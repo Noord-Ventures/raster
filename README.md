@@ -1,69 +1,81 @@
 # Raster
 
-The design system behind [noord.vc](https://noord.vc), [noord.dev](https://noord.dev), and renatovaldes.com.
+A monochrome, CSS-first design system. One ink, no accent — emphasis comes from weight, size, and spacing, never from a hue.
 
-Live documentation: **[noord.dev/studio/raster](https://noord.dev/studio/raster)**
+Raster began as the system behind [noord.vc](https://noord.vc), [noord.dev](https://noord.dev), and renatovaldes.com; this repo is its standalone home: tokens, CSS, React components, a typed registry, a CLI, and the documentation site.
 
 ## Principles
 
-- **One ink, no accent.** The palette is monochrome — paper, ink, and the grays between. Emphasis comes from weight, size, and spacing, never from a hue.
+- **One ink, no accent.** The palette is monochrome — paper, ink, and the grays between.
 - **Hairlines, not boxes.** Rows and dividers are 1px lines on the open grid; cells and cards avoid heavy chrome.
-- **The grid is visible.** A 204px module (184px column + 20px gutter) draws faint lines across every page; content boxes span whole modules so edges step from grid line to grid line on resize.
-- **Sentence case, always.** Never all caps — labels and eyebrows are sentence case.
-- **Quiet motion.** 0.15–0.3s, ease. Color and opacity change; layout rarely moves; nothing bounces. All looping demos are disabled under `prefers-reduced-motion`.
+- **The grid is visible.** A 204px module (184px column + 20px gutter) draws faint lines across every page.
+- **CSS-first, zero dependencies.** Plain classes on plain markup. The React layer adds behavior with native elements — no Radix, no Tailwind.
+- **Sentence case, always.** Never all caps.
+- **Quiet motion.** 0.15–0.3s, ease. Color and opacity change; layout rarely moves; nothing bounces.
 
 ## What's in this repo
 
-| Path | Contents |
-|---|---|
-| `src/tokens.ts` | The token source of truth — color, type, grid, radii, icons, motion, breakpoints |
-| `src/registry.ts` | The component kit as data: name, description, CSS classes, and a minimal markup snippet per component |
-| `tokens/raster.tokens.json` | The tokens as plain JSON, generated from the TS source |
-| `css/raster.css` | Self-contained stylesheet: token custom properties (light + dark), base styles, and the component classes |
+| Path | Package | Contents |
+|---|---|---|
+| `packages/core` | `@raster/core` | Tokens (the source of truth), per-component CSS, the typed component registry, and the build that generates `raster.css`, `tokens.css`, the token JSON, and the 0.1 compat layer |
+| `packages/react` | `@raster/react` | Accessible React components with zero dependencies — native inputs, native `<dialog>`, ARIA tabs/listbox — styled by the core CSS |
+| `packages/cli` | `@raster/cli` | `raster init` / `raster add` / `raster list` / `raster tokens` — carries the whole system offline and vendors code you own |
+| `registry/` | — | Generated shadcn-compatible registry items, installable via `npx shadcn add <url>/r/<name>.json` |
+| `apps/www` | — | The documentation site: live component gallery, per-component docs, tokens, served registry |
 
 ## Using it
 
-**CSS.** Link `css/raster.css` and set `data-theme="dark"` on the root element for the dark scheme. All components are plain classes on plain markup — see `src/registry.ts` for the snippet each component expects.
+**CLI (recommended).**
 
-```html
-<link rel="stylesheet" href="css/raster.css" />
-<button class="bb-btn-primary">Primary action</button>
-<span class="rs-switch rs-switch-on"><i></i></span>
+```sh
+npx raster init            # writes styles/raster.css + raster.json
+npx raster add button dialog
 ```
 
-**Tokens.** Import the JSON anywhere, or the typed object in TypeScript:
+`add` vendors React source into `components/raster/` — the code is yours. Registry dependencies come along automatically. CSS-only components (link, chip, table, icons…) need no code: the classes are already in raster.css.
+
+**Plain CSS.** Link `packages/core/css/raster.css` and use the `rs-*` classes; set `data-theme="dark"` on the root element for the dark scheme. See the registry for each component's snippet.
+
+**Tokens.**
 
 ```ts
-import { rasterTokens } from "@noord/raster";
+import { rasterTokens } from "@raster/core";
 rasterTokens.color.light.paper; // "#FAF8F2"
 ```
 
-**Over the wire.** The tokens are also served publicly:
+**shadcn interop.** Every component is published as a registry item under `registry/` following the shadcn registry-item schema, so `npx shadcn add <host>/r/button.json` works from any host serving that directory (the docs site serves it at `/r/`).
 
-- `GET https://noord.dev/api/raster/tokens` — the token set as JSON
-- `https://noord.dev/api/mcp` — MCP endpoint exposing tokens and the component registry to agents
+## Architecture
+
+`packages/core/src/tokens.ts` and `src/registry.ts` are the sources of truth. Everything else is generated:
+
+```
+src/tokens.ts ──► tokens/raster.tokens.json     (tokens as JSON)
+              ──► css/tokens.css                (custom properties, light + dark, the grid)
+css sources   ──► css/raster.css                (the whole system, one file)
+src/legacy.ts ──► css/raster-compat.css         (0.1 class names: bb-*, lib-*, bare table)
+registry      ──► registry/<name>.json          (shadcn-compatible, contents inlined)
+              ──► registry/bundle.json          (embedded by the CLI at build time)
+```
+
+The test suite enforces what the generation can't: every registry class exists in its CSS, every snippet class has a provider, no `var()` is undefined, no styled class is missing from the registry, and no hex in the system is a hue.
+
+## Development
+
+```sh
+pnpm install
+pnpm build        # builds core (css + registry + dist), react, cli
+pnpm test         # core integrity tests, react jsdom tests, cli tests
+pnpm dev          # docs site at localhost:3000
+```
 
 ## Typeface
 
-Raster is set in **Messina Sans** by Luzi Gantenbein ([Luzi Type, Zürich](https://www.luzi-type.ch)). The font is commercially licensed and **not bundled in this repo** — provide your own `@font-face` for `'Messina Sans'`, or the stack falls back to system sans. Weights used: 500 (body), 600 (headings and labels).
+Raster is set in **Messina Sans** by Luzi Gantenbein ([Luzi Type, Zürich](https://www.luzi-type.ch)). The font is commercially licensed and **not bundled** — provide your own `@font-face` for `'Messina Sans'`, or the stack falls back to system sans. Weights: 500 (body), 600 (headings and labels).
 
-## Regenerating the token JSON
+## Coming from Raster 0.1
 
-After editing `src/tokens.ts` (Node ≥ 22.6):
-
-```sh
-npm run build:tokens
-```
-
-## Provenance & sync
-
-Raster grew inside the [noord-vc](https://github.com/rennvaldes/noord-vc) codebase, where the live documentation page, the interactive demos, and the site itself consume it. This repo is the standalone home of the system's tokens, registry, and component CSS. Until the site consumes this package directly, changes should land in both places:
-
-| Here | In noord-vc |
-|---|---|
-| `src/tokens.ts` | `src/lib/raster-tokens.ts` |
-| `src/registry.ts` | `src/lib/raster-registry.ts` |
-| `css/raster.css` | component sections of `src/app/globals.css` |
+0.2 normalized every class to the `rs-` prefix and scoped table styles to `.rs-table`. Sites on the 0.1 names keep working by linking the generated `css/raster-compat.css` after `raster.css` (or `raster init --compat`). The rename map lives in `packages/core/src/legacy.ts`.
 
 ---
 

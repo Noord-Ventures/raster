@@ -4,3 +4,5 @@ dist/
 .next/
 *.tsbuildinfo
 .turbo/
+out/
+apps/www/public/r/
