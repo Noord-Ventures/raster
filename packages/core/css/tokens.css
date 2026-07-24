@@ -1,0 +1,33 @@
+/* ── Tokens ── GENERATED from src/tokens.ts — do not edit by hand. */
+:root {
+  --bg: #FAF8F2;                        /* paper */
+  --text: #1A1A1A;                      /* ink */
+  --text-secondary: #6B6B6B;            /* gray */
+  --accent: #1A1A1A;                   /* the "accent" is ink — monochrome */
+  --divider: rgba(0,0,0,0.10);
+  --divider-subtle: rgba(0,0,0,0.06);
+  --table-alt: rgba(0,0,0,0.02);
+  --grid-line: rgba(0,0,0,0.025);
+  --radius: 6px;
+  --radius-sm: 4px;
+  --gutter: 20px;
+  --pad: 20px;
+  --transition: background-color 0.3s ease, color 0.3s ease;
+  /* Background column grid: 204px modules (184 column + 20 gutter). */
+  --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);
+  --grid-size: 204px;
+  --grid-pos: 20px 0;
+}
+[data-theme="dark"] {
+  --bg: #0E0C0A;
+  --text: #E8E8E8;
+  --text-secondary: #949494;
+  --accent: #E8E8E8;
+  --divider: rgba(255,255,255,0.12);
+  --divider-subtle: rgba(255,255,255,0.07);
+  --table-alt: rgba(255,255,255,0.03);
+  --grid-line: rgba(255,255,255,0.01);
+}
+@media(max-width:480px){
+  :root{--pad:25px}
+}

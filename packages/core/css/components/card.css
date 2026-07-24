@@ -1,0 +1,5 @@
+/* ── Card ── */
+.rs-card{border:1px solid var(--divider);border-radius:var(--radius);padding:20px;max-width:360px}
+.rs-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}
+.rs-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}
+.rs-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}

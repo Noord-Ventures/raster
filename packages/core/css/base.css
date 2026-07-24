@@ -1,0 +1,22 @@
+/* ── Base ──
+   Raster owns the page: paper background, ink text, and the visible
+   204px module grid drawn behind everything. */
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background-color:var(--bg);
+  background-image:var(--grid-image);
+  background-size:var(--grid-size) 100vh;
+  background-repeat:repeat-x;
+  background-attachment:fixed;
+  background-position:var(--grid-pos);
+  color:var(--text);
+  font-family:'Messina Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  font-weight:500;
+  line-height:1.6;
+  transition:var(--transition);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── Utilities ── */
+.rs-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.rs-sr:focus-visible+.rs-check,.rs-sr:focus-visible+.rs-radio-dot,.rs-sr:focus-visible+.rs-switch{outline:1.5px solid var(--text);outline-offset:2px}

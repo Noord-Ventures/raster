@@ -1,0 +1,10 @@
+/* ── Stepper ── */
+.rs-steps{display:flex;align-items:flex-start;gap:8px}
+.rs-step{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:78px}
+.rs-step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--divider);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;background:var(--bg)}
+.rs-step-done{background:var(--text);border-color:var(--text);color:var(--bg)}
+.rs-step-active{border-color:var(--text);color:var(--text)}
+.rs-step-name{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);line-height:1.2}
+.rs-step-sub{font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}
+.rs-step-line{flex:1;height:1px;background:var(--divider);margin-top:12px;min-width:14px}
+@media(max-width:640px){.rs-steps{flex-direction:column;gap:14px}.rs-step-line{display:none}}

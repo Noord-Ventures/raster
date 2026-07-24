@@ -1,26 +1,23 @@
 {
-  "name": "@noord/raster",
-  "version": "0.1.0",
-  "description": "Raster — the design system behind noord.vc, noord.dev, and renatovaldes.com. Tokens, component registry, and CSS.",
+  "name": "raster-monorepo",
+  "private": true,
+  "version": "0.2.0",
+  "description": "Raster — a monochrome, CSS-first design system. Tokens, components, CLI, registry, and docs.",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rennvaldes/raster.git"
   },
-  "homepage": "https://noord.dev/studio/raster",
   "type": "module",
-  "main": "src/index.ts",
-  "exports": {
-    ".": "./src/index.ts",
-    "./tokens": "./tokens/raster.tokens.json",
-    "./css": "./css/raster.css"
+  "engines": {
+    "node": ">=22.6"
   },
-  "files": [
-    "src",
-    "css",
-    "tokens"
-  ],
+  "packageManager": "pnpm@10.4.1",
   "scripts": {
-    "build:tokens": "node --experimental-strip-types scripts/build-tokens.mjs"
+    "build": "pnpm -r --filter './packages/*' build",
+    "build:registry": "pnpm --filter @raster/core build:registry",
+    "test": "pnpm -r --filter './packages/*' test",
+    "typecheck": "pnpm -r --filter './packages/*' typecheck",
+    "dev": "pnpm --filter www dev"
   }
 }

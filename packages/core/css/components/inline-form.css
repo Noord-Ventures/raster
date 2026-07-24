@@ -1,0 +1,10 @@
+/* ── Inline form — the action lives inside the field ── */
+.rs-inline-field{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:4px 6px 4px 12px;transition:border-color .2s ease}
+.rs-inline-field:focus-within{border-color:var(--accent)}
+.rs-inline-input{flex:1;min-width:0;border:none;background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);outline:none;padding:7px 0}
+.rs-inline-input::placeholder{color:var(--text-secondary)}
+.rs-inline-btn{height:28px;padding:0 16px;font-size:12.5px;min-width:0;border-radius:3px;white-space:nowrap}
+.rs-reveal{max-width:0;opacity:0;transform:translateX(-6px) scale(.92);overflow:hidden;transition:max-width .4s cubic-bezier(.22,1,.36,1),opacity .3s ease .05s,transform .4s cubic-bezier(.22,1,.36,1)}
+.rs-reveal-in{max-width:160px;opacity:1;transform:none}
+.rs-subscribed{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text);animation:rsSubIn .35s cubic-bezier(.22,1,.36,1)}
+@keyframes rsSubIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}

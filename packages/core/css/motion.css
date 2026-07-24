@@ -1,0 +1,5 @@
+/* ── Reduced motion — nothing loops, nothing slides ── */
+@media(prefers-reduced-motion:reduce){
+  .rs-reveal{transition:none}
+  .rs-subscribed{animation:none}
+}

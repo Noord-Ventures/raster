@@ -1,0 +1,111 @@
+// Generates every derived artifact from the sources of truth:
+//
+//   src/tokens.ts     →  tokens/raster.tokens.json   (tokens as JSON)
+//                     →  css/tokens.css              (custom properties)
+//   css/* sources     →  css/raster.css              (the whole system, one file)
+//   src/legacy.ts     →  css/raster-compat.css       (0.1 class names)
+//
+// Run with: npm run build:css  (Node ≥ 22.6)
+
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { rasterTokens } from "../src/tokens.ts";
+import { rasterComponents } from "../src/registry.ts";
+import { toLegacyCss } from "../src/legacy.ts";
+
+const root = (p) => fileURLToPath(new URL(`../${p}`, import.meta.url));
+const read = (p) => readFileSync(root(p), "utf8");
+const write = (p, text) => {
+  writeFileSync(root(p), text);
+  console.log(`wrote ${p} (${text.length} bytes)`);
+};
+
+/* ── 1. Tokens as JSON ── */
+write("tokens/raster.tokens.json", JSON.stringify(rasterTokens, null, 2) + "\n");
+
+/* ── 2. Tokens as CSS custom properties ── */
+const { color, grid, radius } = rasterTokens;
+const c1 = grid.column;
+const gridImage = `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent ${c1}px,var(--grid-line) ${c1}px,var(--grid-line) ${c1 + 1}px,transparent ${c1 + 1}px,transparent ${grid.module}px)`;
+
+const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts — do not edit by hand. */
+:root {
+  --bg: ${color.light.paper};                        /* paper */
+  --text: ${color.light.ink};                      /* ink */
+  --text-secondary: ${color.light.gray};            /* gray */
+  --accent: ${color.light.ink};                   /* the "accent" is ink — monochrome */
+  --divider: ${color.light.divider};
+  --divider-subtle: ${color.light.dividerSubtle};
+  --table-alt: ${color.light.tableAlt};
+  --grid-line: ${color.light.gridLine};
+  --radius: ${radius.base}px;
+  --radius-sm: ${radius.small}px;
+  --gutter: ${grid.gutter}px;
+  --pad: ${grid.pad}px;
+  --transition: background-color 0.3s ease, color 0.3s ease;
+  /* Background column grid: ${grid.module}px modules (${grid.column} column + ${grid.gutter} gutter). */
+  --grid-image: ${gridImage};
+  --grid-size: ${grid.module}px;
+  --grid-pos: ${grid.gutter}px 0;
+}
+[data-theme="dark"] {
+  --bg: ${color.dark.black};
+  --text: ${color.dark.white};
+  --text-secondary: ${color.dark.gray};
+  --accent: ${color.dark.white};
+  --divider: ${color.dark.divider};
+  --divider-subtle: ${color.dark.dividerSubtle};
+  --table-alt: ${color.dark.tableAlt};
+  --grid-line: ${color.dark.gridLine};
+}
+@media(max-width:${grid.mobile.breakpoint}px){
+  :root{--pad:${grid.mobile.pad}px}
+}
+`;
+write("css/tokens.css", tokensCss);
+
+/* ── 3. The whole system as one file ── */
+const componentFiles = [];
+for (const component of rasterComponents) {
+  for (const file of component.css) {
+    if (!componentFiles.includes(file)) componentFiles.push(file);
+  }
+}
+const sources = ["tokens.css", "base.css", "type.css", ...componentFiles, "motion.css"];
+
+const banner = `/* ═══════════════════════════════════════════════════════════════════
+   RASTER — a monochrome, CSS-first design system.
+   ${rasterTokens.meta.url}
+
+   One ink, no accent hue: emphasis comes from weight, size, and
+   spacing. Hairline borders, a ${grid.module}px module grid (${grid.column}px column +
+   ${grid.gutter}px gutter), sentence case everywhere.
+
+   GENERATED from the css/ sources — edit those, then run
+   \`npm run build:css\`. Tokens come from src/tokens.ts.
+
+   Typeface: Messina Sans (Luzi Type, Zürich) — licensed, not bundled.
+   Provide your own @font-face for 'Messina Sans' or the stack falls
+   back to system sans.
+   ═══════════════════════════════════════════════════════════════════ */
+
+`;
+
+const rasterCss = banner + sources.map((f) => read(`css/${f}`)).join("\n");
+write("css/raster.css", rasterCss);
+
+/* ── 4. Compat layer — the 0.1 class names ── */
+const compatBanner = `/* RASTER COMPAT — GENERATED. Re-emits Raster rules under the 0.1
+   class names (bb-*, lib-*, bare table elements) so sites built on
+   them keep working. Link this after raster.css; drop it once your
+   markup uses the rs- names. */
+
+`;
+const compatParts = [];
+for (const f of sources) {
+  const source = read(`css/${f}`);
+  const legacy = toLegacyCss(source);
+  if (legacy !== source) compatParts.push(legacy);
+}
+mkdirSync(root("css"), { recursive: true });
+write("css/raster-compat.css", compatBanner + compatParts.join("\n"));
