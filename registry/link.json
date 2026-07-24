@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "link",
+  "type": "registry:component",
+  "title": "Text link",
+  "description": "Underlined by its hairline; never colored.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/styles/link.css",
+      "content": "/* ── Text link — underlined by its hairline, never colored ── */\n.rs-link{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);transition:border-color .2s ease}\n.rs-link:hover{border-color:var(--accent)}\n",
+      "type": "registry:file",
+      "target": "styles/raster/link.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "actions",
+      "classes": [
+        "rs-link"
+      ],
+      "snippet": "<a class=\"rs-link\" href=\"#\">A text link</a>",
+      "cssOnly": true,
+      "registryDependencies": []
+    }
+  }
+}

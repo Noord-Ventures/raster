@@ -1,0 +1,933 @@
+{
+  "name": "raster",
+  "version": "0.2.0",
+  "css": {
+    "raster": "/* ═══════════════════════════════════════════════════════════════════\n   RASTER — a monochrome, CSS-first design system.\n   https://noord.dev/studio/raster\n\n   One ink, no accent hue: emphasis comes from weight, size, and\n   spacing. Hairline borders, a 204px module grid (184px column +\n   20px gutter), sentence case everywhere.\n\n   GENERATED from the css/ sources — edit those, then run\n   `npm run build:css`. Tokens come from src/tokens.ts.\n\n   Typeface: Messina Sans (Luzi Type, Zürich) — licensed, not bundled.\n   Provide your own @font-face for 'Messina Sans' or the stack falls\n   back to system sans.\n   ═══════════════════════════════════════════════════════════════════ */\n\n/* ── Tokens ── GENERATED from src/tokens.ts — do not edit by hand. */\n:root {\n  --bg: #FAF8F2;                        /* paper */\n  --text: #1A1A1A;                      /* ink */\n  --text-secondary: #6B6B6B;            /* gray */\n  --accent: #1A1A1A;                   /* the \"accent\" is ink — monochrome */\n  --divider: rgba(0,0,0,0.10);\n  --divider-subtle: rgba(0,0,0,0.06);\n  --table-alt: rgba(0,0,0,0.02);\n  --grid-line: rgba(0,0,0,0.025);\n  --radius: 6px;\n  --radius-sm: 4px;\n  --gutter: 20px;\n  --pad: 20px;\n  --transition: background-color 0.3s ease, color 0.3s ease;\n  /* Background column grid: 204px modules (184 column + 20 gutter). */\n  --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);\n  --grid-size: 204px;\n  --grid-pos: 20px 0;\n}\n[data-theme=\"dark\"] {\n  --bg: #0E0C0A;\n  --text: #E8E8E8;\n  --text-secondary: #949494;\n  --accent: #E8E8E8;\n  --divider: rgba(255,255,255,0.12);\n  --divider-subtle: rgba(255,255,255,0.07);\n  --table-alt: rgba(255,255,255,0.03);\n  --grid-line: rgba(255,255,255,0.01);\n}\n@media(max-width:480px){\n  :root{--pad:25px}\n}\n\n/* ── Base ──\n   Raster owns the page: paper background, ink text, and the visible\n   204px module grid drawn behind everything. */\nhtml{scroll-behavior:smooth;font-size:16px}\nbody{\n  background-color:var(--bg);\n  background-image:var(--grid-image);\n  background-size:var(--grid-size) 100vh;\n  background-repeat:repeat-x;\n  background-attachment:fixed;\n  background-position:var(--grid-pos);\n  color:var(--text);\n  font-family:'Messina Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;\n  font-weight:500;\n  line-height:1.6;\n  transition:var(--transition);\n  -webkit-font-smoothing:antialiased;\n}\n\n/* ── Utilities ── */\n.rs-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}\n.rs-sr:focus-visible+.rs-check,.rs-sr:focus-visible+.rs-radio-dot,.rs-sr:focus-visible+.rs-switch{outline:1.5px solid var(--text);outline-offset:2px}\n\n/* ── Type scale ──\n   Hierarchy from weight, color, and position — never all caps. */\n.rs-t-xl{font-size:clamp(34px,5vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin:0;text-wrap:balance}\n.rs-t-display{font-size:38px;font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0}\n.rs-t-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0}\n.rs-t-sub{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.5;color:var(--text-secondary);margin:0}\n.rs-t-body{font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin:0}\n.rs-t-label{font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--text);margin:0}\n\n/* ── Inline code ── */\n.rs-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}\n\n/* ── Buttons ── */\n.rs-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity .2s ease}\n.rs-btn-primary:hover{opacity:.85}\n.rs-btn-primary:disabled{opacity:.4;cursor:not-allowed}\n.rs-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color .2s ease,color .2s ease}\n.rs-btn-ghost:hover{background:var(--divider);border-color:transparent}\n.rs-btn-ghost:disabled{opacity:.4;cursor:not-allowed;background:transparent;border-color:var(--divider)}\n.rs-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}\n\n/* ── Text link — underlined by its hairline, never colored ── */\n.rs-link{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);transition:border-color .2s ease}\n.rs-link:hover{border-color:var(--accent)}\n\n/* ── Field — quiet input: hairline border, ink focus, label above ── */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}\n.rs-input:focus{border-color:var(--accent)}\n.rs-input-full{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n\n/* ── Inline form — the action lives inside the field ── */\n.rs-inline-field{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:4px 6px 4px 12px;transition:border-color .2s ease}\n.rs-inline-field:focus-within{border-color:var(--accent)}\n.rs-inline-input{flex:1;min-width:0;border:none;background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);outline:none;padding:7px 0}\n.rs-inline-input::placeholder{color:var(--text-secondary)}\n.rs-inline-btn{height:28px;padding:0 16px;font-size:12.5px;min-width:0;border-radius:3px;white-space:nowrap}\n.rs-reveal{max-width:0;opacity:0;transform:translateX(-6px) scale(.92);overflow:hidden;transition:max-width .4s cubic-bezier(.22,1,.36,1),opacity .3s ease .05s,transform .4s cubic-bezier(.22,1,.36,1)}\n.rs-reveal-in{max-width:160px;opacity:1;transform:none}\n.rs-subscribed{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text);animation:rsSubIn .35s cubic-bezier(.22,1,.36,1)}\n@keyframes rsSubIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}\n\n/* ── Radio — the dot is ink, never a hue ── */\n.rs-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.rs-radio-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--divider);position:relative;flex-shrink:0}\n.rs-radio-on{border-color:var(--text)}\n.rs-radio-on::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--text)}\n\n/* ── Checkbox — 16px boxes, 3px radius, ink when checked ── */\n.rs-choice{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.rs-check{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--divider);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--bg)}\n.rs-check svg{width:12px;height:12px}\n.rs-check-on{background:var(--text);border-color:var(--text)}\n\n/* ── Switch — state moves, layout doesn't ── */\n.rs-switch{display:inline-flex;box-sizing:border-box;width:32px;height:18px;border-radius:9px;border:1.5px solid var(--divider);position:relative;flex-shrink:0;transition:background-color .2s ease,border-color .2s ease}\n.rs-switch i{position:absolute;top:1.5px;left:1.5px;width:12px;height:12px;border-radius:50%;background:var(--text-secondary);transition:transform .2s ease}\n.rs-switch-on{background:var(--text);border-color:var(--text)}\n.rs-switch-on i{background:var(--bg);transform:translateX(14px)}\nbutton.rs-switch{padding:0;background:none;cursor:pointer;border:1.5px solid var(--divider)}\nbutton.rs-switch.rs-switch-on{background:var(--text);border-color:var(--text)}\n\n/* ── Slider — thin track with ink fill and 14px thumb ── */\n.rs-slider{position:relative;height:2px;background:var(--divider);border-radius:1px;margin:10px 0}\n.rs-slider-fill{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:1px}\n.rs-slider-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:1.5px solid var(--text)}\n.rs-slider input[type=range]{position:absolute;left:0;right:0;top:-8px;bottom:-8px;width:100%;height:auto;opacity:0;cursor:pointer;margin:0}\n.rs-slider:has(input[type=range]:focus-visible) .rs-slider-thumb{outline:1.5px solid var(--text);outline-offset:2px}\n\n/* ── Progress — the percentage lives in the label, never in the bar ── */\n.rs-progress-head{display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:7px}\n.rs-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}\n.rs-progress span{display:block;height:100%;background:var(--text);border-radius:2px}\n\n/* ── Tabs — active tab is ink with a 1.5px underline ── */\n.rs-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}\n.rs-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}\nbutton.rs-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}\n\n/* ── Breadcrumbs — slashes at 40%, current page is ink ── */\n.rs-crumbs{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}\n.rs-crumbs-sep{opacity:.4}\n.rs-crumbs-here{color:var(--text)}\n\n/* ── Pagination — squares, not pills ── */\n.rs-pages{display:flex;align-items:center;gap:5px}\n.rs-page{width:26px;height:26px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-secondary);border:1px solid transparent}\n.rs-page:not(.rs-page-gap):not(.rs-page-on){border-color:var(--divider-subtle)}\n.rs-page.rs-page-on,button.rs-page-on{background:var(--text);color:var(--bg);font-weight:600}\nbutton.rs-page{padding:0;background:none;font-family:inherit;cursor:pointer}\n\n/* ── Dropdown + menu — the menu overlays, it never pushes layout ── */\n.rs-select{position:relative;display:inline-block;min-width:180px}\n.rs-select .rs-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px}\n.rs-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}\nbutton.rs-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%}\n.rs-menu{border:1px solid var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}\n.rs-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle)}\n.rs-menu-item:last-child{border-bottom:none}\n.rs-menu-item.rs-menu-item-active,button.rs-menu-item-active{background:var(--divider-subtle)}\nbutton.rs-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}\n\n/* ── Dialog — one question, two equal actions, no third option ── */\n.rs-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}\ndialog.rs-dialog{color:var(--text)}\ndialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}\n.rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}\n.rs-dialog-actions{display:flex;justify-content:flex-end;gap:8px}\n\n/* ── Badges — outline for recommendations, solid for done, muted for pending ── */\n.rs-badge{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge-solid{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--bg);background:var(--text);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge-muted{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--text-secondary);background:var(--divider-subtle);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n\n/* ── Mono chip — technical identifiers ── */\n.rs-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}\n\n/* ── Card ── */\n.rs-card{border:1px solid var(--divider);border-radius:var(--radius);padding:20px;max-width:360px}\n.rs-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}\n.rs-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}\n.rs-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}\n\n/* ── Stepper ── */\n.rs-steps{display:flex;align-items:flex-start;gap:8px}\n.rs-step{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:78px}\n.rs-step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--divider);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;background:var(--bg)}\n.rs-step-done{background:var(--text);border-color:var(--text);color:var(--bg)}\n.rs-step-active{border-color:var(--text);color:var(--text)}\n.rs-step-name{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);line-height:1.2}\n.rs-step-sub{font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-step-line{flex:1;height:1px;background:var(--divider);margin-top:12px;min-width:14px}\n@media(max-width:640px){.rs-steps{flex-direction:column;gap:14px}.rs-step-line{display:none}}\n\n/* ── Table — hairline rows on the open grid; no cell borders ──\n   Scoped to .rs-table so linking raster.css never restyles a table\n   it doesn't own. The compat layer re-emits these on bare elements. */\n.rs-table{width:calc(100% + 40px);border-collapse:collapse;margin:16px 0 24px -20px;font-size:14px}\n.rs-table th{text-align:left;font-weight:600;color:var(--text);letter-spacing:-.01em;padding:10px 16px 10px 12px;border-bottom:2px solid var(--divider);font-size:13px}\n.rs-table th:first-child{padding-left:20px}\n.rs-table th:last-child{padding-right:20px}\n.rs-table td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);vertical-align:top}\n.rs-table td:first-child{padding-left:20px}\n.rs-table td:last-child{padding-right:20px}\n.rs-table tr:nth-child(even) td{background:var(--table-alt)}\n.rs-table td:last-child,.rs-table th:last-child{text-align:right}\n@media(max-width:640px){\n  .rs-table{font-size:12px;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));margin-right:calc(-1*var(--pad))}\n  .rs-table th{padding:8px 10px;font-size:12px}\n  .rs-table td{padding:8px 10px}\n  .rs-table th:first-child,.rs-table td:first-child{padding-left:var(--pad)}\n  .rs-table th:last-child,.rs-table td:last-child{padding-right:var(--pad)}\n}\n\n/* ── Icons — 16/20/24/32, single-weight 1.5px strokes in currentColor ── */\n.rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}\n.rs-icons svg{width:16px;height:16px;flex-shrink:0}\n\n/* ── Workflow cards — the dashed editable pipeline ── */\n.rs-flow{display:grid;grid-template-columns:1fr;gap:var(--gutter)}\n@media(min-width:560px){.rs-flow{grid-template-columns:repeat(2,184px);width:fit-content}}\n@media(min-width:940px){.rs-flow{grid-template-columns:repeat(3,184px)}}\n@media(min-width:1280px){.rs-flow{grid-template-columns:repeat(4,184px)}}\n@media(min-width:1448px){.rs-flow{grid-template-columns:repeat(5,184px)}}\n.rs-flow-step{position:relative;border:1px dashed var(--divider);border-radius:10px;padding:14px 34px 16px 14px;background:var(--bg);transition:border-color .2s ease}\n.rs-flow-step:hover{border-color:var(--accent)}\n.rs-flow-step::after{content:\"\";position:absolute;top:15px;right:13px;width:8px;height:14px;background-image:radial-gradient(currentColor 1.1px,transparent 1.3px);background-size:4px 5px;color:var(--text-secondary);opacity:.4}\n.rs-flow-num{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--divider);background:var(--bg);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);margin-bottom:14px}\n.rs-flow-step h4{display:inline-block;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text);border-bottom:1px dashed var(--divider);padding-bottom:1px;margin:0 0 8px}\n.rs-flow-step p{font-size:12.5px;line-height:1.55;color:var(--text-secondary);letter-spacing:-.005em;margin:0}\n.rs-flow-subs{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}\n.rs-flow-subs span{font-size:11px;line-height:1;padding:3px 7px;border:1px dashed var(--divider);border-radius:5px;color:var(--text-secondary);letter-spacing:-.005em}\n.rs-flow-subs .rs-flow-sub-add{width:18px;padding:3px 0;text-align:center;opacity:.7}\n.rs-flow-add{display:flex;align-items:center;gap:8px;margin-top:14px;border:1px dashed var(--divider);border-radius:10px;padding:12px 14px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);background:none;width:184px;max-width:100%;transition:border-color .2s ease,color .2s ease;font-family:inherit;cursor:pointer}\n.rs-flow-add:hover{border-color:var(--accent);color:var(--text)}\n.rs-flow-plus{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;font-size:13px;line-height:1}\n\n/* ── Assistant panel — monochrome chat surface ── */\n.rs-ai{display:flex;flex-direction:column;gap:16px;max-width:560px;border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:20px}\n.rs-ai-head{display:flex;justify-content:space-between;align-items:center}\n.rs-ai-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-ai-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-ai-status i{width:6px;height:6px;border-radius:50%;background:var(--text)}\n.rs-ai-msg{display:flex;width:100%}\n.rs-ai-user{justify-content:flex-end}\n.rs-ai-user-block{background:var(--table-alt);border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:10px 14px;font-size:13.5px;color:var(--text);letter-spacing:-.01em;max-width:85%}\n.rs-ai-reply{font-size:13.5px;line-height:1.6;color:var(--text);letter-spacing:-.01em;margin:0}\n.rs-ai-card{border:1px solid var(--divider);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;align-items:flex-start}\n.rs-ai-tag{font-size:10.5px;font-weight:600;letter-spacing:.02em;color:var(--text);border:1px solid var(--divider);border-radius:5px;padding:2px 8px;margin-bottom:10px}\n.rs-ai-text{font-size:13px;color:var(--text);line-height:1.5;margin:0}\n.rs-ai-done{display:flex;align-items:baseline;gap:8px;margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--text-secondary)}\n.rs-ai-done svg{flex-shrink:0;transform:translateY(1.5px);color:var(--text)}\n.rs-ai-input{margin-top:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:10px 12px;font-size:12.5px;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center}\n.rs-ai-send{color:var(--text);font-weight:600}\n\n/* ── Reduced motion — nothing loops, nothing slides ── */\n@media(prefers-reduced-motion:reduce){\n  .rs-reveal{transition:none}\n  .rs-subscribed{animation:none}\n}\n",
+    "compat": "/* RASTER COMPAT — GENERATED. Re-emits Raster rules under the 0.1\n   class names (bb-*, lib-*, bare table elements) so sites built on\n   them keep working. Link this after raster.css; drop it once your\n   markup uses the rs- names. */\n\n/* ── Base ──\n   Raster owns the page: paper background, ink text, and the visible\n   204px module grid drawn behind everything. */\nhtml{scroll-behavior:smooth;font-size:16px}\nbody{\n  background-color:var(--bg);\n  background-image:var(--grid-image);\n  background-size:var(--grid-size) 100vh;\n  background-repeat:repeat-x;\n  background-attachment:fixed;\n  background-position:var(--grid-pos);\n  color:var(--text);\n  font-family:'Messina Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;\n  font-weight:500;\n  line-height:1.6;\n  transition:var(--transition);\n  -webkit-font-smoothing:antialiased;\n}\n\n/* ── Utilities ── */\n.rs-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}\n.rs-sr:focus-visible+.rs-check,.rs-sr:focus-visible+.bb-radio-dot,.rs-sr:focus-visible+.rs-switch{outline:1.5px solid var(--text);outline-offset:2px}\n\n/* ── Type scale ──\n   Hierarchy from weight, color, and position — never all caps. */\n.rs-t-xl{font-size:clamp(34px,5vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin:0;text-wrap:balance}\n.rs-t-display{font-size:38px;font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0}\n.rs-t-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0}\n.rs-t-sub{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.5;color:var(--text-secondary);margin:0}\n.rs-t-body{font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin:0}\n.rs-t-label{font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--text);margin:0}\n\n/* ── Inline code ── */\n.bb-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}\n\n/* ── Buttons ── */\n.bb-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity .2s ease}\n.bb-btn-primary:hover{opacity:.85}\n.bb-btn-primary:disabled{opacity:.4;cursor:not-allowed}\n.bb-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color .2s ease,color .2s ease}\n.bb-btn-ghost:hover{background:var(--divider);border-color:transparent}\n.bb-btn-ghost:disabled{opacity:.4;cursor:not-allowed;background:transparent;border-color:var(--divider)}\n.bb-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}\n\n/* ── Text link — underlined by its hairline, never colored ── */\n.bb-link-demo{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);transition:border-color .2s ease}\n.bb-link-demo:hover{border-color:var(--accent)}\n\n/* ── Field — quiet input: hairline border, ink focus, label above ── */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n.bb-sig-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}\n.bb-sig-input:focus{border-color:var(--accent)}\n.rs-input{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n\n/* ── Radio — the dot is ink, never a hue ── */\n.bb-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.bb-radio-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--divider);position:relative;flex-shrink:0}\n.bb-radio-on{border-color:var(--text)}\n.bb-radio-on::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--text)}\n\n/* ── Slider — thin track with ink fill and 14px thumb ── */\n.bb-slider{position:relative;height:2px;background:var(--divider);border-radius:1px;margin:10px 0}\n.bb-slider-fill{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:1px}\n.bb-slider-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:1.5px solid var(--text)}\n.bb-slider input[type=range]{position:absolute;left:0;right:0;top:-8px;bottom:-8px;width:100%;height:auto;opacity:0;cursor:pointer;margin:0}\n.bb-slider:has(input[type=range]:focus-visible) .bb-slider-thumb{outline:1.5px solid var(--text);outline-offset:2px}\n\n/* ── Progress — the percentage lives in the label, never in the bar ── */\n.rs-progress-head{display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:7px}\n.bb-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}\n.bb-progress span{display:block;height:100%;background:var(--text);border-radius:2px}\n\n/* ── Tabs — active tab is ink with a 1.5px underline ── */\n.bb-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}\n.bb-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}\n.bb-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}\nbutton.bb-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}\n\n/* ── Breadcrumbs — slashes at 40%, current page is ink ── */\n.bb-crumbs-demo{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}\n.bb-crumbs-demo-sep{opacity:.4}\n.bb-crumbs-demo-here{color:var(--text)}\n\n/* ── Dropdown + menu — the menu overlays, it never pushes layout ── */\n.rs-select{position:relative;display:inline-block;min-width:180px}\n.rs-select .bb-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px}\n.bb-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}\nbutton.bb-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%}\n.bb-menu{border:1px solid var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}\n.bb-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle)}\n.bb-menu-item:last-child{border-bottom:none}\n.bb-menu-item.bb-menu-item-active,button.bb-menu-item-active{background:var(--divider-subtle)}\nbutton.bb-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}\n\n/* ── Dialog — one question, two equal actions, no third option ── */\n.bb-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}\ndialog.bb-dialog{color:var(--text)}\ndialog.bb-dialog::backdrop{background:rgba(0,0,0,0.25)}\n.bb-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.bb-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}\n.bb-dialog-actions{display:flex;justify-content:flex-end;gap:8px}\n\n/* ── Badges — outline for recommendations, solid for done, muted for pending ── */\n.bb-badge{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;line-height:1.4;border-radius:var(--radius-sm)}\n.bb-badge-solid{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--bg);background:var(--text);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n.bb-badge-muted{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--text-secondary);background:var(--divider-subtle);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n\n/* ── Mono chip — technical identifiers ── */\n.lib-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}\n\n/* ── Card ── */\n.bb-card-demo{border:1px solid var(--divider);border-radius:var(--radius);padding:20px;max-width:360px}\n.bb-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}\n.bb-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}\n.bb-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}\n\n/* ── Table — hairline rows on the open grid; no cell borders ──\n   Scoped to table so linking raster.css never restyles a table\n   it doesn't own. The compat layer re-emits these on bare elements. */\ntable{width:calc(100% + 40px);border-collapse:collapse;margin:16px 0 24px -20px;font-size:14px}\ntable th{text-align:left;font-weight:600;color:var(--text);letter-spacing:-.01em;padding:10px 16px 10px 12px;border-bottom:2px solid var(--divider);font-size:13px}\ntable th:first-child{padding-left:20px}\ntable th:last-child{padding-right:20px}\ntable td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);vertical-align:top}\ntable td:first-child{padding-left:20px}\ntable td:last-child{padding-right:20px}\ntable tr:nth-child(even) td{background:var(--table-alt)}\ntable td:last-child,table th:last-child{text-align:right}\n@media(max-width:640px){\n  table{font-size:12px;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));margin-right:calc(-1*var(--pad))}\n  table th{padding:8px 10px;font-size:12px}\n  table td{padding:8px 10px}\n  table th:first-child,table td:first-child{padding-left:var(--pad)}\n  table th:last-child,table td:last-child{padding-right:var(--pad)}\n}\n\n/* ── Icons — 16/20/24/32, single-weight 1.5px strokes in currentColor ── */\n.bb-icons{display:flex;gap:18px;align-items:center;color:var(--text)}\n.bb-icons svg{width:16px;height:16px;flex-shrink:0}\n"
+  },
+  "items": [
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "raster-base",
+      "type": "registry:style",
+      "title": "Raster base",
+      "description": "Tokens (light + dark), page base with the visible module grid, type scale, and reduced-motion rules.",
+      "files": [
+        {
+          "path": "raster/styles/base.css",
+          "content": "/* ── Tokens ── GENERATED from src/tokens.ts — do not edit by hand. */\n:root {\n  --bg: #FAF8F2;                        /* paper */\n  --text: #1A1A1A;                      /* ink */\n  --text-secondary: #6B6B6B;            /* gray */\n  --accent: #1A1A1A;                   /* the \"accent\" is ink — monochrome */\n  --divider: rgba(0,0,0,0.10);\n  --divider-subtle: rgba(0,0,0,0.06);\n  --table-alt: rgba(0,0,0,0.02);\n  --grid-line: rgba(0,0,0,0.025);\n  --radius: 6px;\n  --radius-sm: 4px;\n  --gutter: 20px;\n  --pad: 20px;\n  --transition: background-color 0.3s ease, color 0.3s ease;\n  /* Background column grid: 204px modules (184 column + 20 gutter). */\n  --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);\n  --grid-size: 204px;\n  --grid-pos: 20px 0;\n}\n[data-theme=\"dark\"] {\n  --bg: #0E0C0A;\n  --text: #E8E8E8;\n  --text-secondary: #949494;\n  --accent: #E8E8E8;\n  --divider: rgba(255,255,255,0.12);\n  --divider-subtle: rgba(255,255,255,0.07);\n  --table-alt: rgba(255,255,255,0.03);\n  --grid-line: rgba(255,255,255,0.01);\n}\n@media(max-width:480px){\n  :root{--pad:25px}\n}\n\n/* ── Base ──\n   Raster owns the page: paper background, ink text, and the visible\n   204px module grid drawn behind everything. */\nhtml{scroll-behavior:smooth;font-size:16px}\nbody{\n  background-color:var(--bg);\n  background-image:var(--grid-image);\n  background-size:var(--grid-size) 100vh;\n  background-repeat:repeat-x;\n  background-attachment:fixed;\n  background-position:var(--grid-pos);\n  color:var(--text);\n  font-family:'Messina Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;\n  font-weight:500;\n  line-height:1.6;\n  transition:var(--transition);\n  -webkit-font-smoothing:antialiased;\n}\n\n/* ── Utilities ── */\n.rs-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}\n.rs-sr:focus-visible+.rs-check,.rs-sr:focus-visible+.rs-radio-dot,.rs-sr:focus-visible+.rs-switch{outline:1.5px solid var(--text);outline-offset:2px}\n\n/* ── Type scale ──\n   Hierarchy from weight, color, and position — never all caps. */\n.rs-t-xl{font-size:clamp(34px,5vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin:0;text-wrap:balance}\n.rs-t-display{font-size:38px;font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0}\n.rs-t-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0}\n.rs-t-sub{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.5;color:var(--text-secondary);margin:0}\n.rs-t-body{font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin:0}\n.rs-t-label{font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--text);margin:0}\n\n/* ── Inline code ── */\n.rs-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}\n\n/* ── Reduced motion — nothing loops, nothing slides ── */\n@media(prefers-reduced-motion:reduce){\n  .rs-reveal{transition:none}\n  .rs-subscribed{animation:none}\n}\n",
+          "type": "registry:file",
+          "target": "styles/raster/base.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "foundation",
+          "cssOnly": true
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "button",
+      "type": "registry:component",
+      "title": "Button",
+      "description": "Solid ink primary — one per view — and a hairline ghost secondary. 40px tall, 36px small variant.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/button.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  /** Solid ink primary — one per view — or hairline ghost. */\n  variant?: \"primary\" | \"ghost\";\n  size?: \"default\" | \"sm\";\n}\n\nexport const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(\n  { variant = \"primary\", size = \"default\", type = \"button\", className, ...props },\n  ref,\n) {\n  return (\n    <button\n      ref={ref}\n      type={type}\n      className={cx(\n        variant === \"ghost\" ? \"rs-btn-ghost\" : \"rs-btn-primary\",\n        size === \"sm\" && \"rs-btn-sm\",\n        className,\n      )}\n      {...props}\n    />\n  );\n});\n",
+          "type": "registry:component",
+          "target": "components/raster/button.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/button.css",
+          "content": "/* ── Buttons ── */\n.rs-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity .2s ease}\n.rs-btn-primary:hover{opacity:.85}\n.rs-btn-primary:disabled{opacity:.4;cursor:not-allowed}\n.rs-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color .2s ease,color .2s ease}\n.rs-btn-ghost:hover{background:var(--divider);border-color:transparent}\n.rs-btn-ghost:disabled{opacity:.4;cursor:not-allowed;background:transparent;border-color:var(--divider)}\n.rs-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}\n",
+          "type": "registry:file",
+          "target": "styles/raster/button.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-btn-primary",
+            "rs-btn-ghost",
+            "rs-btn-sm"
+          ],
+          "snippet": "<button class=\"rs-btn-primary\">Primary action</button>\n<button class=\"rs-btn-ghost\">Secondary</button>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "link",
+      "type": "registry:component",
+      "title": "Text link",
+      "description": "Underlined by its hairline; never colored.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/styles/link.css",
+          "content": "/* ── Text link — underlined by its hairline, never colored ── */\n.rs-link{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);transition:border-color .2s ease}\n.rs-link:hover{border-color:var(--accent)}\n",
+          "type": "registry:file",
+          "target": "styles/raster/link.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-link"
+          ],
+          "snippet": "<a class=\"rs-link\" href=\"#\">A text link</a>",
+          "cssOnly": true,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "input",
+      "type": "registry:component",
+      "title": "Input",
+      "description": "Quiet field: hairline border, ink focus, label above at 12px.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/input.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  /** Label rendered above the field at 12px. */\n  label?: React.ReactNode;\n  /** Marks the field as validated: ink border and ink feedback text. */\n  ok?: boolean;\n  /** Quiet feedback line under the field. */\n  feedback?: React.ReactNode;\n}\n\nexport const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(\n  { label, ok, feedback, className, id, ...props },\n  ref,\n) {\n  const autoId = React.useId();\n  const inputId = id ?? autoId;\n  return (\n    <div className=\"rs-field\">\n      {label != null && (\n        <label className=\"rs-field-label\" htmlFor={inputId}>\n          {label}\n        </label>\n      )}\n      <input\n        ref={ref}\n        id={inputId}\n        className={cx(\"rs-input\", \"rs-input-full\", ok && \"rs-input-ok\", className)}\n        {...props}\n      />\n      {feedback != null && <span className={cx(\"rs-feedback\", ok && \"rs-feedback-ok\")}>{feedback}</span>}\n    </div>\n  );\n});\n",
+          "type": "registry:component",
+          "target": "components/raster/input.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/field.css",
+          "content": "/* ── Field — quiet input: hairline border, ink focus, label above ── */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}\n.rs-input:focus{border-color:var(--accent)}\n.rs-input-full{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n",
+          "type": "registry:file",
+          "target": "styles/raster/field.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-field",
+            "rs-field-label",
+            "rs-input",
+            "rs-input-full",
+            "rs-input-ok",
+            "rs-feedback",
+            "rs-feedback-ok"
+          ],
+          "snippet": "<div class=\"rs-field\"><span class=\"rs-field-label\">E-mail</span><input class=\"rs-input rs-input-full\" /></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "inline-form",
+      "type": "registry:component",
+      "title": "Inline form",
+      "description": "One field, one action — the action lives inside the field and appears once input validates.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "raster/inline-form.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface InlineFormProps\n  extends Omit<React.FormHTMLAttributes<HTMLFormElement>, \"onSubmit\"> {\n  placeholder?: string;\n  buttonLabel?: React.ReactNode;\n  successLabel?: React.ReactNode;\n  /** The action only appears once this returns true. Defaults to a loose e-mail check. */\n  validate?: (value: string) => boolean;\n  onSubmit?: (value: string) => void;\n  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;\n}\n\n/** One field, one action — the action lives inside the field. */\nexport function InlineForm({\n  placeholder = \"Your e-mail\",\n  buttonLabel = \"Subscribe\",\n  successLabel = \"You're on the list\",\n  validate = (v) => /.+@.+\\..+/.test(v),\n  onSubmit,\n  className,\n  inputProps,\n  ...props\n}: InlineFormProps) {\n  const [value, setValue] = React.useState(\"\");\n  const [done, setDone] = React.useState(false);\n  const valid = validate(value);\n\n  if (done) {\n    return (\n      <div className=\"rs-subscribed\">\n        <svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" aria-hidden=\"true\">\n          <path d=\"M3 8.5l3.5 3.5L13 5\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" />\n        </svg>\n        {successLabel}\n      </div>\n    );\n  }\n\n  return (\n    <form\n      className={cx(\"rs-inline-field\", className)}\n      onSubmit={(e) => {\n        e.preventDefault();\n        if (!valid) return;\n        onSubmit?.(value);\n        setDone(true);\n      }}\n      {...props}\n    >\n      <input\n        className=\"rs-inline-input\"\n        placeholder={placeholder}\n        value={value}\n        onChange={(e) => setValue(e.target.value)}\n        {...inputProps}\n      />\n      <span className={cx(\"rs-reveal\", valid && \"rs-reveal-in\")}>\n        <button type=\"submit\" className=\"rs-btn-primary rs-inline-btn\" tabIndex={valid ? 0 : -1}>\n          {buttonLabel}\n        </button>\n      </span>\n    </form>\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/inline-form.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/inline-form.css",
+          "content": "/* ── Inline form — the action lives inside the field ── */\n.rs-inline-field{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:4px 6px 4px 12px;transition:border-color .2s ease}\n.rs-inline-field:focus-within{border-color:var(--accent)}\n.rs-inline-input{flex:1;min-width:0;border:none;background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);outline:none;padding:7px 0}\n.rs-inline-input::placeholder{color:var(--text-secondary)}\n.rs-inline-btn{height:28px;padding:0 16px;font-size:12.5px;min-width:0;border-radius:3px;white-space:nowrap}\n.rs-reveal{max-width:0;opacity:0;transform:translateX(-6px) scale(.92);overflow:hidden;transition:max-width .4s cubic-bezier(.22,1,.36,1),opacity .3s ease .05s,transform .4s cubic-bezier(.22,1,.36,1)}\n.rs-reveal-in{max-width:160px;opacity:1;transform:none}\n.rs-subscribed{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text);animation:rsSubIn .35s cubic-bezier(.22,1,.36,1)}\n@keyframes rsSubIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}\n",
+          "type": "registry:file",
+          "target": "styles/raster/inline-form.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "patterns",
+          "classes": [
+            "rs-inline-field",
+            "rs-inline-input",
+            "rs-inline-btn",
+            "rs-reveal",
+            "rs-reveal-in",
+            "rs-subscribed"
+          ],
+          "snippet": "<div class=\"rs-inline-field\"><input class=\"rs-inline-input\" placeholder=\"Your e-mail\" /><span class=\"rs-reveal rs-reveal-in\"><button class=\"rs-btn-primary rs-inline-btn\">Subscribe</button></span></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "button"
+          ]
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "radio",
+      "type": "registry:component",
+      "title": "Radio",
+      "description": "One choice; the dot is ink, never a hue.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/radio.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\ninterface RadioGroupContextValue {\n  name: string;\n  value: string | undefined;\n  setValue: (value: string) => void;\n}\n\nconst RadioGroupContext = React.createContext<RadioGroupContextValue | null>(null);\n\nexport interface RadioGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  name?: string;\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (value: string) => void;\n}\n\nexport function RadioGroup({\n  name,\n  value,\n  defaultValue,\n  onValueChange,\n  children,\n  ...props\n}: RadioGroupProps) {\n  const autoName = React.useId();\n  const [inner, setInner] = React.useState(defaultValue);\n  const isControlled = value !== undefined;\n  const current = isControlled ? value : inner;\n  const setValue = (next: string) => {\n    if (!isControlled) setInner(next);\n    onValueChange?.(next);\n  };\n  return (\n    <div role=\"radiogroup\" {...props}>\n      <RadioGroupContext.Provider value={{ name: name ?? autoName, value: current, setValue }}>\n        {children}\n      </RadioGroupContext.Provider>\n    </div>\n  );\n}\n\nexport interface RadioProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"value\"> {\n  value: string;\n  label?: React.ReactNode;\n}\n\n/** A real native radio inside a RadioGroup; the ink dot mirrors its state. */\nexport const Radio = React.forwardRef<HTMLInputElement, RadioProps>(function Radio(\n  { value, label, className, onChange, ...props },\n  ref,\n) {\n  const group = React.useContext(RadioGroupContext);\n  const on = group ? group.value === value : undefined;\n  return (\n    <label className={cx(\"rs-radio\", className)}>\n      <input\n        ref={ref}\n        type=\"radio\"\n        className=\"rs-sr\"\n        name={group?.name}\n        value={value}\n        checked={on}\n        onChange={(e) => {\n          group?.setValue(value);\n          onChange?.(e);\n        }}\n        {...props}\n      />\n      <span className={cx(\"rs-radio-dot\", on && \"rs-radio-on\")} aria-hidden=\"true\" />\n      {label}\n    </label>\n  );\n});\n",
+          "type": "registry:component",
+          "target": "components/raster/radio.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/radio.css",
+          "content": "/* ── Radio — the dot is ink, never a hue ── */\n.rs-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.rs-radio-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--divider);position:relative;flex-shrink:0}\n.rs-radio-on{border-color:var(--text)}\n.rs-radio-on::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--text)}\n",
+          "type": "registry:file",
+          "target": "styles/raster/radio.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-radio",
+            "rs-radio-dot",
+            "rs-radio-on"
+          ],
+          "snippet": "<label class=\"rs-radio\"><span class=\"rs-radio-dot rs-radio-on\"></span>Monthly</label>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "checkbox",
+      "type": "registry:component",
+      "title": "Checkbox",
+      "description": "Many choices; 16px boxes, 3px radius, ink when checked.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/checkbox.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface CheckboxProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  label?: React.ReactNode;\n}\n\n/** A real native checkbox; the visible 16px box mirrors its state. */\nexport const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(\n  { label, className, checked, defaultChecked, onChange, ...props },\n  ref,\n) {\n  const [inner, setInner] = React.useState(defaultChecked ?? false);\n  const isControlled = checked !== undefined;\n  const on = isControlled ? checked : inner;\n  return (\n    <label className={cx(\"rs-choice\", className)}>\n      <input\n        ref={ref}\n        type=\"checkbox\"\n        className=\"rs-sr\"\n        checked={on}\n        onChange={(e) => {\n          if (!isControlled) setInner(e.target.checked);\n          onChange?.(e);\n        }}\n        {...props}\n      />\n      <span className={cx(\"rs-check\", on && \"rs-check-on\")} aria-hidden=\"true\">\n        {on && (\n          <svg viewBox=\"0 0 12 12\" fill=\"none\">\n            <path\n              d=\"M2.5 6.5l2.5 2.5 4.5-5.5\"\n              stroke=\"currentColor\"\n              strokeWidth=\"1.5\"\n              strokeLinecap=\"round\"\n              strokeLinejoin=\"round\"\n            />\n          </svg>\n        )}\n      </span>\n      {label}\n    </label>\n  );\n});\n",
+          "type": "registry:component",
+          "target": "components/raster/checkbox.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/checkbox.css",
+          "content": "/* ── Checkbox — 16px boxes, 3px radius, ink when checked ── */\n.rs-choice{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.rs-check{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--divider);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--bg)}\n.rs-check svg{width:12px;height:12px}\n.rs-check-on{background:var(--text);border-color:var(--text)}\n",
+          "type": "registry:file",
+          "target": "styles/raster/checkbox.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-choice",
+            "rs-check",
+            "rs-check-on"
+          ],
+          "snippet": "<label class=\"rs-choice\"><span class=\"rs-check rs-check-on\"><svg viewBox=\"0 0 12 12\" fill=\"none\"><path d=\"M2.5 6.5l2.5 2.5 4.5-5.5\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span>Brand</label>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "switch",
+      "type": "registry:component",
+      "title": "Switch",
+      "description": "32×18 pill; on is ink, off is hairline. State moves, layout doesn't.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/switch.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SwitchProps\n  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, \"onChange\"> {\n  checked?: boolean;\n  defaultChecked?: boolean;\n  onCheckedChange?: (checked: boolean) => void;\n}\n\n/** A button with role=\"switch\" — state moves, layout doesn't. */\nexport const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(function Switch(\n  { checked, defaultChecked, onCheckedChange, className, onClick, ...props },\n  ref,\n) {\n  const [inner, setInner] = React.useState(defaultChecked ?? false);\n  const isControlled = checked !== undefined;\n  const on = isControlled ? checked : inner;\n  return (\n    <button\n      ref={ref}\n      type=\"button\"\n      role=\"switch\"\n      aria-checked={on}\n      className={cx(\"rs-switch\", on && \"rs-switch-on\", className)}\n      onClick={(e) => {\n        if (!isControlled) setInner(!on);\n        onCheckedChange?.(!on);\n        onClick?.(e);\n      }}\n      {...props}\n    >\n      <i />\n    </button>\n  );\n});\n",
+          "type": "registry:component",
+          "target": "components/raster/switch.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/switch.css",
+          "content": "/* ── Switch — state moves, layout doesn't ── */\n.rs-switch{display:inline-flex;box-sizing:border-box;width:32px;height:18px;border-radius:9px;border:1.5px solid var(--divider);position:relative;flex-shrink:0;transition:background-color .2s ease,border-color .2s ease}\n.rs-switch i{position:absolute;top:1.5px;left:1.5px;width:12px;height:12px;border-radius:50%;background:var(--text-secondary);transition:transform .2s ease}\n.rs-switch-on{background:var(--text);border-color:var(--text)}\n.rs-switch-on i{background:var(--bg);transform:translateX(14px)}\nbutton.rs-switch{padding:0;background:none;cursor:pointer;border:1.5px solid var(--divider)}\nbutton.rs-switch.rs-switch-on{background:var(--text);border-color:var(--text)}\n",
+          "type": "registry:file",
+          "target": "styles/raster/switch.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-switch",
+            "rs-switch-on"
+          ],
+          "snippet": "<span class=\"rs-switch rs-switch-on\"><i></i></span>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "slider",
+      "type": "registry:component",
+      "title": "Slider",
+      "description": "Thin track with ink fill and 14px thumb.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/slider.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SliderProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"value\" | \"defaultValue\" | \"onChange\"> {\n  value?: number;\n  defaultValue?: number;\n  min?: number;\n  max?: number;\n  step?: number;\n  onValueChange?: (value: number) => void;\n}\n\n/** A native range input drives the ink track — pointer and keyboard for free. */\nexport const Slider = React.forwardRef<HTMLInputElement, SliderProps>(function Slider(\n  { value, defaultValue = 50, min = 0, max = 100, step = 1, onValueChange, className, ...props },\n  ref,\n) {\n  const [inner, setInner] = React.useState(defaultValue);\n  const isControlled = value !== undefined;\n  const current = isControlled ? value : inner;\n  const pct = max === min ? 0 : ((current - min) / (max - min)) * 100;\n  return (\n    <div className={cx(\"rs-slider\", className)}>\n      <span className=\"rs-slider-fill\" style={{ width: `${pct}%` }} />\n      <span className=\"rs-slider-thumb\" style={{ left: `${pct}%` }} />\n      <input\n        ref={ref}\n        type=\"range\"\n        min={min}\n        max={max}\n        step={step}\n        value={current}\n        onChange={(e) => {\n          const next = Number(e.target.value);\n          if (!isControlled) setInner(next);\n          onValueChange?.(next);\n        }}\n        {...props}\n      />\n    </div>\n  );\n});\n",
+          "type": "registry:component",
+          "target": "components/raster/slider.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/slider.css",
+          "content": "/* ── Slider — thin track with ink fill and 14px thumb ── */\n.rs-slider{position:relative;height:2px;background:var(--divider);border-radius:1px;margin:10px 0}\n.rs-slider-fill{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:1px}\n.rs-slider-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:1.5px solid var(--text)}\n.rs-slider input[type=range]{position:absolute;left:0;right:0;top:-8px;bottom:-8px;width:100%;height:auto;opacity:0;cursor:pointer;margin:0}\n.rs-slider:has(input[type=range]:focus-visible) .rs-slider-thumb{outline:1.5px solid var(--text);outline-offset:2px}\n",
+          "type": "registry:file",
+          "target": "styles/raster/slider.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-slider",
+            "rs-slider-fill",
+            "rs-slider-thumb"
+          ],
+          "snippet": "<div class=\"rs-slider\"><span class=\"rs-slider-fill\" style=\"width:62%\"></span><span class=\"rs-slider-thumb\" style=\"left:62%\"></span></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "progress",
+      "type": "registry:component",
+      "title": "Progress",
+      "description": "4px bar; the percentage lives in the label, never inside the bar.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/progress.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {\n  value: number;\n  max?: number;\n  /** Label above the bar; the percentage lives here, never inside the bar. */\n  label?: React.ReactNode;\n}\n\nexport function Progress({ value, max = 100, label, className, ...props }: ProgressProps) {\n  const pct = Math.min(100, Math.max(0, max === 0 ? 0 : (value / max) * 100));\n  return (\n    <div className={cx(className)} {...props}>\n      {label != null && (\n        <div className=\"rs-progress-head\">\n          <span>{label}</span>\n          <span>{Math.round(pct)}%</span>\n        </div>\n      )}\n      <div\n        className=\"rs-progress\"\n        role=\"progressbar\"\n        aria-valuemin={0}\n        aria-valuemax={max}\n        aria-valuenow={value}\n      >\n        <span style={{ width: `${pct}%` }} />\n      </div>\n    </div>\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/progress.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/progress.css",
+          "content": "/* ── Progress — the percentage lives in the label, never in the bar ── */\n.rs-progress-head{display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:7px}\n.rs-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}\n.rs-progress span{display:block;height:100%;background:var(--text);border-radius:2px}\n",
+          "type": "registry:file",
+          "target": "styles/raster/progress.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-progress",
+            "rs-progress-head"
+          ],
+          "snippet": "<div class=\"rs-progress-head\"><span>Uploading</span><span>40%</span></div><div class=\"rs-progress\"><span style=\"width:40%\"></span></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tabs",
+      "type": "registry:component",
+      "title": "Tabs",
+      "description": "Active tab is ink with a 1.5px underline.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/tabs.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\ninterface TabsContextValue {\n  value: string;\n  setValue: (value: string) => void;\n  idBase: string;\n}\n\nconst TabsContext = React.createContext<TabsContextValue | null>(null);\n\nfunction useTabsContext(component: string): TabsContextValue {\n  const ctx = React.useContext(TabsContext);\n  if (!ctx) throw new Error(`<${component}> must be used inside <Tabs>`);\n  return ctx;\n}\n\nexport interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (value: string) => void;\n}\n\nexport function Tabs({ value, defaultValue, onValueChange, children, ...props }: TabsProps) {\n  const idBase = React.useId();\n  const [inner, setInner] = React.useState(defaultValue ?? \"\");\n  const isControlled = value !== undefined;\n  const current = isControlled ? value : inner;\n  const setValue = (next: string) => {\n    if (!isControlled) setInner(next);\n    onValueChange?.(next);\n  };\n  return (\n    <div {...props}>\n      <TabsContext.Provider value={{ value: current, setValue, idBase }}>\n        {children}\n      </TabsContext.Provider>\n    </div>\n  );\n}\n\nexport function TabList({ className, onKeyDown, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {\n    onKeyDown?.(e);\n    if (e.key !== \"ArrowRight\" && e.key !== \"ArrowLeft\") return;\n    const tabs = Array.from(\n      e.currentTarget.querySelectorAll<HTMLButtonElement>('[role=\"tab\"]:not(:disabled)'),\n    );\n    const index = tabs.indexOf(document.activeElement as HTMLButtonElement);\n    if (index === -1) return;\n    e.preventDefault();\n    const next = e.key === \"ArrowRight\" ? (index + 1) % tabs.length : (index - 1 + tabs.length) % tabs.length;\n    tabs[next]?.focus();\n    tabs[next]?.click();\n  };\n  return (\n    <div role=\"tablist\" className={cx(\"rs-tabs\", className)} onKeyDown={handleKeyDown} {...props} />\n  );\n}\n\nexport interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string;\n}\n\nexport function Tab({ value, className, onClick, ...props }: TabProps) {\n  const ctx = useTabsContext(\"Tab\");\n  const selected = ctx.value === value;\n  return (\n    <button\n      type=\"button\"\n      role=\"tab\"\n      id={`${ctx.idBase}-tab-${value}`}\n      aria-selected={selected}\n      aria-controls={`${ctx.idBase}-panel-${value}`}\n      tabIndex={selected ? 0 : -1}\n      className={cx(\"rs-tab\", selected && \"rs-tab-active\", className)}\n      onClick={(e) => {\n        ctx.setValue(value);\n        onClick?.(e);\n      }}\n      {...props}\n    />\n  );\n}\n\nexport interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {\n  value: string;\n}\n\nexport function TabPanel({ value, ...props }: TabPanelProps) {\n  const ctx = useTabsContext(\"TabPanel\");\n  const selected = ctx.value === value;\n  return (\n    <div\n      role=\"tabpanel\"\n      id={`${ctx.idBase}-panel-${value}`}\n      aria-labelledby={`${ctx.idBase}-tab-${value}`}\n      hidden={!selected}\n      {...props}\n    />\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/tabs.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/tabs.css",
+          "content": "/* ── Tabs — active tab is ink with a 1.5px underline ── */\n.rs-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}\n.rs-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}\nbutton.rs-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}\n",
+          "type": "registry:file",
+          "target": "styles/raster/tabs.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "navigation",
+          "classes": [
+            "rs-tabs",
+            "rs-tab",
+            "rs-tab-active"
+          ],
+          "snippet": "<div class=\"rs-tabs\"><span class=\"rs-tab rs-tab-active\">Overview</span><span class=\"rs-tab\">Activity</span></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "breadcrumbs",
+      "type": "registry:component",
+      "title": "Breadcrumbs",
+      "description": "Slashes at 40% opacity; the current page is ink.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/breadcrumbs.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface Crumb {\n  label: React.ReactNode;\n  href?: string;\n}\n\nexport interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {\n  items: Crumb[];\n}\n\nexport function Breadcrumbs({ items, className, ...props }: BreadcrumbsProps) {\n  return (\n    <nav aria-label=\"Breadcrumbs\" className={cx(\"rs-crumbs\", className)} {...props}>\n      {items.map((item, index) => {\n        const last = index === items.length - 1;\n        return (\n          <React.Fragment key={index}>\n            {index > 0 && (\n              <span className=\"rs-crumbs-sep\" aria-hidden=\"true\">\n                /\n              </span>\n            )}\n            {last ? (\n              <span className=\"rs-crumbs-here\" aria-current=\"page\">\n                {item.label}\n              </span>\n            ) : item.href ? (\n              <a href={item.href}>{item.label}</a>\n            ) : (\n              <span>{item.label}</span>\n            )}\n          </React.Fragment>\n        );\n      })}\n    </nav>\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/breadcrumbs.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/breadcrumbs.css",
+          "content": "/* ── Breadcrumbs — slashes at 40%, current page is ink ── */\n.rs-crumbs{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}\n.rs-crumbs-sep{opacity:.4}\n.rs-crumbs-here{color:var(--text)}\n",
+          "type": "registry:file",
+          "target": "styles/raster/breadcrumbs.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "navigation",
+          "classes": [
+            "rs-crumbs",
+            "rs-crumbs-sep",
+            "rs-crumbs-here"
+          ],
+          "snippet": "<p class=\"rs-crumbs\"><span>Studio</span><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Raster</span></p>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "pagination",
+      "type": "registry:component",
+      "title": "Pagination",
+      "description": "Squares, not pills; the current page is solid ink.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/pagination.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface PaginationProps extends React.HTMLAttributes<HTMLElement> {\n  /** Current 1-based page. */\n  page: number;\n  count: number;\n  onPageChange?: (page: number) => void;\n  /** Pages kept visible around the current one. */\n  siblings?: number;\n}\n\nfunction pageItems(page: number, count: number, siblings: number): Array<number | \"gap\"> {\n  const wanted = new Set<number>([1, count]);\n  for (let p = page - siblings; p <= page + siblings; p++) {\n    if (p >= 1 && p <= count) wanted.add(p);\n  }\n  const sorted = [...wanted].sort((a, b) => a - b);\n  const items: Array<number | \"gap\"> = [];\n  let prev = 0;\n  for (const p of sorted) {\n    if (prev && p - prev === 2) items.push(prev + 1);\n    else if (prev && p - prev > 2) items.push(\"gap\");\n    items.push(p);\n    prev = p;\n  }\n  return items;\n}\n\nexport function Pagination({\n  page,\n  count,\n  onPageChange,\n  siblings = 1,\n  className,\n  ...props\n}: PaginationProps) {\n  return (\n    <nav aria-label=\"Pagination\" className={cx(\"rs-pages\", className)} {...props}>\n      <button\n        type=\"button\"\n        className=\"rs-page\"\n        aria-label=\"Previous page\"\n        disabled={page <= 1}\n        onClick={() => onPageChange?.(page - 1)}\n      >\n        ‹\n      </button>\n      {pageItems(page, count, siblings).map((item, index) =>\n        item === \"gap\" ? (\n          <span key={`gap-${index}`} className=\"rs-page rs-page-gap\" aria-hidden=\"true\">\n            …\n          </span>\n        ) : (\n          <button\n            key={item}\n            type=\"button\"\n            className={cx(\"rs-page\", item === page && \"rs-page-on\")}\n            aria-current={item === page ? \"page\" : undefined}\n            onClick={() => onPageChange?.(item)}\n          >\n            {item}\n          </button>\n        ),\n      )}\n      <button\n        type=\"button\"\n        className=\"rs-page\"\n        aria-label=\"Next page\"\n        disabled={page >= count}\n        onClick={() => onPageChange?.(page + 1)}\n      >\n        ›\n      </button>\n    </nav>\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/pagination.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/pagination.css",
+          "content": "/* ── Pagination — squares, not pills ── */\n.rs-pages{display:flex;align-items:center;gap:5px}\n.rs-page{width:26px;height:26px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-secondary);border:1px solid transparent}\n.rs-page:not(.rs-page-gap):not(.rs-page-on){border-color:var(--divider-subtle)}\n.rs-page.rs-page-on,button.rs-page-on{background:var(--text);color:var(--bg);font-weight:600}\nbutton.rs-page{padding:0;background:none;font-family:inherit;cursor:pointer}\n",
+          "type": "registry:file",
+          "target": "styles/raster/pagination.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "navigation",
+          "classes": [
+            "rs-pages",
+            "rs-page",
+            "rs-page-on",
+            "rs-page-gap"
+          ],
+          "snippet": "<div class=\"rs-pages\"><span class=\"rs-page\">‹</span><span class=\"rs-page rs-page-on\">1</span><span class=\"rs-page\">2</span><span class=\"rs-page\">›</span></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "select",
+      "type": "registry:component",
+      "title": "Select",
+      "description": "Closed trigger with chevron; the open menu overlays instead of pushing layout.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/select.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SelectOption {\n  value: string;\n  label: React.ReactNode;\n}\n\nexport interface SelectProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\" | \"defaultValue\"> {\n  options: SelectOption[];\n  value?: string;\n  defaultValue?: string;\n  placeholder?: React.ReactNode;\n  onValueChange?: (value: string) => void;\n  disabled?: boolean;\n}\n\n/** Listbox pattern on a hairline trigger; the open menu overlays, it never pushes layout. */\nexport function Select({\n  options,\n  value,\n  defaultValue,\n  placeholder = \"Select…\",\n  onValueChange,\n  disabled,\n  className,\n  ...props\n}: SelectProps) {\n  const idBase = React.useId();\n  const rootRef = React.useRef<HTMLDivElement>(null);\n  const triggerRef = React.useRef<HTMLButtonElement>(null);\n  const [open, setOpen] = React.useState(false);\n  const [inner, setInner] = React.useState(defaultValue);\n  const isControlled = value !== undefined;\n  const current = isControlled ? value : inner;\n  const selectedIndex = options.findIndex((o) => o.value === current);\n  const [activeIndex, setActiveIndex] = React.useState(Math.max(0, selectedIndex));\n\n  const select = (next: string) => {\n    if (!isControlled) setInner(next);\n    onValueChange?.(next);\n    setOpen(false);\n    triggerRef.current?.focus();\n  };\n\n  React.useEffect(() => {\n    if (!open) return;\n    const onPointerDown = (e: PointerEvent) => {\n      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);\n    };\n    document.addEventListener(\"pointerdown\", onPointerDown);\n    return () => document.removeEventListener(\"pointerdown\", onPointerDown);\n  }, [open]);\n\n  const onTriggerKeyDown = (e: React.KeyboardEvent) => {\n    if ([\"ArrowDown\", \"ArrowUp\", \"Enter\", \" \"].includes(e.key) && !open) {\n      e.preventDefault();\n      setActiveIndex(Math.max(0, selectedIndex));\n      setOpen(true);\n      return;\n    }\n    if (!open) return;\n    if (e.key === \"Escape\") setOpen(false);\n    if (e.key === \"ArrowDown\") {\n      e.preventDefault();\n      setActiveIndex((i) => Math.min(options.length - 1, i + 1));\n    }\n    if (e.key === \"ArrowUp\") {\n      e.preventDefault();\n      setActiveIndex((i) => Math.max(0, i - 1));\n    }\n    if (e.key === \"Enter\" || e.key === \" \") {\n      e.preventDefault();\n      const active = options[activeIndex];\n      if (active) select(active.value);\n    }\n  };\n\n  const selected = selectedIndex >= 0 ? options[selectedIndex] : undefined;\n\n  return (\n    <div ref={rootRef} className={cx(\"rs-select\", className)} {...props}>\n      <button\n        ref={triggerRef}\n        type=\"button\"\n        className=\"rs-dropdown\"\n        aria-haspopup=\"listbox\"\n        aria-expanded={open}\n        aria-controls={`${idBase}-listbox`}\n        disabled={disabled}\n        onClick={() => setOpen((o) => !o)}\n        onKeyDown={onTriggerKeyDown}\n      >\n        <span>{selected ? selected.label : placeholder}</span>\n        <svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" aria-hidden=\"true\">\n          <path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" />\n        </svg>\n      </button>\n      {open && (\n        <div id={`${idBase}-listbox`} role=\"listbox\" className=\"rs-menu\" aria-activedescendant={`${idBase}-opt-${activeIndex}`}>\n          {options.map((option, index) => (\n            <button\n              key={option.value}\n              id={`${idBase}-opt-${index}`}\n              type=\"button\"\n              role=\"option\"\n              aria-selected={option.value === current}\n              className={cx(\n                \"rs-menu-item\",\n                (option.value === current || index === activeIndex) && \"rs-menu-item-active\",\n              )}\n              onPointerEnter={() => setActiveIndex(index)}\n              onClick={() => select(option.value)}\n            >\n              {option.label}\n            </button>\n          ))}\n        </div>\n      )}\n    </div>\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/select.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/menu.css",
+          "content": "/* ── Dropdown + menu — the menu overlays, it never pushes layout ── */\n.rs-select{position:relative;display:inline-block;min-width:180px}\n.rs-select .rs-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px}\n.rs-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}\nbutton.rs-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%}\n.rs-menu{border:1px solid var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}\n.rs-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle)}\n.rs-menu-item:last-child{border-bottom:none}\n.rs-menu-item.rs-menu-item-active,button.rs-menu-item-active{background:var(--divider-subtle)}\nbutton.rs-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}\n",
+          "type": "registry:file",
+          "target": "styles/raster/menu.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-select",
+            "rs-dropdown",
+            "rs-menu",
+            "rs-menu-item",
+            "rs-menu-item-active"
+          ],
+          "snippet": "<button class=\"rs-dropdown\"><span>Alkmaar</span></button>\n<div class=\"rs-menu\"><button class=\"rs-menu-item rs-menu-item-active\">Alkmaar</button><button class=\"rs-menu-item\">Amsterdam</button></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "dialog",
+      "type": "registry:component",
+      "title": "Dialog",
+      "description": "One question, two equal-sized actions, no third option.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "raster/dialog.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface DialogProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n}\n\n/**\n * A native <dialog> — focus trapping, Escape, and the backdrop come\n * from the platform, not a dependency.\n */\nexport function Dialog({ open, onClose, className, children, ...props }: DialogProps) {\n  const ref = React.useRef<HTMLDialogElement>(null);\n\n  React.useEffect(() => {\n    const dialog = ref.current;\n    if (!dialog) return;\n    if (open && !dialog.open) dialog.showModal();\n    else if (!open && dialog.open) dialog.close();\n  }, [open]);\n\n  return (\n    <dialog ref={ref} className={cx(\"rs-dialog\", className)} onClose={() => onClose?.()} {...props}>\n      {children}\n    </dialog>\n  );\n}\n\nexport function DialogTitle({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-dialog-title\", className)} {...props} />;\n}\n\nexport function DialogBody({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-dialog-body\", className)} {...props} />;\n}\n\nexport function DialogActions({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return <div className={cx(\"rs-dialog-actions\", className)} {...props} />;\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/dialog.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/dialog.css",
+          "content": "/* ── Dialog — one question, two equal actions, no third option ── */\n.rs-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}\ndialog.rs-dialog{color:var(--text)}\ndialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}\n.rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}\n.rs-dialog-actions{display:flex;justify-content:flex-end;gap:8px}\n",
+          "type": "registry:file",
+          "target": "styles/raster/dialog.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-dialog",
+            "rs-dialog-title",
+            "rs-dialog-body",
+            "rs-dialog-actions"
+          ],
+          "snippet": "<div class=\"rs-dialog\"><span class=\"rs-dialog-title\">Remove this item?</span><p class=\"rs-dialog-body\">This can't be undone.</p><div class=\"rs-dialog-actions\"><button class=\"rs-btn-ghost rs-btn-sm\">Cancel</button><button class=\"rs-btn-primary rs-btn-sm\">Remove</button></div></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "button"
+          ]
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "badge",
+      "type": "registry:component",
+      "title": "Badge",
+      "description": "Outline for recommendations, solid for done, muted for pending.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/badge.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** Outline for recommendations, solid for done, muted for pending. */\n  variant?: \"outline\" | \"solid\" | \"muted\";\n}\n\nconst variantClass = {\n  outline: \"rs-badge\",\n  solid: \"rs-badge-solid\",\n  muted: \"rs-badge-muted\",\n} as const;\n\nexport const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(function Badge(\n  { variant = \"outline\", className, ...props },\n  ref,\n) {\n  return <span ref={ref} className={cx(variantClass[variant], className)} {...props} />;\n});\n",
+          "type": "registry:component",
+          "target": "components/raster/badge.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/badge.css",
+          "content": "/* ── Badges — outline for recommendations, solid for done, muted for pending ── */\n.rs-badge{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge-solid{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--bg);background:var(--text);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge-muted{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--text-secondary);background:var(--divider-subtle);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n",
+          "type": "registry:file",
+          "target": "styles/raster/badge.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-badge",
+            "rs-badge-solid",
+            "rs-badge-muted"
+          ],
+          "snippet": "<span class=\"rs-badge\">Recommended</span><span class=\"rs-badge-solid\">Delivered</span><span class=\"rs-badge-muted\">In progress</span>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "chip",
+      "type": "registry:component",
+      "title": "Mono chip",
+      "description": "Technical identifiers set in the mono stack with a mixed hairline.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/styles/chip.css",
+          "content": "/* ── Mono chip — technical identifiers ── */\n.rs-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}\n",
+          "type": "registry:file",
+          "target": "styles/raster/chip.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chip"
+          ],
+          "snippet": "<span class=\"rs-chip\">/noord-brand</span>",
+          "cssOnly": true,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "card",
+      "type": "registry:component",
+      "title": "Card",
+      "description": "A hairline frame on the open grid; label, title, body — no heavy chrome.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/card.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  function Card({ className, ...props }, ref) {\n    return <div ref={ref} className={cx(\"rs-card\", className)} {...props} />;\n  },\n);\n\nexport function CardLabel({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-card-label\", className)} {...props} />;\n}\n\nexport function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {\n  return <h3 className={cx(\"rs-card-title\", className)} {...props} />;\n}\n\nexport function CardBody({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-card-body\", className)} {...props} />;\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/card.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/card.css",
+          "content": "/* ── Card ── */\n.rs-card{border:1px solid var(--divider);border-radius:var(--radius);padding:20px;max-width:360px}\n.rs-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}\n.rs-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}\n.rs-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}\n",
+          "type": "registry:file",
+          "target": "styles/raster/card.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-card",
+            "rs-card-label",
+            "rs-card-title",
+            "rs-card-body"
+          ],
+          "snippet": "<div class=\"rs-card\"><span class=\"rs-card-label\">Case study</span><h3 class=\"rs-card-title\">A quieter interface</h3><p class=\"rs-card-body\">Emphasis from weight and spacing, never from a hue.</p></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "stepper",
+      "type": "registry:component",
+      "title": "Stepper",
+      "description": "Numbered dots joined by hairlines; done is ink, active is outlined.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/stepper.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface Step {\n  name: React.ReactNode;\n  sub?: React.ReactNode;\n}\n\nexport interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {\n  steps: Step[];\n  /** 0-based index of the active step; everything before it is done. */\n  current: number;\n}\n\nexport function Stepper({ steps, current, className, ...props }: StepperProps) {\n  return (\n    <div className={cx(\"rs-steps\", className)} {...props}>\n      {steps.map((step, index) => (\n        <React.Fragment key={index}>\n          {index > 0 && <span className=\"rs-step-line\" aria-hidden=\"true\" />}\n          <div className=\"rs-step\" aria-current={index === current ? \"step\" : undefined}>\n            <span\n              className={cx(\n                \"rs-step-dot\",\n                index < current && \"rs-step-done\",\n                index === current && \"rs-step-active\",\n              )}\n            >\n              {index + 1}\n            </span>\n            <span className=\"rs-step-name\">{step.name}</span>\n            {step.sub != null && <span className=\"rs-step-sub\">{step.sub}</span>}\n          </div>\n        </React.Fragment>\n      ))}\n    </div>\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/stepper.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/stepper.css",
+          "content": "/* ── Stepper ── */\n.rs-steps{display:flex;align-items:flex-start;gap:8px}\n.rs-step{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:78px}\n.rs-step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--divider);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;background:var(--bg)}\n.rs-step-done{background:var(--text);border-color:var(--text);color:var(--bg)}\n.rs-step-active{border-color:var(--text);color:var(--text)}\n.rs-step-name{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);line-height:1.2}\n.rs-step-sub{font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-step-line{flex:1;height:1px;background:var(--divider);margin-top:12px;min-width:14px}\n@media(max-width:640px){.rs-steps{flex-direction:column;gap:14px}.rs-step-line{display:none}}\n",
+          "type": "registry:file",
+          "target": "styles/raster/stepper.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "navigation",
+          "classes": [
+            "rs-steps",
+            "rs-step",
+            "rs-step-dot",
+            "rs-step-done",
+            "rs-step-active",
+            "rs-step-name",
+            "rs-step-sub",
+            "rs-step-line"
+          ],
+          "snippet": "<div class=\"rs-steps\"><div class=\"rs-step\"><span class=\"rs-step-dot rs-step-done\">1</span><span class=\"rs-step-name\">Brief</span></div><span class=\"rs-step-line\"></span><div class=\"rs-step\"><span class=\"rs-step-dot rs-step-active\">2</span><span class=\"rs-step-name\">Design</span></div></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "table",
+      "type": "registry:component",
+      "title": "Table",
+      "description": "Hairline rows on the open grid; no cell borders, last column right-aligned.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/styles/table.css",
+          "content": "/* ── Table — hairline rows on the open grid; no cell borders ──\n   Scoped to .rs-table so linking raster.css never restyles a table\n   it doesn't own. The compat layer re-emits these on bare elements. */\n.rs-table{width:calc(100% + 40px);border-collapse:collapse;margin:16px 0 24px -20px;font-size:14px}\n.rs-table th{text-align:left;font-weight:600;color:var(--text);letter-spacing:-.01em;padding:10px 16px 10px 12px;border-bottom:2px solid var(--divider);font-size:13px}\n.rs-table th:first-child{padding-left:20px}\n.rs-table th:last-child{padding-right:20px}\n.rs-table td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);vertical-align:top}\n.rs-table td:first-child{padding-left:20px}\n.rs-table td:last-child{padding-right:20px}\n.rs-table tr:nth-child(even) td{background:var(--table-alt)}\n.rs-table td:last-child,.rs-table th:last-child{text-align:right}\n@media(max-width:640px){\n  .rs-table{font-size:12px;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));margin-right:calc(-1*var(--pad))}\n  .rs-table th{padding:8px 10px;font-size:12px}\n  .rs-table td{padding:8px 10px}\n  .rs-table th:first-child,.rs-table td:first-child{padding-left:var(--pad)}\n  .rs-table th:last-child,.rs-table td:last-child{padding-right:var(--pad)}\n}\n",
+          "type": "registry:file",
+          "target": "styles/raster/table.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-table"
+          ],
+          "snippet": "<table class=\"rs-table\"><thead><tr><th>Phase</th><th>Weeks</th></tr></thead><tbody><tr><td>Strategy</td><td>2</td></tr><tr><td>Identity</td><td>4</td></tr></tbody></table>",
+          "cssOnly": true,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "icons",
+      "type": "registry:component",
+      "title": "Icons",
+      "description": "16/20/24/32px, single-weight 1.5px strokes in currentColor, non-scaling.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/styles/icons.css",
+          "content": "/* ── Icons — 16/20/24/32, single-weight 1.5px strokes in currentColor ── */\n.rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}\n.rs-icons svg{width:16px;height:16px;flex-shrink:0}\n",
+          "type": "registry:file",
+          "target": "styles/raster/icons.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-icons"
+          ],
+          "snippet": "<div class=\"rs-icons\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><path d=\"M2.5 8h11M9.5 4l4 4-4 4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" vector-effect=\"non-scaling-stroke\"/></svg></div>",
+          "cssOnly": true,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "workflow",
+      "type": "registry:component",
+      "title": "Workflow card",
+      "description": "Editable pipeline card: dashed frame, drag handle, dashed chips, ghost add-step card.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/styles/flow.css",
+          "content": "/* ── Workflow cards — the dashed editable pipeline ── */\n.rs-flow{display:grid;grid-template-columns:1fr;gap:var(--gutter)}\n@media(min-width:560px){.rs-flow{grid-template-columns:repeat(2,184px);width:fit-content}}\n@media(min-width:940px){.rs-flow{grid-template-columns:repeat(3,184px)}}\n@media(min-width:1280px){.rs-flow{grid-template-columns:repeat(4,184px)}}\n@media(min-width:1448px){.rs-flow{grid-template-columns:repeat(5,184px)}}\n.rs-flow-step{position:relative;border:1px dashed var(--divider);border-radius:10px;padding:14px 34px 16px 14px;background:var(--bg);transition:border-color .2s ease}\n.rs-flow-step:hover{border-color:var(--accent)}\n.rs-flow-step::after{content:\"\";position:absolute;top:15px;right:13px;width:8px;height:14px;background-image:radial-gradient(currentColor 1.1px,transparent 1.3px);background-size:4px 5px;color:var(--text-secondary);opacity:.4}\n.rs-flow-num{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--divider);background:var(--bg);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);margin-bottom:14px}\n.rs-flow-step h4{display:inline-block;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text);border-bottom:1px dashed var(--divider);padding-bottom:1px;margin:0 0 8px}\n.rs-flow-step p{font-size:12.5px;line-height:1.55;color:var(--text-secondary);letter-spacing:-.005em;margin:0}\n.rs-flow-subs{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}\n.rs-flow-subs span{font-size:11px;line-height:1;padding:3px 7px;border:1px dashed var(--divider);border-radius:5px;color:var(--text-secondary);letter-spacing:-.005em}\n.rs-flow-subs .rs-flow-sub-add{width:18px;padding:3px 0;text-align:center;opacity:.7}\n.rs-flow-add{display:flex;align-items:center;gap:8px;margin-top:14px;border:1px dashed var(--divider);border-radius:10px;padding:12px 14px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);background:none;width:184px;max-width:100%;transition:border-color .2s ease,color .2s ease;font-family:inherit;cursor:pointer}\n.rs-flow-add:hover{border-color:var(--accent);color:var(--text)}\n.rs-flow-plus{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;font-size:13px;line-height:1}\n",
+          "type": "registry:file",
+          "target": "styles/raster/flow.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "patterns",
+          "classes": [
+            "rs-flow",
+            "rs-flow-step",
+            "rs-flow-num",
+            "rs-flow-subs",
+            "rs-flow-sub-add",
+            "rs-flow-add",
+            "rs-flow-plus"
+          ],
+          "snippet": "<div class=\"rs-flow\"><div class=\"rs-flow-step\"><span class=\"rs-flow-num\">1</span><h4>Proposal</h4><p>Scope, timeline, and fee on one page.</p></div></div>",
+          "cssOnly": true,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "assistant",
+      "type": "registry:component",
+      "title": "Assistant panel",
+      "description": "Chat surface: user block, replies, suggestion card with applied state, quiet input row.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/styles/assistant.css",
+          "content": "/* ── Assistant panel — monochrome chat surface ── */\n.rs-ai{display:flex;flex-direction:column;gap:16px;max-width:560px;border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:20px}\n.rs-ai-head{display:flex;justify-content:space-between;align-items:center}\n.rs-ai-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-ai-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-ai-status i{width:6px;height:6px;border-radius:50%;background:var(--text)}\n.rs-ai-msg{display:flex;width:100%}\n.rs-ai-user{justify-content:flex-end}\n.rs-ai-user-block{background:var(--table-alt);border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:10px 14px;font-size:13.5px;color:var(--text);letter-spacing:-.01em;max-width:85%}\n.rs-ai-reply{font-size:13.5px;line-height:1.6;color:var(--text);letter-spacing:-.01em;margin:0}\n.rs-ai-card{border:1px solid var(--divider);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;align-items:flex-start}\n.rs-ai-tag{font-size:10.5px;font-weight:600;letter-spacing:.02em;color:var(--text);border:1px solid var(--divider);border-radius:5px;padding:2px 8px;margin-bottom:10px}\n.rs-ai-text{font-size:13px;color:var(--text);line-height:1.5;margin:0}\n.rs-ai-done{display:flex;align-items:baseline;gap:8px;margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--text-secondary)}\n.rs-ai-done svg{flex-shrink:0;transform:translateY(1.5px);color:var(--text)}\n.rs-ai-input{margin-top:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:10px 12px;font-size:12.5px;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center}\n.rs-ai-send{color:var(--text);font-weight:600}\n",
+          "type": "registry:file",
+          "target": "styles/raster/assistant.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "patterns",
+          "classes": [
+            "rs-ai",
+            "rs-ai-head",
+            "rs-ai-title",
+            "rs-ai-status",
+            "rs-ai-msg",
+            "rs-ai-user",
+            "rs-ai-user-block",
+            "rs-ai-reply",
+            "rs-ai-card",
+            "rs-ai-tag",
+            "rs-ai-text",
+            "rs-ai-done",
+            "rs-ai-input",
+            "rs-ai-send"
+          ],
+          "snippet": "<div class=\"rs-ai\"><div class=\"rs-ai-msg rs-ai-user\"><div class=\"rs-ai-user-block\">Make the intro tighter.</div></div><p class=\"rs-ai-reply\">Done — two sentences, same claim.</p></div>",
+          "cssOnly": true,
+          "registryDependencies": []
+        }
+      }
+    }
+  ]
+}

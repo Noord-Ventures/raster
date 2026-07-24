@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slider",
+  "type": "registry:component",
+  "title": "Slider",
+  "description": "Thin track with ink fill and 14px thumb.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/slider.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SliderProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"value\" | \"defaultValue\" | \"onChange\"> {\n  value?: number;\n  defaultValue?: number;\n  min?: number;\n  max?: number;\n  step?: number;\n  onValueChange?: (value: number) => void;\n}\n\n/** A native range input drives the ink track — pointer and keyboard for free. */\nexport const Slider = React.forwardRef<HTMLInputElement, SliderProps>(function Slider(\n  { value, defaultValue = 50, min = 0, max = 100, step = 1, onValueChange, className, ...props },\n  ref,\n) {\n  const [inner, setInner] = React.useState(defaultValue);\n  const isControlled = value !== undefined;\n  const current = isControlled ? value : inner;\n  const pct = max === min ? 0 : ((current - min) / (max - min)) * 100;\n  return (\n    <div className={cx(\"rs-slider\", className)}>\n      <span className=\"rs-slider-fill\" style={{ width: `${pct}%` }} />\n      <span className=\"rs-slider-thumb\" style={{ left: `${pct}%` }} />\n      <input\n        ref={ref}\n        type=\"range\"\n        min={min}\n        max={max}\n        step={step}\n        value={current}\n        onChange={(e) => {\n          const next = Number(e.target.value);\n          if (!isControlled) setInner(next);\n          onValueChange?.(next);\n        }}\n        {...props}\n      />\n    </div>\n  );\n});\n",
+      "type": "registry:component",
+      "target": "components/raster/slider.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/slider.css",
+      "content": "/* ── Slider — thin track with ink fill and 14px thumb ── */\n.rs-slider{position:relative;height:2px;background:var(--divider);border-radius:1px;margin:10px 0}\n.rs-slider-fill{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:1px}\n.rs-slider-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:1.5px solid var(--text)}\n.rs-slider input[type=range]{position:absolute;left:0;right:0;top:-8px;bottom:-8px;width:100%;height:auto;opacity:0;cursor:pointer;margin:0}\n.rs-slider:has(input[type=range]:focus-visible) .rs-slider-thumb{outline:1.5px solid var(--text);outline-offset:2px}\n",
+      "type": "registry:file",
+      "target": "styles/raster/slider.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "forms",
+      "classes": [
+        "rs-slider",
+        "rs-slider-fill",
+        "rs-slider-thumb"
+      ],
+      "snippet": "<div class=\"rs-slider\"><span class=\"rs-slider-fill\" style=\"width:62%\"></span><span class=\"rs-slider-thumb\" style=\"left:62%\"></span></div>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

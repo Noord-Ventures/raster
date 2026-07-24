@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "type": "registry:component",
+  "title": "Tabs",
+  "description": "Active tab is ink with a 1.5px underline.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/tabs.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\ninterface TabsContextValue {\n  value: string;\n  setValue: (value: string) => void;\n  idBase: string;\n}\n\nconst TabsContext = React.createContext<TabsContextValue | null>(null);\n\nfunction useTabsContext(component: string): TabsContextValue {\n  const ctx = React.useContext(TabsContext);\n  if (!ctx) throw new Error(`<${component}> must be used inside <Tabs>`);\n  return ctx;\n}\n\nexport interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (value: string) => void;\n}\n\nexport function Tabs({ value, defaultValue, onValueChange, children, ...props }: TabsProps) {\n  const idBase = React.useId();\n  const [inner, setInner] = React.useState(defaultValue ?? \"\");\n  const isControlled = value !== undefined;\n  const current = isControlled ? value : inner;\n  const setValue = (next: string) => {\n    if (!isControlled) setInner(next);\n    onValueChange?.(next);\n  };\n  return (\n    <div {...props}>\n      <TabsContext.Provider value={{ value: current, setValue, idBase }}>\n        {children}\n      </TabsContext.Provider>\n    </div>\n  );\n}\n\nexport function TabList({ className, onKeyDown, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {\n    onKeyDown?.(e);\n    if (e.key !== \"ArrowRight\" && e.key !== \"ArrowLeft\") return;\n    const tabs = Array.from(\n      e.currentTarget.querySelectorAll<HTMLButtonElement>('[role=\"tab\"]:not(:disabled)'),\n    );\n    const index = tabs.indexOf(document.activeElement as HTMLButtonElement);\n    if (index === -1) return;\n    e.preventDefault();\n    const next = e.key === \"ArrowRight\" ? (index + 1) % tabs.length : (index - 1 + tabs.length) % tabs.length;\n    tabs[next]?.focus();\n    tabs[next]?.click();\n  };\n  return (\n    <div role=\"tablist\" className={cx(\"rs-tabs\", className)} onKeyDown={handleKeyDown} {...props} />\n  );\n}\n\nexport interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  value: string;\n}\n\nexport function Tab({ value, className, onClick, ...props }: TabProps) {\n  const ctx = useTabsContext(\"Tab\");\n  const selected = ctx.value === value;\n  return (\n    <button\n      type=\"button\"\n      role=\"tab\"\n      id={`${ctx.idBase}-tab-${value}`}\n      aria-selected={selected}\n      aria-controls={`${ctx.idBase}-panel-${value}`}\n      tabIndex={selected ? 0 : -1}\n      className={cx(\"rs-tab\", selected && \"rs-tab-active\", className)}\n      onClick={(e) => {\n        ctx.setValue(value);\n        onClick?.(e);\n      }}\n      {...props}\n    />\n  );\n}\n\nexport interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {\n  value: string;\n}\n\nexport function TabPanel({ value, ...props }: TabPanelProps) {\n  const ctx = useTabsContext(\"TabPanel\");\n  const selected = ctx.value === value;\n  return (\n    <div\n      role=\"tabpanel\"\n      id={`${ctx.idBase}-panel-${value}`}\n      aria-labelledby={`${ctx.idBase}-tab-${value}`}\n      hidden={!selected}\n      {...props}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/tabs.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/tabs.css",
+      "content": "/* ── Tabs — active tab is ink with a 1.5px underline ── */\n.rs-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}\n.rs-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}\nbutton.rs-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}\n",
+      "type": "registry:file",
+      "target": "styles/raster/tabs.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "navigation",
+      "classes": [
+        "rs-tabs",
+        "rs-tab",
+        "rs-tab-active"
+      ],
+      "snippet": "<div class=\"rs-tabs\"><span class=\"rs-tab rs-tab-active\">Overview</span><span class=\"rs-tab\">Activity</span></div>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

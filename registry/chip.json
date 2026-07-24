@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chip",
+  "type": "registry:component",
+  "title": "Mono chip",
+  "description": "Technical identifiers set in the mono stack with a mixed hairline.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/styles/chip.css",
+      "content": "/* ── Mono chip — technical identifiers ── */\n.rs-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}\n",
+      "type": "registry:file",
+      "target": "styles/raster/chip.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "content",
+      "classes": [
+        "rs-chip"
+      ],
+      "snippet": "<span class=\"rs-chip\">/noord-brand</span>",
+      "cssOnly": true,
+      "registryDependencies": []
+    }
+  }
+}

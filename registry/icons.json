@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "icons",
+  "type": "registry:component",
+  "title": "Icons",
+  "description": "16/20/24/32px, single-weight 1.5px strokes in currentColor, non-scaling.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/styles/icons.css",
+      "content": "/* ── Icons — 16/20/24/32, single-weight 1.5px strokes in currentColor ── */\n.rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}\n.rs-icons svg{width:16px;height:16px;flex-shrink:0}\n",
+      "type": "registry:file",
+      "target": "styles/raster/icons.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "content",
+      "classes": [
+        "rs-icons"
+      ],
+      "snippet": "<div class=\"rs-icons\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><path d=\"M2.5 8h11M9.5 4l4 4-4 4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" vector-effect=\"non-scaling-stroke\"/></svg></div>",
+      "cssOnly": true,
+      "registryDependencies": []
+    }
+  }
+}

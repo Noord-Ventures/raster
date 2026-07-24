@@ -1,0 +1,47 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dialog",
+  "type": "registry:component",
+  "title": "Dialog",
+  "description": "One question, two equal-sized actions, no third option.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "raster/dialog.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface DialogProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n}\n\n/**\n * A native <dialog> — focus trapping, Escape, and the backdrop come\n * from the platform, not a dependency.\n */\nexport function Dialog({ open, onClose, className, children, ...props }: DialogProps) {\n  const ref = React.useRef<HTMLDialogElement>(null);\n\n  React.useEffect(() => {\n    const dialog = ref.current;\n    if (!dialog) return;\n    if (open && !dialog.open) dialog.showModal();\n    else if (!open && dialog.open) dialog.close();\n  }, [open]);\n\n  return (\n    <dialog ref={ref} className={cx(\"rs-dialog\", className)} onClose={() => onClose?.()} {...props}>\n      {children}\n    </dialog>\n  );\n}\n\nexport function DialogTitle({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-dialog-title\", className)} {...props} />;\n}\n\nexport function DialogBody({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-dialog-body\", className)} {...props} />;\n}\n\nexport function DialogActions({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return <div className={cx(\"rs-dialog-actions\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/dialog.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/dialog.css",
+      "content": "/* ── Dialog — one question, two equal actions, no third option ── */\n.rs-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}\ndialog.rs-dialog{color:var(--text)}\ndialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}\n.rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}\n.rs-dialog-actions{display:flex;justify-content:flex-end;gap:8px}\n",
+      "type": "registry:file",
+      "target": "styles/raster/dialog.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "surfaces",
+      "classes": [
+        "rs-dialog",
+        "rs-dialog-title",
+        "rs-dialog-body",
+        "rs-dialog-actions"
+      ],
+      "snippet": "<div class=\"rs-dialog\"><span class=\"rs-dialog-title\">Remove this item?</span><p class=\"rs-dialog-body\">This can't be undone.</p><div class=\"rs-dialog-actions\"><button class=\"rs-btn-ghost rs-btn-sm\">Cancel</button><button class=\"rs-btn-primary rs-btn-sm\">Remove</button></div></div>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "button"
+      ]
+    }
+  }
+}

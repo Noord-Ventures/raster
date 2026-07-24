@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button",
+  "type": "registry:component",
+  "title": "Button",
+  "description": "Solid ink primary — one per view — and a hairline ghost secondary. 40px tall, 36px small variant.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/button.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  /** Solid ink primary — one per view — or hairline ghost. */\n  variant?: \"primary\" | \"ghost\";\n  size?: \"default\" | \"sm\";\n}\n\nexport const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(\n  { variant = \"primary\", size = \"default\", type = \"button\", className, ...props },\n  ref,\n) {\n  return (\n    <button\n      ref={ref}\n      type={type}\n      className={cx(\n        variant === \"ghost\" ? \"rs-btn-ghost\" : \"rs-btn-primary\",\n        size === \"sm\" && \"rs-btn-sm\",\n        className,\n      )}\n      {...props}\n    />\n  );\n});\n",
+      "type": "registry:component",
+      "target": "components/raster/button.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/button.css",
+      "content": "/* ── Buttons ── */\n.rs-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity .2s ease}\n.rs-btn-primary:hover{opacity:.85}\n.rs-btn-primary:disabled{opacity:.4;cursor:not-allowed}\n.rs-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color .2s ease,color .2s ease}\n.rs-btn-ghost:hover{background:var(--divider);border-color:transparent}\n.rs-btn-ghost:disabled{opacity:.4;cursor:not-allowed;background:transparent;border-color:var(--divider)}\n.rs-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}\n",
+      "type": "registry:file",
+      "target": "styles/raster/button.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "actions",
+      "classes": [
+        "rs-btn-primary",
+        "rs-btn-ghost",
+        "rs-btn-sm"
+      ],
+      "snippet": "<button class=\"rs-btn-primary\">Primary action</button>\n<button class=\"rs-btn-ghost\">Secondary</button>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radio",
+  "type": "registry:component",
+  "title": "Radio",
+  "description": "One choice; the dot is ink, never a hue.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/radio.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\ninterface RadioGroupContextValue {\n  name: string;\n  value: string | undefined;\n  setValue: (value: string) => void;\n}\n\nconst RadioGroupContext = React.createContext<RadioGroupContextValue | null>(null);\n\nexport interface RadioGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  name?: string;\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (value: string) => void;\n}\n\nexport function RadioGroup({\n  name,\n  value,\n  defaultValue,\n  onValueChange,\n  children,\n  ...props\n}: RadioGroupProps) {\n  const autoName = React.useId();\n  const [inner, setInner] = React.useState(defaultValue);\n  const isControlled = value !== undefined;\n  const current = isControlled ? value : inner;\n  const setValue = (next: string) => {\n    if (!isControlled) setInner(next);\n    onValueChange?.(next);\n  };\n  return (\n    <div role=\"radiogroup\" {...props}>\n      <RadioGroupContext.Provider value={{ name: name ?? autoName, value: current, setValue }}>\n        {children}\n      </RadioGroupContext.Provider>\n    </div>\n  );\n}\n\nexport interface RadioProps\n  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\" | \"value\"> {\n  value: string;\n  label?: React.ReactNode;\n}\n\n/** A real native radio inside a RadioGroup; the ink dot mirrors its state. */\nexport const Radio = React.forwardRef<HTMLInputElement, RadioProps>(function Radio(\n  { value, label, className, onChange, ...props },\n  ref,\n) {\n  const group = React.useContext(RadioGroupContext);\n  const on = group ? group.value === value : undefined;\n  return (\n    <label className={cx(\"rs-radio\", className)}>\n      <input\n        ref={ref}\n        type=\"radio\"\n        className=\"rs-sr\"\n        name={group?.name}\n        value={value}\n        checked={on}\n        onChange={(e) => {\n          group?.setValue(value);\n          onChange?.(e);\n        }}\n        {...props}\n      />\n      <span className={cx(\"rs-radio-dot\", on && \"rs-radio-on\")} aria-hidden=\"true\" />\n      {label}\n    </label>\n  );\n});\n",
+      "type": "registry:component",
+      "target": "components/raster/radio.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/radio.css",
+      "content": "/* ── Radio — the dot is ink, never a hue ── */\n.rs-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.rs-radio-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--divider);position:relative;flex-shrink:0}\n.rs-radio-on{border-color:var(--text)}\n.rs-radio-on::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--text)}\n",
+      "type": "registry:file",
+      "target": "styles/raster/radio.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "forms",
+      "classes": [
+        "rs-radio",
+        "rs-radio-dot",
+        "rs-radio-on"
+      ],
+      "snippet": "<label class=\"rs-radio\"><span class=\"rs-radio-dot rs-radio-on\"></span>Monthly</label>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

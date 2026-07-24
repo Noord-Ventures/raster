@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "type": "registry:component",
+  "title": "Switch",
+  "description": "32×18 pill; on is ink, off is hairline. State moves, layout doesn't.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/switch.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SwitchProps\n  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, \"onChange\"> {\n  checked?: boolean;\n  defaultChecked?: boolean;\n  onCheckedChange?: (checked: boolean) => void;\n}\n\n/** A button with role=\"switch\" — state moves, layout doesn't. */\nexport const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(function Switch(\n  { checked, defaultChecked, onCheckedChange, className, onClick, ...props },\n  ref,\n) {\n  const [inner, setInner] = React.useState(defaultChecked ?? false);\n  const isControlled = checked !== undefined;\n  const on = isControlled ? checked : inner;\n  return (\n    <button\n      ref={ref}\n      type=\"button\"\n      role=\"switch\"\n      aria-checked={on}\n      className={cx(\"rs-switch\", on && \"rs-switch-on\", className)}\n      onClick={(e) => {\n        if (!isControlled) setInner(!on);\n        onCheckedChange?.(!on);\n        onClick?.(e);\n      }}\n      {...props}\n    >\n      <i />\n    </button>\n  );\n});\n",
+      "type": "registry:component",
+      "target": "components/raster/switch.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/switch.css",
+      "content": "/* ── Switch — state moves, layout doesn't ── */\n.rs-switch{display:inline-flex;box-sizing:border-box;width:32px;height:18px;border-radius:9px;border:1.5px solid var(--divider);position:relative;flex-shrink:0;transition:background-color .2s ease,border-color .2s ease}\n.rs-switch i{position:absolute;top:1.5px;left:1.5px;width:12px;height:12px;border-radius:50%;background:var(--text-secondary);transition:transform .2s ease}\n.rs-switch-on{background:var(--text);border-color:var(--text)}\n.rs-switch-on i{background:var(--bg);transform:translateX(14px)}\nbutton.rs-switch{padding:0;background:none;cursor:pointer;border:1.5px solid var(--divider)}\nbutton.rs-switch.rs-switch-on{background:var(--text);border-color:var(--text)}\n",
+      "type": "registry:file",
+      "target": "styles/raster/switch.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "forms",
+      "classes": [
+        "rs-switch",
+        "rs-switch-on"
+      ],
+      "snippet": "<span class=\"rs-switch rs-switch-on\"><i></i></span>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

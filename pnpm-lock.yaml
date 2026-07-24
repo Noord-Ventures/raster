@@ -8,6 +8,24 @@ importers:
 
   .: {}
 
+  packages/cli:
+    devDependencies:
+      '@raster/core':
+        specifier: workspace:*
+        version: link:../core
+      '@types/node':
+        specifier: ^26.1.1
+        version: 26.1.1
+      tsup:
+        specifier: ^8.3.5
+        version: 8.5.1(postcss@8.5.22)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.7(@types/node@26.1.1)(jsdom@26.1.0)
+
   packages/core:
     devDependencies:
       '@types/node':

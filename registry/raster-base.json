@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "raster-base",
+  "type": "registry:style",
+  "title": "Raster base",
+  "description": "Tokens (light + dark), page base with the visible module grid, type scale, and reduced-motion rules.",
+  "files": [
+    {
+      "path": "raster/styles/base.css",
+      "content": "/* ── Tokens ── GENERATED from src/tokens.ts — do not edit by hand. */\n:root {\n  --bg: #FAF8F2;                        /* paper */\n  --text: #1A1A1A;                      /* ink */\n  --text-secondary: #6B6B6B;            /* gray */\n  --accent: #1A1A1A;                   /* the \"accent\" is ink — monochrome */\n  --divider: rgba(0,0,0,0.10);\n  --divider-subtle: rgba(0,0,0,0.06);\n  --table-alt: rgba(0,0,0,0.02);\n  --grid-line: rgba(0,0,0,0.025);\n  --radius: 6px;\n  --radius-sm: 4px;\n  --gutter: 20px;\n  --pad: 20px;\n  --transition: background-color 0.3s ease, color 0.3s ease;\n  /* Background column grid: 204px modules (184 column + 20 gutter). */\n  --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);\n  --grid-size: 204px;\n  --grid-pos: 20px 0;\n}\n[data-theme=\"dark\"] {\n  --bg: #0E0C0A;\n  --text: #E8E8E8;\n  --text-secondary: #949494;\n  --accent: #E8E8E8;\n  --divider: rgba(255,255,255,0.12);\n  --divider-subtle: rgba(255,255,255,0.07);\n  --table-alt: rgba(255,255,255,0.03);\n  --grid-line: rgba(255,255,255,0.01);\n}\n@media(max-width:480px){\n  :root{--pad:25px}\n}\n\n/* ── Base ──\n   Raster owns the page: paper background, ink text, and the visible\n   204px module grid drawn behind everything. */\nhtml{scroll-behavior:smooth;font-size:16px}\nbody{\n  background-color:var(--bg);\n  background-image:var(--grid-image);\n  background-size:var(--grid-size) 100vh;\n  background-repeat:repeat-x;\n  background-attachment:fixed;\n  background-position:var(--grid-pos);\n  color:var(--text);\n  font-family:'Messina Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;\n  font-weight:500;\n  line-height:1.6;\n  transition:var(--transition);\n  -webkit-font-smoothing:antialiased;\n}\n\n/* ── Utilities ── */\n.rs-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}\n.rs-sr:focus-visible+.rs-check,.rs-sr:focus-visible+.rs-radio-dot,.rs-sr:focus-visible+.rs-switch{outline:1.5px solid var(--text);outline-offset:2px}\n\n/* ── Type scale ──\n   Hierarchy from weight, color, and position — never all caps. */\n.rs-t-xl{font-size:clamp(34px,5vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin:0;text-wrap:balance}\n.rs-t-display{font-size:38px;font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0}\n.rs-t-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0}\n.rs-t-sub{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.5;color:var(--text-secondary);margin:0}\n.rs-t-body{font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin:0}\n.rs-t-label{font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--text);margin:0}\n\n/* ── Inline code ── */\n.rs-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}\n\n/* ── Reduced motion — nothing loops, nothing slides ── */\n@media(prefers-reduced-motion:reduce){\n  .rs-reveal{transition:none}\n  .rs-subscribed{animation:none}\n}\n",
+      "type": "registry:file",
+      "target": "styles/raster/base.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "foundation",
+      "cssOnly": true
+    }
+  }
+}

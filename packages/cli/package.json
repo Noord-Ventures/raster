@@ -1,0 +1,30 @@
+{
+  "name": "@raster/cli",
+  "version": "0.2.0",
+  "description": "The Raster CLI — install the monochrome design system into any project: raster init, raster add <component>.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rennvaldes/raster.git",
+    "directory": "packages/cli"
+  },
+  "type": "module",
+  "bin": {
+    "raster": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm --filter @raster/core build:css && pnpm --filter @raster/core build:registry && tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@raster/core": "workspace:*",
+    "@types/node": "^26.1.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}

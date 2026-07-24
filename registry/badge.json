@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:component",
+  "title": "Badge",
+  "description": "Outline for recommendations, solid for done, muted for pending.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** Outline for recommendations, solid for done, muted for pending. */\n  variant?: \"outline\" | \"solid\" | \"muted\";\n}\n\nconst variantClass = {\n  outline: \"rs-badge\",\n  solid: \"rs-badge-solid\",\n  muted: \"rs-badge-muted\",\n} as const;\n\nexport const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(function Badge(\n  { variant = \"outline\", className, ...props },\n  ref,\n) {\n  return <span ref={ref} className={cx(variantClass[variant], className)} {...props} />;\n});\n",
+      "type": "registry:component",
+      "target": "components/raster/badge.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/badge.css",
+      "content": "/* ── Badges — outline for recommendations, solid for done, muted for pending ── */\n.rs-badge{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge-solid{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--bg);background:var(--text);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge-muted{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--text-secondary);background:var(--divider-subtle);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n",
+      "type": "registry:file",
+      "target": "styles/raster/badge.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "feedback",
+      "classes": [
+        "rs-badge",
+        "rs-badge-solid",
+        "rs-badge-muted"
+      ],
+      "snippet": "<span class=\"rs-badge\">Recommended</span><span class=\"rs-badge-solid\">Delivered</span><span class=\"rs-badge-muted\">In progress</span>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

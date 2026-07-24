@@ -1,0 +1,44 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pagination",
+  "type": "registry:component",
+  "title": "Pagination",
+  "description": "Squares, not pills; the current page is solid ink.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/pagination.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface PaginationProps extends React.HTMLAttributes<HTMLElement> {\n  /** Current 1-based page. */\n  page: number;\n  count: number;\n  onPageChange?: (page: number) => void;\n  /** Pages kept visible around the current one. */\n  siblings?: number;\n}\n\nfunction pageItems(page: number, count: number, siblings: number): Array<number | \"gap\"> {\n  const wanted = new Set<number>([1, count]);\n  for (let p = page - siblings; p <= page + siblings; p++) {\n    if (p >= 1 && p <= count) wanted.add(p);\n  }\n  const sorted = [...wanted].sort((a, b) => a - b);\n  const items: Array<number | \"gap\"> = [];\n  let prev = 0;\n  for (const p of sorted) {\n    if (prev && p - prev === 2) items.push(prev + 1);\n    else if (prev && p - prev > 2) items.push(\"gap\");\n    items.push(p);\n    prev = p;\n  }\n  return items;\n}\n\nexport function Pagination({\n  page,\n  count,\n  onPageChange,\n  siblings = 1,\n  className,\n  ...props\n}: PaginationProps) {\n  return (\n    <nav aria-label=\"Pagination\" className={cx(\"rs-pages\", className)} {...props}>\n      <button\n        type=\"button\"\n        className=\"rs-page\"\n        aria-label=\"Previous page\"\n        disabled={page <= 1}\n        onClick={() => onPageChange?.(page - 1)}\n      >\n        ‹\n      </button>\n      {pageItems(page, count, siblings).map((item, index) =>\n        item === \"gap\" ? (\n          <span key={`gap-${index}`} className=\"rs-page rs-page-gap\" aria-hidden=\"true\">\n            …\n          </span>\n        ) : (\n          <button\n            key={item}\n            type=\"button\"\n            className={cx(\"rs-page\", item === page && \"rs-page-on\")}\n            aria-current={item === page ? \"page\" : undefined}\n            onClick={() => onPageChange?.(item)}\n          >\n            {item}\n          </button>\n        ),\n      )}\n      <button\n        type=\"button\"\n        className=\"rs-page\"\n        aria-label=\"Next page\"\n        disabled={page >= count}\n        onClick={() => onPageChange?.(page + 1)}\n      >\n        ›\n      </button>\n    </nav>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/pagination.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/pagination.css",
+      "content": "/* ── Pagination — squares, not pills ── */\n.rs-pages{display:flex;align-items:center;gap:5px}\n.rs-page{width:26px;height:26px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-secondary);border:1px solid transparent}\n.rs-page:not(.rs-page-gap):not(.rs-page-on){border-color:var(--divider-subtle)}\n.rs-page.rs-page-on,button.rs-page-on{background:var(--text);color:var(--bg);font-weight:600}\nbutton.rs-page{padding:0;background:none;font-family:inherit;cursor:pointer}\n",
+      "type": "registry:file",
+      "target": "styles/raster/pagination.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "navigation",
+      "classes": [
+        "rs-pages",
+        "rs-page",
+        "rs-page-on",
+        "rs-page-gap"
+      ],
+      "snippet": "<div class=\"rs-pages\"><span class=\"rs-page\">‹</span><span class=\"rs-page rs-page-on\">1</span><span class=\"rs-page\">2</span><span class=\"rs-page\">›</span></div>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

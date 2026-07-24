@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "table",
+  "type": "registry:component",
+  "title": "Table",
+  "description": "Hairline rows on the open grid; no cell borders, last column right-aligned.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/styles/table.css",
+      "content": "/* ── Table — hairline rows on the open grid; no cell borders ──\n   Scoped to .rs-table so linking raster.css never restyles a table\n   it doesn't own. The compat layer re-emits these on bare elements. */\n.rs-table{width:calc(100% + 40px);border-collapse:collapse;margin:16px 0 24px -20px;font-size:14px}\n.rs-table th{text-align:left;font-weight:600;color:var(--text);letter-spacing:-.01em;padding:10px 16px 10px 12px;border-bottom:2px solid var(--divider);font-size:13px}\n.rs-table th:first-child{padding-left:20px}\n.rs-table th:last-child{padding-right:20px}\n.rs-table td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);vertical-align:top}\n.rs-table td:first-child{padding-left:20px}\n.rs-table td:last-child{padding-right:20px}\n.rs-table tr:nth-child(even) td{background:var(--table-alt)}\n.rs-table td:last-child,.rs-table th:last-child{text-align:right}\n@media(max-width:640px){\n  .rs-table{font-size:12px;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));margin-right:calc(-1*var(--pad))}\n  .rs-table th{padding:8px 10px;font-size:12px}\n  .rs-table td{padding:8px 10px}\n  .rs-table th:first-child,.rs-table td:first-child{padding-left:var(--pad)}\n  .rs-table th:last-child,.rs-table td:last-child{padding-right:var(--pad)}\n}\n",
+      "type": "registry:file",
+      "target": "styles/raster/table.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "content",
+      "classes": [
+        "rs-table"
+      ],
+      "snippet": "<table class=\"rs-table\"><thead><tr><th>Phase</th><th>Weeks</th></tr></thead><tbody><tr><td>Strategy</td><td>2</td></tr><tr><td>Identity</td><td>4</td></tr></tbody></table>",
+      "cssOnly": true,
+      "registryDependencies": []
+    }
+  }
+}

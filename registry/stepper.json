@@ -1,0 +1,48 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stepper",
+  "type": "registry:component",
+  "title": "Stepper",
+  "description": "Numbered dots joined by hairlines; done is ink, active is outlined.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/stepper.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface Step {\n  name: React.ReactNode;\n  sub?: React.ReactNode;\n}\n\nexport interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {\n  steps: Step[];\n  /** 0-based index of the active step; everything before it is done. */\n  current: number;\n}\n\nexport function Stepper({ steps, current, className, ...props }: StepperProps) {\n  return (\n    <div className={cx(\"rs-steps\", className)} {...props}>\n      {steps.map((step, index) => (\n        <React.Fragment key={index}>\n          {index > 0 && <span className=\"rs-step-line\" aria-hidden=\"true\" />}\n          <div className=\"rs-step\" aria-current={index === current ? \"step\" : undefined}>\n            <span\n              className={cx(\n                \"rs-step-dot\",\n                index < current && \"rs-step-done\",\n                index === current && \"rs-step-active\",\n              )}\n            >\n              {index + 1}\n            </span>\n            <span className=\"rs-step-name\">{step.name}</span>\n            {step.sub != null && <span className=\"rs-step-sub\">{step.sub}</span>}\n          </div>\n        </React.Fragment>\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/stepper.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/stepper.css",
+      "content": "/* ── Stepper ── */\n.rs-steps{display:flex;align-items:flex-start;gap:8px}\n.rs-step{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:78px}\n.rs-step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--divider);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;background:var(--bg)}\n.rs-step-done{background:var(--text);border-color:var(--text);color:var(--bg)}\n.rs-step-active{border-color:var(--text);color:var(--text)}\n.rs-step-name{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);line-height:1.2}\n.rs-step-sub{font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-step-line{flex:1;height:1px;background:var(--divider);margin-top:12px;min-width:14px}\n@media(max-width:640px){.rs-steps{flex-direction:column;gap:14px}.rs-step-line{display:none}}\n",
+      "type": "registry:file",
+      "target": "styles/raster/stepper.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "navigation",
+      "classes": [
+        "rs-steps",
+        "rs-step",
+        "rs-step-dot",
+        "rs-step-done",
+        "rs-step-active",
+        "rs-step-name",
+        "rs-step-sub",
+        "rs-step-line"
+      ],
+      "snippet": "<div class=\"rs-steps\"><div class=\"rs-step\"><span class=\"rs-step-dot rs-step-done\">1</span><span class=\"rs-step-name\">Brief</span></div><span class=\"rs-step-line\"></span><div class=\"rs-step\"><span class=\"rs-step-dot rs-step-active\">2</span><span class=\"rs-step-name\">Design</span></div></div>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "assistant",
+  "type": "registry:component",
+  "title": "Assistant panel",
+  "description": "Chat surface: user block, replies, suggestion card with applied state, quiet input row.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/styles/assistant.css",
+      "content": "/* ── Assistant panel — monochrome chat surface ── */\n.rs-ai{display:flex;flex-direction:column;gap:16px;max-width:560px;border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:20px}\n.rs-ai-head{display:flex;justify-content:space-between;align-items:center}\n.rs-ai-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-ai-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-ai-status i{width:6px;height:6px;border-radius:50%;background:var(--text)}\n.rs-ai-msg{display:flex;width:100%}\n.rs-ai-user{justify-content:flex-end}\n.rs-ai-user-block{background:var(--table-alt);border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:10px 14px;font-size:13.5px;color:var(--text);letter-spacing:-.01em;max-width:85%}\n.rs-ai-reply{font-size:13.5px;line-height:1.6;color:var(--text);letter-spacing:-.01em;margin:0}\n.rs-ai-card{border:1px solid var(--divider);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;align-items:flex-start}\n.rs-ai-tag{font-size:10.5px;font-weight:600;letter-spacing:.02em;color:var(--text);border:1px solid var(--divider);border-radius:5px;padding:2px 8px;margin-bottom:10px}\n.rs-ai-text{font-size:13px;color:var(--text);line-height:1.5;margin:0}\n.rs-ai-done{display:flex;align-items:baseline;gap:8px;margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--text-secondary)}\n.rs-ai-done svg{flex-shrink:0;transform:translateY(1.5px);color:var(--text)}\n.rs-ai-input{margin-top:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:10px 12px;font-size:12.5px;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center}\n.rs-ai-send{color:var(--text);font-weight:600}\n",
+      "type": "registry:file",
+      "target": "styles/raster/assistant.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "patterns",
+      "classes": [
+        "rs-ai",
+        "rs-ai-head",
+        "rs-ai-title",
+        "rs-ai-status",
+        "rs-ai-msg",
+        "rs-ai-user",
+        "rs-ai-user-block",
+        "rs-ai-reply",
+        "rs-ai-card",
+        "rs-ai-tag",
+        "rs-ai-text",
+        "rs-ai-done",
+        "rs-ai-input",
+        "rs-ai-send"
+      ],
+      "snippet": "<div class=\"rs-ai\"><div class=\"rs-ai-msg rs-ai-user\"><div class=\"rs-ai-user-block\">Make the intro tighter.</div></div><p class=\"rs-ai-reply\">Done — two sentences, same claim.</p></div>",
+      "cssOnly": true,
+      "registryDependencies": []
+    }
+  }
+}

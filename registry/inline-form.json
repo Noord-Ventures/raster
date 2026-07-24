@@ -1,0 +1,49 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "inline-form",
+  "type": "registry:component",
+  "title": "Inline form",
+  "description": "One field, one action — the action lives inside the field and appears once input validates.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "raster/inline-form.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface InlineFormProps\n  extends Omit<React.FormHTMLAttributes<HTMLFormElement>, \"onSubmit\"> {\n  placeholder?: string;\n  buttonLabel?: React.ReactNode;\n  successLabel?: React.ReactNode;\n  /** The action only appears once this returns true. Defaults to a loose e-mail check. */\n  validate?: (value: string) => boolean;\n  onSubmit?: (value: string) => void;\n  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;\n}\n\n/** One field, one action — the action lives inside the field. */\nexport function InlineForm({\n  placeholder = \"Your e-mail\",\n  buttonLabel = \"Subscribe\",\n  successLabel = \"You're on the list\",\n  validate = (v) => /.+@.+\\..+/.test(v),\n  onSubmit,\n  className,\n  inputProps,\n  ...props\n}: InlineFormProps) {\n  const [value, setValue] = React.useState(\"\");\n  const [done, setDone] = React.useState(false);\n  const valid = validate(value);\n\n  if (done) {\n    return (\n      <div className=\"rs-subscribed\">\n        <svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" aria-hidden=\"true\">\n          <path d=\"M3 8.5l3.5 3.5L13 5\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" />\n        </svg>\n        {successLabel}\n      </div>\n    );\n  }\n\n  return (\n    <form\n      className={cx(\"rs-inline-field\", className)}\n      onSubmit={(e) => {\n        e.preventDefault();\n        if (!valid) return;\n        onSubmit?.(value);\n        setDone(true);\n      }}\n      {...props}\n    >\n      <input\n        className=\"rs-inline-input\"\n        placeholder={placeholder}\n        value={value}\n        onChange={(e) => setValue(e.target.value)}\n        {...inputProps}\n      />\n      <span className={cx(\"rs-reveal\", valid && \"rs-reveal-in\")}>\n        <button type=\"submit\" className=\"rs-btn-primary rs-inline-btn\" tabIndex={valid ? 0 : -1}>\n          {buttonLabel}\n        </button>\n      </span>\n    </form>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/inline-form.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/inline-form.css",
+      "content": "/* ── Inline form — the action lives inside the field ── */\n.rs-inline-field{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:4px 6px 4px 12px;transition:border-color .2s ease}\n.rs-inline-field:focus-within{border-color:var(--accent)}\n.rs-inline-input{flex:1;min-width:0;border:none;background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);outline:none;padding:7px 0}\n.rs-inline-input::placeholder{color:var(--text-secondary)}\n.rs-inline-btn{height:28px;padding:0 16px;font-size:12.5px;min-width:0;border-radius:3px;white-space:nowrap}\n.rs-reveal{max-width:0;opacity:0;transform:translateX(-6px) scale(.92);overflow:hidden;transition:max-width .4s cubic-bezier(.22,1,.36,1),opacity .3s ease .05s,transform .4s cubic-bezier(.22,1,.36,1)}\n.rs-reveal-in{max-width:160px;opacity:1;transform:none}\n.rs-subscribed{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text);animation:rsSubIn .35s cubic-bezier(.22,1,.36,1)}\n@keyframes rsSubIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}\n",
+      "type": "registry:file",
+      "target": "styles/raster/inline-form.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "patterns",
+      "classes": [
+        "rs-inline-field",
+        "rs-inline-input",
+        "rs-inline-btn",
+        "rs-reveal",
+        "rs-reveal-in",
+        "rs-subscribed"
+      ],
+      "snippet": "<div class=\"rs-inline-field\"><input class=\"rs-inline-input\" placeholder=\"Your e-mail\" /><span class=\"rs-reveal rs-reveal-in\"><button class=\"rs-btn-primary rs-inline-btn\">Subscribe</button></span></div>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "button"
+      ]
+    }
+  }
+}
