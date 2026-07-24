@@ -1,9 +1,19 @@
-/* Site chrome for raster.design — everything else is raster.css itself. */
+/* Site chrome for raster.design — everything else is raster.css itself.
+
+   Everything sits on the grid. The shell is left-anchored so its edges
+   align with the fixed background grid (lines at 20 + n·204px), and its
+   width *steps* from grid line to grid line: n modules = n·204 − 20px of
+   content, plus 20px padding each side. Boxes inside inherit the step. */
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
-.site-shell { max-width: 1244px; margin: 0 auto; padding: 0 var(--pad); }
+.site-shell { margin: 0; padding: 0 var(--pad); max-width: 100%; }
+@media (min-width: 428px)  { .site-shell { max-width: 428px; } }  /* 2 modules */
+@media (min-width: 632px)  { .site-shell { max-width: 632px; } }  /* 3 modules */
+@media (min-width: 836px)  { .site-shell { max-width: 836px; } }  /* 4 modules */
+@media (min-width: 1040px) { .site-shell { max-width: 1040px; } } /* 5 modules */
+@media (min-width: 1244px) { .site-shell { max-width: 1244px; } } /* 6 modules */
 
 /* ── Header ── */
 .site-header {
@@ -36,23 +46,28 @@ html, body { margin: 0; padding: 0; }
 }
 
 /* ── Principles ── */
-.principles { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--gutter); padding: 48px 0 72px; border-top: 1px solid var(--divider-subtle); }
+/* Principle cards span two whole modules. */
+.principles { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 48px 0 72px; border-top: 1px solid var(--divider-subtle); }
+@media (max-width: 480px) { .principles { grid-template-columns: 1fr; } }
 .principle h3 { font-size: 15px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 6px; }
 .principle p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; letter-spacing: -.01em; margin: 0; }
 
 /* ── Docs layout ── */
-.docs-layout { display: grid; grid-template-columns: 204px 1fr; gap: var(--gutter); align-items: start; }
+/* 184px sidebar + 20px gutter = one module, so the main column starts on a grid line. */
+.docs-layout { display: grid; grid-template-columns: 184px 1fr; gap: var(--gutter); align-items: start; }
 @media (max-width: 800px) { .docs-layout { grid-template-columns: 1fr; } .docs-nav { display: none; } }
 .docs-nav { position: sticky; top: 24px; padding: 32px 0; }
 .docs-nav h4 { font-size: 12px; font-weight: 600; color: var(--text-secondary); letter-spacing: -.01em; margin: 18px 0 6px; }
 .docs-nav h4:first-child { margin-top: 0; }
 .docs-nav a { display: block; font-size: 13.5px; color: var(--text-secondary); text-decoration: none; padding: 4px 0; letter-spacing: -.01em; transition: color .15s ease; }
 .docs-nav a:hover, .docs-nav a[aria-current="page"] { color: var(--text); }
-.docs-main { padding: 32px 0 96px; min-width: 0; max-width: 800px; }
+.docs-main { padding: 32px 0 96px; min-width: 0; max-width: 796px; }  /* 4 modules */
 .docs-main > p { max-width: 592px; }
 
 /* ── Component gallery ── */
-.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--gutter); padding: 32px 0 96px; }
+/* Gallery cards span two whole modules; edges land on grid lines. */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 32px 0 96px; }
+@media (max-width: 480px) { .gallery { grid-template-columns: 1fr; } }
 .gallery-item { border: 1px solid var(--divider); border-radius: var(--radius); text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: border-color .2s ease; }
 .gallery-item:hover { border-color: var(--text); }
 .gallery-demo { padding: 28px 20px; min-height: 128px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--divider-subtle); overflow: hidden; pointer-events: none; }
