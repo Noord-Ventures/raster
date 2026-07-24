@@ -5,7 +5,7 @@
   "description": "raster.design — documentation and component gallery for the Raster design system.",
   "type": "module",
   "scripts": {
-    "prebuild": "pnpm --filter @raster/core build && pnpm --filter @raster/core build:registry && pnpm --filter @raster/react build && node scripts/copy-registry.mjs",
+    "prebuild": "node scripts/build-deps.mjs",
     "predev": "node scripts/copy-registry.mjs",
     "dev": "next dev",
     "build": "next build",
