@@ -1,0 +1,26 @@
+{
+  "name": "@noord/raster",
+  "version": "0.1.0",
+  "description": "Raster — the design system behind noord.vc, noord.dev, and renatovaldes.com. Tokens, component registry, and CSS.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rennvaldes/raster.git"
+  },
+  "homepage": "https://noord.dev/studio/raster",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens": "./tokens/raster.tokens.json",
+    "./css": "./css/raster.css"
+  },
+  "files": [
+    "src",
+    "css",
+    "tokens"
+  ],
+  "scripts": {
+    "build:tokens": "node --experimental-strip-types scripts/build-tokens.mjs"
+  }
+}

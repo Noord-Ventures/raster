@@ -1,0 +1,262 @@
+/* ═══════════════════════════════════════════════════════════════════
+   RASTER — the design system behind noord.vc, noord.dev, and
+   renatovaldes.com.
+
+   One ink, no accent hue: emphasis comes from weight, size, and
+   spacing. Hairline borders, a 204px module grid (184px column +
+   20px gutter), sentence case everywhere.
+
+   This file is self-contained: token custom properties, base styles,
+   and the component kit. Values mirror src/tokens.ts — change tokens
+   there first, then here.
+
+   Typeface: Messina Sans (Luzi Type, Zürich) — licensed, not bundled.
+   Provide your own @font-face for 'Messina Sans' or the stack falls
+   back to system sans.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Tokens ── */
+:root {
+  --bg: #FAF8F2;                        /* paper */
+  --text: #1A1A1A;                      /* ink */
+  --text-secondary: #6B6B6B;            /* gray */
+  --accent: #1A1A1A;                    /* the "accent" is ink — monochrome */
+  --divider: rgba(0,0,0,0.10);
+  --divider-subtle: rgba(0,0,0,0.06);
+  --table-alt: rgba(0,0,0,0.02);
+  --grid-line: rgba(0,0,0,0.025);
+  --radius: 6px;
+  --radius-sm: 4px;
+  --gutter: 20px;
+  --pad: 20px;
+  --transition: background-color 0.3s ease, color 0.3s ease;
+  /* Background column grid: 204px modules (184 column + 20 gutter). */
+  --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);
+  --grid-size: 204px;
+  --grid-pos: 20px 0;
+}
+[data-theme="dark"] {
+  --bg: #0E0C0A;
+  --text: #E8E8E8;
+  --text-secondary: #949494;
+  --accent: #E8E8E8;
+  --divider: rgba(255,255,255,0.12);
+  --divider-subtle: rgba(255,255,255,0.07);
+  --table-alt: rgba(255,255,255,0.03);
+  --grid-line: rgba(255,255,255,0.01);
+}
+
+/* ── Base ── */
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background-color:var(--bg);
+  background-image:var(--grid-image);
+  background-size:var(--grid-size) 100vh;
+  background-repeat:repeat-x;
+  background-attachment:fixed;
+  background-position:var(--grid-pos);
+  color:var(--text);
+  font-family:'Messina Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  font-weight:500;
+  line-height:1.6;
+  transition:var(--transition);
+  -webkit-font-smoothing:antialiased;
+}
+@media(max-width:480px){
+  :root{--pad:25px}
+}
+
+/* ── Type scale ──
+   Hierarchy from weight, color, and position — never all caps. */
+.rs-t-xl{font-size:clamp(34px,5vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin:0;text-wrap:balance}
+.rs-t-display{font-size:38px;font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0}
+.rs-t-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0}
+.rs-t-sub{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.5;color:var(--text-secondary);margin:0}
+.rs-t-body{font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin:0}
+.rs-t-label{font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--text);margin:0}
+
+/* ── Inline code ── */
+.bb-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}
+
+/* ── Buttons ── */
+.bb-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity .2s ease}
+.bb-btn-primary:hover{opacity:.85}
+.bb-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color .2s ease,color .2s ease}
+.bb-btn-ghost:hover{background:var(--divider);border-color:transparent}
+.bb-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}
+
+/* ── Text link — underlined by its hairline, never colored ── */
+.bb-link-demo{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);transition:border-color .2s ease}
+.bb-link-demo:hover{border-color:var(--accent)}
+
+/* ── Badges ── */
+.bb-badge{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;line-height:1.4;border-radius:var(--radius-sm)}
+.bb-badge-solid{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--bg);background:var(--text);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}
+.bb-badge-muted{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--text-secondary);background:var(--divider-subtle);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}
+
+/* ── Mono chip — technical identifiers ── */
+.lib-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}
+
+/* ── Card ── */
+.bb-card-demo{border:1px solid var(--divider);border-radius:var(--radius);padding:20px;max-width:360px}
+.bb-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}
+.bb-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}
+.bb-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}
+
+/* ── Field ── */
+.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}
+.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}
+.bb-sig-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}
+.bb-sig-input:focus{border-color:var(--accent)}
+.rs-input{width:100%}
+.rs-input-ok{border-color:var(--text) !important}
+.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}
+.rs-feedback-ok{color:var(--text)}
+.rs-feedback svg{flex-shrink:0}
+
+/* ── Inline form — the action lives inside the field ── */
+.rs-inline-field{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:4px 6px 4px 12px;transition:border-color .2s ease}
+.rs-inline-field:focus-within{border-color:var(--accent)}
+.rs-inline-input{flex:1;min-width:0;border:none;background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);outline:none;padding:7px 0}
+.rs-inline-input::placeholder{color:var(--text-secondary)}
+.rs-inline-btn{height:28px;padding:0 16px;font-size:12.5px;min-width:0;border-radius:3px;white-space:nowrap}
+.rs-reveal{max-width:0;opacity:0;transform:translateX(-6px) scale(.92);overflow:hidden;transition:max-width .4s cubic-bezier(.22,1,.36,1),opacity .3s ease .05s,transform .4s cubic-bezier(.22,1,.36,1)}
+.rs-reveal-in{max-width:160px;opacity:1;transform:none}
+.rs-subscribed{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text);animation:rsSubIn .35s cubic-bezier(.22,1,.36,1)}
+@keyframes rsSubIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ── Radio — the dot is ink, never a hue ── */
+.bb-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}
+.bb-radio-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--divider);position:relative;flex-shrink:0}
+.bb-radio-on{border-color:var(--text)}
+.bb-radio-on::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--text)}
+
+/* ── Checkbox ── */
+.rs-check{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--divider);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--bg)}
+.rs-check svg{width:12px;height:12px}
+.rs-check-on{background:var(--text);border-color:var(--text)}
+
+/* ── Switch — state moves, layout doesn't ── */
+.rs-switch{display:inline-flex;box-sizing:border-box;width:32px;height:18px;border-radius:9px;border:1.5px solid var(--divider);position:relative;flex-shrink:0;transition:background-color .2s ease,border-color .2s ease}
+.rs-switch i{position:absolute;top:1.5px;left:1.5px;width:12px;height:12px;border-radius:50%;background:var(--text-secondary);transition:transform .2s ease}
+.rs-switch-on{background:var(--text);border-color:var(--text)}
+.rs-switch-on i{background:var(--bg);transform:translateX(14px)}
+
+/* ── Slider ── */
+.bb-slider{position:relative;height:2px;background:var(--divider);border-radius:1px;margin:10px 0}
+.bb-slider-fill{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:1px}
+.bb-slider-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:1.5px solid var(--text)}
+
+/* ── Progress — the percentage lives in the label, never in the bar ── */
+.rs-progress-head{display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:7px}
+.bb-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}
+.bb-progress span{display:block;height:100%;background:var(--text);border-radius:2px}
+
+/* ── Tabs ── */
+.bb-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}
+.bb-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}
+.bb-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}
+button.bb-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}
+
+/* ── Breadcrumbs — slashes at 40%, current page is ink ── */
+.bb-crumbs-demo{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}
+.bb-crumbs-demo-sep{opacity:.4}
+.bb-crumbs-demo-here{color:var(--text)}
+
+/* ── Pagination — squares, not pills ── */
+.rs-pages{display:flex;align-items:center;gap:5px}
+.rs-page{width:26px;height:26px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-secondary);border:1px solid transparent}
+.rs-page:not(.rs-page-gap):not(.rs-page-on){border-color:var(--divider-subtle)}
+.rs-page.rs-page-on,button.rs-page-on{background:var(--text);color:var(--bg);font-weight:600}
+button.rs-page{padding:0;background:none;font-family:inherit;cursor:pointer}
+
+/* ── Dropdown + menu — the menu overlays, it never pushes layout ── */
+.bb-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}
+button.bb-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%}
+.bb-menu{border:1px solid var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+.bb-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle)}
+.bb-menu-item:last-child{border-bottom:none}
+.bb-menu-item.bb-menu-item-active,button.bb-menu-item-active{background:var(--divider-subtle)}
+button.bb-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
+
+/* ── Dialog — one question, two equal actions, no third option ── */
+.bb-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+.bb-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}
+.bb-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}
+.bb-dialog-actions{display:flex;justify-content:flex-end;gap:8px}
+
+/* ── Stepper ── */
+.rs-steps{display:flex;align-items:flex-start;gap:8px}
+.rs-step{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:78px}
+.rs-step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--divider);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;background:var(--bg)}
+.rs-step-done{background:var(--text);border-color:var(--text);color:var(--bg)}
+.rs-step-active{border-color:var(--text);color:var(--text)}
+.rs-step-name{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);line-height:1.2}
+.rs-step-sub{font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}
+.rs-step-line{flex:1;height:1px;background:var(--divider);margin-top:12px;min-width:14px}
+@media(max-width:640px){.rs-steps{flex-direction:column;gap:14px}.rs-step-line{display:none}}
+
+/* ── Table — hairline rows on the open grid; no cell borders ── */
+table{width:calc(100% + 40px);border-collapse:collapse;margin:16px 0 24px -20px;font-size:14px}
+th{text-align:left;font-weight:600;color:var(--text);letter-spacing:-.01em;padding:10px 16px 10px 12px;border-bottom:2px solid var(--divider);font-size:13px}
+th:first-child{padding-left:20px}
+th:last-child{padding-right:20px}
+td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);vertical-align:top}
+td:first-child{padding-left:20px}
+td:last-child{padding-right:20px}
+tr:nth-child(even) td{background:var(--table-alt)}
+td:last-child,th:last-child{text-align:right}
+@media(max-width:640px){
+  table{font-size:12px;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));margin-right:calc(-1*var(--pad))}
+  th{padding:8px 10px;font-size:12px}
+  td{padding:8px 10px}
+  th:first-child,td:first-child{padding-left:var(--pad)}
+  th:last-child,td:last-child{padding-right:var(--pad)}
+}
+
+/* ── Icons — 16/20/24/32, single-weight 1.5px strokes in currentColor ── */
+.bb-icons{display:flex;gap:18px;align-items:center;color:var(--text)}
+.bb-icons svg{width:16px;height:16px;flex-shrink:0}
+
+/* ── Workflow cards — the dashed editable pipeline ── */
+.rs-flow{display:grid;grid-template-columns:1fr;gap:var(--gutter)}
+@media(min-width:560px){.rs-flow{grid-template-columns:repeat(2,184px);width:fit-content}}
+@media(min-width:940px){.rs-flow{grid-template-columns:repeat(3,184px)}}
+@media(min-width:1280px){.rs-flow{grid-template-columns:repeat(4,184px)}}
+@media(min-width:1448px){.rs-flow{grid-template-columns:repeat(5,184px)}}
+.rs-flow-step{position:relative;border:1px dashed var(--divider);border-radius:10px;padding:14px 34px 16px 14px;background:var(--bg);transition:border-color .2s ease}
+.rs-flow-step:hover{border-color:var(--accent)}
+.rs-flow-step::after{content:"";position:absolute;top:15px;right:13px;width:8px;height:14px;background-image:radial-gradient(currentColor 1.1px,transparent 1.3px);background-size:4px 5px;color:var(--text-secondary);opacity:.4}
+.rs-flow-num{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--divider);background:var(--bg);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);margin-bottom:14px}
+.rs-flow-step h4{display:inline-block;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text);border-bottom:1px dashed var(--divider);padding-bottom:1px;margin:0 0 8px}
+.rs-flow-step p{font-size:12.5px;line-height:1.55;color:var(--text-secondary);letter-spacing:-.005em;margin:0}
+.rs-flow-subs{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
+.rs-flow-subs span{font-size:11px;line-height:1;padding:3px 7px;border:1px dashed var(--divider);border-radius:5px;color:var(--text-secondary);letter-spacing:-.005em}
+.rs-flow-subs .rs-flow-sub-add{width:18px;padding:3px 0;text-align:center;opacity:.7}
+.rs-flow-add{display:flex;align-items:center;gap:8px;margin-top:14px;border:1px dashed var(--divider);border-radius:10px;padding:12px 14px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);background:none;width:184px;max-width:100%;transition:border-color .2s ease,color .2s ease;font-family:inherit;cursor:pointer}
+.rs-flow-add:hover{border-color:var(--accent);color:var(--text)}
+.rs-flow-plus{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;font-size:13px;line-height:1}
+
+/* ── Assistant panel — monochrome chat surface ── */
+.rs-ai{display:flex;flex-direction:column;gap:16px;max-width:560px;border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:20px}
+.rs-ai-head{display:flex;justify-content:space-between;align-items:center}
+.rs-ai-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.rs-ai-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}
+.rs-ai-status i{width:6px;height:6px;border-radius:50%;background:var(--text)}
+.rs-ai-msg{display:flex;width:100%}
+.rs-ai-user{justify-content:flex-end}
+.rs-ai-user-block{background:var(--table-alt);border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:10px 14px;font-size:13.5px;color:var(--text);letter-spacing:-.01em;max-width:85%}
+.rs-ai-reply{font-size:13.5px;line-height:1.6;color:var(--text);letter-spacing:-.01em;margin:0}
+.rs-ai-card{border:1px solid var(--divider);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;align-items:flex-start}
+.rs-ai-tag{font-size:10.5px;font-weight:600;letter-spacing:.02em;color:var(--text);border:1px solid var(--divider);border-radius:5px;padding:2px 8px;margin-bottom:10px}
+.rs-ai-text{font-size:13px;color:var(--text);line-height:1.5;margin:0}
+.rs-ai-done{display:flex;align-items:baseline;gap:8px;margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--text-secondary)}
+.rs-ai-done svg{flex-shrink:0;transform:translateY(1.5px);color:var(--text)}
+.rs-ai-input{margin-top:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:10px 12px;font-size:12.5px;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center}
+.rs-ai-send{color:var(--text);font-weight:600}
+
+/* ── Reduced motion — nothing loops, nothing slides ── */
+@media(prefers-reduced-motion:reduce){
+  .rs-reveal{transition:none}
+  .rs-subscribed{animation:none}
+}
