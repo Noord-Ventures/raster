@@ -1,19 +1,24 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
+import { CrumbBar } from "@/components/crumb-bar";
 import { DocsNav } from "@/components/docs-nav";
 
 export const metadata: Metadata = { title: "Getting started" };
 
 export default function DocsPage() {
   return (
-    <div className="docs-layout">
-      <DocsNav />
-      <main className="docs-main">
-        <h1 className="rs-t-display">Getting started</h1>
-        <p className="rs-t-sub" style={{ marginTop: 10 }}>
-          Raster installs as plain CSS plus components you own. There is no runtime
-          dependency — not on Raster, not on anything else.
-        </p>
+    <>
+      <CrumbBar trail={[{ label: "Raster", href: "/" }, { label: "Docs" }, { label: "Getting started" }]} />
+      <div className="site-layout">
+        <DocsNav />
+        <main className="site-content">
+          <header className="cover" style={{ paddingBottom: 8 }}>
+            <h1 className="rs-t-display">Getting started</h1>
+            <p className="rs-t-sub">
+              Raster installs as plain CSS plus components you own. There is no runtime
+              dependency — not on Raster, not on anything else.
+            </p>
+          </header>
 
         <h2 className="section-label">1. Initialize</h2>
         <CodeBlock code={`npx raster init`} />
@@ -60,7 +65,8 @@ export default function DocsPage() {
           <code className="rs-code">lib-*</code>, bare <code className="rs-code">table</code>)
           working while you migrate.
         </p>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }

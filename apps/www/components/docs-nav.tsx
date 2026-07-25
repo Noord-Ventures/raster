@@ -4,15 +4,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { rasterCategories, rasterComponents } from "@raster/core";
 
+/** The left TOC: one module wide, sticky, in the noord.dev studio style. */
 export function DocsNav() {
   const pathname = usePathname();
   return (
-    <aside className="docs-nav">
-      <h4>Foundations</h4>
-      <Link href="/docs" aria-current={pathname === "/docs" ? "page" : undefined}>
+    <aside className="toc">
+      <p className="toc-label">Foundations</p>
+      <Link href="/docs" className="toc-item" aria-current={pathname === "/docs" ? "page" : undefined}>
         Getting started
       </Link>
-      <Link href="/docs/tokens" aria-current={pathname === "/docs/tokens" ? "page" : undefined}>
+      <Link href="/docs/tokens" className="toc-item" aria-current={pathname === "/docs/tokens" ? "page" : undefined}>
         Tokens
       </Link>
       {rasterCategories.map((category) => {
@@ -20,11 +21,11 @@ export function DocsNav() {
         if (items.length === 0) return null;
         return (
           <div key={category}>
-            <h4>{category.charAt(0).toUpperCase() + category.slice(1)}</h4>
+            <p className="toc-label">{category.charAt(0).toUpperCase() + category.slice(1)}</p>
             {items.map((c) => {
               const href = `/components/${c.name}`;
               return (
-                <Link key={c.name} href={href} aria-current={pathname === href ? "page" : undefined}>
+                <Link key={c.name} href={href} className="toc-item" aria-current={pathname === href ? "page" : undefined}>
                   {c.title}
                 </Link>
               );

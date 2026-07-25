@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "@raster/core/css";
 import "./site.css";
-import { SiteHeader } from "@/components/site-header";
+import { SiteChrome } from "@/components/site-chrome";
 
 export const metadata: Metadata = {
   title: {
@@ -20,16 +20,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
-        <div className="site-shell">
-          <SiteHeader />
-          {children}
-          <footer className="site-footer">
-            <span>Raster — the design system behind noord.vc, noord.dev, and renatovaldes.com.</span>
-            <span>
-              <a href="https://github.com/rennvaldes/raster">GitHub</a>
-            </span>
-          </footer>
-        </div>
+        <SiteChrome />
+        {children}
       </body>
     </html>
   );

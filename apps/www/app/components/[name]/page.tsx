@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { rasterComponents } from "@raster/core";
 import { CodeBlock } from "@/components/code-block";
+import { CrumbBar } from "@/components/crumb-bar";
 import { DocsNav } from "@/components/docs-nav";
 import { Preview } from "@/components/preview";
 
@@ -111,16 +112,21 @@ export default async function ComponentPage({
   const usage = reactUsage[component.name];
 
   return (
-    <div className="docs-layout">
-      <DocsNav />
-      <main className="docs-main">
-        <p className="rs-crumbs">
-          <span>Components</span>
-          <span className="rs-crumbs-sep">/</span>
-          <span className="rs-crumbs-here">{component.title}</span>
-        </p>
-        <h1 className="rs-t-display component-head">{component.title}</h1>
-        <p className="rs-t-sub component-desc">{component.description}</p>
+    <>
+      <CrumbBar
+        trail={[
+          { label: "Raster", href: "/" },
+          { label: "Components", href: "/components" },
+          { label: component.title },
+        ]}
+      />
+      <div className="site-layout">
+        <DocsNav />
+        <main className="site-content">
+          <header className="cover" style={{ paddingBottom: 8 }}>
+            <h1 className="rs-t-display component-head">{component.title}</h1>
+            <p className="rs-t-sub component-desc">{component.description}</p>
+          </header>
 
         <div className="preview-box">
           <Preview name={component.name} snippet={component.snippet} />
@@ -160,7 +166,8 @@ export default async function ComponentPage({
             </div>
           </>
         )}
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }

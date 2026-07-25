@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { rasterTokens } from "@raster/core";
 import { CodeBlock } from "@/components/code-block";
+import { CrumbBar } from "@/components/crumb-bar";
 import { DocsNav } from "@/components/docs-nav";
 
 export const metadata: Metadata = { title: "Tokens" };
@@ -8,14 +9,18 @@ export const metadata: Metadata = { title: "Tokens" };
 export default function TokensPage() {
   const { color, type, grid } = rasterTokens;
   return (
-    <div className="docs-layout">
-      <DocsNav />
-      <main className="docs-main">
-        <h1 className="rs-t-display">Tokens</h1>
-        <p className="rs-t-sub" style={{ marginTop: 10 }}>
-          One source of truth in TypeScript; JSON and CSS custom properties are generated from
-          it. Import the typed object, fetch the JSON, or use the custom properties directly.
-        </p>
+    <>
+      <CrumbBar trail={[{ label: "Raster", href: "/" }, { label: "Docs" }, { label: "Tokens" }]} />
+      <div className="site-layout">
+        <DocsNav />
+        <main className="site-content">
+          <header className="cover" style={{ paddingBottom: 8 }}>
+            <h1 className="rs-t-display">Tokens</h1>
+            <p className="rs-t-sub">
+              One source of truth in TypeScript; JSON and CSS custom properties are generated from
+              it. Import the typed object, fetch the JSON, or use the custom properties directly.
+            </p>
+          </header>
 
         <h2 className="section-label">The neutral scale</h2>
         <p className="rs-t-body">Ink to paper — there is no accent hue anywhere in the system.</p>
@@ -65,7 +70,8 @@ rasterTokens.grid.module;       // ${grid.module}
 // GET /r/index.json     — the component registry
 // npx raster tokens     — the token set as JSON`}
         />
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }

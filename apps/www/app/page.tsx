@@ -36,49 +36,61 @@ export default function Home() {
     .map((name) => rasterComponents.find((c) => c.name === name)!)
     .filter(Boolean);
   return (
-    <main>
-      <section className="hero">
-        <h1 className="rs-t-xl">A design system with one ink.</h1>
-        <p className="rs-t-sub">
-          Raster is monochrome, CSS-first, and dependency-free. Tokens, components, a typed
-          registry, and a CLI that vendors code you own — nothing else comes along.
-        </p>
-        <div className="hero-actions">
-          <Link href="/docs">
-            <button className="rs-btn-primary">Get started</button>
-          </Link>
-          <Link href="/components">
-            <button className="rs-btn-ghost">Browse components</button>
-          </Link>
-        </div>
-        <code className="hero-install">npx raster init &amp;&amp; npx raster add button dialog</code>
-      </section>
-
-      <section className="principles">
-        {principles.map((p) => (
-          <div className="principle" key={p.title}>
-            <h3>{p.title}</h3>
-            <p>{p.body}</p>
-          </div>
-        ))}
-      </section>
-
-      <section>
-        <h2 className="rs-t-title">The kit</h2>
-        <div className="gallery">
-          {items.map((c) => (
-            <Link key={c.name} href={`/components/${c.name}`} className="gallery-item">
-              <div className="gallery-demo">
-                <Preview name={c.name} snippet={c.snippet} />
-              </div>
-              <div className="gallery-meta">
-                <h3>{c.title}</h3>
-                <p>{c.description}</p>
-              </div>
+    <div className="site-layout">
+      <main className="site-content-wide">
+        <header className="cover" style={{ maxWidth: 592 }}>
+          <p className="rs-t-label" style={{ color: "var(--text-secondary)", fontWeight: 500, marginBottom: 32 }}>
+            Raster — a monochrome design system
+          </p>
+          <h1 className="rs-t-xl">A design system with one ink.</h1>
+          <p className="rs-t-sub">
+            Raster is monochrome, CSS-first, and dependency-free. Tokens, components, a typed
+            registry, and a CLI that vendors code you own — nothing else comes along.
+          </p>
+          <div className="hero-actions">
+            <Link href="/docs">
+              <button className="rs-btn-primary">Get started</button>
             </Link>
+            <Link href="/components">
+              <button className="rs-btn-ghost">Browse components</button>
+            </Link>
+          </div>
+          <code className="hero-install">npx raster init &amp;&amp; npx raster add button dialog</code>
+        </header>
+
+        <section className="principles">
+          {principles.map((p) => (
+            <div className="principle" key={p.title}>
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+            </div>
           ))}
-        </div>
-      </section>
-    </main>
+        </section>
+
+        <section>
+          <h2 className="rs-t-title">The kit</h2>
+          <div className="gallery">
+            {items.map((c) => (
+              <Link key={c.name} href={`/components/${c.name}`} className="gallery-item">
+                <div className="gallery-demo">
+                  <Preview name={c.name} snippet={c.snippet} />
+                </div>
+                <div className="gallery-meta">
+                  <h3>{c.title}</h3>
+                  <p>{c.description}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <footer className="site-footer">
+          <span>Raster — the design system behind noord.vc, noord.dev, and renatovaldes.com.</span>
+          <span>
+            <a href="https://github.com/rennvaldes/raster">GitHub</a>
+          </span>
+        </footer>
+      </main>
+    </div>
   );
 }

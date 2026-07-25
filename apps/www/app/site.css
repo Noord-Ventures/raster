@@ -1,42 +1,169 @@
-/* Site chrome for raster.design — everything else is raster.css itself.
+/* Site chrome for the Raster docs site — mirrors the layout system of
+   noord.vc / noord.dev / renatovaldes.com:
 
-   Everything sits on the grid. The shell is left-anchored so its edges
-   align with the fixed background grid (lines at 20 + n·204px), and its
-   width *steps* from grid line to grid line: n modules = n·204 − 20px of
-   content, plus 20px padding each side. Boxes inside inherit the step. */
+   - No header bar. Fixed corner chrome: logo top-left on the first
+     grid line (20px), controls top-right, each with a paper-halo
+     drop-shadow so they float over content.
+   - The content column starts one module in (margin-left: 204px at
+     the 1024px rail) and the layout width rounds DOWN to whole 204px
+     modules, so edges step from grid line to grid line on resize.
+   - Reading measure is 592px (3 modules); covers pad 120px down.
+   - Left TOC: 184px, sticky, visible from 900px.
+   - A fixed 72px crumb bar; breadcrumbs fade in once the page cover
+     scrolls away. */
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
-.site-shell { margin: 0; padding: 0 var(--pad); max-width: 100%; }
-@media (min-width: 428px)  { .site-shell { max-width: 428px; } }  /* 2 modules */
-@media (min-width: 632px)  { .site-shell { max-width: 632px; } }  /* 3 modules */
-@media (min-width: 836px)  { .site-shell { max-width: 836px; } }  /* 4 modules */
-@media (min-width: 1040px) { .site-shell { max-width: 1040px; } } /* 5 modules */
-@media (min-width: 1244px) { .site-shell { max-width: 1244px; } } /* 6 modules */
-
-/* ── Header ── */
-.site-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 0; border-bottom: 1px solid var(--divider-subtle);
+/* ── Fixed corner chrome ── */
+.logo-wrap {
+  position: fixed; top: 24px; left: 20px; z-index: 200;
+  display: flex; align-items: center; gap: 12px;
 }
-.site-header nav { display: flex; align-items: center; gap: 22px; }
-.site-header nav a { font-size: 14px; font-weight: 500; letter-spacing: -.01em; color: var(--text-secondary); text-decoration: none; transition: color .2s ease; }
-.site-header nav a:hover, .site-header nav a[aria-current="page"] { color: var(--text); }
-.site-logo { font-size: 15px; font-weight: 600; letter-spacing: -.01em; color: var(--text); text-decoration: none; }
-.site-logo span { color: var(--text-secondary); font-weight: 500; }
+.site-logo {
+  display: block; width: 20px; height: 20px; color: var(--text);
+  filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
+  transition: opacity .2s ease;
+}
+.site-logo:hover { opacity: .7; }
 
-/* ── Theme toggle ── */
+.corner-nav {
+  position: fixed; top: 24px; right: 58px; z-index: 200;
+  display: flex; align-items: center; gap: 16px; height: 24px;
+  filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
+}
+.corner-nav a {
+  font-size: 13px; font-weight: 500; letter-spacing: -.01em;
+  color: var(--text-secondary); text-decoration: none; line-height: 1;
+  transition: color .2s ease;
+}
+.corner-nav a:hover, .corner-nav a[aria-current="page"] { color: var(--text); }
+
 .theme-toggle {
-  width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;
-  background: none; border: 1px solid var(--divider); border-radius: var(--radius-sm);
-  color: var(--text); cursor: pointer; padding: 0; transition: border-color .2s ease;
+  position: fixed; top: 24px; right: 20px; z-index: 200;
+  width: 24px; height: 24px; padding: 4px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: none; border: none; border-radius: var(--radius-sm);
+  color: var(--text-secondary); cursor: pointer; outline: none;
+  filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
+  transition: color .2s ease;
 }
-.theme-toggle:hover { border-color: var(--text); }
+.theme-toggle:hover { color: var(--text); }
 
-/* ── Hero ── */
-.hero { padding: 96px 0 72px; max-width: 592px; }
-.hero p { margin: 20px 0 0; }
+/* Mobile: burger + panel replace the corner links. */
+.nav-toggle {
+  position: fixed; top: 20px; right: 18px; z-index: 210;
+  width: 24px; height: 24px; padding: 4px;
+  display: none; align-items: center; justify-content: center;
+  background: none; border: none; border-radius: var(--radius-sm);
+  color: var(--text-secondary); cursor: pointer; outline: none;
+  filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
+}
+.nav-toggle-icon { position: relative; display: block; width: 16px; height: 12px; }
+.nav-toggle-icon span {
+  position: absolute; left: 0; right: 0; height: 1.5px; background: currentColor;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.nav-toggle-icon span:nth-child(1) { top: 0; }
+.nav-toggle-icon span:nth-child(2) { top: 5.25px; }
+.nav-toggle-icon span:nth-child(3) { bottom: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon span:nth-child(1) { transform: translateY(5.25px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon span:nth-child(3) { transform: translateY(-5.25px) rotate(-45deg); }
+
+.nav-panel {
+  position: fixed; top: 64px; left: 0; right: 0; z-index: 205;
+  background: var(--bg); border-bottom: 1px solid var(--divider-subtle);
+  padding: 6px 0 12px;
+  opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+}
+.nav-panel[data-open="true"] { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+.nav-panel-links { display: flex; flex-direction: column; }
+.nav-panel-link {
+  display: block; padding: 12px 18px; font-size: 15px; font-weight: 500;
+  letter-spacing: -.01em; color: var(--text); text-decoration: none;
+  border-bottom: 1px solid var(--divider-subtle);
+}
+.nav-panel-theme {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  width: 100%; padding: 14px 18px 4px; border: none; background: none;
+  border-top: 1px solid var(--divider-subtle); cursor: pointer;
+  color: var(--text-secondary); font-family: inherit; font-size: 13px;
+  font-weight: 500; letter-spacing: -.01em;
+}
+
+@media (max-width: 640px) {
+  .logo-wrap { top: 22px; left: 18px; }
+  .corner-nav, .theme-toggle { display: none; }
+  .nav-toggle { display: flex; }
+}
+
+/* ── Crumb bar — fixed; crumbs fade in when the cover scrolls away ── */
+.crumb-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 160;
+  display: flex; align-items: center; height: 72px;
+  font-size: 13px; font-weight: 500; letter-spacing: -.01em; line-height: 1.3;
+  background: none; border-bottom: 1px solid transparent;
+  transition: var(--transition), background-color .2s ease, border-color .2s ease;
+}
+.crumb-bar-scrolled { background: var(--bg); border-color: var(--divider-subtle); }
+.crumb-bar-inner {
+  display: flex; align-items: center; gap: 20px; width: 100%; min-width: 0;
+  padding-left: var(--pad);
+}
+@media (min-width: 1024px) { .crumb-bar-inner { margin-left: 204px; } }
+.crumb-bar .rs-crumbs {
+  opacity: 0; transform: translateY(4px); pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+.crumb-bar-scrolled .rs-crumbs { opacity: 1; transform: none; pointer-events: auto; }
+.crumb-bar a { color: inherit; text-decoration: none; }
+@media (max-width: 640px) { .crumb-bar { height: 64px; font-size: 12px; } }
+
+/* ── The layout — one module in, width snapped to whole modules ── */
+.site-layout {
+  --ml: 0px;
+  display: flex; gap: var(--gutter); padding: 0 var(--pad);
+}
+@media (min-width: 481px) {
+  .site-layout {
+    width: calc(max(round(down, 100vw - var(--ml) - 2*var(--pad) + var(--gutter), 204px), 204px) + var(--gutter));
+  }
+}
+@media (min-width: 1024px) { .site-layout { --ml: 204px; margin-left: 204px; } }
+@media (min-width: 1700px) { .site-layout { max-width: 1244px; } }
+
+.site-content { flex-shrink: 1; width: 592px; min-width: 0; max-width: 592px; padding-bottom: 72px; }
+.site-content-wide { flex-shrink: 1; width: 100%; min-width: 0; padding-bottom: 72px; }
+@media (max-width: 800px) { .site-content { width: 100%; max-width: 100%; } }
+
+/* ── Cover — every page opens 120px down ── */
+.cover { padding-top: 120px; padding-bottom: 64px; }
+.cover .rs-t-sub { margin-top: 16px; }
+@media (max-width: 640px) { .cover { padding-top: 72px; padding-bottom: 40px; } }
+
+/* ── TOC — one column wide, sticky, from 900px ── */
+.toc {
+  width: 184px; flex-shrink: 0; align-self: flex-start;
+  position: sticky; top: 0; padding-top: 120px; padding-right: 20px;
+  display: none;
+}
+@media (min-width: 900px) { .toc { display: block; } }
+.toc-label {
+  font-size: 13px; font-weight: 500; letter-spacing: -.01em;
+  color: var(--text-secondary); margin: 18px 0 12px;
+}
+.toc-label:first-child { margin-top: 0; }
+.toc-item {
+  display: block; padding: 5px 0; font-size: 13px; font-weight: 400;
+  letter-spacing: -.01em; color: var(--text-secondary); opacity: .6;
+  text-decoration: none; transition: color .15s ease, opacity .15s ease;
+}
+.toc-item:hover { color: var(--text); opacity: 1; }
+.toc-item[aria-current="page"] { color: var(--text); opacity: 1; font-weight: 500; }
+
+/* ── Hero actions ── */
 .hero-actions { display: flex; gap: 10px; margin-top: 32px; align-items: center; }
 .hero-install {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px;
@@ -47,26 +174,13 @@ html, body { margin: 0; padding: 0; }
 
 /* ── Principles ── */
 /* Principle cards span two whole modules. */
-.principles { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 48px 0 72px; border-top: 1px solid var(--divider-subtle); }
+.principles { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 48px 0 64px; border-top: 1px solid var(--divider-subtle); }
 @media (max-width: 480px) { .principles { grid-template-columns: 1fr; } }
 .principle h3 { font-size: 15px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 6px; }
 .principle p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; letter-spacing: -.01em; margin: 0; }
 
-/* ── Docs layout ── */
-/* 184px sidebar + 20px gutter = one module, so the main column starts on a grid line. */
-.docs-layout { display: grid; grid-template-columns: 184px 1fr; gap: var(--gutter); align-items: start; }
-@media (max-width: 800px) { .docs-layout { grid-template-columns: 1fr; } .docs-nav { display: none; } }
-.docs-nav { position: sticky; top: 24px; padding: 32px 0; }
-.docs-nav h4 { font-size: 12px; font-weight: 600; color: var(--text-secondary); letter-spacing: -.01em; margin: 18px 0 6px; }
-.docs-nav h4:first-child { margin-top: 0; }
-.docs-nav a { display: block; font-size: 13.5px; color: var(--text-secondary); text-decoration: none; padding: 4px 0; letter-spacing: -.01em; transition: color .15s ease; }
-.docs-nav a:hover, .docs-nav a[aria-current="page"] { color: var(--text); }
-.docs-main { padding: 32px 0 96px; min-width: 0; max-width: 796px; }  /* 4 modules */
-.docs-main > p { max-width: 592px; }
-
-/* ── Component gallery ── */
-/* Gallery cards span two whole modules; edges land on grid lines. */
-.gallery { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 32px 0 96px; }
+/* ── Component gallery — cards span two whole modules ── */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 24px 0 48px; }
 @media (max-width: 480px) { .gallery { grid-template-columns: 1fr; } }
 .gallery-item { border: 1px solid var(--divider); border-radius: var(--radius); text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: border-color .2s ease; }
 .gallery-item:hover { border-color: var(--text); }
@@ -85,6 +199,10 @@ html, body { margin: 0; padding: 0; }
 .component-head { margin: 8px 0 4px; }
 .component-desc { max-width: 592px; }
 
-/* ── Footer ── */
-.site-footer { border-top: 1px solid var(--divider-subtle); padding: 28px 0 48px; font-size: 12.5px; color: var(--text-secondary); letter-spacing: -.01em; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+/* ── Footer — quiet hairline inside the layout ── */
+.site-footer {
+  border-top: 1px solid var(--divider-subtle); margin-top: 24px;
+  padding: 26px 0 48px; font-size: 12.5px; color: var(--text-secondary);
+  letter-spacing: -.01em; display: flex; flex-direction: column; gap: 6px;
+}
 .site-footer a { color: inherit; }
