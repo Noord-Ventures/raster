@@ -1,0 +1,44 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toast",
+  "type": "registry:component",
+  "title": "Toast",
+  "description": "Quiet confirmations bottom right, announced politely to screen readers, gone in four seconds.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/toast.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ToastOptions {\n  description?: React.ReactNode;\n}\n\ninterface ToastItem {\n  id: number;\n  title: React.ReactNode;\n  description?: React.ReactNode;\n}\n\nlet nextId = 1;\nconst listeners = new Set<(item: ToastItem) => void>();\n\n/** Fire a toast from anywhere; a mounted <Toaster /> renders it. */\nexport function toast(title: React.ReactNode, options?: ToastOptions): void {\n  const item: ToastItem = { id: nextId++, title, description: options?.description };\n  listeners.forEach((listener) => listener(item));\n}\n\nexport interface ToasterProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** How long a toast stays, in milliseconds. */\n  duration?: number;\n}\n\nexport function Toaster({ duration = 4000, className, ...props }: ToasterProps) {\n  const [items, setItems] = React.useState<ToastItem[]>([]);\n\n  React.useEffect(() => {\n    const add = (item: ToastItem) => {\n      setItems((current) => [...current, item]);\n      setTimeout(() => {\n        setItems((current) => current.filter((i) => i.id !== item.id));\n      }, duration);\n    };\n    listeners.add(add);\n    return () => {\n      listeners.delete(add);\n    };\n  }, [duration]);\n\n  return (\n    <div className={cx(\"rs-toasts\", className)} role=\"status\" aria-live=\"polite\" {...props}>\n      {items.map((item) => (\n        <div key={item.id} className=\"rs-toast\">\n          <div>\n            <span className=\"rs-toast-title\">{item.title}</span>\n            {item.description != null && <p className=\"rs-toast-body\">{item.description}</p>}\n          </div>\n        </div>\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/toast.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/toast.css",
+      "content": "/* ── Toast — quiet confirmations, bottom right, announced politely ── */\n.rs-toasts{position:fixed;bottom:20px;right:20px;z-index:300;display:flex;flex-direction:column;align-items:flex-end;gap:8px}\n.rs-toast{display:flex;align-items:flex-start;gap:10px;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:10px 14px;max-width:340px;animation:rsToastIn .25s cubic-bezier(.22,1,.36,1)}\n.rs-toast-title{display:block;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-toast-body{font-size:12.5px;line-height:1.5;letter-spacing:-.01em;color:var(--text-secondary);margin:1px 0 0}\n@keyframes rsToastIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}\n@media(prefers-reduced-motion:reduce){.rs-toast{animation:none}}\n",
+      "type": "registry:file",
+      "target": "styles/raster/toast.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "feedback",
+      "classes": [
+        "rs-toasts",
+        "rs-toast",
+        "rs-toast-title",
+        "rs-toast-body"
+      ],
+      "snippet": "<div class=\"rs-toasts\" role=\"status\"><div class=\"rs-toast\"><div><span class=\"rs-toast-title\">Saved</span><p class=\"rs-toast-body\">Your changes are live.</p></div></div></div>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

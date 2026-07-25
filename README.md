@@ -69,6 +69,12 @@ pnpm test         # core integrity tests, react jsdom tests, cli tests
 pnpm dev          # docs site at localhost:3000
 ```
 
+## Catalogue and shadcn parity
+
+37 components, each CSS-first with an optional zero-dependency React layer. Where shadcn reaches for Radix, Raster reaches for the platform: accordions are native `<details>` (the `name` attribute gives exclusive-open with zero JS), dialogs/alert-dialogs/sheets are native `<dialog>` (platform focus trap, Escape, backdrop), popovers use the native Popover API (top layer, light dismiss), tooltips are CSS-only and keyboard-aware, and form controls wrap real native inputs.
+
+Still to build for full shadcn parity: command palette, combobox, calendar + date picker, data table, input-otp, context menu, menubar, navigation menu, hover card, carousel, resizable, sonner-style queueing, charts.
+
 ## Typeface
 
 Raster is set in **Messina Sans** by Luzi Gantenbein ([Luzi Type, Zürich](https://www.luzi-type.ch)). The font is commercially licensed and **not bundled** — provide your own `@font-face` for `'Messina Sans'`, or the stack falls back to system sans. Weights: 500 (body), 600 (headings and labels).

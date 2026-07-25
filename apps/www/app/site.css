@@ -172,8 +172,12 @@ html, body { margin: 0; padding: 0; }
 /* ── Component gallery — cards span two whole modules ── */
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 24px 0 48px; }
 @media (max-width: 480px) { .gallery { grid-template-columns: 1fr; } }
-.gallery-item { border: 1px solid var(--divider); border-radius: var(--radius); text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: border-color .2s ease; }
+/* Cards are divs with a stretched title link, so live demos never nest
+   interactive elements inside an anchor. */
+.gallery-item { position: relative; border: 1px solid var(--divider); border-radius: var(--radius); display: flex; flex-direction: column; transition: border-color .2s ease; }
 .gallery-item:hover { border-color: var(--text); }
+.gallery-item-link { color: inherit; text-decoration: none; }
+.gallery-item-link::after { content: ""; position: absolute; inset: 0; }
 .gallery-demo { padding: 28px 20px; min-height: 128px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--divider-subtle); overflow: hidden; pointer-events: none; }
 .gallery-meta { padding: 14px 20px 16px; }
 .gallery-meta h3 { font-size: 14.5px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 3px; }

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover",
+  "type": "registry:component",
+  "title": "Popover",
+  "description": "The native Popover API: rendered in the top layer, light dismiss for free, anchored by four lines of code.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "raster/popover.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Trigger content, rendered in a ghost button. */\n  trigger: React.ReactNode;\n  /** Where the panel sits relative to the trigger. */\n  align?: \"start\" | \"end\";\n}\n\n/**\n * The native Popover API: the panel lives in the top layer and light\n * dismiss comes from the platform — no portal, no outside-click code.\n */\nexport function Popover({ trigger, align = \"start\", className, children, ...props }: PopoverProps) {\n  const id = React.useId();\n  const triggerRef = React.useRef<HTMLButtonElement>(null);\n  const panelRef = React.useRef<HTMLDivElement>(null);\n\n  const position = () => {\n    const anchor = triggerRef.current;\n    const panel = panelRef.current;\n    if (!anchor || !panel) return;\n    const rect = anchor.getBoundingClientRect();\n    panel.style.top = `${rect.bottom + 6}px`;\n    panel.style.left =\n      align === \"end\"\n        ? `${Math.max(8, rect.right - panel.offsetWidth)}px`\n        : `${Math.min(rect.left, window.innerWidth - panel.offsetWidth - 8)}px`;\n  };\n\n  return (\n    <>\n      <button ref={triggerRef} type=\"button\" className=\"rs-btn-ghost rs-btn-sm\" popoverTarget={id}>\n        {trigger}\n      </button>\n      <div\n        ref={panelRef}\n        id={id}\n        popover=\"auto\"\n        className={cx(\"rs-popover\", className)}\n        onToggle={(e) => {\n          if ((e as unknown as ToggleEvent).newState === \"open\") position();\n        }}\n        {...props}\n      >\n        {children}\n      </div>\n    </>\n  );\n}\n\nexport function PopoverTitle({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-popover-title\", className)} {...props} />;\n}\n\nexport function PopoverBody({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-popover-body\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/popover.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/popover.css",
+      "content": "/* ── Popover — the native Popover API: top layer, light dismiss ── */\n.rs-popover{position:fixed;inset:auto;margin:0;border:1px solid var(--divider);border-radius:var(--radius);background:var(--bg);color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;width:240px;font-size:13px;line-height:1.55;letter-spacing:-.01em}\n.rs-popover-title{display:block;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:4px}\n.rs-popover-body{color:var(--text-secondary);margin:0}\n",
+      "type": "registry:file",
+      "target": "styles/raster/popover.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "surfaces",
+      "classes": [
+        "rs-popover",
+        "rs-popover-title",
+        "rs-popover-body"
+      ],
+      "snippet": "<button class=\"rs-btn-ghost rs-btn-sm\" popovertarget=\"info\">Details</button>\n<div id=\"info\" popover=\"auto\" class=\"rs-popover\"><span class=\"rs-popover-title\">Module grid</span><p class=\"rs-popover-body\">204px modules: a 184px column and a 20px gutter.</p></div>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "button"
+      ]
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "type": "registry:component",
+  "title": "Textarea",
+  "description": "The quiet field, taller: hairline border, ink focus, vertical resize only.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/input.json"
+  ],
+  "files": [
+    {
+      "path": "raster/textarea.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {\n  label?: React.ReactNode;\n  feedback?: React.ReactNode;\n}\n\nexport const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(\n  { label, feedback, className, id, ...props },\n  ref,\n) {\n  const autoId = React.useId();\n  const areaId = id ?? autoId;\n  return (\n    <div className=\"rs-field\">\n      {label != null && (\n        <label className=\"rs-field-label\" htmlFor={areaId}>\n          {label}\n        </label>\n      )}\n      <textarea ref={ref} id={areaId} className={cx(\"rs-textarea\", className)} {...props} />\n      {feedback != null && <span className=\"rs-feedback\">{feedback}</span>}\n    </div>\n  );\n});\n",
+      "type": "registry:component",
+      "target": "components/raster/textarea.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/textarea.css",
+      "content": "/* ── Textarea — the quiet field, taller ── */\n.rs-textarea{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;line-height:1.55;padding:8px 10px;outline:none;font-family:inherit;min-height:96px;resize:vertical;width:100%}\n.rs-textarea:focus{border-color:var(--accent)}\n.rs-textarea::placeholder{color:var(--text-secondary)}\n",
+      "type": "registry:file",
+      "target": "styles/raster/textarea.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "forms",
+      "classes": [
+        "rs-textarea"
+      ],
+      "snippet": "<div class=\"rs-field\"><span class=\"rs-field-label\">Notes</span><textarea class=\"rs-textarea\" placeholder=\"What should we know?\"></textarea></div>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "input"
+      ]
+    }
+  }
+}

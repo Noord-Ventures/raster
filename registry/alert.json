@@ -1,0 +1,44 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert",
+  "type": "registry:component",
+  "title": "Alert",
+  "description": "A hairline frame with an ink icon; solid ink for critical. Emphasis from weight, never a hue.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/alert.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface AlertProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  title?: React.ReactNode;\n  /** Solid ink for the message that must not be missed. */\n  variant?: \"outline\" | \"solid\";\n  icon?: React.ReactNode;\n}\n\nexport function Alert({ title, variant = \"outline\", icon, className, children, ...props }: AlertProps) {\n  return (\n    <div\n      role=\"status\"\n      className={cx(\"rs-alert\", variant === \"solid\" && \"rs-alert-solid\", className)}\n      {...props}\n    >\n      {icon ?? (\n        <svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" aria-hidden=\"true\">\n          <circle cx=\"8\" cy=\"8\" r=\"6.25\" stroke=\"currentColor\" strokeWidth=\"1.5\" />\n          <path d=\"M8 7.5v3.5M8 5v.5\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" />\n        </svg>\n      )}\n      <div>\n        {title != null && <span className=\"rs-alert-title\">{title}</span>}\n        {children != null && <p className=\"rs-alert-body\">{children}</p>}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/alert.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/alert.css",
+      "content": "/* ── Alert — a hairline frame; emphasis from weight, never a hue ── */\n.rs-alert{display:flex;gap:10px;border:1px solid var(--divider);border-radius:var(--radius);padding:12px 14px;align-items:flex-start}\n.rs-alert svg{flex-shrink:0;margin-top:1px;color:var(--text)}\n.rs-alert-title{display:block;font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-alert-body{font-size:13px;line-height:1.55;letter-spacing:-.01em;color:var(--text-secondary);margin:2px 0 0}\n.rs-alert-solid{background:var(--text);border-color:var(--text)}\n.rs-alert-solid svg,.rs-alert-solid .rs-alert-title{color:var(--bg)}\n.rs-alert-solid .rs-alert-body{color:var(--bg);opacity:.75}\n",
+      "type": "registry:file",
+      "target": "styles/raster/alert.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "feedback",
+      "classes": [
+        "rs-alert",
+        "rs-alert-title",
+        "rs-alert-body",
+        "rs-alert-solid"
+      ],
+      "snippet": "<div class=\"rs-alert\" role=\"status\"><div><span class=\"rs-alert-title\">Heads up</span><p class=\"rs-alert-body\">Your workspace syncs every hour.</p></div></div>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "type": "registry:component",
+  "title": "Separator",
+  "description": "A hairline, horizontal or vertical — the only divider the system needs.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/styles/separator.css",
+      "content": "/* ── Separator — a hairline, horizontal or vertical ── */\n.rs-sep{border:none;border-top:1px solid var(--divider-subtle);margin:20px 0}\n.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider-subtle);margin:0 12px}\n",
+      "type": "registry:file",
+      "target": "styles/raster/separator.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "content",
+      "classes": [
+        "rs-sep",
+        "rs-sep-v"
+      ],
+      "snippet": "<hr class=\"rs-sep\" />",
+      "cssOnly": true,
+      "registryDependencies": []
+    }
+  }
+}

@@ -841,6 +841,576 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "accordion",
+      "type": "registry:component",
+      "title": "Accordion",
+      "description": "Native <details> rows on hairlines; the name attribute keeps one open at a time — no JavaScript at all.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-acc",
+            "rs-acc-item",
+            "rs-acc-chevron",
+            "rs-acc-body"
+          ],
+          "snippet": "<div class=\"rs-acc\"><details class=\"rs-acc-item\" name=\"faq\" open><summary>What is Raster?<svg class=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></summary><div class=\"rs-acc-body\">A monochrome, CSS-first design system.</div></details><details class=\"rs-acc-item\" name=\"faq\"><summary>Is it dependency-free?<svg class=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></summary><div class=\"rs-acc-body\">Yes — native elements do the work.</div></details></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/accordion.tsx",
+          "type": "registry:component",
+          "target": "components/raster/accordion.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/accordion.css",
+          "type": "registry:file",
+          "target": "styles/raster/accordion.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "alert",
+      "type": "registry:component",
+      "title": "Alert",
+      "description": "A hairline frame with an ink icon; solid ink for critical. Emphasis from weight, never a hue.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-alert",
+            "rs-alert-title",
+            "rs-alert-body",
+            "rs-alert-solid"
+          ],
+          "snippet": "<div class=\"rs-alert\" role=\"status\"><div><span class=\"rs-alert-title\">Heads up</span><p class=\"rs-alert-body\">Your workspace syncs every hour.</p></div></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/alert.tsx",
+          "type": "registry:component",
+          "target": "components/raster/alert.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/alert.css",
+          "type": "registry:file",
+          "target": "styles/raster/alert.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "alert-dialog",
+      "type": "registry:component",
+      "title": "Alert dialog",
+      "description": "A native <dialog> that requires an explicit answer — Escape and light dismiss are disabled.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/dialog.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-dialog",
+            "rs-dialog-title",
+            "rs-dialog-body",
+            "rs-dialog-actions"
+          ],
+          "snippet": "<dialog class=\"rs-dialog\" open><span class=\"rs-dialog-title\">Delete this workspace?</span><p class=\"rs-dialog-body\">All projects go with it.</p><div class=\"rs-dialog-actions\"><button class=\"rs-btn-ghost rs-btn-sm\">Cancel</button><button class=\"rs-btn-primary rs-btn-sm\">Delete</button></div></dialog>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "dialog",
+            "button"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/alert-dialog.tsx",
+          "type": "registry:component",
+          "target": "components/raster/alert-dialog.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/dialog.css",
+          "type": "registry:file",
+          "target": "styles/raster/dialog.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "avatar",
+      "type": "registry:component",
+      "title": "Avatar",
+      "description": "Initials in a quiet circle; images cover, broken images fall back to initials. Rows overlap on hairlines.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-avatar",
+            "rs-avatar-sm",
+            "rs-avatar-lg",
+            "rs-avatar-row"
+          ],
+          "snippet": "<div class=\"rs-avatar-row\"><span class=\"rs-avatar\">RV</span><span class=\"rs-avatar\">NO</span><span class=\"rs-avatar\">+3</span></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/avatar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/avatar.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/avatar.css",
+          "type": "registry:file",
+          "target": "styles/raster/avatar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "textarea",
+      "type": "registry:component",
+      "title": "Textarea",
+      "description": "The quiet field, taller: hairline border, ink focus, vertical resize only.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/input.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-textarea"
+          ],
+          "snippet": "<div class=\"rs-field\"><span class=\"rs-field-label\">Notes</span><textarea class=\"rs-textarea\" placeholder=\"What should we know?\"></textarea></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "input"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/textarea.tsx",
+          "type": "registry:component",
+          "target": "components/raster/textarea.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/textarea.css",
+          "type": "registry:file",
+          "target": "styles/raster/textarea.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "separator",
+      "type": "registry:component",
+      "title": "Separator",
+      "description": "A hairline, horizontal or vertical — the only divider the system needs.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-sep",
+            "rs-sep-v"
+          ],
+          "snippet": "<hr class=\"rs-sep\" />",
+          "cssOnly": true,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/styles/separator.css",
+          "type": "registry:file",
+          "target": "styles/raster/separator.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "skeleton",
+      "type": "registry:component",
+      "title": "Skeleton",
+      "description": "A quiet pulse on the divider tone; perfectly still under prefers-reduced-motion.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-skeleton"
+          ],
+          "snippet": "<span class=\"rs-skeleton\" style=\"width:180px;height:14px\"></span>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/skeleton.tsx",
+          "type": "registry:component",
+          "target": "components/raster/skeleton.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/skeleton.css",
+          "type": "registry:file",
+          "target": "styles/raster/skeleton.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tooltip",
+      "type": "registry:component",
+      "title": "Tooltip",
+      "description": "CSS-only: shows on hover and on keyboard focus alike, ink on paper, no positioning library.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-tip"
+          ],
+          "snippet": "<span class=\"rs-tip\" data-tip=\"Copy to clipboard\"><button class=\"rs-btn-ghost rs-btn-sm\">Copy</button></span>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "button"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/tooltip.tsx",
+          "type": "registry:component",
+          "target": "components/raster/tooltip.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/tooltip.css",
+          "type": "registry:file",
+          "target": "styles/raster/tooltip.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "toast",
+      "type": "registry:component",
+      "title": "Toast",
+      "description": "Quiet confirmations bottom right, announced politely to screen readers, gone in four seconds.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-toasts",
+            "rs-toast",
+            "rs-toast-title",
+            "rs-toast-body"
+          ],
+          "snippet": "<div class=\"rs-toasts\" role=\"status\"><div class=\"rs-toast\"><div><span class=\"rs-toast-title\">Saved</span><p class=\"rs-toast-body\">Your changes are live.</p></div></div></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/toast.tsx",
+          "type": "registry:component",
+          "target": "components/raster/toast.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/toast.css",
+          "type": "registry:file",
+          "target": "styles/raster/toast.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "dropdown-menu",
+      "type": "registry:component",
+      "title": "Dropdown menu",
+      "description": "An action menu on the shared overlay surface: keyboard navigation, menu semantics, no layout shift.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/select.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-menu",
+            "rs-menu-item",
+            "rs-menu-sep"
+          ],
+          "snippet": "<div class=\"rs-menu\" role=\"menu\"><button class=\"rs-menu-item\" role=\"menuitem\">Rename</button><button class=\"rs-menu-item\" role=\"menuitem\">Duplicate</button><hr class=\"rs-menu-sep\" /><button class=\"rs-menu-item\" role=\"menuitem\">Delete</button></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "select",
+            "button"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/dropdown-menu.tsx",
+          "type": "registry:component",
+          "target": "components/raster/dropdown-menu.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/menu.css",
+          "type": "registry:file",
+          "target": "styles/raster/menu.css"
+        },
+        {
+          "path": "raster/styles/menu-extras.css",
+          "type": "registry:file",
+          "target": "styles/raster/menu-extras.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "toggle",
+      "type": "registry:component",
+      "title": "Toggle",
+      "description": "A press switch and its group; pressed is ink, like everything on. State lives in aria-pressed.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-toggle",
+            "rs-toggle-group"
+          ],
+          "snippet": "<div class=\"rs-toggle-group\"><button class=\"rs-toggle\" aria-pressed=\"true\">Left</button><button class=\"rs-toggle\" aria-pressed=\"false\">Center</button><button class=\"rs-toggle\" aria-pressed=\"false\">Right</button></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/toggle.tsx",
+          "type": "registry:component",
+          "target": "components/raster/toggle.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/toggle.css",
+          "type": "registry:file",
+          "target": "styles/raster/toggle.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "popover",
+      "type": "registry:component",
+      "title": "Popover",
+      "description": "The native Popover API: rendered in the top layer, light dismiss for free, anchored by four lines of code.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-popover",
+            "rs-popover-title",
+            "rs-popover-body"
+          ],
+          "snippet": "<button class=\"rs-btn-ghost rs-btn-sm\" popovertarget=\"info\">Details</button>\n<div id=\"info\" popover=\"auto\" class=\"rs-popover\"><span class=\"rs-popover-title\">Module grid</span><p class=\"rs-popover-body\">204px modules: a 184px column and a 20px gutter.</p></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "button"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/popover.tsx",
+          "type": "registry:component",
+          "target": "components/raster/popover.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/popover.css",
+          "type": "registry:file",
+          "target": "styles/raster/popover.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "sheet",
+      "type": "registry:component",
+      "title": "Sheet",
+      "description": "A native <dialog> parked at the screen edge — platform focus trap and backdrop, hairline seam.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-sheet",
+            "rs-sheet-left",
+            "rs-sheet-title",
+            "rs-sheet-body"
+          ],
+          "snippet": "<dialog class=\"rs-sheet\" open><span class=\"rs-sheet-title\">Filters</span><p class=\"rs-sheet-body\">Everything narrows from here.</p></dialog>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/sheet.tsx",
+          "type": "registry:component",
+          "target": "components/raster/sheet.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/sheet.css",
+          "type": "registry:file",
+          "target": "styles/raster/sheet.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "scroll-area",
+      "type": "registry:component",
+      "title": "Scroll area",
+      "description": "Quiet overflow: hidden scrollbar, feathered top and bottom edges — the same treatment the docs TOC uses.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-scroll"
+          ],
+          "snippet": "<div class=\"rs-scroll\" style=\"max-height:140px\" tabindex=\"0\"><p>Alkmaar</p><p>Amsterdam</p><p>Delft</p><p>Eindhoven</p><p>Groningen</p><p>Haarlem</p><p>Rotterdam</p><p>Utrecht</p></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/scroll-area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/scroll-area.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/scroll-area.css",
+          "type": "registry:file",
+          "target": "styles/raster/scroll-area.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "workflow",
       "type": "registry:component",
       "title": "Workflow card",

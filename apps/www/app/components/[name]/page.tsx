@@ -61,6 +61,102 @@ const reactUsage: Record<string, string> = {
   breadcrumbs: `import { Breadcrumbs } from "@/components/raster/breadcrumbs";
 
 <Breadcrumbs items={[{ label: "Studio", href: "/studio" }, { label: "Raster" }]} />`,
+  accordion: `import { Accordion, AccordionItem } from "@/components/raster/accordion";
+
+<Accordion exclusive>
+  <AccordionItem title="What is Raster?" defaultOpen>
+    A monochrome, CSS-first design system.
+  </AccordionItem>
+  <AccordionItem title="Is it dependency-free?">
+    Yes — native elements do the work.
+  </AccordionItem>
+</Accordion>`,
+  alert: `import { Alert } from "@/components/raster/alert";
+
+<Alert title="Heads up">Your workspace syncs every hour.</Alert>
+<Alert variant="solid" title="Payment failed">Update your card to keep publishing.</Alert>`,
+  "alert-dialog": `import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle } from "@/components/raster/alert-dialog";
+
+<AlertDialog open={open} onClose={() => setOpen(false)}>
+  <AlertDialogTitle>Delete this workspace?</AlertDialogTitle>
+  <AlertDialogBody>All projects go with it.</AlertDialogBody>
+  <AlertDialogActions>
+    <Button variant="ghost" size="sm" onClick={() => setOpen(false)}>Keep it</Button>
+    <Button size="sm" onClick={remove}>Delete</Button>
+  </AlertDialogActions>
+</AlertDialog>`,
+  avatar: `import { Avatar, AvatarRow } from "@/components/raster/avatar";
+
+<Avatar src="/renn.jpg" alt="Renn" initials="RV" />
+<AvatarRow>
+  <Avatar initials="RV" />
+  <Avatar initials="NO" />
+  <Avatar initials="+3" />
+</AvatarRow>`,
+  textarea: `import { Textarea } from "@/components/raster/textarea";
+
+<Textarea label="Notes" placeholder="What should we know?" />`,
+  separator: `import { Separator } from "@/components/raster/separator";
+
+<Separator />
+<Separator orientation="vertical" />`,
+  skeleton: `import { Skeleton } from "@/components/raster/skeleton";
+
+<Skeleton width="60%" />
+<Skeleton width={240} height={14} />`,
+  tooltip: `import { Tooltip } from "@/components/raster/tooltip";
+
+<Tooltip tip="Copy to clipboard">
+  <Button variant="ghost" size="sm">Copy</Button>
+</Tooltip>`,
+  toast: `import { toast, Toaster } from "@/components/raster/toast";
+
+// once, in your layout
+<Toaster />
+
+// from anywhere
+toast("Saved", { description: "Your changes are live." });`,
+  "dropdown-menu": `import { DropdownMenu } from "@/components/raster/dropdown-menu";
+
+<DropdownMenu
+  label="Actions"
+  items={[
+    { label: "Rename", onSelect: rename },
+    { label: "Duplicate", onSelect: duplicate },
+    { separator: true },
+    { label: "Delete", onSelect: remove },
+  ]}
+/>`,
+  toggle: `import { Toggle, ToggleGroup } from "@/components/raster/toggle";
+
+<Toggle pressed={bold} onPressedChange={setBold}>Bold</Toggle>
+
+<ToggleGroup
+  options={[
+    { value: "left", label: "Left" },
+    { value: "center", label: "Center" },
+    { value: "right", label: "Right" },
+  ]}
+  value={align}
+  onValueChange={setAlign}
+/>`,
+  popover: `import { Popover, PopoverBody, PopoverTitle } from "@/components/raster/popover";
+
+<Popover trigger="Details">
+  <PopoverTitle>Module grid</PopoverTitle>
+  <PopoverBody>204px modules: a 184px column and a 20px gutter.</PopoverBody>
+</Popover>`,
+  sheet: `import { Sheet, SheetBody, SheetTitle } from "@/components/raster/sheet";
+
+<Sheet open={open} onClose={() => setOpen(false)} side="right">
+  <SheetTitle>Filters</SheetTitle>
+  <SheetBody>Everything narrows from here.</SheetBody>
+</Sheet>`,
+  "scroll-area": `import { ScrollArea } from "@/components/raster/scroll-area";
+
+<ScrollArea maxHeight={240}>
+  {cities.map((city) => <p key={city}>{city}</p>)}
+</ScrollArea>`,
   "crumb-bar": `import { CrumbBar } from "@/components/raster/crumb-bar";
 
 <CrumbBar

@@ -2,6 +2,15 @@
 
 import * as React from "react";
 import {
+  Accordion,
+  AccordionItem,
+  Alert,
+  AlertDialog,
+  AlertDialogActions,
+  AlertDialogBody,
+  AlertDialogTitle,
+  Avatar,
+  AvatarRow,
   Badge,
   Breadcrumbs,
   Button,
@@ -14,16 +23,31 @@ import {
   DialogActions,
   DialogBody,
   DialogTitle,
+  DropdownMenu,
   InlineForm,
   Input,
   Pagination,
   Progress,
   Radio,
   RadioGroup,
+  ScrollArea,
   Select,
+  Separator,
+  Sheet,
+  SheetBody,
+  SheetTitle,
+  Skeleton,
   Slider,
   Stepper,
   Switch,
+  Textarea,
+  toast,
+  Toaster,
+  ToggleGroup,
+  Tooltip,
+  Popover,
+  PopoverBody,
+  PopoverTitle,
   Tab,
   TabList,
   TabPanel,
@@ -49,6 +73,55 @@ function DialogDemo() {
           </Button>
         </DialogActions>
       </Dialog>
+    </>
+  );
+}
+
+function AlertDialogDemo() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <>
+      <Button variant="ghost" size="sm" onClick={() => setOpen(true)}>
+        Delete workspace…
+      </Button>
+      <AlertDialog open={open} onClose={() => setOpen(false)}>
+        <AlertDialogTitle>Delete this workspace?</AlertDialogTitle>
+        <AlertDialogBody>All projects go with it. This needs an answer.</AlertDialogBody>
+        <AlertDialogActions>
+          <Button variant="ghost" size="sm" onClick={() => setOpen(false)}>
+            Keep it
+          </Button>
+          <Button size="sm" onClick={() => setOpen(false)}>
+            Delete
+          </Button>
+        </AlertDialogActions>
+      </AlertDialog>
+    </>
+  );
+}
+
+function SheetDemo() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <>
+      <Button variant="ghost" size="sm" onClick={() => setOpen(true)}>
+        Open filters
+      </Button>
+      <Sheet open={open} onClose={() => setOpen(false)}>
+        <SheetTitle>Filters</SheetTitle>
+        <SheetBody>Everything narrows from here. Press Escape to close.</SheetBody>
+      </Sheet>
+    </>
+  );
+}
+
+function ToastDemo() {
+  return (
+    <>
+      <Button variant="ghost" size="sm" onClick={() => toast("Saved", { description: "Your changes are live." })}>
+        Save changes
+      </Button>
+      <Toaster />
     </>
   );
 }
@@ -130,6 +203,93 @@ export const demos: Record<string, () => React.ReactNode> = {
         <Tab value="settings">Settings</Tab>
       </TabList>
     </Tabs>
+  ),
+  accordion: () => (
+    <div style={{ width: 300 }}>
+      <Accordion exclusive>
+        <AccordionItem title="What is Raster?" defaultOpen>
+          A monochrome, CSS-first design system.
+        </AccordionItem>
+        <AccordionItem title="Is it dependency-free?">Yes — native elements do the work.</AccordionItem>
+      </Accordion>
+    </div>
+  ),
+  alert: () => (
+    <div style={{ width: 300 }}>
+      <Alert title="Heads up">Your workspace syncs every hour.</Alert>
+    </div>
+  ),
+  "alert-dialog": AlertDialogDemo,
+  avatar: () => (
+    <AvatarRow>
+      <Avatar initials="RV" />
+      <Avatar initials="NO" />
+      <Avatar initials="+3" />
+    </AvatarRow>
+  ),
+  textarea: () => (
+    <div style={{ width: 280 }}>
+      <Textarea label="Notes" placeholder="What should we know?" rows={3} />
+    </div>
+  ),
+  separator: () => (
+    <div style={{ width: 220 }}>
+      <p className="rs-t-body">Above the line.</p>
+      <Separator />
+      <p className="rs-t-body">Below it.</p>
+    </div>
+  ),
+  skeleton: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8, width: 220 }}>
+      <Skeleton width="60%" />
+      <Skeleton width="100%" />
+      <Skeleton width="85%" />
+    </div>
+  ),
+  tooltip: () => (
+    <Tooltip tip="Copy to clipboard">
+      <Button variant="ghost" size="sm">
+        Copy
+      </Button>
+    </Tooltip>
+  ),
+  toast: ToastDemo,
+  "dropdown-menu": () => (
+    <DropdownMenu
+      label="Actions"
+      items={[
+        { label: "Rename" },
+        { label: "Duplicate" },
+        { separator: true },
+        { label: "Delete" },
+      ]}
+    />
+  ),
+  toggle: () => (
+    <ToggleGroup
+      options={[
+        { value: "left", label: "Left" },
+        { value: "center", label: "Center" },
+        { value: "right", label: "Right" },
+      ]}
+      defaultValue="left"
+    />
+  ),
+  popover: () => (
+    <Popover trigger="Details">
+      <PopoverTitle>Module grid</PopoverTitle>
+      <PopoverBody>204px modules: a 184px column and a 20px gutter.</PopoverBody>
+    </Popover>
+  ),
+  sheet: SheetDemo,
+  "scroll-area": () => (
+    <ScrollArea maxHeight={110} style={{ width: 180 }}>
+      {["Alkmaar", "Amsterdam", "Delft", "Eindhoven", "Groningen", "Haarlem", "Rotterdam", "Utrecht"].map((c) => (
+        <p key={c} className="rs-t-body" style={{ padding: "3px 0" }}>
+          {c}
+        </p>
+      ))}
+    </ScrollArea>
   ),
   "crumb-bar": () => (
     <nav className="rs-crumb-bar rs-crumb-bar-scrolled" style={{ position: "relative", width: 340 }} aria-label="Breadcrumbs">

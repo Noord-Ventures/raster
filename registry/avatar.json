@@ -1,0 +1,44 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:component",
+  "title": "Avatar",
+  "description": "Initials in a quiet circle; images cover, broken images fall back to initials. Rows overlap on hairlines.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/avatar.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface AvatarProps extends React.HTMLAttributes<HTMLSpanElement> {\n  src?: string;\n  alt?: string;\n  /** Shown when there is no image, or when it fails to load. */\n  initials?: string;\n  size?: \"sm\" | \"md\" | \"lg\";\n}\n\nexport function Avatar({ src, alt, initials, size = \"md\", className, ...props }: AvatarProps) {\n  const [failed, setFailed] = React.useState(false);\n  const showImage = src && !failed;\n  return (\n    <span\n      className={cx(\"rs-avatar\", size === \"sm\" && \"rs-avatar-sm\", size === \"lg\" && \"rs-avatar-lg\", className)}\n      {...props}\n    >\n      {showImage ? <img src={src} alt={alt ?? \"\"} onError={() => setFailed(true)} /> : initials}\n    </span>\n  );\n}\n\n/** Overlapping row; each avatar keeps a paper seam. */\nexport function AvatarRow({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return <div className={cx(\"rs-avatar-row\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/avatar.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/avatar.css",
+      "content": "/* ── Avatar — initials in a quiet circle; images cover ── */\n.rs-avatar{width:32px;height:32px;border-radius:50%;background:var(--divider-subtle);color:var(--text);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;letter-spacing:-.01em;overflow:hidden;flex-shrink:0;user-select:none}\n.rs-avatar img{width:100%;height:100%;object-fit:cover}\n.rs-avatar-sm{width:24px;height:24px;font-size:10px}\n.rs-avatar-lg{width:48px;height:48px;font-size:16px}\n.rs-avatar-row{display:flex}\n.rs-avatar-row .rs-avatar{border:2px solid var(--bg);margin-left:-8px}\n.rs-avatar-row .rs-avatar:first-child{margin-left:0}\n",
+      "type": "registry:file",
+      "target": "styles/raster/avatar.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "content",
+      "classes": [
+        "rs-avatar",
+        "rs-avatar-sm",
+        "rs-avatar-lg",
+        "rs-avatar-row"
+      ],
+      "snippet": "<div class=\"rs-avatar-row\"><span class=\"rs-avatar\">RV</span><span class=\"rs-avatar\">NO</span><span class=\"rs-avatar\">+3</span></div>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

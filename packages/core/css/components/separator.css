@@ -1,0 +1,3 @@
+/* ── Separator — a hairline, horizontal or vertical ── */
+.rs-sep{border:none;border-top:1px solid var(--divider-subtle);margin:20px 0}
+.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider-subtle);margin:0 12px}

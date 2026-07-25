@@ -2,7 +2,7 @@
   "name": "raster",
   "version": "0.2.0",
   "css": {
-    "raster": "/* ═══════════════════════════════════════════════════════════════════\n   RASTER — a monochrome, CSS-first design system.\n   https://noord.dev/studio/raster\n\n   One ink, no accent hue: emphasis comes from weight, size, and\n   spacing. Hairline borders, a 204px module grid (184px column +\n   20px gutter), sentence case everywhere.\n\n   GENERATED from the css/ sources — edit those, then run\n   `npm run build:css`. Tokens come from src/tokens.ts.\n\n   Typeface: Messina Sans (Luzi Type, Zürich) — licensed, not bundled.\n   Provide your own @font-face for 'Messina Sans' or the stack falls\n   back to system sans.\n   ═══════════════════════════════════════════════════════════════════ */\n\n/* ── Tokens ── GENERATED from src/tokens.ts — do not edit by hand. */\n:root {\n  --bg: #FAF8F2;                        /* paper */\n  --text: #1A1A1A;                      /* ink */\n  --text-secondary: #6B6B6B;            /* gray */\n  --accent: #1A1A1A;                   /* the \"accent\" is ink — monochrome */\n  --divider: rgba(0,0,0,0.10);\n  --divider-subtle: rgba(0,0,0,0.06);\n  --table-alt: rgba(0,0,0,0.02);\n  --grid-line: rgba(0,0,0,0.025);\n  --radius: 6px;\n  --radius-sm: 4px;\n  --gutter: 20px;\n  --pad: 20px;\n  --transition: background-color 0.3s ease, color 0.3s ease;\n  /* Background column grid: 204px modules (184 column + 20 gutter). */\n  --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);\n  --grid-size: 204px;\n  --grid-pos: 20px 0;\n}\n[data-theme=\"dark\"] {\n  --bg: #0E0C0A;\n  --text: #E8E8E8;\n  --text-secondary: #949494;\n  --accent: #E8E8E8;\n  --divider: rgba(255,255,255,0.12);\n  --divider-subtle: rgba(255,255,255,0.07);\n  --table-alt: rgba(255,255,255,0.03);\n  --grid-line: rgba(255,255,255,0.01);\n}\n@media(max-width:480px){\n  :root{--pad:25px}\n}\n\n/* ── Base ──\n   Raster owns the page: paper background, ink text, and the visible\n   204px module grid drawn behind everything. */\nhtml{scroll-behavior:smooth;font-size:16px}\nbody{\n  background-color:var(--bg);\n  background-image:var(--grid-image);\n  background-size:var(--grid-size) 100vh;\n  background-repeat:repeat-x;\n  background-attachment:fixed;\n  background-position:var(--grid-pos);\n  color:var(--text);\n  font-family:'Messina Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;\n  font-weight:500;\n  line-height:1.6;\n  transition:var(--transition);\n  -webkit-font-smoothing:antialiased;\n}\n\n/* ── Utilities ── */\n.rs-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}\n.rs-sr:focus-visible+.rs-check,.rs-sr:focus-visible+.rs-radio-dot,.rs-sr:focus-visible+.rs-switch{outline:1.5px solid var(--text);outline-offset:2px}\n\n/* ── Type scale ──\n   Hierarchy from weight, color, and position — never all caps. */\n.rs-t-xl{font-size:clamp(34px,5vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin:0;text-wrap:balance}\n.rs-t-display{font-size:38px;font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0}\n.rs-t-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0}\n.rs-t-sub{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.5;color:var(--text-secondary);margin:0}\n.rs-t-body{font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin:0}\n.rs-t-label{font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--text);margin:0}\n\n/* ── Inline code ── */\n.rs-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}\n\n/* ── Buttons ── */\n.rs-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity .2s ease}\n.rs-btn-primary:hover{opacity:.85}\n.rs-btn-primary:disabled{opacity:.4;cursor:not-allowed}\n.rs-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color .2s ease,color .2s ease}\n.rs-btn-ghost:hover{background:var(--divider);border-color:transparent}\n.rs-btn-ghost:disabled{opacity:.4;cursor:not-allowed;background:transparent;border-color:var(--divider)}\n.rs-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}\n\n/* ── Text link — underlined by its hairline, never colored ── */\n.rs-link{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);transition:border-color .2s ease}\n.rs-link:hover{border-color:var(--accent)}\n\n/* ── Field — quiet input: hairline border, ink focus, label above ── */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}\n.rs-input:focus{border-color:var(--accent)}\n.rs-input-full{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n\n/* ── Inline form — the action lives inside the field ── */\n.rs-inline-field{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:4px 6px 4px 12px;transition:border-color .2s ease}\n.rs-inline-field:focus-within{border-color:var(--accent)}\n.rs-inline-input{flex:1;min-width:0;border:none;background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);outline:none;padding:7px 0}\n.rs-inline-input::placeholder{color:var(--text-secondary)}\n.rs-inline-btn{height:28px;padding:0 16px;font-size:12.5px;min-width:0;border-radius:3px;white-space:nowrap}\n.rs-reveal{max-width:0;opacity:0;transform:translateX(-6px) scale(.92);overflow:hidden;transition:max-width .4s cubic-bezier(.22,1,.36,1),opacity .3s ease .05s,transform .4s cubic-bezier(.22,1,.36,1)}\n.rs-reveal-in{max-width:160px;opacity:1;transform:none}\n.rs-subscribed{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text);animation:rsSubIn .35s cubic-bezier(.22,1,.36,1)}\n@keyframes rsSubIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}\n\n/* ── Radio — the dot is ink, never a hue ── */\n.rs-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.rs-radio-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--divider);position:relative;flex-shrink:0}\n.rs-radio-on{border-color:var(--text)}\n.rs-radio-on::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--text)}\n\n/* ── Checkbox — 16px boxes, 3px radius, ink when checked ── */\n.rs-choice{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.rs-check{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--divider);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--bg)}\n.rs-check svg{width:12px;height:12px}\n.rs-check-on{background:var(--text);border-color:var(--text)}\n\n/* ── Switch — state moves, layout doesn't ── */\n.rs-switch{display:inline-flex;box-sizing:border-box;width:32px;height:18px;border-radius:9px;border:1.5px solid var(--divider);position:relative;flex-shrink:0;transition:background-color .2s ease,border-color .2s ease}\n.rs-switch i{position:absolute;top:1.5px;left:1.5px;width:12px;height:12px;border-radius:50%;background:var(--text-secondary);transition:transform .2s ease}\n.rs-switch-on{background:var(--text);border-color:var(--text)}\n.rs-switch-on i{background:var(--bg);transform:translateX(14px)}\nbutton.rs-switch{padding:0;background:none;cursor:pointer;border:1.5px solid var(--divider)}\nbutton.rs-switch.rs-switch-on{background:var(--text);border-color:var(--text)}\n\n/* ── Slider — thin track with ink fill and 14px thumb ── */\n.rs-slider{position:relative;height:2px;background:var(--divider);border-radius:1px;margin:10px 0}\n.rs-slider-fill{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:1px}\n.rs-slider-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:1.5px solid var(--text)}\n.rs-slider input[type=range]{position:absolute;left:0;right:0;top:-8px;bottom:-8px;width:100%;height:auto;opacity:0;cursor:pointer;margin:0}\n.rs-slider:has(input[type=range]:focus-visible) .rs-slider-thumb{outline:1.5px solid var(--text);outline-offset:2px}\n\n/* ── Progress — the percentage lives in the label, never in the bar ── */\n.rs-progress-head{display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:7px}\n.rs-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}\n.rs-progress span{display:block;height:100%;background:var(--text);border-radius:2px}\n\n/* ── Tabs — active tab is ink with a 1.5px underline ── */\n.rs-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}\n.rs-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}\nbutton.rs-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}\n\n/* ── Breadcrumbs — slashes at 40%, current page is ink ── */\n.rs-crumbs{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}\n.rs-crumbs-sep{opacity:.4}\n.rs-crumbs-here{color:var(--text)}\n\n/* ── Crumb bar — fixed top bar in the house chrome ──\n   Transparent at rest; once the page cover scrolls away it gains the\n   paper background and its bottom hairline, and the breadcrumbs fade\n   in. The inner row starts one module in at the 1024px rail. */\n.rs-crumb-bar{position:fixed;top:0;left:0;right:0;z-index:160;display:flex;align-items:center;height:72px;font-size:13px;font-weight:500;letter-spacing:-.01em;line-height:1.3;background:none;border-bottom:1px solid transparent;transition:var(--transition),background-color .2s ease,border-color .2s ease}\n.rs-crumb-bar-scrolled{background:var(--bg);border-bottom-color:var(--divider-subtle)}\n.rs-crumb-bar-inner{display:flex;align-items:center;gap:20px;width:100%;min-width:0;padding-left:var(--pad)}\n.rs-crumb-bar .rs-crumbs{margin:0;opacity:0;transform:translateY(4px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}\n.rs-crumb-bar-scrolled .rs-crumbs{opacity:1;transform:none;pointer-events:auto}\n.rs-crumb-bar a{color:inherit;text-decoration:none}\n@media(min-width:1024px){.rs-crumb-bar-inner{margin-left:204px}}\n@media(max-width:640px){.rs-crumb-bar{height:64px;font-size:12px}}\n\n/* ── Pagination — squares, not pills ── */\n.rs-pages{display:flex;align-items:center;gap:5px}\n.rs-page{width:26px;height:26px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-secondary);border:1px solid transparent}\n.rs-page:not(.rs-page-gap):not(.rs-page-on){border-color:var(--divider-subtle)}\n.rs-page.rs-page-on,button.rs-page-on{background:var(--text);color:var(--bg);font-weight:600}\nbutton.rs-page{padding:0;background:none;font-family:inherit;cursor:pointer}\n\n/* ── Dropdown + menu — the menu overlays, it never pushes layout ── */\n.rs-select{position:relative;display:inline-block;min-width:180px}\n.rs-select .rs-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px}\n.rs-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}\nbutton.rs-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%}\n.rs-menu{border:1px solid var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}\n.rs-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle)}\n.rs-menu-item:last-child{border-bottom:none}\n.rs-menu-item.rs-menu-item-active,button.rs-menu-item-active{background:var(--divider-subtle)}\nbutton.rs-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}\n\n/* ── Dialog — one question, two equal actions, no third option ── */\n.rs-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}\ndialog.rs-dialog{color:var(--text)}\ndialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}\n.rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}\n.rs-dialog-actions{display:flex;justify-content:flex-end;gap:8px}\n\n/* ── Badges — outline for recommendations, solid for done, muted for pending ── */\n.rs-badge{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge-solid{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--bg);background:var(--text);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge-muted{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--text-secondary);background:var(--divider-subtle);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n\n/* ── Mono chip — technical identifiers ── */\n.rs-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}\n\n/* ── Card ── */\n.rs-card{border:1px solid var(--divider);border-radius:var(--radius);padding:20px;max-width:360px}\n.rs-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}\n.rs-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}\n.rs-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}\n\n/* ── Stepper ── */\n.rs-steps{display:flex;align-items:flex-start;gap:8px}\n.rs-step{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:78px}\n.rs-step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--divider);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;background:var(--bg)}\n.rs-step-done{background:var(--text);border-color:var(--text);color:var(--bg)}\n.rs-step-active{border-color:var(--text);color:var(--text)}\n.rs-step-name{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);line-height:1.2}\n.rs-step-sub{font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-step-line{flex:1;height:1px;background:var(--divider);margin-top:12px;min-width:14px}\n@media(max-width:640px){.rs-steps{flex-direction:column;gap:14px}.rs-step-line{display:none}}\n\n/* ── Table — hairline rows on the open grid; no cell borders ──\n   Scoped to .rs-table so linking raster.css never restyles a table\n   it doesn't own. The compat layer re-emits these on bare elements. */\n.rs-table{width:calc(100% + 40px);border-collapse:collapse;margin:16px 0 24px -20px;font-size:14px}\n.rs-table th{text-align:left;font-weight:600;color:var(--text);letter-spacing:-.01em;padding:10px 16px 10px 12px;border-bottom:2px solid var(--divider);font-size:13px}\n.rs-table th:first-child{padding-left:20px}\n.rs-table th:last-child{padding-right:20px}\n.rs-table td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);vertical-align:top}\n.rs-table td:first-child{padding-left:20px}\n.rs-table td:last-child{padding-right:20px}\n.rs-table tr:nth-child(even) td{background:var(--table-alt)}\n.rs-table td:last-child,.rs-table th:last-child{text-align:right}\n@media(max-width:640px){\n  .rs-table{font-size:12px;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));margin-right:calc(-1*var(--pad))}\n  .rs-table th{padding:8px 10px;font-size:12px}\n  .rs-table td{padding:8px 10px}\n  .rs-table th:first-child,.rs-table td:first-child{padding-left:var(--pad)}\n  .rs-table th:last-child,.rs-table td:last-child{padding-right:var(--pad)}\n}\n\n/* ── Icons — 16/20/24/32, single-weight 1.5px strokes in currentColor ── */\n.rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}\n.rs-icons svg{width:16px;height:16px;flex-shrink:0}\n\n/* ── Workflow cards — the dashed editable pipeline ── */\n.rs-flow{display:grid;grid-template-columns:1fr;gap:var(--gutter)}\n@media(min-width:560px){.rs-flow{grid-template-columns:repeat(2,184px);width:fit-content}}\n@media(min-width:940px){.rs-flow{grid-template-columns:repeat(3,184px)}}\n@media(min-width:1280px){.rs-flow{grid-template-columns:repeat(4,184px)}}\n@media(min-width:1448px){.rs-flow{grid-template-columns:repeat(5,184px)}}\n.rs-flow-step{position:relative;border:1px dashed var(--divider);border-radius:10px;padding:14px 34px 16px 14px;background:var(--bg);transition:border-color .2s ease}\n.rs-flow-step:hover{border-color:var(--accent)}\n.rs-flow-step::after{content:\"\";position:absolute;top:15px;right:13px;width:8px;height:14px;background-image:radial-gradient(currentColor 1.1px,transparent 1.3px);background-size:4px 5px;color:var(--text-secondary);opacity:.4}\n.rs-flow-num{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--divider);background:var(--bg);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);margin-bottom:14px}\n.rs-flow-step h4{display:inline-block;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text);border-bottom:1px dashed var(--divider);padding-bottom:1px;margin:0 0 8px}\n.rs-flow-step p{font-size:12.5px;line-height:1.55;color:var(--text-secondary);letter-spacing:-.005em;margin:0}\n.rs-flow-subs{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}\n.rs-flow-subs span{font-size:11px;line-height:1;padding:3px 7px;border:1px dashed var(--divider);border-radius:5px;color:var(--text-secondary);letter-spacing:-.005em}\n.rs-flow-subs .rs-flow-sub-add{width:18px;padding:3px 0;text-align:center;opacity:.7}\n.rs-flow-add{display:flex;align-items:center;gap:8px;margin-top:14px;border:1px dashed var(--divider);border-radius:10px;padding:12px 14px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);background:none;width:184px;max-width:100%;transition:border-color .2s ease,color .2s ease;font-family:inherit;cursor:pointer}\n.rs-flow-add:hover{border-color:var(--accent);color:var(--text)}\n.rs-flow-plus{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;font-size:13px;line-height:1}\n\n/* ── Assistant panel — monochrome chat surface ── */\n.rs-ai{display:flex;flex-direction:column;gap:16px;max-width:560px;border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:20px}\n.rs-ai-head{display:flex;justify-content:space-between;align-items:center}\n.rs-ai-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-ai-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-ai-status i{width:6px;height:6px;border-radius:50%;background:var(--text)}\n.rs-ai-msg{display:flex;width:100%}\n.rs-ai-user{justify-content:flex-end}\n.rs-ai-user-block{background:var(--table-alt);border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:10px 14px;font-size:13.5px;color:var(--text);letter-spacing:-.01em;max-width:85%}\n.rs-ai-reply{font-size:13.5px;line-height:1.6;color:var(--text);letter-spacing:-.01em;margin:0}\n.rs-ai-card{border:1px solid var(--divider);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;align-items:flex-start}\n.rs-ai-tag{font-size:10.5px;font-weight:600;letter-spacing:.02em;color:var(--text);border:1px solid var(--divider);border-radius:5px;padding:2px 8px;margin-bottom:10px}\n.rs-ai-text{font-size:13px;color:var(--text);line-height:1.5;margin:0}\n.rs-ai-done{display:flex;align-items:baseline;gap:8px;margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--text-secondary)}\n.rs-ai-done svg{flex-shrink:0;transform:translateY(1.5px);color:var(--text)}\n.rs-ai-input{margin-top:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:10px 12px;font-size:12.5px;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center}\n.rs-ai-send{color:var(--text);font-weight:600}\n\n/* ── Reduced motion — nothing loops, nothing slides ── */\n@media(prefers-reduced-motion:reduce){\n  .rs-reveal{transition:none}\n  .rs-subscribed{animation:none}\n}\n",
+    "raster": "/* ═══════════════════════════════════════════════════════════════════\n   RASTER — a monochrome, CSS-first design system.\n   https://noord.dev/studio/raster\n\n   One ink, no accent hue: emphasis comes from weight, size, and\n   spacing. Hairline borders, a 204px module grid (184px column +\n   20px gutter), sentence case everywhere.\n\n   GENERATED from the css/ sources — edit those, then run\n   `npm run build:css`. Tokens come from src/tokens.ts.\n\n   Typeface: Messina Sans (Luzi Type, Zürich) — licensed, not bundled.\n   Provide your own @font-face for 'Messina Sans' or the stack falls\n   back to system sans.\n   ═══════════════════════════════════════════════════════════════════ */\n\n/* ── Tokens ── GENERATED from src/tokens.ts — do not edit by hand. */\n:root {\n  --bg: #FAF8F2;                        /* paper */\n  --text: #1A1A1A;                      /* ink */\n  --text-secondary: #6B6B6B;            /* gray */\n  --accent: #1A1A1A;                   /* the \"accent\" is ink — monochrome */\n  --divider: rgba(0,0,0,0.10);\n  --divider-subtle: rgba(0,0,0,0.06);\n  --table-alt: rgba(0,0,0,0.02);\n  --grid-line: rgba(0,0,0,0.025);\n  --radius: 6px;\n  --radius-sm: 4px;\n  --gutter: 20px;\n  --pad: 20px;\n  --transition: background-color 0.3s ease, color 0.3s ease;\n  /* Background column grid: 204px modules (184 column + 20 gutter). */\n  --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);\n  --grid-size: 204px;\n  --grid-pos: 20px 0;\n}\n[data-theme=\"dark\"] {\n  --bg: #0E0C0A;\n  --text: #E8E8E8;\n  --text-secondary: #949494;\n  --accent: #E8E8E8;\n  --divider: rgba(255,255,255,0.12);\n  --divider-subtle: rgba(255,255,255,0.07);\n  --table-alt: rgba(255,255,255,0.03);\n  --grid-line: rgba(255,255,255,0.01);\n}\n@media(max-width:480px){\n  :root{--pad:25px}\n}\n\n/* ── Base ──\n   Raster owns the page: paper background, ink text, and the visible\n   204px module grid drawn behind everything. */\nhtml{scroll-behavior:smooth;font-size:16px}\nbody{\n  background-color:var(--bg);\n  background-image:var(--grid-image);\n  background-size:var(--grid-size) 100vh;\n  background-repeat:repeat-x;\n  background-attachment:fixed;\n  background-position:var(--grid-pos);\n  color:var(--text);\n  font-family:'Messina Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;\n  font-weight:500;\n  line-height:1.6;\n  transition:var(--transition);\n  -webkit-font-smoothing:antialiased;\n}\n\n/* ── Utilities ── */\n.rs-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}\n.rs-sr:focus-visible+.rs-check,.rs-sr:focus-visible+.rs-radio-dot,.rs-sr:focus-visible+.rs-switch{outline:1.5px solid var(--text);outline-offset:2px}\n\n/* ── Type scale ──\n   Hierarchy from weight, color, and position — never all caps. */\n.rs-t-xl{font-size:clamp(34px,5vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin:0;text-wrap:balance}\n.rs-t-display{font-size:38px;font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0}\n.rs-t-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0}\n.rs-t-sub{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.5;color:var(--text-secondary);margin:0}\n.rs-t-body{font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin:0}\n.rs-t-label{font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--text);margin:0}\n\n/* ── Inline code ── */\n.rs-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}\n\n/* ── Buttons ── */\n.rs-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity .2s ease}\n.rs-btn-primary:hover{opacity:.85}\n.rs-btn-primary:disabled{opacity:.4;cursor:not-allowed}\n.rs-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color .2s ease,color .2s ease}\n.rs-btn-ghost:hover{background:var(--divider);border-color:transparent}\n.rs-btn-ghost:disabled{opacity:.4;cursor:not-allowed;background:transparent;border-color:var(--divider)}\n.rs-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}\n\n/* ── Text link — underlined by its hairline, never colored ── */\n.rs-link{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);transition:border-color .2s ease}\n.rs-link:hover{border-color:var(--accent)}\n\n/* ── Field — quiet input: hairline border, ink focus, label above ── */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}\n.rs-input:focus{border-color:var(--accent)}\n.rs-input-full{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n\n/* ── Inline form — the action lives inside the field ── */\n.rs-inline-field{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:4px 6px 4px 12px;transition:border-color .2s ease}\n.rs-inline-field:focus-within{border-color:var(--accent)}\n.rs-inline-input{flex:1;min-width:0;border:none;background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);outline:none;padding:7px 0}\n.rs-inline-input::placeholder{color:var(--text-secondary)}\n.rs-inline-btn{height:28px;padding:0 16px;font-size:12.5px;min-width:0;border-radius:3px;white-space:nowrap}\n.rs-reveal{max-width:0;opacity:0;transform:translateX(-6px) scale(.92);overflow:hidden;transition:max-width .4s cubic-bezier(.22,1,.36,1),opacity .3s ease .05s,transform .4s cubic-bezier(.22,1,.36,1)}\n.rs-reveal-in{max-width:160px;opacity:1;transform:none}\n.rs-subscribed{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text);animation:rsSubIn .35s cubic-bezier(.22,1,.36,1)}\n@keyframes rsSubIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}\n\n/* ── Radio — the dot is ink, never a hue ── */\n.rs-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.rs-radio-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--divider);position:relative;flex-shrink:0}\n.rs-radio-on{border-color:var(--text)}\n.rs-radio-on::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--text)}\n\n/* ── Checkbox — 16px boxes, 3px radius, ink when checked ── */\n.rs-choice{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.rs-check{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--divider);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--bg)}\n.rs-check svg{width:12px;height:12px}\n.rs-check-on{background:var(--text);border-color:var(--text)}\n\n/* ── Switch — state moves, layout doesn't ── */\n.rs-switch{display:inline-flex;box-sizing:border-box;width:32px;height:18px;border-radius:9px;border:1.5px solid var(--divider);position:relative;flex-shrink:0;transition:background-color .2s ease,border-color .2s ease}\n.rs-switch i{position:absolute;top:1.5px;left:1.5px;width:12px;height:12px;border-radius:50%;background:var(--text-secondary);transition:transform .2s ease}\n.rs-switch-on{background:var(--text);border-color:var(--text)}\n.rs-switch-on i{background:var(--bg);transform:translateX(14px)}\nbutton.rs-switch{padding:0;background:none;cursor:pointer;border:1.5px solid var(--divider)}\nbutton.rs-switch.rs-switch-on{background:var(--text);border-color:var(--text)}\n\n/* ── Slider — thin track with ink fill and 14px thumb ── */\n.rs-slider{position:relative;height:2px;background:var(--divider);border-radius:1px;margin:10px 0}\n.rs-slider-fill{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:1px}\n.rs-slider-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:1.5px solid var(--text)}\n.rs-slider input[type=range]{position:absolute;left:0;right:0;top:-8px;bottom:-8px;width:100%;height:auto;opacity:0;cursor:pointer;margin:0}\n.rs-slider:has(input[type=range]:focus-visible) .rs-slider-thumb{outline:1.5px solid var(--text);outline-offset:2px}\n\n/* ── Progress — the percentage lives in the label, never in the bar ── */\n.rs-progress-head{display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:7px}\n.rs-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}\n.rs-progress span{display:block;height:100%;background:var(--text);border-radius:2px}\n\n/* ── Tabs — active tab is ink with a 1.5px underline ── */\n.rs-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}\n.rs-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}\nbutton.rs-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}\n\n/* ── Breadcrumbs — slashes at 40%, current page is ink ── */\n.rs-crumbs{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}\n.rs-crumbs-sep{opacity:.4}\n.rs-crumbs-here{color:var(--text)}\n\n/* ── Crumb bar — fixed top bar in the house chrome ──\n   Transparent at rest; once the page cover scrolls away it gains the\n   paper background and its bottom hairline, and the breadcrumbs fade\n   in. The inner row starts one module in at the 1024px rail. */\n.rs-crumb-bar{position:fixed;top:0;left:0;right:0;z-index:160;display:flex;align-items:center;height:72px;font-size:13px;font-weight:500;letter-spacing:-.01em;line-height:1.3;background:none;border-bottom:1px solid transparent;transition:var(--transition),background-color .2s ease,border-color .2s ease}\n.rs-crumb-bar-scrolled{background:var(--bg);border-bottom-color:var(--divider-subtle)}\n.rs-crumb-bar-inner{display:flex;align-items:center;gap:20px;width:100%;min-width:0;padding-left:var(--pad)}\n.rs-crumb-bar .rs-crumbs{margin:0;opacity:0;transform:translateY(4px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}\n.rs-crumb-bar-scrolled .rs-crumbs{opacity:1;transform:none;pointer-events:auto}\n.rs-crumb-bar a{color:inherit;text-decoration:none}\n@media(min-width:1024px){.rs-crumb-bar-inner{margin-left:204px}}\n@media(max-width:640px){.rs-crumb-bar{height:64px;font-size:12px}}\n\n/* ── Pagination — squares, not pills ── */\n.rs-pages{display:flex;align-items:center;gap:5px}\n.rs-page{width:26px;height:26px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-secondary);border:1px solid transparent}\n.rs-page:not(.rs-page-gap):not(.rs-page-on){border-color:var(--divider-subtle)}\n.rs-page.rs-page-on,button.rs-page-on{background:var(--text);color:var(--bg);font-weight:600}\nbutton.rs-page{padding:0;background:none;font-family:inherit;cursor:pointer}\n\n/* ── Dropdown + menu — the menu overlays, it never pushes layout ── */\n.rs-select{position:relative;display:inline-block;min-width:180px}\n.rs-select .rs-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px}\n.rs-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}\nbutton.rs-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%}\n.rs-menu{border:1px solid var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}\n.rs-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle)}\n.rs-menu-item:last-child{border-bottom:none}\n.rs-menu-item.rs-menu-item-active,button.rs-menu-item-active{background:var(--divider-subtle)}\nbutton.rs-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}\n\n/* ── Dialog — one question, two equal actions, no third option ── */\n.rs-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}\ndialog.rs-dialog{color:var(--text)}\ndialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}\n.rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}\n.rs-dialog-actions{display:flex;justify-content:flex-end;gap:8px}\n\n/* ── Badges — outline for recommendations, solid for done, muted for pending ── */\n.rs-badge{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge-solid{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--bg);background:var(--text);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge-muted{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--text-secondary);background:var(--divider-subtle);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n\n/* ── Mono chip — technical identifiers ── */\n.rs-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}\n\n/* ── Card ── */\n.rs-card{border:1px solid var(--divider);border-radius:var(--radius);padding:20px;max-width:360px}\n.rs-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}\n.rs-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}\n.rs-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}\n\n/* ── Stepper ── */\n.rs-steps{display:flex;align-items:flex-start;gap:8px}\n.rs-step{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:78px}\n.rs-step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--divider);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;background:var(--bg)}\n.rs-step-done{background:var(--text);border-color:var(--text);color:var(--bg)}\n.rs-step-active{border-color:var(--text);color:var(--text)}\n.rs-step-name{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);line-height:1.2}\n.rs-step-sub{font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-step-line{flex:1;height:1px;background:var(--divider);margin-top:12px;min-width:14px}\n@media(max-width:640px){.rs-steps{flex-direction:column;gap:14px}.rs-step-line{display:none}}\n\n/* ── Table — hairline rows on the open grid; no cell borders ──\n   Scoped to .rs-table so linking raster.css never restyles a table\n   it doesn't own. The compat layer re-emits these on bare elements. */\n.rs-table{width:calc(100% + 40px);border-collapse:collapse;margin:16px 0 24px -20px;font-size:14px}\n.rs-table th{text-align:left;font-weight:600;color:var(--text);letter-spacing:-.01em;padding:10px 16px 10px 12px;border-bottom:2px solid var(--divider);font-size:13px}\n.rs-table th:first-child{padding-left:20px}\n.rs-table th:last-child{padding-right:20px}\n.rs-table td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);vertical-align:top}\n.rs-table td:first-child{padding-left:20px}\n.rs-table td:last-child{padding-right:20px}\n.rs-table tr:nth-child(even) td{background:var(--table-alt)}\n.rs-table td:last-child,.rs-table th:last-child{text-align:right}\n@media(max-width:640px){\n  .rs-table{font-size:12px;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));margin-right:calc(-1*var(--pad))}\n  .rs-table th{padding:8px 10px;font-size:12px}\n  .rs-table td{padding:8px 10px}\n  .rs-table th:first-child,.rs-table td:first-child{padding-left:var(--pad)}\n  .rs-table th:last-child,.rs-table td:last-child{padding-right:var(--pad)}\n}\n\n/* ── Icons — 16/20/24/32, single-weight 1.5px strokes in currentColor ── */\n.rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}\n.rs-icons svg{width:16px;height:16px;flex-shrink:0}\n\n/* ── Accordion — native <details>; one open at a time via the name attribute ── */\n.rs-acc{border-top:1px solid var(--divider-subtle)}\n.rs-acc-item{border-bottom:1px solid var(--divider-subtle)}\n.rs-acc-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-acc-item summary::-webkit-details-marker{display:none}\n.rs-acc-chevron{flex-shrink:0;color:var(--text-secondary);transition:transform .2s ease}\n.rs-acc-item[open] .rs-acc-chevron{transform:rotate(180deg)}\n.rs-acc-body{padding:0 0 16px;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}\n\n/* ── Alert — a hairline frame; emphasis from weight, never a hue ── */\n.rs-alert{display:flex;gap:10px;border:1px solid var(--divider);border-radius:var(--radius);padding:12px 14px;align-items:flex-start}\n.rs-alert svg{flex-shrink:0;margin-top:1px;color:var(--text)}\n.rs-alert-title{display:block;font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-alert-body{font-size:13px;line-height:1.55;letter-spacing:-.01em;color:var(--text-secondary);margin:2px 0 0}\n.rs-alert-solid{background:var(--text);border-color:var(--text)}\n.rs-alert-solid svg,.rs-alert-solid .rs-alert-title{color:var(--bg)}\n.rs-alert-solid .rs-alert-body{color:var(--bg);opacity:.75}\n\n/* ── Avatar — initials in a quiet circle; images cover ── */\n.rs-avatar{width:32px;height:32px;border-radius:50%;background:var(--divider-subtle);color:var(--text);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;letter-spacing:-.01em;overflow:hidden;flex-shrink:0;user-select:none}\n.rs-avatar img{width:100%;height:100%;object-fit:cover}\n.rs-avatar-sm{width:24px;height:24px;font-size:10px}\n.rs-avatar-lg{width:48px;height:48px;font-size:16px}\n.rs-avatar-row{display:flex}\n.rs-avatar-row .rs-avatar{border:2px solid var(--bg);margin-left:-8px}\n.rs-avatar-row .rs-avatar:first-child{margin-left:0}\n\n/* ── Textarea — the quiet field, taller ── */\n.rs-textarea{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;line-height:1.55;padding:8px 10px;outline:none;font-family:inherit;min-height:96px;resize:vertical;width:100%}\n.rs-textarea:focus{border-color:var(--accent)}\n.rs-textarea::placeholder{color:var(--text-secondary)}\n\n/* ── Separator — a hairline, horizontal or vertical ── */\n.rs-sep{border:none;border-top:1px solid var(--divider-subtle);margin:20px 0}\n.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider-subtle);margin:0 12px}\n\n/* ── Skeleton — a quiet pulse; still under reduced motion ── */\n.rs-skeleton{display:block;background:var(--divider-subtle);border-radius:var(--radius-sm);animation:rsSkel 1.6s ease-in-out infinite}\n@keyframes rsSkel{0%,100%{opacity:1}50%{opacity:.55}}\n@media(prefers-reduced-motion:reduce){.rs-skeleton{animation:none}}\n\n/* ── Tooltip — CSS-only, shows on hover and keyboard focus alike ── */\n.rs-tip{position:relative;display:inline-flex}\n.rs-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(2px);background:var(--text);color:var(--bg);font-size:11.5px;font-weight:500;letter-spacing:-.01em;line-height:1.3;padding:5px 9px;border-radius:var(--radius-sm);white-space:nowrap;opacity:0;pointer-events:none;z-index:180;transition:opacity .15s ease .15s,transform .15s ease .15s}\n.rs-tip:hover::after,.rs-tip:focus-within::after{opacity:1;transform:translateX(-50%) translateY(0)}\n@media(prefers-reduced-motion:reduce){.rs-tip::after{transition:opacity .15s ease .15s}}\n\n/* ── Toast — quiet confirmations, bottom right, announced politely ── */\n.rs-toasts{position:fixed;bottom:20px;right:20px;z-index:300;display:flex;flex-direction:column;align-items:flex-end;gap:8px}\n.rs-toast{display:flex;align-items:flex-start;gap:10px;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:10px 14px;max-width:340px;animation:rsToastIn .25s cubic-bezier(.22,1,.36,1)}\n.rs-toast-title{display:block;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-toast-body{font-size:12.5px;line-height:1.5;letter-spacing:-.01em;color:var(--text-secondary);margin:1px 0 0}\n@keyframes rsToastIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}\n@media(prefers-reduced-motion:reduce){.rs-toast{animation:none}}\n\n/* ── Menu separators — for action menus ── */\n.rs-menu-sep{border:none;border-top:1px solid var(--divider-subtle);margin:4px 0}\n\n/* ── Toggle — a press switch; on is ink, like everything on ── */\n.rs-toggle{display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:32px;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;background:none;border:1px solid var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:background-color .2s ease,color .2s ease,border-color .2s ease}\n.rs-toggle[aria-pressed=\"true\"]{background:var(--text);border-color:var(--text);color:var(--bg)}\n.rs-toggle-group{display:inline-flex}\n.rs-toggle-group .rs-toggle{border-radius:0;margin-left:-1px}\n.rs-toggle-group .rs-toggle:first-child{border-radius:var(--radius-sm) 0 0 var(--radius-sm);margin-left:0}\n.rs-toggle-group .rs-toggle:last-child{border-radius:0 var(--radius-sm) var(--radius-sm) 0}\n.rs-toggle-group .rs-toggle[aria-pressed=\"true\"]{position:relative;z-index:1}\n\n/* ── Popover — the native Popover API: top layer, light dismiss ── */\n.rs-popover{position:fixed;inset:auto;margin:0;border:1px solid var(--divider);border-radius:var(--radius);background:var(--bg);color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;width:240px;font-size:13px;line-height:1.55;letter-spacing:-.01em}\n.rs-popover-title{display:block;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:4px}\n.rs-popover-body{color:var(--text-secondary);margin:0}\n\n/* ── Sheet — a native <dialog> parked at the edge ── */\ndialog.rs-sheet{position:fixed;inset:0 0 0 auto;margin:0;height:100dvh;max-height:none;width:360px;max-width:85vw;border:none;border-left:1px solid var(--divider);border-radius:0;padding:24px 20px;background:var(--bg);color:var(--text);box-shadow:-12px 0 32px rgba(0,0,0,0.06)}\ndialog.rs-sheet::backdrop{background:rgba(0,0,0,0.25)}\ndialog.rs-sheet-left{inset:0 auto 0 0;border-left:none;border-right:1px solid var(--divider);box-shadow:12px 0 32px rgba(0,0,0,0.06)}\n.rs-sheet-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-sheet-body{font-size:13.5px;line-height:1.6;letter-spacing:-.01em;color:var(--text-secondary);margin:0}\n\n/* ── Scroll area — quiet scroll with feathered edges, no scrollbar chrome ── */\n.rs-scroll{overflow-y:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);padding:12px 0}\n.rs-scroll::-webkit-scrollbar{display:none}\n\n/* ── Workflow cards — the dashed editable pipeline ── */\n.rs-flow{display:grid;grid-template-columns:1fr;gap:var(--gutter)}\n@media(min-width:560px){.rs-flow{grid-template-columns:repeat(2,184px);width:fit-content}}\n@media(min-width:940px){.rs-flow{grid-template-columns:repeat(3,184px)}}\n@media(min-width:1280px){.rs-flow{grid-template-columns:repeat(4,184px)}}\n@media(min-width:1448px){.rs-flow{grid-template-columns:repeat(5,184px)}}\n.rs-flow-step{position:relative;border:1px dashed var(--divider);border-radius:10px;padding:14px 34px 16px 14px;background:var(--bg);transition:border-color .2s ease}\n.rs-flow-step:hover{border-color:var(--accent)}\n.rs-flow-step::after{content:\"\";position:absolute;top:15px;right:13px;width:8px;height:14px;background-image:radial-gradient(currentColor 1.1px,transparent 1.3px);background-size:4px 5px;color:var(--text-secondary);opacity:.4}\n.rs-flow-num{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--divider);background:var(--bg);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);margin-bottom:14px}\n.rs-flow-step h4{display:inline-block;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text);border-bottom:1px dashed var(--divider);padding-bottom:1px;margin:0 0 8px}\n.rs-flow-step p{font-size:12.5px;line-height:1.55;color:var(--text-secondary);letter-spacing:-.005em;margin:0}\n.rs-flow-subs{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}\n.rs-flow-subs span{font-size:11px;line-height:1;padding:3px 7px;border:1px dashed var(--divider);border-radius:5px;color:var(--text-secondary);letter-spacing:-.005em}\n.rs-flow-subs .rs-flow-sub-add{width:18px;padding:3px 0;text-align:center;opacity:.7}\n.rs-flow-add{display:flex;align-items:center;gap:8px;margin-top:14px;border:1px dashed var(--divider);border-radius:10px;padding:12px 14px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);background:none;width:184px;max-width:100%;transition:border-color .2s ease,color .2s ease;font-family:inherit;cursor:pointer}\n.rs-flow-add:hover{border-color:var(--accent);color:var(--text)}\n.rs-flow-plus{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;font-size:13px;line-height:1}\n\n/* ── Assistant panel — monochrome chat surface ── */\n.rs-ai{display:flex;flex-direction:column;gap:16px;max-width:560px;border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:20px}\n.rs-ai-head{display:flex;justify-content:space-between;align-items:center}\n.rs-ai-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-ai-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-ai-status i{width:6px;height:6px;border-radius:50%;background:var(--text)}\n.rs-ai-msg{display:flex;width:100%}\n.rs-ai-user{justify-content:flex-end}\n.rs-ai-user-block{background:var(--table-alt);border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:10px 14px;font-size:13.5px;color:var(--text);letter-spacing:-.01em;max-width:85%}\n.rs-ai-reply{font-size:13.5px;line-height:1.6;color:var(--text);letter-spacing:-.01em;margin:0}\n.rs-ai-card{border:1px solid var(--divider);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;align-items:flex-start}\n.rs-ai-tag{font-size:10.5px;font-weight:600;letter-spacing:.02em;color:var(--text);border:1px solid var(--divider);border-radius:5px;padding:2px 8px;margin-bottom:10px}\n.rs-ai-text{font-size:13px;color:var(--text);line-height:1.5;margin:0}\n.rs-ai-done{display:flex;align-items:baseline;gap:8px;margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--text-secondary)}\n.rs-ai-done svg{flex-shrink:0;transform:translateY(1.5px);color:var(--text)}\n.rs-ai-input{margin-top:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:10px 12px;font-size:12.5px;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center}\n.rs-ai-send{color:var(--text);font-weight:600}\n\n/* ── Reduced motion — nothing loops, nothing slides ── */\n@media(prefers-reduced-motion:reduce){\n  .rs-reveal{transition:none}\n  .rs-subscribed{animation:none}\n}\n",
     "compat": "/* RASTER COMPAT — GENERATED. Re-emits Raster rules under the 0.1\n   class names (bb-*, lib-*, bare table elements) so sites built on\n   them keep working. Link this after raster.css; drop it once your\n   markup uses the rs- names. */\n\n/* ── Base ──\n   Raster owns the page: paper background, ink text, and the visible\n   204px module grid drawn behind everything. */\nhtml{scroll-behavior:smooth;font-size:16px}\nbody{\n  background-color:var(--bg);\n  background-image:var(--grid-image);\n  background-size:var(--grid-size) 100vh;\n  background-repeat:repeat-x;\n  background-attachment:fixed;\n  background-position:var(--grid-pos);\n  color:var(--text);\n  font-family:'Messina Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;\n  font-weight:500;\n  line-height:1.6;\n  transition:var(--transition);\n  -webkit-font-smoothing:antialiased;\n}\n\n/* ── Utilities ── */\n.rs-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}\n.rs-sr:focus-visible+.rs-check,.rs-sr:focus-visible+.bb-radio-dot,.rs-sr:focus-visible+.rs-switch{outline:1.5px solid var(--text);outline-offset:2px}\n\n/* ── Type scale ──\n   Hierarchy from weight, color, and position — never all caps. */\n.rs-t-xl{font-size:clamp(34px,5vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin:0;text-wrap:balance}\n.rs-t-display{font-size:38px;font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0}\n.rs-t-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0}\n.rs-t-sub{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.5;color:var(--text-secondary);margin:0}\n.rs-t-body{font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin:0}\n.rs-t-label{font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--text);margin:0}\n\n/* ── Inline code ── */\n.bb-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}\n\n/* ── Buttons ── */\n.bb-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity .2s ease}\n.bb-btn-primary:hover{opacity:.85}\n.bb-btn-primary:disabled{opacity:.4;cursor:not-allowed}\n.bb-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color .2s ease,color .2s ease}\n.bb-btn-ghost:hover{background:var(--divider);border-color:transparent}\n.bb-btn-ghost:disabled{opacity:.4;cursor:not-allowed;background:transparent;border-color:var(--divider)}\n.bb-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}\n\n/* ── Text link — underlined by its hairline, never colored ── */\n.bb-link-demo{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);transition:border-color .2s ease}\n.bb-link-demo:hover{border-color:var(--accent)}\n\n/* ── Field — quiet input: hairline border, ink focus, label above ── */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n.bb-sig-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}\n.bb-sig-input:focus{border-color:var(--accent)}\n.rs-input{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n\n/* ── Radio — the dot is ink, never a hue ── */\n.bb-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.bb-radio-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--divider);position:relative;flex-shrink:0}\n.bb-radio-on{border-color:var(--text)}\n.bb-radio-on::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--text)}\n\n/* ── Slider — thin track with ink fill and 14px thumb ── */\n.bb-slider{position:relative;height:2px;background:var(--divider);border-radius:1px;margin:10px 0}\n.bb-slider-fill{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:1px}\n.bb-slider-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:1.5px solid var(--text)}\n.bb-slider input[type=range]{position:absolute;left:0;right:0;top:-8px;bottom:-8px;width:100%;height:auto;opacity:0;cursor:pointer;margin:0}\n.bb-slider:has(input[type=range]:focus-visible) .bb-slider-thumb{outline:1.5px solid var(--text);outline-offset:2px}\n\n/* ── Progress — the percentage lives in the label, never in the bar ── */\n.rs-progress-head{display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:7px}\n.bb-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}\n.bb-progress span{display:block;height:100%;background:var(--text);border-radius:2px}\n\n/* ── Tabs — active tab is ink with a 1.5px underline ── */\n.bb-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}\n.bb-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}\n.bb-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}\nbutton.bb-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}\n\n/* ── Breadcrumbs — slashes at 40%, current page is ink ── */\n.bb-crumbs-demo{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}\n.bb-crumbs-demo-sep{opacity:.4}\n.bb-crumbs-demo-here{color:var(--text)}\n\n/* ── Crumb bar — fixed top bar in the house chrome ──\n   Transparent at rest; once the page cover scrolls away it gains the\n   paper background and its bottom hairline, and the breadcrumbs fade\n   in. The inner row starts one module in at the 1024px rail. */\n.rs-crumb-bar{position:fixed;top:0;left:0;right:0;z-index:160;display:flex;align-items:center;height:72px;font-size:13px;font-weight:500;letter-spacing:-.01em;line-height:1.3;background:none;border-bottom:1px solid transparent;transition:var(--transition),background-color .2s ease,border-color .2s ease}\n.rs-crumb-bar-scrolled{background:var(--bg);border-bottom-color:var(--divider-subtle)}\n.rs-crumb-bar-inner{display:flex;align-items:center;gap:20px;width:100%;min-width:0;padding-left:var(--pad)}\n.rs-crumb-bar .bb-crumbs-demo{margin:0;opacity:0;transform:translateY(4px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}\n.rs-crumb-bar-scrolled .bb-crumbs-demo{opacity:1;transform:none;pointer-events:auto}\n.rs-crumb-bar a{color:inherit;text-decoration:none}\n@media(min-width:1024px){.rs-crumb-bar-inner{margin-left:204px}}\n@media(max-width:640px){.rs-crumb-bar{height:64px;font-size:12px}}\n\n/* ── Dropdown + menu — the menu overlays, it never pushes layout ── */\n.rs-select{position:relative;display:inline-block;min-width:180px}\n.rs-select .bb-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px}\n.bb-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}\nbutton.bb-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%}\n.bb-menu{border:1px solid var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}\n.bb-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle)}\n.bb-menu-item:last-child{border-bottom:none}\n.bb-menu-item.bb-menu-item-active,button.bb-menu-item-active{background:var(--divider-subtle)}\nbutton.bb-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}\n\n/* ── Dialog — one question, two equal actions, no third option ── */\n.bb-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}\ndialog.bb-dialog{color:var(--text)}\ndialog.bb-dialog::backdrop{background:rgba(0,0,0,0.25)}\n.bb-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.bb-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}\n.bb-dialog-actions{display:flex;justify-content:flex-end;gap:8px}\n\n/* ── Badges — outline for recommendations, solid for done, muted for pending ── */\n.bb-badge{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;line-height:1.4;border-radius:var(--radius-sm)}\n.bb-badge-solid{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--bg);background:var(--text);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n.bb-badge-muted{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--text-secondary);background:var(--divider-subtle);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n\n/* ── Mono chip — technical identifiers ── */\n.lib-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}\n\n/* ── Card ── */\n.bb-card-demo{border:1px solid var(--divider);border-radius:var(--radius);padding:20px;max-width:360px}\n.bb-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}\n.bb-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}\n.bb-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}\n\n/* ── Table — hairline rows on the open grid; no cell borders ──\n   Scoped to table so linking raster.css never restyles a table\n   it doesn't own. The compat layer re-emits these on bare elements. */\ntable{width:calc(100% + 40px);border-collapse:collapse;margin:16px 0 24px -20px;font-size:14px}\ntable th{text-align:left;font-weight:600;color:var(--text);letter-spacing:-.01em;padding:10px 16px 10px 12px;border-bottom:2px solid var(--divider);font-size:13px}\ntable th:first-child{padding-left:20px}\ntable th:last-child{padding-right:20px}\ntable td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);vertical-align:top}\ntable td:first-child{padding-left:20px}\ntable td:last-child{padding-right:20px}\ntable tr:nth-child(even) td{background:var(--table-alt)}\ntable td:last-child,table th:last-child{text-align:right}\n@media(max-width:640px){\n  table{font-size:12px;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));margin-right:calc(-1*var(--pad))}\n  table th{padding:8px 10px;font-size:12px}\n  table td{padding:8px 10px}\n  table th:first-child,table td:first-child{padding-left:var(--pad)}\n  table th:last-child,table td:last-child{padding-right:var(--pad)}\n}\n\n/* ── Icons — 16/20/24/32, single-weight 1.5px strokes in currentColor ── */\n.bb-icons{display:flex;gap:18px;align-items:center;color:var(--text)}\n.bb-icons svg{width:16px;height:16px;flex-shrink:0}\n"
   },
   "items": [
@@ -894,6 +894,617 @@
           ],
           "snippet": "<div class=\"rs-icons\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><path d=\"M2.5 8h11M9.5 4l4 4-4 4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" vector-effect=\"non-scaling-stroke\"/></svg></div>",
           "cssOnly": true,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "accordion",
+      "type": "registry:component",
+      "title": "Accordion",
+      "description": "Native <details> rows on hairlines; the name attribute keeps one open at a time — no JavaScript at all.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/accordion.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nconst AccordionContext = React.createContext<string | undefined>(undefined);\n\nexport interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** One item open at a time, via the platform's own `name` grouping. */\n  exclusive?: boolean;\n}\n\n/** Native <details> rows on hairlines — the browser does all the work. */\nexport function Accordion({ exclusive, className, children, ...props }: AccordionProps) {\n  const group = React.useId();\n  return (\n    <div className={cx(\"rs-acc\", className)} {...props}>\n      <AccordionContext.Provider value={exclusive ? group : undefined}>\n        {children}\n      </AccordionContext.Provider>\n    </div>\n  );\n}\n\nexport interface AccordionItemProps\n  extends Omit<React.DetailsHTMLAttributes<HTMLDetailsElement>, \"title\"> {\n  title: React.ReactNode;\n  defaultOpen?: boolean;\n}\n\nexport function AccordionItem({ title, defaultOpen, className, children, ...props }: AccordionItemProps) {\n  const group = React.useContext(AccordionContext);\n  return (\n    <details className={cx(\"rs-acc-item\", className)} name={group} open={defaultOpen || undefined} {...props}>\n      <summary>\n        {title}\n        <svg className=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" aria-hidden=\"true\">\n          <path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" />\n        </svg>\n      </summary>\n      <div className=\"rs-acc-body\">{children}</div>\n    </details>\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/accordion.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/accordion.css",
+          "content": "/* ── Accordion — native <details>; one open at a time via the name attribute ── */\n.rs-acc{border-top:1px solid var(--divider-subtle)}\n.rs-acc-item{border-bottom:1px solid var(--divider-subtle)}\n.rs-acc-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-acc-item summary::-webkit-details-marker{display:none}\n.rs-acc-chevron{flex-shrink:0;color:var(--text-secondary);transition:transform .2s ease}\n.rs-acc-item[open] .rs-acc-chevron{transform:rotate(180deg)}\n.rs-acc-body{padding:0 0 16px;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}\n",
+          "type": "registry:file",
+          "target": "styles/raster/accordion.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-acc",
+            "rs-acc-item",
+            "rs-acc-chevron",
+            "rs-acc-body"
+          ],
+          "snippet": "<div class=\"rs-acc\"><details class=\"rs-acc-item\" name=\"faq\" open><summary>What is Raster?<svg class=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></summary><div class=\"rs-acc-body\">A monochrome, CSS-first design system.</div></details><details class=\"rs-acc-item\" name=\"faq\"><summary>Is it dependency-free?<svg class=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></summary><div class=\"rs-acc-body\">Yes — native elements do the work.</div></details></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "alert",
+      "type": "registry:component",
+      "title": "Alert",
+      "description": "A hairline frame with an ink icon; solid ink for critical. Emphasis from weight, never a hue.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/alert.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface AlertProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  title?: React.ReactNode;\n  /** Solid ink for the message that must not be missed. */\n  variant?: \"outline\" | \"solid\";\n  icon?: React.ReactNode;\n}\n\nexport function Alert({ title, variant = \"outline\", icon, className, children, ...props }: AlertProps) {\n  return (\n    <div\n      role=\"status\"\n      className={cx(\"rs-alert\", variant === \"solid\" && \"rs-alert-solid\", className)}\n      {...props}\n    >\n      {icon ?? (\n        <svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" aria-hidden=\"true\">\n          <circle cx=\"8\" cy=\"8\" r=\"6.25\" stroke=\"currentColor\" strokeWidth=\"1.5\" />\n          <path d=\"M8 7.5v3.5M8 5v.5\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" />\n        </svg>\n      )}\n      <div>\n        {title != null && <span className=\"rs-alert-title\">{title}</span>}\n        {children != null && <p className=\"rs-alert-body\">{children}</p>}\n      </div>\n    </div>\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/alert.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/alert.css",
+          "content": "/* ── Alert — a hairline frame; emphasis from weight, never a hue ── */\n.rs-alert{display:flex;gap:10px;border:1px solid var(--divider);border-radius:var(--radius);padding:12px 14px;align-items:flex-start}\n.rs-alert svg{flex-shrink:0;margin-top:1px;color:var(--text)}\n.rs-alert-title{display:block;font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-alert-body{font-size:13px;line-height:1.55;letter-spacing:-.01em;color:var(--text-secondary);margin:2px 0 0}\n.rs-alert-solid{background:var(--text);border-color:var(--text)}\n.rs-alert-solid svg,.rs-alert-solid .rs-alert-title{color:var(--bg)}\n.rs-alert-solid .rs-alert-body{color:var(--bg);opacity:.75}\n",
+          "type": "registry:file",
+          "target": "styles/raster/alert.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-alert",
+            "rs-alert-title",
+            "rs-alert-body",
+            "rs-alert-solid"
+          ],
+          "snippet": "<div class=\"rs-alert\" role=\"status\"><div><span class=\"rs-alert-title\">Heads up</span><p class=\"rs-alert-body\">Your workspace syncs every hour.</p></div></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "alert-dialog",
+      "type": "registry:component",
+      "title": "Alert dialog",
+      "description": "A native <dialog> that requires an explicit answer — Escape and light dismiss are disabled.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/dialog.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "raster/alert-dialog.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface AlertDialogProps\n  extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n}\n\n/**\n * A native <dialog> that demands an answer: Escape is swallowed and\n * there is no light dismiss — the only way out is one of the actions.\n */\nexport function AlertDialog({ open, onClose, className, children, ...props }: AlertDialogProps) {\n  const ref = React.useRef<HTMLDialogElement>(null);\n\n  React.useEffect(() => {\n    const dialog = ref.current;\n    if (!dialog) return;\n    if (open && !dialog.open) dialog.showModal();\n    else if (!open && dialog.open) dialog.close();\n  }, [open]);\n\n  return (\n    <dialog\n      ref={ref}\n      role=\"alertdialog\"\n      className={cx(\"rs-dialog\", className)}\n      onClose={() => onClose?.()}\n      onCancel={(e) => e.preventDefault()}\n      {...props}\n    >\n      {children}\n    </dialog>\n  );\n}\n\nexport { DialogTitle as AlertDialogTitle, DialogBody as AlertDialogBody, DialogActions as AlertDialogActions } from \"./dialog\";\n",
+          "type": "registry:component",
+          "target": "components/raster/alert-dialog.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/dialog.css",
+          "content": "/* ── Dialog — one question, two equal actions, no third option ── */\n.rs-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}\ndialog.rs-dialog{color:var(--text)}\ndialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}\n.rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}\n.rs-dialog-actions{display:flex;justify-content:flex-end;gap:8px}\n",
+          "type": "registry:file",
+          "target": "styles/raster/dialog.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-dialog",
+            "rs-dialog-title",
+            "rs-dialog-body",
+            "rs-dialog-actions"
+          ],
+          "snippet": "<dialog class=\"rs-dialog\" open><span class=\"rs-dialog-title\">Delete this workspace?</span><p class=\"rs-dialog-body\">All projects go with it.</p><div class=\"rs-dialog-actions\"><button class=\"rs-btn-ghost rs-btn-sm\">Cancel</button><button class=\"rs-btn-primary rs-btn-sm\">Delete</button></div></dialog>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "dialog",
+            "button"
+          ]
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "avatar",
+      "type": "registry:component",
+      "title": "Avatar",
+      "description": "Initials in a quiet circle; images cover, broken images fall back to initials. Rows overlap on hairlines.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/avatar.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface AvatarProps extends React.HTMLAttributes<HTMLSpanElement> {\n  src?: string;\n  alt?: string;\n  /** Shown when there is no image, or when it fails to load. */\n  initials?: string;\n  size?: \"sm\" | \"md\" | \"lg\";\n}\n\nexport function Avatar({ src, alt, initials, size = \"md\", className, ...props }: AvatarProps) {\n  const [failed, setFailed] = React.useState(false);\n  const showImage = src && !failed;\n  return (\n    <span\n      className={cx(\"rs-avatar\", size === \"sm\" && \"rs-avatar-sm\", size === \"lg\" && \"rs-avatar-lg\", className)}\n      {...props}\n    >\n      {showImage ? <img src={src} alt={alt ?? \"\"} onError={() => setFailed(true)} /> : initials}\n    </span>\n  );\n}\n\n/** Overlapping row; each avatar keeps a paper seam. */\nexport function AvatarRow({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return <div className={cx(\"rs-avatar-row\", className)} {...props} />;\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/avatar.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/avatar.css",
+          "content": "/* ── Avatar — initials in a quiet circle; images cover ── */\n.rs-avatar{width:32px;height:32px;border-radius:50%;background:var(--divider-subtle);color:var(--text);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;letter-spacing:-.01em;overflow:hidden;flex-shrink:0;user-select:none}\n.rs-avatar img{width:100%;height:100%;object-fit:cover}\n.rs-avatar-sm{width:24px;height:24px;font-size:10px}\n.rs-avatar-lg{width:48px;height:48px;font-size:16px}\n.rs-avatar-row{display:flex}\n.rs-avatar-row .rs-avatar{border:2px solid var(--bg);margin-left:-8px}\n.rs-avatar-row .rs-avatar:first-child{margin-left:0}\n",
+          "type": "registry:file",
+          "target": "styles/raster/avatar.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-avatar",
+            "rs-avatar-sm",
+            "rs-avatar-lg",
+            "rs-avatar-row"
+          ],
+          "snippet": "<div class=\"rs-avatar-row\"><span class=\"rs-avatar\">RV</span><span class=\"rs-avatar\">NO</span><span class=\"rs-avatar\">+3</span></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "textarea",
+      "type": "registry:component",
+      "title": "Textarea",
+      "description": "The quiet field, taller: hairline border, ink focus, vertical resize only.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "raster/textarea.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {\n  label?: React.ReactNode;\n  feedback?: React.ReactNode;\n}\n\nexport const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(\n  { label, feedback, className, id, ...props },\n  ref,\n) {\n  const autoId = React.useId();\n  const areaId = id ?? autoId;\n  return (\n    <div className=\"rs-field\">\n      {label != null && (\n        <label className=\"rs-field-label\" htmlFor={areaId}>\n          {label}\n        </label>\n      )}\n      <textarea ref={ref} id={areaId} className={cx(\"rs-textarea\", className)} {...props} />\n      {feedback != null && <span className=\"rs-feedback\">{feedback}</span>}\n    </div>\n  );\n});\n",
+          "type": "registry:component",
+          "target": "components/raster/textarea.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/textarea.css",
+          "content": "/* ── Textarea — the quiet field, taller ── */\n.rs-textarea{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;line-height:1.55;padding:8px 10px;outline:none;font-family:inherit;min-height:96px;resize:vertical;width:100%}\n.rs-textarea:focus{border-color:var(--accent)}\n.rs-textarea::placeholder{color:var(--text-secondary)}\n",
+          "type": "registry:file",
+          "target": "styles/raster/textarea.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-textarea"
+          ],
+          "snippet": "<div class=\"rs-field\"><span class=\"rs-field-label\">Notes</span><textarea class=\"rs-textarea\" placeholder=\"What should we know?\"></textarea></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "input"
+          ]
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "separator",
+      "type": "registry:component",
+      "title": "Separator",
+      "description": "A hairline, horizontal or vertical — the only divider the system needs.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/styles/separator.css",
+          "content": "/* ── Separator — a hairline, horizontal or vertical ── */\n.rs-sep{border:none;border-top:1px solid var(--divider-subtle);margin:20px 0}\n.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider-subtle);margin:0 12px}\n",
+          "type": "registry:file",
+          "target": "styles/raster/separator.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-sep",
+            "rs-sep-v"
+          ],
+          "snippet": "<hr class=\"rs-sep\" />",
+          "cssOnly": true,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "skeleton",
+      "type": "registry:component",
+      "title": "Skeleton",
+      "description": "A quiet pulse on the divider tone; perfectly still under prefers-reduced-motion.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/skeleton.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SkeletonProps extends React.HTMLAttributes<HTMLSpanElement> {\n  width?: number | string;\n  height?: number | string;\n}\n\nexport function Skeleton({ width, height = 14, style, className, ...props }: SkeletonProps) {\n  return (\n    <span\n      aria-hidden=\"true\"\n      className={cx(\"rs-skeleton\", className)}\n      style={{ width, height, ...style }}\n      {...props}\n    />\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/skeleton.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/skeleton.css",
+          "content": "/* ── Skeleton — a quiet pulse; still under reduced motion ── */\n.rs-skeleton{display:block;background:var(--divider-subtle);border-radius:var(--radius-sm);animation:rsSkel 1.6s ease-in-out infinite}\n@keyframes rsSkel{0%,100%{opacity:1}50%{opacity:.55}}\n@media(prefers-reduced-motion:reduce){.rs-skeleton{animation:none}}\n",
+          "type": "registry:file",
+          "target": "styles/raster/skeleton.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-skeleton"
+          ],
+          "snippet": "<span class=\"rs-skeleton\" style=\"width:180px;height:14px\"></span>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tooltip",
+      "type": "registry:component",
+      "title": "Tooltip",
+      "description": "CSS-only: shows on hover and on keyboard focus alike, ink on paper, no positioning library.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "raster/tooltip.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** The tip text — plain CSS shows it on hover and keyboard focus alike. */\n  tip: string;\n}\n\nexport function Tooltip({ tip, className, children, ...props }: TooltipProps) {\n  return (\n    <span className={cx(\"rs-tip\", className)} data-tip={tip} {...props}>\n      {children}\n    </span>\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/tooltip.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/tooltip.css",
+          "content": "/* ── Tooltip — CSS-only, shows on hover and keyboard focus alike ── */\n.rs-tip{position:relative;display:inline-flex}\n.rs-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(2px);background:var(--text);color:var(--bg);font-size:11.5px;font-weight:500;letter-spacing:-.01em;line-height:1.3;padding:5px 9px;border-radius:var(--radius-sm);white-space:nowrap;opacity:0;pointer-events:none;z-index:180;transition:opacity .15s ease .15s,transform .15s ease .15s}\n.rs-tip:hover::after,.rs-tip:focus-within::after{opacity:1;transform:translateX(-50%) translateY(0)}\n@media(prefers-reduced-motion:reduce){.rs-tip::after{transition:opacity .15s ease .15s}}\n",
+          "type": "registry:file",
+          "target": "styles/raster/tooltip.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-tip"
+          ],
+          "snippet": "<span class=\"rs-tip\" data-tip=\"Copy to clipboard\"><button class=\"rs-btn-ghost rs-btn-sm\">Copy</button></span>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "button"
+          ]
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "toast",
+      "type": "registry:component",
+      "title": "Toast",
+      "description": "Quiet confirmations bottom right, announced politely to screen readers, gone in four seconds.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/toast.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ToastOptions {\n  description?: React.ReactNode;\n}\n\ninterface ToastItem {\n  id: number;\n  title: React.ReactNode;\n  description?: React.ReactNode;\n}\n\nlet nextId = 1;\nconst listeners = new Set<(item: ToastItem) => void>();\n\n/** Fire a toast from anywhere; a mounted <Toaster /> renders it. */\nexport function toast(title: React.ReactNode, options?: ToastOptions): void {\n  const item: ToastItem = { id: nextId++, title, description: options?.description };\n  listeners.forEach((listener) => listener(item));\n}\n\nexport interface ToasterProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** How long a toast stays, in milliseconds. */\n  duration?: number;\n}\n\nexport function Toaster({ duration = 4000, className, ...props }: ToasterProps) {\n  const [items, setItems] = React.useState<ToastItem[]>([]);\n\n  React.useEffect(() => {\n    const add = (item: ToastItem) => {\n      setItems((current) => [...current, item]);\n      setTimeout(() => {\n        setItems((current) => current.filter((i) => i.id !== item.id));\n      }, duration);\n    };\n    listeners.add(add);\n    return () => {\n      listeners.delete(add);\n    };\n  }, [duration]);\n\n  return (\n    <div className={cx(\"rs-toasts\", className)} role=\"status\" aria-live=\"polite\" {...props}>\n      {items.map((item) => (\n        <div key={item.id} className=\"rs-toast\">\n          <div>\n            <span className=\"rs-toast-title\">{item.title}</span>\n            {item.description != null && <p className=\"rs-toast-body\">{item.description}</p>}\n          </div>\n        </div>\n      ))}\n    </div>\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/toast.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/toast.css",
+          "content": "/* ── Toast — quiet confirmations, bottom right, announced politely ── */\n.rs-toasts{position:fixed;bottom:20px;right:20px;z-index:300;display:flex;flex-direction:column;align-items:flex-end;gap:8px}\n.rs-toast{display:flex;align-items:flex-start;gap:10px;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:10px 14px;max-width:340px;animation:rsToastIn .25s cubic-bezier(.22,1,.36,1)}\n.rs-toast-title{display:block;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-toast-body{font-size:12.5px;line-height:1.5;letter-spacing:-.01em;color:var(--text-secondary);margin:1px 0 0}\n@keyframes rsToastIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}\n@media(prefers-reduced-motion:reduce){.rs-toast{animation:none}}\n",
+          "type": "registry:file",
+          "target": "styles/raster/toast.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-toasts",
+            "rs-toast",
+            "rs-toast-title",
+            "rs-toast-body"
+          ],
+          "snippet": "<div class=\"rs-toasts\" role=\"status\"><div class=\"rs-toast\"><div><span class=\"rs-toast-title\">Saved</span><p class=\"rs-toast-body\">Your changes are live.</p></div></div></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "dropdown-menu",
+      "type": "registry:component",
+      "title": "Dropdown menu",
+      "description": "An action menu on the shared overlay surface: keyboard navigation, menu semantics, no layout shift.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/select.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "raster/dropdown-menu.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface DropdownMenuItem {\n  label?: React.ReactNode;\n  onSelect?: () => void;\n  disabled?: boolean;\n  separator?: boolean;\n}\n\nexport interface DropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {\n  label: React.ReactNode;\n  items: DropdownMenuItem[];\n}\n\n/** An action menu on the shared overlay surface, with full keyboard navigation. */\nexport function DropdownMenu({ label, items, className, ...props }: DropdownMenuProps) {\n  const idBase = React.useId();\n  const rootRef = React.useRef<HTMLDivElement>(null);\n  const triggerRef = React.useRef<HTMLButtonElement>(null);\n  const [open, setOpen] = React.useState(false);\n  const actionable = items.filter((item) => !item.separator);\n  const [activeIndex, setActiveIndex] = React.useState(0);\n\n  React.useEffect(() => {\n    if (!open) return;\n    const onPointerDown = (e: PointerEvent) => {\n      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);\n    };\n    document.addEventListener(\"pointerdown\", onPointerDown);\n    return () => document.removeEventListener(\"pointerdown\", onPointerDown);\n  }, [open]);\n\n  const select = (item: DropdownMenuItem) => {\n    if (item.disabled) return;\n    setOpen(false);\n    triggerRef.current?.focus();\n    item.onSelect?.();\n  };\n\n  const onKeyDown = (e: React.KeyboardEvent) => {\n    if (!open) {\n      if ([\"ArrowDown\", \"ArrowUp\", \"Enter\", \" \"].includes(e.key)) {\n        e.preventDefault();\n        setActiveIndex(0);\n        setOpen(true);\n      }\n      return;\n    }\n    if (e.key === \"Escape\") {\n      setOpen(false);\n      triggerRef.current?.focus();\n    }\n    if (e.key === \"ArrowDown\") {\n      e.preventDefault();\n      setActiveIndex((i) => Math.min(actionable.length - 1, i + 1));\n    }\n    if (e.key === \"ArrowUp\") {\n      e.preventDefault();\n      setActiveIndex((i) => Math.max(0, i - 1));\n    }\n    if (e.key === \"Home\") setActiveIndex(0);\n    if (e.key === \"End\") setActiveIndex(actionable.length - 1);\n    if (e.key === \"Enter\" || e.key === \" \") {\n      e.preventDefault();\n      const item = actionable[activeIndex];\n      if (item) select(item);\n    }\n  };\n\n  let actionIndex = -1;\n  return (\n    <div ref={rootRef} className={cx(\"rs-select\", className)} onKeyDown={onKeyDown} {...props}>\n      <button\n        ref={triggerRef}\n        type=\"button\"\n        className=\"rs-dropdown\"\n        aria-haspopup=\"menu\"\n        aria-expanded={open}\n        aria-controls={`${idBase}-menu`}\n        onClick={() => setOpen((o) => !o)}\n      >\n        <span>{label}</span>\n        <svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" aria-hidden=\"true\">\n          <path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" />\n        </svg>\n      </button>\n      {open && (\n        <div id={`${idBase}-menu`} role=\"menu\" className=\"rs-menu\">\n          {items.map((item, index) => {\n            if (item.separator) return <hr key={`sep-${index}`} className=\"rs-menu-sep\" />;\n            actionIndex++;\n            const current = actionIndex;\n            return (\n              <button\n                key={index}\n                type=\"button\"\n                role=\"menuitem\"\n                disabled={item.disabled}\n                className={cx(\"rs-menu-item\", current === activeIndex && \"rs-menu-item-active\")}\n                onPointerEnter={() => setActiveIndex(current)}\n                onClick={() => select(item)}\n              >\n                {item.label}\n              </button>\n            );\n          })}\n        </div>\n      )}\n    </div>\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/dropdown-menu.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/menu.css",
+          "content": "/* ── Dropdown + menu — the menu overlays, it never pushes layout ── */\n.rs-select{position:relative;display:inline-block;min-width:180px}\n.rs-select .rs-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px}\n.rs-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}\nbutton.rs-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%}\n.rs-menu{border:1px solid var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}\n.rs-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle)}\n.rs-menu-item:last-child{border-bottom:none}\n.rs-menu-item.rs-menu-item-active,button.rs-menu-item-active{background:var(--divider-subtle)}\nbutton.rs-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}\n",
+          "type": "registry:file",
+          "target": "styles/raster/menu.css"
+        },
+        {
+          "path": "raster/styles/menu-extras.css",
+          "content": "/* ── Menu separators — for action menus ── */\n.rs-menu-sep{border:none;border-top:1px solid var(--divider-subtle);margin:4px 0}\n",
+          "type": "registry:file",
+          "target": "styles/raster/menu-extras.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-menu",
+            "rs-menu-item",
+            "rs-menu-sep"
+          ],
+          "snippet": "<div class=\"rs-menu\" role=\"menu\"><button class=\"rs-menu-item\" role=\"menuitem\">Rename</button><button class=\"rs-menu-item\" role=\"menuitem\">Duplicate</button><hr class=\"rs-menu-sep\" /><button class=\"rs-menu-item\" role=\"menuitem\">Delete</button></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "select",
+            "button"
+          ]
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "toggle",
+      "type": "registry:component",
+      "title": "Toggle",
+      "description": "A press switch and its group; pressed is ink, like everything on. State lives in aria-pressed.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/toggle.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ToggleProps\n  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, \"onChange\"> {\n  pressed?: boolean;\n  defaultPressed?: boolean;\n  onPressedChange?: (pressed: boolean) => void;\n}\n\n/** A press switch; state lives in aria-pressed, pressed is ink. */\nexport const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(function Toggle(\n  { pressed, defaultPressed, onPressedChange, className, onClick, ...props },\n  ref,\n) {\n  const [inner, setInner] = React.useState(defaultPressed ?? false);\n  const isControlled = pressed !== undefined;\n  const on = isControlled ? pressed : inner;\n  return (\n    <button\n      ref={ref}\n      type=\"button\"\n      aria-pressed={on}\n      className={cx(\"rs-toggle\", className)}\n      onClick={(e) => {\n        if (!isControlled) setInner(!on);\n        onPressedChange?.(!on);\n        onClick?.(e);\n      }}\n      {...props}\n    />\n  );\n});\n\nexport interface ToggleGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  options: Array<{ value: string; label: React.ReactNode }>;\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (value: string) => void;\n}\n\n/** One pressed at a time — a quiet segmented control. */\nexport function ToggleGroup({\n  options,\n  value,\n  defaultValue,\n  onValueChange,\n  className,\n  ...props\n}: ToggleGroupProps) {\n  const [inner, setInner] = React.useState(defaultValue);\n  const isControlled = value !== undefined;\n  const current = isControlled ? value : inner;\n  return (\n    <div role=\"group\" className={cx(\"rs-toggle-group\", className)} {...props}>\n      {options.map((option) => (\n        <button\n          key={option.value}\n          type=\"button\"\n          aria-pressed={option.value === current}\n          className=\"rs-toggle\"\n          onClick={() => {\n            if (!isControlled) setInner(option.value);\n            onValueChange?.(option.value);\n          }}\n        >\n          {option.label}\n        </button>\n      ))}\n    </div>\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/toggle.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/toggle.css",
+          "content": "/* ── Toggle — a press switch; on is ink, like everything on ── */\n.rs-toggle{display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:32px;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;background:none;border:1px solid var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:background-color .2s ease,color .2s ease,border-color .2s ease}\n.rs-toggle[aria-pressed=\"true\"]{background:var(--text);border-color:var(--text);color:var(--bg)}\n.rs-toggle-group{display:inline-flex}\n.rs-toggle-group .rs-toggle{border-radius:0;margin-left:-1px}\n.rs-toggle-group .rs-toggle:first-child{border-radius:var(--radius-sm) 0 0 var(--radius-sm);margin-left:0}\n.rs-toggle-group .rs-toggle:last-child{border-radius:0 var(--radius-sm) var(--radius-sm) 0}\n.rs-toggle-group .rs-toggle[aria-pressed=\"true\"]{position:relative;z-index:1}\n",
+          "type": "registry:file",
+          "target": "styles/raster/toggle.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-toggle",
+            "rs-toggle-group"
+          ],
+          "snippet": "<div class=\"rs-toggle-group\"><button class=\"rs-toggle\" aria-pressed=\"true\">Left</button><button class=\"rs-toggle\" aria-pressed=\"false\">Center</button><button class=\"rs-toggle\" aria-pressed=\"false\">Right</button></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "popover",
+      "type": "registry:component",
+      "title": "Popover",
+      "description": "The native Popover API: rendered in the top layer, light dismiss for free, anchored by four lines of code.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "raster/popover.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Trigger content, rendered in a ghost button. */\n  trigger: React.ReactNode;\n  /** Where the panel sits relative to the trigger. */\n  align?: \"start\" | \"end\";\n}\n\n/**\n * The native Popover API: the panel lives in the top layer and light\n * dismiss comes from the platform — no portal, no outside-click code.\n */\nexport function Popover({ trigger, align = \"start\", className, children, ...props }: PopoverProps) {\n  const id = React.useId();\n  const triggerRef = React.useRef<HTMLButtonElement>(null);\n  const panelRef = React.useRef<HTMLDivElement>(null);\n\n  const position = () => {\n    const anchor = triggerRef.current;\n    const panel = panelRef.current;\n    if (!anchor || !panel) return;\n    const rect = anchor.getBoundingClientRect();\n    panel.style.top = `${rect.bottom + 6}px`;\n    panel.style.left =\n      align === \"end\"\n        ? `${Math.max(8, rect.right - panel.offsetWidth)}px`\n        : `${Math.min(rect.left, window.innerWidth - panel.offsetWidth - 8)}px`;\n  };\n\n  return (\n    <>\n      <button ref={triggerRef} type=\"button\" className=\"rs-btn-ghost rs-btn-sm\" popoverTarget={id}>\n        {trigger}\n      </button>\n      <div\n        ref={panelRef}\n        id={id}\n        popover=\"auto\"\n        className={cx(\"rs-popover\", className)}\n        onToggle={(e) => {\n          if ((e as unknown as ToggleEvent).newState === \"open\") position();\n        }}\n        {...props}\n      >\n        {children}\n      </div>\n    </>\n  );\n}\n\nexport function PopoverTitle({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-popover-title\", className)} {...props} />;\n}\n\nexport function PopoverBody({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-popover-body\", className)} {...props} />;\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/popover.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/popover.css",
+          "content": "/* ── Popover — the native Popover API: top layer, light dismiss ── */\n.rs-popover{position:fixed;inset:auto;margin:0;border:1px solid var(--divider);border-radius:var(--radius);background:var(--bg);color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;width:240px;font-size:13px;line-height:1.55;letter-spacing:-.01em}\n.rs-popover-title{display:block;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:4px}\n.rs-popover-body{color:var(--text-secondary);margin:0}\n",
+          "type": "registry:file",
+          "target": "styles/raster/popover.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-popover",
+            "rs-popover-title",
+            "rs-popover-body"
+          ],
+          "snippet": "<button class=\"rs-btn-ghost rs-btn-sm\" popovertarget=\"info\">Details</button>\n<div id=\"info\" popover=\"auto\" class=\"rs-popover\"><span class=\"rs-popover-title\">Module grid</span><p class=\"rs-popover-body\">204px modules: a 184px column and a 20px gutter.</p></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "button"
+          ]
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "sheet",
+      "type": "registry:component",
+      "title": "Sheet",
+      "description": "A native <dialog> parked at the screen edge — platform focus trap and backdrop, hairline seam.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/sheet.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SheetProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n  side?: \"left\" | \"right\";\n}\n\n/**\n * A native <dialog> parked at the screen edge — the platform provides\n * the focus trap, Escape, and the backdrop.\n */\nexport function Sheet({ open, onClose, side = \"right\", className, children, ...props }: SheetProps) {\n  const ref = React.useRef<HTMLDialogElement>(null);\n\n  React.useEffect(() => {\n    const dialog = ref.current;\n    if (!dialog) return;\n    if (open && !dialog.open) dialog.showModal();\n    else if (!open && dialog.open) dialog.close();\n  }, [open]);\n\n  return (\n    <dialog\n      ref={ref}\n      className={cx(\"rs-sheet\", side === \"left\" && \"rs-sheet-left\", className)}\n      onClose={() => onClose?.()}\n      {...props}\n    >\n      {children}\n    </dialog>\n  );\n}\n\nexport function SheetTitle({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-sheet-title\", className)} {...props} />;\n}\n\nexport function SheetBody({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-sheet-body\", className)} {...props} />;\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/sheet.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/sheet.css",
+          "content": "/* ── Sheet — a native <dialog> parked at the edge ── */\ndialog.rs-sheet{position:fixed;inset:0 0 0 auto;margin:0;height:100dvh;max-height:none;width:360px;max-width:85vw;border:none;border-left:1px solid var(--divider);border-radius:0;padding:24px 20px;background:var(--bg);color:var(--text);box-shadow:-12px 0 32px rgba(0,0,0,0.06)}\ndialog.rs-sheet::backdrop{background:rgba(0,0,0,0.25)}\ndialog.rs-sheet-left{inset:0 auto 0 0;border-left:none;border-right:1px solid var(--divider);box-shadow:12px 0 32px rgba(0,0,0,0.06)}\n.rs-sheet-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-sheet-body{font-size:13.5px;line-height:1.6;letter-spacing:-.01em;color:var(--text-secondary);margin:0}\n",
+          "type": "registry:file",
+          "target": "styles/raster/sheet.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-sheet",
+            "rs-sheet-left",
+            "rs-sheet-title",
+            "rs-sheet-body"
+          ],
+          "snippet": "<dialog class=\"rs-sheet\" open><span class=\"rs-sheet-title\">Filters</span><p class=\"rs-sheet-body\">Everything narrows from here.</p></dialog>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "scroll-area",
+      "type": "registry:component",
+      "title": "Scroll area",
+      "description": "Quiet overflow: hidden scrollbar, feathered top and bottom edges — the same treatment the docs TOC uses.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "files": [
+        {
+          "path": "raster/scroll-area.tsx",
+          "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {\n  maxHeight?: number | string;\n}\n\n/** Quiet overflow: hidden scrollbar, feathered top and bottom edges. */\nexport function ScrollArea({ maxHeight = 240, style, className, ...props }: ScrollAreaProps) {\n  return (\n    <div\n      className={cx(\"rs-scroll\", className)}\n      style={{ maxHeight, ...style }}\n      tabIndex={0}\n      {...props}\n    />\n  );\n}\n",
+          "type": "registry:component",
+          "target": "components/raster/scroll-area.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/scroll-area.css",
+          "content": "/* ── Scroll area — quiet scroll with feathered edges, no scrollbar chrome ── */\n.rs-scroll{overflow-y:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);padding:12px 0}\n.rs-scroll::-webkit-scrollbar{display:none}\n",
+          "type": "registry:file",
+          "target": "styles/raster/scroll-area.css"
+        }
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-scroll"
+          ],
+          "snippet": "<div class=\"rs-scroll\" style=\"max-height:140px\" tabindex=\"0\"><p>Alkmaar</p><p>Amsterdam</p><p>Delft</p><p>Eindhoven</p><p>Groningen</p><p>Haarlem</p><p>Rotterdam</p><p>Utrecht</p></div>",
+          "cssOnly": false,
           "registryDependencies": []
         }
       }

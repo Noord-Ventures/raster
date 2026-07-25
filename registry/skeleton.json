@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:component",
+  "title": "Skeleton",
+  "description": "A quiet pulse on the divider tone; perfectly still under prefers-reduced-motion.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/skeleton.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SkeletonProps extends React.HTMLAttributes<HTMLSpanElement> {\n  width?: number | string;\n  height?: number | string;\n}\n\nexport function Skeleton({ width, height = 14, style, className, ...props }: SkeletonProps) {\n  return (\n    <span\n      aria-hidden=\"true\"\n      className={cx(\"rs-skeleton\", className)}\n      style={{ width, height, ...style }}\n      {...props}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/skeleton.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/skeleton.css",
+      "content": "/* ── Skeleton — a quiet pulse; still under reduced motion ── */\n.rs-skeleton{display:block;background:var(--divider-subtle);border-radius:var(--radius-sm);animation:rsSkel 1.6s ease-in-out infinite}\n@keyframes rsSkel{0%,100%{opacity:1}50%{opacity:.55}}\n@media(prefers-reduced-motion:reduce){.rs-skeleton{animation:none}}\n",
+      "type": "registry:file",
+      "target": "styles/raster/skeleton.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "feedback",
+      "classes": [
+        "rs-skeleton"
+      ],
+      "snippet": "<span class=\"rs-skeleton\" style=\"width:180px;height:14px\"></span>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

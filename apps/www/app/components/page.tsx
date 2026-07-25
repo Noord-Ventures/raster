@@ -29,15 +29,19 @@ export default function ComponentsPage() {
                 </h2>
                 <div className="gallery" style={{ paddingBottom: 8 }}>
                   {items.map((c) => (
-                    <Link key={c.name} href={`/components/${c.name}`} className="gallery-item">
+                    <div key={c.name} className="gallery-item">
                       <div className="gallery-demo">
                         <Preview name={c.name} snippet={c.snippet} />
                       </div>
                       <div className="gallery-meta">
-                        <h3>{c.title}</h3>
+                        <h3>
+                          <Link href={`/components/${c.name}`} className="gallery-item-link">
+                            {c.title}
+                          </Link>
+                        </h3>
                         <p>{c.description}</p>
                       </div>
-                    </Link>
+                    </div>
                   ))}
                 </div>
               </section>
