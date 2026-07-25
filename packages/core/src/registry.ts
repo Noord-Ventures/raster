@@ -124,6 +124,18 @@ export const rasterComponents: RasterComponent[] = [
     snippet: `<p class="rs-crumbs"><span>Studio</span><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Raster</span></p>`,
   },
   {
+    name: "crumb-bar",
+    title: "Crumb bar",
+    description:
+      "Fixed top bar of the house chrome; transparent at rest, it gains the paper background and its bottom hairline on scroll while the breadcrumbs fade in.",
+    category: "navigation",
+    classes: ["rs-crumb-bar", "rs-crumb-bar-scrolled", "rs-crumb-bar-inner"],
+    css: ["components/crumb-bar.css"],
+    react: "components/crumb-bar.tsx",
+    registryDependencies: ["breadcrumbs"],
+    snippet: `<nav class="rs-crumb-bar rs-crumb-bar-scrolled"><div class="rs-crumb-bar-inner"><p class="rs-crumbs"><span>Raster</span><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Components</span></p></div></nav>`,
+  },
+  {
     name: "pagination",
     title: "Pagination",
     description: "Squares, not pills; the current page is solid ink.",

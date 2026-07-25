@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { rasterComponents } from "@raster/core";
 import { CodeBlock } from "@/components/code-block";
-import { CrumbBar } from "@/components/crumb-bar";
 import { DocsNav } from "@/components/docs-nav";
 import { Preview } from "@/components/preview";
 
@@ -62,6 +61,15 @@ const reactUsage: Record<string, string> = {
   breadcrumbs: `import { Breadcrumbs } from "@/components/raster/breadcrumbs";
 
 <Breadcrumbs items={[{ label: "Studio", href: "/studio" }, { label: "Raster" }]} />`,
+  "crumb-bar": `import { CrumbBar } from "@/components/raster/crumb-bar";
+
+<CrumbBar
+  trail={[
+    { label: "Raster", href: "/" },
+    { label: "Components", href: "/components" },
+    { label: "Switch" },
+  ]}
+/>`,
   pagination: `import { Pagination } from "@/components/raster/pagination";
 
 <Pagination page={page} count={12} onPageChange={setPage} />`,
@@ -113,13 +121,6 @@ export default async function ComponentPage({
 
   return (
     <>
-      <CrumbBar
-        trail={[
-          { label: "Raster", href: "/" },
-          { label: "Components", href: "/components" },
-          { label: component.title },
-        ]}
-      />
       <div className="site-layout">
         <DocsNav />
         <main className="site-content">

@@ -1,9 +1,10 @@
 import * as React from "react";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   Badge,
+  CrumbBar,
   Button,
   Checkbox,
   InlineForm,
@@ -211,6 +212,21 @@ describe("Stepper", () => {
     expect(dots[0]?.className).toContain("rs-step-done");
     expect(dots[1]?.className).toContain("rs-step-active");
     expect(dots[2]?.className).not.toContain("rs-step-active");
+  });
+});
+
+describe("CrumbBar", () => {
+  it("solidifies and reveals the crumbs on scroll", () => {
+    const { container } = render(
+      <CrumbBar trail={[{ label: "Raster", href: "/" }, { label: "Components" }]} />,
+    );
+    const bar = container.querySelector(".rs-crumb-bar")!;
+    expect(bar.className).not.toContain("rs-crumb-bar-scrolled");
+    Object.defineProperty(window, "scrollY", { value: 300, configurable: true });
+    fireEvent.scroll(window);
+    expect(bar.className).toContain("rs-crumb-bar-scrolled");
+    expect(screen.getByText("Components").className).toBe("rs-crumbs-here");
+    Object.defineProperty(window, "scrollY", { value: 0, configurable: true });
   });
 });
 

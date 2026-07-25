@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { rasterCategories, rasterComponents } from "@raster/core";
-import { CrumbBar } from "@/components/crumb-bar";
 import { DocsNav } from "@/components/docs-nav";
 import { Preview } from "@/components/preview";
 
@@ -10,7 +9,6 @@ export const metadata: Metadata = { title: "Components" };
 export default function ComponentsPage() {
   return (
     <>
-      <CrumbBar trail={[{ label: "Raster", href: "/" }, { label: "Components" }]} />
       <div className="site-layout">
         <DocsNav />
         <main className="site-content-wide">

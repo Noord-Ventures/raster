@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { rasterTokens } from "@raster/core";
 import { CodeBlock } from "@/components/code-block";
-import { CrumbBar } from "@/components/crumb-bar";
 import { DocsNav } from "@/components/docs-nav";
 
 export const metadata: Metadata = { title: "Tokens" };
@@ -10,7 +9,6 @@ export default function TokensPage() {
   const { color, type, grid } = rasterTokens;
   return (
     <>
-      <CrumbBar trail={[{ label: "Raster", href: "/" }, { label: "Docs" }, { label: "Tokens" }]} />
       <div className="site-layout">
         <DocsNav />
         <main className="site-content">

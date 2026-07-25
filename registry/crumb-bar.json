@@ -1,0 +1,46 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "crumb-bar",
+  "type": "registry:component",
+  "title": "Crumb bar",
+  "description": "Fixed top bar of the house chrome; transparent at rest, it gains the paper background and its bottom hairline on scroll while the breadcrumbs fade in.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/breadcrumbs.json"
+  ],
+  "files": [
+    {
+      "path": "raster/crumb-bar.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface CrumbBarItem {\n  label: React.ReactNode;\n  href?: string;\n}\n\nexport interface CrumbBarProps extends React.HTMLAttributes<HTMLElement> {\n  trail: CrumbBarItem[];\n  /** Pixels of scroll before the bar solidifies and the crumbs fade in. */\n  threshold?: number;\n}\n\n/**\n * The fixed top bar of the house chrome. Transparent at rest; once the\n * page cover scrolls away it gains the paper background and its bottom\n * hairline, and the breadcrumbs fade in.\n */\nexport function CrumbBar({ trail, threshold = 110, className, ...props }: CrumbBarProps) {\n  const [scrolled, setScrolled] = React.useState(false);\n\n  React.useEffect(() => {\n    const onScroll = () => setScrolled(window.scrollY > threshold);\n    onScroll();\n    window.addEventListener(\"scroll\", onScroll, { passive: true });\n    return () => window.removeEventListener(\"scroll\", onScroll);\n  }, [threshold]);\n\n  return (\n    <nav\n      className={cx(\"rs-crumb-bar\", scrolled && \"rs-crumb-bar-scrolled\", className)}\n      aria-label=\"Breadcrumbs\"\n      {...props}\n    >\n      <div className=\"rs-crumb-bar-inner\">\n        <p className=\"rs-crumbs\">\n          {trail.map((crumb, index) => {\n            const last = index === trail.length - 1;\n            return (\n              <React.Fragment key={index}>\n                {index > 0 && (\n                  <span className=\"rs-crumbs-sep\" aria-hidden=\"true\">\n                    /\n                  </span>\n                )}\n                {last ? (\n                  <span className=\"rs-crumbs-here\">{crumb.label}</span>\n                ) : crumb.href ? (\n                  <a href={crumb.href}>{crumb.label}</a>\n                ) : (\n                  <span>{crumb.label}</span>\n                )}\n              </React.Fragment>\n            );\n          })}\n        </p>\n      </div>\n    </nav>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/crumb-bar.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/crumb-bar.css",
+      "content": "/* ── Crumb bar — fixed top bar in the house chrome ──\n   Transparent at rest; once the page cover scrolls away it gains the\n   paper background and its bottom hairline, and the breadcrumbs fade\n   in. The inner row starts one module in at the 1024px rail. */\n.rs-crumb-bar{position:fixed;top:0;left:0;right:0;z-index:160;display:flex;align-items:center;height:72px;font-size:13px;font-weight:500;letter-spacing:-.01em;line-height:1.3;background:none;border-bottom:1px solid transparent;transition:var(--transition),background-color .2s ease,border-color .2s ease}\n.rs-crumb-bar-scrolled{background:var(--bg);border-bottom-color:var(--divider-subtle)}\n.rs-crumb-bar-inner{display:flex;align-items:center;gap:20px;width:100%;min-width:0;padding-left:var(--pad)}\n.rs-crumb-bar .rs-crumbs{margin:0;opacity:0;transform:translateY(4px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}\n.rs-crumb-bar-scrolled .rs-crumbs{opacity:1;transform:none;pointer-events:auto}\n.rs-crumb-bar a{color:inherit;text-decoration:none}\n@media(min-width:1024px){.rs-crumb-bar-inner{margin-left:204px}}\n@media(max-width:640px){.rs-crumb-bar{height:64px;font-size:12px}}\n",
+      "type": "registry:file",
+      "target": "styles/raster/crumb-bar.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "navigation",
+      "classes": [
+        "rs-crumb-bar",
+        "rs-crumb-bar-scrolled",
+        "rs-crumb-bar-inner"
+      ],
+      "snippet": "<nav class=\"rs-crumb-bar rs-crumb-bar-scrolled\"><div class=\"rs-crumb-bar-inner\"><p class=\"rs-crumbs\"><span>Raster</span><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Components</span></p></div></nav>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "breadcrumbs"
+      ]
+    }
+  }
+}

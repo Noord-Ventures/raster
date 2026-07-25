@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
-import { CrumbBar } from "@/components/crumb-bar";
 import { DocsNav } from "@/components/docs-nav";
 
 export const metadata: Metadata = { title: "Getting started" };
@@ -8,7 +7,6 @@ export const metadata: Metadata = { title: "Getting started" };
 export default function DocsPage() {
   return (
     <>
-      <CrumbBar trail={[{ label: "Raster", href: "/" }, { label: "Docs" }, { label: "Getting started" }]} />
       <div className="site-layout">
         <DocsNav />
         <main className="site-content">

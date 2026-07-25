@@ -12,6 +12,7 @@ export { Tabs, TabList, Tab, TabPanel, type TabsProps, type TabProps, type TabPa
 export { Select, type SelectProps, type SelectOption } from "./components/select";
 export { Dialog, DialogTitle, DialogBody, DialogActions, type DialogProps } from "./components/dialog";
 export { Breadcrumbs, type BreadcrumbsProps, type Crumb } from "./components/breadcrumbs";
+export { CrumbBar, type CrumbBarProps, type CrumbBarItem } from "./components/crumb-bar";
 export { Pagination, type PaginationProps } from "./components/pagination";
 export { Stepper, type StepperProps, type Step } from "./components/stepper";
 export { InlineForm, type InlineFormProps } from "./components/inline-form";

@@ -131,6 +131,17 @@ export const demos: Record<string, () => React.ReactNode> = {
       </TabList>
     </Tabs>
   ),
+  "crumb-bar": () => (
+    <nav className="rs-crumb-bar rs-crumb-bar-scrolled" style={{ position: "relative", width: 340 }} aria-label="Breadcrumbs">
+      <div className="rs-crumb-bar-inner" style={{ margin: 0, paddingLeft: 16 }}>
+        <p className="rs-crumbs">
+          <span>Raster</span>
+          <span className="rs-crumbs-sep">/</span>
+          <span className="rs-crumbs-here">Components</span>
+        </p>
+      </div>
+    </nav>
+  ),
   breadcrumbs: () => (
     <Breadcrumbs items={[{ label: "Studio", href: "#" }, { label: "Raster" }]} />
   ),

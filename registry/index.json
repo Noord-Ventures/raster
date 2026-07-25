@@ -461,6 +461,49 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "crumb-bar",
+      "type": "registry:component",
+      "title": "Crumb bar",
+      "description": "Fixed top bar of the house chrome; transparent at rest, it gains the paper background and its bottom hairline on scroll while the breadcrumbs fade in.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/breadcrumbs.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "navigation",
+          "classes": [
+            "rs-crumb-bar",
+            "rs-crumb-bar-scrolled",
+            "rs-crumb-bar-inner"
+          ],
+          "snippet": "<nav class=\"rs-crumb-bar rs-crumb-bar-scrolled\"><div class=\"rs-crumb-bar-inner\"><p class=\"rs-crumbs\"><span>Raster</span><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Components</span></p></div></nav>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "breadcrumbs"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/crumb-bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/crumb-bar.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/crumb-bar.css",
+          "type": "registry:file",
+          "target": "styles/raster/crumb-bar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "pagination",
       "type": "registry:component",
       "title": "Pagination",
