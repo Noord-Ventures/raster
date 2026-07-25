@@ -61,6 +61,110 @@ const reactUsage: Record<string, string> = {
   breadcrumbs: `import { Breadcrumbs } from "@/components/raster/breadcrumbs";
 
 <Breadcrumbs items={[{ label: "Studio", href: "/studio" }, { label: "Raster" }]} />`,
+  chart: `import { BarChart, Donut, LineChart, Sparkline } from "@/components/raster/chart";
+
+<LineChart
+  labels={months}
+  series={[
+    { name: "Revenue", values: revenue },
+    { name: "Costs", values: costs },
+  ]}
+  area
+/>
+
+<BarChart data={[{ label: "Q1", value: 42 }, { label: "Q2", value: 58 }]} />
+<Sparkline values={[12, 18, 15, 26, 24, 34]} />
+<Donut value={72} label="complete" />`,
+  collapsible: `import { Collapsible } from "@/components/raster/collapsible";
+
+<Collapsible title="Show the details">Here they are.</Collapsible>`,
+  "hover-card": `import { HoverCard } from "@/components/raster/hover-card";
+
+<HoverCard trigger={<a className="rs-link" href="/noord">@noord</a>}>
+  Noord — a venture studio in Alkmaar.
+</HoverCard>`,
+  kbd: `import { Kbd } from "@/components/raster/kbd";
+
+<Kbd>⌘</Kbd><Kbd>K</Kbd>`,
+  "input-otp": `import { InputOTP } from "@/components/raster/input-otp";
+
+<InputOTP length={6} onComplete={(code) => verify(code)} />`,
+  "context-menu": `import { ContextMenu } from "@/components/raster/context-menu";
+
+<ContextMenu items={[{ label: "Copy", onSelect: copy }, { separator: true }, { label: "Inspect" }]}>
+  <Canvas />
+</ContextMenu>`,
+  menubar: `import { Menubar } from "@/components/raster/menubar";
+
+<Menubar
+  menus={[
+    { label: "File", items: [{ label: "New" }, { label: "Open…" }] },
+    { label: "Edit", items: [{ label: "Undo" }, { label: "Redo" }] },
+  ]}
+/>`,
+  "navigation-menu": `import { NavigationMenu } from "@/components/raster/navigation-menu";
+
+<NavigationMenu
+  items={[
+    { label: "Overview", href: "/", current: true },
+    { label: "Docs", href: "/docs" },
+  ]}
+/>`,
+  carousel: `import { Carousel } from "@/components/raster/carousel";
+
+<Carousel aria-label="Case studies">
+  {cases.map((c) => <CaseCard key={c.id} {...c} />)}
+</Carousel>`,
+  resizable: `import { Split } from "@/components/raster/resizable";
+
+<Split initial={60} min={30} max={80}>
+  <Editor />
+  <Preview />
+</Split>`,
+  combobox: `import { Combobox } from "@/components/raster/combobox";
+
+<Combobox
+  options={cities}
+  value={city}
+  onValueChange={setCity}
+  placeholder="Search cities…"
+/>`,
+  command: `import { CommandDialog } from "@/components/raster/command";
+
+// wire the shortcut once in your app
+useEffect(() => {
+  const onKey = (e: KeyboardEvent) => {
+    if (e.key === "k" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); setOpen(true); }
+  };
+  window.addEventListener("keydown", onKey);
+  return () => window.removeEventListener("keydown", onKey);
+}, []);
+
+<CommandDialog
+  open={open}
+  onClose={() => setOpen(false)}
+  groups={[{ label: "Go to", items: [{ label: "Components", onSelect: go }] }]}
+/>`,
+  calendar: `import { Calendar } from "@/components/raster/calendar";
+
+<Calendar value={date} onSelect={setDate} />`,
+  "date-picker": `import { DatePicker } from "@/components/raster/date-picker";
+
+<DatePicker value={date} onChange={setDate} />`,
+  "data-table": `import { DataTable } from "@/components/raster/data-table";
+
+<DataTable
+  columns={[
+    { key: "phase", header: "Phase", sortable: true },
+    { key: "weeks", header: "Weeks", sortable: true },
+  ]}
+  rows={rows}
+/>`,
+  "aspect-ratio": `import { AspectRatio } from "@/components/raster/aspect-ratio";
+
+<AspectRatio ratio={16 / 9}>
+  <img src="/cover.jpg" alt="" />
+</AspectRatio>`,
   accordion: `import { Accordion, AccordionItem } from "@/components/raster/accordion";
 
 <Accordion exclusive>

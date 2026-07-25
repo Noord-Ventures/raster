@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hover-card",
+  "type": "registry:component",
+  "title": "Hover card",
+  "description": "A rich preview that opens on hover — and on keyboard focus, in plain CSS.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/hover-card.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface HoverCardProps extends React.HTMLAttributes<HTMLSpanElement> {\n  trigger: React.ReactNode;\n}\n\n/** A rich preview that opens on hover — and on keyboard focus, in plain CSS. */\nexport function HoverCard({ trigger, className, children, ...props }: HoverCardProps) {\n  return (\n    <span className={cx(\"rs-hover-card\", className)} {...props}>\n      <span tabIndex={0}>{trigger}</span>\n      <span className=\"rs-hover-card-panel\" role=\"tooltip\">\n        {children}\n      </span>\n    </span>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/hover-card.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/hover-card.css",
+      "content": "/* ── Hover card — rich preview on hover or keyboard focus ── */\n.rs-hover-card{position:relative;display:inline-block}\n.rs-hover-card-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:170;width:260px;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;font-size:13px;line-height:1.55;letter-spacing:-.01em;color:var(--text-secondary);opacity:0;visibility:hidden;transform:translateY(2px);transition:opacity .15s ease .2s,transform .15s ease .2s,visibility .15s ease .2s}\n.rs-hover-card:hover .rs-hover-card-panel,.rs-hover-card:focus-within .rs-hover-card-panel{opacity:1;visibility:visible;transform:none}\n",
+      "type": "registry:file",
+      "target": "styles/raster/hover-card.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "surfaces",
+      "classes": [
+        "rs-hover-card",
+        "rs-hover-card-panel"
+      ],
+      "snippet": "<span class=\"rs-hover-card\"><span tabindex=\"0\">@noord</span><span class=\"rs-hover-card-panel\">Noord — a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

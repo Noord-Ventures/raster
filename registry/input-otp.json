@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-otp",
+  "type": "registry:component",
+  "title": "One-time code",
+  "description": "One quiet cell per character; auto-advance, backspace, and paste all work.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/input-otp.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface InputOTPProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  length?: number;\n  onChange?: (code: string) => void;\n  /** Called once every cell is filled. */\n  onComplete?: (code: string) => void;\n  \"aria-label\"?: string;\n}\n\n/** One quiet cell per character: auto-advance, backspace, and paste all work. */\nexport function InputOTP({\n  length = 6,\n  onChange,\n  onComplete,\n  className,\n  \"aria-label\": ariaLabel = \"One-time code\",\n  ...props\n}: InputOTPProps) {\n  const [chars, setChars] = React.useState<string[]>(() => Array(length).fill(\"\"));\n  const refs = React.useRef<Array<HTMLInputElement | null>>([]);\n\n  const commit = (next: string[]) => {\n    setChars(next);\n    const code = next.join(\"\");\n    onChange?.(code);\n    if (code.length === length) onComplete?.(code);\n  };\n\n  const setAt = (index: number, value: string) => {\n    const next = [...chars];\n    next[index] = value;\n    commit(next);\n  };\n\n  const paste = (index: number, text: string) => {\n    const clean = text.replace(/\\D/g, \"\").slice(0, length - index);\n    if (!clean) return;\n    const next = [...chars];\n    for (let i = 0; i < clean.length; i++) next[index + i] = clean[i]!;\n    commit(next);\n    refs.current[Math.min(index + clean.length, length - 1)]?.focus();\n  };\n\n  return (\n    <div className={cx(\"rs-otp\", className)} role=\"group\" aria-label={ariaLabel} {...props}>\n      {chars.map((char, index) => (\n        <input\n          key={index}\n          ref={(el) => {\n            refs.current[index] = el;\n          }}\n          inputMode=\"numeric\"\n          autoComplete={index === 0 ? \"one-time-code\" : \"off\"}\n          maxLength={1}\n          value={char}\n          aria-label={`Digit ${index + 1}`}\n          onChange={(e) => {\n            const value = e.target.value.replace(/\\D/g, \"\");\n            if (value.length > 1) {\n              paste(index, value);\n              return;\n            }\n            setAt(index, value);\n            if (value) refs.current[index + 1]?.focus();\n          }}\n          onKeyDown={(e) => {\n            if (e.key === \"Backspace\" && !chars[index] && index > 0) {\n              refs.current[index - 1]?.focus();\n              setAt(index - 1, \"\");\n            }\n            if (e.key === \"ArrowLeft\") refs.current[index - 1]?.focus();\n            if (e.key === \"ArrowRight\") refs.current[index + 1]?.focus();\n          }}\n          onPaste={(e) => {\n            e.preventDefault();\n            paste(index, e.clipboardData.getData(\"text\"));\n          }}\n        />\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/input-otp.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/input-otp.css",
+      "content": "/* ── One-time code — one quiet cell per character ── */\n.rs-otp{display:flex;gap:8px}\n.rs-otp input{width:40px;height:48px;text-align:center;font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius-sm);outline:none;font-family:inherit;padding:0}\n.rs-otp input:focus{border-color:var(--accent)}\n",
+      "type": "registry:file",
+      "target": "styles/raster/input-otp.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "forms",
+      "classes": [
+        "rs-otp"
+      ],
+      "snippet": "<div class=\"rs-otp\"><input maxlength=\"1\" value=\"8\" /><input maxlength=\"1\" value=\"2\" /><input maxlength=\"1\" /><input maxlength=\"1\" /></div>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "resizable",
+  "type": "registry:component",
+  "title": "Resizable",
+  "description": "Two panes on a draggable hairline; arrow keys work too, state lives in ARIA.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/resizable.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SplitProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Starting share of the first pane, in percent. */\n  initial?: number;\n  min?: number;\n  max?: number;\n  children: [React.ReactNode, React.ReactNode];\n}\n\n/** Two panes on a draggable hairline; arrow keys work too. */\nexport function Split({ initial = 50, min = 20, max = 80, className, children, ...props }: SplitProps) {\n  const [share, setShare] = React.useState(initial);\n  const rootRef = React.useRef<HTMLDivElement>(null);\n  const clamp = (v: number) => Math.min(max, Math.max(min, v));\n\n  const onPointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {\n    e.preventDefault();\n    (e.target as HTMLElement).setPointerCapture(e.pointerId);\n    const rect = rootRef.current?.getBoundingClientRect();\n    if (!rect) return;\n    const move = (ev: PointerEvent) => setShare(clamp(((ev.clientX - rect.left) / rect.width) * 100));\n    const up = () => {\n      document.removeEventListener(\"pointermove\", move);\n      document.removeEventListener(\"pointerup\", up);\n    };\n    document.addEventListener(\"pointermove\", move);\n    document.addEventListener(\"pointerup\", up);\n  };\n\n  return (\n    <div ref={rootRef} className={cx(\"rs-split\", className)} {...props}>\n      <div className=\"rs-split-pane\" style={{ width: `${share}%` }}>\n        {children[0]}\n      </div>\n      <button\n        type=\"button\"\n        className=\"rs-split-handle\"\n        role=\"separator\"\n        aria-orientation=\"vertical\"\n        aria-valuenow={Math.round(share)}\n        aria-valuemin={min}\n        aria-valuemax={max}\n        aria-label=\"Resize panes\"\n        onPointerDown={onPointerDown}\n        onKeyDown={(e) => {\n          if (e.key === \"ArrowLeft\") setShare((s) => clamp(s - 2));\n          if (e.key === \"ArrowRight\") setShare((s) => clamp(s + 2));\n        }}\n      />\n      <div className=\"rs-split-pane\" style={{ width: `${100 - share}%` }}>\n        {children[1]}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/resizable.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/resizable.css",
+      "content": "/* ── Resizable — two panes on a draggable hairline ── */\n.rs-split{display:flex;width:100%}\n.rs-split-pane{min-width:0;overflow:hidden}\n.rs-split-handle{flex-shrink:0;width:9px;margin:0 -4px;position:relative;z-index:5;cursor:col-resize;background:none;border:none;padding:0;touch-action:none}\n.rs-split-handle::after{content:\"\";position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--divider);transition:background-color .2s ease}\n.rs-split-handle:hover::after,.rs-split-handle:focus-visible::after{background:var(--text)}\n.rs-split-handle:focus-visible{outline:none}\n",
+      "type": "registry:file",
+      "target": "styles/raster/resizable.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "surfaces",
+      "classes": [
+        "rs-split",
+        "rs-split-pane",
+        "rs-split-handle"
+      ],
+      "snippet": "<div class=\"rs-split\"><div class=\"rs-split-pane\" style=\"width:50%\">Left</div><button class=\"rs-split-handle\" role=\"separator\" aria-valuenow=\"50\"></button><div class=\"rs-split-pane\" style=\"width:50%\">Right</div></div>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

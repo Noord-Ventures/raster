@@ -1,0 +1,29 @@
+/* ── Charts — hairline grid, ink marks; series differ by texture, never hue ── */
+.rs-chart{position:relative;width:100%}
+.rs-chart svg{display:block;width:100%;height:auto;overflow:visible}
+.rs-chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+.rs-chart-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.rs-chart-value{font-size:20px;font-weight:600;letter-spacing:-.02em;color:var(--text);font-variant-numeric:tabular-nums}
+.rs-chart-grid{stroke:var(--divider-subtle)}
+.rs-chart-baseline{stroke:var(--divider)}
+.rs-chart-axis{fill:var(--text-secondary);font-size:11px;font-weight:500;letter-spacing:0;font-variant-numeric:tabular-nums}
+.rs-chart-line{fill:none;stroke:var(--text);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rs-chart-line-dashed{stroke-dasharray:6 5}
+.rs-chart-line-muted{stroke:var(--text-secondary)}
+.rs-chart-line-dotted{stroke:var(--text-secondary);stroke-dasharray:0.5 6;stroke-width:2.5}
+.rs-chart-area{fill:var(--text);opacity:.05;stroke:none}
+.rs-chart-bar{fill:var(--text)}
+.rs-chart-bar-muted{fill:var(--divider)}
+.rs-chart-cursor{stroke:var(--divider);stroke-width:1}
+.rs-chart-dot{fill:var(--bg);stroke:var(--text);stroke-width:2}
+.rs-chart-tip{position:absolute;pointer-events:none;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius-sm);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:7px 10px;font-size:12px;letter-spacing:-.01em;color:var(--text);white-space:nowrap;z-index:60;transform:translate(-50%,calc(-100% - 10px))}
+.rs-chart-tip-label{display:block;font-size:11px;color:var(--text-secondary);margin-bottom:2px}
+.rs-chart-tip-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rs-chart-tip-name{color:var(--text-secondary)}
+.rs-chart-tip-val{font-weight:600;font-variant-numeric:tabular-nums}
+.rs-chart-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}
+.rs-chart-legend-item{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary)}
+.rs-chart-legend-item svg{display:block}
+.rs-spark{display:inline-block;vertical-align:middle}
+.rs-spark svg{display:block;overflow:visible}
+.rs-spark .rs-chart-line{stroke-width:1.5}

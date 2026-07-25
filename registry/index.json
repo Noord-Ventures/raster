@@ -1411,6 +1411,727 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "chart",
+      "type": "registry:component",
+      "title": "Charts",
+      "description": "Zero-dependency SVG: line, bar, sparkline, donut. Hairline grid, ink marks; series differ by texture — solid, dashed, gray, dotted — never by hue.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart",
+            "rs-chart-line",
+            "rs-chart-grid",
+            "rs-chart-axis",
+            "rs-chart-bar",
+            "rs-spark"
+          ],
+          "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><line class=\"rs-chart-grid\" x1=\"0\" x2=\"240\" y1=\"56\" y2=\"56\"/><path class=\"rs-chart-line\" d=\"M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16\"/></svg></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/chart.tsx",
+          "type": "registry:component",
+          "target": "components/raster/chart.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "collapsible",
+      "type": "registry:component",
+      "title": "Collapsible",
+      "description": "A bare native <details> — no chrome, no JavaScript.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/accordion.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-disclosure",
+            "rs-disclosure-body"
+          ],
+          "snippet": "<details class=\"rs-disclosure\"><summary>Show the details<svg class=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"14\" height=\"14\" fill=\"none\"><path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></summary><div class=\"rs-disclosure-body\">Here they are.</div></details>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "accordion"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/collapsible.tsx",
+          "type": "registry:component",
+          "target": "components/raster/collapsible.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/collapsible.css",
+          "type": "registry:file",
+          "target": "styles/raster/collapsible.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "hover-card",
+      "type": "registry:component",
+      "title": "Hover card",
+      "description": "A rich preview that opens on hover — and on keyboard focus, in plain CSS.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-hover-card",
+            "rs-hover-card-panel"
+          ],
+          "snippet": "<span class=\"rs-hover-card\"><span tabindex=\"0\">@noord</span><span class=\"rs-hover-card-panel\">Noord — a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/hover-card.tsx",
+          "type": "registry:component",
+          "target": "components/raster/hover-card.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/hover-card.css",
+          "type": "registry:file",
+          "target": "styles/raster/hover-card.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "kbd",
+      "type": "registry:component",
+      "title": "Kbd",
+      "description": "Keys in the mono stack with a pressed bottom edge.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-kbd"
+          ],
+          "snippet": "<kbd class=\"rs-kbd\">⌘</kbd> <kbd class=\"rs-kbd\">K</kbd>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/kbd.tsx",
+          "type": "registry:component",
+          "target": "components/raster/kbd.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/kbd.css",
+          "type": "registry:file",
+          "target": "styles/raster/kbd.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "input-otp",
+      "type": "registry:component",
+      "title": "One-time code",
+      "description": "One quiet cell per character; auto-advance, backspace, and paste all work.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-otp"
+          ],
+          "snippet": "<div class=\"rs-otp\"><input maxlength=\"1\" value=\"8\" /><input maxlength=\"1\" value=\"2\" /><input maxlength=\"1\" /><input maxlength=\"1\" /></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/input-otp.tsx",
+          "type": "registry:component",
+          "target": "components/raster/input-otp.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/input-otp.css",
+          "type": "registry:file",
+          "target": "styles/raster/input-otp.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "context-menu",
+      "type": "registry:component",
+      "title": "Context menu",
+      "description": "Right-click opens the shared menu surface at the pointer; Escape and outside clicks close it.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/select.json",
+        "https://raster.noord.dev/r/dropdown-menu.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-menu",
+            "rs-menu-item",
+            "rs-menu-sep"
+          ],
+          "snippet": "<div class=\"rs-menu\" role=\"menu\"><button class=\"rs-menu-item\" role=\"menuitem\">Copy</button><button class=\"rs-menu-item\" role=\"menuitem\">Paste</button><hr class=\"rs-menu-sep\" /><button class=\"rs-menu-item\" role=\"menuitem\">Inspect</button></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "select",
+            "dropdown-menu"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/context-menu.tsx",
+          "type": "registry:component",
+          "target": "components/raster/context-menu.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/menu.css",
+          "type": "registry:file",
+          "target": "styles/raster/menu.css"
+        },
+        {
+          "path": "raster/styles/menu-extras.css",
+          "type": "registry:file",
+          "target": "styles/raster/menu-extras.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "menubar",
+      "type": "registry:component",
+      "title": "Menubar",
+      "description": "Dropdown menus in a hairline strip.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/dropdown-menu.json",
+        "https://raster.noord.dev/r/select.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-menubar"
+          ],
+          "snippet": "<div class=\"rs-menubar\" role=\"menubar\"><button class=\"rs-dropdown\"><span>File</span></button><button class=\"rs-dropdown\"><span>Edit</span></button><button class=\"rs-dropdown\"><span>View</span></button></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "dropdown-menu",
+            "select"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/menubar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/menubar.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/menubar.css",
+          "type": "registry:file",
+          "target": "styles/raster/menubar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "navigation-menu",
+      "type": "registry:component",
+      "title": "Navigation menu",
+      "description": "Quiet links in a row; the current page is ink.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "navigation",
+          "classes": [
+            "rs-nav"
+          ],
+          "snippet": "<nav class=\"rs-nav\"><a href=\"#\" aria-current=\"page\">Overview</a><a href=\"#\">Docs</a><a href=\"#\">Changelog</a></nav>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/navigation-menu.tsx",
+          "type": "registry:component",
+          "target": "components/raster/navigation-menu.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/nav.css",
+          "type": "registry:file",
+          "target": "styles/raster/nav.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "carousel",
+      "type": "registry:component",
+      "title": "Carousel",
+      "description": "Native scroll snap owns the physics; the buttons just nudge it. Edges feather.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/pagination.json",
+        "https://raster.noord.dev/r/card.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-carousel",
+            "rs-carousel-track",
+            "rs-carousel-nav"
+          ],
+          "snippet": "<div class=\"rs-carousel\"><div class=\"rs-carousel-track\"><div class=\"rs-card\">One</div><div class=\"rs-card\">Two</div><div class=\"rs-card\">Three</div></div><div class=\"rs-carousel-nav\"><button class=\"rs-page\">‹</button><button class=\"rs-page\">›</button></div></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "pagination",
+            "card"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/carousel.tsx",
+          "type": "registry:component",
+          "target": "components/raster/carousel.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/carousel.css",
+          "type": "registry:file",
+          "target": "styles/raster/carousel.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "resizable",
+      "type": "registry:component",
+      "title": "Resizable",
+      "description": "Two panes on a draggable hairline; arrow keys work too, state lives in ARIA.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-split",
+            "rs-split-pane",
+            "rs-split-handle"
+          ],
+          "snippet": "<div class=\"rs-split\"><div class=\"rs-split-pane\" style=\"width:50%\">Left</div><button class=\"rs-split-handle\" role=\"separator\" aria-valuenow=\"50\"></button><div class=\"rs-split-pane\" style=\"width:50%\">Right</div></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/resizable.tsx",
+          "type": "registry:component",
+          "target": "components/raster/resizable.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/resizable.css",
+          "type": "registry:file",
+          "target": "styles/raster/resizable.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "combobox",
+      "type": "registry:component",
+      "title": "Combobox",
+      "description": "The quiet field with a filtered overlay — combobox semantics throughout.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/input.json",
+        "https://raster.noord.dev/r/select.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-combobox",
+            "rs-combobox-empty"
+          ],
+          "snippet": "<div class=\"rs-combobox\"><input class=\"rs-input rs-input-full\" role=\"combobox\" placeholder=\"Search…\" /><div class=\"rs-menu\" role=\"listbox\"><button class=\"rs-menu-item rs-menu-item-active\" role=\"option\">Alkmaar</button><button class=\"rs-menu-item\" role=\"option\">Amsterdam</button></div></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "input",
+            "select"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/combobox.tsx",
+          "type": "registry:component",
+          "target": "components/raster/combobox.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/combobox.css",
+          "type": "registry:file",
+          "target": "styles/raster/combobox.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "command",
+      "type": "registry:component",
+      "title": "Command",
+      "description": "One input, everything reachable — filter, arrows, enter. Lives in a native <dialog>.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/dialog.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-command",
+            "rs-command-input",
+            "rs-command-list",
+            "rs-command-group",
+            "rs-command-item",
+            "rs-command-item-active",
+            "rs-command-hint",
+            "rs-command-empty"
+          ],
+          "snippet": "<div class=\"rs-command\" style=\"border:1px solid var(--divider);border-radius:var(--radius)\"><input class=\"rs-command-input\" placeholder=\"Type a command or search…\" /><div class=\"rs-command-list\"><div class=\"rs-command-group\">Go to</div><button class=\"rs-command-item rs-command-item-active\"><span>Components</span><span class=\"rs-command-hint\">⌘1</span></button><button class=\"rs-command-item\"><span>Tokens</span><span class=\"rs-command-hint\">⌘2</span></button></div></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "dialog"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/command.tsx",
+          "type": "registry:component",
+          "target": "components/raster/command.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/command.css",
+          "type": "registry:file",
+          "target": "styles/raster/command.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "calendar",
+      "type": "registry:component",
+      "title": "Calendar",
+      "description": "A month of quiet squares; selected is ink, today is a hairline. Weeks start on Monday.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/pagination.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-cal",
+            "rs-cal-head",
+            "rs-cal-title",
+            "rs-cal-nav",
+            "rs-cal-grid",
+            "rs-cal-dow",
+            "rs-cal-day",
+            "rs-cal-day-out",
+            "rs-cal-day-today",
+            "rs-cal-day-selected"
+          ],
+          "snippet": "<div class=\"rs-cal\"><div class=\"rs-cal-head\"><span class=\"rs-cal-title\">July 2026</span><span class=\"rs-cal-nav\"><button class=\"rs-page\">‹</button><button class=\"rs-page\">›</button></span></div><div class=\"rs-cal-grid\"><span class=\"rs-cal-dow\">Mo</span><span class=\"rs-cal-dow\">Tu</span><span class=\"rs-cal-dow\">We</span><span class=\"rs-cal-dow\">Th</span><span class=\"rs-cal-dow\">Fr</span><span class=\"rs-cal-dow\">Sa</span><span class=\"rs-cal-dow\">Su</span><button class=\"rs-cal-day\">20</button><button class=\"rs-cal-day\">21</button><button class=\"rs-cal-day\">22</button><button class=\"rs-cal-day\">23</button><button class=\"rs-cal-day rs-cal-day-selected\">24</button><button class=\"rs-cal-day rs-cal-day-today\">25</button><button class=\"rs-cal-day\">26</button></div></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "pagination"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/calendar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/calendar.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/calendar.css",
+          "type": "registry:file",
+          "target": "styles/raster/calendar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "date-picker",
+      "type": "registry:component",
+      "title": "Date picker",
+      "description": "The hairline trigger with a calendar overlay.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/select.json",
+        "https://raster.noord.dev/r/calendar.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-dropdown",
+            "rs-cal"
+          ],
+          "snippet": "<button class=\"rs-dropdown\"><span>24 July 2026</span></button>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "select",
+            "calendar"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/date-picker.tsx",
+          "type": "registry:component",
+          "target": "components/raster/date-picker.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/menu.css",
+          "type": "registry:file",
+          "target": "styles/raster/menu.css"
+        },
+        {
+          "path": "raster/styles/calendar.css",
+          "type": "registry:file",
+          "target": "styles/raster/calendar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "data-table",
+      "type": "registry:component",
+      "title": "Data table",
+      "description": "Sortable hairline rows over the plain table — sorting in 30 lines, data stays yours.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/table.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-datatable-sort",
+            "rs-datatable-empty"
+          ],
+          "snippet": "<table class=\"rs-table\"><thead><tr><th><button class=\"rs-datatable-sort\">Phase</button></th><th>Weeks</th></tr></thead><tbody><tr><td>Identity</td><td>4</td></tr><tr><td>Strategy</td><td>2</td></tr></tbody></table>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "table"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/data-table.tsx",
+          "type": "registry:component",
+          "target": "components/raster/data-table.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/datatable.css",
+          "type": "registry:file",
+          "target": "styles/raster/datatable.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "aspect-ratio",
+      "type": "registry:component",
+      "title": "Aspect ratio",
+      "description": "A box that keeps its proportions; media covers.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-ratio"
+          ],
+          "snippet": "<div class=\"rs-ratio\" style=\"aspect-ratio:16/9;max-width:280px;background:var(--divider-subtle)\"></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/aspect-ratio.tsx",
+          "type": "registry:component",
+          "target": "components/raster/aspect-ratio.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/ratio.css",
+          "type": "registry:file",
+          "target": "styles/raster/ratio.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "form",
+      "type": "registry:component",
+      "title": "Form",
+      "description": "The form pattern: quiet fields stacked on the grid, one primary action at the end.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/input.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "patterns",
+          "classes": [
+            "rs-field",
+            "rs-field-label"
+          ],
+          "snippet": "<form style=\"display:flex;flex-direction:column;gap:16px;max-width:388px\"><div class=\"rs-field\"><span class=\"rs-field-label\">Name</span><input class=\"rs-input rs-input-full\" /></div><div class=\"rs-field\"><span class=\"rs-field-label\">E-mail</span><input class=\"rs-input rs-input-full\" /></div><button class=\"rs-btn-primary\">Send</button></form>",
+          "cssOnly": true,
+          "registryDependencies": [
+            "input",
+            "button"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/styles/field.css",
+          "type": "registry:file",
+          "target": "styles/raster/field.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "workflow",
       "type": "registry:component",
       "title": "Workflow card",

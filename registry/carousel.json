@@ -1,0 +1,48 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "carousel",
+  "type": "registry:component",
+  "title": "Carousel",
+  "description": "Native scroll snap owns the physics; the buttons just nudge it. Edges feather.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/pagination.json",
+    "https://raster.noord.dev/r/card.json"
+  ],
+  "files": [
+    {
+      "path": "raster/carousel.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {\n  \"aria-label\"?: string;\n}\n\n/** Native scroll snap does the physics; the buttons just nudge it. */\nexport function Carousel({ className, children, \"aria-label\": ariaLabel = \"Carousel\", ...props }: CarouselProps) {\n  const trackRef = React.useRef<HTMLDivElement>(null);\n  const nudge = (dir: 1 | -1) => {\n    const track = trackRef.current;\n    if (track) track.scrollBy({ left: dir * track.clientWidth * 0.8 });\n  };\n  return (\n    <div className={cx(\"rs-carousel\", className)} role=\"group\" aria-label={ariaLabel} {...props}>\n      <div ref={trackRef} className=\"rs-carousel-track\" tabIndex={0}>\n        {children}\n      </div>\n      <div className=\"rs-carousel-nav\">\n        <button type=\"button\" className=\"rs-page\" aria-label=\"Previous\" onClick={() => nudge(-1)}>\n          ‹\n        </button>\n        <button type=\"button\" className=\"rs-page\" aria-label=\"Next\" onClick={() => nudge(1)}>\n          ›\n        </button>\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/carousel.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/carousel.css",
+      "content": "/* ── Carousel — native scroll snap; the platform owns the physics ── */\n.rs-carousel{position:relative}\n.rs-carousel-track{display:flex;gap:var(--gutter);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);padding:2px 12px}\n.rs-carousel-track::-webkit-scrollbar{display:none}\n.rs-carousel-track>*{scroll-snap-align:start;flex-shrink:0}\n.rs-carousel-nav{display:flex;gap:5px;margin-top:10px}\n@media(prefers-reduced-motion:reduce){.rs-carousel-track{scroll-behavior:auto}}\n",
+      "type": "registry:file",
+      "target": "styles/raster/carousel.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "content",
+      "classes": [
+        "rs-carousel",
+        "rs-carousel-track",
+        "rs-carousel-nav"
+      ],
+      "snippet": "<div class=\"rs-carousel\"><div class=\"rs-carousel-track\"><div class=\"rs-card\">One</div><div class=\"rs-card\">Two</div><div class=\"rs-card\">Three</div></div><div class=\"rs-carousel-nav\"><button class=\"rs-page\">‹</button><button class=\"rs-page\">›</button></div></div>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "pagination",
+        "card"
+      ]
+    }
+  }
+}

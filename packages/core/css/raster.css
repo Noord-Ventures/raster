@@ -332,6 +332,122 @@ dialog.rs-sheet-left{inset:0 auto 0 0;border-left:none;border-right:1px solid va
 .rs-scroll{overflow-y:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);padding:12px 0}
 .rs-scroll::-webkit-scrollbar{display:none}
 
+/* ── Charts — hairline grid, ink marks; series differ by texture, never hue ── */
+.rs-chart{position:relative;width:100%}
+.rs-chart svg{display:block;width:100%;height:auto;overflow:visible}
+.rs-chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+.rs-chart-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.rs-chart-value{font-size:20px;font-weight:600;letter-spacing:-.02em;color:var(--text);font-variant-numeric:tabular-nums}
+.rs-chart-grid{stroke:var(--divider-subtle)}
+.rs-chart-baseline{stroke:var(--divider)}
+.rs-chart-axis{fill:var(--text-secondary);font-size:11px;font-weight:500;letter-spacing:0;font-variant-numeric:tabular-nums}
+.rs-chart-line{fill:none;stroke:var(--text);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rs-chart-line-dashed{stroke-dasharray:6 5}
+.rs-chart-line-muted{stroke:var(--text-secondary)}
+.rs-chart-line-dotted{stroke:var(--text-secondary);stroke-dasharray:0.5 6;stroke-width:2.5}
+.rs-chart-area{fill:var(--text);opacity:.05;stroke:none}
+.rs-chart-bar{fill:var(--text)}
+.rs-chart-bar-muted{fill:var(--divider)}
+.rs-chart-cursor{stroke:var(--divider);stroke-width:1}
+.rs-chart-dot{fill:var(--bg);stroke:var(--text);stroke-width:2}
+.rs-chart-tip{position:absolute;pointer-events:none;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius-sm);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:7px 10px;font-size:12px;letter-spacing:-.01em;color:var(--text);white-space:nowrap;z-index:60;transform:translate(-50%,calc(-100% - 10px))}
+.rs-chart-tip-label{display:block;font-size:11px;color:var(--text-secondary);margin-bottom:2px}
+.rs-chart-tip-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rs-chart-tip-name{color:var(--text-secondary)}
+.rs-chart-tip-val{font-weight:600;font-variant-numeric:tabular-nums}
+.rs-chart-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}
+.rs-chart-legend-item{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary)}
+.rs-chart-legend-item svg{display:block}
+.rs-spark{display:inline-block;vertical-align:middle}
+.rs-spark svg{display:block;overflow:visible}
+.rs-spark .rs-chart-line{stroke-width:1.5}
+
+/* ── Collapsible — a bare <details>, no chrome ── */
+.rs-disclosure summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.rs-disclosure summary::-webkit-details-marker{display:none}
+.rs-disclosure .rs-acc-chevron{transition:transform .2s ease}
+.rs-disclosure[open] .rs-acc-chevron{transform:rotate(180deg)}
+.rs-disclosure-body{padding:10px 0 0;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}
+
+/* ── Hover card — rich preview on hover or keyboard focus ── */
+.rs-hover-card{position:relative;display:inline-block}
+.rs-hover-card-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:170;width:260px;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;font-size:13px;line-height:1.55;letter-spacing:-.01em;color:var(--text-secondary);opacity:0;visibility:hidden;transform:translateY(2px);transition:opacity .15s ease .2s,transform .15s ease .2s,visibility .15s ease .2s}
+.rs-hover-card:hover .rs-hover-card-panel,.rs-hover-card:focus-within .rs-hover-card-panel{opacity:1;visibility:visible;transform:none}
+
+/* ── Kbd — keys in the mono stack with a pressed bottom edge ── */
+.rs-kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);background:var(--bg);border:1px solid var(--divider);border-bottom-width:2px;border-radius:4px;padding:2px 6px;line-height:1.2}
+
+/* ── One-time code — one quiet cell per character ── */
+.rs-otp{display:flex;gap:8px}
+.rs-otp input{width:40px;height:48px;text-align:center;font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius-sm);outline:none;font-family:inherit;padding:0}
+.rs-otp input:focus{border-color:var(--accent)}
+
+/* ── Menubar — dropdown menus in a hairline strip ── */
+.rs-menubar{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);padding:2px}
+.rs-menubar .rs-select{min-width:0}
+.rs-menubar .rs-dropdown{border:none;padding:6px 10px;font-size:13px;gap:6px}
+.rs-menubar .rs-menu{min-width:180px;right:auto}
+
+/* ── Navigation menu — quiet links; the current page is ink ── */
+.rs-nav{display:flex;align-items:center;gap:22px}
+.rs-nav a{font-size:14px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);text-decoration:none;transition:color .2s ease}
+.rs-nav a:hover,.rs-nav a[aria-current="page"]{color:var(--text)}
+
+/* ── Carousel — native scroll snap; the platform owns the physics ── */
+.rs-carousel{position:relative}
+.rs-carousel-track{display:flex;gap:var(--gutter);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);padding:2px 12px}
+.rs-carousel-track::-webkit-scrollbar{display:none}
+.rs-carousel-track>*{scroll-snap-align:start;flex-shrink:0}
+.rs-carousel-nav{display:flex;gap:5px;margin-top:10px}
+@media(prefers-reduced-motion:reduce){.rs-carousel-track{scroll-behavior:auto}}
+
+/* ── Resizable — two panes on a draggable hairline ── */
+.rs-split{display:flex;width:100%}
+.rs-split-pane{min-width:0;overflow:hidden}
+.rs-split-handle{flex-shrink:0;width:9px;margin:0 -4px;position:relative;z-index:5;cursor:col-resize;background:none;border:none;padding:0;touch-action:none}
+.rs-split-handle::after{content:"";position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--divider);transition:background-color .2s ease}
+.rs-split-handle:hover::after,.rs-split-handle:focus-visible::after{background:var(--text)}
+.rs-split-handle:focus-visible{outline:none}
+
+/* ── Combobox — the quiet field with a filtered overlay ── */
+.rs-combobox{position:relative;display:inline-block;min-width:200px}
+.rs-combobox .rs-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px;max-height:240px;overflow-y:auto}
+.rs-combobox-empty{padding:10px 12px;font-size:13px;letter-spacing:-.01em;color:var(--text-secondary)}
+
+/* ── Command — one input, everything reachable ── */
+.rs-command{width:480px;max-width:90vw;padding:0;overflow:hidden}
+.rs-command-input{width:100%;border:none;border-bottom:1px solid var(--divider-subtle);background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);padding:14px 16px;outline:none}
+.rs-command-input::placeholder{color:var(--text-secondary)}
+.rs-command-list{max-height:320px;overflow-y:auto;padding:6px}
+.rs-command-group{font-size:11px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);padding:8px 10px 4px}
+.rs-command-item{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;border:none;background:none;font-family:inherit;font-size:13.5px;letter-spacing:-.01em;color:var(--text);padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer}
+.rs-command-item-active{background:var(--divider-subtle)}
+.rs-command-hint{font-size:11px;color:var(--text-secondary)}
+.rs-command-empty{padding:20px;text-align:center;font-size:13px;color:var(--text-secondary)}
+
+/* ── Calendar — a month of quiet squares; selected is ink ── */
+.rs-cal{width:252px}
+.rs-cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.rs-cal-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.rs-cal-nav{display:flex;gap:5px}
+.rs-cal-grid{display:grid;grid-template-columns:repeat(7,36px)}
+.rs-cal-dow{font-size:11px;font-weight:500;color:var(--text-secondary);text-align:center;padding:4px 0}
+.rs-cal-day{width:36px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;font-variant-numeric:tabular-nums;color:var(--text);background:none;border:none;border-radius:var(--radius-sm);cursor:pointer;font-family:inherit;padding:0}
+.rs-cal-day:hover{background:var(--divider-subtle)}
+.rs-cal-day-out{color:var(--text-secondary);opacity:.45}
+.rs-cal-day-today{box-shadow:inset 0 0 0 1px var(--divider)}
+.rs-cal-day-selected,.rs-cal-day-selected:hover{background:var(--text);color:var(--bg);font-weight:600}
+
+/* ── Data table — sortable hairline rows ── */
+.rs-datatable-sort{background:none;border:none;padding:0;font:inherit;font-weight:600;letter-spacing:inherit;color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.rs-datatable-sort svg{opacity:.45}
+.rs-datatable-sort[data-active="true"] svg{opacity:1}
+.rs-datatable-empty{padding:24px 20px;text-align:center;font-size:13px;letter-spacing:-.01em;color:var(--text-secondary)}
+
+/* ── Aspect ratio — a box that keeps its proportions ── */
+.rs-ratio{position:relative;width:100%;overflow:hidden;border-radius:var(--radius)}
+.rs-ratio>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
 /* ── Workflow cards — the dashed editable pipeline ── */
 .rs-flow{display:grid;grid-template-columns:1fr;gap:var(--gutter)}
 @media(min-width:560px){.rs-flow{grid-template-columns:repeat(2,184px);width:fit-content}}

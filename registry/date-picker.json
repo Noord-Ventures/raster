@@ -1,0 +1,53 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "date-picker",
+  "type": "registry:component",
+  "title": "Date picker",
+  "description": "The hairline trigger with a calendar overlay.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/select.json",
+    "https://raster.noord.dev/r/calendar.json"
+  ],
+  "files": [
+    {
+      "path": "raster/date-picker.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\nimport { Calendar } from \"./calendar\";\n\nexport interface DatePickerProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\" | \"defaultValue\"> {\n  value?: Date;\n  onChange?: (date: Date) => void;\n  placeholder?: string;\n  format?: (date: Date) => string;\n}\n\nconst defaultDateFormat = (d: Date) =>\n  d.toLocaleDateString(\"en\", { day: \"numeric\", month: \"long\", year: \"numeric\" });\n\n/** The hairline trigger with a calendar overlay. */\nexport function DatePicker({\n  value,\n  onChange,\n  placeholder = \"Pick a date\",\n  format = defaultDateFormat,\n  className,\n  ...props\n}: DatePickerProps) {\n  const rootRef = React.useRef<HTMLDivElement>(null);\n  const [open, setOpen] = React.useState(false);\n\n  React.useEffect(() => {\n    if (!open) return;\n    const onPointerDown = (e: PointerEvent) => {\n      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);\n    };\n    const onKey = (e: KeyboardEvent) => {\n      if (e.key === \"Escape\") setOpen(false);\n    };\n    document.addEventListener(\"pointerdown\", onPointerDown);\n    document.addEventListener(\"keydown\", onKey);\n    return () => {\n      document.removeEventListener(\"pointerdown\", onPointerDown);\n      document.removeEventListener(\"keydown\", onKey);\n    };\n  }, [open]);\n\n  return (\n    <div ref={rootRef} className={cx(\"rs-select\", className)} {...props}>\n      <button\n        type=\"button\"\n        className=\"rs-dropdown\"\n        aria-haspopup=\"dialog\"\n        aria-expanded={open}\n        onClick={() => setOpen((o) => !o)}\n      >\n        <span>{value ? format(value) : placeholder}</span>\n        <svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" aria-hidden=\"true\">\n          <rect x=\"2.75\" y=\"3.75\" width=\"10.5\" height=\"9.5\" rx=\"1.5\" stroke=\"currentColor\" strokeWidth=\"1.5\" />\n          <path d=\"M2.75 6.75h10.5M5.5 2v2.5M10.5 2v2.5\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" />\n        </svg>\n      </button>\n      {open && (\n        <div className=\"rs-menu\" style={{ padding: 12, right: \"auto\" }}>\n          <Calendar\n            value={value}\n            onSelect={(d) => {\n              onChange?.(d);\n              setOpen(false);\n            }}\n          />\n        </div>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/date-picker.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/menu.css",
+      "content": "/* ── Dropdown + menu — the menu overlays, it never pushes layout ── */\n.rs-select{position:relative;display:inline-block;min-width:180px}\n.rs-select .rs-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px}\n.rs-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}\nbutton.rs-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%}\n.rs-menu{border:1px solid var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}\n.rs-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle)}\n.rs-menu-item:last-child{border-bottom:none}\n.rs-menu-item.rs-menu-item-active,button.rs-menu-item-active{background:var(--divider-subtle)}\nbutton.rs-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}\n",
+      "type": "registry:file",
+      "target": "styles/raster/menu.css"
+    },
+    {
+      "path": "raster/styles/calendar.css",
+      "content": "/* ── Calendar — a month of quiet squares; selected is ink ── */\n.rs-cal{width:252px}\n.rs-cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}\n.rs-cal-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-cal-nav{display:flex;gap:5px}\n.rs-cal-grid{display:grid;grid-template-columns:repeat(7,36px)}\n.rs-cal-dow{font-size:11px;font-weight:500;color:var(--text-secondary);text-align:center;padding:4px 0}\n.rs-cal-day{width:36px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;font-variant-numeric:tabular-nums;color:var(--text);background:none;border:none;border-radius:var(--radius-sm);cursor:pointer;font-family:inherit;padding:0}\n.rs-cal-day:hover{background:var(--divider-subtle)}\n.rs-cal-day-out{color:var(--text-secondary);opacity:.45}\n.rs-cal-day-today{box-shadow:inset 0 0 0 1px var(--divider)}\n.rs-cal-day-selected,.rs-cal-day-selected:hover{background:var(--text);color:var(--bg);font-weight:600}\n",
+      "type": "registry:file",
+      "target": "styles/raster/calendar.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "forms",
+      "classes": [
+        "rs-dropdown",
+        "rs-cal"
+      ],
+      "snippet": "<button class=\"rs-dropdown\"><span>24 July 2026</span></button>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "select",
+        "calendar"
+      ]
+    }
+  }
+}

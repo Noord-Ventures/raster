@@ -1,0 +1,46 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "menubar",
+  "type": "registry:component",
+  "title": "Menubar",
+  "description": "Dropdown menus in a hairline strip.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/dropdown-menu.json",
+    "https://raster.noord.dev/r/select.json"
+  ],
+  "files": [
+    {
+      "path": "raster/menubar.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\nimport { DropdownMenu, type DropdownMenuItem } from \"./dropdown-menu\";\n\nexport interface MenubarProps extends React.HTMLAttributes<HTMLDivElement> {\n  menus: Array<{ label: React.ReactNode; items: DropdownMenuItem[] }>;\n}\n\n/** Dropdown menus in a hairline strip. */\nexport function Menubar({ menus, className, ...props }: MenubarProps) {\n  return (\n    <div role=\"menubar\" className={cx(\"rs-menubar\", className)} {...props}>\n      {menus.map((menu, index) => (\n        <DropdownMenu key={index} label={menu.label} items={menu.items} />\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/menubar.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/menubar.css",
+      "content": "/* ── Menubar — dropdown menus in a hairline strip ── */\n.rs-menubar{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);padding:2px}\n.rs-menubar .rs-select{min-width:0}\n.rs-menubar .rs-dropdown{border:none;padding:6px 10px;font-size:13px;gap:6px}\n.rs-menubar .rs-menu{min-width:180px;right:auto}\n",
+      "type": "registry:file",
+      "target": "styles/raster/menubar.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "actions",
+      "classes": [
+        "rs-menubar"
+      ],
+      "snippet": "<div class=\"rs-menubar\" role=\"menubar\"><button class=\"rs-dropdown\"><span>File</span></button><button class=\"rs-dropdown\"><span>Edit</span></button><button class=\"rs-dropdown\"><span>View</span></button></div>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "dropdown-menu",
+        "select"
+      ]
+    }
+  }
+}

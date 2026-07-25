@@ -1,0 +1,53 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "calendar",
+  "type": "registry:component",
+  "title": "Calendar",
+  "description": "A month of quiet squares; selected is ink, today is a hairline. Weeks start on Monday.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/pagination.json"
+  ],
+  "files": [
+    {
+      "path": "raster/calendar.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onSelect\"> {\n  value?: Date;\n  onSelect?: (date: Date) => void;\n  defaultMonth?: Date;\n  /** 0 = Sunday, 1 = Monday. Weeks start on Monday, like they should. */\n  weekStart?: 0 | 1;\n}\n\nconst DOW = [\"Mo\", \"Tu\", \"We\", \"Th\", \"Fr\", \"Sa\", \"Su\"];\n\nfunction sameDay(a: Date | undefined, b: Date): boolean {\n  return (\n    !!a && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()\n  );\n}\n\n/** A month of quiet squares; selected is ink, today is a hairline. */\nexport function Calendar({ value, onSelect, defaultMonth, weekStart = 1, className, ...props }: CalendarProps) {\n  const [month, setMonth] = React.useState(() => {\n    const base = value ?? defaultMonth ?? new Date();\n    return new Date(base.getFullYear(), base.getMonth(), 1);\n  });\n\n  const first = new Date(month.getFullYear(), month.getMonth(), 1);\n  const lead = (first.getDay() - weekStart + 7) % 7;\n  const start = new Date(month.getFullYear(), month.getMonth(), 1 - lead);\n  const days = Array.from({ length: 42 }, (_, i) => {\n    const d = new Date(start);\n    d.setDate(start.getDate() + i);\n    return d;\n  });\n  const today = new Date();\n  const title = month.toLocaleDateString(\"en\", { month: \"long\", year: \"numeric\" });\n  const dows = weekStart === 1 ? DOW : [\"Su\", ...DOW.slice(0, 6)];\n  const shift = (delta: number) => setMonth(new Date(month.getFullYear(), month.getMonth() + delta, 1));\n\n  return (\n    <div className={cx(\"rs-cal\", className)} {...props}>\n      <div className=\"rs-cal-head\">\n        <span className=\"rs-cal-title\" aria-live=\"polite\">\n          {title}\n        </span>\n        <span className=\"rs-cal-nav\">\n          <button type=\"button\" className=\"rs-page\" aria-label=\"Previous month\" onClick={() => shift(-1)}>\n            ‹\n          </button>\n          <button type=\"button\" className=\"rs-page\" aria-label=\"Next month\" onClick={() => shift(1)}>\n            ›\n          </button>\n        </span>\n      </div>\n      <div className=\"rs-cal-grid\" role=\"grid\">\n        {dows.map((d) => (\n          <span key={d} className=\"rs-cal-dow\" role=\"columnheader\">\n            {d}\n          </span>\n        ))}\n        {days.map((d) => {\n          const out = d.getMonth() !== month.getMonth();\n          const selected = sameDay(value, d);\n          return (\n            <button\n              key={d.toISOString()}\n              type=\"button\"\n              className={cx(\n                \"rs-cal-day\",\n                out && \"rs-cal-day-out\",\n                sameDay(today, d) && \"rs-cal-day-today\",\n                selected && \"rs-cal-day-selected\",\n              )}\n              aria-pressed={selected}\n              aria-label={d.toDateString()}\n              onClick={() => {\n                onSelect?.(d);\n                if (out) setMonth(new Date(d.getFullYear(), d.getMonth(), 1));\n              }}\n            >\n              {d.getDate()}\n            </button>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/calendar.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/calendar.css",
+      "content": "/* ── Calendar — a month of quiet squares; selected is ink ── */\n.rs-cal{width:252px}\n.rs-cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}\n.rs-cal-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-cal-nav{display:flex;gap:5px}\n.rs-cal-grid{display:grid;grid-template-columns:repeat(7,36px)}\n.rs-cal-dow{font-size:11px;font-weight:500;color:var(--text-secondary);text-align:center;padding:4px 0}\n.rs-cal-day{width:36px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;font-variant-numeric:tabular-nums;color:var(--text);background:none;border:none;border-radius:var(--radius-sm);cursor:pointer;font-family:inherit;padding:0}\n.rs-cal-day:hover{background:var(--divider-subtle)}\n.rs-cal-day-out{color:var(--text-secondary);opacity:.45}\n.rs-cal-day-today{box-shadow:inset 0 0 0 1px var(--divider)}\n.rs-cal-day-selected,.rs-cal-day-selected:hover{background:var(--text);color:var(--bg);font-weight:600}\n",
+      "type": "registry:file",
+      "target": "styles/raster/calendar.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "forms",
+      "classes": [
+        "rs-cal",
+        "rs-cal-head",
+        "rs-cal-title",
+        "rs-cal-nav",
+        "rs-cal-grid",
+        "rs-cal-dow",
+        "rs-cal-day",
+        "rs-cal-day-out",
+        "rs-cal-day-today",
+        "rs-cal-day-selected"
+      ],
+      "snippet": "<div class=\"rs-cal\"><div class=\"rs-cal-head\"><span class=\"rs-cal-title\">July 2026</span><span class=\"rs-cal-nav\"><button class=\"rs-page\">‹</button><button class=\"rs-page\">›</button></span></div><div class=\"rs-cal-grid\"><span class=\"rs-cal-dow\">Mo</span><span class=\"rs-cal-dow\">Tu</span><span class=\"rs-cal-dow\">We</span><span class=\"rs-cal-dow\">Th</span><span class=\"rs-cal-dow\">Fr</span><span class=\"rs-cal-dow\">Sa</span><span class=\"rs-cal-dow\">Su</span><button class=\"rs-cal-day\">20</button><button class=\"rs-cal-day\">21</button><button class=\"rs-cal-day\">22</button><button class=\"rs-cal-day\">23</button><button class=\"rs-cal-day rs-cal-day-selected\">24</button><button class=\"rs-cal-day rs-cal-day-today\">25</button><button class=\"rs-cal-day\">26</button></div></div>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "pagination"
+      ]
+    }
+  }
+}

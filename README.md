@@ -71,9 +71,9 @@ pnpm dev          # docs site at localhost:3000
 
 ## Catalogue and shadcn parity
 
-37 components, each CSS-first with an optional zero-dependency React layer. Where shadcn reaches for Radix, Raster reaches for the platform: accordions are native `<details>` (the `name` attribute gives exclusive-open with zero JS), dialogs/alert-dialogs/sheets are native `<dialog>` (platform focus trap, Escape, backdrop), popovers use the native Popover API (top layer, light dismiss), tooltips are CSS-only and keyboard-aware, and form controls wrap real native inputs.
+54 components — full coverage of the shadcn catalogue, each CSS-first with an optional zero-dependency React layer. Where shadcn reaches for Radix or Recharts, Raster reaches for the platform: accordions and collapsibles are native `<details>` (the `name` attribute gives exclusive-open with zero JS), dialogs/alert-dialogs/sheets/command palettes are native `<dialog>` (platform focus trap, Escape, backdrop), popovers use the native Popover API (top layer, light dismiss), carousels ride native scroll snap, tooltips and hover cards are CSS-only and keyboard-aware, and form controls wrap real native inputs.
 
-Still to build for full shadcn parity: command palette, combobox, calendar + date picker, data table, input-otp, context menu, menubar, navigation menu, hover card, carousel, resizable, sonner-style queueing, charts.
+Charts are zero-dependency SVG — line, bar, sparkline, donut — with a hairline grid, crosshair-and-tooltip hover, a screen-reader table view, and series told apart by texture (solid ink, dashed, gray, dotted), never by hue. shadcn's equivalent pulls in all of Recharts.
 
 ## Typeface
 

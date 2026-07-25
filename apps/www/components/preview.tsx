@@ -3,6 +3,25 @@
 import * as React from "react";
 import {
   Accordion,
+  AspectRatio,
+  BarChart,
+  Calendar,
+  Carousel,
+  Collapsible,
+  Combobox,
+  CommandDialog,
+  ContextMenu,
+  DataTable,
+  DatePicker,
+  Donut,
+  HoverCard,
+  InputOTP,
+  Kbd,
+  LineChart,
+  Menubar,
+  NavigationMenu,
+  Sparkline,
+  Split,
   AccordionItem,
   Alert,
   AlertDialog,
@@ -126,6 +145,43 @@ function ToastDemo() {
   );
 }
 
+function CommandDemo() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <>
+      <Button variant="ghost" size="sm" onClick={() => setOpen(true)}>
+        Open command… <Kbd>⌘</Kbd>
+        <Kbd>K</Kbd>
+      </Button>
+      <CommandDialog
+        open={open}
+        onClose={() => setOpen(false)}
+        groups={[
+          {
+            label: "Go to",
+            items: [
+              { label: "Components", hint: "⌘1" },
+              { label: "Tokens", hint: "⌘2" },
+              { label: "Docs", hint: "⌘3" },
+            ],
+          },
+          { label: "Actions", items: [{ label: "Toggle appearance" }, { label: "Copy install command" }] },
+        ]}
+      />
+    </>
+  );
+}
+
+function CalendarDemo() {
+  const [date, setDate] = React.useState<Date | undefined>(new Date(2026, 6, 24));
+  return <Calendar value={date} onSelect={setDate} />;
+}
+
+function DatePickerDemo() {
+  const [date, setDate] = React.useState<Date | undefined>(new Date(2026, 6, 24));
+  return <DatePicker value={date} onChange={setDate} />;
+}
+
 function PaginationDemo() {
   const [page, setPage] = React.useState(3);
   return <Pagination page={page} count={12} onPageChange={setPage} />;
@@ -203,6 +259,128 @@ export const demos: Record<string, () => React.ReactNode> = {
         <Tab value="settings">Settings</Tab>
       </TabList>
     </Tabs>
+  ),
+  chart: () => (
+    <div style={{ width: 320 }}>
+      <LineChart
+        height={140}
+        labels={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+        series={[
+          { name: "Revenue", values: [12, 18, 15, 26, 24, 34] },
+          { name: "Costs", values: [8, 9, 11, 12, 14, 15] },
+        ]}
+        area
+      />
+    </div>
+  ),
+  collapsible: () => (
+    <Collapsible title="Show the details" defaultOpen>
+      Here they are — quiet, on the grid.
+    </Collapsible>
+  ),
+  "hover-card": () => (
+    <HoverCard trigger={<span className="rs-link">@noord</span>}>
+      Noord — a venture studio in Alkmaar. Ten portfolio companies, one design system.
+    </HoverCard>
+  ),
+  kbd: () => (
+    <span style={{ display: "inline-flex", gap: 4, alignItems: "center" }}>
+      <Kbd>⌘</Kbd>
+      <Kbd>K</Kbd>
+    </span>
+  ),
+  "input-otp": () => <InputOTP length={4} aria-label="Demo code" />,
+  "context-menu": () => (
+    <ContextMenu
+      items={[{ label: "Copy" }, { label: "Paste" }, { separator: true }, { label: "Inspect" }]}
+    >
+      <div
+        style={{
+          border: "1px dashed var(--divider)",
+          borderRadius: "var(--radius)",
+          padding: "22px 28px",
+          fontSize: 13,
+          color: "var(--text-secondary)",
+        }}
+      >
+        Right-click me
+      </div>
+    </ContextMenu>
+  ),
+  menubar: () => (
+    <Menubar
+      menus={[
+        { label: "File", items: [{ label: "New" }, { label: "Open…" }, { separator: true }, { label: "Export" }] },
+        { label: "Edit", items: [{ label: "Undo" }, { label: "Redo" }] },
+        { label: "View", items: [{ label: "Zoom in" }, { label: "Zoom out" }] },
+      ]}
+    />
+  ),
+  "navigation-menu": () => (
+    <NavigationMenu
+      items={[
+        { label: "Overview", href: "#", current: true },
+        { label: "Docs", href: "#" },
+        { label: "Changelog", href: "#" },
+      ]}
+    />
+  ),
+  carousel: () => (
+    <div style={{ width: 300 }}>
+      <Carousel>
+        {["One", "Two", "Three", "Four"].map((n) => (
+          <div key={n} className="rs-card" style={{ width: 140, padding: 14 }}>
+            <span className="rs-card-title" style={{ fontSize: 14 }}>
+              {n}
+            </span>
+          </div>
+        ))}
+      </Carousel>
+    </div>
+  ),
+  resizable: () => (
+    <div style={{ width: 300 }}>
+      <Split initial={55}>
+        <div style={{ padding: 14, fontSize: 13, color: "var(--text-secondary)" }}>Left pane</div>
+        <div style={{ padding: 14, fontSize: 13, color: "var(--text-secondary)" }}>Right pane</div>
+      </Split>
+    </div>
+  ),
+  combobox: () => (
+    <Combobox
+      options={[
+        { value: "alkmaar", label: "Alkmaar" },
+        { value: "amsterdam", label: "Amsterdam" },
+        { value: "delft", label: "Delft" },
+        { value: "rotterdam", label: "Rotterdam" },
+      ]}
+      placeholder="Search cities…"
+    />
+  ),
+  command: CommandDemo,
+  calendar: CalendarDemo,
+  "date-picker": DatePickerDemo,
+  "data-table": () => (
+    <div style={{ width: 300 }}>
+      <DataTable
+        columns={[
+          { key: "phase", header: "Phase", sortable: true },
+          { key: "weeks", header: "Weeks", sortable: true },
+        ]}
+        rows={[
+          { phase: "Strategy", weeks: 2 },
+          { phase: "Identity", weeks: 4 },
+          { phase: "Digital", weeks: 6 },
+        ]}
+      />
+    </div>
+  ),
+  "aspect-ratio": () => (
+    <AspectRatio ratio={16 / 9} style={{ width: 240, background: "var(--divider-subtle)" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, color: "var(--text-secondary)" }}>
+        16 : 9
+      </div>
+    </AspectRatio>
   ),
   accordion: () => (
     <div style={{ width: 300 }}>

@@ -1,0 +1,12 @@
+/* ── Calendar — a month of quiet squares; selected is ink ── */
+.rs-cal{width:252px}
+.rs-cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.rs-cal-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.rs-cal-nav{display:flex;gap:5px}
+.rs-cal-grid{display:grid;grid-template-columns:repeat(7,36px)}
+.rs-cal-dow{font-size:11px;font-weight:500;color:var(--text-secondary);text-align:center;padding:4px 0}
+.rs-cal-day{width:36px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;font-variant-numeric:tabular-nums;color:var(--text);background:none;border:none;border-radius:var(--radius-sm);cursor:pointer;font-family:inherit;padding:0}
+.rs-cal-day:hover{background:var(--divider-subtle)}
+.rs-cal-day-out{color:var(--text-secondary);opacity:.45}
+.rs-cal-day-today{box-shadow:inset 0 0 0 1px var(--divider)}
+.rs-cal-day-selected,.rs-cal-day-selected:hover{background:var(--text);color:var(--bg);font-weight:600}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kbd",
+  "type": "registry:component",
+  "title": "Kbd",
+  "description": "Keys in the mono stack with a pressed bottom edge.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/kbd.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport function Kbd({ className, ...props }: React.HTMLAttributes<HTMLElement>) {\n  return <kbd className={cx(\"rs-kbd\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/kbd.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/kbd.css",
+      "content": "/* ── Kbd — keys in the mono stack with a pressed bottom edge ── */\n.rs-kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);background:var(--bg);border:1px solid var(--divider);border-bottom-width:2px;border-radius:4px;padding:2px 6px;line-height:1.2}\n",
+      "type": "registry:file",
+      "target": "styles/raster/kbd.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "content",
+      "classes": [
+        "rs-kbd"
+      ],
+      "snippet": "<kbd class=\"rs-kbd\">⌘</kbd> <kbd class=\"rs-kbd\">K</kbd>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

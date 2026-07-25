@@ -160,3 +160,14 @@ table td:last-child,table th:last-child{text-align:right}
 /* ── Icons — 16/20/24/32, single-weight 1.5px strokes in currentColor ── */
 .bb-icons{display:flex;gap:18px;align-items:center;color:var(--text)}
 .bb-icons svg{width:16px;height:16px;flex-shrink:0}
+
+/* ── Menubar — dropdown menus in a hairline strip ── */
+.rs-menubar{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);padding:2px}
+.rs-menubar .rs-select{min-width:0}
+.rs-menubar .bb-dropdown{border:none;padding:6px 10px;font-size:13px;gap:6px}
+.rs-menubar .bb-menu{min-width:180px;right:auto}
+
+/* ── Combobox — the quiet field with a filtered overlay ── */
+.rs-combobox{position:relative;display:inline-block;min-width:200px}
+.rs-combobox .bb-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px;max-height:240px;overflow-y:auto}
+.rs-combobox-empty{padding:10px 12px;font-size:13px;letter-spacing:-.01em;color:var(--text-secondary)}

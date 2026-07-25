@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aspect-ratio",
+  "type": "registry:component",
+  "title": "Aspect ratio",
+  "description": "A box that keeps its proportions; media covers.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/aspect-ratio.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Width over height, e.g. 16 / 9. */\n  ratio?: number;\n}\n\nexport function AspectRatio({ ratio = 16 / 9, style, className, ...props }: AspectRatioProps) {\n  return <div className={cx(\"rs-ratio\", className)} style={{ aspectRatio: ratio, ...style }} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/aspect-ratio.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/ratio.css",
+      "content": "/* ── Aspect ratio — a box that keeps its proportions ── */\n.rs-ratio{position:relative;width:100%;overflow:hidden;border-radius:var(--radius)}\n.rs-ratio>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}\n",
+      "type": "registry:file",
+      "target": "styles/raster/ratio.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "content",
+      "classes": [
+        "rs-ratio"
+      ],
+      "snippet": "<div class=\"rs-ratio\" style=\"aspect-ratio:16/9;max-width:280px;background:var(--divider-subtle)\"></div>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}
