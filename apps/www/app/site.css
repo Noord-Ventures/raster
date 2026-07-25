@@ -17,15 +17,19 @@ html, body { margin: 0; padding: 0; }
 
 /* ── Fixed corner chrome ── */
 .logo-wrap {
-  position: fixed; top: 24px; left: 20px; z-index: 200;
+  position: fixed; top: 20px; left: 20px; z-index: 200;
   display: flex; align-items: center; gap: 12px;
 }
+/* The Raster glyph from the noord library: bg mark on a 32px ink tile. */
 .site-logo {
-  display: block; width: 20px; height: 20px; color: var(--text);
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: var(--radius-sm);
+  background: var(--text); color: var(--bg);
   filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
-  transition: opacity .2s ease;
+  transition: var(--transition), opacity .2s ease;
 }
-.site-logo:hover { opacity: .7; }
+.site-logo:hover { opacity: .85; }
+.site-logo-mark { width: 15px; height: 15px; transform: rotate(-45deg); }
 
 .corner-nav {
   position: fixed; top: 24px; right: 58px; z-index: 200;
@@ -94,7 +98,9 @@ html, body { margin: 0; padding: 0; }
 }
 
 @media (max-width: 640px) {
-  .logo-wrap { top: 22px; left: 18px; }
+  .logo-wrap { top: 18px; left: 18px; }
+  .site-logo { width: 28px; height: 28px; }
+  .site-logo-mark { width: 13px; height: 13px; }
   .corner-nav, .theme-toggle { display: none; }
   .nav-toggle { display: flex; }
 }
@@ -124,13 +130,19 @@ html, body { margin: 0; padding: 0; }
 /* ── TOC — one column wide, sticky, from 900px ── */
 .toc {
   width: 184px; flex-shrink: 0; align-self: flex-start;
-  position: sticky; top: 0; padding-top: 120px; padding-right: 20px;
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  padding: 120px 20px 72px 0;
   display: none;
+  scrollbar-width: none;
+  /* Feather the list under the crumb bar and at the bottom edge. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 44px, #000 116px, #000 calc(100% - 64px), transparent calc(100% - 8px));
+  mask-image: linear-gradient(to bottom, transparent 44px, #000 116px, #000 calc(100% - 64px), transparent calc(100% - 8px));
 }
+.toc::-webkit-scrollbar { display: none; }
 @media (min-width: 900px) { .toc { display: block; } }
 .toc-label {
   font-size: 13px; font-weight: 500; letter-spacing: -.01em;
-  color: var(--text-secondary); margin: 18px 0 12px;
+  color: var(--text-secondary); margin: 18px 0 4px;
 }
 .toc-label:first-child { margin-top: 0; }
 .toc-item {
