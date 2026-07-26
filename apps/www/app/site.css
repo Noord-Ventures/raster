@@ -20,16 +20,16 @@ html, body { margin: 0; padding: 0; }
   position: fixed; top: 20px; left: 20px; z-index: 200;
   display: flex; align-items: center; gap: 12px;
 }
-/* The Raster glyph from the noord library: bg mark on a 32px ink tile. */
+/* The Raster glyph, bare: ink on the page, no tile. */
 .site-logo {
   display: flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px; border-radius: var(--radius-sm);
-  background: var(--text); color: var(--bg);
+  width: 32px; height: 32px;
+  color: var(--text);
   filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
   transition: var(--transition), opacity .2s ease;
 }
-.site-logo:hover { opacity: .85; }
-.site-logo-mark { width: 15px; height: 15px; transform: rotate(-45deg); }
+.site-logo:hover { opacity: .7; }
+.site-logo-mark { width: 22px; height: 22px; transform: rotate(-45deg); }
 
 .corner-nav {
   position: fixed; top: 24px; right: 58px; z-index: 200;
@@ -100,7 +100,7 @@ html, body { margin: 0; padding: 0; }
 @media (max-width: 640px) {
   .logo-wrap { top: 18px; left: 18px; }
   .site-logo { width: 28px; height: 28px; }
-  .site-logo-mark { width: 13px; height: 13px; }
+  .site-logo-mark { width: 19px; height: 19px; }
   .corner-nav, .theme-toggle { display: none; }
   .nav-toggle { display: flex; }
 }

@@ -4,8 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 
-/* The Raster mark, as drawn on the noord library page: the glyph on an
-   ink tile, rotated 45° back. */
+/* The Raster mark from the noord library page, bare, rotated 45° back. */
 function RasterMark() {
   return (
     <svg viewBox="0 0 822 822" fill="currentColor" aria-hidden="true" className="site-logo-mark">
