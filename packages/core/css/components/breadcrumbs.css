@@ -1,4 +1,4 @@
-/* ── Breadcrumbs — slashes at 40%, current page is ink ── */
+/* ── Breadcrumbs: slashes at 40%, current page is ink ── */
 .rs-crumbs{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}
 .rs-crumbs-sep{opacity:.4}
 .rs-crumbs-here{color:var(--text)}

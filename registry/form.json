@@ -3,7 +3,7 @@
   "name": "form",
   "type": "registry:component",
   "title": "Form",
-  "description": "The form pattern: quiet fields stacked on the grid, one primary action at the end.",
+  "description": "Fields stacked on the grid; one primary action at the end.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/input.json",
@@ -12,7 +12,7 @@
   "files": [
     {
       "path": "raster/styles/field.css",
-      "content": "/* ── Field — quiet input: hairline border, ink focus, label above ── */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}\n.rs-input:focus{border-color:var(--accent)}\n.rs-input-full{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n",
+      "content": "/* ── Field: quiet input: hairline border, ink focus, label above ── */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}\n.rs-input:focus{border-color:var(--accent)}\n.rs-input-full{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n",
       "type": "registry:file",
       "target": "styles/raster/field.css"
     }

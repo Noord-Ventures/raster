@@ -1,4 +1,4 @@
-/* ── Dropdown + menu — the menu overlays, it never pushes layout ── */
+/* ── Dropdown + menu: the menu overlays, it never pushes layout ── */
 .rs-select{position:relative;display:inline-block;min-width:180px}
 .rs-select .rs-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px}
 .rs-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}

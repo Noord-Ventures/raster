@@ -22,7 +22,7 @@
     },
     {
       "path": "raster/styles/breadcrumbs.css",
-      "content": "/* ── Breadcrumbs — slashes at 40%, current page is ink ── */\n.rs-crumbs{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}\n.rs-crumbs-sep{opacity:.4}\n.rs-crumbs-here{color:var(--text)}\n",
+      "content": "/* ── Breadcrumbs: slashes at 40%, current page is ink ── */\n.rs-crumbs{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}\n.rs-crumbs-sep{opacity:.4}\n.rs-crumbs-here{color:var(--text)}\n",
       "type": "registry:file",
       "target": "styles/raster/breadcrumbs.css"
     }

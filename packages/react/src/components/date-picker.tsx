@@ -13,7 +13,7 @@ export interface DatePickerProps
 const defaultDateFormat = (d: Date) =>
   d.toLocaleDateString("en", { day: "numeric", month: "long", year: "numeric" });
 
-/** The hairline trigger with a calendar overlay. */
+/** Hairline trigger with a calendar overlay. */
 export function DatePicker({
   value,
   onChange,

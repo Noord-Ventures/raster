@@ -5,7 +5,7 @@ export interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {
   maxHeight?: number | string;
 }
 
-/** Quiet overflow: hidden scrollbar, feathered top and bottom edges. */
+/** Hidden scrollbar; feathered top and bottom edges. */
 export function ScrollArea({ maxHeight = 240, style, className, ...props }: ScrollAreaProps) {
   return (
     <div

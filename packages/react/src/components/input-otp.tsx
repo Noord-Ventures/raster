@@ -9,7 +9,7 @@ export interface InputOTPProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   "aria-label"?: string;
 }
 
-/** One quiet cell per character: auto-advance, backspace, and paste all work. */
+/** One cell per character. Auto-advance, backspace, paste. */
 export function InputOTP({
   length = 6,
   onChange,

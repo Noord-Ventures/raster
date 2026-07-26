@@ -1,4 +1,4 @@
-/* ── Toast — quiet confirmations, bottom right, announced politely ── */
+/* ── Toast: quiet confirmations, bottom right, announced politely ── */
 .rs-toasts{position:fixed;bottom:20px;right:20px;z-index:300;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .rs-toast{display:flex;align-items:flex-start;gap:10px;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:10px 14px;max-width:340px;animation:rsToastIn .25s cubic-bezier(.22,1,.36,1)}
 .rs-toast-title{display:block;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}

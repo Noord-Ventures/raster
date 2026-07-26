@@ -1,4 +1,4 @@
-/* ── Assistant panel — monochrome chat surface ── */
+/* ── Assistant panel: monochrome chat surface ── */
 .rs-ai{display:flex;flex-direction:column;gap:16px;max-width:560px;border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:20px}
 .rs-ai-head{display:flex;justify-content:space-between;align-items:center}
 .rs-ai-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}

@@ -3,7 +3,7 @@
   "name": "alert-dialog",
   "type": "registry:component",
   "title": "Alert dialog",
-  "description": "A native <dialog> that requires an explicit answer — Escape and light dismiss are disabled.",
+  "description": "Native <dialog> that requires an explicit answer. Escape and light dismiss are disabled.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/dialog.json",
@@ -12,7 +12,7 @@
   "files": [
     {
       "path": "raster/alert-dialog.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface AlertDialogProps\n  extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n}\n\n/**\n * A native <dialog> that demands an answer: Escape is swallowed and\n * there is no light dismiss — the only way out is one of the actions.\n */\nexport function AlertDialog({ open, onClose, className, children, ...props }: AlertDialogProps) {\n  const ref = React.useRef<HTMLDialogElement>(null);\n\n  React.useEffect(() => {\n    const dialog = ref.current;\n    if (!dialog) return;\n    if (open && !dialog.open) dialog.showModal();\n    else if (!open && dialog.open) dialog.close();\n  }, [open]);\n\n  return (\n    <dialog\n      ref={ref}\n      role=\"alertdialog\"\n      className={cx(\"rs-dialog\", className)}\n      onClose={() => onClose?.()}\n      onCancel={(e) => e.preventDefault()}\n      {...props}\n    >\n      {children}\n    </dialog>\n  );\n}\n\nexport { DialogTitle as AlertDialogTitle, DialogBody as AlertDialogBody, DialogActions as AlertDialogActions } from \"./dialog\";\n",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface AlertDialogProps\n  extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n}\n\n/**\n * A native <dialog> that requires an explicit answer. Escape and\n * light dismiss are disabled.\n */\nexport function AlertDialog({ open, onClose, className, children, ...props }: AlertDialogProps) {\n  const ref = React.useRef<HTMLDialogElement>(null);\n\n  React.useEffect(() => {\n    const dialog = ref.current;\n    if (!dialog) return;\n    if (open && !dialog.open) dialog.showModal();\n    else if (!open && dialog.open) dialog.close();\n  }, [open]);\n\n  return (\n    <dialog\n      ref={ref}\n      role=\"alertdialog\"\n      className={cx(\"rs-dialog\", className)}\n      onClose={() => onClose?.()}\n      onCancel={(e) => e.preventDefault()}\n      {...props}\n    >\n      {children}\n    </dialog>\n  );\n}\n\nexport { DialogTitle as AlertDialogTitle, DialogBody as AlertDialogBody, DialogActions as AlertDialogActions } from \"./dialog\";\n",
       "type": "registry:component",
       "target": "components/raster/alert-dialog.tsx"
     },
@@ -24,7 +24,7 @@
     },
     {
       "path": "raster/styles/dialog.css",
-      "content": "/* ── Dialog — one question, two equal actions, no third option ── */\n.rs-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}\ndialog.rs-dialog{color:var(--text)}\ndialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}\n.rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}\n.rs-dialog-actions{display:flex;justify-content:flex-end;gap:8px}\n",
+      "content": "/* ── Dialog: one question, two equal actions, no third option ── */\n.rs-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}\ndialog.rs-dialog{color:var(--text)}\ndialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}\n.rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}\n.rs-dialog-actions{display:flex;justify-content:flex-end;gap:8px}\n",
       "type": "registry:file",
       "target": "styles/raster/dialog.css"
     }

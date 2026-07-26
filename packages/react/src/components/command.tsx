@@ -21,7 +21,7 @@ export interface CommandProps extends React.HTMLAttributes<HTMLDivElement> {
   onDone?: () => void;
 }
 
-/** One input, everything reachable — filter, arrows, enter. */
+/** Filter, arrows, enter. */
 export function Command({
   groups,
   placeholder = "Type a command or search…",

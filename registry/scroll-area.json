@@ -3,14 +3,14 @@
   "name": "scroll-area",
   "type": "registry:component",
   "title": "Scroll area",
-  "description": "Quiet overflow: hidden scrollbar, feathered top and bottom edges — the same treatment the docs TOC uses.",
+  "description": "Hidden scrollbar; feathered top and bottom edges.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json"
   ],
   "files": [
     {
       "path": "raster/scroll-area.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {\n  maxHeight?: number | string;\n}\n\n/** Quiet overflow: hidden scrollbar, feathered top and bottom edges. */\nexport function ScrollArea({ maxHeight = 240, style, className, ...props }: ScrollAreaProps) {\n  return (\n    <div\n      className={cx(\"rs-scroll\", className)}\n      style={{ maxHeight, ...style }}\n      tabIndex={0}\n      {...props}\n    />\n  );\n}\n",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {\n  maxHeight?: number | string;\n}\n\n/** Hidden scrollbar; feathered top and bottom edges. */\nexport function ScrollArea({ maxHeight = 240, style, className, ...props }: ScrollAreaProps) {\n  return (\n    <div\n      className={cx(\"rs-scroll\", className)}\n      style={{ maxHeight, ...style }}\n      tabIndex={0}\n      {...props}\n    />\n  );\n}\n",
       "type": "registry:component",
       "target": "components/raster/scroll-area.tsx"
     },
@@ -22,7 +22,7 @@
     },
     {
       "path": "raster/styles/scroll-area.css",
-      "content": "/* ── Scroll area — quiet scroll with feathered edges, no scrollbar chrome ── */\n.rs-scroll{overflow-y:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);padding:12px 0}\n.rs-scroll::-webkit-scrollbar{display:none}\n",
+      "content": "/* ── Scroll area: quiet scroll with feathered edges, no scrollbar chrome ── */\n.rs-scroll{overflow-y:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);padding:12px 0}\n.rs-scroll::-webkit-scrollbar{display:none}\n",
       "type": "registry:file",
       "target": "styles/raster/scroll-area.css"
     }

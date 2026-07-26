@@ -1,4 +1,4 @@
-/* ── Slider — thin track with ink fill and 14px thumb ── */
+/* ── Slider: thin track with ink fill and 14px thumb ── */
 .rs-slider{position:relative;height:2px;background:var(--divider);border-radius:1px;margin:10px 0}
 .rs-slider-fill{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:1px}
 .rs-slider-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:1.5px solid var(--text)}

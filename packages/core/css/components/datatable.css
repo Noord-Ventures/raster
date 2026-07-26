@@ -1,4 +1,4 @@
-/* ── Data table — sortable hairline rows ── */
+/* ── Data table: sortable hairline rows ── */
 .rs-datatable-sort{background:none;border:none;padding:0;font:inherit;font-weight:600;letter-spacing:inherit;color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
 .rs-datatable-sort svg{opacity:.45}
 .rs-datatable-sort[data-active="true"] svg{opacity:1}

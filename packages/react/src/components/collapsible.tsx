@@ -7,7 +7,7 @@ export interface CollapsibleProps
   defaultOpen?: boolean;
 }
 
-/** A bare native <details> — no chrome, no JavaScript. */
+/** A bare native <details>. */
 export function Collapsible({ title, defaultOpen, className, children, ...props }: CollapsibleProps) {
   return (
     <details className={cx("rs-disclosure", className)} open={defaultOpen || undefined} {...props}>

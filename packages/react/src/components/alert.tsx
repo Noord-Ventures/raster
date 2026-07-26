@@ -3,7 +3,7 @@ import { cx } from "../cx";
 
 export interface AlertProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   title?: React.ReactNode;
-  /** Solid ink for the message that must not be missed. */
+  /** Solid ink variant. */
   variant?: "outline" | "solid";
   icon?: React.ReactNode;
 }

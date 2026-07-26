@@ -12,7 +12,7 @@ export interface InlineFormProps
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
-/** One field, one action — the action lives inside the field. */
+/** One field, one action; the action sits inside the field. */
 export function InlineForm({
   placeholder = "Your e-mail",
   buttonLabel = "Subscribe",

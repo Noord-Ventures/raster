@@ -275,12 +275,12 @@ export const demos: Record<string, () => React.ReactNode> = {
   ),
   collapsible: () => (
     <Collapsible title="Show the details" defaultOpen>
-      Here they are — quiet, on the grid.
+      Quiet, on the grid.
     </Collapsible>
   ),
   "hover-card": () => (
     <HoverCard trigger={<span className="rs-link">@noord</span>}>
-      Noord — a venture studio in Alkmaar. Ten portfolio companies, one design system.
+      Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.
     </HoverCard>
   ),
   kbd: () => (
@@ -388,7 +388,7 @@ export const demos: Record<string, () => React.ReactNode> = {
         <AccordionItem title="What is Raster?" defaultOpen>
           A monochrome, CSS-first design system.
         </AccordionItem>
-        <AccordionItem title="Is it dependency-free?">Yes — native elements do the work.</AccordionItem>
+        <AccordionItem title="Is it dependency-free?">Yes. Native elements do the work.</AccordionItem>
       </Accordion>
     </div>
   ),

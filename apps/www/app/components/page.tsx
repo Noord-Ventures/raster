@@ -15,8 +15,7 @@ export default function ComponentsPage() {
           <header className="cover" style={{ paddingBottom: 24, maxWidth: 592 }}>
             <h1 className="rs-t-display">Components</h1>
             <p className="rs-t-sub">
-              Every piece of the kit, live. Click through for markup, React usage, and install
-              commands.
+              The kit, live. Each page has markup, React usage, and the install command.
             </p>
           </header>
           {rasterCategories.map((category) => {

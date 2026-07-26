@@ -32,7 +32,7 @@
       "#E8E8E8",
       "#FAF8F2"
     ],
-    "accent": "none — emphasis comes from weight, size, and spacing"
+    "accent": "none; emphasis comes from weight, size, and spacing"
   },
   "type": {
     "family": "'Messina Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",

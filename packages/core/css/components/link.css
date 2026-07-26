@@ -1,3 +1,3 @@
-/* ── Text link — underlined by its hairline, never colored ── */
+/* ── Text link: underlined by its hairline, never colored ── */
 .rs-link{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);transition:border-color .2s ease}
 .rs-link:hover{border-color:var(--accent)}

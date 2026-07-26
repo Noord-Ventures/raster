@@ -1,4 +1,4 @@
-/* ── Workflow cards — the dashed editable pipeline ── */
+/* ── Workflow cards: the dashed editable pipeline ── */
 .rs-flow{display:grid;grid-template-columns:1fr;gap:var(--gutter)}
 @media(min-width:560px){.rs-flow{grid-template-columns:repeat(2,184px);width:fit-content}}
 @media(min-width:940px){.rs-flow{grid-template-columns:repeat(3,184px)}}

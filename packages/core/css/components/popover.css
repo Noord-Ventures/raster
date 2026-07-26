@@ -1,4 +1,4 @@
-/* ── Popover — the native Popover API: top layer, light dismiss ── */
+/* ── Popover: the native Popover API: top layer, light dismiss ── */
 .rs-popover{position:fixed;inset:auto;margin:0;border:1px solid var(--divider);border-radius:var(--radius);background:var(--bg);color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;width:240px;font-size:13px;line-height:1.55;letter-spacing:-.01em}
 .rs-popover-title{display:block;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:4px}
 .rs-popover-body{color:var(--text-secondary);margin:0}

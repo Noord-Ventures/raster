@@ -1,4 +1,4 @@
-/* RASTER COMPAT — GENERATED. Re-emits Raster rules under the 0.1
+/* RASTER COMPAT, GENERATED. Re-emits Raster rules under the 0.1
    class names (bb-*, lib-*, bare table elements) so sites built on
    them keep working. Link this after raster.css; drop it once your
    markup uses the rs- names. */
@@ -27,7 +27,7 @@ body{
 .rs-sr:focus-visible+.rs-check,.rs-sr:focus-visible+.bb-radio-dot,.rs-sr:focus-visible+.rs-switch{outline:1.5px solid var(--text);outline-offset:2px}
 
 /* ── Type scale ──
-   Hierarchy from weight, color, and position — never all caps. */
+   Hierarchy from weight, color, and position; never all caps. */
 .rs-t-xl{font-size:clamp(34px,5vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin:0;text-wrap:balance}
 .rs-t-display{font-size:38px;font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0}
 .rs-t-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0}
@@ -47,11 +47,11 @@ body{
 .bb-btn-ghost:disabled{opacity:.4;cursor:not-allowed;background:transparent;border-color:var(--divider)}
 .bb-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}
 
-/* ── Text link — underlined by its hairline, never colored ── */
+/* ── Text link: underlined by its hairline, never colored ── */
 .bb-link-demo{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);transition:border-color .2s ease}
 .bb-link-demo:hover{border-color:var(--accent)}
 
-/* ── Field — quiet input: hairline border, ink focus, label above ── */
+/* ── Field: quiet input: hairline border, ink focus, label above ── */
 .rs-field{width:100%;display:flex;flex-direction:column;gap:5px}
 .rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}
 .bb-sig-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}
@@ -62,36 +62,36 @@ body{
 .rs-feedback-ok{color:var(--text)}
 .rs-feedback svg{flex-shrink:0}
 
-/* ── Radio — the dot is ink, never a hue ── */
+/* ── Radio: the dot is ink, never a hue ── */
 .bb-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}
 .bb-radio-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--divider);position:relative;flex-shrink:0}
 .bb-radio-on{border-color:var(--text)}
 .bb-radio-on::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--text)}
 
-/* ── Slider — thin track with ink fill and 14px thumb ── */
+/* ── Slider: thin track with ink fill and 14px thumb ── */
 .bb-slider{position:relative;height:2px;background:var(--divider);border-radius:1px;margin:10px 0}
 .bb-slider-fill{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:1px}
 .bb-slider-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:1.5px solid var(--text)}
 .bb-slider input[type=range]{position:absolute;left:0;right:0;top:-8px;bottom:-8px;width:100%;height:auto;opacity:0;cursor:pointer;margin:0}
 .bb-slider:has(input[type=range]:focus-visible) .bb-slider-thumb{outline:1.5px solid var(--text);outline-offset:2px}
 
-/* ── Progress — the percentage lives in the label, never in the bar ── */
+/* ── Progress: the percentage lives in the label, never in the bar ── */
 .rs-progress-head{display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:7px}
 .bb-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}
 .bb-progress span{display:block;height:100%;background:var(--text);border-radius:2px}
 
-/* ── Tabs — active tab is ink with a 1.5px underline ── */
+/* ── Tabs: active tab is ink with a 1.5px underline ── */
 .bb-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}
 .bb-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}
 .bb-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}
 button.bb-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}
 
-/* ── Breadcrumbs — slashes at 40%, current page is ink ── */
+/* ── Breadcrumbs: slashes at 40%, current page is ink ── */
 .bb-crumbs-demo{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}
 .bb-crumbs-demo-sep{opacity:.4}
 .bb-crumbs-demo-here{color:var(--text)}
 
-/* ── Crumb bar — fixed top bar in the house chrome ──
+/* ── Crumb bar: fixed top bar in the house chrome ──
    Transparent at rest; once the page cover scrolls away it gains the
    paper background and its bottom hairline, and the breadcrumbs fade
    in. The inner row starts one module in at the 1024px rail. */
@@ -104,7 +104,7 @@ button.bb-tab{padding:8px 0;background:none;border-top:none;border-left:none;bor
 @media(min-width:1024px){.rs-crumb-bar-inner{margin-left:204px}}
 @media(max-width:640px){.rs-crumb-bar{height:64px;font-size:12px}}
 
-/* ── Dropdown + menu — the menu overlays, it never pushes layout ── */
+/* ── Dropdown + menu: the menu overlays, it never pushes layout ── */
 .rs-select{position:relative;display:inline-block;min-width:180px}
 .rs-select .bb-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px}
 .bb-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}
@@ -115,7 +115,7 @@ button.bb-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%
 .bb-menu-item.bb-menu-item-active,button.bb-menu-item-active{background:var(--divider-subtle)}
 button.bb-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
 
-/* ── Dialog — one question, two equal actions, no third option ── */
+/* ── Dialog: one question, two equal actions, no third option ── */
 .bb-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
 dialog.bb-dialog{color:var(--text)}
 dialog.bb-dialog::backdrop{background:rgba(0,0,0,0.25)}
@@ -123,12 +123,12 @@ dialog.bb-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .bb-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}
 .bb-dialog-actions{display:flex;justify-content:flex-end;gap:8px}
 
-/* ── Badges — outline for recommendations, solid for done, muted for pending ── */
+/* ── Badges: outline for recommendations, solid for done, muted for pending ── */
 .bb-badge{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;line-height:1.4;border-radius:var(--radius-sm)}
 .bb-badge-solid{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--bg);background:var(--text);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}
 .bb-badge-muted{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--text-secondary);background:var(--divider-subtle);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}
 
-/* ── Mono chip — technical identifiers ── */
+/* ── Mono chip: technical identifiers ── */
 .lib-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}
 
 /* ── Card ── */
@@ -137,7 +137,7 @@ dialog.bb-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .bb-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}
 .bb-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}
 
-/* ── Table — hairline rows on the open grid; no cell borders ──
+/* ── Table: hairline rows on the open grid; no cell borders ──
    Scoped to table so linking raster.css never restyles a table
    it doesn't own. The compat layer re-emits these on bare elements. */
 table{width:calc(100% + 40px);border-collapse:collapse;margin:16px 0 24px -20px;font-size:14px}
@@ -157,17 +157,17 @@ table td:last-child,table th:last-child{text-align:right}
   table th:last-child,table td:last-child{padding-right:var(--pad)}
 }
 
-/* ── Icons — 16/20/24/32, single-weight 1.5px strokes in currentColor ── */
+/* ── Icons: 16/20/24/32, single-weight 1.5px strokes in currentColor ── */
 .bb-icons{display:flex;gap:18px;align-items:center;color:var(--text)}
 .bb-icons svg{width:16px;height:16px;flex-shrink:0}
 
-/* ── Menubar — dropdown menus in a hairline strip ── */
+/* ── Menubar: dropdown menus in a hairline strip ── */
 .rs-menubar{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);padding:2px}
 .rs-menubar .rs-select{min-width:0}
 .rs-menubar .bb-dropdown{border:none;padding:6px 10px;font-size:13px;gap:6px}
 .rs-menubar .bb-menu{min-width:180px;right:auto}
 
-/* ── Combobox — the quiet field with a filtered overlay ── */
+/* ── Combobox: the quiet field with a filtered overlay ── */
 .rs-combobox{position:relative;display:inline-block;min-width:200px}
 .rs-combobox .bb-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px;max-height:240px;overflow-y:auto}
 .rs-combobox-empty{padding:10px 12px;font-size:13px;letter-spacing:-.01em;color:var(--text-secondary)}

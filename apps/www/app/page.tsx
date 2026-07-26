@@ -5,7 +5,7 @@ import { Preview } from "@/components/preview";
 const principles = [
   {
     title: "One ink, no accent",
-    body: "The palette is monochrome — paper, ink, and the grays between. Emphasis comes from weight, size, and spacing, never from a hue.",
+    body: "The palette is monochrome: paper, ink, and the grays between. Emphasis comes from weight, size, and spacing.",
   },
   {
     title: "Hairlines, not boxes",
@@ -17,11 +17,11 @@ const principles = [
   },
   {
     title: "CSS-first, zero dependencies",
-    body: "Plain classes on plain markup. The React layer adds behavior with native elements — no Radix, no Tailwind, nothing to audit.",
+    body: "Plain classes on plain markup. The React layer uses native elements. No Radix, no Tailwind.",
   },
   {
     title: "Sentence case, always",
-    body: "Never all caps — labels and eyebrows are sentence case.",
+    body: "Labels and eyebrows are sentence case. Never all caps.",
   },
   {
     title: "Quiet motion",
@@ -40,12 +40,12 @@ export default function Home() {
       <main className="site-content-wide">
         <header className="cover" style={{ maxWidth: 592 }}>
           <p className="rs-t-label" style={{ color: "var(--text-secondary)", fontWeight: 500, marginBottom: 32 }}>
-            Raster — a monochrome design system
+            Raster 0.2
           </p>
           <h1 className="rs-t-xl">A design system with one ink.</h1>
           <p className="rs-t-sub">
             Raster is monochrome, CSS-first, and dependency-free. Tokens, components, a typed
-            registry, and a CLI that vendors code you own — nothing else comes along.
+            registry, and a CLI that copies source into your project.
           </p>
           <div className="hero-actions">
             <Link href="/docs">
@@ -89,7 +89,7 @@ export default function Home() {
         </section>
 
         <footer className="site-footer">
-          <span>Raster — the design system behind noord.vc, noord.dev, and renatovaldes.com.</span>
+          <span>The design system behind noord.vc, noord.dev, and renatovaldes.com.</span>
           <span>
             <a href="https://github.com/rennvaldes/raster">GitHub</a>
           </span>

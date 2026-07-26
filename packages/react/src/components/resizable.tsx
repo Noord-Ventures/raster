@@ -9,7 +9,7 @@ export interface SplitProps extends React.HTMLAttributes<HTMLDivElement> {
   children: [React.ReactNode, React.ReactNode];
 }
 
-/** Two panes on a draggable hairline; arrow keys work too. */
+/** Two panes on a draggable hairline. Arrow keys work. */
 export function Split({ initial = 50, min = 20, max = 80, className, children, ...props }: SplitProps) {
   const [share, setShare] = React.useState(initial);
   const rootRef = React.useRef<HTMLDivElement>(null);

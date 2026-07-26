@@ -3,7 +3,7 @@
   "name": "tooltip",
   "type": "registry:component",
   "title": "Tooltip",
-  "description": "CSS-only: shows on hover and on keyboard focus alike, ink on paper, no positioning library.",
+  "description": "CSS only. Shows on hover and keyboard focus.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/button.json"
@@ -11,7 +11,7 @@
   "files": [
     {
       "path": "raster/tooltip.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** The tip text — plain CSS shows it on hover and keyboard focus alike. */\n  tip: string;\n}\n\nexport function Tooltip({ tip, className, children, ...props }: TooltipProps) {\n  return (\n    <span className={cx(\"rs-tip\", className)} data-tip={tip} {...props}>\n      {children}\n    </span>\n  );\n}\n",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** Tip text. Plain CSS shows it on hover and on keyboard focus. */\n  tip: string;\n}\n\nexport function Tooltip({ tip, className, children, ...props }: TooltipProps) {\n  return (\n    <span className={cx(\"rs-tip\", className)} data-tip={tip} {...props}>\n      {children}\n    </span>\n  );\n}\n",
       "type": "registry:component",
       "target": "components/raster/tooltip.tsx"
     },
@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/tooltip.css",
-      "content": "/* ── Tooltip — CSS-only, shows on hover and keyboard focus alike ── */\n.rs-tip{position:relative;display:inline-flex}\n.rs-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(2px);background:var(--text);color:var(--bg);font-size:11.5px;font-weight:500;letter-spacing:-.01em;line-height:1.3;padding:5px 9px;border-radius:var(--radius-sm);white-space:nowrap;opacity:0;pointer-events:none;z-index:180;transition:opacity .15s ease .15s,transform .15s ease .15s}\n.rs-tip:hover::after,.rs-tip:focus-within::after{opacity:1;transform:translateX(-50%) translateY(0)}\n@media(prefers-reduced-motion:reduce){.rs-tip::after{transition:opacity .15s ease .15s}}\n",
+      "content": "/* ── Tooltip: CSS-only, shows on hover and keyboard focus alike ── */\n.rs-tip{position:relative;display:inline-flex}\n.rs-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(2px);background:var(--text);color:var(--bg);font-size:11.5px;font-weight:500;letter-spacing:-.01em;line-height:1.3;padding:5px 9px;border-radius:var(--radius-sm);white-space:nowrap;opacity:0;pointer-events:none;z-index:180;transition:opacity .15s ease .15s,transform .15s ease .15s}\n.rs-tip:hover::after,.rs-tip:focus-within::after{opacity:1;transform:translateX(-50%) translateY(0)}\n@media(prefers-reduced-motion:reduce){.rs-tip::after{transition:opacity .15s ease .15s}}\n",
       "type": "registry:file",
       "target": "styles/raster/tooltip.css"
     }

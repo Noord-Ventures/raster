@@ -3,7 +3,7 @@
   "name": "textarea",
   "type": "registry:component",
   "title": "Textarea",
-  "description": "The quiet field, taller: hairline border, ink focus, vertical resize only.",
+  "description": "The quiet field, taller. Vertical resize only.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/input.json"
@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/textarea.css",
-      "content": "/* ── Textarea — the quiet field, taller ── */\n.rs-textarea{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;line-height:1.55;padding:8px 10px;outline:none;font-family:inherit;min-height:96px;resize:vertical;width:100%}\n.rs-textarea:focus{border-color:var(--accent)}\n.rs-textarea::placeholder{color:var(--text-secondary)}\n",
+      "content": "/* ── Textarea: the quiet field, taller ── */\n.rs-textarea{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;line-height:1.55;padding:8px 10px;outline:none;font-family:inherit;min-height:96px;resize:vertical;width:100%}\n.rs-textarea:focus{border-color:var(--accent)}\n.rs-textarea::placeholder{color:var(--text-secondary)}\n",
       "type": "registry:file",
       "target": "styles/raster/textarea.css"
     }

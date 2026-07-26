@@ -16,7 +16,7 @@ export interface SelectProps
   disabled?: boolean;
 }
 
-/** Listbox pattern on a hairline trigger; the open menu overlays, it never pushes layout. */
+/** Listbox on a hairline trigger; the open menu overlays. */
 export function Select({
   options,
   value,

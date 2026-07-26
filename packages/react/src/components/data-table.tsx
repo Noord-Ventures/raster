@@ -20,7 +20,7 @@ export interface DataTableProps<Row> extends React.HTMLAttributes<HTMLDivElement
 
 type Dir = "asc" | "desc";
 
-/** Sortable hairline rows over the plain rs-table — data stays yours. */
+/** Sortable rows over the plain rs-table. */
 export function DataTable<Row extends Record<string, unknown>>({
   columns,
   rows,

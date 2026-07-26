@@ -2,7 +2,7 @@ import * as React from "react";
 import { cx } from "../cx";
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {
-  /** The tip text — plain CSS shows it on hover and keyboard focus alike. */
+  /** Tip text. Plain CSS shows it on hover and on keyboard focus. */
   tip: string;
 }
 

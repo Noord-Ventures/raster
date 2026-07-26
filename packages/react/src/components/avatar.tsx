@@ -22,7 +22,7 @@ export function Avatar({ src, alt, initials, size = "md", className, ...props }:
   );
 }
 
-/** Overlapping row; each avatar keeps a paper seam. */
+/** Overlapping row with paper seams. */
 export function AvatarRow({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return <div className={cx("rs-avatar-row", className)} {...props} />;
 }

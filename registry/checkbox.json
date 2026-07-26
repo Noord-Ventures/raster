@@ -22,7 +22,7 @@
     },
     {
       "path": "raster/styles/checkbox.css",
-      "content": "/* ── Checkbox — 16px boxes, 3px radius, ink when checked ── */\n.rs-choice{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.rs-check{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--divider);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--bg)}\n.rs-check svg{width:12px;height:12px}\n.rs-check-on{background:var(--text);border-color:var(--text)}\n",
+      "content": "/* ── Checkbox: 16px boxes, 3px radius, ink when checked ── */\n.rs-choice{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.rs-check{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--divider);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--bg)}\n.rs-check svg{width:12px;height:12px}\n.rs-check-on{background:var(--text);border-color:var(--text)}\n",
       "type": "registry:file",
       "target": "styles/raster/checkbox.css"
     }

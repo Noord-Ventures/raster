@@ -3,14 +3,14 @@
   "name": "navigation-menu",
   "type": "registry:component",
   "title": "Navigation menu",
-  "description": "Quiet links in a row; the current page is ink.",
+  "description": "Links in a row; the current page is ink.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json"
   ],
   "files": [
     {
       "path": "raster/navigation-menu.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface NavigationMenuProps extends React.HTMLAttributes<HTMLElement> {\n  items: Array<{ label: React.ReactNode; href: string; current?: boolean }>;\n}\n\n/** Quiet links in a row; the current page is ink. */\nexport function NavigationMenu({ items, className, ...props }: NavigationMenuProps) {\n  return (\n    <nav className={cx(\"rs-nav\", className)} {...props}>\n      {items.map((item, index) => (\n        <a key={index} href={item.href} aria-current={item.current ? \"page\" : undefined}>\n          {item.label}\n        </a>\n      ))}\n    </nav>\n  );\n}\n",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface NavigationMenuProps extends React.HTMLAttributes<HTMLElement> {\n  items: Array<{ label: React.ReactNode; href: string; current?: boolean }>;\n}\n\n/** Links in a row; the current page is ink. */\nexport function NavigationMenu({ items, className, ...props }: NavigationMenuProps) {\n  return (\n    <nav className={cx(\"rs-nav\", className)} {...props}>\n      {items.map((item, index) => (\n        <a key={index} href={item.href} aria-current={item.current ? \"page\" : undefined}>\n          {item.label}\n        </a>\n      ))}\n    </nav>\n  );\n}\n",
       "type": "registry:component",
       "target": "components/raster/navigation-menu.tsx"
     },
@@ -22,7 +22,7 @@
     },
     {
       "path": "raster/styles/nav.css",
-      "content": "/* ── Navigation menu — quiet links; the current page is ink ── */\n.rs-nav{display:flex;align-items:center;gap:22px}\n.rs-nav a{font-size:14px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);text-decoration:none;transition:color .2s ease}\n.rs-nav a:hover,.rs-nav a[aria-current=\"page\"]{color:var(--text)}\n",
+      "content": "/* ── Navigation menu: quiet links; the current page is ink ── */\n.rs-nav{display:flex;align-items:center;gap:22px}\n.rs-nav a{font-size:14px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);text-decoration:none;transition:color .2s ease}\n.rs-nav a:hover,.rs-nav a[aria-current=\"page\"]{color:var(--text)}\n",
       "type": "registry:file",
       "target": "styles/raster/nav.css"
     }

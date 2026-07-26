@@ -3,14 +3,14 @@
   "name": "button",
   "type": "registry:component",
   "title": "Button",
-  "description": "Solid ink primary — one per view — and a hairline ghost secondary. 40px tall, 36px small variant.",
+  "description": "Solid ink primary and hairline ghost. One primary per view. 40px tall; 36px small variant.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json"
   ],
   "files": [
     {
       "path": "raster/button.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  /** Solid ink primary — one per view — or hairline ghost. */\n  variant?: \"primary\" | \"ghost\";\n  size?: \"default\" | \"sm\";\n}\n\nexport const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(\n  { variant = \"primary\", size = \"default\", type = \"button\", className, ...props },\n  ref,\n) {\n  return (\n    <button\n      ref={ref}\n      type={type}\n      className={cx(\n        variant === \"ghost\" ? \"rs-btn-ghost\" : \"rs-btn-primary\",\n        size === \"sm\" && \"rs-btn-sm\",\n        className,\n      )}\n      {...props}\n    />\n  );\n});\n",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  /** Solid ink primary or hairline ghost. One primary per view. */\n  variant?: \"primary\" | \"ghost\";\n  size?: \"default\" | \"sm\";\n}\n\nexport const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(\n  { variant = \"primary\", size = \"default\", type = \"button\", className, ...props },\n  ref,\n) {\n  return (\n    <button\n      ref={ref}\n      type={type}\n      className={cx(\n        variant === \"ghost\" ? \"rs-btn-ghost\" : \"rs-btn-primary\",\n        size === \"sm\" && \"rs-btn-sm\",\n        className,\n      )}\n      {...props}\n    />\n  );\n});\n",
       "type": "registry:component",
       "target": "components/raster/button.tsx"
     },

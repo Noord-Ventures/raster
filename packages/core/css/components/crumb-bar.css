@@ -1,4 +1,4 @@
-/* ── Crumb bar — fixed top bar in the house chrome ──
+/* ── Crumb bar: fixed top bar in the house chrome ──
    Transparent at rest; once the page cover scrolls away it gains the
    paper background and its bottom hairline, and the breadcrumbs fade
    in. The inner row starts one module in at the 1024px rail. */

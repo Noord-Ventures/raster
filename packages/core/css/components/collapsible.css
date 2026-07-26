@@ -1,4 +1,4 @@
-/* ── Collapsible — a bare <details>, no chrome ── */
+/* ── Collapsible: a bare <details>, no chrome ── */
 .rs-disclosure summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
 .rs-disclosure summary::-webkit-details-marker{display:none}
 .rs-disclosure .rs-acc-chevron{transition:transform .2s ease}

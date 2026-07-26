@@ -1,5 +1,5 @@
 /**
- * Raster registry schema — the typed contract every component entry
+ * Raster registry schema: the typed contract every component entry
  * satisfies. The registry drives everything downstream: the docs site,
  * the CLI, the generated registry JSON, and the integrity tests.
  */
@@ -27,7 +27,7 @@ export interface RasterComponent {
   classes: string[];
   /** CSS source files, relative to packages/core/css/. */
   css: string[];
-  /** React source file, relative to packages/react/src/ — absent for CSS-only entries. */
+  /** React source file, relative to packages/react/src/. Absent for CSS-only entries. */
   react?: string;
   /** Other registry components this one's snippet or styles rely on. */
   registryDependencies?: string[];

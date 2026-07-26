@@ -1,5 +1,5 @@
 /**
- * The raster CLI as a library — every command is a pure-ish function
+ * The raster CLI as a library: every command is a pure-ish function
  * over an explicit cwd so the whole thing is testable without a shell.
  *
  * The CLI carries the entire system with it (CSS + registry bundled at
@@ -141,7 +141,7 @@ export interface AddOutcome {
 /**
  * Vendor a component's React source (plus the shared cx helper) into
  * the project. CSS is not written per-component: init's raster.css
- * already styles every component — that's the CSS-first model.
+ * already styles every component. That is the CSS-first model.
  */
 export function add(cwd: string, names: string[], options: AddOptions = {}): {
   outcomes: AddOutcome[];

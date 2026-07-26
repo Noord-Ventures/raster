@@ -3,14 +3,14 @@
   "name": "sheet",
   "type": "registry:component",
   "title": "Sheet",
-  "description": "A native <dialog> parked at the screen edge — platform focus trap and backdrop, hairline seam.",
+  "description": "Native <dialog> at the screen edge. Platform focus trap and backdrop.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json"
   ],
   "files": [
     {
       "path": "raster/sheet.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SheetProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n  side?: \"left\" | \"right\";\n}\n\n/**\n * A native <dialog> parked at the screen edge — the platform provides\n * the focus trap, Escape, and the backdrop.\n */\nexport function Sheet({ open, onClose, side = \"right\", className, children, ...props }: SheetProps) {\n  const ref = React.useRef<HTMLDialogElement>(null);\n\n  React.useEffect(() => {\n    const dialog = ref.current;\n    if (!dialog) return;\n    if (open && !dialog.open) dialog.showModal();\n    else if (!open && dialog.open) dialog.close();\n  }, [open]);\n\n  return (\n    <dialog\n      ref={ref}\n      className={cx(\"rs-sheet\", side === \"left\" && \"rs-sheet-left\", className)}\n      onClose={() => onClose?.()}\n      {...props}\n    >\n      {children}\n    </dialog>\n  );\n}\n\nexport function SheetTitle({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-sheet-title\", className)} {...props} />;\n}\n\nexport function SheetBody({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-sheet-body\", className)} {...props} />;\n}\n",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SheetProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n  side?: \"left\" | \"right\";\n}\n\n/**\n * A native <dialog> at the screen edge. The platform provides the\n * focus trap, Escape, and the backdrop.\n */\nexport function Sheet({ open, onClose, side = \"right\", className, children, ...props }: SheetProps) {\n  const ref = React.useRef<HTMLDialogElement>(null);\n\n  React.useEffect(() => {\n    const dialog = ref.current;\n    if (!dialog) return;\n    if (open && !dialog.open) dialog.showModal();\n    else if (!open && dialog.open) dialog.close();\n  }, [open]);\n\n  return (\n    <dialog\n      ref={ref}\n      className={cx(\"rs-sheet\", side === \"left\" && \"rs-sheet-left\", className)}\n      onClose={() => onClose?.()}\n      {...props}\n    >\n      {children}\n    </dialog>\n  );\n}\n\nexport function SheetTitle({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-sheet-title\", className)} {...props} />;\n}\n\nexport function SheetBody({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-sheet-body\", className)} {...props} />;\n}\n",
       "type": "registry:component",
       "target": "components/raster/sheet.tsx"
     },
@@ -22,7 +22,7 @@
     },
     {
       "path": "raster/styles/sheet.css",
-      "content": "/* ── Sheet — a native <dialog> parked at the edge ── */\ndialog.rs-sheet{position:fixed;inset:0 0 0 auto;margin:0;height:100dvh;max-height:none;width:360px;max-width:85vw;border:none;border-left:1px solid var(--divider);border-radius:0;padding:24px 20px;background:var(--bg);color:var(--text);box-shadow:-12px 0 32px rgba(0,0,0,0.06)}\ndialog.rs-sheet::backdrop{background:rgba(0,0,0,0.25)}\ndialog.rs-sheet-left{inset:0 auto 0 0;border-left:none;border-right:1px solid var(--divider);box-shadow:12px 0 32px rgba(0,0,0,0.06)}\n.rs-sheet-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-sheet-body{font-size:13.5px;line-height:1.6;letter-spacing:-.01em;color:var(--text-secondary);margin:0}\n",
+      "content": "/* ── Sheet: a native <dialog> parked at the edge ── */\ndialog.rs-sheet{position:fixed;inset:0 0 0 auto;margin:0;height:100dvh;max-height:none;width:360px;max-width:85vw;border:none;border-left:1px solid var(--divider);border-radius:0;padding:24px 20px;background:var(--bg);color:var(--text);box-shadow:-12px 0 32px rgba(0,0,0,0.06)}\ndialog.rs-sheet::backdrop{background:rgba(0,0,0,0.25)}\ndialog.rs-sheet-left{inset:0 auto 0 0;border-left:none;border-right:1px solid var(--divider);box-shadow:12px 0 32px rgba(0,0,0,0.06)}\n.rs-sheet-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-sheet-body{font-size:13.5px;line-height:1.6;letter-spacing:-.01em;color:var(--text-secondary);margin:0}\n",
       "type": "registry:file",
       "target": "styles/raster/sheet.css"
     }

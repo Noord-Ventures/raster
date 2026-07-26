@@ -1,4 +1,4 @@
-/* ── Field — quiet input: hairline border, ink focus, label above ── */
+/* ── Field: quiet input: hairline border, ink focus, label above ── */
 .rs-field{width:100%;display:flex;flex-direction:column;gap:5px}
 .rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}
 .rs-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}

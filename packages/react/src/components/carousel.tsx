@@ -5,7 +5,7 @@ export interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   "aria-label"?: string;
 }
 
-/** Native scroll snap does the physics; the buttons just nudge it. */
+/** Native scroll snap; the buttons nudge. */
 export function Carousel({ className, children, "aria-label": ariaLabel = "Carousel", ...props }: CarouselProps) {
   const trackRef = React.useRef<HTMLDivElement>(null);
   const nudge = (dir: 1 | -1) => {

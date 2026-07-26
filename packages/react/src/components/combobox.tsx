@@ -11,7 +11,7 @@ export interface ComboboxProps
   emptyLabel?: React.ReactNode;
 }
 
-/** The quiet field with a filtered overlay — combobox semantics throughout. */
+/** Filtered listbox on the quiet field. */
 export function Combobox({
   options,
   value,

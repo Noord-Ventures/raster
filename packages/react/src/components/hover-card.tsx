@@ -5,7 +5,7 @@ export interface HoverCardProps extends React.HTMLAttributes<HTMLSpanElement> {
   trigger: React.ReactNode;
 }
 
-/** A rich preview that opens on hover — and on keyboard focus, in plain CSS. */
+/** Preview panel on hover or keyboard focus. CSS only. */
 export function HoverCard({ trigger, className, children, ...props }: HoverCardProps) {
   return (
     <span className={cx("rs-hover-card", className)} {...props}>

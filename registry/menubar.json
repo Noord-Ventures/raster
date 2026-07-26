@@ -24,7 +24,7 @@
     },
     {
       "path": "raster/styles/menubar.css",
-      "content": "/* ── Menubar — dropdown menus in a hairline strip ── */\n.rs-menubar{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);padding:2px}\n.rs-menubar .rs-select{min-width:0}\n.rs-menubar .rs-dropdown{border:none;padding:6px 10px;font-size:13px;gap:6px}\n.rs-menubar .rs-menu{min-width:180px;right:auto}\n",
+      "content": "/* ── Menubar: dropdown menus in a hairline strip ── */\n.rs-menubar{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);padding:2px}\n.rs-menubar .rs-select{min-width:0}\n.rs-menubar .rs-dropdown{border:none;padding:6px 10px;font-size:13px;gap:6px}\n.rs-menubar .rs-menu{min-width:180px;right:auto}\n",
       "type": "registry:file",
       "target": "styles/raster/menubar.css"
     }

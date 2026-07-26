@@ -7,8 +7,8 @@ export interface DialogProps extends Omit<React.DialogHTMLAttributes<HTMLDialogE
 }
 
 /**
- * A native <dialog> — focus trapping, Escape, and the backdrop come
- * from the platform, not a dependency.
+ * A native <dialog>. Focus trapping, Escape, and the backdrop come
+ * from the platform.
  */
 export function Dialog({ open, onClose, className, children, ...props }: DialogProps) {
   const ref = React.useRef<HTMLDialogElement>(null);

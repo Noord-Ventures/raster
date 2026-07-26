@@ -1,4 +1,4 @@
-/* ── Inline form — the action lives inside the field ── */
+/* ── Inline form: the action lives inside the field ── */
 .rs-inline-field{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:4px 6px 4px 12px;transition:border-color .2s ease}
 .rs-inline-field:focus-within{border-color:var(--accent)}
 .rs-inline-input{flex:1;min-width:0;border:none;background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);outline:none;padding:7px 0}

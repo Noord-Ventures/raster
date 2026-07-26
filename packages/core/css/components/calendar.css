@@ -1,4 +1,4 @@
-/* ── Calendar — a month of quiet squares; selected is ink ── */
+/* ── Calendar: a month of quiet squares; selected is ink ── */
 .rs-cal{width:252px}
 .rs-cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .rs-cal-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}

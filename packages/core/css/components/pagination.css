@@ -1,4 +1,4 @@
-/* ── Pagination — squares, not pills ── */
+/* ── Pagination: squares, not pills ── */
 .rs-pages{display:flex;align-items:center;gap:5px}
 .rs-page{width:26px;height:26px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-secondary);border:1px solid transparent}
 .rs-page:not(.rs-page-gap):not(.rs-page-on){border-color:var(--divider-subtle)}

@@ -1,4 +1,4 @@
-/* ── Resizable — two panes on a draggable hairline ── */
+/* ── Resizable: two panes on a draggable hairline ── */
 .rs-split{display:flex;width:100%}
 .rs-split-pane{min-width:0;overflow:hidden}
 .rs-split-handle{flex-shrink:0;width:9px;margin:0 -4px;position:relative;z-index:5;cursor:col-resize;background:none;border:none;padding:0;touch-action:none}

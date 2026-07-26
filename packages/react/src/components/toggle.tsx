@@ -8,7 +8,7 @@ export interface ToggleProps
   onPressedChange?: (pressed: boolean) => void;
 }
 
-/** A press switch; state lives in aria-pressed, pressed is ink. */
+/** Press switch; state lives in aria-pressed. */
 export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(function Toggle(
   { pressed, defaultPressed, onPressedChange, className, onClick, ...props },
   ref,
@@ -39,7 +39,7 @@ export interface ToggleGroupProps extends Omit<React.HTMLAttributes<HTMLDivEleme
   onValueChange?: (value: string) => void;
 }
 
-/** One pressed at a time — a quiet segmented control. */
+/** One pressed at a time. */
 export function ToggleGroup({
   options,
   value,

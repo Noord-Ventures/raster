@@ -1,9 +1,9 @@
-/* ── Tokens ── GENERATED from src/tokens.ts — do not edit by hand. */
+/* ── Tokens ── GENERATED from src/tokens.ts. Do not edit by hand. */
 :root {
   --bg: #FAF8F2;                        /* paper */
   --text: #1A1A1A;                      /* ink */
   --text-secondary: #6B6B6B;            /* gray */
-  --accent: #1A1A1A;                   /* the "accent" is ink — monochrome */
+  --accent: #1A1A1A;                   /* the "accent" is ink; monochrome */
   --divider: rgba(0,0,0,0.10);
   --divider-subtle: rgba(0,0,0,0.06);
   --table-alt: rgba(0,0,0,0.02);

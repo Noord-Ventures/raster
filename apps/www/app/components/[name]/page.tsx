@@ -81,7 +81,7 @@ const reactUsage: Record<string, string> = {
   "hover-card": `import { HoverCard } from "@/components/raster/hover-card";
 
 <HoverCard trigger={<a className="rs-link" href="/noord">@noord</a>}>
-  Noord — a venture studio in Alkmaar.
+  Noord, a venture studio in Alkmaar.
 </HoverCard>`,
   kbd: `import { Kbd } from "@/components/raster/kbd";
 
@@ -172,7 +172,7 @@ useEffect(() => {
     A monochrome, CSS-first design system.
   </AccordionItem>
   <AccordionItem title="Is it dependency-free?">
-    Yes — native elements do the work.
+    Yes. Native elements do the work.
   </AccordionItem>
 </Accordion>`,
   alert: `import { Alert } from "@/components/raster/alert";

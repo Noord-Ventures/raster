@@ -8,7 +8,7 @@ export interface SwitchProps
   onCheckedChange?: (checked: boolean) => void;
 }
 
-/** A button with role="switch" — state moves, layout doesn't. */
+/** A button with role="switch". */
 export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(function Switch(
   { checked, defaultChecked, onCheckedChange, className, onClick, ...props },
   ref,

@@ -7,8 +7,8 @@ import { SiteChrome } from "@/components/site-chrome";
 
 export const metadata: Metadata = {
   title: {
-    default: "Raster — a monochrome design system",
-    template: "%s — Raster",
+    default: "Raster: a monochrome design system",
+    template: "%s · Raster",
   },
   description:
     "One ink, no accent. Raster is a CSS-first, zero-dependency design system: tokens, components, a registry, and a CLI.",

@@ -1,4 +1,4 @@
-/* ── Switch — state moves, layout doesn't ── */
+/* ── Switch: state moves, layout doesn't ── */
 .rs-switch{display:inline-flex;box-sizing:border-box;width:32px;height:18px;border-radius:9px;border:1.5px solid var(--divider);position:relative;flex-shrink:0;transition:background-color .2s ease,border-color .2s ease}
 .rs-switch i{position:absolute;top:1.5px;left:1.5px;width:12px;height:12px;border-radius:50%;background:var(--text-secondary);transition:transform .2s ease}
 .rs-switch-on{background:var(--text);border-color:var(--text)}

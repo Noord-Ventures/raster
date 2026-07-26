@@ -2,7 +2,7 @@ import { add, init, list, snippetFor, tokensJson } from "./lib";
 
 const VERSION = "0.2.0";
 
-const HELP = `raster — the monochrome design system
+const HELP = `raster ${VERSION}, the monochrome design system
 
 Usage
   raster init [--css-dir <dir>] [--components-dir <dir>] [--compat] [--overwrite]
@@ -14,9 +14,8 @@ Usage
 Commands
   init      Write raster.css into your project (plus raster.json config).
             --compat also writes the 0.1 class-name layer.
-  add       Vendor a component's React source into your project — the
-            code is yours after that. CSS-only components need no code;
-            add prints their markup snippet.
+  add       Copy a component's React source into your project.
+            CSS-only components need no code; add prints the snippet.
   list      Every component in the registry.
   tokens    The design tokens as JSON.
 `;
@@ -45,7 +44,7 @@ function parseFlags(argv: string[]): { positional: string[]; flags: Record<strin
 function reportWrites(results: { path: string; status: string }[]): void {
   for (const r of results) {
     const mark = r.status === "written" ? "+" : r.status === "unchanged" ? "=" : "!";
-    const note = r.status === "skipped" ? "  (exists — pass --overwrite to replace)" : "";
+    const note = r.status === "skipped" ? "  (exists; pass --overwrite to replace)" : "";
     console.log(`  ${mark} ${r.path}${note}`);
   }
 }
@@ -69,8 +68,8 @@ Next steps
   1. Link the stylesheet (or import it in your root layout):
        <link rel="stylesheet" href="/${results[0]!.path}" />
   2. Dark scheme: set data-theme="dark" on <html>.
-  3. Messina Sans is licensed and not bundled — provide your own
-     @font-face, or the stack falls back to system sans.
+  3. Messina Sans is licensed and not bundled. Provide your own
+     @font-face; the stack falls back to system sans.
   4. Add components:  npx raster add button dialog
 `);
     break;
@@ -82,10 +81,10 @@ Next steps
       process.exit(1);
     }
     const { outcomes, unknown } = add(cwd, positional, { overwrite: Boolean(flags["overwrite"]) });
-    for (const name of unknown) console.error(`✗ unknown component "${name}" — see: raster list`);
+    for (const name of unknown) console.error(`✗ unknown component "${name}". See: raster list`);
     for (const outcome of outcomes) {
       if (outcome.cssOnly) {
-        console.log(`${outcome.item.title} (${outcome.item.name}) is CSS-only — already styled by raster.css.`);
+        console.log(`${outcome.item.title} (${outcome.item.name}) is CSS-only; already styled by raster.css.`);
         const snippet = snippetFor(outcome.item.name);
         if (snippet) console.log(`  Markup:\n${snippet.split("\n").map((l) => `    ${l}`).join("\n")}`);
       } else {

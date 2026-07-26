@@ -5,7 +5,7 @@ export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   value?: Date;
   onSelect?: (date: Date) => void;
   defaultMonth?: Date;
-  /** 0 = Sunday, 1 = Monday. Weeks start on Monday, like they should. */
+  /** 0 = Sunday, 1 = Monday. */
   weekStart?: 0 | 1;
 }
 
@@ -17,7 +17,7 @@ function sameDay(a: Date | undefined, b: Date): boolean {
   );
 }
 
-/** A month of quiet squares; selected is ink, today is a hairline. */
+/** Month grid. Selected is ink; today is a hairline. */
 export function Calendar({ value, onSelect, defaultMonth, weekStart = 1, className, ...props }: CalendarProps) {
   const [month, setMonth] = React.useState(() => {
     const base = value ?? defaultMonth ?? new Date();

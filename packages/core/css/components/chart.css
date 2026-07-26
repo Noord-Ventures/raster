@@ -1,4 +1,4 @@
-/* ── Charts — hairline grid, ink marks; series differ by texture, never hue ── */
+/* ── Charts: hairline grid, ink marks; series differ by texture, never hue ── */
 .rs-chart{position:relative;width:100%}
 .rs-chart svg{display:block;width:100%;height:auto;overflow:visible}
 .rs-chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}

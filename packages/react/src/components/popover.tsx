@@ -9,8 +9,8 @@ export interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * The native Popover API: the panel lives in the top layer and light
- * dismiss comes from the platform — no portal, no outside-click code.
+ * The native Popover API. The panel lives in the top layer; light
+ * dismiss comes from the platform.
  */
 export function Popover({ trigger, align = "start", className, children, ...props }: PopoverProps) {
   const id = React.useId();

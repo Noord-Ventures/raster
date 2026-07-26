@@ -3,7 +3,7 @@
   "name": "stepper",
   "type": "registry:component",
   "title": "Stepper",
-  "description": "Numbered dots joined by hairlines; done is ink, active is outlined.",
+  "description": "Numbered dots joined by hairlines. Done is ink; active is outlined.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json"
   ],

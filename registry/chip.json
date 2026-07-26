@@ -10,7 +10,7 @@
   "files": [
     {
       "path": "raster/styles/chip.css",
-      "content": "/* ── Mono chip — technical identifiers ── */\n.rs-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}\n",
+      "content": "/* ── Mono chip: technical identifiers ── */\n.rs-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}\n",
       "type": "registry:file",
       "target": "styles/raster/chip.css"
     }

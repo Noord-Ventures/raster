@@ -28,7 +28,7 @@
       "name": "button",
       "type": "registry:component",
       "title": "Button",
-      "description": "Solid ink primary — one per view — and a hairline ghost secondary. 40px tall, 36px small variant.",
+      "description": "Solid ink primary and hairline ghost. One primary per view. 40px tall; 36px small variant.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -140,7 +140,7 @@
       "name": "inline-form",
       "type": "registry:component",
       "title": "Inline form",
-      "description": "One field, one action — the action lives inside the field and appears once input validates.",
+      "description": "One field, one action. The action sits inside the field and appears once input validates.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/button.json"
@@ -186,7 +186,7 @@
       "name": "radio",
       "type": "registry:component",
       "title": "Radio",
-      "description": "One choice; the dot is ink, never a hue.",
+      "description": "One choice; the dot is ink.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -345,7 +345,7 @@
       "name": "progress",
       "type": "registry:component",
       "title": "Progress",
-      "description": "4px bar; the percentage lives in the label, never inside the bar.",
+      "description": "4px bar. The percentage lives in the label, not the bar.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -464,7 +464,7 @@
       "name": "crumb-bar",
       "type": "registry:component",
       "title": "Crumb bar",
-      "description": "Fixed top bar of the house chrome; transparent at rest, it gains the paper background and its bottom hairline on scroll while the breadcrumbs fade in.",
+      "description": "Fixed top bar. Transparent at rest; on scroll it gains the paper background and a bottom hairline, and the breadcrumbs fade in.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/breadcrumbs.json"
@@ -702,7 +702,7 @@
       "name": "card",
       "type": "registry:component",
       "title": "Card",
-      "description": "A hairline frame on the open grid; label, title, body — no heavy chrome.",
+      "description": "Hairline frame; label, title, body.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -743,7 +743,7 @@
       "name": "stepper",
       "type": "registry:component",
       "title": "Stepper",
-      "description": "Numbered dots joined by hairlines; done is ink, active is outlined.",
+      "description": "Numbered dots joined by hairlines. Done is ink; active is outlined.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -844,7 +844,7 @@
       "name": "accordion",
       "type": "registry:component",
       "title": "Accordion",
-      "description": "Native <details> rows on hairlines; the name attribute keeps one open at a time — no JavaScript at all.",
+      "description": "Native <details> rows on hairlines. The name attribute keeps one item open at a time; no JavaScript.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -857,7 +857,7 @@
             "rs-acc-chevron",
             "rs-acc-body"
           ],
-          "snippet": "<div class=\"rs-acc\"><details class=\"rs-acc-item\" name=\"faq\" open><summary>What is Raster?<svg class=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></summary><div class=\"rs-acc-body\">A monochrome, CSS-first design system.</div></details><details class=\"rs-acc-item\" name=\"faq\"><summary>Is it dependency-free?<svg class=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></summary><div class=\"rs-acc-body\">Yes — native elements do the work.</div></details></div>",
+          "snippet": "<div class=\"rs-acc\"><details class=\"rs-acc-item\" name=\"faq\" open><summary>What is Raster?<svg class=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></summary><div class=\"rs-acc-body\">A monochrome, CSS-first design system.</div></details><details class=\"rs-acc-item\" name=\"faq\"><summary>Is it dependency-free?<svg class=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></summary><div class=\"rs-acc-body\">Yes. Native elements do the work.</div></details></div>",
           "cssOnly": false,
           "registryDependencies": []
         }
@@ -885,7 +885,7 @@
       "name": "alert",
       "type": "registry:component",
       "title": "Alert",
-      "description": "A hairline frame with an ink icon; solid ink for critical. Emphasis from weight, never a hue.",
+      "description": "Hairline frame with an ink icon. Solid ink variant for critical.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -926,7 +926,7 @@
       "name": "alert-dialog",
       "type": "registry:component",
       "title": "Alert dialog",
-      "description": "A native <dialog> that requires an explicit answer — Escape and light dismiss are disabled.",
+      "description": "Native <dialog> that requires an explicit answer. Escape and light dismiss are disabled.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/dialog.json",
@@ -972,7 +972,7 @@
       "name": "avatar",
       "type": "registry:component",
       "title": "Avatar",
-      "description": "Initials in a quiet circle; images cover, broken images fall back to initials. Rows overlap on hairlines.",
+      "description": "Initials in a circle. Images cover; broken images fall back to initials. Rows overlap.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -1013,7 +1013,7 @@
       "name": "textarea",
       "type": "registry:component",
       "title": "Textarea",
-      "description": "The quiet field, taller: hairline border, ink focus, vertical resize only.",
+      "description": "The quiet field, taller. Vertical resize only.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/input.json"
@@ -1054,7 +1054,7 @@
       "name": "separator",
       "type": "registry:component",
       "title": "Separator",
-      "description": "A hairline, horizontal or vertical — the only divider the system needs.",
+      "description": "A hairline, horizontal or vertical.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -1083,7 +1083,7 @@
       "name": "skeleton",
       "type": "registry:component",
       "title": "Skeleton",
-      "description": "A quiet pulse on the divider tone; perfectly still under prefers-reduced-motion.",
+      "description": "Pulse on the divider tone. Still under prefers-reduced-motion.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -1121,7 +1121,7 @@
       "name": "tooltip",
       "type": "registry:component",
       "title": "Tooltip",
-      "description": "CSS-only: shows on hover and on keyboard focus alike, ink on paper, no positioning library.",
+      "description": "CSS only. Shows on hover and keyboard focus.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/button.json"
@@ -1162,7 +1162,7 @@
       "name": "toast",
       "type": "registry:component",
       "title": "Toast",
-      "description": "Quiet confirmations bottom right, announced politely to screen readers, gone in four seconds.",
+      "description": "Bottom right, aria-live polite, dismissed after four seconds.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -1203,7 +1203,7 @@
       "name": "dropdown-menu",
       "type": "registry:component",
       "title": "Dropdown menu",
-      "description": "An action menu on the shared overlay surface: keyboard navigation, menu semantics, no layout shift.",
+      "description": "Action menu with menu semantics and keyboard navigation.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/select.json",
@@ -1253,7 +1253,7 @@
       "name": "toggle",
       "type": "registry:component",
       "title": "Toggle",
-      "description": "A press switch and its group; pressed is ink, like everything on. State lives in aria-pressed.",
+      "description": "Press switch and group. Pressed is ink; state lives in aria-pressed.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -1292,7 +1292,7 @@
       "name": "popover",
       "type": "registry:component",
       "title": "Popover",
-      "description": "The native Popover API: rendered in the top layer, light dismiss for free, anchored by four lines of code.",
+      "description": "Native Popover API: top layer, light dismiss.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/button.json"
@@ -1335,7 +1335,7 @@
       "name": "sheet",
       "type": "registry:component",
       "title": "Sheet",
-      "description": "A native <dialog> parked at the screen edge — platform focus trap and backdrop, hairline seam.",
+      "description": "Native <dialog> at the screen edge. Platform focus trap and backdrop.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -1376,7 +1376,7 @@
       "name": "scroll-area",
       "type": "registry:component",
       "title": "Scroll area",
-      "description": "Quiet overflow: hidden scrollbar, feathered top and bottom edges — the same treatment the docs TOC uses.",
+      "description": "Hidden scrollbar; feathered top and bottom edges.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -1414,7 +1414,7 @@
       "name": "chart",
       "type": "registry:component",
       "title": "Charts",
-      "description": "Zero-dependency SVG: line, bar, sparkline, donut. Hairline grid, ink marks; series differ by texture — solid, dashed, gray, dotted — never by hue.",
+      "description": "SVG line, bar, sparkline, donut. Hairline grid, ink marks. Series differ by texture: solid, dashed, gray, dotted.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -1457,7 +1457,7 @@
       "name": "collapsible",
       "type": "registry:component",
       "title": "Collapsible",
-      "description": "A bare native <details> — no chrome, no JavaScript.",
+      "description": "A bare native <details>.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/accordion.json"
@@ -1499,7 +1499,7 @@
       "name": "hover-card",
       "type": "registry:component",
       "title": "Hover card",
-      "description": "A rich preview that opens on hover — and on keyboard focus, in plain CSS.",
+      "description": "Preview panel on hover or keyboard focus. CSS only.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -1510,7 +1510,7 @@
             "rs-hover-card",
             "rs-hover-card-panel"
           ],
-          "snippet": "<span class=\"rs-hover-card\"><span tabindex=\"0\">@noord</span><span class=\"rs-hover-card-panel\">Noord — a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>",
+          "snippet": "<span class=\"rs-hover-card\"><span tabindex=\"0\">@noord</span><span class=\"rs-hover-card-panel\">Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>",
           "cssOnly": false,
           "registryDependencies": []
         }
@@ -1576,7 +1576,7 @@
       "name": "input-otp",
       "type": "registry:component",
       "title": "One-time code",
-      "description": "One quiet cell per character; auto-advance, backspace, and paste all work.",
+      "description": "One cell per character. Auto-advance, backspace, paste.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -1614,7 +1614,7 @@
       "name": "context-menu",
       "type": "registry:component",
       "title": "Context menu",
-      "description": "Right-click opens the shared menu surface at the pointer; Escape and outside clicks close it.",
+      "description": "Right-click menu at the pointer. Escape and outside clicks close it.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/select.json",
@@ -1707,7 +1707,7 @@
       "name": "navigation-menu",
       "type": "registry:component",
       "title": "Navigation menu",
-      "description": "Quiet links in a row; the current page is ink.",
+      "description": "Links in a row; the current page is ink.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -1745,7 +1745,7 @@
       "name": "carousel",
       "type": "registry:component",
       "title": "Carousel",
-      "description": "Native scroll snap owns the physics; the buttons just nudge it. Edges feather.",
+      "description": "Native scroll snap. Buttons nudge; edges feather.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/pagination.json",
@@ -1790,7 +1790,7 @@
       "name": "resizable",
       "type": "registry:component",
       "title": "Resizable",
-      "description": "Two panes on a draggable hairline; arrow keys work too, state lives in ARIA.",
+      "description": "Two panes on a draggable hairline. Arrow keys work; state lives in ARIA.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -1830,7 +1830,7 @@
       "name": "combobox",
       "type": "registry:component",
       "title": "Combobox",
-      "description": "The quiet field with a filtered overlay — combobox semantics throughout.",
+      "description": "Filtered listbox on the quiet field. Combobox semantics.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/input.json",
@@ -1874,7 +1874,7 @@
       "name": "command",
       "type": "registry:component",
       "title": "Command",
-      "description": "One input, everything reachable — filter, arrows, enter. Lives in a native <dialog>.",
+      "description": "Command palette in a native <dialog>. Filter, arrows, enter.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/dialog.json"
@@ -1922,7 +1922,7 @@
       "name": "calendar",
       "type": "registry:component",
       "title": "Calendar",
-      "description": "A month of quiet squares; selected is ink, today is a hairline. Weeks start on Monday.",
+      "description": "Month grid. Selected is ink; today is a hairline. Weeks start on Monday.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/pagination.json"
@@ -1972,7 +1972,7 @@
       "name": "date-picker",
       "type": "registry:component",
       "title": "Date picker",
-      "description": "The hairline trigger with a calendar overlay.",
+      "description": "Hairline trigger with a calendar overlay.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/select.json",
@@ -2021,7 +2021,7 @@
       "name": "data-table",
       "type": "registry:component",
       "title": "Data table",
-      "description": "Sortable hairline rows over the plain table — sorting in 30 lines, data stays yours.",
+      "description": "Sortable rows over the plain table. aria-sort on headers.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/table.json"
@@ -2063,7 +2063,7 @@
       "name": "aspect-ratio",
       "type": "registry:component",
       "title": "Aspect ratio",
-      "description": "A box that keeps its proportions; media covers.",
+      "description": "A box that keeps its proportions. Media covers.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -2101,7 +2101,7 @@
       "name": "form",
       "type": "registry:component",
       "title": "Form",
-      "description": "The form pattern: quiet fields stacked on the grid, one primary action at the end.",
+      "description": "Fields stacked on the grid; one primary action at the end.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/input.json",
@@ -2192,7 +2192,7 @@
             "rs-ai-input",
             "rs-ai-send"
           ],
-          "snippet": "<div class=\"rs-ai\"><div class=\"rs-ai-msg rs-ai-user\"><div class=\"rs-ai-user-block\">Make the intro tighter.</div></div><p class=\"rs-ai-reply\">Done — two sentences, same claim.</p></div>",
+          "snippet": "<div class=\"rs-ai\"><div class=\"rs-ai-msg rs-ai-user\"><div class=\"rs-ai-user-block\">Make the intro tighter.</div></div><p class=\"rs-ai-reply\">Done. Two sentences, same claim.</p></div>",
           "cssOnly": true,
           "registryDependencies": []
         }

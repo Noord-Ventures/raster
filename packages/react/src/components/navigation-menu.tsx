@@ -5,7 +5,7 @@ export interface NavigationMenuProps extends React.HTMLAttributes<HTMLElement> {
   items: Array<{ label: React.ReactNode; href: string; current?: boolean }>;
 }
 
-/** Quiet links in a row; the current page is ink. */
+/** Links in a row; the current page is ink. */
 export function NavigationMenu({ items, className, ...props }: NavigationMenuProps) {
   return (
     <nav className={cx("rs-nav", className)} {...props}>

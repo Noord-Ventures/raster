@@ -1,4 +1,4 @@
-/* ── Command — one input, everything reachable ── */
+/* ── Command: one input, everything reachable ── */
 .rs-command{width:480px;max-width:90vw;padding:0;overflow:hidden}
 .rs-command-input{width:100%;border:none;border-bottom:1px solid var(--divider-subtle);background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);padding:14px 16px;outline:none}
 .rs-command-input::placeholder{color:var(--text-secondary)}

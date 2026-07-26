@@ -3,7 +3,7 @@
   "name": "progress",
   "type": "registry:component",
   "title": "Progress",
-  "description": "4px bar; the percentage lives in the label, never inside the bar.",
+  "description": "4px bar. The percentage lives in the label, not the bar.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json"
   ],
@@ -22,7 +22,7 @@
     },
     {
       "path": "raster/styles/progress.css",
-      "content": "/* ── Progress — the percentage lives in the label, never in the bar ── */\n.rs-progress-head{display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:7px}\n.rs-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}\n.rs-progress span{display:block;height:100%;background:var(--text);border-radius:2px}\n",
+      "content": "/* ── Progress: the percentage lives in the label, never in the bar ── */\n.rs-progress-head{display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:7px}\n.rs-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}\n.rs-progress span{display:block;height:100%;background:var(--text);border-radius:2px}\n",
       "type": "registry:file",
       "target": "styles/raster/progress.css"
     }

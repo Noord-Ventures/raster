@@ -11,7 +11,7 @@ export interface SliderProps
   onValueChange?: (value: number) => void;
 }
 
-/** A native range input drives the ink track — pointer and keyboard for free. */
+/** A native range input drives the ink track. */
 export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(function Slider(
   { value, defaultValue = 50, min = 0, max = 100, step = 1, onValueChange, className, ...props },
   ref,

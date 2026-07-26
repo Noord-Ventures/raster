@@ -8,8 +8,8 @@ export interface SheetProps extends Omit<React.DialogHTMLAttributes<HTMLDialogEl
 }
 
 /**
- * A native <dialog> parked at the screen edge — the platform provides
- * the focus trap, Escape, and the backdrop.
+ * A native <dialog> at the screen edge. The platform provides the
+ * focus trap, Escape, and the backdrop.
  */
 export function Sheet({ open, onClose, side = "right", className, children, ...props }: SheetProps) {
   const ref = React.useRef<HTMLDialogElement>(null);

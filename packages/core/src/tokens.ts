@@ -1,5 +1,5 @@
 /**
- * Raster design tokens — the single source of truth for the design system
+ * Raster design tokens: the single source of truth for the design system
  * Noord and Renato Valdés-Olmos are built on. Everything that can be a
  * token lives here: the CSS custom properties in globals.css mirror these
  * values at runtime, the Noord brand guidelines derive their palettes and
@@ -43,7 +43,7 @@ export const rasterTokens = {
       "#E8E8E8",
       "#FAF8F2",
     ],
-    accent: "none — emphasis comes from weight, size, and spacing",
+    accent: "none; emphasis comes from weight, size, and spacing",
   },
   type: {
     family:

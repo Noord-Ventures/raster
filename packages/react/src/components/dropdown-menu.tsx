@@ -13,7 +13,7 @@ export interface DropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> 
   items: DropdownMenuItem[];
 }
 
-/** An action menu on the shared overlay surface, with full keyboard navigation. */
+/** Action menu with menu semantics and keyboard navigation. */
 export function DropdownMenu({ label, items, className, ...props }: DropdownMenuProps) {
   const idBase = React.useId();
   const rootRef = React.useRef<HTMLDivElement>(null);

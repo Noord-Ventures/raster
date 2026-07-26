@@ -10,7 +10,7 @@
   "files": [
     {
       "path": "raster/styles/icons.css",
-      "content": "/* ── Icons — 16/20/24/32, single-weight 1.5px strokes in currentColor ── */\n.rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}\n.rs-icons svg{width:16px;height:16px;flex-shrink:0}\n",
+      "content": "/* ── Icons: 16/20/24/32, single-weight 1.5px strokes in currentColor ── */\n.rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}\n.rs-icons svg{width:16px;height:16px;flex-shrink:0}\n",
       "type": "registry:file",
       "target": "styles/raster/icons.css"
     }

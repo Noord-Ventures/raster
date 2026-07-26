@@ -1,4 +1,4 @@
-/* ── Table — hairline rows on the open grid; no cell borders ──
+/* ── Table: hairline rows on the open grid; no cell borders ──
    Scoped to .rs-table so linking raster.css never restyles a table
    it doesn't own. The compat layer re-emits these on bare elements. */
 .rs-table{width:calc(100% + 40px);border-collapse:collapse;margin:16px 0 24px -20px;font-size:14px}

@@ -28,12 +28,12 @@ const { color, grid, radius } = rasterTokens;
 const c1 = grid.column;
 const gridImage = `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent ${c1}px,var(--grid-line) ${c1}px,var(--grid-line) ${c1 + 1}px,transparent ${c1 + 1}px,transparent ${grid.module}px)`;
 
-const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts — do not edit by hand. */
+const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not edit by hand. */
 :root {
   --bg: ${color.light.paper};                        /* paper */
   --text: ${color.light.ink};                      /* ink */
   --text-secondary: ${color.light.gray};            /* gray */
-  --accent: ${color.light.ink};                   /* the "accent" is ink — monochrome */
+  --accent: ${color.light.ink};                   /* the "accent" is ink; monochrome */
   --divider: ${color.light.divider};
   --divider-subtle: ${color.light.dividerSubtle};
   --table-alt: ${color.light.tableAlt};
@@ -74,17 +74,17 @@ for (const component of rasterComponents) {
 const sources = ["tokens.css", "base.css", "type.css", ...componentFiles, "motion.css"];
 
 const banner = `/* ═══════════════════════════════════════════════════════════════════
-   RASTER — a monochrome, CSS-first design system.
+   RASTER, a monochrome, CSS-first design system.
    ${rasterTokens.meta.url}
 
    One ink, no accent hue: emphasis comes from weight, size, and
    spacing. Hairline borders, a ${grid.module}px module grid (${grid.column}px column +
    ${grid.gutter}px gutter), sentence case everywhere.
 
-   GENERATED from the css/ sources — edit those, then run
+   GENERATED from the css/ sources. Edit those, then run
    \`npm run build:css\`. Tokens come from src/tokens.ts.
 
-   Typeface: Messina Sans (Luzi Type, Zürich) — licensed, not bundled.
+   Typeface: Messina Sans (Luzi Type, Zürich). Licensed, not bundled.
    Provide your own @font-face for 'Messina Sans' or the stack falls
    back to system sans.
    ═══════════════════════════════════════════════════════════════════ */
@@ -94,8 +94,8 @@ const banner = `/* ════════════════════�
 const rasterCss = banner + sources.map((f) => read(`css/${f}`)).join("\n");
 write("css/raster.css", rasterCss);
 
-/* ── 4. Compat layer — the 0.1 class names ── */
-const compatBanner = `/* RASTER COMPAT — GENERATED. Re-emits Raster rules under the 0.1
+/* ── 4. Compat layer: the 0.1 class names ── */
+const compatBanner = `/* RASTER COMPAT, GENERATED. Re-emits Raster rules under the 0.1
    class names (bb-*, lib-*, bare table elements) so sites built on
    them keep working. Link this after raster.css; drop it once your
    markup uses the rs- names. */

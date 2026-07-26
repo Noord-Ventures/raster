@@ -6,7 +6,7 @@ export interface ContextMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   items: DropdownMenuItem[];
 }
 
-/** Right-click (or long-press) opens the shared menu surface at the pointer. */
+/** Right-click menu at the pointer. */
 export function ContextMenu({ items, className, children, ...props }: ContextMenuProps) {
   const [at, setAt] = React.useState<{ x: number; y: number } | null>(null);
   const menuRef = React.useRef<HTMLDivElement>(null);

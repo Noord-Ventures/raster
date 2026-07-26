@@ -8,7 +8,7 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   exclusive?: boolean;
 }
 
-/** Native <details> rows on hairlines — the browser does all the work. */
+/** Native <details> rows on hairlines. */
 export function Accordion({ exclusive, className, children, ...props }: AccordionProps) {
   const group = React.useId();
   return (

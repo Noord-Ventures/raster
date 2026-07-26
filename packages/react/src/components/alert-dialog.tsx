@@ -8,8 +8,8 @@ export interface AlertDialogProps
 }
 
 /**
- * A native <dialog> that demands an answer: Escape is swallowed and
- * there is no light dismiss — the only way out is one of the actions.
+ * A native <dialog> that requires an explicit answer. Escape and
+ * light dismiss are disabled.
  */
 export function AlertDialog({ open, onClose, className, children, ...props }: AlertDialogProps) {
   const ref = React.useRef<HTMLDialogElement>(null);

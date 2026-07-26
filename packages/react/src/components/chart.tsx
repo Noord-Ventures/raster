@@ -2,7 +2,7 @@ import * as React from "react";
 import { cx } from "../cx";
 
 /*
- * Raster charts — zero-dependency SVG. The grid is hairlines, the
+ * Raster charts: zero-dependency SVG. The grid is hairlines, the
  * marks are ink, and series are told apart by texture (solid, dashed,
  * gray, dotted), never by hue. Every chart ships a hover layer and a
  * visually-hidden table for screen readers.
@@ -13,7 +13,7 @@ export interface ChartSeries {
   values: number[];
 }
 
-/** Fixed identity order — texture follows the series, never its rank. */
+/** Fixed identity order: texture follows the series, not its rank. */
 const SERIES_CLASS = [
   "rs-chart-line",
   "rs-chart-line rs-chart-line-dashed",
@@ -268,7 +268,7 @@ export function BarChart({ data, height = 180, valueFormat = defaultFormat, clas
   );
 }
 
-/* ── Sparkline — inline, endpoint emphasized ── */
+/* ── Sparkline: inline, endpoint emphasized ── */
 
 export interface SparklineProps extends React.HTMLAttributes<HTMLSpanElement> {
   values: number[];
@@ -294,7 +294,7 @@ export function Sparkline({ values, width = 120, height = 28, className, ...prop
   );
 }
 
-/* ── Donut — one value against its whole ── */
+/* ── Donut: one value against its whole ── */
 
 export interface DonutProps extends React.HTMLAttributes<HTMLDivElement> {
   value: number;

@@ -1,4 +1,4 @@
-/* Site chrome for the Raster docs site — mirrors the layout system of
+/* Site chrome for the Raster docs site. Mirrors the layout system of
    noord.vc / noord.dev / renatovaldes.com:
 
    - No header bar. Fixed corner chrome: logo top-left on the first
@@ -105,7 +105,7 @@ html, body { margin: 0; padding: 0; }
   .nav-toggle { display: flex; }
 }
 
-/* ── The layout — one module in, width snapped to whole modules ── */
+/* ── Layout: one module in, width snapped to whole modules ── */
 .site-layout {
   --ml: 0px;
   display: flex; gap: var(--gutter); padding: 0 var(--pad);
@@ -122,12 +122,12 @@ html, body { margin: 0; padding: 0; }
 .site-content-wide { flex-shrink: 1; width: 100%; min-width: 0; padding-bottom: 72px; }
 @media (max-width: 800px) { .site-content { width: 100%; max-width: 100%; } }
 
-/* ── Cover — every page opens 120px down ── */
+/* ── Cover: every page opens 120px down ── */
 .cover { padding-top: 120px; padding-bottom: 64px; }
 .cover .rs-t-sub { margin-top: 16px; }
 @media (max-width: 640px) { .cover { padding-top: 72px; padding-bottom: 40px; } }
 
-/* ── TOC — one column wide, sticky, from 900px ── */
+/* ── TOC: one column wide, sticky, from 900px ── */
 .toc {
   width: 184px; flex-shrink: 0; align-self: flex-start;
   position: sticky; top: 0; height: 100vh; overflow-y: auto;
@@ -169,7 +169,7 @@ html, body { margin: 0; padding: 0; }
 .principle h3 { font-size: 15px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 6px; }
 .principle p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; letter-spacing: -.01em; margin: 0; }
 
-/* ── Component gallery — cards span two whole modules ── */
+/* ── Component gallery: cards span two whole modules ── */
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 24px 0 48px; }
 @media (max-width: 480px) { .gallery { grid-template-columns: 1fr; } }
 /* Cards are divs with a stretched title link, so live demos never nest
@@ -193,7 +193,7 @@ html, body { margin: 0; padding: 0; }
 .component-head { margin: 8px 0 4px; }
 .component-desc { max-width: 592px; }
 
-/* ── Footer — quiet hairline inside the layout ── */
+/* ── Footer: quiet hairline inside the layout ── */
 .site-footer {
   border-top: 1px solid var(--divider-subtle); margin-top: 24px;
   padding: 26px 0 48px; font-size: 12.5px; color: var(--text-secondary);

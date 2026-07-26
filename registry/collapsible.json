@@ -3,7 +3,7 @@
   "name": "collapsible",
   "type": "registry:component",
   "title": "Collapsible",
-  "description": "A bare native <details> — no chrome, no JavaScript.",
+  "description": "A bare native <details>.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/accordion.json"
@@ -11,7 +11,7 @@
   "files": [
     {
       "path": "raster/collapsible.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface CollapsibleProps\n  extends Omit<React.DetailsHTMLAttributes<HTMLDetailsElement>, \"title\"> {\n  title: React.ReactNode;\n  defaultOpen?: boolean;\n}\n\n/** A bare native <details> — no chrome, no JavaScript. */\nexport function Collapsible({ title, defaultOpen, className, children, ...props }: CollapsibleProps) {\n  return (\n    <details className={cx(\"rs-disclosure\", className)} open={defaultOpen || undefined} {...props}>\n      <summary>\n        {title}\n        <svg className=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"14\" height=\"14\" fill=\"none\" aria-hidden=\"true\">\n          <path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" />\n        </svg>\n      </summary>\n      <div className=\"rs-disclosure-body\">{children}</div>\n    </details>\n  );\n}\n",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface CollapsibleProps\n  extends Omit<React.DetailsHTMLAttributes<HTMLDetailsElement>, \"title\"> {\n  title: React.ReactNode;\n  defaultOpen?: boolean;\n}\n\n/** A bare native <details>. */\nexport function Collapsible({ title, defaultOpen, className, children, ...props }: CollapsibleProps) {\n  return (\n    <details className={cx(\"rs-disclosure\", className)} open={defaultOpen || undefined} {...props}>\n      <summary>\n        {title}\n        <svg className=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"14\" height=\"14\" fill=\"none\" aria-hidden=\"true\">\n          <path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" />\n        </svg>\n      </summary>\n      <div className=\"rs-disclosure-body\">{children}</div>\n    </details>\n  );\n}\n",
       "type": "registry:component",
       "target": "components/raster/collapsible.tsx"
     },
@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/collapsible.css",
-      "content": "/* ── Collapsible — a bare <details>, no chrome ── */\n.rs-disclosure summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-disclosure summary::-webkit-details-marker{display:none}\n.rs-disclosure .rs-acc-chevron{transition:transform .2s ease}\n.rs-disclosure[open] .rs-acc-chevron{transform:rotate(180deg)}\n.rs-disclosure-body{padding:10px 0 0;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}\n",
+      "content": "/* ── Collapsible: a bare <details>, no chrome ── */\n.rs-disclosure summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-disclosure summary::-webkit-details-marker{display:none}\n.rs-disclosure .rs-acc-chevron{transition:transform .2s ease}\n.rs-disclosure[open] .rs-acc-chevron{transform:rotate(180deg)}\n.rs-disclosure-body{padding:10px 0 0;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}\n",
       "type": "registry:file",
       "target": "styles/raster/collapsible.css"
     }

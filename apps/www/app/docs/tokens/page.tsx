@@ -15,13 +15,12 @@ export default function TokensPage() {
           <header className="cover" style={{ paddingBottom: 8 }}>
             <h1 className="rs-t-display">Tokens</h1>
             <p className="rs-t-sub">
-              One source of truth in TypeScript; JSON and CSS custom properties are generated from
-              it. Import the typed object, fetch the JSON, or use the custom properties directly.
+              Defined once in TypeScript. The JSON and the CSS custom properties are generated.
             </p>
           </header>
 
         <h2 className="section-label">The neutral scale</h2>
-        <p className="rs-t-body">Ink to paper — there is no accent hue anywhere in the system.</p>
+        <p className="rs-t-body">Ink to paper. There is no accent.</p>
         <div style={{ display: "flex", gap: 0, margin: "16px 0 28px", border: "1px solid var(--divider)", borderRadius: "var(--radius-sm)", overflow: "hidden" }}>
           {color.neutralScale.map((hex) => (
             <div key={hex} style={{ flex: 1, height: 56, background: hex }} title={hex} />
@@ -52,8 +51,8 @@ export default function TokensPage() {
 
         <h2 className="section-label">The grid</h2>
         <p className="rs-t-body">
-          {grid.module}px modules — a {grid.column}px column plus a {grid.gutter}px gutter —
-          drawn faintly across every page. Content boxes span whole modules, so edges step from
+          {grid.module}px modules: a {grid.column}px column and a {grid.gutter}px gutter,
+          drawn faintly across every page. Content boxes span whole modules; edges step from
           grid line to grid line on resize.
         </p>
 
@@ -65,8 +64,8 @@ rasterTokens.color.light.paper; // "${color.light.paper}"
 rasterTokens.grid.module;       // ${grid.module}
 
 // or over the wire
-// GET /r/index.json     — the component registry
-// npx raster tokens     — the token set as JSON`}
+// GET /r/index.json     (the component registry)
+// npx raster tokens     (the token set as JSON)`}
         />
         </main>
       </div>

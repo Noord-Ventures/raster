@@ -1,8 +1,8 @@
 // Generates the distributable registry at <repo>/registry/:
 //
-//   registry/index.json    — shadcn-compatible registry index (no file contents)
-//   registry/<name>.json   — shadcn-compatible registry-item, contents inlined
-//   registry/bundle.json   — every item with contents, consumed by @raster/cli
+//   registry/index.json    shadcn-compatible registry index (no file contents)
+//   registry/<name>.json   shadcn-compatible registry-item, contents inlined
+//   registry/bundle.json   every item with contents, consumed by @raster/cli
 //
 // Components install two ways: through the raster CLI (bundles this
 // output), or through `npx shadcn add <url>/r/<name>.json` from any
@@ -30,7 +30,7 @@ const write = (name, data) => {
 };
 
 /* The base style every component needs: tokens, page base, type scale,
-   reduced-motion rules — everything in raster.css except components. */
+   reduced-motion rules: everything in raster.css except components. */
 const baseCss = ["tokens.css", "base.css", "type.css", "motion.css"]
   .map((f) => readCore(`css/${f}`))
   .join("\n");
