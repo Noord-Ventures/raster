@@ -17,19 +17,20 @@ html, body { margin: 0; padding: 0; }
 
 /* ── Fixed corner chrome ── */
 .logo-wrap {
-  position: fixed; top: 20px; left: 20px; z-index: 200;
+  position: fixed; top: 24px; left: 20px; z-index: 200;
   display: flex; align-items: center; gap: 12px;
 }
-/* The Raster glyph, bare: ink on the page, no tile. */
+/* The Raster glyph, bare: ink on the page, no tile (house spec: 20px). */
 .site-logo {
   display: flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px;
+  width: 20px; height: 20px;
   color: var(--text);
   filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
   transition: var(--transition), opacity .2s ease;
 }
-.site-logo:hover { opacity: .7; }
-.site-logo-mark { width: 22px; height: 22px; transform: rotate(-45deg); }
+.site-logo:hover { opacity: .6; }
+.site-logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.site-logo-mark { width: 20px; height: 20px; transform: rotate(-45deg); }
 
 .corner-nav {
   position: fixed; top: 24px; right: 58px; z-index: 200;
@@ -45,14 +46,28 @@ html, body { margin: 0; padding: 0; }
 
 .theme-toggle {
   position: fixed; top: 24px; right: 20px; z-index: 200;
-  width: 24px; height: 24px; padding: 4px;
-  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; padding: 4px; overflow: hidden;
   background: none; border: none; border-radius: var(--radius-sm);
   color: var(--text-secondary); cursor: pointer; outline: none;
   filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
   transition: color .2s ease;
 }
 .theme-toggle:hover { color: var(--text); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* The sun/moon pair slides on a track (house idiom). */
+.toggle-track {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  transition: transform .5s cubic-bezier(.4,0,.15,1);
+}
+.icon-sun, .icon-moon {
+  width: 16px; height: 16px; flex-shrink: 0;
+  transition: transform .5s cubic-bezier(.4,0,.15,1), opacity .5s cubic-bezier(.4,0,.15,1);
+}
+.toggle-track .icon-moon { opacity: 1; transform: rotate(0); }
+.toggle-track .icon-sun { opacity: .4; transform: rotate(-90deg); }
+.toggle-track.is-dark { transform: translateY(-24px); }
+.toggle-track.is-dark .icon-sun { opacity: 1; transform: rotate(0); }
+.toggle-track.is-dark .icon-moon { opacity: .4; transform: rotate(90deg); }
 
 /* Mobile: burger + panel replace the corner links. */
 .nav-toggle {
@@ -98,11 +113,15 @@ html, body { margin: 0; padding: 0; }
 }
 
 @media (max-width: 640px) {
-  .logo-wrap { top: 18px; left: 18px; }
-  .site-logo { width: 28px; height: 28px; }
-  .site-logo-mark { width: 19px; height: 19px; }
+  .logo-wrap { top: 22px; left: 18px; }
   .corner-nav, .theme-toggle { display: none; }
   .nav-toggle { display: flex; }
+}
+/* Mobile grid (≤480): chrome shifts onto the 25px gutters. */
+@media (max-width: 480px) {
+  .logo-wrap { left: 25px; }
+  .theme-toggle, .nav-toggle { right: 25px; }
+  .nav-panel-link, .nav-panel-theme { padding-left: 25px; padding-right: 25px; }
 }
 
 /* ── Layout: one module in, width snapped to whole modules ── */

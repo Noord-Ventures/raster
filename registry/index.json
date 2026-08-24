@@ -68,7 +68,7 @@
       "name": "link",
       "type": "registry:component",
       "title": "Text link",
-      "description": "Underlined by its hairline; never colored.",
+      "description": "Underlined by its hairline; never colored. The gradient variant inset by one pixel for running copy.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -76,9 +76,10 @@
         "raster": {
           "category": "actions",
           "classes": [
-            "rs-link"
+            "rs-link",
+            "rs-link-underline"
           ],
-          "snippet": "<a class=\"rs-link\" href=\"#\">A text link</a>",
+          "snippet": "<a class=\"rs-link\" href=\"#\">A text link</a>\n<a class=\"rs-link-underline\" href=\"#\">An in-copy link</a>",
           "cssOnly": true,
           "registryDependencies": []
         }
@@ -475,9 +476,12 @@
           "classes": [
             "rs-crumb-bar",
             "rs-crumb-bar-scrolled",
-            "rs-crumb-bar-inner"
+            "rs-crumb-bar-inner",
+            "rs-crumb-root",
+            "rs-crumb-root-full",
+            "rs-crumb-root-short"
           ],
-          "snippet": "<nav class=\"rs-crumb-bar rs-crumb-bar-scrolled\"><div class=\"rs-crumb-bar-inner\"><p class=\"rs-crumbs\"><span>Raster</span><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Components</span></p></div></nav>",
+          "snippet": "<nav class=\"rs-crumb-bar rs-crumb-bar-scrolled\"><div class=\"rs-crumb-bar-inner\"><a class=\"rs-crumb-root\" href=\"/\"><span class=\"rs-crumb-root-full\">Raster</span><span class=\"rs-crumb-root-short\">rs</span></a><p class=\"rs-crumbs\"><span>Docs</span><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Components</span></p></div></nav>",
           "cssOnly": false,
           "registryDependencies": [
             "breadcrumbs"
@@ -788,7 +792,7 @@
       "name": "table",
       "type": "registry:component",
       "title": "Table",
-      "description": "Hairline rows on the open grid; no cell borders, last column right-aligned.",
+      "description": "Hairline rows on the open grid; no cell borders, last column right-aligned. Total rows carry 2px rules.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json"
       ],
@@ -796,7 +800,8 @@
         "raster": {
           "category": "content",
           "classes": [
-            "rs-table"
+            "rs-table",
+            "rs-total-row"
           ],
           "snippet": "<table class=\"rs-table\"><thead><tr><th>Phase</th><th>Weeks</th></tr></thead><tbody><tr><td>Strategy</td><td>2</td></tr><tr><td>Identity</td><td>4</td></tr></tbody></table>",
           "cssOnly": true,
@@ -2202,6 +2207,110 @@
           "path": "raster/styles/assistant.css",
           "type": "registry:file",
           "target": "styles/raster/assistant.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "theme-toggle",
+      "type": "registry:component",
+      "title": "Theme toggle",
+      "description": "Fixed top right. Sun and moon slide on a track; the choice persists in localStorage.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-theme-toggle",
+            "rs-theme-track",
+            "rs-theme-track-dark",
+            "rs-theme-sun",
+            "rs-theme-moon"
+          ],
+          "snippet": "<button class=\"rs-theme-toggle\" aria-label=\"Toggle color scheme\"><span class=\"rs-theme-track\"><svg class=\"rs-theme-moon\" viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M13.5 9.5A5.5 5.5 0 0 1 6.5 2.5a5.5 5.5 0 1 0 7 7Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/></svg><svg class=\"rs-theme-sun\" viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"3.25\" stroke=\"currentColor\" stroke-width=\"1.5\"/><path d=\"M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"/></svg></span></button>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/theme-toggle.tsx",
+          "type": "registry:component",
+          "target": "components/raster/theme-toggle.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/theme-toggle.css",
+          "type": "registry:file",
+          "target": "styles/raster/theme-toggle.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "callout",
+      "type": "registry:component",
+      "title": "Callout",
+      "description": "A tinted note in running copy. Hairline frame, 3px ink left edge.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-callout"
+          ],
+          "snippet": "<div class=\"rs-callout\"><p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p></div>",
+          "cssOnly": true,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/styles/callout.css",
+          "type": "registry:file",
+          "target": "styles/raster/callout.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "references",
+      "type": "registry:component",
+      "title": "References",
+      "description": "Inline citations, a numbered hairline list, and a cite box. Numerals hang in the gutter.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-cite",
+            "rs-refs",
+            "rs-ref-authors",
+            "rs-ref-doi",
+            "rs-cite-box",
+            "rs-cite-box-label",
+            "rs-cite-box-text"
+          ],
+          "snippet": "<p>Set in a single ink.<sup class=\"rs-cite\"><a href=\"#ref-1\">1</a></sup></p><ol class=\"rs-refs\"><li id=\"ref-1\"><span class=\"rs-ref-authors\">Müller-Brockmann, J.</span> Grid systems in graphic design. <a class=\"rs-ref-doi\" href=\"#\">niggli.ch/grid</a></li></ol>",
+          "cssOnly": true,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/styles/refs.css",
+          "type": "registry:file",
+          "target": "styles/raster/refs.css"
         }
       ]
     }

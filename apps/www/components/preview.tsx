@@ -59,6 +59,7 @@ import {
   Slider,
   Stepper,
   Switch,
+  ThemeToggle,
   Textarea,
   toast,
   Toaster,
@@ -495,6 +496,9 @@ export const demos: Record<string, () => React.ReactNode> = {
     />
   ),
   dialog: DialogDemo,
+  "theme-toggle": () => (
+    <ThemeToggle style={{ position: "relative", top: "auto", right: "auto", filter: "none" }} />
+  ),
   stepper: () => (
     <Stepper
       steps={[{ name: "Brief" }, { name: "Design" }, { name: "Build" }]}

@@ -1,8 +1,9 @@
 /* ── Base ──
    Raster owns the page: paper background, ink text, and the visible
    204px module grid drawn behind everything. */
-html{scroll-behavior:smooth;font-size:16px}
+html{scroll-behavior:smooth;font-size:16px;overflow-x:clip}
 body{
+  overflow-x:clip;
   background-color:var(--bg);
   background-image:var(--grid-image);
   background-size:var(--grid-size) 100vh;

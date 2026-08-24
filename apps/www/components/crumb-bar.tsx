@@ -12,7 +12,7 @@ interface Crumb {
 
 function trailFor(pathname: string): Crumb[] {
   const parts = pathname.split("/").filter(Boolean);
-  const trail: Crumb[] = [{ label: "Raster", href: "/" }];
+  const trail: Crumb[] = [];
   if (parts[0] === "docs") {
     trail.push({ label: "Docs", href: "/docs" });
     if (parts[1] === "tokens") trail.push({ label: "Tokens" });
@@ -48,27 +48,32 @@ export function CrumbBar() {
   return (
     <nav className={`rs-crumb-bar${scrolled ? " rs-crumb-bar-scrolled" : ""}`} aria-label="Breadcrumbs">
       <div className="rs-crumb-bar-inner">
-        <p className="rs-crumbs">
-          {trail.map((crumb, index) => {
-            const last = index === trail.length - 1;
-            return (
-              <React.Fragment key={index}>
-                {index > 0 && (
-                  <span className="rs-crumbs-sep" aria-hidden="true">
-                    /
-                  </span>
-                )}
-                {last ? (
-                  <span className="rs-crumbs-here">{crumb.label}</span>
-                ) : crumb.href ? (
-                  <Link href={crumb.href}>{crumb.label}</Link>
-                ) : (
-                  <span>{crumb.label}</span>
-                )}
-              </React.Fragment>
-            );
-          })}
-        </p>
+        <Link className="rs-crumb-root" href="/">
+          Raster
+        </Link>
+        {trail.length > 0 && (
+          <p className="rs-crumbs">
+            {trail.map((crumb, index) => {
+              const last = index === trail.length - 1;
+              return (
+                <React.Fragment key={index}>
+                  {index > 0 && (
+                    <span className="rs-crumbs-sep" aria-hidden="true">
+                      /
+                    </span>
+                  )}
+                  {last ? (
+                    <span className="rs-crumbs-here">{crumb.label}</span>
+                  ) : crumb.href ? (
+                    <Link href={crumb.href}>{crumb.label}</Link>
+                  ) : (
+                    <span>{crumb.label}</span>
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </p>
+        )}
       </div>
     </nav>
   );

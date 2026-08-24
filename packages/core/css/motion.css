@@ -2,4 +2,5 @@
 @media(prefers-reduced-motion:reduce){
   .rs-reveal{transition:none}
   .rs-subscribed{animation:none}
+  .rs-theme-track,.rs-theme-sun,.rs-theme-moon{transition:none}
 }

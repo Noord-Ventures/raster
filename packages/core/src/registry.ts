@@ -25,11 +25,12 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "link",
     title: "Text link",
-    description: "Underlined by its hairline; never colored.",
+    description:
+      "Underlined by its hairline; never colored. The gradient variant inset by one pixel for running copy.",
     category: "actions",
-    classes: ["rs-link"],
+    classes: ["rs-link", "rs-link-underline"],
     css: ["components/link.css"],
-    snippet: `<a class="rs-link" href="#">A text link</a>`,
+    snippet: `<a class="rs-link" href="#">A text link</a>\n<a class="rs-link-underline" href="#">An in-copy link</a>`,
   },
   {
     name: "input",
@@ -129,11 +130,18 @@ export const rasterComponents: RasterComponent[] = [
     description:
       "Fixed top bar. Transparent at rest; on scroll it gains the paper background and a bottom hairline, and the breadcrumbs fade in.",
     category: "navigation",
-    classes: ["rs-crumb-bar", "rs-crumb-bar-scrolled", "rs-crumb-bar-inner"],
+    classes: [
+      "rs-crumb-bar",
+      "rs-crumb-bar-scrolled",
+      "rs-crumb-bar-inner",
+      "rs-crumb-root",
+      "rs-crumb-root-full",
+      "rs-crumb-root-short",
+    ],
     css: ["components/crumb-bar.css"],
     react: "components/crumb-bar.tsx",
     registryDependencies: ["breadcrumbs"],
-    snippet: `<nav class="rs-crumb-bar rs-crumb-bar-scrolled"><div class="rs-crumb-bar-inner"><p class="rs-crumbs"><span>Raster</span><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Components</span></p></div></nav>`,
+    snippet: `<nav class="rs-crumb-bar rs-crumb-bar-scrolled"><div class="rs-crumb-bar-inner"><a class="rs-crumb-root" href="/"><span class="rs-crumb-root-full">Raster</span><span class="rs-crumb-root-short">rs</span></a><p class="rs-crumbs"><span>Docs</span><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Components</span></p></div></nav>`,
   },
   {
     name: "pagination",
@@ -208,9 +216,10 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "table",
     title: "Table",
-    description: "Hairline rows on the open grid; no cell borders, last column right-aligned.",
+    description:
+      "Hairline rows on the open grid; no cell borders, last column right-aligned. Total rows carry 2px rules.",
     category: "content",
-    classes: ["rs-table"],
+    classes: ["rs-table", "rs-total-row"],
     css: ["components/table.css"],
     snippet: `<table class="rs-table"><thead><tr><th>Phase</th><th>Weeks</th></tr></thead><tbody><tr><td>Strategy</td><td>2</td></tr><tr><td>Identity</td><td>4</td></tr></tbody></table>`,
   },
@@ -564,5 +573,35 @@ export const rasterComponents: RasterComponent[] = [
     classes: ["rs-ai", "rs-ai-head", "rs-ai-title", "rs-ai-status", "rs-ai-msg", "rs-ai-user", "rs-ai-user-block", "rs-ai-reply", "rs-ai-card", "rs-ai-tag", "rs-ai-text", "rs-ai-done", "rs-ai-input", "rs-ai-send"],
     css: ["components/assistant.css"],
     snippet: `<div class="rs-ai"><div class="rs-ai-msg rs-ai-user"><div class="rs-ai-user-block">Make the intro tighter.</div></div><p class="rs-ai-reply">Done. Two sentences, same claim.</p></div>`,
+  },
+  {
+    name: "theme-toggle",
+    title: "Theme toggle",
+    description:
+      "Fixed top right. Sun and moon slide on a track; the choice persists in localStorage.",
+    category: "actions",
+    classes: ["rs-theme-toggle", "rs-theme-track", "rs-theme-track-dark", "rs-theme-sun", "rs-theme-moon"],
+    css: ["components/theme-toggle.css"],
+    react: "components/theme-toggle.tsx",
+    snippet: `<button class="rs-theme-toggle" aria-label="Toggle color scheme"><span class="rs-theme-track"><svg class="rs-theme-moon" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A5.5 5.5 0 0 1 6.5 2.5a5.5 5.5 0 1 0 7 7Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><svg class="rs-theme-sun" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3.25" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>`,
+  },
+  {
+    name: "callout",
+    title: "Callout",
+    description: "A tinted note in running copy. Hairline frame, 3px ink left edge.",
+    category: "feedback",
+    classes: ["rs-callout"],
+    css: ["components/callout.css"],
+    snippet: `<div class="rs-callout"><p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p></div>`,
+  },
+  {
+    name: "references",
+    title: "References",
+    description:
+      "Inline citations, a numbered hairline list, and a cite box. Numerals hang in the gutter.",
+    category: "content",
+    classes: ["rs-cite", "rs-refs", "rs-ref-authors", "rs-ref-doi", "rs-cite-box", "rs-cite-box-label", "rs-cite-box-text"],
+    css: ["components/refs.css"],
+    snippet: `<p>Set in a single ink.<sup class="rs-cite"><a href="#ref-1">1</a></sup></p><ol class="rs-refs"><li id="ref-1"><span class="rs-ref-authors">Müller-Brockmann, J.</span> Grid systems in graphic design. <a class="rs-ref-doi" href="#">niggli.ch/grid</a></li></ol>`,
   },
 ];

@@ -71,7 +71,7 @@ pnpm dev          # docs site at localhost:3000
 
 ## Catalogue
 
-54 components, covering the shadcn catalogue. Each is CSS-first with an optional zero-dependency React layer.
+57 components, covering the shadcn catalogue. Each is CSS-first with an optional zero-dependency React layer.
 
 Behavior comes from the platform where it exists. Accordion and collapsible are native `<details>`; the `name` attribute gives exclusive-open without JS. Dialog, alert dialog, sheet, and the command palette are native `<dialog>`: focus trap, Escape, backdrop. Popover uses the Popover API. Carousel uses scroll snap. Tooltip and hover card are CSS. Form controls wrap native inputs.
 

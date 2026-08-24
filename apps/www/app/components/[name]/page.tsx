@@ -264,12 +264,16 @@ toast("Saved", { description: "Your changes are live." });`,
   "crumb-bar": `import { CrumbBar } from "@/components/raster/crumb-bar";
 
 <CrumbBar
+  root={{ label: "Renato Valdés Olmos", href: "/" }}
+  rootShort="RVO"
   trail={[
-    { label: "Raster", href: "/" },
     { label: "Components", href: "/components" },
     { label: "Switch" },
   ]}
 />`,
+  "theme-toggle": `import { ThemeToggle } from "@/components/raster/theme-toggle";
+
+<ThemeToggle onThemeChange={(dark) => console.log(dark)} />`,
   pagination: `import { Pagination } from "@/components/raster/pagination";
 
 <Pagination page={page} count={12} onPageChange={setPage} />`,

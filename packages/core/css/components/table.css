@@ -10,6 +10,7 @@
 .rs-table td:last-child{padding-right:20px}
 .rs-table tr:nth-child(even) td{background:var(--table-alt)}
 .rs-table td:last-child,.rs-table th:last-child{text-align:right}
+.rs-table tr.rs-total-row td{font-weight:500;color:var(--text);border-top:2px solid var(--divider);border-bottom:2px solid var(--divider)}
 @media(max-width:640px){
   .rs-table{font-size:12px;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));margin-right:calc(-1*var(--pad))}
   .rs-table th{padding:8px 10px;font-size:12px}

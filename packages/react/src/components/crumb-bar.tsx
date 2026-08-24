@@ -10,6 +10,10 @@ export interface CrumbBarProps extends React.HTMLAttributes<HTMLElement> {
   trail: CrumbBarItem[];
   /** Pixels of scroll before the bar solidifies and the crumbs fade in. */
   threshold?: number;
+  /** Root crumb, held in the TOC column from 900px. */
+  root?: CrumbBarItem;
+  /** Abbreviated root shown on phones in place of the full label. */
+  rootShort?: React.ReactNode;
 }
 
 /**
@@ -17,7 +21,7 @@ export interface CrumbBarProps extends React.HTMLAttributes<HTMLElement> {
  * page cover scrolls away it gains the paper background and its bottom
  * hairline, and the breadcrumbs fade in.
  */
-export function CrumbBar({ trail, threshold = 110, className, ...props }: CrumbBarProps) {
+export function CrumbBar({ trail, threshold = 110, root, rootShort, className, ...props }: CrumbBarProps) {
   const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => {
@@ -34,6 +38,18 @@ export function CrumbBar({ trail, threshold = 110, className, ...props }: CrumbB
       {...props}
     >
       <div className="rs-crumb-bar-inner">
+        {root &&
+          (root.href ? (
+            <a className="rs-crumb-root" href={root.href}>
+              {rootShort ? <span className="rs-crumb-root-full">{root.label}</span> : root.label}
+              {rootShort && <span className="rs-crumb-root-short">{rootShort}</span>}
+            </a>
+          ) : (
+            <span className="rs-crumb-root">
+              {rootShort ? <span className="rs-crumb-root-full">{root.label}</span> : root.label}
+              {rootShort && <span className="rs-crumb-root-short">{rootShort}</span>}
+            </span>
+          ))}
         <p className="rs-crumbs">
           {trail.map((crumb, index) => {
             const last = index === trail.length - 1;

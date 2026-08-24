@@ -58,8 +58,16 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --table-alt: ${color.dark.tableAlt};
   --grid-line: ${color.dark.gridLine};
 }
+/* Mobile grid (≤${grid.mobile.breakpoint}): two fluid columns, three ${grid.mobile.gutter}px gutters
+   (edge · middle · edge). Column width = 50vw − ${grid.mobile.gutter * 1.5}px; the background
+   draws all four column-edge lines and content lives between the outer pair. */
 @media(max-width:${grid.mobile.breakpoint}px){
-  :root{--pad:${grid.mobile.pad}px}
+  :root{
+    --pad:${grid.mobile.pad}px;
+    --grid-image:linear-gradient(to right,transparent 0,transparent ${grid.mobile.gutter}px,var(--grid-line) ${grid.mobile.gutter}px,var(--grid-line) ${grid.mobile.gutter + 1}px,transparent ${grid.mobile.gutter + 1}px,transparent calc(50vw - ${grid.mobile.gutter / 2}px),var(--grid-line) calc(50vw - ${grid.mobile.gutter / 2}px),var(--grid-line) calc(50vw - ${grid.mobile.gutter / 2 - 1}px),transparent calc(50vw - ${grid.mobile.gutter / 2 - 1}px),transparent calc(50vw + ${grid.mobile.gutter / 2}px),var(--grid-line) calc(50vw + ${grid.mobile.gutter / 2}px),var(--grid-line) calc(50vw + ${grid.mobile.gutter / 2 + 1}px),transparent calc(50vw + ${grid.mobile.gutter / 2 + 1}px),transparent calc(100vw - ${grid.mobile.gutter + 1}px),var(--grid-line) calc(100vw - ${grid.mobile.gutter + 1}px),var(--grid-line) calc(100vw - ${grid.mobile.gutter}px),transparent calc(100vw - ${grid.mobile.gutter}px));
+    --grid-size:100vw;
+    --grid-pos:0 0;
+  }
 }
 `;
 write("css/tokens.css", tokensCss);

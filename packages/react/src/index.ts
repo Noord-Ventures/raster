@@ -27,6 +27,7 @@ export { Tooltip, type TooltipProps } from "./components/tooltip";
 export { toast, Toaster, type ToastOptions, type ToasterProps } from "./components/toast";
 export { DropdownMenu, type DropdownMenuProps, type DropdownMenuItem } from "./components/dropdown-menu";
 export { Toggle, ToggleGroup, type ToggleProps, type ToggleGroupProps } from "./components/toggle";
+export { ThemeToggle, type ThemeToggleProps } from "./components/theme-toggle";
 export { Popover, PopoverTitle, PopoverBody, type PopoverProps } from "./components/popover";
 export { Sheet, SheetTitle, SheetBody, type SheetProps } from "./components/sheet";
 export { ScrollArea, type ScrollAreaProps } from "./components/scroll-area";

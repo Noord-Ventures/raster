@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "callout",
+  "type": "registry:component",
+  "title": "Callout",
+  "description": "A tinted note in running copy. Hairline frame, 3px ink left edge.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json"
+  ],
+  "files": [
+    {
+      "path": "raster/styles/callout.css",
+      "content": "/* ── Callout: a tinted, accent-edged note inside running copy ── */\n.rs-callout{background:var(--table-alt);border:1px solid var(--divider);border-left:3px solid var(--accent);border-radius:var(--radius);padding:16px 20px}\n.rs-callout p{font-size:14px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.6;margin:0}\n.rs-callout p strong{color:var(--text);font-weight:600}\n@media(max-width:640px){.rs-callout{padding:14px 16px}}\n",
+      "type": "registry:file",
+      "target": "styles/raster/callout.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "feedback",
+      "classes": [
+        "rs-callout"
+      ],
+      "snippet": "<div class=\"rs-callout\"><p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p></div>",
+      "cssOnly": true,
+      "registryDependencies": []
+    }
+  }
+}
