@@ -15,7 +15,7 @@
  *   package.json                         homepage, repository
  */
 
-import { LAW, WORD } from "../specimen";
+import { DOOR, LAW, WORD } from "../specimen";
 import { rasterTokens } from "@noordvc/raster";
 
 export const word = WORD;
@@ -36,6 +36,7 @@ export const typeface = {
 export const noord = {
   heading: "Noord",
   what: "Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.",
+  door: DOOR,
   host: rasterTokens.meta.url,
   packages: ["@noordvc/raster", "@noordvc/raster-react", "@noordvc/raster-cli"] as const,
   command: "npx @noordvc/raster-cli init",

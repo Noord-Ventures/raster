@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
+import { DOOR, HOST, LAW } from "../specimen";
 
-export const metadata: Metadata = { title: "Getting started" };
+export const metadata: Metadata = {
+  title: "Getting started",
+  description: LAW,
+};
 
 export default function DocsPage() {
   return (
@@ -13,7 +17,7 @@ export default function DocsPage() {
           <header className="cover" style={{ paddingBottom: 8 }}>
             <h1 className="rs-t-display">Getting started</h1>
             <p className="rs-t-sub">
-              Plain CSS plus components you own. No runtime dependency.
+              Plain CSS plus components you own. The door is {DOOR.replace("https://", "")}.
             </p>
           </header>
 
@@ -37,10 +41,11 @@ export default function DocsPage() {
         </p>
 
         <h2 className="section-label">Using shadcn&apos;s CLI instead</h2>
-        <CodeBlock code={`npx shadcn add https://raster.noord.dev/r/button.json`} />
+        <CodeBlock code={`npx shadcn add ${HOST}/r/button.json`} />
         <p className="rs-t-body">
-          Each component is also published as a shadcn registry item at{" "}
-          <code className="rs-code">https://raster.noord.dev/r/&lt;name&gt;.json</code>.
+          Each component is also a shadcn registry item at{" "}
+          <code className="rs-code">{HOST}/r/&lt;name&gt;.json</code>
+          , on the host we run today.
         </p>
 
         <h2 className="section-label">The typeface</h2>

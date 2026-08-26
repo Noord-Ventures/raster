@@ -4,7 +4,7 @@ import "./about.css";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `${word}. ${law}`,
+  description: law,
 };
 
 export default function AboutPage() {
@@ -34,7 +34,8 @@ export default function AboutPage() {
         <div className="masthead-copy">
           <p>{noord.what}</p>
           <p>
-            Host today:{" "}
+            <a href={noord.door}>{noord.door.replace("https://", "")}</a>
+            {" is the door. Host today: "}
             <a href={noord.host}>{noord.host.replace("https://", "")}</a>
             . Packages: {noord.packages.join(", ")}.
           </p>

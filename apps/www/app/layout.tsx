@@ -5,15 +5,9 @@ import "./site.css";
 import "@/components/examples/use.css";
 import { CrumbBar } from "@/components/crumb-bar";
 import { SiteChrome } from "@/components/site-chrome";
-import { COMMAND, LAW } from "./specimen";
+import { social } from "./social";
 
-export const metadata: Metadata = {
-  title: {
-    default: "Raster: a monochrome design system",
-    template: "%s · Raster",
-  },
-  description: `${LAW} ${COMMAND}`,
-};
+export const metadata: Metadata = social;
 
 const themeInit = `(function(){try{var t=localStorage.getItem("raster-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}})()`;
 

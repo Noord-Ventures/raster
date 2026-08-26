@@ -1,6 +1,8 @@
 # Raster
 
-A monochrome, CSS-first design system. One ink, no accent; emphasis comes from weight, size, and spacing.
+A poster you can install.
+
+Public door: [getraster.com](https://getraster.com). Host today: [raster.noord.dev](https://raster.noord.dev).
 
 This repo contains the tokens, CSS, React components, registry, CLI, and documentation site.
 

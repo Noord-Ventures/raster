@@ -5,8 +5,8 @@ import { SpecimenKit } from "./specimen-kit";
 import "./specimen.css";
 
 export const metadata: Metadata = {
-  title: "Raster",
-  description: `${LAW} ${COMMAND}`,
+  title: WORD,
+  description: LAW,
 };
 
 export default function Home() {

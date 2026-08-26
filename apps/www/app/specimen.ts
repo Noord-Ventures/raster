@@ -5,6 +5,11 @@ export const WORD = "Raster";
 export const LAW = "A poster you can install.";
 export const COMMAND = "npx @noordvc/raster-cli init";
 
+/** Public door. Do not attach DNS from this repo. */
+export const DOOR = "https://getraster.com";
+/** Current host until the door is pointed. Registry and fonts still live here. */
+export const HOST = "https://raster.noord.dev";
+
 /**
  * Object cells on the poster. Names from the catalog on this branch —
  * the same kit a stranger opens under /components. Not a leftover demo.

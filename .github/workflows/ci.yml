@@ -68,10 +68,24 @@ jobs:
           grep -q '{WORD}' "$page"
           grep -q 'A poster you can install.' "$writer"
           grep -q 'npx @noordvc/raster-cli init' "$writer"
-          if grep -n -E 'One ink|204 module|Crouwel|Müller-Brockmann' "$page" "$writer" apps/www/app/layout.tsx; then
+          if grep -n -E 'One ink|204 module|Crouwel|Müller-Brockmann' "$page" "$writer" apps/www/app/layout.tsx apps/www/app/social.ts; then
             echo "Homepage law must not use the old museum caption"
             exit 1
           fi
+          grep -q 'DOOR = "https://getraster.com"' "$writer"
+          grep -q 'HOST = "https://raster.noord.dev"' "$writer"
+          grep -q 'openGraph' apps/www/app/social.ts
+          grep -q 'summary_large_image' apps/www/app/social.ts
+          grep -q '/og.png' apps/www/app/social.ts
+          test -f apps/www/public/og.png
+          python3 -c '
+          from pathlib import Path
+          p = Path("apps/www/public/og.png").read_bytes()
+          assert p[:8] == b"\x89PNG\r\n\x1a\n", "og.png is not a PNG"
+          w = int.from_bytes(p[16:20], "big")
+          h = int.from_bytes(p[20:24], "big")
+          assert (w, h) == (1200, 630), f"og.png must be 1200×630, got {w}×{h}"
+          '
           grep -q 'specimen-page' "$page"
           grep -q 'isSpecimenPath' apps/www/components/crumb-bar.tsx
           test -f apps/www/app/specimen.css
@@ -158,6 +172,8 @@ jobs:
           test -f "$css"
           grep -q 'heading: "Typeface"' "$facts"
           grep -q 'heading: "Noord"' "$facts"
+          grep -q 'door: DOOR' "$facts"
+          grep -q 'getraster.com' apps/www/app/specimen.ts
           grep -q 'heading: "Renato Valdés Olmos"' "$facts"
           grep -q 'foundry.license' "$facts"
           grep -q 'meta.url' "$facts"
