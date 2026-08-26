@@ -31,7 +31,30 @@ export { ThemeToggle, type ThemeToggleProps } from "./components/theme-toggle";
 export { Popover, PopoverTitle, PopoverBody, type PopoverProps } from "./components/popover";
 export { Sheet, SheetTitle, SheetBody, type SheetProps } from "./components/sheet";
 export { ScrollArea, type ScrollAreaProps } from "./components/scroll-area";
-export { LineChart, BarChart, Sparkline, Donut, type ChartSeries, type LineChartProps, type BarChartProps, type SparklineProps, type DonutProps } from "./components/chart";
+export {
+  LineChart,
+  AreaChart,
+  BarChart,
+  ScatterChart,
+  Donut,
+  Share,
+  Histogram,
+  SmallMultiples,
+  Sparkline,
+  type ChartSeries,
+  type ChartAnnotation,
+  type ChartPoint,
+  type LineChartProps,
+  type AreaChartProps,
+  type BarChartProps,
+  type BarOrientation,
+  type ScatterChartProps,
+  type SparklineProps,
+  type DonutProps,
+  type ShareProps,
+  type HistogramProps,
+  type SmallMultiplesProps,
+} from "./components/chart";
 export { Collapsible, type CollapsibleProps } from "./components/collapsible";
 export { HoverCard, type HoverCardProps } from "./components/hover-card";
 export { Kbd } from "./components/kbd";
@@ -47,3 +70,23 @@ export { Calendar, type CalendarProps } from "./components/calendar";
 export { DatePicker, type DatePickerProps } from "./components/date-picker";
 export { DataTable, type DataTableProps, type DataTableColumn } from "./components/data-table";
 export { AspectRatio, type AspectRatioProps } from "./components/aspect-ratio";
+export { ButtonGroup, type ButtonGroupProps } from "./components/button-group";
+export { Drawer, DrawerTitle, DrawerBody, type DrawerProps } from "./components/drawer";
+export { Empty, type EmptyProps } from "./components/empty";
+export { Field, FieldLabel, FieldHint, FieldError, type FieldProps } from "./components/field";
+export { Form, type FormProps } from "./components/form";
+export { InputGroup, InputAddon, type InputGroupProps } from "./components/input-group";
+export { Item, type ItemProps } from "./components/item";
+export { Label, type LabelProps } from "./components/label";
+export { NativeSelect, type NativeSelectProps } from "./components/native-select";
+export {
+  Sidebar,
+  SidebarHead,
+  SidebarNav,
+  SidebarItem,
+  SidebarLabel,
+  SidebarFoot,
+  type SidebarProps,
+  type SidebarItemProps,
+} from "./components/sidebar";
+export { Spinner, type SpinnerProps } from "./components/spinner";

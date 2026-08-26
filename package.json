@@ -1,21 +1,27 @@
 {
   "name": "raster-monorepo",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Raster — a monochrome, CSS-first design system. Tokens, components, CLI, registry, and docs.",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rennvaldes/raster.git"
   },
+  "homepage": "https://raster.noord.dev",
   "type": "module",
   "engines": {
     "node": ">=22.6"
   },
   "packageManager": "pnpm@10.4.1",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
   "scripts": {
     "build": "pnpm -r --filter './packages/*' build",
-    "build:registry": "pnpm --filter @raster/core build:registry",
+    "build:registry": "pnpm --filter @noordvc/raster build:registry",
     "test": "pnpm -r --filter './packages/*' test",
     "typecheck": "pnpm -r --filter './packages/*' typecheck",
     "dev": "pnpm --filter www dev"

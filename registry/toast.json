@@ -5,7 +5,8 @@
   "title": "Toast",
   "description": "Bottom right, aria-live polite, dismissed after four seconds.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

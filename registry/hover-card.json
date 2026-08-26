@@ -5,7 +5,8 @@
   "title": "Hover card",
   "description": "Preview panel on hover or keyboard focus. CSS only.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

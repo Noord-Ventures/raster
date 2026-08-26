@@ -5,7 +5,8 @@
   "title": "Stepper",
   "description": "Numbered dots joined by hairlines. Done is ink; active is outlined.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

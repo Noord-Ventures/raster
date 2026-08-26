@@ -1,0 +1,5 @@
+/* ── Button group: flush joined actions, one hairline between ── */
+.rs-btn-group{display:inline-flex;align-items:stretch}
+.rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{border-radius:0;margin-inline-start:-1px}
+.rs-btn-group > :first-child{margin-inline-start:0}
+.rs-btn-group > .rs-btn-primary{position:relative;z-index:1}

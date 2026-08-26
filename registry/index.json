@@ -1,14 +1,37 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "raster",
-  "homepage": "https://noord.dev/studio/raster",
+  "homepage": "https://raster.noord.dev",
   "items": [
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "inter",
+      "type": "registry:font",
+      "title": "Inter",
+      "description": "Default face. Variable Inter (latin + latin-ext), SIL OFL 1.1. System sans is fallback only.",
+      "meta": {
+        "raster": {
+          "category": "foundation",
+          "cssOnly": true
+        }
+      },
+      "files": [
+        {
+          "path": "raster/styles/inter.css",
+          "type": "registry:file",
+          "target": "styles/raster/inter.css"
+        }
+      ]
+    },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "raster-base",
       "type": "registry:style",
       "title": "Raster base",
       "description": "Tokens (light + dark), page base with the visible module grid, type scale, and reduced-motion rules.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/inter.json"
+      ],
       "meta": {
         "raster": {
           "category": "foundation",
@@ -30,7 +53,8 @@
       "title": "Button",
       "description": "Solid ink primary and hairline ghost. One primary per view. 40px tall; 36px small variant.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -65,12 +89,55 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "button-group",
+      "type": "registry:component",
+      "title": "Button group",
+      "description": "Flush joined actions. One hairline between.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-btn-group"
+          ],
+          "snippet": "<div class=\"rs-btn-group\"><button class=\"rs-btn-ghost\">Left</button><button class=\"rs-btn-ghost\">Center</button><button class=\"rs-btn-ghost\">Right</button></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "button"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/button-group.tsx",
+          "type": "registry:component",
+          "target": "components/raster/button-group.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/button-group.css",
+          "type": "registry:file",
+          "target": "styles/raster/button-group.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "link",
       "type": "registry:component",
       "title": "Text link",
       "description": "Underlined by its hairline; never colored. The gradient variant inset by one pixel for running copy.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -99,7 +166,8 @@
       "title": "Input",
       "description": "Quiet field: hairline border, ink focus, label above at 12px.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -138,12 +206,180 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "label",
+      "type": "registry:component",
+      "title": "Label",
+      "description": "12px, secondary ink, above the control.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-label"
+          ],
+          "snippet": "<label class=\"rs-label\" for=\"name\">Name</label>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/label.tsx",
+          "type": "registry:component",
+          "target": "components/raster/label.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/field.css",
+          "type": "registry:file",
+          "target": "styles/raster/field.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "field",
+      "type": "registry:component",
+      "title": "Field",
+      "description": "Label, control, hint or error. The stack every form is made of.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/input.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-field",
+            "rs-field-label",
+            "rs-field-hint",
+            "rs-field-error"
+          ],
+          "snippet": "<div class=\"rs-field\"><label class=\"rs-field-label\">Name</label><input class=\"rs-input rs-input-full\" /><p class=\"rs-field-hint\">As it appears on the invoice.</p></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "input"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/field.tsx",
+          "type": "registry:component",
+          "target": "components/raster/field.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/field.css",
+          "type": "registry:file",
+          "target": "styles/raster/field.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "input-group",
+      "type": "registry:component",
+      "title": "Input group",
+      "description": "Addon and field share one hairline.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/input.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-input-group",
+            "rs-input-addon",
+            "rs-input-group-end"
+          ],
+          "snippet": "<div class=\"rs-input-group\"><span class=\"rs-input-addon\">https://</span><input class=\"rs-input\" placeholder=\"raster.noord.dev\" /></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "input"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/input-group.tsx",
+          "type": "registry:component",
+          "target": "components/raster/input-group.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/input-group.css",
+          "type": "registry:file",
+          "target": "styles/raster/input-group.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "native-select",
+      "type": "registry:component",
+      "title": "Native select",
+      "description": "The platform list. Raster chrome. No custom menu.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-native-select"
+          ],
+          "snippet": "<select class=\"rs-native-select\"><option>Alkmaar</option><option>Amsterdam</option><option>Rotterdam</option></select>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/native-select.tsx",
+          "type": "registry:component",
+          "target": "components/raster/native-select.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/native-select.css",
+          "type": "registry:file",
+          "target": "styles/raster/native-select.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "inline-form",
       "type": "registry:component",
       "title": "Inline form",
       "description": "One field, one action. The action sits inside the field and appears once input validates.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/button.json"
       ],
       "meta": {
@@ -189,7 +425,8 @@
       "title": "Radio",
       "description": "One choice; the dot is ink.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -229,7 +466,8 @@
       "title": "Checkbox",
       "description": "Many choices; 16px boxes, 3px radius, ink when checked.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -269,7 +507,8 @@
       "title": "Switch",
       "description": "32×18 pill; on is ink, off is hairline. State moves, layout doesn't.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -308,7 +547,8 @@
       "title": "Slider",
       "description": "Thin track with ink fill and 14px thumb.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -348,7 +588,8 @@
       "title": "Progress",
       "description": "4px bar. The percentage lives in the label, not the bar.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -385,9 +626,10 @@
       "name": "tabs",
       "type": "registry:component",
       "title": "Tabs",
-      "description": "Active tab is ink with a 1.5px underline.",
+      "description": "One line of type. Hairline on the active tab only.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -397,7 +639,7 @@
             "rs-tab",
             "rs-tab-active"
           ],
-          "snippet": "<div class=\"rs-tabs\"><span class=\"rs-tab rs-tab-active\">Overview</span><span class=\"rs-tab\">Activity</span></div>",
+          "snippet": "<div class=\"rs-tabs\"><span class=\"rs-tab rs-tab-active\">Overview</span><span class=\"rs-tab\">Activity</span><span class=\"rs-tab\">Settings</span></div>",
           "cssOnly": false,
           "registryDependencies": []
         }
@@ -425,19 +667,21 @@
       "name": "breadcrumbs",
       "type": "registry:component",
       "title": "Breadcrumbs",
-      "description": "Slashes at 40% opacity; the current page is ink.",
+      "description": "One ink trail. Ancestors stay ink; slashes at 40%; the current page is full ink.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
           "category": "navigation",
           "classes": [
             "rs-crumbs",
+            "rs-crumbs-link",
             "rs-crumbs-sep",
             "rs-crumbs-here"
           ],
-          "snippet": "<p class=\"rs-crumbs\"><span>Studio</span><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Raster</span></p>",
+          "snippet": "<p class=\"rs-crumbs\"><a class=\"rs-crumbs-link\" href=\"/\">Studio</a><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Raster</span></p>",
           "cssOnly": false,
           "registryDependencies": []
         }
@@ -468,6 +712,7 @@
       "description": "Fixed top bar. Transparent at rest; on scroll it gains the paper background and a bottom hairline, and the breadcrumbs fade in.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/breadcrumbs.json"
       ],
       "meta": {
@@ -513,7 +758,8 @@
       "title": "Pagination",
       "description": "Squares, not pills; the current page is solid ink.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -554,7 +800,8 @@
       "title": "Select",
       "description": "Closed trigger with chevron; the open menu overlays instead of pushing layout.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -597,6 +844,7 @@
       "description": "One question, two equal-sized actions, no third option.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/button.json"
       ],
       "meta": {
@@ -640,7 +888,8 @@
       "title": "Badge",
       "description": "Outline for recommendations, solid for done, muted for pending.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -680,7 +929,8 @@
       "title": "Mono chip",
       "description": "Technical identifiers set in the mono stack with a mixed hairline.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -708,7 +958,8 @@
       "title": "Card",
       "description": "Hairline frame; label, title, body.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -749,7 +1000,8 @@
       "title": "Stepper",
       "description": "Numbered dots joined by hairlines. Done is ink; active is outlined.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -794,7 +1046,8 @@
       "title": "Table",
       "description": "Hairline rows on the open grid; no cell borders, last column right-aligned. Total rows carry 2px rules.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -823,7 +1076,8 @@
       "title": "Icons",
       "description": "16/20/24/32px, single-weight 1.5px strokes in currentColor, non-scaling.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -851,7 +1105,8 @@
       "title": "Accordion",
       "description": "Native <details> rows on hairlines. The name attribute keeps one item open at a time; no JavaScript.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -892,7 +1147,8 @@
       "title": "Alert",
       "description": "Hairline frame with an ink icon. Solid ink variant for critical.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -934,6 +1190,7 @@
       "description": "Native <dialog> that requires an explicit answer. Escape and light dismiss are disabled.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/dialog.json",
         "https://raster.noord.dev/r/button.json"
       ],
@@ -961,6 +1218,11 @@
           "target": "components/raster/alert-dialog.tsx"
         },
         {
+          "path": "raster/dialog.tsx",
+          "type": "registry:component",
+          "target": "components/raster/dialog.tsx"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -979,7 +1241,8 @@
       "title": "Avatar",
       "description": "Initials in a circle. Images cover; broken images fall back to initials. Rows overlap.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1015,12 +1278,55 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "item",
+      "type": "registry:component",
+      "title": "Item",
+      "description": "A flush row. Title occupies the cell; meta trails.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-item",
+            "rs-item-title",
+            "rs-item-desc",
+            "rs-item-meta"
+          ],
+          "snippet": "<div class=\"rs-item\"><div><p class=\"rs-item-title\">Alkmaar</p><p class=\"rs-item-desc\">The studio city.</p></div><span class=\"rs-item-meta\">NL</span></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/item.tsx",
+          "type": "registry:component",
+          "target": "components/raster/item.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/item.css",
+          "type": "registry:file",
+          "target": "styles/raster/item.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "textarea",
       "type": "registry:component",
       "title": "Textarea",
       "description": "The quiet field, taller. Vertical resize only.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/input.json"
       ],
       "meta": {
@@ -1061,7 +1367,8 @@
       "title": "Separator",
       "description": "A hairline, horizontal or vertical.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1071,11 +1378,21 @@
             "rs-sep-v"
           ],
           "snippet": "<hr class=\"rs-sep\" />",
-          "cssOnly": true,
+          "cssOnly": false,
           "registryDependencies": []
         }
       },
       "files": [
+        {
+          "path": "raster/separator.tsx",
+          "type": "registry:component",
+          "target": "components/raster/separator.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
         {
           "path": "raster/styles/separator.css",
           "type": "registry:file",
@@ -1090,7 +1407,8 @@
       "title": "Skeleton",
       "description": "Pulse on the divider tone. Still under prefers-reduced-motion.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1123,12 +1441,97 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "empty",
+      "type": "registry:component",
+      "title": "Empty",
+      "description": "A vacant cell. Title, one sentence, optional action.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-empty",
+            "rs-empty-title",
+            "rs-empty-body",
+            "rs-empty-action"
+          ],
+          "snippet": "<div class=\"rs-empty\"><p class=\"rs-empty-title\">No projects yet</p><p class=\"rs-empty-body\">Start one. The grid is empty on purpose.</p><div class=\"rs-empty-action\"><button class=\"rs-btn-ghost rs-btn-sm\">New project</button></div></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "button"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/empty.tsx",
+          "type": "registry:component",
+          "target": "components/raster/empty.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/empty.css",
+          "type": "registry:file",
+          "target": "styles/raster/empty.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "spinner",
+      "type": "registry:component",
+      "title": "Spinner",
+      "description": "Hairline ring. Stops under prefers-reduced-motion.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-spinner"
+          ],
+          "snippet": "<span class=\"rs-spinner\" role=\"status\" aria-label=\"Loading\"></span>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/spinner.tsx",
+          "type": "registry:component",
+          "target": "components/raster/spinner.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/spinner.css",
+          "type": "registry:file",
+          "target": "styles/raster/spinner.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "tooltip",
       "type": "registry:component",
       "title": "Tooltip",
       "description": "CSS only. Shows on hover and keyboard focus.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/button.json"
       ],
       "meta": {
@@ -1169,7 +1572,8 @@
       "title": "Toast",
       "description": "Bottom right, aria-live polite, dismissed after four seconds.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1211,6 +1615,7 @@
       "description": "Action menu with menu semantics and keyboard navigation.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/select.json",
         "https://raster.noord.dev/r/button.json"
       ],
@@ -1260,7 +1665,8 @@
       "title": "Toggle",
       "description": "Press switch and group. Pressed is ink; state lives in aria-pressed.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1294,12 +1700,60 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "toggle-group",
+      "type": "registry:component",
+      "title": "Toggle group",
+      "description": "One pressed at a time. Joined hairlines.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/toggle.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-toggle-group"
+          ],
+          "snippet": "<div class=\"rs-toggle-group\"><button class=\"rs-toggle\" aria-pressed=\"true\">Left</button><button class=\"rs-toggle\" aria-pressed=\"false\">Center</button><button class=\"rs-toggle\" aria-pressed=\"false\">Right</button></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "toggle"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/toggle-group.tsx",
+          "type": "registry:component",
+          "target": "components/raster/toggle-group.tsx"
+        },
+        {
+          "path": "raster/toggle.tsx",
+          "type": "registry:component",
+          "target": "components/raster/toggle.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/toggle.css",
+          "type": "registry:file",
+          "target": "styles/raster/toggle.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "popover",
       "type": "registry:component",
       "title": "Popover",
       "description": "Native Popover API: top layer, light dismiss.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/button.json"
       ],
       "meta": {
@@ -1342,7 +1796,8 @@
       "title": "Sheet",
       "description": "Native <dialog> at the screen edge. Platform focus trap and backdrop.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1378,12 +1833,54 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "drawer",
+      "type": "registry:component",
+      "title": "Drawer",
+      "description": "Native <dialog> from the bottom edge. Platform focus trap and backdrop.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-drawer",
+            "rs-drawer-title",
+            "rs-drawer-body"
+          ],
+          "snippet": "<dialog class=\"rs-drawer\" open><span class=\"rs-drawer-title\">Notes</span><p class=\"rs-drawer-body\">A bottom panel. Escape closes it.</p></dialog>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/drawer.tsx",
+          "type": "registry:component",
+          "target": "components/raster/drawer.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/drawer.css",
+          "type": "registry:file",
+          "target": "styles/raster/drawer.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "scroll-area",
       "type": "registry:component",
       "title": "Scroll area",
       "description": "Hidden scrollbar; feathered top and bottom edges.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1419,9 +1916,10 @@
       "name": "chart",
       "type": "registry:component",
       "title": "Charts",
-      "description": "SVG line, bar, sparkline, donut. Hairline grid, ink marks. Series differ by texture: solid, dashed, gray, dotted.",
+      "description": "A line on a 204 field. Hairline grid, ink marks. Series differ by texture: solid, dashed, gray, dotted. One optional Crouwel spot.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1446,6 +1944,608 @@
           "target": "components/raster/chart.tsx"
         },
         {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "bar-chart",
+      "type": "registry:component",
+      "title": "Bar chart",
+      "description": "Vertical or horizontal. Thin ink bars, no radius. Stacked when the series share a field.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/chart.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart-bar"
+          ],
+          "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><line class=\"rs-chart-grid\" x1=\"0\" x2=\"240\" y1=\"56\" y2=\"56\"/><rect class=\"rs-chart-bar\" x=\"20\" y=\"18\" width=\"8\" height=\"38\"/><rect class=\"rs-chart-bar\" x=\"48\" y=\"10\" width=\"8\" height=\"46\"/><rect class=\"rs-chart-bar\" x=\"76\" y=\"24\" width=\"8\" height=\"32\"/></svg></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "chart"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/bar-chart.tsx",
+          "type": "registry:component",
+          "target": "components/raster/bar-chart.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "area-chart",
+      "type": "registry:component",
+      "title": "Area chart",
+      "description": "A filled field under the first series. Same law as the line: hairlines, texture, one optional spot.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/chart.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart-area"
+          ],
+          "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><path class=\"rs-chart-area\" d=\"M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16 L240 56 L0 56 Z\"/><path class=\"rs-chart-line\" d=\"M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16\"/></svg></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "chart"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/area-chart.tsx",
+          "type": "registry:component",
+          "target": "components/raster/area-chart.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "scatter-chart",
+      "type": "registry:component",
+      "title": "Scatter chart",
+      "description": "Marks on a hairline grid. One ink, or one Crouwel spot on the field.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/chart.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart-mark"
+          ],
+          "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><line class=\"rs-chart-grid\" x1=\"0\" x2=\"240\" y1=\"56\" y2=\"56\"/><circle class=\"rs-chart-mark\" cx=\"36\" cy=\"40\" r=\"2\"/><circle class=\"rs-chart-mark\" cx=\"88\" cy=\"22\" r=\"2\"/><circle class=\"rs-chart-mark\" cx=\"140\" cy=\"30\" r=\"2\"/><circle class=\"rs-chart-mark\" cx=\"196\" cy=\"14\" r=\"2\"/></svg></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "chart"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/scatter-chart.tsx",
+          "type": "registry:component",
+          "target": "components/raster/scatter-chart.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "donut",
+      "type": "registry:component",
+      "title": "Donut or share",
+      "description": "A ring against its whole, or a flush share strip. Hairline, no rounded fat stroke.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/chart.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart-donut"
+          ],
+          "snippet": "<div class=\"rs-chart\"><svg class=\"rs-chart-donut\" viewBox=\"0 0 96 96\" width=\"96\" height=\"96\"><circle cx=\"48\" cy=\"48\" r=\"36\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\"/></svg></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "chart"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/donut.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "histogram",
+      "type": "registry:component",
+      "title": "Histogram",
+      "description": "Adjacent bins, one hairline between. A density field, not a dashboard widget.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/chart.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart-hist"
+          ],
+          "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><rect class=\"rs-chart-hist\" x=\"8\" y=\"36\" width=\"36\" height=\"20\"/><rect class=\"rs-chart-hist\" x=\"45\" y=\"20\" width=\"36\" height=\"36\"/><rect class=\"rs-chart-hist\" x=\"82\" y=\"8\" width=\"36\" height=\"48\"/><rect class=\"rs-chart-hist\" x=\"119\" y=\"24\" width=\"36\" height=\"32\"/></svg></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "chart"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "small-multiples",
+      "type": "registry:component",
+      "title": "Small multiples",
+      "description": "The same axes, repeated. One 184 column per panel.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/chart.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart-multi"
+          ],
+          "snippet": "<div class=\"rs-chart-multi\"><div class=\"rs-chart\"><svg viewBox=\"0 0 184 64\" width=\"184\" height=\"64\"><path class=\"rs-chart-line\" d=\"M0 40 L46 28 L92 34 L138 16 L184 22\"/></svg></div><div class=\"rs-chart\"><svg viewBox=\"0 0 184 64\" width=\"184\" height=\"64\"><path class=\"rs-chart-line\" d=\"M0 30 L46 36 L92 22 L138 28 L184 18\"/></svg></div></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "chart"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/small-multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/small-multiples.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -1465,6 +2565,7 @@
       "description": "A bare native <details>.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/accordion.json"
       ],
       "meta": {
@@ -1506,7 +2607,8 @@
       "title": "Hover card",
       "description": "Preview panel on hover or keyboard focus. CSS only.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1545,7 +2647,8 @@
       "title": "Kbd",
       "description": "Keys in the mono stack with a pressed bottom edge.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1583,7 +2686,8 @@
       "title": "One-time code",
       "description": "One cell per character. Auto-advance, backspace, paste.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1622,6 +2726,7 @@
       "description": "Right-click menu at the pointer. Escape and outside clicks close it.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/select.json",
         "https://raster.noord.dev/r/dropdown-menu.json"
       ],
@@ -1648,6 +2753,11 @@
           "target": "components/raster/context-menu.tsx"
         },
         {
+          "path": "raster/dropdown-menu.tsx",
+          "type": "registry:component",
+          "target": "components/raster/dropdown-menu.tsx"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -1672,6 +2782,7 @@
       "description": "Dropdown menus in a hairline strip.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/dropdown-menu.json",
         "https://raster.noord.dev/r/select.json"
       ],
@@ -1696,6 +2807,11 @@
           "target": "components/raster/menubar.tsx"
         },
         {
+          "path": "raster/dropdown-menu.tsx",
+          "type": "registry:component",
+          "target": "components/raster/dropdown-menu.tsx"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -1714,7 +2830,8 @@
       "title": "Navigation menu",
       "description": "Links in a row; the current page is ink.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1747,12 +2864,57 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "sidebar",
+      "type": "registry:component",
+      "title": "Sidebar",
+      "description": "One 204 module rail. Air under the last item before the foot rule.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "navigation",
+          "classes": [
+            "rs-sidebar",
+            "rs-sidebar-head",
+            "rs-sidebar-nav",
+            "rs-sidebar-item",
+            "rs-sidebar-label",
+            "rs-sidebar-foot"
+          ],
+          "snippet": "<aside class=\"rs-sidebar\"><div class=\"rs-sidebar-head\">Raster</div><nav class=\"rs-sidebar-nav\"><p class=\"rs-sidebar-label\">Go to</p><a class=\"rs-sidebar-item\" aria-current=\"page\">Overview</a><a class=\"rs-sidebar-item\" href=\"#\">Docs</a><a class=\"rs-sidebar-item\" href=\"#\">Components</a></nav><div class=\"rs-sidebar-foot\">0.3</div></aside>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/sidebar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/sidebar.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/sidebar.css",
+          "type": "registry:file",
+          "target": "styles/raster/sidebar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "carousel",
       "type": "registry:component",
       "title": "Carousel",
       "description": "Native scroll snap. Buttons nudge; edges feather.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/pagination.json",
         "https://raster.noord.dev/r/card.json"
       ],
@@ -1797,7 +2959,8 @@
       "title": "Resizable",
       "description": "Two panes on a draggable hairline. Arrow keys work; state lives in ARIA.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1838,6 +3001,7 @@
       "description": "Filtered listbox on the quiet field. Combobox semantics.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/input.json",
         "https://raster.noord.dev/r/select.json"
       ],
@@ -1863,6 +3027,11 @@
           "target": "components/raster/combobox.tsx"
         },
         {
+          "path": "raster/select.tsx",
+          "type": "registry:component",
+          "target": "components/raster/select.tsx"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -1882,6 +3051,7 @@
       "description": "Command palette in a native <dialog>. Filter, arrows, enter.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/dialog.json"
       ],
       "meta": {
@@ -1911,6 +3081,11 @@
           "target": "components/raster/command.tsx"
         },
         {
+          "path": "raster/dialog.tsx",
+          "type": "registry:component",
+          "target": "components/raster/dialog.tsx"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -1930,6 +3105,7 @@
       "description": "Month grid. Selected is ink; today is a hairline. Weeks start on Monday.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/pagination.json"
       ],
       "meta": {
@@ -1980,6 +3156,7 @@
       "description": "Hairline trigger with a calendar overlay.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/select.json",
         "https://raster.noord.dev/r/calendar.json"
       ],
@@ -2003,6 +3180,11 @@
           "path": "raster/date-picker.tsx",
           "type": "registry:component",
           "target": "components/raster/date-picker.tsx"
+        },
+        {
+          "path": "raster/calendar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/calendar.tsx"
         },
         {
           "path": "raster/cx.ts",
@@ -2029,6 +3211,7 @@
       "description": "Sortable rows over the plain table. aria-sort on headers.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
         "https://raster.noord.dev/r/table.json"
       ],
       "meta": {
@@ -2070,7 +3253,8 @@
       "title": "Aspect ratio",
       "description": "A box that keeps its proportions. Media covers.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -2109,25 +3293,37 @@
       "description": "Fields stacked on the grid; one primary action at the end.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/field.json",
         "https://raster.noord.dev/r/input.json",
         "https://raster.noord.dev/r/button.json"
       ],
       "meta": {
         "raster": {
-          "category": "patterns",
+          "category": "forms",
           "classes": [
-            "rs-field",
-            "rs-field-label"
+            "rs-form"
           ],
-          "snippet": "<form style=\"display:flex;flex-direction:column;gap:16px;max-width:388px\"><div class=\"rs-field\"><span class=\"rs-field-label\">Name</span><input class=\"rs-input rs-input-full\" /></div><div class=\"rs-field\"><span class=\"rs-field-label\">E-mail</span><input class=\"rs-input rs-input-full\" /></div><button class=\"rs-btn-primary\">Send</button></form>",
-          "cssOnly": true,
+          "snippet": "<form class=\"rs-form\"><div class=\"rs-field\"><span class=\"rs-field-label\">Name</span><input class=\"rs-input rs-input-full\" /></div><div class=\"rs-field\"><span class=\"rs-field-label\">E-mail</span><input class=\"rs-input rs-input-full\" /></div><button class=\"rs-btn-primary\">Send</button></form>",
+          "cssOnly": false,
           "registryDependencies": [
+            "field",
             "input",
             "button"
           ]
         }
       },
       "files": [
+        {
+          "path": "raster/form.tsx",
+          "type": "registry:component",
+          "target": "components/raster/form.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
         {
           "path": "raster/styles/field.css",
           "type": "registry:file",
@@ -2142,7 +3338,8 @@
       "title": "Workflow card",
       "description": "Editable pipeline card: dashed frame, drag handle, dashed chips, ghost add-step card.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -2176,7 +3373,8 @@
       "title": "Assistant panel",
       "description": "Chat surface: user block, replies, suggestion card with applied state, quiet input row.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -2217,7 +3415,8 @@
       "title": "Theme toggle",
       "description": "Fixed top right. Sun and moon slide on a track; the choice persists in localStorage.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -2259,7 +3458,8 @@
       "title": "Callout",
       "description": "A tinted note in running copy. Hairline frame, 3px ink left edge.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -2287,7 +3487,8 @@
       "title": "References",
       "description": "Inline citations, a numbered hairline list, and a cite box. Numerals hang in the gutter.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json"
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
       ],
       "meta": {
         "raster": {

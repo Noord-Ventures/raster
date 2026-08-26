@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { rasterComponents } from "@raster/core";
+import { rasterComponents } from "@noordvc/raster";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
+import { InAction } from "@/components/examples/scene";
 import { Preview } from "@/components/preview";
 
 export function generateStaticParams() {
@@ -24,6 +25,87 @@ const reactUsage: Record<string, string> = {
 
 <Button>Primary action</Button>
 <Button variant="ghost" size="sm">Secondary</Button>`,
+  "button-group": `import { ButtonGroup } from "@/components/raster/button-group";
+import { Button } from "@/components/raster/button";
+
+<ButtonGroup>
+  <Button variant="ghost">Left</Button>
+  <Button variant="ghost">Center</Button>
+  <Button variant="ghost">Right</Button>
+</ButtonGroup>`,
+  label: `import { Label } from "@/components/raster/label";
+
+<Label htmlFor="name">Name</Label>`,
+  field: `import { Field, FieldHint, FieldLabel } from "@/components/raster/field";
+
+<Field>
+  <FieldLabel htmlFor="name">Name</FieldLabel>
+  <input id="name" className="rs-input rs-input-full" />
+  <FieldHint>As it appears on the invoice.</FieldHint>
+</Field>`,
+  form: `import { Form } from "@/components/raster/form";
+import { Field, FieldLabel } from "@/components/raster/field";
+import { Button } from "@/components/raster/button";
+
+<Form onSubmit={save}>
+  <Field>
+    <FieldLabel htmlFor="name">Name</FieldLabel>
+    <input id="name" className="rs-input rs-input-full" />
+  </Field>
+  <Button type="submit">Send</Button>
+</Form>`,
+  "input-group": `import { InputAddon, InputGroup } from "@/components/raster/input-group";
+
+<InputGroup>
+  <InputAddon>https://</InputAddon>
+  <input className="rs-input" placeholder="raster.noord.dev" />
+</InputGroup>`,
+  "native-select": `import { NativeSelect } from "@/components/raster/native-select";
+
+<NativeSelect label="City" defaultValue="alkmaar">
+  <option value="alkmaar">Alkmaar</option>
+  <option value="amsterdam">Amsterdam</option>
+</NativeSelect>`,
+  item: `import { Item } from "@/components/raster/item";
+
+<Item title="Alkmaar" description="The studio city." meta="NL" />`,
+  empty: `import { Empty } from "@/components/raster/empty";
+import { Button } from "@/components/raster/button";
+
+<Empty title="No projects yet" action={<Button variant="ghost" size="sm">New project</Button>}>
+  Start one. The grid is empty on purpose.
+</Empty>`,
+  spinner: `import { Spinner } from "@/components/raster/spinner";
+
+<Spinner label="Loading" />`,
+  drawer: `import { Drawer, DrawerBody, DrawerTitle } from "@/components/raster/drawer";
+
+<Drawer open={open} onClose={() => setOpen(false)}>
+  <DrawerTitle>Notes</DrawerTitle>
+  <DrawerBody>A bottom panel. Escape closes it.</DrawerBody>
+</Drawer>`,
+  sidebar: `import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@/components/raster/sidebar";
+
+<Sidebar>
+  <SidebarHead>Raster</SidebarHead>
+  <SidebarNav>
+    <SidebarLabel>Go to</SidebarLabel>
+    <SidebarItem href="/" current>Overview</SidebarItem>
+    <SidebarItem href="/docs">Docs</SidebarItem>
+  </SidebarNav>
+  <SidebarFoot>0.3</SidebarFoot>
+</Sidebar>`,
+  "toggle-group": `import { ToggleGroup } from "@/components/raster/toggle-group";
+
+<ToggleGroup
+  options={[
+    { value: "left", label: "Left" },
+    { value: "center", label: "Center" },
+    { value: "right", label: "Right" },
+  ]}
+  value={align}
+  onValueChange={setAlign}
+/>`,
   input: `import { Input } from "@/components/raster/input";
 
 <Input label="E-mail" placeholder="renn@noord.vc" ok feedback="Looks good" />`,
@@ -61,20 +143,73 @@ const reactUsage: Record<string, string> = {
   breadcrumbs: `import { Breadcrumbs } from "@/components/raster/breadcrumbs";
 
 <Breadcrumbs items={[{ label: "Studio", href: "/studio" }, { label: "Raster" }]} />`,
-  chart: `import { BarChart, Donut, LineChart, Sparkline } from "@/components/raster/chart";
+  chart: `import { LineChart } from "@/components/raster/chart";
 
 <LineChart
-  labels={months}
+  height={204}
+  labels={days}
   series={[
-    { name: "Revenue", values: revenue },
-    { name: "Costs", values: costs },
+    { name: "Sheets", values: sheets },
+    { name: "Proofs", values: proofs },
   ]}
-  area
-/>
+  unit="sheets"
+  annotations={[{ at: 3, label: "Press" }]}
+  spot
+  inverted={false}
+/>`,
+  "bar-chart": `import { BarChart } from "@/components/raster/chart";
 
-<BarChart data={[{ label: "Q1", value: 42 }, { label: "Q2", value: 58 }]} />
-<Sparkline values={[12, 18, 15, 26, 24, 34]} />
-<Donut value={72} label="complete" />`,
+<BarChart
+  height={204}
+  orientation="horizontal"
+  data={[
+    { label: "Alkmaar", value: 42 },
+    { label: "Delft", value: 28 },
+  ]}
+  unit="issues"
+  stacked
+/>`,
+  "area-chart": `import { AreaChart } from "@/components/raster/chart";
+
+<AreaChart
+  height={204}
+  labels={days}
+  series={[{ name: "Sheets", values: sheets }]}
+  unit="sheets"
+  annotations={[{ at: 3, label: "Press" }]}
+/>`,
+  "scatter-chart": `import { ScatterChart } from "@/components/raster/chart";
+
+<ScatterChart
+  height={204}
+  points={marks}
+  xLabel="Module"
+  yLabel="Density"
+  annotations={[{ at: 40, label: "204" }]}
+/>`,
+  donut: `import { Donut, Share } from "@/components/raster/chart";
+
+<Donut value={72} max={100} size={184} label="printed" />
+<Share slices={[{ label: "Sheet", value: 72 }, { label: "Proof", value: 18 }]} />`,
+  histogram: `import { Histogram } from "@/components/raster/chart";
+
+<Histogram
+  height={204}
+  bins={[
+    { label: "0–1", count: 4 },
+    { label: "1–2", count: 11 },
+    { label: "2–3", count: 18 },
+  ]}
+/>`,
+  "small-multiples": `import { SmallMultiples } from "@/components/raster/chart";
+
+<SmallMultiples
+  height={136}
+  panels={[
+    { title: "Alkmaar", labels: days, series: [{ name: "Sheets", values: alkmaar }] },
+    { title: "Delft", labels: days, series: [{ name: "Sheets", values: delft }] },
+  ]}
+/>`,
   collapsible: `import { Collapsible } from "@/components/raster/collapsible";
 
 <Collapsible title="Show the details">Here they are.</Collapsible>`,
@@ -337,8 +472,10 @@ export default async function ComponentPage({
           <Preview name={component.name} snippet={component.snippet} />
         </div>
 
+        <InAction name={component.name} />
+
         <h2 className="section-label">Install</h2>
-        <CodeBlock code={`npx raster add ${component.name}`} />
+        <CodeBlock code={`npx @noordvc/raster-cli add ${component.name}`} />
 
         <h2 className="section-label">Markup</h2>
         <CodeBlock code={component.snippet} />

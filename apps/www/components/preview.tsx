@@ -4,7 +4,29 @@ import * as React from "react";
 import {
   Accordion,
   AspectRatio,
+  AreaChart,
   BarChart,
+  ButtonGroup,
+  Drawer,
+  DrawerBody,
+  DrawerTitle,
+  Empty,
+  Field,
+  FieldHint,
+  FieldLabel,
+  Form,
+  InputAddon,
+  InputGroup,
+  Item,
+  Label,
+  NativeSelect,
+  Sidebar,
+  SidebarFoot,
+  SidebarHead,
+  SidebarItem,
+  SidebarLabel,
+  SidebarNav,
+  Spinner,
   Calendar,
   Carousel,
   Collapsible,
@@ -14,13 +36,16 @@ import {
   DataTable,
   DatePicker,
   Donut,
+  Histogram,
   HoverCard,
   InputOTP,
   Kbd,
   LineChart,
   Menubar,
   NavigationMenu,
-  Sparkline,
+  ScatterChart,
+  Share,
+  SmallMultiples,
   Split,
   AccordionItem,
   Alert,
@@ -72,7 +97,7 @@ import {
   TabList,
   TabPanel,
   Tabs,
-} from "@raster/react";
+} from "@noordvc/raster-react";
 
 function DialogDemo() {
   const [open, setOpen] = React.useState(false);
@@ -116,6 +141,21 @@ function AlertDialogDemo() {
           </Button>
         </AlertDialogActions>
       </AlertDialog>
+    </>
+  );
+}
+
+function DrawerDemo() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <>
+      <Button variant="ghost" size="sm" onClick={() => setOpen(true)}>
+        Open notes
+      </Button>
+      <Drawer open={open} onClose={() => setOpen(false)}>
+        <DrawerTitle>Notes</DrawerTitle>
+        <DrawerBody>A bottom panel. Escape closes it.</DrawerBody>
+      </Drawer>
     </>
   );
 }
@@ -207,6 +247,13 @@ function ProgressDemo() {
 
 /** Live demo per registry name. CSS-only entries fall back to their snippet. */
 export const demos: Record<string, () => React.ReactNode> = {
+  "button-group": () => (
+    <ButtonGroup>
+      <Button variant="ghost">Left</Button>
+      <Button variant="ghost">Center</Button>
+      <Button variant="ghost">Right</Button>
+    </ButtonGroup>
+  ),
   button: () => (
     <div style={{ display: "flex", gap: 10 }}>
       <Button>Primary action</Button>
@@ -226,6 +273,86 @@ export const demos: Record<string, () => React.ReactNode> = {
       <CardTitle>A quieter interface</CardTitle>
       <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>
     </Card>
+  ),
+  label: () => <Label htmlFor="demo-name">Name</Label>,
+  field: () => (
+    <div style={{ width: 260 }}>
+      <Field>
+        <FieldLabel htmlFor="demo-field">Name</FieldLabel>
+        <input id="demo-field" className="rs-input rs-input-full" placeholder="Raster" />
+        <FieldHint>As it appears on the invoice.</FieldHint>
+      </Field>
+    </div>
+  ),
+  form: () => (
+    <Form
+      onSubmit={(e) => e.preventDefault()}
+      style={{ width: 260 }}
+    >
+      <Field>
+        <FieldLabel htmlFor="demo-form-name">Name</FieldLabel>
+        <input id="demo-form-name" className="rs-input rs-input-full" placeholder="Renato" />
+      </Field>
+      <Button type="submit" size="sm">
+        Send
+      </Button>
+    </Form>
+  ),
+  "input-group": () => (
+    <div style={{ width: 260 }}>
+      <InputGroup>
+        <InputAddon>https://</InputAddon>
+        <Input placeholder="raster.noord.dev" />
+      </InputGroup>
+    </div>
+  ),
+  "native-select": () => (
+    <div style={{ width: 220 }}>
+      <NativeSelect aria-label="City" defaultValue="alkmaar">
+        <option value="alkmaar">Alkmaar</option>
+        <option value="amsterdam">Amsterdam</option>
+        <option value="rotterdam">Rotterdam</option>
+      </NativeSelect>
+    </div>
+  ),
+  item: () => (
+    <div style={{ width: 260 }}>
+      <Item title="Alkmaar" description="The studio city." meta="NL" />
+      <Item title="Delft" description="The grid city." meta="NL" />
+    </div>
+  ),
+  empty: () => (
+    <div style={{ width: 260 }}>
+      <Empty title="No projects yet" action={<Button variant="ghost" size="sm">New project</Button>}>
+        Start one. The grid is empty on purpose.
+      </Empty>
+    </div>
+  ),
+  spinner: () => <Spinner />,
+  drawer: DrawerDemo,
+  sidebar: () => (
+    <Sidebar>
+      <SidebarHead>Raster</SidebarHead>
+      <SidebarNav>
+        <SidebarLabel>Go to</SidebarLabel>
+        <SidebarItem href="#" current>
+          Overview
+        </SidebarItem>
+        <SidebarItem href="#">Docs</SidebarItem>
+        <SidebarItem href="#">Components</SidebarItem>
+      </SidebarNav>
+      <SidebarFoot>0.3</SidebarFoot>
+    </Sidebar>
+  ),
+  "toggle-group": () => (
+    <ToggleGroup
+      options={[
+        { value: "left", label: "Left" },
+        { value: "center", label: "Center" },
+        { value: "right", label: "Right" },
+      ]}
+      defaultValue="left"
+    />
   ),
   input: () => (
     <div style={{ width: 260 }}>
@@ -262,15 +389,96 @@ export const demos: Record<string, () => React.ReactNode> = {
     </Tabs>
   ),
   chart: () => (
-    <div style={{ width: 320 }}>
+    <div style={{ width: 408 }}>
       <LineChart
-        height={140}
-        labels={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+        height={204}
+        labels={["Mon", "Tue", "Wed", "Thu", "Fri"]}
         series={[
-          { name: "Revenue", values: [12, 18, 15, 26, 24, 34] },
-          { name: "Costs", values: [8, 9, 11, 12, 14, 15] },
+          { name: "Sheets", values: [12, 18, 15, 26, 24] },
+          { name: "Proofs", values: [4, 6, 5, 9, 7] },
         ]}
-        area
+        unit="sheets"
+        annotations={[{ at: 3, label: "Press" }]}
+      />
+    </div>
+  ),
+  "bar-chart": () => (
+    <div style={{ width: 408 }}>
+      <BarChart
+        height={204}
+        data={[
+          { label: "Alkmaar", value: 42 },
+          { label: "Delft", value: 28 },
+          { label: "Haarlem", value: 21 },
+          { label: "Utrecht", value: 16 },
+        ]}
+        unit="issues"
+        yLabel="This issue"
+      />
+    </div>
+  ),
+  "area-chart": () => (
+    <div style={{ width: 408 }}>
+      <AreaChart
+        height={204}
+        labels={["Mon", "Tue", "Wed", "Thu", "Fri"]}
+        series={[{ name: "Sheets", values: [8, 14, 12, 22, 18] }]}
+        unit="sheets"
+        annotations={[{ at: 3, label: "Press" }]}
+      />
+    </div>
+  ),
+  "scatter-chart": () => (
+    <div style={{ width: 408 }}>
+      <ScatterChart
+        height={204}
+        points={[
+          { x: 12, y: 18, label: "Alkmaar" },
+          { x: 28, y: 16, label: "Haarlem" },
+          { x: 48, y: 22, label: "Rotterdam" },
+          { x: 68, y: 26, label: "Groningen" },
+          { x: 80, y: 44, label: "Amsterdam" },
+        ]}
+        xLabel="Module"
+        yLabel="Density"
+      />
+    </div>
+  ),
+  donut: () => (
+    <div style={{ width: 408, display: "grid", gap: 20 }}>
+      <Donut value={72} max={100} size={184} label="printed" />
+      <Share
+        slices={[
+          { label: "Sheet", value: 72 },
+          { label: "Proof", value: 18 },
+          { label: "Waste", value: 10 },
+        ]}
+      />
+    </div>
+  ),
+  histogram: () => (
+    <div style={{ width: 408 }}>
+      <Histogram
+        height={204}
+        yLabel="Count"
+        bins={[
+          { label: "0–1", count: 4 },
+          { label: "1–2", count: 11 },
+          { label: "2–3", count: 18 },
+          { label: "3–4", count: 9 },
+          { label: "4–5", count: 3 },
+        ]}
+      />
+    </div>
+  ),
+  "small-multiples": () => (
+    <div style={{ width: 408 }}>
+      <SmallMultiples
+        height={120}
+        panels={[
+          { title: "Alkmaar", labels: ["Mon", "Wed", "Fri"], series: [{ name: "Sheets", values: [12, 15, 24] }] },
+          { title: "Delft", labels: ["Mon", "Wed", "Fri"], series: [{ name: "Sheets", values: [8, 9, 14] }] },
+        ]}
       />
     </div>
   ),
@@ -482,7 +690,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     </nav>
   ),
   breadcrumbs: () => (
-    <Breadcrumbs items={[{ label: "Studio", href: "#" }, { label: "Raster" }]} />
+    <Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Raster" }]} />
   ),
   pagination: PaginationDemo,
   select: () => (

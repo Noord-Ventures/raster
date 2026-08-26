@@ -5,7 +5,8 @@
   "title": "Switch",
   "description": "32×18 pill; on is ink, off is hairline. State moves, layout doesn't.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

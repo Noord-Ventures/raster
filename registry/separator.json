@@ -5,9 +5,22 @@
   "title": "Separator",
   "description": "A hairline, horizontal or vertical.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
+    {
+      "path": "raster/separator.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SeparatorProps extends React.HTMLAttributes<HTMLElement> {\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nexport function Separator({ orientation = \"horizontal\", className, ...props }: SeparatorProps) {\n  if (orientation === \"vertical\") {\n    return <span role=\"separator\" aria-orientation=\"vertical\" className={cx(\"rs-sep-v\", className)} {...props} />;\n  }\n  return <hr className={cx(\"rs-sep\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/separator.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
     {
       "path": "raster/styles/separator.css",
       "content": "/* ── Separator: a hairline, horizontal or vertical ── */\n.rs-sep{border:none;border-top:1px solid var(--divider-subtle);margin:20px 0}\n.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider-subtle);margin:0 12px}\n",
@@ -23,7 +36,7 @@
         "rs-sep-v"
       ],
       "snippet": "<hr class=\"rs-sep\" />",
-      "cssOnly": true,
+      "cssOnly": false,
       "registryDependencies": []
     }
   }

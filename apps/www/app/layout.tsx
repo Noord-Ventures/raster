@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import "@raster/core/css";
+import "@noordvc/raster/css";
 import "./site.css";
+import "@/components/examples/use.css";
 import { CrumbBar } from "@/components/crumb-bar";
 import { SiteChrome } from "@/components/site-chrome";
+import { social } from "./social";
 
-export const metadata: Metadata = {
-  title: {
-    default: "Raster: a monochrome design system",
-    template: "%s · Raster",
-  },
-  description:
-    "One ink, no accent. Raster is a CSS-first, zero-dependency design system: tokens, components, a registry, and a CLI.",
-};
+export const metadata: Metadata = social;
 
 const themeInit = `(function(){try{var t=localStorage.getItem("raster-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}})()`;
 

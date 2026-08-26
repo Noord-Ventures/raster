@@ -32,10 +32,59 @@ describe("generated raster.css", () => {
     expect(rasterCss).toContain(`--grid-size: ${rasterTokens.grid.module}px`);
   });
 
+  it("defaults to bundled Inter, with system sans as fallback only", () => {
+    expect(rasterCss).toContain("@font-face");
+    expect(rasterCss).toContain('font-family:Inter');
+    expect(rasterCss).toContain("./fonts/inter/InterVariable-latin.woff2");
+    expect(rasterCss).toContain("./fonts/inter/InterVariable-latin-ext.woff2");
+    expect(rasterCss).not.toMatch(/Messina|Geist|Schibsted|Heros|Plex/i);
+    expect(rasterTokens.type.foundry.typeface).toBe("Inter");
+    expect(rasterTokens.type.foundry.license).toBe("SIL OFL 1.1");
+  });
+
   it("has balanced braces", () => {
     const open = (rasterCss.match(/\{/g) ?? []).length;
     const close = (rasterCss.match(/\}/g) ?? []).length;
     expect(open).toBe(close);
+  });
+
+  it("paints breadcrumb ancestors as ink, not a UA link color", () => {
+    const crumbs = readFileSync(join(pkgDir, "css/components/breadcrumbs.css"), "utf8");
+    expect(crumbs).toMatch(/a:link/);
+    expect(crumbs).toMatch(/a:visited/);
+    expect(crumbs).toMatch(/a:any-link/);
+    expect(crumbs).toMatch(/color:var\(--text\)/);
+    expect(crumbs).not.toMatch(/#00[fF]|#0000ff|\bblue\b|purple/i);
+    expect(rasterCss).toMatch(/\.rs-crumbs a:link/);
+  });
+
+  it("leaves air under the last sidebar item before the foot rule", () => {
+    const side = readFileSync(join(pkgDir, "css/components/sidebar.css"), "utf8");
+    expect(side).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:32px\}/);
+    expect(side).toMatch(/\.rs-sidebar-nav\{[^}]*padding:8px 0 32px/);
+    expect(rasterCss).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:32px\}/);
+  });
+
+  it("marks only the active tab with a hairline", () => {
+    const tabs = readFileSync(join(pkgDir, "css/components/tabs.css"), "utf8");
+    expect(tabs).not.toMatch(/1\.5px/);
+    expect(tabs).toMatch(/appearance:none/);
+    expect(tabs).toMatch(/inset 0 -1px 0 var\(--text\)/);
+    expect(tabs).not.toMatch(/\.rs-tabs\{[^}]*border-bottom/);
+    expect(rasterCss).toMatch(/button\.rs-tab\{[^}]*appearance:none/);
+  });
+
+  it("draws charts as a poster field, not a dashboard widget", () => {
+    const chart = readFileSync(join(pkgDir, "css/components/chart.css"), "utf8");
+    expect(chart).toMatch(/stroke-linecap:butt/);
+    expect(chart).toMatch(/border-radius:0/);
+    expect(chart).toMatch(/box-shadow:none/);
+    expect(chart).toMatch(/stroke-width:1/);
+    expect(chart).not.toMatch(/stroke-linecap:round/);
+    expect(chart).not.toMatch(/box-shadow:\s*[^n]/);
+    expect(chart).not.toMatch(/#e30613/i);
+    expect(rasterCss).toMatch(/\.rs-chart-field\{/);
+    expect(rasterCss).toMatch(/\.rs-chart-line\{[^}]*stroke-width:1/);
   });
 
   it("never introduces a color hue — the palette is monochrome", () => {

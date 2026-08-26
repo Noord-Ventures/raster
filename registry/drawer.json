@@ -1,0 +1,44 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "drawer",
+  "type": "registry:component",
+  "title": "Drawer",
+  "description": "Native <dialog> from the bottom edge. Platform focus trap and backdrop.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
+  ],
+  "files": [
+    {
+      "path": "raster/drawer.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface DrawerProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n}\n\n/**\n * A native <dialog> from the bottom edge. The platform provides the\n * focus trap, Escape, and the backdrop.\n */\nexport function Drawer({ open, onClose, className, children, ...props }: DrawerProps) {\n  const ref = React.useRef<HTMLDialogElement>(null);\n\n  React.useEffect(() => {\n    const dialog = ref.current;\n    if (!dialog) return;\n    if (open && !dialog.open) dialog.showModal();\n    else if (!open && dialog.open) dialog.close();\n  }, [open]);\n\n  return (\n    <dialog\n      ref={ref}\n      className={cx(\"rs-drawer\", className)}\n      onClose={() => onClose?.()}\n      {...props}\n    >\n      {children}\n    </dialog>\n  );\n}\n\nexport function DrawerTitle({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-drawer-title\", className)} {...props} />;\n}\n\nexport function DrawerBody({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-drawer-body\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/drawer.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/drawer.css",
+      "content": "/* ── Drawer: a native <dialog> from the bottom edge. No shadow. ── */\ndialog.rs-drawer{position:fixed;inset:auto 0 0 0;margin:0;width:100%;max-width:none;height:auto;max-height:85dvh;border:none;border-top:1px solid var(--divider);border-radius:0;padding:24px 20px;background:var(--bg);color:var(--text);box-shadow:none}\ndialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}\n.rs-drawer-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-drawer-body{font-size:13.5px;line-height:1.6;letter-spacing:-.01em;color:var(--text-secondary);margin:0}\n",
+      "type": "registry:file",
+      "target": "styles/raster/drawer.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "surfaces",
+      "classes": [
+        "rs-drawer",
+        "rs-drawer-title",
+        "rs-drawer-body"
+      ],
+      "snippet": "<dialog class=\"rs-drawer\" open><span class=\"rs-drawer-title\">Notes</span><p class=\"rs-drawer-body\">A bottom panel. Escape closes it.</p></dialog>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

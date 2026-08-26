@@ -5,7 +5,8 @@
   "title": "Slider",
   "description": "Thin track with ink fill and 14px thumb.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

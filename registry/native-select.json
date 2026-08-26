@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "native-select",
+  "type": "registry:component",
+  "title": "Native select",
+  "description": "The platform list. Raster chrome. No custom menu.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
+  ],
+  "files": [
+    {
+      "path": "raster/native-select.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface NativeSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {\n  label?: React.ReactNode;\n}\n\n/** The platform list. Raster chrome. */\nexport const NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(\n  function NativeSelect({ label, className, id, children, ...props }, ref) {\n    const autoId = React.useId();\n    const selectId = id ?? autoId;\n    const control = (\n      <select ref={ref} id={selectId} className={cx(\"rs-native-select\", className)} {...props}>\n        {children}\n      </select>\n    );\n    if (label == null) return control;\n    return (\n      <div className=\"rs-field\">\n        <label className=\"rs-field-label\" htmlFor={selectId}>\n          {label}\n        </label>\n        {control}\n      </div>\n    );\n  },\n);\n",
+      "type": "registry:component",
+      "target": "components/raster/native-select.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/native-select.css",
+      "content": "/* ── Native select: the platform list, Raster chrome ── */\n.rs-native-select{appearance:none;font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;color:var(--text);background:var(--bg) url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'><path d='M4 6l4 4 4-4' stroke='%231A1A1A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>\") no-repeat right 10px center;border:1px solid var(--divider);border-radius:0;padding:8px 32px 8px 10px;outline:none;width:100%}\n.rs-native-select:focus{border-color:var(--accent)}\n[data-theme=\"dark\"] .rs-native-select{background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'><path d='M4 6l4 4 4-4' stroke='%23E8E8E8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>\")}\n",
+      "type": "registry:file",
+      "target": "styles/raster/native-select.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "forms",
+      "classes": [
+        "rs-native-select"
+      ],
+      "snippet": "<select class=\"rs-native-select\"><option>Alkmaar</option><option>Amsterdam</option><option>Rotterdam</option></select>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

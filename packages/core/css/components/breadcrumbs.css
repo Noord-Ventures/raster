@@ -1,4 +1,26 @@
-/* ── Breadcrumbs: slashes at 40%, current page is ink ── */
-.rs-crumbs{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}
-.rs-crumbs-sep{opacity:.4}
-.rs-crumbs-here{color:var(--text)}
+/* ── Breadcrumbs: one ink trail. Slashes at 40%. Current page is full ink.
+   Ancestors stay Inter/ink — never a UA :link or :visited color, never an accent. ── */
+.rs-crumbs{font-size:13px;color:var(--text);letter-spacing:-.01em;display:flex;align-items:baseline;gap:8px}
+.rs-crumbs a,
+.rs-crumbs a:link,
+.rs-crumbs a:visited,
+.rs-crumbs a:hover,
+.rs-crumbs a:active,
+.rs-crumbs a:focus,
+.rs-crumbs a:focus-visible,
+.rs-crumbs a:any-link,
+.rs-crumbs a:-webkit-any-link,
+.rs-crumbs .rs-crumbs-link{
+  color:var(--text);
+  text-decoration:none;
+  background:none;
+}
+.rs-crumbs a,
+.rs-crumbs a:link,
+.rs-crumbs a:visited,
+.rs-crumbs a:any-link,
+.rs-crumbs a:-webkit-any-link,
+.rs-crumbs .rs-crumbs-link{opacity:.55}
+.rs-crumbs a:hover,.rs-crumbs a:focus-visible{opacity:1}
+.rs-crumbs-sep{color:var(--text);opacity:.4}
+.rs-crumbs-here{color:var(--text);opacity:1}

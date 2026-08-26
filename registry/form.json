@@ -6,27 +6,41 @@
   "description": "Fields stacked on the grid; one primary action at the end.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
+    "https://raster.noord.dev/r/field.json",
     "https://raster.noord.dev/r/input.json",
     "https://raster.noord.dev/r/button.json"
   ],
   "files": [
     {
+      "path": "raster/form.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {}\n\n/** Native form. Fields stack. One primary action at the end. */\nexport function Form({ className, ...props }: FormProps) {\n  return <form className={cx(\"rs-form\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/form.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
       "path": "raster/styles/field.css",
-      "content": "/* ── Field: quiet input: hairline border, ink focus, label above ── */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}\n.rs-input:focus{border-color:var(--accent)}\n.rs-input-full{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n",
+      "content": "/* ── Field: quiet input: hairline border, ink focus, label above ── */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}\n.rs-input:focus{border-color:var(--accent)}\n.rs-input-full{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n.rs-field-hint{font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.45}\n.rs-field-error{font-size:12px;font-weight:500;color:var(--text);letter-spacing:-.01em;line-height:1.45}\n.rs-form{display:flex;flex-direction:column;gap:16px;max-width:388px;margin:0}\n.rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n",
       "type": "registry:file",
       "target": "styles/raster/field.css"
     }
   ],
   "meta": {
     "raster": {
-      "category": "patterns",
+      "category": "forms",
       "classes": [
-        "rs-field",
-        "rs-field-label"
+        "rs-form"
       ],
-      "snippet": "<form style=\"display:flex;flex-direction:column;gap:16px;max-width:388px\"><div class=\"rs-field\"><span class=\"rs-field-label\">Name</span><input class=\"rs-input rs-input-full\" /></div><div class=\"rs-field\"><span class=\"rs-field-label\">E-mail</span><input class=\"rs-input rs-input-full\" /></div><button class=\"rs-btn-primary\">Send</button></form>",
-      "cssOnly": true,
+      "snippet": "<form class=\"rs-form\"><div class=\"rs-field\"><span class=\"rs-field-label\">Name</span><input class=\"rs-input rs-input-full\" /></div><div class=\"rs-field\"><span class=\"rs-field-label\">E-mail</span><input class=\"rs-input rs-input-full\" /></div><button class=\"rs-btn-primary\">Send</button></form>",
+      "cssOnly": false,
       "registryDependencies": [
+        "field",
         "input",
         "button"
       ]

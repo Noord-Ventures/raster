@@ -3,9 +3,10 @@
   "name": "tabs",
   "type": "registry:component",
   "title": "Tabs",
-  "description": "Active tab is ink with a 1.5px underline.",
+  "description": "One line of type. Hairline on the active tab only.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {
@@ -22,7 +23,7 @@
     },
     {
       "path": "raster/styles/tabs.css",
-      "content": "/* ── Tabs: active tab is ink with a 1.5px underline ── */\n.rs-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}\n.rs-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}\nbutton.rs-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}\n",
+      "content": "/* ── Tabs: one line of type. Hairline on the active tab only. ── */\n.rs-tabs{display:flex;align-items:baseline;gap:22px;max-width:360px;border:none;box-shadow:none;background:none}\n.rs-tab,\nbutton.rs-tab{\n  -webkit-appearance:none;\n  appearance:none;\n  padding:8px 0;\n  font-size:14px;\n  font-family:inherit;\n  color:var(--text-secondary);\n  letter-spacing:-.01em;\n  text-decoration:none;\n  background:none;\n  background-image:none;\n  box-shadow:none;\n  border:none;\n  border-radius:0;\n  cursor:pointer;\n  text-align:left;\n}\n.rs-tab-active,\nbutton.rs-tab.rs-tab-active{\n  color:var(--text);\n  font-weight:600;\n  border:none;\n  box-shadow:inset 0 -1px 0 var(--text);\n}\n",
       "type": "registry:file",
       "target": "styles/raster/tabs.css"
     }
@@ -35,7 +36,7 @@
         "rs-tab",
         "rs-tab-active"
       ],
-      "snippet": "<div class=\"rs-tabs\"><span class=\"rs-tab rs-tab-active\">Overview</span><span class=\"rs-tab\">Activity</span></div>",
+      "snippet": "<div class=\"rs-tabs\"><span class=\"rs-tab rs-tab-active\">Overview</span><span class=\"rs-tab\">Activity</span><span class=\"rs-tab\">Settings</span></div>",
       "cssOnly": false,
       "registryDependencies": []
     }

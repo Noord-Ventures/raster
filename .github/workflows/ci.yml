@@ -1,0 +1,250 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.4.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Generate
+        run: |
+          pnpm build
+          pnpm build:registry
+      - name: Types in the tarball
+        run: |
+          test -f packages/core/dist/index.d.ts
+          test -f packages/react/dist/index.d.ts
+      - name: Integrity tests
+        run: pnpm test
+      - name: Dead-host grep
+        run: |
+          if grep -R -E 'raster\.design|raster-pied|vercel\.app' registry --include='*.json'; then
+            echo "Dead host found in generated registry JSON"
+            exit 1
+          fi
+      - name: No leftover scoped package names
+        run: |
+          needles=(
+            "$(printf '@%s/' 'raster')"
+            "$(printf '@%s/raster' 'noord')"
+            "$(printf '@%s/' 'rennvaldes')"
+          )
+          for needle in "${needles[@]}"; do
+            if grep -R -n -F "$needle" --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=dist --exclude-dir=.next --exclude-dir=out --exclude-dir=public --exclude=pnpm-lock.yaml .; then
+              echo "Leftover $needle package name found"
+              exit 1
+            fi
+          done
+      - name: Homepage is a specimen
+        run: |
+          page=apps/www/app/page.tsx
+          writer=apps/www/app/specimen.ts
+          if grep -n -E 'site-layout|SIL OFL|Raster 0\.3' "$page"; then
+            echo "Homepage still carries docs-column or marketing copy"
+            exit 1
+          fi
+          if [ "$(grep -o 'Inter' "$writer" | wc -l)" -ne 1 ]; then
+            echo "Inter must be named once, in app/specimen.ts"
+            exit 1
+          fi
+          if grep -n Inter "$page"; then
+            echo "Inter must be written in app/specimen.ts, not page.tsx"
+            exit 1
+          fi
+          grep -q 'WORD = "Raster"' "$writer"
+          grep -q '{WORD}' "$page"
+          grep -q 'A poster you can install.' "$writer"
+          grep -q 'npx @noordvc/raster-cli init' "$writer"
+          if grep -n -E 'One ink|204 module|Crouwel|Müller-Brockmann' "$page" "$writer" apps/www/app/layout.tsx apps/www/app/social.ts; then
+            echo "Homepage law must not use the old museum caption"
+            exit 1
+          fi
+          grep -q 'DOOR = "https://getraster.com"' "$writer"
+          grep -q 'HOST = "https://raster.noord.dev"' "$writer"
+          grep -q 'openGraph' apps/www/app/social.ts
+          grep -q 'summary_large_image' apps/www/app/social.ts
+          grep -q '/og.png' apps/www/app/social.ts
+          grep -q 'return new URL(HOST)' apps/www/app/social.ts
+          grep -q 'absolute: WORD' apps/www/app/page.tsx
+          test -f apps/www/public/og.png
+          python3 -c '
+          from pathlib import Path
+          p = Path("apps/www/public/og.png").read_bytes()
+          assert p[:8] == b"\x89PNG\r\n\x1a\n", "og.png is not a PNG"
+          w = int.from_bytes(p[16:20], "big")
+          h = int.from_bytes(p[20:24], "big")
+          assert (w, h) == (1200, 630), f"og.png must be 1200×630, got {w}×{h}"
+          '
+          grep -q 'specimen-page' "$page"
+          grep -q 'isSpecimenPath' apps/www/components/crumb-bar.tsx
+          test -f apps/www/app/specimen.css
+          if grep -n specimen-page apps/www/app/site.css; then
+            echo "Specimen styles drifted back into site chrome"
+            exit 1
+          fi
+          if grep -n 'padding: 1px;' apps/www/app/specimen.css; then
+            echo "Specimen must stay flush on top and left"
+            exit 1
+          fi
+          grep -q 'padding: 0 1px 1px 0' apps/www/app/specimen.css
+          grep -q 'KIT =' apps/www/app/specimen.ts
+          grep -q 'button-group' apps/www/app/specimen.ts
+          grep -q 'tabs' apps/www/app/specimen.ts
+          grep -q 'chart' apps/www/app/specimen.ts
+          grep -q 'SpecimenKit' apps/www/app/page.tsx
+          test -f apps/www/app/specimen-kit.tsx
+          if grep -nE 'Save|Draft|rs-switch' apps/www/app/page.tsx apps/www/app/specimen-kit.tsx; then
+            echo "Homepage kit cells must not be the leftover Save / switch / Draft set"
+            exit 1
+          fi
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const spec = readFileSync("apps/www/app/specimen.ts", "utf8");
+            const names = [...spec.matchAll(/"(button-group|tabs|chart)"/g)].map((m) => m[1]);
+            const reg = readFileSync("packages/core/src/registry.ts", "utf8");
+            for (const name of names) {
+              if (!reg.includes(`name: "${name}"`)) {
+                console.error("KIT name missing from catalog:", name);
+                process.exit(1);
+              }
+            }
+          '
+          if ! grep -q 'gallery-item' apps/www/app/site.css || ! grep -q 'background-color: var(--bg)' apps/www/app/site.css; then
+            echo "Component tiles must be opaque paper"
+            exit 1
+          fi
+          grep -q 'isolation: isolate' apps/www/app/site.css
+          grep -q 'rs-crumbs a' packages/core/css/components/breadcrumbs.css
+          grep -q 'a:link' packages/core/css/components/breadcrumbs.css
+          grep -q 'a:visited' packages/core/css/components/breadcrumbs.css
+          grep -q 'a:any-link' packages/core/css/components/breadcrumbs.css
+          grep -q 'color:var(--text)' packages/core/css/components/breadcrumbs.css
+          if grep -nE '#00[fF]|#0000ff|[Pp]urple|\\bblue\\b' packages/core/css/components/breadcrumbs.css; then
+            echo "Breadcrumb trail must stay ink — no second link color"
+            exit 1
+          fi
+          if grep -n '1.5px' packages/core/css/components/tabs.css; then
+            echo "Tabs must use a hairline on the active tab only"
+            exit 1
+          fi
+          if grep -n 'border-bottom:1px solid var(--divider' packages/core/css/components/tabs.css; then
+            echo "Tab set must not sit on a full-width bar"
+            exit 1
+          fi
+          grep -q 'appearance:none' packages/core/css/components/tabs.css
+          grep -q 'inset 0 -1px 0 var(--text)' packages/core/css/components/tabs.css
+          grep -q 'padding:8px 0 32px' packages/core/css/components/sidebar.css
+          grep -q 'rs-sidebar-item:last-child' packages/core/css/components/sidebar.css
+          grep -q 'padding-bottom:32px' packages/core/css/components/sidebar.css
+      - name: Every component has an isolated Use
+        run: |
+          test -f apps/www/components/examples/use.css
+          test -f apps/www/components/examples/use-slot.tsx
+          grep -q '184px minmax(0, 1fr)' apps/www/components/examples/use.css
+          grep -q 'rs-use-in' apps/www/components/examples/use.css
+          if grep -n border-left apps/www/components/examples/use.css; then
+            echo "Use field must not grow a left rule"
+            exit 1
+          fi
+          if [ -f apps/www/components/examples/index.tsx ]; then
+            echo "Uses must stay one file per component, not a shared dump"
+            exit 1
+          fi
+          node apps/www/scripts/check-examples.mjs
+          grep -q 'The control, the name, a short law.' apps/www/app/components/page.tsx
+          grep -q 'className="rs-scene"' apps/www/components/examples/scene.tsx
+          grep -q '.rs-scene .rs-use-type' apps/www/components/examples/use.css
+      - name: About is a masthead
+        run: |
+          page=apps/www/app/about/page.tsx
+          facts=apps/www/app/about/facts.ts
+          css=apps/www/app/about/about.css
+          test -f "$page"
+          test -f "$facts"
+          test -f "$css"
+          grep -q 'heading: "Typeface"' "$facts"
+          grep -q 'heading: "Noord"' "$facts"
+          grep -q 'door: DOOR' "$facts"
+          grep -q 'getraster.com' apps/www/app/specimen.ts
+          grep -q 'heading: "Renato Valdés Olmos"' "$facts"
+          grep -q 'foundry.license' "$facts"
+          grep -q 'meta.url' "$facts"
+          grep -q '@noordvc/raster' "$facts"
+          grep -q 'type.foundry' "$facts"
+          grep -q 'masthead-typeface' "$page"
+          grep -q 'masthead-noord' "$page"
+          grep -q 'masthead-renato' "$page"
+          grep -q 'SIL OFL 1.1' packages/core/src/tokens.ts
+          if grep -n Messina "$page" "$facts" "$css"; then
+            echo "About must not name Messina"
+            exit 1
+          fi
+          if grep -n about.css apps/www/app/site.css; then
+            echo "About styles must stay isolated"
+            exit 1
+          fi
+          grep -q 'href: "/about"' apps/www/components/site-chrome.tsx
+          grep -q 'label: "About"' apps/www/components/site-chrome.tsx
+          if grep -n border-left "$css"; then
+            echo "Masthead must not grow a left rule"
+            exit 1
+          fi
+      - name: Components TOC is catalog groups
+        run: |
+          nav=apps/www/components/docs-nav/index.tsx
+          map=apps/www/components/docs-nav/FEATURE.md
+          test -f "$map"
+          grep -q Navigation "$map"
+          grep -q 'second column' "$map"
+          if grep -n Foundations "$nav"; then
+            echo "Components TOC must not use Foundations as a first-column item"
+            exit 1
+          fi
+          grep -q 'rasterCategories' "$nav"
+          grep -q 'data-toc="groups"' "$nav"
+          grep -q 'data-toc="items"' "$nav"
+          if grep -n toc-rail apps/www/app/site.css; then
+            echo "Docs-rail styles drifted back into site chrome"
+            exit 1
+          fi
+          if grep -n border-left apps/www/components/docs-nav/docs-nav.css; then
+            echo "Secondaries column must not grow its own left rule"
+            exit 1
+          fi
+          grep -q 'background: var(--bg)' apps/www/components/docs-nav/docs-nav.css
+      - name: Charts are posters
+        run: |
+          css=packages/core/css/components/chart.css
+          grep -q 'stroke-linecap:butt' "$css"
+          grep -q 'border-radius:0' "$css"
+          grep -q 'box-shadow:none' "$css"
+          grep -q 'stroke-width:1' "$css"
+          if grep -nE 'stroke-linecap:round|box-shadow:[^n]|rx=\{' "$css" packages/react/src/components/charts/*.tsx; then
+            echo "Charts must stay hairline, flush, no shadow, no rounded bars"
+            exit 1
+          fi
+          if grep -nE '#[Ee]30613|#[Ff][Ff]0000' "$css"; then
+            echo "Crouwel spot must not live in CSS"
+            exit 1
+          fi
+          for n in chart bar-chart area-chart scatter-chart donut histogram small-multiples; do
+            test -f "apps/www/components/examples/$n/use.tsx"
+          done
+          grep -q ToggleGroup apps/www/components/examples/chart/use.tsx
+          test -d packages/react/src/components/charts
+          test -f packages/react/src/components/charts/line.tsx
+          test -f packages/react/src/components/charts/bar.tsx
+          test -f packages/react/src/components/charts/scatter.tsx

@@ -1,0 +1,17 @@
+export function Use() {
+  return (
+    <article className="rs-use" data-use="chip">
+      <h3 className="rs-use-type">Id</h3>
+      <div className="rs-use-body">
+        <div className="rs-use-stack">
+          <p className="rs-use-kicker">The job</p>
+          <p className="rs-use-copy">A name and a version. Flush, no pill radius.</p>
+        </div>
+        <div className="rs-use-actions">
+          <span className="rs-chip">/noord-brand</span>
+          <span className="rs-chip">0.3.0</span>
+        </div>
+      </div>
+    </article>
+  );
+}

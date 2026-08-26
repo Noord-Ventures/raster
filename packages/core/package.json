@@ -1,16 +1,21 @@
 {
-  "name": "@raster/core",
-  "version": "0.2.0",
+  "name": "@noordvc/raster",
+  "version": "0.3.0",
   "description": "Raster core — design tokens, component registry, and CSS. Monochrome, CSS-first, zero dependencies.",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rennvaldes/raster.git",
     "directory": "packages/core"
   },
-  "homepage": "https://noord.dev/studio/raster",
+  "homepage": "https://raster.noord.dev",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

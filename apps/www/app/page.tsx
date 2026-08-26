@@ -1,100 +1,39 @@
 import Link from "next/link";
-import { rasterComponents } from "@raster/core";
-import { Preview } from "@/components/preview";
+import type { Metadata } from "next";
+import { COMMAND, LAW, WORD } from "./specimen";
+import { SpecimenKit } from "./specimen-kit";
+import "./specimen.css";
 
-const principles = [
-  {
-    title: "One ink, no accent",
-    body: "The palette is monochrome: paper, ink, and the grays between. Emphasis comes from weight, size, and spacing.",
-  },
-  {
-    title: "Hairlines, not boxes",
-    body: "Rows and dividers are 1px lines on the open grid; cells and cards avoid heavy chrome.",
-  },
-  {
-    title: "The grid is visible",
-    body: "A 204px module draws faint lines across every page; content boxes span whole modules so edges step from grid line to grid line.",
-  },
-  {
-    title: "CSS-first, zero dependencies",
-    body: "Plain classes on plain markup. The React layer uses native elements. No Radix, no Tailwind.",
-  },
-  {
-    title: "Sentence case, always",
-    body: "Labels and eyebrows are sentence case. Never all caps.",
-  },
-  {
-    title: "Quiet motion",
-    body: "0.15–0.3s, ease. Color and opacity change; layout rarely moves; nothing bounces.",
-  },
-];
-
-const featured = ["button", "switch", "input", "tabs", "select", "badge"];
+export const metadata: Metadata = {
+  title: { absolute: WORD },
+  description: LAW,
+};
 
 export default function Home() {
-  const items = featured
-    .map((name) => rasterComponents.find((c) => c.name === name)!)
-    .filter(Boolean);
   return (
-    <div className="site-layout">
-      <main className="site-content-wide">
-        <header className="cover" style={{ maxWidth: 592 }}>
-          <p className="rs-t-label" style={{ color: "var(--text-secondary)", fontWeight: 500, marginBottom: 32 }}>
-            Raster 0.2
-          </p>
-          <h1 className="rs-t-xl">A design system with one ink.</h1>
-          <p className="rs-t-sub">
-            Raster is monochrome, CSS-first, and dependency-free. Tokens, components, a typed
-            registry, and a CLI that copies source into your project.
-          </p>
-          <div className="hero-actions">
-            <Link href="/docs">
-              <button className="rs-btn-primary">Get started</button>
-            </Link>
-            <Link href="/components">
-              <button className="rs-btn-ghost">Browse components</button>
-            </Link>
-          </div>
-          <code className="hero-install">npx raster init &amp;&amp; npx raster add button dialog</code>
-        </header>
-
-        <section className="principles">
-          {principles.map((p) => (
-            <div className="principle" key={p.title}>
-              <h3>{p.title}</h3>
-              <p>{p.body}</p>
-            </div>
-          ))}
+    <main className="specimen-page" aria-label="Raster specimen">
+      <div className="specimen">
+        <section className="specimen-cell specimen-cell-face" aria-label="Face">
+          <p className="specimen-face">{WORD}</p>
         </section>
 
-        <section>
-          <h2 className="rs-t-title">The kit</h2>
-          <div className="gallery">
-            {items.map((c) => (
-              <div key={c.name} className="gallery-item">
-                <div className="gallery-demo">
-                  <Preview name={c.name} snippet={c.snippet} />
-                </div>
-                <div className="gallery-meta">
-                  <h3>
-                    <Link href={`/components/${c.name}`} className="gallery-item-link">
-                      {c.title}
-                    </Link>
-                  </h3>
-                  <p>{c.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+        <section className="specimen-cell specimen-cell-law">
+          <h1 className="specimen-law">{LAW}</h1>
         </section>
 
-        <footer className="site-footer">
-          <span>The design system behind noord.vc, noord.dev, and renatovaldes.com.</span>
-          <span>
-            <a href="https://github.com/rennvaldes/raster">GitHub</a>
-          </span>
-        </footer>
-      </main>
-    </div>
+        <section className="specimen-cell specimen-cell-command">
+          <p className="specimen-command">{COMMAND}</p>
+          <p className="specimen-command-meta">
+            <Link href="/docs">Getting started</Link>
+            <span aria-hidden="true"> · </span>
+            MIT
+          </p>
+        </section>
+
+        <SpecimenKit />
+
+        <div className="specimen-cell specimen-cell-empty" aria-hidden="true" />
+      </div>
+    </main>
   );
 }

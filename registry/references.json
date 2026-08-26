@@ -5,7 +5,8 @@
   "title": "References",
   "description": "Inline citations, a numbered hairline list, and a cite box. Numerals hang in the gutter.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

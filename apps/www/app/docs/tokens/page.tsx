@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { rasterTokens } from "@raster/core";
+import { rasterTokens } from "@noordvc/raster";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
 
@@ -58,14 +58,14 @@ export default function TokensPage() {
 
         <h2 className="section-label">Programmatic access</h2>
         <CodeBlock
-          code={`import { rasterTokens } from "@raster/core";
+          code={`import { rasterTokens } from "@noordvc/raster";
 
 rasterTokens.color.light.paper; // "${color.light.paper}"
 rasterTokens.grid.module;       // ${grid.module}
 
 // or over the wire
-// GET /r/index.json     (the component registry)
-// npx raster tokens     (the token set as JSON)`}
+// GET https://raster.noord.dev/r/index.json
+// npx @noordvc/raster-cli tokens`}
         />
         </main>
       </div>

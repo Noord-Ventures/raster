@@ -1,0 +1,48 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field",
+  "type": "registry:component",
+  "title": "Field",
+  "description": "Label, control, hint or error. The stack every form is made of.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
+    "https://raster.noord.dev/r/input.json"
+  ],
+  "files": [
+    {
+      "path": "raster/field.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {}\n\n/** Stack: label, control, hint or error. */\nexport function Field({ className, ...props }: FieldProps) {\n  return <div className={cx(\"rs-field\", className)} {...props} />;\n}\n\nexport function FieldLabel({ className, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {\n  return <label className={cx(\"rs-field-label\", className)} {...props} />;\n}\n\nexport function FieldHint({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-field-hint\", className)} {...props} />;\n}\n\nexport function FieldError({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p role=\"alert\" className={cx(\"rs-field-error\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/field.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/field.css",
+      "content": "/* ── Field: quiet input: hairline border, ink focus, label above ── */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}\n.rs-input:focus{border-color:var(--accent)}\n.rs-input-full{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n.rs-field-hint{font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.45}\n.rs-field-error{font-size:12px;font-weight:500;color:var(--text);letter-spacing:-.01em;line-height:1.45}\n.rs-form{display:flex;flex-direction:column;gap:16px;max-width:388px;margin:0}\n.rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}\n",
+      "type": "registry:file",
+      "target": "styles/raster/field.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "forms",
+      "classes": [
+        "rs-field",
+        "rs-field-label",
+        "rs-field-hint",
+        "rs-field-error"
+      ],
+      "snippet": "<div class=\"rs-field\"><label class=\"rs-field-label\">Name</label><input class=\"rs-input rs-input-full\" /><p class=\"rs-field-hint\">As it appears on the invoice.</p></div>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "input"
+      ]
+    }
+  }
+}

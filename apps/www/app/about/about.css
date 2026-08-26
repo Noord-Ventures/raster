@@ -1,0 +1,112 @@
+/* About / masthead. Isolated. Do not move these rules into site.css. */
+
+.masthead-page {
+  padding: 0 20px 72px;
+  max-width: 836px;
+}
+
+.masthead {
+  min-height: 204px;
+  padding: 120px 0 40px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.masthead-word {
+  margin: 0;
+  font-size: clamp(52px, 10vw, 88px);
+  font-weight: 600;
+  letter-spacing: -.035em;
+  line-height: .95;
+  color: var(--text);
+}
+
+.masthead-law {
+  margin: 16px 0 0;
+  max-width: 28em;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.masthead-block {
+  display: grid;
+  grid-template-columns: 184px minmax(0, 1fr);
+  min-height: 204px;
+  border-bottom: 1px solid var(--divider);
+  background: var(--bg);
+}
+
+.masthead-block h2 {
+  margin: 0;
+  padding: 20px 16px 18px;
+  border-right: 1px solid var(--divider);
+  font-size: clamp(22px, 3.6vw, 32px);
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: .95;
+  color: var(--text);
+  display: flex;
+  align-items: flex-end;
+  text-wrap: balance;
+}
+
+.masthead-copy {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.masthead-copy p,
+.masthead-copy ul {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.5;
+  color: var(--text);
+  max-width: 36em;
+}
+
+.masthead-copy ul {
+  padding: 0;
+  list-style: none;
+}
+
+.masthead-copy li + li { margin-top: 8px; }
+
+.masthead-kicker {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--text-secondary);
+}
+
+.masthead-copy a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--divider);
+}
+
+.masthead-copy a:hover { border-color: var(--text); }
+
+.masthead-copy a:link,
+.masthead-copy a:visited,
+.masthead-copy a:any-link {
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  .masthead { padding-top: 72px; }
+  .masthead-block { grid-template-columns: 1fr; min-height: 0; }
+  .masthead-block h2 {
+    border-right: none;
+    border-bottom: 1px solid var(--divider);
+    min-height: 88px;
+    font-size: 28px;
+  }
+}

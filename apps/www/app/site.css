@@ -1,5 +1,4 @@
-/* Site chrome for the Raster docs site. Mirrors the layout system of
-   noord.vc / noord.dev / renatovaldes.com:
+/* Site chrome for the Raster docs site:
 
    - No header bar. Fixed corner chrome: logo top-left on the first
      grid line (20px), controls top-right, each with a paper-halo
@@ -8,9 +7,8 @@
      the 1024px rail) and the layout width rounds DOWN to whole 204px
      modules, so edges step from grid line to grid line on resize.
    - Reading measure is 592px (3 modules); covers pad 120px down.
-   - Left TOC: 184px, sticky, visible from 900px.
    - A fixed 72px crumb bar; breadcrumbs fade in once the page cover
-     scrolls away. */
+     scrolls away. The docs rail lives in components/docs-nav. */
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
@@ -137,7 +135,7 @@ html, body { margin: 0; padding: 0; }
 @media (min-width: 1024px) { .site-layout { --ml: 204px; margin-left: 204px; } }
 @media (min-width: 1700px) { .site-layout { max-width: 1244px; } }
 
-.site-content { flex-shrink: 1; width: 592px; min-width: 0; max-width: 592px; padding-bottom: 72px; }
+.site-content { flex-shrink: 1; width: 592px; min-width: 0; max-width: min(592px, 100%); padding-bottom: 72px; }
 .site-content-wide { flex-shrink: 1; width: 100%; min-width: 0; padding-bottom: 72px; }
 @media (max-width: 800px) { .site-content { width: 100%; max-width: 100%; } }
 
@@ -146,64 +144,35 @@ html, body { margin: 0; padding: 0; }
 .cover .rs-t-sub { margin-top: 16px; }
 @media (max-width: 640px) { .cover { padding-top: 72px; padding-bottom: 40px; } }
 
-/* ── TOC: one column wide, sticky, from 900px ── */
-.toc {
-  width: 184px; flex-shrink: 0; align-self: flex-start;
-  position: sticky; top: 0; height: 100vh; overflow-y: auto;
-  padding: 120px 20px 72px 0;
-  display: none;
-  scrollbar-width: none;
-  /* Feather the list under the crumb bar and at the bottom edge. */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 44px, #000 116px, #000 calc(100% - 64px), transparent calc(100% - 8px));
-  mask-image: linear-gradient(to bottom, transparent 44px, #000 116px, #000 calc(100% - 64px), transparent calc(100% - 8px));
-}
-.toc::-webkit-scrollbar { display: none; }
-@media (min-width: 900px) { .toc { display: block; } }
-.toc-label {
-  font-size: 13px; font-weight: 500; letter-spacing: -.01em;
-  color: var(--text-secondary); margin: 18px 0 4px;
-}
-.toc-label:first-child { margin-top: 0; }
-.toc-item {
-  display: block; padding: 5px 0; font-size: 13px; font-weight: 400;
-  letter-spacing: -.01em; color: var(--text-secondary); opacity: .6;
-  text-decoration: none; transition: color .15s ease, opacity .15s ease;
-}
-.toc-item:hover { color: var(--text); opacity: 1; }
-.toc-item[aria-current="page"] { color: var(--text); opacity: 1; font-weight: 500; }
-
-/* ── Hero actions ── */
-.hero-actions { display: flex; gap: 10px; margin-top: 32px; align-items: center; }
-.hero-install {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px;
-  color: var(--text-secondary); background: var(--table-alt);
-  border: 1px solid var(--divider-subtle); border-radius: var(--radius-sm);
-  padding: 10px 14px; display: inline-block; margin-top: 28px;
-}
-
-/* ── Principles ── */
-/* Principle cards span two whole modules. */
-.principles { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 48px 0 64px; border-top: 1px solid var(--divider-subtle); }
-@media (max-width: 480px) { .principles { grid-template-columns: 1fr; } }
-.principle h3 { font-size: 15px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 6px; }
-.principle p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; letter-spacing: -.01em; margin: 0; }
-
 /* ── Component gallery: cards span two whole modules ── */
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 24px 0 48px; }
 @media (max-width: 480px) { .gallery { grid-template-columns: 1fr; } }
 /* Cards are divs with a stretched title link, so live demos never nest
    interactive elements inside an anchor. */
-.gallery-item { position: relative; border: 1px solid var(--divider); border-radius: var(--radius); display: flex; flex-direction: column; transition: border-color .2s ease; }
+.gallery-item {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--bg);
+  background-image: none;
+  border: 1px solid var(--divider);
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .2s ease;
+}
 .gallery-item:hover { border-color: var(--text); }
 .gallery-item-link { color: inherit; text-decoration: none; }
 .gallery-item-link::after { content: ""; position: absolute; inset: 0; }
-.gallery-demo { padding: 28px 20px; min-height: 128px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--divider-subtle); overflow: hidden; pointer-events: none; }
+.gallery-demo,
+.gallery-meta { background-color: var(--bg); }
+.gallery-demo { padding: 28px 24px; min-height: 204px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--divider-subtle); overflow: hidden; pointer-events: none; }
 .gallery-meta { padding: 14px 20px 16px; }
 .gallery-meta h3 { font-size: 14.5px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 3px; }
 .gallery-meta p { font-size: 12.5px; color: var(--text-secondary); letter-spacing: -.01em; line-height: 1.5; margin: 0; }
 
 /* ── Component page ── */
-.preview-box { border: 1px solid var(--divider); border-radius: var(--radius); padding: 48px 32px; display: flex; align-items: center; justify-content: center; margin: 24px 0; }
+.preview-box { border: 1px solid var(--divider); border-radius: 0; padding: 56px 32px; min-height: 204px; display: flex; align-items: center; justify-content: center; margin: 24px 0 16px; background: var(--bg); }
 .preview-box > * { max-width: 100%; }
 .code-block { position: relative; background: var(--table-alt); border: 1px solid var(--divider-subtle); border-radius: var(--radius-sm); padding: 14px 16px; margin: 12px 0 28px; overflow-x: auto; }
 .code-block pre { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; line-height: 1.6; color: var(--text); }

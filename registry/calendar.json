@@ -6,6 +6,7 @@
   "description": "Month grid. Selected is ink; today is a hairline. Weeks start on Monday.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
     "https://raster.noord.dev/r/pagination.json"
   ],
   "files": [

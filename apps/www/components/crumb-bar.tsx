@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import { rasterComponents } from "@raster/core";
+import { rasterComponents } from "@noordvc/raster";
+import { isSpecimenPath } from "@/app/specimen";
 
 interface Crumb {
   label: string;
@@ -17,6 +18,8 @@ function trailFor(pathname: string): Crumb[] {
     trail.push({ label: "Docs", href: "/docs" });
     if (parts[1] === "tokens") trail.push({ label: "Tokens" });
     else trail.push({ label: "Getting started" });
+  } else if (parts[0] === "about") {
+    trail.push({ label: "About" });
   } else if (parts[0] === "components") {
     trail.push({ label: "Components", href: "/components" });
     if (parts[1]) {
@@ -45,6 +48,9 @@ export function CrumbBar() {
 
   const trail = trailFor(pathname);
 
+  /* Exception: the specimen path is a flush poster. No crumb bar on the field. */
+  if (isSpecimenPath(pathname)) return null;
+
   return (
     <nav className={`rs-crumb-bar${scrolled ? " rs-crumb-bar-scrolled" : ""}`} aria-label="Breadcrumbs">
       <div className="rs-crumb-bar-inner">
@@ -65,7 +71,9 @@ export function CrumbBar() {
                   {last ? (
                     <span className="rs-crumbs-here">{crumb.label}</span>
                   ) : crumb.href ? (
-                    <Link href={crumb.href}>{crumb.label}</Link>
+                    <Link className="rs-crumbs-link" href={crumb.href}>
+                      {crumb.label}
+                    </Link>
                   ) : (
                     <span>{crumb.label}</span>
                   )}

@@ -6,6 +6,7 @@
   "description": "Native <dialog> that requires an explicit answer. Escape and light dismiss are disabled.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
     "https://raster.noord.dev/r/dialog.json",
     "https://raster.noord.dev/r/button.json"
   ],
@@ -15,6 +16,12 @@
       "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface AlertDialogProps\n  extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n}\n\n/**\n * A native <dialog> that requires an explicit answer. Escape and\n * light dismiss are disabled.\n */\nexport function AlertDialog({ open, onClose, className, children, ...props }: AlertDialogProps) {\n  const ref = React.useRef<HTMLDialogElement>(null);\n\n  React.useEffect(() => {\n    const dialog = ref.current;\n    if (!dialog) return;\n    if (open && !dialog.open) dialog.showModal();\n    else if (!open && dialog.open) dialog.close();\n  }, [open]);\n\n  return (\n    <dialog\n      ref={ref}\n      role=\"alertdialog\"\n      className={cx(\"rs-dialog\", className)}\n      onClose={() => onClose?.()}\n      onCancel={(e) => e.preventDefault()}\n      {...props}\n    >\n      {children}\n    </dialog>\n  );\n}\n\nexport { DialogTitle as AlertDialogTitle, DialogBody as AlertDialogBody, DialogActions as AlertDialogActions } from \"./dialog\";\n",
       "type": "registry:component",
       "target": "components/raster/alert-dialog.tsx"
+    },
+    {
+      "path": "raster/dialog.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface DialogProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n}\n\n/**\n * A native <dialog>. Focus trapping, Escape, and the backdrop come\n * from the platform.\n */\nexport function Dialog({ open, onClose, className, children, ...props }: DialogProps) {\n  const ref = React.useRef<HTMLDialogElement>(null);\n\n  React.useEffect(() => {\n    const dialog = ref.current;\n    if (!dialog) return;\n    if (open && !dialog.open) dialog.showModal();\n    else if (!open && dialog.open) dialog.close();\n  }, [open]);\n\n  return (\n    <dialog ref={ref} className={cx(\"rs-dialog\", className)} onClose={() => onClose?.()} {...props}>\n      {children}\n    </dialog>\n  );\n}\n\nexport function DialogTitle({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-dialog-title\", className)} {...props} />;\n}\n\nexport function DialogBody({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-dialog-body\", className)} {...props} />;\n}\n\nexport function DialogActions({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return <div className={cx(\"rs-dialog-actions\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/dialog.tsx"
     },
     {
       "path": "raster/cx.ts",

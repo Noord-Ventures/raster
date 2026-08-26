@@ -79,7 +79,7 @@ for (const component of rasterComponents) {
     if (!componentFiles.includes(file)) componentFiles.push(file);
   }
 }
-const sources = ["tokens.css", "base.css", "type.css", ...componentFiles, "motion.css"];
+const sources = ["fonts.css", "tokens.css", "base.css", "type.css", ...componentFiles, "motion.css"];
 
 const banner = `/* ═══════════════════════════════════════════════════════════════════
    RASTER, a monochrome, CSS-first design system.
@@ -92,9 +92,8 @@ const banner = `/* ════════════════════�
    GENERATED from the css/ sources. Edit those, then run
    \`npm run build:css\`. Tokens come from src/tokens.ts.
 
-   Typeface: Messina Sans (Luzi Type, Zürich). Licensed, not bundled.
-   Provide your own @font-face for 'Messina Sans' or the stack falls
-   back to system sans.
+   Typeface: Inter (SIL OFL 1.1), variable, latin + latin-ext.
+   Bundled. System sans is fallback only.
    ═══════════════════════════════════════════════════════════════════ */
 
 `;

@@ -5,7 +5,8 @@
   "title": "Table",
   "description": "Hairline rows on the open grid; no cell borders, last column right-aligned. Total rows carry 2px rules.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

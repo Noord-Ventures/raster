@@ -16,7 +16,7 @@ body{
   background-attachment:fixed;
   background-position:var(--grid-pos);
   color:var(--text);
-  font-family:'Messina Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
   font-weight:500;
   line-height:1.6;
   transition:var(--transition);
@@ -49,6 +49,12 @@ body{
 .bb-btn-primary:focus-visible,.bb-btn-ghost:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .bb-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}
 
+/* ── Button group: flush joined actions, one hairline between ── */
+.rs-btn-group{display:inline-flex;align-items:stretch}
+.rs-btn-group > .bb-btn-primary,.rs-btn-group > .bb-btn-ghost{border-radius:0;margin-inline-start:-1px}
+.rs-btn-group > :first-child{margin-inline-start:0}
+.rs-btn-group > .bb-btn-primary{position:relative;z-index:1}
+
 /* ── Text link: underlined by its hairline, never colored ── */
 .bb-link-demo{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider);transition:border-color .2s ease}
 .bb-link-demo:hover{border-color:var(--accent)}
@@ -68,6 +74,18 @@ body{
 .rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}
 .rs-feedback-ok{color:var(--text)}
 .rs-feedback svg{flex-shrink:0}
+.rs-field-hint{font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.45}
+.rs-field-error{font-size:12px;font-weight:500;color:var(--text);letter-spacing:-.01em;line-height:1.45}
+.rs-form{display:flex;flex-direction:column;gap:16px;max-width:388px;margin:0}
+.rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}
+
+/* ── Input group: addon and field share one hairline ── */
+.rs-input-group{display:flex;align-items:stretch;width:100%;border:1px solid var(--divider);border-radius:0;background:var(--bg)}
+.rs-input-group:focus-within{border-color:var(--accent)}
+.rs-input-addon{display:flex;align-items:center;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);background:var(--table-alt);border-right:1px solid var(--divider);white-space:nowrap}
+.rs-input-group .bb-sig-input{border:none;border-radius:0;flex:1;min-width:0}
+.rs-input-group .bb-sig-input:focus{outline:none}
+.rs-input-group-end .rs-input-addon{border-right:none;border-left:1px solid var(--divider)}
 
 /* ── Radio: the dot is ink, never a hue ── */
 .bb-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}
@@ -87,16 +105,60 @@ body{
 .bb-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}
 .bb-progress span{display:block;height:100%;background:var(--text);border-radius:2px}
 
-/* ── Tabs: active tab is ink with a 1.5px underline ── */
-.bb-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}
-.bb-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}
-.bb-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}
-button.bb-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}
+/* ── Tabs: one line of type. Hairline on the active tab only. ── */
+.bb-tabs{display:flex;align-items:baseline;gap:22px;max-width:360px;border:none;box-shadow:none;background:none}
+.bb-tab,
+button.bb-tab{
+  -webkit-appearance:none;
+  appearance:none;
+  padding:8px 0;
+  font-size:14px;
+  font-family:inherit;
+  color:var(--text-secondary);
+  letter-spacing:-.01em;
+  text-decoration:none;
+  background:none;
+  background-image:none;
+  box-shadow:none;
+  border:none;
+  border-radius:0;
+  cursor:pointer;
+  text-align:left;
+}
+.bb-tab-active,
+button.bb-tab.bb-tab-active{
+  color:var(--text);
+  font-weight:600;
+  border:none;
+  box-shadow:inset 0 -1px 0 var(--text);
+}
 
-/* ── Breadcrumbs: slashes at 40%, current page is ink ── */
-.bb-crumbs-demo{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}
-.bb-crumbs-demo-sep{opacity:.4}
-.bb-crumbs-demo-here{color:var(--text)}
+/* ── Breadcrumbs: one ink trail. Slashes at 40%. Current page is full ink.
+   Ancestors stay Inter/ink — never a UA :link or :visited color, never an accent. ── */
+.bb-crumbs-demo{font-size:13px;color:var(--text);letter-spacing:-.01em;display:flex;align-items:baseline;gap:8px}
+.bb-crumbs-demo a,
+.bb-crumbs-demo a:link,
+.bb-crumbs-demo a:visited,
+.bb-crumbs-demo a:hover,
+.bb-crumbs-demo a:active,
+.bb-crumbs-demo a:focus,
+.bb-crumbs-demo a:focus-visible,
+.bb-crumbs-demo a:any-link,
+.bb-crumbs-demo a:-webkit-any-link,
+.bb-crumbs-demo .rs-crumbs-link{
+  color:var(--text);
+  text-decoration:none;
+  background:none;
+}
+.bb-crumbs-demo a,
+.bb-crumbs-demo a:link,
+.bb-crumbs-demo a:visited,
+.bb-crumbs-demo a:any-link,
+.bb-crumbs-demo a:-webkit-any-link,
+.bb-crumbs-demo .rs-crumbs-link{opacity:.55}
+.bb-crumbs-demo a:hover,.bb-crumbs-demo a:focus-visible{opacity:1}
+.bb-crumbs-demo-sep{color:var(--text);opacity:.4}
+.bb-crumbs-demo-here{color:var(--text);opacity:1}
 
 /* ── Crumb bar: fixed top bar in the house chrome ──
    Transparent at rest; once the page cover scrolls away it gains the

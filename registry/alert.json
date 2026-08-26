@@ -5,7 +5,8 @@
   "title": "Alert",
   "description": "Hairline frame with an ink icon. Solid ink variant for critical.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

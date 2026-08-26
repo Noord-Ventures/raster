@@ -6,3 +6,4 @@ dist/
 .turbo/
 out/
 apps/www/public/r/
+apps/www/public/fonts/

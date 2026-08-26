@@ -3,14 +3,15 @@
   "name": "breadcrumbs",
   "type": "registry:component",
   "title": "Breadcrumbs",
-  "description": "Slashes at 40% opacity; the current page is ink.",
+  "description": "One ink trail. Ancestors stay ink; slashes at 40%; the current page is full ink.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {
       "path": "raster/breadcrumbs.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface Crumb {\n  label: React.ReactNode;\n  href?: string;\n}\n\nexport interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {\n  items: Crumb[];\n}\n\nexport function Breadcrumbs({ items, className, ...props }: BreadcrumbsProps) {\n  return (\n    <nav aria-label=\"Breadcrumbs\" className={cx(\"rs-crumbs\", className)} {...props}>\n      {items.map((item, index) => {\n        const last = index === items.length - 1;\n        return (\n          <React.Fragment key={index}>\n            {index > 0 && (\n              <span className=\"rs-crumbs-sep\" aria-hidden=\"true\">\n                /\n              </span>\n            )}\n            {last ? (\n              <span className=\"rs-crumbs-here\" aria-current=\"page\">\n                {item.label}\n              </span>\n            ) : item.href ? (\n              <a href={item.href}>{item.label}</a>\n            ) : (\n              <span>{item.label}</span>\n            )}\n          </React.Fragment>\n        );\n      })}\n    </nav>\n  );\n}\n",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface Crumb {\n  label: React.ReactNode;\n  href?: string;\n}\n\nexport interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {\n  items: Crumb[];\n}\n\nexport function Breadcrumbs({ items, className, ...props }: BreadcrumbsProps) {\n  return (\n    <nav aria-label=\"Breadcrumbs\" className={cx(\"rs-crumbs\", className)} {...props}>\n      {items.map((item, index) => {\n        const last = index === items.length - 1;\n        return (\n          <React.Fragment key={index}>\n            {index > 0 && (\n              <span className=\"rs-crumbs-sep\" aria-hidden=\"true\">\n                /\n              </span>\n            )}\n            {last ? (\n              <span className=\"rs-crumbs-here\" aria-current=\"page\">\n                {item.label}\n              </span>\n            ) : item.href ? (\n              <a className=\"rs-crumbs-link\" href={item.href}>\n                {item.label}\n              </a>\n            ) : (\n              <span>{item.label}</span>\n            )}\n          </React.Fragment>\n        );\n      })}\n    </nav>\n  );\n}\n",
       "type": "registry:component",
       "target": "components/raster/breadcrumbs.tsx"
     },
@@ -22,7 +23,7 @@
     },
     {
       "path": "raster/styles/breadcrumbs.css",
-      "content": "/* ── Breadcrumbs: slashes at 40%, current page is ink ── */\n.rs-crumbs{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}\n.rs-crumbs-sep{opacity:.4}\n.rs-crumbs-here{color:var(--text)}\n",
+      "content": "/* ── Breadcrumbs: one ink trail. Slashes at 40%. Current page is full ink.\n   Ancestors stay Inter/ink — never a UA :link or :visited color, never an accent. ── */\n.rs-crumbs{font-size:13px;color:var(--text);letter-spacing:-.01em;display:flex;align-items:baseline;gap:8px}\n.rs-crumbs a,\n.rs-crumbs a:link,\n.rs-crumbs a:visited,\n.rs-crumbs a:hover,\n.rs-crumbs a:active,\n.rs-crumbs a:focus,\n.rs-crumbs a:focus-visible,\n.rs-crumbs a:any-link,\n.rs-crumbs a:-webkit-any-link,\n.rs-crumbs .rs-crumbs-link{\n  color:var(--text);\n  text-decoration:none;\n  background:none;\n}\n.rs-crumbs a,\n.rs-crumbs a:link,\n.rs-crumbs a:visited,\n.rs-crumbs a:any-link,\n.rs-crumbs a:-webkit-any-link,\n.rs-crumbs .rs-crumbs-link{opacity:.55}\n.rs-crumbs a:hover,.rs-crumbs a:focus-visible{opacity:1}\n.rs-crumbs-sep{color:var(--text);opacity:.4}\n.rs-crumbs-here{color:var(--text);opacity:1}\n",
       "type": "registry:file",
       "target": "styles/raster/breadcrumbs.css"
     }
@@ -32,10 +33,11 @@
       "category": "navigation",
       "classes": [
         "rs-crumbs",
+        "rs-crumbs-link",
         "rs-crumbs-sep",
         "rs-crumbs-here"
       ],
-      "snippet": "<p class=\"rs-crumbs\"><span>Studio</span><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Raster</span></p>",
+      "snippet": "<p class=\"rs-crumbs\"><a class=\"rs-crumbs-link\" href=\"/\">Studio</a><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Raster</span></p>",
       "cssOnly": false,
       "registryDependencies": []
     }

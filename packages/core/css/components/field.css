@@ -8,3 +8,7 @@
 .rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}
 .rs-feedback-ok{color:var(--text)}
 .rs-feedback svg{flex-shrink:0}
+.rs-field-hint{font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.45}
+.rs-field-error{font-size:12px;font-weight:500;color:var(--text);letter-spacing:-.01em;line-height:1.45}
+.rs-form{display:flex;flex-direction:column;gap:16px;max-width:388px;margin:0}
+.rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}

@@ -2,15 +2,16 @@
  * The raster CLI as a library: every command is a pure-ish function
  * over an explicit cwd so the whole thing is testable without a shell.
  *
- * The CLI carries the entire system with it (CSS + registry bundled at
- * build time), so init and add work offline. A remote registry can
- * override the bundle via --registry or raster.json for out-of-band
- * updates.
+ * The CLI carries the entire system with it (CSS + registry + Inter
+ * files bundled at build time), so init and add work offline. A remote
+ * registry can override the bundle via --registry or raster.json for
+ * out-of-band updates.
  */
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { rasterComponents, rasterTokens } from "@raster/core";
+import { fileURLToPath } from "node:url";
+import { rasterComponents, rasterTokens } from "@noordvc/raster";
 import bundle from "../../../registry/bundle.json" with { type: "json" };
 
 const rasterCss: string = (bundle as { css: { raster: string } }).css.raster;
@@ -55,6 +56,7 @@ export interface WriteResult {
 }
 
 const CONFIG_FILE = "raster.json";
+const FONT_FILES = ["InterVariable-latin.woff2", "InterVariable-latin-ext.woff2", "OFL.txt"];
 
 export function loadConfig(cwd: string): RasterConfig {
   const file = join(cwd, CONFIG_FILE);
@@ -62,11 +64,12 @@ export function loadConfig(cwd: string): RasterConfig {
   return { ...defaultConfig, ...(JSON.parse(readFileSync(file, "utf8")) as Partial<RasterConfig>) };
 }
 
-function writeFileSafe(cwd: string, relPath: string, content: string, overwrite: boolean): WriteResult {
+function writeFileSafe(cwd: string, relPath: string, content: string | Buffer, overwrite: boolean): WriteResult {
   const abs = join(cwd, relPath);
   if (existsSync(abs)) {
-    const current = readFileSync(abs, "utf8");
-    if (current === content) return { path: relPath, status: "unchanged" };
+    const current = readFileSync(abs);
+    const next = typeof content === "string" ? Buffer.from(content) : content;
+    if (current.equals(next)) return { path: relPath, status: "unchanged" };
     if (!overwrite) return { path: relPath, status: "skipped" };
   }
   mkdirSync(dirname(abs), { recursive: true });
@@ -74,21 +77,51 @@ function writeFileSafe(cwd: string, relPath: string, content: string, overwrite:
   return { path: relPath, status: "written" };
 }
 
+/** Resolve vendored Inter files: published CLI dist, or the core package in-repo. */
+export function resolveFontsDir(): string {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const candidates = [
+    join(here, "fonts/inter"),
+    join(here, "../fonts/inter"),
+    join(here, "../../core/css/fonts/inter"),
+    join(here, "../../../core/css/fonts/inter"),
+  ];
+  const found = candidates.find((dir) => existsSync(join(dir, "OFL.txt")));
+  if (!found) {
+    throw new Error("Raster Inter files not found. Rebuild @noordvc/raster-cli (copy-fonts) or check packages/core/css/fonts/inter.");
+  }
+  return found;
+}
+
+function copyFonts(cwd: string, cssDir: string, overwrite: boolean): WriteResult[] {
+  const srcDir = resolveFontsDir();
+  const results: WriteResult[] = [];
+  for (const file of FONT_FILES) {
+    const src = join(srcDir, file);
+    if (!existsSync(src)) continue;
+    results.push(writeFileSafe(cwd, join(cssDir, "fonts/inter", file), readFileSync(src), overwrite));
+  }
+  return results;
+}
+
 export interface InitOptions {
   cssDir?: string;
   componentsDir?: string;
   compat?: boolean;
   overwrite?: boolean;
+  registry?: string;
 }
 
-/** Write raster.css (and optionally the 0.1 compat layer) plus raster.json. */
+/** Write raster.css, Inter files, and optionally the 0.1 compat layer, plus raster.json. */
 export function init(cwd: string, options: InitOptions = {}): WriteResult[] {
   const config: RasterConfig = {
     cssDir: options.cssDir ?? defaultConfig.cssDir,
     componentsDir: options.componentsDir ?? defaultConfig.componentsDir,
   };
+  if (options.registry) config.registry = options.registry;
   const results: WriteResult[] = [];
   results.push(writeFileSafe(cwd, join(config.cssDir, "raster.css"), rasterCss, options.overwrite ?? false));
+  results.push(...copyFonts(cwd, config.cssDir, options.overwrite ?? false));
   if (options.compat) {
     results.push(
       writeFileSafe(cwd, join(config.cssDir, "raster-compat.css"), compatCss, options.overwrite ?? false),
@@ -130,6 +163,7 @@ export function resolveWithDependencies(names: string[]): { resolved: RegistryIt
 
 export interface AddOptions {
   overwrite?: boolean;
+  registry?: string;
 }
 
 export interface AddOutcome {
@@ -138,28 +172,80 @@ export interface AddOutcome {
   results: WriteResult[];
 }
 
+function itemUrl(registry: string, name: string): string {
+  return `${registry.replace(/\/$/, "")}/${name}.json`;
+}
+
+async function readRegistryItem(registry: string, name: string): Promise<RegistryItem> {
+  const loc = itemUrl(registry, name);
+  if (/^https?:\/\//.test(loc) || loc.startsWith("file:")) {
+    const res = await fetch(loc);
+    if (!res.ok) throw new Error(`Failed to fetch ${loc}: ${res.status}`);
+    return (await res.json()) as RegistryItem;
+  }
+  const file = join(registry, `${name}.json`);
+  if (!existsSync(file)) throw new Error(`Registry item not found: ${file}`);
+  return JSON.parse(readFileSync(file, "utf8")) as RegistryItem;
+}
+
+async function resolveFromRegistry(
+  registry: string,
+  names: string[],
+): Promise<{ resolved: RegistryItem[]; unknown: string[] }> {
+  const unknown: string[] = [];
+  const seen = new Set<string>();
+  const resolved: RegistryItem[] = [];
+  const visit = async (name: string) => {
+    if (seen.has(name)) return;
+    seen.add(name);
+    try {
+      const item = await readRegistryItem(registry, name);
+      for (const dep of item.meta?.raster?.registryDependencies ?? []) await visit(dep);
+      resolved.push(item);
+    } catch {
+      unknown.push(name);
+    }
+  };
+  for (const name of names) await visit(name);
+  return { resolved, unknown };
+}
+
+function writeItemFiles(cwd: string, item: RegistryItem, componentsDir: string, overwrite: boolean): WriteResult[] {
+  const results: WriteResult[] = [];
+  for (const file of item.files) {
+    if (!file.path.endsWith(".tsx") && !file.path.endsWith(".ts")) continue;
+    const base = file.path.split("/").pop()!;
+    results.push(writeFileSafe(cwd, join(componentsDir, base), file.content, overwrite));
+  }
+  return results;
+}
+
 /**
  * Vendor a component's React source (plus the shared cx helper) into
  * the project. CSS is not written per-component: init's raster.css
  * already styles every component. That is the CSS-first model.
+ *
+ * When --registry or raster.json.registry is set, items are loaded
+ * from that registry (HTTP(S) URL or a local directory of JSON files)
+ * instead of the bundled snapshot.
  */
-export function add(cwd: string, names: string[], options: AddOptions = {}): {
+export async function add(
+  cwd: string,
+  names: string[],
+  options: AddOptions = {},
+): Promise<{
   outcomes: AddOutcome[];
   unknown: string[];
-} {
+}> {
   const config = loadConfig(cwd);
-  const { resolved, unknown } = resolveWithDependencies(names);
+  const registry = options.registry ?? config.registry;
+  const { resolved, unknown } = registry
+    ? await resolveFromRegistry(registry, names)
+    : resolveWithDependencies(names);
   const outcomes: AddOutcome[] = [];
   for (const item of resolved) {
     const cssOnly = item.meta?.raster?.cssOnly ?? false;
-    const results: WriteResult[] = [];
-    if (!cssOnly) {
-      for (const file of item.files) {
-        if (!file.path.endsWith(".tsx") && !file.path.endsWith(".ts")) continue;
-        const base = file.path.split("/").pop()!;
-        results.push(writeFileSafe(cwd, join(config.componentsDir, base), file.content, options.overwrite ?? false));
-      }
-    }
+    const results = cssOnly ? [] : writeItemFiles(cwd, item, config.componentsDir, options.overwrite ?? false);
     outcomes.push({ item, cssOnly, results });
   }
   return { outcomes, unknown };

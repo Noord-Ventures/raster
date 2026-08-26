@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { rasterCategories, rasterComponents } from "@raster/core";
+import { rasterCategories, rasterComponents } from "@noordvc/raster";
 import { DocsNav } from "@/components/docs-nav";
 import { Preview } from "@/components/preview";
 
@@ -14,15 +14,13 @@ export default function ComponentsPage() {
         <main className="site-content-wide">
           <header className="cover" style={{ paddingBottom: 24, maxWidth: 592 }}>
             <h1 className="rs-t-display">Components</h1>
-            <p className="rs-t-sub">
-              The kit, live. Each page has markup, React usage, and the install command.
-            </p>
+            <p className="rs-t-sub">The control, the name, a short law.</p>
           </header>
           {rasterCategories.map((category) => {
             const items = rasterComponents.filter((c) => c.category === category);
             if (items.length === 0) return null;
             return (
-              <section key={category}>
+              <section key={category} id={category}>
                 <h2 className="rs-t-title" style={{ marginTop: 40 }}>
                   {category.charAt(0).toUpperCase() + category.slice(1)}
                 </h2>

@@ -1,0 +1,97 @@
+/* Use field: a 204-module composition. Paper, hairlines, no radius. */
+.rs-use {
+  isolation: isolate;
+  background-color: var(--bg);
+  background-image: none;
+  border: 1px solid var(--divider);
+  border-radius: 0;
+  box-shadow: none;
+  display: grid;
+  grid-template-columns: 184px minmax(0, 1fr);
+  min-height: 204px;
+  overflow: hidden;
+  margin: 8px 0 24px;
+}
+.rs-scene {
+  isolation: isolate;
+  background-color: var(--bg);
+  border: 1px solid var(--divider);
+  border-radius: 0;
+  box-shadow: none;
+  margin: 8px 0 32px;
+  overflow: hidden;
+}
+.rs-scene .rs-use {
+  width: 100%;
+  border: none;
+  margin: 0;
+  grid-template-columns: 1fr;
+  min-height: 204px;
+}
+.rs-scene .rs-use-type {
+  display: none;
+}
+.rs-use .rs-theme-toggle {
+  position: relative;
+  top: auto;
+  right: auto;
+  filter: none;
+}
+.rs-use-type {
+  margin: 0;
+  padding: 20px 16px 18px;
+  border-right: 1px solid var(--divider);
+  background: var(--bg);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 600;
+  letter-spacing: -.035em;
+  line-height: .95;
+  color: var(--text);
+  display: flex;
+  align-items: flex-end;
+  text-wrap: balance;
+}
+.rs-use-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 0;
+  background: var(--bg);
+}
+.rs-use-kicker {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--text-secondary);
+}
+.rs-use-copy {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.45;
+  color: var(--text);
+  max-width: 28em;
+}
+.rs-use-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.rs-use-stack { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.rs-use-panel { animation: rs-use-in .22s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .rs-use-panel { animation: none; }
+}
+@keyframes rs-use-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (max-width: 640px) {
+  .rs-use { grid-template-columns: 1fr; min-height: 0; }
+  .rs-use-type {
+    border-right: none;
+    border-bottom: 1px solid var(--divider);
+    min-height: 88px;
+    font-size: 32px;
+  }
+}

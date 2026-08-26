@@ -3,9 +3,19 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+  BarChart,
   Badge,
+  Breadcrumbs,
+  ButtonGroup,
   CrumbBar,
   Button,
+  Empty,
+  Field,
+  FieldLabel,
+  LineChart,
+  Form,
+  NativeSelect,
+  Spinner,
   Checkbox,
   InlineForm,
   Pagination,
@@ -215,6 +225,15 @@ describe("Stepper", () => {
   });
 });
 
+describe("Breadcrumbs", () => {
+  it("keeps ancestors as trail links, not a second color", () => {
+    render(<Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Raster" }]} />);
+    expect(screen.getByRole("link", { name: "Studio" }).className).toBe("rs-crumbs-link");
+    expect(screen.getByText("Raster").className).toBe("rs-crumbs-here");
+    expect(screen.getByText("/").className).toBe("rs-crumbs-sep");
+  });
+});
+
 describe("CrumbBar", () => {
   it("solidifies and reveals the crumbs on scroll", () => {
     const { container } = render(
@@ -227,6 +246,97 @@ describe("CrumbBar", () => {
     expect(bar.className).toContain("rs-crumb-bar-scrolled");
     expect(screen.getByText("Components").className).toBe("rs-crumbs-here");
     Object.defineProperty(window, "scrollY", { value: 0, configurable: true });
+  });
+});
+
+describe("ButtonGroup", () => {
+  it("is a group of flush actions", () => {
+    render(
+      <ButtonGroup>
+        <Button variant="ghost">Left</Button>
+        <Button variant="ghost">Right</Button>
+      </ButtonGroup>,
+    );
+    expect(screen.getByRole("group").className).toBe("rs-btn-group");
+    expect(screen.getAllByRole("button")).toHaveLength(2);
+  });
+});
+
+describe("Form and Field", () => {
+  it("stacks a labeled field inside a native form", () => {
+    render(
+      <Form aria-label="Contact">
+        <Field>
+          <FieldLabel htmlFor="name">Name</FieldLabel>
+          <input id="name" className="rs-input" />
+        </Field>
+      </Form>,
+    );
+    expect(screen.getByRole("form", { name: "Contact" }).className).toBe("rs-form");
+    expect(screen.getByLabelText("Name")).toBeTruthy();
+  });
+});
+
+describe("NativeSelect", () => {
+  it("is a real select with Raster chrome", () => {
+    render(
+      <NativeSelect aria-label="City" defaultValue="alkmaar">
+        <option value="alkmaar">Alkmaar</option>
+        <option value="delft">Delft</option>
+      </NativeSelect>,
+    );
+    const el = screen.getByRole("combobox", { name: "City" }) as HTMLSelectElement;
+    expect(el.className).toBe("rs-native-select");
+    expect(el.value).toBe("alkmaar");
+  });
+});
+
+describe("Empty", () => {
+  it("renders a vacant cell", () => {
+    render(<Empty title="No projects yet">Start one.</Empty>);
+    expect(screen.getByText("No projects yet").className).toBe("rs-empty-title");
+    expect(screen.getByText("Start one.").className).toBe("rs-empty-body");
+  });
+});
+
+describe("Spinner", () => {
+  it("exposes status semantics", () => {
+    render(<Spinner label="Loading" />);
+    expect(screen.getByRole("status", { name: "Loading" }).className).toBe("rs-spinner");
+  });
+});
+
+describe("LineChart", () => {
+  it("renders a hairline plot and a screen-reader table", () => {
+    render(
+      <LineChart
+        labels={["Mon", "Tue"]}
+        series={[{ name: "Sheets", values: [12, 18] }]}
+      />,
+    );
+    expect(document.querySelector(".rs-chart-line")).toBeTruthy();
+    expect(document.querySelector(".rs-chart-field")).toBeTruthy();
+    expect(screen.getByRole("table")).toBeTruthy();
+    expect(screen.getByText("Sheets")).toBeTruthy();
+  });
+});
+
+describe("BarChart", () => {
+  it("draws horizontal bars without a radius", () => {
+    const { container } = render(
+      <BarChart
+        orientation="horizontal"
+        data={[
+          { label: "Alkmaar", value: 42 },
+          { label: "Delft", value: 28 },
+        ]}
+      />,
+    );
+    const bars = container.querySelectorAll("rect.rs-chart-bar");
+    expect(bars.length).toBe(2);
+    for (const bar of bars) {
+      expect(bar.getAttribute("rx")).toBeNull();
+    }
   });
 });
 

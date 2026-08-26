@@ -1,8 +1,10 @@
 # Raster
 
-A monochrome, CSS-first design system. One ink, no accent; emphasis comes from weight, size, and spacing.
+A poster you can install.
 
-Raster is the system behind [noord.vc](https://noord.vc), [noord.dev](https://noord.dev), and renatovaldes.com. This repo contains the tokens, CSS, React components, registry, CLI, and documentation site.
+Public door: [getraster.com](https://getraster.com). Host today: [raster.noord.dev](https://raster.noord.dev).
+
+This repo contains the tokens, CSS, React components, registry, CLI, and documentation site.
 
 ## Principles
 
@@ -17,9 +19,9 @@ Raster is the system behind [noord.vc](https://noord.vc), [noord.dev](https://no
 
 | Path | Package | Contents |
 |---|---|---|
-| `packages/core` | `@raster/core` | Tokens, per-component CSS, the typed registry, and the build that generates `raster.css`, `tokens.css`, the token JSON, and the 0.1 compat layer |
-| `packages/react` | `@raster/react` | React components with zero dependencies, styled by the core CSS |
-| `packages/cli` | `@raster/cli` | `raster init` / `add` / `list` / `tokens`. Bundles the registry; works offline |
+| `packages/core` | `@noordvc/raster` | Tokens, per-component CSS, vendored Inter, the typed registry, and the build that generates `raster.css`, `tokens.css`, the token JSON, and the 0.1 compat layer |
+| `packages/react` | `@noordvc/raster-react` | React components styled by `@noordvc/raster` CSS (`@noordvc/raster-react` depends on `@noordvc/raster`) |
+| `packages/cli` | `@noordvc/raster-cli` | `npx @noordvc/raster-cli init` / `add` / `list` / `tokens`. Bundles the registry; works offline |
 | `registry/` | | Generated registry items in the shadcn registry-item schema |
 | `apps/www` | | Documentation site: gallery, per-component docs, tokens, served registry |
 
@@ -28,22 +30,28 @@ Raster is the system behind [noord.vc](https://noord.vc), [noord.dev](https://no
 **CLI.**
 
 ```sh
-npx raster init            # writes styles/raster.css + raster.json
-npx raster add button dialog
+npx @noordvc/raster-cli init            # writes styles/raster.css, Inter, and raster.json
+npx @noordvc/raster-cli add button dialog
 ```
 
 `add` copies React source into `components/raster/`. Registry dependencies install with it. CSS-only components need no code; the classes are in raster.css.
 
-**Plain CSS.** Link `packages/core/css/raster.css` and use the `rs-*` classes. Set `data-theme="dark"` on the root element for the dark scheme.
+`init --compat` also writes the 0.1 class-name layer. `init --registry <url>` (or `raster.json.registry`) points `add` at a remote registry for out-of-band updates.
+
+**Plain CSS.** Import `@noordvc/raster/css` (or link the file the CLI wrote) and use the `rs-*` classes. Set `data-theme="dark"` on the root element for the dark scheme.
 
 **Tokens.**
 
 ```ts
-import { rasterTokens } from "@raster/core";
+import { rasterTokens } from "@noordvc/raster";
 rasterTokens.color.light.paper; // "#FAF8F2"
 ```
 
-**shadcn interop.** Each component is published as a registry item under `registry/` in the shadcn registry-item schema. `npx shadcn add <host>/r/button.json` works from any host serving that directory. The docs site serves it at `/r/`.
+**shadcn interop.** Each component is published as a registry item under `registry/` in the shadcn registry-item schema. From the public host:
+
+```sh
+npx shadcn add https://raster.noord.dev/r/button.json
+```
 
 ## Architecture
 
@@ -58,7 +66,7 @@ registry         registry/<name>.json          shadcn registry-item, contents in
                  registry/bundle.json          embedded by the CLI at build time
 ```
 
-The test suite enforces what generation cannot: every registry class exists in its CSS, every snippet class has a provider, no `var()` is undefined, no styled class is missing from the registry, and no hex in the system is a hue.
+The test suite enforces what generation cannot: every registry class exists in its CSS, every snippet class has a provider, no `var()` is undefined, no styled class is missing from the registry, no hex in the system is a hue, and generated registry JSON never names a dead host.
 
 ## Development
 
@@ -71,7 +79,7 @@ pnpm dev          # docs site at localhost:3000
 
 ## Catalogue
 
-57 components, covering the shadcn catalogue. Each is CSS-first with an optional zero-dependency React layer.
+68 components, covering the everyday shadcn/ui catalogue. Each is CSS-first with an optional zero-dependency React layer.
 
 Behavior comes from the platform where it exists. Accordion and collapsible are native `<details>`; the `name` attribute gives exclusive-open without JS. Dialog, alert dialog, sheet, and the command palette are native `<dialog>`: focus trap, Escape, backdrop. Popover uses the Popover API. Carousel uses scroll snap. Tooltip and hover card are CSS. Form controls wrap native inputs.
 
@@ -79,12 +87,12 @@ Charts are dependency-free SVG: line, bar, sparkline, donut. Hairline grid, hove
 
 ## Typeface
 
-Messina Sans by Luzi Gantenbein ([Luzi Type, Zürich](https://www.luzi-type.ch)). Licensed, not bundled. Provide your own `@font-face` for `'Messina Sans'`; the stack falls back to system sans. Weights: 500 body, 600 headings and labels.
+Inter, SIL OFL 1.1. Variable, latin + latin-ext, vendored next to the CSS. System sans is fallback only. Weights: 500 body, 600 headings and labels.
 
 ## Coming from 0.1
 
-0.2 renamed every class to the `rs-` prefix and scoped table styles to `.rs-table`. Sites on the 0.1 names keep working by linking the generated `css/raster-compat.css` after `raster.css`, or via `raster init --compat`. The rename map is `packages/core/src/legacy.ts`.
+0.2 renamed every class to the `rs-` prefix and scoped table styles to `.rs-table`. Sites on the 0.1 names keep working by linking the generated `css/raster-compat.css` after `raster.css`, or via `npx @noordvc/raster-cli init --compat`. The rename map is `packages/core/src/legacy.ts`.
 
 ---
 
-© Noord / Renato Valdés-Olmos. All rights reserved.
+MIT © Noord / Renato Valdés-Olmos

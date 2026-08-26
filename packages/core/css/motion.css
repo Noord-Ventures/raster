@@ -3,4 +3,5 @@
   .rs-reveal{transition:none}
   .rs-subscribed{animation:none}
   .rs-theme-track,.rs-theme-sun,.rs-theme-moon{transition:none}
+  .rs-spinner{animation:none;border-top-color:var(--text)}
 }
