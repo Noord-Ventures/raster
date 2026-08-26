@@ -17,9 +17,9 @@
     "sw"
     "badge";
   grid-auto-rows: minmax(204px, auto);
-  /* One ink line: padding is the outer rule, gap is the inner. They meet. */
+  /* Internal 1px gaps are the module lines. Top and left stay flush. */
   background: var(--divider);
-  padding: 1px;
+  padding: 0 1px 1px 0;
   gap: 1px;
 }
 .specimen-cell {

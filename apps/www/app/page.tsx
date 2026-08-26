@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { COMMAND, FACE, LAW } from "./specimen";
+import { COMMAND, LAW, WORD } from "./specimen";
 import "./specimen.css";
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function Home() {
     <main className="specimen-page" aria-label="Raster specimen">
       <div className="specimen">
         <section className="specimen-cell specimen-cell-face" aria-label="Face">
-          <p className="specimen-face">{FACE}</p>
+          <p className="specimen-face">{WORD}</p>
         </section>
 
         <section className="specimen-cell specimen-cell-law">

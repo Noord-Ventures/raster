@@ -149,7 +149,7 @@ html, body { margin: 0; padding: 0; }
 @media (max-width: 480px) { .gallery { grid-template-columns: 1fr; } }
 /* Cards are divs with a stretched title link, so live demos never nest
    interactive elements inside an anchor. */
-.gallery-item { position: relative; border: 1px solid var(--divider); border-radius: var(--radius); display: flex; flex-direction: column; transition: border-color .2s ease; }
+.gallery-item { position: relative; background: var(--bg); border: 1px solid var(--divider); border-radius: 0; display: flex; flex-direction: column; transition: border-color .2s ease; }
 .gallery-item:hover { border-color: var(--text); }
 .gallery-item-link { color: inherit; text-decoration: none; }
 .gallery-item-link::after { content: ""; position: absolute; inset: 0; }
