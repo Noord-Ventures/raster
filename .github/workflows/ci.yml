@@ -84,6 +84,28 @@ jobs:
             exit 1
           fi
           grep -q 'padding: 0 1px 1px 0' apps/www/app/specimen.css
+          grep -q 'KIT =' apps/www/app/specimen.ts
+          grep -q 'button-group' apps/www/app/specimen.ts
+          grep -q 'tabs' apps/www/app/specimen.ts
+          grep -q 'chart' apps/www/app/specimen.ts
+          grep -q 'SpecimenKit' apps/www/app/page.tsx
+          test -f apps/www/app/specimen-kit.tsx
+          if grep -nE 'Save|Draft|rs-switch' apps/www/app/page.tsx apps/www/app/specimen-kit.tsx; then
+            echo "Homepage kit cells must not be the leftover Save / switch / Draft set"
+            exit 1
+          fi
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const spec = readFileSync("apps/www/app/specimen.ts", "utf8");
+            const names = [...spec.matchAll(/"(button-group|tabs|chart)"/g)].map((m) => m[1]);
+            const reg = readFileSync("packages/core/src/registry.ts", "utf8");
+            for (const name of names) {
+              if (!reg.includes(`name: "${name}"`)) {
+                console.error("KIT name missing from catalog:", name);
+                process.exit(1);
+              }
+            }
+          '
           if ! grep -q 'gallery-item' apps/www/app/site.css || ! grep -q 'background-color: var(--bg)' apps/www/app/site.css; then
             echo "Component tiles must be opaque paper"
             exit 1

@@ -13,9 +13,9 @@
     "face"
     "law"
     "command"
-    "btn"
-    "sw"
-    "badge";
+    "kita"
+    "kitb"
+    "kitc";
   grid-auto-rows: minmax(204px, auto);
   /* Internal 1px gaps are the module lines. Top and left stay flush. */
   background: var(--divider);
@@ -48,9 +48,9 @@
   justify-content: space-between;
   gap: 16px;
 }
-.specimen-cell-btn { grid-area: btn; }
-.specimen-cell-sw { grid-area: sw; }
-.specimen-cell-badge { grid-area: badge; }
+.specimen-cell-kit-a { grid-area: kita; }
+.specimen-cell-kit-b { grid-area: kitb; }
+.specimen-cell-kit-c { grid-area: kitc; }
 .specimen-cell-empty {
   display: none;
   grid-area: rest;
@@ -97,22 +97,45 @@
 }
 .specimen-command-meta a:hover { border-color: var(--text); }
 .specimen-cell-demo {
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 12px;
+  overflow: hidden;
 }
-.specimen-demo-live {
+.specimen-kit-name {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+.specimen-kit-name a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--divider);
+}
+.specimen-kit-name a:hover { border-color: var(--text); }
+.specimen-kit-live {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.specimen-demo-live .rs-btn-primary,
-.specimen-demo-live .rs-btn-ghost,
-.specimen-demo-live .rs-badge,
-.specimen-demo-live .rs-badge-solid,
-.specimen-demo-live .rs-badge-muted {
+.specimen-kit-live > div {
+  width: 100% !important;
+  max-width: 100%;
+}
+.specimen-kit-live .rs-chart,
+.specimen-kit-live .rs-chart-field,
+.specimen-kit-live .rs-btn-group,
+.specimen-kit-live .rs-tabs {
+  width: 100%;
+  max-width: 100%;
   border-radius: 0;
   box-shadow: none;
 }
+.specimen-kit-live .rs-chart-field { padding: 10px; }
 
 @media (min-width: 408px) {
   .specimen {
@@ -122,8 +145,8 @@
       "face face"
       "law law"
       "command command"
-      "btn sw"
-      "badge rest";
+      "kita kitb"
+      "kitc rest";
     grid-auto-rows: minmax(204px, 1fr);
   }
   .specimen-cell-empty { display: block; }
@@ -136,7 +159,7 @@
       "face face face law"
       "face face face law"
       "command command command command"
-      "btn sw badge rest";
+      "kita kitb kitc rest";
   }
 }
 
@@ -148,7 +171,7 @@
     grid-template-areas:
       "face face face face law law"
       "face face face face law law"
-      "command command command btn sw badge";
+      "command command command kita kitb kitc";
   }
   .specimen-cell { min-height: 0; }
   .specimen-cell-face { min-height: 0; }

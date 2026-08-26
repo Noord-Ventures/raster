@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { COMMAND, LAW, WORD } from "./specimen";
+import { SpecimenKit } from "./specimen-kit";
 import "./specimen.css";
 
 export const metadata: Metadata = {
@@ -29,27 +30,7 @@ export default function Home() {
           </p>
         </section>
 
-        <section className="specimen-cell specimen-cell-demo specimen-cell-btn" aria-label="Button">
-          <div className="specimen-demo-live">
-            <button type="button" className="rs-btn-primary">
-              Save
-            </button>
-          </div>
-        </section>
-
-        <section className="specimen-cell specimen-cell-demo specimen-cell-sw" aria-label="Switch">
-          <div className="specimen-demo-live">
-            <span className="rs-switch rs-switch-on">
-              <i />
-            </span>
-          </div>
-        </section>
-
-        <section className="specimen-cell specimen-cell-demo specimen-cell-badge" aria-label="Badge">
-          <div className="specimen-demo-live">
-            <span className="rs-badge">Draft</span>
-          </div>
-        </section>
+        <SpecimenKit />
 
         <div className="specimen-cell specimen-cell-empty" aria-hidden="true" />
       </div>
