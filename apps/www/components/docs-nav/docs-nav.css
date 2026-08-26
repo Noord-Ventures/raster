@@ -20,8 +20,12 @@
   mask-image: linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 64px), transparent calc(100% - 8px));
 }
 .toc-sub {
+  /* Paper over the 184-line so it cannot read as an inset stroke on the list.
+     1px margin leaves the 408 module line as the only join with the groups. */
+  margin-left: 1px;
   padding-left: 20px;
   padding-right: 20px;
+  background: var(--bg);
 }
 .toc-sub:empty { display: none; }
 .toc::-webkit-scrollbar { display: none; }

@@ -110,3 +110,4 @@ jobs:
             echo "Secondaries column must not grow its own left rule"
             exit 1
           fi
+          grep -q 'background: var(--bg)' apps/www/components/docs-nav/docs-nav.css
