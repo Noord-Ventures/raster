@@ -45,6 +45,9 @@ export function CrumbBar() {
 
   const trail = trailFor(pathname);
 
+  /* The homepage is a flush poster. The crumb bar would sit on the field. */
+  if (pathname === "/") return null;
+
   return (
     <nav className={`rs-crumb-bar${scrolled ? " rs-crumb-bar-scrolled" : ""}`} aria-label="Breadcrumbs">
       <div className="rs-crumb-bar-inner">

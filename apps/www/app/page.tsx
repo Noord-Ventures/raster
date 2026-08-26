@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { rasterComponents } from "@noordvc/raster";
-import { Preview } from "@/components/preview";
+import { Badge, Button, Switch } from "@noordvc/raster-react";
 
 export const metadata: Metadata = {
   title: "Raster",
@@ -11,62 +10,47 @@ export const metadata: Metadata = {
 const COMMAND = "npx @noordvc/raster-cli init";
 const LAW = "One ink, a 204 module.";
 
-const featured = ["button", "switch", "input", "tabs"];
-
 export default function Home() {
-  const items = featured
-    .map((name) => rasterComponents.find((c) => c.name === name)!)
-    .filter(Boolean);
-
   return (
-    <div className="site-layout">
-      <main className="site-content-wide">
-        <section className="specimen" aria-label="Raster specimen">
-          <div className="specimen-cell specimen-cell-2x2">
-            <p className="specimen-face">Inter</p>
-          </div>
-          <div className="specimen-cell">
-            <p className="rs-t-label specimen-quiet">Raster 0.3</p>
-            <p className="specimen-meta">
-              SIL OFL 1.1
-              <br />
-              bundled
-            </p>
-          </div>
-          <div className="specimen-cell">
-            <h1 className="specimen-law">{LAW}</h1>
-          </div>
-          <div className="specimen-cell specimen-cell-2">
-            <p className="specimen-quiet">Install</p>
-            <code className="specimen-command">{COMMAND}</code>
-            <Link href="/docs" className="specimen-link">
-              Getting started
-            </Link>
-          </div>
+    <main className="specimen-page" aria-label="Raster specimen">
+      <div className="specimen">
+        <section className="specimen-cell specimen-cell-face" aria-label="Face">
+          <p className="specimen-face">Inter</p>
         </section>
 
-        <section className="specimen specimen-tight" aria-label="Components">
-          {items.map((c) => (
-            <div className="specimen-cell specimen-demo" key={c.name}>
-              <div className="specimen-demo-live">
-                <Preview name={c.name} snippet={c.snippet} />
-              </div>
-              <Link href={`/components/${c.name}`} className="specimen-link">
-                {c.title}
-              </Link>
-            </div>
-          ))}
+        <section className="specimen-cell specimen-cell-law">
+          <h1 className="specimen-law">{LAW}</h1>
         </section>
 
-        <footer className="site-footer">
-          <span>MIT.</span>
-          <span>
-            <a href="https://github.com/rennvaldes/raster">GitHub</a>
-            {" · "}
+        <section className="specimen-cell specimen-cell-command">
+          <p className="specimen-command">{COMMAND}</p>
+          <p className="specimen-command-meta">
             <Link href="/docs">Getting started</Link>
-          </span>
-        </footer>
-      </main>
-    </div>
+            <span aria-hidden="true"> · </span>
+            MIT
+          </p>
+        </section>
+
+        <section className="specimen-cell specimen-cell-demo specimen-cell-btn" aria-label="Button">
+          <div className="specimen-demo-live">
+            <Button>Save</Button>
+          </div>
+        </section>
+
+        <section className="specimen-cell specimen-cell-demo specimen-cell-sw" aria-label="Switch">
+          <div className="specimen-demo-live">
+            <Switch defaultChecked aria-label="Switch" />
+          </div>
+        </section>
+
+        <section className="specimen-cell specimen-cell-demo specimen-cell-badge" aria-label="Badge">
+          <div className="specimen-demo-live">
+            <Badge>Draft</Badge>
+          </div>
+        </section>
+
+        <div className="specimen-cell specimen-cell-empty" aria-hidden="true" />
+      </div>
+    </main>
   );
 }

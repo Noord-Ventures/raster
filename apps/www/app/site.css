@@ -191,35 +191,65 @@ html, body { margin: 0; padding: 0; }
 .toc-item[aria-current="true"] { font-weight: 500; }
 .toc-item:focus-visible { outline: 1px solid var(--text); outline-offset: 2px; }
 
-/* ── Homepage specimen: flush 204 cells, type occupies a cell like an image ── */
+/* ── Homepage: full-viewport 204 poster. Grid is the page. ── */
+.specimen-page {
+  width: 100%;
+  min-height: 100dvh;
+}
 .specimen {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 204px);
-  margin-top: 120px;
+  width: 100%;
+  min-height: 100dvh;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "face"
+    "law"
+    "command"
+    "btn"
+    "sw"
+    "badge";
+  grid-auto-rows: minmax(204px, auto);
   border-top: 1px solid var(--divider);
   border-left: 1px solid var(--divider);
 }
-.specimen-tight { margin-top: 0; }
 .specimen-cell {
+  min-width: 0;
   min-height: 204px;
   padding: 20px;
   border-right: 1px solid var(--divider);
   border-bottom: 1px solid var(--divider);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  overflow: visible;
 }
-.specimen-cell-2 { grid-column: span 2; }
-.specimen-cell-2x2 {
-  grid-column: span 2;
-  grid-row: span 2;
-  min-height: 408px;
-  padding: 20px;
+.specimen-cell-face {
+  grid-area: face;
+  container-type: size;
   justify-content: flex-end;
+  min-height: 408px;
+}
+.specimen-cell-law {
+  grid-area: law;
+  container-type: size;
+  justify-content: flex-end;
+}
+.specimen-cell-command {
+  grid-area: command;
+  container-type: size;
+  justify-content: space-between;
+  gap: 16px;
+}
+.specimen-cell-btn { grid-area: btn; }
+.specimen-cell-sw { grid-area: sw; }
+.specimen-cell-badge { grid-area: badge; }
+.specimen-cell-empty {
+  display: none;
+  grid-area: rest;
+  padding: 0;
 }
 .specimen-face {
   margin: 0;
-  font-size: clamp(72px, 18vw, 148px);
+  font-size: clamp(4.5rem, min(32cqw, 54cqh), 12rem);
   font-weight: 600;
   letter-spacing: -.045em;
   line-height: .82;
@@ -227,64 +257,91 @@ html, body { margin: 0; padding: 0; }
 }
 .specimen-law {
   margin: 0;
-  font-size: 22px;
+  font-size: clamp(1.5rem, min(18cqw, 12cqh), 3.5rem);
   font-weight: 600;
-  letter-spacing: -.02em;
-  line-height: 1.2;
+  letter-spacing: -.035em;
+  line-height: 1;
   text-wrap: balance;
+  max-width: 8.5em;
 }
-.specimen-quiet {
+.specimen-command {
+  margin: 0;
+  font-family: inherit;
+  font-size: clamp(15px, 2.4cqw, 22px);
+  font-weight: 500;
+  letter-spacing: -.025em;
+  line-height: 1.25;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+.specimen-command-meta {
+  margin: 0;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: -.01em;
   color: var(--text-secondary);
-  margin: 0;
 }
-.specimen-meta {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: -.01em;
-  line-height: 1.45;
-}
-.specimen-command {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 13px;
-  color: var(--text);
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 12px 0 0;
-  display: block;
-}
-.specimen-link {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: -.01em;
+.specimen-command-meta a {
   color: var(--text);
   text-decoration: none;
   border-bottom: 1px solid var(--divider);
-  width: fit-content;
 }
-.specimen-link:hover { border-color: var(--text); }
-.specimen-type { justify-content: space-between; overflow: hidden; }
-.specimen-demo { justify-content: flex-end; gap: 16px; }
+.specimen-command-meta a:hover { border-color: var(--text); }
+.specimen-cell-demo {
+  justify-content: center;
+  align-items: center;
+}
 .specimen-demo-live {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
-  overflow: hidden;
-  min-height: 0;
 }
-@media (max-width: 640px) {
-  .specimen { margin-top: 72px; }
+.specimen-demo-live .rs-btn-primary,
+.specimen-demo-live .rs-btn-ghost,
+.specimen-demo-live .rs-badge,
+.specimen-demo-live .rs-badge-solid,
+.specimen-demo-live .rs-badge-muted {
+  border-radius: 0;
+  box-shadow: none;
 }
-@media (max-width: 480px) {
-  .specimen { grid-template-columns: 1fr; }
-  .specimen-cell-2, .specimen-cell-2x2 { grid-column: span 1; grid-row: span 1; min-height: 204px; }
-  .specimen-face { font-size: 72px; }
+
+@media (min-width: 408px) {
+  .specimen {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "face face"
+      "face face"
+      "law law"
+      "command command"
+      "btn sw"
+      "badge rest";
+    grid-auto-rows: minmax(204px, 1fr);
+  }
+  .specimen-cell-empty { display: block; }
+}
+
+@media (min-width: 816px) {
+  .specimen {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-areas:
+      "face face face law"
+      "face face face law"
+      "command command command command"
+      "btn sw badge rest";
+  }
+}
+
+@media (min-width: 1224px) {
+  .specimen {
+    height: 100dvh;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(204px, 1fr));
+    grid-template-areas:
+      "face face face face law law"
+      "face face face face law law"
+      "command command command btn sw badge";
+  }
+  .specimen-cell-empty { display: none; }
 }
 
 /* ── Component gallery: cards span two whole modules ── */
