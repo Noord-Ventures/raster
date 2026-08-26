@@ -60,9 +60,9 @@ describe("generated raster.css", () => {
 
   it("leaves air under the last sidebar item before the foot rule", () => {
     const side = readFileSync(join(pkgDir, "css/components/sidebar.css"), "utf8");
-    expect(side).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:20px\}/);
-    expect(side).toMatch(/\.rs-sidebar-nav\{[^}]*padding:8px 0 20px/);
-    expect(rasterCss).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:20px\}/);
+    expect(side).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:32px\}/);
+    expect(side).toMatch(/\.rs-sidebar-nav\{[^}]*padding:8px 0 32px/);
+    expect(rasterCss).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:32px\}/);
   });
 
   it("marks only the active tab with a hairline", () => {
