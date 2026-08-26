@@ -2245,7 +2245,7 @@
       "name": "sidebar",
       "type": "registry:component",
       "title": "Sidebar",
-      "description": "One 204 module rail. Flush items, hairline edge.",
+      "description": "One 204 module rail. Air under the last item before the foot rule.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json"

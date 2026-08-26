@@ -531,11 +531,24 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-nav a{font-size:14px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);text-decoration:none;transition:color .2s ease}
 .rs-nav a:hover,.rs-nav a[aria-current="page"]{color:var(--text)}
 
-/* ── Sidebar: one 204 module rail, flush items, hairline edge ── */
+/* ── Sidebar: one 204 module rail, flush items, hairline edge.
+   Last item keeps air before the foot rule. ── */
 .rs-sidebar{width:204px;min-height:204px;display:flex;flex-direction:column;border-right:1px solid var(--divider);background:var(--bg);border-radius:0}
 .rs-sidebar-head{padding:16px 20px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);border-bottom:1px solid var(--divider)}
-.rs-sidebar-nav{display:flex;flex-direction:column;padding:8px 0 24px;flex:1}
-.rs-sidebar-item{display:block;padding:8px 20px;font-size:13px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);text-decoration:none}
+.rs-sidebar-nav{display:flex;flex-direction:column;padding:8px 0 20px;flex:1}
+.rs-sidebar-item,
+.rs-sidebar-item:link,
+.rs-sidebar-item:visited,
+.rs-sidebar-item:any-link{
+  display:block;
+  padding:8px 20px;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:-.01em;
+  color:var(--text-secondary);
+  text-decoration:none;
+}
+.rs-sidebar-item:last-child{padding-bottom:20px}
 .rs-sidebar-item:hover,.rs-sidebar-item[aria-current="page"]{color:var(--text)}
 .rs-sidebar-label{padding:16px 20px 4px;font-size:12px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary)}
 .rs-sidebar-foot{padding:12px 20px;border-top:1px solid var(--divider);font-size:12px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary)}

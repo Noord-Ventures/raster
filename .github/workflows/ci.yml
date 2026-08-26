@@ -108,7 +108,9 @@ jobs:
           fi
           grep -q 'appearance:none' packages/core/css/components/tabs.css
           grep -q 'inset 0 -1px 0 var(--text)' packages/core/css/components/tabs.css
-          grep -q 'padding:8px 0 24px' packages/core/css/components/sidebar.css
+          grep -q 'padding:8px 0 20px' packages/core/css/components/sidebar.css
+          grep -q 'rs-sidebar-item:last-child' packages/core/css/components/sidebar.css
+          grep -q 'padding-bottom:20px' packages/core/css/components/sidebar.css
       - name: Components TOC is catalog groups
         run: |
           nav=apps/www/components/docs-nav/index.tsx

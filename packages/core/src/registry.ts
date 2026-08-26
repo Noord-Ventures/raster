@@ -569,7 +569,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "sidebar",
     title: "Sidebar",
-    description: "One 204 module rail. Flush items, hairline edge.",
+    description: "One 204 module rail. Air under the last item before the foot rule.",
     category: "navigation",
     classes: ["rs-sidebar", "rs-sidebar-head", "rs-sidebar-nav", "rs-sidebar-item", "rs-sidebar-label", "rs-sidebar-foot"],
     css: ["components/sidebar.css"],
