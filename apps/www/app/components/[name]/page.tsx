@@ -338,7 +338,7 @@ export default async function ComponentPage({
         </div>
 
         <h2 className="section-label">Install</h2>
-        <CodeBlock code={`npx raster add ${component.name}`} />
+        <CodeBlock code={`npx @raster/cli add ${component.name}`} />
 
         <h2 className="section-label">Markup</h2>
         <CodeBlock code={component.snippet} />

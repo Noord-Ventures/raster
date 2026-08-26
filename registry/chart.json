@@ -5,7 +5,8 @@
   "title": "Charts",
   "description": "SVG line, bar, sparkline, donut. Hairline grid, ink marks. Series differ by texture: solid, dashed, gray, dotted.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

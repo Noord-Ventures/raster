@@ -1,12 +1,16 @@
 {
   "name": "@raster/react",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Raster React components — accessible, zero-dependency, styled by @raster/core CSS.",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rennvaldes/raster.git",
     "directory": "packages/react"
+  },
+  "homepage": "https://raster.noord.dev",
+  "publishConfig": {
+    "access": "public"
   },
   "type": "module",
   "sideEffects": false,
@@ -28,7 +32,11 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "@raster/core": "workspace:^"
+  },
   "peerDependencies": {
+    "@raster/core": ">=0.3.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },

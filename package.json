@@ -1,13 +1,14 @@
 {
   "name": "raster-monorepo",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Raster — a monochrome, CSS-first design system. Tokens, components, CLI, registry, and docs.",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rennvaldes/raster.git"
   },
+  "homepage": "https://raster.noord.dev",
   "type": "module",
   "engines": {
     "node": ">=22.6"

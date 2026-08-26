@@ -5,7 +5,8 @@
   "title": "Avatar",
   "description": "Initials in a circle. Images cover; broken images fall back to initials. Rows overlap.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

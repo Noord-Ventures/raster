@@ -6,6 +6,7 @@
   "description": "One field, one action. The action sits inside the field and appears once input validates.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
     "https://raster.noord.dev/r/button.json"
   ],
   "files": [

@@ -1,8 +1,8 @@
 {
   "name": "www",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
-  "description": "raster.design — documentation and component gallery for the Raster design system.",
+  "description": "raster.noord.dev — documentation and component gallery for the Raster design system.",
   "type": "module",
   "scripts": {
     "prebuild": "node scripts/build-deps.mjs",

@@ -6,6 +6,7 @@
   "description": "Command palette in a native <dialog>. Filter, arrows, enter.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
     "https://raster.noord.dev/r/dialog.json"
   ],
   "files": [

@@ -6,6 +6,7 @@
   "description": "Sortable rows over the plain table. aria-sort on headers.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
     "https://raster.noord.dev/r/table.json"
   ],
   "files": [

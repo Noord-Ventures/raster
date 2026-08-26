@@ -5,7 +5,8 @@
   "title": "Scroll area",
   "description": "Hidden scrollbar; feathered top and bottom edges.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

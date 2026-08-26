@@ -6,6 +6,7 @@
   "description": "Fields stacked on the grid; one primary action at the end.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
     "https://raster.noord.dev/r/input.json",
     "https://raster.noord.dev/r/button.json"
   ],

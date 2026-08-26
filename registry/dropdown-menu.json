@@ -6,6 +6,7 @@
   "description": "Action menu with menu semantics and keyboard navigation.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
     "https://raster.noord.dev/r/select.json",
     "https://raster.noord.dev/r/button.json"
   ],

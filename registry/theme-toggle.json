@@ -5,7 +5,8 @@
   "title": "Theme toggle",
   "description": "Fixed top right. Sun and moon slide on a track; the choice persists in localStorage.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

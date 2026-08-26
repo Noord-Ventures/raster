@@ -6,6 +6,7 @@
   "description": "Right-click menu at the pointer. Escape and outside clicks close it.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
     "https://raster.noord.dev/r/select.json",
     "https://raster.noord.dev/r/dropdown-menu.json"
   ],

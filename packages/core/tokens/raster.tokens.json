@@ -1,8 +1,8 @@
 {
   "meta": {
     "name": "Raster",
-    "description": "The design system behind noord.vc, noord.dev, and renatovaldes.com.",
-    "url": "https://noord.dev/studio/raster"
+    "description": "A monochrome, CSS-first design system.",
+    "url": "https://raster.noord.dev"
   },
   "color": {
     "light": {
@@ -35,12 +35,12 @@
     "accent": "none; emphasis comes from weight, size, and spacing"
   },
   "type": {
-    "family": "'Messina Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
+    "family": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
     "foundry": {
-      "typeface": "Messina Sans",
-      "designer": "Luzi Gantenbein",
-      "publisher": "Luzi Type, Zürich",
-      "url": "https://www.luzi-type.ch"
+      "typeface": "Inter",
+      "designer": "Rasmus Andersson",
+      "license": "SIL OFL 1.1",
+      "url": "https://rsms.me/inter/"
     },
     "weights": {
       "body": 500,

@@ -40,12 +40,12 @@ export default function Home() {
       <main className="site-content-wide">
         <header className="cover" style={{ maxWidth: 592 }}>
           <p className="rs-t-label" style={{ color: "var(--text-secondary)", fontWeight: 500, marginBottom: 32 }}>
-            Raster 0.2
+            Raster 0.3
           </p>
           <h1 className="rs-t-xl">A design system with one ink.</h1>
           <p className="rs-t-sub">
             Raster is monochrome, CSS-first, and dependency-free. Tokens, components, a typed
-            registry, and a CLI that copies source into your project.
+            registry, and a CLI that copies source into your project. Set in Inter.
           </p>
           <div className="hero-actions">
             <Link href="/docs">
@@ -55,7 +55,7 @@ export default function Home() {
               <button className="rs-btn-ghost">Browse components</button>
             </Link>
           </div>
-          <code className="hero-install">npx raster init &amp;&amp; npx raster add button dialog</code>
+          <code className="hero-install">npx @raster/cli init</code>
         </header>
 
         <section className="principles">
@@ -89,7 +89,7 @@ export default function Home() {
         </section>
 
         <footer className="site-footer">
-          <span>The design system behind noord.vc, noord.dev, and renatovaldes.com.</span>
+          <span>Raster. MIT. Inter under SIL OFL 1.1.</span>
           <span>
             <a href="https://github.com/rennvaldes/raster">GitHub</a>
           </span>

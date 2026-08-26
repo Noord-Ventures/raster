@@ -5,7 +5,8 @@
   "title": "Resizable",
   "description": "Two panes on a draggable hairline. Arrow keys work; state lives in ARIA.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

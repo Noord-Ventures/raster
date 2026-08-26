@@ -14,3 +14,13 @@ if (!existsSync(src)) {
 mkdirSync(dest, { recursive: true });
 cpSync(src, dest, { recursive: true });
 console.log("copied registry → public/r");
+
+const fontSrc = fileURLToPath(new URL("../../../packages/core/css/fonts/inter", import.meta.url));
+const fontDest = fileURLToPath(new URL("../public/fonts/inter", import.meta.url));
+if (!existsSync(fontSrc)) {
+  console.error("Inter fonts not found — expected packages/core/css/fonts/inter");
+  process.exit(1);
+}
+mkdirSync(fontDest, { recursive: true });
+cpSync(fontSrc, fontDest, { recursive: true });
+console.log("copied Inter fonts → public/fonts/inter");

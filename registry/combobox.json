@@ -6,6 +6,7 @@
   "description": "Filtered listbox on the quiet field. Combobox semantics.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
     "https://raster.noord.dev/r/input.json",
     "https://raster.noord.dev/r/select.json"
   ],

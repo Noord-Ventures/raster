@@ -5,7 +5,8 @@
   "title": "Navigation menu",
   "description": "Links in a row; the current page is ink.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

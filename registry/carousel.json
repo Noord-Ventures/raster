@@ -6,6 +6,7 @@
   "description": "Native scroll snap. Buttons nudge; edges feather.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
     "https://raster.noord.dev/r/pagination.json",
     "https://raster.noord.dev/r/card.json"
   ],

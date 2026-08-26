@@ -73,6 +73,10 @@ importers:
         version: 3.2.7(@types/node@26.1.1)(jsdom@26.1.0)
 
   packages/react:
+    dependencies:
+      '@raster/core':
+        specifier: workspace:^
+        version: link:../core
     devDependencies:
       '@testing-library/react':
         specifier: ^16.2.0

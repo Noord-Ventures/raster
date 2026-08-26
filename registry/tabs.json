@@ -5,7 +5,8 @@
   "title": "Tabs",
   "description": "Active tab is ink with a 1.5px underline.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

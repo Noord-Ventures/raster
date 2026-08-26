@@ -5,7 +5,8 @@
   "title": "Checkbox",
   "description": "Many choices; 16px boxes, 3px radius, ink when checked.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

@@ -1,18 +1,14 @@
 /**
- * Raster design tokens: the single source of truth for the design system
- * Noord and Renato Valdés-Olmos are built on. Everything that can be a
- * token lives here: the CSS custom properties in globals.css mirror these
- * values at runtime, the Noord brand guidelines derive their palettes and
- * type scale from them, and they are served externally via
- * /api/raster/tokens and the MCP endpoint at /api/mcp.
+ * Raster design tokens: the single source of truth for the design system.
+ * CSS custom properties, the token JSON, and the docs site all generate
+ * from this file. Tokens ship in @raster/core and `npx @raster/cli tokens`.
  */
 
 export const rasterTokens = {
   meta: {
     name: "Raster",
-    description:
-      "The design system behind noord.vc, noord.dev, and renatovaldes.com.",
-    url: "https://noord.dev/studio/raster",
+    description: "A monochrome, CSS-first design system.",
+    url: "https://raster.noord.dev",
   },
   color: {
     light: {
@@ -46,13 +42,12 @@ export const rasterTokens = {
     accent: "none; emphasis comes from weight, size, and spacing",
   },
   type: {
-    family:
-      "'Messina Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
+    family: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
     foundry: {
-      typeface: "Messina Sans",
-      designer: "Luzi Gantenbein",
-      publisher: "Luzi Type, Zürich",
-      url: "https://www.luzi-type.ch",
+      typeface: "Inter",
+      designer: "Rasmus Andersson",
+      license: "SIL OFL 1.1",
+      url: "https://rsms.me/inter/",
     },
     weights: { body: 500, heading: 600, label: 600 },
     bodyLineHeight: 1.6,

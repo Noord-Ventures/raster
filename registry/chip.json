@@ -5,7 +5,8 @@
   "title": "Mono chip",
   "description": "Technical identifiers set in the mono stack with a mixed hairline.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

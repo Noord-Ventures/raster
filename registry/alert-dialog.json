@@ -6,6 +6,7 @@
   "description": "Native <dialog> that requires an explicit answer. Escape and light dismiss are disabled.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
     "https://raster.noord.dev/r/dialog.json",
     "https://raster.noord.dev/r/button.json"
   ],

@@ -5,7 +5,8 @@
   "title": "Separator",
   "description": "A hairline, horizontal or vertical.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

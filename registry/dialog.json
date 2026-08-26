@@ -6,6 +6,7 @@
   "description": "One question, two equal-sized actions, no third option.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
     "https://raster.noord.dev/r/button.json"
   ],
   "files": [

@@ -5,7 +5,8 @@
   "title": "Icons",
   "description": "16/20/24/32px, single-weight 1.5px strokes in currentColor, non-scaling.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

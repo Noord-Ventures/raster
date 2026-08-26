@@ -64,8 +64,8 @@ rasterTokens.color.light.paper; // "${color.light.paper}"
 rasterTokens.grid.module;       // ${grid.module}
 
 // or over the wire
-// GET /r/index.json     (the component registry)
-// npx raster tokens     (the token set as JSON)`}
+// GET https://raster.noord.dev/r/index.json
+// npx @raster/cli tokens`}
         />
         </main>
       </div>

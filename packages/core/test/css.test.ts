@@ -32,6 +32,16 @@ describe("generated raster.css", () => {
     expect(rasterCss).toContain(`--grid-size: ${rasterTokens.grid.module}px`);
   });
 
+  it("defaults to bundled Inter, with system sans as fallback only", () => {
+    expect(rasterCss).toContain("@font-face");
+    expect(rasterCss).toContain('font-family:Inter');
+    expect(rasterCss).toContain("./fonts/inter/InterVariable-latin.woff2");
+    expect(rasterCss).toContain("./fonts/inter/InterVariable-latin-ext.woff2");
+    expect(rasterCss).not.toMatch(/Messina|Geist|Schibsted|Heros|Plex/i);
+    expect(rasterTokens.type.foundry.typeface).toBe("Inter");
+    expect(rasterTokens.type.foundry.license).toBe("SIL OFL 1.1");
+  });
+
   it("has balanced braces", () => {
     const open = (rasterCss.match(/\{/g) ?? []).length;
     const close = (rasterCss.match(/\}/g) ?? []).length;

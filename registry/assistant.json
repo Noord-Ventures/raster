@@ -5,7 +5,8 @@
   "title": "Assistant panel",
   "description": "Chat surface: user block, replies, suggestion card with applied state, quiet input row.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

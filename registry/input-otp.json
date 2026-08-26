@@ -5,7 +5,8 @@
   "title": "One-time code",
   "description": "One cell per character. Auto-advance, backspace, paste.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

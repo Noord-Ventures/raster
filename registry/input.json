@@ -5,7 +5,8 @@
   "title": "Input",
   "description": "Quiet field: hairline border, ink focus, label above at 12px.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

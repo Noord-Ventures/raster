@@ -5,7 +5,8 @@
   "title": "Select",
   "description": "Closed trigger with chevron; the open menu overlays instead of pushing layout.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {

@@ -5,7 +5,8 @@
   "title": "Workflow card",
   "description": "Editable pipeline card: dashed frame, drag handle, dashed chips, ghost add-step card.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json"
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {
