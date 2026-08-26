@@ -95,3 +95,7 @@ jobs:
             echo "Docs-rail styles drifted back into site chrome"
             exit 1
           fi
+          if grep -n border-left apps/www/components/docs-nav/docs-nav.css; then
+            echo "Secondaries column must not grow its own left rule"
+            exit 1
+          fi
