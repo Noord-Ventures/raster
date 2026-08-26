@@ -6,6 +6,8 @@
    - The content column starts one module in (margin-left: 204px at
      the 1024px rail) and the layout width rounds DOWN to whole 204px
      modules, so edges step from grid line to grid line on resize.
+     The catalog rail drops that inset below 1440 (writer in docs-nav)
+     so the two navs sit in columns 1 and 2 on a narrow desktop.
    - Reading measure is 592px (3 modules); covers pad 120px down.
    - A fixed 72px crumb bar; breadcrumbs fade in once the page cover
      scrolls away. The docs rail lives in components/docs-nav. */
