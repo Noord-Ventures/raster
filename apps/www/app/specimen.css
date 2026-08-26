@@ -69,6 +69,7 @@
   justify-content: flex-end;
 }
 .specimen-cell-command {
+  position: relative;
   grid-area: cmd;
   container-type: inline-size;
   justify-content: space-between;
