@@ -13,8 +13,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@raster/core": "workspace:*",
-    "@raster/react": "workspace:*",
+    "@noord/raster": "workspace:*",
+    "@noord/raster-react": "workspace:*",
     "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

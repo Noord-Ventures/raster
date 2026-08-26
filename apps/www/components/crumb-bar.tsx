@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import { rasterComponents } from "@raster/core";
+import { rasterComponents } from "@noord/raster";
 
 interface Crumb {
   label: string;

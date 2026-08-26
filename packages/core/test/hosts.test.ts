@@ -25,6 +25,16 @@ describe("generated registry hosts", () => {
     expect(hits, `dead host in registry/${hits.join(", ")}`).toEqual([]);
   });
 
+  it("never names a leftover scoped raster package", () => {
+    const leftover = new RegExp(`@${"raster"}/`);
+    const hits: string[] = [];
+    for (const name of files) {
+      const text = readFileSync(join(registryDir, name), "utf8");
+      if (leftover.test(text)) hits.push(name);
+    }
+    expect(hits, `leftover package scope in registry/${hits.join(", ")}`).toEqual([]);
+  });
+
   it("uses https://raster.noord.dev for homepage, raster-base, and inter", () => {
     const index = JSON.parse(readFileSync(join(registryDir, "index.json"), "utf8")) as {
       homepage: string;

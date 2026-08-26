@@ -6,5 +6,5 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
-  external: ["react", "react-dom", "@raster/core"],
+  external: ["react", "react-dom", "@noord/raster"],
 });

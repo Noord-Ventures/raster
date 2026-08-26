@@ -1,7 +1,7 @@
 {
-  "name": "@raster/cli",
+  "name": "@noord/raster-cli",
   "version": "0.3.0",
-  "description": "The Raster CLI — install the monochrome design system into any project: npx @raster/cli init, npx @raster/cli add <component>.",
+  "description": "The Raster CLI — install the monochrome design system into any project: npx @noord/raster-cli init, npx @noord/raster-cli add <component>.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -20,12 +20,12 @@
     "dist"
   ],
   "scripts": {
-    "build": "pnpm --filter @raster/core build:css && pnpm --filter @raster/core build:registry && tsup && node scripts/copy-fonts.mjs",
+    "build": "pnpm --filter @noord/raster build:css && pnpm --filter @noord/raster build:registry && tsup && node scripts/copy-fonts.mjs",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@raster/core": "workspace:*",
+    "@noord/raster": "workspace:*",
     "@types/node": "^26.1.1",
     "tsup": "^8.3.5",
     "typescript": "^5.7.3",

@@ -35,3 +35,10 @@ jobs:
             echo "Dead host found in generated registry JSON"
             exit 1
           fi
+      - name: No leftover scoped raster package names
+        run: |
+          needle="$(printf '@%s/' 'raster')"
+          if grep -R -n -F "$needle" --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=dist --exclude-dir=.next --exclude-dir=out --exclude-dir=public --exclude=pnpm-lock.yaml .; then
+            echo "Leftover $needle package name found"
+            exit 1
+          fi

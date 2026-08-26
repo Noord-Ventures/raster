@@ -72,7 +72,7 @@ import {
   TabList,
   TabPanel,
   Tabs,
-} from "@raster/react";
+} from "@noord/raster-react";
 
 function DialogDemo() {
   const [open, setOpen] = React.useState(false);
