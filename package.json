@@ -14,6 +14,11 @@
     "node": ">=22.6"
   },
   "packageManager": "pnpm@10.4.1",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
   "scripts": {
     "build": "pnpm -r --filter './packages/*' build",
     "build:registry": "pnpm --filter @raster/core build:registry",
