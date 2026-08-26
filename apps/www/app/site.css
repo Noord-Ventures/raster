@@ -171,21 +171,101 @@ html, body { margin: 0; padding: 0; }
 .toc-item:hover { color: var(--text); opacity: 1; }
 .toc-item[aria-current="page"] { color: var(--text); opacity: 1; font-weight: 500; }
 
-/* ── Hero actions ── */
-.hero-actions { display: flex; gap: 10px; margin-top: 32px; align-items: center; }
-.hero-install {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px;
-  color: var(--text-secondary); background: var(--table-alt);
-  border: 1px solid var(--divider-subtle); border-radius: var(--radius-sm);
-  padding: 10px 14px; display: inline-block; margin-top: 28px;
+/* ── Homepage specimen: flush 204 cells, type occupies a cell like an image ── */
+.specimen {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 204px);
+  margin-top: 120px;
+  border-top: 1px solid var(--divider);
+  border-left: 1px solid var(--divider);
 }
-
-/* ── Principles ── */
-/* Principle cards span two whole modules. */
-.principles { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 48px 0 64px; border-top: 1px solid var(--divider-subtle); }
-@media (max-width: 480px) { .principles { grid-template-columns: 1fr; } }
-.principle h3 { font-size: 15px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 6px; }
-.principle p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; letter-spacing: -.01em; margin: 0; }
+.specimen-tight { margin-top: 0; }
+.specimen-cell {
+  min-height: 204px;
+  padding: 20px;
+  border-right: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.specimen-cell-2 { grid-column: span 2; }
+.specimen-cell-2x2 {
+  grid-column: span 2;
+  grid-row: span 2;
+  min-height: 408px;
+  padding: 20px;
+  justify-content: flex-end;
+}
+.specimen-face {
+  margin: 0;
+  font-size: clamp(72px, 18vw, 148px);
+  font-weight: 600;
+  letter-spacing: -.045em;
+  line-height: .82;
+  color: var(--text);
+}
+.specimen-law {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.specimen-quiet {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  color: var(--text-secondary);
+  margin: 0;
+}
+.specimen-meta {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.45;
+}
+.specimen-command {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  color: var(--text);
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: block;
+}
+.specimen-link {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--divider);
+  width: fit-content;
+}
+.specimen-link:hover { border-color: var(--text); }
+.specimen-type { justify-content: space-between; overflow: hidden; }
+.specimen-demo { justify-content: flex-end; gap: 16px; }
+.specimen-demo-live {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  overflow: hidden;
+  min-height: 0;
+}
+@media (max-width: 640px) {
+  .specimen { margin-top: 72px; }
+}
+@media (max-width: 480px) {
+  .specimen { grid-template-columns: 1fr; }
+  .specimen-cell-2, .specimen-cell-2x2 { grid-column: span 1; grid-row: span 1; min-height: 204px; }
+  .specimen-face { font-size: 72px; }
+}
 
 /* ── Component gallery: cards span two whole modules ── */
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 24px 0 48px; }

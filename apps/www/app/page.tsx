@@ -1,97 +1,85 @@
 import Link from "next/link";
-import { rasterComponents } from "@noordvc/raster";
+import type { Metadata } from "next";
+import { rasterComponents, rasterTokens } from "@noordvc/raster";
 import { Preview } from "@/components/preview";
 
-const principles = [
-  {
-    title: "One ink, no accent",
-    body: "The palette is monochrome: paper, ink, and the grays between. Emphasis comes from weight, size, and spacing.",
-  },
-  {
-    title: "Hairlines, not boxes",
-    body: "Rows and dividers are 1px lines on the open grid; cells and cards avoid heavy chrome.",
-  },
-  {
-    title: "The grid is visible",
-    body: "A 204px module draws faint lines across every page; content boxes span whole modules so edges step from grid line to grid line.",
-  },
-  {
-    title: "CSS-first, zero dependencies",
-    body: "Plain classes on plain markup. The React layer uses native elements. No Radix, no Tailwind.",
-  },
-  {
-    title: "Sentence case, always",
-    body: "Labels and eyebrows are sentence case. Never all caps.",
-  },
-  {
-    title: "Quiet motion",
-    body: "0.15–0.3s, ease. Color and opacity change; layout rarely moves; nothing bounces.",
-  },
-];
+export const metadata: Metadata = {
+  title: "Raster",
+  description: "One ink, a 204 module, Inter. npx @noordvc/raster-cli init",
+};
 
-const featured = ["button", "switch", "input", "tabs", "select", "badge"];
+const COMMAND = "npx @noordvc/raster-cli init";
+const LAW = "One ink, a 204 module, Inter.";
+
+const featured = ["button", "switch", "input", "tabs"];
 
 export default function Home() {
   const items = featured
     .map((name) => rasterComponents.find((c) => c.name === name)!)
     .filter(Boolean);
+  const { type } = rasterTokens;
+
   return (
     <div className="site-layout">
       <main className="site-content-wide">
-        <header className="cover" style={{ maxWidth: 592 }}>
-          <p className="rs-t-label" style={{ color: "var(--text-secondary)", fontWeight: 500, marginBottom: 32 }}>
-            Raster 0.3
-          </p>
-          <h1 className="rs-t-xl">A design system with one ink.</h1>
-          <p className="rs-t-sub">
-            Raster is monochrome, CSS-first, and dependency-free. Tokens, components, a typed
-            registry, and a CLI that copies source into your project. Set in Inter.
-          </p>
-          <div className="hero-actions">
-            <Link href="/docs">
-              <button className="rs-btn-primary">Get started</button>
-            </Link>
-            <Link href="/components">
-              <button className="rs-btn-ghost">Browse components</button>
+        <section className="specimen" aria-label="Raster specimen">
+          <div className="specimen-cell specimen-cell-2x2">
+            <p className="specimen-face">Inter</p>
+          </div>
+          <div className="specimen-cell">
+            <p className="rs-t-label specimen-quiet">Raster 0.3</p>
+            <p className="specimen-meta">
+              {type.foundry.typeface}
+              <br />
+              {type.foundry.license}
+              <br />
+              bundled
+            </p>
+          </div>
+          <div className="specimen-cell">
+            <h1 className="specimen-law">{LAW}</h1>
+          </div>
+          <div className="specimen-cell specimen-cell-2">
+            <p className="specimen-quiet">Install</p>
+            <code className="specimen-command">{COMMAND}</code>
+            <Link href="/docs" className="specimen-link">
+              Getting started
             </Link>
           </div>
-          <code className="hero-install">npx @noordvc/raster-cli init</code>
-        </header>
+        </section>
 
-        <section className="principles">
-          {principles.map((p) => (
-            <div className="principle" key={p.title}>
-              <h3>{p.title}</h3>
-              <p>{p.body}</p>
+        <section className="specimen specimen-tight" aria-label="Type scale">
+          {type.scale.map((s) => (
+            <div className="specimen-cell specimen-type" key={s.name}>
+              <p className="specimen-quiet">
+                {s.name} · {s.px} · {s.weight}
+              </p>
+              <p style={{ fontSize: s.px, fontWeight: s.weight, letterSpacing: s.tracking, lineHeight: s.lineHeight, margin: 0 }}>
+                Inter
+              </p>
             </div>
           ))}
         </section>
 
-        <section>
-          <h2 className="rs-t-title">The kit</h2>
-          <div className="gallery">
-            {items.map((c) => (
-              <div key={c.name} className="gallery-item">
-                <div className="gallery-demo">
-                  <Preview name={c.name} snippet={c.snippet} />
-                </div>
-                <div className="gallery-meta">
-                  <h3>
-                    <Link href={`/components/${c.name}`} className="gallery-item-link">
-                      {c.title}
-                    </Link>
-                  </h3>
-                  <p>{c.description}</p>
-                </div>
+        <section className="specimen specimen-tight" aria-label="Components">
+          {items.map((c) => (
+            <div className="specimen-cell specimen-demo" key={c.name}>
+              <div className="specimen-demo-live">
+                <Preview name={c.name} snippet={c.snippet} />
               </div>
-            ))}
-          </div>
+              <Link href={`/components/${c.name}`} className="specimen-link">
+                {c.title}
+              </Link>
+            </div>
+          ))}
         </section>
 
         <footer className="site-footer">
-          <span>Raster. MIT. Inter under SIL OFL 1.1.</span>
+          <span>MIT. Inter under SIL OFL 1.1.</span>
           <span>
             <a href="https://github.com/rennvaldes/raster">GitHub</a>
+            {" · "}
+            <Link href="/docs">Getting started</Link>
           </span>
         </footer>
       </main>
