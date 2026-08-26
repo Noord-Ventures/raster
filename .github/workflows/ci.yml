@@ -62,6 +62,11 @@ jobs:
           grep -q 'One ink, a 204 module.' "$page"
           grep -q 'npx @noordvc/raster-cli init' "$page"
           grep -q 'specimen-page' "$page"
+          test -f apps/www/app/specimen.css
+          if grep -n specimen-page apps/www/app/site.css; then
+            echo "Specimen styles drifted back into site chrome"
+            exit 1
+          fi
       - name: Components TOC is catalog groups
         run: |
           nav=apps/www/components/docs-nav.tsx
