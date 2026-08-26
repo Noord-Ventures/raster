@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { rasterCategories, rasterComponents } from "@noordvc/raster";
 import { DocsNav } from "@/components/docs-nav";
-import { Preview } from "@/components/preview";
+import { UseSlot } from "@/components/examples/use-slot";
 
 export const metadata: Metadata = { title: "Components" };
 
@@ -30,7 +30,7 @@ export default function ComponentsPage() {
                   {items.map((c) => (
                     <div key={c.name} className="gallery-item">
                       <div className="gallery-demo">
-                        <Preview name={c.name} snippet={c.snippet} />
+                        <UseSlot name={c.name} />
                       </div>
                       <div className="gallery-meta">
                         <h3>

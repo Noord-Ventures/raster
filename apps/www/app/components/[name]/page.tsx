@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { rasterComponents } from "@noordvc/raster";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
+import { UseSlot } from "@/components/examples/use-slot";
 import { Preview } from "@/components/preview";
 
 export function generateStaticParams() {
@@ -413,6 +414,8 @@ export default async function ComponentPage({
             <h1 className="rs-t-display component-head">{component.title}</h1>
             <p className="rs-t-sub component-desc">{component.description}</p>
           </header>
+
+        <UseSlot name={component.name} />
 
         <div className="preview-box">
           <Preview name={component.name} snippet={component.snippet} />

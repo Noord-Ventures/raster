@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "@noordvc/raster/css";
 import "./site.css";
+import "@/components/examples/use.css";
 import { CrumbBar } from "@/components/crumb-bar";
 import { SiteChrome } from "@/components/site-chrome";
 import { COMMAND, LAW } from "./specimen";

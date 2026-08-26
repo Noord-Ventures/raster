@@ -108,9 +108,24 @@ jobs:
           fi
           grep -q 'appearance:none' packages/core/css/components/tabs.css
           grep -q 'inset 0 -1px 0 var(--text)' packages/core/css/components/tabs.css
-          grep -q 'padding:8px 0 20px' packages/core/css/components/sidebar.css
+          grep -q 'padding:8px 0 32px' packages/core/css/components/sidebar.css
           grep -q 'rs-sidebar-item:last-child' packages/core/css/components/sidebar.css
-          grep -q 'padding-bottom:20px' packages/core/css/components/sidebar.css
+          grep -q 'padding-bottom:32px' packages/core/css/components/sidebar.css
+      - name: Every component has an isolated Use
+        run: |
+          test -f apps/www/components/examples/use.css
+          test -f apps/www/components/examples/use-slot.tsx
+          grep -q '184px minmax(0, 1fr)' apps/www/components/examples/use.css
+          grep -q 'rs-use-in' apps/www/components/examples/use.css
+          if grep -n border-left apps/www/components/examples/use.css; then
+            echo "Use field must not grow a left rule"
+            exit 1
+          fi
+          if [ -f apps/www/components/examples/index.tsx ]; then
+            echo "Uses must stay one file per component, not a shared dump"
+            exit 1
+          fi
+          node apps/www/scripts/check-examples.mjs
       - name: Components TOC is catalog groups
         run: |
           nav=apps/www/components/docs-nav/index.tsx
