@@ -11,7 +11,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { rasterComponents, rasterTokens } from "@noord/raster";
+import { rasterComponents, rasterTokens } from "@noordvc/raster";
 import bundle from "../../../registry/bundle.json" with { type: "json" };
 
 const rasterCss: string = (bundle as { css: { raster: string } }).css.raster;
@@ -88,7 +88,7 @@ export function resolveFontsDir(): string {
   ];
   const found = candidates.find((dir) => existsSync(join(dir, "OFL.txt")));
   if (!found) {
-    throw new Error("Raster Inter files not found. Rebuild @noord/raster-cli (copy-fonts) or check packages/core/css/fonts/inter.");
+    throw new Error("Raster Inter files not found. Rebuild @noordvc/raster-cli (copy-fonts) or check packages/core/css/fonts/inter.");
   }
   return found;
 }

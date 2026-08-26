@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { rasterCategories, rasterComponents } from "@noord/raster";
+import { rasterCategories, rasterComponents } from "@noordvc/raster";
 
 /** The left TOC: one module wide, sticky, in the noord.dev studio style. */
 export function DocsNav() {

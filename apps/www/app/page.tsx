@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { rasterComponents } from "@noord/raster";
+import { rasterComponents } from "@noordvc/raster";
 import { Preview } from "@/components/preview";
 
 const principles = [
@@ -55,7 +55,7 @@ export default function Home() {
               <button className="rs-btn-ghost">Browse components</button>
             </Link>
           </div>
-          <code className="hero-install">npx @noord/raster-cli init</code>
+          <code className="hero-install">npx @noordvc/raster-cli init</code>
         </header>
 
         <section className="principles">

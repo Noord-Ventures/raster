@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { rasterComponents } from "@noord/raster";
+import { rasterComponents } from "@noordvc/raster";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
 import { Preview } from "@/components/preview";
@@ -338,7 +338,7 @@ export default async function ComponentPage({
         </div>
 
         <h2 className="section-label">Install</h2>
-        <CodeBlock code={`npx @noord/raster-cli add ${component.name}`} />
+        <CodeBlock code={`npx @noordvc/raster-cli add ${component.name}`} />
 
         <h2 className="section-label">Markup</h2>
         <CodeBlock code={component.snippet} />

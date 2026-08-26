@@ -1,5 +1,5 @@
 // Copy vendored Inter files next to the bundled CLI so `init` can
-// write them beside raster.css without reaching back into @noord/raster.
+// write them beside raster.css without reaching back into @noordvc/raster.
 import { cpSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 

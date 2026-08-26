@@ -2,14 +2,14 @@ import { add, init, list, snippetFor, tokensJson } from "./lib";
 
 const VERSION = "0.3.0";
 
-const HELP = `@noord/raster-cli ${VERSION}, the monochrome design system
+const HELP = `@noordvc/raster-cli ${VERSION}, the monochrome design system
 
 Usage
-  npx @noord/raster-cli init [--css-dir <dir>] [--components-dir <dir>] [--compat] [--registry <url>] [--overwrite]
-  npx @noord/raster-cli add <component...> [--overwrite] [--registry <url>]
-  npx @noord/raster-cli list
-  npx @noord/raster-cli tokens
-  npx @noord/raster-cli help
+  npx @noordvc/raster-cli init [--css-dir <dir>] [--components-dir <dir>] [--compat] [--registry <url>] [--overwrite]
+  npx @noordvc/raster-cli add <component...> [--overwrite] [--registry <url>]
+  npx @noordvc/raster-cli list
+  npx @noordvc/raster-cli tokens
+  npx @noordvc/raster-cli help
 
 Commands
   init      Write raster.css, Inter (SIL OFL 1.1), and raster.json.
@@ -77,21 +77,21 @@ Next steps
        <link rel="stylesheet" href="/${results[0]!.path}" />
   2. Dark scheme: set data-theme="dark" on <html>.
   3. Inter is bundled (SIL OFL 1.1). System sans is fallback only.
-  4. Add components:  npx @noord/raster-cli add button dialog
+  4. Add components:  npx @noordvc/raster-cli add button dialog
 `);
       break;
     }
 
     case "add": {
       if (positional.length === 0) {
-        console.error("Nothing to add. Usage: npx @noord/raster-cli add <component...>   (see: npx @noord/raster-cli list)");
+        console.error("Nothing to add. Usage: npx @noordvc/raster-cli add <component...>   (see: npx @noordvc/raster-cli list)");
         process.exit(1);
       }
       const { outcomes, unknown } = await add(cwd, positional, {
         overwrite: Boolean(flags["overwrite"]),
         registry: registryFlag(flags),
       });
-      for (const name of unknown) console.error(`✗ unknown component "${name}". See: npx @noord/raster-cli list`);
+      for (const name of unknown) console.error(`✗ unknown component "${name}". See: npx @noordvc/raster-cli list`);
       for (const outcome of outcomes) {
         if (outcome.cssOnly) {
           console.log(`${outcome.item.title} (${outcome.item.name}) is CSS-only; already styled by raster.css.`);

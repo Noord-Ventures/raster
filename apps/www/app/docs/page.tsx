@@ -18,7 +18,7 @@ export default function DocsPage() {
           </header>
 
         <h2 className="section-label">1. Initialize</h2>
-        <CodeBlock code={`npx @noord/raster-cli init`} />
+        <CodeBlock code={`npx @noordvc/raster-cli init`} />
         <p className="rs-t-body">
           Writes <code className="rs-code">styles/raster.css</code> (tokens, Inter, base
           styles, component classes), the Inter files, and{" "}
@@ -28,7 +28,7 @@ export default function DocsPage() {
         </p>
 
         <h2 className="section-label">2. Add components</h2>
-        <CodeBlock code={`npx @noord/raster-cli add button dialog switch`} />
+        <CodeBlock code={`npx @noordvc/raster-cli add button dialog switch`} />
         <p className="rs-t-body">
           Copies React source into <code className="rs-code">components/raster/</code>.
           Registry dependencies install with it; dialog pulls button. CSS-only components need
@@ -50,7 +50,7 @@ export default function DocsPage() {
         </p>
 
         <h2 className="section-label">Coming from Raster 0.1</h2>
-        <CodeBlock code={`npx @noord/raster-cli init --compat`} />
+        <CodeBlock code={`npx @noordvc/raster-cli init --compat`} />
         <p className="rs-t-body">
           0.2 renamed every class to the <code className="rs-code">rs-</code> prefix. The
           compat flag also writes <code className="rs-code">raster-compat.css</code>, which

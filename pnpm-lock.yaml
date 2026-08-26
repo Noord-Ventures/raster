@@ -10,10 +10,10 @@ importers:
 
   apps/www:
     dependencies:
-      '@noord/raster':
+      '@noordvc/raster':
         specifier: workspace:*
         version: link:../../packages/core
-      '@noord/raster-react':
+      '@noordvc/raster-react':
         specifier: workspace:*
         version: link:../../packages/react
       next:
@@ -41,7 +41,7 @@ importers:
 
   packages/cli:
     devDependencies:
-      '@noord/raster':
+      '@noordvc/raster':
         specifier: workspace:*
         version: link:../core
       '@types/node':
@@ -74,7 +74,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@noord/raster':
+      '@noordvc/raster':
         specifier: workspace:^
         version: link:../core
     devDependencies:

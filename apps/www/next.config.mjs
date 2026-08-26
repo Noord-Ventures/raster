@@ -2,7 +2,7 @@
 const nextConfig = {
   output: "export",
   trailingSlash: true,
-  transpilePackages: ["@noord/raster", "@noord/raster-react"],
+  transpilePackages: ["@noordvc/raster", "@noordvc/raster-react"],
 };
 
 export default nextConfig;

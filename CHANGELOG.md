@@ -5,10 +5,10 @@
 Cut 1: a stranger can install Raster after merge, npm publish, and DNS.
 
 - MIT on the code. Inter stays SIL OFL 1.1 (`packages/core/css/fonts/inter/OFL.txt`).
-- Publishable packages: `@noord/raster`, `@noord/raster-react`, `@noord/raster-cli` at 0.3.0. The `raster` npm org is not available, so this is the `@noord` fallback. Not private. Types ship in the tarball. `@noord/raster-react` depends on `@noord/raster` so CSS is not a second secret install.
+- Publishable packages: `@noordvc/raster`, `@noordvc/raster-react`, `@noordvc/raster-cli` at 0.3.0. The `raster` and `noord` npm orgs are not available; the locked org is `noordvc`. Not private. Types ship in the tarball. `@noordvc/raster-react` depends on `@noordvc/raster` so CSS is not a second secret install.
 - Default face is vendored Inter (variable, latin + latin-ext). System sans is fallback only. Messina is off.
 - Public host is `https://raster.noord.dev`. Generated registry items, `raster-base`, and the `inter` item use that host. Dead hosts (`raster.design`, `raster-pied`, `vercel.app`) fail CI.
-- Documented CLI is `npx @noord/raster-cli init`. `--registry` is implemented (HTTP(S) or a local directory; also `raster.json.registry`). `init --compat` still writes 0.1 class names.
+- Documented CLI is `npx @noordvc/raster-cli init`. `--registry` is implemented (HTTP(S) or a local directory; also `raster.json.registry`). `init --compat` still writes 0.1 class names.
 - Dropped leftover `raster.design` copy and the `/api/raster/tokens` + `/api/mcp` pointers. Those routes do not exist on this static export.
 - Docs first page and getting started show the one command and Inter.
 

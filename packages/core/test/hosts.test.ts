@@ -25,12 +25,12 @@ describe("generated registry hosts", () => {
     expect(hits, `dead host in registry/${hits.join(", ")}`).toEqual([]);
   });
 
-  it("never names a leftover scoped raster package", () => {
-    const leftover = new RegExp(`@${"raster"}/`);
+  it("never names a leftover scoped package", () => {
+    const leftovers = [new RegExp(`@${"raster"}/`), new RegExp(`@${"noord"}/raster`), new RegExp(`@${"rennvaldes"}/`)];
     const hits: string[] = [];
     for (const name of files) {
       const text = readFileSync(join(registryDir, name), "utf8");
-      if (leftover.test(text)) hits.push(name);
+      if (leftovers.some((re) => re.test(text))) hits.push(name);
     }
     expect(hits, `leftover package scope in registry/${hits.join(", ")}`).toEqual([]);
   });
