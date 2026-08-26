@@ -62,7 +62,8 @@ export function LineChart({
   const max = domain?.[1] ?? niceMax(rawMax);
   const min = domain?.[0] ?? 0;
   const span = max - min || 1;
-  const format = valueFormat ?? ((v: number) => defaultFormat(v, unit));
+  const format = valueFormat ?? ((v: number) => defaultFormat(v));
+  const tip = valueFormat ?? ((v: number) => defaultFormat(v, unit));
   const [hover, setHover] = React.useState<number | null>(null);
   const overlayRef = React.useRef<SVGRectElement>(null);
 
@@ -174,10 +175,10 @@ export function LineChart({
           left={`${(x(hover) / W) * 100}%`}
           top={`${(MT / height) * 100}%`}
           label={tickLabels[hover] ?? ""}
-          rows={shown.map((s) => ({ name: s.name, value: format(s.values[hover] ?? 0) }))}
+          rows={shown.map((s) => ({ name: s.name, value: tip(s.values[hover] ?? 0) }))}
         />
       )}
-      {shown.length > 1 && (
+      {(shown.length > 1 || unit) && (
         <div className="rs-chart-legend">
           {shown.map((s, si) => (
             <span key={s.name} className="rs-chart-legend-item">
@@ -185,6 +186,7 @@ export function LineChart({
               {s.name}
             </span>
           ))}
+          {unit ? <span className="rs-chart-legend-item">{unit}</span> : null}
         </div>
       )}
       <SrTable caption="Chart data" labels={tickLabels} series={shown} />

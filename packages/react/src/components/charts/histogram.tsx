@@ -34,7 +34,8 @@ export function Histogram({
   spot,
   ...props
 }: HistogramProps) {
-  const format = valueFormat ?? ((v: number) => defaultFormat(v, unit));
+  const format = valueFormat ?? ((v: number) => defaultFormat(v));
+  const tip = valueFormat ?? ((v: number) => defaultFormat(v, unit));
   const [hover, setHover] = React.useState<number | null>(null);
   const { W, ML, MR, MT, MB } = PLOT;
   const plotW = W - ML - MR;
@@ -87,7 +88,7 @@ export function Histogram({
           left={`${((ML + (hover ?? 0) * (bw + gap) + bw / 2) / W) * 100}%`}
           top={`${((MT + plotH - (active.count / max) * plotH) / height) * 100}%`}
           label={active.label}
-          rows={[{ value: format(active.count) }]}
+          rows={[{ value: tip(active.count) }]}
         />
       )}
       {unit && (

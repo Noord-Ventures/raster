@@ -56,7 +56,8 @@ export function BarChart({
     ? Math.max(...stacks.map((row) => row[row.length - 1] ?? 0))
     : Math.max(0, ...shown.flatMap((s) => s.values));
   const max = niceMax(rawMax);
-  const format = valueFormat ?? ((v: number) => defaultFormat(v, unit));
+  const format = valueFormat ?? ((v: number) => defaultFormat(v));
+  const tip = valueFormat ?? ((v: number) => defaultFormat(v, unit));
   const [hover, setHover] = React.useState<number | null>(null);
 
   const { W, ML, MR, MT, MB } = PLOT;
@@ -207,12 +208,17 @@ export function BarChart({
           )}
         </g>
       </svg>
+      {unit && (
+        <div className="rs-chart-legend" aria-hidden="true">
+          <span className="rs-chart-legend-item">{unit}</span>
+        </div>
+      )}
       {hover != null && tickLabels[hover] && (
         <ChartTip
           left={horizontal ? "50%" : `${((ML + hover * band + band / 2) / W) * 100}%`}
           top={horizontal ? `${((MT + hover * band) / height) * 100}%` : `${(yV(shown[0]?.values[hover] ?? 0) / height) * 100}%`}
           label={tickLabels[hover]}
-          rows={shown.map((s) => ({ name: shown.length > 1 ? s.name : undefined, value: format(s.values[hover] ?? 0) }))}
+          rows={shown.map((s) => ({ name: shown.length > 1 ? s.name : undefined, value: tip(s.values[hover] ?? 0) }))}
         />
       )}
       <SrTable caption="Chart data" labels={tickLabels} series={shown} />

@@ -21,7 +21,11 @@ export interface ChartPoint {
 
 export function ticksBetween(min: number, max: number, count = 4): number[] {
   const span = max - min || 1;
-  return Array.from({ length: count }, (_, i) => min + ((i + 1) / count) * span);
+  const step = niceStep(span, count);
+  const start = Math.ceil(min / step) * step;
+  const values: number[] = [];
+  for (let t = start; t <= max + step * 1e-6; t += step) values.push(+t.toFixed(8));
+  return values.length ? values : [+min.toFixed(2), +max.toFixed(2)];
 }
 
 export const LINE_CLASS = [
@@ -50,8 +54,20 @@ export function defaultFormat(v: number, unit?: string): string {
   return unit ? `${n} ${unit}` : n;
 }
 
+export function niceStep(span: number, count = 4): number {
+  const raw = span / Math.max(1, count);
+  if (raw <= 0) return 1;
+  const pow = 10 ** Math.floor(Math.log10(raw));
+  for (const f of [1, 2, 2.5, 5, 10]) {
+    if (f * pow >= raw) return f * pow;
+  }
+  return 10 * pow;
+}
+
 export function ticksFor(max: number, count = 4, inverted = false): number[] {
-  const values = Array.from({ length: count }, (_, i) => ((i + 1) / count) * max);
+  const step = niceStep(max, count);
+  const values: number[] = [];
+  for (let t = step; t <= max + step * 1e-6; t += step) values.push(+t.toFixed(8));
   return inverted ? values.reverse() : values;
 }
 

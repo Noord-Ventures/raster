@@ -49,7 +49,7 @@ export function ScatterChart({
   spot,
   ...props
 }: ScatterChartProps) {
-  const format = valueFormat ?? ((v: number) => defaultFormat(v, unit));
+  const format = valueFormat ?? ((v: number) => defaultFormat(v));
   const [hover, setHover] = React.useState<number | null>(null);
   const { W, ML, MR, MT, MB } = PLOT;
   const plotW = W - ML - MR;
