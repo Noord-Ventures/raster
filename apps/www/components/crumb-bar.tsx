@@ -18,6 +18,8 @@ function trailFor(pathname: string): Crumb[] {
     trail.push({ label: "Docs", href: "/docs" });
     if (parts[1] === "tokens") trail.push({ label: "Tokens" });
     else trail.push({ label: "Getting started" });
+  } else if (parts[0] === "about") {
+    trail.push({ label: "About" });
   } else if (parts[0] === "components") {
     trail.push({ label: "Components", href: "/components" });
     if (parts[1]) {

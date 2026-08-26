@@ -126,6 +126,39 @@ jobs:
             exit 1
           fi
           node apps/www/scripts/check-examples.mjs
+      - name: About is a masthead
+        run: |
+          page=apps/www/app/about/page.tsx
+          facts=apps/www/app/about/facts.ts
+          css=apps/www/app/about/about.css
+          test -f "$page"
+          test -f "$facts"
+          test -f "$css"
+          grep -q 'heading: "Typeface"' "$facts"
+          grep -q 'heading: "Noord"' "$facts"
+          grep -q 'heading: "Renato Valdés Olmos"' "$facts"
+          grep -q 'foundry.license' "$facts"
+          grep -q 'meta.url' "$facts"
+          grep -q '@noordvc/raster' "$facts"
+          grep -q 'type.foundry' "$facts"
+          grep -q 'masthead-typeface' "$page"
+          grep -q 'masthead-noord' "$page"
+          grep -q 'masthead-renato' "$page"
+          grep -q 'SIL OFL 1.1' packages/core/src/tokens.ts
+          if grep -n Messina "$page" "$facts" "$css"; then
+            echo "About must not name Messina"
+            exit 1
+          fi
+          if grep -n about.css apps/www/app/site.css; then
+            echo "About styles must stay isolated"
+            exit 1
+          fi
+          grep -q 'href: "/about"' apps/www/components/site-chrome.tsx
+          grep -q 'label: "About"' apps/www/components/site-chrome.tsx
+          if grep -n border-left "$css"; then
+            echo "Masthead must not grow a left rule"
+            exit 1
+          fi
       - name: Components TOC is catalog groups
         run: |
           nav=apps/www/components/docs-nav/index.tsx

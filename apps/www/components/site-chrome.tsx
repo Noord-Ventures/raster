@@ -60,6 +60,7 @@ const links = [
   { href: "/", label: "Home", corner: false },
   { href: "/docs", label: "Docs", corner: true },
   { href: "/components", label: "Components", corner: true },
+  { href: "/about", label: "About", corner: true },
 ];
 
 export function SiteChrome() {

@@ -11,5 +11,6 @@ Writers: catalog groups are `packages/core/src/schema.ts` (`rasterCategories`). 
 | Component | `/components/:name` | Hover the group → click the item | That page's group stays selected. Column two is not empty. |
 | Getting started | `/docs` | Corner → Docs | Short rail: Getting started, Tokens. Command is the one in `app/specimen.ts`. |
 | Tokens | `/docs/tokens` | Docs → Tokens | Same short rail. |
+| About | `/about` | Corner → About | Masthead, then Typeface, Noord, Renato Valdés Olmos, then credits from this repo’s packages. Isolated files under `app/about`. |
 
 The components rail is groups → items. It is not Getting started / Foundations / Components.
