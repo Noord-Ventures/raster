@@ -209,33 +209,34 @@ html, body { margin: 0; padding: 0; }
     "sw"
     "badge";
   grid-auto-rows: minmax(204px, auto);
-  border-top: 1px solid var(--divider);
-  border-left: 1px solid var(--divider);
+  /* One ink line: padding is the outer rule, gap is the inner. They meet. */
+  background: var(--divider);
+  padding: 1px;
+  gap: 1px;
 }
 .specimen-cell {
   min-width: 0;
   min-height: 204px;
   padding: 20px;
-  border-right: 1px solid var(--divider);
-  border-bottom: 1px solid var(--divider);
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   overflow: visible;
 }
 .specimen-cell-face {
   grid-area: face;
-  container-type: size;
+  container-type: inline-size;
   justify-content: flex-end;
   min-height: 408px;
 }
 .specimen-cell-law {
   grid-area: law;
-  container-type: size;
+  container-type: inline-size;
   justify-content: flex-end;
 }
 .specimen-cell-command {
   grid-area: command;
-  container-type: size;
+  container-type: inline-size;
   justify-content: space-between;
   gap: 16px;
 }
@@ -249,7 +250,7 @@ html, body { margin: 0; padding: 0; }
 }
 .specimen-face {
   margin: 0;
-  font-size: clamp(4.5rem, min(32cqw, 54cqh), 12rem);
+  font-size: clamp(4.5rem, 30cqw, 24rem);
   font-weight: 600;
   letter-spacing: -.045em;
   line-height: .82;
@@ -257,7 +258,7 @@ html, body { margin: 0; padding: 0; }
 }
 .specimen-law {
   margin: 0;
-  font-size: clamp(1.5rem, min(18cqw, 12cqh), 3.5rem);
+  font-size: clamp(1.5rem, 14cqw, 4.5rem);
   font-weight: 600;
   letter-spacing: -.035em;
   line-height: 1;
@@ -335,12 +336,14 @@ html, body { margin: 0; padding: 0; }
   .specimen {
     height: 100dvh;
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    grid-template-rows: repeat(3, minmax(204px, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
     grid-template-areas:
       "face face face face law law"
       "face face face face law law"
       "command command command btn sw badge";
   }
+  .specimen-cell { min-height: 0; }
+  .specimen-cell-face { min-height: 0; }
   .specimen-cell-empty { display: none; }
 }
 
