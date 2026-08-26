@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 import { rasterComponents } from "@noordvc/raster";
+import { interfaceBySlug } from "@/app/interfaces/catalog";
 import { isFieldPath, isSpecimenPath } from "@/app/specimen";
 
 interface Crumb {
@@ -25,6 +26,12 @@ function trailFor(pathname: string): Crumb[] {
     if (parts[1]) {
       const component = rasterComponents.find((c) => c.name === parts[1]);
       trail.push({ label: component?.title ?? parts[1] });
+    }
+  } else if (parts[0] === "interfaces") {
+    trail.push({ label: "Interfaces", href: "/interfaces" });
+    if (parts[1]) {
+      const proto = interfaceBySlug(parts[1]);
+      trail.push({ label: proto?.title ?? parts[1] });
     }
   }
   return trail;
