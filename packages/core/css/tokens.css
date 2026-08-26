@@ -10,8 +10,11 @@
   --grid-line: rgba(0,0,0,0.025);
   --radius: 6px;
   --radius-sm: 4px;
+  --radius-chrome: 0px;
   --gutter: 20px;
   --pad: 20px;
+  /* Concentric: inner = max(0, outer − padding). Default radius vs --pad is 0. */
+  --radius-in: max(0px, calc(var(--radius) - var(--pad)));
   --transition: background-color 0.3s ease, color 0.3s ease;
   /* Background column grid: 204px modules (184 column + 20 gutter). */
   --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);

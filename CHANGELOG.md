@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Concentric radius: `inner = max(0, outer − padding)` as a token, `--radius-in` / `--rs-out` / `--rs-gap`, and `Nest` / `NestInner`. Raster chrome stays square.
+
 ## 0.3.0
 
 Cut 1: a stranger can install Raster after merge, npm publish, and DNS.

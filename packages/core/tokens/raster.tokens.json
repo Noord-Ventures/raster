@@ -121,7 +121,9 @@
   },
   "radius": {
     "base": 6,
-    "small": 4
+    "small": 4,
+    "chrome": 0,
+    "concentric": "max(0, outer − padding)"
   },
   "icons": {
     "sizes": [

@@ -79,7 +79,14 @@ export const rasterTokens = {
       columnWidth: "50vw − 37.5px",
     },
   },
-  radius: { base: 6, small: 4 },
+  radius: {
+    base: 6,
+    small: 4,
+    /** Raster chrome stays square. Surfaces that use a radius follow the concentric law. */
+    chrome: 0,
+    /** inner = max(0, outer − padding); outer = inner + padding */
+    concentric: "max(0, outer − padding)",
+  },
   icons: {
     sizes: [16, 20, 24, 32],
     stroke: 1.5,

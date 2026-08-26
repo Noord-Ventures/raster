@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { rasterTokens } from "@noordvc/raster";
+import { concentricInner, rasterTokens } from "@noordvc/raster";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
 
 export const metadata: Metadata = { title: "Tokens" };
 
 export default function TokensPage() {
-  const { color, type, grid } = rasterTokens;
+  const { color, type, grid, radius } = rasterTokens;
   return (
     <>
       <div className="site-layout">
@@ -55,6 +55,20 @@ export default function TokensPage() {
           drawn faintly across every page. Content boxes span whole modules; edges step from
           grid line to grid line on resize.
         </p>
+
+        <h2 className="section-label">Radius</h2>
+        <p className="rs-t-body">
+          Chrome stays {radius.chrome}. Surfaces that use a radius keep nested
+          corners concentric: inner = {radius.concentric}.
+        </p>
+        <CodeBlock
+          code={`import { concentricInner, concentricOuter } from "@noordvc/raster";
+
+concentricInner(28, 16); // ${concentricInner(28, 16)}
+concentricOuter(12, 16); // 28
+
+// CSS: --rs-out and --rs-gap on .rs-nest; .rs-nest-in subtracts.`}
+        />
 
         <h2 className="section-label">Programmatic access</h2>
         <CodeBlock

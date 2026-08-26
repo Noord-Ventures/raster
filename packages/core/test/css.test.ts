@@ -139,4 +139,13 @@ describe("tokens", () => {
   it("grid module = column + gutter", () => {
     expect(rasterTokens.grid.module).toBe(rasterTokens.grid.column + rasterTokens.grid.gutter);
   });
+
+  it("ships the concentric-radius law", () => {
+    expect(rasterTokens.radius.chrome).toBe(0);
+    expect(rasterTokens.radius.concentric).toBe("max(0, outer − padding)");
+    expect(rasterCss).toContain("--radius-chrome: 0px");
+    expect(rasterCss).toContain("--radius-in: max(0px, calc(var(--radius) - var(--pad)))");
+    expect(rasterCss).toMatch(/\.rs-nest\{/);
+    expect(rasterCss).toMatch(/\.rs-nest-in\{/);
+  });
 });

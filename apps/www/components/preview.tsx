@@ -40,6 +40,8 @@ import {
   HoverCard,
   InputOTP,
   Kbd,
+  Nest,
+  NestInner,
   LineChart,
   Menubar,
   NavigationMenu,
@@ -583,6 +585,11 @@ export const demos: Record<string, () => React.ReactNode> = {
         ]}
       />
     </div>
+  ),
+  "concentric-radius": () => (
+    <Nest radius={28} pad={16} style={{ width: 184 }}>
+      <NestInner />
+    </Nest>
   ),
   "aspect-ratio": () => (
     <AspectRatio ratio={16 / 9} style={{ width: 240, background: "var(--divider-subtle)" }}>

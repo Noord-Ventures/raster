@@ -257,6 +257,17 @@ export const rasterComponents: RasterComponent[] = [
     snippet: `<div class="rs-card"><span class="rs-card-label">Case study</span><h3 class="rs-card-title">A quieter interface</h3><p class="rs-card-body">Emphasis from weight and spacing, never from a hue.</p></div>`,
   },
   {
+    name: "concentric-radius",
+    title: "Concentric radius",
+    description:
+      "Inner radius is max(0, outer − padding). Nested frames stay concentric. Raster chrome stays square.",
+    category: "surfaces",
+    classes: ["rs-nest", "rs-nest-in"],
+    css: ["components/nest.css"],
+    react: "components/concentric-radius.tsx",
+    snippet: `<div class="rs-nest" style="--rs-out:28px;--rs-gap:16px;width:184px"><div class="rs-nest-in"></div></div>`,
+  },
+  {
     name: "stepper",
     title: "Stepper",
     description: "Numbered dots joined by hairlines. Done is ink; active is outlined.",
