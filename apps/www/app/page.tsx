@@ -1,21 +1,19 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { COMMAND, FACE, LAW } from "./specimen";
 import "./specimen.css";
 
 export const metadata: Metadata = {
   title: "Raster",
-  description: "One ink, a 204 module. npx @noordvc/raster-cli init",
+  description: `${LAW} ${COMMAND}`,
 };
-
-const COMMAND = "npx @noordvc/raster-cli init";
-const LAW = "One ink, a 204 module.";
 
 export default function Home() {
   return (
     <main className="specimen-page" aria-label="Raster specimen">
       <div className="specimen">
         <section className="specimen-cell specimen-cell-face" aria-label="Face">
-          <p className="specimen-face">Inter</p>
+          <p className="specimen-face">{FACE}</p>
         </section>
 
         <section className="specimen-cell specimen-cell-law">

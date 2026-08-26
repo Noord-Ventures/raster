@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 import { rasterComponents } from "@noordvc/raster";
+import { isSpecimenPath } from "@/app/specimen";
 
 interface Crumb {
   label: string;
@@ -45,8 +46,8 @@ export function CrumbBar() {
 
   const trail = trailFor(pathname);
 
-  /* The homepage is a flush poster. The crumb bar would sit on the field. */
-  if (pathname === "/") return null;
+  /* Exception: the specimen path is a flush poster. No crumb bar on the field. */
+  if (isSpecimenPath(pathname)) return null;
 
   return (
     <nav className={`rs-crumb-bar${scrolled ? " rs-crumb-bar-scrolled" : ""}`} aria-label="Breadcrumbs">

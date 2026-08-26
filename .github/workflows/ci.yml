@@ -51,17 +51,27 @@ jobs:
       - name: Homepage is a specimen
         run: |
           page=apps/www/app/page.tsx
+          writer=apps/www/app/specimen.ts
           if grep -n -E 'site-layout|SIL OFL|Raster 0\.3' "$page"; then
             echo "Homepage still carries docs-column or marketing copy"
             exit 1
           fi
-          if [ "$(grep -o 'Inter' "$page" | wc -l)" -ne 1 ]; then
-            echo "Inter must be named once on the homepage"
+          if [ "$(grep -o 'Inter' "$writer" | wc -l)" -ne 1 ]; then
+            echo "Inter must be named once, in app/specimen.ts"
             exit 1
           fi
-          grep -q 'One ink, a 204 module.' "$page"
-          grep -q 'npx @noordvc/raster-cli init' "$page"
+          if grep -n Inter "$page"; then
+            echo "Inter must be written in app/specimen.ts, not page.tsx"
+            exit 1
+          fi
+          grep -q 'One ink, a 204 module.' "$writer"
+          grep -q 'npx @noordvc/raster-cli init' "$writer"
+          if grep -n 'One ink, a 204 module.' "$page" apps/www/app/layout.tsx; then
+            echo "Law must be written in app/specimen.ts"
+            exit 1
+          fi
           grep -q 'specimen-page' "$page"
+          grep -q 'isSpecimenPath' apps/www/components/crumb-bar.tsx
           test -f apps/www/app/specimen.css
           if grep -n specimen-page apps/www/app/site.css; then
             echo "Specimen styles drifted back into site chrome"
