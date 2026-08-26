@@ -22,7 +22,7 @@ export default function ComponentsPage() {
             const items = rasterComponents.filter((c) => c.category === category);
             if (items.length === 0) return null;
             return (
-              <section key={category}>
+              <section key={category} id={category}>
                 <h2 className="rs-t-title" style={{ marginTop: 40 }}>
                   {category.charAt(0).toUpperCase() + category.slice(1)}
                 </h2>

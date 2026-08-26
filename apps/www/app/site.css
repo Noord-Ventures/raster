@@ -182,8 +182,14 @@ html, body { margin: 0; padding: 0; }
   letter-spacing: -.01em; color: var(--text-secondary); opacity: .6;
   text-decoration: none; transition: color .15s ease, opacity .15s ease;
 }
-.toc-item:hover { color: var(--text); opacity: 1; }
-.toc-item[aria-current="page"] { color: var(--text); opacity: 1; font-weight: 500; }
+.toc-item:hover,
+.toc-item:focus-visible,
+.toc-item[data-preview="true"],
+.toc-item[aria-current="true"],
+.toc-item[aria-current="page"] { color: var(--text); opacity: 1; }
+.toc-item[aria-current="page"],
+.toc-item[aria-current="true"] { font-weight: 500; }
+.toc-item:focus-visible { outline: 1px solid var(--text); outline-offset: 2px; }
 
 /* ── Homepage specimen: flush 204 cells, type occupies a cell like an image ── */
 .specimen {

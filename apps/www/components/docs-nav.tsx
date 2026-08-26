@@ -2,88 +2,101 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { rasterCategories, rasterComponents } from "@noordvc/raster";
+import * as React from "react";
+import { rasterCategories, rasterComponents, type RasterCategory } from "@noordvc/raster";
 
-type Section = "start" | "foundations" | "components";
-
-const topLevel: Array<{ href: string; label: string; section: Section }> = [
-  { href: "/docs", label: "Getting started", section: "start" },
-  { href: "/docs/tokens", label: "Foundations", section: "foundations" },
-  { href: "/components", label: "Components", section: "components" },
-];
-
-const foundationPages = [{ href: "/docs/tokens", label: "Tokens" }];
-
-function sectionOf(pathname: string): Section {
-  if (pathname.startsWith("/components")) return "components";
-  if (pathname.startsWith("/docs/tokens")) return "foundations";
-  return "start";
+function sentence(value: string) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
+function here(pathname: string, href: string) {
+  return pathname === href || pathname === `${href}/`;
+}
+
+function pageGroup(pathname: string): RasterCategory | null {
+  const match = pathname.match(/^\/components\/([^/]+)\/?$/);
+  if (!match) return pathname.startsWith("/components") ? rasterCategories[0]! : null;
+  return rasterComponents.find((c) => c.name === match[1])?.category ?? rasterCategories[0]!;
+}
+
+const groups = rasterCategories.filter((category) =>
+  rasterComponents.some((c) => c.category === category),
+);
+
 /**
- * Dual-column rail, same idea as /work/: top-level in the first 184,
- * secondaries in the second, then the page. The component list never
- * lands in the first column.
+ * Components rail: groups in the first 184, that group's items in the
+ * second. Hover (and focus) fills the second column. The page's own
+ * group stays selected so the column is never empty on load.
  */
 export function DocsNav() {
   const pathname = usePathname();
-  const section = sectionOf(pathname);
-  const here = (href: string) => pathname === href || pathname === `${href}/`;
+  const selected = pageGroup(pathname);
+  const [preview, setPreview] = React.useState<RasterCategory | null>(null);
+  const shown = preview ?? selected;
+
+  React.useEffect(() => {
+    setPreview(null);
+  }, [pathname]);
+
+  const leaveRail = (event: React.PointerEvent | React.FocusEvent) => {
+    const next = "relatedTarget" in event ? event.relatedTarget : null;
+    if (next instanceof Node && event.currentTarget.contains(next)) return;
+    setPreview(null);
+  };
+
+  if (!pathname.startsWith("/components")) {
+    return (
+      <div className="toc-rail">
+        <nav className="toc" aria-label="Docs">
+          <Link href="/docs" className="toc-item" aria-current={here(pathname, "/docs") ? "page" : undefined}>
+            Getting started
+          </Link>
+          <Link
+            href="/docs/tokens"
+            className="toc-item"
+            aria-current={here(pathname, "/docs/tokens") ? "page" : undefined}
+          >
+            Tokens
+          </Link>
+        </nav>
+      </div>
+    );
+  }
+
+  const items = shown ? rasterComponents.filter((c) => c.category === shown) : [];
 
   return (
-    <div className="toc-rail">
-      <nav className="toc" aria-label="Docs">
-        {topLevel.map((item) => (
+    <div className="toc-rail" onPointerLeave={leaveRail} onBlur={leaveRail}>
+      <nav className="toc" aria-label="Component groups">
+        {groups.map((category) => (
           <Link
-            key={item.href}
-            href={item.href}
+            key={category}
+            href={`/components#${category}`}
             className="toc-item"
-            aria-current={section === item.section ? (here(item.href) ? "page" : "true") : undefined}
+            aria-current={selected === category ? "true" : undefined}
+            data-preview={shown === category ? "true" : undefined}
+            onPointerEnter={() => setPreview(category)}
+            onFocus={() => setPreview(category)}
           >
-            {item.label}
+            {sentence(category)}
           </Link>
         ))}
       </nav>
 
-      <nav
-        className="toc toc-sub"
-        aria-label={section === "components" ? "Components" : "In this section"}
-      >
-        {section === "foundations" &&
-          foundationPages.map((item) => (
+      <nav className="toc toc-sub" aria-label={shown ? sentence(shown) : "Components"}>
+        {items.map((c) => {
+          const href = `/components/${c.name}`;
+          return (
             <Link
-              key={item.href}
-              href={item.href}
+              key={c.name}
+              href={href}
               className="toc-item"
-              aria-current={here(item.href) ? "page" : undefined}
+              aria-current={here(pathname, href) ? "page" : undefined}
             >
-              {item.label}
+              {c.title}
             </Link>
-          ))}
-
-        {section === "components" &&
-          rasterCategories.map((category) => {
-            const items = rasterComponents.filter((c) => c.category === category);
-            if (items.length === 0) return null;
-            return (
-              <div key={category}>
-                <p className="toc-label">{category.charAt(0).toUpperCase() + category.slice(1)}</p>
-                {items.map((c) => {
-                  const href = `/components/${c.name}`;
-                  return (
-                    <Link
-                      key={c.name}
-                      href={href}
-                      className="toc-item"
-                      aria-current={here(href) ? "page" : undefined}
-                    >
-                      {c.title}
-                    </Link>
-                  );
-                })}
-              </div>
-            );
-          })}
+          );
+        })}
       </nav>
     </div>
   );
