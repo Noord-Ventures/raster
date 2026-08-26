@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 import { rasterCategories, rasterComponents, type RasterCategory } from "@noordvc/raster";
+import "./docs-nav.css";
 
 function sentence(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1);

@@ -1,6 +1,6 @@
-# Docs feature map
+# Docs rail
 
-How to reach each surface, and what done looks like. Catalog groups live in `packages/core/src/schema.ts` (`rasterCategories`).
+What it is, how to get there, what done looks like. Catalog groups live in `packages/core/src/schema.ts` (`rasterCategories`).
 
 | Surface | Route | Click path | Done |
 | --- | --- | --- | --- |

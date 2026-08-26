@@ -69,7 +69,11 @@ jobs:
           fi
       - name: Components TOC is catalog groups
         run: |
-          nav=apps/www/components/docs-nav.tsx
+          nav=apps/www/components/docs-nav/index.tsx
+          map=apps/www/components/docs-nav/FEATURE.md
+          test -f "$map"
+          grep -q Navigation "$map"
+          grep -q 'second column' "$map"
           if grep -n Foundations "$nav"; then
             echo "Components TOC must not use Foundations as a first-column item"
             exit 1
@@ -77,3 +81,7 @@ jobs:
           grep -q 'rasterCategories' "$nav"
           grep -q 'data-toc="groups"' "$nav"
           grep -q 'data-toc="items"' "$nav"
+          if grep -n toc-rail apps/www/app/site.css; then
+            echo "Docs-rail styles drifted back into site chrome"
+            exit 1
+          fi

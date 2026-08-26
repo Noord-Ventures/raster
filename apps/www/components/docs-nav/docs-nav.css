@@ -1,0 +1,46 @@
+/* Docs rail. Imported only by components/docs-nav. */
+
+.toc-rail {
+  display: none;
+  flex-shrink: 0;
+  align-self: flex-start;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 120px 0 72px;
+  gap: 0;
+}
+@media (min-width: 900px) { .toc-rail { display: flex; } }
+.toc {
+  width: 184px; flex-shrink: 0;
+  height: 100%; overflow-y: auto;
+  padding: 0 20px 0 0;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 64px), transparent calc(100% - 8px));
+  mask-image: linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 64px), transparent calc(100% - 8px));
+}
+.toc-sub {
+  border-left: 1px solid var(--divider-subtle);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.toc-sub:empty { display: none; }
+.toc::-webkit-scrollbar { display: none; }
+.toc-label {
+  font-size: 13px; font-weight: 500; letter-spacing: -.01em;
+  color: var(--text-secondary); margin: 18px 0 4px;
+}
+.toc-label:first-child, .toc-sub > div:first-child .toc-label { margin-top: 0; }
+.toc-item {
+  display: block; padding: 5px 0; font-size: 13px; font-weight: 400;
+  letter-spacing: -.01em; color: var(--text-secondary); opacity: .6;
+  text-decoration: none; transition: color .15s ease, opacity .15s ease;
+}
+.toc-item:hover,
+.toc-item:focus-visible,
+.toc-item[data-preview="true"],
+.toc-item[aria-current="true"],
+.toc-item[aria-current="page"] { color: var(--text); opacity: 1; }
+.toc-item[aria-current="page"],
+.toc-item[aria-current="true"] { font-weight: 500; }
+.toc-item:focus-visible { outline: 1px solid var(--text); outline-offset: 2px; }

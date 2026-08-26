@@ -7,9 +7,8 @@
      the 1024px rail) and the layout width rounds DOWN to whole 204px
      modules, so edges step from grid line to grid line on resize.
    - Reading measure is 592px (3 modules); covers pad 120px down.
-   - Left TOC: 184px, sticky, visible from 900px.
    - A fixed 72px crumb bar; breadcrumbs fade in once the page cover
-     scrolls away. */
+     scrolls away. The docs rail lives in components/docs-nav. */
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
@@ -144,52 +143,6 @@ html, body { margin: 0; padding: 0; }
 .cover { padding-top: 120px; padding-bottom: 64px; }
 .cover .rs-t-sub { margin-top: 16px; }
 @media (max-width: 640px) { .cover { padding-top: 72px; padding-bottom: 40px; } }
-
-/* ── Dual-column rail: top-level, then secondaries, then the page ── */
-.toc-rail {
-  display: none;
-  flex-shrink: 0;
-  align-self: flex-start;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  padding: 120px 0 72px;
-  gap: 0;
-}
-@media (min-width: 900px) { .toc-rail { display: flex; } }
-.toc {
-  width: 184px; flex-shrink: 0;
-  height: 100%; overflow-y: auto;
-  padding: 0 20px 0 0;
-  scrollbar-width: none;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 64px), transparent calc(100% - 8px));
-  mask-image: linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 64px), transparent calc(100% - 8px));
-}
-.toc-sub {
-  border-left: 1px solid var(--divider-subtle);
-  padding-left: 20px;
-  padding-right: 20px;
-}
-.toc-sub:empty { display: none; }
-.toc::-webkit-scrollbar { display: none; }
-.toc-label {
-  font-size: 13px; font-weight: 500; letter-spacing: -.01em;
-  color: var(--text-secondary); margin: 18px 0 4px;
-}
-.toc-label:first-child, .toc-sub > div:first-child .toc-label { margin-top: 0; }
-.toc-item {
-  display: block; padding: 5px 0; font-size: 13px; font-weight: 400;
-  letter-spacing: -.01em; color: var(--text-secondary); opacity: .6;
-  text-decoration: none; transition: color .15s ease, opacity .15s ease;
-}
-.toc-item:hover,
-.toc-item:focus-visible,
-.toc-item[data-preview="true"],
-.toc-item[aria-current="true"],
-.toc-item[aria-current="page"] { color: var(--text); opacity: 1; }
-.toc-item[aria-current="page"],
-.toc-item[aria-current="true"] { font-weight: 500; }
-.toc-item:focus-visible { outline: 1px solid var(--text); outline-offset: 2px; }
 
 /* ── Component gallery: cards span two whole modules ── */
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 24px 0 48px; }
