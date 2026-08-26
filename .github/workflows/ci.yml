@@ -111,7 +111,7 @@ jobs:
           grep -q 'POSTER' apps/www/app/page.tsx
           test -f apps/www/app/specimen-kit.tsx
           test -f apps/www/app/specimen-laws.ts
-          if grep -nE 'height: 100dvh' apps/www/app/specimen.css; then
+          if grep -nE '^[[:space:]]*height: 100dvh' apps/www/app/specimen.css; then
             echo "Specimen must scroll; do not lock height to the viewport"
             exit 1
           fi
