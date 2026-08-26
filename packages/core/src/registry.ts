@@ -165,7 +165,7 @@ export const rasterComponents: RasterComponent[] = [
     classes: ["rs-tabs", "rs-tab", "rs-tab-active"],
     css: ["components/tabs.css"],
     react: "components/tabs.tsx",
-    snippet: `<div class="rs-tabs"><span class="rs-tab rs-tab-active">Overview</span><span class="rs-tab">Activity</span></div>`,
+    snippet: `<div class="rs-tabs"><span class="rs-tab rs-tab-active">Overview</span><span class="rs-tab">Activity</span><span class="rs-tab">Settings</span></div>`,
   },
   {
     name: "breadcrumbs",

@@ -639,7 +639,7 @@
             "rs-tab",
             "rs-tab-active"
           ],
-          "snippet": "<div class=\"rs-tabs\"><span class=\"rs-tab rs-tab-active\">Overview</span><span class=\"rs-tab\">Activity</span></div>",
+          "snippet": "<div class=\"rs-tabs\"><span class=\"rs-tab rs-tab-active\">Overview</span><span class=\"rs-tab\">Activity</span><span class=\"rs-tab\">Settings</span></div>",
           "cssOnly": false,
           "registryDependencies": []
         }

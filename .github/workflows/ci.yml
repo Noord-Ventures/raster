@@ -102,6 +102,12 @@ jobs:
             echo "Tabs must use a hairline on the active tab only"
             exit 1
           fi
+          if grep -n 'border-bottom:1px solid var(--divider' packages/core/css/components/tabs.css; then
+            echo "Tab set must not sit on a full-width bar"
+            exit 1
+          fi
+          grep -q 'appearance:none' packages/core/css/components/tabs.css
+          grep -q 'inset 0 -1px 0 var(--text)' packages/core/css/components/tabs.css
           grep -q 'padding:8px 0 24px' packages/core/css/components/sidebar.css
       - name: Components TOC is catalog groups
         run: |

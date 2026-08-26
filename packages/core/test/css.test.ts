@@ -58,6 +58,15 @@ describe("generated raster.css", () => {
     expect(rasterCss).toMatch(/\.rs-crumbs a:link/);
   });
 
+  it("marks only the active tab with a hairline", () => {
+    const tabs = readFileSync(join(pkgDir, "css/components/tabs.css"), "utf8");
+    expect(tabs).not.toMatch(/1\.5px/);
+    expect(tabs).toMatch(/appearance:none/);
+    expect(tabs).toMatch(/inset 0 -1px 0 var\(--text\)/);
+    expect(tabs).not.toMatch(/\.rs-tabs\{[^}]*border-bottom/);
+    expect(rasterCss).toMatch(/button\.rs-tab\{[^}]*appearance:none/);
+  });
+
   it("never introduces a color hue — the palette is monochrome", () => {
     // Hex values must be gray-ish (R≈G≈B) — the warm paper/black get a small tolerance.
     const hexes = [...rasterCss.matchAll(/#([0-9a-fA-F]{6})\b/g)].map((m) => m[1]!);
