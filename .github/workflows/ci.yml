@@ -237,6 +237,33 @@ jobs:
             echo "Masthead must not grow a left rule"
             exit 1
           fi
+      - name: Interfaces is six posters
+        run: |
+          node apps/www/scripts/check-interfaces.mjs
+          grep -q 'href: "/interfaces"' apps/www/components/site-chrome.tsx
+          grep -q 'label: "Interfaces"' apps/www/components/site-chrome.tsx
+          test -f apps/www/app/interfaces/FEATURE.md
+          test -f apps/www/app/interfaces/catalog.ts
+          test -f apps/www/app/interfaces/page.tsx
+          test -f apps/www/app/interfaces/interfaces.css
+          for slug in ai-tool dashboard threads fleet delivery slack; do
+            test -f "apps/www/app/interfaces/$slug/page.tsx"
+            test -f "apps/www/app/interfaces/$slug/board.tsx"
+          done
+          test -f apps/www/app/interfaces/fleet/map.tsx
+          grep -q 'Working posters. The catalog, composed.' apps/www/app/interfaces/page.tsx
+          if grep -R -n -E 'tailwind|@radix-ui' apps/www/app/interfaces; then
+            echo "Interfaces must stay off Tailwind and Radix"
+            exit 1
+          fi
+          if grep -n 'box-shadow:' apps/www/app/interfaces/interfaces.css | grep -v 'none'; then
+            echo "Interfaces chrome must not grow a shadow"
+            exit 1
+          fi
+          if grep -n about.css apps/www/app/site.css || grep -n interfaces.css apps/www/app/site.css; then
+            echo "Interfaces styles must stay isolated"
+            exit 1
+          fi
       - name: Components TOC is catalog groups
         run: |
           nav=apps/www/components/docs-nav/index.tsx
