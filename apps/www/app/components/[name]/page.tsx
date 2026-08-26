@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { rasterComponents } from "@noordvc/raster";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
-import { UseSlot } from "@/components/examples/use-slot";
+import { InAction } from "@/components/examples/scene";
 import { Preview } from "@/components/preview";
 
 export function generateStaticParams() {
@@ -468,11 +468,11 @@ export default async function ComponentPage({
             <p className="rs-t-sub component-desc">{component.description}</p>
           </header>
 
-        <UseSlot name={component.name} />
-
         <div className="preview-box">
           <Preview name={component.name} snippet={component.snippet} />
         </div>
+
+        <InAction name={component.name} />
 
         <h2 className="section-label">Install</h2>
         <CodeBlock code={`npx @noordvc/raster-cli add ${component.name}`} />

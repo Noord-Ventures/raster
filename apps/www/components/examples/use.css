@@ -12,11 +12,24 @@
   overflow: hidden;
   margin: 8px 0 24px;
 }
-.gallery-demo .rs-use {
+.rs-scene {
+  isolation: isolate;
+  background-color: var(--bg);
+  border: 1px solid var(--divider);
+  border-radius: 0;
+  box-shadow: none;
+  margin: 8px 0 32px;
+  overflow: hidden;
+}
+.rs-scene .rs-use {
   width: 100%;
   border: none;
   margin: 0;
+  grid-template-columns: 1fr;
   min-height: 204px;
+}
+.rs-scene .rs-use-type {
+  display: none;
 }
 .rs-use .rs-theme-toggle {
   position: relative;

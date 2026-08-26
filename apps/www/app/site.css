@@ -166,13 +166,13 @@ html, body { margin: 0; padding: 0; }
 .gallery-item-link::after { content: ""; position: absolute; inset: 0; }
 .gallery-demo,
 .gallery-meta { background-color: var(--bg); }
-.gallery-demo { padding: 0; min-height: 204px; display: flex; align-items: stretch; justify-content: stretch; border-bottom: 1px solid var(--divider-subtle); overflow: hidden; pointer-events: none; }
+.gallery-demo { padding: 28px 24px; min-height: 204px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--divider-subtle); overflow: hidden; pointer-events: none; }
 .gallery-meta { padding: 14px 20px 16px; }
 .gallery-meta h3 { font-size: 14.5px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 3px; }
 .gallery-meta p { font-size: 12.5px; color: var(--text-secondary); letter-spacing: -.01em; line-height: 1.5; margin: 0; }
 
 /* ── Component page ── */
-.preview-box { border: 1px solid var(--divider); border-radius: var(--radius); padding: 48px 32px; display: flex; align-items: center; justify-content: center; margin: 24px 0; }
+.preview-box { border: 1px solid var(--divider); border-radius: 0; padding: 56px 32px; min-height: 204px; display: flex; align-items: center; justify-content: center; margin: 24px 0 16px; background: var(--bg); }
 .preview-box > * { max-width: 100%; }
 .code-block { position: relative; background: var(--table-alt); border: 1px solid var(--divider-subtle); border-radius: var(--radius-sm); padding: 14px 16px; margin: 12px 0 28px; overflow-x: auto; }
 .code-block pre { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; line-height: 1.6; color: var(--text); }

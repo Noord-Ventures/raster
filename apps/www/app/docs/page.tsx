@@ -17,7 +17,7 @@ export default function DocsPage() {
           <header className="cover" style={{ paddingBottom: 8 }}>
             <h1 className="rs-t-display">Getting started</h1>
             <p className="rs-t-sub">
-              Plain CSS plus components you own. The door is {DOOR.replace("https://", "")}.
+              CSS you own. The door is {DOOR.replace("https://", "")}.
             </p>
           </header>
 

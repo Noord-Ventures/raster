@@ -30,7 +30,7 @@ export const typeface = {
   license: foundry.license,
   url: foundry.url,
   ofl: "Copyright 2016 The Inter Project Authors",
-  why: "One face. Weight and size do the work a second typeface would try to do. Variable, latin and latin-ext, vendored next to the CSS. System sans is fallback only. Weights: 500 body, 600 headings and labels.",
+  why: "One face. Weight and size do the work.",
 };
 
 export const noord = {

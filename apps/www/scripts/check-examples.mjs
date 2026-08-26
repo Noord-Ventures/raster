@@ -36,14 +36,20 @@ if (unmapped.length) {
 }
 
 const page = readFileSync(join(root, "apps/www/app/components/[name]/page.tsx"), "utf8");
-if (!page.includes("UseSlot") || page.indexOf("UseSlot") > page.indexOf("preview-box")) {
-  console.error("Component pages must render UseSlot above the preview-box specimen");
+const control = page.indexOf('<div className="preview-box">');
+const scene = page.indexOf("<InAction");
+if (control === -1 || scene === -1) {
+  console.error("Component pages must show the control, then the in-action scene");
+  process.exit(1);
+}
+if (scene < control) {
+  console.error("The in-action scene must sit under the control, not above it");
   process.exit(1);
 }
 
 const catalog = readFileSync(join(root, "apps/www/app/components/page.tsx"), "utf8");
-if (!catalog.includes("UseSlot")) {
-  console.error("Catalog tiles must preview the same Use composition");
+if (!catalog.includes("Preview") || catalog.includes("UseSlot") || catalog.includes("InAction")) {
+  console.error("Catalog tiles must show the raw control, not a composed scene");
   process.exit(1);
 }
 

@@ -5,7 +5,7 @@ import { SpecimenKit } from "./specimen-kit";
 import "./specimen.css";
 
 export const metadata: Metadata = {
-  title: WORD,
+  title: { absolute: WORD },
   description: LAW,
 };
 

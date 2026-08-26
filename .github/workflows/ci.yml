@@ -77,6 +77,8 @@ jobs:
           grep -q 'openGraph' apps/www/app/social.ts
           grep -q 'summary_large_image' apps/www/app/social.ts
           grep -q '/og.png' apps/www/app/social.ts
+          grep -q 'return new URL(HOST)' apps/www/app/social.ts
+          grep -q 'absolute: WORD' apps/www/app/page.tsx
           test -f apps/www/public/og.png
           python3 -c '
           from pathlib import Path
@@ -162,6 +164,9 @@ jobs:
             exit 1
           fi
           node apps/www/scripts/check-examples.mjs
+          grep -q 'The control, the name, a short law.' apps/www/app/components/page.tsx
+          grep -q 'className="rs-scene"' apps/www/components/examples/scene.tsx
+          grep -q '.rs-scene .rs-use-type' apps/www/components/examples/use.css
       - name: About is a masthead
         run: |
           page=apps/www/app/about/page.tsx

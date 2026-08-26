@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { rasterCategories, rasterComponents } from "@noordvc/raster";
 import { DocsNav } from "@/components/docs-nav";
-import { UseSlot } from "@/components/examples/use-slot";
+import { Preview } from "@/components/preview";
 
 export const metadata: Metadata = { title: "Components" };
 
@@ -14,9 +14,7 @@ export default function ComponentsPage() {
         <main className="site-content-wide">
           <header className="cover" style={{ paddingBottom: 24, maxWidth: 592 }}>
             <h1 className="rs-t-display">Components</h1>
-            <p className="rs-t-sub">
-              The kit, live. Each page has markup, React usage, and the install command.
-            </p>
+            <p className="rs-t-sub">The control, the name, a short law.</p>
           </header>
           {rasterCategories.map((category) => {
             const items = rasterComponents.filter((c) => c.category === category);
@@ -30,7 +28,7 @@ export default function ComponentsPage() {
                   {items.map((c) => (
                     <div key={c.name} className="gallery-item">
                       <div className="gallery-demo">
-                        <UseSlot name={c.name} />
+                        <Preview name={c.name} snippet={c.snippet} />
                       </div>
                       <div className="gallery-meta">
                         <h3>
