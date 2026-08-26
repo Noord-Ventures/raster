@@ -160,7 +160,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "tabs",
     title: "Tabs",
-    description: "Active tab is ink with a 1.5px underline.",
+    description: "One line of type. Hairline on the active tab only.",
     category: "navigation",
     classes: ["rs-tabs", "rs-tab", "rs-tab-active"],
     css: ["components/tabs.css"],

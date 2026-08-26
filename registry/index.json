@@ -626,7 +626,7 @@
       "name": "tabs",
       "type": "registry:component",
       "title": "Tabs",
-      "description": "Active tab is ink with a 1.5px underline.",
+      "description": "One line of type. Hairline on the active tab only.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json"

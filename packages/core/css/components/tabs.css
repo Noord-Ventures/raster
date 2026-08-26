@@ -1,5 +1,6 @@
-/* ── Tabs: active tab is ink with a 1.5px underline ── */
-.rs-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}
-.rs-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}
-.rs-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}
-button.rs-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}
+/* ── Tabs: one line of type. Hairline on the active tab only. ── */
+.rs-tabs{display:flex;gap:22px;max-width:360px}
+.rs-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em;text-decoration:none;border:none;background:none;box-shadow:none}
+.rs-tab-active{color:var(--text);font-weight:600;border-bottom:1px solid var(--text)}
+button.rs-tab{padding:8px 0;background:none;border:none;font-family:inherit;cursor:pointer;text-align:left}
+button.rs-tab.rs-tab-active{border-bottom:1px solid var(--text)}

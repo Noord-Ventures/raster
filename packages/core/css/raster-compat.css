@@ -105,16 +105,20 @@ body{
 .bb-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}
 .bb-progress span{display:block;height:100%;background:var(--text);border-radius:2px}
 
-/* ── Tabs: active tab is ink with a 1.5px underline ── */
-.bb-tabs{display:flex;gap:22px;border-bottom:1px solid var(--divider-subtle);max-width:360px}
-.bb-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em}
-.bb-tab-active{color:var(--text);font-weight:600;border-bottom:1.5px solid var(--text);margin-bottom:-1px}
-button.bb-tab{padding:8px 0;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;cursor:pointer;text-align:left}
+/* ── Tabs: one line of type. Hairline on the active tab only. ── */
+.bb-tabs{display:flex;gap:22px;max-width:360px}
+.bb-tab{padding:8px 0;font-size:14px;color:var(--text-secondary);letter-spacing:-.01em;text-decoration:none;border:none;background:none;box-shadow:none}
+.bb-tab-active{color:var(--text);font-weight:600;border-bottom:1px solid var(--text)}
+button.bb-tab{padding:8px 0;background:none;border:none;font-family:inherit;cursor:pointer;text-align:left}
+button.bb-tab.bb-tab-active{border-bottom:1px solid var(--text)}
 
-/* ── Breadcrumbs: slashes at 40%, current page is ink ── */
-.bb-crumbs-demo{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}
+/* ── Breadcrumbs: one ink trail. Slashes at 40%. Current page is full ink. ── */
+.bb-crumbs-demo{font-size:13px;color:var(--text);letter-spacing:-.01em;display:flex;gap:8px}
+.bb-crumbs-demo a{color:inherit;text-decoration:none;opacity:.55}
+.bb-crumbs-demo a:visited{color:inherit}
+.bb-crumbs-demo a:hover,.bb-crumbs-demo a:focus-visible{opacity:1}
 .bb-crumbs-demo-sep{opacity:.4}
-.bb-crumbs-demo-here{color:var(--text)}
+.bb-crumbs-demo-here{color:var(--text);opacity:1}
 
 /* ── Crumb bar: fixed top bar in the house chrome ──
    Transparent at rest; once the page cover scrolls away it gains the

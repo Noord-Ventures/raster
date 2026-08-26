@@ -1,4 +1,7 @@
-/* ── Breadcrumbs: slashes at 40%, current page is ink ── */
-.rs-crumbs{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}
+/* ── Breadcrumbs: one ink trail. Slashes at 40%. Current page is full ink. ── */
+.rs-crumbs{font-size:13px;color:var(--text);letter-spacing:-.01em;display:flex;gap:8px}
+.rs-crumbs a{color:inherit;text-decoration:none;opacity:.55}
+.rs-crumbs a:visited{color:inherit}
+.rs-crumbs a:hover,.rs-crumbs a:focus-visible{opacity:1}
 .rs-crumbs-sep{opacity:.4}
-.rs-crumbs-here{color:var(--text)}
+.rs-crumbs-here{color:var(--text);opacity:1}

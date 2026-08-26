@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/breadcrumbs.css",
-      "content": "/* ── Breadcrumbs: slashes at 40%, current page is ink ── */\n.rs-crumbs{font-size:13px;color:var(--text-secondary);letter-spacing:-.01em;display:flex;gap:8px}\n.rs-crumbs-sep{opacity:.4}\n.rs-crumbs-here{color:var(--text)}\n",
+      "content": "/* ── Breadcrumbs: one ink trail. Slashes at 40%. Current page is full ink. ── */\n.rs-crumbs{font-size:13px;color:var(--text);letter-spacing:-.01em;display:flex;gap:8px}\n.rs-crumbs a{color:inherit;text-decoration:none;opacity:.55}\n.rs-crumbs a:visited{color:inherit}\n.rs-crumbs a:hover,.rs-crumbs a:focus-visible{opacity:1}\n.rs-crumbs-sep{opacity:.4}\n.rs-crumbs-here{color:var(--text);opacity:1}\n",
       "type": "registry:file",
       "target": "styles/raster/breadcrumbs.css"
     }

@@ -84,10 +84,17 @@ jobs:
             exit 1
           fi
           grep -q 'padding: 0 1px 1px 0' apps/www/app/specimen.css
-          if ! grep -q 'gallery-item' apps/www/app/site.css || ! grep -A1 '\.gallery-item {' apps/www/app/site.css | grep -q 'background: var(--bg)'; then
+          if ! grep -q 'gallery-item' apps/www/app/site.css || ! grep -q 'background-color: var(--bg)' apps/www/app/site.css; then
             echo "Component tiles must be opaque paper"
             exit 1
           fi
+          grep -q 'isolation: isolate' apps/www/app/site.css
+          grep -q 'rs-crumbs a' packages/core/css/components/breadcrumbs.css
+          if grep -n '1.5px' packages/core/css/components/tabs.css; then
+            echo "Tabs must use a hairline on the active tab only"
+            exit 1
+          fi
+          grep -q 'padding:8px 0 24px' packages/core/css/components/sidebar.css
       - name: Components TOC is catalog groups
         run: |
           nav=apps/www/components/docs-nav/index.tsx
