@@ -29,7 +29,7 @@ if (extras.length) {
 }
 
 const slot = readFileSync(join(examples, "use-slot.tsx"), "utf8");
-const unmapped = names.filter((name) => !slot.includes(`"${name}"`));
+const unmapped = names.filter((name) => !slot.includes(`"${name}"`) && !new RegExp(`(?:^|\\n)\\s+${name}:`, "m").test(slot));
 if (unmapped.length) {
   console.error("use-slot.tsx missing imports:\n" + unmapped.map((n) => `  ${n}`).join("\n"));
   process.exit(1);
