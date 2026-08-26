@@ -1,4 +1,4 @@
-import { SmallMultiples } from "@noordvc/raster-react";
+import { SmallMultiples } from "@noorddev/raster-react";
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 

@@ -1,4 +1,4 @@
-import { Histogram } from "@noordvc/raster-react";
+import { Histogram } from "@noorddev/raster-react";
 
 export function Use() {
   return (

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { concentricInner, rasterTokens } from "@noordvc/raster";
+import { concentricInner, rasterTokens } from "@noorddev/raster";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
 
@@ -62,7 +62,7 @@ export default function TokensPage() {
           corners concentric: inner = {radius.concentric}.
         </p>
         <CodeBlock
-          code={`import { concentricInner, concentricOuter } from "@noordvc/raster";
+          code={`import { concentricInner, concentricOuter } from "@noorddev/raster";
 
 concentricInner(28, 16); // ${concentricInner(28, 16)}
 concentricOuter(12, 16); // 28
@@ -72,14 +72,14 @@ concentricOuter(12, 16); // 28
 
         <h2 className="section-label">Programmatic access</h2>
         <CodeBlock
-          code={`import { rasterTokens } from "@noordvc/raster";
+          code={`import { rasterTokens } from "@noorddev/raster";
 
 rasterTokens.color.light.paper; // "${color.light.paper}"
 rasterTokens.grid.module;       // ${grid.module}
 
 // or over the wire
 // GET https://raster.noord.dev/r/index.json
-// npx @noordvc/raster-cli tokens`}
+// npx @noorddev/raster-cli tokens`}
         />
         </main>
       </div>

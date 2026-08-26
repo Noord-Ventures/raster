@@ -1,4 +1,4 @@
-import { Button } from "@noordvc/raster-react";
+import { Button } from "@noorddev/raster-react";
 
 /** Press ticket: one primary, one ghost. The sheet is the product. */
 export function Use() {

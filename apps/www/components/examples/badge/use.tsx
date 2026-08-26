@@ -1,4 +1,4 @@
-import { Badge } from "@noordvc/raster-react";
+import { Badge } from "@noorddev/raster-react";
 
 export function Use() {
   return (

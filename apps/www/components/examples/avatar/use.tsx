@@ -1,4 +1,4 @@
-import { Avatar, AvatarRow } from "@noordvc/raster-react";
+import { Avatar, AvatarRow } from "@noorddev/raster-react";
 
 export function Use() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { BarChart, ToggleGroup } from "@noordvc/raster-react";
+import { BarChart, ToggleGroup } from "@noorddev/raster-react";
 
 const CITIES = [
   { label: "Alkmaar", value: 42 },

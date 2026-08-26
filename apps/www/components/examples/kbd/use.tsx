@@ -1,4 +1,4 @@
-import { Kbd } from "@noordvc/raster-react";
+import { Kbd } from "@noorddev/raster-react";
 
 export function Use() {
   return (

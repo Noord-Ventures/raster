@@ -13,7 +13,7 @@ import {
   Item,
   NavigationMenu,
   ToggleGroup,
-} from "@noordvc/raster-react";
+} from "@noorddev/raster-react";
 
 const PLACES = [
   { name: "De Buren", kind: "Kitchen", rating: "4.8", time: "22 min", area: "Alkmaar", tag: "Open" },

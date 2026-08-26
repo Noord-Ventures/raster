@@ -19,7 +19,7 @@ import {
   TabList,
   TabPanel,
   Tabs,
-} from "@noordvc/raster-react";
+} from "@noorddev/raster-react";
 
 type Post = {
   id: string;

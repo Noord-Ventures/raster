@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Tab, TabList, TabPanel, Tabs } from "@noordvc/raster-react";
+import { Tab, TabList, TabPanel, Tabs } from "@noorddev/raster-react";
 
 /** An issue board. The panel fades in — 0.22s, ease, no bounce. */
 export function Use() {

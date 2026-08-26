@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import { rasterCategories, rasterComponents, type RasterCategory } from "@noordvc/raster";
+import { rasterCategories, rasterComponents, type RasterCategory } from "@noorddev/raster";
 import { MobileToc } from "@/components/toc-mobile";
 import "./docs-nav.css";
 

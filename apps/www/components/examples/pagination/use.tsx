@@ -1,4 +1,4 @@
-import { Pagination } from "@noordvc/raster-react";
+import { Pagination } from "@noorddev/raster-react";
 
 export function Use() {
   return (

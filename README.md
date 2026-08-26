@@ -19,9 +19,9 @@ This repo contains the tokens, CSS, React components, registry, CLI, and documen
 
 | Path | Package | Contents |
 |---|---|---|
-| `packages/core` | `@noordvc/raster` | Tokens, per-component CSS, vendored Inter, the typed registry, and the build that generates `raster.css`, `tokens.css`, the token JSON, and the 0.1 compat layer |
-| `packages/react` | `@noordvc/raster-react` | React components styled by `@noordvc/raster` CSS (`@noordvc/raster-react` depends on `@noordvc/raster`) |
-| `packages/cli` | `@noordvc/raster-cli` | `npx @noordvc/raster-cli init` / `add` / `list` / `tokens`. Bundles the registry; works offline |
+| `packages/core` | `@noorddev/raster` | Tokens, per-component CSS, vendored Inter, the typed registry, and the build that generates `raster.css`, `tokens.css`, the token JSON, and the 0.1 compat layer |
+| `packages/react` | `@noorddev/raster-react` | React components styled by `@noorddev/raster` CSS (`@noorddev/raster-react` depends on `@noorddev/raster`) |
+| `packages/cli` | `@noorddev/raster-cli` | `npx @noorddev/raster-cli init` / `add` / `list` / `tokens`. Bundles the registry; works offline |
 | `registry/` | | Generated registry items in the shadcn registry-item schema |
 | `apps/www` | | Documentation site: gallery, per-component docs, tokens, served registry |
 
@@ -30,20 +30,20 @@ This repo contains the tokens, CSS, React components, registry, CLI, and documen
 **CLI.**
 
 ```sh
-npx @noordvc/raster-cli init            # writes styles/raster.css, Inter, and raster.json
-npx @noordvc/raster-cli add button dialog
+npx @noorddev/raster-cli init            # writes styles/raster.css, Inter, and raster.json
+npx @noorddev/raster-cli add button dialog
 ```
 
 `add` copies React source into `components/raster/`. Registry dependencies install with it. CSS-only components need no code; the classes are in raster.css.
 
 `init --compat` also writes the 0.1 class-name layer. `init --registry <url>` (or `raster.json.registry`) points `add` at a remote registry for out-of-band updates.
 
-**Plain CSS.** Import `@noordvc/raster/css` (or link the file the CLI wrote) and use the `rs-*` classes. Set `data-theme="dark"` on the root element for the dark scheme.
+**Plain CSS.** Import `@noorddev/raster/css` (or link the file the CLI wrote) and use the `rs-*` classes. Set `data-theme="dark"` on the root element for the dark scheme.
 
 **Tokens.**
 
 ```ts
-import { rasterTokens } from "@noordvc/raster";
+import { rasterTokens } from "@noorddev/raster";
 rasterTokens.color.light.paper; // "#FAF8F2"
 ```
 
@@ -91,7 +91,7 @@ Inter, SIL OFL 1.1. Variable, latin + latin-ext, vendored next to the CSS. Syste
 
 ## Coming from 0.1
 
-0.2 renamed every class to the `rs-` prefix and scoped table styles to `.rs-table`. Sites on the 0.1 names keep working by linking the generated `css/raster-compat.css` after `raster.css`, or via `npx @noordvc/raster-cli init --compat`. The rename map is `packages/core/src/legacy.ts`.
+0.2 renamed every class to the `rs-` prefix and scoped table styles to `.rs-table`. Sites on the 0.1 names keep working by linking the generated `css/raster-compat.css` after `raster.css`, or via `npx @noorddev/raster-cli init --compat`. The rename map is `packages/core/src/legacy.ts`.
 
 ---
 

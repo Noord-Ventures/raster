@@ -1,4 +1,4 @@
-import { Spinner } from "@noordvc/raster-react";
+import { Spinner } from "@noorddev/raster-react";
 
 export function Use() {
   return (

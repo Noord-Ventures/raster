@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { LineChart, ToggleGroup } from "@noordvc/raster-react";
+import { LineChart, ToggleGroup } from "@noorddev/raster-react";
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 const SHEETS = [12, 18, 15, 26, 24];

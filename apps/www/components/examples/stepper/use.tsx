@@ -1,4 +1,4 @@
-import { Stepper } from "@noordvc/raster-react";
+import { Stepper } from "@noorddev/raster-react";
 
 export function Use() {
   return (

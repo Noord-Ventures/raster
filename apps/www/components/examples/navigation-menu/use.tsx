@@ -1,4 +1,4 @@
-import { NavigationMenu } from "@noordvc/raster-react";
+import { NavigationMenu } from "@noorddev/raster-react";
 
 export function Use() {
   return (

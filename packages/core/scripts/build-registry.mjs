@@ -2,7 +2,7 @@
 //
 //   registry/index.json    shadcn-compatible registry index (no file contents)
 //   registry/<name>.json   shadcn-compatible registry-item, contents inlined
-//   registry/bundle.json   every item with contents, consumed by @noordvc/raster-cli
+//   registry/bundle.json   every item with contents, consumed by @noorddev/raster-cli
 //
 // Components install two ways: through the raster CLI (bundles this
 // output), or through `npx shadcn add <url>/r/<name>.json` from any

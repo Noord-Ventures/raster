@@ -1,4 +1,4 @@
-import { Donut, Share } from "@noordvc/raster-react";
+import { Donut, Share } from "@noorddev/raster-react";
 
 export function Use() {
   return (

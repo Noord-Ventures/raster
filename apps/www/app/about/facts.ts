@@ -12,7 +12,7 @@
  */
 
 import { DOOR, LAW, WORD } from "../specimen";
-import { rasterTokens } from "@noordvc/raster";
+import { rasterTokens } from "@noorddev/raster";
 
 export const word = WORD;
 export const law = LAW;
@@ -37,8 +37,8 @@ export const noord = {
   who: "Renato Valdés Olmos led design and development for Raster at Noord.",
   door: DOOR,
   host: rasterTokens.meta.url,
-  packages: ["@noordvc/raster", "@noordvc/raster-react", "@noordvc/raster-cli"] as const,
-  command: "npx @noordvc/raster-cli init",
+  packages: ["@noorddev/raster", "@noorddev/raster-react", "@noorddev/raster-cli"] as const,
+  command: "npx @noorddev/raster-cli init",
 };
 
 export const person = {

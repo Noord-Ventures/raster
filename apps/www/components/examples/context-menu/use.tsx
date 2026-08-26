@@ -1,4 +1,4 @@
-import { ContextMenu } from "@noordvc/raster-react";
+import { ContextMenu } from "@noorddev/raster-react";
 
 export function Use() {
   return (

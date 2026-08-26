@@ -17,7 +17,7 @@ import {
   TabPanel,
   Tabs,
   Textarea,
-} from "@noordvc/raster-react";
+} from "@noorddev/raster-react";
 
 const SHEETS = [
   { href: "#brief", label: "Brief", current: true },

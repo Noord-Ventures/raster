@@ -1,7 +1,7 @@
 {
-  "name": "@noordvc/raster-react",
+  "name": "@noorddev/raster-react",
   "version": "0.3.0",
-  "description": "Raster React components — accessible, zero-dependency, styled by @noordvc/raster CSS.",
+  "description": "Raster React components — accessible, zero-dependency, styled by @noorddev/raster CSS.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -33,10 +33,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@noordvc/raster": "workspace:^"
+    "@noorddev/raster": "workspace:^"
   },
   "peerDependencies": {
-    "@noordvc/raster": ">=0.3.0",
+    "@noorddev/raster": ">=0.3.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },

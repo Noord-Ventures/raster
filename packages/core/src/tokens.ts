@@ -1,7 +1,7 @@
 /**
  * Raster design tokens: the single source of truth for the design system.
  * CSS custom properties, the token JSON, and the docs site all generate
- * from this file. Tokens ship in @noordvc/raster and `npx @noordvc/raster-cli tokens`.
+ * from this file. Tokens ship in @noorddev/raster and `npx @noorddev/raster-cli tokens`.
  */
 
 export const rasterTokens = {

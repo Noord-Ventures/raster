@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem } from "@noordvc/raster-react";
+import { Accordion, AccordionItem } from "@noorddev/raster-react";
 
 export function Use() {
   return (

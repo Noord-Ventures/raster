@@ -1,5 +1,5 @@
 {
-  "name": "@noordvc/raster",
+  "name": "@noorddev/raster",
   "version": "0.3.0",
   "description": "Raster core — design tokens, component registry, and CSS. Monochrome, CSS-first, zero dependencies.",
   "license": "MIT",

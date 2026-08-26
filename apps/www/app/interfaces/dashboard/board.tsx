@@ -21,7 +21,7 @@ import {
   TabPanel,
   Tabs,
   ToggleGroup,
-} from "@noordvc/raster-react";
+} from "@noorddev/raster-react";
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const SHEETS = [12, 18, 15, 26, 24, 11, 9];

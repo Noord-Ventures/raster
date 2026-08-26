@@ -1,4 +1,4 @@
-import { Split } from "@noordvc/raster-react";
+import { Split } from "@noorddev/raster-react";
 
 export function Use() {
   return (

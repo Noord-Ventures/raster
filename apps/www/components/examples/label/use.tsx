@@ -1,4 +1,4 @@
-import { Label } from "@noordvc/raster-react";
+import { Label } from "@noorddev/raster-react";
 
 export function Use() {
   return (

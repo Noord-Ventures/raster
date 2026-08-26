@@ -4,7 +4,7 @@ export const FACE = "Inter";
 export const WORD = "Raster";
 export const LAW = "A design system on a modular grid.";
 export const POSTER = "A poster you can install.";
-export const COMMAND = "npx @noordvc/raster-cli init";
+export const COMMAND = "npx @noorddev/raster-cli init";
 
 /** Public door. Do not attach DNS from this repo. */
 export const DOOR = "https://getraster.com";

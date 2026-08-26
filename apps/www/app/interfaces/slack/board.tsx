@@ -14,7 +14,7 @@ import {
   SidebarLabel,
   SidebarNav,
   Textarea,
-} from "@noordvc/raster-react";
+} from "@noorddev/raster-react";
 
 type Kind = "person" | "agent";
 

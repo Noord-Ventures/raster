@@ -1,4 +1,4 @@
-import { Collapsible } from "@noordvc/raster-react";
+import { Collapsible } from "@noorddev/raster-react";
 
 export function Use() {
   return (
