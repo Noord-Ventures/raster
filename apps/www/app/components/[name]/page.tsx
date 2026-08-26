@@ -143,20 +143,73 @@ import { Button } from "@/components/raster/button";
   breadcrumbs: `import { Breadcrumbs } from "@/components/raster/breadcrumbs";
 
 <Breadcrumbs items={[{ label: "Studio", href: "/studio" }, { label: "Raster" }]} />`,
-  chart: `import { BarChart, Donut, LineChart, Sparkline } from "@/components/raster/chart";
+  chart: `import { LineChart } from "@/components/raster/chart";
 
 <LineChart
-  labels={months}
+  height={204}
+  labels={days}
   series={[
-    { name: "Revenue", values: revenue },
-    { name: "Costs", values: costs },
+    { name: "Sheets", values: sheets },
+    { name: "Proofs", values: proofs },
   ]}
-  area
-/>
+  unit="sheets"
+  annotations={[{ at: 3, label: "Press" }]}
+  spot
+  inverted={false}
+/>`,
+  "bar-chart": `import { BarChart } from "@/components/raster/chart";
 
-<BarChart data={[{ label: "Q1", value: 42 }, { label: "Q2", value: 58 }]} />
-<Sparkline values={[12, 18, 15, 26, 24, 34]} />
-<Donut value={72} label="complete" />`,
+<BarChart
+  height={204}
+  orientation="horizontal"
+  data={[
+    { label: "Alkmaar", value: 42 },
+    { label: "Delft", value: 28 },
+  ]}
+  unit="issues"
+  stacked
+/>`,
+  "area-chart": `import { AreaChart } from "@/components/raster/chart";
+
+<AreaChart
+  height={204}
+  labels={days}
+  series={[{ name: "Sheets", values: sheets }]}
+  unit="sheets"
+  annotations={[{ at: 3, label: "Press" }]}
+/>`,
+  "scatter-chart": `import { ScatterChart } from "@/components/raster/chart";
+
+<ScatterChart
+  height={204}
+  points={marks}
+  xLabel="Module"
+  yLabel="Density"
+  annotations={[{ at: 40, label: "204" }]}
+/>`,
+  donut: `import { Donut, Share } from "@/components/raster/chart";
+
+<Donut value={72} max={100} size={184} label="printed" />
+<Share slices={[{ label: "Sheet", value: 72 }, { label: "Proof", value: 18 }]} />`,
+  histogram: `import { Histogram } from "@/components/raster/chart";
+
+<Histogram
+  height={204}
+  bins={[
+    { label: "0–1", count: 4 },
+    { label: "1–2", count: 11 },
+    { label: "2–3", count: 18 },
+  ]}
+/>`,
+  "small-multiples": `import { SmallMultiples } from "@/components/raster/chart";
+
+<SmallMultiples
+  height={136}
+  panels={[
+    { title: "Alkmaar", labels: days, series: [{ name: "Sheets", values: alkmaar }] },
+    { title: "Delft", labels: days, series: [{ name: "Sheets", values: delft }] },
+  ]}
+/>`,
   collapsible: `import { Collapsible } from "@/components/raster/collapsible";
 
 <Collapsible title="Show the details">Here they are.</Collapsible>`,

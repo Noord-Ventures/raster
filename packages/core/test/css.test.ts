@@ -74,6 +74,19 @@ describe("generated raster.css", () => {
     expect(rasterCss).toMatch(/button\.rs-tab\{[^}]*appearance:none/);
   });
 
+  it("draws charts as a poster field, not a dashboard widget", () => {
+    const chart = readFileSync(join(pkgDir, "css/components/chart.css"), "utf8");
+    expect(chart).toMatch(/stroke-linecap:butt/);
+    expect(chart).toMatch(/border-radius:0/);
+    expect(chart).toMatch(/box-shadow:none/);
+    expect(chart).toMatch(/stroke-width:1/);
+    expect(chart).not.toMatch(/stroke-linecap:round/);
+    expect(chart).not.toMatch(/box-shadow:\s*[^n]/);
+    expect(chart).not.toMatch(/#e30613/i);
+    expect(rasterCss).toMatch(/\.rs-chart-field\{/);
+    expect(rasterCss).toMatch(/\.rs-chart-line\{[^}]*stroke-width:1/);
+  });
+
   it("never introduces a color hue — the palette is monochrome", () => {
     // Hex values must be gray-ish (R≈G≈B) — the warm paper/black get a small tolerance.
     const hexes = [...rasterCss.matchAll(/#([0-9a-fA-F]{6})\b/g)].map((m) => m[1]!);

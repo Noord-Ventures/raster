@@ -31,7 +31,30 @@ export { ThemeToggle, type ThemeToggleProps } from "./components/theme-toggle";
 export { Popover, PopoverTitle, PopoverBody, type PopoverProps } from "./components/popover";
 export { Sheet, SheetTitle, SheetBody, type SheetProps } from "./components/sheet";
 export { ScrollArea, type ScrollAreaProps } from "./components/scroll-area";
-export { LineChart, BarChart, Sparkline, Donut, type ChartSeries, type LineChartProps, type BarChartProps, type SparklineProps, type DonutProps } from "./components/chart";
+export {
+  LineChart,
+  AreaChart,
+  BarChart,
+  ScatterChart,
+  Donut,
+  Share,
+  Histogram,
+  SmallMultiples,
+  Sparkline,
+  type ChartSeries,
+  type ChartAnnotation,
+  type ChartPoint,
+  type LineChartProps,
+  type AreaChartProps,
+  type BarChartProps,
+  type BarOrientation,
+  type ScatterChartProps,
+  type SparklineProps,
+  type DonutProps,
+  type ShareProps,
+  type HistogramProps,
+  type SmallMultiplesProps,
+} from "./components/chart";
 export { Collapsible, type CollapsibleProps } from "./components/collapsible";
 export { HoverCard, type HoverCardProps } from "./components/hover-card";
 export { Kbd } from "./components/kbd";

@@ -1,19 +1,20 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "chart",
+  "name": "histogram",
   "type": "registry:component",
-  "title": "Charts",
-  "description": "A line on a 204 field. Hairline grid, ink marks. Series differ by texture: solid, dashed, gray, dotted. One optional Crouwel spot.",
+  "title": "Histogram",
+  "description": "Adjacent bins, one hairline between. A density field, not a dashboard widget.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json"
+    "https://raster.noord.dev/r/inter.json",
+    "https://raster.noord.dev/r/chart.json"
   ],
   "files": [
     {
-      "path": "raster/chart.tsx",
+      "path": "raster/histogram.tsx",
       "content": "export * from \"./charts/index\";\n",
       "type": "registry:component",
-      "target": "components/raster/chart.tsx"
+      "target": "components/raster/histogram.tsx"
     },
     {
       "path": "raster/charts/index.ts",
@@ -92,16 +93,13 @@
     "raster": {
       "category": "content",
       "classes": [
-        "rs-chart",
-        "rs-chart-line",
-        "rs-chart-grid",
-        "rs-chart-axis",
-        "rs-chart-bar",
-        "rs-spark"
+        "rs-chart-hist"
       ],
-      "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><line class=\"rs-chart-grid\" x1=\"0\" x2=\"240\" y1=\"56\" y2=\"56\"/><path class=\"rs-chart-line\" d=\"M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16\"/></svg></div>",
+      "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><rect class=\"rs-chart-hist\" x=\"8\" y=\"36\" width=\"36\" height=\"20\"/><rect class=\"rs-chart-hist\" x=\"45\" y=\"20\" width=\"36\" height=\"36\"/><rect class=\"rs-chart-hist\" x=\"82\" y=\"8\" width=\"36\" height=\"48\"/><rect class=\"rs-chart-hist\" x=\"119\" y=\"24\" width=\"36\" height=\"32\"/></svg></div>",
       "cssOnly": false,
-      "registryDependencies": []
+      "registryDependencies": [
+        "chart"
+      ]
     }
   }
 }

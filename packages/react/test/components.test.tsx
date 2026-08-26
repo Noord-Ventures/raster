@@ -3,6 +3,7 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+  BarChart,
   Badge,
   Breadcrumbs,
   ButtonGroup,
@@ -11,6 +12,7 @@ import {
   Empty,
   Field,
   FieldLabel,
+  LineChart,
   Form,
   NativeSelect,
   Spinner,
@@ -301,6 +303,40 @@ describe("Spinner", () => {
   it("exposes status semantics", () => {
     render(<Spinner label="Loading" />);
     expect(screen.getByRole("status", { name: "Loading" }).className).toBe("rs-spinner");
+  });
+});
+
+describe("LineChart", () => {
+  it("renders a hairline plot and a screen-reader table", () => {
+    render(
+      <LineChart
+        labels={["Mon", "Tue"]}
+        series={[{ name: "Sheets", values: [12, 18] }]}
+      />,
+    );
+    expect(document.querySelector(".rs-chart-line")).toBeTruthy();
+    expect(document.querySelector(".rs-chart-field")).toBeTruthy();
+    expect(screen.getByRole("table")).toBeTruthy();
+    expect(screen.getByText("Sheets")).toBeTruthy();
+  });
+});
+
+describe("BarChart", () => {
+  it("draws horizontal bars without a radius", () => {
+    const { container } = render(
+      <BarChart
+        orientation="horizontal"
+        data={[
+          { label: "Alkmaar", value: 42 },
+          { label: "Delft", value: 28 },
+        ]}
+      />,
+    );
+    const bars = container.querySelectorAll("rect.rs-chart-bar");
+    expect(bars.length).toBe(2);
+    for (const bar of bars) {
+      expect(bar.getAttribute("rx")).toBeNull();
+    }
   });
 });
 

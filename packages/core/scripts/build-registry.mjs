@@ -10,7 +10,8 @@
 //
 // Run with: npm run build:registry  (Node ≥ 22.6)
 
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, lstatSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join, normalize, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { rasterTokens } from "../src/tokens.ts";
 import { rasterComponents } from "../src/registry.ts";
@@ -95,19 +96,84 @@ const interItem = {
 
 const cxSource = readReact("cx.ts");
 
+function posix(p) {
+  return p.replaceAll("\\", "/");
+}
+
+function resolveLocal(fromRel, spec) {
+  const collapsed = posix(normalize(join(dirname(fromRel), spec)));
+  const candidates = [collapsed, `${collapsed}.tsx`, `${collapsed}.ts`, `${collapsed}/index.ts`, `${collapsed}/index.tsx`];
+  for (const c of candidates) {
+    const abs = repoPath(`packages/react/src/${c}`);
+    if (existsSync(abs) && lstatSync(abs).isFile()) return c;
+  }
+  return null;
+}
+
+function isCx(rel) {
+  return rel === "cx" || rel === "cx.ts" || rel.endsWith("/cx.ts") || rel.endsWith("/cx");
+}
+
+function collectReactGraph(entryRel) {
+  const sources = new Map();
+  const queue = [entryRel];
+  while (queue.length) {
+    const rel = queue.shift();
+    if (!rel || sources.has(rel) || isCx(rel)) continue;
+    const source = readReact(rel);
+    sources.set(rel, source);
+    for (const match of source.matchAll(/from ["'](\.[^"']+)["']/g)) {
+      const resolved = resolveLocal(rel, match[1]);
+      if (resolved && !isCx(resolved)) queue.push(resolved);
+    }
+  }
+  return sources;
+}
+
+function destFor(srcRel, componentName, entryRel) {
+  if (srcRel === entryRel) {
+    const ext = srcRel.endsWith(".ts") && !srcRel.endsWith(".tsx") ? ".ts" : ".tsx";
+    return `raster/${componentName}${ext}`;
+  }
+  return `raster/${srcRel.replace(/^components\//, "")}`;
+}
+
+function rewriteImports(source, srcRel, dest, destBySrc) {
+  return source.replace(/from ["'](\.[^"']+)["']/g, (full, spec) => {
+    const resolved = resolveLocal(srcRel, spec);
+    const destDir = dirname(dest);
+    let target;
+    if (!resolved || isCx(resolved)) {
+      target = "raster/cx";
+    } else {
+      target = destBySrc.get(resolved).replace(/\.(tsx|ts)$/, "");
+    }
+    let rel = posix(relative(destDir, target));
+    if (!rel.startsWith(".")) rel = `./${rel}`;
+    return `from "${rel}"`;
+  });
+}
+
 const items = [interItem, baseItem];
 
 for (const component of rasterComponents) {
   const files = [];
 
   if (component.react) {
-    const source = readReact(component.react).replace('from "../cx"', 'from "./cx"');
-    files.push({
-      path: `raster/${component.name}.tsx`,
-      content: source,
-      type: "registry:component",
-      target: `components/raster/${component.name}.tsx`,
-    });
+    const graph = collectReactGraph(component.react);
+    const destBySrc = new Map(
+      [...graph.keys()].map((src) => [src, destFor(src, component.name, component.react)]),
+    );
+    for (const [srcRel, source] of graph) {
+      const dest = destBySrc.get(srcRel);
+      const ext = dest.endsWith(".ts") && !dest.endsWith(".tsx") ? "ts" : "tsx";
+      files.push({
+        path: dest,
+        content: rewriteImports(source, srcRel, dest, destBySrc),
+        type: ext === "tsx" ? "registry:component" : "registry:file",
+        target: `components/${dest}`,
+      });
+    }
     files.push({
       path: "raster/cx.ts",
       content: cxSource,

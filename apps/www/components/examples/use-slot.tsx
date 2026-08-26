@@ -6,8 +6,10 @@ import { Use as Alert } from "./alert/use";
 import { Use as AlertDialog } from "./alert-dialog/use";
 import { Use as AspectRatio } from "./aspect-ratio/use";
 import { Use as Assistant } from "./assistant/use";
+import { Use as AreaChart } from "./area-chart/use";
 import { Use as Avatar } from "./avatar/use";
 import { Use as Badge } from "./badge/use";
+import { Use as BarChart } from "./bar-chart/use";
 import { Use as Breadcrumbs } from "./breadcrumbs/use";
 import { Use as Button } from "./button/use";
 import { Use as ButtonGroup } from "./button-group/use";
@@ -26,11 +28,13 @@ import { Use as CrumbBar } from "./crumb-bar/use";
 import { Use as DataTable } from "./data-table/use";
 import { Use as DatePicker } from "./date-picker/use";
 import { Use as Dialog } from "./dialog/use";
+import { Use as Donut } from "./donut/use";
 import { Use as Drawer } from "./drawer/use";
 import { Use as DropdownMenu } from "./dropdown-menu/use";
 import { Use as Empty } from "./empty/use";
 import { Use as Field } from "./field/use";
 import { Use as Form } from "./form/use";
+import { Use as Histogram } from "./histogram/use";
 import { Use as HoverCard } from "./hover-card/use";
 import { Use as Icons } from "./icons/use";
 import { Use as InlineForm } from "./inline-form/use";
@@ -50,12 +54,14 @@ import { Use as Progress } from "./progress/use";
 import { Use as Radio } from "./radio/use";
 import { Use as References } from "./references/use";
 import { Use as Resizable } from "./resizable/use";
+import { Use as ScatterChart } from "./scatter-chart/use";
 import { Use as ScrollArea } from "./scroll-area/use";
 import { Use as Select } from "./select/use";
 import { Use as Separator } from "./separator/use";
 import { Use as Sheet } from "./sheet/use";
 import { Use as Sidebar } from "./sidebar/use";
 import { Use as Skeleton } from "./skeleton/use";
+import { Use as SmallMultiples } from "./small-multiples/use";
 import { Use as Slider } from "./slider/use";
 import { Use as Spinner } from "./spinner/use";
 import { Use as Stepper } from "./stepper/use";
@@ -75,9 +81,11 @@ const uses: Record<string, ComponentType> = {
   alert: Alert,
   "alert-dialog": AlertDialog,
   "aspect-ratio": AspectRatio,
+  "area-chart": AreaChart,
   assistant: Assistant,
   avatar: Avatar,
   badge: Badge,
+  "bar-chart": BarChart,
   breadcrumbs: Breadcrumbs,
   button: Button,
   "button-group": ButtonGroup,
@@ -96,11 +104,13 @@ const uses: Record<string, ComponentType> = {
   "data-table": DataTable,
   "date-picker": DatePicker,
   dialog: Dialog,
+  donut: Donut,
   drawer: Drawer,
   "dropdown-menu": DropdownMenu,
   empty: Empty,
   field: Field,
   form: Form,
+  histogram: Histogram,
   "hover-card": HoverCard,
   icons: Icons,
   "inline-form": InlineForm,
@@ -119,6 +129,7 @@ const uses: Record<string, ComponentType> = {
   progress: Progress,
   radio: Radio,
   references: References,
+  "scatter-chart": ScatterChart,
   resizable: Resizable,
   "scroll-area": ScrollArea,
   select: Select,
@@ -127,6 +138,7 @@ const uses: Record<string, ComponentType> = {
   sidebar: Sidebar,
   skeleton: Skeleton,
   slider: Slider,
+  "small-multiples": SmallMultiples,
   spinner: Spinner,
   stepper: Stepper,
   switch: Switch,

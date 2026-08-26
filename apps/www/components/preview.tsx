@@ -4,6 +4,7 @@ import * as React from "react";
 import {
   Accordion,
   AspectRatio,
+  AreaChart,
   BarChart,
   ButtonGroup,
   Drawer,
@@ -35,13 +36,16 @@ import {
   DataTable,
   DatePicker,
   Donut,
+  Histogram,
   HoverCard,
   InputOTP,
   Kbd,
   LineChart,
   Menubar,
   NavigationMenu,
-  Sparkline,
+  ScatterChart,
+  Share,
+  SmallMultiples,
   Split,
   AccordionItem,
   Alert,
@@ -385,15 +389,96 @@ export const demos: Record<string, () => React.ReactNode> = {
     </Tabs>
   ),
   chart: () => (
-    <div style={{ width: 320 }}>
+    <div style={{ width: 408 }}>
       <LineChart
-        height={140}
-        labels={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+        height={204}
+        labels={["Mon", "Tue", "Wed", "Thu", "Fri"]}
         series={[
-          { name: "Revenue", values: [12, 18, 15, 26, 24, 34] },
-          { name: "Costs", values: [8, 9, 11, 12, 14, 15] },
+          { name: "Sheets", values: [12, 18, 15, 26, 24] },
+          { name: "Proofs", values: [4, 6, 5, 9, 7] },
         ]}
-        area
+        unit="sheets"
+        annotations={[{ at: 3, label: "Press" }]}
+      />
+    </div>
+  ),
+  "bar-chart": () => (
+    <div style={{ width: 408 }}>
+      <BarChart
+        height={204}
+        data={[
+          { label: "Alkmaar", value: 42 },
+          { label: "Delft", value: 28 },
+          { label: "Haarlem", value: 21 },
+          { label: "Utrecht", value: 16 },
+        ]}
+        unit="issues"
+        yLabel="This issue"
+      />
+    </div>
+  ),
+  "area-chart": () => (
+    <div style={{ width: 408 }}>
+      <AreaChart
+        height={204}
+        labels={["Mon", "Tue", "Wed", "Thu", "Fri"]}
+        series={[{ name: "Sheets", values: [8, 14, 12, 22, 18] }]}
+        unit="sheets"
+        annotations={[{ at: 3, label: "Press" }]}
+      />
+    </div>
+  ),
+  "scatter-chart": () => (
+    <div style={{ width: 408 }}>
+      <ScatterChart
+        height={204}
+        points={[
+          { x: 12, y: 18, label: "Alkmaar" },
+          { x: 28, y: 16, label: "Haarlem" },
+          { x: 48, y: 22, label: "Rotterdam" },
+          { x: 68, y: 26, label: "Groningen" },
+          { x: 80, y: 44, label: "Amsterdam" },
+        ]}
+        xLabel="Module"
+        yLabel="Density"
+      />
+    </div>
+  ),
+  donut: () => (
+    <div style={{ width: 408, display: "grid", gap: 20 }}>
+      <Donut value={72} max={100} size={184} label="printed" />
+      <Share
+        slices={[
+          { label: "Sheet", value: 72 },
+          { label: "Proof", value: 18 },
+          { label: "Waste", value: 10 },
+        ]}
+      />
+    </div>
+  ),
+  histogram: () => (
+    <div style={{ width: 408 }}>
+      <Histogram
+        height={204}
+        yLabel="Count"
+        bins={[
+          { label: "0–1", count: 4 },
+          { label: "1–2", count: 11 },
+          { label: "2–3", count: 18 },
+          { label: "3–4", count: 9 },
+          { label: "4–5", count: 3 },
+        ]}
+      />
+    </div>
+  ),
+  "small-multiples": () => (
+    <div style={{ width: 408 }}>
+      <SmallMultiples
+        height={120}
+        panels={[
+          { title: "Alkmaar", labels: ["Mon", "Wed", "Fri"], series: [{ name: "Sheets", values: [12, 15, 24] }] },
+          { title: "Delft", labels: ["Mon", "Wed", "Fri"], series: [{ name: "Sheets", values: [8, 9, 14] }] },
+        ]}
       />
     </div>
   ),

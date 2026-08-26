@@ -1218,6 +1218,11 @@
           "target": "components/raster/alert-dialog.tsx"
         },
         {
+          "path": "raster/dialog.tsx",
+          "type": "registry:component",
+          "target": "components/raster/dialog.tsx"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -1724,6 +1729,11 @@
           "target": "components/raster/toggle-group.tsx"
         },
         {
+          "path": "raster/toggle.tsx",
+          "type": "registry:component",
+          "target": "components/raster/toggle.tsx"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -1906,7 +1916,7 @@
       "name": "chart",
       "type": "registry:component",
       "title": "Charts",
-      "description": "SVG line, bar, sparkline, donut. Hairline grid, ink marks. Series differ by texture: solid, dashed, gray, dotted.",
+      "description": "A line on a 204 field. Hairline grid, ink marks. Series differ by texture: solid, dashed, gray, dotted. One optional Crouwel spot.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json"
@@ -1932,6 +1942,608 @@
           "path": "raster/chart.tsx",
           "type": "registry:component",
           "target": "components/raster/chart.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "bar-chart",
+      "type": "registry:component",
+      "title": "Bar chart",
+      "description": "Vertical or horizontal. Thin ink bars, no radius. Stacked when the series share a field.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/chart.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart-bar"
+          ],
+          "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><line class=\"rs-chart-grid\" x1=\"0\" x2=\"240\" y1=\"56\" y2=\"56\"/><rect class=\"rs-chart-bar\" x=\"20\" y=\"18\" width=\"8\" height=\"38\"/><rect class=\"rs-chart-bar\" x=\"48\" y=\"10\" width=\"8\" height=\"46\"/><rect class=\"rs-chart-bar\" x=\"76\" y=\"24\" width=\"8\" height=\"32\"/></svg></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "chart"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/bar-chart.tsx",
+          "type": "registry:component",
+          "target": "components/raster/bar-chart.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "area-chart",
+      "type": "registry:component",
+      "title": "Area chart",
+      "description": "A filled field under the first series. Same law as the line: hairlines, texture, one optional spot.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/chart.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart-area"
+          ],
+          "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><path class=\"rs-chart-area\" d=\"M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16 L240 56 L0 56 Z\"/><path class=\"rs-chart-line\" d=\"M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16\"/></svg></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "chart"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/area-chart.tsx",
+          "type": "registry:component",
+          "target": "components/raster/area-chart.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "scatter-chart",
+      "type": "registry:component",
+      "title": "Scatter chart",
+      "description": "Marks on a hairline grid. One ink, or one Crouwel spot on the field.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/chart.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart-mark"
+          ],
+          "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><line class=\"rs-chart-grid\" x1=\"0\" x2=\"240\" y1=\"56\" y2=\"56\"/><circle class=\"rs-chart-mark\" cx=\"36\" cy=\"40\" r=\"2\"/><circle class=\"rs-chart-mark\" cx=\"88\" cy=\"22\" r=\"2\"/><circle class=\"rs-chart-mark\" cx=\"140\" cy=\"30\" r=\"2\"/><circle class=\"rs-chart-mark\" cx=\"196\" cy=\"14\" r=\"2\"/></svg></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "chart"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/scatter-chart.tsx",
+          "type": "registry:component",
+          "target": "components/raster/scatter-chart.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "donut",
+      "type": "registry:component",
+      "title": "Donut or share",
+      "description": "A ring against its whole, or a flush share strip. Hairline, no rounded fat stroke.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/chart.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart-donut"
+          ],
+          "snippet": "<div class=\"rs-chart\"><svg class=\"rs-chart-donut\" viewBox=\"0 0 96 96\" width=\"96\" height=\"96\"><circle cx=\"48\" cy=\"48\" r=\"36\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\"/></svg></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "chart"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/donut.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "histogram",
+      "type": "registry:component",
+      "title": "Histogram",
+      "description": "Adjacent bins, one hairline between. A density field, not a dashboard widget.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/chart.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart-hist"
+          ],
+          "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><rect class=\"rs-chart-hist\" x=\"8\" y=\"36\" width=\"36\" height=\"20\"/><rect class=\"rs-chart-hist\" x=\"45\" y=\"20\" width=\"36\" height=\"36\"/><rect class=\"rs-chart-hist\" x=\"82\" y=\"8\" width=\"36\" height=\"48\"/><rect class=\"rs-chart-hist\" x=\"119\" y=\"24\" width=\"36\" height=\"32\"/></svg></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "chart"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/chart.css",
+          "type": "registry:file",
+          "target": "styles/raster/chart.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "small-multiples",
+      "type": "registry:component",
+      "title": "Small multiples",
+      "description": "The same axes, repeated. One 184 column per panel.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/chart.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-chart-multi"
+          ],
+          "snippet": "<div class=\"rs-chart-multi\"><div class=\"rs-chart\"><svg viewBox=\"0 0 184 64\" width=\"184\" height=\"64\"><path class=\"rs-chart-line\" d=\"M0 40 L46 28 L92 34 L138 16 L184 22\"/></svg></div><div class=\"rs-chart\"><svg viewBox=\"0 0 184 64\" width=\"184\" height=\"64\"><path class=\"rs-chart-line\" d=\"M0 30 L46 36 L92 22 L138 28 L184 18\"/></svg></div></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "chart"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/small-multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/small-multiples.tsx"
+        },
+        {
+          "path": "raster/charts/index.ts",
+          "type": "registry:file",
+          "target": "components/raster/charts/index.ts"
+        },
+        {
+          "path": "raster/charts/line.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/line.tsx"
+        },
+        {
+          "path": "raster/charts/area.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/area.tsx"
+        },
+        {
+          "path": "raster/charts/bar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/bar.tsx"
+        },
+        {
+          "path": "raster/charts/scatter.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/scatter.tsx"
+        },
+        {
+          "path": "raster/charts/donut.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/donut.tsx"
+        },
+        {
+          "path": "raster/charts/histogram.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/histogram.tsx"
+        },
+        {
+          "path": "raster/charts/multiples.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/multiples.tsx"
+        },
+        {
+          "path": "raster/charts/sparkline.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/sparkline.tsx"
+        },
+        {
+          "path": "raster/charts/frame.tsx",
+          "type": "registry:component",
+          "target": "components/raster/charts/frame.tsx"
         },
         {
           "path": "raster/cx.ts",
@@ -2141,6 +2753,11 @@
           "target": "components/raster/context-menu.tsx"
         },
         {
+          "path": "raster/dropdown-menu.tsx",
+          "type": "registry:component",
+          "target": "components/raster/dropdown-menu.tsx"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -2188,6 +2805,11 @@
           "path": "raster/menubar.tsx",
           "type": "registry:component",
           "target": "components/raster/menubar.tsx"
+        },
+        {
+          "path": "raster/dropdown-menu.tsx",
+          "type": "registry:component",
+          "target": "components/raster/dropdown-menu.tsx"
         },
         {
           "path": "raster/cx.ts",
@@ -2405,6 +3027,11 @@
           "target": "components/raster/combobox.tsx"
         },
         {
+          "path": "raster/select.tsx",
+          "type": "registry:component",
+          "target": "components/raster/select.tsx"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -2452,6 +3079,11 @@
           "path": "raster/command.tsx",
           "type": "registry:component",
           "target": "components/raster/command.tsx"
+        },
+        {
+          "path": "raster/dialog.tsx",
+          "type": "registry:component",
+          "target": "components/raster/dialog.tsx"
         },
         {
           "path": "raster/cx.ts",
@@ -2548,6 +3180,11 @@
           "path": "raster/date-picker.tsx",
           "type": "registry:component",
           "target": "components/raster/date-picker.tsx"
+        },
+        {
+          "path": "raster/calendar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/calendar.tsx"
         },
         {
           "path": "raster/cx.ts",

@@ -17,6 +17,12 @@
       "target": "components/raster/toggle-group.tsx"
     },
     {
+      "path": "raster/toggle.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ToggleProps\n  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, \"onChange\"> {\n  pressed?: boolean;\n  defaultPressed?: boolean;\n  onPressedChange?: (pressed: boolean) => void;\n}\n\n/** Press switch; state lives in aria-pressed. */\nexport const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(function Toggle(\n  { pressed, defaultPressed, onPressedChange, className, onClick, ...props },\n  ref,\n) {\n  const [inner, setInner] = React.useState(defaultPressed ?? false);\n  const isControlled = pressed !== undefined;\n  const on = isControlled ? pressed : inner;\n  return (\n    <button\n      ref={ref}\n      type=\"button\"\n      aria-pressed={on}\n      className={cx(\"rs-toggle\", className)}\n      onClick={(e) => {\n        if (!isControlled) setInner(!on);\n        onPressedChange?.(!on);\n        onClick?.(e);\n      }}\n      {...props}\n    />\n  );\n});\n\nexport interface ToggleGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  options: Array<{ value: string; label: React.ReactNode }>;\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (value: string) => void;\n}\n\n/** One pressed at a time. */\nexport function ToggleGroup({\n  options,\n  value,\n  defaultValue,\n  onValueChange,\n  className,\n  ...props\n}: ToggleGroupProps) {\n  const [inner, setInner] = React.useState(defaultValue);\n  const isControlled = value !== undefined;\n  const current = isControlled ? value : inner;\n  return (\n    <div role=\"group\" className={cx(\"rs-toggle-group\", className)} {...props}>\n      {options.map((option) => (\n        <button\n          key={option.value}\n          type=\"button\"\n          aria-pressed={option.value === current}\n          className=\"rs-toggle\"\n          onClick={() => {\n            if (!isControlled) setInner(option.value);\n            onValueChange?.(option.value);\n          }}\n        >\n          {option.label}\n        </button>\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/toggle.tsx"
+    },
+    {
       "path": "raster/cx.ts",
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",

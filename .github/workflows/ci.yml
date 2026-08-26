@@ -182,3 +182,26 @@ jobs:
             exit 1
           fi
           grep -q 'background: var(--bg)' apps/www/components/docs-nav/docs-nav.css
+      - name: Charts are posters
+        run: |
+          css=packages/core/css/components/chart.css
+          grep -q 'stroke-linecap:butt' "$css"
+          grep -q 'border-radius:0' "$css"
+          grep -q 'box-shadow:none' "$css"
+          grep -q 'stroke-width:1' "$css"
+          if grep -nE 'stroke-linecap:round|box-shadow:[^n]|rx=\{' "$css" packages/react/src/components/charts/*.tsx; then
+            echo "Charts must stay hairline, flush, no shadow, no rounded bars"
+            exit 1
+          fi
+          if grep -nE '#[Ee]30613|#[Ff][Ff]0000' "$css"; then
+            echo "Crouwel spot must not live in CSS"
+            exit 1
+          fi
+          for n in chart bar-chart area-chart scatter-chart donut histogram small-multiples; do
+            test -f "apps/www/components/examples/$n/use.tsx"
+          done
+          grep -q ToggleGroup apps/www/components/examples/chart/use.tsx
+          test -d packages/react/src/components/charts
+          test -f packages/react/src/components/charts/line.tsx
+          test -f packages/react/src/components/charts/bar.tsx
+          test -f packages/react/src/components/charts/scatter.tsx

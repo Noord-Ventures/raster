@@ -1,0 +1,193 @@
+import * as React from "react";
+import {
+  ChartField,
+  ChartTip,
+  LINE_CLASS,
+  LegendSwatch,
+  MAX_SERIES,
+  PLOT,
+  SrTable,
+  defaultFormat,
+  niceMax,
+  stackedRows,
+  ticksFor,
+  type ChartAnnotation,
+  type ChartSeries,
+} from "./frame";
+
+export interface LineChartProps extends React.HTMLAttributes<HTMLDivElement> {
+  series: ChartSeries[];
+  labels?: string[];
+  height?: number;
+  /** Fill under the first series. Prefer AreaChart for a dedicated area. */
+  area?: boolean;
+  stacked?: boolean;
+  inverted?: boolean;
+  grid?: boolean;
+  ticks?: number;
+  unit?: string;
+  yLabel?: string;
+  xLabel?: string;
+  annotations?: ChartAnnotation[];
+  domain?: [number, number];
+  spot?: boolean | string;
+  valueFormat?: (value: number) => string;
+}
+
+export function LineChart({
+  series,
+  labels,
+  height = 204,
+  area,
+  stacked,
+  inverted,
+  grid = true,
+  ticks = 4,
+  unit,
+  yLabel,
+  xLabel,
+  annotations,
+  domain,
+  spot,
+  valueFormat,
+  className,
+  ...props
+}: LineChartProps) {
+  const shown = series.slice(0, MAX_SERIES);
+  const n = Math.max(1, ...shown.map((s) => s.values.length));
+  const stacks = stacked ? stackedRows(shown) : null;
+  const rawMax = stacks
+    ? Math.max(...stacks.map((row) => row[row.length - 1] ?? 0))
+    : Math.max(0, ...shown.flatMap((s) => s.values));
+  const max = domain?.[1] ?? niceMax(rawMax);
+  const min = domain?.[0] ?? 0;
+  const span = max - min || 1;
+  const format = valueFormat ?? ((v: number) => defaultFormat(v, unit));
+  const [hover, setHover] = React.useState<number | null>(null);
+  const overlayRef = React.useRef<SVGRectElement>(null);
+
+  const { W, ML, MR, MT, MB } = PLOT;
+  const plotW = W - ML - MR;
+  const plotH = height - MT - MB;
+  const x = (i: number) => ML + (n <= 1 ? 0 : (i / (n - 1)) * plotW);
+  const y = (v: number) => {
+    const t = (v - min) / span;
+    return inverted ? MT + t * plotH : MT + plotH - t * plotH;
+  };
+  const path = (values: number[]) => values.map((v, i) => `${i === 0 ? "M" : "L"}${x(i)} ${y(v)}`).join(" ");
+  const tickVals = ticksFor(max, ticks);
+  const tickLabels = labels ?? Array.from({ length: n }, (_, i) => `${i + 1}`);
+
+  const locate = (clientX: number): number | null => {
+    const rect = overlayRef.current?.getBoundingClientRect();
+    if (!rect || rect.width === 0) return null;
+    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    return Math.round(ratio * (n - 1));
+  };
+
+  return (
+    <ChartField spot={spot} className={className} {...props}>
+      {(yLabel || xLabel) && (
+        <div className="rs-chart-head">
+          {yLabel ? <p className="rs-chart-title">{yLabel}</p> : <span />}
+          {xLabel ? <p className="rs-chart-title">{xLabel}</p> : null}
+        </div>
+      )}
+      <svg viewBox={`0 0 ${W} ${height}`} role="img" aria-label={`Line chart, ${shown.map((s) => s.name).join(" and ")}`}>
+        <g className="rs-chart-plot">
+          {grid &&
+            tickVals.map((t) => (
+              <g key={t}>
+                <line className="rs-chart-grid" x1={ML} x2={W - MR} y1={y(t)} y2={y(t)} />
+                <text className="rs-chart-axis" x={ML - 6} y={y(t) + 3.5} textAnchor="end">
+                  {format(t)}
+                </text>
+              </g>
+            ))}
+          <line className="rs-chart-baseline" x1={ML} x2={W - MR} y1={y(min)} y2={y(min)} />
+          {area && shown[0] && !stacked && (
+            <path
+              className={spot ? "rs-chart-area-spot" : "rs-chart-area"}
+              d={`${path(shown[0].values)} L${x(n - 1)} ${y(min)} L${x(0)} ${y(min)} Z`}
+            />
+          )}
+          {stacked && stacks
+            ? shown.map((s, si) => {
+                const top = stacks.map((row) => row[si] ?? 0);
+                return (
+                  <path
+                    key={s.name}
+                    className={spot && si === 0 ? "rs-chart-line rs-chart-line-spot" : LINE_CLASS[si]}
+                    d={path(top)}
+                  />
+                );
+              })
+            : shown.map((s, si) => (
+                <path
+                  key={s.name}
+                  className={spot && si === 0 ? "rs-chart-line rs-chart-line-spot" : LINE_CLASS[si]}
+                  d={path(s.values)}
+                />
+              ))}
+          {annotations?.map((a) => (
+            <g key={`${a.at}-${a.label}`}>
+              <line className="rs-chart-cursor" x1={x(a.at)} x2={x(a.at)} y1={MT} y2={y(min)} />
+              <text className="rs-chart-ann" x={x(a.at) + 4} y={MT + 10}>
+                {a.label}
+              </text>
+            </g>
+          ))}
+          {hover != null && (
+            <g>
+              <line className="rs-chart-cursor" x1={x(hover)} x2={x(hover)} y1={MT} y2={y(min)} />
+              {shown.map((s, si) => (
+                <circle
+                  key={si}
+                  className="rs-chart-dot"
+                  cx={x(hover)}
+                  cy={y(stacked && stacks ? (stacks[hover]?.[si] ?? 0) : (s.values[hover] ?? 0))}
+                  r={3}
+                />
+              ))}
+            </g>
+          )}
+          <text className="rs-chart-axis" x={ML} y={height - 4} textAnchor="start">
+            {tickLabels[0]}
+          </text>
+          <text className="rs-chart-axis" x={W - MR} y={height - 4} textAnchor="end">
+            {tickLabels[n - 1]}
+          </text>
+          <rect
+            ref={overlayRef}
+            x={ML}
+            y={0}
+            width={plotW}
+            height={height}
+            fill="transparent"
+            onMouseMove={(e) => setHover(locate(e.clientX))}
+            onMouseLeave={() => setHover(null)}
+          />
+        </g>
+      </svg>
+      {hover != null && (
+        <ChartTip
+          left={`${(x(hover) / W) * 100}%`}
+          top={`${(MT / height) * 100}%`}
+          label={tickLabels[hover] ?? ""}
+          rows={shown.map((s) => ({ name: s.name, value: format(s.values[hover] ?? 0) }))}
+        />
+      )}
+      {shown.length > 1 && (
+        <div className="rs-chart-legend">
+          {shown.map((s, si) => (
+            <span key={s.name} className="rs-chart-legend-item">
+              <LegendSwatch seriesIndex={si} spot={Boolean(spot)} />
+              {s.name}
+            </span>
+          ))}
+        </div>
+      )}
+      <SrTable caption="Chart data" labels={tickLabels} series={shown} />
+    </ChartField>
+  );
+}
