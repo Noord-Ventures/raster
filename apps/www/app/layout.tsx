@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     default: "Raster: a monochrome design system",
     template: "%s · Raster",
   },
-  description: "One ink, a 204 module, Inter. npx @noordvc/raster-cli init",
+  description: "One ink, a 204 module. npx @noordvc/raster-cli init",
 };
 
 const themeInit = `(function(){try{var t=localStorage.getItem("raster-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}})()`;
