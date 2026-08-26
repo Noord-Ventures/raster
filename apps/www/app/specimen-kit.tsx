@@ -5,17 +5,19 @@ import { rasterComponents } from "@noordvc/raster";
 import { Preview } from "@/components/preview";
 import { KIT } from "./specimen";
 
+const slots = ["a", "b", "c", "d"] as const;
+
 export function SpecimenKit() {
   return (
     <>
       {KIT.map((name, i) => {
         const component = rasterComponents.find((c) => c.name === name);
         if (!component) return null;
-        const slot = ["a", "b", "c"][i] ?? "a";
+        const slot = slots[i] ?? "a";
         return (
           <section
             key={component.name}
-            className={`specimen-cell specimen-cell-demo specimen-cell-kit-${slot}`}
+            className={`specimen-cell specimen-cell-demo specimen-cell-kit-${slot} specimen-cell-kit-${component.name}`}
             aria-label={component.title}
           >
             <p className="specimen-kit-name">

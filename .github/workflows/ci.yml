@@ -67,6 +67,7 @@ jobs:
           grep -q 'WORD = "Raster"' "$writer"
           grep -q '{WORD}' "$page"
           grep -q 'A poster you can install.' "$writer"
+          grep -q 'A design system on a modular grid.' "$writer"
           grep -q 'npx @noordvc/raster-cli init' "$writer"
           if grep -n -E 'One ink|204 module|Crouwel|Müller-Brockmann' "$page" "$writer" apps/www/app/layout.tsx apps/www/app/social.ts; then
             echo "Homepage law must not use the old museum caption"
@@ -101,19 +102,39 @@ jobs:
           fi
           grep -q 'padding: 0 1px 1px 0' apps/www/app/specimen.css
           grep -q 'KIT =' apps/www/app/specimen.ts
-          grep -q 'button-group' apps/www/app/specimen.ts
-          grep -q 'tabs' apps/www/app/specimen.ts
-          grep -q 'chart' apps/www/app/specimen.ts
+          grep -q 'accordion' apps/www/app/specimen.ts
+          grep -q 'calendar' apps/www/app/specimen.ts
+          grep -q 'field' apps/www/app/specimen.ts
+          grep -q 'stepper' apps/www/app/specimen.ts
           grep -q 'SpecimenKit' apps/www/app/page.tsx
+          grep -q 'SpecimenPrinciples' apps/www/app/page.tsx
+          grep -q 'POSTER' apps/www/app/page.tsx
           test -f apps/www/app/specimen-kit.tsx
+          test -f apps/www/app/specimen-laws.ts
+          if grep -nE '^[[:space:]]*height: 100dvh' apps/www/app/specimen.css; then
+            echo "Specimen must scroll; do not lock height to the viewport"
+            exit 1
+          fi
+          if grep -n 'overflow: hidden' apps/www/app/specimen.css; then
+            echo "Kit cells must not crop"
+            exit 1
+          fi
           if grep -nE 'Save|Draft|rs-switch' apps/www/app/page.tsx apps/www/app/specimen-kit.tsx; then
             echo "Homepage kit cells must not be the leftover Save / switch / Draft set"
+            exit 1
+          fi
+          if grep -nE '"button-group"|"tabs"|"chart"' apps/www/app/specimen.ts; then
+            echo "Homepage kit must not reuse the cropped button-group / tabs / chart cells"
             exit 1
           fi
           node -e '
             const { readFileSync } = require("node:fs");
             const spec = readFileSync("apps/www/app/specimen.ts", "utf8");
-            const names = [...spec.matchAll(/"(button-group|tabs|chart)"/g)].map((m) => m[1]);
+            const names = [...spec.matchAll(/"(accordion|calendar|field|stepper)"/g)].map((m) => m[1]);
+            if (names.length !== 4) {
+              console.error("KIT must name accordion, calendar, field, stepper");
+              process.exit(1);
+            }
             const reg = readFileSync("packages/core/src/registry.ts", "utf8");
             for (const name of names) {
               if (!reg.includes(`name: "${name}"`)) {
@@ -184,9 +205,23 @@ jobs:
           grep -q 'meta.url' "$facts"
           grep -q '@noordvc/raster' "$facts"
           grep -q 'type.foundry' "$facts"
+          grep -q 'AI lab' "$facts"
+          grep -q 'Alkmaar' "$facts"
+          grep -q 'Silicon Valley' "$facts"
+          grep -q 'designed and built' "$facts"
           grep -q 'masthead-typeface' "$page"
           grep -q 'masthead-noord' "$page"
           grep -q 'masthead-renato' "$page"
+          grep -q 'field-page' "$page"
+          grep -q 'field-face' "$css"
+          if grep -nE 'venture studio|Ten portfolio|ten portfolio' "$facts" "$page"; then
+            echo "About must not lead with the venture-studio line"
+            exit 1
+          fi
+          if grep -n 'overflow: hidden' "$css"; then
+            echo "About field cells must not crop"
+            exit 1
+          fi
           grep -q 'SIL OFL 1.1' packages/core/src/tokens.ts
           if grep -n Messina "$page" "$facts" "$css"; then
             echo "About must not name Messina"
