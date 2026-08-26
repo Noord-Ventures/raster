@@ -28,6 +28,8 @@ const groups = rasterCategories.filter((category) =>
  * Components rail: groups in the first 184, that group's items in the
  * second. Hover (and focus) fills the second column. The page's own
  * group stays selected so the column is never empty on load.
+ * Below 1440 the rail occupies columns 1–2; from 1440 the chrome
+ * keeps the one-module inset.
  */
 export function DocsNav() {
   const pathname = usePathname();
@@ -67,7 +69,7 @@ export function DocsNav() {
   const items = shown ? rasterComponents.filter((c) => c.category === shown) : [];
 
   return (
-    <div className="toc-rail" onPointerLeave={leaveRail} onBlur={leaveRail}>
+    <div className="toc-rail" data-rail="catalog" onPointerLeave={leaveRail} onBlur={leaveRail}>
       <nav className="toc" data-toc="groups" aria-label="Component groups">
         {groups.map((category) => (
           <Link

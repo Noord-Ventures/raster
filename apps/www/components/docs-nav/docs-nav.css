@@ -11,6 +11,23 @@
   gap: 0;
 }
 @media (min-width: 900px) { .toc-rail { display: flex; } }
+
+/* Below the 1440 wide anchor, cancel the chrome's one-module inset
+   so groups sit in column 1 and secondaries in column 2. Content
+   stays in flow after those two modules. Wide desktop keeps the
+   airy 1024 placement. No hamburger — the rail is already hidden
+   under 900, and the existing burger is site chrome only. */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .site-layout:has([data-rail="catalog"]) {
+    --ml: 0px;
+    margin-left: 0;
+  }
+  body:has([data-rail="catalog"]) .rs-crumb-bar-inner {
+    margin-left: 0;
+    padding-left: 76px;
+  }
+}
+
 .toc {
   width: 184px; flex-shrink: 0;
   height: 100%; overflow-y: auto;
