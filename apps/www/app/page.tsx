@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Badge, Button, Switch } from "@noordvc/raster-react";
 
 export const metadata: Metadata = {
   title: "Raster",
@@ -33,19 +32,23 @@ export default function Home() {
 
         <section className="specimen-cell specimen-cell-demo specimen-cell-btn" aria-label="Button">
           <div className="specimen-demo-live">
-            <Button>Save</Button>
+            <button type="button" className="rs-btn-primary">
+              Save
+            </button>
           </div>
         </section>
 
         <section className="specimen-cell specimen-cell-demo specimen-cell-sw" aria-label="Switch">
           <div className="specimen-demo-live">
-            <Switch defaultChecked aria-label="Switch" />
+            <span className="rs-switch rs-switch-on">
+              <i />
+            </span>
           </div>
         </section>
 
         <section className="specimen-cell specimen-cell-demo specimen-cell-badge" aria-label="Badge">
           <div className="specimen-demo-live">
-            <Badge>Draft</Badge>
+            <span className="rs-badge">Draft</span>
           </div>
         </section>
 
