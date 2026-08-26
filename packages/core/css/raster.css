@@ -213,12 +213,31 @@ button.rs-switch.rs-switch-on{background:var(--text);border-color:var(--text)}
 button.rs-tab{padding:8px 0;background:none;border:none;font-family:inherit;cursor:pointer;text-align:left}
 button.rs-tab.rs-tab-active{border-bottom:1px solid var(--text)}
 
-/* ── Breadcrumbs: one ink trail. Slashes at 40%. Current page is full ink. ── */
-.rs-crumbs{font-size:13px;color:var(--text);letter-spacing:-.01em;display:flex;gap:8px}
-.rs-crumbs a{color:inherit;text-decoration:none;opacity:.55}
-.rs-crumbs a:visited{color:inherit}
+/* ── Breadcrumbs: one ink trail. Slashes at 40%. Current page is full ink.
+   Ancestors stay Inter/ink — never a UA :link or :visited color, never an accent. ── */
+.rs-crumbs{font-size:13px;color:var(--text);letter-spacing:-.01em;display:flex;align-items:baseline;gap:8px}
+.rs-crumbs a,
+.rs-crumbs a:link,
+.rs-crumbs a:visited,
+.rs-crumbs a:hover,
+.rs-crumbs a:active,
+.rs-crumbs a:focus,
+.rs-crumbs a:focus-visible,
+.rs-crumbs a:any-link,
+.rs-crumbs a:-webkit-any-link,
+.rs-crumbs .rs-crumbs-link{
+  color:var(--text);
+  text-decoration:none;
+  background:none;
+}
+.rs-crumbs a,
+.rs-crumbs a:link,
+.rs-crumbs a:visited,
+.rs-crumbs a:any-link,
+.rs-crumbs a:-webkit-any-link,
+.rs-crumbs .rs-crumbs-link{opacity:.55}
 .rs-crumbs a:hover,.rs-crumbs a:focus-visible{opacity:1}
-.rs-crumbs-sep{opacity:.4}
+.rs-crumbs-sep{color:var(--text);opacity:.4}
 .rs-crumbs-here{color:var(--text);opacity:1}
 
 /* ── Crumb bar: fixed top bar in the house chrome ──

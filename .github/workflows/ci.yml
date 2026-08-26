@@ -90,6 +90,14 @@ jobs:
           fi
           grep -q 'isolation: isolate' apps/www/app/site.css
           grep -q 'rs-crumbs a' packages/core/css/components/breadcrumbs.css
+          grep -q 'a:link' packages/core/css/components/breadcrumbs.css
+          grep -q 'a:visited' packages/core/css/components/breadcrumbs.css
+          grep -q 'a:any-link' packages/core/css/components/breadcrumbs.css
+          grep -q 'color:var(--text)' packages/core/css/components/breadcrumbs.css
+          if grep -nE '#00[fF]|#0000ff|[Pp]urple|\\bblue\\b' packages/core/css/components/breadcrumbs.css; then
+            echo "Breadcrumb trail must stay ink — no second link color"
+            exit 1
+          fi
           if grep -n '1.5px' packages/core/css/components/tabs.css; then
             echo "Tabs must use a hairline on the active tab only"
             exit 1

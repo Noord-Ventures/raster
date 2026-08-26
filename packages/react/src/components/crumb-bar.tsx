@@ -63,7 +63,9 @@ export function CrumbBar({ trail, threshold = 110, root, rootShort, className, .
                 {last ? (
                   <span className="rs-crumbs-here">{crumb.label}</span>
                 ) : crumb.href ? (
-                  <a href={crumb.href}>{crumb.label}</a>
+                  <a className="rs-crumbs-link" href={crumb.href}>
+                    {crumb.label}
+                  </a>
                 ) : (
                   <span>{crumb.label}</span>
                 )}

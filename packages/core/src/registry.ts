@@ -170,12 +170,12 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "breadcrumbs",
     title: "Breadcrumbs",
-    description: "Slashes at 40% opacity; the current page is ink.",
+    description: "One ink trail. Ancestors stay ink; slashes at 40%; the current page is full ink.",
     category: "navigation",
-    classes: ["rs-crumbs", "rs-crumbs-sep", "rs-crumbs-here"],
+    classes: ["rs-crumbs", "rs-crumbs-link", "rs-crumbs-sep", "rs-crumbs-here"],
     css: ["components/breadcrumbs.css"],
     react: "components/breadcrumbs.tsx",
-    snippet: `<p class="rs-crumbs"><span>Studio</span><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Raster</span></p>`,
+    snippet: `<p class="rs-crumbs"><a class="rs-crumbs-link" href="/">Studio</a><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Raster</span></p>`,
   },
   {
     name: "crumb-bar",

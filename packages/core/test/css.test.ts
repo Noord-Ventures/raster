@@ -48,6 +48,16 @@ describe("generated raster.css", () => {
     expect(open).toBe(close);
   });
 
+  it("paints breadcrumb ancestors as ink, not a UA link color", () => {
+    const crumbs = readFileSync(join(pkgDir, "css/components/breadcrumbs.css"), "utf8");
+    expect(crumbs).toMatch(/a:link/);
+    expect(crumbs).toMatch(/a:visited/);
+    expect(crumbs).toMatch(/a:any-link/);
+    expect(crumbs).toMatch(/color:var\(--text\)/);
+    expect(crumbs).not.toMatch(/#00[fF]|#0000ff|\bblue\b|purple/i);
+    expect(rasterCss).toMatch(/\.rs-crumbs a:link/);
+  });
+
   it("never introduces a color hue — the palette is monochrome", () => {
     // Hex values must be gray-ish (R≈G≈B) — the warm paper/black get a small tolerance.
     const hexes = [...rasterCss.matchAll(/#([0-9a-fA-F]{6})\b/g)].map((m) => m[1]!);

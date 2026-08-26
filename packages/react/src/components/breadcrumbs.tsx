@@ -27,7 +27,9 @@ export function Breadcrumbs({ items, className, ...props }: BreadcrumbsProps) {
                 {item.label}
               </span>
             ) : item.href ? (
-              <a href={item.href}>{item.label}</a>
+              <a className="rs-crumbs-link" href={item.href}>
+                {item.label}
+              </a>
             ) : (
               <span>{item.label}</span>
             )}

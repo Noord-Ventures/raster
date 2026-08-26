@@ -667,7 +667,7 @@
       "name": "breadcrumbs",
       "type": "registry:component",
       "title": "Breadcrumbs",
-      "description": "Slashes at 40% opacity; the current page is ink.",
+      "description": "One ink trail. Ancestors stay ink; slashes at 40%; the current page is full ink.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json"
@@ -677,10 +677,11 @@
           "category": "navigation",
           "classes": [
             "rs-crumbs",
+            "rs-crumbs-link",
             "rs-crumbs-sep",
             "rs-crumbs-here"
           ],
-          "snippet": "<p class=\"rs-crumbs\"><span>Studio</span><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Raster</span></p>",
+          "snippet": "<p class=\"rs-crumbs\"><a class=\"rs-crumbs-link\" href=\"/\">Studio</a><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Raster</span></p>",
           "cssOnly": false,
           "registryDependencies": []
         }

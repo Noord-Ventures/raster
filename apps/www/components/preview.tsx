@@ -605,7 +605,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     </nav>
   ),
   breadcrumbs: () => (
-    <Breadcrumbs items={[{ label: "Studio", href: "#" }, { label: "Raster" }]} />
+    <Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Raster" }]} />
   ),
   pagination: PaginationDemo,
   select: () => (

@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   Badge,
+  Breadcrumbs,
   ButtonGroup,
   CrumbBar,
   Button,
@@ -219,6 +220,15 @@ describe("Stepper", () => {
     expect(dots[0]?.className).toContain("rs-step-done");
     expect(dots[1]?.className).toContain("rs-step-active");
     expect(dots[2]?.className).not.toContain("rs-step-active");
+  });
+});
+
+describe("Breadcrumbs", () => {
+  it("keeps ancestors as trail links, not a second color", () => {
+    render(<Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Raster" }]} />);
+    expect(screen.getByRole("link", { name: "Studio" }).className).toBe("rs-crumbs-link");
+    expect(screen.getByText("Raster").className).toBe("rs-crumbs-here");
+    expect(screen.getByText("/").className).toBe("rs-crumbs-sep");
   });
 });
 

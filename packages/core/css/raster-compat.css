@@ -112,12 +112,31 @@ body{
 button.bb-tab{padding:8px 0;background:none;border:none;font-family:inherit;cursor:pointer;text-align:left}
 button.bb-tab.bb-tab-active{border-bottom:1px solid var(--text)}
 
-/* ── Breadcrumbs: one ink trail. Slashes at 40%. Current page is full ink. ── */
-.bb-crumbs-demo{font-size:13px;color:var(--text);letter-spacing:-.01em;display:flex;gap:8px}
-.bb-crumbs-demo a{color:inherit;text-decoration:none;opacity:.55}
-.bb-crumbs-demo a:visited{color:inherit}
+/* ── Breadcrumbs: one ink trail. Slashes at 40%. Current page is full ink.
+   Ancestors stay Inter/ink — never a UA :link or :visited color, never an accent. ── */
+.bb-crumbs-demo{font-size:13px;color:var(--text);letter-spacing:-.01em;display:flex;align-items:baseline;gap:8px}
+.bb-crumbs-demo a,
+.bb-crumbs-demo a:link,
+.bb-crumbs-demo a:visited,
+.bb-crumbs-demo a:hover,
+.bb-crumbs-demo a:active,
+.bb-crumbs-demo a:focus,
+.bb-crumbs-demo a:focus-visible,
+.bb-crumbs-demo a:any-link,
+.bb-crumbs-demo a:-webkit-any-link,
+.bb-crumbs-demo .rs-crumbs-link{
+  color:var(--text);
+  text-decoration:none;
+  background:none;
+}
+.bb-crumbs-demo a,
+.bb-crumbs-demo a:link,
+.bb-crumbs-demo a:visited,
+.bb-crumbs-demo a:any-link,
+.bb-crumbs-demo a:-webkit-any-link,
+.bb-crumbs-demo .rs-crumbs-link{opacity:.55}
 .bb-crumbs-demo a:hover,.bb-crumbs-demo a:focus-visible{opacity:1}
-.bb-crumbs-demo-sep{opacity:.4}
+.bb-crumbs-demo-sep{color:var(--text);opacity:.4}
 .bb-crumbs-demo-here{color:var(--text);opacity:1}
 
 /* ── Crumb bar: fixed top bar in the house chrome ──

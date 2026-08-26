@@ -69,7 +69,9 @@ export function CrumbBar() {
                   {last ? (
                     <span className="rs-crumbs-here">{crumb.label}</span>
                   ) : crumb.href ? (
-                    <Link href={crumb.href}>{crumb.label}</Link>
+                    <Link className="rs-crumbs-link" href={crumb.href}>
+                      {crumb.label}
+                    </Link>
                   ) : (
                     <span>{crumb.label}</span>
                   )}
