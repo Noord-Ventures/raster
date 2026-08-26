@@ -48,3 +48,27 @@ jobs:
               exit 1
             fi
           done
+      - name: Homepage is a specimen
+        run: |
+          page=apps/www/app/page.tsx
+          if grep -n -E 'site-layout|SIL OFL|Raster 0\.3' "$page"; then
+            echo "Homepage still carries docs-column or marketing copy"
+            exit 1
+          fi
+          if [ "$(grep -o 'Inter' "$page" | wc -l)" -ne 1 ]; then
+            echo "Inter must be named once on the homepage"
+            exit 1
+          fi
+          grep -q 'One ink, a 204 module.' "$page"
+          grep -q 'npx @noordvc/raster-cli init' "$page"
+          grep -q 'specimen-page' "$page"
+      - name: Components TOC is catalog groups
+        run: |
+          nav=apps/www/components/docs-nav.tsx
+          if grep -n Foundations "$nav"; then
+            echo "Components TOC must not use Foundations as a first-column item"
+            exit 1
+          fi
+          grep -q 'rasterCategories' "$nav"
+          grep -q 'data-toc="groups"' "$nav"
+          grep -q 'data-toc="items"' "$nav"

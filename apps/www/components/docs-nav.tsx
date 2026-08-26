@@ -67,7 +67,7 @@ export function DocsNav() {
 
   return (
     <div className="toc-rail" onPointerLeave={leaveRail} onBlur={leaveRail}>
-      <nav className="toc" aria-label="Component groups">
+      <nav className="toc" data-toc="groups" aria-label="Component groups">
         {groups.map((category) => (
           <Link
             key={category}
@@ -83,7 +83,7 @@ export function DocsNav() {
         ))}
       </nav>
 
-      <nav className="toc toc-sub" aria-label={shown ? sentence(shown) : "Components"}>
+      <nav className="toc toc-sub" data-toc="items" aria-label={shown ? sentence(shown) : "Components"}>
         {items.map((c) => {
           const href = `/components/${c.name}`;
           return (
