@@ -17,12 +17,18 @@ export const HOST = "https://raster.noord.dev";
  */
 export const KIT = ["accordion", "calendar", "field", "stepper"] as const;
 
+function normalizePath(pathname: string) {
+  const path = pathname.replace(/\/+$/, "");
+  return path === "" ? "/" : path;
+}
+
 /** Narrow exception: the flush poster has no crumb bar. */
 export function isSpecimenPath(pathname: string) {
-  return pathname === "/";
+  return normalizePath(pathname) === "/";
 }
 
 /** Flush field pages: homepage specimen and About. No crumb bar on the field. */
 export function isFieldPath(pathname: string) {
-  return pathname === "/" || pathname === "/about";
+  const path = normalizePath(pathname);
+  return path === "/" || path === "/about";
 }
