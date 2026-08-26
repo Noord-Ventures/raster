@@ -4,8 +4,15 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   Badge,
+  ButtonGroup,
   CrumbBar,
   Button,
+  Empty,
+  Field,
+  FieldLabel,
+  Form,
+  NativeSelect,
+  Spinner,
   Checkbox,
   InlineForm,
   Pagination,
@@ -227,6 +234,63 @@ describe("CrumbBar", () => {
     expect(bar.className).toContain("rs-crumb-bar-scrolled");
     expect(screen.getByText("Components").className).toBe("rs-crumbs-here");
     Object.defineProperty(window, "scrollY", { value: 0, configurable: true });
+  });
+});
+
+describe("ButtonGroup", () => {
+  it("is a group of flush actions", () => {
+    render(
+      <ButtonGroup>
+        <Button variant="ghost">Left</Button>
+        <Button variant="ghost">Right</Button>
+      </ButtonGroup>,
+    );
+    expect(screen.getByRole("group").className).toBe("rs-btn-group");
+    expect(screen.getAllByRole("button")).toHaveLength(2);
+  });
+});
+
+describe("Form and Field", () => {
+  it("stacks a labeled field inside a native form", () => {
+    render(
+      <Form aria-label="Contact">
+        <Field>
+          <FieldLabel htmlFor="name">Name</FieldLabel>
+          <input id="name" className="rs-input" />
+        </Field>
+      </Form>,
+    );
+    expect(screen.getByRole("form", { name: "Contact" }).className).toBe("rs-form");
+    expect(screen.getByLabelText("Name")).toBeTruthy();
+  });
+});
+
+describe("NativeSelect", () => {
+  it("is a real select with Raster chrome", () => {
+    render(
+      <NativeSelect aria-label="City" defaultValue="alkmaar">
+        <option value="alkmaar">Alkmaar</option>
+        <option value="delft">Delft</option>
+      </NativeSelect>,
+    );
+    const el = screen.getByRole("combobox", { name: "City" }) as HTMLSelectElement;
+    expect(el.className).toBe("rs-native-select");
+    expect(el.value).toBe("alkmaar");
+  });
+});
+
+describe("Empty", () => {
+  it("renders a vacant cell", () => {
+    render(<Empty title="No projects yet">Start one.</Empty>);
+    expect(screen.getByText("No projects yet").className).toBe("rs-empty-title");
+    expect(screen.getByText("Start one.").className).toBe("rs-empty-body");
+  });
+});
+
+describe("Spinner", () => {
+  it("exposes status semantics", () => {
+    render(<Spinner label="Loading" />);
+    expect(screen.getByRole("status", { name: "Loading" }).className).toBe("rs-spinner");
   });
 });
 

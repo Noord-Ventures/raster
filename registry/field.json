@@ -1,22 +1,20 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "form",
+  "name": "field",
   "type": "registry:component",
-  "title": "Form",
-  "description": "Fields stacked on the grid; one primary action at the end.",
+  "title": "Field",
+  "description": "Label, control, hint or error. The stack every form is made of.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/field.json",
-    "https://raster.noord.dev/r/input.json",
-    "https://raster.noord.dev/r/button.json"
+    "https://raster.noord.dev/r/input.json"
   ],
   "files": [
     {
-      "path": "raster/form.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {}\n\n/** Native form. Fields stack. One primary action at the end. */\nexport function Form({ className, ...props }: FormProps) {\n  return <form className={cx(\"rs-form\", className)} {...props} />;\n}\n",
+      "path": "raster/field.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {}\n\n/** Stack: label, control, hint or error. */\nexport function Field({ className, ...props }: FieldProps) {\n  return <div className={cx(\"rs-field\", className)} {...props} />;\n}\n\nexport function FieldLabel({ className, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {\n  return <label className={cx(\"rs-field-label\", className)} {...props} />;\n}\n\nexport function FieldHint({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-field-hint\", className)} {...props} />;\n}\n\nexport function FieldError({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p role=\"alert\" className={cx(\"rs-field-error\", className)} {...props} />;\n}\n",
       "type": "registry:component",
-      "target": "components/raster/form.tsx"
+      "target": "components/raster/field.tsx"
     },
     {
       "path": "raster/cx.ts",
@@ -35,14 +33,15 @@
     "raster": {
       "category": "forms",
       "classes": [
-        "rs-form"
+        "rs-field",
+        "rs-field-label",
+        "rs-field-hint",
+        "rs-field-error"
       ],
-      "snippet": "<form class=\"rs-form\"><div class=\"rs-field\"><span class=\"rs-field-label\">Name</span><input class=\"rs-input rs-input-full\" /></div><div class=\"rs-field\"><span class=\"rs-field-label\">E-mail</span><input class=\"rs-input rs-input-full\" /></div><button class=\"rs-btn-primary\">Send</button></form>",
+      "snippet": "<div class=\"rs-field\"><label class=\"rs-field-label\">Name</label><input class=\"rs-input rs-input-full\" /><p class=\"rs-field-hint\">As it appears on the invoice.</p></div>",
       "cssOnly": false,
       "registryDependencies": [
-        "field",
-        "input",
-        "button"
+        "input"
       ]
     }
   }

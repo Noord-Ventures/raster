@@ -1,0 +1,45 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-group",
+  "type": "registry:component",
+  "title": "Toggle group",
+  "description": "One pressed at a time. Joined hairlines.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
+    "https://raster.noord.dev/r/toggle.json"
+  ],
+  "files": [
+    {
+      "path": "raster/toggle-group.tsx",
+      "content": "export { ToggleGroup, type ToggleGroupProps } from \"./toggle\";\n",
+      "type": "registry:component",
+      "target": "components/raster/toggle-group.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/toggle.css",
+      "content": "/* ── Toggle: a press switch; on is ink, like everything on ── */\n.rs-toggle{display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:32px;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;background:none;border:1px solid var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:background-color .2s ease,color .2s ease,border-color .2s ease}\n.rs-toggle[aria-pressed=\"true\"]{background:var(--text);border-color:var(--text);color:var(--bg)}\n.rs-toggle-group{display:inline-flex}\n.rs-toggle-group .rs-toggle{border-radius:0;margin-left:-1px}\n.rs-toggle-group .rs-toggle:first-child{border-radius:var(--radius-sm) 0 0 var(--radius-sm);margin-left:0}\n.rs-toggle-group .rs-toggle:last-child{border-radius:0 var(--radius-sm) var(--radius-sm) 0}\n.rs-toggle-group .rs-toggle[aria-pressed=\"true\"]{position:relative;z-index:1}\n",
+      "type": "registry:file",
+      "target": "styles/raster/toggle.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "actions",
+      "classes": [
+        "rs-toggle-group"
+      ],
+      "snippet": "<div class=\"rs-toggle-group\"><button class=\"rs-toggle\" aria-pressed=\"true\">Left</button><button class=\"rs-toggle\" aria-pressed=\"false\">Center</button><button class=\"rs-toggle\" aria-pressed=\"false\">Right</button></div>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "toggle"
+      ]
+    }
+  }
+}

@@ -1,22 +1,19 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "form",
+  "name": "label",
   "type": "registry:component",
-  "title": "Form",
-  "description": "Fields stacked on the grid; one primary action at the end.",
+  "title": "Label",
+  "description": "12px, secondary ink, above the control.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/field.json",
-    "https://raster.noord.dev/r/input.json",
-    "https://raster.noord.dev/r/button.json"
+    "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {
-      "path": "raster/form.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {}\n\n/** Native form. Fields stack. One primary action at the end. */\nexport function Form({ className, ...props }: FormProps) {\n  return <form className={cx(\"rs-form\", className)} {...props} />;\n}\n",
+      "path": "raster/label.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}\n\n/** Label above a control. 12px, secondary ink. */\nexport function Label({ className, ...props }: LabelProps) {\n  return <label className={cx(\"rs-label\", className)} {...props} />;\n}\n",
       "type": "registry:component",
-      "target": "components/raster/form.tsx"
+      "target": "components/raster/label.tsx"
     },
     {
       "path": "raster/cx.ts",
@@ -35,15 +32,11 @@
     "raster": {
       "category": "forms",
       "classes": [
-        "rs-form"
+        "rs-label"
       ],
-      "snippet": "<form class=\"rs-form\"><div class=\"rs-field\"><span class=\"rs-field-label\">Name</span><input class=\"rs-input rs-input-full\" /></div><div class=\"rs-field\"><span class=\"rs-field-label\">E-mail</span><input class=\"rs-input rs-input-full\" /></div><button class=\"rs-btn-primary\">Send</button></form>",
+      "snippet": "<label class=\"rs-label\" for=\"name\">Name</label>",
       "cssOnly": false,
-      "registryDependencies": [
-        "field",
-        "input",
-        "button"
-      ]
+      "registryDependencies": []
     }
   }
 }

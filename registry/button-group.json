@@ -1,0 +1,45 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group",
+  "type": "registry:component",
+  "title": "Button group",
+  "description": "Flush joined actions. One hairline between.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
+    "https://raster.noord.dev/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "raster/button-group.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {}\n\n/** Flush joined actions. One hairline between. */\nexport function ButtonGroup({ className, ...props }: ButtonGroupProps) {\n  return <div role=\"group\" className={cx(\"rs-btn-group\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/button-group.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/button-group.css",
+      "content": "/* ── Button group: flush joined actions, one hairline between ── */\n.rs-btn-group{display:inline-flex;align-items:stretch}\n.rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{border-radius:0;margin-inline-start:-1px}\n.rs-btn-group > :first-child{margin-inline-start:0}\n.rs-btn-group > .rs-btn-primary{position:relative;z-index:1}\n",
+      "type": "registry:file",
+      "target": "styles/raster/button-group.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "actions",
+      "classes": [
+        "rs-btn-group"
+      ],
+      "snippet": "<div class=\"rs-btn-group\"><button class=\"rs-btn-ghost\">Left</button><button class=\"rs-btn-ghost\">Center</button><button class=\"rs-btn-ghost\">Right</button></div>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "button"
+      ]
+    }
+  }
+}

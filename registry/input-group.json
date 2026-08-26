@@ -1,0 +1,47 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-group",
+  "type": "registry:component",
+  "title": "Input group",
+  "description": "Addon and field share one hairline.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
+    "https://raster.noord.dev/r/input.json"
+  ],
+  "files": [
+    {
+      "path": "raster/input-group.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface InputGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Place the addon after the field. */\n  end?: boolean;\n}\n\n/** Addon and field share one hairline. */\nexport function InputGroup({ end, className, ...props }: InputGroupProps) {\n  return <div className={cx(\"rs-input-group\", end && \"rs-input-group-end\", className)} {...props} />;\n}\n\nexport function InputAddon({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-input-addon\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/input-group.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/input-group.css",
+      "content": "/* ── Input group: addon and field share one hairline ── */\n.rs-input-group{display:flex;align-items:stretch;width:100%;border:1px solid var(--divider);border-radius:0;background:var(--bg)}\n.rs-input-group:focus-within{border-color:var(--accent)}\n.rs-input-addon{display:flex;align-items:center;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);background:var(--table-alt);border-right:1px solid var(--divider);white-space:nowrap}\n.rs-input-group .rs-input{border:none;border-radius:0;flex:1;min-width:0}\n.rs-input-group .rs-input:focus{outline:none}\n.rs-input-group-end .rs-input-addon{border-right:none;border-left:1px solid var(--divider)}\n",
+      "type": "registry:file",
+      "target": "styles/raster/input-group.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "forms",
+      "classes": [
+        "rs-input-group",
+        "rs-input-addon",
+        "rs-input-group-end"
+      ],
+      "snippet": "<div class=\"rs-input-group\"><span class=\"rs-input-addon\">https://</span><input class=\"rs-input\" placeholder=\"raster.noord.dev\" /></div>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "input"
+      ]
+    }
+  }
+}

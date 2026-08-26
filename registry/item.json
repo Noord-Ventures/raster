@@ -1,0 +1,45 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "item",
+  "type": "registry:component",
+  "title": "Item",
+  "description": "A flush row. Title occupies the cell; meta trails.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
+  ],
+  "files": [
+    {
+      "path": "raster/item.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface ItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  meta?: React.ReactNode;\n}\n\n/** A flush row. Title occupies the cell; meta trails. */\nexport function Item({ title, description, meta, className, ...props }: ItemProps) {\n  return (\n    <div className={cx(\"rs-item\", className)} {...props}>\n      <div>\n        <p className=\"rs-item-title\">{title}</p>\n        {description != null && <p className=\"rs-item-desc\">{description}</p>}\n      </div>\n      {meta != null && <span className=\"rs-item-meta\">{meta}</span>}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/item.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/item.css",
+      "content": "/* ── Item: a flush row. Title, note, trailing meta ── */\n.rs-item{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;padding:10px 0;border-bottom:1px solid var(--divider);border-radius:0}\n.rs-item:last-child{border-bottom:none}\n.rs-item-title{margin:0;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-item-desc{margin:2px 0 0;font-size:12.5px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary)}\n.rs-item-meta{font-size:12px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);flex-shrink:0}\n",
+      "type": "registry:file",
+      "target": "styles/raster/item.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "content",
+      "classes": [
+        "rs-item",
+        "rs-item-title",
+        "rs-item-desc",
+        "rs-item-meta"
+      ],
+      "snippet": "<div class=\"rs-item\"><div><p class=\"rs-item-title\">Alkmaar</p><p class=\"rs-item-desc\">The studio city.</p></div><span class=\"rs-item-meta\">NL</span></div>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

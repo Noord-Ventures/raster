@@ -1,0 +1,48 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty",
+  "type": "registry:component",
+  "title": "Empty",
+  "description": "A vacant cell. Title, one sentence, optional action.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json",
+    "https://raster.noord.dev/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "raster/empty.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface EmptyProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  title?: React.ReactNode;\n  action?: React.ReactNode;\n}\n\n/** A vacant cell. Title, one sentence, optional action. */\nexport function Empty({ title, action, className, children, ...props }: EmptyProps) {\n  return (\n    <div className={cx(\"rs-empty\", className)} {...props}>\n      {title != null && <p className=\"rs-empty-title\">{title}</p>}\n      {children != null && <p className=\"rs-empty-body\">{children}</p>}\n      {action != null && <div className=\"rs-empty-action\">{action}</div>}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/empty.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/empty.css",
+      "content": "/* ── Empty: a quiet vacant cell, not an illustration ── */\n.rs-empty{display:flex;flex-direction:column;justify-content:center;gap:8px;min-height:204px;padding:20px;border:1px solid var(--divider);border-radius:0}\n.rs-empty-title{margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-empty-body{margin:0;font-size:13.5px;line-height:1.55;letter-spacing:-.01em;color:var(--text-secondary)}\n.rs-empty-action{margin-top:8px;width:fit-content}\n",
+      "type": "registry:file",
+      "target": "styles/raster/empty.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "feedback",
+      "classes": [
+        "rs-empty",
+        "rs-empty-title",
+        "rs-empty-body",
+        "rs-empty-action"
+      ],
+      "snippet": "<div class=\"rs-empty\"><p class=\"rs-empty-title\">No projects yet</p><p class=\"rs-empty-body\">Start one. The grid is empty on purpose.</p><div class=\"rs-empty-action\"><button class=\"rs-btn-ghost rs-btn-sm\">New project</button></div></div>",
+      "cssOnly": false,
+      "registryDependencies": [
+        "button"
+      ]
+    }
+  }
+}

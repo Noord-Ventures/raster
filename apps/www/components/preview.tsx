@@ -5,6 +5,27 @@ import {
   Accordion,
   AspectRatio,
   BarChart,
+  ButtonGroup,
+  Drawer,
+  DrawerBody,
+  DrawerTitle,
+  Empty,
+  Field,
+  FieldHint,
+  FieldLabel,
+  Form,
+  InputAddon,
+  InputGroup,
+  Item,
+  Label,
+  NativeSelect,
+  Sidebar,
+  SidebarFoot,
+  SidebarHead,
+  SidebarItem,
+  SidebarLabel,
+  SidebarNav,
+  Spinner,
   Calendar,
   Carousel,
   Collapsible,
@@ -120,6 +141,21 @@ function AlertDialogDemo() {
   );
 }
 
+function DrawerDemo() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <>
+      <Button variant="ghost" size="sm" onClick={() => setOpen(true)}>
+        Open notes
+      </Button>
+      <Drawer open={open} onClose={() => setOpen(false)}>
+        <DrawerTitle>Notes</DrawerTitle>
+        <DrawerBody>A bottom panel. Escape closes it.</DrawerBody>
+      </Drawer>
+    </>
+  );
+}
+
 function SheetDemo() {
   const [open, setOpen] = React.useState(false);
   return (
@@ -207,6 +243,13 @@ function ProgressDemo() {
 
 /** Live demo per registry name. CSS-only entries fall back to their snippet. */
 export const demos: Record<string, () => React.ReactNode> = {
+  "button-group": () => (
+    <ButtonGroup>
+      <Button variant="ghost">Left</Button>
+      <Button variant="ghost">Center</Button>
+      <Button variant="ghost">Right</Button>
+    </ButtonGroup>
+  ),
   button: () => (
     <div style={{ display: "flex", gap: 10 }}>
       <Button>Primary action</Button>
@@ -226,6 +269,86 @@ export const demos: Record<string, () => React.ReactNode> = {
       <CardTitle>A quieter interface</CardTitle>
       <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>
     </Card>
+  ),
+  label: () => <Label htmlFor="demo-name">Name</Label>,
+  field: () => (
+    <div style={{ width: 260 }}>
+      <Field>
+        <FieldLabel htmlFor="demo-field">Name</FieldLabel>
+        <input id="demo-field" className="rs-input rs-input-full" placeholder="Raster" />
+        <FieldHint>As it appears on the invoice.</FieldHint>
+      </Field>
+    </div>
+  ),
+  form: () => (
+    <Form
+      onSubmit={(e) => e.preventDefault()}
+      style={{ width: 260 }}
+    >
+      <Field>
+        <FieldLabel htmlFor="demo-form-name">Name</FieldLabel>
+        <input id="demo-form-name" className="rs-input rs-input-full" placeholder="Renato" />
+      </Field>
+      <Button type="submit" size="sm">
+        Send
+      </Button>
+    </Form>
+  ),
+  "input-group": () => (
+    <div style={{ width: 260 }}>
+      <InputGroup>
+        <InputAddon>https://</InputAddon>
+        <Input placeholder="raster.noord.dev" />
+      </InputGroup>
+    </div>
+  ),
+  "native-select": () => (
+    <div style={{ width: 220 }}>
+      <NativeSelect aria-label="City" defaultValue="alkmaar">
+        <option value="alkmaar">Alkmaar</option>
+        <option value="amsterdam">Amsterdam</option>
+        <option value="rotterdam">Rotterdam</option>
+      </NativeSelect>
+    </div>
+  ),
+  item: () => (
+    <div style={{ width: 260 }}>
+      <Item title="Alkmaar" description="The studio city." meta="NL" />
+      <Item title="Delft" description="The grid city." meta="NL" />
+    </div>
+  ),
+  empty: () => (
+    <div style={{ width: 260 }}>
+      <Empty title="No projects yet" action={<Button variant="ghost" size="sm">New project</Button>}>
+        Start one. The grid is empty on purpose.
+      </Empty>
+    </div>
+  ),
+  spinner: () => <Spinner />,
+  drawer: DrawerDemo,
+  sidebar: () => (
+    <Sidebar>
+      <SidebarHead>Raster</SidebarHead>
+      <SidebarNav>
+        <SidebarLabel>Go to</SidebarLabel>
+        <SidebarItem href="#" current>
+          Overview
+        </SidebarItem>
+        <SidebarItem href="#">Docs</SidebarItem>
+        <SidebarItem href="#">Components</SidebarItem>
+      </SidebarNav>
+      <SidebarFoot>0.3</SidebarFoot>
+    </Sidebar>
+  ),
+  "toggle-group": () => (
+    <ToggleGroup
+      options={[
+        { value: "left", label: "Left" },
+        { value: "center", label: "Center" },
+        { value: "right", label: "Right" },
+      ]}
+      defaultValue="left"
+    />
   ),
   input: () => (
     <div style={{ width: 260 }}>

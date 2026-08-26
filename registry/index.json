@@ -89,6 +89,48 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "button-group",
+      "type": "registry:component",
+      "title": "Button group",
+      "description": "Flush joined actions. One hairline between.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-btn-group"
+          ],
+          "snippet": "<div class=\"rs-btn-group\"><button class=\"rs-btn-ghost\">Left</button><button class=\"rs-btn-ghost\">Center</button><button class=\"rs-btn-ghost\">Right</button></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "button"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/button-group.tsx",
+          "type": "registry:component",
+          "target": "components/raster/button-group.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/button-group.css",
+          "type": "registry:file",
+          "target": "styles/raster/button-group.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "link",
       "type": "registry:component",
       "title": "Text link",
@@ -159,6 +201,173 @@
           "path": "raster/styles/field.css",
           "type": "registry:file",
           "target": "styles/raster/field.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "label",
+      "type": "registry:component",
+      "title": "Label",
+      "description": "12px, secondary ink, above the control.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-label"
+          ],
+          "snippet": "<label class=\"rs-label\" for=\"name\">Name</label>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/label.tsx",
+          "type": "registry:component",
+          "target": "components/raster/label.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/field.css",
+          "type": "registry:file",
+          "target": "styles/raster/field.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "field",
+      "type": "registry:component",
+      "title": "Field",
+      "description": "Label, control, hint or error. The stack every form is made of.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/input.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-field",
+            "rs-field-label",
+            "rs-field-hint",
+            "rs-field-error"
+          ],
+          "snippet": "<div class=\"rs-field\"><label class=\"rs-field-label\">Name</label><input class=\"rs-input rs-input-full\" /><p class=\"rs-field-hint\">As it appears on the invoice.</p></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "input"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/field.tsx",
+          "type": "registry:component",
+          "target": "components/raster/field.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/field.css",
+          "type": "registry:file",
+          "target": "styles/raster/field.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "input-group",
+      "type": "registry:component",
+      "title": "Input group",
+      "description": "Addon and field share one hairline.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/input.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-input-group",
+            "rs-input-addon",
+            "rs-input-group-end"
+          ],
+          "snippet": "<div class=\"rs-input-group\"><span class=\"rs-input-addon\">https://</span><input class=\"rs-input\" placeholder=\"raster.noord.dev\" /></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "input"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/input-group.tsx",
+          "type": "registry:component",
+          "target": "components/raster/input-group.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/input-group.css",
+          "type": "registry:file",
+          "target": "styles/raster/input-group.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "native-select",
+      "type": "registry:component",
+      "title": "Native select",
+      "description": "The platform list. Raster chrome. No custom menu.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "forms",
+          "classes": [
+            "rs-native-select"
+          ],
+          "snippet": "<select class=\"rs-native-select\"><option>Alkmaar</option><option>Amsterdam</option><option>Rotterdam</option></select>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/native-select.tsx",
+          "type": "registry:component",
+          "target": "components/raster/native-select.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/native-select.css",
+          "type": "registry:file",
+          "target": "styles/raster/native-select.css"
         }
       ]
     },
@@ -1063,6 +1272,48 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "item",
+      "type": "registry:component",
+      "title": "Item",
+      "description": "A flush row. Title occupies the cell; meta trails.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "content",
+          "classes": [
+            "rs-item",
+            "rs-item-title",
+            "rs-item-desc",
+            "rs-item-meta"
+          ],
+          "snippet": "<div class=\"rs-item\"><div><p class=\"rs-item-title\">Alkmaar</p><p class=\"rs-item-desc\">The studio city.</p></div><span class=\"rs-item-meta\">NL</span></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/item.tsx",
+          "type": "registry:component",
+          "target": "components/raster/item.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/item.css",
+          "type": "registry:file",
+          "target": "styles/raster/item.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "textarea",
       "type": "registry:component",
       "title": "Textarea",
@@ -1121,11 +1372,21 @@
             "rs-sep-v"
           ],
           "snippet": "<hr class=\"rs-sep\" />",
-          "cssOnly": true,
+          "cssOnly": false,
           "registryDependencies": []
         }
       },
       "files": [
+        {
+          "path": "raster/separator.tsx",
+          "type": "registry:component",
+          "target": "components/raster/separator.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
         {
           "path": "raster/styles/separator.css",
           "type": "registry:file",
@@ -1169,6 +1430,90 @@
           "path": "raster/styles/skeleton.css",
           "type": "registry:file",
           "target": "styles/raster/skeleton.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "empty",
+      "type": "registry:component",
+      "title": "Empty",
+      "description": "A vacant cell. Title, one sentence, optional action.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/button.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-empty",
+            "rs-empty-title",
+            "rs-empty-body",
+            "rs-empty-action"
+          ],
+          "snippet": "<div class=\"rs-empty\"><p class=\"rs-empty-title\">No projects yet</p><p class=\"rs-empty-body\">Start one. The grid is empty on purpose.</p><div class=\"rs-empty-action\"><button class=\"rs-btn-ghost rs-btn-sm\">New project</button></div></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "button"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/empty.tsx",
+          "type": "registry:component",
+          "target": "components/raster/empty.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/empty.css",
+          "type": "registry:file",
+          "target": "styles/raster/empty.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "spinner",
+      "type": "registry:component",
+      "title": "Spinner",
+      "description": "Hairline ring. Stops under prefers-reduced-motion.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "feedback",
+          "classes": [
+            "rs-spinner"
+          ],
+          "snippet": "<span class=\"rs-spinner\" role=\"status\" aria-label=\"Loading\"></span>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/spinner.tsx",
+          "type": "registry:component",
+          "target": "components/raster/spinner.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/spinner.css",
+          "type": "registry:file",
+          "target": "styles/raster/spinner.css"
         }
       ]
     },
@@ -1349,6 +1694,48 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "toggle-group",
+      "type": "registry:component",
+      "title": "Toggle group",
+      "description": "One pressed at a time. Joined hairlines.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/toggle.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "actions",
+          "classes": [
+            "rs-toggle-group"
+          ],
+          "snippet": "<div class=\"rs-toggle-group\"><button class=\"rs-toggle\" aria-pressed=\"true\">Left</button><button class=\"rs-toggle\" aria-pressed=\"false\">Center</button><button class=\"rs-toggle\" aria-pressed=\"false\">Right</button></div>",
+          "cssOnly": false,
+          "registryDependencies": [
+            "toggle"
+          ]
+        }
+      },
+      "files": [
+        {
+          "path": "raster/toggle-group.tsx",
+          "type": "registry:component",
+          "target": "components/raster/toggle-group.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/toggle.css",
+          "type": "registry:file",
+          "target": "styles/raster/toggle.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "popover",
       "type": "registry:component",
       "title": "Popover",
@@ -1430,6 +1817,47 @@
           "path": "raster/styles/sheet.css",
           "type": "registry:file",
           "target": "styles/raster/sheet.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "drawer",
+      "type": "registry:component",
+      "title": "Drawer",
+      "description": "Native <dialog> from the bottom edge. Platform focus trap and backdrop.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-drawer",
+            "rs-drawer-title",
+            "rs-drawer-body"
+          ],
+          "snippet": "<dialog class=\"rs-drawer\" open><span class=\"rs-drawer-title\">Notes</span><p class=\"rs-drawer-body\">A bottom panel. Escape closes it.</p></dialog>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/drawer.tsx",
+          "type": "registry:component",
+          "target": "components/raster/drawer.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/drawer.css",
+          "type": "registry:file",
+          "target": "styles/raster/drawer.css"
         }
       ]
     },
@@ -1813,6 +2241,50 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "sidebar",
+      "type": "registry:component",
+      "title": "Sidebar",
+      "description": "One 204 module rail. Flush items, hairline edge.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "navigation",
+          "classes": [
+            "rs-sidebar",
+            "rs-sidebar-head",
+            "rs-sidebar-nav",
+            "rs-sidebar-item",
+            "rs-sidebar-label",
+            "rs-sidebar-foot"
+          ],
+          "snippet": "<aside class=\"rs-sidebar\"><div class=\"rs-sidebar-head\">Raster</div><nav class=\"rs-sidebar-nav\"><p class=\"rs-sidebar-label\">Go to</p><a class=\"rs-sidebar-item\" aria-current=\"page\">Overview</a><a class=\"rs-sidebar-item\" href=\"#\">Docs</a><a class=\"rs-sidebar-item\" href=\"#\">Components</a></nav><div class=\"rs-sidebar-foot\">0.3</div></aside>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/sidebar.tsx",
+          "type": "registry:component",
+          "target": "components/raster/sidebar.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/sidebar.css",
+          "type": "registry:file",
+          "target": "styles/raster/sidebar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "carousel",
       "type": "registry:component",
       "title": "Carousel",
@@ -2184,25 +2656,36 @@
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json",
+        "https://raster.noord.dev/r/field.json",
         "https://raster.noord.dev/r/input.json",
         "https://raster.noord.dev/r/button.json"
       ],
       "meta": {
         "raster": {
-          "category": "patterns",
+          "category": "forms",
           "classes": [
-            "rs-field",
-            "rs-field-label"
+            "rs-form"
           ],
-          "snippet": "<form style=\"display:flex;flex-direction:column;gap:16px;max-width:388px\"><div class=\"rs-field\"><span class=\"rs-field-label\">Name</span><input class=\"rs-input rs-input-full\" /></div><div class=\"rs-field\"><span class=\"rs-field-label\">E-mail</span><input class=\"rs-input rs-input-full\" /></div><button class=\"rs-btn-primary\">Send</button></form>",
-          "cssOnly": true,
+          "snippet": "<form class=\"rs-form\"><div class=\"rs-field\"><span class=\"rs-field-label\">Name</span><input class=\"rs-input rs-input-full\" /></div><div class=\"rs-field\"><span class=\"rs-field-label\">E-mail</span><input class=\"rs-input rs-input-full\" /></div><button class=\"rs-btn-primary\">Send</button></form>",
+          "cssOnly": false,
           "registryDependencies": [
+            "field",
             "input",
             "button"
           ]
         }
       },
       "files": [
+        {
+          "path": "raster/form.tsx",
+          "type": "registry:component",
+          "target": "components/raster/form.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
         {
           "path": "raster/styles/field.css",
           "type": "registry:file",

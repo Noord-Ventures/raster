@@ -24,6 +24,87 @@ const reactUsage: Record<string, string> = {
 
 <Button>Primary action</Button>
 <Button variant="ghost" size="sm">Secondary</Button>`,
+  "button-group": `import { ButtonGroup } from "@/components/raster/button-group";
+import { Button } from "@/components/raster/button";
+
+<ButtonGroup>
+  <Button variant="ghost">Left</Button>
+  <Button variant="ghost">Center</Button>
+  <Button variant="ghost">Right</Button>
+</ButtonGroup>`,
+  label: `import { Label } from "@/components/raster/label";
+
+<Label htmlFor="name">Name</Label>`,
+  field: `import { Field, FieldHint, FieldLabel } from "@/components/raster/field";
+
+<Field>
+  <FieldLabel htmlFor="name">Name</FieldLabel>
+  <input id="name" className="rs-input rs-input-full" />
+  <FieldHint>As it appears on the invoice.</FieldHint>
+</Field>`,
+  form: `import { Form } from "@/components/raster/form";
+import { Field, FieldLabel } from "@/components/raster/field";
+import { Button } from "@/components/raster/button";
+
+<Form onSubmit={save}>
+  <Field>
+    <FieldLabel htmlFor="name">Name</FieldLabel>
+    <input id="name" className="rs-input rs-input-full" />
+  </Field>
+  <Button type="submit">Send</Button>
+</Form>`,
+  "input-group": `import { InputAddon, InputGroup } from "@/components/raster/input-group";
+
+<InputGroup>
+  <InputAddon>https://</InputAddon>
+  <input className="rs-input" placeholder="raster.noord.dev" />
+</InputGroup>`,
+  "native-select": `import { NativeSelect } from "@/components/raster/native-select";
+
+<NativeSelect label="City" defaultValue="alkmaar">
+  <option value="alkmaar">Alkmaar</option>
+  <option value="amsterdam">Amsterdam</option>
+</NativeSelect>`,
+  item: `import { Item } from "@/components/raster/item";
+
+<Item title="Alkmaar" description="The studio city." meta="NL" />`,
+  empty: `import { Empty } from "@/components/raster/empty";
+import { Button } from "@/components/raster/button";
+
+<Empty title="No projects yet" action={<Button variant="ghost" size="sm">New project</Button>}>
+  Start one. The grid is empty on purpose.
+</Empty>`,
+  spinner: `import { Spinner } from "@/components/raster/spinner";
+
+<Spinner label="Loading" />`,
+  drawer: `import { Drawer, DrawerBody, DrawerTitle } from "@/components/raster/drawer";
+
+<Drawer open={open} onClose={() => setOpen(false)}>
+  <DrawerTitle>Notes</DrawerTitle>
+  <DrawerBody>A bottom panel. Escape closes it.</DrawerBody>
+</Drawer>`,
+  sidebar: `import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@/components/raster/sidebar";
+
+<Sidebar>
+  <SidebarHead>Raster</SidebarHead>
+  <SidebarNav>
+    <SidebarLabel>Go to</SidebarLabel>
+    <SidebarItem href="/" current>Overview</SidebarItem>
+    <SidebarItem href="/docs">Docs</SidebarItem>
+  </SidebarNav>
+  <SidebarFoot>0.3</SidebarFoot>
+</Sidebar>`,
+  "toggle-group": `import { ToggleGroup } from "@/components/raster/toggle-group";
+
+<ToggleGroup
+  options={[
+    { value: "left", label: "Left" },
+    { value: "center", label: "Center" },
+    { value: "right", label: "Right" },
+  ]}
+  value={align}
+  onValueChange={setAlign}
+/>`,
   input: `import { Input } from "@/components/raster/input";
 
 <Input label="E-mail" placeholder="renn@noord.vc" ok feedback="Looks good" />`,

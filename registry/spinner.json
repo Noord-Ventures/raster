@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spinner",
+  "type": "registry:component",
+  "title": "Spinner",
+  "description": "Hairline ring. Stops under prefers-reduced-motion.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
+  ],
+  "files": [
+    {
+      "path": "raster/spinner.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {\n  label?: string;\n}\n\n/** Hairline ring. Stops under prefers-reduced-motion. */\nexport function Spinner({ label = \"Loading\", className, ...props }: SpinnerProps) {\n  return <span role=\"status\" aria-label={label} className={cx(\"rs-spinner\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/spinner.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/spinner.css",
+      "content": "/* ── Spinner: a hairline ring. Motion stops under reduced-motion ── */\n.rs-spinner{display:inline-block;width:16px;height:16px;border:1.5px solid var(--divider);border-top-color:var(--text);border-radius:0;animation:rs-spin .7s linear infinite;vertical-align:middle}\n@keyframes rs-spin{to{transform:rotate(360deg)}}\n",
+      "type": "registry:file",
+      "target": "styles/raster/spinner.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "feedback",
+      "classes": [
+        "rs-spinner"
+      ],
+      "snippet": "<span class=\"rs-spinner\" role=\"status\" aria-label=\"Loading\"></span>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

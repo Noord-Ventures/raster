@@ -11,5 +11,6 @@ Cut 1: a stranger can install Raster after merge, npm publish, and DNS.
 - Documented CLI is `npx @noordvc/raster-cli init`. `--registry` is implemented (HTTP(S) or a local directory; also `raster.json.registry`). `init --compat` still writes 0.1 class names.
 - Dropped leftover `raster.design` copy and the `/api/raster/tokens` + `/api/mcp` pointers. Those routes do not exist on this static export.
 - Docs first page and getting started show the one command and Inter.
+- Everyday shadcn/ui primitives now install Raster-style: button group, drawer, empty, field, form (React), input group, item, label, native select, sidebar, spinner, toggle group. Catalog completeness, not a clone. Deferred: sonner (needs the sonner widget), direction (RTL helper, not a primitive), and the AI chat set (attachment, bubble, marker, message, message-scroller) which depend on Radix or `@shadcn/react`.
 
 This release does not npm-publish, create a GitHub Release, or attach `raster.noord.dev` on Vercel. Those are human steps after merge.

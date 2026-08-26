@@ -1,0 +1,47 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sidebar",
+  "type": "registry:component",
+  "title": "Sidebar",
+  "description": "One 204 module rail. Flush items, hairline edge.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
+  ],
+  "files": [
+    {
+      "path": "raster/sidebar.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SidebarProps extends React.HTMLAttributes<HTMLElement> {}\n\n/** One 204 module rail. Flush items, hairline edge. */\nexport function Sidebar({ className, ...props }: SidebarProps) {\n  return <aside className={cx(\"rs-sidebar\", className)} {...props} />;\n}\n\nexport function SidebarHead({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return <div className={cx(\"rs-sidebar-head\", className)} {...props} />;\n}\n\nexport function SidebarNav({ className, ...props }: React.HTMLAttributes<HTMLElement>) {\n  return <nav className={cx(\"rs-sidebar-nav\", className)} {...props} />;\n}\n\nexport interface SidebarItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {\n  current?: boolean;\n}\n\nexport function SidebarItem({ current, className, ...props }: SidebarItemProps) {\n  return (\n    <a className={cx(\"rs-sidebar-item\", className)} aria-current={current ? \"page\" : undefined} {...props} />\n  );\n}\n\nexport function SidebarLabel({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-sidebar-label\", className)} {...props} />;\n}\n\nexport function SidebarFoot({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return <div className={cx(\"rs-sidebar-foot\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/sidebar.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/sidebar.css",
+      "content": "/* ── Sidebar: one 204 module rail, flush items, hairline edge ── */\n.rs-sidebar{width:204px;min-height:204px;display:flex;flex-direction:column;border-right:1px solid var(--divider);background:var(--bg);border-radius:0}\n.rs-sidebar-head{padding:16px 20px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);border-bottom:1px solid var(--divider)}\n.rs-sidebar-nav{display:flex;flex-direction:column;padding:8px 0;flex:1}\n.rs-sidebar-item{display:block;padding:8px 20px;font-size:13px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);text-decoration:none}\n.rs-sidebar-item:hover,.rs-sidebar-item[aria-current=\"page\"]{color:var(--text)}\n.rs-sidebar-label{padding:16px 20px 4px;font-size:12px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary)}\n.rs-sidebar-foot{padding:12px 20px;border-top:1px solid var(--divider);font-size:12px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary)}\n",
+      "type": "registry:file",
+      "target": "styles/raster/sidebar.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "navigation",
+      "classes": [
+        "rs-sidebar",
+        "rs-sidebar-head",
+        "rs-sidebar-nav",
+        "rs-sidebar-item",
+        "rs-sidebar-label",
+        "rs-sidebar-foot"
+      ],
+      "snippet": "<aside class=\"rs-sidebar\"><div class=\"rs-sidebar-head\">Raster</div><nav class=\"rs-sidebar-nav\"><p class=\"rs-sidebar-label\">Go to</p><a class=\"rs-sidebar-item\" aria-current=\"page\">Overview</a><a class=\"rs-sidebar-item\" href=\"#\">Docs</a><a class=\"rs-sidebar-item\" href=\"#\">Components</a></nav><div class=\"rs-sidebar-foot\">0.3</div></aside>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}
