@@ -2,7 +2,8 @@
 
 export const FACE = "Inter";
 export const WORD = "Raster";
-export const LAW = "A poster you can install.";
+export const LAW = "A design system on a modular grid.";
+export const POSTER = "A poster you can install.";
 export const COMMAND = "npx @noordvc/raster-cli init";
 
 /** Public door. Do not attach DNS from this repo. */
@@ -12,11 +13,16 @@ export const HOST = "https://raster.noord.dev";
 
 /**
  * Object cells on the poster. Names from the catalog on this branch —
- * the same kit a stranger opens under /components. Not a leftover demo.
+ * the same kit a stranger opens under /components. Full objects, not crops.
  */
-export const KIT = ["button-group", "tabs", "chart"] as const;
+export const KIT = ["accordion", "calendar", "field", "stepper"] as const;
 
 /** Narrow exception: the flush poster has no crumb bar. */
 export function isSpecimenPath(pathname: string) {
   return pathname === "/";
+}
+
+/** Flush field pages: homepage specimen and About. No crumb bar on the field. */
+export function isFieldPath(pathname: string) {
+  return pathname === "/" || pathname === "/about";
 }
