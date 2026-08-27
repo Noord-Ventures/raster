@@ -29,9 +29,9 @@
     "kitc"
     "kitd";
   grid-auto-rows: minmax(204px, auto);
-  /* Internal 1px gaps are the module lines. Top and left stay flush. */
+  /* Internal 1px gaps are the module lines. The field opens into the viewport. */
   background: var(--divider);
-  padding: 0 1px 1px 0;
+  padding: 0;
   gap: 1px;
 }
 .specimen-cell {

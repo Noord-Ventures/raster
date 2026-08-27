@@ -3,6 +3,7 @@
 ## Unreleased
 
 - www: quieter credits. About is a modernist homage (Swiss Style, Dutch modernism, names as type-in-cells, illustrated 204 / hairline / flush / grotesque). Homepage install command is a primary CTA.
+- Homepage opens on the right and bottom; no outer frame. About and interior chrome keep their hairlines.
 - User-facing install copy uses `@noorddev` (`npx @noorddev/raster-cli init`). Does not publish.
 - www phone: 44pt hits, safe-area insets, stacked TOC, copy control. Desktop chrome stays.
 - Phone control scale (≤640): `--hit` / `--control-h` / `--control-fs` plus `phone.css` recut every interactive Raster control. Desktop poster stays.

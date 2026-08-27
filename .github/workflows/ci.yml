@@ -106,7 +106,28 @@ jobs:
             echo "Specimen must stay flush on top and left"
             exit 1
           fi
-          grep -q 'padding: 0 1px 1px 0' apps/www/app/specimen.css
+          if grep -n 'padding: 0 1px 1px 0' apps/www/app/specimen.css; then
+            echo "Homepage must open on the right and bottom"
+            exit 1
+          fi
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const css = readFileSync("apps/www/app/specimen.css", "utf8");
+            const start = css.indexOf(".specimen {");
+            if (start < 0) {
+              console.error("Homepage .specimen rule missing");
+              process.exit(1);
+            }
+            const rule = css.slice(start, css.indexOf("}", start));
+            if (!/padding:\s*0;/.test(rule)) {
+              console.error("Homepage specimen must have padding: 0");
+              process.exit(1);
+            }
+            if (/border-(right|bottom)/.test(rule) || /padding:\s*0\s+1px/.test(rule)) {
+              console.error("Homepage must not draw a right or bottom frame");
+              process.exit(1);
+            }
+          '
           grep -q 'KIT =' apps/www/app/specimen.ts
           grep -q 'accordion' apps/www/app/specimen.ts
           grep -q 'calendar' apps/www/app/specimen.ts
@@ -322,6 +343,7 @@ jobs:
           grep -q 'field-spec-module' "$page"
           grep -q 'field-spec-hair' "$page"
           grep -q 'field-spec-flush' "$page"
+          grep -q 'padding: 0 1px 1px 0' "$css"
           grep -q 'field-grotesque' "$page"
           grep -q '204' "$facts"
           grep -q 'Hairlines' "$facts"
