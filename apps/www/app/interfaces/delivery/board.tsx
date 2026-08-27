@@ -173,13 +173,13 @@ export function Board() {
           </section>
         ) : (
           <>
-            <section className="sc-food-hero" aria-label="Tonight">
+            <section className="sc-food-tonight" aria-label="Tonight">
               <img src={place.photo} alt="" />
+              <div>
+                <p>{place.area} · {place.time}</p>
+                <h2>{place.dish}</h2>
+              </div>
             </section>
-            <div className="sc-food-hero-copy">
-              <p>{place.area} · {place.time}</p>
-              <h2>{place.dish}</h2>
-            </div>
 
             <div className="sc-food-tools">
               <input
