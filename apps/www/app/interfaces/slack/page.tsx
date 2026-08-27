@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { interfaceBySlug } from "../catalog";
+import { InterfacesNav } from "../nav";
 import "../interfaces.css";
 import { Board } from "./board";
 
@@ -11,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <Board />;
+  return (
+    <>
+      <InterfacesNav rail={false} />
+      <Board />
+    </>
+  );
 }

@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- www phone: 44pt hits, safe-area insets, stacked TOC, copy control. Desktop chrome stays.
 - Concentric radius: `inner = max(0, outer − padding)` as a token, `--radius-in` / `--rs-out` / `--rs-gap`, and `Nest` / `NestInner`. Raster chrome stays square.
 
 ## 0.3.0

@@ -71,6 +71,13 @@ export function SiteChrome() {
 
   React.useEffect(() => setOpen(false), [pathname]);
 
+  React.useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   const current = (href: string) =>
     (href === "/" ? pathname === "/" : pathname.startsWith(href)) ? ("page" as const) : undefined;
 
