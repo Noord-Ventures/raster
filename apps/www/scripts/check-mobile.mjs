@@ -76,6 +76,9 @@ if (!specimen.includes("min-width: 481px") || !about.includes("min-width: 481px"
 if (specimen.includes("padding: 0 1px 1px 0") || /padding:\s*1px;/.test(specimen)) {
   fail("Homepage must open on the right and bottom; do not restore an outer frame");
 }
+if (!specimen.includes("body:has(.specimen-page)") || !specimen.includes("clip-path: inset(0)")) {
+  fail("Homepage must cover the page grid and clip any edge hairline");
+}
 if (!about.includes("padding: 0 1px 1px 0")) {
   fail("About must keep its right and bottom hairline");
 }
