@@ -183,6 +183,39 @@ jobs:
           grep -q 'padding:8px 0 32px' packages/core/css/components/sidebar.css
           grep -q 'rs-sidebar-item:last-child' packages/core/css/components/sidebar.css
           grep -q 'padding-bottom:32px' packages/core/css/components/sidebar.css
+      - name: Code blocks copy
+        run: |
+          block=apps/www/components/code-block.tsx
+          css=apps/www/app/site.css
+          grep -q 'writeText' "$block"
+          grep -q 'aria-label' "$block"
+          grep -q 'Copied' "$block"
+          grep -q 'aria-live' "$block"
+          grep -q 'code-copy' "$css"
+          grep -q 'CopyControl' apps/www/app/page.tsx
+          grep -q 'CodeBlock' apps/www/app/docs/page.tsx
+          grep -q 'Coming from Raster 0.1' apps/www/app/docs/page.tsx
+          if grep -nE 'toast|Toaster|rs-toast' "$block"; then
+            echo "Copy must confirm on the control, not via toast"
+            exit 1
+          fi
+          if grep -nE 'tailwind|@radix|@radix-ui' "$block" "$css"; then
+            echo "Copy control must stay CSS-first"
+            exit 1
+          fi
+          if grep -Rn '<pre>' apps/www --include='*.tsx' | grep -v code-block.tsx; then
+            echo "Command and code blocks must go through CodeBlock"
+            exit 1
+          fi
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const css = readFileSync("apps/www/app/site.css", "utf8");
+            const copy = css.slice(css.indexOf(".code-copy {"), css.indexOf(".code-copy:hover"));
+            if (!copy.includes("border-radius: 0") || !copy.includes("box-shadow: none")) {
+              console.error("Copy chrome must be flush: no radius, no shadow");
+              process.exit(1);
+            }
+          '
       - name: Every component has an isolated Use
         run: |
           test -f apps/www/components/examples/use.css

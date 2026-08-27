@@ -6,8 +6,24 @@ import * as React from "react";
 function CopyMark() {
   return (
     <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
-      <rect x="5.5" y="2.5" width="8" height="8" stroke="currentColor" strokeWidth="1.5" />
-      <rect x="2.5" y="5.5" width="8" height="8" stroke="currentColor" strokeWidth="1.5" />
+      <rect
+        x="5.5"
+        y="2.5"
+        width="8"
+        height="8"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        vectorEffect="non-scaling-stroke"
+      />
+      <rect
+        x="2.5"
+        y="5.5"
+        width="8"
+        height="8"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        vectorEffect="non-scaling-stroke"
+      />
     </svg>
   );
 }
