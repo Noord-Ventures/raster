@@ -454,6 +454,12 @@ jobs:
             exit 1
           fi
           grep -q 'background: var(--bg)' apps/www/components/docs-nav/docs-nav.css
+          grep -q 'width: 204px' apps/www/components/docs-nav/docs-nav.css
+          grep -q '408 module line' apps/www/components/docs-nav/docs-nav.css
+          if grep -n 'margin-left: 1px' apps/www/components/docs-nav/docs-nav.css; then
+            echo "Secondaries must occupy gutter + column (204), not a 1px nudge"
+            exit 1
+          fi
           node apps/www/scripts/check-mobile.mjs
           grep -q 'MobileToc' apps/www/components/docs-nav/index.tsx
           grep -q '44pt' apps/www/components/docs-nav/FEATURE.md
