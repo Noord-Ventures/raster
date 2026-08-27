@@ -316,7 +316,18 @@
     padding: 12px 0;
     font-size: 16px;
   }
-  .if-head { min-height: 44px; }
+  .if-head {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 44px;
+    padding: 12px 20px;
+  }
+  .if-head-title {
+    font-size: 16px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
   .if-composer { padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); }
 }
 
