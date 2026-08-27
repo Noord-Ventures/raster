@@ -11,7 +11,7 @@ Writers: catalog groups are `packages/core/src/schema.ts` (`rasterCategories`). 
 | Component | `/components/:name` | Hover the group → click the item | That page's group stays selected. Column two is not empty. |
 | Getting started | `/docs` | Corner → Docs | Short rail: Getting started, Tokens. Command is the one in `app/specimen.ts`. Command and code blocks carry a quiet copy control. Under 900 the rail hides; a stacked 44pt contents picker takes its place. |
 | Tokens | `/docs/tokens` | Docs → Tokens | Same short rail. Same phone picker. |
-| Phone | ≤430 | Burger, theme, contents | 44pt hits on chrome, TOC, catalog tiles, copy. Safe-area insets. One column. Desktop rail and 20px mark stay. |
+| Phone | ≤430 | Burger, theme, contents | 44pt hits on chrome, TOC, catalog tiles, copy. Kit controls recut at ≤640 (44pt, 16px, full-width). Safe-area insets. One column. Desktop rail and 20px mark stay. |
 | About | `/about` | Corner → About | Flush field. Noord first (AI lab, Alkmaar and Silicon Valley). Type occupies cells. Then Inter, packages, door, host, Renato Valdés Olmos, MIT. Isolated files under `app/about`. |
 
 The components rail is groups → items. It is not Getting started / Foundations / Components.

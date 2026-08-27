@@ -15,6 +15,6 @@ Chrome stays monochrome. A board may set one Crouwel spot or a color-field. Inte
 | Fleet | `/interfaces/fleet` | Interfaces → Fleet | Floating Raster on a three.js map. Active fleet, inactive objects, alerts. Map is a scene, not the noord.vc marketing page. |
 | Food delivery | `/interfaces/delivery` | Interfaces → Food delivery | Main browsing, navbar, ratings. |
 | Slack | `/interfaces/slack` | Interfaces → Slack | Chat UI, sidebar, agents mixed with real people. |
-| Phone | ≤430 | Contents picker | Rail hides under 900. A stacked 44pt picker lists the six. Board sidebars use 44pt rows. Desktop posters stay flush. |
+| Phone | ≤430 | Contents picker | Rail hides under 900. A stacked 44pt picker lists the six. Board sidebars and Raster controls use the 44pt phone scale. Desktop posters stay flush. |
 
 The six folders are `ai-tool`, `dashboard`, `threads`, `fleet`, `delivery`, `slack`. CI fails if any route disappears.

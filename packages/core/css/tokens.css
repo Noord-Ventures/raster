@@ -20,6 +20,11 @@
   --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);
   --grid-size: 204px;
   --grid-pos: 20px 0;
+  /* Control scale. Desktop is the Raster poster; phone recuts in phone.css. */
+  --hit: 40px;
+  --control-h: 40px;
+  --control-fs: 14px;
+  --control-label: 12px;
 }
 [data-theme="dark"] {
   --bg: #0E0C0A;
@@ -40,5 +45,14 @@
     --grid-image:linear-gradient(to right,transparent 0,transparent 25px,var(--grid-line) 25px,var(--grid-line) 26px,transparent 26px,transparent calc(50vw - 12.5px),var(--grid-line) calc(50vw - 12.5px),var(--grid-line) calc(50vw - 11.5px),transparent calc(50vw - 11.5px),transparent calc(50vw + 12.5px),var(--grid-line) calc(50vw + 12.5px),var(--grid-line) calc(50vw + 13.5px),transparent calc(50vw + 13.5px),transparent calc(100vw - 26px),var(--grid-line) calc(100vw - 26px),var(--grid-line) calc(100vw - 25px),transparent calc(100vw - 25px));
     --grid-size:100vw;
     --grid-pos:0 0;
+  }
+}
+/* Phone control scale (≤640): 44pt hits, 16px type on fields. */
+@media(max-width:640px){
+  :root{
+    --hit:44px;
+    --control-h:44px;
+    --control-fs:16px;
+    --control-label:15px;
   }
 }

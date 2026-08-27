@@ -116,4 +116,6 @@
     min-height: 88px;
     font-size: 32px;
   }
+  .rs-use-actions { flex-direction: column; align-items: stretch; width: 100%; }
+  .rs-use-copy { font-size: 16px; }
 }

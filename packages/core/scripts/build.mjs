@@ -24,7 +24,7 @@ const write = (p, text) => {
 write("tokens/raster.tokens.json", JSON.stringify(rasterTokens, null, 2) + "\n");
 
 /* ── 2. Tokens as CSS custom properties ── */
-const { color, grid, radius } = rasterTokens;
+const { color, grid, radius, control } = rasterTokens;
 const c1 = grid.column;
 const gridImage = `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent ${c1}px,var(--grid-line) ${c1}px,var(--grid-line) ${c1 + 1}px,transparent ${c1 + 1}px,transparent ${grid.module}px)`;
 
@@ -50,6 +50,11 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --grid-image: ${gridImage};
   --grid-size: ${grid.module}px;
   --grid-pos: ${grid.gutter}px 0;
+  /* Control scale. Desktop is the Raster poster; phone recuts in phone.css. */
+  --hit: ${control.desktop.hit}px;
+  --control-h: ${control.desktop.height}px;
+  --control-fs: ${control.desktop.font}px;
+  --control-label: ${control.desktop.label}px;
 }
 [data-theme="dark"] {
   --bg: ${color.dark.black};
@@ -72,6 +77,15 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
     --grid-pos:0 0;
   }
 }
+/* Phone control scale (≤${control.breakpoint}): 44pt hits, 16px type on fields. */
+@media(max-width:${control.breakpoint}px){
+  :root{
+    --hit:${control.phone.hit}px;
+    --control-h:${control.phone.height}px;
+    --control-fs:${control.phone.font}px;
+    --control-label:${control.phone.label}px;
+  }
+}
 `;
 write("css/tokens.css", tokensCss);
 
@@ -82,7 +96,7 @@ for (const component of rasterComponents) {
     if (!componentFiles.includes(file)) componentFiles.push(file);
   }
 }
-const sources = ["fonts.css", "tokens.css", "base.css", "type.css", ...componentFiles, "motion.css"];
+const sources = ["fonts.css", "tokens.css", "base.css", "type.css", ...componentFiles, "phone.css", "motion.css"];
 
 const banner = `/* ═══════════════════════════════════════════════════════════════════
    RASTER, a monochrome, CSS-first design system.

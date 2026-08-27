@@ -78,6 +78,31 @@ if (!ifCss.includes(".if-board .rs-sidebar-item") || !ifCss.includes("min-height
   fail("Interface sidebars must use 44pt rows on the phone");
 }
 
+const phoneCss = readFileSync(join(root, "packages/core/css/phone.css"), "utf8");
+const tokensCss = readFileSync(join(root, "packages/core/css/tokens.css"), "utf8");
+const buttonCss = readFileSync(join(root, "packages/core/css/components/button.css"), "utf8");
+if (!tokensCss.includes("--hit:") || !tokensCss.includes("--control-h:") || !tokensCss.includes("--control-fs:")) {
+  fail("Tokens must emit --hit / --control-h / --control-fs");
+}
+if (!tokensCss.includes("--hit:44px") && !tokensCss.includes("--hit: 44px")) {
+  fail("Phone tokens must set --hit to 44px");
+}
+if (!phoneCss.includes("@media(max-width:640px)") && !phoneCss.includes("@media (max-width: 640px)")) {
+  fail("phone.css must recut interactive controls at 640");
+}
+for (const sel of [".rs-btn-primary", ".rs-input", ".rs-tab", ".rs-switch"]) {
+  if (!phoneCss.includes(sel)) fail(`phone.css must recut ${sel}`);
+}
+if (!phoneCss.includes("min-height:var(--hit)") && !phoneCss.includes("min-height: var(--hit)")) {
+  fail("phone.css must size hits with --hit");
+}
+if (!buttonCss.includes("height:40px")) {
+  fail("Desktop button must stay 40px; recut only in phone.css");
+}
+if (!phone.includes("flex-direction: column") || !phone.includes(".preview-box")) {
+  fail("Phone previews must stack so full-width controls show");
+}
+
 const desktopLogo = site.slice(0, site.indexOf("@media (max-width: 640px)"));
 if (!desktopLogo.includes("width: 20px; height: 20px") || !desktopLogo.includes(".theme-toggle") || !desktopLogo.includes("width: 24px; height: 24px")) {
   fail("Desktop chrome must stay 20px mark / 24px toggle");

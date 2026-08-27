@@ -34,7 +34,7 @@ const write = (name, data) => {
 
 /* The base style every component needs: tokens, page base, type scale,
    reduced-motion rules: everything in raster.css except components. */
-const baseCss = ["tokens.css", "base.css", "type.css", "motion.css"]
+const baseCss = ["tokens.css", "base.css", "type.css", "phone.css", "motion.css"]
   .map((f) => readCore(`css/${f}`))
   .join("\n");
 

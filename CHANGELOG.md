@@ -3,6 +3,7 @@
 ## Unreleased
 
 - www phone: 44pt hits, safe-area insets, stacked TOC, copy control. Desktop chrome stays.
+- Phone control scale (≤640): `--hit` / `--control-h` / `--control-fs` plus `phone.css` recut every interactive Raster control. Desktop poster stays.
 - Concentric radius: `inner = max(0, outer − padding)` as a token, `--radius-in` / `--rs-out` / `--rs-gap`, and `Nest` / `NestInner`. Raster chrome stays square.
 
 ## 0.3.0
