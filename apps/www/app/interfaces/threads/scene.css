@@ -1,138 +1,112 @@
-/* Threads. Editorial feed, not a Raster discussion card. */
+/* Threads. A Raster feed, not an editorial-app skin. */
 
 .sc-th {
-  --th-paper: #f7f3ea;
-  --th-ink: #1d1914;
-  --th-mute: #6f675c;
-  --th-line: rgba(29, 25, 20, 0.1);
-  --th-card: #fffdf8;
-  --th-accent: #b42318;
-  --th-serif: var(--sc-thread-serif), "Iowan Old Style", Palatino, Georgia, serif;
-  --th-sans: Inter, ui-sans-serif, system-ui, sans-serif;
   min-height: 100dvh;
-  display: flex;
-  background: var(--th-paper);
-  color: var(--th-ink);
-  font-family: var(--th-sans);
+  display: grid;
+  grid-template-columns: minmax(0, 592px) 184px;
+  column-gap: 20px;
+  justify-content: start;
+  padding: 72px 20px 40px;
+  background: var(--bg);
+  color: var(--text);
 }
-[data-theme="dark"] .sc-th {
-  --th-paper: #141210;
-  --th-ink: #f3eee4;
-  --th-mute: #b4ab9e;
-  --th-line: rgba(243, 238, 228, 0.1);
-  --th-card: #1d1a16;
-  --th-accent: #e25b4c;
-}
-
 .sc-th-feed {
-  flex: 1;
   min-width: 0;
-  max-width: 680px;
-  padding: 80px 24px 64px;
-  margin: 0 auto;
+  padding: 20px 0 40px;
 }
 .sc-th-feed h1 {
   margin: 0 0 20px;
-  font-family: var(--th-serif);
-  font-size: 40px;
-  font-weight: 500;
+  font-size: 38px;
+  font-weight: 600;
   letter-spacing: -0.03em;
 }
 .sc-th-post {
-  background: var(--th-card);
-  border-radius: 20px;
-  padding: 20px 22px;
-  margin-bottom: 14px;
-  box-shadow: 0 8px 20px rgba(29, 25, 20, 0.05);
+  background: var(--bg);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 20px 0;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--grid-line);
 }
-.sc-th-post[aria-current="true"] { outline: 1px solid var(--th-ink); }
+.sc-th-post[aria-current="true"] .sc-th-who strong { text-decoration: underline; text-underline-offset: 3px; }
 .sc-th-who {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
   margin-bottom: 10px;
 }
 .sc-th-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--th-ink);
-  color: var(--th-paper);
-  display: grid;
-  place-items: center;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
+  color: var(--text-secondary);
 }
-.sc-th-who strong { font-size: 14px; letter-spacing: -0.01em; }
-.sc-th-who span { color: var(--th-mute); font-size: 13px; }
+.sc-th-who strong { font-size: 13px; letter-spacing: -0.01em; }
+.sc-th-who span { color: var(--text-secondary); font-size: 12px; }
 .sc-th-body {
   margin: 0;
-  font-size: 16px;
-  line-height: 1.55;
-  letter-spacing: -0.011em;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
 }
 .sc-th-quote {
   margin: 0;
-  padding: 16px 18px;
-  border-left: 3px solid var(--th-accent);
-  font-family: var(--th-serif);
+  padding: 0;
+  border-left: 1px solid var(--grid-line);
+  padding-left: 20px;
   font-size: 22px;
-  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
 }
 .sc-th-photo {
   display: block;
   width: 100%;
-  height: 220px;
+  height: 204px;
   object-fit: cover;
-  border-radius: 14px;
+  border-radius: 0;
   margin-top: 12px;
 }
 .sc-th-actions {
   display: flex;
-  gap: 8px;
+  gap: 16px;
   margin-top: 14px;
 }
 .sc-th-actions button {
   appearance: none;
   border: 0;
   background: transparent;
-  color: var(--th-mute);
+  color: var(--text-secondary);
   min-height: 36px;
-  padding: 0 10px;
-  border-radius: 999px;
-  font: 500 13px/1 var(--th-sans);
+  padding: 0;
+  border-radius: 0;
+  font: 500 13px/1 inherit;
   cursor: pointer;
+  transition: color var(--duration-snap) var(--ease);
 }
 .sc-th-actions button:hover,
-.sc-th-actions button[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--th-accent) 10%, transparent);
-  color: var(--th-accent);
-}
+.sc-th-actions button[aria-pressed="true"] { color: var(--text); }
 
 .sc-th-pane {
-  width: min(420px, 40vw);
-  flex-shrink: 0;
-  background: var(--th-card);
-  border-left: 1px solid var(--th-line);
-  padding: 80px 22px 32px;
+  padding: 20px 0 32px;
+  border-left: 1px solid var(--grid-line);
+  padding-left: 20px;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 .sc-th-pane h2 {
   margin: 0;
-  font-family: var(--th-serif);
-  font-size: 26px;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 .sc-th-reply {
   padding: 10px 0;
-  border-top: 1px solid var(--th-line);
+  border-top: 1px solid var(--grid-line);
   font-size: 14px;
   line-height: 1.5;
 }
-.sc-th-reply strong { display: block; margin-bottom: 2px; }
+.sc-th-reply strong { display: block; margin-bottom: 2px; font-size: 12px; }
 .sc-th-composer {
   margin-top: auto;
   display: flex;
@@ -140,39 +114,47 @@
 }
 .sc-th-composer input {
   flex: 1;
-  min-height: 44px;
-  border: 1px solid var(--th-line);
-  background: var(--th-paper);
+  min-height: 40px;
+  border: 1px solid var(--grid-line);
+  background: var(--bg);
   color: inherit;
-  border-radius: 999px;
-  padding: 0 14px;
-  font: 450 14px/1 var(--th-sans);
+  border-radius: 0;
+  padding: 0 12px;
+  font: 500 14px/1 inherit;
+  transition: border-color var(--duration-snap) var(--ease);
 }
+.sc-th-composer input:focus-visible { outline: 1px solid var(--text); outline-offset: 2px; }
 .sc-th-composer button {
   appearance: none;
   border: 0;
-  background: var(--th-ink);
-  color: var(--th-paper);
-  border-radius: 999px;
-  min-height: 44px;
-  padding: 0 16px;
-  font: 500 13px/1 var(--th-sans);
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 0;
+  min-height: 40px;
+  padding: 0 14px;
+  font: 600 13px/1 inherit;
   cursor: pointer;
+  transition: opacity var(--duration-snap) var(--ease);
 }
 
 @media (max-width: 900px) {
-  .sc-th { flex-direction: column; }
+  .sc-th { grid-template-columns: 1fr; }
   .sc-th-pane {
-    width: 100%;
     border-left: 0;
-    border-top: 1px solid var(--th-line);
-    padding-top: 24px;
+    border-top: 1px solid var(--grid-line);
+    padding-left: 0;
+    padding-top: 20px;
   }
-  .sc-th-feed { padding-top: 72px; }
 }
 
 @media (max-width: 640px) {
   .sc-th-actions button,
   .sc-th-composer button { min-height: 44px; font-size: 16px; }
-  .sc-th-feed h1 { font-size: 32px; }
+  .sc-th-feed h1 { font-size: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-th-actions button,
+  .sc-th-composer input,
+  .sc-th-composer button { transition: none; }
 }

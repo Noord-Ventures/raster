@@ -4,11 +4,11 @@ import * as React from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-const LIVE = "#3ddec4";
-const ALERT = "#ff6b4a";
-const NIGHT = "#071014";
-const BUILDING = "#152126";
-const GRID = "#1c3333";
+const LIVE = "#E8E8E8";
+const ALERT = "#C4C2BD";
+const NIGHT = "#0E0C0A";
+const BUILDING = "#1A1A1A";
+const GRID = "#3D3D3D";
 
 type Vehicle = {
   id: string;
@@ -143,8 +143,7 @@ export function FleetMap({ selected = "Van 04" }: { selected?: string }) {
     controls.dampingFactor = 0.06;
     controls.minPolarAngle = 0.55;
     controls.maxPolarAngle = 1.25;
-    controls.autoRotate = !reduced;
-    controls.autoRotateSpeed = 0.35;
+    controls.autoRotate = false;
 
     const resize = () => {
       const w = el.clientWidth;
@@ -171,9 +170,6 @@ export function FleetMap({ selected = "Van 04" }: { selected?: string }) {
           van.mesh.position.copy(pose.position);
           van.mesh.rotation.y = pose.yaw;
           van.mesh.material = van.id === selectedRef.current ? pickMat : activeMat;
-        }
-        for (const mark of alerts) {
-          mark.scale.y = 1 + Math.sin(now / 420) * 0.08;
         }
       }
       controls.update();

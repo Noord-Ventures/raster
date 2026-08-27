@@ -1,9 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { threadSerif } from "../scene-fonts";
 
-type Reply = { who: string; initials: string; body: string };
+type Reply = { who: string; initials: string; body: string; fresh?: boolean };
 
 type Post = {
   id: string;
@@ -86,14 +85,14 @@ export function Board() {
     setPosts((rows) =>
       rows.map((item) =>
         item.id === open
-          ? { ...item, replies: [...item.replies, { who: "You", initials: "YO", body: text }] }
+          ? { ...item, replies: [...item.replies, { who: "You", initials: "YO", body: text, fresh: true }] }
           : item,
       ),
     );
   }
 
   return (
-    <main className={`if-board sc-th ${threadSerif.variable}`} aria-label="Threads">
+    <main className="if-board sc-th" aria-label="Threads">
       <section className="sc-th-feed" aria-label="Feed">
         <h1>Today</h1>
         {posts.map((item) => (
@@ -121,7 +120,7 @@ export function Board() {
         <h2>{post.who}</h2>
         <p className="sc-th-body">{post.body}</p>
         {post.replies.map((item, i) => (
-          <div key={i} className="sc-th-reply">
+          <div key={i} className={item.fresh ? "sc-th-reply sc-fresh" : "sc-th-reply"}>
             <strong>{item.who}</strong>
             {item.body}
           </div>

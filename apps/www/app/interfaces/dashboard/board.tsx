@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { dashSans } from "../scene-fonts";
 
 const WEEK = { sheets: 38, proofs: 12, press: 4, series: [12, 18, 15, 26, 24, 11, 9] };
 const MONTH = { sheets: 142, proofs: 41, press: 9, series: [28, 34, 31, 42, 38, 22, 19] };
@@ -21,10 +20,7 @@ function Line({ values }: { values: number[] }) {
   const pts = values.map((v, i) => `${i * step},${h - (v / max) * (h - 16)}`).join(" ");
   return (
     <svg className="sc-dash-chart" viewBox={`0 0 ${w} ${h}`} role="img" aria-label="Sheets over the range">
-      <polyline fill="none" stroke="#1f8a78" strokeWidth="3" strokeLinejoin="round" points={pts} />
-      {values.map((v, i) => (
-        <circle key={i} cx={i * step} cy={h - (v / max) * (h - 16)} r="4" fill="#1f8a78" />
-      ))}
+      <polyline fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter" points={pts} />
     </svg>
   );
 }
@@ -33,13 +29,15 @@ export function Board() {
   const [range, setRange] = React.useState<"week" | "month">("week");
   const [page, setPage] = React.useState("overview");
   const [job, setJob] = React.useState("14");
+  const [metricFresh, setMetricFresh] = React.useState(false);
+  const [noteFresh, setNoteFresh] = React.useState(false);
   const data = range === "week" ? WEEK : MONTH;
   const selected = JOBS.find((item) => item.id === job) ?? JOBS[0]!;
 
   return (
-    <main className={`if-board sc-dash ${dashSans.variable}`} aria-label="SaaS dashboard">
-      <aside className="sc-dash-rail" aria-label="Studio">
-        <p className="sc-dash-brand">Studio ledger</p>
+    <main className="if-board sc-dash" aria-label="SaaS dashboard">
+      <aside className="sc-dash-rail" aria-label="Jobs">
+        <p className="sc-dash-brand">Jobs</p>
         {[
           { id: "overview", label: "Overview" },
           { id: "jobs", label: "Jobs" },
@@ -65,7 +63,10 @@ export function Board() {
                 key={item}
                 type="button"
                 aria-pressed={range === item}
-                onClick={() => setRange(item)}
+                onClick={() => {
+                  setRange(item);
+                  setMetricFresh(true);
+                }}
               >
                 {item === "week" ? "Week" : "Month"}
               </button>
@@ -76,15 +77,15 @@ export function Board() {
         <div className="sc-dash-metrics">
           <article className="sc-dash-metric">
             <p>Sheets this {range}</p>
-            <strong>{data.sheets}</strong>
+            <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.sheets}</strong>
           </article>
           <article className="sc-dash-metric">
             <p>Proofs</p>
-            <strong>{data.proofs}</strong>
+            <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.proofs}</strong>
           </article>
           <article className="sc-dash-metric">
             <p>On press</p>
-            <strong>{data.press}</strong>
+            <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.press}</strong>
           </article>
         </div>
 
@@ -104,6 +105,7 @@ export function Board() {
                 onClick={() => {
                   setJob(item.id);
                   setPage("jobs");
+                  setNoteFresh(true);
                 }}
               >
                 <span>
@@ -114,8 +116,7 @@ export function Board() {
                 <span>{item.state}</span>
               </button>
             ))}
-            <div className="sc-dash-detail">
-              <span className="sc-dash-dot" />
+            <div key={job} className={noteFresh ? "sc-dash-detail sc-fresh" : "sc-dash-detail"}>
               {selected.note}
             </div>
           </article>

@@ -1,3 +1,4 @@
+@import "./scene-motion.css";
 /* Interfaces section. Isolated. Do not move these rules into site.css. */
 
 .if-index {
@@ -57,7 +58,7 @@
   color: var(--text-secondary);
   opacity: .6;
   text-decoration: none;
-  transition: color .15s ease, opacity .15s ease;
+  transition: color var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease);
 }
 .if-rail a:hover,
 .if-rail a:focus-visible,
@@ -93,7 +94,7 @@
   justify-content: flex-end;
   text-decoration: none;
   color: inherit;
-  transition: border-color .2s ease;
+  transition: border-color var(--duration-snap) var(--ease);
 }
 .if-tile:hover { border-color: var(--text); }
 .if-tile h2 {

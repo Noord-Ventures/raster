@@ -1,10 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { aiSerif } from "../scene-fonts";
 
 type Role = "user" | "assistant";
-type Msg = { role: Role; text: string };
+type Msg = { role: Role; text: string; fresh?: boolean };
 
 const CHATS = [
   { id: "brief", title: "Tighten the brief", preview: "Two sentences, same claim." },
@@ -50,14 +49,6 @@ const REPLIES = [
   "I would leave the chrome quiet and put the color on the field only.",
 ];
 
-function Spark() {
-  return (
-    <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
-      <path d="M8 1.2 9.1 6.4 14.8 8 9.1 9.6 8 14.8 6.9 9.6 1.2 8l5.7-1.6L8 1.2Z" />
-    </svg>
-  );
-}
-
 export function Board() {
   const [chat, setChat] = React.useState<string>("brief");
   const [messages, setMessages] = React.useState<Msg[]>(STARTED.brief ?? []);
@@ -89,17 +80,17 @@ export function Board() {
     const value = (text ?? draft).trim();
     if (!value || pending) return;
     setDraft("");
-    setMessages((rows) => [...rows, { role: "user", text: value }]);
+    setMessages((rows) => [...rows, { role: "user", text: value, fresh: true }]);
     setPending(true);
     window.setTimeout(() => {
       const reply = REPLIES[value.length % REPLIES.length]!;
-      setMessages((rows) => [...rows, { role: "assistant", text: reply }]);
+      setMessages((rows) => [...rows, { role: "assistant", text: reply, fresh: true }]);
       setPending(false);
     }, 700);
   }
 
   return (
-    <main className={`if-board sc-ai ${aiSerif.variable}`} aria-label="AI tool">
+    <main className="if-board sc-ai" aria-label="AI tool">
       <aside className="sc-ai-rail" aria-label="Chats">
         <button type="button" className="sc-ai-new" onClick={fresh}>
           New chat
@@ -125,10 +116,7 @@ export function Board() {
           <div className="sc-ai-measure">
             {messages.length === 0 ? (
               <div className="sc-ai-empty">
-                <span className="sc-ai-mark">
-                  <Spark />
-                </span>
-                <h1 className="sc-ai-hello">How can I help?</h1>
+                <h1 className="sc-ai-hello">Write the next line</h1>
                 <div className="sc-ai-hints">
                   {HINTS.map((hint) => (
                     <button key={hint} type="button" className="sc-ai-hint" onClick={() => send(hint)}>
@@ -140,12 +128,12 @@ export function Board() {
             ) : (
               messages.map((msg, i) =>
                 msg.role === "user" ? (
-                  <article key={i} className="sc-ai-msg sc-ai-msg-user">
+                  <article key={i} className={`sc-ai-msg sc-ai-msg-user${msg.fresh ? " sc-fresh" : ""}`}>
                     <p className="sc-ai-who">You</p>
                     <p className="sc-ai-bubble">{msg.text}</p>
                   </article>
                 ) : (
-                  <article key={i} className="sc-ai-msg">
+                  <article key={i} className={`sc-ai-msg${msg.fresh ? " sc-fresh" : ""}`}>
                     <p className="sc-ai-who">Assistant</p>
                     <p className="sc-ai-reply">{msg.text}</p>
                   </article>
@@ -154,10 +142,7 @@ export function Board() {
             )}
             {pending ? (
               <p className="sc-ai-pending" aria-live="polite">
-                <i />
-                <i />
-                <i />
-                <span>Writing</span>
+                Writing
               </p>
             ) : null}
             <div ref={end} />
@@ -176,7 +161,7 @@ export function Board() {
               ref={box}
               rows={1}
               value={draft}
-              placeholder="Ask anything"
+              placeholder="A line"
               aria-label="Message"
               onChange={(event) => setDraft(event.target.value)}
               onKeyDown={(event) => {
