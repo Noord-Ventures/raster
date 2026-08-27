@@ -109,20 +109,22 @@
   max-width: 9em;
 }
 .specimen-cell-principle {
-  justify-content: space-between;
-  gap: 16px;
+  justify-content: flex-end;
+}
+.specimen-index {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
 }
 .specimen-n {
   margin: 0;
-  font-size: clamp(52px, 10vw, 88px);
+  flex: none;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: -.045em;
-  line-height: .85;
+  letter-spacing: -.01em;
+  line-height: 1.3;
   font-variant-numeric: tabular-nums;
-  color: var(--text);
-}
-.specimen-cell-p01 .specimen-n {
-  font-size: clamp(72px, 14vw, 120px);
+  color: var(--text-secondary);
 }
 .specimen-n-text {
   margin: 0;

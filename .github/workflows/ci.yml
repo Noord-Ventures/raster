@@ -109,6 +109,19 @@ jobs:
           grep -q 'SpecimenKit' apps/www/app/page.tsx
           grep -q 'SpecimenPrinciples' apps/www/app/page.tsx
           grep -q 'POSTER' apps/www/app/page.tsx
+          grep -q 'specimen-index' apps/www/app/specimen-principles.tsx
+          if ! awk '/^\.specimen-n \{/,/^\}/' apps/www/app/specimen.css | grep -q 'font-size: 12px'; then
+            echo "Field numerals must stay a 12px index, not a poster numeral"
+            exit 1
+          fi
+          if awk '/^\.specimen-n \{/,/^\}/' apps/www/app/specimen.css | grep -qE 'clamp\(|[3-9][0-9]px|[0-9]+rem|[0-9]+vw'; then
+            echo "Field numerals must not scale like a poster numeral"
+            exit 1
+          fi
+          if grep -n 'specimen-cell-p01 .specimen-n' apps/www/app/specimen.css; then
+            echo "01 must not be a larger typographic spot"
+            exit 1
+          fi
           test -f apps/www/app/specimen-kit.tsx
           test -f apps/www/app/specimen-laws.ts
           if grep -nE '^[[:space:]]*height: 100dvh' apps/www/app/specimen.css; then
