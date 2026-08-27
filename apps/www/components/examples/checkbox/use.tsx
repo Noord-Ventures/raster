@@ -1,4 +1,4 @@
-import { Checkbox } from "@noordvc/raster-react";
+import { Checkbox } from "@noorddev/raster-react";
 
 export function Use() {
   return (

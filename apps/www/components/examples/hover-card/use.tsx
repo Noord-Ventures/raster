@@ -1,4 +1,4 @@
-import { HoverCard } from "@noordvc/raster-react";
+import { HoverCard } from "@noorddev/raster-react";
 
 export function Use() {
   return (

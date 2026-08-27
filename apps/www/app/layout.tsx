@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import "@noordvc/raster/css";
+import "@noorddev/raster/css";
 import "./site.css";
 import "@/components/examples/use.css";
 import { CrumbBar } from "@/components/crumb-bar";

@@ -1,4 +1,4 @@
-import { Skeleton } from "@noordvc/raster-react";
+import { Skeleton } from "@noorddev/raster-react";
 
 export function Use() {
   return (

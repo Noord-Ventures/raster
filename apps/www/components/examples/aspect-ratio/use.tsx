@@ -1,4 +1,4 @@
-import { AspectRatio } from "@noordvc/raster-react";
+import { AspectRatio } from "@noorddev/raster-react";
 
 export function Use() {
   return (

@@ -6,7 +6,7 @@ import {
   Badge,
   Item,
   ScrollArea,
-} from "@noordvc/raster-react";
+} from "@noorddev/raster-react";
 import { FleetMap } from "./map";
 
 const ACTIVE = [

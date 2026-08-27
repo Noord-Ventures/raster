@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { rasterComponents } from "@noordvc/raster";
+import { rasterComponents } from "@noorddev/raster";
 import { Preview } from "@/components/preview";
 import { KIT } from "./specimen";
 

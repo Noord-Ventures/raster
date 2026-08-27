@@ -8,7 +8,7 @@ const src = fileURLToPath(new URL("../../../registry", import.meta.url));
 const dest = fileURLToPath(new URL("../public/r", import.meta.url));
 
 if (!existsSync(src)) {
-  console.error("registry/ not found — run: pnpm --filter @noordvc/raster build:registry");
+  console.error("registry/ not found — run: pnpm --filter @noorddev/raster build:registry");
   process.exit(1);
 }
 mkdirSync(dest, { recursive: true });

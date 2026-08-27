@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from "@noordvc/raster-react";
+import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from "@noorddev/raster-react";
 
 export function Use() {
   const [open, setOpen] = React.useState(false);

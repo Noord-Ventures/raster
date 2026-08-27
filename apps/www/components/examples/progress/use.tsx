@@ -1,4 +1,4 @@
-import { Progress } from "@noordvc/raster-react";
+import { Progress } from "@noorddev/raster-react";
 
 export function Use() {
   return (

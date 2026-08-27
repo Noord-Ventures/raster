@@ -1,4 +1,4 @@
-import { ScatterChart } from "@noordvc/raster-react";
+import { ScatterChart } from "@noorddev/raster-react";
 
 const MARKS = [
   { x: 12, y: 18, label: "Alkmaar", group: "Press" },

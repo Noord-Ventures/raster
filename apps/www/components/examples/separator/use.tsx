@@ -1,4 +1,4 @@
-import { Separator } from "@noordvc/raster-react";
+import { Separator } from "@noorddev/raster-react";
 
 export function Use() {
   return (

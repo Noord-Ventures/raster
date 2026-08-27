@@ -1,4 +1,4 @@
-import { ScrollArea } from "@noordvc/raster-react";
+import { ScrollArea } from "@noorddev/raster-react";
 
 export function Use() {
   return (

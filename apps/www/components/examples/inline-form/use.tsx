@@ -1,4 +1,4 @@
-import { InlineForm } from "@noordvc/raster-react";
+import { InlineForm } from "@noorddev/raster-react";
 
 export function Use() {
   return (

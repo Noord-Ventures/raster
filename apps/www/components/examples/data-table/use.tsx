@@ -1,4 +1,4 @@
-import { DataTable } from "@noordvc/raster-react";
+import { DataTable } from "@noorddev/raster-react";
 
 export function Use() {
   return (

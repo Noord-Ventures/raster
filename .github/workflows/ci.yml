@@ -41,6 +41,8 @@ jobs:
             "$(printf '@%s/' 'raster')"
             "$(printf '@%s/raster' 'noord')"
             "$(printf '@%s/' 'rennvaldes')"
+            "$(printf '@%s/' 'noordvc')"
+            "$(printf '@%s/' 'noordai')"
           )
           for needle in "${needles[@]}"; do
             if grep -R -n -F "$needle" --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=dist --exclude-dir=.next --exclude-dir=out --exclude-dir=public --exclude=pnpm-lock.yaml .; then
@@ -68,7 +70,7 @@ jobs:
           grep -q '{WORD}' "$page"
           grep -q 'A poster you can install.' "$writer"
           grep -q 'A design system on a modular grid.' "$writer"
-          grep -q 'npx @noordvc/raster-cli init' "$writer"
+          grep -q 'npx @noorddev/raster-cli init' "$writer"
           if grep -n -E 'One ink|204 module|Crouwel|Müller-Brockmann' "$page" "$writer" apps/www/app/layout.tsx apps/www/app/social.ts; then
             echo "Homepage law must not use the old museum caption"
             exit 1
@@ -249,7 +251,7 @@ jobs:
           grep -q 'heading: "Renato Valdés Olmos"' "$facts"
           grep -q 'foundry.license' "$facts"
           grep -q 'meta.url' "$facts"
-          grep -q '@noordvc/raster' "$facts"
+          grep -q '@noorddev/raster' "$facts"
           grep -q 'type.foundry' "$facts"
           grep -q 'AI lab' "$facts"
           grep -q 'Alkmaar' "$facts"

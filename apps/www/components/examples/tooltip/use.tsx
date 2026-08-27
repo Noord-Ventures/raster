@@ -1,4 +1,4 @@
-import { Tooltip } from "@noordvc/raster-react";
+import { Tooltip } from "@noorddev/raster-react";
 
 export function Use() {
   return (

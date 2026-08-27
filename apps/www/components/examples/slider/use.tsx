@@ -1,4 +1,4 @@
-import { Slider } from "@noordvc/raster-react";
+import { Slider } from "@noorddev/raster-react";
 
 export function Use() {
   return (

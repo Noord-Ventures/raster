@@ -1,4 +1,4 @@
-import { Select } from "@noordvc/raster-react";
+import { Select } from "@noorddev/raster-react";
 
 export function Use() {
   return (

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { rasterCategories, rasterComponents } from "@noordvc/raster";
+import { rasterCategories, rasterComponents } from "@noorddev/raster";
 import { DocsNav } from "@/components/docs-nav";
 import { Preview } from "@/components/preview";
 

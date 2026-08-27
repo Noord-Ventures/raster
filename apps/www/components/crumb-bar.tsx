@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import { rasterComponents } from "@noordvc/raster";
+import { rasterComponents } from "@noorddev/raster";
 import { interfaceBySlug } from "@/app/interfaces/catalog";
 import { isFieldPath, isSpecimenPath } from "@/app/specimen";
 

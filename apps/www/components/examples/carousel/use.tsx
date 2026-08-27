@@ -1,4 +1,4 @@
-import { Carousel } from "@noordvc/raster-react";
+import { Carousel } from "@noorddev/raster-react";
 
 export function Use() {
   return (

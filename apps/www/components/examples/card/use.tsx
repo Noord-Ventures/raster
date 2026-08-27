@@ -1,4 +1,4 @@
-import { Card, CardBody, CardLabel, CardTitle } from "@noordvc/raster-react";
+import { Card, CardBody, CardLabel, CardTitle } from "@noorddev/raster-react";
 
 export function Use() {
   return (
