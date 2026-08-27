@@ -33,7 +33,7 @@
   flex-wrap: wrap;
   gap: 12px 16px;
   min-height: 72px;
-  padding: 16px 220px 12px 64px;
+  padding: 80px 24px 12px 64px;
   background: color-mix(in srgb, var(--fd-paper) 88%, transparent);
 }
 .sc-food-nav { margin-left: auto; }
