@@ -60,7 +60,7 @@ function Spark() {
 
 export function Board() {
   const [chat, setChat] = React.useState<string>("brief");
-  const [messages, setMessages] = React.useState<Msg[]>(STARTED.brief);
+  const [messages, setMessages] = React.useState<Msg[]>(STARTED.brief ?? []);
   const [draft, setDraft] = React.useState("");
   const [pending, setPending] = React.useState(false);
   const end = React.useRef<HTMLDivElement>(null);
