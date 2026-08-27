@@ -554,9 +554,9 @@ jobs:
           fi
           grep -q 'var(--duration-snap)' "$site"
           grep -q 'var(--duration)' "$site"
-          grep -q 'code-copy\[aria-label="Copied"\]' "$site"
-          grep -q 'rasterTokens.motion' apps/www/app/docs/tokens/page.tsx
-          grep -q 'Entry is not a show' apps/www/app/docs/tokens/page.tsx
+          grep -qF 'code-copy[aria-label="Copied"]' "$site"
+          grep -q '{motion.rule}' apps/www/app/docs/tokens/page.tsx
+          grep -q '{motion.snap}' apps/www/app/docs/tokens/page.tsx
           if grep -nE 'tailwind|@radix-ui' "$tokens" "$site" packages/core/css/motion.css; then
             echo "Motion must stay CSS-first"
             exit 1
