@@ -73,6 +73,12 @@ if (specimen.includes("min-width: 408px") || about.includes("min-width: 408px"))
 if (!specimen.includes("min-width: 481px") || !about.includes("min-width: 481px")) {
   fail("Two-column fields start at 481, after phone widths");
 }
+if (specimen.includes("padding: 0 1px 1px 0") || /padding:\s*1px;/.test(specimen)) {
+  fail("Homepage must open on the right and bottom; do not restore an outer frame");
+}
+if (!about.includes("padding: 0 1px 1px 0")) {
+  fail("About must keep its right and bottom hairline");
+}
 
 if (!ifCss.includes(".if-board .rs-sidebar-item") || !ifCss.includes("min-height: 44px")) {
   fail("Interface sidebars must use 44pt rows on the phone");

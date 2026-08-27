@@ -12,6 +12,7 @@
   grid-template-areas:
     "face"
     "law"
+    "cmd"
     "p01"
     "p02"
     "p03"
@@ -26,12 +27,11 @@
     "kita"
     "kitb"
     "kitc"
-    "kitd"
-    "cmd";
+    "kitd";
   grid-auto-rows: minmax(204px, auto);
-  /* Internal 1px gaps are the module lines. Top and left stay flush. */
+  /* Internal 1px gaps are the module lines. The field opens into the viewport. */
   background: var(--divider);
-  padding: 0 1px 1px 0;
+  padding: 0;
   gap: 1px;
 }
 .specimen-cell {
@@ -74,6 +74,13 @@
   justify-content: space-between;
   gap: 16px;
 }
+.specimen-command-kicker {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--text-secondary);
+}
 .specimen-command-row {
   display: flex;
   align-items: flex-start;
@@ -85,7 +92,7 @@
   right: auto;
   background: none;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 6px;
 }
 .specimen-cell-kit-a { grid-area: kita; }
 .specimen-cell-kit-b { grid-area: kitb; }
@@ -145,10 +152,10 @@
 .specimen-command {
   margin: 0;
   font-family: inherit;
-  font-size: clamp(15px, 2.4cqw, 22px);
-  font-weight: 500;
-  letter-spacing: -.025em;
-  line-height: 1.25;
+  font-size: clamp(1.5rem, 8.5cqw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -.04em;
+  line-height: .95;
   color: var(--text);
   overflow-wrap: anywhere;
 }
@@ -207,12 +214,13 @@
     grid-template-areas:
       "face face"
       "law law"
+      "cmd cmd"
       "p01 p02"
       "p03 p04"
       "p05 p06"
       "p07 p08"
       "p09 p10"
-      "note cmd"
+      "note note"
       "kita kita"
       "kitb kitb"
       "kitc kitc"
@@ -226,13 +234,13 @@
     grid-template-areas:
       "face face face face"
       "face face face face"
-      "law law law law"
+      "law law cmd cmd"
       "p01 p01 p02 p02"
       "p03 p03 p04 p04"
       "p05 p05 p06 p06"
       "p07 p07 p08 p08"
       "p09 p09 p10 p10"
-      "note note cmd cmd"
+      "note note note note"
       "kita kita kitb kitb"
       "kitc kitc kitd kitd";
   }
@@ -243,13 +251,13 @@
     grid-template-columns: repeat(6, minmax(0, 1fr));
     grid-template-areas:
       "face face face law law law"
-      "face face face law law law"
+      "face face face cmd cmd cmd"
       "p01 p01 p02 p02 p03 p03"
       "p04 p04 p05 p05 p06 p06"
       "p07 p07 p08 p08 p09 p09"
       "p10 p10 p10 note note note"
       "kita kita kitb kitb kitc kitc"
-      "kitd kitd kitd cmd cmd cmd";
+      "kitd kitd kitd kitd kitd kitd";
   }
 }
 
