@@ -97,6 +97,14 @@ jobs:
           '
           grep -q 'specimen-page' "$page"
           grep -q 'isSpecimenPath' apps/www/components/crumb-bar.tsx
+          if grep -n 'if (isSpecimenPath(pathname)) return null' apps/www/components/crumb-bar.tsx; then
+            echo "Homepage must keep the site crumb bar"
+            exit 1
+          fi
+          if grep -n 'if (isSpecimenPath(pathname) || isFieldPath(pathname)) return null' apps/www/components/crumb-bar.tsx; then
+            echo "Homepage must keep the site crumb bar"
+            exit 1
+          fi
           test -f apps/www/app/specimen.css
           if grep -n specimen-page apps/www/app/site.css; then
             echo "Specimen styles drifted back into site chrome"
