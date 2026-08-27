@@ -1,155 +1,198 @@
 "use client";
 
 import * as React from "react";
-import {
-  Badge,
-  Button,
-  ButtonGroup,
-  ScrollArea,
-  Sidebar,
-  SidebarFoot,
-  SidebarHead,
-  SidebarItem,
-  SidebarLabel,
-  SidebarNav,
-  Tab,
-  TabList,
-  TabPanel,
-  Tabs,
-  Textarea,
-} from "@noorddev/raster-react";
+import { aiSerif } from "../scene-fonts";
 
-const SHEETS = [
-  { href: "#brief", label: "Brief", current: true },
-  { href: "#press", label: "Press run" },
-  { href: "#invoice", label: "Invoice note" },
+type Role = "user" | "assistant";
+type Msg = { role: Role; text: string };
+
+const CHATS = [
+  { id: "brief", title: "Tighten the brief", preview: "Two sentences, same claim." },
+  { id: "press", title: "Press run 14", preview: "Keep the weeks under the fee." },
+  { id: "invoice", title: "Invoice note", preview: "The number on the cover." },
+] as const;
+
+const STARTED: Record<string, Msg[]> = {
+  brief: [
+    { role: "user", text: "Make the intro tighter. Keep the fee on the first page." },
+    {
+      role: "assistant",
+      text: "Two sentences, same claim. The fee stays on the first page; the weeks follow it. I would cut the opening clause and let the number do the work.",
+    },
+    { role: "user", text: "Good. Where should the timeline sit?" },
+    {
+      role: "assistant",
+      text: "Directly under the fee. Two lines, not a list. If a third week appears, it becomes a second sheet.",
+    },
+  ],
+  press: [
+    { role: "user", text: "Press starts week 4. What do I tell the floor?" },
+    {
+      role: "assistant",
+      text: "One note: same ink, no second color on the plate. Proofs stay in the run. If density drops, stop the sheet and ping the thread.",
+    },
+  ],
+  invoice: [
+    { role: "user", text: "The invoice has to match the cover." },
+    {
+      role: "assistant",
+      text: "Use the number on page one. Do not add a second total. Date the sheet to the week the press starts.",
+    },
+  ],
+};
+
+const HINTS = ["Tighten the intro", "Move the timeline", "Write the invoice line"];
+
+const REPLIES = [
+  "I can keep that on the sheet. Two sentences, same claim.",
+  "Place it under the fee. If it needs a third line, it is a second module.",
+  "Done as a note, not a list. The number stays first.",
+  "I would leave the chrome quiet and put the color on the field only.",
 ];
 
+function Spark() {
+  return (
+    <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
+      <path d="M8 1.2 9.1 6.4 14.8 8 9.1 9.6 8 14.8 6.9 9.6 1.2 8l5.7-1.6L8 1.2Z" />
+    </svg>
+  );
+}
+
 export function Board() {
-  const [tab, setTab] = React.useState("brief");
-  const [note, setNote] = React.useState("Cut the opening. Keep the fee on the first page.");
+  const [chat, setChat] = React.useState<string>("brief");
+  const [messages, setMessages] = React.useState<Msg[]>(STARTED.brief ?? []);
+  const [draft, setDraft] = React.useState("");
+  const [pending, setPending] = React.useState(false);
+  const end = React.useRef<HTMLDivElement>(null);
+  const box = React.useRef<HTMLTextAreaElement>(null);
+
+  React.useEffect(() => {
+    end.current?.scrollIntoView({ block: "end" });
+  }, [messages, pending]);
+
+  function openChat(id: string) {
+    setChat(id);
+    setMessages(STARTED[id] ?? []);
+    setDraft("");
+    setPending(false);
+  }
+
+  function fresh() {
+    setChat("new");
+    setMessages([]);
+    setDraft("");
+    setPending(false);
+    box.current?.focus();
+  }
+
+  function send(text?: string) {
+    const value = (text ?? draft).trim();
+    if (!value || pending) return;
+    setDraft("");
+    setMessages((rows) => [...rows, { role: "user", text: value }]);
+    setPending(true);
+    window.setTimeout(() => {
+      const reply = REPLIES[value.length % REPLIES.length]!;
+      setMessages((rows) => [...rows, { role: "assistant", text: reply }]);
+      setPending(false);
+    }, 700);
+  }
 
   return (
-    <main className="if-board" aria-label="AI tool">
-      <div className="if-app">
-        <Sidebar>
-          <SidebarHead>Sheet</SidebarHead>
-          <SidebarNav>
-            <SidebarLabel>Open</SidebarLabel>
-            {SHEETS.map((item) => (
-              <SidebarItem key={item.href} href={item.href} current={item.current}>
-                {item.label}
-              </SidebarItem>
-            ))}
-            <SidebarLabel>Library</SidebarLabel>
-            <SidebarItem href="#proofs">Proofs</SidebarItem>
-            <SidebarItem href="#refs">References</SidebarItem>
-          </SidebarNav>
-          <SidebarFoot>Local · 3 sheets</SidebarFoot>
-        </Sidebar>
+    <main className={`if-board sc-ai ${aiSerif.variable}`} aria-label="AI tool">
+      <aside className="sc-ai-rail" aria-label="Chats">
+        <button type="button" className="sc-ai-new" onClick={fresh}>
+          New chat
+        </button>
+        <div className="sc-ai-chats">
+          {CHATS.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className="sc-ai-chat"
+              aria-current={chat === item.id}
+              onClick={() => openChat(item.id)}
+            >
+              <span className="sc-ai-chat-title">{item.title}</span>
+              <span className="sc-ai-chat-preview">{item.preview}</span>
+            </button>
+          ))}
+        </div>
+      </aside>
 
-        <section className="if-main" aria-label="Canvas">
-          <div className="if-head">
-            <p className="if-head-title">Brief</p>
-            <ButtonGroup>
-              <Button variant="ghost" size="sm">
-                Write
-              </Button>
-              <Button variant="ghost" size="sm">
-                Review
-              </Button>
-            </ButtonGroup>
-          </div>
-          <div className="if-pane">
-            <Tabs value={tab} onValueChange={setTab}>
-              <TabList>
-                <Tab value="brief">Brief</Tab>
-                <Tab value="notes">Notes</Tab>
-              </TabList>
-              <TabPanel value="brief">
-                <div className="if-stack" style={{ marginTop: 20 }}>
-                  <div className="if-sheet">
-                    <p className="if-kicker">Page 1</p>
-                    <p className="if-copy">
-                      One sheet. Scope, weeks, and the fee. The number on the cover is the number on
-                      the invoice.
-                    </p>
-                    <p className="if-copy" style={{ marginTop: 12 }}>
-                      Press starts week 4. Proofs stay in the same ink. No second color in the chrome.
-                    </p>
-                  </div>
-                  <article className="rs-ai-card">
-                    <span className="rs-ai-tag">Widget</span>
-                    <p className="rs-ai-text">Move the timeline under the fee. Two lines, not a list.</p>
-                    <p className="rs-ai-done">
-                      <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
-                        <path d="M3 8.5 6.5 12 13 4.5" stroke="currentColor" strokeWidth="1.5" />
-                      </svg>
-                      Applied to the brief
-                    </p>
-                  </article>
-                  <article className="rs-ai-card">
-                    <span className="rs-ai-tag">Widget</span>
-                    <p className="rs-ai-text">The refs hang in the gutter. Keep the cite box after the claim.</p>
-                    <div style={{ marginTop: 12 }}>
-                      <Button variant="ghost" size="sm">
-                        Apply
-                      </Button>
-                    </div>
-                  </article>
+      <section className="sc-ai-stage" aria-label="Conversation">
+        <div className="sc-ai-thread">
+          <div className="sc-ai-measure">
+            {messages.length === 0 ? (
+              <div className="sc-ai-empty">
+                <span className="sc-ai-mark">
+                  <Spark />
+                </span>
+                <h1 className="sc-ai-hello">How can I help?</h1>
+                <div className="sc-ai-hints">
+                  {HINTS.map((hint) => (
+                    <button key={hint} type="button" className="sc-ai-hint" onClick={() => send(hint)}>
+                      {hint}
+                    </button>
+                  ))}
                 </div>
-              </TabPanel>
-              <TabPanel value="notes">
-                <div style={{ marginTop: 20 }}>
-                  <Textarea
-                    label="Scratch"
-                    value={note}
-                    onChange={(e) => setNote(e.target.value)}
-                  />
-                </div>
-              </TabPanel>
-            </Tabs>
-          </div>
-        </section>
-
-        <aside className="if-col" aria-label="AI chat">
-          <div className="if-head">
-            <p className="if-head-title">Assistant</p>
-            <Badge variant="muted">On the sheet</Badge>
-          </div>
-          <ScrollArea maxHeight="none" style={{ flex: 1, maxHeight: "none" }}>
-            <div className="rs-ai" style={{ border: "none", padding: 20 }}>
-              <div className="rs-ai-head">
-                <p className="rs-ai-title">Sheet</p>
-                <p className="rs-ai-status">
-                  <i />
-                  Reading brief
-                </p>
               </div>
-              <div className="rs-ai-msg rs-ai-user">
-                <div className="rs-ai-user-block">Make the intro tighter.</div>
-              </div>
-              <p className="rs-ai-reply">
-                Two sentences, same claim. The fee stays on the first page; the weeks follow it.
+            ) : (
+              messages.map((msg, i) =>
+                msg.role === "user" ? (
+                  <article key={i} className="sc-ai-msg sc-ai-msg-user">
+                    <p className="sc-ai-who">You</p>
+                    <p className="sc-ai-bubble">{msg.text}</p>
+                  </article>
+                ) : (
+                  <article key={i} className="sc-ai-msg">
+                    <p className="sc-ai-who">Assistant</p>
+                    <p className="sc-ai-reply">{msg.text}</p>
+                  </article>
+                ),
+              )
+            )}
+            {pending ? (
+              <p className="sc-ai-pending" aria-live="polite">
+                <i />
+                <i />
+                <i />
+                <span>Writing</span>
               </p>
-              <div className="rs-ai-msg rs-ai-user">
-                <div className="rs-ai-user-block">Show the edit as a widget in the canvas.</div>
-              </div>
-              <p className="rs-ai-reply">Applied. The timeline sits under the fee now.</p>
-              <article className="rs-ai-card">
-                <span className="rs-ai-tag">In feed</span>
-                <p className="rs-ai-text">Next: hang the Müller-Brockmann cite on the grid claim.</p>
-              </article>
-            </div>
-          </ScrollArea>
-          <div className="if-composer">
-            <div className="rs-ai-input">
-              <span>Ask the sheet…</span>
-              <span className="rs-ai-send">Send</span>
-            </div>
+            ) : null}
+            <div ref={end} />
           </div>
-        </aside>
-      </div>
+        </div>
+
+        <div className="sc-ai-dock">
+          <form
+            className="sc-ai-composer"
+            onSubmit={(event) => {
+              event.preventDefault();
+              send();
+            }}
+          >
+            <textarea
+              ref={box}
+              rows={1}
+              value={draft}
+              placeholder="Ask anything"
+              aria-label="Message"
+              onChange={(event) => setDraft(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && !event.shiftKey) {
+                  event.preventDefault();
+                  send();
+                }
+              }}
+            />
+            <button type="submit" className="sc-ai-send" disabled={!draft.trim() || pending}>
+              Send
+            </button>
+          </form>
+          <p className="sc-ai-note">Local replies. No live model on this sheet.</p>
+        </div>
+      </section>
     </main>
   );
 }

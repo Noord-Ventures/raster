@@ -1,12 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  Alert,
-  Badge,
-  Item,
-  ScrollArea,
-} from "@noorddev/raster-react";
+import { fleetMono } from "../scene-fonts";
 import { FleetMap } from "./map";
 
 const ACTIVE = [
@@ -21,55 +16,62 @@ const INACTIVE = [
   { id: "Van 03", where: "Yard north", meta: "Service" },
   { id: "Bike 14", where: "Spoor", meta: "Parked" },
   { id: "Boat 06", where: "Haven", meta: "Idle" },
-  { id: "Van 22", where: "Beverkoog", meta: "Parked" },
 ];
 
 export function Board() {
   const [pick, setPick] = React.useState("Van 04");
+  const [alert, setAlert] = React.useState(true);
+  const chosen = ACTIVE.find((unit) => unit.id === pick) ?? ACTIVE[0]!;
 
   return (
-    <main className="if-board if-fleet" aria-label="Fleet">
-      <FleetMap />
-      <section className="if-float if-float-a" aria-label="Active fleet">
-        <p className="if-kicker">Active fleet</p>
-        <ScrollArea maxHeight={280}>
-          {ACTIVE.map((unit) => (
-            <Item
-              key={unit.id}
-              title={unit.id}
-              description={unit.where}
-              meta={
-                <Badge variant={unit.id === pick ? "solid" : "outline"}>{unit.meta}</Badge>
-              }
-              onClick={() => setPick(unit.id)}
-              style={{ cursor: "pointer" }}
-            />
-          ))}
-        </ScrollArea>
+    <main className={`if-board sc-fleet ${fleetMono.variable}`} aria-label="Fleet">
+      <FleetMap selected={pick} />
+      <section className="sc-fleet-hud sc-fleet-a" aria-label="Active fleet">
+        <h2>Active fleet</h2>
+        {ACTIVE.map((unit) => (
+          <button
+            key={unit.id}
+            type="button"
+            className="sc-fleet-unit"
+            aria-current={pick === unit.id}
+            onClick={() => setPick(unit.id)}
+          >
+            <span>
+              {unit.id}
+              <br />
+              <small>{unit.where}</small>
+            </span>
+            <span className="sc-fleet-live">{unit.meta}</span>
+          </button>
+        ))}
       </section>
-      <section className="if-float if-float-b" aria-label="Inactive objects">
-        <p className="if-kicker">Inactive objects</p>
-        <ScrollArea maxHeight={280}>
-          {INACTIVE.map((unit) => (
-            <Item key={unit.id} title={unit.id} description={unit.where} meta={unit.meta} />
-          ))}
-        </ScrollArea>
+      <section className="sc-fleet-hud sc-fleet-b" aria-label="Inactive objects">
+        <h2>Inactive</h2>
+        {INACTIVE.map((unit) => (
+          <div key={unit.id} className="sc-fleet-unit">
+            <span>
+              {unit.id}
+              <br />
+              <small>{unit.where}</small>
+            </span>
+            <span>{unit.meta}</span>
+          </div>
+        ))}
       </section>
-      <section className="if-float if-float-c" aria-label="Alerts">
-        <Alert title="Density drop on plate 09">
-          Boat 02 is holding on the Oudegracht. Van 11 is two minutes out.
-        </Alert>
-        <div
-          className="if-field-spot"
-          style={{ marginTop: 12, ["--rs-chart-spot" as string]: "#E30613" }}
-        >
-          <p className="if-kicker">Alert field</p>
-          <Item
-            title="Boat 02"
-            description="Hold · Oudegracht"
-            meta={<Badge variant="solid">Alert</Badge>}
-          />
-        </div>
+      <section className="sc-fleet-hud sc-fleet-c" aria-label="Alerts">
+        {alert ? (
+          <div className="sc-fleet-alert">
+            <p>
+              <strong>Density drop on plate 09.</strong> {chosen.id} is selected. Boat 02 is holding on
+              the Oudegracht.
+            </p>
+            <button type="button" onClick={() => setAlert(false)}>
+              Acknowledge
+            </button>
+          </div>
+        ) : (
+          <p className="sc-fleet-quiet">No open alerts. {chosen.id} stays selected.</p>
+        )}
       </section>
     </main>
   );

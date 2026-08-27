@@ -2,32 +2,32 @@ export const interfaces = [
   {
     slug: "ai-tool",
     title: "AI tool",
-    law: "Sidebar, main canvas, chat box, in-feed widgets.",
+    law: "A conversation. Composer at the bottom.",
   },
   {
     slug: "dashboard",
     title: "SaaS dashboard",
-    law: "Sidebar, graphs, lists, multiple panes.",
+    law: "An ops console. Range, jobs, a selected pane.",
   },
   {
     slug: "threads",
     title: "Threads",
-    law: "Main feed, content types, threads, discussion.",
+    law: "A feed. Notes, photographs, a live thread.",
   },
   {
     slug: "fleet",
     title: "Fleet",
-    law: "Floating Raster on a three.js map. Active, inactive, alerts.",
+    law: "A night map. Active units, a panel, alerts.",
   },
   {
     slug: "delivery",
     title: "Food delivery",
-    law: "Main browsing, navbar, ratings.",
+    law: "Photographs of plates. Ratings, a bag.",
   },
   {
     slug: "slack",
     title: "Slack",
-    law: "Chat, sidebar, agents mixed with people.",
+    law: "Aubergine rail. Agents sit with people.",
   },
 ] as const;
 
