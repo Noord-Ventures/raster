@@ -530,8 +530,8 @@ jobs:
           grep -q 'confirm: "0.16s"' "$tokens"
           grep -q 'cubic-bezier(0.2, 0, 0, 1)' "$tokens"
           grep -q 'Entry is not a show' "$tokens"
-          grep -q '--duration-snap' packages/core/scripts/build.mjs
-          grep -q '--ease' packages/core/scripts/build.mjs
+          grep -qF -- '--duration-snap' packages/core/scripts/build.mjs
+          grep -qF -- '--ease' packages/core/scripts/build.mjs
           if grep -n 'rs-chart-enter\|rs-chart-in\|@keyframes' "$chart"; then
             echo "Charts must not fade in on load"
             exit 1
