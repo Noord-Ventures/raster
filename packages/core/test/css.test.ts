@@ -148,4 +148,28 @@ describe("tokens", () => {
     expect(rasterCss).toMatch(/\.rs-nest\{/);
     expect(rasterCss).toMatch(/\.rs-nest-in\{/);
   });
+
+  it("emits a phone control scale at 640 without restyling desktop", () => {
+    expect(rasterTokens.control.desktop.hit).toBe(40);
+    expect(rasterTokens.control.phone.hit).toBe(44);
+    expect(rasterTokens.control.phone.font).toBe(16);
+    expect(rasterTokens.control.breakpoint).toBe(640);
+    expect(rasterCss).toContain("--hit: 40px");
+    expect(rasterCss).toContain("--control-h: 40px");
+    expect(rasterCss).toContain("--control-fs: 14px");
+    expect(rasterCss).toContain("--hit:44px");
+    expect(rasterCss).toContain("--control-h:44px");
+    expect(rasterCss).toContain("--control-fs:16px");
+    const button = readFileSync(join(pkgDir, "css/components/button.css"), "utf8");
+    expect(button).toContain("height:40px");
+    expect(button).not.toMatch(/@media/);
+    const phone = readFileSync(join(pkgDir, "css/phone.css"), "utf8");
+    expect(phone).toMatch(/@media\(max-width:640px\)/);
+    expect(phone).toContain(".rs-btn-primary");
+    expect(phone).toContain(".rs-input");
+    expect(phone).toContain(".rs-tab");
+    expect(phone).toContain(".rs-switch");
+    expect(phone).toMatch(/min-height:var\(--hit\)/);
+    expect(rasterCss).toMatch(/\.rs-btn-primary,\.rs-btn-ghost\{[^}]*min-height:var\(--hit\)/);
+  });
 });

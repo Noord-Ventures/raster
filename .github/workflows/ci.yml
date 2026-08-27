@@ -290,6 +290,10 @@ jobs:
             exit 1
           fi
           grep -q 'background: var(--bg)' apps/www/components/docs-nav/docs-nav.css
+          node apps/www/scripts/check-mobile.mjs
+          grep -q 'MobileToc' apps/www/components/docs-nav/index.tsx
+          grep -q '44pt' apps/www/components/docs-nav/FEATURE.md
+          grep -q 'viewportFit' apps/www/app/layout.tsx
       - name: Charts are posters
         run: |
           css=packages/core/css/components/chart.css

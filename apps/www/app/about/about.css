@@ -160,7 +160,7 @@
   border-bottom: 1px solid var(--text);
 }
 
-@media (min-width: 408px) {
+@media (min-width: 481px) {
   .field {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
@@ -198,4 +198,21 @@
       "pkg pkg pkg door door host"
       "who who who who mit mit";
   }
+}
+
+@media (max-width: 640px) {
+  .field-cell-word {
+    padding-top: calc(20px + env(safe-area-inset-top, 0px));
+  }
+  .field-cell-mit {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+  .field-copy p { font-size: 16px; line-height: 1.6; }
+  .field-kicker { font-size: 13px; }
+  .field-cell a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .field-url a { min-height: 44px; }
 }

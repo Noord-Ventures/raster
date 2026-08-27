@@ -74,6 +74,19 @@
   justify-content: space-between;
   gap: 16px;
 }
+.specimen-command-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.specimen-cell-command .code-copy {
+  position: static;
+  top: auto;
+  right: auto;
+  background: none;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
 .specimen-cell-kit-a { grid-area: kita; }
 .specimen-cell-kit-b { grid-area: kitb; }
 .specimen-cell-kit-c { grid-area: kitc; }
@@ -186,7 +199,7 @@
   box-shadow: none;
 }
 
-@media (min-width: 408px) {
+@media (min-width: 481px) {
   .specimen {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
@@ -235,5 +248,32 @@
       "p10 p10 p10 note note note"
       "kita kita kitb kitb kitc kitc"
       "kitd kitd kitd cmd cmd cmd";
+  }
+}
+
+@media (max-width: 640px) {
+  .specimen-cell-face {
+    padding-top: calc(20px + env(safe-area-inset-top, 0px));
+  }
+  .specimen-cell-command {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+  .specimen-command-meta a,
+  .specimen-kit-name a {
+    display: inline-flex;
+    align-items: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .specimen-kit-name { font-size: 15px; }
+  .specimen-command-meta { font-size: 15px; }
+  .specimen-n-text { font-size: 18px; line-height: 1.4; }
+  .specimen-poster { font-size: 15px; }
+  .specimen-cell-command .code-copy {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    margin-top: 0;
   }
 }

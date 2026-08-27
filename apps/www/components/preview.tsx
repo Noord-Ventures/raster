@@ -257,13 +257,13 @@ export const demos: Record<string, () => React.ReactNode> = {
     </ButtonGroup>
   ),
   button: () => (
-    <div style={{ display: "flex", gap: 10 }}>
+    <div className="preview-cluster">
       <Button>Primary action</Button>
       <Button variant="ghost">Secondary</Button>
     </div>
   ),
   badge: () => (
-    <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+    <div className="preview-cluster">
       <Badge>Recommended</Badge>
       <Badge variant="solid">Delivered</Badge>
       <Badge variant="muted">In progress</Badge>

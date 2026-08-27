@@ -20,6 +20,16 @@
 @media (min-width: 1700px) {
   .if-index { max-width: 1244px; }
 }
+@media (max-width: 899px) {
+  .if-index {
+    flex-direction: column;
+    padding-top: calc(72px + env(safe-area-inset-top, 0px));
+  }
+  .if-index .cover { padding-top: 32px; }
+}
+@media (max-width: 640px) {
+  .if-index { padding-top: calc(56px + env(safe-area-inset-top, 0px)); }
+}
 
 .if-rail {
   display: none;
@@ -64,8 +74,11 @@
   gap: var(--gutter);
   padding: 24px 0 72px;
 }
-@media (max-width: 480px) {
-  .if-list { grid-template-columns: 1fr; }
+@media (max-width: 640px) {
+  .if-list { grid-template-columns: 1fr; padding: 16px 0 calc(72px + env(safe-area-inset-bottom, 0px)); }
+  .if-tile { min-height: 184px; padding: 24px 20px; }
+  .if-tile h2 { font-size: 22px; }
+  .if-tile p { font-size: 15px; line-height: 1.5; }
 }
 .if-tile {
   isolation: isolate;
@@ -279,12 +292,43 @@
   .if-col,
   .if-col-narrow { width: 100%; min-height: 0; }
   .if-app { flex-direction: column; }
-  .if-app .rs-sidebar { min-height: 0; width: 100%; border-right: none; border-bottom: 1px solid var(--divider); padding-top: 64px; }
+  .if-app .rs-sidebar { min-height: 0; width: 100%; border-right: none; border-bottom: 1px solid var(--divider); padding-top: 12px; }
   .if-grid-2 { grid-template-columns: 1fr; }
   .if-float { position: relative; top: auto; left: auto; right: auto; bottom: auto; width: auto; margin: 12px 20px; }
   .if-float-c { width: auto; }
   .if-fleet { overflow: auto; }
   .if-fleet-map { position: relative; min-height: 408px; }
+}
+
+@media (max-width: 640px) {
+  .if-board { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .if-board .rs-sidebar-item {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+  .if-board .rs-sidebar-item:last-child { padding-bottom: 32px; }
+  .if-board .rs-tab,
+  .if-board button.rs-tab {
+    min-height: 44px;
+    padding: 12px 0;
+    font-size: 16px;
+  }
+  .if-head {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 44px;
+    padding: 12px 20px;
+  }
+  .if-head-title {
+    font-size: 16px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .if-composer { padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

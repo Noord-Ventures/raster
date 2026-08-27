@@ -99,6 +99,12 @@ export const rasterTokens = {
     reducedMotion: "all looping demos disabled under prefers-reduced-motion",
   },
   breakpoints: { mobileGrid: 480, mobileLayout: 640, rail: 1024, wide: 1440, cap: 1700 },
+  /** Desktop stays the Raster poster. Phone (≤640) is a 44pt control scale. */
+  control: {
+    desktop: { hit: 40, height: 40, font: 14, label: 12 },
+    phone: { hit: 44, height: 44, font: 16, label: 15 },
+    breakpoint: 640,
+  },
 } as const;
 
 export type RasterTokens = typeof rasterTokens;
