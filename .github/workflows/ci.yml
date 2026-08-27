@@ -71,6 +71,10 @@ jobs:
           grep -q 'A poster you can install.' "$writer"
           grep -q 'A design system on a modular grid.' "$writer"
           grep -q 'npx @noorddev/raster-cli init' "$writer"
+          if grep -n '@noordvc' "$writer" "$page" apps/www/app/docs/page.tsx; then
+            echo "User-facing install copy must say @noorddev, not @noordvc"
+            exit 1
+          fi
           if grep -n -E 'One ink|204 module|Crouwel|Müller-Brockmann' "$page" "$writer" apps/www/app/layout.tsx apps/www/app/social.ts; then
             echo "Homepage law must not use the old museum caption"
             exit 1
@@ -124,6 +128,40 @@ jobs:
             echo "01 must not be a larger typographic spot"
             exit 1
           fi
+          grep -q 'CopyControl' apps/www/app/page.tsx
+          grep -q 'specimen-command-kicker' apps/www/app/page.tsx
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const page = readFileSync("apps/www/app/page.tsx", "utf8");
+            const body = page.slice(page.indexOf("export default function Home"));
+            const cmd = body.indexOf("specimen-cell-command");
+            const laws = body.indexOf("<SpecimenPrinciples");
+            if (cmd < 0 || laws < 0 || cmd > laws) {
+              console.error("Install command must sit before the numbered laws");
+              process.exit(1);
+            }
+            const css = readFileSync("apps/www/app/specimen.css", "utf8");
+            const areas = [...css.matchAll(/grid-template-areas:\s*([^;]+);/g)].map((m) => m[1]);
+            if (areas.length === 0) {
+              console.error("Specimen grid areas missing");
+              process.exit(1);
+            }
+            for (const block of areas) {
+              const cmdAt = block.indexOf("cmd");
+              const p01 = block.indexOf("p01");
+              if (cmdAt < 0 || p01 < 0 || cmdAt > p01) {
+                console.error("Command cell must precede law 01 in every specimen grid");
+                process.exit(1);
+              }
+            }
+            const start = css.indexOf(".specimen-command {");
+            const end = css.indexOf("}", start);
+            const rule = css.slice(start, end);
+            if (!rule.includes("3.5rem") || !rule.includes("font-weight: 600")) {
+              console.error("Install command must stay a primary poster CTA");
+              process.exit(1);
+            }
+          '
           test -f apps/www/app/specimen-kit.tsx
           test -f apps/www/app/specimen-laws.ts
           if grep -nE '^[[:space:]]*height: 100dvh' apps/www/app/specimen.css; then
@@ -236,7 +274,7 @@ jobs:
           grep -q 'The control, the name, a short law.' apps/www/app/components/page.tsx
           grep -q 'className="rs-scene"' apps/www/components/examples/scene.tsx
           grep -q '.rs-scene .rs-use-type' apps/www/components/examples/use.css
-      - name: About is a masthead
+      - name: About is a modernist homage
         run: |
           page=apps/www/app/about/page.tsx
           facts=apps/www/app/about/facts.ts
@@ -244,6 +282,21 @@ jobs:
           test -f "$page"
           test -f "$facts"
           test -f "$css"
+          grep -q 'homage' "$facts"
+          grep -q 'Swiss Style' "$facts"
+          grep -q 'Dutch modernism' "$facts"
+          grep -q 'Josef Müller-Brockmann' "$facts"
+          grep -q 'Wim Crouwel' "$facts"
+          grep -q 'Max Bill' "$facts"
+          grep -q 'Karl Gerstner' "$facts"
+          grep -q 'Emil Ruder' "$facts"
+          grep -q 'Armin Hofmann' "$facts"
+          grep -q 'Piet Zwart' "$facts"
+          grep -q 'Paul Schuitema' "$facts"
+          grep -q 'Otto Treumann' "$facts"
+          grep -q 'Total Design' "$facts"
+          grep -q 'Neue Grafik' "$facts"
+          grep -q 'Grid Systems' "$facts"
           grep -q 'heading: "Typeface"' "$facts"
           grep -q 'heading: "Noord"' "$facts"
           grep -q 'door: DOOR' "$facts"
@@ -252,24 +305,61 @@ jobs:
           grep -q 'foundry.license' "$facts"
           grep -q 'meta.url' "$facts"
           grep -q '@noorddev/raster' "$facts"
+          if grep -n 'npx @noordvc' "$facts" "$page"; then
+            echo "About install copy must say @noorddev, not @noordvc"
+            exit 1
+          fi
           grep -q 'type.foundry' "$facts"
           grep -q 'AI lab' "$facts"
           grep -q 'Alkmaar' "$facts"
           grep -q 'Silicon Valley' "$facts"
           grep -q 'designed and built' "$facts"
-          grep -q 'masthead-typeface' "$page"
-          grep -q 'masthead-noord' "$page"
-          grep -q 'masthead-renato' "$page"
           grep -q 'field-page' "$page"
           grep -q 'field-face' "$css"
+          grep -q 'field-name-feature' "$css"
+          grep -q 'field-colophon' "$css"
+          grep -q 'field-colophon' "$page"
+          grep -q 'field-spec-module' "$page"
+          grep -q 'field-spec-hair' "$page"
+          grep -q 'field-spec-flush' "$page"
+          grep -q 'field-grotesque' "$page"
+          grep -q '204' "$facts"
+          grep -q 'Hairlines' "$facts"
+          grep -q 'No radius' "$facts"
+          if grep -nE 'masthead-noord|masthead-typeface|masthead-renato' "$page"; then
+            echo "Credits must not occupy masthead ids"
+            exit 1
+          fi
+          if grep -nE 'field-face">|field-face |field-name-feature">' "$page" | grep -nE 'Noord|Inter|Renato'; then
+            echo "Credits must not be the About face"
+            exit 1
+          fi
           if grep -nE 'venture studio|Ten portfolio|ten portfolio' "$facts" "$page"; then
             echo "About must not lead with the venture-studio line"
+            exit 1
+          fi
+          if grep -nE 'our team|the team|team page|we are a' "$facts" "$page"; then
+            echo "About must not be a team page"
             exit 1
           fi
           if grep -n 'overflow: hidden' "$css"; then
             echo "About field cells must not crop"
             exit 1
           fi
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const css = readFileSync("apps/www/app/about/about.css", "utf8");
+            const start = css.indexOf(".field-colophon p {");
+            if (start < 0) {
+              console.error("Colophon type rule missing");
+              process.exit(1);
+            }
+            const rule = css.slice(start, css.indexOf("}", start));
+            if (!rule.includes("font-size: 12px") || !rule.includes("--text-secondary")) {
+              console.error("Colophon must stay 12px and secondary");
+              process.exit(1);
+            }
+          '
           grep -q 'SIL OFL 1.1' packages/core/src/tokens.ts
           if grep -n Messina "$page" "$facts" "$css"; then
             echo "About must not name Messina"
@@ -282,7 +372,11 @@ jobs:
           grep -q 'href: "/about"' apps/www/components/site-chrome.tsx
           grep -q 'label: "About"' apps/www/components/site-chrome.tsx
           if grep -n border-left "$css"; then
-            echo "Masthead must not grow a left rule"
+            echo "About field must not grow a left rule"
+            exit 1
+          fi
+          if grep -nE 'box-shadow:[^n]|border-radius:[^0]' "$css"; then
+            echo "About must stay flush: no shadow, no radius"
             exit 1
           fi
       - name: Interfaces is six posters

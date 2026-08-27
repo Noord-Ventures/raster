@@ -23,13 +23,8 @@ export default function Home() {
           <h1 className="specimen-law">{LAW}</h1>
         </section>
 
-        <SpecimenPrinciples />
-
-        <section className="specimen-cell specimen-cell-note">
-          <p className="specimen-poster">{POSTER}</p>
-        </section>
-
         <section className="specimen-cell specimen-cell-command">
+          <p className="specimen-command-kicker">Install</p>
           <div className="specimen-command-row">
             <p className="specimen-command">{COMMAND}</p>
             <CopyControl text={COMMAND} />
@@ -39,6 +34,12 @@ export default function Home() {
             <span aria-hidden="true"> · </span>
             MIT
           </p>
+        </section>
+
+        <SpecimenPrinciples />
+
+        <section className="specimen-cell specimen-cell-note">
+          <p className="specimen-poster">{POSTER}</p>
         </section>
 
         <SpecimenKit />

@@ -11,15 +11,24 @@
   min-height: 100dvh;
   grid-template-columns: minmax(0, 1fr);
   grid-template-areas:
-    "word"
+    "era"
     "lead"
-    "inter"
-    "type"
-    "pkg"
-    "door"
-    "host"
-    "who"
-    "mit";
+    "jmb"
+    "wc"
+    "n01"
+    "n02"
+    "n03"
+    "n04"
+    "n05"
+    "n06"
+    "n07"
+    "n08"
+    "n09"
+    "mod"
+    "hair"
+    "flush"
+    "grot"
+    "colo";
   grid-auto-rows: minmax(204px, auto);
   background: var(--divider);
   padding: 0 1px 1px 0;
@@ -38,31 +47,40 @@
   overflow: visible;
 }
 
-.field-cell-word {
-  grid-area: word;
+.field-cell-era {
+  grid-area: era;
   container-type: inline-size;
   justify-content: flex-end;
   min-height: 408px;
+  background-color: var(--bg);
+  background-image: var(--grid-image);
+  background-size: var(--grid-size) 100%;
 }
 
-.field-cell-lead {
-  grid-area: lead;
-  justify-content: space-between;
-}
-
-.field-cell-inter {
-  grid-area: inter;
+.field-cell-lead { grid-area: lead; }
+.field-cell-jmb { grid-area: jmb; min-height: 408px; }
+.field-cell-wc { grid-area: wc; min-height: 408px; }
+.field-cell-n01 { grid-area: n01; }
+.field-cell-n02 { grid-area: n02; }
+.field-cell-n03 { grid-area: n03; }
+.field-cell-n04 { grid-area: n04; }
+.field-cell-n05 { grid-area: n05; }
+.field-cell-n06 { grid-area: n06; }
+.field-cell-n07 { grid-area: n07; }
+.field-cell-n08 { grid-area: n08; }
+.field-cell-n09 { grid-area: n09; }
+.field-cell-mod { grid-area: mod; }
+.field-cell-hair { grid-area: hair; }
+.field-cell-flush { grid-area: flush; }
+.field-cell-grot {
+  grid-area: grot;
   container-type: inline-size;
-  justify-content: flex-end;
-  min-height: 408px;
 }
-
-.field-cell-type { grid-area: type; }
-.field-cell-pkg { grid-area: pkg; }
-.field-cell-door { grid-area: door; }
-.field-cell-host { grid-area: host; }
-.field-cell-who { grid-area: who; justify-content: flex-end; }
-.field-cell-mit { grid-area: mit; }
+.field-cell-colophon {
+  grid-area: colo;
+  justify-content: flex-start;
+  gap: 12px;
+}
 
 .field-face {
   margin: 0;
@@ -73,18 +91,19 @@
   color: var(--text);
 }
 
-.field-face-sub {
-  font-size: clamp(3.5rem, 22cqw, 12rem);
-}
-
 .field-name {
   margin: 0;
-  font-size: clamp(28px, 5vw, 52px);
+  font-size: clamp(1.5rem, 4.2vw, 2.5rem);
   font-weight: 600;
   letter-spacing: -.035em;
   line-height: .95;
   text-wrap: balance;
-  max-width: 8em;
+}
+
+.field-name-feature {
+  font-size: clamp(2.5rem, 7vw, 7rem);
+  letter-spacing: -.045em;
+  line-height: .85;
 }
 
 .field-kicker {
@@ -111,31 +130,93 @@
   color: var(--text);
 }
 
-.field-names {
+.field-mark {
   margin: 0;
-  padding: 0;
-  list-style: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  text-wrap: balance;
+  max-width: 22em;
+}
+
+.field-spec {
+  flex: 1;
+  min-height: 88px;
+  width: 100%;
+}
+
+.field-spec-module {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px;
+  background: var(--divider);
+}
+
+.field-spec-module span {
+  display: flex;
+  align-items: flex-end;
+  padding: 8px;
+  background: var(--bg);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--text-secondary);
+}
+
+.field-spec-hair {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--divider) 0,
+    var(--divider) 1px,
+    transparent 1px,
+    transparent 20px
+  );
+}
+
+.field-spec-flush {
+  margin: 0 -20px;
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 12px 20px;
+}
+
+.field-spec-flush span {
+  font-size: clamp(52px, 10vw, 88px);
+  font-weight: 600;
+  letter-spacing: -.045em;
+  line-height: .85;
+  color: var(--text);
+}
+
+.field-grotesque {
+  margin: 0;
+  font-size: clamp(4.5rem, 22cqw, 10rem);
+  font-weight: 600;
+  letter-spacing: -.05em;
+  line-height: .8;
+  color: var(--text);
+}
+
+.field-colophon {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  max-width: 36em;
 }
 
-.field-names li {
-  font-size: clamp(18px, 3vw, 28px);
-  font-weight: 600;
-  letter-spacing: -.03em;
-  line-height: 1.15;
-  color: var(--text);
-  overflow-wrap: anywhere;
-}
-
-.field-url {
+.field-colophon p {
   margin: 0;
-  font-size: clamp(22px, 4vw, 36px);
-  font-weight: 600;
-  letter-spacing: -.03em;
-  line-height: 1.1;
-  overflow-wrap: anywhere;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.5;
+  color: var(--text-secondary);
 }
 
 .field-cell a {
@@ -152,26 +233,31 @@
   color: var(--text);
 }
 
-.field-url a {
-  border-bottom: none;
+.field-colophon a,
+.field-colophon a:link,
+.field-colophon a:visited,
+.field-colophon a:any-link {
+  color: var(--text-secondary);
 }
 
-.field-url a:hover {
-  border-bottom: 1px solid var(--text);
-}
+.field-colophon a:hover { border-color: var(--text-secondary); }
 
 @media (min-width: 481px) {
   .field {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
-      "word word"
+      "era era"
       "lead lead"
-      "inter inter"
-      "type type"
-      "pkg pkg"
-      "door host"
-      "who who"
-      "mit mit";
+      "jmb jmb"
+      "wc wc"
+      "n01 n02"
+      "n03 n04"
+      "n05 n06"
+      "n07 n08"
+      "n09 mod"
+      "hair flush"
+      "grot grot"
+      "colo colo";
   }
 }
 
@@ -179,12 +265,18 @@
   .field {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-areas:
-      "word word word word"
-      "word word word word"
+      "era era era era"
+      "era era era era"
       "lead lead lead lead"
-      "inter inter type type"
-      "pkg pkg door host"
-      "who who mit mit";
+      "jmb jmb jmb jmb"
+      "wc wc wc wc"
+      "n01 n01 n02 n02"
+      "n03 n03 n04 n04"
+      "n05 n05 n06 n06"
+      "n07 n07 n08 n08"
+      "n09 n09 mod mod"
+      "hair hair flush flush"
+      "grot grot colo colo";
   }
 }
 
@@ -192,11 +284,15 @@
   .field {
     grid-template-columns: repeat(6, minmax(0, 1fr));
     grid-template-areas:
-      "word word word lead lead lead"
-      "word word word lead lead lead"
-      "inter inter inter type type type"
-      "pkg pkg pkg door door host"
-      "who who who who mit mit";
+      "era era era lead lead lead"
+      "era era era lead lead lead"
+      "jmb jmb jmb jmb jmb jmb"
+      "wc wc wc wc wc wc"
+      "n01 n01 n02 n02 n03 n03"
+      "n04 n04 n05 n05 n06 n06"
+      "n07 n07 n08 n08 n09 n09"
+      "mod mod hair hair flush flush"
+      "grot grot grot colo colo colo";
   }
 }
 
