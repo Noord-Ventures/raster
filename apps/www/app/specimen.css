@@ -1,18 +1,29 @@
 /* Homepage specimen. Imported only by app/page.tsx. */
 
+/* Cover the site grid on home only. The 20px inset module line
+   was reading as a box around the page. About keeps that grid. */
+body:has(.specimen-page) {
+  background-image: none;
+}
+
 .specimen-page {
   width: 100%;
   min-height: 100dvh;
+  margin: 0;
+  border: none;
+  background: var(--bg);
 }
 .specimen {
   display: grid;
   width: 100%;
   min-height: 100dvh;
+  margin: 0;
+  border: none;
   grid-template-columns: minmax(0, 1fr);
   grid-template-areas:
     "face"
-    "law"
     "cmd"
+    "law"
     "p01"
     "p02"
     "p03"
@@ -29,10 +40,12 @@
     "kitc"
     "kitd";
   grid-auto-rows: minmax(204px, auto);
-  /* Internal 1px gaps are the module lines. The field opens into the viewport. */
-  background: var(--divider);
+  /* Paper to the viewport. Internal lines are cell shadows, clipped
+     at the field edge so no hairline reads as a page frame. */
+  background: var(--bg);
   padding: 0;
-  gap: 1px;
+  gap: 0;
+  clip-path: inset(0);
 }
 .specimen-cell {
   min-width: 0;
@@ -42,6 +55,7 @@
   display: flex;
   flex-direction: column;
   overflow: visible;
+  box-shadow: 1px 0 0 var(--divider), 0 1px 0 var(--divider);
 }
 .specimen-cell-face {
   grid-area: face;
@@ -71,20 +85,21 @@
 .specimen-cell-command {
   grid-area: cmd;
   container-type: inline-size;
-  justify-content: space-between;
-  gap: 16px;
+  justify-content: center;
+  gap: 20px;
+  min-height: 408px;
 }
 .specimen-command-kicker {
   margin: 0;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
   letter-spacing: -.01em;
   color: var(--text-secondary);
 }
 .specimen-command-row {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 16px;
 }
 .specimen-cell-command .code-copy {
   position: static;
@@ -92,7 +107,11 @@
   right: auto;
   background: none;
   flex-shrink: 0;
-  margin-top: 6px;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  margin-top: 8px;
 }
 .specimen-cell-kit-a { grid-area: kita; }
 .specimen-cell-kit-b { grid-area: kitb; }
@@ -152,10 +171,10 @@
 .specimen-command {
   margin: 0;
   font-family: inherit;
-  font-size: clamp(1.5rem, 8.5cqw, 3.5rem);
+  font-size: clamp(2rem, 7.5cqw, 5rem);
   font-weight: 600;
-  letter-spacing: -.04em;
-  line-height: .95;
+  letter-spacing: -.045em;
+  line-height: .92;
   color: var(--text);
   overflow-wrap: anywhere;
 }
@@ -213,8 +232,8 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
       "face face"
-      "law law"
       "cmd cmd"
+      "law law"
       "p01 p02"
       "p03 p04"
       "p05 p06"
@@ -233,8 +252,8 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-areas:
       "face face face face"
-      "face face face face"
-      "law law cmd cmd"
+      "cmd cmd cmd cmd"
+      "law law law law"
       "p01 p01 p02 p02"
       "p03 p03 p04 p04"
       "p05 p05 p06 p06"
@@ -251,7 +270,7 @@
     grid-template-columns: repeat(6, minmax(0, 1fr));
     grid-template-areas:
       "face face face law law law"
-      "face face face cmd cmd cmd"
+      "cmd cmd cmd cmd cmd cmd"
       "p01 p01 p02 p02 p03 p03"
       "p04 p04 p05 p05 p06 p06"
       "p07 p07 p08 p08 p09 p09"

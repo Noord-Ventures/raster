@@ -110,9 +110,21 @@ jobs:
             echo "Homepage must open on the right and bottom"
             exit 1
           fi
+          grep -q 'body:has(.specimen-page)' apps/www/app/specimen.css
+          grep -q 'clip-path: inset(0)' apps/www/app/specimen.css
           node -e '
             const { readFileSync } = require("node:fs");
             const css = readFileSync("apps/www/app/specimen.css", "utf8");
+            const pageStart = css.indexOf(".specimen-page {");
+            if (pageStart < 0) {
+              console.error("Homepage .specimen-page rule missing");
+              process.exit(1);
+            }
+            const pageRule = css.slice(pageStart, css.indexOf("}", pageStart));
+            if (!pageRule.includes("background: var(--bg)") || /border:\s*1px/.test(pageRule)) {
+              console.error("Homepage paper must be flush: opaque, no page border");
+              process.exit(1);
+            }
             const start = css.indexOf(".specimen {");
             if (start < 0) {
               console.error("Homepage .specimen rule missing");
@@ -123,8 +135,12 @@ jobs:
               console.error("Homepage specimen must have padding: 0");
               process.exit(1);
             }
-            if (/border-(right|bottom)/.test(rule) || /padding:\s*0\s+1px/.test(rule)) {
-              console.error("Homepage must not draw a right or bottom frame");
+            if (!rule.includes("background: var(--bg)")) {
+              console.error("Homepage leftover must be paper, not a divider sliver");
+              process.exit(1);
+            }
+            if (/border-(top|right|bottom|left)/.test(rule) || /padding:\s*0\s+1px/.test(rule)) {
+              console.error("Homepage must not draw a frame on any side");
               process.exit(1);
             }
           '
@@ -178,9 +194,23 @@ jobs:
             const start = css.indexOf(".specimen-command {");
             const end = css.indexOf("}", start);
             const rule = css.slice(start, end);
-            if (!rule.includes("3.5rem") || !rule.includes("font-weight: 600")) {
+            if (!rule.includes("5rem") || !rule.includes("font-weight: 600")) {
               console.error("Install command must stay a primary poster CTA");
               process.exit(1);
+            }
+            const cmdCell = css.slice(css.indexOf(".specimen-cell-command {"), css.indexOf("}", css.indexOf(".specimen-cell-command {")));
+            if (!cmdCell.includes("min-height: 408px")) {
+              console.error("Install command cell must occupy two modules");
+              process.exit(1);
+            }
+            for (const block of areas) {
+              const rows = block.match(/"[^"]+"/g) || [];
+              const cmdRows = rows.filter((row) => row.includes("cmd"));
+              const onlyCmd = cmdRows.length > 0 && cmdRows.every((row) => /^"(?:cmd )*(cmd)"$/.test(row.trim()));
+              if (!onlyCmd) {
+                console.error("Install command must be a full-bleed CTA row, not a shared cell");
+                process.exit(1);
+              }
             }
           '
           test -f apps/www/app/specimen-kit.tsx
