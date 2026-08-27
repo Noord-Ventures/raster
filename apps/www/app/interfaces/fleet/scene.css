@@ -38,8 +38,8 @@
   padding: 16px 16px 12px;
   backdrop-filter: none;
 }
-.sc-fleet-a { top: 76px; left: 20px; }
-.sc-fleet-b { top: 76px; right: 20px; }
+.sc-fleet-a { top: 76px; left: 64px; }
+.sc-fleet-b { top: 76px; right: 72px; }
 .sc-fleet-c { bottom: 20px; left: 20px; width: min(560px, calc(100vw - 40px)); }
 
 .sc-fleet-hud h2 {

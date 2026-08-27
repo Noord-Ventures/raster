@@ -34,7 +34,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 72px 16px 24px;
+  padding: 76px 16px 24px 20px;
   background: var(--ai-rail);
   color: var(--ai-ink);
 }

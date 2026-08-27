@@ -62,7 +62,7 @@
 .sc-dash-main {
   flex: 1;
   min-width: 0;
-  padding: 76px 24px 40px;
+  padding: 76px 72px 40px 24px;
 }
 .sc-dash-head {
   display: flex;

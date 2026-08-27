@@ -29,12 +29,14 @@
   z-index: 3;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 12px 16px;
   min-height: 72px;
-  padding: 16px 24px 12px;
+  padding: 16px 220px 12px 64px;
   background: color-mix(in srgb, var(--fd-paper) 88%, transparent);
 }
+.sc-food-nav { margin-left: auto; }
 .sc-food-where {
   margin: 0;
   font-family: var(--fd-display);
@@ -238,7 +240,8 @@
 .sc-food-dish p { margin: 0; font-size: 13px; color: var(--fd-mute); }
 
 @media (max-width: 640px) {
-  .sc-food-bar { flex-wrap: wrap; padding-top: 64px; }
+  .sc-food-bar { flex-wrap: wrap; padding: 64px 16px 12px; }
+  .sc-food-nav { margin-left: 0; }
   .sc-food-where { font-size: 24px; }
   .sc-food-nav button,
   .sc-food-bag,
