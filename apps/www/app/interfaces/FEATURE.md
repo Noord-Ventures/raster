@@ -2,19 +2,19 @@
 
 What it is, how to get there, what done looks like.
 
-Writers: the six live in `app/interfaces/catalog.ts`. Each proto is its own folder and its own route. The section is a first-class nav sibling of Components, Docs, and About — not a page inside a component. Compose the Raster catalog. Do not invent a second kit.
+Writers: the six live in `app/interfaces/catalog.ts`. Each proto is its own folder and its own route. The section is a first-class nav sibling of Components, Docs, and About — not a page inside a component.
 
-Chrome stays monochrome. A board may set one Crouwel spot or a color-field. Inter, 204 module, hairlines, flush, no radius, no shadow, sentence case.
+Catalog stays Raster control. Detail is control, then a product scene. Each scene has its own surface, type, and controls. Scenes may use color, radius, and shadow. Site chrome may not.
 
 | Surface | Route | Click path | Done |
 | --- | --- | --- | --- |
 | Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. First column is the six. Each tile is a proto. |
-| AI tool | `/interfaces/ai-tool` | Interfaces → AI tool | Sidebar, main canvas, AI chat box, in-feed widgets. |
-| SaaS dashboard | `/interfaces/dashboard` | Interfaces → SaaS dashboard | Sidebar, graphs, lists, multiple panes. |
-| Threads | `/interfaces/threads` | Interfaces → Threads | Main feed, content types, threads, discussion. |
-| Fleet | `/interfaces/fleet` | Interfaces → Fleet | Floating Raster on a three.js map. Active fleet, inactive objects, alerts. Map is a scene, not the noord.vc marketing page. |
-| Food delivery | `/interfaces/delivery` | Interfaces → Food delivery | Main browsing, navbar, ratings. |
-| Slack | `/interfaces/slack` | Interfaces → Slack | Chat UI, sidebar, agents mixed with real people. |
-| Phone | ≤430 | Contents picker | Rail hides under 900. A stacked 44pt picker lists the six. Board sidebars and Raster controls use the 44pt phone scale. Desktop posters stay flush. |
+| AI tool | `/interfaces/ai-tool` | Interfaces → AI tool | Chat product. Thread, user vs assistant, composer at the bottom, canned reply. |
+| SaaS dashboard | `/interfaces/dashboard` | Interfaces → SaaS dashboard | Cool ops console. Range changes the numbers. A selected job opens a pane. |
+| Threads | `/interfaces/threads` | Interfaces → Threads | Editorial feed. Image posts, open thread, like, a reply. |
+| Fleet | `/interfaces/fleet` | Interfaces → Fleet | Night map with a floating panel. Select a unit. Acknowledge an alert. |
+| Food delivery | `/interfaces/delivery` | Interfaces → Food delivery | Photograph browsing, ratings, a working bag. |
+| Slack | `/interfaces/slack` | Interfaces → Slack | Aubergine sidebar, message pane, composer, agents mixed with people. |
+| Phone | ≤430 | Contents picker | Rail hides under 900. A stacked 44pt picker lists the six. Scene controls use the 44pt phone scale. |
 
 The six folders are `ai-tool`, `dashboard`, `threads`, `fleet`, `delivery`, `slack`. CI fails if any route disappears.

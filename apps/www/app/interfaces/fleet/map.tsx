@@ -4,14 +4,14 @@ import * as React from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-const SPOT = "#E30613";
-
-function readColor(name: string, fallback: string) {
-  const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  return raw || fallback;
-}
+const LIVE = "#3ddec4";
+const ALERT = "#ff6b4a";
+const NIGHT = "#071014";
+const BUILDING = "#152126";
+const GRID = "#1c3333";
 
 type Vehicle = {
+  id: string;
   mesh: THREE.Mesh;
   path: THREE.Vector3[];
   t: number;
@@ -40,8 +40,10 @@ function follow(path: THREE.Vector3[], t: number) {
   };
 }
 
-export function FleetMap() {
+export function FleetMap({ selected = "Van 04" }: { selected?: string }) {
   const host = React.useRef<HTMLDivElement>(null);
+  const selectedRef = React.useRef(selected);
+  selectedRef.current = selected;
 
   React.useEffect(() => {
     const el = host.current;
@@ -57,12 +59,12 @@ export function FleetMap() {
 
     const ground = new THREE.Mesh(
       new THREE.PlaneGeometry(2400, 2400),
-      new THREE.MeshBasicMaterial({ side: THREE.DoubleSide }),
+      new THREE.MeshBasicMaterial({ color: NIGHT, side: THREE.DoubleSide }),
     );
     ground.rotation.x = -Math.PI / 2;
     scene.add(ground);
 
-    const grid = new THREE.GridHelper(1800, 36);
+    const grid = new THREE.GridHelper(1800, 36, GRID, GRID);
     const gridMat = grid.material as THREE.LineBasicMaterial;
     gridMat.transparent = true;
     gridMat.opacity = 0.35;
@@ -70,7 +72,7 @@ export function FleetMap() {
 
     const buildingGeo = new THREE.BoxGeometry(1, 1, 1);
     buildingGeo.translate(0, 0.5, 0);
-    const buildingMat = new THREE.MeshBasicMaterial();
+    const buildingMat = new THREE.MeshBasicMaterial({ color: BUILDING });
     const buildings = new THREE.InstancedMesh(buildingGeo, buildingMat, 86);
     const dummy = new THREE.Object3D();
     let placed = 0;
@@ -89,17 +91,18 @@ export function FleetMap() {
     buildings.count = placed;
     scene.add(buildings);
 
-    const activeMat = new THREE.MeshBasicMaterial();
-    const inactiveMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.38 });
-    const alertMat = new THREE.MeshBasicMaterial();
+    const activeMat = new THREE.MeshBasicMaterial({ color: LIVE });
+    const pickMat = new THREE.MeshBasicMaterial({ color: "#ffffff" });
+    const inactiveMat = new THREE.MeshBasicMaterial({ color: "#4a6464", transparent: true, opacity: 0.5 });
+    const alertMat = new THREE.MeshBasicMaterial({ color: ALERT });
     const vanGeo = new THREE.BoxGeometry(6.2, 2.2, 3.1);
     vanGeo.translate(0, 1.1, 0);
 
     const actives: Vehicle[] = [
-      { mesh: new THREE.Mesh(vanGeo, activeMat), path: rectPath(-80, -40, 220, 140), t: 0.1, speed: 0.12 },
-      { mesh: new THREE.Mesh(vanGeo, activeMat), path: rectPath(40, 80, 180, 160), t: 1.4, speed: 0.09 },
-      { mesh: new THREE.Mesh(vanGeo, activeMat), path: rectPath(-20, 20, 260, 90), t: 2.2, speed: 0.11 },
-      { mesh: new THREE.Mesh(vanGeo, activeMat), path: rectPath(120, -90, 140, 200), t: 0.7, speed: 0.1 },
+      { id: "Van 04", mesh: new THREE.Mesh(vanGeo, activeMat), path: rectPath(-80, -40, 220, 140), t: 0.1, speed: 0.12 },
+      { id: "Van 11", mesh: new THREE.Mesh(vanGeo, activeMat), path: rectPath(40, 80, 180, 160), t: 1.4, speed: 0.09 },
+      { id: "Bike 08", mesh: new THREE.Mesh(vanGeo, activeMat), path: rectPath(-20, 20, 260, 90), t: 2.2, speed: 0.11 },
+      { id: "Boat 02", mesh: new THREE.Mesh(vanGeo, activeMat), path: rectPath(120, -90, 140, 200), t: 0.7, speed: 0.1 },
     ];
     for (const van of actives) scene.add(van.mesh);
 
@@ -108,7 +111,6 @@ export function FleetMap() {
       new THREE.Vector3(-40, 0, 210),
       new THREE.Vector3(90, 0, 200),
       new THREE.Vector3(210, 0, 40),
-      new THREE.Vector3(-200, 0, -30),
     ].map((pos) => {
       const mesh = new THREE.Mesh(vanGeo, inactiveMat);
       mesh.position.copy(pos);
@@ -129,23 +131,8 @@ export function FleetMap() {
       return mesh;
     });
 
-    const paint = () => {
-      const paper = readColor("--bg", "#FAF8F2");
-      const ink = readColor("--text", "#1A1A1A");
-      const gray = readColor("--text-secondary", "#6B6B6B");
-      const line = readColor("--divider", "rgba(0,0,0,0.10)");
-      ground.material.color.set(paper);
-      buildingMat.color.set(paper).lerp(new THREE.Color(ink), 0.16);
-      gridMat.color.set(line);
-      activeMat.color.set(ink);
-      inactiveMat.color.set(gray);
-      alertMat.color.set(SPOT);
-      scene.fog = new THREE.Fog(new THREE.Color(paper), 900, 4200);
-      scene.background = new THREE.Color(paper);
-    };
-    paint();
-    const theme = new MutationObserver(paint);
-    theme.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    scene.fog = new THREE.Fog(new THREE.Color(NIGHT), 700, 3800);
+    scene.background = new THREE.Color(NIGHT);
 
     camera.position.set(420, 380, 520);
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -183,6 +170,7 @@ export function FleetMap() {
           const pose = follow(van.path, van.t);
           van.mesh.position.copy(pose.position);
           van.mesh.rotation.y = pose.yaw;
+          van.mesh.material = van.id === selectedRef.current ? pickMat : activeMat;
         }
         for (const mark of alerts) {
           mark.scale.y = 1 + Math.sin(now / 420) * 0.08;
@@ -196,7 +184,6 @@ export function FleetMap() {
     return () => {
       cancelAnimationFrame(frame);
       ro.disconnect();
-      theme.disconnect();
       controls.dispose();
       renderer.dispose();
       buildingGeo.dispose();
@@ -206,6 +193,7 @@ export function FleetMap() {
       (ground.material as THREE.Material).dispose();
       buildingMat.dispose();
       activeMat.dispose();
+      pickMat.dispose();
       inactiveMat.dispose();
       alertMat.dispose();
       if (renderer.domElement.parentNode === el) el.removeChild(renderer.domElement);
@@ -213,5 +201,5 @@ export function FleetMap() {
     };
   }, []);
 
-  return <div ref={host} className="if-fleet-map" aria-hidden="true" />;
+  return <div ref={host} className="sc-fleet-map if-fleet-map" aria-hidden="true" />;
 }

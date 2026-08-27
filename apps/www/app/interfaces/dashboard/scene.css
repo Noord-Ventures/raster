@@ -1,0 +1,194 @@
+/* SaaS dashboard. Cool ops console, not a Raster ledger card. */
+
+.sc-dash {
+  --ds-paper: #eef2f4;
+  --ds-ink: #12181c;
+  --ds-mute: #5c6b74;
+  --ds-line: rgba(18, 24, 28, 0.1);
+  --ds-card: #ffffff;
+  --ds-rail: #12181c;
+  --ds-rail-ink: #e8eef1;
+  --ds-accent: #1f8a78;
+  --ds-warn: #d08a2b;
+  --ds-sans: var(--sc-dash-sans), Inter, ui-sans-serif, system-ui, sans-serif;
+  min-height: 100dvh;
+  display: flex;
+  background: var(--ds-paper);
+  color: var(--ds-ink);
+  font-family: var(--ds-sans);
+}
+[data-theme="dark"] .sc-dash {
+  --ds-paper: #0e1316;
+  --ds-ink: #e8eef1;
+  --ds-mute: #93a3ac;
+  --ds-line: rgba(232, 238, 241, 0.1);
+  --ds-card: #171d21;
+  --ds-rail: #0a0e10;
+  --ds-rail-ink: #e8eef1;
+}
+
+.sc-dash-rail {
+  width: 228px;
+  flex-shrink: 0;
+  background: var(--ds-rail);
+  color: var(--ds-rail-ink);
+  padding: 76px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sc-dash-brand {
+  margin: 0 8px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  opacity: 0.7;
+}
+.sc-dash-rail button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  border-radius: 10px;
+  min-height: 40px;
+  padding: 0 12px;
+  font: 500 14px/1 var(--ds-sans);
+  cursor: pointer;
+}
+.sc-dash-rail button[aria-current="true"],
+.sc-dash-rail button:hover { background: rgba(255, 255, 255, 0.08); }
+
+.sc-dash-main {
+  flex: 1;
+  min-width: 0;
+  padding: 76px 24px 40px;
+}
+.sc-dash-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.sc-dash-head h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.sc-dash-range {
+  display: flex;
+  padding: 4px;
+  background: var(--ds-card);
+  border-radius: 999px;
+}
+.sc-dash-range button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ds-mute);
+  border-radius: 999px;
+  min-height: 36px;
+  padding: 0 14px;
+  font: 500 13px/1 var(--ds-sans);
+  cursor: pointer;
+}
+.sc-dash-range button[aria-pressed="true"] {
+  background: var(--ds-ink);
+  color: var(--ds-paper);
+}
+
+.sc-dash-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.sc-dash-metric {
+  background: var(--ds-card);
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 8px 20px rgba(18, 24, 28, 0.04);
+}
+.sc-dash-metric p { margin: 0; font-size: 13px; color: var(--ds-mute); }
+.sc-dash-metric strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-dash-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+  gap: 12px;
+}
+.sc-dash-card {
+  background: var(--ds-card);
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 8px 20px rgba(18, 24, 28, 0.04);
+}
+.sc-dash-card h2 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ds-mute);
+}
+.sc-dash-chart { width: 100%; height: auto; display: block; }
+.sc-dash-job {
+  appearance: none;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--ds-line);
+  cursor: pointer;
+  font: 500 14px/1.3 var(--ds-sans);
+}
+.sc-dash-job:last-child { border-bottom: 0; }
+.sc-dash-job[aria-current="true"] { color: var(--ds-accent); }
+.sc-dash-job small { color: var(--ds-mute); font-weight: 400; }
+.sc-dash-detail {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--ds-line);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.sc-dash-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-accent);
+  margin-right: 8px;
+}
+
+@media (max-width: 900px) {
+  .sc-dash { flex-direction: column; }
+  .sc-dash-rail {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 72px 16px 12px;
+  }
+  .sc-dash-brand { width: 100%; margin-bottom: 8px; }
+  .sc-dash-main { padding-top: 20px; }
+  .sc-dash-metrics,
+  .sc-dash-split { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .sc-dash-rail button,
+  .sc-dash-range button,
+  .sc-dash-job { min-height: 44px; font-size: 16px; }
+}

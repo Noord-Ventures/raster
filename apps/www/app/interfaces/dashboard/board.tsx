@@ -1,138 +1,126 @@
 "use client";
 
 import * as React from "react";
-import {
-  Badge,
-  BarChart,
-  DataTable,
-  Donut,
-  Item,
-  LineChart,
-  ScrollArea,
-  Sidebar,
-  SidebarFoot,
-  SidebarHead,
-  SidebarItem,
-  SidebarLabel,
-  SidebarNav,
-  Split,
-  Tab,
-  TabList,
-  TabPanel,
-  Tabs,
-  ToggleGroup,
-} from "@noorddev/raster-react";
+import { dashSans } from "../scene-fonts";
 
-const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-const SHEETS = [12, 18, 15, 26, 24, 11, 9];
-const PROOFS = [4, 6, 5, 9, 7, 3, 2];
+const WEEK = { sheets: 38, proofs: 12, press: 4, series: [12, 18, 15, 26, 24, 11, 9] };
+const MONTH = { sheets: 142, proofs: 41, press: 9, series: [28, 34, 31, 42, 38, 22, 19] };
 
-const ROWS = [
-  { job: "Press run 14", city: "Alkmaar", weeks: 4, state: "On press" },
-  { job: "Identity 09", city: "Delft", weeks: 6, state: "Proof" },
-  { job: "Ledger 03", city: "Haarlem", weeks: 2, state: "Invoice" },
-  { job: "Poster 22", city: "Utrecht", weeks: 3, state: "Brief" },
+const JOBS = [
+  { id: "14", name: "Press run 14", city: "Alkmaar", weeks: 4, state: "On press", note: "Plate is up at 06:00. Density watch on unit 09." },
+  { id: "09", name: "Identity 09", city: "Delft", weeks: 6, state: "Proof", note: "Second proof due Friday. Same ink." },
+  { id: "03", name: "Ledger 03", city: "Haarlem", weeks: 2, state: "Invoice", note: "Cover number matches the invoice." },
+  { id: "22", name: "Poster 22", city: "Utrecht", weeks: 3, state: "Brief", note: "One sheet. Scope, weeks, fee." },
 ];
 
+function Line({ values }: { values: number[] }) {
+  const max = Math.max(...values);
+  const w = 560;
+  const h = 180;
+  const step = w / (values.length - 1);
+  const pts = values.map((v, i) => `${i * step},${h - (v / max) * (h - 16)}`).join(" ");
+  return (
+    <svg className="sc-dash-chart" viewBox={`0 0 ${w} ${h}`} role="img" aria-label="Sheets over the range">
+      <polyline fill="none" stroke="#1f8a78" strokeWidth="3" strokeLinejoin="round" points={pts} />
+      {values.map((v, i) => (
+        <circle key={i} cx={i * step} cy={h - (v / max) * (h - 16)} r="4" fill="#1f8a78" />
+      ))}
+    </svg>
+  );
+}
+
 export function Board() {
-  const [range, setRange] = React.useState("week");
-  const [tab, setTab] = React.useState("overview");
+  const [range, setRange] = React.useState<"week" | "month">("week");
+  const [page, setPage] = React.useState("overview");
+  const [job, setJob] = React.useState("14");
+  const data = range === "week" ? WEEK : MONTH;
+  const selected = JOBS.find((item) => item.id === job) ?? JOBS[0]!;
 
   return (
-    <main className="if-board" aria-label="SaaS dashboard">
-      <div className="if-app">
-        <Sidebar>
-          <SidebarHead>Ledger</SidebarHead>
-          <SidebarNav>
-            <SidebarLabel>Studio</SidebarLabel>
-            <SidebarItem href="#overview" current>
-              Overview
-            </SidebarItem>
-            <SidebarItem href="#jobs">Jobs</SidebarItem>
-            <SidebarItem href="#invoices">Invoices</SidebarItem>
-            <SidebarLabel>Field</SidebarLabel>
-            <SidebarItem href="#press">Press</SidebarItem>
-            <SidebarItem href="#proofs">Proofs</SidebarItem>
-          </SidebarNav>
-          <SidebarFoot>Week 34</SidebarFoot>
-        </Sidebar>
+    <main className={`if-board sc-dash ${dashSans.variable}`} aria-label="SaaS dashboard">
+      <aside className="sc-dash-rail" aria-label="Studio">
+        <p className="sc-dash-brand">Studio ledger</p>
+        {[
+          { id: "overview", label: "Overview" },
+          { id: "jobs", label: "Jobs" },
+          { id: "invoices", label: "Invoices" },
+        ].map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            aria-current={page === item.id}
+            onClick={() => setPage(item.id)}
+          >
+            {item.label}
+          </button>
+        ))}
+      </aside>
 
-        <section className="if-main" aria-label="Dashboard">
-          <div className="if-head">
-            <p className="if-head-title">Overview</p>
-            <ToggleGroup
-              value={range}
-              onValueChange={setRange}
-              options={[
-                { value: "week", label: "Week" },
-                { value: "month", label: "Month" },
-              ]}
-            />
+      <section className="sc-dash-main">
+        <div className="sc-dash-head">
+          <h1>{page === "overview" ? "Overview" : page === "jobs" ? "Jobs" : "Invoices"}</h1>
+          <div className="sc-dash-range" role="group" aria-label="Range">
+            {(["week", "month"] as const).map((item) => (
+              <button
+                key={item}
+                type="button"
+                aria-pressed={range === item}
+                onClick={() => setRange(item)}
+              >
+                {item === "week" ? "Week" : "Month"}
+              </button>
+            ))}
           </div>
-          <div className="if-pane">
-            <Tabs value={tab} onValueChange={setTab}>
-              <TabList>
-                <Tab value="overview">Overview</Tab>
-                <Tab value="jobs">Jobs</Tab>
-              </TabList>
-              <TabPanel value="overview">
-                <div className="if-stack" style={{ marginTop: 20 }}>
-                  <Split initial={62} min={40} max={75}>
-                    <div className="if-stack">
-                      <p className="if-kicker">Sheets this {range}</p>
-                      <LineChart
-                        height={204}
-                        labels={DAYS}
-                        series={[
-                          { name: "Sheets", values: SHEETS },
-                          { name: "Proofs", values: PROOFS },
-                        ]}
-                        unit="sheets"
-                        annotations={[{ at: 3, label: "Press" }]}
-                        spot
-                      />
-                      <BarChart
-                        height={184}
-                        orientation="horizontal"
-                        data={[
-                          { label: "Alkmaar", value: 42 },
-                          { label: "Delft", value: 28 },
-                          { label: "Haarlem", value: 21 },
-                          { label: "Utrecht", value: 16 },
-                        ]}
-                        unit="jobs"
-                      />
-                    </div>
-                    <div className="if-stack">
-                      <p className="if-kicker">Share</p>
-                      <Donut value={72} max={100} size={184} label="printed" />
-                      <ScrollArea maxHeight={204}>
-                        <Item title="Press run 14" description="Alkmaar · four weeks" meta={<Badge variant="solid">On press</Badge>} />
-                        <Item title="Identity 09" description="Delft · proofs due" meta={<Badge variant="muted">Proof</Badge>} />
-                        <Item title="Ledger 03" description="Haarlem · invoice out" meta={<Badge>Invoice</Badge>} />
-                        <Item title="Poster 22" description="Utrecht · brief open" meta={<Badge variant="muted">Brief</Badge>} />
-                      </ScrollArea>
-                    </div>
-                  </Split>
-                </div>
-              </TabPanel>
-              <TabPanel value="jobs">
-                <div style={{ marginTop: 20 }}>
-                  <DataTable
-                    columns={[
-                      { key: "job", header: "Job", sortable: true },
-                      { key: "city", header: "City", sortable: true },
-                      { key: "weeks", header: "Weeks", sortable: true },
-                      { key: "state", header: "State" },
-                    ]}
-                    rows={ROWS}
-                  />
-                </div>
-              </TabPanel>
-            </Tabs>
-          </div>
-        </section>
-      </div>
+        </div>
+
+        <div className="sc-dash-metrics">
+          <article className="sc-dash-metric">
+            <p>Sheets this {range}</p>
+            <strong>{data.sheets}</strong>
+          </article>
+          <article className="sc-dash-metric">
+            <p>Proofs</p>
+            <strong>{data.proofs}</strong>
+          </article>
+          <article className="sc-dash-metric">
+            <p>On press</p>
+            <strong>{data.press}</strong>
+          </article>
+        </div>
+
+        <div className="sc-dash-split">
+          <article className="sc-dash-card">
+            <h2>Throughput</h2>
+            <Line values={data.series} />
+          </article>
+          <article className="sc-dash-card">
+            <h2>{page === "invoices" ? "Open invoices" : "Jobs"}</h2>
+            {JOBS.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className="sc-dash-job"
+                aria-current={job === item.id}
+                onClick={() => {
+                  setJob(item.id);
+                  setPage("jobs");
+                }}
+              >
+                <span>
+                  {item.name}
+                  <br />
+                  <small>{item.city} · {item.weeks} weeks</small>
+                </span>
+                <span>{item.state}</span>
+              </button>
+            ))}
+            <div className="sc-dash-detail">
+              <span className="sc-dash-dot" />
+              {selected.note}
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
   );
 }

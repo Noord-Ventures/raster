@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { interfaceBySlug } from "../catalog";
 import { InterfacesNav } from "../nav";
 import "../interfaces.css";
+import "./scene.css";
 import { Board } from "./board";
 
 const proto = interfaceBySlug("fleet")!;
