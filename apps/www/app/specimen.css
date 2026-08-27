@@ -189,6 +189,7 @@ body:has(.specimen-page) {
   color: var(--text);
   text-decoration: none;
   border-bottom: 1px solid var(--divider);
+  transition: border-color var(--duration-snap) var(--ease);
 }
 .specimen-command-meta a:hover { border-color: var(--text); }
 .specimen-cell-demo {
@@ -209,6 +210,7 @@ body:has(.specimen-page) {
   color: var(--text);
   text-decoration: none;
   border-bottom: 1px solid var(--divider);
+  transition: border-color var(--duration-snap) var(--ease);
 }
 .specimen-kit-name a:hover { border-color: var(--text); }
 .specimen-kit-live {

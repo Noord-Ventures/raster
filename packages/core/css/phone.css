@@ -332,12 +332,12 @@
   .rs-btn-ghost:active{background:var(--divider);border-color:transparent}
   .rs-cal-day:hover{background:none}
   .rs-cal-day:active{background:var(--divider-subtle)}
-  .rs-hover-card:hover .rs-hover-card-panel{opacity:0;visibility:hidden;transform:translateY(2px)}
+  .rs-hover-card:hover .rs-hover-card-panel{opacity:0;visibility:hidden}
   .rs-hover-card:focus-within .rs-hover-card-panel,
-  .rs-hover-card:active .rs-hover-card-panel{opacity:1;visibility:visible;transform:none}
-  .rs-tip:hover::after{opacity:0;transform:translateX(-50%) translateY(2px)}
+  .rs-hover-card:active .rs-hover-card-panel{opacity:1;visibility:visible}
+  .rs-tip:hover::after{opacity:0}
   .rs-tip:focus-within::after,
-  .rs-tip:active::after{opacity:1;transform:translateX(-50%) translateY(0)}
+  .rs-tip:active::after{opacity:1}
   .rs-link:hover{border-color:var(--divider)}
   .rs-link:active{border-color:var(--accent)}
   .rs-link-underline:hover{background-image:linear-gradient(var(--divider),var(--divider))}

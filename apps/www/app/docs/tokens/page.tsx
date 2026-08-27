@@ -6,7 +6,7 @@ import { DocsNav } from "@/components/docs-nav";
 export const metadata: Metadata = { title: "Tokens" };
 
 export default function TokensPage() {
-  const { color, type, grid, radius } = rasterTokens;
+  const { color, type, grid, radius, motion } = rasterTokens;
   return (
     <>
       <div className="site-layout">
@@ -69,6 +69,11 @@ concentricOuter(12, 16); // 28
 
 // CSS: --rs-out and --rs-gap on .rs-nest; .rs-nest-in subtracts.`}
         />
+
+        <h2 className="section-label">Motion</h2>
+        <p className="rs-t-body">
+          {motion.rule} Snap {motion.snap}, ease {motion.ease}, confirm {motion.confirm}. Curve {motion.easing}.
+        </p>
 
         <h2 className="section-label">Programmatic access</h2>
         <CodeBlock

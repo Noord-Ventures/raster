@@ -2,7 +2,7 @@
    The academic register: quiet superscripts, hairline rows, numerals
    hanging in the gutter. */
 .rs-cite{font-size:10.5px;font-weight:600;letter-spacing:0;line-height:0;vertical-align:super;white-space:nowrap}
-.rs-cite a{color:var(--text-secondary);text-decoration:none;transition:color .15s ease}
+.rs-cite a{color:var(--text-secondary);text-decoration:none;transition:color var(--duration-snap) var(--ease)}
 .rs-cite a:hover{color:var(--accent)}
 .rs-refs{list-style:none;counter-reset:ref;margin:4px 0 8px;padding:0}
 .rs-refs li{counter-increment:ref;position:relative;padding:10px 0;font-size:13px;font-weight:500;line-height:1.65;color:var(--text-secondary);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);scroll-margin-top:88px}
@@ -10,7 +10,7 @@
 .rs-refs li::before{content:counter(ref);position:absolute;left:-16px;top:11px;width:12px;text-align:right;font-size:11px;font-weight:600;color:var(--accent)}
 .rs-refs li:target{background:var(--table-alt)}
 .rs-ref-authors{color:var(--text);font-weight:500}
-.rs-ref-doi{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:var(--text-secondary);text-decoration:none;border-bottom:1px solid var(--divider);transition:color .15s ease,border-color .15s ease;word-break:break-all}
+.rs-ref-doi{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:var(--text-secondary);text-decoration:none;border-bottom:1px solid var(--divider);transition:color var(--duration-snap) var(--ease),border-color var(--duration-snap) var(--ease);word-break:break-all}
 .rs-ref-doi:hover{color:var(--text);border-color:var(--accent)}
 .rs-cite-box{border:1px solid var(--divider);border-radius:var(--radius);padding:20px;margin-top:8px}
 .rs-cite-box-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:8px}

@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/resizable.css",
-      "content": "/* ── Resizable: two panes on a draggable hairline ── */\n.rs-split{display:flex;width:100%}\n.rs-split-pane{min-width:0;overflow:hidden}\n.rs-split-handle{flex-shrink:0;width:9px;margin:0 -4px;position:relative;z-index:5;cursor:col-resize;background:none;border:none;padding:0;touch-action:none}\n.rs-split-handle::after{content:\"\";position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--divider);transition:background-color .2s ease}\n.rs-split-handle:hover::after,.rs-split-handle:focus-visible::after{background:var(--text)}\n.rs-split-handle:focus-visible{outline:none}\n",
+      "content": "/* ── Resizable: two panes on a draggable hairline ── */\n.rs-split{display:flex;width:100%}\n.rs-split-pane{min-width:0;overflow:hidden}\n.rs-split-handle{flex-shrink:0;width:9px;margin:0 -4px;position:relative;z-index:5;cursor:col-resize;background:none;border:none;padding:0;touch-action:none}\n.rs-split-handle::after{content:\"\";position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--divider);transition:background-color var(--duration-snap) var(--ease)}\n.rs-split-handle:hover::after,.rs-split-handle:focus-visible::after{background:var(--text)}\n.rs-split-handle:focus-visible{outline:none}\n",
       "type": "registry:file",
       "target": "styles/raster/resizable.css"
     }

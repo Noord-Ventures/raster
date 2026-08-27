@@ -149,6 +149,31 @@ describe("tokens", () => {
     expect(rasterCss).toMatch(/\.rs-nest-in\{/);
   });
 
+  it("ships short named motion and refuses a load show", () => {
+    expect(rasterTokens.motion.duration).toBe("0.12–0.18s");
+    expect(rasterTokens.motion.snap).toBe("0.12s");
+    expect(rasterTokens.motion.ease).toBe("0.18s");
+    expect(rasterTokens.motion.confirm).toBe("0.16s");
+    expect(rasterTokens.motion.easing).toBe("cubic-bezier(0.2, 0, 0, 1)");
+    expect(rasterTokens.motion.rule).toMatch(/Entry is not a show/);
+    expect(rasterCss).toContain("--duration-snap: 0.12s");
+    expect(rasterCss).toContain("--duration: 0.18s");
+    expect(rasterCss).toContain("--duration-confirm: 0.16s");
+    expect(rasterCss).toContain("--ease: cubic-bezier(0.2, 0, 0, 1)");
+    expect(rasterCss).not.toMatch(/rs-chart-enter|rs-chart-in/);
+    expect(rasterCss).not.toMatch(/translateY\((4|6)px\)/);
+    expect(rasterCss).not.toMatch(/scale\(\.92\)/);
+    expect(rasterCss).not.toMatch(/\.5s cubic-bezier/);
+    expect(rasterCss).not.toMatch(/cubic-bezier\([^)]*[1-9]\.[0-9]/);
+    const site = readFileSync(join(pkgDir, "../../apps/www/app/site.css"), "utf8");
+    expect(site).not.toMatch(/translateY\(-6px\)/);
+    expect(site).not.toMatch(/\.5s cubic-bezier/);
+    expect(site).toContain("var(--duration-snap)");
+    const chart = readFileSync(join(pkgDir, "css/components/chart.css"), "utf8");
+    expect(chart).not.toMatch(/animation:/);
+    expect(chart).not.toMatch(/stagger|animation-delay/);
+  });
+
   it("emits a phone control scale at 640 without restyling desktop", () => {
     expect(rasterTokens.control.desktop.hit).toBe(40);
     expect(rasterTokens.control.phone.hit).toBe(44);

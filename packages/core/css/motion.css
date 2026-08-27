@@ -1,7 +1,7 @@
-/* ── Reduced motion: nothing loops, nothing slides ── */
+/* ── Reduced motion: nothing loops, nothing slides, nothing enters ── */
 @media(prefers-reduced-motion:reduce){
-  .rs-reveal{transition:none}
-  .rs-subscribed{animation:none}
+  .rs-reveal,.rs-crumb-bar .rs-crumbs,.rs-tip::after,.rs-hover-card-panel{transition:none}
+  .rs-subscribed,.rs-toast{animation:none}
   .rs-theme-track,.rs-theme-sun,.rs-theme-moon{transition:none}
   .rs-spinner{animation:none;border-top-color:var(--text)}
 }

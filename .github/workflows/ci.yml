@@ -517,3 +517,47 @@ jobs:
           test -f packages/react/src/components/charts/line.tsx
           test -f packages/react/src/components/charts/bar.tsx
           test -f packages/react/src/components/charts/scatter.tsx
+      - name: Motion is quiet
+        run: |
+          tokens=packages/core/src/tokens.ts
+          chart=packages/core/css/components/chart.css
+          site=apps/www/app/site.css
+          form=packages/core/css/components/inline-form.css
+          theme=packages/core/css/components/theme-toggle.css
+          toast=packages/core/css/components/toast.css
+          grep -q 'snap: "0.12s"' "$tokens"
+          grep -q 'ease: "0.18s"' "$tokens"
+          grep -q 'confirm: "0.16s"' "$tokens"
+          grep -q 'cubic-bezier(0.2, 0, 0, 1)' "$tokens"
+          grep -q 'Entry is not a show' "$tokens"
+          grep -qF -- '--duration-snap' packages/core/scripts/build.mjs
+          grep -qF -- '--ease' packages/core/scripts/build.mjs
+          if grep -n 'rs-chart-enter\|rs-chart-in\|@keyframes' "$chart"; then
+            echo "Charts must not fade in on load"
+            exit 1
+          fi
+          if grep -nE 'stagger|animation-delay' "$chart" "$site" apps/www/app/specimen.css apps/www/app/about/about.css; then
+            echo "No staggered reveals"
+            exit 1
+          fi
+          if grep -nE 'scale\(\.92\)|translateX\(-6px\)|translateY\((4|6)px\)' "$form" "$toast" packages/core/css/components/crumb-bar.css; then
+            echo "Fade-up and scale shows are out"
+            exit 1
+          fi
+          if grep -nE '\.5s cubic-bezier|rotate\(-90deg\)|rotate\(90deg\)' "$theme" "$site"; then
+            echo "Theme toggle must snap, not spin for half a second"
+            exit 1
+          fi
+          if grep -n 'translateY(-6px)' "$site"; then
+            echo "Nav panel must not drop in"
+            exit 1
+          fi
+          grep -q 'var(--duration-snap)' "$site"
+          grep -q 'var(--duration)' "$site"
+          grep -qF 'code-copy[aria-label="Copied"]' "$site"
+          grep -q '{motion.rule}' apps/www/app/docs/tokens/page.tsx
+          grep -q '{motion.snap}' apps/www/app/docs/tokens/page.tsx
+          if grep -nE 'tailwind|@radix-ui' "$tokens" "$site" packages/core/css/motion.css; then
+            echo "Motion must stay CSS-first"
+            exit 1
+          fi

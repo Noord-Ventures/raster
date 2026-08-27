@@ -24,7 +24,7 @@ const write = (p, text) => {
 write("tokens/raster.tokens.json", JSON.stringify(rasterTokens, null, 2) + "\n");
 
 /* ── 2. Tokens as CSS custom properties ── */
-const { color, grid, radius, control } = rasterTokens;
+const { color, grid, radius, control, motion } = rasterTokens;
 const c1 = grid.column;
 const gridImage = `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent ${c1}px,var(--grid-line) ${c1}px,var(--grid-line) ${c1 + 1}px,transparent ${c1 + 1}px,transparent ${grid.module}px)`;
 
@@ -45,7 +45,11 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --pad: ${grid.pad}px;
   /* Concentric: inner = max(0, outer − padding). Default radius vs --pad is 0. */
   --radius-in: max(0px, calc(var(--radius) - var(--pad)));
-  --transition: background-color 0.3s ease, color 0.3s ease;
+  --ease: ${motion.easing};
+  --duration-snap: ${motion.snap};
+  --duration: ${motion.ease};
+  --duration-confirm: ${motion.confirm};
+  --transition: background-color var(--duration) var(--ease), color var(--duration) var(--ease);
   /* Background column grid: ${grid.module}px modules (${grid.column} column + ${grid.gutter} gutter). */
   --grid-image: ${gridImage};
   --grid-size: ${grid.module}px;

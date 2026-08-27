@@ -9,7 +9,7 @@
      The catalog rail drops that inset below 1440 (writer in docs-nav)
      so the two navs sit in columns 1 and 2 on a narrow desktop.
    - Reading measure is 592px (3 modules); covers pad 120px down.
-   - A fixed 72px crumb bar; breadcrumbs fade in once the page cover
+   - A fixed 72px crumb bar; breadcrumbs appear once the page cover
      scrolls away. The docs rail lives in components/docs-nav. */
 
 * { box-sizing: border-box; }
@@ -26,7 +26,7 @@ html, body { margin: 0; padding: 0; }
   width: 20px; height: 20px;
   color: var(--text);
   filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
-  transition: var(--transition), opacity .2s ease;
+  transition: var(--transition), opacity var(--duration-snap) var(--ease);
 }
 .site-logo:hover { opacity: .6; }
 .site-logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -40,7 +40,7 @@ html, body { margin: 0; padding: 0; }
 .corner-nav a {
   font-size: 13px; font-weight: 500; letter-spacing: -.01em;
   color: var(--text-secondary); text-decoration: none; line-height: 1;
-  transition: color .2s ease;
+  transition: color var(--duration-snap) var(--ease);
 }
 .corner-nav a:hover, .corner-nav a[aria-current="page"] { color: var(--text); }
 
@@ -50,24 +50,24 @@ html, body { margin: 0; padding: 0; }
   background: none; border: none; border-radius: 0;
   color: var(--text-secondary); cursor: pointer; outline: none;
   filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
-  transition: color .2s ease;
+  transition: color var(--duration-snap) var(--ease);
 }
 .theme-toggle:hover { color: var(--text); }
 .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 /* The sun/moon pair slides on a track (house idiom). */
 .toggle-track {
   display: flex; flex-direction: column; align-items: center; gap: 8px;
-  transition: transform .5s cubic-bezier(.4,0,.15,1);
+  transition: transform var(--duration) var(--ease);
 }
 .icon-sun, .icon-moon {
   width: 16px; height: 16px; flex-shrink: 0;
-  transition: transform .5s cubic-bezier(.4,0,.15,1), opacity .5s cubic-bezier(.4,0,.15,1);
+  transition: opacity var(--duration) var(--ease);
 }
-.toggle-track .icon-moon { opacity: 1; transform: rotate(0); }
-.toggle-track .icon-sun { opacity: .4; transform: rotate(-90deg); }
+.toggle-track .icon-moon { opacity: 1; }
+.toggle-track .icon-sun { opacity: .35; }
 .toggle-track.is-dark { transform: translateY(-24px); }
-.toggle-track.is-dark .icon-sun { opacity: 1; transform: rotate(0); }
-.toggle-track.is-dark .icon-moon { opacity: .4; transform: rotate(90deg); }
+.toggle-track.is-dark .icon-sun { opacity: 1; }
+.toggle-track.is-dark .icon-moon { opacity: .35; }
 
 /* Mobile: burger + panel replace the corner links. Theme stays in chrome. */
 .nav-toggle {
@@ -81,7 +81,7 @@ html, body { margin: 0; padding: 0; }
 .nav-toggle-icon { position: relative; display: block; width: 16px; height: 12px; }
 .nav-toggle-icon span {
   position: absolute; left: 0; right: 0; height: 1.5px; background: currentColor;
-  transition: transform .2s ease, opacity .2s ease;
+  transition: transform var(--duration) var(--ease), opacity var(--duration) var(--ease);
 }
 .nav-toggle-icon span:nth-child(1) { top: 0; }
 .nav-toggle-icon span:nth-child(2) { top: 5.25px; }
@@ -94,10 +94,10 @@ html, body { margin: 0; padding: 0; }
   position: fixed; top: 64px; left: 0; right: 0; z-index: 205;
   background: var(--bg); border-bottom: 1px solid var(--divider-subtle);
   padding: 6px 0 12px;
-  opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px);
-  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity var(--duration) var(--ease), visibility var(--duration) var(--ease);
 }
-.nav-panel[data-open="true"] { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+.nav-panel[data-open="true"] { opacity: 1; visibility: visible; pointer-events: auto; }
 .nav-panel-links { display: flex; flex-direction: column; }
 .nav-panel-link {
   display: block; padding: 12px 18px; font-size: 15px; font-weight: 500;
@@ -252,7 +252,7 @@ html, body { margin: 0; padding: 0; }
   box-shadow: none;
   display: flex;
   flex-direction: column;
-  transition: border-color .2s ease;
+  transition: border-color var(--duration-snap) var(--ease);
 }
 .gallery-item:hover { border-color: var(--text); }
 .gallery-item-link { color: inherit; text-decoration: none; }
@@ -303,9 +303,11 @@ html, body { margin: 0; padding: 0; }
   color: var(--text-secondary);
   cursor: pointer;
   font: inherit;
-  transition: color .2s ease;
+  transition: color var(--duration-snap) var(--ease);
 }
-.code-copy:hover { color: var(--text); }
+.code-copy:hover,
+.code-copy[aria-label="Copied"] { color: var(--text); }
+.code-copy svg { display: block; }
 .code-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* Phone contents picker. Hidden on the desktop rail. */
@@ -334,7 +336,7 @@ html, body { margin: 0; padding: 0; }
   font-size: 16px; font-weight: 500; letter-spacing: -.01em;
   color: var(--text-secondary); text-decoration: none;
   border-bottom: 1px solid var(--divider-subtle);
-  transition: color .15s ease, opacity .15s ease;
+  transition: color var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease);
 }
 .toc-mobile-item:last-child { border-bottom: none; }
 .toc-mobile-item:hover,
@@ -382,3 +384,11 @@ html, body { margin: 0; padding: 0; }
   letter-spacing: -.01em; display: flex; flex-direction: column; gap: 6px;
 }
 .site-footer a { color: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle-track,
+  .icon-sun,
+  .icon-moon,
+  .nav-panel,
+  .nav-toggle-icon span { transition: none; }
+}

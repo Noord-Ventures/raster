@@ -65,11 +65,4 @@
 .rs-spark svg{display:block;overflow:visible}
 .rs-spark .rs-chart-line{stroke-width:1}
 .rs-chart-plot{transform-origin:center}
-@media(prefers-reduced-motion:no-preference){
-  .rs-chart-enter .rs-chart-plot{animation:rs-chart-in .22s ease}
-  .rs-chart-bar,.rs-chart-mark,.rs-chart-share-seg{transition:fill .2s ease,opacity .2s ease}
-}
-@keyframes rs-chart-in{from{opacity:0}to{opacity:1}}
-@media(prefers-reduced-motion:reduce){
-  .rs-chart-enter .rs-chart-plot{animation:none}
-}
+.rs-chart-bar,.rs-chart-mark,.rs-chart-share-seg{transition:fill var(--duration-snap) var(--ease),opacity var(--duration-snap) var(--ease)}

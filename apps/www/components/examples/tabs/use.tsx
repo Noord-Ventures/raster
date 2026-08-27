@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Tab, TabList, TabPanel, Tabs } from "@noorddev/raster-react";
 
-/** An issue board. The panel fades in — 0.22s, ease, no bounce. */
+/** An issue board. The panel confirms — opacity, short curve, no bounce. */
 export function Use() {
   const [page, setPage] = React.useState("overview");
   return (
