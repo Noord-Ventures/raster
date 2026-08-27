@@ -2,7 +2,7 @@
 
 What it is, how to get there, what done looks like.
 
-Writers: catalog groups are `packages/core/src/schema.ts` (`rasterCategories`). Face, law, and command are `apps/www/app/specimen.ts`. Numbered laws are `apps/www/app/specimen-laws.ts`. The crumb bar is off on `/` and `/about` (`isFieldPath`) so the field stays flush.
+Writers: catalog groups are `packages/core/src/schema.ts` (`rasterCategories`). Face, law, and command are `apps/www/app/specimen.ts`. Numbered laws are `apps/www/app/specimen-laws.ts`. Homepage `/` uses the same scroll-in crumb bar as docs and components. The crumb bar stays off on `/about` so that field stays flush.
 
 | Surface | Route | Click path | Done |
 | --- | --- | --- | --- |

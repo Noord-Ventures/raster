@@ -15,7 +15,9 @@ interface Crumb {
 function trailFor(pathname: string): Crumb[] {
   const parts = pathname.split("/").filter(Boolean);
   const trail: Crumb[] = [];
-  if (parts[0] === "docs") {
+  if (parts.length === 0) {
+    trail.push({ label: "Home" });
+  } else if (parts[0] === "docs") {
     trail.push({ label: "Docs", href: "/docs" });
     if (parts[1] === "tokens") trail.push({ label: "Tokens" });
     else trail.push({ label: "Getting started" });
@@ -55,8 +57,8 @@ export function CrumbBar() {
 
   const trail = trailFor(pathname);
 
-  /* Exception: specimen and About are flush fields. No crumb bar on the field. */
-  if (isSpecimenPath(pathname) || isFieldPath(pathname)) return null;
+  /* About stays a flush field. Homepage keeps the same scroll-in chrome. */
+  if (isFieldPath(pathname) && !isSpecimenPath(pathname)) return null;
 
   return (
     <nav className={`rs-crumb-bar${scrolled ? " rs-crumb-bar-scrolled" : ""}`} aria-label="Breadcrumbs">

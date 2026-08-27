@@ -22,12 +22,12 @@ function normalizePath(pathname: string) {
   return path === "" ? "/" : path;
 }
 
-/** Narrow exception: the flush poster has no crumb bar. */
+/** Homepage specimen. Uses the same scroll-in crumb bar as the rest of the site. */
 export function isSpecimenPath(pathname: string) {
   return normalizePath(pathname) === "/";
 }
 
-/** Flush field pages: homepage specimen and About. No crumb bar on the field. */
+/** Flush field pages. About stays without a crumb bar; homepage keeps site chrome. */
 export function isFieldPath(pathname: string) {
   const path = normalizePath(pathname);
   return path === "/" || path === "/about";
