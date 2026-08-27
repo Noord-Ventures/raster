@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { foodDisplay } from "../scene-fonts";
 
 type Kind = "kitchen" | "counter" | "bakery";
 
@@ -140,7 +139,7 @@ export function Board() {
   const dishes = DISHES[place.id] ?? [];
 
   return (
-    <main className={`if-board sc-food ${foodDisplay.variable}`} aria-label="Food delivery">
+    <main className="if-board sc-food" aria-label="Food delivery">
       <header className="sc-food-bar">
         <p className="sc-food-where">Alkmaar</p>
         <nav className="sc-food-nav" aria-label="Food">
@@ -176,11 +175,11 @@ export function Board() {
           <>
             <section className="sc-food-hero" aria-label="Tonight">
               <img src={place.photo} alt="" />
-              <div className="sc-food-hero-copy">
-                <p>{place.area} · {place.time}</p>
-                <h2>{place.dish}</h2>
-              </div>
             </section>
+            <div className="sc-food-hero-copy">
+              <p>{place.area} · {place.time}</p>
+              <h2>{place.dish}</h2>
+            </div>
 
             <div className="sc-food-tools">
               <input
@@ -219,7 +218,7 @@ export function Board() {
                     </p>
                     <h3>{item.name}</h3>
                     <div className="sc-food-card-row">
-                      <span className="sc-food-star">{item.rating} rating</span>
+                      <span>{item.rating} rating</span>
                       <span>{item.time}</span>
                     </div>
                   </div>

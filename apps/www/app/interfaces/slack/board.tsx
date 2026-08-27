@@ -6,9 +6,9 @@ type Kind = "person" | "agent";
 type Line = { who: string; initials: string; kind: Kind; body: string; fresh?: boolean };
 
 const CHANNELS = [
-  { id: "press", label: "#press" },
-  { id: "studio", label: "#studio" },
-  { id: "raster", label: "#raster" },
+  { id: "press", label: "Press" },
+  { id: "studio", label: "Studio" },
+  { id: "raster", label: "Raster" },
 ] as const;
 
 const PEOPLE = [
@@ -65,9 +65,9 @@ export function Board() {
   }
 
   return (
-    <main className="if-board sc-sl" aria-label="Slack">
-      <aside className="sc-sl-rail" aria-label="Workspace">
-        <p className="sc-sl-ws">Studio</p>
+    <main className="if-board sc-sl" aria-label="Chat">
+      <aside className="sc-sl-rail" aria-label="Channels">
+        <p className="sc-sl-ws">Desk</p>
         <p className="sc-sl-label">Channels</p>
         {CHANNELS.map((item) => (
           <button
@@ -102,7 +102,7 @@ export function Board() {
             const key = `${room}-${i}`;
             return (
               <article key={key} className={line.fresh ? "sc-sl-line sc-fresh" : "sc-sl-line"}>
-                <span className="sc-sl-ava" data-kind={line.kind}>
+                <span className="sc-sl-ava">
                   {line.initials}
                 </span>
                 <div>

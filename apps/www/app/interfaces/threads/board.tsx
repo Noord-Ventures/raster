@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { threadSerif } from "../scene-fonts";
 
 type Reply = { who: string; initials: string; body: string; fresh?: boolean };
 
@@ -93,7 +92,7 @@ export function Board() {
   }
 
   return (
-    <main className={`if-board sc-th ${threadSerif.variable}`} aria-label="Threads">
+    <main className="if-board sc-th" aria-label="Threads">
       <section className="sc-th-feed" aria-label="Feed">
         <h1>Today</h1>
         {posts.map((item) => (

@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { fleetMono } from "../scene-fonts";
 import { FleetMap } from "./map";
 
 const ACTIVE = [
@@ -24,7 +23,7 @@ export function Board() {
   const chosen = ACTIVE.find((unit) => unit.id === pick) ?? ACTIVE[0]!;
 
   return (
-    <main className={`if-board sc-fleet ${fleetMono.variable}`} aria-label="Fleet">
+    <main className="if-board sc-fleet" aria-label="Fleet">
       <FleetMap selected={pick} />
       <section className="sc-fleet-hud sc-fleet-a" aria-label="Active fleet">
         <h2>Active fleet</h2>

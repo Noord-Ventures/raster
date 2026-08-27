@@ -4,11 +4,11 @@ import * as React from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-const LIVE = "#3ddec4";
-const ALERT = "#ff6b4a";
-const NIGHT = "#071014";
-const BUILDING = "#152126";
-const GRID = "#1c3333";
+const LIVE = "#E8E8E8";
+const ALERT = "#C4C2BD";
+const NIGHT = "#0E0C0A";
+const BUILDING = "#1A1A1A";
+const GRID = "#3D3D3D";
 
 type Vehicle = {
   id: string;

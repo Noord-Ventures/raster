@@ -112,6 +112,16 @@ if (!map.includes("Entry is not a show")) {
   console.error("FEATURE.md must state the motion lock");
   process.exit(1);
 }
+if (!map.includes("Raster product demo") || !map.includes("no radius")) {
+  console.error("FEATURE.md must lock scenes as Raster product demos");
+  process.exit(1);
+}
+if (existsSync(join(dir, "scene-fonts.ts"))) {
+  console.error("Scenes must use Inter, not extra display faces");
+  process.exit(1);
+}
+
+const productSkin = /Fraunces|Source_Serif|IBM_Plex|Newsreader|Iowan|Palatino|#c96442|#e08b6a|#3e1242|#007a5a|#1f8a78|#c45c26|#3ddec4|#ff6b4a|#1264a3|#5b2c6f|#071014|aubergine/i;
 
 for (const slug of slugs) {
   const css = readFileSync(join(dir, slug, "scene.css"), "utf8");
@@ -125,6 +135,20 @@ for (const slug of slugs) {
   }
   if (/translateY|stagger|animation-delay/.test(css)) {
     console.error(`${slug} scene must not fade-up or stagger`);
+    process.exit(1);
+  }
+  if (productSkin.test(css) || productSkin.test(readFileSync(join(dir, slug, "board.tsx"), "utf8"))) {
+    console.error(`${slug} must stay Raster: no product skin, no extra face, no reference hue`);
+    process.exit(1);
+  }
+  const radii = [...css.matchAll(/border-radius:\s*([^;]+)/g)].map((m) => m[1].trim());
+  if (radii.some((value) => value !== "0")) {
+    console.error(`${slug} scene must stay flush: no radius`);
+    process.exit(1);
+  }
+  const shadows = [...css.matchAll(/box-shadow:\s*([^;]+)/g)].map((m) => m[1].trim());
+  if (shadows.some((value) => value !== "none")) {
+    console.error(`${slug} scene must stay flush: no shadow`);
     process.exit(1);
   }
   const board = readFileSync(join(dir, slug, "board.tsx"), "utf8");

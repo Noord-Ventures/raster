@@ -446,6 +446,16 @@ jobs:
           done
           test -f apps/www/app/interfaces/fleet/map.tsx
           grep -q 'Working posters. The catalog, composed.' apps/www/app/interfaces/page.tsx
+          grep -q 'Raster product demo' apps/www/app/interfaces/FEATURE.md
+          grep -q 'no radius' apps/www/app/interfaces/FEATURE.md
+          if [ -f apps/www/app/interfaces/scene-fonts.ts ]; then
+            echo "Scenes must use Inter, not extra display faces"
+            exit 1
+          fi
+          if grep -R -n -E 'Fraunces|Source_Serif|IBM_Plex|Newsreader|aubergine|#c96442|#3e1242|#007a5a|#1f8a78' apps/www/app/interfaces; then
+            echo "Interfaces scenes must not wear a product skin"
+            exit 1
+          fi
           if grep -R -n -E 'tailwind|@radix-ui' apps/www/app/interfaces; then
             echo "Interfaces must stay off Tailwind and Radix"
             exit 1
