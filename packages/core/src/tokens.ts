@@ -93,10 +93,13 @@ export const rasterTokens = {
     rule: "single-weight strokes in currentColor; filled only when the state is active",
   },
   motion: {
-    duration: "0.15–0.3s",
-    easing: "ease",
-    rule: "color and opacity change; layout rarely moves; nothing bounces",
-    reducedMotion: "all looping demos disabled under prefers-reduced-motion",
+    duration: "0.12–0.18s",
+    snap: "0.12s",
+    ease: "0.18s",
+    confirm: "0.16s",
+    easing: "cubic-bezier(0.2, 0, 0, 1)",
+    rule: "A state the user caused may ease, snap with a short curve, or confirm. Entry is not a show. Color and opacity name the change; nothing bounces.",
+    reducedMotion: "looping demos and unsolicited entry disabled under prefers-reduced-motion",
   },
   breakpoints: { mobileGrid: 480, mobileLayout: 640, rail: 1024, wide: 1440, cap: 1700 },
   /** Desktop stays the Raster poster. Phone (≤640) is a 44pt control scale. */

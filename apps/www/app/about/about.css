@@ -223,6 +223,7 @@
   color: var(--text);
   text-decoration: none;
   border-bottom: 1px solid var(--divider);
+  transition: border-color var(--duration-snap) var(--ease);
 }
 
 .field-cell a:hover { border-color: var(--text); }

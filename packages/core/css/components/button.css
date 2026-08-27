@@ -1,8 +1,8 @@
 /* ── Buttons ── */
-.rs-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity .2s ease}
+.rs-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity var(--duration-snap) var(--ease)}
 .rs-btn-primary:hover{opacity:.85}
 .rs-btn-primary:disabled{opacity:.4;cursor:not-allowed}
-.rs-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color .2s ease,color .2s ease}
+.rs-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease)}
 .rs-btn-ghost:hover{background:var(--divider);border-color:transparent}
 .rs-btn-ghost:disabled{opacity:.4;cursor:not-allowed;background:transparent;border-color:var(--divider)}
 .rs-btn-primary:focus-visible,.rs-btn-ghost:focus-visible{outline:2px solid var(--accent);outline-offset:2px}

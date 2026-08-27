@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/switch.css",
-      "content": "/* ── Switch: state moves, layout doesn't ── */\n.rs-switch{display:inline-flex;box-sizing:border-box;width:32px;height:18px;border-radius:9px;border:1.5px solid var(--divider);position:relative;flex-shrink:0;transition:background-color .2s ease,border-color .2s ease}\n.rs-switch i{position:absolute;top:1.5px;left:1.5px;width:12px;height:12px;border-radius:50%;background:var(--text-secondary);transition:transform .2s ease}\n.rs-switch-on{background:var(--text);border-color:var(--text)}\n.rs-switch-on i{background:var(--bg);transform:translateX(14px)}\nbutton.rs-switch{padding:0;background:none;cursor:pointer;border:1.5px solid var(--divider)}\nbutton.rs-switch.rs-switch-on{background:var(--text);border-color:var(--text)}\n",
+      "content": "/* ── Switch: state moves, layout doesn't ── */\n.rs-switch{display:inline-flex;box-sizing:border-box;width:32px;height:18px;border-radius:9px;border:1.5px solid var(--divider);position:relative;flex-shrink:0;transition:background-color var(--duration) var(--ease),border-color var(--duration) var(--ease)}\n.rs-switch i{position:absolute;top:1.5px;left:1.5px;width:12px;height:12px;border-radius:50%;background:var(--text-secondary);transition:transform var(--duration) var(--ease)}\n.rs-switch-on{background:var(--text);border-color:var(--text)}\n.rs-switch-on i{background:var(--bg);transform:translateX(14px)}\nbutton.rs-switch{padding:0;background:none;cursor:pointer;border:1.5px solid var(--divider)}\nbutton.rs-switch.rs-switch-on{background:var(--text);border-color:var(--text)}\n",
       "type": "registry:file",
       "target": "styles/raster/switch.css"
     }

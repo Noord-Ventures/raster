@@ -15,7 +15,11 @@
   --pad: 20px;
   /* Concentric: inner = max(0, outer − padding). Default radius vs --pad is 0. */
   --radius-in: max(0px, calc(var(--radius) - var(--pad)));
-  --transition: background-color 0.3s ease, color 0.3s ease;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --duration-snap: 0.12s;
+  --duration: 0.18s;
+  --duration-confirm: 0.16s;
+  --transition: background-color var(--duration) var(--ease), color var(--duration) var(--ease);
   /* Background column grid: 204px modules (184 column + 20 gutter). */
   --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);
   --grid-size: 204px;

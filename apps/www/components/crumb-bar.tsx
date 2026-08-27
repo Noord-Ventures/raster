@@ -40,7 +40,7 @@ function trailFor(pathname: string): Crumb[] {
 /**
  * The fixed top bar, on every page. Transparent at rest; once the
  * cover scrolls away it gains the paper background and its bottom
- * hairline, and the breadcrumbs fade in.
+ * hairline, and the breadcrumbs appear.
  */
 export function CrumbBar() {
   const pathname = usePathname();

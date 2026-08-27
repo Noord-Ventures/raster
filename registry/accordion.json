@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/accordion.css",
-      "content": "/* ── Accordion: native <details>; one open at a time via the name attribute ── */\n.rs-acc{border-top:1px solid var(--divider-subtle)}\n.rs-acc-item{border-bottom:1px solid var(--divider-subtle)}\n.rs-acc-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-acc-item summary::-webkit-details-marker{display:none}\n.rs-acc-chevron{flex-shrink:0;color:var(--text-secondary);transition:transform .2s ease}\n.rs-acc-item[open] .rs-acc-chevron{transform:rotate(180deg)}\n.rs-acc-body{padding:0 0 16px;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}\n",
+      "content": "/* ── Accordion: native <details>; one open at a time via the name attribute ── */\n.rs-acc{border-top:1px solid var(--divider-subtle)}\n.rs-acc-item{border-bottom:1px solid var(--divider-subtle)}\n.rs-acc-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-acc-item summary::-webkit-details-marker{display:none}\n.rs-acc-chevron{flex-shrink:0;color:var(--text-secondary);transition:transform var(--duration) var(--ease)}\n.rs-acc-item[open] .rs-acc-chevron{transform:rotate(180deg)}\n.rs-acc-body{padding:0 0 16px;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}\n",
       "type": "registry:file",
       "target": "styles/raster/accordion.css"
     }

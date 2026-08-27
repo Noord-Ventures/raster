@@ -1,8 +1,8 @@
 /* ── Text link: underlined by its hairline, never colored ── */
-.rs-link{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider);transition:border-color .2s ease}
+.rs-link{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider);transition:border-color var(--duration-snap) var(--ease)}
 .rs-link:hover{border-color:var(--accent)}
 .rs-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 /* Gradient variant: the underline is drawn one pixel inside each end,
    so it never touches a neighbouring glyph. Hover paints it ink. */
-.rs-link-underline{color:var(--text);text-decoration:none;border-bottom:none;background-image:linear-gradient(var(--divider),var(--divider));background-size:calc(100% - 1px) 1px;background-position:1px 100%;background-repeat:no-repeat;transition:background-image .2s ease}
+.rs-link-underline{color:var(--text);text-decoration:none;border-bottom:none;background-image:linear-gradient(var(--divider),var(--divider));background-size:calc(100% - 1px) 1px;background-position:1px 100%;background-repeat:no-repeat;transition:background-image var(--duration-snap) var(--ease)}
 .rs-link-underline:hover{background-image:linear-gradient(var(--accent),var(--accent))}

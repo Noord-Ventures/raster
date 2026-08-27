@@ -49,7 +49,11 @@
   --pad: 20px;
   /* Concentric: inner = max(0, outer − padding). Default radius vs --pad is 0. */
   --radius-in: max(0px, calc(var(--radius) - var(--pad)));
-  --transition: background-color 0.3s ease, color 0.3s ease;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --duration-snap: 0.12s;
+  --duration: 0.18s;
+  --duration-confirm: 0.16s;
+  --transition: background-color var(--duration) var(--ease), color var(--duration) var(--ease);
   /* Background column grid: 204px modules (184 column + 20 gutter). */
   --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);
   --grid-size: 204px;
@@ -128,10 +132,10 @@ body{
 .rs-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}
 
 /* ── Buttons ── */
-.rs-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity .2s ease}
+.rs-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity var(--duration-snap) var(--ease)}
 .rs-btn-primary:hover{opacity:.85}
 .rs-btn-primary:disabled{opacity:.4;cursor:not-allowed}
-.rs-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color .2s ease,color .2s ease}
+.rs-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease)}
 .rs-btn-ghost:hover{background:var(--divider);border-color:transparent}
 .rs-btn-ghost:disabled{opacity:.4;cursor:not-allowed;background:transparent;border-color:var(--divider)}
 .rs-btn-primary:focus-visible,.rs-btn-ghost:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -144,12 +148,12 @@ body{
 .rs-btn-group > .rs-btn-primary{position:relative;z-index:1}
 
 /* ── Text link: underlined by its hairline, never colored ── */
-.rs-link{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider);transition:border-color .2s ease}
+.rs-link{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider);transition:border-color var(--duration-snap) var(--ease)}
 .rs-link:hover{border-color:var(--accent)}
 .rs-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 /* Gradient variant: the underline is drawn one pixel inside each end,
    so it never touches a neighbouring glyph. Hover paints it ink. */
-.rs-link-underline{color:var(--text);text-decoration:none;border-bottom:none;background-image:linear-gradient(var(--divider),var(--divider));background-size:calc(100% - 1px) 1px;background-position:1px 100%;background-repeat:no-repeat;transition:background-image .2s ease}
+.rs-link-underline{color:var(--text);text-decoration:none;border-bottom:none;background-image:linear-gradient(var(--divider),var(--divider));background-size:calc(100% - 1px) 1px;background-position:1px 100%;background-repeat:no-repeat;transition:background-image var(--duration-snap) var(--ease)}
 .rs-link-underline:hover{background-image:linear-gradient(var(--accent),var(--accent))}
 
 /* ── Field: quiet input: hairline border, ink focus, label above ── */
@@ -181,15 +185,15 @@ body{
 [data-theme="dark"] .rs-native-select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'><path d='M4 6l4 4 4-4' stroke='%23E8E8E8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>")}
 
 /* ── Inline form: the action lives inside the field ── */
-.rs-inline-field{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:4px 6px 4px 12px;transition:border-color .2s ease}
+.rs-inline-field{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:4px 6px 4px 12px;transition:border-color var(--duration-snap) var(--ease)}
 .rs-inline-field:focus-within{border-color:var(--accent)}
 .rs-inline-input{flex:1;min-width:0;border:none;background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);outline:none;padding:7px 0}
 .rs-inline-input::placeholder{color:var(--text-secondary)}
 .rs-inline-btn{height:28px;padding:0 16px;font-size:12.5px;min-width:0;border-radius:3px;white-space:nowrap}
-.rs-reveal{max-width:0;opacity:0;transform:translateX(-6px) scale(.92);overflow:hidden;transition:max-width .4s cubic-bezier(.22,1,.36,1),opacity .3s ease .05s,transform .4s cubic-bezier(.22,1,.36,1)}
-.rs-reveal-in{max-width:160px;opacity:1;transform:none}
-.rs-subscribed{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text);animation:rsSubIn .35s cubic-bezier(.22,1,.36,1)}
-@keyframes rsSubIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.rs-reveal{max-width:0;opacity:0;overflow:hidden;transition:max-width var(--duration) var(--ease),opacity var(--duration) var(--ease)}
+.rs-reveal-in{max-width:160px;opacity:1}
+.rs-subscribed{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text);animation:rsConfirm var(--duration-confirm) var(--ease)}
+@keyframes rsConfirm{from{opacity:0}to{opacity:1}}
 
 /* ── Radio: the dot is ink, never a hue ── */
 .rs-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}
@@ -204,8 +208,8 @@ body{
 .rs-check-on{background:var(--text);border-color:var(--text)}
 
 /* ── Switch: state moves, layout doesn't ── */
-.rs-switch{display:inline-flex;box-sizing:border-box;width:32px;height:18px;border-radius:9px;border:1.5px solid var(--divider);position:relative;flex-shrink:0;transition:background-color .2s ease,border-color .2s ease}
-.rs-switch i{position:absolute;top:1.5px;left:1.5px;width:12px;height:12px;border-radius:50%;background:var(--text-secondary);transition:transform .2s ease}
+.rs-switch{display:inline-flex;box-sizing:border-box;width:32px;height:18px;border-radius:9px;border:1.5px solid var(--divider);position:relative;flex-shrink:0;transition:background-color var(--duration) var(--ease),border-color var(--duration) var(--ease)}
+.rs-switch i{position:absolute;top:1.5px;left:1.5px;width:12px;height:12px;border-radius:50%;background:var(--text-secondary);transition:transform var(--duration) var(--ease)}
 .rs-switch-on{background:var(--text);border-color:var(--text)}
 .rs-switch-on i{background:var(--bg);transform:translateX(14px)}
 button.rs-switch{padding:0;background:none;cursor:pointer;border:1.5px solid var(--divider)}
@@ -280,16 +284,16 @@ button.rs-tab.rs-tab-active{
 
 /* ── Crumb bar: fixed top bar in the house chrome ──
    Transparent at rest; once the page cover scrolls away it gains the
-   paper background and its bottom hairline, and the breadcrumbs fade
-   in. From 900px the root crumb holds the TOC column; the inner row
+   paper background and its bottom hairline, and the breadcrumbs
+   appear. From 900px the root crumb holds the TOC column; the inner row
    starts one module in at the 1024px rail. */
-.rs-crumb-bar{position:fixed;top:0;left:0;right:0;z-index:160;display:flex;align-items:center;height:72px;font-size:13px;font-weight:500;letter-spacing:-.01em;line-height:1.3;background:none;border-bottom:1px solid transparent;transition:var(--transition),background-color .2s ease,border-color .2s ease}
+.rs-crumb-bar{position:fixed;top:0;left:0;right:0;z-index:160;display:flex;align-items:center;height:72px;font-size:13px;font-weight:500;letter-spacing:-.01em;line-height:1.3;background:none;border-bottom:1px solid transparent;transition:var(--transition)}
 .rs-crumb-bar-scrolled{background:var(--bg);border-bottom-color:var(--divider-subtle)}
 .rs-crumb-bar-inner{display:flex;align-items:center;gap:20px;width:100%;min-width:0;padding:0 56px 0 76px}
-.rs-crumb-bar .rs-crumbs{margin:0;min-width:0;overflow:hidden;white-space:nowrap;opacity:0;transform:translateY(4px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}
-.rs-crumb-bar-scrolled .rs-crumbs{opacity:1;transform:none;pointer-events:auto}
+.rs-crumb-bar .rs-crumbs{margin:0;min-width:0;overflow:hidden;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity var(--duration) var(--ease)}
+.rs-crumb-bar-scrolled .rs-crumbs{opacity:1;pointer-events:auto}
 .rs-crumb-bar a{color:inherit;text-decoration:none}
-.rs-crumb-root{flex-shrink:0;color:var(--text);text-decoration:none;transition:color .2s ease}
+.rs-crumb-root{flex-shrink:0;color:var(--text);text-decoration:none;transition:color var(--duration-snap) var(--ease)}
 .rs-crumb-bar .rs-crumbs-here{overflow:hidden;text-overflow:ellipsis}
 /* Root abbreviation: the short name shows only on phones, leaving the
    path room to dock and ellipsize. */
@@ -407,7 +411,7 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .rs-acc-item{border-bottom:1px solid var(--divider-subtle)}
 .rs-acc-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
 .rs-acc-item summary::-webkit-details-marker{display:none}
-.rs-acc-chevron{flex-shrink:0;color:var(--text-secondary);transition:transform .2s ease}
+.rs-acc-chevron{flex-shrink:0;color:var(--text-secondary);transition:transform var(--duration) var(--ease)}
 .rs-acc-item[open] .rs-acc-chevron{transform:rotate(180deg)}
 .rs-acc-body{padding:0 0 16px;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}
 
@@ -462,23 +466,23 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 
 /* ── Tooltip: CSS-only, shows on hover and keyboard focus alike ── */
 .rs-tip{position:relative;display:inline-flex}
-.rs-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(2px);background:var(--text);color:var(--bg);font-size:11.5px;font-weight:500;letter-spacing:-.01em;line-height:1.3;padding:5px 9px;border-radius:var(--radius-sm);white-space:nowrap;opacity:0;pointer-events:none;z-index:180;transition:opacity .15s ease .15s,transform .15s ease .15s}
-.rs-tip:hover::after,.rs-tip:focus-within::after{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(prefers-reduced-motion:reduce){.rs-tip::after{transition:opacity .15s ease .15s}}
+.rs-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);font-size:11.5px;font-weight:500;letter-spacing:-.01em;line-height:1.3;padding:5px 9px;border-radius:var(--radius-sm);white-space:nowrap;opacity:0;pointer-events:none;z-index:180;transition:opacity var(--duration-snap) var(--ease) var(--duration-snap)}
+.rs-tip:hover::after,.rs-tip:focus-within::after{opacity:1}
+@media(prefers-reduced-motion:reduce){.rs-tip::after{transition:opacity var(--duration-snap) var(--ease) var(--duration-snap)}}
 
 /* ── Toast: quiet confirmations, bottom right, announced politely ── */
 .rs-toasts{position:fixed;bottom:20px;right:20px;z-index:300;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.rs-toast{display:flex;align-items:flex-start;gap:10px;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:10px 14px;max-width:340px;animation:rsToastIn .25s cubic-bezier(.22,1,.36,1)}
+.rs-toast{display:flex;align-items:flex-start;gap:10px;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:10px 14px;max-width:340px;animation:rsToastIn var(--duration-confirm) var(--ease)}
 .rs-toast-title{display:block;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
 .rs-toast-body{font-size:12.5px;line-height:1.5;letter-spacing:-.01em;color:var(--text-secondary);margin:1px 0 0}
-@keyframes rsToastIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes rsToastIn{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.rs-toast{animation:none}}
 
 /* ── Menu separators: for action menus ── */
 .rs-menu-sep{border:none;border-top:1px solid var(--divider-subtle);margin:4px 0}
 
 /* ── Toggle: a press switch; on is ink, like everything on ── */
-.rs-toggle{display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:32px;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;background:none;border:1px solid var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+.rs-toggle{display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:32px;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;background:none;border:1px solid var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:background-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease),border-color var(--duration-snap) var(--ease)}
 .rs-toggle[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:var(--bg)}
 .rs-toggle-group{display:inline-flex}
 .rs-toggle-group .rs-toggle{border-radius:0;margin-left:-1px}
@@ -575,26 +579,19 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-spark svg{display:block;overflow:visible}
 .rs-spark .rs-chart-line{stroke-width:1}
 .rs-chart-plot{transform-origin:center}
-@media(prefers-reduced-motion:no-preference){
-  .rs-chart-enter .rs-chart-plot{animation:rs-chart-in .22s ease}
-  .rs-chart-bar,.rs-chart-mark,.rs-chart-share-seg{transition:fill .2s ease,opacity .2s ease}
-}
-@keyframes rs-chart-in{from{opacity:0}to{opacity:1}}
-@media(prefers-reduced-motion:reduce){
-  .rs-chart-enter .rs-chart-plot{animation:none}
-}
+.rs-chart-bar,.rs-chart-mark,.rs-chart-share-seg{transition:fill var(--duration-snap) var(--ease),opacity var(--duration-snap) var(--ease)}
 
 /* ── Collapsible: a bare <details>, no chrome ── */
 .rs-disclosure summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
 .rs-disclosure summary::-webkit-details-marker{display:none}
-.rs-disclosure .rs-acc-chevron{transition:transform .2s ease}
+.rs-disclosure .rs-acc-chevron{transition:transform var(--duration) var(--ease)}
 .rs-disclosure[open] .rs-acc-chevron{transform:rotate(180deg)}
 .rs-disclosure-body{padding:10px 0 0;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}
 
 /* ── Hover card: rich preview on hover or keyboard focus ── */
 .rs-hover-card{position:relative;display:inline-block}
-.rs-hover-card-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:170;width:260px;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;font-size:13px;line-height:1.55;letter-spacing:-.01em;color:var(--text-secondary);opacity:0;visibility:hidden;transform:translateY(2px);transition:opacity .15s ease .2s,transform .15s ease .2s,visibility .15s ease .2s}
-.rs-hover-card:hover .rs-hover-card-panel,.rs-hover-card:focus-within .rs-hover-card-panel{opacity:1;visibility:visible;transform:none}
+.rs-hover-card-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:170;width:260px;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;font-size:13px;line-height:1.55;letter-spacing:-.01em;color:var(--text-secondary);opacity:0;visibility:hidden;transition:opacity var(--duration-snap) var(--ease) var(--duration-snap),visibility var(--duration-snap) var(--ease) var(--duration-snap)}
+.rs-hover-card:hover .rs-hover-card-panel,.rs-hover-card:focus-within .rs-hover-card-panel{opacity:1;visibility:visible}
 
 /* ── Kbd: keys in the mono stack with a pressed bottom edge ── */
 .rs-kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);background:var(--bg);border:1px solid var(--divider);border-bottom-width:2px;border-radius:4px;padding:2px 6px;line-height:1.2}
@@ -612,7 +609,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 
 /* ── Navigation menu: quiet links; the current page is ink ── */
 .rs-nav{display:flex;align-items:center;gap:22px}
-.rs-nav a{font-size:14px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);text-decoration:none;transition:color .2s ease}
+.rs-nav a{font-size:14px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);text-decoration:none;transition:color var(--duration-snap) var(--ease)}
 .rs-nav a:hover,.rs-nav a[aria-current="page"]{color:var(--text)}
 
 /* ── Sidebar: one 204 module rail, flush items, hairline edge.
@@ -649,7 +646,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-split{display:flex;width:100%}
 .rs-split-pane{min-width:0;overflow:hidden}
 .rs-split-handle{flex-shrink:0;width:9px;margin:0 -4px;position:relative;z-index:5;cursor:col-resize;background:none;border:none;padding:0;touch-action:none}
-.rs-split-handle::after{content:"";position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--divider);transition:background-color .2s ease}
+.rs-split-handle::after{content:"";position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--divider);transition:background-color var(--duration-snap) var(--ease)}
 .rs-split-handle:hover::after,.rs-split-handle:focus-visible::after{background:var(--text)}
 .rs-split-handle:focus-visible{outline:none}
 
@@ -698,7 +695,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 @media(min-width:940px){.rs-flow{grid-template-columns:repeat(3,184px)}}
 @media(min-width:1280px){.rs-flow{grid-template-columns:repeat(4,184px)}}
 @media(min-width:1448px){.rs-flow{grid-template-columns:repeat(5,184px)}}
-.rs-flow-step{position:relative;border:1px dashed var(--divider);border-radius:10px;padding:14px 34px 16px 14px;background:var(--bg);transition:border-color .2s ease}
+.rs-flow-step{position:relative;border:1px dashed var(--divider);border-radius:10px;padding:14px 34px 16px 14px;background:var(--bg);transition:border-color var(--duration-snap) var(--ease)}
 .rs-flow-step:hover{border-color:var(--accent)}
 .rs-flow-step::after{content:"";position:absolute;top:15px;right:13px;width:8px;height:14px;background-image:radial-gradient(currentColor 1.1px,transparent 1.3px);background-size:4px 5px;color:var(--text-secondary);opacity:.4}
 .rs-flow-num{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--divider);background:var(--bg);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);margin-bottom:14px}
@@ -707,7 +704,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-flow-subs{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
 .rs-flow-subs span{font-size:11px;line-height:1;padding:3px 7px;border:1px dashed var(--divider);border-radius:5px;color:var(--text-secondary);letter-spacing:-.005em}
 .rs-flow-subs .rs-flow-sub-add{width:18px;padding:3px 0;text-align:center;opacity:.7}
-.rs-flow-add{display:flex;align-items:center;gap:8px;margin-top:14px;border:1px dashed var(--divider);border-radius:10px;padding:12px 14px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);background:none;width:184px;max-width:100%;transition:border-color .2s ease,color .2s ease;font-family:inherit;cursor:pointer}
+.rs-flow-add{display:flex;align-items:center;gap:8px;margin-top:14px;border:1px dashed var(--divider);border-radius:10px;padding:12px 14px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);background:none;width:184px;max-width:100%;transition:border-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease);font-family:inherit;cursor:pointer}
 .rs-flow-add:hover{border-color:var(--accent);color:var(--text)}
 .rs-flow-plus{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;font-size:13px;line-height:1}
 
@@ -733,13 +730,13 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-theme-toggle{position:fixed;top:24px;right:20px;z-index:200;width:24px;height:24px;padding:4px;overflow:hidden;background:none;border:none;border-radius:var(--radius-sm);cursor:pointer;color:var(--text-secondary);outline:none;filter:drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))}
 .rs-theme-toggle:hover{color:var(--accent)}
 .rs-theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.rs-theme-track{display:flex;flex-direction:column;align-items:center;gap:8px;transition:transform .5s cubic-bezier(.4,0,.15,1)}
-.rs-theme-sun,.rs-theme-moon{width:16px;height:16px;flex-shrink:0;transition:transform .5s cubic-bezier(.4,0,.15,1),opacity .5s cubic-bezier(.4,0,.15,1)}
-.rs-theme-track .rs-theme-moon{opacity:1;transform:rotate(0)}
-.rs-theme-track .rs-theme-sun{opacity:.4;transform:rotate(-90deg)}
+.rs-theme-track{display:flex;flex-direction:column;align-items:center;gap:8px;transition:transform var(--duration) var(--ease)}
+.rs-theme-sun,.rs-theme-moon{width:16px;height:16px;flex-shrink:0;transition:opacity var(--duration) var(--ease)}
+.rs-theme-track .rs-theme-moon{opacity:1}
+.rs-theme-track .rs-theme-sun{opacity:.35}
 .rs-theme-track-dark{transform:translateY(-24px)}
-.rs-theme-track-dark .rs-theme-sun{opacity:1;transform:rotate(0)}
-.rs-theme-track-dark .rs-theme-moon{opacity:.4;transform:rotate(90deg)}
+.rs-theme-track-dark .rs-theme-sun{opacity:1}
+.rs-theme-track-dark .rs-theme-moon{opacity:.35}
 @media(max-width:480px){.rs-theme-toggle{right:25px}}
 
 /* ── Callout: a tinted, accent-edged note inside running copy ── */
@@ -752,7 +749,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
    The academic register: quiet superscripts, hairline rows, numerals
    hanging in the gutter. */
 .rs-cite{font-size:10.5px;font-weight:600;letter-spacing:0;line-height:0;vertical-align:super;white-space:nowrap}
-.rs-cite a{color:var(--text-secondary);text-decoration:none;transition:color .15s ease}
+.rs-cite a{color:var(--text-secondary);text-decoration:none;transition:color var(--duration-snap) var(--ease)}
 .rs-cite a:hover{color:var(--accent)}
 .rs-refs{list-style:none;counter-reset:ref;margin:4px 0 8px;padding:0}
 .rs-refs li{counter-increment:ref;position:relative;padding:10px 0;font-size:13px;font-weight:500;line-height:1.65;color:var(--text-secondary);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);scroll-margin-top:88px}
@@ -760,7 +757,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-refs li::before{content:counter(ref);position:absolute;left:-16px;top:11px;width:12px;text-align:right;font-size:11px;font-weight:600;color:var(--accent)}
 .rs-refs li:target{background:var(--table-alt)}
 .rs-ref-authors{color:var(--text);font-weight:500}
-.rs-ref-doi{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:var(--text-secondary);text-decoration:none;border-bottom:1px solid var(--divider);transition:color .15s ease,border-color .15s ease;word-break:break-all}
+.rs-ref-doi{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:var(--text-secondary);text-decoration:none;border-bottom:1px solid var(--divider);transition:color var(--duration-snap) var(--ease),border-color var(--duration-snap) var(--ease);word-break:break-all}
 .rs-ref-doi:hover{color:var(--text);border-color:var(--accent)}
 .rs-cite-box{border:1px solid var(--divider);border-radius:var(--radius);padding:20px;margin-top:8px}
 .rs-cite-box-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:8px}
@@ -1102,22 +1099,22 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
   .rs-btn-ghost:active{background:var(--divider);border-color:transparent}
   .rs-cal-day:hover{background:none}
   .rs-cal-day:active{background:var(--divider-subtle)}
-  .rs-hover-card:hover .rs-hover-card-panel{opacity:0;visibility:hidden;transform:translateY(2px)}
+  .rs-hover-card:hover .rs-hover-card-panel{opacity:0;visibility:hidden}
   .rs-hover-card:focus-within .rs-hover-card-panel,
-  .rs-hover-card:active .rs-hover-card-panel{opacity:1;visibility:visible;transform:none}
-  .rs-tip:hover::after{opacity:0;transform:translateX(-50%) translateY(2px)}
+  .rs-hover-card:active .rs-hover-card-panel{opacity:1;visibility:visible}
+  .rs-tip:hover::after{opacity:0}
   .rs-tip:focus-within::after,
-  .rs-tip:active::after{opacity:1;transform:translateX(-50%) translateY(0)}
+  .rs-tip:active::after{opacity:1}
   .rs-link:hover{border-color:var(--divider)}
   .rs-link:active{border-color:var(--accent)}
   .rs-link-underline:hover{background-image:linear-gradient(var(--divider),var(--divider))}
   .rs-link-underline:active{background-image:linear-gradient(var(--accent),var(--accent))}
 }
 
-/* ── Reduced motion: nothing loops, nothing slides ── */
+/* ── Reduced motion: nothing loops, nothing slides, nothing enters ── */
 @media(prefers-reduced-motion:reduce){
-  .rs-reveal{transition:none}
-  .rs-subscribed{animation:none}
+  .rs-reveal,.rs-crumb-bar .rs-crumbs,.rs-tip::after,.rs-hover-card-panel{transition:none}
+  .rs-subscribed,.rs-toast{animation:none}
   .rs-theme-track,.rs-theme-sun,.rs-theme-moon{transition:none}
   .rs-spinner{animation:none;border-top-color:var(--text)}
 }

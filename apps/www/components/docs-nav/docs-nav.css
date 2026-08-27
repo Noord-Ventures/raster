@@ -58,7 +58,7 @@
 .toc-item {
   display: block; padding: 5px 0; font-size: 13px; font-weight: 400;
   letter-spacing: -.01em; color: var(--text-secondary); opacity: .6;
-  text-decoration: none; transition: color .15s ease, opacity .15s ease;
+  text-decoration: none; transition: color var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease);
 }
 .toc-item:hover,
 .toc-item:focus-visible,

@@ -159,7 +159,7 @@ export function ChartField({ spot, className, style, children, ...props }: Chart
   const color = spot === true ? CROUWEL_SPOT : typeof spot === "string" ? spot : undefined;
   return (
     <div
-      className={cx("rs-chart", "rs-chart-field", "rs-chart-enter", className)}
+      className={cx("rs-chart", "rs-chart-field", className)}
       style={{
         ...(style as React.CSSProperties),
         ...(color ? ({ ["--rs-chart-spot" as string]: color } as React.CSSProperties) : null),

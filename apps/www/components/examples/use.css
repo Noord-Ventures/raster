@@ -99,7 +99,7 @@
   border-radius: 28px;
   background: var(--bg);
 }
-.rs-use-panel { animation: rs-use-in .22s ease; }
+.rs-use-panel { animation: rs-use-in var(--duration-confirm) var(--ease); }
 @media (prefers-reduced-motion: reduce) {
   .rs-use-panel { animation: none; }
 }
