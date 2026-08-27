@@ -143,8 +143,7 @@ export function FleetMap({ selected = "Van 04" }: { selected?: string }) {
     controls.dampingFactor = 0.06;
     controls.minPolarAngle = 0.55;
     controls.maxPolarAngle = 1.25;
-    controls.autoRotate = !reduced;
-    controls.autoRotateSpeed = 0.35;
+    controls.autoRotate = false;
 
     const resize = () => {
       const w = el.clientWidth;
@@ -171,9 +170,6 @@ export function FleetMap({ selected = "Van 04" }: { selected?: string }) {
           van.mesh.position.copy(pose.position);
           van.mesh.rotation.y = pose.yaw;
           van.mesh.material = van.id === selectedRef.current ? pickMat : activeMat;
-        }
-        for (const mark of alerts) {
-          mark.scale.y = 1 + Math.sin(now / 420) * 0.08;
         }
       }
       controls.update();

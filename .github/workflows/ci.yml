@@ -536,10 +536,21 @@ jobs:
             echo "Charts must not fade in on load"
             exit 1
           fi
-          if grep -nE 'stagger|animation-delay' "$chart" "$site" apps/www/app/specimen.css apps/www/app/about/about.css; then
+          if grep -nE 'stagger|animation-delay' "$chart" "$site" apps/www/app/specimen.css apps/www/app/about/about.css apps/www/app/interfaces/*/scene.css apps/www/app/interfaces/scene-motion.css; then
             echo "No staggered reveals"
             exit 1
           fi
+          if grep -nE 'translateY' apps/www/app/interfaces/*/scene.css apps/www/app/interfaces/scene-motion.css; then
+            echo "Interface scenes must not fade-up"
+            exit 1
+          fi
+          grep -q 'Entry is not a show' apps/www/app/interfaces/FEATURE.md
+          grep -q '@keyframes sc-confirm' apps/www/app/interfaces/scene-motion.css
+          for slug in ai-tool dashboard threads fleet delivery slack; do
+            grep -q 'var(--duration-snap)' "apps/www/app/interfaces/$slug/scene.css"
+            grep -q 'var(--ease)' "apps/www/app/interfaces/$slug/scene.css"
+            grep -q 'sc-fresh' "apps/www/app/interfaces/$slug/board.tsx"
+          done
           if grep -nE 'scale\(\.92\)|translateX\(-6px\)|translateY\((4|6)px\)' "$form" "$toast" packages/core/css/components/crumb-bar.css; then
             echo "Fade-up and scale shows are out"
             exit 1

@@ -50,6 +50,7 @@
   letter-spacing: -0.01em;
   text-align: left;
   cursor: pointer;
+  transition: background-color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease);
 }
 .sc-ai-new:hover,
 .sc-ai-new:focus-visible { background: var(--ai-paper); }
@@ -72,6 +73,7 @@
   text-align: left;
   cursor: pointer;
   font-family: inherit;
+  transition: background-color var(--duration-snap) var(--ease);
 }
 .sc-ai-chat:hover { background: color-mix(in srgb, var(--ai-paper) 70%, transparent); }
 .sc-ai-chat[aria-current="true"] { background: var(--ai-paper); }
@@ -154,6 +156,7 @@
   padding: 0 14px;
   font: 500 13px/1 var(--ai-sans);
   cursor: pointer;
+  transition: border-color var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease);
 }
 .sc-ai-hint:hover,
 .sc-ai-hint:focus-visible { border-color: var(--ai-ink); }
@@ -199,10 +202,8 @@
   height: 6px;
   border-radius: 50%;
   background: currentColor;
-  animation: sc-ai-pulse 1s ease infinite;
+  animation: sc-ai-pulse 1s var(--ease) infinite;
 }
-.sc-ai-pending i:nth-child(2) { animation-delay: 0.15s; }
-.sc-ai-pending i:nth-child(3) { animation-delay: 0.3s; }
 @keyframes sc-ai-pulse {
   0%, 80%, 100% { opacity: 0.25; }
   40% { opacity: 1; }
@@ -222,7 +223,9 @@
   border: 1px solid var(--ai-line);
   border-radius: 22px;
   box-shadow: 0 10px 28px rgba(43, 38, 31, 0.08);
+  transition: border-color var(--duration-snap) var(--ease);
 }
+.sc-ai-composer:focus-within { border-color: color-mix(in srgb, var(--ai-ink) 35%, var(--ai-line)); }
 .sc-ai-composer textarea {
   flex: 1;
   min-height: 44px;
@@ -248,6 +251,7 @@
   padding: 0 14px;
   font: 500 13px/1 var(--ai-sans);
   cursor: pointer;
+  transition: opacity var(--duration-snap) var(--ease);
 }
 .sc-ai-send:disabled { opacity: 0.35; cursor: default; }
 .sc-ai-send:focus-visible { outline: 2px solid var(--ai-accent); outline-offset: 2px; }
@@ -291,5 +295,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .sc-ai-new,
+  .sc-ai-chat,
+  .sc-ai-hint,
+  .sc-ai-composer,
+  .sc-ai-send { transition: none; }
   .sc-ai-pending i { animation: none; opacity: 0.6; }
 }

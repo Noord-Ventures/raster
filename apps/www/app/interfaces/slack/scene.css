@@ -58,6 +58,7 @@
   padding: 0 10px;
   font: 500 14px/1 var(--sl-sans);
   cursor: pointer;
+  transition: background-color var(--duration-snap) var(--ease);
 }
 .sc-sl-rail button[aria-current="true"],
 .sc-sl-rail button:hover { background: rgba(255, 255, 255, 0.1); }
@@ -97,6 +98,7 @@
   gap: 12px;
   padding: 8px 8px;
   border-radius: 8px;
+  transition: background-color var(--duration-snap) var(--ease);
 }
 .sc-sl-line:hover { background: var(--sl-hover); }
 .sc-sl-ava {
@@ -132,6 +134,7 @@
   margin-top: 6px;
   font: 500 12px/1 var(--sl-sans);
   cursor: pointer;
+  transition: color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease);
 }
 .sc-sl-react[aria-pressed="true"] { color: var(--sl-agent); border-color: var(--sl-agent); }
 
@@ -143,7 +146,9 @@
   border: 1px solid var(--sl-line);
   border-radius: 8px;
   background: var(--sl-paper);
+  transition: border-color var(--duration-snap) var(--ease);
 }
+.sc-sl-composer:focus-within { border-color: color-mix(in srgb, var(--sl-ink) 35%, var(--sl-line)); }
 .sc-sl-composer textarea {
   flex: 1;
   border: 0;
@@ -165,6 +170,7 @@
   padding: 0 14px;
   font: 600 13px/1 var(--sl-sans);
   cursor: pointer;
+  transition: opacity var(--duration-snap) var(--ease);
 }
 
 .sc-sl-side {
@@ -199,4 +205,12 @@
 @media (max-width: 640px) {
   .sc-sl-rail button,
   .sc-sl-composer button { min-height: 44px; font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-sl-rail button,
+  .sc-sl-line,
+  .sc-sl-react,
+  .sc-sl-composer,
+  .sc-sl-composer button { transition: none; }
 }

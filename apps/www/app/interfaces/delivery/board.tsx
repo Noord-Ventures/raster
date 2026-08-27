@@ -128,7 +128,7 @@ export function Board() {
   const [filter, setFilter] = React.useState("all");
   const [query, setQuery] = React.useState("");
   const [pick, setPick] = React.useState("buren");
-  const [bag, setBag] = React.useState<string[]>([]);
+  const [bag, setBag] = React.useState<{ name: string; fresh?: boolean }[]>([]);
 
   const shown = PLACES.filter((place) => {
     const kindOk = filter === "all" || place.kind === filter;
@@ -159,7 +159,7 @@ export function Board() {
           ))}
         </nav>
         <button type="button" className="sc-food-bag" onClick={() => setTab("orders")}>
-          Bag {bag.length}
+          <span key={bag.length} className={bag.length ? "sc-fresh" : undefined}>Bag {bag.length}</span>
         </button>
       </header>
 
@@ -168,8 +168,8 @@ export function Board() {
           <section className="sc-food-menu" aria-label="Bag">
             <h2>{bag.length ? "Tonight" : "Bag is empty"}</h2>
             <p>{bag.length ? `${bag.length} in the bag.` : "Open a kitchen and add a plate."}</p>
-            {bag.map((name, i) => (
-              <p key={`${name}-${i}`}>{name}</p>
+            {bag.map((item, i) => (
+              <p key={`${item.name}-${i}`} className={item.fresh ? "sc-fresh" : undefined}>{item.name}</p>
             ))}
           </section>
         ) : (
@@ -238,7 +238,12 @@ export function Board() {
                     key={dish.name}
                     type="button"
                     className="sc-food-dish"
-                    onClick={() => setBag((rows) => [...rows, dish.name])}
+                    onClick={() =>
+                      setBag((rows) => [
+                        ...rows.map((entry) => ({ ...entry, fresh: false })),
+                        { name: dish.name, fresh: true },
+                      ])
+                    }
                   >
                     <img src={dish.photo} alt="" />
                     <div>

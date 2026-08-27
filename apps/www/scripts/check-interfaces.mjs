@@ -95,4 +95,43 @@ if (!existsSync(join(dir, "fleet", "map.tsx"))) {
   process.exit(1);
 }
 
+if (!existsSync(join(dir, "scene-motion.css"))) {
+  console.error("Interfaces scene motion sheet missing: scene-motion.css");
+  process.exit(1);
+}
+const motion = readFileSync(join(dir, "scene-motion.css"), "utf8");
+if (!motion.includes("@keyframes sc-confirm") || !motion.includes("opacity: 0")) {
+  console.error("Scene confirm must be opacity-only");
+  process.exit(1);
+}
+if (/translateY|stagger|animation-delay/.test(motion)) {
+  console.error("Scene confirm must not fade-up or stagger");
+  process.exit(1);
+}
+if (!map.includes("Entry is not a show")) {
+  console.error("FEATURE.md must state the motion lock");
+  process.exit(1);
+}
+
+for (const slug of slugs) {
+  const css = readFileSync(join(dir, slug, "scene.css"), "utf8");
+  if (!css.includes("var(--duration-snap)") || !css.includes("var(--ease)")) {
+    console.error(`${slug} scene must use Raster snap/ease tokens`);
+    process.exit(1);
+  }
+  if (!css.includes("prefers-reduced-motion")) {
+    console.error(`${slug} scene must honor reduced motion`);
+    process.exit(1);
+  }
+  if (/translateY|stagger|animation-delay/.test(css)) {
+    console.error(`${slug} scene must not fade-up or stagger`);
+    process.exit(1);
+  }
+  const board = readFileSync(join(dir, slug, "board.tsx"), "utf8");
+  if (!board.includes("sc-fresh")) {
+    console.error(`${slug} board must confirm a user-caused state`);
+    process.exit(1);
+  }
+}
+
 console.log(`ok: ${slugs.length} Interfaces routes`);

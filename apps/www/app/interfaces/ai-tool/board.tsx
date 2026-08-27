@@ -4,7 +4,7 @@ import * as React from "react";
 import { aiSerif } from "../scene-fonts";
 
 type Role = "user" | "assistant";
-type Msg = { role: Role; text: string };
+type Msg = { role: Role; text: string; fresh?: boolean };
 
 const CHATS = [
   { id: "brief", title: "Tighten the brief", preview: "Two sentences, same claim." },
@@ -89,11 +89,11 @@ export function Board() {
     const value = (text ?? draft).trim();
     if (!value || pending) return;
     setDraft("");
-    setMessages((rows) => [...rows, { role: "user", text: value }]);
+    setMessages((rows) => [...rows, { role: "user", text: value, fresh: true }]);
     setPending(true);
     window.setTimeout(() => {
       const reply = REPLIES[value.length % REPLIES.length]!;
-      setMessages((rows) => [...rows, { role: "assistant", text: reply }]);
+      setMessages((rows) => [...rows, { role: "assistant", text: reply, fresh: true }]);
       setPending(false);
     }, 700);
   }
@@ -140,12 +140,12 @@ export function Board() {
             ) : (
               messages.map((msg, i) =>
                 msg.role === "user" ? (
-                  <article key={i} className="sc-ai-msg sc-ai-msg-user">
+                  <article key={i} className={`sc-ai-msg sc-ai-msg-user${msg.fresh ? " sc-fresh" : ""}`}>
                     <p className="sc-ai-who">You</p>
                     <p className="sc-ai-bubble">{msg.text}</p>
                   </article>
                 ) : (
-                  <article key={i} className="sc-ai-msg">
+                  <article key={i} className={`sc-ai-msg${msg.fresh ? " sc-fresh" : ""}`}>
                     <p className="sc-ai-who">Assistant</p>
                     <p className="sc-ai-reply">{msg.text}</p>
                   </article>

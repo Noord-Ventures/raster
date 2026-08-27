@@ -55,6 +55,7 @@
   padding: 0 12px;
   font: 500 14px/1 var(--ds-sans);
   cursor: pointer;
+  transition: background-color var(--duration-snap) var(--ease);
 }
 .sc-dash-rail button[aria-current="true"],
 .sc-dash-rail button:hover { background: rgba(255, 255, 255, 0.08); }
@@ -93,6 +94,7 @@
   padding: 0 14px;
   font: 500 13px/1 var(--ds-sans);
   cursor: pointer;
+  transition: background-color var(--duration-snap) var(--ease), color var(--duration-snap) var(--ease);
 }
 .sc-dash-range button[aria-pressed="true"] {
   background: var(--ds-ink);
@@ -119,6 +121,7 @@
   font-weight: 500;
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
+  transition: opacity var(--duration-confirm) var(--ease);
 }
 
 .sc-dash-split {
@@ -153,6 +156,7 @@
   border-bottom: 1px solid var(--ds-line);
   cursor: pointer;
   font: 500 14px/1.3 var(--ds-sans);
+  transition: color var(--duration-snap) var(--ease);
 }
 .sc-dash-job:last-child { border-bottom: 0; }
 .sc-dash-job[aria-current="true"] { color: var(--ds-accent); }
@@ -191,4 +195,11 @@
   .sc-dash-rail button,
   .sc-dash-range button,
   .sc-dash-job { min-height: 44px; font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-dash-rail button,
+  .sc-dash-range button,
+  .sc-dash-metric strong,
+  .sc-dash-job { transition: none; }
 }

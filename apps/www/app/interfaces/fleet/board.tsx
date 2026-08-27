@@ -70,7 +70,7 @@ export function Board() {
             </button>
           </div>
         ) : (
-          <p className="sc-fleet-quiet">No open alerts. {chosen.id} stays selected.</p>
+          <p className="sc-fleet-quiet sc-fresh">No open alerts. {chosen.id} stays selected.</p>
         )}
       </section>
     </main>

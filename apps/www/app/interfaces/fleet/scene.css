@@ -64,6 +64,7 @@
   border-radius: 10px;
   cursor: pointer;
   font: 500 13px/1.3 var(--fl-mono);
+  transition: background-color var(--duration-snap) var(--ease);
 }
 .sc-fleet-unit:hover,
 .sc-fleet-unit[aria-current="true"] { background: rgba(61, 222, 196, 0.1); }
@@ -88,6 +89,7 @@
   font: 500 12px/1 var(--fl-mono);
   cursor: pointer;
   white-space: nowrap;
+  transition: border-color var(--duration-snap) var(--ease);
 }
 .sc-fleet-alert button:hover { border-color: var(--fl-ink); }
 .sc-fleet-quiet {
@@ -114,4 +116,9 @@
 @media (max-width: 640px) {
   .sc-fleet-unit,
   .sc-fleet-alert button { min-height: 44px; font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-fleet-unit,
+  .sc-fleet-alert button { transition: none; }
 }

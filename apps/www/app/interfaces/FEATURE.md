@@ -6,6 +6,8 @@ Writers: the six live in `app/interfaces/catalog.ts`. Each proto is its own fold
 
 Catalog stays Raster control. Detail is control, then a product scene. Each scene has its own surface, type, and controls. Scenes may use color, radius, and shadow. Site chrome may not.
 
+Motion: a state the user caused may snap, ease, or confirm. Quiet, precise, a little pleasure on the change. Entry is not a show. No fade-up on load, no staggered reveal. Color and opacity name the change. Nothing bounces. Reduced motion stills the loops.
+
 | Surface | Route | Click path | Done |
 | --- | --- | --- | --- |
 | Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. First column is the six. Each tile is a proto. |

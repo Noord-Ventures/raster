@@ -3,7 +3,7 @@
 import * as React from "react";
 
 type Kind = "person" | "agent";
-type Line = { who: string; initials: string; kind: Kind; body: string };
+type Line = { who: string; initials: string; kind: Kind; body: string; fresh?: boolean };
 
 const CHANNELS = [
   { id: "press", label: "#press" },
@@ -60,7 +60,7 @@ export function Board() {
     setDraft("");
     setLines((map) => ({
       ...map,
-      [room]: [...(map[room] ?? []), { who: "You", initials: "YO", kind: "person", body: text }],
+      [room]: [...(map[room] ?? []), { who: "You", initials: "YO", kind: "person", body: text, fresh: true }],
     }));
   }
 
@@ -101,7 +101,7 @@ export function Board() {
           {thread.map((line, i) => {
             const key = `${room}-${i}`;
             return (
-              <article key={key} className="sc-sl-line">
+              <article key={key} className={line.fresh ? "sc-sl-line sc-fresh" : "sc-sl-line"}>
                 <span className="sc-sl-ava" data-kind={line.kind}>
                   {line.initials}
                 </span>

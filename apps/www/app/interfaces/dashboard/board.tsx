@@ -33,6 +33,8 @@ export function Board() {
   const [range, setRange] = React.useState<"week" | "month">("week");
   const [page, setPage] = React.useState("overview");
   const [job, setJob] = React.useState("14");
+  const [metricFresh, setMetricFresh] = React.useState(false);
+  const [noteFresh, setNoteFresh] = React.useState(false);
   const data = range === "week" ? WEEK : MONTH;
   const selected = JOBS.find((item) => item.id === job) ?? JOBS[0]!;
 
@@ -65,7 +67,10 @@ export function Board() {
                 key={item}
                 type="button"
                 aria-pressed={range === item}
-                onClick={() => setRange(item)}
+                onClick={() => {
+                  setRange(item);
+                  setMetricFresh(true);
+                }}
               >
                 {item === "week" ? "Week" : "Month"}
               </button>
@@ -76,15 +81,15 @@ export function Board() {
         <div className="sc-dash-metrics">
           <article className="sc-dash-metric">
             <p>Sheets this {range}</p>
-            <strong>{data.sheets}</strong>
+            <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.sheets}</strong>
           </article>
           <article className="sc-dash-metric">
             <p>Proofs</p>
-            <strong>{data.proofs}</strong>
+            <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.proofs}</strong>
           </article>
           <article className="sc-dash-metric">
             <p>On press</p>
-            <strong>{data.press}</strong>
+            <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.press}</strong>
           </article>
         </div>
 
@@ -104,6 +109,7 @@ export function Board() {
                 onClick={() => {
                   setJob(item.id);
                   setPage("jobs");
+                  setNoteFresh(true);
                 }}
               >
                 <span>
@@ -114,7 +120,7 @@ export function Board() {
                 <span>{item.state}</span>
               </button>
             ))}
-            <div className="sc-dash-detail">
+            <div key={job} className={noteFresh ? "sc-dash-detail sc-fresh" : "sc-dash-detail"}>
               <span className="sc-dash-dot" />
               {selected.note}
             </div>
