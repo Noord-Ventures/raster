@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "concentric-radius",
+  "type": "registry:component",
+  "title": "Concentric radius",
+  "description": "Inner radius is max(0, outer − padding). Nested frames stay concentric. Raster chrome stays square.",
+  "registryDependencies": [
+    "https://raster.noord.dev/r/raster-base.json",
+    "https://raster.noord.dev/r/inter.json"
+  ],
+  "files": [
+    {
+      "path": "raster/concentric-radius.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\n/** inner = max(0, outer − padding) */\nexport function concentricInner(outer: number, padding: number): number {\n  return Math.max(0, outer - padding);\n}\n\n/** outer = inner + padding */\nexport function concentricOuter(inner: number, padding: number): number {\n  return Math.max(0, inner) + Math.max(0, padding);\n}\n\nconst NestInnerRadius = React.createContext<number | null>(null);\n\nfunction nestVars(out?: number, gap?: number): React.CSSProperties {\n  const style: Record<string, string> = {};\n  if (out != null) style[\"--rs-out\"] = `${out}px`;\n  if (gap != null) style[\"--rs-gap\"] = `${gap}px`;\n  return style as React.CSSProperties;\n}\n\nexport interface NestProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Outer radius in px. Nested nests inherit the parent inner radius. */\n  radius?: number;\n  /** Padding in px. Subtracted from the outer radius. */\n  pad?: number;\n}\n\nexport function Nest({ radius, pad, style, className, children, ...props }: NestProps) {\n  const inherited = React.useContext(NestInnerRadius);\n  const out = radius ?? inherited ?? undefined;\n  const next = out != null && pad != null ? concentricInner(out, pad) : inherited;\n\n  return (\n    <NestInnerRadius.Provider value={next ?? null}>\n      <div className={cx(\"rs-nest\", className)} style={{ ...nestVars(out, pad), ...style }} {...props}>\n        {children}\n      </div>\n    </NestInnerRadius.Provider>\n  );\n}\n\nexport function NestInner({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return <div className={cx(\"rs-nest-in\", className)} {...props} />;\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/concentric-radius.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/nest.css",
+      "content": "/* ── Concentric radius: inner = max(0, outer − padding) ── */\n.rs-nest{\n  --rs-out:var(--radius);\n  --rs-gap:var(--pad);\n  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  box-sizing:border-box;\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  padding:var(--rs-gap);\n  background:var(--bg);\n}\n.rs-nest-in{\n  --rs-out:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  --rs-in:var(--rs-out);\n  box-sizing:border-box;\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  min-height:72px;\n  background:var(--bg);\n}\n",
+      "type": "registry:file",
+      "target": "styles/raster/nest.css"
+    }
+  ],
+  "meta": {
+    "raster": {
+      "category": "surfaces",
+      "classes": [
+        "rs-nest",
+        "rs-nest-in"
+      ],
+      "snippet": "<div class=\"rs-nest\" style=\"--rs-out:28px;--rs-gap:16px;width:184px\"><div class=\"rs-nest-in\"></div></div>",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

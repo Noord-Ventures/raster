@@ -995,6 +995,46 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "concentric-radius",
+      "type": "registry:component",
+      "title": "Concentric radius",
+      "description": "Inner radius is max(0, outer − padding). Nested frames stay concentric. Raster chrome stays square.",
+      "registryDependencies": [
+        "https://raster.noord.dev/r/raster-base.json",
+        "https://raster.noord.dev/r/inter.json"
+      ],
+      "meta": {
+        "raster": {
+          "category": "surfaces",
+          "classes": [
+            "rs-nest",
+            "rs-nest-in"
+          ],
+          "snippet": "<div class=\"rs-nest\" style=\"--rs-out:28px;--rs-gap:16px;width:184px\"><div class=\"rs-nest-in\"></div></div>",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/concentric-radius.tsx",
+          "type": "registry:component",
+          "target": "components/raster/concentric-radius.tsx"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/styles/nest.css",
+          "type": "registry:file",
+          "target": "styles/raster/nest.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "stepper",
       "type": "registry:component",
       "title": "Stepper",

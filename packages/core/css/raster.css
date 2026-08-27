@@ -44,8 +44,11 @@
   --grid-line: rgba(0,0,0,0.025);
   --radius: 6px;
   --radius-sm: 4px;
+  --radius-chrome: 0px;
   --gutter: 20px;
   --pad: 20px;
+  /* Concentric: inner = max(0, outer − padding). Default radius vs --pad is 0. */
+  --radius-in: max(0px, calc(var(--radius) - var(--pad)));
   --transition: background-color 0.3s ease, color 0.3s ease;
   /* Background column grid: 204px modules (184 column + 20 gutter). */
   --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);
@@ -327,6 +330,27 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .rs-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}
 .rs-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}
 .rs-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}
+
+/* ── Concentric radius: inner = max(0, outer − padding) ── */
+.rs-nest{
+  --rs-out:var(--radius);
+  --rs-gap:var(--pad);
+  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  box-sizing:border-box;
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  padding:var(--rs-gap);
+  background:var(--bg);
+}
+.rs-nest-in{
+  --rs-out:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  --rs-in:var(--rs-out);
+  box-sizing:border-box;
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  min-height:72px;
+  background:var(--bg);
+}
 
 /* ── Stepper ── */
 .rs-steps{display:flex;align-items:flex-start;gap:8px}

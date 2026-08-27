@@ -8,6 +8,9 @@ import {
   Breadcrumbs,
   ButtonGroup,
   CrumbBar,
+  concentricInner,
+  Nest,
+  NestInner,
   Button,
   Empty,
   Field,
@@ -337,6 +340,26 @@ describe("BarChart", () => {
     for (const bar of bars) {
       expect(bar.getAttribute("rx")).toBeNull();
     }
+  });
+});
+
+describe("Nest", () => {
+  it("sets concentric custom properties and nests by subtraction", () => {
+    const { container } = render(
+      <Nest radius={28} pad={16}>
+        <Nest pad={8}>
+          <NestInner>Board</NestInner>
+        </Nest>
+      </Nest>,
+    );
+    const nests = container.querySelectorAll(".rs-nest");
+    expect(nests).toHaveLength(2);
+    expect((nests[0] as HTMLElement).style.getPropertyValue("--rs-out")).toBe("28px");
+    expect((nests[0] as HTMLElement).style.getPropertyValue("--rs-gap")).toBe("16px");
+    expect((nests[1] as HTMLElement).style.getPropertyValue("--rs-out")).toBe("12px");
+    expect((nests[1] as HTMLElement).style.getPropertyValue("--rs-gap")).toBe("8px");
+    expect(container.querySelector(".rs-nest-in")?.textContent).toBe("Board");
+    expect(concentricInner(28, 16)).toBe(12);
   });
 });
 

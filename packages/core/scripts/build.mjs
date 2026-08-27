@@ -40,8 +40,11 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --grid-line: ${color.light.gridLine};
   --radius: ${radius.base}px;
   --radius-sm: ${radius.small}px;
+  --radius-chrome: ${radius.chrome}px;
   --gutter: ${grid.gutter}px;
   --pad: ${grid.pad}px;
+  /* Concentric: inner = max(0, outer − padding). Default radius vs --pad is 0. */
+  --radius-in: max(0px, calc(var(--radius) - var(--pad)));
   --transition: background-color 0.3s ease, color 0.3s ease;
   /* Background column grid: ${grid.module}px modules (${grid.column} column + ${grid.gutter} gutter). */
   --grid-image: ${gridImage};

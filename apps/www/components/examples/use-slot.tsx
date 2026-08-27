@@ -22,6 +22,7 @@ import { Use as Checkbox } from "./checkbox/use";
 import { Use as Chip } from "./chip/use";
 import { Use as Collapsible } from "./collapsible/use";
 import { Use as Combobox } from "./combobox/use";
+import { Use as ConcentricRadius } from "./concentric-radius/use";
 import { Use as Command } from "./command/use";
 import { Use as ContextMenu } from "./context-menu/use";
 import { Use as CrumbBar } from "./crumb-bar/use";
@@ -98,6 +99,7 @@ const uses: Record<string, ComponentType> = {
   chip: Chip,
   collapsible: Collapsible,
   combobox: Combobox,
+  "concentric-radius": ConcentricRadius,
   command: Command,
   "context-menu": ContextMenu,
   "crumb-bar": CrumbBar,

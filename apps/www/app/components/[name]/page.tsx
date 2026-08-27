@@ -295,6 +295,11 @@ useEffect(() => {
   ]}
   rows={rows}
 />`,
+  "concentric-radius": `import { Nest, NestInner } from "@/components/raster/concentric-radius";
+
+<Nest radius={28} pad={16}>
+  <NestInner>Board</NestInner>
+</Nest>`,
   "aspect-ratio": `import { AspectRatio } from "@/components/raster/aspect-ratio";
 
 <AspectRatio ratio={16 / 9}>
