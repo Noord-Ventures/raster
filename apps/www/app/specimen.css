@@ -262,6 +262,7 @@
   .specimen-kit-name a {
     display: inline-flex;
     align-items: center;
+    min-width: 44px;
     min-height: 44px;
   }
   .specimen-kit-name { font-size: 15px; }
