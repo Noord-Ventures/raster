@@ -176,7 +176,7 @@ export function SiteChrome() {
             {l.label}
           </Link>
         ))}
-        <a href="https://github.com/rennvaldes/raster">GitHub</a>
+        <a href="https://github.com/Noord-Ventures/raster">GitHub</a>
       </nav>
 
       <div ref={appearanceRef}>
@@ -224,7 +224,7 @@ export function SiteChrome() {
               {l.label}
             </Link>
           ))}
-          <a href="https://github.com/rennvaldes/raster" className="nav-panel-link">
+          <a href="https://github.com/Noord-Ventures/raster" className="nav-panel-link">
             GitHub
           </a>
         </div>

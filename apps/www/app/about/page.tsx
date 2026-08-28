@@ -226,7 +226,7 @@ export default function AboutPage() {
               {" · "}
               <a href={noord.host}>{noord.host.replace("https://", "")}</a>
               {" · "}
-              <a href={person.repo}>github.com/rennvaldes/raster</a>
+              <a href={person.repo}>{person.repo.replace("https://", "")}</a>
             </p>
             <p>
               {person.copyright}, {person.year}.

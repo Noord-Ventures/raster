@@ -249,7 +249,7 @@ export const notes = [
   },
   {
     q: "Where do I report a problem?",
-    a: "github.com/rennvaldes/raster. Issues and pull requests. The packages are @noorddev/raster, @noorddev/raster-react, and @noorddev/raster-cli.",
+    a: "github.com/Noord-Ventures/raster. Issues and pull requests. The packages are @noorddev/raster, @noorddev/raster-react, and @noorddev/raster-cli.",
   },
 ] as const;
 
@@ -279,5 +279,5 @@ export const person = {
   heading: "Renato Valdés Olmos",
   copyright: "MIT © Noord / Renato Valdés-Olmos",
   year: "2026",
-  repo: "https://github.com/rennvaldes/raster",
+  repo: "https://github.com/Noord-Ventures/raster",
 };
