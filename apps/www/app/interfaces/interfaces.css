@@ -1,24 +1,10 @@
 @import "./scene-motion.css";
 /* Interfaces section. Isolated. Do not move these rules into site.css. */
 
-/* Same 204 as home: body verticals at --grid-pos, plus horizontals at
-   204 / 408 / 612 so the field reads as a module. Ink is --grid-line
-   (already quieter than --divider). Do not raise opacity. No line at
-   y=0 — that would read as a page frame. */
+/* Site 204 is html::before in core base. Paper stays open so the
+   field runs through the title cell and around the crops. */
 body:has(.if-index) {
-  background-image:
-    var(--grid-image),
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 203px,
-      var(--grid-line) 203px,
-      var(--grid-line) 204px
-    );
-  background-size: var(--grid-size) 100vh, 100% 204px;
-  background-repeat: repeat-x, repeat-y;
-  background-attachment: fixed, fixed;
-  background-position: var(--grid-pos), 0 0;
+  background: transparent;
 }
 
 .if-index {

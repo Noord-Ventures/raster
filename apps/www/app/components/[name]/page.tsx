@@ -475,7 +475,7 @@ export default async function ComponentPage({
       <div className="site-layout">
         <DocsNav />
         <main className="site-content">
-          <header className="cover" style={{ paddingBottom: 8 }}>
+          <header className="cover">
             <h1 className="rs-t-display component-head">{component.title}</h1>
             <p className="rs-t-sub component-desc">{component.description}</p>
           </header>

@@ -82,6 +82,9 @@ if (specimen.includes("background-image: none")) {
 if (!specimen.includes("body:has(.specimen-page)") || !specimen.includes("clip-path: inset(0)")) {
   fail("Homepage must keep the site grid and clip any edge hairline");
 }
+if (!specimen.includes("body:has(.specimen-page) {\n  background: transparent;")) {
+  fail("Homepage must let the site 204 overlay read through (no second body grid)");
+}
 if (!specimen.includes("background: transparent")) {
   fail("Homepage paper must let the site 204 verticals show through");
 }
@@ -106,8 +109,12 @@ if (!ifCss.includes(".if-board .rs-sidebar-item") || !ifCss.includes("min-height
 if (/\.if-rail \{[^}]*background:\s*var\(--bg\)/s.test(ifCss)) {
   fail("Interfaces rail must not cover the site module grid");
 }
-if (!ifCss.includes("body:has(.if-index)") || !ifCss.includes("repeating-linear-gradient")) {
-  fail("Interfaces must paint the 204 field, including horizontals");
+const baseCss = readFileSync(join(root, "packages/core/css/base.css"), "utf8");
+if (!baseCss.includes("html::before") || !baseCss.includes("clip-path:inset(0 0 0 21px)") || !baseCss.includes("repeating-linear-gradient")) {
+  fail("Site 204 must paint on html::before (horizontals included) and clip the 20px page frame");
+}
+if (!ifCss.includes("body:has(.if-index)") || !ifCss.includes("background: transparent")) {
+  fail("Interfaces paper must stay open so the site 204 overlay reads through");
 }
 if (/if-list \{[^}]*padding:\s*24px/s.test(ifCss)) {
   fail("Interfaces cards must sit on the 204, not 24px off it");

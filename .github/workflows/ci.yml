@@ -141,8 +141,13 @@ jobs:
               console.error("Homepage must not hide the site module grid");
               process.exit(1);
             }
-            if (!hasRule.includes("background-image: var(--grid-image)")) {
-              console.error("Homepage must keep the site module grid");
+            const base = readFileSync("packages/core/css/base.css", "utf8");
+            if (!base.includes("html::before") || !base.includes("clip-path:inset(0 0 0 21px)")) {
+              console.error("Site 204 must paint on html::before and clip the 20px page frame");
+              process.exit(1);
+            }
+            if (!base.includes("repeating-linear-gradient")) {
+              console.error("Site 204 must include horizontals so the module reads");
               process.exit(1);
             }
             const pageStart = css.indexOf(".specimen-page {");
@@ -529,7 +534,10 @@ jobs:
       - name: Interfaces is six posters
         run: |
           node apps/www/scripts/check-interfaces.mjs
-          grep -q 'body:has(.if-index)' apps/www/app/interfaces/interfaces.css
+          grep -q 'html::before' packages/core/css/base.css
+          grep -q 'clip-path:inset(0 0 0 21px)' packages/core/css/base.css
+          grep -q '.rs-btn-group > .rs-btn-ghost + *' packages/core/css/components/button-group.css
+          grep -q 'border-inline-start:1px solid var(--grid-line)' packages/core/css/components/button-group.css
           grep -q 'min-height: 204px' apps/www/app/interfaces/interfaces.css
           grep -q 'margin-top: 204px' apps/www/app/interfaces/interfaces.css
           if grep -n 'background: var(--bg)' apps/www/app/interfaces/interfaces.css | grep -q if-rail; then

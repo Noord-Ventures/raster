@@ -12,7 +12,7 @@ export default function ComponentsPage() {
       <div className="site-layout">
         <DocsNav />
         <main className="site-content-wide">
-          <header className="cover" style={{ paddingBottom: 24, maxWidth: 592 }}>
+          <header className="cover" style={{ maxWidth: 592 }}>
             <h1 className="rs-t-display">Components</h1>
             <p className="rs-t-sub">The control, the name, a short law.</p>
           </header>
