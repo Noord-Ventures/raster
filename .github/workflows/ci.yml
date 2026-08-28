@@ -350,9 +350,8 @@ jobs:
             exit 1
           fi
           chrome=apps/www/components/site-chrome.tsx
-          grep -q 'name="sun"' "$chrome"
-          grep -q 'name="moon"' "$chrome"
-          grep -q '@noorddev/raster-react' "$chrome"
+          grep -q 'SettingsMark' "$chrome"
+          grep -q 'M2 4.5h5M11 4.5h3M2 11.5h3M9 11.5h5' "$chrome"
           grep -q 'name="calendar"' packages/react/src/components/date-picker.tsx
           grep -q 'r(3, 4.5, 10, 9)' "$marks"
           if grep -nE 'M13.5 9.5A5.5|r="3.25"' "$chrome" packages/react/src/components/theme-toggle.tsx; then
