@@ -101,13 +101,16 @@
   min-height: 0;
   overflow: auto;
   column-count: 2;
-  column-gap: 0;
+  column-gap: 12px;
+  padding: 12px;
 }
 .sc-wall-card {
   break-inside: avoid;
-  border-right: 1px solid var(--divider);
-  border-bottom: 1px solid var(--divider);
+  margin-bottom: 12px;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-sm);
   background: var(--bg);
+  overflow: hidden;
 }
 .sc-wall-card.is-on { background: color-mix(in srgb, var(--text) 5%, var(--bg)); }
 .sc-wall-open {
@@ -204,7 +207,6 @@
     max-height: 160px;
   }
   .sc-wall-stream { column-count: 1; }
-  .sc-wall-card { border-right: 0; }
   .if-inspect.is-open { width: 100%; border-left: 0; border-top: 1px solid var(--divider); }
   .sc-wall-inspect { width: 100%; }
 }

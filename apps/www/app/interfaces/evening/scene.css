@@ -1,4 +1,4 @@
-/* Evening. A kitchen market. Flush cells, hairline chrome. */
+/* Evening. A kitchen market. Cards and boxes use --radius-sm. Segments are not pills. */
 
 .sc-evening {
   height: 100%;
@@ -40,7 +40,7 @@
   border: 1px solid var(--divider);
   background: var(--bg);
   color: var(--text);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   padding: 0 10px;
   font: 500 13px/1 inherit;
   transition: border-color var(--duration-snap) var(--ease);
@@ -68,7 +68,7 @@
   border: 1px solid var(--divider);
   background: var(--bg);
   color: var(--text);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   font: 600 13px/1 inherit;
   cursor: pointer;
   transition: background-color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease);
@@ -89,7 +89,8 @@
   display: flex;
   align-items: stretch;
   border: 1px solid var(--divider);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
 }
 .sc-evening-seg button {
   appearance: none;
@@ -121,6 +122,8 @@
   overflow: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 12px;
 }
 .sc-evening-empty {
   grid-column: 1 / -1;
@@ -135,18 +138,16 @@
   align-content: start;
   gap: 8px;
   padding: 0 0 12px;
-  border: 0;
-  border-right: 1px solid var(--divider);
-  border-bottom: 1px solid var(--divider);
-  background: transparent;
+  border: 1px solid var(--divider);
+  background: var(--bg);
   color: inherit;
   text-align: left;
   cursor: pointer;
   font-family: inherit;
-  border-radius: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
   transition: background-color var(--duration-snap) var(--ease);
 }
-.sc-evening-store:nth-child(2n) { border-right: 0; }
 .sc-evening-store:hover { background: color-mix(in srgb, var(--text) 4%, transparent); }
 .sc-evening-store img {
   display: block;
@@ -255,7 +256,7 @@
   width: 56px;
   height: 56px;
   object-fit: cover;
-  border-radius: 0;
+  border-radius: var(--radius-sm);
 }
 .sc-evening-item-open span { display: grid; gap: 3px; min-width: 0; }
 .sc-evening-item-open b { font-size: 13px; font-weight: 600; }
@@ -278,7 +279,7 @@
   border: 1px solid var(--divider);
   background: var(--bg);
   color: var(--text);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   font: 500 12px/1 inherit;
   cursor: pointer;
   transition: border-color var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease);
@@ -297,7 +298,7 @@
   width: 100%;
   height: 96px;
   object-fit: cover;
-  border-radius: 0;
+  border-radius: var(--radius-sm);
 }
 .sc-evening-dish { margin: 0; font-size: 15px; font-weight: 600; color: var(--text); }
 .sc-evening-sheet p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--text-secondary); }
@@ -329,7 +330,6 @@
 @media (max-width: 900px) {
   .sc-evening { grid-template-columns: 1fr; overflow: auto; }
   .sc-evening-stores { grid-template-columns: 1fr; }
-  .sc-evening-store { border-right: 0; }
   .if-inspect.is-open { width: 100%; border-left: 0; border-top: 1px solid var(--divider); }
   .sc-evening-sheet { width: 100%; }
 }

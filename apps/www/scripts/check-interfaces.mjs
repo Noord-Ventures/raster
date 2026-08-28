@@ -265,13 +265,17 @@ if (!map.includes("Icon")) {
   console.error("FEATURE.md must lock Raster Icon marks");
   process.exit(1);
 }
+if (!map.includes("--radius-sm") || !/not pills/i.test(map)) {
+  console.error("FEATURE.md must lock cards and boxes to --radius-sm, not pills");
+  process.exit(1);
+}
 if (existsSync(join(dir, "scene-fonts.ts"))) {
   console.error("Scenes must use Inter, not extra display faces");
   process.exit(1);
 }
 
 const productSkin = /Fraunces|Source_Serif|IBM_Plex|Newsreader|Iowan|Palatino|#c96442|#e08b6a|#3e1242|#007a5a|#1f8a78|#c45c26|#3ddec4|#ff6b4a|#1264a3|#5b2c6f|#071014|aubergine/i;
-const allowedRadius = /^(0|50%|var\(--radius-sm\))$/;
+const allowedRadius = /^(0|50%|var\(--radius-sm\)|var\(--radius\))$/;
 const quietShadow = (value) =>
   value === "none" ||
   value.startsWith("inset ") ||
@@ -299,7 +303,11 @@ for (const slug of slugs) {
   }
   const radii = [...scene.matchAll(/border-radius:\s*([^;]+)/g)].map((m) => m[1].trim());
   if (radii.some((value) => !allowedRadius.test(value))) {
-    console.error(`${slug} scene chrome stays flush; boxed UI may use --radius-sm only`);
+    console.error(`${slug} cards and boxes use --radius-sm; chrome stays 0; not pills`);
+    process.exit(1);
+  }
+  if (/border-radius:\s*(999|9999|100vw)/.test(scene)) {
+    console.error(`${slug} must not use pill radius`);
     process.exit(1);
   }
   const shadows = [...scene.matchAll(/box-shadow:\s*([^;]+)/g)].map((m) => m[1].trim());
@@ -353,14 +361,33 @@ for (const slug of slugs) {
 }
 
 const wallBoard = readFileSync(join(dir, "wall", "board.tsx"), "utf8");
+const wallScene = readFileSync(join(dir, "wall", "scene.css"), "utf8");
 if (wallBoard.includes('aria-label="Thread"') || !wallBoard.includes('aria-label="Feed"')) {
   console.error("Wall primary view must be a feed, not a thread");
   process.exit(1);
 }
+const wallCard = wallScene.slice(wallScene.indexOf(".sc-wall-card {"), wallScene.indexOf("}", wallScene.indexOf(".sc-wall-card {")));
+if (!wallCard.includes("var(--radius-sm)")) {
+  console.error("Wall feed cards must use --radius-sm, the button radius");
+  process.exit(1);
+}
 
 const eveningBoard = readFileSync(join(dir, "evening", "board.tsx"), "utf8");
+const eveningScene = readFileSync(join(dir, "evening", "scene.css"), "utf8");
 if (!eveningBoard.includes("sc-evening-store") || !eveningBoard.includes("Bag")) {
   console.error("Evening must be a store market with a bag, not a thin kitchen list");
+  process.exit(1);
+}
+const eveningStore = eveningScene.slice(eveningScene.indexOf(".sc-evening-store {"), eveningScene.indexOf("}", eveningScene.indexOf(".sc-evening-store {")));
+const eveningSearch = eveningScene.slice(eveningScene.indexOf(".sc-evening-search {"), eveningScene.indexOf("}", eveningScene.indexOf(".sc-evening-search {")));
+const eveningSeg = eveningScene.slice(eveningScene.indexOf(".sc-evening-seg {"), eveningScene.indexOf("}", eveningScene.indexOf(".sc-evening-seg {")));
+const eveningSegBtn = eveningScene.slice(eveningScene.indexOf(".sc-evening-seg button {"), eveningScene.indexOf("}", eveningScene.indexOf(".sc-evening-seg button {")));
+if (!eveningStore.includes("var(--radius-sm)") || !eveningSearch.includes("var(--radius-sm)") || !eveningSeg.includes("var(--radius-sm)")) {
+  console.error("Evening cards and boxes must use --radius-sm, the button radius");
+  process.exit(1);
+}
+if (!/border-radius:\s*0/.test(eveningSegBtn)) {
+  console.error("Evening filter segments must stay square inside, not pills");
   process.exit(1);
 }
 
