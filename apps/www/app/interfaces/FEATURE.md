@@ -4,19 +4,25 @@ What it is, how to get there, what done looks like.
 
 Writers: the six live in `app/interfaces/catalog.ts`. Each proto is its own folder and its own route. The section is a first-class nav sibling of Components, Docs, and About — not a page inside a component.
 
-Catalog stays Raster control. Detail is a Raster product demo that happens to do that job — not a skin of Claude, Slack, or a food app. Scene chrome is Raster chrome: sentence case, Inter / system grotesque, hairlines, 204 module (184 + 20), flush cells, no radius, no shadow, no tape, monochrome. Dividers use the gridline. Photographs occupy a cell like an image.
+Each interface is a fictional little app: an English name, a mark, one or two words of voice. Not a screenshot of a real product. Not a generic component dump. Not a Linear, Notion, Figma, or Waymo clone.
 
-Motion: a state the user caused may snap, ease, or confirm. Quiet, precise, a little pleasure on the change. Entry is not a show. No fade-up on load, no staggered reveal. Color and opacity name the change. Nothing bounces. Reduced motion stills the loops.
+Landing cards are poster crops — a clipped fragment of that UI, not a tiny full-page shrink, not a title-only frame. Type in a crop wraps on a word. A composer or photograph may run off the card; a letter may not. Captions follow the English names.
+
+Detail keeps Raster site chrome (logo, corner nav, crumb bar, Interfaces rail). The custom UI sits in a boxed specimen. Below the box: a longer description, plus meta (what, type, module, ink, use, field). No horizontal divider between the UI and the copy. No rule under the description. The specimen is not almost-fullscreen.
+
+The boxed UI is a coherent modern product with a Raster core, not a floaty flat demo. Module, hairlines, grotesque, sentence case. Never all caps. No tape. Chrome stays mostly monochrome. A board may take one spot or a quiet hue for hierarchy. Minimal shadow is allowed. Faces may be round. App dividers run edge to edge in the pane. The boxed UI may follow `--radius-sm`.
+
+Each app has two to three levels of use: list → detail → one level deeper. Inspector panes (`.if-inspect`) open with width and opacity. A state the user caused may snap, ease, or confirm. Quiet, precise, a little pleasure on the change. Entry is not a show. No fade-up on load, no staggered reveal. Color, opacity, and width name the change. Nothing bounces. Reduced motion stills the loops.
 
 | Surface | Route | Click path | Done |
 | --- | --- | --- | --- |
-| Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. First column is the six. Each tile is a proto. |
-| AI tool | `/interfaces/ai-tool` | Interfaces → AI tool | Writing tool. Thread, user vs assistant as type, composer at the bottom, canned reply. |
-| SaaS dashboard | `/interfaces/dashboard` | Interfaces → SaaS dashboard | Ops field. Range changes the numbers. A selected job opens a note. |
-| Threads | `/interfaces/threads` | Interfaces → Threads | Feed of notes. Photographs occupy a cell. Like, a live reply. |
-| Fleet | `/interfaces/fleet` | Interfaces → Fleet | Night map in a cell. Select a unit. Acknowledge an alert. |
-| Food delivery | `/interfaces/delivery` | Interfaces → Food delivery | Photographs in cells. Ratings, a working bag. |
-| Slack | `/interfaces/slack` | Interfaces → Slack | Channel list, message pane, composer. Agents sit with people. |
+| Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. Each card is a poster crop, then the English name. |
+| Line | `/interfaces/line` | Interfaces → Line | Modern writing chat. List → chat → a line. Centered measure. Composer in the pane, aligned. |
+| Press | `/interfaces/press` | Interfaces → Press | Ops app. Floor → job → sheet. Hue in the rail. One Crouwel spot. |
+| Wall | `/interfaces/wall` | Interfaces → Wall | Social wall. Feed → thread → profile. Faces of people. |
+| Night | `/interfaces/night` | Interfaces → Night | SF dispatch. List → unit → trip. Readable map, traffic, one list scale. |
+| Evening | `/interfaces/evening` | Interfaces → Evening | Kitchen list. Browse → kitchen → plate. |
+| Room | `/interfaces/room` | Interfaces → Room | Studio room. Channel → message → thread. Faces, people in the rail. |
 | Phone | ≤430 | Contents picker | Rail hides under 900. A stacked 44pt picker lists the six. Scene controls use the 44pt phone scale. |
 
-The six folders are `ai-tool`, `dashboard`, `threads`, `fleet`, `delivery`, `slack`. CI fails if any route disappears.
+The six folders are `line`, `press`, `wall`, `night`, `evening`, `room`. CI fails if any route disappears.

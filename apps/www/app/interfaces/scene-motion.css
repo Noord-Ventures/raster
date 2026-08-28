@@ -11,4 +11,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sc-fresh { animation: none; }
+  .if-inspect { transition: none; }
 }

@@ -1,21 +1,22 @@
 "use client";
 
 import * as React from "react";
+import { Brand } from "../mark";
 
 const WEEK = { sheets: 38, proofs: 12, press: 4, series: [12, 18, 15, 26, 24, 11, 9] };
 const MONTH = { sheets: 142, proofs: 41, press: 9, series: [28, 34, 31, 42, 38, 22, 19] };
 
 const JOBS = [
-  { id: "14", name: "Press run 14", city: "Alkmaar", weeks: 4, state: "On press", note: "Plate is up at 06:00. Density watch on unit 09." },
-  { id: "09", name: "Identity 09", city: "Delft", weeks: 6, state: "Proof", note: "Second proof due Friday. Same ink." },
-  { id: "03", name: "Ledger 03", city: "Haarlem", weeks: 2, state: "Invoice", note: "Cover number matches the invoice." },
-  { id: "22", name: "Poster 22", city: "Utrecht", weeks: 3, state: "Brief", note: "One sheet. Scope, weeks, fee." },
+  { id: "14", name: "Press run 14", city: "Alkmaar", weeks: 4, state: "On press", note: "Plate is up at 06:00. Density watch on unit 09.", sheet: "Fee on page one. Timeline under the fee. Same ink." },
+  { id: "09", name: "Identity 09", city: "Delft", weeks: 6, state: "Proof", note: "Second proof due Friday. Same ink.", sheet: "One mark. No second color in the chrome." },
+  { id: "03", name: "Ledger 03", city: "Haarlem", weeks: 2, state: "Invoice", note: "Cover number matches the invoice.", sheet: "Date the sheet to the week the press starts." },
+  { id: "22", name: "Poster 22", city: "Utrecht", weeks: 3, state: "Brief", note: "One sheet. Scope, weeks, fee.", sheet: "A grid is a plan, not a decoration." },
 ];
 
 function Line({ values }: { values: number[] }) {
   const max = Math.max(...values);
   const w = 560;
-  const h = 180;
+  const h = 120;
   const step = w / (values.length - 1);
   const pts = values.map((v, i) => `${i * step},${h - (v / max) * (h - 16)}`).join(" ");
   return (
@@ -29,27 +30,36 @@ export function Board() {
   const [range, setRange] = React.useState<"week" | "month">("week");
   const [page, setPage] = React.useState("overview");
   const [job, setJob] = React.useState("14");
+  const [sheet, setSheet] = React.useState(false);
   const [metricFresh, setMetricFresh] = React.useState(false);
-  const [noteFresh, setNoteFresh] = React.useState(false);
   const data = range === "week" ? WEEK : MONTH;
   const selected = JOBS.find((item) => item.id === job) ?? JOBS[0]!;
 
   return (
-    <main className="if-board sc-dash" aria-label="SaaS dashboard">
-      <aside className="sc-dash-rail" aria-label="Jobs">
-        <p className="sc-dash-brand">Jobs</p>
+    <main className="if-board sc-dash" aria-label="Press" style={{ ["--if-spot" as string]: "#E30613" }}>
+      <aside className="sc-dash-rail" aria-label="Floor">
+        <div className="sc-dash-brand">
+          <Brand slug="press" title="Press" />
+          <p className="sc-dash-voice">On press</p>
+        </div>
+        <p className="sc-dash-label">Floor</p>
         {[
-          { id: "overview", label: "Overview" },
-          { id: "jobs", label: "Jobs" },
-          { id: "invoices", label: "Invoices" },
+          { id: "overview", label: "Overview", meta: "Today" },
+          { id: "jobs", label: "Jobs", meta: "4" },
+          { id: "invoices", label: "Invoices", meta: "2" },
         ].map((item) => (
           <button
             key={item.id}
             type="button"
+            className="sc-dash-nav"
             aria-current={page === item.id}
-            onClick={() => setPage(item.id)}
+            onClick={() => {
+              setPage(item.id);
+              setSheet(false);
+            }}
           >
-            {item.label}
+            <span>{item.label}</span>
+            <em>{item.meta}</em>
           </button>
         ))}
       </aside>
@@ -85,7 +95,7 @@ export function Board() {
           </article>
           <article className="sc-dash-metric">
             <p>On press</p>
-            <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.press}</strong>
+            <strong key={range} className={`sc-dash-spot${metricFresh ? " sc-fresh" : ""}`}>{data.press}</strong>
           </article>
         </div>
 
@@ -105,7 +115,7 @@ export function Board() {
                 onClick={() => {
                   setJob(item.id);
                   setPage("jobs");
-                  setNoteFresh(true);
+                  setSheet(false);
                 }}
               >
                 <span>
@@ -116,12 +126,27 @@ export function Board() {
                 <span>{item.state}</span>
               </button>
             ))}
-            <div key={job} className={noteFresh ? "sc-dash-detail sc-fresh" : "sc-dash-detail"}>
-              {selected.note}
+            <div key={job} className="sc-dash-detail sc-fresh">
+              <p>{selected.note}</p>
+              <button type="button" onClick={() => setSheet(true)}>
+                Open sheet
+              </button>
             </div>
           </article>
         </div>
       </section>
+
+      <aside className={`if-inspect${sheet ? " is-open" : ""}`} aria-label="Sheet">
+        <div className="sc-dash-inspect">
+          {sheet ? (
+            <div key={job} className="sc-fresh">
+              <h2>{selected.name}</h2>
+              <p>{selected.sheet}</p>
+              <p>{selected.city} · {selected.weeks} weeks · {selected.state}</p>
+            </div>
+          ) : null}
+        </div>
+      </aside>
     </main>
   );
 }

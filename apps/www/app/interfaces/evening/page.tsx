@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { interfaceBySlug } from "../catalog";
-import { InterfacesNav } from "../nav";
+import { InterfaceShell } from "../shell";
 import "../interfaces.css";
 import "./scene.css";
 import { Board } from "./board";
 
-const proto = interfaceBySlug("delivery")!;
+const proto = interfaceBySlug("evening")!;
 
 export const metadata: Metadata = {
   title: proto.title,
@@ -14,9 +14,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <>
-      <InterfacesNav rail={false} />
+    <InterfaceShell slug="evening">
       <Board />
-    </>
+    </InterfaceShell>
   );
 }

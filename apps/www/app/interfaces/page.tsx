@@ -1,12 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { interfaces } from "./catalog";
+import { InterfaceCrop } from "./crops";
 import { InterfacesNav } from "./nav";
 import "./interfaces.css";
 
 export const metadata: Metadata = {
   title: "Interfaces",
-  description: "Working posters composed from the Raster catalog.",
+  description: "Six invented tools. A poster crop of each.",
 };
 
 export default function InterfacesPage() {
@@ -16,13 +17,16 @@ export default function InterfacesPage() {
       <main className="site-content-wide">
         <header className="cover" style={{ paddingBottom: 24, maxWidth: 592 }}>
           <h1 className="rs-t-display">Interfaces</h1>
-          <p className="rs-t-sub">Working posters. The catalog, composed.</p>
+          <p className="rs-t-sub">Six little tools. A poster crop of each.</p>
         </header>
         <div className="if-list">
           {interfaces.map((item) => (
             <Link key={item.slug} href={`/interfaces/${item.slug}`} className="if-tile">
-              <h2>{item.title}</h2>
-              <p>{item.law}</p>
+              <InterfaceCrop slug={item.slug} />
+              <div className="if-tile-matter">
+                <h2>{item.title}</h2>
+                <p>{item.voice}</p>
+              </div>
             </Link>
           ))}
         </div>
