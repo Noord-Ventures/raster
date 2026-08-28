@@ -102,17 +102,20 @@ if (!specimen.includes("min-width: 481px") || !about.includes("min-width: 481px"
 if (specimen.includes("padding: 0 1px 1px 0") || /padding:\s*1px;/.test(specimen)) {
   fail("Homepage must open on the right and bottom; do not restore an outer frame");
 }
-if (specimen.includes("background-image: none")) {
-  fail("Homepage must not hide the site module grid");
+if (specimen.includes("background-image: var(--grid-image)") || specimen.includes("repeating-linear-gradient")) {
+  fail("Homepage must not paint gutter lines through type");
+}
+if (!specimen.includes("html:has(.specimen-page)::before") || !specimen.includes("display: none")) {
+  fail("Homepage must kill the site gutter overlay so Raster / tagline / install are not caged");
 }
 if (!specimen.includes("body:has(.specimen-page)") || !specimen.includes("clip-path: inset(0)")) {
-  fail("Homepage must keep the site grid and clip any edge hairline");
+  fail("Homepage must clip any edge hairline so there is no page frame");
 }
 if (!specimen.includes("body:has(.specimen-page) {\n  background: transparent;")) {
-  fail("Homepage must let the site 204 overlay read through (no second body grid)");
+  fail("Homepage must not paint a second body grid");
 }
-if (!specimen.includes("background: transparent")) {
-  fail("Homepage paper must let the site 204 verticals show through");
+if (!specimen.includes("box-shadow: 1px 0 0 var(--grid-line), 0 1px 0 var(--grid-line)")) {
+  fail("Homepage field is boxed 204 cells in --grid-line, not a gutter overlay");
 }
 if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
   fail("Catalog secondaries must not cover the site module grid");
@@ -122,7 +125,7 @@ if (!about.includes("padding: 0 1px 1px 0")) {
 }
 const aboutCell = about.slice(about.indexOf(".field-cell {"), about.indexOf("}", about.indexOf(".field-cell {")));
 if (!aboutCell.includes("background-image: var(--grid-image)") || !aboutCell.includes("background-position: var(--grid-pos)") || !aboutCell.includes("background-attachment: fixed")) {
-  fail("About must share the site 204 spine with home, not a local hero tile");
+  fail("About must keep the gutter-line 204 spine, not a local hero tile");
 }
 const aboutEra = about.slice(about.indexOf(".field-cell-era {"), about.indexOf("}", about.indexOf(".field-cell-era {")));
 if (aboutEra.includes("background-image")) {
