@@ -12,7 +12,7 @@ Usage
   npx @noorddev/raster-cli help
 
 Commands
-  init      Write raster.css, Inter (SIL OFL 1.1), and raster.json.
+  init      Write raster.css, Inter (SIL OFL 1.1), index.html (specimen), and raster.json.
             --compat also writes the 0.1 class-name layer.
             --registry <url> stores a remote registry for add (HTTP(S) or a local directory).
   add       Copy a component's React source into your project.
@@ -71,13 +71,15 @@ async function main(): Promise<void> {
       });
       console.log("Raster initialized.\n");
       reportWrites(results);
+      const cssPath = results.find((r) => r.path.endsWith("raster.css") && !r.path.endsWith("raster-compat.css"))?.path ?? "styles/raster.css";
       console.log(`
 Next steps
-  1. Link the stylesheet (or import it in your root layout):
-       <link rel="stylesheet" href="/${results[0]!.path}" />
-  2. Dark scheme: set data-theme="dark" on <html>.
-  3. Inter is bundled (SIL OFL 1.1). System sans is fallback only.
-  4. Add components:  npx @noorddev/raster-cli add button dialog
+  1. Open index.html — the specimen page init writes.
+  2. The stylesheet is already linked:
+       <link rel="stylesheet" href="${cssPath}" />
+  3. Dark scheme: set data-theme="dark" on <html>, or use the control on the specimen.
+  4. Inter is bundled (SIL OFL 1.1). System sans is fallback only.
+  5. Add components:  npx @noorddev/raster-cli add button dialog
 `);
       break;
     }

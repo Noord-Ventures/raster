@@ -3,10 +3,12 @@
 ## Unreleased
 
 - Slight Raster radius: `--radius-sm` is 4px, the standalone button token. Cards, boxes, callouts, dialogs, sheets, drawers, catalog frames, and interface scene frames share it. `--radius` aliases `--radius-sm`. Nested inners still follow Steve Ruiz. Chrome, icon marks, empty, and charts stay 0. No shadow. Does not publish.
+- About is a workhorse specimen in the Inter register: what it is, who it is for, pasteable usage, free & open, type on the module, then history. The 204 spine stays (20 / 204 / 224 / 408). Navbar on scroll on About. `npx @noorddev/raster-cli init` writes `index.html` as a real specimen, not a hello-world shell. Preview at `/starter`.
+- Starter / generated page recut: box padding is the 20px gutter; scheme toggle is the Raster sun/moon mark; Flush hairlines span the cell; 184+20 reads as column and gutter on the 204 module; US English; kit includes a graph and `rs-kbd`. Module cells stay flush; inner boxes may take `--radius-sm`. Same copy on About.
 - Raster icons: first complete family in `@noorddev/raster-react`. Same 16 module / 1px language. Catalog on /components/icons. Site theme-toggle is the family. Does not publish.
 - Site 204 module grid is visible on home, under the components rail, through About, and on Interfaces (title cell + field around the crops). `--grid-line` reads as a hairline. No page-frame.
 - Chrome polish: calendar days are square; month chevrons sit 1px down; grouped seams and dividers use `--divider`; button / input groups inherit `--radius-sm`. Grouped T-junctions are one stroke. Field input is a 40px integer control with 8px / 16px label and hint.
-- www: quieter credits. About is a modernist homage (Swiss Style, Dutch modernism, names as type-in-cells, illustrated 204 / hairline / flush / grotesque). Homepage install command is a primary CTA.
+- www: quieter credits. Homepage install command is a primary CTA.
 - Homepage opens on the right and bottom; no outer frame. About and interior chrome keep their hairlines.
 - User-facing install copy uses `@noorddev` (`npx @noorddev/raster-cli init`). Does not publish.
 - www phone: 44pt hits, safe-area insets, stacked TOC, copy control. Desktop chrome stays.

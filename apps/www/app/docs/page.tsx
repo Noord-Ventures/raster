@@ -25,9 +25,10 @@ export default function DocsPage() {
         <CodeBlock code={COMMAND} />
         <p className="rs-t-body">
           Writes <code className="rs-code">styles/raster.css</code> (tokens, Inter, base
-          styles, component classes), the Inter files, and{" "}
-          <code className="rs-code">raster.json</code>. Link the stylesheet or import it in
-          your root layout. Set <code className="rs-code">data-theme=&quot;dark&quot;</code> on the
+          styles, component classes), the Inter files,{" "}
+          <code className="rs-code">index.html</code> (a specimen page, not a shell), and{" "}
+          <code className="rs-code">raster.json</code>. The specimen already links the
+          stylesheet. Set <code className="rs-code">data-theme=&quot;dark&quot;</code> on the
           root element for the dark scheme.
         </p>
 

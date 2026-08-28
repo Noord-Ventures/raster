@@ -1,10 +1,25 @@
 import type { Metadata } from "next";
-import { era, featured, field, noord, person, programme, typeface } from "./facts";
+import { CopyControl } from "@/components/code-block";
+import {
+  era,
+  featured,
+  field,
+  history,
+  lead,
+  license,
+  noord,
+  notes,
+  person,
+  program,
+  specimen,
+  typeface,
+  usage,
+} from "./facts";
 import "./about.css";
 
 export const metadata: Metadata = {
   title: "About",
-  description: era.homage,
+  description: lead.what,
 };
 
 export default function AboutPage() {
@@ -19,11 +34,111 @@ export default function AboutPage() {
         </section>
 
         <section className="field-cell field-cell-lead">
-          <p className="field-kicker">Homage</p>
+          <p className="field-kicker">{lead.kicker}</p>
           <div className="field-copy">
-            <p>{era.homage}</p>
-            <p>{era.programme}</p>
-            <p>{era.pair}</p>
+            <p>{lead.what}</p>
+            <p>{lead.who}</p>
+          </div>
+        </section>
+
+        <section className="field-cell field-cell-use" aria-labelledby="usage-heading">
+          <p className="field-kicker" id="usage-heading">
+            {usage.kicker}
+          </p>
+          <div className="field-copy">
+            <p>{usage.intro}</p>
+          </div>
+          <div className="field-code-stack">
+            <div className="field-code-row">
+              <pre className="field-code">
+                <code>{usage.command}</code>
+              </pre>
+              <CopyControl text={usage.command} />
+            </div>
+            <div className="field-code-row">
+              <pre className="field-code">
+                <code>{usage.html}</code>
+              </pre>
+              <CopyControl text={usage.html} />
+            </div>
+            <div className="field-code-row">
+              <pre className="field-code">
+                <code>{usage.control}</code>
+              </pre>
+              <CopyControl text={usage.control} />
+            </div>
+          </div>
+          <p className="field-mark">{usage.after}</p>
+        </section>
+
+        <section className="field-cell field-cell-free">
+          <p className="field-kicker">{license.kicker}</p>
+          <div className="field-copy">
+            <p>{license.body}</p>
+            <p>
+              {license.type}{" "}
+              <a href={typeface.url}>{typeface.url.replace("https://", "")}</a>
+            </p>
+          </div>
+        </section>
+
+        <section className="field-cell field-cell-spec" aria-labelledby="specimen-heading">
+          <p className="field-kicker" id="specimen-heading">
+            {specimen.kicker}
+          </p>
+          <p className="field-spec-type" aria-hidden="true">
+            Raster
+          </p>
+          <div className="field-copy field-copy-wide">
+            <p>{specimen.body}</p>
+            <p>{specimen.mid}</p>
+            <p>{specimen.long}</p>
+          </div>
+        </section>
+
+        <section className="field-cell field-cell-mod" aria-label="204 module">
+          <p className="field-kicker">{program.module.kicker}</p>
+          <div className="field-spec field-spec-module" aria-label="204 module: 184 column and 20 gutter">
+            <div className="field-mod204">
+              <div className="field-col184" />
+              <div className="field-gut20" />
+            </div>
+            <div className="field-mod-dim">
+              <span>184</span>
+              <span>20</span>
+            </div>
+          </div>
+          <p className="field-mark">{program.module.law}</p>
+        </section>
+
+        <section className="field-cell field-cell-hair" aria-label="Hairlines">
+          <p className="field-kicker">{program.hairline.kicker}</p>
+          <div className="field-spec field-spec-hair" aria-hidden="true" />
+          <p className="field-mark">{program.hairline.law}</p>
+        </section>
+
+        <section className="field-cell field-cell-flush" aria-label="Flush cells">
+          <p className="field-kicker">{program.flush.kicker}</p>
+          <div className="field-spec field-spec-flush" aria-hidden="true">
+            <div className="field-flush-row" />
+            <div className="field-flush-row" />
+            <div className="field-flush-row" />
+          </div>
+          <p className="field-mark">{program.flush.law}</p>
+        </section>
+
+        <section className="field-cell field-cell-grot" aria-label="Grotesque">
+          <p className="field-kicker">{program.grotesque.kicker}</p>
+          <p className="field-grotesque" aria-hidden="true">
+            {program.grotesque.mark}
+          </p>
+          <p className="field-mark">{program.grotesque.law}</p>
+        </section>
+
+        <section className="field-cell field-cell-hist">
+          <p className="field-kicker">{history.kicker}</p>
+          <div className="field-copy">
+            <p>{history.body}</p>
           </div>
         </section>
 
@@ -55,37 +170,18 @@ export default function AboutPage() {
           </section>
         ))}
 
-        <section className="field-cell field-cell-mod" aria-label="204 module">
-          <p className="field-kicker">{programme.module.kicker}</p>
-          <div className="field-spec field-spec-module" aria-hidden="true">
-            <span>204</span>
-            <span>184</span>
-            <span>20</span>
-            <span />
-          </div>
-          <p className="field-mark">{programme.module.law}</p>
-        </section>
-
-        <section className="field-cell field-cell-hair" aria-label="Hairlines">
-          <p className="field-kicker">{programme.hairline.kicker}</p>
-          <div className="field-spec field-spec-hair" aria-hidden="true" />
-          <p className="field-mark">{programme.hairline.law}</p>
-        </section>
-
-        <section className="field-cell field-cell-flush" aria-label="Flush cells">
-          <p className="field-kicker">{programme.flush.kicker}</p>
-          <div className="field-spec field-spec-flush" aria-hidden="true">
-            <span>0</span>
-          </div>
-          <p className="field-mark">{programme.flush.law}</p>
-        </section>
-
-        <section className="field-cell field-cell-grot" aria-label="Grotesque">
-          <p className="field-kicker">{programme.grotesque.kicker}</p>
-          <p className="field-grotesque" aria-hidden="true">
-            {programme.grotesque.mark}
+        <section className="field-cell field-cell-faq" aria-labelledby="notes-heading">
+          <p className="field-kicker" id="notes-heading">
+            Notes
           </p>
-          <p className="field-mark">{programme.grotesque.law}</p>
+          <dl className="field-notes">
+            {notes.map((note) => (
+              <div key={note.q} className="field-note">
+                <dt>{note.q}</dt>
+                <dd>{note.a}</dd>
+              </div>
+            ))}
+          </dl>
         </section>
 
         <section className="field-cell field-cell-colophon" aria-label="Colophon">

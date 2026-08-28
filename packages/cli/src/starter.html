@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Raster</title>
+    <meta
+      name="description"
+      content="Raster is a workhorse of a design system on a modular grid, used for interfaces."
+    />
+    <link rel="stylesheet" href="{{CSS_HREF}}" />
+    <style>
+      .sp { width: 100%; min-height: 100dvh; }
+      .sp-field {
+        display: grid;
+        width: 100%;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+          "face" "lead" "use" "free" "type" "run" "mod" "hair"
+          "flush" "grot" "kit" "faq" "colo";
+        grid-auto-rows: minmax(204px, auto);
+        background: var(--divider);
+        padding: 0 1px 1px 0;
+        gap: 1px;
+      }
+      .sp-cell {
+        min-width: 0;
+        min-height: 204px;
+        padding: 20px;
+        background-color: var(--bg);
+        background-image: var(--grid-image);
+        background-size: var(--grid-size) 100%;
+        background-position: var(--grid-pos);
+        background-attachment: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 16px;
+        overflow: visible;
+      }
+      .sp-face { grid-area: face; justify-content: flex-end; min-height: 408px; container-type: inline-size; }
+      .sp-lead { grid-area: lead; }
+      .sp-use { grid-area: use; justify-content: flex-start; min-height: 408px; }
+      .sp-free { grid-area: free; }
+      .sp-type { grid-area: type; justify-content: flex-start; min-height: 408px; }
+      .sp-run { grid-area: run; justify-content: flex-start; }
+      .sp-mod { grid-area: mod; }
+      .sp-hair { grid-area: hair; }
+      .sp-flush { grid-area: flush; overflow: visible; }
+      .sp-grot { grid-area: grot; container-type: inline-size; }
+      .sp-kit { grid-area: kit; justify-content: flex-start; min-height: 408px; }
+      .sp-faq { grid-area: faq; justify-content: flex-start; }
+      .sp-colo { grid-area: colo; justify-content: flex-start; gap: 12px; }
+      .sp-word {
+        margin: 0;
+        font-size: clamp(4.5rem, 28cqw, 16rem);
+        font-weight: 600;
+        letter-spacing: -.045em;
+        line-height: .82;
+      }
+      .sp-kicker {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: -.01em;
+        color: var(--text-secondary);
+      }
+      .sp-copy { display: flex; flex-direction: column; gap: 12px; max-width: 36em; }
+      .sp-copy p { margin: 0; font-size: 15px; font-weight: 500; letter-spacing: -.01em; line-height: 1.5; }
+      .sp-mark {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: -.01em;
+        line-height: 1.4;
+        color: var(--text-secondary);
+        max-width: 22em;
+      }
+      .sp-code-stack { display: flex; flex-direction: column; gap: 8px; max-width: 44em; width: 100%; }
+      .sp-code {
+        margin: 0;
+        padding: 20px;
+        background: var(--table-alt);
+        border: 1px solid var(--divider);
+        border-radius: var(--radius-sm);
+        overflow-x: auto;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12.5px;
+        line-height: 1.5;
+        color: var(--text);
+      }
+      .sp-weights { display: flex; flex-direction: column; gap: 16px; max-width: 36em; }
+      .sp-w {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: -.02em;
+        line-height: 1.3;
+      }
+      .sp-w5 { font-weight: 500; }
+      .sp-w6 { font-weight: 600; }
+      .sp-run p {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: -.01em;
+        line-height: 1.6;
+        max-width: 36em;
+      }
+      .sp-diagram {
+        flex: 1;
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .sp-mod204 {
+        flex: 1;
+        min-height: 88px;
+        display: grid;
+        grid-template-columns: 184fr 20fr;
+        border: 1px solid var(--divider);
+        background: var(--bg);
+      }
+      .sp-col184 {
+        background: var(--table-alt);
+        border-right: 1px solid var(--text);
+      }
+      .sp-gut20 { background: var(--bg); }
+      .sp-dim {
+        display: grid;
+        grid-template-columns: 184fr 20fr;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: -.01em;
+        color: var(--text-secondary);
+      }
+      .sp-dim-gut { text-align: center; }
+      .sp-rules {
+        flex: 1;
+        min-height: 88px;
+        background-image: repeating-linear-gradient(
+          to bottom,
+          var(--divider) 0,
+          var(--divider) 1px,
+          transparent 1px,
+          transparent 20px
+        );
+      }
+      .sp-zero {
+        box-sizing: border-box;
+        flex: 1;
+        min-height: 88px;
+        width: calc(100% + 40px);
+        max-width: none;
+        margin: 0 0 0 -20px;
+        border-top: 1px solid var(--divider);
+        border-bottom: 1px solid var(--divider);
+        display: flex;
+        flex-direction: column;
+      }
+      .sp-flush-row {
+        flex: 1;
+        min-height: 40px;
+        box-sizing: border-box;
+        padding: 20px;
+        border-bottom: 1px solid var(--divider);
+      }
+      .sp-flush-row:last-child { border-bottom: 0; }
+      .sp-ag {
+        margin: 0;
+        font-size: clamp(4.5rem, 22cqw, 10rem);
+        font-weight: 600;
+        letter-spacing: -.05em;
+        line-height: .8;
+      }
+      .sp-kit-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+      .sp-kit-form { max-width: 388px; width: 100%; }
+      .sp-kit .rs-chart-field { padding: 20px; max-width: 408px; }
+      .sp-keys { display: inline-flex; align-items: center; gap: 6px; }
+      button.sp-scheme {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 20;
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .sp-scheme svg { display: block; }
+      .sp-colo p {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: -.01em;
+        line-height: 1.5;
+        color: var(--text-secondary);
+        max-width: 36em;
+      }
+      .sp a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--divider); }
+      @media (min-width: 481px) {
+        .sp-field {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-template-areas:
+            "face face" "lead lead" "use use" "free free" "type type"
+            "run run" "mod hair" "flush grot" "kit kit" "faq faq" "colo colo";
+        }
+      }
+      @media (min-width: 816px) {
+        .sp-field {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          grid-template-areas:
+            "face face face face" "face face face face"
+            "lead lead lead lead" "use use use use"
+            "free free type type" "run run run run"
+            "mod mod hair hair" "flush flush grot grot"
+            "kit kit kit kit" "faq faq colo colo";
+        }
+      }
+      @media (min-width: 1224px) {
+        .sp-field {
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          grid-template-areas:
+            "face face face lead lead lead" "face face face lead lead lead"
+            "use use use use use use" "free free type type type type"
+            "run run run run run run" "mod mod hair hair flush flush"
+            "grot grot kit kit kit kit" "faq faq faq colo colo colo";
+        }
+      }
+      @media (max-width: 640px) {
+        .sp-copy p { font-size: 16px; line-height: 1.6; }
+        .sp-scheme { top: calc(8px + env(safe-area-inset-top, 0px)); right: calc(8px + env(safe-area-inset-right, 0px)); }
+      }
+    </style>
+  </head>
+  <body>
+    <button
+      type="button"
+      class="rs-btn-ghost rs-btn-sm sp-scheme"
+      id="scheme"
+      aria-label="Toggle color scheme"
+      title="Toggle color scheme"
+    >
+      <svg id="scheme-moon" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+        <path
+          d="M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="butt"
+          stroke-linejoin="miter"
+        />
+      </svg>
+      <svg id="scheme-sun" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" hidden>
+        <circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1" />
+        <path
+          d="M8 2 V3.5M8 12.5 V14M2 8 H3.5M12.5 8 H14M4.4 4.4 L5.3 5.3M10.7 10.7 L11.6 11.6M11.6 4.4 L10.7 5.3M5.3 10.7 L4.4 11.6"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="butt"
+          stroke-linejoin="miter"
+        />
+      </svg>
+    </button>
+    <main class="sp" aria-label="Raster specimen">
+      <div class="sp-field">
+        <section class="sp-cell sp-face" aria-labelledby="sp-title">
+          <p class="sp-kicker">A design system on a modular grid</p>
+          <h1 class="sp-word" id="sp-title">Raster</h1>
+        </section>
+
+        <section class="sp-cell sp-lead">
+          <p class="sp-kicker">What it is</p>
+          <div class="sp-copy">
+            <p>
+              Raster is a workhorse of a design system on a modular grid, used for interfaces. The page is paper. Type is Inter. The module is 204 pixels — 184 for the column, 20 for the gutter. Cells are flush. A line is 1px.
+            </p>
+            <p>
+              This page is what <code class="rs-code">npx @noorddev/raster-cli init</code> writes. The stylesheet is linked. The classes start with rs-. Change the markup; keep the module.
+            </p>
+          </div>
+        </section>
+
+        <section class="sp-cell sp-use" aria-labelledby="sp-usage">
+          <p class="sp-kicker" id="sp-usage">Usage</p>
+          <div class="sp-copy">
+            <p>If you are making a web thing, the head already has the stylesheet. A control is a class on a native element:</p>
+          </div>
+          <div class="sp-code-stack">
+            <pre class="sp-code">&lt;link rel="stylesheet" href="styles/raster.css" /&gt;</pre>
+            <pre class="sp-code">&lt;button class="rs-btn-primary"&gt;Save&lt;/button&gt;</pre>
+            <pre class="sp-code">html[data-theme="dark"]</pre>
+          </div>
+          <p class="sp-mark">The mark in the corner sets data-theme="dark" on the root element.</p>
+        </section>
+
+        <section class="sp-cell sp-free">
+          <p class="sp-kicker">Free &amp; open source</p>
+          <div class="sp-copy">
+            <p>Raster is free and open source. The code is MIT. Type is Inter, SIL OFL 1.1, designed by Rasmus Andersson.</p>
+          </div>
+        </section>
+
+        <section class="sp-cell sp-type" aria-labelledby="sp-type-h">
+          <p class="sp-kicker" id="sp-type-h">Type on the module</p>
+          <div class="sp-weights">
+            <p class="sp-w sp-w5">500 · The module is 204. Body copy sits in the column and reads at interface size.</p>
+            <p class="sp-w sp-w6">600 · Headings and labels. Sentence case. Weight does the emphasis.</p>
+          </div>
+          <p class="sp-mark">15px body, 12–13 labels, 22 and up for a title. One grotesque.</p>
+        </section>
+
+        <section class="sp-cell sp-run" aria-labelledby="sp-run-h">
+          <p class="sp-kicker" id="sp-run-h">In use</p>
+          <div class="sp-run">
+            <p>
+              A settings page, a table of jobs, a form with a hint under the field — that is the work. The grid is visible behind the chrome so you can see where a cell begins. Paper is #FAF8F2. Ink is #1A1A1A. The grays between them are the only in-between.
+            </p>
+            <p>
+              On a phone the field is one column. At 481 pixels it pairs. At 816 it is four modules wide; at 1224 it is six. Edges step from line to line. A button is 40 tall on the desktop and 44 on the phone. The field label sits on a 16px line so the hairline lands on an integer.
+            </p>
+            <p>
+              Motion is 0.12 to 0.18 seconds. A state the user caused may ease or confirm. Entry is not a show. Color and opacity name the change. Layout rarely moves.
+            </p>
+          </div>
+        </section>
+
+        <section class="sp-cell sp-mod" aria-label="204 module">
+          <p class="sp-kicker">204</p>
+          <figure class="sp-diagram">
+            <div class="sp-mod204" aria-hidden="true">
+              <div class="sp-col184"></div>
+              <div class="sp-gut20"></div>
+            </div>
+            <figcaption class="sp-dim">
+              <span>184</span>
+              <span class="sp-dim-gut">20</span>
+            </figcaption>
+          </figure>
+          <p class="sp-mark">184 column + 20 gutter.</p>
+        </section>
+
+        <section class="sp-cell sp-hair" aria-label="Hairlines">
+          <p class="sp-kicker">Hairlines</p>
+          <div class="sp-rules" aria-hidden="true"></div>
+          <p class="sp-mark">Hairlines mark the module. A 1px line, not a box.</p>
+        </section>
+
+        <section class="sp-cell sp-flush" aria-label="Flush cells">
+          <p class="sp-kicker">Flush</p>
+          <div class="sp-zero" aria-hidden="true">
+            <div class="sp-flush-row"></div>
+            <div class="sp-flush-row"></div>
+            <div class="sp-flush-row"></div>
+          </div>
+          <p class="sp-mark">Module cells sit flush on the gridline.</p>
+        </section>
+
+        <section class="sp-cell sp-grot" aria-label="Grotesque">
+          <p class="sp-kicker">Grotesque</p>
+          <p class="sp-ag" aria-hidden="true">Ag</p>
+          <p class="sp-mark">One face. Weight and size do the work.</p>
+        </section>
+
+        <section class="sp-cell sp-kit" aria-labelledby="sp-kit-h">
+          <p class="sp-kicker" id="sp-kit-h">Features you can see</p>
+          <div class="sp-kit-row">
+            <button type="button" class="rs-btn-primary">Save</button>
+            <button type="button" class="rs-btn-ghost">Cancel</button>
+            <span class="rs-badge">Recommended</span>
+            <span class="rs-badge-muted">In progress</span>
+            <span class="sp-keys">
+              <kbd class="rs-kbd">⌘</kbd>
+              <kbd class="rs-kbd">K</kbd>
+            </span>
+          </div>
+          <div class="sp-kit-form">
+            <div class="rs-field">
+              <label class="rs-field-label" for="sp-name">Name</label>
+              <input class="rs-input rs-input-full" id="sp-name" value="Raster" />
+              <p class="rs-field-hint">As it appears on the invoice.</p>
+            </div>
+          </div>
+          <div class="rs-chart rs-chart-field" aria-label="Jobs this week">
+            <div class="rs-chart-head">
+              <p class="rs-chart-title">Jobs</p>
+              <p class="rs-chart-value">184</p>
+            </div>
+            <svg viewBox="0 0 240 88" role="img" aria-label="Line, 184 jobs">
+              <line class="rs-chart-grid" x1="0" y1="22" x2="240" y2="22" />
+              <line class="rs-chart-grid" x1="0" y1="44" x2="240" y2="44" />
+              <line class="rs-chart-grid" x1="0" y1="66" x2="240" y2="66" />
+              <line class="rs-chart-baseline" x1="0" y1="87" x2="240" y2="87" />
+              <path class="rs-chart-line" d="M0 70 L40 58 L80 62 L120 36 L160 44 L200 22 L240 28" />
+            </svg>
+          </div>
+          <div class="rs-tabs" role="tablist">
+            <span class="rs-tab rs-tab-active">Overview</span>
+            <span class="rs-tab">Activity</span>
+            <span class="rs-tab">Settings</span>
+          </div>
+        </section>
+
+        <section class="sp-cell sp-faq" aria-labelledby="sp-faq-h">
+          <p class="sp-kicker" id="sp-faq-h">Notes</p>
+          <div class="rs-acc">
+            <details class="rs-acc-item" name="sp-faq" open>
+              <summary>
+                How do I keep this page?
+                <svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+              <div class="rs-acc-body">This is index.html. Edit it. The classes are in styles/raster.css. Add a component with npx @noorddev/raster-cli add button dialog.</div>
+            </details>
+            <details class="rs-acc-item" name="sp-faq">
+              <summary>
+                Do I need React?
+                <svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+              <div class="rs-acc-body">No. Raster is CSS-first. Plain classes on plain markup. React is optional.</div>
+            </details>
+            <details class="rs-acc-item" name="sp-faq">
+              <summary>
+                Why Inter?
+                <svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+              <div class="rs-acc-body">One grotesque for interfaces. Variable, latin + latin-ext, vendored next to the CSS. SIL OFL 1.1.</div>
+            </details>
+            <details class="rs-acc-item" name="sp-faq">
+              <summary>
+                Where is the documentation?
+                <svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+              <div class="rs-acc-body">getraster.com and raster.noord.dev. The repo is github.com/rennvaldes/raster.</div>
+            </details>
+          </div>
+        </section>
+
+        <section class="sp-cell sp-colo" aria-label="Colophon">
+          <p class="sp-kicker">Colophon</p>
+          <div class="sp-colo">
+            <p>@noorddev/raster · @noorddev/raster-react · @noorddev/raster-cli</p>
+            <p>Inter, SIL OFL 1.1 · Rasmus Andersson. Copyright 2016 The Inter Project Authors. rsms.me/inter/</p>
+            <p>MIT © Noord / Renato Valdés-Olmos, 2026.</p>
+            <p><code class="rs-code">npx @noorddev/raster-cli init</code></p>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var btn = document.getElementById("scheme");
+        var sun = document.getElementById("scheme-sun");
+        var moon = document.getElementById("scheme-moon");
+        if (!btn || !sun || !moon) return;
+        function sync() {
+          var dark = root.getAttribute("data-theme") === "dark";
+          sun.hidden = !dark;
+          moon.hidden = dark;
+          btn.setAttribute("aria-label", dark ? "Use light scheme" : "Use dark scheme");
+          btn.setAttribute("title", btn.getAttribute("aria-label"));
+        }
+        btn.addEventListener("click", function () {
+          if (root.getAttribute("data-theme") === "dark") root.removeAttribute("data-theme");
+          else root.setAttribute("data-theme", "dark");
+          sync();
+        });
+        sync();
+      })();
+    </script>
+  </body>
+</html>

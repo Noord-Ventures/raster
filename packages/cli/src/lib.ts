@@ -13,6 +13,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { rasterComponents, rasterTokens } from "@noorddev/raster";
 import bundle from "../../../registry/bundle.json" with { type: "json" };
+import { starterPage } from "./starter";
 
 const rasterCss: string = (bundle as { css: { raster: string } }).css.raster;
 const compatCss: string = (bundle as { css: { compat: string } }).css.compat;
@@ -112,7 +113,7 @@ export interface InitOptions {
   registry?: string;
 }
 
-/** Write raster.css, Inter files, and optionally the 0.1 compat layer, plus raster.json. */
+/** Write raster.css, Inter files, a specimen page, and optionally the 0.1 compat layer, plus raster.json. */
 export function init(cwd: string, options: InitOptions = {}): WriteResult[] {
   const config: RasterConfig = {
     cssDir: options.cssDir ?? defaultConfig.cssDir,
@@ -120,6 +121,7 @@ export function init(cwd: string, options: InitOptions = {}): WriteResult[] {
   };
   if (options.registry) config.registry = options.registry;
   const results: WriteResult[] = [];
+  const cssHref = `${config.cssDir.replace(/\\/g, "/")}/raster.css`;
   results.push(writeFileSafe(cwd, join(config.cssDir, "raster.css"), rasterCss, options.overwrite ?? false));
   results.push(...copyFonts(cwd, config.cssDir, options.overwrite ?? false));
   if (options.compat) {
@@ -127,6 +129,7 @@ export function init(cwd: string, options: InitOptions = {}): WriteResult[] {
       writeFileSafe(cwd, join(config.cssDir, "raster-compat.css"), compatCss, options.overwrite ?? false),
     );
   }
+  results.push(writeFileSafe(cwd, "index.html", starterPage(cssHref), options.overwrite ?? false));
   results.push(
     writeFileSafe(cwd, CONFIG_FILE, JSON.stringify(config, null, 2) + "\n", options.overwrite ?? false),
   );

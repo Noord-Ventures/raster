@@ -2,8 +2,9 @@
  * About facts. Every string is already known, or written from known facts.
  * Do not invent a bio, a client list, a headcount, or a product.
  *
- * Designers: published years, cities, and works only.
- * Credits: Inter, Noord, Renato, packages — colophon, not the face.
+ * Register: workhorse, specific, facts before poetry. Lead with what
+ * Raster is and who it is for. History (Crouwel, Müller-Brockmann) sits
+ * after the specimen. Credits stay in the colophon.
  *
  * Sources:
  *   packages/core/src/tokens.ts          type.foundry, meta.url, grid.module
@@ -24,12 +25,41 @@ const foundry = rasterTokens.type.foundry;
 const grid = rasterTokens.grid;
 
 export const era = {
-  heading: "Grid",
-  kicker: "Swiss Style · Dutch modernism",
-  homage: "Raster is an homage to that room.",
-  programme:
-    "The grid is the idea. One grotesque. Hairlines, not boxes. A 204 module. Flush cells. No radius.",
-  pair: "Josef Müller-Brockmann drew the programme. Wim Crouwel put it on the press at Total Design.",
+  heading: WORD,
+  kicker: LAW,
+};
+
+export const lead = {
+  kicker: "What it is",
+  what: "Raster is a workhorse of a design system on a modular grid, used for interfaces. The page is paper. Type is Inter. The module is 204 pixels — 184 for the column, 20 for the gutter. Cells are flush. A line is 1px.",
+  who: "It is meant for product UI: forms, tables, settings, the everyday catalog. You install the CSS. React is there if you want a component. The classes start with rs-.",
+};
+
+export const usage = {
+  kicker: "Usage",
+  intro: "Using Raster is one command, then a stylesheet. If you are making a web thing, paste this in the document head:",
+  command: COMMAND,
+  html: `<link rel="stylesheet" href="styles/raster.css" />`,
+  control: `<button class="rs-btn-primary">Save</button>`,
+  after: "Then a control. Dark scheme: set data-theme=\"dark\" on the root element.",
+};
+
+export const license = {
+  kicker: "Free & open source",
+  body: "Raster is free and open source. The code is MIT. You can use it in a product, a poster, or an internal tool.",
+  type: `${foundry.typeface} is ${foundry.license}, designed by ${foundry.designer}.`,
+};
+
+export const specimen = {
+  kicker: "Specimen",
+  body: "Body is 15px, weight 500, measure about 66 characters. Headings and labels are 600. Sentence case. The module holds the type: a 204 cell, or two, or a column of them. Edges step from grid line to grid line.",
+  mid: "A button is 40 tall on the desktop and 44 on the phone. The field label sits on a 16px line so the hairline lands on an integer. Radius on a control follows the concentric law. Module cells stay flush to the gridline.",
+  long: "The smaller sizes keep a tall x-height so interface copy stays readable at 12 and 13. The larger sizes tighten tracking and let weight do the emphasis. There is no accent hue. Paper, ink, and the grays between them are the palette. Motion is 0.12 to 0.18 seconds, ease, a state the user caused — color and opacity name the change; layout rarely moves.",
+};
+
+export const history = {
+  kicker: "History",
+  body: "The program comes from Swiss Style and Dutch modernism. Josef Müller-Brockmann drew it. Wim Crouwel put it on the press at Total Design.",
 };
 
 export const featured = [
@@ -106,18 +136,18 @@ export const field = [
   },
 ] as const;
 
-export const programme = {
+export const program = {
   module: {
     kicker: "204",
     law: `${grid.column} column + ${grid.gutter} gutter.`,
   },
   hairline: {
     kicker: "Hairlines",
-    law: "The programme is visible. Not a box.",
+    law: "Hairlines mark the module. A 1px line, not a box.",
   },
   flush: {
-    kicker: "Flush · 0",
-    law: "No radius. Cells meet the line.",
+    kicker: "Flush",
+    law: "Module cells sit flush on the gridline.",
   },
   grotesque: {
     kicker: "Grotesque",
@@ -125,6 +155,37 @@ export const programme = {
     mark: "Ag",
   },
 } as const;
+
+export const notes = [
+  {
+    q: "How do I install Raster?",
+    a: `${COMMAND} writes styles/raster.css, Inter, raster.json, and a specimen page (index.html). Link the stylesheet, or import it in your root layout.`,
+  },
+  {
+    q: "How do I add a component?",
+    a: "npx @noorddev/raster-cli add button dialog. React source lands in components/raster/. CSS-only components need no file; the classes are already in raster.css.",
+  },
+  {
+    q: "How do I switch to the dark scheme?",
+    a: "Set data-theme=\"dark\" on the root element. Tokens flip paper and ink. The module grid stays.",
+  },
+  {
+    q: "Do I need React?",
+    a: "No. Raster is CSS-first. Plain classes on plain markup. The React layer is optional and uses native elements.",
+  },
+  {
+    q: "Why Inter?",
+    a: "One grotesque for interfaces. Variable, latin + latin-ext, vendored next to the CSS. System sans is fallback only. Weights: 500 body, 600 headings and labels.",
+  },
+  {
+    q: "What is the module?",
+    a: `204 pixels: ${grid.column} column + ${grid.gutter} gutter. Content boxes span whole modules. On a phone the field is one column; at 481 it pairs; at 816 it is four; at 1224 it is six.`,
+  },
+  {
+    q: "Where do I report a problem?",
+    a: "github.com/rennvaldes/raster. Issues and pull requests. The packages are @noorddev/raster, @noorddev/raster-react, and @noorddev/raster-cli.",
+  },
+] as const;
 
 export const typeface = {
   heading: "Typeface",
