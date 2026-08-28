@@ -455,6 +455,20 @@ jobs:
           grep -q 'field-spec-hair' "$page"
           grep -q 'field-spec-flush' "$page"
           grep -q 'padding: 0 1px 1px 0' "$css"
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const css = readFileSync("apps/www/app/about/about.css", "utf8");
+            const cell = css.slice(css.indexOf(".field-cell {"), css.indexOf("}", css.indexOf(".field-cell {")));
+            if (!cell.includes("background-image: var(--grid-image)") || !cell.includes("background-position: var(--grid-pos)") || !cell.includes("background-attachment: fixed")) {
+              console.error("About cells must paint the same fixed site 204 as home");
+              process.exit(1);
+            }
+            const era = css.slice(css.indexOf(".field-cell-era {"), css.indexOf("}", css.indexOf(".field-cell-era {")));
+            if (era.includes("background-image")) {
+              console.error("About hero must not paint a local unpositioned grid");
+              process.exit(1);
+            }
+          '
           grep -q 'field-grotesque' "$page"
           grep -q '204' "$facts"
           grep -q 'Hairlines' "$facts"

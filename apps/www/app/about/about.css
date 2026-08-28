@@ -39,7 +39,14 @@
   min-width: 0;
   min-height: 204px;
   padding: 20px;
-  background: var(--bg);
+  /* Same site 204 as home: body spine at --grid-pos (20 / 204 / 224 /
+     408), fixed, full page. Not a local hero tile at 0 (204k−20). */
+  background-color: var(--bg);
+  background-image: var(--grid-image);
+  background-size: var(--grid-size) 100vh;
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+  background-position: var(--grid-pos);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -52,9 +59,6 @@
   container-type: inline-size;
   justify-content: flex-end;
   min-height: 408px;
-  background-color: var(--bg);
-  background-image: var(--grid-image);
-  background-size: var(--grid-size) 100%;
 }
 
 .field-cell-lead { grid-area: lead; }

@@ -91,6 +91,14 @@ if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
 if (!about.includes("padding: 0 1px 1px 0")) {
   fail("About must keep its right and bottom hairline");
 }
+const aboutCell = about.slice(about.indexOf(".field-cell {"), about.indexOf("}", about.indexOf(".field-cell {")));
+if (!aboutCell.includes("background-image: var(--grid-image)") || !aboutCell.includes("background-position: var(--grid-pos)") || !aboutCell.includes("background-attachment: fixed")) {
+  fail("About must share the site 204 spine with home, not a local hero tile");
+}
+const aboutEra = about.slice(about.indexOf(".field-cell-era {"), about.indexOf("}", about.indexOf(".field-cell-era {")));
+if (aboutEra.includes("background-image")) {
+  fail("About hero must not paint a local unpositioned grid");
+}
 
 if (!ifCss.includes(".if-board .rs-sidebar-item") || !ifCss.includes("min-height: 44px")) {
   fail("Interface sidebars must use 44pt rows on the phone");
