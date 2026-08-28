@@ -81,6 +81,16 @@ if (!css.includes(".if-title {\n  min-height: 204px")) {
   console.error("Interfaces title cell must be 204");
   process.exit(1);
 }
+const tileAt = css.indexOf(".if-tile {");
+const tileRule = css.slice(tileAt, css.indexOf("}", tileAt));
+if (/background:\s*var\(--bg\)/.test(tileRule) || !tileRule.includes("background: transparent")) {
+  console.error("Interfaces tiles must not cover 204s around the crops");
+  process.exit(1);
+}
+if (!tileRule.includes("var(--grid-line)") || tileRule.includes("var(--divider)")) {
+  console.error("Interfaces tile edges must be --grid-line, quieter than --divider");
+  process.exit(1);
+}
 const specRule = css.slice(css.indexOf(".if-specimen {"), css.indexOf("}", css.indexOf(".if-specimen {")));
 if (!specRule.includes("margin-top: 204px")) {
   console.error("Detail specimen must sit on the 204, not 120px off it");

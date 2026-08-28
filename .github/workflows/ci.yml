@@ -584,6 +584,10 @@ jobs:
               console.error("Landing tiles must stay flush: no shadow");
               process.exit(1);
             }
+            if (/background:\s*var\(--bg\)/.test(tile) || !tile.includes("background: transparent") || !tile.includes("var(--grid-line)")) {
+              console.error("Interfaces tiles must sit on the 204, ink --grid-line");
+              process.exit(1);
+            }
             const spec = css.slice(css.indexOf(".if-specimen {"), css.indexOf("}", css.indexOf(".if-specimen {")));
             if (!spec.includes("box-shadow:") || spec.includes("box-shadow: none")) {
               console.error("Specimen may take a quiet shadow");
