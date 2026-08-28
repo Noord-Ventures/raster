@@ -3,7 +3,7 @@
   "name": "select",
   "type": "registry:component",
   "title": "Select",
-  "description": "Closed trigger with chevron; the open menu overlays instead of pushing layout.",
+  "description": "Closed trigger with a chevron. The menu overlays the page.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

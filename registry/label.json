@@ -3,7 +3,7 @@
   "name": "label",
   "type": "registry:component",
   "title": "Label",
-  "description": "12px, secondary ink, above the control.",
+  "description": "12px secondary label, set above the control.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

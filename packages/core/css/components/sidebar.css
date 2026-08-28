@@ -1,6 +1,6 @@
 /* ── Sidebar: one 204 module rail, flush items, hairline edge.
    Last item keeps air before the foot rule. ── */
-.rs-sidebar{width:204px;min-height:204px;display:flex;flex-direction:column;border-right:1px solid var(--divider);background:var(--bg);border-radius:0}
+.rs-sidebar{width:204px;min-height:204px;display:flex;flex-direction:column;border:1px solid var(--divider);background:var(--bg);border-radius:0}
 .rs-sidebar-head{padding:16px 20px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);border-bottom:1px solid var(--divider)}
 .rs-sidebar-nav{display:flex;flex-direction:column;padding:8px 0 32px;flex:1}
 .rs-sidebar-item,

@@ -14,8 +14,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "button",
     title: "Button",
-    description:
-      "Solid ink primary and hairline ghost. One primary per view. 40px tall; 36px small variant.",
+    description: "Solid ink primary and 1px ghost. 40px tall; 36px small.",
     category: "actions",
     classes: ["rs-btn-primary", "rs-btn-ghost", "rs-btn-sm"],
     css: ["components/button.css"],
@@ -25,7 +24,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "button-group",
     title: "Button group",
-    description: "Flush joined actions. One hairline between.",
+    description: "Joined ghost buttons with a 1px rule between.",
     category: "actions",
     classes: ["rs-btn-group"],
     css: ["components/button-group.css"],
@@ -36,17 +35,16 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "link",
     title: "Text link",
-    description:
-      "Underlined by its hairline; never colored. The gradient variant inset by one pixel for running copy.",
+    description: "Text link with a hairline underline. In-copy variant is inset 1px.",
     category: "actions",
     classes: ["rs-link", "rs-link-underline"],
     css: ["components/link.css"],
-    snippet: `<a class="rs-link" href="#">A text link</a>\n<a class="rs-link-underline" href="#">An in-copy link</a>`,
+    snippet: `<div><a class="rs-link" href="#">A text link</a></div>\n<div><a class="rs-link-underline" href="#">An in-copy link</a></div>`,
   },
   {
     name: "input",
     title: "Input",
-    description: "Quiet field: hairline border, ink focus, label above at 12px.",
+    description: "Text field. 1px border, ink focus, 12px label above.",
     category: "forms",
     classes: ["rs-field", "rs-field-label", "rs-input", "rs-input-full", "rs-input-ok", "rs-feedback", "rs-feedback-ok"],
     css: ["components/field.css"],
@@ -56,7 +54,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "label",
     title: "Label",
-    description: "12px, secondary ink, above the control.",
+    description: "12px secondary label, set above the control.",
     category: "forms",
     classes: ["rs-label"],
     css: ["components/field.css"],
@@ -66,7 +64,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "field",
     title: "Field",
-    description: "Label, control, hint or error. The stack every form is made of.",
+    description: "Label, control, and a hint or error stacked in one cell.",
     category: "forms",
     classes: ["rs-field", "rs-field-label", "rs-field-hint", "rs-field-error"],
     css: ["components/field.css"],
@@ -77,7 +75,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "input-group",
     title: "Input group",
-    description: "Addon and field share one hairline.",
+    description: "Addon and field share a 1px border.",
     category: "forms",
     classes: ["rs-input-group", "rs-input-addon", "rs-input-group-end"],
     css: ["components/input-group.css"],
@@ -88,7 +86,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "native-select",
     title: "Native select",
-    description: "The platform list. Raster chrome. No custom menu.",
+    description: "Native select with Raster 1px chrome.",
     category: "forms",
     classes: ["rs-native-select"],
     css: ["components/native-select.css"],
@@ -98,8 +96,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "inline-form",
     title: "Inline form",
-    description:
-      "One field, one action. The action sits inside the field and appears once input validates.",
+    description: "One field with the submit action inside. The button appears after the input validates.",
     category: "patterns",
     classes: ["rs-inline-field", "rs-inline-input", "rs-inline-btn", "rs-reveal", "rs-reveal-in", "rs-subscribed"],
     css: ["components/inline-form.css"],
@@ -110,7 +107,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "radio",
     title: "Radio",
-    description: "One choice; the dot is ink.",
+    description: "Single-choice control. Selected dot is ink.",
     category: "forms",
     classes: ["rs-radio", "rs-radio-dot", "rs-radio-on"],
     css: ["components/radio.css"],
@@ -120,7 +117,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "checkbox",
     title: "Checkbox",
-    description: "Many choices; 16px boxes, 3px radius, ink when checked.",
+    description: "Multi-choice. 16px box, 3px radius, ink fill when checked.",
     category: "forms",
     classes: ["rs-choice", "rs-check", "rs-check-on"],
     css: ["components/checkbox.css"],
@@ -130,7 +127,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "switch",
     title: "Switch",
-    description: "32×18 pill; on is ink, off is hairline. State moves, layout doesn't.",
+    description: "32×18 control. On fills ink; off is a 1px track. The thumb moves; the box stays 32px.",
     category: "forms",
     classes: ["rs-switch", "rs-switch-on"],
     css: ["components/switch.css"],
@@ -140,7 +137,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "slider",
     title: "Slider",
-    description: "Thin track with ink fill and 14px thumb.",
+    description: "2px track, ink fill, 14px thumb.",
     category: "forms",
     classes: ["rs-slider", "rs-slider-fill", "rs-slider-thumb"],
     css: ["components/slider.css"],
@@ -150,7 +147,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "progress",
     title: "Progress",
-    description: "4px bar. The percentage lives in the label, not the bar.",
+    description: "4px bar. Percentage is set in the label.",
     category: "feedback",
     classes: ["rs-progress", "rs-progress-head"],
     css: ["components/progress.css"],
@@ -160,7 +157,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "tabs",
     title: "Tabs",
-    description: "One line of type. Hairline on the active tab only.",
+    description: "Text tabs in one row. Active tab has a 1px underline.",
     category: "navigation",
     classes: ["rs-tabs", "rs-tab", "rs-tab-active"],
     css: ["components/tabs.css"],
@@ -170,7 +167,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "breadcrumbs",
     title: "Breadcrumbs",
-    description: "One ink trail. Ancestors stay ink; slashes at 40%; the current page is full ink.",
+    description: "Ancestor links, 40% slashes, current page at full ink.",
     category: "navigation",
     classes: ["rs-crumbs", "rs-crumbs-link", "rs-crumbs-sep", "rs-crumbs-here"],
     css: ["components/breadcrumbs.css"],
@@ -180,8 +177,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "crumb-bar",
     title: "Crumb bar",
-    description:
-      "Fixed top bar. Transparent at rest; on scroll it gains the paper background and a bottom hairline, and the breadcrumbs fade in.",
+    description: "Fixed 72px bar. Transparent at rest; scrolled state adds paper, a bottom 1px, and the trail.",
     category: "navigation",
     classes: [
       "rs-crumb-bar",
@@ -199,7 +195,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "pagination",
     title: "Pagination",
-    description: "Squares, not pills; the current page is solid ink.",
+    description: "Square page controls. Current page is solid ink.",
     category: "navigation",
     classes: ["rs-pages", "rs-page", "rs-page-on", "rs-page-gap"],
     css: ["components/pagination.css"],
@@ -209,7 +205,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "select",
     title: "Select",
-    description: "Closed trigger with chevron; the open menu overlays instead of pushing layout.",
+    description: "Closed trigger with a chevron. The menu overlays the page.",
     category: "forms",
     classes: ["rs-select", "rs-dropdown", "rs-menu", "rs-menu-item", "rs-menu-item-active"],
     css: ["components/menu.css"],
@@ -219,7 +215,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "dialog",
     title: "Dialog",
-    description: "One question, two equal-sized actions, no third option.",
+    description: "Modal with a title, body, and two equal actions.",
     category: "surfaces",
     classes: ["rs-dialog", "rs-dialog-title", "rs-dialog-body", "rs-dialog-actions"],
     css: ["components/dialog.css"],
@@ -230,7 +226,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "badge",
     title: "Badge",
-    description: "Outline for recommendations, solid for done, muted for pending.",
+    description: "11px badge. Outline, solid, and muted fills.",
     category: "feedback",
     classes: ["rs-badge", "rs-badge-solid", "rs-badge-muted"],
     css: ["components/badge.css"],
@@ -240,7 +236,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "chip",
     title: "Mono chip",
-    description: "Technical identifiers set in the mono stack with a mixed hairline.",
+    description: "Mono identifier with a 1px mixed border.",
     category: "content",
     classes: ["rs-chip"],
     css: ["components/chip.css"],
@@ -249,7 +245,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "card",
     title: "Card",
-    description: "Hairline frame; label, title, body.",
+    description: "1px frame with a label, title, and body.",
     category: "surfaces",
     classes: ["rs-card", "rs-card-label", "rs-card-title", "rs-card-body", "rs-card-in"],
     css: ["components/card.css"],
@@ -259,8 +255,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "concentric-radius",
     title: "Concentric radius",
-    description:
-      "Inner radius from Steve Ruiz's circular-corner fit, clamped at 0. Nested frames stay concentric. Raster chrome stays square.",
+    description: "Nested frames. Inner radius is the circular-corner fit, clamped at 0.",
     category: "surfaces",
     classes: ["rs-nest", "rs-nest-in"],
     css: ["components/nest.css"],
@@ -270,18 +265,17 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "stepper",
     title: "Stepper",
-    description: "Numbered dots joined by hairlines. Done is ink; active is outlined.",
+    description: "Numbered dots joined by 1px lines. Done fills ink; active is outlined.",
     category: "navigation",
     classes: ["rs-steps", "rs-step", "rs-step-dot", "rs-step-done", "rs-step-active", "rs-step-name", "rs-step-sub", "rs-step-line"],
     css: ["components/stepper.css"],
     react: "components/stepper.tsx",
-    snippet: `<div class="rs-steps"><div class="rs-step"><span class="rs-step-dot rs-step-done">1</span><span class="rs-step-name">Brief</span></div><span class="rs-step-line"></span><div class="rs-step"><span class="rs-step-dot rs-step-active">2</span><span class="rs-step-name">Design</span></div></div>`,
+    snippet: `<div class="rs-steps"><div class="rs-step"><span class="rs-step-dot rs-step-done">1</span><span class="rs-step-line"></span><span class="rs-step-name">Brief</span></div><div class="rs-step"><span class="rs-step-dot rs-step-active">2</span><span class="rs-step-name">Design</span></div></div>`,
   },
   {
     name: "table",
     title: "Table",
-    description:
-      "Hairline rows on the open grid; no cell borders, last column right-aligned. Total rows carry 2px rules.",
+    description: "Open grid, 1px row rules, last column right-aligned. Total rows use 2px rules.",
     category: "content",
     classes: ["rs-table", "rs-total-row"],
     css: ["components/table.css"],
@@ -290,9 +284,8 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "icons",
     title: "Icons",
-    description:
-      "One family. 16 viewBox, 1px currentColor hairline, butt/miter, no radius. Marks live in the React package.",
-    category: "content",
+    description: "16 viewBox marks, 1px currentColor, butt/miter. Shipped in the React package.",
+    category: "icons",
     classes: [
       "rs-icons",
       "rs-icon",
@@ -311,7 +304,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "accordion",
     title: "Accordion",
-    description: "Native <details> rows on hairlines. The name attribute keeps one item open at a time; no JavaScript.",
+    description: "Native details rows on 1px rules. Shared name keeps one item open.",
     category: "content",
     classes: ["rs-acc", "rs-acc-item", "rs-acc-chevron", "rs-acc-body"],
     css: ["components/accordion.css"],
@@ -321,7 +314,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "alert",
     title: "Alert",
-    description: "Hairline frame with an ink icon. Solid ink variant for critical.",
+    description: "1px frame with an icon. Solid ink variant for critical.",
     category: "feedback",
     classes: ["rs-alert", "rs-alert-title", "rs-alert-body", "rs-alert-solid"],
     css: ["components/alert.css"],
@@ -331,7 +324,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "alert-dialog",
     title: "Alert dialog",
-    description: "Native <dialog> that requires an explicit answer. Escape and light dismiss are disabled.",
+    description: "Native dialog that must be answered. Escape and light dismiss are off.",
     category: "surfaces",
     classes: ["rs-dialog", "rs-dialog-title", "rs-dialog-body", "rs-dialog-actions"],
     css: ["components/dialog.css"],
@@ -342,7 +335,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "avatar",
     title: "Avatar",
-    description: "Initials in a circle. Images cover; broken images fall back to initials. Rows overlap.",
+    description: "32px circle of initials, or a covering image. Broken images fall back. Rows overlap 8px.",
     category: "content",
     classes: ["rs-avatar", "rs-avatar-sm", "rs-avatar-lg", "rs-avatar-row"],
     css: ["components/avatar.css"],
@@ -352,7 +345,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "item",
     title: "Item",
-    description: "A flush row. Title occupies the cell; meta trails.",
+    description: "Flush row: title and description on the left, meta on the right.",
     category: "content",
     classes: ["rs-item", "rs-item-title", "rs-item-desc", "rs-item-meta"],
     css: ["components/item.css"],
@@ -362,7 +355,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "textarea",
     title: "Textarea",
-    description: "The quiet field, taller. Vertical resize only.",
+    description: "Multiline field, vertical resize only.",
     category: "forms",
     classes: ["rs-textarea"],
     css: ["components/textarea.css"],
@@ -373,7 +366,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "separator",
     title: "Separator",
-    description: "A hairline, horizontal or vertical.",
+    description: "1px rule, horizontal or vertical.",
     category: "content",
     classes: ["rs-sep", "rs-sep-v"],
     css: ["components/separator.css"],
@@ -383,7 +376,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "skeleton",
     title: "Skeleton",
-    description: "Pulse on the divider tone. Still under prefers-reduced-motion.",
+    description: "Divider-tone pulse. Animation stops when prefers-reduced-motion is on.",
     category: "feedback",
     classes: ["rs-skeleton"],
     css: ["components/skeleton.css"],
@@ -393,7 +386,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "empty",
     title: "Empty",
-    description: "A vacant cell. Title, one sentence, optional action.",
+    description: "Placeholder cell with a title, a sentence, and an optional action.",
     category: "feedback",
     classes: ["rs-empty", "rs-empty-title", "rs-empty-body", "rs-empty-action"],
     css: ["components/empty.css"],
@@ -404,17 +397,17 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "spinner",
     title: "Spinner",
-    description: "Hairline ring. Stops under prefers-reduced-motion.",
+    description: "16px 1px ring. Animation stops when prefers-reduced-motion is on.",
     category: "feedback",
     classes: ["rs-spinner"],
     css: ["components/spinner.css"],
     react: "components/spinner.tsx",
-    snippet: `<span class="rs-spinner" role="status" aria-label="Loading"></span>`,
+    snippet: `<span class="rs-spinner" role="status" aria-label="Loading"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="28 13" vector-effect="non-scaling-stroke"/></svg></span>`,
   },
   {
     name: "tooltip",
     title: "Tooltip",
-    description: "CSS only. Shows on hover and keyboard focus.",
+    description: "Label on hover and keyboard focus.",
     category: "feedback",
     classes: ["rs-tip"],
     css: ["components/tooltip.css"],
@@ -425,7 +418,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "toast",
     title: "Toast",
-    description: "Bottom right, aria-live polite, dismissed after four seconds.",
+    description: "Bottom-right status, aria-live polite, four-second dismiss.",
     category: "feedback",
     classes: ["rs-toasts", "rs-toast", "rs-toast-title", "rs-toast-body"],
     css: ["components/toast.css"],
@@ -435,7 +428,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "dropdown-menu",
     title: "Dropdown menu",
-    description: "Action menu with menu semantics and keyboard navigation.",
+    description: "Action menu with menuitem roles and arrow-key movement.",
     category: "actions",
     classes: ["rs-menu", "rs-menu-item", "rs-menu-sep"],
     css: ["components/menu.css", "components/menu-extras.css"],
@@ -446,7 +439,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "toggle",
     title: "Toggle",
-    description: "Press switch and group. Pressed is ink; state lives in aria-pressed.",
+    description: "Pressable control. Pressed fills ink. State is aria-pressed.",
     category: "actions",
     classes: ["rs-toggle", "rs-toggle-group"],
     css: ["components/toggle.css"],
@@ -456,7 +449,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "toggle-group",
     title: "Toggle group",
-    description: "One pressed at a time. Joined hairlines.",
+    description: "Joined toggles, one pressed, 1px between.",
     category: "actions",
     classes: ["rs-toggle-group"],
     css: ["components/toggle.css"],
@@ -467,7 +460,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "popover",
     title: "Popover",
-    description: "Native Popover API: top layer, light dismiss.",
+    description: "Native Popover API. Top layer, light dismiss.",
     category: "surfaces",
     classes: ["rs-popover", "rs-popover-title", "rs-popover-body"],
     css: ["components/popover.css"],
@@ -478,7 +471,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "sheet",
     title: "Sheet",
-    description: "Native <dialog> at the screen edge. Platform focus trap and backdrop.",
+    description: "Native dialog docked to a screen edge, with the platform focus trap and backdrop.",
     category: "surfaces",
     classes: ["rs-sheet", "rs-sheet-left", "rs-sheet-title", "rs-sheet-body"],
     css: ["components/sheet.css"],
@@ -488,7 +481,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "drawer",
     title: "Drawer",
-    description: "Native <dialog> from the bottom edge. Platform focus trap and backdrop.",
+    description: "Native dialog from the bottom edge, with the platform focus trap and backdrop.",
     category: "surfaces",
     classes: ["rs-drawer", "rs-drawer-title", "rs-drawer-body"],
     css: ["components/drawer.css"],
@@ -498,7 +491,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "scroll-area",
     title: "Scroll area",
-    description: "Hidden scrollbar; feathered top and bottom edges.",
+    description: "Overflow box with the scrollbar hidden and 20px feathers at the ends.",
     category: "content",
     classes: ["rs-scroll"],
     css: ["components/scroll-area.css"],
@@ -508,9 +501,8 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "chart",
     title: "Charts",
-    description:
-      "A line on a 204 field. Hairline grid, ink marks. Series differ by texture: solid, dashed, gray, dotted. One optional Crouwel spot.",
-    category: "content",
+    description: "Line on a 204 field. 1px grid, ink marks. Series use solid, dashed, gray, or dotted. One optional spot color.",
+    category: "charts",
     classes: ["rs-chart", "rs-chart-line", "rs-chart-grid", "rs-chart-axis", "rs-chart-bar", "rs-spark"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
@@ -519,8 +511,8 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "bar-chart",
     title: "Bar chart",
-    description: "Vertical or horizontal. Thin ink bars, no radius. Stacked when the series share a field.",
-    category: "content",
+    description: "Vertical or horizontal. Thin ink bars, square ends. Stacks when series share a field.",
+    category: "charts",
     classes: ["rs-chart-bar"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
@@ -530,8 +522,8 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "area-chart",
     title: "Area chart",
-    description: "A filled field under the first series. Same law as the line: hairlines, texture, one optional spot.",
-    category: "content",
+    description: "Filled field under the first series. 1px grid, textured series, one optional spot color.",
+    category: "charts",
     classes: ["rs-chart-area"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
@@ -541,8 +533,8 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "scatter-chart",
     title: "Scatter chart",
-    description: "Marks on a hairline grid. One ink, or one Crouwel spot on the field.",
-    category: "content",
+    description: "Marks on a 1px grid. Ink, or one optional spot color.",
+    category: "charts",
     classes: ["rs-chart-mark"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
@@ -552,8 +544,8 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "donut",
     title: "Donut or share",
-    description: "A ring against its whole, or a flush share strip. Hairline, no rounded fat stroke.",
-    category: "content",
+    description: "Ring against its total, or a flush share strip. 1px stroke.",
+    category: "charts",
     classes: ["rs-chart-donut"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
@@ -563,8 +555,8 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "histogram",
     title: "Histogram",
-    description: "Adjacent bins, one hairline between. A density field, not a dashboard widget.",
-    category: "content",
+    description: "Histogram. Adjacent bins, 1px between.",
+    category: "charts",
     classes: ["rs-chart-hist"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
@@ -574,8 +566,8 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "small-multiples",
     title: "Small multiples",
-    description: "The same axes, repeated. One 184 column per panel.",
-    category: "content",
+    description: "Repeated charts on the same axes. One 184 column per panel.",
+    category: "charts",
     classes: ["rs-chart-multi"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
@@ -585,7 +577,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "collapsible",
     title: "Collapsible",
-    description: "A bare native <details>.",
+    description: "Native details disclosure.",
     category: "content",
     classes: ["rs-disclosure", "rs-disclosure-body"],
     css: ["components/collapsible.css"],
@@ -596,7 +588,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "hover-card",
     title: "Hover card",
-    description: "Preview panel on hover or keyboard focus. CSS only.",
+    description: "Preview panel on hover and keyboard focus.",
     category: "surfaces",
     classes: ["rs-hover-card", "rs-hover-card-panel"],
     css: ["components/hover-card.css"],
@@ -606,9 +598,9 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "kbd",
     title: "Kbd",
-    description: "Keys in the mono stack with a pressed bottom edge.",
+    description: "Mono key cap with a 1px frame and a heavier bottom edge.",
     category: "content",
-    classes: ["rs-kbd"],
+    classes: ["rs-kbd", "rs-kbd-pair"],
     css: ["components/kbd.css"],
     react: "components/kbd.tsx",
     snippet: `<kbd class="rs-kbd">⌘</kbd> <kbd class="rs-kbd">K</kbd>`,
@@ -616,7 +608,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "input-otp",
     title: "One-time code",
-    description: "One cell per character. Auto-advance, backspace, paste.",
+    description: "One cell per character. Auto-advance, backspace, and paste.",
     category: "forms",
     classes: ["rs-otp"],
     css: ["components/input-otp.css"],
@@ -626,7 +618,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "context-menu",
     title: "Context menu",
-    description: "Right-click menu at the pointer. Escape and outside clicks close it.",
+    description: "Menu at the pointer on right-click. Escape and outside click close it.",
     category: "actions",
     classes: ["rs-menu", "rs-menu-item", "rs-menu-sep"],
     css: ["components/menu.css", "components/menu-extras.css"],
@@ -637,7 +629,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "menubar",
     title: "Menubar",
-    description: "Dropdown menus in a hairline strip.",
+    description: "Row of dropdowns in a 1px strip.",
     category: "actions",
     classes: ["rs-menubar"],
     css: ["components/menubar.css"],
@@ -648,7 +640,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "navigation-menu",
     title: "Navigation menu",
-    description: "Links in a row; the current page is ink.",
+    description: "Horizontal links. The current page is full ink.",
     category: "navigation",
     classes: ["rs-nav"],
     css: ["components/nav.css"],
@@ -658,7 +650,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "sidebar",
     title: "Sidebar",
-    description: "One 204 module rail. Air under the last item before the foot rule.",
+    description: "204-wide rail with a head, nav, and foot. 1px on all four sides.",
     category: "navigation",
     classes: ["rs-sidebar", "rs-sidebar-head", "rs-sidebar-nav", "rs-sidebar-item", "rs-sidebar-label", "rs-sidebar-foot"],
     css: ["components/sidebar.css"],
@@ -668,18 +660,18 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "carousel",
     title: "Carousel",
-    description: "Native scroll snap. Buttons nudge; edges feather.",
+    description: "Scroll-snap track. Buttons nudge one slide; ends feather.",
     category: "content",
-    classes: ["rs-carousel", "rs-carousel-track", "rs-carousel-nav"],
+    classes: ["rs-carousel", "rs-carousel-track", "rs-carousel-slide", "rs-carousel-nav"],
     css: ["components/carousel.css"],
     react: "components/carousel.tsx",
-    registryDependencies: ["pagination", "card"],
-    snippet: `<div class="rs-carousel"><div class="rs-carousel-track"><div class="rs-card">One</div><div class="rs-card">Two</div><div class="rs-card">Three</div></div><div class="rs-carousel-nav"><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.5 L5.5 8 L10.5 12.5" vector-effect="non-scaling-stroke"/></svg></button><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></svg></button></div></div>`,
+    registryDependencies: ["pagination"],
+    snippet: `<div class="rs-carousel"><div class="rs-carousel-track"><div class="rs-carousel-slide">One</div><div class="rs-carousel-slide">Two</div><div class="rs-carousel-slide">Three</div></div><div class="rs-carousel-nav"><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.5 L5.5 8 L10.5 12.5" vector-effect="non-scaling-stroke"/></svg></button><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></svg></button></div></div>`,
   },
   {
     name: "resizable",
     title: "Resizable",
-    description: "Two panes on a draggable hairline. Arrow keys work; state lives in ARIA.",
+    description: "Two panes split by a draggable 1px handle. Arrows move it; value is in ARIA.",
     category: "surfaces",
     classes: ["rs-split", "rs-split-pane", "rs-split-handle"],
     css: ["components/resizable.css"],
@@ -689,7 +681,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "combobox",
     title: "Combobox",
-    description: "Filtered listbox on the quiet field. Combobox semantics.",
+    description: "Text field with a filtered listbox.",
     category: "forms",
     classes: ["rs-combobox", "rs-combobox-empty"],
     css: ["components/combobox.css"],
@@ -700,7 +692,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "command",
     title: "Command",
-    description: "Command palette in a native <dialog>. Filter, arrows, enter.",
+    description: "Command palette in a native dialog. Filter, arrows, enter.",
     category: "actions",
     classes: ["rs-command", "rs-command-input", "rs-command-list", "rs-command-group", "rs-command-item", "rs-command-item-active", "rs-command-hint", "rs-command-empty"],
     css: ["components/command.css"],
@@ -711,7 +703,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "calendar",
     title: "Calendar",
-    description: "Month grid. Selected is ink; today is a hairline. Weeks start on Monday.",
+    description: "Month grid. Selected day is ink; today is a 1px outline. Weeks start Monday.",
     category: "forms",
     classes: ["rs-cal", "rs-cal-head", "rs-cal-title", "rs-cal-nav", "rs-cal-grid", "rs-cal-dow", "rs-cal-day", "rs-cal-day-out", "rs-cal-day-today", "rs-cal-day-selected"],
     css: ["components/calendar.css"],
@@ -722,7 +714,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "date-picker",
     title: "Date picker",
-    description: "Hairline trigger with a calendar overlay.",
+    description: "1px trigger that opens a calendar overlay.",
     category: "forms",
     classes: ["rs-dropdown", "rs-cal"],
     css: ["components/menu.css", "components/calendar.css"],
@@ -733,7 +725,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "data-table",
     title: "Data table",
-    description: "Sortable rows over the plain table. aria-sort on headers.",
+    description: "Sortable table. Headers expose aria-sort.",
     category: "content",
     classes: ["rs-datatable-sort", "rs-datatable-empty"],
     css: ["components/datatable.css"],
@@ -744,7 +736,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "aspect-ratio",
     title: "Aspect ratio",
-    description: "A box that keeps its proportions. Media covers.",
+    description: "Box that holds a ratio. Media fills it.",
     category: "content",
     classes: ["rs-ratio"],
     css: ["components/ratio.css"],
@@ -754,7 +746,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "form",
     title: "Form",
-    description: "Fields stacked on the grid; one primary action at the end.",
+    description: "Stacked fields with one primary action at the end.",
     category: "forms",
     classes: ["rs-form"],
     css: ["components/field.css"],
@@ -765,16 +757,16 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "workflow",
     title: "Workflow card",
-    description: "Editable pipeline card: dashed frame, drag handle, dashed chips, ghost add-step card.",
+    description: "Dashed 1px pipeline step. Drag handle, dashed chips, ghost add-step.",
     category: "patterns",
     classes: ["rs-flow", "rs-flow-step", "rs-flow-num", "rs-flow-subs", "rs-flow-sub-add", "rs-flow-add", "rs-flow-plus"],
     css: ["components/flow.css"],
-    snippet: `<div class="rs-flow"><div class="rs-flow-step"><span class="rs-flow-num">1</span><h4>Proposal</h4><p>Scope, timeline, and fee on one page.</p></div></div>`,
+    snippet: `<div class="rs-flow" style="grid-template-columns:184px;width:184px"><div class="rs-flow-step"><span class="rs-flow-num">1</span><h4>Proposal</h4><p>Scope, timeline, and fee on one page.</p><div class="rs-flow-subs"><span>Brief</span><span>Fee</span><span class="rs-flow-sub-add">+</span></div></div><button type="button" class="rs-flow-add"><span class="rs-flow-plus">+</span> Add a step</button></div>`,
   },
   {
     name: "assistant",
     title: "Assistant panel",
-    description: "Chat surface: user block, replies, suggestion card with applied state, quiet input row.",
+    description: "Chat panel: user block, reply, suggestion card, input row.",
     category: "patterns",
     classes: ["rs-ai", "rs-ai-head", "rs-ai-title", "rs-ai-status", "rs-ai-msg", "rs-ai-user", "rs-ai-user-block", "rs-ai-reply", "rs-ai-card", "rs-ai-tag", "rs-ai-text", "rs-ai-done", "rs-ai-input", "rs-ai-send"],
     css: ["components/assistant.css"],
@@ -783,18 +775,17 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "theme-toggle",
     title: "Theme toggle",
-    description:
-      "Fixed top right. Sun and moon slide on a track; the choice persists in localStorage.",
+    description: "Icon that swaps moon and sun with the color scheme. Saved in localStorage.",
     category: "actions",
-    classes: ["rs-theme-toggle", "rs-theme-track", "rs-theme-track-dark", "rs-theme-sun", "rs-theme-moon"],
+    classes: ["rs-theme-toggle", "rs-theme-toggle-inline", "rs-theme-sun", "rs-theme-moon"],
     css: ["components/theme-toggle.css"],
     react: "components/theme-toggle.tsx",
-    snippet: `<button class="rs-theme-toggle" aria-label="Toggle color scheme"><span class="rs-theme-track"><svg class="rs-theme-moon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5" vector-effect="non-scaling-stroke"/></svg><svg class="rs-theme-sun" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><circle cx="8" cy="8" r="2.5" vector-effect="non-scaling-stroke"/><path d="M8 2 V3.5 M8 12.5 V14 M2 8 H3.5 M12.5 8 H14 M4.4 4.4 L5.3 5.3 M10.7 10.7 L11.6 11.6 M11.6 4.4 L10.7 5.3 M5.3 10.7 L4.4 11.6" vector-effect="non-scaling-stroke"/></svg></span></button>`,
+    snippet: `<button class="rs-theme-toggle rs-theme-toggle-inline" aria-label="Toggle color scheme"><svg class="rs-theme-moon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5" vector-effect="non-scaling-stroke"/></svg></button>`,
   },
   {
     name: "callout",
     title: "Callout",
-    description: "A tinted note in running copy. Hairline frame, 3px ink left edge.",
+    description: "Note in running copy. 1px frame, 3px ink left edge, square corners.",
     category: "feedback",
     classes: ["rs-callout"],
     css: ["components/callout.css"],
@@ -803,8 +794,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "references",
     title: "References",
-    description:
-      "Inline citations, a numbered hairline list, and a cite box. Numerals hang in the gutter.",
+    description: "Inline citations, a numbered 1px list, and a cite box. Numerals hang in the gutter.",
     category: "content",
     classes: ["rs-cite", "rs-refs", "rs-ref-authors", "rs-ref-doi", "rs-cite-box", "rs-cite-box-label", "rs-cite-box-text"],
     css: ["components/refs.css"],

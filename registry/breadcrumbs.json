@@ -3,7 +3,7 @@
   "name": "breadcrumbs",
   "type": "registry:component",
   "title": "Breadcrumbs",
-  "description": "One ink trail. Ancestors stay ink; slashes at 40%; the current page is full ink.",
+  "description": "Ancestor links, 40% slashes, current page at full ink.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

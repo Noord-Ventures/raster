@@ -15,5 +15,6 @@
 }
 .rs-btn-group:has(> .rs-btn-sm){height:36px}
 .rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{box-sizing:border-box;height:auto;border:0;border-radius:0;margin:0}
-.rs-btn-group > * + *{border-inline-start:1px solid var(--divider)}
+.rs-btn-group > .rs-btn-primary + *,
+.rs-btn-group > .rs-btn-ghost + *{border-inline-start:1px solid var(--divider)}
 .rs-btn-group > .rs-btn-primary{position:relative;z-index:1}

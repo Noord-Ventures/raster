@@ -66,7 +66,8 @@ body{
 }
 .rs-btn-group:has(> .bb-btn-sm){height:36px}
 .rs-btn-group > .bb-btn-primary,.rs-btn-group > .bb-btn-ghost{box-sizing:border-box;height:auto;border:0;border-radius:0;margin:0}
-.rs-btn-group > * + *{border-inline-start:1px solid var(--divider)}
+.rs-btn-group > .bb-btn-primary + *,
+.rs-btn-group > .bb-btn-ghost + *{border-inline-start:1px solid var(--divider)}
 .rs-btn-group > .bb-btn-primary{position:relative;z-index:1}
 
 /* ── Text link: underlined by its hairline, never colored ── */
@@ -439,16 +440,17 @@ table tr.rs-total-row td{font-weight:500;color:var(--text);border-top:2px solid 
     text-align:center;
   }
 
-  /* Stepper: 44pt marks, 16px names, more air. Already stacks at 640. */
-  .rs-steps{gap:20px}
+  /* Stepper: 44pt dots stay circles; hairlines still meet the marks. */
+  .rs-steps{gap:0}
   .rs-step{min-width:0;gap:6px}
   .rs-step-dot{
     width:var(--hit);
     height:var(--hit);
-    border-radius:0;
+    border-radius:50%;
     font-size:15px;
     margin-bottom:8px;
   }
+  .rs-step-line{top:calc(var(--hit) / 2);left:var(--hit)}
   .rs-step-name{font-size:var(--control-fs)}
   .rs-step-sub{font-size:13px}
 
@@ -706,6 +708,6 @@ table tr.rs-total-row td{font-weight:500;color:var(--text);border-top:2px solid 
 @media(prefers-reduced-motion:reduce){
   .rs-reveal,.rs-crumb-bar .bb-crumbs-demo,.rs-tip::after,.rs-hover-card-panel{transition:none}
   .rs-subscribed,.rs-toast{animation:none}
-  .rs-theme-track,.rs-theme-sun,.rs-theme-moon{transition:none}
-  .rs-spinner{animation:none;border-top-color:var(--text)}
+  .rs-theme-sun,.rs-theme-moon{transition:none}
+  .rs-spinner svg{animation:none}
 }

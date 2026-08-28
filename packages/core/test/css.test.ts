@@ -49,6 +49,32 @@ describe("generated raster.css", () => {
     expect(open).toBe(close);
   });
 
+  it("draws a 1px hairline spinner ring, not a rotating square", () => {
+    const spinner = readFileSync(join(pkgDir, "css/components/spinner.css"), "utf8");
+    expect(spinner).not.toMatch(/border-radius:0/);
+    expect(spinner).not.toMatch(/border:1\.5px/);
+    expect(spinner).toMatch(/\.rs-spinner svg\{/);
+    expect(rasterCss).toMatch(/\.rs-spinner svg\{/);
+  });
+
+  it("keeps callout flush: hairline frame, 3px ink left, no radius", () => {
+    const callout = readFileSync(join(pkgDir, "css/components/callout.css"), "utf8");
+    expect(callout).toMatch(/border:1px solid var\(--divider\)/);
+    expect(callout).toMatch(/border-left:3px solid var\(--text\)/);
+    expect(callout).toMatch(/border-radius:0/);
+    expect(callout).toMatch(/box-shadow:none/);
+    expect(callout).not.toMatch(/border-radius:var\(--radius\)/);
+    expect(rasterCss).toMatch(/\.rs-callout\{[^}]*border-radius:0/);
+  });
+
+  it("joins stepper hairlines to the dots", () => {
+    const stepper = readFileSync(join(pkgDir, "css/components/stepper.css"), "utf8");
+    expect(stepper).toMatch(/\.rs-step-line\{[^}]*left:24px/);
+    expect(stepper).toMatch(/\.rs-step-line\{[^}]*right:0/);
+    expect(stepper).not.toMatch(/display:none/);
+    expect(rasterCss).toMatch(/\.rs-step-line\{[^}]*left:24px/);
+  });
+
   it("catalogs icons in sentence-case groups", () => {
     const icons = readFileSync(join(pkgDir, "css/components/icons.css"), "utf8");
     expect(icons).toMatch(/\.rs-icon-catalog\{[^}]*width:100%/);
@@ -71,6 +97,7 @@ describe("generated raster.css", () => {
     const side = readFileSync(join(pkgDir, "css/components/sidebar.css"), "utf8");
     expect(side).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:32px\}/);
     expect(side).toMatch(/\.rs-sidebar-nav\{[^}]*padding:8px 0 32px/);
+    expect(side).toMatch(/\.rs-sidebar\{[^}]*border:1px solid var\(--divider\)/);
     expect(rasterCss).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:32px\}/);
   });
 
@@ -96,7 +123,7 @@ describe("generated raster.css", () => {
     expect(group).toMatch(/\.rs-btn-group\{[^}]*--rs-out:var\(--radius-sm\)/);
     expect(group).toMatch(/\.rs-btn-group\{[^}]*--rs-in:max\(0px,calc\(var\(--rs-out\) - var\(--rs-gap\)\)\)/);
     expect(group).toMatch(/\.rs-btn-group\{[^}]*border-radius:var\(--rs-out\)/);
-    expect(group).toMatch(/> \* \+ \*\{border-inline-start:1px solid var\(--divider\)\}/);
+    expect(group).toMatch(/> \.rs-btn-ghost \+ \*\{border-inline-start:1px solid var\(--divider\)\}/);
     expect(group).not.toMatch(/margin-inline-start:-1px/);
     expect(group).not.toMatch(/border-inline-start-color:transparent/);
     expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*border:1px solid var\(--divider\)/);
@@ -106,7 +133,7 @@ describe("generated raster.css", () => {
     expect(toggle).not.toMatch(/margin-left:-1px/);
     expect(phone).not.toMatch(/\.rs-toggle-group .rs-toggle\{[^}]*margin-left:-1px/);
     expect(rasterCss).toMatch(/\.rs-btn-group\{[^}]*border:1px solid var\(--divider\)/);
-    expect(rasterCss).toMatch(/\.rs-btn-group > \* \+ \*\{border-inline-start:1px solid var\(--divider\)\}/);
+    expect(rasterCss).toMatch(/\.rs-btn-group > \.rs-btn-ghost \+ \*\{border-inline-start:1px solid var\(--divider\)\}/);
   });
 
   it("sits the field input on an integer 40px control", () => {
@@ -163,6 +190,10 @@ describe("generated raster.css", () => {
     expect(chart).not.toMatch(/#e30613/i);
     expect(rasterCss).toMatch(/\.rs-chart-field\{/);
     expect(rasterCss).toMatch(/\.rs-chart-line\{[^}]*stroke-width:1/);
+    expect(chart).toMatch(/\.rs-chart-hist\{fill:var\(--divider\)/);
+    expect(chart).not.toMatch(/\.rs-chart-hist\{fill:var\(--text\)/);
+    expect(chart).toMatch(/\.rs-chart-donut-label\{[^}]*font-weight:500/);
+    expect(chart).not.toMatch(/\.rs-chart-donut-label\{[^}]*font-size:16px/);
   });
 
   it("never introduces a color hue — the palette is monochrome", () => {

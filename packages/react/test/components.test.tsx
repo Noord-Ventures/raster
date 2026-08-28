@@ -341,16 +341,14 @@ describe("Icon", () => {
 });
 
 describe("ThemeToggle", () => {
-  it("uses family sun and moon with rs-icon", () => {
+  it("renders one family mark that swaps", () => {
     const { container } = render(<ThemeToggle />);
-    const moon = container.querySelector(".rs-theme-moon");
-    const sun = container.querySelector(".rs-theme-sun");
-    expect(moon?.classList.contains("rs-icon")).toBe(true);
-    expect(sun?.classList.contains("rs-icon")).toBe(true);
-    expect(moon?.getAttribute("viewBox")).toBe("0 0 16 16");
-    expect(sun?.getAttribute("stroke-width")).toBe("1");
-    expect(sun?.getAttribute("stroke-linecap")).toBe("butt");
-    expect(container.querySelector("circle")?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+    const marks = container.querySelectorAll(".rs-theme-moon, .rs-theme-sun");
+    expect(marks).toHaveLength(1);
+    expect(marks[0]?.classList.contains("rs-icon")).toBe(true);
+    expect(marks[0]?.getAttribute("viewBox")).toBe("0 0 16 16");
+    expect(marks[0]?.getAttribute("stroke-width")).toBe("1");
+    expect(marks[0]?.getAttribute("stroke-linecap")).toBe("butt");
     expect(container.querySelector('[stroke-width="1.5"]')).toBeNull();
   });
 });
@@ -402,6 +400,16 @@ describe("Stepper", () => {
     expect(dots[0]?.className).toContain("rs-step-done");
     expect(dots[1]?.className).toContain("rs-step-active");
     expect(dots[2]?.className).not.toContain("rs-step-active");
+  });
+
+  it("keeps joining hairlines inside each step so they meet the dots", () => {
+    const { container } = render(
+      <Stepper steps={[{ name: "Brief" }, { name: "Design" }, { name: "Build" }]} current={1} />,
+    );
+    const steps = container.querySelectorAll(".rs-step");
+    expect(steps[0]?.querySelector(".rs-step-line")).toBeTruthy();
+    expect(steps[1]?.querySelector(".rs-step-line")).toBeTruthy();
+    expect(steps[2]?.querySelector(".rs-step-line")).toBeNull();
   });
 });
 
@@ -483,6 +491,14 @@ describe("Spinner", () => {
   it("exposes status semantics", () => {
     render(<Spinner label="Loading" />);
     expect(screen.getByRole("status", { name: "Loading" }).className).toBe("rs-spinner");
+  });
+
+  it("draws a 1px hairline circle, not a square", () => {
+    const { container } = render(<Spinner />);
+    const ring = container.querySelector("circle");
+    expect(ring?.getAttribute("stroke-width")).toBe("1");
+    expect(ring?.getAttribute("stroke-linecap")).toBe("butt");
+    expect(ring?.getAttribute("r")).toBe("6.5");
   });
 });
 

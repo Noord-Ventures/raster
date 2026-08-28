@@ -3,7 +3,7 @@
   "name": "combobox",
   "type": "registry:component",
   "title": "Combobox",
-  "description": "Filtered listbox on the quiet field. Combobox semantics.",
+  "description": "Text field with a filtered listbox.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

@@ -3,7 +3,7 @@
   "name": "aspect-ratio",
   "type": "registry:component",
   "title": "Aspect ratio",
-  "description": "A box that keeps its proportions. Media covers.",
+  "description": "Box that holds a ratio. Media fills it.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

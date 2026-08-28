@@ -3,7 +3,7 @@
   "name": "icons",
   "type": "registry:component",
   "title": "Icons",
-  "description": "One family. 16 viewBox, 1px currentColor hairline, butt/miter, no radius. Marks live in the React package.",
+  "description": "16 viewBox marks, 1px currentColor, butt/miter. Shipped in the React package.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"
@@ -36,7 +36,7 @@
   ],
   "meta": {
     "raster": {
-      "category": "content",
+      "category": "icons",
       "classes": [
         "rs-icons",
         "rs-icon",

@@ -3,7 +3,7 @@
   "name": "data-table",
   "type": "registry:component",
   "title": "Data table",
-  "description": "Sortable rows over the plain table. aria-sort on headers.",
+  "description": "Sortable table. Headers expose aria-sort.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

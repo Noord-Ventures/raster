@@ -195,8 +195,11 @@ function CommandDemo() {
   return (
     <>
       <Button variant="ghost" size="sm" onClick={() => setOpen(true)}>
-        Open command… <Kbd>⌘</Kbd>
-        <Kbd>K</Kbd>
+        Open command…
+        <span className="rs-kbd-pair">
+          <Kbd>⌘</Kbd>
+          <Kbd>K</Kbd>
+        </span>
       </Button>
       <CommandDialog
         open={open}
@@ -258,7 +261,35 @@ export const demos: Record<string, () => React.ReactNode> = {
       <Button variant="ghost">Right</Button>
     </ButtonGroup>
   ),
+  link: () => (
+    <div className="preview-cluster" style={{ flexDirection: "column", alignItems: "flex-start", gap: 12 }}>
+      <a className="rs-link" href="#">
+        A text link
+      </a>
+      <a className="rs-link-underline" href="#" style={{ fontSize: 14 }}>
+        An in-copy link
+      </a>
+    </div>
+  ),
   icons: () => <IconCatalog />,
+  workflow: () => (
+    <div className="rs-flow" style={{ gridTemplateColumns: "184px", width: 184 }}>
+      <div className="rs-flow-step">
+        <span className="rs-flow-num">1</span>
+        <h4>Proposal</h4>
+        <p>Scope, timeline, and fee on one page.</p>
+        <div className="rs-flow-subs">
+          <span>Brief</span>
+          <span>Fee</span>
+          <span className="rs-flow-sub-add">+</span>
+        </div>
+      </div>
+      <button type="button" className="rs-flow-add">
+        <span className="rs-flow-plus">+</span>
+        Add a step
+      </button>
+    </div>
+  ),
   button: () => (
     <div className="preview-cluster">
       <Button>Primary action</Button>
@@ -452,7 +483,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     </div>
   ),
   donut: () => (
-    <div style={{ width: 408, display: "grid", gap: 20 }}>
+    <div style={{ width: "100%", maxWidth: 340, display: "grid", gap: 20 }}>
       <Donut value={72} max={100} size={184} label="printed" />
       <Share
         slices={[
@@ -464,7 +495,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     </div>
   ),
   histogram: () => (
-    <div style={{ width: 408 }}>
+    <div style={{ width: "100%", maxWidth: 340 }}>
       <Histogram
         height={204}
         yLabel="Count"
@@ -542,17 +573,15 @@ export const demos: Record<string, () => React.ReactNode> = {
     />
   ),
   carousel: () => (
-    <div style={{ width: 300 }}>
-      <Carousel>
-        {["One", "Two", "Three", "Four"].map((n) => (
-          <div key={n} className="rs-card" style={{ width: 140, padding: 14 }}>
-            <span className="rs-card-title" style={{ fontSize: 14 }}>
-              {n}
-            </span>
-          </div>
-        ))}
-      </Carousel>
-    </div>
+    <Carousel>
+      {["One", "Two", "Three", "Four"].map((n) => (
+        <div key={n} className="rs-carousel-slide">
+          <span className="rs-card-title" style={{ fontSize: 14 }}>
+            {n}
+          </span>
+        </div>
+      ))}
+    </Carousel>
   ),
   resizable: () => (
     <div style={{ width: 300 }}>
@@ -716,9 +745,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     />
   ),
   dialog: DialogDemo,
-  "theme-toggle": () => (
-    <ThemeToggle style={{ position: "relative", top: "auto", right: "auto", filter: "none" }} />
-  ),
+  "theme-toggle": () => <ThemeToggle className="rs-theme-toggle-inline" />,
   stepper: () => (
     <Stepper
       steps={[{ name: "Brief" }, { name: "Design" }, { name: "Build" }]}

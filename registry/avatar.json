@@ -3,7 +3,7 @@
   "name": "avatar",
   "type": "registry:component",
   "title": "Avatar",
-  "description": "Initials in a circle. Images cover; broken images fall back to initials. Rows overlap.",
+  "description": "32px circle of initials, or a covering image. Broken images fall back. Rows overlap 8px.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

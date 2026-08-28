@@ -3,7 +3,7 @@
   "name": "badge",
   "type": "registry:component",
   "title": "Badge",
-  "description": "Outline for recommendations, solid for done, muted for pending.",
+  "description": "11px badge. Outline, solid, and muted fills.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

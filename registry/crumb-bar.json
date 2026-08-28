@@ -3,7 +3,7 @@
   "name": "crumb-bar",
   "type": "registry:component",
   "title": "Crumb bar",
-  "description": "Fixed top bar. Transparent at rest; on scroll it gains the paper background and a bottom hairline, and the breadcrumbs fade in.",
+  "description": "Fixed 72px bar. Transparent at rest; scrolled state adds paper, a bottom 1px, and the trail.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

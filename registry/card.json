@@ -3,7 +3,7 @@
   "name": "card",
   "type": "registry:component",
   "title": "Card",
-  "description": "Hairline frame; label, title, body.",
+  "description": "1px frame with a label, title, and body.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

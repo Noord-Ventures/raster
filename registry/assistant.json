@@ -3,7 +3,7 @@
   "name": "assistant",
   "type": "registry:component",
   "title": "Assistant panel",
-  "description": "Chat surface: user block, replies, suggestion card with applied state, quiet input row.",
+  "description": "Chat panel: user block, reply, suggestion card, input row.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

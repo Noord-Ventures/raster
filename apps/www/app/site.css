@@ -302,6 +302,22 @@ html, body { margin: 0; padding: 0; }
 .gallery-demo,
 .gallery-meta { background-color: var(--bg); }
 .gallery-demo { padding: 28px 24px; min-height: 204px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--divider-subtle); overflow: hidden; pointer-events: none; }
+.gallery-demo .rs-theme-toggle,
+.preview-box .rs-theme-toggle {
+  position: relative;
+  top: auto;
+  right: auto;
+  filter: none;
+  z-index: 1;
+}
+.gallery-demo .rs-carousel,
+.preview-box .rs-carousel { width: 100%; max-width: 100%; }
+.gallery-demo .rs-flow,
+.preview-box .rs-flow {
+  grid-template-columns: 184px;
+  width: 184px;
+  max-width: 100%;
+}
 .gallery-meta { padding: 14px 20px 16px; }
 .gallery-meta h3 { font-size: 14.5px; font-weight: 600; letter-spacing: -.01em; margin: 0 0 3px; }
 .gallery-meta p { font-size: 12.5px; color: var(--text-secondary); letter-spacing: -.01em; line-height: 1.5; margin: 0; }

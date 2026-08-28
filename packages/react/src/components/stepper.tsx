@@ -16,22 +16,20 @@ export function Stepper({ steps, current, className, ...props }: StepperProps) {
   return (
     <div className={cx("rs-steps", className)} {...props}>
       {steps.map((step, index) => (
-        <React.Fragment key={index}>
-          {index > 0 && <span className="rs-step-line" aria-hidden="true" />}
-          <div className="rs-step" aria-current={index === current ? "step" : undefined}>
-            <span
-              className={cx(
-                "rs-step-dot",
-                index < current && "rs-step-done",
-                index === current && "rs-step-active",
-              )}
-            >
-              {index + 1}
-            </span>
-            <span className="rs-step-name">{step.name}</span>
-            {step.sub != null && <span className="rs-step-sub">{step.sub}</span>}
-          </div>
-        </React.Fragment>
+        <div key={index} className="rs-step" aria-current={index === current ? "step" : undefined}>
+          <span
+            className={cx(
+              "rs-step-dot",
+              index < current && "rs-step-done",
+              index === current && "rs-step-active",
+            )}
+          >
+            {index + 1}
+          </span>
+          {index < steps.length - 1 && <span className="rs-step-line" aria-hidden="true" />}
+          <span className="rs-step-name">{step.name}</span>
+          {step.sub != null && <span className="rs-step-sub">{step.sub}</span>}
+        </div>
       ))}
     </div>
   );

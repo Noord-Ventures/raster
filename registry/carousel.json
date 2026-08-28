@@ -3,12 +3,11 @@
   "name": "carousel",
   "type": "registry:component",
   "title": "Carousel",
-  "description": "Native scroll snap. Buttons nudge; edges feather.",
+  "description": "Scroll-snap track. Buttons nudge one slide; ends feather.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/pagination.json",
-    "https://raster.noord.dev/r/card.json"
+    "https://raster.noord.dev/r/pagination.json"
   ],
   "files": [
     {
@@ -37,7 +36,7 @@
     },
     {
       "path": "raster/styles/carousel.css",
-      "content": "/* ── Carousel: native scroll snap; the platform owns the physics ── */\n.rs-carousel{position:relative}\n.rs-carousel-track{display:flex;gap:var(--gutter);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);padding:2px 12px}\n.rs-carousel-track::-webkit-scrollbar{display:none}\n.rs-carousel-track>*{scroll-snap-align:start;flex-shrink:0}\n.rs-carousel-nav{display:flex;gap:5px;margin-top:10px}\n@media(prefers-reduced-motion:reduce){.rs-carousel-track{scroll-behavior:auto}}\n",
+      "content": "/* ── Carousel: native scroll snap; edges feather; slides are Raster chrome ── */\n.rs-carousel{position:relative;width:100%;max-width:100%}\n.rs-carousel-track{display:flex;gap:var(--gutter);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 28px,#000 calc(100% - 36px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 28px,#000 calc(100% - 36px),transparent 100%);padding:2px 0}\n.rs-carousel-track::-webkit-scrollbar{display:none}\n.rs-carousel-track>*{scroll-snap-align:start;flex-shrink:0}\n.rs-carousel-slide{box-sizing:border-box;width:140px;padding:14px;border:1px solid var(--divider);border-radius:0;box-shadow:none;background:var(--bg)}\n.rs-carousel-nav{display:flex;gap:5px;margin-top:10px}\n@media(prefers-reduced-motion:reduce){.rs-carousel-track{scroll-behavior:auto}}\n",
       "type": "registry:file",
       "target": "styles/raster/carousel.css"
     }
@@ -48,13 +47,13 @@
       "classes": [
         "rs-carousel",
         "rs-carousel-track",
+        "rs-carousel-slide",
         "rs-carousel-nav"
       ],
-      "snippet": "<div class=\"rs-carousel\"><div class=\"rs-carousel-track\"><div class=\"rs-card\">One</div><div class=\"rs-card\">Two</div><div class=\"rs-card\">Three</div></div><div class=\"rs-carousel-nav\"><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.5 L5.5 8 L10.5 12.5\" vector-effect=\"non-scaling-stroke\"/></svg></button><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M5.5 3.5 L10.5 8 L5.5 12.5\" vector-effect=\"non-scaling-stroke\"/></svg></button></div></div>",
+      "snippet": "<div class=\"rs-carousel\"><div class=\"rs-carousel-track\"><div class=\"rs-carousel-slide\">One</div><div class=\"rs-carousel-slide\">Two</div><div class=\"rs-carousel-slide\">Three</div></div><div class=\"rs-carousel-nav\"><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.5 L5.5 8 L10.5 12.5\" vector-effect=\"non-scaling-stroke\"/></svg></button><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M5.5 3.5 L10.5 8 L5.5 12.5\" vector-effect=\"non-scaling-stroke\"/></svg></button></div></div>",
       "cssOnly": false,
       "registryDependencies": [
-        "pagination",
-        "card"
+        "pagination"
       ]
     }
   }

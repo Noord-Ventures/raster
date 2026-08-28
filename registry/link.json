@@ -3,7 +3,7 @@
   "name": "link",
   "type": "registry:component",
   "title": "Text link",
-  "description": "Underlined by its hairline; never colored. The gradient variant inset by one pixel for running copy.",
+  "description": "Text link with a hairline underline. In-copy variant is inset 1px.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"
@@ -23,7 +23,7 @@
         "rs-link",
         "rs-link-underline"
       ],
-      "snippet": "<a class=\"rs-link\" href=\"#\">A text link</a>\n<a class=\"rs-link-underline\" href=\"#\">An in-copy link</a>",
+      "snippet": "<div><a class=\"rs-link\" href=\"#\">A text link</a></div>\n<div><a class=\"rs-link-underline\" href=\"#\">An in-copy link</a></div>",
       "cssOnly": true,
       "registryDependencies": []
     }

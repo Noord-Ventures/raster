@@ -3,7 +3,7 @@
   "name": "skeleton",
   "type": "registry:component",
   "title": "Skeleton",
-  "description": "Pulse on the divider tone. Still under prefers-reduced-motion.",
+  "description": "Divider-tone pulse. Animation stops when prefers-reduced-motion is on.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"
