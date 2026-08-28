@@ -13,6 +13,14 @@
   grid-template-areas:
     "era"
     "lead"
+    "use"
+    "free"
+    "spec"
+    "mod"
+    "hair"
+    "flush"
+    "grot"
+    "hist"
     "jmb"
     "wc"
     "n01"
@@ -24,10 +32,7 @@
     "n07"
     "n08"
     "n09"
-    "mod"
-    "hair"
-    "flush"
-    "grot"
+    "faq"
     "colo";
   grid-auto-rows: minmax(204px, auto);
   background: var(--divider);
@@ -62,6 +67,17 @@
 }
 
 .field-cell-lead { grid-area: lead; }
+.field-cell-use {
+  grid-area: use;
+  justify-content: flex-start;
+  min-height: 408px;
+}
+.field-cell-free { grid-area: free; }
+.field-cell-spec {
+  grid-area: spec;
+  justify-content: flex-start;
+  min-height: 408px;
+}
 .field-cell-jmb { grid-area: jmb; min-height: 408px; }
 .field-cell-wc { grid-area: wc; min-height: 408px; }
 .field-cell-n01 { grid-area: n01; }
@@ -79,6 +95,11 @@
 .field-cell-grot {
   grid-area: grot;
   container-type: inline-size;
+}
+.field-cell-hist { grid-area: hist; }
+.field-cell-faq {
+  grid-area: faq;
+  justify-content: flex-start;
 }
 .field-cell-colophon {
   grid-area: colo;
@@ -125,6 +146,8 @@
   max-width: 28em;
 }
 
+.field-copy-wide { max-width: 36em; }
+
 .field-copy p {
   margin: 0;
   font-size: 15px;
@@ -143,6 +166,61 @@
   color: var(--text-secondary);
   text-wrap: balance;
   max-width: 22em;
+}
+
+.field-spec-type {
+  margin: 0;
+  font-size: clamp(3rem, 12vw, 8rem);
+  font-weight: 600;
+  letter-spacing: -.045em;
+  line-height: .85;
+  color: var(--text);
+}
+
+.field-code-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 44em;
+}
+
+.field-code-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.field-code {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 12px 14px;
+  background: var(--table-alt);
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+  overflow-x: auto;
+}
+
+.field-code code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.field-cell-use .code-copy {
+  position: static;
+  top: auto;
+  right: auto;
+  background: none;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  margin-top: 6px;
 }
 
 .field-spec {
@@ -207,6 +285,31 @@
   color: var(--text);
 }
 
+.field-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  max-width: 40em;
+}
+
+.field-note dt {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--text);
+}
+
+.field-note dd {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
 .field-colophon {
   display: flex;
   flex-direction: column;
@@ -253,15 +356,19 @@
     grid-template-areas:
       "era era"
       "lead lead"
+      "use use"
+      "free free"
+      "spec spec"
+      "mod hair"
+      "flush grot"
+      "hist hist"
       "jmb jmb"
       "wc wc"
       "n01 n02"
       "n03 n04"
       "n05 n06"
       "n07 n08"
-      "n09 mod"
-      "hair flush"
-      "grot grot"
+      "n09 faq"
       "colo colo";
   }
 }
@@ -273,15 +380,19 @@
       "era era era era"
       "era era era era"
       "lead lead lead lead"
+      "use use use use"
+      "free free spec spec"
+      "mod mod hair hair"
+      "flush flush grot grot"
+      "hist hist hist hist"
       "jmb jmb jmb jmb"
       "wc wc wc wc"
       "n01 n01 n02 n02"
       "n03 n03 n04 n04"
       "n05 n05 n06 n06"
       "n07 n07 n08 n08"
-      "n09 n09 mod mod"
-      "hair hair flush flush"
-      "grot grot colo colo";
+      "n09 n09 faq faq"
+      "colo colo colo colo";
   }
 }
 
@@ -291,13 +402,16 @@
     grid-template-areas:
       "era era era lead lead lead"
       "era era era lead lead lead"
+      "use use use use use use"
+      "free free spec spec spec spec"
+      "mod mod hair hair flush flush"
+      "grot grot grot hist hist hist"
       "jmb jmb jmb jmb jmb jmb"
       "wc wc wc wc wc wc"
       "n01 n01 n02 n02 n03 n03"
       "n04 n04 n05 n05 n06 n06"
       "n07 n07 n08 n08 n09 n09"
-      "mod mod hair hair flush flush"
-      "grot grot grot colo colo colo";
+      "faq faq faq colo colo colo";
   }
 }
 
@@ -316,4 +430,10 @@
     min-height: 44px;
   }
   .field-url a { min-height: 44px; }
+  .field-cell-use .code-copy {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
 }

@@ -1,10 +1,25 @@
 import type { Metadata } from "next";
-import { era, featured, field, noord, person, programme, typeface } from "./facts";
+import { CopyControl } from "@/components/code-block";
+import {
+  era,
+  featured,
+  field,
+  history,
+  lead,
+  license,
+  noord,
+  notes,
+  person,
+  programme,
+  specimen,
+  typeface,
+  usage,
+} from "./facts";
 import "./about.css";
 
 export const metadata: Metadata = {
   title: "About",
-  description: era.homage,
+  description: lead.what,
 };
 
 export default function AboutPage() {
@@ -19,41 +34,67 @@ export default function AboutPage() {
         </section>
 
         <section className="field-cell field-cell-lead">
-          <p className="field-kicker">Homage</p>
+          <p className="field-kicker">{lead.kicker}</p>
           <div className="field-copy">
-            <p>{era.homage}</p>
-            <p>{era.programme}</p>
-            <p>{era.pair}</p>
+            <p>{lead.what}</p>
+            <p>{lead.who}</p>
           </div>
         </section>
 
-        {featured.map((figure) => (
-          <section
-            key={figure.id}
-            className={`field-cell field-cell-${figure.id}`}
-            aria-label={figure.name}
-          >
-            <p className="field-kicker">
-              {figure.years} · {figure.place}
-            </p>
-            <h2 className="field-name field-name-feature">{figure.name}</h2>
-            <p className="field-mark">{figure.mark}</p>
-          </section>
-        ))}
+        <section className="field-cell field-cell-use" aria-labelledby="usage-heading">
+          <p className="field-kicker" id="usage-heading">
+            {usage.kicker}
+          </p>
+          <div className="field-copy">
+            <p>{usage.intro}</p>
+          </div>
+          <div className="field-code-stack">
+            <div className="field-code-row">
+              <pre className="field-code">
+                <code>{usage.command}</code>
+              </pre>
+              <CopyControl text={usage.command} />
+            </div>
+            <div className="field-code-row">
+              <pre className="field-code">
+                <code>{usage.html}</code>
+              </pre>
+              <CopyControl text={usage.html} />
+            </div>
+            <div className="field-code-row">
+              <pre className="field-code">
+                <code>{usage.control}</code>
+              </pre>
+              <CopyControl text={usage.control} />
+            </div>
+          </div>
+          <p className="field-mark">{usage.after}</p>
+        </section>
 
-        {field.map((entry, i) => (
-          <section
-            key={entry.name}
-            className={`field-cell field-cell-n${String(i + 1).padStart(2, "0")}`}
-            aria-label={entry.name}
-          >
-            <p className="field-kicker">
-              {entry.years} · {entry.place}
+        <section className="field-cell field-cell-free">
+          <p className="field-kicker">{license.kicker}</p>
+          <div className="field-copy">
+            <p>{license.body}</p>
+            <p>
+              {license.type}{" "}
+              <a href={typeface.url}>{typeface.url.replace("https://", "")}</a>
             </p>
-            <h2 className="field-name">{entry.name}</h2>
-            <p className="field-mark">{entry.mark}</p>
-          </section>
-        ))}
+          </div>
+        </section>
+
+        <section className="field-cell field-cell-spec" aria-labelledby="specimen-heading">
+          <p className="field-kicker" id="specimen-heading">
+            {specimen.kicker}
+          </p>
+          <p className="field-spec-type" aria-hidden="true">
+            Raster
+          </p>
+          <div className="field-copy field-copy-wide">
+            <p>{specimen.body}</p>
+            <p>{specimen.mid}</p>
+            <p>{specimen.long}</p>
+          </div>
+        </section>
 
         <section className="field-cell field-cell-mod" aria-label="204 module">
           <p className="field-kicker">{programme.module.kicker}</p>
@@ -86,6 +127,55 @@ export default function AboutPage() {
             {programme.grotesque.mark}
           </p>
           <p className="field-mark">{programme.grotesque.law}</p>
+        </section>
+
+        <section className="field-cell field-cell-hist">
+          <p className="field-kicker">{history.kicker}</p>
+          <div className="field-copy">
+            <p>{history.body}</p>
+          </div>
+        </section>
+
+        {featured.map((figure) => (
+          <section
+            key={figure.id}
+            className={`field-cell field-cell-${figure.id}`}
+            aria-label={figure.name}
+          >
+            <p className="field-kicker">
+              {figure.years} · {figure.place}
+            </p>
+            <h2 className="field-name field-name-feature">{figure.name}</h2>
+            <p className="field-mark">{figure.mark}</p>
+          </section>
+        ))}
+
+        {field.map((entry, i) => (
+          <section
+            key={entry.name}
+            className={`field-cell field-cell-n${String(i + 1).padStart(2, "0")}`}
+            aria-label={entry.name}
+          >
+            <p className="field-kicker">
+              {entry.years} · {entry.place}
+            </p>
+            <h2 className="field-name">{entry.name}</h2>
+            <p className="field-mark">{entry.mark}</p>
+          </section>
+        ))}
+
+        <section className="field-cell field-cell-faq" aria-labelledby="notes-heading">
+          <p className="field-kicker" id="notes-heading">
+            Notes
+          </p>
+          <dl className="field-notes">
+            {notes.map((note) => (
+              <div key={note.q} className="field-note">
+                <dt>{note.q}</dt>
+                <dd>{note.a}</dd>
+              </div>
+            ))}
+          </dl>
         </section>
 
         <section className="field-cell field-cell-colophon" aria-label="Colophon">

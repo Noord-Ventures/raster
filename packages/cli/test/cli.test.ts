@@ -15,7 +15,7 @@ afterEach(() => {
 });
 
 describe("init", () => {
-  it("writes raster.css, Inter files, and raster.json", () => {
+  it("writes raster.css, Inter files, a specimen page, and raster.json", () => {
     const results = init(cwd);
     expect(results.map((r) => r.status).every((s) => s === "written")).toBe(true);
     const css = readFileSync(join(cwd, "styles/raster.css"), "utf8");
@@ -26,6 +26,17 @@ describe("init", () => {
     expect(existsSync(join(cwd, "styles/fonts/inter/InterVariable-latin.woff2"))).toBe(true);
     expect(existsSync(join(cwd, "styles/fonts/inter/InterVariable-latin-ext.woff2"))).toBe(true);
     expect(readFileSync(join(cwd, "styles/fonts/inter/OFL.txt"), "utf8")).toContain("SIL Open Font License");
+    const page = readFileSync(join(cwd, "index.html"), "utf8");
+    expect(page).toContain('href="styles/raster.css"');
+    expect(page).toContain("workhorse of a design system");
+    expect(page).toContain("rs-btn-primary");
+    expect(page).toContain("184 column + 20 gutter");
+    expect(page).not.toContain("Hello world");
+    expect(page).not.toContain("lighthouse");
+    expect(page).not.toContain("U+0041");
+    expect(page).not.toContain("Messina");
+    expect(page).not.toContain("tailwind");
+    expect(page).not.toContain("radix");
     expect(loadConfig(cwd)).toMatchObject({ cssDir: "styles", componentsDir: "components/raster" });
   });
 

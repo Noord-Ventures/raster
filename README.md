@@ -30,7 +30,7 @@ This repo contains the tokens, CSS, React components, registry, CLI, and documen
 **CLI.**
 
 ```sh
-npx @noorddev/raster-cli init            # writes styles/raster.css, Inter, and raster.json
+npx @noorddev/raster-cli init            # writes styles/raster.css, Inter, index.html (specimen), and raster.json
 npx @noorddev/raster-cli add button dialog
 ```
 

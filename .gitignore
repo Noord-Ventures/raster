@@ -7,3 +7,5 @@ dist/
 out/
 apps/www/public/r/
 apps/www/public/fonts/
+apps/www/public/raster.css
+apps/www/public/starter/

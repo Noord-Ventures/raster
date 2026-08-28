@@ -97,6 +97,7 @@ jobs:
           '
           grep -q 'specimen-page' "$page"
           grep -q 'rs-crumb-bar' apps/www/components/crumb-bar.tsx
+          grep -q 'label: "About"' apps/www/components/crumb-bar.tsx
           if grep -n 'return null' apps/www/components/crumb-bar.tsx; then
             echo "Crumb bar must run on every route, including Home and About"
             exit 1
@@ -405,7 +406,7 @@ jobs:
           grep -q 'The control, the name, a short law.' apps/www/app/components/page.tsx
           grep -q 'className="rs-scene"' apps/www/components/examples/scene.tsx
           grep -q '.rs-scene .rs-use-type' apps/www/components/examples/use.css
-      - name: About is a modernist homage
+      - name: About is a workhorse specimen
         run: |
           page=apps/www/app/about/page.tsx
           facts=apps/www/app/about/facts.ts
@@ -413,7 +414,13 @@ jobs:
           test -f "$page"
           test -f "$facts"
           test -f "$css"
-          grep -q 'homage' "$facts"
+          grep -q 'workhorse of a design system' "$facts"
+          grep -q 'used for interfaces' "$facts"
+          grep -q 'kicker: "Usage"' "$facts"
+          grep -q 'kicker: "Free & open source"' "$facts"
+          grep -q 'kicker: "Specimen"' "$facts"
+          grep -q 'kicker: "History"' "$facts"
+          grep -q 'heading: WORD' "$facts"
           grep -q 'Swiss Style' "$facts"
           grep -q 'Dutch modernism' "$facts"
           grep -q 'Josef Müller-Brockmann' "$facts"
@@ -469,9 +476,26 @@ jobs:
             }
           '
           grep -q 'field-grotesque' "$page"
+          grep -q 'field-cell-use' "$page"
+          grep -q 'field-cell-spec' "$page"
+          grep -q 'field-notes' "$page"
           grep -q '204' "$facts"
           grep -q 'Hairlines' "$facts"
           grep -q 'No radius' "$facts"
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const page = readFileSync("apps/www/app/about/page.tsx", "utf8");
+            const useAt = page.indexOf("field-cell-use");
+            const histAt = page.indexOf("field-cell-hist");
+            const jmbAt = page.indexOf("field-cell-${figure.id}");
+            if (useAt < 0 || histAt < 0 || useAt > histAt) {
+              console.error("Usage must precede history on About");
+              process.exit(1);
+            }
+            if (histAt > jmbAt && jmbAt > 0) {
+              /* featured cells follow the history lead — ok */
+            }
+          '
           if grep -nE 'masthead-noord|masthead-typeface|masthead-renato' "$page"; then
             echo "Credits must not occupy masthead ids"
             exit 1
@@ -486,6 +510,14 @@ jobs:
           fi
           if grep -nE 'our team|the team|team page|we are a' "$facts" "$page"; then
             echo "About must not be a team page"
+            exit 1
+          fi
+          if grep -nE 'homage to that room|heading: "Grid"' "$facts"; then
+            echo "About must not open as an homage brochure"
+            exit 1
+          fi
+          if grep -nE 'pharos|lighthouse|U\+0041|glyph table' "$facts" "$page"; then
+            echo "About must not clone Inter specimen content"
             exit 1
           fi
           if grep -n 'overflow: hidden' "$css"; then
@@ -525,6 +557,34 @@ jobs:
             echo "About must stay flush: no shadow, no radius"
             exit 1
           fi
+      - name: Init writes a specimen page
+        run: |
+          starter=packages/cli/src/starter.html
+          lib=packages/cli/src/lib.ts
+          copy=apps/www/scripts/copy-registry.mjs
+          test -f "$starter"
+          test -f packages/cli/src/starter.ts
+          grep -q 'starterPage' "$lib"
+          grep -q 'index.html' "$lib"
+          grep -q 'public/starter' "$copy"
+          grep -q 'workhorse of a design system' "$starter"
+          grep -q 'rs-btn-primary' "$starter"
+          grep -q '184 column + 20 gutter' "$starter"
+          grep -q 'styles/raster.css' "$starter"
+          grep -q '{{CSS_HREF}}' "$starter"
+          if grep -nE 'Hello world|hello-world|Get started today|Ship faster' "$starter"; then
+            echo "Starter must be a specimen, not a hello-world shell or a landing"
+            exit 1
+          fi
+          if grep -nE 'pharos|lighthouse|U\+0041|glyph table' "$starter"; then
+            echo "Starter must not clone Inter specimen content"
+            exit 1
+          fi
+          if grep -nE 'Messina|tailwind|@radix' "$starter"; then
+            echo "Starter must stay Raster: Inter, no Tailwind, no Radix, no Messina"
+            exit 1
+          fi
+          grep -q 'index.html' apps/www/app/docs/page.tsx
       - name: Interfaces is six posters
         run: |
           node apps/www/scripts/check-interfaces.mjs
