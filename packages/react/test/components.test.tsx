@@ -25,6 +25,7 @@ import {
   iconNames,
   NativeSelect,
   Spinner,
+  ThemeToggle,
   Checkbox,
   InlineForm,
   Pagination,
@@ -251,7 +252,7 @@ describe("Icon", () => {
 
   it("ships a complete family on the same 16 module", () => {
     expect(iconNames.length).toBeGreaterThanOrEqual(80);
-    expect(iconNames.length).toBeLessThanOrEqual(120);
+    expect(iconNames.length).toBeLessThanOrEqual(160);
     const { container } = render(
       <>
         {iconNames.map((name) => (
@@ -281,6 +282,49 @@ describe("Icon", () => {
     expect(container.querySelector('g[transform="rotate(270 8 8)"]')).toBeTruthy();
   });
 
+  it("inks every shape so live DOM matches Vera's lock", () => {
+    const { container } = render(<Icon name="copy" />);
+    const path = container.querySelector('path[d="M6.5 2.5 H13.5 V9.5"]');
+    const rect = container.querySelector("rect");
+    expect(path?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+    expect(path?.getAttribute("stroke-width")).toBe("1");
+    expect(path?.getAttribute("stroke-linecap")).toBe("butt");
+    expect(rect?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+  });
+
+  it("draws sun and moon as rs-icon family members, not a second stroke", () => {
+    const { container, rerender } = render(<Icon name="sun" className="icon-sun" />);
+    const sun = container.querySelector("svg");
+    expect(sun?.classList.contains("rs-icon")).toBe(true);
+    expect(sun?.classList.contains("icon-sun")).toBe(true);
+    const circle = container.querySelector("circle");
+    expect(circle?.getAttribute("stroke-width")).toBe("1");
+    expect(circle?.getAttribute("stroke-linecap")).toBe("butt");
+    expect(circle?.getAttribute("stroke-linejoin")).toBe("miter");
+    expect(circle?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+    expect(circle?.getAttribute("fill")).toBe("none");
+    rerender(<Icon name="moon" className="icon-moon" />);
+    const moon = container.querySelector("svg");
+    expect(moon?.classList.contains("rs-icon")).toBe(true);
+    const crescent = container.querySelector("path");
+    expect(crescent?.getAttribute("d")).toBe("M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5");
+    expect(crescent?.getAttribute("d")).not.toMatch(/M13\.5 9\.5A5\.5/);
+    expect(crescent?.getAttribute("stroke-width")).toBe("1");
+    expect(crescent?.getAttribute("stroke-linecap")).toBe("butt");
+    expect(crescent?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+  });
+
+  it("holds calendar on the same hairline", () => {
+    const { container } = render(<Icon name="calendar" />);
+    const rect = container.querySelector("rect");
+    expect(rect?.getAttribute("x")).toBe("3");
+    expect(rect?.getAttribute("y")).toBe("4.5");
+    expect(rect?.getAttribute("width")).toBe("10");
+    expect(rect?.getAttribute("height")).toBe("9");
+    expect(rect?.getAttribute("rx")).toBeNull();
+    expect(rect?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+  });
+
   it("catalogs the family in sentence-case groups at 12 and 16", () => {
     const { container } = render(<IconCatalog />);
     expect(iconGroups.length).toBeGreaterThanOrEqual(8);
@@ -293,6 +337,21 @@ describe("Icon", () => {
     expect(firstPair).toBeTruthy();
     const sizes = [...firstPair!.querySelectorAll("svg")].map((svg) => svg.getAttribute("width"));
     expect(sizes).toEqual(["12", "16"]);
+  });
+});
+
+describe("ThemeToggle", () => {
+  it("uses family sun and moon with rs-icon", () => {
+    const { container } = render(<ThemeToggle />);
+    const moon = container.querySelector(".rs-theme-moon");
+    const sun = container.querySelector(".rs-theme-sun");
+    expect(moon?.classList.contains("rs-icon")).toBe(true);
+    expect(sun?.classList.contains("rs-icon")).toBe(true);
+    expect(moon?.getAttribute("viewBox")).toBe("0 0 16 16");
+    expect(sun?.getAttribute("stroke-width")).toBe("1");
+    expect(sun?.getAttribute("stroke-linecap")).toBe("butt");
+    expect(container.querySelector("circle")?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+    expect(container.querySelector('[stroke-width="1.5"]')).toBeNull();
   });
 });
 

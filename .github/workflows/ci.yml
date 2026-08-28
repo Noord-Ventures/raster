@@ -317,6 +317,16 @@ jobs:
             echo "Raster chrome must use the family, not a second stroke"
             exit 1
           fi
+          chrome=apps/www/components/site-chrome.tsx
+          grep -q 'name="sun"' "$chrome"
+          grep -q 'name="moon"' "$chrome"
+          grep -q '@noorddev/raster-react' "$chrome"
+          grep -q 'name="calendar"' packages/react/src/components/date-picker.tsx
+          grep -q 'r(3, 4.5, 10, 9)' "$marks"
+          if grep -nE 'M13.5 9.5A5.5|r="3.25"' "$chrome" packages/react/src/components/theme-toggle.tsx; then
+            echo "Site theme-toggle must use the Raster family"
+            exit 1
+          fi
           if grep -nE 'CopyMark|CopiedMark|width="8"' "$block"; then
             echo "Code-block copy must use the Raster Icon, not the overlapping squares"
             exit 1

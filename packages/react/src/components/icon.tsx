@@ -39,13 +39,13 @@ export type IconSize = 12 | 16;
 function renderEl(el: MarkEl, key: number): React.ReactNode {
   switch (el.t) {
     case "path":
-      return <path key={key} d={el.d} />;
+      return <path key={key} d={el.d} {...iconInk} />;
     case "rect":
-      return <rect key={key} x={el.x} y={el.y} width={el.w} height={el.h} />;
+      return <rect key={key} x={el.x} y={el.y} width={el.w} height={el.h} {...iconInk} />;
     case "circle":
-      return <circle key={key} cx={el.cx} cy={el.cy} r={el.r} />;
+      return <circle key={key} cx={el.cx} cy={el.cy} r={el.r} {...iconInk} />;
     case "line":
-      return <line key={key} x1={el.x1} y1={el.y1} x2={el.x2} y2={el.y2} />;
+      return <line key={key} x1={el.x1} y1={el.y1} x2={el.x2} y2={el.y2} {...iconInk} />;
   }
 }
 
