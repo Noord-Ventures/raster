@@ -163,7 +163,6 @@ export function Board() {
           <p className="if-ico-row">
             <Icon name="rows" size={16} />
             Today
-            <Icon name="calendar" size={12} />
           </p>
         </header>
         <div className="sc-wall-stream">

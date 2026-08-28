@@ -140,21 +140,10 @@ export function Board() {
                   <span>
                     {item.name}
                     <br />
-                    <small className="if-ico-row">
-                      <Icon name="map-pin" size={12} />
-                      {item.city}
-                      <Icon name="calendar" size={12} />
-                      {item.weeks} weeks
-                    </small>
+                    <small>{item.city} · {item.weeks} weeks</small>
                   </span>
                 </span>
-                <span className="if-ico-row">
-                  <Icon
-                    name={item.state === "On press" ? "printer" : item.state === "Proof" ? "file-text" : item.state === "Invoice" ? "receipt" : "quote"}
-                    size={12}
-                  />
-                  {item.state}
-                </span>
+                <span>{item.state}</span>
               </button>
             ))}
             <div key={job} className="sc-dash-detail sc-fresh">
