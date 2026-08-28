@@ -770,7 +770,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-carousel-track{display:flex;gap:var(--gutter);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 28px,#000 calc(100% - 36px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 28px,#000 calc(100% - 36px),transparent 100%);padding:2px 0}
 .rs-carousel-track::-webkit-scrollbar{display:none}
 .rs-carousel-track>*{scroll-snap-align:start;flex-shrink:0}
-.rs-carousel-slide{box-sizing:border-box;width:140px;padding:14px;border:1px solid var(--divider);border-radius:0;box-shadow:none;background:var(--bg)}
+.rs-carousel-slide{box-sizing:border-box;width:140px;padding:14px;border:1px solid var(--divider);border-radius:var(--radius-sm);box-shadow:none;background:var(--bg)}
 .rs-carousel-nav{display:flex;gap:5px;margin-top:10px}
 @media(prefers-reduced-motion:reduce){.rs-carousel-track{scroll-behavior:auto}}
 
@@ -830,16 +830,16 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 @media(min-width:940px){.rs-flow{grid-template-columns:repeat(3,184px)}}
 @media(min-width:1280px){.rs-flow{grid-template-columns:repeat(4,184px)}}
 @media(min-width:1448px){.rs-flow{grid-template-columns:repeat(5,184px)}}
-.rs-flow-step{position:relative;border:1px dashed var(--divider);border-radius:0;padding:14px 34px 16px 14px;background:var(--bg);transition:border-color var(--duration-snap) var(--ease)}
+.rs-flow-step{position:relative;border:1px dashed var(--divider);border-radius:var(--radius-sm);padding:14px 34px 16px 14px;background:var(--bg);transition:border-color var(--duration-snap) var(--ease)}
 .rs-flow-step:hover{border-color:var(--accent)}
 .rs-flow-step::after{content:"";position:absolute;top:15px;right:13px;width:8px;height:14px;background-image:radial-gradient(currentColor 1.1px,transparent 1.3px);background-size:4px 5px;color:var(--text-secondary);opacity:.4}
 .rs-flow-num{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--divider);background:var(--bg);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);margin-bottom:14px}
 .rs-flow-step h4{display:inline-block;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text);border-bottom:1px dashed var(--divider);padding-bottom:1px;margin:0 0 8px}
 .rs-flow-step p{font-size:12.5px;line-height:1.55;color:var(--text-secondary);letter-spacing:-.005em;margin:0}
 .rs-flow-subs{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
-.rs-flow-subs span{font-size:11px;line-height:1;padding:3px 7px;border:1px dashed var(--divider);border-radius:0;color:var(--text-secondary);letter-spacing:-.005em}
+.rs-flow-subs span{font-size:11px;line-height:1;padding:3px 7px;border:1px dashed var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);letter-spacing:-.005em}
 .rs-flow-subs .rs-flow-sub-add{width:18px;padding:3px 0;text-align:center;opacity:.7}
-.rs-flow-add{display:flex;align-items:center;gap:8px;margin-top:14px;border:1px dashed var(--divider);border-radius:0;padding:12px 14px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);background:none;width:184px;max-width:100%;transition:border-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease);font-family:inherit;cursor:pointer}
+.rs-flow-add{display:flex;align-items:center;gap:8px;margin-top:14px;border:1px dashed var(--divider);border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);background:none;width:184px;max-width:100%;transition:border-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease);font-family:inherit;cursor:pointer}
 .rs-flow-add:hover{border-color:var(--accent);color:var(--text)}
 .rs-flow-plus{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;font-size:13px;line-height:1}
 
@@ -869,7 +869,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-theme-toggle-inline{position:relative;top:auto;right:auto;z-index:1;filter:none}
 @media(max-width:480px){.rs-theme-toggle:not(.rs-theme-toggle-inline){right:25px}}
 
-/* ── Callout: paper field, hairline frame, 3px ink left. Slight Raster radius. ── */
+/* ── Callout: paper field, hairline frame, 3px ink left, slight Raster radius. ── */
 .rs-callout{background:var(--bg);border:1px solid var(--divider);border-left:3px solid var(--text);border-radius:var(--radius-sm);box-shadow:none;padding:16px 20px}
 .rs-callout p{font-size:14px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.6;margin:0}
 .rs-callout p strong{color:var(--text);font-weight:600}

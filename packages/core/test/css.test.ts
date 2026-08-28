@@ -57,14 +57,25 @@ describe("generated raster.css", () => {
     expect(rasterCss).toMatch(/\.rs-spinner svg\{/);
   });
 
-  it("keeps callout flush: hairline frame, 3px ink left, no radius", () => {
+  it("keeps callout a Raster note: hairline frame, 3px ink left, slight radius", () => {
     const callout = readFileSync(join(pkgDir, "css/components/callout.css"), "utf8");
     expect(callout).toMatch(/border:1px solid var\(--divider\)/);
     expect(callout).toMatch(/border-left:3px solid var\(--text\)/);
-    expect(callout).toMatch(/border-radius:0/);
+    expect(callout).toMatch(/border-radius:var\(--radius-sm\)/);
     expect(callout).toMatch(/box-shadow:none/);
-    expect(callout).not.toMatch(/border-radius:var\(--radius\)/);
-    expect(rasterCss).toMatch(/\.rs-callout\{[^}]*border-radius:0/);
+    expect(callout).not.toMatch(/border-radius:var\(--radius[^-]/);
+    expect(callout).not.toMatch(/border-radius:(0|1[02]px)/);
+    expect(rasterCss).toMatch(/\.rs-callout\{[^}]*border-radius:var\(--radius-sm\)/);
+  });
+
+  it("gives carousel and workflow cards the button-family radius, not 0 or 12px", () => {
+    const carousel = readFileSync(join(pkgDir, "css/components/carousel.css"), "utf8");
+    const flow = readFileSync(join(pkgDir, "css/components/flow.css"), "utf8");
+    expect(carousel).toMatch(/\.rs-carousel-slide\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(carousel).not.toMatch(/border-radius:(0|10px|12px)/);
+    expect(flow).toMatch(/\.rs-flow-step\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(flow).toMatch(/\.rs-flow-add\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(flow).not.toMatch(/border-radius:(0|10px|12px)/);
   });
 
   it("joins stepper hairlines to the dots", () => {

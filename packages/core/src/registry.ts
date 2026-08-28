@@ -785,7 +785,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "callout",
     title: "Callout",
-    description: "Note in running copy. 1px frame, 3px ink left edge, square corners.",
+    description: "Note in running copy. 1px frame, 3px ink left edge, slight Raster radius.",
     category: "feedback",
     classes: ["rs-callout"],
     css: ["components/callout.css"],

@@ -3679,7 +3679,7 @@
       "name": "callout",
       "type": "registry:component",
       "title": "Callout",
-      "description": "Note in running copy. 1px frame, 3px ink left edge, square corners.",
+      "description": "Note in running copy. 1px frame, 3px ink left edge, slight Raster radius.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json"
