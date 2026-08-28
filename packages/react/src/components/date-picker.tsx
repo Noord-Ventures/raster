@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cx } from "../cx";
 import { Calendar } from "./calendar";
+import { Icon } from "./icon";
 
 export interface DatePickerProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "defaultValue"> {
@@ -51,10 +52,7 @@ export function DatePicker({
         onClick={() => setOpen((o) => !o)}
       >
         <span>{value ? format(value) : placeholder}</span>
-        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
-          <rect x="2.75" y="3.75" width="10.5" height="9.5" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M2.75 6.75h10.5M5.5 2v2.5M10.5 2v2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
+        <Icon name="calendar" size={16} />
       </button>
       {open && (
         <div className="rs-menu" style={{ padding: 12, right: "auto" }}>

@@ -1,10 +1,17 @@
 export { cx } from "./cx";
 export {
   Icon,
+  IconCatalog,
   ICON_STROKE,
   ICON_VIEWBOX,
   iconInk,
+  iconGroups,
+  iconLabel,
   iconNames,
+  resolveIcon,
+  type DrawnName,
+  type IconAlias,
+  type IconGroup,
   type IconName,
   type IconProps,
   type IconRotate,

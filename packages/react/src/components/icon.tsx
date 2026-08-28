@@ -1,5 +1,19 @@
 import * as React from "react";
 import { cx } from "../cx";
+import {
+  iconGroups,
+  iconLabel,
+  iconNames,
+  marks,
+  resolveIcon,
+  type IconName,
+  type IconRotate,
+  type MarkEl,
+} from "./icon-marks";
+
+export { iconGroups, iconLabel, iconNames, resolveIcon };
+export type { IconName, IconRotate };
+export type { DrawnName, IconAlias, IconGroup } from "./icon-marks";
 
 /**
  * Raster chrome marks. Vera 28 Aug 2026.
@@ -20,31 +34,19 @@ export const iconInk = {
   vectorEffect: "non-scaling-stroke",
 } as const;
 
-export const iconNames = ["copy", "copied", "chevron-left", "chevron-right", "close"] as const;
-export type IconName = (typeof iconNames)[number] | "check";
 export type IconSize = 12 | 16;
-export type IconRotate = 90 | 180 | 270;
 
-const marks: Record<(typeof iconNames)[number], React.ReactNode> = {
-  copy: (
-    <>
-      <path d="M6.5 2.5 H13.5 V9.5" {...iconInk} />
-      <rect x="2.5" y="6.5" width="7" height="7" {...iconInk} />
-    </>
-  ),
-  copied: <path d="M3.5 8.5 L6.5 11.5 L12.5 4.5" {...iconInk} />,
-  "chevron-left": <path d="M10.5 3.5 L5.5 8 L10.5 12.5" {...iconInk} />,
-  "chevron-right": <path d="M5.5 3.5 L10.5 8 L5.5 12.5" {...iconInk} />,
-  close: (
-    <>
-      <path d="M4.5 4.5 L11.5 11.5" {...iconInk} />
-      <path d="M11.5 4.5 L4.5 11.5" {...iconInk} />
-    </>
-  ),
-};
-
-function resolveName(name: IconName): (typeof iconNames)[number] {
-  return name === "check" ? "copied" : name;
+function renderEl(el: MarkEl, key: number): React.ReactNode {
+  switch (el.t) {
+    case "path":
+      return <path key={key} d={el.d} />;
+    case "rect":
+      return <rect key={key} x={el.x} y={el.y} width={el.w} height={el.h} />;
+    case "circle":
+      return <circle key={key} cx={el.cx} cy={el.cy} r={el.r} />;
+    case "line":
+      return <line key={key} x1={el.x1} y1={el.y1} x2={el.x2} y2={el.y2} />;
+  }
 }
 
 export interface IconProps extends Omit<React.SVGAttributes<SVGSVGElement>, "children" | "rotate"> {
@@ -56,7 +58,9 @@ export interface IconProps extends Omit<React.SVGAttributes<SVGSVGElement>, "chi
 
 /** One mark. Size is the drawn square; the viewBox is always 16. */
 export function Icon({ name, size = 16, rotate, className, ...props }: IconProps) {
-  const nodes = marks[resolveName(name)];
+  const resolved = resolveIcon(name);
+  const turn = rotate ?? resolved.rotate;
+  const nodes = marks[resolved.mark].map(renderEl);
   return (
     <svg
       className={cx("rs-icon", className)}
@@ -67,7 +71,31 @@ export function Icon({ name, size = 16, rotate, className, ...props }: IconProps
       {...iconInk}
       {...props}
     >
-      {rotate ? <g transform={`rotate(${rotate} 8 8)`}>{nodes}</g> : nodes}
+      {turn ? <g transform={`rotate(${turn} 8 8)`}>{nodes}</g> : nodes}
     </svg>
+  );
+}
+
+/** Full family at 12 and 16, grouped. */
+export function IconCatalog({ className }: { className?: string }) {
+  return (
+    <div className={cx("rs-icon-catalog", className)}>
+      {iconGroups.map((group) => (
+        <section key={group.title} className="rs-icon-group">
+          <h3 className="rs-icon-group-title">{group.title}</h3>
+          <div className="rs-icon-grid">
+            {group.names.map((mark) => (
+              <div key={`${group.title}-${mark}`} className="rs-icon-cell">
+                <div className="rs-icon-pair">
+                  <Icon name={mark} size={12} />
+                  <Icon name={mark} size={16} />
+                </div>
+                <span className="rs-icon-label">{iconLabel(mark)}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
   );
 }

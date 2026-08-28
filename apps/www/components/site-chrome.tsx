@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@noorddev/raster-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
@@ -35,25 +36,8 @@ function useTheme() {
   return { dark, toggle };
 }
 
-function SunIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
-      <circle cx="8" cy="8" r="3.25" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function MoonIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
-      <path d="M13.5 9.5A5.5 5.5 0 0 1 6.5 2.5a5.5 5.5 0 1 0 7 7Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 function ThemeIcon({ dark }: { dark: boolean | null }) {
-  return dark ? <SunIcon /> : <MoonIcon />;
+  return dark ? <Icon name="sun" size={16} /> : <Icon name="moon" size={16} />;
 }
 
 const links = [
@@ -100,8 +84,8 @@ export function SiteChrome() {
 
       <button type="button" className="theme-toggle" onClick={toggle} aria-label="Toggle color scheme">
         <span className={`toggle-track${dark ? " is-dark" : ""}`}>
-          <MoonIcon className="icon-moon" />
-          <SunIcon className="icon-sun" />
+          <Icon name="moon" size={16} className="icon-moon" />
+          <Icon name="sun" size={16} className="icon-sun" />
         </span>
       </button>
 

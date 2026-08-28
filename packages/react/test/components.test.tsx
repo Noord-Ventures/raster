@@ -18,8 +18,10 @@ import {
   LineChart,
   Form,
   Icon,
+  IconCatalog,
   ICON_STROKE,
   ICON_VIEWBOX,
+  iconGroups,
   iconNames,
   NativeSelect,
   Spinner,
@@ -232,8 +234,8 @@ describe("Icon", () => {
     expect(container.querySelector("svg")?.getAttribute("viewBox")).toBe("0 0 16 16");
   });
 
-  it("ships five marks and no sibling down chevron", () => {
-    expect([...iconNames]).toEqual(["copy", "copied", "chevron-left", "chevron-right", "close"]);
+  it("keeps Vera's five paths exact", () => {
+    expect(iconNames.slice(0, 5)).toEqual(["copy", "copied", "chevron-left", "chevron-right", "close"]);
     const { container } = render(
       <>
         <Icon name="chevron-left" />
@@ -245,6 +247,51 @@ describe("Icon", () => {
     expect(container.querySelector('path[d="M5.5 3.5 L10.5 8 L5.5 12.5"]')).toBeTruthy();
     expect(container.querySelector('path[d="M4.5 4.5 L11.5 11.5"]')).toBeTruthy();
     expect(container.querySelector('path[d="M11.5 4.5 L4.5 11.5"]')).toBeTruthy();
+  });
+
+  it("ships a complete family on the same 16 module", () => {
+    expect(iconNames.length).toBeGreaterThanOrEqual(80);
+    expect(iconNames.length).toBeLessThanOrEqual(120);
+    const { container } = render(
+      <>
+        {iconNames.map((name) => (
+          <Icon key={name} name={name} size={12} />
+        ))}
+      </>,
+    );
+    const svgs = [...container.querySelectorAll("svg")];
+    expect(svgs).toHaveLength(iconNames.length);
+    for (const svg of svgs) {
+      expect(svg.getAttribute("viewBox")).toBe("0 0 16 16");
+      expect(svg.getAttribute("width")).toBe("12");
+      expect(svg.getAttribute("height")).toBe("12");
+      expect(svg.getAttribute("stroke-width")).toBe("1");
+      expect(svg.getAttribute("stroke-linecap")).toBe("butt");
+      expect(svg.querySelector("[rx]")).toBeNull();
+    }
+  });
+
+  it("reuses the check for success and rotates chevron-right for up and down", () => {
+    const { container, rerender } = render(<Icon name="success" />);
+    expect(container.querySelector('path[d="M3.5 8.5 L6.5 11.5 L12.5 4.5"]')).toBeTruthy();
+    rerender(<Icon name="chevron-down" />);
+    expect(container.querySelector('path[d="M5.5 3.5 L10.5 8 L5.5 12.5"]')).toBeTruthy();
+    expect(container.querySelector('g[transform="rotate(90 8 8)"]')).toBeTruthy();
+    rerender(<Icon name="chevron-up" />);
+    expect(container.querySelector('g[transform="rotate(270 8 8)"]')).toBeTruthy();
+  });
+
+  it("catalogs the family in sentence-case groups at 12 and 16", () => {
+    const { container } = render(<IconCatalog />);
+    expect(iconGroups.length).toBeGreaterThanOrEqual(8);
+    expect(container.querySelector(".rs-icon-catalog")).toBeTruthy();
+    expect(container.querySelector(".rs-icon-group-title")?.textContent).toBe("Navigation");
+    expect(container.textContent).not.toMatch(/NAVIGATION|ACTIONS|SETTINGS/);
+    const cells = container.querySelectorAll(".rs-icon-cell");
+    expect(cells.length).toBeGreaterThanOrEqual(80);
+    const firstPair = container.querySelector(".rs-icon-pair");
+    const sizes = [...firstPair.querySelectorAll("svg")].map((svg) => svg.getAttribute("width"));
+    expect(sizes).toEqual(["12", "16"]);
   });
 });
 

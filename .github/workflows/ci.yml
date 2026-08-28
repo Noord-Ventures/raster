@@ -295,23 +295,26 @@ jobs:
           grep -q 'name="copied"' "$block"
           grep -q 'size={16}' "$block"
           icon=packages/react/src/components/icon.tsx
-          grep -q 'M6.5 2.5 H13.5 V9.5' "$icon"
-          grep -q 'x="2.5"' "$icon"
-          grep -q 'y="6.5"' "$icon"
-          grep -q 'width="7"' "$icon"
-          grep -q 'M3.5 8.5 L6.5 11.5 L12.5 4.5' "$icon"
+          marks=packages/react/src/components/icon-marks.ts
+          grep -q 'M6.5 2.5 H13.5 V9.5' "$marks"
+          grep -q 'r(2.5, 6.5, 7, 7)' "$marks"
+          grep -q 'M3.5 8.5 L6.5 11.5 L12.5 4.5' "$marks"
           grep -q 'strokeLinecap: "butt"' "$icon"
           grep -q 'strokeLinejoin: "miter"' "$icon"
           grep -q 'ICON_STROKE = 1' "$icon"
           grep -q 'rotate={90}' packages/react/src/components/accordion.tsx
           grep -q 'name="chevron-right"' packages/react/src/components/accordion.tsx
           grep -q 'name="check"' packages/react/src/components/checkbox.tsx
-          if grep -nE 'lucide|heroicons|@heroicons|chevron-down' "$block" "$icon"; then
+          if grep -nE 'lucide|heroicons|@heroicons' "$block" "$icon" "$marks"; then
             echo "Copy mark must stay Raster-native"
             exit 1
           fi
-          if grep -nE 'strokeWidth: 1\.5|strokeLinecap: "round"' "$icon"; then
+          if grep -nE 'strokeWidth: 1\.5|strokeLinecap: "round"' "$icon" "$marks"; then
             echo "Icons must stay a 1px butt hairline"
+            exit 1
+          fi
+          if grep -nE 'strokeWidth="1\.5"|strokeLinecap="round"|rx=' packages/react/src/components/theme-toggle.tsx packages/react/src/components/alert.tsx packages/react/src/components/date-picker.tsx packages/react/src/components/data-table.tsx apps/www/components/site-chrome.tsx; then
+            echo "Raster chrome must use the family, not a second stroke"
             exit 1
           fi
           if grep -nE 'CopyMark|CopiedMark|width="8"' "$block"; then

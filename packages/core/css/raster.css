@@ -187,9 +187,9 @@ body{
 .rs-input-group-end .rs-input-addon{border-inline-start:1px solid var(--divider)}
 
 /* ── Native select: the platform list, Raster chrome ── */
-.rs-native-select{appearance:none;box-sizing:border-box;height:var(--control-h);font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;line-height:calc(var(--control-h) - 2px);color:var(--text);background:var(--bg) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'><path d='M4 6l4 4 4-4' stroke='%231A1A1A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat right 10px center;border:1px solid var(--divider);border-radius:var(--radius-sm);padding:0 32px 0 10px;outline:none;width:100%}
+.rs-native-select{appearance:none;box-sizing:border-box;height:var(--control-h);font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;line-height:calc(var(--control-h) - 2px);color:var(--text);background:var(--bg) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' width='16' height='16' fill='none' stroke='%231A1A1A' stroke-width='1' stroke-linecap='butt' stroke-linejoin='miter'><g transform='rotate(90 8 8)'><path d='M5.5 3.5 L10.5 8 L5.5 12.5' vector-effect='non-scaling-stroke'/></g></svg>") no-repeat right 10px center;border:1px solid var(--divider);border-radius:var(--radius-sm);padding:0 32px 0 10px;outline:none;width:100%}
 .rs-native-select:focus{border-color:var(--accent)}
-[data-theme="dark"] .rs-native-select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'><path d='M4 6l4 4 4-4' stroke='%23E8E8E8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>")}
+[data-theme="dark"] .rs-native-select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' width='16' height='16' fill='none' stroke='%23E8E8E8' stroke-width='1' stroke-linecap='butt' stroke-linejoin='miter'><g transform='rotate(90 8 8)'><path d='M5.5 3.5 L10.5 8 L5.5 12.5' vector-effect='non-scaling-stroke'/></g></svg>")}
 
 /* ── Inline form: the action lives inside the field ── */
 .rs-inline-field{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:4px 6px 4px 12px;transition:border-color var(--duration-snap) var(--ease)}
@@ -319,6 +319,7 @@ button.rs-tab.rs-tab-active{
 /* ── Pagination: squares, not pills ── */
 .rs-pages{display:flex;align-items:center;gap:5px}
 .rs-page{width:26px;height:26px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-secondary);border:1px solid transparent}
+.rs-page .rs-icon{display:block;color:inherit}
 .rs-page:not(.rs-page-gap):not(.rs-page-on){border-color:var(--divider)}
 .rs-page.rs-page-on,button.rs-page-on{background:var(--text);color:var(--bg);font-weight:600}
 button.rs-page{padding:0;background:none;font-family:inherit;cursor:pointer}
@@ -409,9 +410,18 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
   .rs-table th:last-child,.rs-table td:last-child{padding-right:var(--pad)}
 }
 
-/* ── Icons: 16/20/24/32, single-weight 1.5px strokes in currentColor ── */
+/* ── Icons: 16 viewBox, 1px currentColor hairline. Size from the svg width. ── */
 .rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}
-.rs-icons svg{width:16px;height:16px;flex-shrink:0}
+.rs-icon{display:block;flex-shrink:0;color:inherit}
+.rs-icons svg{flex-shrink:0}
+.rs-icons svg:not([width]){width:16px;height:16px}
+.rs-icon-catalog{width:100%;display:flex;flex-direction:column;gap:28px;text-align:left;align-self:stretch}
+.rs-icon-group{display:flex;flex-direction:column;gap:12px}
+.rs-icon-group-title{margin:0;font-size:12px;font-weight:600;letter-spacing:0;color:var(--text-secondary);text-transform:none}
+.rs-icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:16px 12px}
+.rs-icon-cell{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.rs-icon-pair{display:flex;align-items:center;gap:10px;min-height:16px}
+.rs-icon-label{font-size:11px;line-height:1.3;color:var(--text-secondary);text-transform:none}
 
 /* ── Accordion: native <details>; one open at a time via the name attribute ── */
 .rs-acc{border-top:1px solid var(--divider)}

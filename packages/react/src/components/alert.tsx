@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cx } from "../cx";
+import { Icon } from "./icon";
 
 export interface AlertProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   title?: React.ReactNode;
@@ -16,10 +17,7 @@ export function Alert({ title, variant = "outline", icon, className, children, .
       {...props}
     >
       {icon ?? (
-        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
-          <circle cx="8" cy="8" r="6.25" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M8 7.5v3.5M8 5v.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
+        <Icon name="info" size={16} />
       )}
       <div>
         {title != null && <span className="rs-alert-title">{title}</span>}
