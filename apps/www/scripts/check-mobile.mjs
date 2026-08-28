@@ -48,6 +48,12 @@ if (phone.includes(".theme-toggle { display: none") || /corner-nav,\s*\.theme-to
 if (!phone.includes("overflow: hidden") || !phone.includes("flex-wrap: nowrap")) {
   fail("Phone crumb bar must clip to one line; crumbs must not wrap out of the bar");
 }
+if (!phone.includes("translateY(3px)") || !phone.includes(".rs-crumbs-here")) {
+  fail("Phone crumb type must sit on the same optical middle as the 44px icons");
+}
+if (!phone.includes("flex: 1 1 0")) {
+  fail("Phone crumb leaf must shrink and ellipsize so the trail stays one line at 375");
+}
 if (chrome.includes("toggle-track") || chrome.includes("icon-moon") || chrome.includes("icon-sun")) {
   fail("Site chrome toggle must show one icon for the current scheme, not a sliding pair");
 }
