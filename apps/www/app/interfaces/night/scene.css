@@ -40,14 +40,13 @@
   padding: 10px 20px;
   border: 0;
   border-bottom: 1px solid var(--divider);
-  border-left: 2px solid transparent;
   background: transparent;
   color: var(--text);
   text-align: left;
   cursor: pointer;
   font: 500 13px/1.3 inherit;
   border-radius: 0;
-  transition: color var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease);
+  transition: color var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease);
 }
 .sc-night-unit b { grid-area: name; font-weight: 600; }
 .sc-night-unit i {
@@ -63,8 +62,8 @@
   color: var(--text-secondary);
 }
 .sc-night-unit[aria-current="true"] {
-  background: color-mix(in srgb, var(--if-spot, var(--text)) 10%, var(--bg));
-  border-left-color: var(--if-spot, var(--text));
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  font-weight: 600;
 }
 
 .sc-night-field {
@@ -90,6 +89,9 @@
 }
 .sc-night-ghost {
   appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   height: 28px;
   padding: 0 10px;
   border: 1px solid var(--divider);

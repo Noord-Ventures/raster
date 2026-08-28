@@ -147,6 +147,10 @@ if (/border-top:\s*1px/.test(dockRule)) {
   console.error("Line dock must not be a full-pane bar");
   process.exit(1);
 }
+if (/line-height:\s*44px/.test(lineScene)) {
+  console.error("Line composer type must sit in the middle of the field");
+  process.exit(1);
+}
 
 for (const name of names) {
   if (!catalog.includes(`title: "${name}"`)) {
@@ -246,6 +250,10 @@ if (!map.includes("fictional little app") || !map.includes("poster crop")) {
   console.error("FEATURE.md must lock fictional apps and poster crops");
   process.exit(1);
 }
+if (!map.includes("Icon")) {
+  console.error("FEATURE.md must lock Raster Icon marks");
+  process.exit(1);
+}
 if (existsSync(join(dir, "scene-fonts.ts"))) {
   console.error("Scenes must use Inter, not extra display faces");
   process.exit(1);
@@ -300,6 +308,69 @@ for (const slug of slugs) {
     console.error(`${slug} board must carry the invented brand`);
     process.exit(1);
   }
+  if (!board.includes('from "@noorddev/raster-react"') || !board.includes("<Icon ")) {
+    console.error(`${slug} board must use Raster Icon marks, not a second family`);
+    process.exit(1);
+  }
+  if (/lucide-react|@heroicons|heroicons/.test(board + scene)) {
+    console.error(`${slug} must not import Lucide or Heroicons`);
+    process.exit(1);
+  }
+  const marks = [...board.matchAll(/<Icon name="([a-z0-9-]+)"/g)].map((m) => m[1]);
+  if (new Set(marks).size < 7) {
+    console.error(`${slug} board must use more Raster Icon marks on nav, lists, and chrome`);
+    process.exit(1);
+  }
+  const needed = {
+    line: ["plus", "send", "quote", "inbox"],
+    press: ["layout", "printer", "calendar"],
+    wall: ["rows", "thumbs-up", "users"],
+    night: ["truck", "map-pin", "globe"],
+    evening: ["bag", "search", "wallet"],
+    room: ["hash", "send", "message"],
+  };
+  for (const name of needed[slug]) {
+    if (!board.includes(`"${name}"`)) {
+      console.error(`${slug} board must use the ${name} Raster mark`);
+      process.exit(1);
+    }
+  }
+  if (/border-left:\s*2px solid transparent/.test(scene)) {
+    console.error(`${slug} sidebar must not mark selected with a left rail`);
+    process.exit(1);
+  }
+}
+
+const wallBoard = readFileSync(join(dir, "wall", "board.tsx"), "utf8");
+if (wallBoard.includes('aria-label="Thread"') || !wallBoard.includes('aria-label="Feed"')) {
+  console.error("Wall primary view must be a feed, not a thread");
+  process.exit(1);
+}
+
+const eveningBoard = readFileSync(join(dir, "evening", "board.tsx"), "utf8");
+if (!eveningBoard.includes("sc-evening-store") || !eveningBoard.includes("Bag")) {
+  console.error("Evening must be a store market with a bag, not a thin kitchen list");
+  process.exit(1);
+}
+
+const nightMap = readFileSync(join(dir, "night", "map.tsx"), "utf8");
+if (!nightMap.includes("BUILDINGS") || !nightMap.includes("TubeGeometry")) {
+  console.error("Night field must be a street of buildings with a route, not a flat grid");
+  process.exit(1);
+}
+
+const people = readFileSync(join(dir, "people.tsx"), "utf8");
+if (/Inez Veld|Karel Vos|Loes Hart|Bram Nijk|Maya Ort|Owen Hart/.test(people + wallBoard + readFileSync(join(dir, "room", "board.tsx"), "utf8"))) {
+  console.error("Interfaces people must come from renatovaldes.com/work, not invented names");
+  process.exit(1);
+}
+if (!people.includes("Ilana") || !people.includes("Aziez") || !people.includes("Koen")) {
+  console.error("Interfaces people must include first names from /work");
+  process.exit(1);
+}
+if (!catalog.includes('what: "AI chat"') || !catalog.includes('what: "Dashboard"') || !catalog.includes('what: "Social feed"') || !catalog.includes('what: "Fleet management"') || !catalog.includes('what: "Order out"') || !catalog.includes('what: "Team chat"')) {
+  console.error("Catalog must lock the six Interfaces: AI chat, Dashboard, Social feed, Fleet management, Order out, Team chat");
+  process.exit(1);
 }
 
 console.log(`ok: ${slugs.length} Interfaces routes`);
