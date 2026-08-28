@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
 
 type Role = "you" | "line";
@@ -62,7 +63,7 @@ export function Board() {
   const [pending, setPending] = React.useState(false);
   const [inspect, setInspect] = React.useState<Inspect>(null);
   const end = React.useRef<HTMLDivElement>(null);
-  const box = React.useRef<HTMLTextAreaElement>(null);
+  const box = React.useRef<HTMLInputElement>(null);
   const piece = CHATS.find((item) => item.id === chat)?.title ?? "New chat";
   const looked = inspect?.kind === "line" ? messages.find((msg) => msg.id === inspect.id) : null;
 
@@ -111,7 +112,8 @@ export function Board() {
           <Brand slug="line" title="Line" />
           <p className="sc-ai-voice">The next line</p>
         </div>
-        <button type="button" className="sc-ai-new" onClick={fresh}>
+        <button type="button" className="rs-btn-ghost sc-ai-new" onClick={fresh}>
+          <Icon name="plus" size={16} />
           New chat
         </button>
         <p className="sc-ai-label">Chats</p>
@@ -124,7 +126,10 @@ export function Board() {
               aria-current={chat === item.id}
               onClick={() => openChat(item.id)}
             >
-              <span className="sc-ai-chat-title">{item.title}</span>
+              <span className="sc-ai-chat-title">
+                <Icon name="message" size={12} />
+                {item.title}
+              </span>
               <span className="sc-ai-chat-preview">{item.preview}</span>
               <span className="sc-ai-chat-when">{item.when}</span>
             </button>
@@ -141,6 +146,7 @@ export function Board() {
             aria-pressed={inspect?.kind === "settings"}
             onClick={() => setInspect((cur) => (cur?.kind === "settings" ? null : { kind: "settings" }))}
           >
+            <Icon name="sliders" size={16} />
             Settings
           </button>
         </header>
@@ -152,6 +158,7 @@ export function Board() {
                 <div className="sc-ai-hints">
                   {HINTS.map((hint) => (
                     <button key={hint} type="button" className="sc-ai-hint" onClick={() => send(hint)}>
+                      <Icon name="quote" size={12} />
                       {hint}
                     </button>
                   ))}
@@ -177,6 +184,7 @@ export function Board() {
                         )
                       }
                     >
+                      <Icon name="expand" size={12} />
                       Open line
                     </button>
                   </article>
@@ -199,21 +207,17 @@ export function Board() {
               send();
             }}
           >
-            <textarea
+            <input
               ref={box}
-              rows={1}
+              type="text"
               value={draft}
               placeholder="The next line"
               aria-label="Line"
+              autoComplete="off"
               onChange={(event) => setDraft(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" && !event.shiftKey) {
-                  event.preventDefault();
-                  send();
-                }
-              }}
             />
             <button type="submit" className="sc-ai-send" disabled={!draft.trim() || pending}>
+              <Icon name="send" size={16} />
               Send
             </button>
           </form>
@@ -240,6 +244,7 @@ export function Board() {
                   setInspect(null);
                 }}
               >
+                <Icon name="edit" size={12} />
                 Rewrite
               </button>
             </div>

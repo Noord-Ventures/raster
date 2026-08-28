@@ -36,7 +36,6 @@
   width: 100%;
   border: 0;
   border-bottom: 1px solid var(--divider);
-  border-left: 2px solid transparent;
   background: transparent;
   color: var(--text);
   text-align: left;
@@ -92,7 +91,7 @@
 }
 .sc-room-ch[aria-current="true"],
 .sc-room-person[aria-current="true"] {
-  border-left-color: var(--text);
+  font-weight: 600;
 }
 
 .sc-room-chat {
@@ -162,6 +161,9 @@
 .sc-room-dock input:focus { border-color: var(--text); }
 .sc-room-dock button {
   appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   height: 32px;
   padding: 0 12px;
   border: 0;
@@ -196,6 +198,9 @@
 }
 .sc-room-ghost {
   appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   height: 28px;
   padding: 0 10px;
   border: 1px solid var(--divider);

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
 import { Scene } from "./map";
 
@@ -18,12 +19,12 @@ export function Board() {
 
   return (
     <main className="if-board sc-night" aria-label="Night" style={{ ["--if-spot" as string]: "#E30613" }}>
-      <aside className="sc-night-rail" aria-label="Field">
+      <aside className="sc-night-rail" aria-label="Fleet">
         <div className="sc-night-brand">
           <Brand slug="night" title="Night" />
           <p className="sc-night-voice">On the street</p>
         </div>
-        <p className="sc-night-label">Field</p>
+        <p className="sc-night-label">Fleet</p>
         {UNITS.map((row) => (
           <button
             key={row.id}
@@ -35,9 +36,18 @@ export function Board() {
               setPane("none");
             }}
           >
-            <b>{row.name}</b>
-            <i>{row.state}</i>
-            <em>{row.where}</em>
+            <b className="if-ico-row">
+              <Icon name="truck" size={16} />
+              {row.name}
+            </b>
+            <i className="if-ico-row">
+              <Icon name="activity" size={12} />
+              {row.state}
+            </i>
+            <em className="if-ico-row">
+              <Icon name="map-pin" size={12} />
+              {row.where}
+            </em>
           </button>
         ))}
       </aside>
@@ -48,6 +58,7 @@ export function Board() {
             {item.name} · {item.state}
           </p>
           <button type="button" className="sc-night-ghost" onClick={() => setPane("trip")}>
+            <Icon name="compass" size={12} />
             Open trip
           </button>
         </header>
@@ -59,7 +70,10 @@ export function Board() {
       <aside className={`if-inspect${pane === "trip" ? " is-open" : ""}`} aria-label="Trip">
         {pane === "trip" ? (
           <div key={item.id} className="sc-night-inspect sc-fresh">
-            <p className="sc-night-label">Trip</p>
+            <p className="sc-night-label if-ico-row">
+              <Icon name="map" size={12} />
+              Trip
+            </p>
             <p className="sc-night-trip">{item.trip}</p>
             <p>San Francisco field. Streets, water, traffic, one selected unit.</p>
             <dl>
@@ -77,6 +91,7 @@ export function Board() {
               </div>
             </dl>
             <button type="button" className="sc-night-ghost" onClick={() => setPane("none")}>
+              <Icon name="close" size={12} />
               Close
             </button>
           </div>
