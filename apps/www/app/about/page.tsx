@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CopyControl } from "@/components/code-block";
+import { CodeBlock } from "@/components/code-block";
 import {
   era,
   featured,
@@ -49,24 +49,9 @@ export default function AboutPage() {
             <p>{usage.intro}</p>
           </div>
           <div className="field-code-stack">
-            <div className="field-code-row">
-              <pre className="field-code">
-                <code>{usage.command}</code>
-              </pre>
-              <CopyControl text={usage.command} />
-            </div>
-            <div className="field-code-row">
-              <pre className="field-code">
-                <code>{usage.html}</code>
-              </pre>
-              <CopyControl text={usage.html} />
-            </div>
-            <div className="field-code-row">
-              <pre className="field-code">
-                <code>{usage.control}</code>
-              </pre>
-              <CopyControl text={usage.control} />
-            </div>
+            <CodeBlock code={usage.command} />
+            <CodeBlock code={usage.html} />
+            <CodeBlock code={usage.control} />
           </div>
           <p className="field-mark">{usage.after}</p>
         </section>
@@ -145,30 +130,67 @@ export default function AboutPage() {
         {featured.map((figure) => (
           <section
             key={figure.id}
-            className={`field-cell field-cell-${figure.id}`}
+            className={`field-cell field-cell-${figure.id}${figure.work ? " field-cell-has-work" : ""}`}
             aria-label={figure.name}
           >
-            <p className="field-kicker">
-              {figure.years} · {figure.place}
-            </p>
-            <h2 className="field-name field-name-feature">{figure.name}</h2>
-            <p className="field-mark">{figure.mark}</p>
+            {figure.work ? (
+              <div className="field-work">
+                <img src={figure.work.src} alt={figure.work.alt} />
+              </div>
+            ) : null}
+            {figure.work ? (
+              <div className="field-matter">
+                <p className="field-kicker">
+                  {figure.years} · {figure.place}
+                </p>
+                <h2 className="field-name field-name-feature">{figure.name}</h2>
+                <p className="field-mark">{figure.mark}</p>
+              </div>
+            ) : (
+              <>
+                <p className="field-kicker">
+                  {figure.years} · {figure.place}
+                </p>
+                <h2 className="field-name field-name-feature">{figure.name}</h2>
+                <p className="field-mark">{figure.mark}</p>
+              </>
+            )}
           </section>
         ))}
 
-        {field.map((entry, i) => (
-          <section
-            key={entry.name}
-            className={`field-cell field-cell-n${String(i + 1).padStart(2, "0")}`}
-            aria-label={entry.name}
-          >
-            <p className="field-kicker">
-              {entry.years} · {entry.place}
-            </p>
-            <h2 className="field-name">{entry.name}</h2>
-            <p className="field-mark">{entry.mark}</p>
-          </section>
-        ))}
+        {field.map((entry, i) => {
+          const work = "work" in entry ? entry.work : undefined;
+          return (
+            <section
+              key={entry.name}
+              className={`field-cell field-cell-n${String(i + 1).padStart(2, "0")}${work ? " field-cell-has-work" : ""}`}
+              aria-label={entry.name}
+            >
+              {work ? (
+                <div className="field-work">
+                  <img src={work.src} alt={work.alt} />
+                </div>
+              ) : null}
+              {work ? (
+                <div className="field-matter">
+                  <p className="field-kicker">
+                    {entry.years} · {entry.place}
+                  </p>
+                  <h2 className="field-name">{entry.name}</h2>
+                  <p className="field-mark">{entry.mark}</p>
+                </div>
+              ) : (
+                <>
+                  <p className="field-kicker">
+                    {entry.years} · {entry.place}
+                  </p>
+                  <h2 className="field-name">{entry.name}</h2>
+                  <p className="field-mark">{entry.mark}</p>
+                </>
+              )}
+            </section>
+          );
+        })}
 
         <section className="field-cell field-cell-faq" aria-labelledby="notes-heading">
           <p className="field-kicker" id="notes-heading">

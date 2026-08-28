@@ -87,6 +87,59 @@ body {
   display: block; width: 16px; height: 16px; flex-shrink: 0;
 }
 
+/* Appearance: Raster menu, not a pill and not a second icon family. */
+.appearance-menu {
+  position: fixed;
+  top: 52px;
+  right: 20px;
+  z-index: 220;
+  min-width: 228px;
+  margin: 0;
+  padding: 12px;
+  box-shadow: none;
+  filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
+}
+.appearance-label {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  color: var(--text-secondary);
+}
+.appearance-cells {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+}
+.appearance-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 8px 4px;
+  min-height: 32px;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1;
+  cursor: pointer;
+}
+.appearance-cell[aria-checked="true"] {
+  border-color: var(--text);
+  color: var(--text);
+}
+.appearance-cell:hover { color: var(--text); }
+.appearance-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.nav-panel-appearance {
+  padding: 14px 18px 8px;
+  border-top: 1px solid var(--divider-subtle);
+}
+
 /* Mobile: burger + panel replace the corner links. Theme stays in chrome. */
 .nav-toggle {
   position: fixed; top: 20px; right: 18px; z-index: 210;
@@ -121,13 +174,6 @@ body {
   display: block; padding: 12px 18px; font-size: 15px; font-weight: 500;
   letter-spacing: -.01em; color: var(--text); text-decoration: none;
   border-bottom: 1px solid var(--divider-subtle);
-}
-.nav-panel-theme {
-  display: flex; justify-content: space-between; align-items: center; gap: 12px;
-  width: 100%; padding: 14px 18px 4px; border: none; background: none;
-  border-top: 1px solid var(--divider-subtle); cursor: pointer;
-  color: var(--text-secondary); font-family: inherit; font-size: 13px;
-  font-weight: 500; letter-spacing: -.01em;
 }
 
 /* ── Phone (≤640): 44pt hits, safe-area, theme stays in chrome ── */
@@ -171,9 +217,12 @@ body {
     display: flex; align-items: center;
     min-height: 44px; padding: 12px 20px; font-size: 17px;
   }
-  .nav-panel-theme {
-    min-height: 44px; padding: 12px 20px; font-size: 15px;
+  .appearance-menu {
+    top: calc(56px + env(safe-area-inset-top, 0px));
+    right: calc(56px + env(safe-area-inset-right, 0px));
   }
+  .appearance-cell { min-height: 44px; }
+  .nav-panel-appearance { padding: 12px 20px 16px; }
   .rs-crumb-bar {
     height: calc(56px + env(safe-area-inset-top, 0px));
     padding-top: env(safe-area-inset-top, 0px);
@@ -266,7 +315,7 @@ body {
   .logo-wrap { left: calc(8px + env(safe-area-inset-left, 0px)); }
   .theme-toggle { right: calc(56px + env(safe-area-inset-right, 0px)); }
   .nav-toggle { right: calc(8px + env(safe-area-inset-right, 0px)); }
-  .nav-panel-link, .nav-panel-theme { padding-left: 25px; padding-right: 25px; }
+  .nav-panel-link, .nav-panel-appearance { padding-left: 25px; padding-right: 25px; }
   .rs-crumb-bar-inner {
     flex-wrap: nowrap;
     padding: 0 calc(108px + env(safe-area-inset-right, 0px)) 0 calc(60px + env(safe-area-inset-left, 0px));

@@ -8,7 +8,7 @@ Each interface is a fictional little app: an English name, a mark, one or two wo
 
 Landing cards are poster crops — a clipped fragment of that UI, not a tiny full-page shrink, not a title-only frame. Type in a crop wraps on a word. A composer or photograph may run off the card; a letter may not. Captions follow the English names.
 
-The site 204 (184 + 20) shows on `/interfaces` the same as home. Type occupies the first cell. Cards sit on the grid. No dropped horizontals or vanished verticals. Ink is `--grid-line`, quieter than `--divider`. Do not raise opacity. Detail routes keep the field around the boxed specimen.
+The site 204 (184 + 20) shows on `/interfaces` as quiet vertical gutters. Type occupies the first cell. Cards sit on the grid. No page-level 204 horizontals. Night's map grid stays inside the Night card. Ink is `--grid-line`, quieter than `--divider`. Do not raise opacity. Detail routes keep the field around the boxed specimen.
 
 Detail keeps Raster site chrome (logo, corner nav, crumb bar, Interfaces rail). The custom UI sits in a boxed specimen. Below the box: a longer description, plus meta (what, type, module, ink, use, field). No horizontal divider between the UI and the copy. No rule under the description. The specimen is not almost-fullscreen.
 

@@ -518,6 +518,9 @@ jobs:
             }
           '
           grep -q 'field-cell-use' "$page"
+          grep -q 'CodeBlock' "$page"
+          grep -q 'field-work' "$css"
+          grep -q 'round(down, 100%, 204px)' "$css"
           grep -q 'field-cell-spec' "$page"
           grep -q 'field-notes' "$page"
           grep -q '204' "$facts"
@@ -575,10 +578,20 @@ jobs:
             echo "About must not clone Inter specimen content"
             exit 1
           fi
-          if grep -n 'overflow: hidden' "$css"; then
-            echo "About field cells must not crop"
-            exit 1
-          fi
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const css = readFileSync("apps/www/app/about/about.css", "utf8");
+            const cell = css.slice(css.indexOf(".field-cell {"), css.indexOf("}", css.indexOf(".field-cell {")));
+            if (cell.includes("overflow: hidden")) {
+              console.error("About field cells must not crop type");
+              process.exit(1);
+            }
+            const work = css.slice(css.indexOf(".field-work {"), css.indexOf("}", css.indexOf(".field-work {")));
+            if (!work.includes("overflow: hidden")) {
+              console.error("About work stills crop like an Interfaces poster");
+              process.exit(1);
+            }
+          '
           node -e '
             const { readFileSync } = require("node:fs");
             const css = readFileSync("apps/www/app/about/about.css", "utf8");

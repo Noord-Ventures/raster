@@ -63,6 +63,18 @@ if (chrome.includes("toggle-track") || chrome.includes("icon-moon") || chrome.in
 if (!chrome.includes('d="M2 4.5h5M11 4.5h3M2 11.5h3M9 11.5h5"') || !chrome.includes("<SettingsMark />")) {
   fail("Site chrome toggle must use the sliders mark from renatovaldes.com");
 }
+if (!chrome.includes('"Light"') || !chrome.includes('"Dark"') || !chrome.includes('"Auto"')) {
+  fail("Site appearance must offer Light, Dark, and Auto");
+}
+if (chrome.includes("Text size") || chrome.includes("Show grid") || chrome.includes("Hide grid")) {
+  fail("Do not port Text size or Grid from renatovaldes.com");
+}
+if (!layout.includes('t==="auto"') && !layout.includes("t==='auto'")) {
+  fail("themeInit must follow the system scheme when Appearance is Auto");
+}
+if (!chrome.includes("appearance-cell") || !chrome.includes('role="radio"')) {
+  fail("Appearance selected state must be square cells, not a pill track");
+}
 
 const crumbs = readFileSync(join(root, "apps/www/components/crumb-bar.tsx"), "utf8");
 if (crumbs.includes("return null") || crumbs.includes("isFieldPath")) {
@@ -126,6 +138,12 @@ if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
 if (!about.includes("padding: 0 1px 1px 0")) {
   fail("About must keep its right and bottom hairline");
 }
+if (!about.includes("round(down, 100%, 204px)") || !about.includes(".field-cell-use .code-copy")) {
+  fail("Usage code blocks must snap to the 204 column with the copy control inside the cell");
+}
+if (!about.includes(".field-work") || !about.includes("object-fit: cover")) {
+  fail("About designer tiles crop the work like an Interfaces poster");
+}
 const aboutCell = about.slice(about.indexOf(".field-cell {"), about.indexOf("}", about.indexOf(".field-cell {")));
 if (!aboutCell.includes("background-image: var(--grid-image)") || !aboutCell.includes("background-position: var(--grid-pos)") || !aboutCell.includes("background-attachment: fixed")) {
   fail("About must share the site 204 spine with home, not a local hero tile");
@@ -141,8 +159,14 @@ if (!ifCss.includes(".if-board .rs-sidebar-item") || !ifCss.includes("min-height
 if (/\.if-rail \{[^}]*background:\s*var\(--bg\)/s.test(ifCss)) {
   fail("Interfaces rail must not cover the site module grid");
 }
-if (!ifCss.includes("body:has(.if-index)") || !ifCss.includes("repeating-linear-gradient")) {
-  fail("Interfaces must paint the 204 field, including horizontals");
+if (!ifCss.includes("body:has(.if-index)")) {
+  fail("Interfaces must keep body:has(.if-index) on the site field");
+}
+if (/repeating-linear-gradient\([\s\S]{0,160}203px/.test(ifCss) || /background-size:[^;]*100%\s*204px/.test(ifCss)) {
+  fail("Interfaces must not paint page-level 204 horizontals");
+}
+if (!ifCss.includes(".if-crop-nacht-grid") || !ifCss.includes("34px 34px")) {
+  fail("Night map grid must stay inside the Night card");
 }
 if (/if-list \{[^}]*padding:\s*24px/s.test(ifCss)) {
   fail("Interfaces cards must sit on the 204, not 24px off it");

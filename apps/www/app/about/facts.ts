@@ -69,6 +69,10 @@ export const featured = [
     years: "1914–1996",
     place: "Zurich",
     mark: "Grid Systems in Graphic Design. Neue Grafik, 1958.",
+    work: {
+      src: "/about/mueller-brockmann-grid-systems.jpg",
+      alt: "Cover of Grid Systems in Graphic Design",
+    },
   },
   {
     id: "wc",
@@ -76,6 +80,10 @@ export const featured = [
     years: "1928–2019",
     place: "Amsterdam",
     mark: "Stedelijk posters. New Alphabet, 1967. Total Design, 1963.",
+    work: {
+      src: "/about/crouwel-new-alphabet.png",
+      alt: "New Alphabet type specimen",
+    },
   },
 ] as const;
 
@@ -85,24 +93,40 @@ export const field = [
     years: "1908–1994",
     place: "Zurich · Ulm",
     mark: "HfG Ulm. Concrete art.",
+    work: {
+      src: "/about/bill-hfg-ulm.jpg",
+      alt: "HfG Ulm, architecture by Max Bill, 1955",
+    },
   },
   {
     name: "Karl Gerstner",
     years: "1930–2017",
     place: "Basel",
     mark: "Designing Programmes, 1964.",
+    work: {
+      src: "/about/gerstner-designing-programmes.jpg",
+      alt: "Cover of Designing Programmes",
+    },
   },
   {
     name: "Emil Ruder",
     years: "1914–1970",
     place: "Basel",
     mark: "Typographie.",
+    work: {
+      src: "/about/ruder-typographie.jpg",
+      alt: "Cover of Typographie",
+    },
   },
   {
     name: "Armin Hofmann",
     years: "1920–2020",
     place: "Basel",
     mark: "Graphic Design Manual.",
+    work: {
+      src: "/about/hofmann-form-farbe.jpg",
+      alt: "Form Farbe poster, Gewerbemuseum Winterthur, 1951",
+    },
   },
   {
     name: "Piet Zwart",
@@ -127,12 +151,20 @@ export const field = [
     years: "1963",
     place: "Amsterdam",
     mark: "Crouwel, Wissing, Kramer. TD.",
+    work: {
+      src: "/about/total-design-logo.jpg",
+      alt: "Total Design mark",
+    },
   },
   {
     name: "Swiss Style",
     years: "1950s",
     place: "Switzerland",
     mark: "International Typographic Style. Objective. Modular.",
+    work: {
+      src: "/about/neue-grafik.jpg",
+      alt: "Neue Grafik, July 1963",
+    },
   },
 ] as const;
 

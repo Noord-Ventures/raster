@@ -65,8 +65,16 @@ if (!index.includes("if-title")) {
   console.error("Interfaces title must occupy a 204 cell");
   process.exit(1);
 }
-if (!css.includes("body:has(.if-index)") || !css.includes("repeating-linear-gradient")) {
-  console.error("Interfaces must paint the 204 field (verticals + horizontals)");
+if (!css.includes("body:has(.if-index)")) {
+  console.error("Interfaces must keep body:has(.if-index) so the page stays on the site field");
+  process.exit(1);
+}
+if (/repeating-linear-gradient\([\s\S]{0,160}203px/.test(css) || /background-size:[^;]*100%\s*204px/.test(css)) {
+  console.error("Interfaces must not paint page-level 204 horizontals");
+  process.exit(1);
+}
+if (!css.includes(".if-crop-nacht-grid") || !css.includes("34px 34px")) {
+  console.error("Night map grid must stay inside the Night card");
   process.exit(1);
 }
 if (/\.if-rail \{[^}]*background:\s*var\(--bg\)/s.test(css)) {
@@ -98,6 +106,10 @@ if (!specRule.includes("margin-top: 204px")) {
 }
 if (!map.includes("Type occupies the first cell") || !map.includes("--grid-line")) {
   console.error("FEATURE.md must lock the Interfaces 204 field");
+  process.exit(1);
+}
+if (!map.includes("No page-level 204 horizontals") || !map.includes("Night's map grid stays")) {
+  console.error("FEATURE.md must drop page-level 204 horizontals and keep the Night card grid");
   process.exit(1);
 }
 if (!crops.includes("if-crop-scene")) {
