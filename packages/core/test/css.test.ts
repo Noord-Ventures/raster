@@ -260,17 +260,24 @@ describe("tokens", () => {
     for (let i = 1; i < sizes.length; i++) expect(sizes[i]!).toBeLessThan(sizes[i - 1]!);
   });
 
-  it("paints a readable module grid, quieter than chrome hairlines", () => {
+  it("paints a readable module grid; divider ink is the same hairline", () => {
     const light = rasterTokens.color.light;
     const dark = rasterTokens.color.dark;
     const alpha = (value: string) => Number(value.match(/rgba?\([^)]*?,\s*([\d.]+)\s*\)/)?.[1]);
     expect(alpha(light.gridLine)).toBeGreaterThan(0.05);
-    expect(alpha(light.gridLine)).toBeLessThan(alpha(light.divider));
+    expect(light.gridLine).toBe(light.divider);
     expect(alpha(dark.gridLine)).toBeGreaterThan(0.05);
-    expect(alpha(dark.gridLine)).toBeLessThan(alpha(dark.divider));
+    expect(dark.gridLine).toBe(dark.divider);
     expect(rasterCss).toContain(`--grid-line: ${light.gridLine}`);
+    expect(rasterCss).toContain(`--divider: ${light.divider}`);
     expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(0,0,0,0\.025\)/);
     expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(255,255,255,0\.01\)/);
+    expect(rasterCss).toContain("html::before");
+    expect(rasterCss).toContain("background-image:var(--grid-image)");
+    const overlay = rasterCss.match(/html::before\{[^}]*\}/)?.[0] ?? "";
+    expect(overlay).not.toContain("repeating-linear-gradient");
+    expect(rasterCss).toContain("background:var(--divider)");
+    expect(rasterCss).toContain("gap:1px");
   });
 
   it("grid module = column + gutter", () => {

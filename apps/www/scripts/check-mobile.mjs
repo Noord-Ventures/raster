@@ -102,14 +102,20 @@ if (!specimen.includes("min-width: 481px") || !about.includes("min-width: 481px"
 if (specimen.includes("padding: 0 1px 1px 0") || /padding:\s*1px;/.test(specimen)) {
   fail("Homepage must open on the right and bottom; do not restore an outer frame");
 }
-if (specimen.includes("background-image: none")) {
-  fail("Homepage must not hide the site module grid");
+if (specimen.includes("background-image: var(--grid-image)") || specimen.includes("repeating-linear-gradient")) {
+  fail("Homepage must not paint gutter lines through type");
+}
+if (!specimen.includes("html:has(.specimen-page)::before") || !specimen.includes("display: none")) {
+  fail("Homepage must kill the site gutter overlay so Raster / tagline / install are not caged");
 }
 if (!specimen.includes("body:has(.specimen-page)") || !specimen.includes("clip-path: inset(0)")) {
-  fail("Homepage must keep the site grid and clip any edge hairline");
+  fail("Homepage must clip any edge hairline so there is no page frame");
 }
-if (!specimen.includes("background: transparent")) {
-  fail("Homepage paper must let the site 204 verticals show through");
+if (!specimen.includes("body:has(.specimen-page) {\n  background: transparent;")) {
+  fail("Homepage must not paint a second body grid");
+}
+if (!specimen.includes("box-shadow: 1px 0 0 var(--grid-line), 0 1px 0 var(--grid-line)")) {
+  fail("Homepage field is boxed 204 cells in --grid-line, not a gutter overlay");
 }
 if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
   fail("Catalog secondaries must not cover the site module grid");
@@ -119,7 +125,7 @@ if (!about.includes("padding: 0 1px 1px 0")) {
 }
 const aboutCell = about.slice(about.indexOf(".field-cell {"), about.indexOf("}", about.indexOf(".field-cell {")));
 if (!aboutCell.includes("background-image: var(--grid-image)") || !aboutCell.includes("background-position: var(--grid-pos)") || !aboutCell.includes("background-attachment: fixed")) {
-  fail("About must share the site 204 spine with home, not a local hero tile");
+  fail("About must keep the gutter-line 204 spine, not a local hero tile");
 }
 const aboutEra = about.slice(about.indexOf(".field-cell-era {"), about.indexOf("}", about.indexOf(".field-cell-era {")));
 if (aboutEra.includes("background-image")) {
@@ -132,8 +138,17 @@ if (!ifCss.includes(".if-board .rs-sidebar-item") || !ifCss.includes("min-height
 if (/\.if-rail \{[^}]*background:\s*var\(--bg\)/s.test(ifCss)) {
   fail("Interfaces rail must not cover the site module grid");
 }
-if (!ifCss.includes("body:has(.if-index)") || !ifCss.includes("repeating-linear-gradient")) {
-  fail("Interfaces must paint the 204 field, including horizontals");
+const baseCss = readFileSync(join(root, "packages/core/css/base.css"), "utf8");
+if (!baseCss.includes("html::before") || !baseCss.includes("clip-path:inset(0 0 0 21px)") || !baseCss.includes("var(--grid-image)")) {
+  fail("Site gutter overlay must paint verticals on html::before and clip the 20px page frame");
+}
+const beforeAt = baseCss.indexOf("html::before{");
+const beforeRule = beforeAt >= 0 ? baseCss.slice(beforeAt, baseCss.indexOf("}", beforeAt)) : "";
+if (beforeRule.includes("repeating-linear-gradient")) {
+  fail("Gutter overlay must not paint 204 horizontals — that cages type");
+}
+if (!ifCss.includes("body:has(.if-index)") || !ifCss.includes("background: transparent")) {
+  fail("Interfaces paper must stay open so the site 204 overlay reads through");
 }
 if (/if-list \{[^}]*padding:\s*24px/s.test(ifCss)) {
   fail("Interfaces cards must sit on the 204, not 24px off it");

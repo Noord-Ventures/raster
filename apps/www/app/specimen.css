@@ -1,11 +1,15 @@
 /* Homepage specimen. Imported only by app/page.tsx. */
 
-/* Site 204 module grid stays on home. The flush-homepage pass hid it
-   because the 20px inset line read as a page frame. Clip-path still
-   kills edge hairlines; the module verticals stay. Paper is transparent
-   so body --grid-image shows through. */
+/* Homepage is boxed 204 cells (cell shadows). The site gutter
+   overlay on html::before would cut through Raster, the tagline,
+   and the install line — a cage, not a field. Kill it here only.
+   Components and the rest keep the overlay. Clip-path still
+   kills edge hairlines so the 20px inset is not a page frame. */
+html:has(.specimen-page)::before {
+  display: none;
+}
 body:has(.specimen-page) {
-  background-image: var(--grid-image);
+  background: transparent;
 }
 
 .specimen-page {
@@ -57,7 +61,7 @@ body:has(.specimen-page) {
   display: flex;
   flex-direction: column;
   overflow: visible;
-  box-shadow: 1px 0 0 var(--divider), 0 1px 0 var(--divider);
+  box-shadow: 1px 0 0 var(--grid-line), 0 1px 0 var(--grid-line);
 }
 .specimen-cell-face {
   grid-area: face;

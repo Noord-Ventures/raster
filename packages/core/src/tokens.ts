@@ -15,12 +15,12 @@ export const rasterTokens = {
       paper: "#FAF8F2",
       ink: "#1A1A1A",
       gray: "#6B6B6B",
-      /** Chrome hairlines: outer strokes, joins, rows, separators. */
-      divider: "rgba(0,0,0,0.10)",
+      /** Chrome hairlines and the page 204. One ink: joins, rows, field. */
+      divider: "rgba(0,0,0,0.08)",
       /** Fills only (hover, skeleton, muted). Not a second line ink. */
       dividerSubtle: "rgba(0,0,0,0.06)",
-      /** Page-field module grid. Hairline behind chrome, quieter than
-          --divider, strong enough to read on paper. */
+      /** Page-field module grid. Same hairline as --divider. Quiet, readable
+          on paper. Do not raise. */
       gridLine: "rgba(0,0,0,0.08)",
       tableAlt: "rgba(0,0,0,0.02)",
     },
@@ -28,7 +28,7 @@ export const rasterTokens = {
       black: "#0E0C0A",
       white: "#E8E8E8",
       gray: "#949494",
-      divider: "rgba(255,255,255,0.12)",
+      divider: "rgba(255,255,255,0.10)",
       dividerSubtle: "rgba(255,255,255,0.07)",
       gridLine: "rgba(255,255,255,0.10)",
       tableAlt: "rgba(255,255,255,0.03)",

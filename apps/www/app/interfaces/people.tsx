@@ -15,21 +15,14 @@ export type FaceId = keyof typeof faces;
 
 export function Face({ who, size = 28 }: { who: FaceId; size?: number }) {
   const face = faces[who];
-  if (face.photo) {
-    return (
-      <img
-        className="if-face"
-        src={face.photo}
-        alt=""
-        width={size}
-        height={size}
-        style={{ width: size, height: size }}
-      />
-    );
-  }
   return (
-    <span className="if-face if-face-inits" style={{ width: size, height: size, fontSize: size * 0.36 }}>
-      {face.initials}
-    </span>
+    <img
+      className="if-face"
+      src={face.photo}
+      alt=""
+      width={size}
+      height={size}
+      style={{ width: size, height: size }}
+    />
   );
 }
