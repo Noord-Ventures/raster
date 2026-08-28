@@ -1,4 +1,22 @@
 export { cx } from "./cx";
+export {
+  Icon,
+  IconCatalog,
+  ICON_STROKE,
+  ICON_VIEWBOX,
+  iconInk,
+  iconGroups,
+  iconLabel,
+  iconNames,
+  resolveIcon,
+  type DrawnName,
+  type IconAlias,
+  type IconGroup,
+  type IconName,
+  type IconProps,
+  type IconRotate,
+  type IconSize,
+} from "./components/icon";
 export { Button, type ButtonProps } from "./components/button";
 export { Badge, type BadgeProps } from "./components/badge";
 export { Card, CardLabel, CardTitle, CardBody } from "./components/card";

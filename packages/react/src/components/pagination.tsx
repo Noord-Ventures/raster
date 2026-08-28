@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cx } from "../cx";
+import { Icon } from "./icon";
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /** Current 1-based page. */
@@ -44,7 +45,7 @@ export function Pagination({
         disabled={page <= 1}
         onClick={() => onPageChange?.(page - 1)}
       >
-        ‹
+        <Icon name="chevron-left" size={12} />
       </button>
       {pageItems(page, count, siblings).map((item, index) =>
         item === "gap" ? (
@@ -70,7 +71,7 @@ export function Pagination({
         disabled={page >= count}
         onClick={() => onPageChange?.(page + 1)}
       >
-        ›
+        <Icon name="chevron-right" size={12} />
       </button>
     </nav>
   );

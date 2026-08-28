@@ -48,6 +48,14 @@ describe("generated raster.css", () => {
     expect(open).toBe(close);
   });
 
+  it("catalogs icons in sentence-case groups", () => {
+    const icons = readFileSync(join(pkgDir, "css/components/icons.css"), "utf8");
+    expect(icons).toMatch(/\.rs-icon-catalog\{[^}]*width:100%/);
+    expect(icons).toMatch(/\.rs-icon-group-title\{[^}]*text-transform:none/);
+    expect(icons).toMatch(/\.rs-icon-label\{[^}]*text-transform:none/);
+    expect(icons).not.toMatch(/text-transform:uppercase/);
+  });
+
   it("paints breadcrumb ancestors as ink, not a UA link color", () => {
     const crumbs = readFileSync(join(pkgDir, "css/components/breadcrumbs.css"), "utf8");
     expect(crumbs).toMatch(/a:link/);

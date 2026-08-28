@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cx } from "../cx";
+import { Icon } from "./icon";
 
 export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
   value?: Date;
@@ -45,10 +46,10 @@ export function Calendar({ value, onSelect, defaultMonth, weekStart = 1, classNa
         </span>
         <span className="rs-cal-nav">
           <button type="button" className="rs-page" aria-label="Previous month" onClick={() => shift(-1)}>
-            ‹
+            <Icon name="chevron-left" size={12} />
           </button>
           <button type="button" className="rs-page" aria-label="Next month" onClick={() => shift(1)}>
-            ›
+            <Icon name="chevron-right" size={12} />
           </button>
         </span>
       </div>

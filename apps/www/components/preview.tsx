@@ -38,6 +38,7 @@ import {
   Donut,
   Histogram,
   HoverCard,
+  IconCatalog,
   InputOTP,
   Kbd,
   Nest,
@@ -256,6 +257,7 @@ export const demos: Record<string, () => React.ReactNode> = {
       <Button variant="ghost">Right</Button>
     </ButtonGroup>
   ),
+  icons: () => <IconCatalog />,
   button: () => (
     <div className="preview-cluster">
       <Button>Primary action</Button>

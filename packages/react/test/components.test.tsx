@@ -17,8 +17,15 @@ import {
   FieldLabel,
   LineChart,
   Form,
+  Icon,
+  IconCatalog,
+  ICON_STROKE,
+  ICON_VIEWBOX,
+  iconGroups,
+  iconNames,
   NativeSelect,
   Spinner,
+  ThemeToggle,
   Checkbox,
   InlineForm,
   Pagination,
@@ -101,6 +108,7 @@ describe("Checkbox", () => {
     const box = screen.getByRole("checkbox", { name: "Brand" });
     await user.click(box);
     expect((box as HTMLInputElement).checked).toBe(true);
+    expect(document.querySelector('path[d="M3.5 8.5 L6.5 11.5 L12.5 4.5"]')).toBeTruthy();
   });
 });
 
@@ -175,6 +183,175 @@ describe("Tabs", () => {
     screen.getByRole("tab", { name: "A" }).focus();
     await user.keyboard("{ArrowRight}");
     expect(screen.getByRole("tab", { name: "B" }).getAttribute("aria-selected")).toBe("true");
+  });
+});
+
+describe("Icon", () => {
+  it("locks a 16 viewBox, 1px currentColor hairline, butt/miter, no radius", () => {
+    const { container } = render(<Icon name="copy" />);
+    const svg = container.querySelector("svg");
+    expect(svg?.getAttribute("viewBox")).toBe("0 0 16 16");
+    expect(svg?.getAttribute("width")).toBe("16");
+    expect(svg?.getAttribute("height")).toBe("16");
+    expect(svg?.getAttribute("fill")).toBe("none");
+    expect(svg?.getAttribute("stroke")).toBe("currentColor");
+    expect(svg?.getAttribute("stroke-width")).toBe("1");
+    expect(svg?.getAttribute("stroke-linecap")).toBe("butt");
+    expect(svg?.getAttribute("stroke-linejoin")).toBe("miter");
+    expect(svg?.classList.contains("rs-icon")).toBe(true);
+    expect(container.querySelector("[rx]")).toBeNull();
+    expect(ICON_STROKE).toBe(1);
+    expect(ICON_VIEWBOX).toBe(16);
+  });
+
+  it("keeps the copy mark square at 12 and 16", () => {
+    const { container, rerender } = render(<Icon name="copy" size={12} />);
+    let svg = container.querySelector("svg");
+    expect(svg?.getAttribute("width")).toBe("12");
+    expect(svg?.getAttribute("height")).toBe("12");
+    expect(svg?.getAttribute("viewBox")).toBe("0 0 16 16");
+    rerender(<Icon name="copy" size={16} />);
+    svg = container.querySelector("svg");
+    expect(svg?.getAttribute("width")).toBe("16");
+    expect(svg?.getAttribute("height")).toBe("16");
+  });
+
+  it("draws Vera's copy: front 7×7, exposed L, no overlap", () => {
+    const { container } = render(<Icon name="copy" />);
+    expect(container.querySelector('path[d="M6.5 2.5 H13.5 V9.5"]')).toBeTruthy();
+    const rect = container.querySelector("rect");
+    expect(rect?.getAttribute("x")).toBe("2.5");
+    expect(rect?.getAttribute("y")).toBe("6.5");
+    expect(rect?.getAttribute("width")).toBe("7");
+    expect(rect?.getAttribute("height")).toBe("7");
+    expect(container.querySelectorAll("rect")).toHaveLength(1);
+  });
+
+  it("uses one check path for copied and check", () => {
+    const { container, rerender } = render(<Icon name="copied" />);
+    expect(container.querySelector('path[d="M3.5 8.5 L6.5 11.5 L12.5 4.5"]')).toBeTruthy();
+    rerender(<Icon name="check" />);
+    expect(container.querySelector('path[d="M3.5 8.5 L6.5 11.5 L12.5 4.5"]')).toBeTruthy();
+    expect(container.querySelector("svg")?.getAttribute("viewBox")).toBe("0 0 16 16");
+  });
+
+  it("keeps Vera's five paths exact", () => {
+    expect(iconNames.slice(0, 5)).toEqual(["copy", "copied", "chevron-left", "chevron-right", "close"]);
+    const { container } = render(
+      <>
+        <Icon name="chevron-left" />
+        <Icon name="chevron-right" />
+        <Icon name="close" />
+      </>,
+    );
+    expect(container.querySelector('path[d="M10.5 3.5 L5.5 8 L10.5 12.5"]')).toBeTruthy();
+    expect(container.querySelector('path[d="M5.5 3.5 L10.5 8 L5.5 12.5"]')).toBeTruthy();
+    expect(container.querySelector('path[d="M4.5 4.5 L11.5 11.5"]')).toBeTruthy();
+    expect(container.querySelector('path[d="M11.5 4.5 L4.5 11.5"]')).toBeTruthy();
+  });
+
+  it("ships a complete family on the same 16 module", () => {
+    expect(iconNames.length).toBeGreaterThanOrEqual(80);
+    expect(iconNames.length).toBeLessThanOrEqual(160);
+    const { container } = render(
+      <>
+        {iconNames.map((name) => (
+          <Icon key={name} name={name} size={12} />
+        ))}
+      </>,
+    );
+    const svgs = [...container.querySelectorAll("svg")];
+    expect(svgs).toHaveLength(iconNames.length);
+    for (const svg of svgs) {
+      expect(svg.getAttribute("viewBox")).toBe("0 0 16 16");
+      expect(svg.getAttribute("width")).toBe("12");
+      expect(svg.getAttribute("height")).toBe("12");
+      expect(svg.getAttribute("stroke-width")).toBe("1");
+      expect(svg.getAttribute("stroke-linecap")).toBe("butt");
+      expect(svg.querySelector("[rx]")).toBeNull();
+    }
+  });
+
+  it("reuses the check for success and rotates chevron-right for up and down", () => {
+    const { container, rerender } = render(<Icon name="success" />);
+    expect(container.querySelector('path[d="M3.5 8.5 L6.5 11.5 L12.5 4.5"]')).toBeTruthy();
+    rerender(<Icon name="chevron-down" />);
+    expect(container.querySelector('path[d="M5.5 3.5 L10.5 8 L5.5 12.5"]')).toBeTruthy();
+    expect(container.querySelector('g[transform="rotate(90 8 8)"]')).toBeTruthy();
+    rerender(<Icon name="chevron-up" />);
+    expect(container.querySelector('g[transform="rotate(270 8 8)"]')).toBeTruthy();
+  });
+
+  it("inks every shape so live DOM matches Vera's lock", () => {
+    const { container } = render(<Icon name="copy" />);
+    const path = container.querySelector('path[d="M6.5 2.5 H13.5 V9.5"]');
+    const rect = container.querySelector("rect");
+    expect(path?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+    expect(path?.getAttribute("stroke-width")).toBe("1");
+    expect(path?.getAttribute("stroke-linecap")).toBe("butt");
+    expect(rect?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+  });
+
+  it("draws sun and moon as rs-icon family members, not a second stroke", () => {
+    const { container, rerender } = render(<Icon name="sun" className="icon-sun" />);
+    const sun = container.querySelector("svg");
+    expect(sun?.classList.contains("rs-icon")).toBe(true);
+    expect(sun?.classList.contains("icon-sun")).toBe(true);
+    const circle = container.querySelector("circle");
+    expect(circle?.getAttribute("stroke-width")).toBe("1");
+    expect(circle?.getAttribute("stroke-linecap")).toBe("butt");
+    expect(circle?.getAttribute("stroke-linejoin")).toBe("miter");
+    expect(circle?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+    expect(circle?.getAttribute("fill")).toBe("none");
+    rerender(<Icon name="moon" className="icon-moon" />);
+    const moon = container.querySelector("svg");
+    expect(moon?.classList.contains("rs-icon")).toBe(true);
+    const crescent = container.querySelector("path");
+    expect(crescent?.getAttribute("d")).toBe("M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5");
+    expect(crescent?.getAttribute("d")).not.toMatch(/M13\.5 9\.5A5\.5/);
+    expect(crescent?.getAttribute("stroke-width")).toBe("1");
+    expect(crescent?.getAttribute("stroke-linecap")).toBe("butt");
+    expect(crescent?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+  });
+
+  it("holds calendar on the same hairline", () => {
+    const { container } = render(<Icon name="calendar" />);
+    const rect = container.querySelector("rect");
+    expect(rect?.getAttribute("x")).toBe("3");
+    expect(rect?.getAttribute("y")).toBe("4.5");
+    expect(rect?.getAttribute("width")).toBe("10");
+    expect(rect?.getAttribute("height")).toBe("9");
+    expect(rect?.getAttribute("rx")).toBeNull();
+    expect(rect?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+  });
+
+  it("catalogs the family in sentence-case groups at 12 and 16", () => {
+    const { container } = render(<IconCatalog />);
+    expect(iconGroups.length).toBeGreaterThanOrEqual(8);
+    expect(container.querySelector(".rs-icon-catalog")).toBeTruthy();
+    expect(container.querySelector(".rs-icon-group-title")?.textContent).toBe("Navigation");
+    expect(container.textContent).not.toMatch(/NAVIGATION|ACTIONS|SETTINGS/);
+    const cells = container.querySelectorAll(".rs-icon-cell");
+    expect(cells.length).toBeGreaterThanOrEqual(80);
+    const firstPair = container.querySelector(".rs-icon-pair");
+    expect(firstPair).toBeTruthy();
+    const sizes = [...firstPair!.querySelectorAll("svg")].map((svg) => svg.getAttribute("width"));
+    expect(sizes).toEqual(["12", "16"]);
+  });
+});
+
+describe("ThemeToggle", () => {
+  it("uses family sun and moon with rs-icon", () => {
+    const { container } = render(<ThemeToggle />);
+    const moon = container.querySelector(".rs-theme-moon");
+    const sun = container.querySelector(".rs-theme-sun");
+    expect(moon?.classList.contains("rs-icon")).toBe(true);
+    expect(sun?.classList.contains("rs-icon")).toBe(true);
+    expect(moon?.getAttribute("viewBox")).toBe("0 0 16 16");
+    expect(sun?.getAttribute("stroke-width")).toBe("1");
+    expect(sun?.getAttribute("stroke-linecap")).toBe("butt");
+    expect(container.querySelector("circle")?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
+    expect(container.querySelector('[stroke-width="1.5"]')).toBeNull();
   });
 });
 

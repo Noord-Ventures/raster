@@ -267,6 +267,7 @@ html, body { margin: 0; padding: 0; }
 /* ── Component page ── */
 .preview-box { border: 1px solid var(--divider); border-radius: 0; padding: 56px 32px; min-height: 204px; display: flex; align-items: center; justify-content: center; margin: 24px 0 16px; background: var(--bg); }
 .preview-box > * { max-width: 100%; }
+.preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 32px 24px; }
 .preview-cluster { display: flex; gap: 10px; align-items: center; }
 .code-block {
   position: relative;

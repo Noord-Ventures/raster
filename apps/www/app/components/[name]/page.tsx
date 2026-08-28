@@ -112,6 +112,11 @@ import { Button } from "@/components/raster/button";
   "inline-form": `import { InlineForm } from "@/components/raster/inline-form";
 
 <InlineForm onSubmit={(email) => subscribe(email)} />`,
+  icons: `import { Icon, IconCatalog } from "@/components/raster/icon";
+
+<Icon name="search" size={12} />
+<Icon name="search" size={16} />
+<IconCatalog />`,
   checkbox: `import { Checkbox } from "@/components/raster/checkbox";
 
 <Checkbox label="Brand" defaultChecked />`,

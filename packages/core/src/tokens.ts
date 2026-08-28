@@ -91,9 +91,11 @@ export const rasterTokens = {
     concentric: "max(0, outer − padding)",
   },
   icons: {
-    sizes: [16, 20, 24, 32],
-    stroke: 1.5,
-    rule: "single-weight strokes in currentColor; filled only when the state is active",
+    sizes: [12, 16],
+    stroke: 1,
+    viewBox: 16,
+    center: [8, 8],
+    rule: "1px currentColor hairline, butt/miter, no rx, no fill; draw at 12 or 16",
   },
   motion: {
     duration: "0.12–0.18s",

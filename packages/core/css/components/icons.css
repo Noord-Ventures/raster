@@ -1,3 +1,12 @@
-/* ── Icons: 16/20/24/32, single-weight 1.5px strokes in currentColor ── */
+/* ── Icons: 16 viewBox, 1px currentColor hairline. Size from the svg width. ── */
 .rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}
-.rs-icons svg{width:16px;height:16px;flex-shrink:0}
+.rs-icon{display:block;flex-shrink:0;color:inherit}
+.rs-icons svg{flex-shrink:0}
+.rs-icons svg:not([width]){width:16px;height:16px}
+.rs-icon-catalog{width:100%;display:flex;flex-direction:column;gap:28px;text-align:left;align-self:stretch}
+.rs-icon-group{display:flex;flex-direction:column;gap:12px}
+.rs-icon-group-title{margin:0;font-size:12px;font-weight:600;letter-spacing:0;color:var(--text-secondary);text-transform:none}
+.rs-icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:16px 12px}
+.rs-icon-cell{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.rs-icon-pair{display:flex;align-items:center;gap:10px;min-height:16px}
+.rs-icon-label{font-size:11px;line-height:1.3;color:var(--text-secondary);text-transform:none}

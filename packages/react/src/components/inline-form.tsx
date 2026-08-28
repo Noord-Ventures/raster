@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cx } from "../cx";
+import { Icon } from "./icon";
 
 export interface InlineFormProps
   extends Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit"> {
@@ -30,9 +31,7 @@ export function InlineForm({
   if (done) {
     return (
       <div className="rs-subscribed">
-        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
-          <path d="M3 8.5l3.5 3.5L13 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <Icon name="check" size={16} />
         {successLabel}
       </div>
     );

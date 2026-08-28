@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cx } from "../cx";
+import { Icon } from "./icon";
 
 export interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   "aria-label"?: string;
@@ -19,10 +20,10 @@ export function Carousel({ className, children, "aria-label": ariaLabel = "Carou
       </div>
       <div className="rs-carousel-nav">
         <button type="button" className="rs-page" aria-label="Previous" onClick={() => nudge(-1)}>
-          ‹
+          <Icon name="chevron-left" size={12} />
         </button>
         <button type="button" className="rs-page" aria-label="Next" onClick={() => nudge(1)}>
-          ›
+          <Icon name="chevron-right" size={12} />
         </button>
       </div>
     </div>

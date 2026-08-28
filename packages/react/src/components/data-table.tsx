@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cx } from "../cx";
+import { Icon } from "./icon";
 
 export interface DataTableColumn<Row> {
   key: string;
@@ -56,13 +57,10 @@ export function DataTable<Row extends Record<string, unknown>>({
                 {column.sortable ? (
                   <button type="button" className="rs-datatable-sort" data-active={sort?.key === column.key} onClick={() => toggle(column.key)}>
                     {column.header}
-                    <svg viewBox="0 0 10 12" width="8" height="10" fill="none" aria-hidden="true">
-                      {sort?.key === column.key && sort.dir === "desc" ? (
-                        <path d="M5 10V2M2 7l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      ) : (
-                        <path d="M5 2v8M2 5l3-3 3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      )}
-                    </svg>
+                    <Icon
+                      name={sort?.key === column.key && sort.dir === "desc" ? "arrow-down" : "arrow-up"}
+                      size={12}
+                    />
                   </button>
                 ) : (
                   column.header
