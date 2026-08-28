@@ -76,10 +76,34 @@ describe("generated raster.css", () => {
 
   it("joins button groups on one hairline and the button radius", () => {
     const group = readFileSync(join(pkgDir, "css/components/button-group.css"), "utf8");
-    expect(group).toMatch(/border-start-start-radius:var\(--radius-sm\)/);
-    expect(group).toMatch(/border-start-end-radius:var\(--radius-sm\)/);
-    expect(group).toMatch(/\.rs-btn-ghost \+ \.rs-btn-ghost\{border-inline-start-color:transparent\}/);
-    expect(rasterCss).toMatch(/\.rs-btn-group > :first-child\{[^}]*border-start-start-radius:var\(--radius-sm\)/);
+    const toggle = readFileSync(join(pkgDir, "css/components/toggle.css"), "utf8");
+    const phone = readFileSync(join(pkgDir, "css/phone.css"), "utf8");
+    expect(group).toMatch(/\.rs-btn-group\{[^}]*border:1px solid var\(--divider\)/);
+    expect(group).toMatch(/\.rs-btn-group\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(group).toMatch(/> \* \+ \*\{border-inline-start:1px solid var\(--divider\)\}/);
+    expect(group).not.toMatch(/margin-inline-start:-1px/);
+    expect(group).not.toMatch(/border-inline-start-color:transparent/);
+    expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*border:1px solid var\(--divider\)/);
+    expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(toggle).toMatch(/\.rs-toggle \+ \.rs-toggle\{border-inline-start:1px solid var\(--divider\)\}/);
+    expect(toggle).not.toMatch(/margin-left:-1px/);
+    expect(phone).not.toMatch(/\.rs-toggle-group .rs-toggle\{[^}]*margin-left:-1px/);
+    expect(rasterCss).toMatch(/\.rs-btn-group\{[^}]*border:1px solid var\(--divider\)/);
+    expect(rasterCss).toMatch(/\.rs-btn-group > \* \+ \*\{border-inline-start:1px solid var\(--divider\)\}/);
+  });
+
+  it("sits the field input on an integer 40px control", () => {
+    const field = readFileSync(join(pkgDir, "css/components/field.css"), "utf8");
+    expect(field).toMatch(/\.rs-field\{[^}]*gap:8px/);
+    expect(field).toMatch(/\.rs-field-label\{[^}]*line-height:16px/);
+    expect(field).toMatch(/\.rs-input\{[^}]*height:var\(--control-h\)/);
+    expect(field).toMatch(/\.rs-input\{[^}]*box-sizing:border-box/);
+    expect(field).toMatch(/\.rs-field-hint\{[^}]*margin:0/);
+    expect(field).toMatch(/\.rs-field-hint\{[^}]*line-height:16px/);
+    expect(field).toMatch(/\.rs-field-error\{[^}]*margin:0/);
+    expect(field).toMatch(/\.rs-field-error\{[^}]*line-height:16px/);
+    expect(rasterCss).toMatch(/\.rs-input\{[^}]*height:var\(--control-h\)/);
+    expect(rasterCss).toMatch(/\.rs-field\{[^}]*gap:8px/);
   });
 
   it("lets grouped fields inherit the standalone input radius", () => {
