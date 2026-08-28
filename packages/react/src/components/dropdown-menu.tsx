@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cx } from "../cx";
+import { Icon } from "./icon";
 
 export interface DropdownMenuItem {
   label?: React.ReactNode;
@@ -81,9 +82,7 @@ export function DropdownMenu({ label, items, className, ...props }: DropdownMenu
         onClick={() => setOpen((o) => !o)}
       >
         <span>{label}</span>
-        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
-          <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <Icon name="chevron-right" rotate={90} />
       </button>
       {open && (
         <div id={`${idBase}-menu`} role="menu" className="rs-menu">

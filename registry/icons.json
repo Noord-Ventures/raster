@@ -3,15 +3,27 @@
   "name": "icons",
   "type": "registry:component",
   "title": "Icons",
-  "description": "16/20/24/32px, single-weight 1.5px strokes in currentColor, non-scaling.",
+  "description": "16 viewBox, 1px currentColor hairline, butt/miter, no radius. Marks live in the React package.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"
   ],
   "files": [
     {
+      "path": "raster/icons.tsx",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\n/**\n * Raster chrome marks. Vera 28 Aug 2026.\n *\n * 16×16 module, optical center 8,8. Stroke 1, currentColor, fill none.\n * Cap butt, join miter, no rx. Hairline stays 1 CSS px at 12 and 16.\n * Copied is check. Accordion down is chevron-right rotated 90°.\n */\nexport const ICON_STROKE = 1;\nexport const ICON_VIEWBOX = 16;\n\nexport const iconInk = {\n  fill: \"none\",\n  stroke: \"currentColor\",\n  strokeWidth: ICON_STROKE,\n  strokeLinecap: \"butt\",\n  strokeLinejoin: \"miter\",\n  vectorEffect: \"non-scaling-stroke\",\n} as const;\n\nexport const iconNames = [\"copy\", \"copied\", \"chevron-left\", \"chevron-right\", \"close\"] as const;\nexport type IconName = (typeof iconNames)[number] | \"check\";\nexport type IconSize = 12 | 16;\nexport type IconRotate = 90 | 180 | 270;\n\nconst marks: Record<(typeof iconNames)[number], React.ReactNode> = {\n  copy: (\n    <>\n      <path d=\"M6.5 2.5 H13.5 V9.5\" {...iconInk} />\n      <rect x=\"2.5\" y=\"6.5\" width=\"7\" height=\"7\" {...iconInk} />\n    </>\n  ),\n  copied: <path d=\"M3.5 8.5 L6.5 11.5 L12.5 4.5\" {...iconInk} />,\n  \"chevron-left\": <path d=\"M10.5 3.5 L5.5 8 L10.5 12.5\" {...iconInk} />,\n  \"chevron-right\": <path d=\"M5.5 3.5 L10.5 8 L5.5 12.5\" {...iconInk} />,\n  close: (\n    <>\n      <path d=\"M4.5 4.5 L11.5 11.5\" {...iconInk} />\n      <path d=\"M11.5 4.5 L4.5 11.5\" {...iconInk} />\n    </>\n  ),\n};\n\nfunction resolveName(name: IconName): (typeof iconNames)[number] {\n  return name === \"check\" ? \"copied\" : name;\n}\n\nexport interface IconProps extends Omit<React.SVGAttributes<SVGSVGElement>, \"children\" | \"rotate\"> {\n  name: IconName;\n  size?: IconSize;\n  /** Same mark, spun around 8,8. Accordion down is chevron-right at 90. */\n  rotate?: IconRotate;\n}\n\n/** One mark. Size is the drawn square; the viewBox is always 16. */\nexport function Icon({ name, size = 16, rotate, className, ...props }: IconProps) {\n  const nodes = marks[resolveName(name)];\n  return (\n    <svg\n      className={cx(\"rs-icon\", className)}\n      viewBox=\"0 0 16 16\"\n      width={size}\n      height={size}\n      aria-hidden=\"true\"\n      {...iconInk}\n      {...props}\n    >\n      {rotate ? <g transform={`rotate(${rotate} 8 8)`}>{nodes}</g> : nodes}\n    </svg>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/raster/icons.tsx"
+    },
+    {
+      "path": "raster/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/cx.ts"
+    },
+    {
       "path": "raster/styles/icons.css",
-      "content": "/* ── Icons: 16/20/24/32, single-weight 1.5px strokes in currentColor ── */\n.rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}\n.rs-icons svg{width:16px;height:16px;flex-shrink:0}\n",
+      "content": "/* ── Icons: 16 viewBox, 1px currentColor hairline. Size from the svg width. ── */\n.rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}\n.rs-icon{display:block;flex-shrink:0;color:inherit}\n.rs-icons svg{flex-shrink:0}\n.rs-icons svg:not([width]){width:16px;height:16px}\n",
       "type": "registry:file",
       "target": "styles/raster/icons.css"
     }
@@ -20,10 +32,11 @@
     "raster": {
       "category": "content",
       "classes": [
-        "rs-icons"
+        "rs-icons",
+        "rs-icon"
       ],
-      "snippet": "<div class=\"rs-icons\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><path d=\"M2.5 8h11M9.5 4l4 4-4 4\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" vector-effect=\"non-scaling-stroke\"/></svg></div>",
-      "cssOnly": true,
+      "snippet": "<div class=\"rs-icons\"><svg class=\"rs-icon\" viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M6.5 2.5 H13.5 V9.5\" vector-effect=\"non-scaling-stroke\"/><rect x=\"2.5\" y=\"6.5\" width=\"7\" height=\"7\" vector-effect=\"non-scaling-stroke\"/></svg><svg class=\"rs-icon\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M6.5 2.5 H13.5 V9.5\" vector-effect=\"non-scaling-stroke\"/><rect x=\"2.5\" y=\"6.5\" width=\"7\" height=\"7\" vector-effect=\"non-scaling-stroke\"/></svg></div>",
+      "cssOnly": false,
       "registryDependencies": []
     }
   }

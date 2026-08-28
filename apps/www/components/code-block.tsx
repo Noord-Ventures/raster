@@ -1,46 +1,7 @@
 "use client";
 
 import * as React from "react";
-
-/** House stroke: 16 viewBox, 1.5px, currentColor. Same check as the checkbox. */
-function CopyMark() {
-  return (
-    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
-      <rect
-        x="5.5"
-        y="2.5"
-        width="8"
-        height="8"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        vectorEffect="non-scaling-stroke"
-      />
-      <rect
-        x="2.5"
-        y="5.5"
-        width="8"
-        height="8"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        vectorEffect="non-scaling-stroke"
-      />
-    </svg>
-  );
-}
-
-function CopiedMark() {
-  return (
-    <svg viewBox="0 0 12 12" width="16" height="16" fill="none" aria-hidden="true">
-      <path
-        d="M2.5 6.5l2.5 2.5 4.5-5.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+import { Icon } from "@noorddev/raster-react";
 
 async function writeClipboard(text: string) {
   if (navigator.clipboard?.writeText) {
@@ -84,7 +45,7 @@ export function CopyControl({ text }: { text: string }) {
       onClick={copy}
       aria-label={copied ? "Copied" : "Copy"}
     >
-      {copied ? <CopiedMark /> : <CopyMark />}
+      {copied ? <Icon name="copied" size={16} /> : <Icon name="copy" size={16} />}
       <span className="rs-sr" aria-live="polite">
         {copied ? "Copied" : ""}
       </span>

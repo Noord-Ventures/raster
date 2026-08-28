@@ -17,6 +17,10 @@ import {
   FieldLabel,
   LineChart,
   Form,
+  Icon,
+  ICON_STROKE,
+  ICON_VIEWBOX,
+  iconNames,
   NativeSelect,
   Spinner,
   Checkbox,
@@ -101,6 +105,7 @@ describe("Checkbox", () => {
     const box = screen.getByRole("checkbox", { name: "Brand" });
     await user.click(box);
     expect((box as HTMLInputElement).checked).toBe(true);
+    expect(document.querySelector('path[d="M3.5 8.5 L6.5 11.5 L12.5 4.5"]')).toBeTruthy();
   });
 });
 
@@ -175,6 +180,71 @@ describe("Tabs", () => {
     screen.getByRole("tab", { name: "A" }).focus();
     await user.keyboard("{ArrowRight}");
     expect(screen.getByRole("tab", { name: "B" }).getAttribute("aria-selected")).toBe("true");
+  });
+});
+
+describe("Icon", () => {
+  it("locks a 16 viewBox, 1px currentColor hairline, butt/miter, no radius", () => {
+    const { container } = render(<Icon name="copy" />);
+    const svg = container.querySelector("svg");
+    expect(svg?.getAttribute("viewBox")).toBe("0 0 16 16");
+    expect(svg?.getAttribute("width")).toBe("16");
+    expect(svg?.getAttribute("height")).toBe("16");
+    expect(svg?.getAttribute("fill")).toBe("none");
+    expect(svg?.getAttribute("stroke")).toBe("currentColor");
+    expect(svg?.getAttribute("stroke-width")).toBe("1");
+    expect(svg?.getAttribute("stroke-linecap")).toBe("butt");
+    expect(svg?.getAttribute("stroke-linejoin")).toBe("miter");
+    expect(svg?.classList.contains("rs-icon")).toBe(true);
+    expect(container.querySelector("[rx]")).toBeNull();
+    expect(ICON_STROKE).toBe(1);
+    expect(ICON_VIEWBOX).toBe(16);
+  });
+
+  it("keeps the copy mark square at 12 and 16", () => {
+    const { container, rerender } = render(<Icon name="copy" size={12} />);
+    let svg = container.querySelector("svg");
+    expect(svg?.getAttribute("width")).toBe("12");
+    expect(svg?.getAttribute("height")).toBe("12");
+    expect(svg?.getAttribute("viewBox")).toBe("0 0 16 16");
+    rerender(<Icon name="copy" size={16} />);
+    svg = container.querySelector("svg");
+    expect(svg?.getAttribute("width")).toBe("16");
+    expect(svg?.getAttribute("height")).toBe("16");
+  });
+
+  it("draws Vera's copy: front 7×7, exposed L, no overlap", () => {
+    const { container } = render(<Icon name="copy" />);
+    expect(container.querySelector('path[d="M6.5 2.5 H13.5 V9.5"]')).toBeTruthy();
+    const rect = container.querySelector("rect");
+    expect(rect?.getAttribute("x")).toBe("2.5");
+    expect(rect?.getAttribute("y")).toBe("6.5");
+    expect(rect?.getAttribute("width")).toBe("7");
+    expect(rect?.getAttribute("height")).toBe("7");
+    expect(container.querySelectorAll("rect")).toHaveLength(1);
+  });
+
+  it("uses one check path for copied and check", () => {
+    const { container, rerender } = render(<Icon name="copied" />);
+    expect(container.querySelector('path[d="M3.5 8.5 L6.5 11.5 L12.5 4.5"]')).toBeTruthy();
+    rerender(<Icon name="check" />);
+    expect(container.querySelector('path[d="M3.5 8.5 L6.5 11.5 L12.5 4.5"]')).toBeTruthy();
+    expect(container.querySelector("svg")?.getAttribute("viewBox")).toBe("0 0 16 16");
+  });
+
+  it("ships five marks and no sibling down chevron", () => {
+    expect([...iconNames]).toEqual(["copy", "copied", "chevron-left", "chevron-right", "close"]);
+    const { container } = render(
+      <>
+        <Icon name="chevron-left" />
+        <Icon name="chevron-right" />
+        <Icon name="close" />
+      </>,
+    );
+    expect(container.querySelector('path[d="M10.5 3.5 L5.5 8 L10.5 12.5"]')).toBeTruthy();
+    expect(container.querySelector('path[d="M5.5 3.5 L10.5 8 L5.5 12.5"]')).toBeTruthy();
+    expect(container.querySelector('path[d="M4.5 4.5 L11.5 11.5"]')).toBeTruthy();
+    expect(container.querySelector('path[d="M11.5 4.5 L4.5 11.5"]')).toBeTruthy();
   });
 });
 

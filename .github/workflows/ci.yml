@@ -290,6 +290,34 @@ jobs:
           grep -q 'aria-label' "$block"
           grep -q 'Copied' "$block"
           grep -q 'aria-live' "$block"
+          grep -q '@noorddev/raster-react' "$block"
+          grep -q 'name="copy"' "$block"
+          grep -q 'name="copied"' "$block"
+          grep -q 'size={16}' "$block"
+          icon=packages/react/src/components/icon.tsx
+          grep -q 'M6.5 2.5 H13.5 V9.5' "$icon"
+          grep -q 'x="2.5"' "$icon"
+          grep -q 'y="6.5"' "$icon"
+          grep -q 'width="7"' "$icon"
+          grep -q 'M3.5 8.5 L6.5 11.5 L12.5 4.5' "$icon"
+          grep -q 'strokeLinecap: "butt"' "$icon"
+          grep -q 'strokeLinejoin: "miter"' "$icon"
+          grep -q 'ICON_STROKE = 1' "$icon"
+          grep -q 'rotate={90}' packages/react/src/components/accordion.tsx
+          grep -q 'name="chevron-right"' packages/react/src/components/accordion.tsx
+          grep -q 'name="check"' packages/react/src/components/checkbox.tsx
+          if grep -nE 'lucide|heroicons|@heroicons|chevron-down' "$block" "$icon"; then
+            echo "Copy mark must stay Raster-native"
+            exit 1
+          fi
+          if grep -nE 'strokeWidth: 1\.5|strokeLinecap: "round"' "$icon"; then
+            echo "Icons must stay a 1px butt hairline"
+            exit 1
+          fi
+          if grep -nE 'CopyMark|CopiedMark|width="8"' "$block"; then
+            echo "Code-block copy must use the Raster Icon, not the overlapping squares"
+            exit 1
+          fi
           grep -q 'code-copy' "$css"
           grep -q 'CopyControl' apps/www/app/page.tsx
           grep -q 'CodeBlock' apps/www/app/docs/page.tsx

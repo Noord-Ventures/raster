@@ -125,7 +125,7 @@ export const rasterComponents: RasterComponent[] = [
     classes: ["rs-choice", "rs-check", "rs-check-on"],
     css: ["components/checkbox.css"],
     react: "components/checkbox.tsx",
-    snippet: `<label class="rs-choice"><span class="rs-check rs-check-on"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5l2.5 2.5 4.5-5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Brand</label>`,
+    snippet: `<label class="rs-choice"><span class="rs-check rs-check-on"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M3.5 8.5 L6.5 11.5 L12.5 4.5" vector-effect="non-scaling-stroke"/></svg></span>Brand</label>`,
   },
   {
     name: "switch",
@@ -204,7 +204,7 @@ export const rasterComponents: RasterComponent[] = [
     classes: ["rs-pages", "rs-page", "rs-page-on", "rs-page-gap"],
     css: ["components/pagination.css"],
     react: "components/pagination.tsx",
-    snippet: `<div class="rs-pages"><span class="rs-page">‹</span><span class="rs-page rs-page-on">1</span><span class="rs-page">2</span><span class="rs-page">›</span></div>`,
+    snippet: `<div class="rs-pages"><span class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.5 L5.5 8 L10.5 12.5" vector-effect="non-scaling-stroke"/></svg></span><span class="rs-page rs-page-on">1</span><span class="rs-page">2</span><span class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></svg></span></div>`,
   },
   {
     name: "select",
@@ -290,11 +290,13 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "icons",
     title: "Icons",
-    description: "16/20/24/32px, single-weight 1.5px strokes in currentColor, non-scaling.",
+    description:
+      "16 viewBox, 1px currentColor hairline, butt/miter, no radius. Marks live in the React package.",
     category: "content",
-    classes: ["rs-icons"],
+    classes: ["rs-icons", "rs-icon"],
     css: ["components/icons.css"],
-    snippet: `<div class="rs-icons"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M2.5 8h11M9.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></div>`,
+    react: "components/icon.tsx",
+    snippet: `<div class="rs-icons"><svg class="rs-icon" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M6.5 2.5 H13.5 V9.5" vector-effect="non-scaling-stroke"/><rect x="2.5" y="6.5" width="7" height="7" vector-effect="non-scaling-stroke"/></svg><svg class="rs-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M6.5 2.5 H13.5 V9.5" vector-effect="non-scaling-stroke"/><rect x="2.5" y="6.5" width="7" height="7" vector-effect="non-scaling-stroke"/></svg></div>`,
   },
   {
     name: "accordion",
@@ -304,7 +306,7 @@ export const rasterComponents: RasterComponent[] = [
     classes: ["rs-acc", "rs-acc-item", "rs-acc-chevron", "rs-acc-body"],
     css: ["components/accordion.css"],
     react: "components/accordion.tsx",
-    snippet: `<div class="rs-acc"><details class="rs-acc-item" name="faq" open><summary>What is Raster?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="rs-acc-body">A monochrome, CSS-first design system.</div></details><details class="rs-acc-item" name="faq"><summary>Is it dependency-free?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="rs-acc-body">Yes. Native elements do the work.</div></details></div>`,
+    snippet: `<div class="rs-acc"><details class="rs-acc-item" name="faq" open><summary>What is Raster?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">A monochrome, CSS-first design system.</div></details><details class="rs-acc-item" name="faq"><summary>Is it dependency-free?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">Yes. Native elements do the work.</div></details></div>`,
   },
   {
     name: "alert",
@@ -579,7 +581,7 @@ export const rasterComponents: RasterComponent[] = [
     css: ["components/collapsible.css"],
     react: "components/collapsible.tsx",
     registryDependencies: ["accordion"],
-    snippet: `<details class="rs-disclosure"><summary>Show the details<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="14" height="14" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="rs-disclosure-body">Here they are.</div></details>`,
+    snippet: `<details class="rs-disclosure"><summary>Show the details<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-disclosure-body">Here they are.</div></details>`,
   },
   {
     name: "hover-card",
@@ -662,7 +664,7 @@ export const rasterComponents: RasterComponent[] = [
     css: ["components/carousel.css"],
     react: "components/carousel.tsx",
     registryDependencies: ["pagination", "card"],
-    snippet: `<div class="rs-carousel"><div class="rs-carousel-track"><div class="rs-card">One</div><div class="rs-card">Two</div><div class="rs-card">Three</div></div><div class="rs-carousel-nav"><button class="rs-page">‹</button><button class="rs-page">›</button></div></div>`,
+    snippet: `<div class="rs-carousel"><div class="rs-carousel-track"><div class="rs-card">One</div><div class="rs-card">Two</div><div class="rs-card">Three</div></div><div class="rs-carousel-nav"><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.5 L5.5 8 L10.5 12.5" vector-effect="non-scaling-stroke"/></svg></button><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></svg></button></div></div>`,
   },
   {
     name: "resizable",
@@ -705,7 +707,7 @@ export const rasterComponents: RasterComponent[] = [
     css: ["components/calendar.css"],
     react: "components/calendar.tsx",
     registryDependencies: ["pagination"],
-    snippet: `<div class="rs-cal"><div class="rs-cal-head"><span class="rs-cal-title">July 2026</span><span class="rs-cal-nav"><button class="rs-page">‹</button><button class="rs-page">›</button></span></div><div class="rs-cal-grid"><span class="rs-cal-dow">Mo</span><span class="rs-cal-dow">Tu</span><span class="rs-cal-dow">We</span><span class="rs-cal-dow">Th</span><span class="rs-cal-dow">Fr</span><span class="rs-cal-dow">Sa</span><span class="rs-cal-dow">Su</span><button class="rs-cal-day">20</button><button class="rs-cal-day">21</button><button class="rs-cal-day">22</button><button class="rs-cal-day">23</button><button class="rs-cal-day rs-cal-day-selected">24</button><button class="rs-cal-day rs-cal-day-today">25</button><button class="rs-cal-day">26</button></div></div>`,
+    snippet: `<div class="rs-cal"><div class="rs-cal-head"><span class="rs-cal-title">July 2026</span><span class="rs-cal-nav"><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.5 L5.5 8 L10.5 12.5" vector-effect="non-scaling-stroke"/></svg></button><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></svg></button></span></div><div class="rs-cal-grid"><span class="rs-cal-dow">Mo</span><span class="rs-cal-dow">Tu</span><span class="rs-cal-dow">We</span><span class="rs-cal-dow">Th</span><span class="rs-cal-dow">Fr</span><span class="rs-cal-dow">Sa</span><span class="rs-cal-dow">Su</span><button class="rs-cal-day">20</button><button class="rs-cal-day">21</button><button class="rs-cal-day">22</button><button class="rs-cal-day">23</button><button class="rs-cal-day rs-cal-day-selected">24</button><button class="rs-cal-day rs-cal-day-today">25</button><button class="rs-cal-day">26</button></div></div>`,
   },
   {
     name: "date-picker",

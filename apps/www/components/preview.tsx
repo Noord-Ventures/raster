@@ -38,6 +38,7 @@ import {
   Donut,
   Histogram,
   HoverCard,
+  Icon,
   InputOTP,
   Kbd,
   Nest,
@@ -255,6 +256,16 @@ export const demos: Record<string, () => React.ReactNode> = {
       <Button variant="ghost">Center</Button>
       <Button variant="ghost">Right</Button>
     </ButtonGroup>
+  ),
+  icons: () => (
+    <div className="rs-icons">
+      <Icon name="copy" size={12} />
+      <Icon name="copy" size={16} />
+      <Icon name="copied" size={16} />
+      <Icon name="chevron-left" size={16} />
+      <Icon name="chevron-right" size={16} />
+      <Icon name="close" size={16} />
+    </div>
   ),
   button: () => (
     <div className="preview-cluster">
