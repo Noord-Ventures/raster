@@ -1,6 +1,5 @@
 "use client";
 
-import { Icon } from "@noorddev/raster-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
@@ -18,10 +17,6 @@ function RasterMark() {
 }
 
 function useTheme() {
-  const [dark, setDark] = React.useState<boolean | null>(null);
-  React.useEffect(() => {
-    setDark(document.documentElement.dataset.theme === "dark");
-  }, []);
   const toggle = () => {
     const next = !(document.documentElement.dataset.theme === "dark");
     if (next) document.documentElement.dataset.theme = "dark";
@@ -31,13 +26,19 @@ function useTheme() {
     } catch {
       /* private mode */
     }
-    setDark(next);
   };
-  return { dark, toggle };
+  return { toggle };
 }
 
-function ThemeIcon({ dark }: { dark: boolean | null }) {
-  return dark ? <Icon name="sun" size={16} /> : <Icon name="moon" size={16} />;
+/* Same sliders mark as the top-right control on renatovaldes.com. One glyph, no track. */
+function SettingsMark() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
+      <path d="M2 4.5h5M11 4.5h3M2 11.5h3M9 11.5h5" />
+      <circle cx="9" cy="4.5" r="1.9" />
+      <circle cx="7" cy="11.5" r="1.9" />
+    </svg>
+  );
 }
 
 const links = [
@@ -50,7 +51,7 @@ const links = [
 
 export function SiteChrome() {
   const pathname = usePathname();
-  const { dark, toggle } = useTheme();
+  const { toggle } = useTheme();
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => setOpen(false), [pathname]);
@@ -83,7 +84,7 @@ export function SiteChrome() {
       </nav>
 
       <button type="button" className="theme-toggle" onClick={toggle} aria-label="Toggle color scheme">
-        <ThemeIcon dark={dark} />
+        <SettingsMark />
       </button>
 
       <button
@@ -113,7 +114,7 @@ export function SiteChrome() {
         </div>
         <button className="nav-panel-theme" type="button" onClick={toggle}>
           <span>Appearance</span>
-          <ThemeIcon dark={dark} />
+          <SettingsMark />
         </button>
       </nav>
     </>

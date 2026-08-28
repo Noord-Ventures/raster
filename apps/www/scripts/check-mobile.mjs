@@ -57,11 +57,11 @@ if (!phone.includes(".site-logo-mark") || !phone.includes("top: 1px")) {
 if (!phone.includes("flex: 1 1 0")) {
   fail("Phone crumb leaf must shrink and ellipsize so the trail stays one line at 375");
 }
-if (chrome.includes("toggle-track") || chrome.includes("icon-moon") || chrome.includes("icon-sun")) {
-  fail("Site chrome toggle must show one icon for the current scheme, not a sliding pair");
+if (chrome.includes("toggle-track") || chrome.includes("icon-moon") || chrome.includes("icon-sun") || chrome.includes("SunIcon") || chrome.includes("MoonIcon")) {
+  fail("Site chrome toggle must show one mark, not a sun/moon pair");
 }
-if (!chrome.includes("<ThemeIcon dark={dark} />")) {
-  fail("Site chrome toggle must render one mark matching the current scheme");
+if (!chrome.includes('d="M2 4.5h5M11 4.5h3M2 11.5h3M9 11.5h5"') || !chrome.includes("<SettingsMark />")) {
+  fail("Site chrome toggle must use the sliders mark from renatovaldes.com");
 }
 
 const crumbs = readFileSync(join(root, "apps/www/components/crumb-bar.tsx"), "utf8");
