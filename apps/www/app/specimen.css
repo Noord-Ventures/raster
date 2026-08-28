@@ -42,9 +42,14 @@ body:has(.specimen-page) {
     "kitc"
     "kitd";
   grid-auto-rows: minmax(204px, auto);
-  /* Paper to the viewport via body. Internal lines are cell shadows,
-     clipped at the field edge so no hairline reads as a page frame. */
+  /* 204 verticals live on this field. clip-path on a full-page child
+     can eat body background-attachment:fixed; paint the module here. */
   background: transparent;
+  background-image: var(--grid-image);
+  background-size: var(--grid-size) 100vh;
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+  background-position: var(--grid-pos);
   padding: 0;
   gap: 0;
   clip-path: inset(0);

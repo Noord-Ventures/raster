@@ -96,7 +96,9 @@ describe("generated raster.css", () => {
     expect(group).toMatch(/\.rs-btn-group\{[^}]*--rs-out:var\(--radius-sm\)/);
     expect(group).toMatch(/\.rs-btn-group\{[^}]*--rs-in:max\(0px,calc\(var\(--rs-out\) - var\(--rs-gap\)\)\)/);
     expect(group).toMatch(/\.rs-btn-group\{[^}]*border-radius:var\(--rs-out\)/);
-    expect(group).toMatch(/> \* \+ \*\{border-inline-start:1px solid var\(--divider\)\}/);
+    expect(group).toMatch(/\.rs-btn-group\{[^}]*background:var\(--divider\)/);
+    expect(group).toMatch(/\.rs-btn-group\{[^}]*gap:1px/);
+    expect(group).toMatch(/> \.rs-btn-ghost\{background:var\(--bg\)\}/);
     expect(group).not.toMatch(/margin-inline-start:-1px/);
     expect(group).not.toMatch(/border-inline-start-color:transparent/);
     expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*border:1px solid var\(--divider\)/);
@@ -106,7 +108,9 @@ describe("generated raster.css", () => {
     expect(toggle).not.toMatch(/margin-left:-1px/);
     expect(phone).not.toMatch(/\.rs-toggle-group .rs-toggle\{[^}]*margin-left:-1px/);
     expect(rasterCss).toMatch(/\.rs-btn-group\{[^}]*border:1px solid var\(--divider\)/);
-    expect(rasterCss).toMatch(/\.rs-btn-group > \* \+ \*\{border-inline-start:1px solid var\(--divider\)\}/);
+    expect(rasterCss).toMatch(/\.rs-btn-group\{[^}]*background:var\(--divider\)/);
+    expect(rasterCss).toMatch(/\.rs-btn-group\{[^}]*gap:1px/);
+    expect(rasterCss).toMatch(/\.rs-btn-group > \.rs-btn-ghost\{background:var\(--bg\)\}/);
   });
 
   it("sits the field input on an integer 40px control", () => {
@@ -248,6 +252,7 @@ describe("tokens", () => {
     const site = readFileSync(join(pkgDir, "../../apps/www/app/site.css"), "utf8");
     expect(site).toMatch(/\.gallery-item \{[^}]*border-radius: var\(--radius-sm\)/);
     expect(site).toMatch(/\.preview-box \{[^}]*border-radius: var\(--radius-sm\)/);
+    expect(site).toMatch(/\.preview-box \{[^}]*background: transparent/);
     const frames = readFileSync(join(pkgDir, "../../apps/www/app/interfaces/interfaces.css"), "utf8");
     expect(frames).toMatch(/\.if-tile \{[^}]*border-radius: var\(--radius-sm\)/);
     expect(frames).toMatch(/\.if-specimen \{[^}]*border-radius: var\(--radius-sm\)/);

@@ -121,6 +121,11 @@ jobs:
           fi
           grep -q 'body:has(.specimen-page)' apps/www/app/specimen.css
           grep -q 'clip-path: inset(0)' apps/www/app/specimen.css
+          grep -q 'background-attachment: fixed' apps/www/app/specimen.css
+          if awk '/^\.preview-box \{/,/^\}/' apps/www/app/site.css | grep -q 'background: var(--bg)'; then
+            echo "Component preview must not paint paper over the 204s"
+            exit 1
+          fi
           if grep -n 'rgba(0,0,0,0.025)' packages/core/src/tokens.ts; then
             echo "Module grid-line must read; 0.025 is invisible on paper"
             exit 1

@@ -111,6 +111,12 @@ if (!specimen.includes("body:has(.specimen-page)") || !specimen.includes("clip-p
 if (!specimen.includes("background: transparent")) {
   fail("Homepage paper must let the site 204 verticals show through");
 }
+if (!specimen.includes("background-attachment: fixed") || !specimen.includes("background-image: var(--grid-image)")) {
+  fail("Homepage field must paint the 204 grid on .specimen");
+}
+if (/\.preview-box \{[^}]*background:\s*var\(--bg\)/s.test(site)) {
+  fail("Component specimens must not paint paper over the 204s next to them");
+}
 if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
   fail("Catalog secondaries must not cover the site module grid");
 }
