@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/nest.css",
-      "content": "/* ── Concentric radius: Steve Ruiz innerRadius, clamped at 0.\n   --rs-in is the closed form of the circular-corner SDF fit. ── */\n.rs-nest{\n  --rs-out:var(--radius);\n  --rs-gap:var(--pad);\n  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  box-sizing:border-box;\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  padding:var(--rs-gap);\n  background:var(--bg);\n}\n.rs-nest-in{\n  --rs-out:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  --rs-in:var(--rs-out);\n  box-sizing:border-box;\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  min-height:72px;\n  background:var(--bg);\n}\n",
+      "content": "/* ── Concentric radius: Steve Ruiz innerRadius, clamped at 0.\n   --rs-in is the closed form of the circular-corner fit.\n   Do not reassign --rs-out on the inner frame: that cycles the custom\n   property and the used radius becomes 0. ── */\n.rs-nest{\n  --rs-out:var(--radius);\n  --rs-gap:var(--pad);\n  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  box-sizing:border-box;\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  padding:var(--rs-gap);\n  background:var(--bg);\n}\n.rs-nest-in{\n  box-sizing:border-box;\n  border:1px solid var(--divider);\n  border-radius:var(--rs-in);\n  min-height:72px;\n  background:var(--bg);\n}\n",
       "type": "registry:file",
       "target": "styles/raster/nest.css"
     }

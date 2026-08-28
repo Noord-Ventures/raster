@@ -226,6 +226,11 @@ describe("tokens", () => {
     expect(rasterCss).toMatch(/\.rs-card-in\{[^}]*border-radius:var\(--rs-in\)/);
     expect(rasterCss).toMatch(/\.rs-cal-day\{[^}]*border-radius:var\(--rs-in/);
     expect(rasterCss).toMatch(/\.rs-dialog \.rs-btn-primary,[^{]*\{[^}]*border-radius:var\(--rs-in\)/);
+    // Inner frames inherit --rs-in. Reassigning --rs-out from itself cycles
+    // the custom property and the used radius becomes 0.
+    const nestIn = rasterCss.match(/\.rs-nest-in\{[^}]*\}/)?.[0] ?? "";
+    expect(nestIn).toMatch(/border-radius:var\(--rs-in\)/);
+    expect(nestIn).not.toMatch(/--rs-out:/);
   });
 
   it("ships short named motion and refuses a load show", () => {
