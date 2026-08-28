@@ -82,7 +82,7 @@ export function Board() {
     <main className="if-board sc-room" aria-label="Room">
       <aside className="sc-room-rail" aria-label="Rooms">
         <div className="sc-room-brand">
-          <Brand slug="slack" title="Room" />
+          <Brand slug="room" title="Room" />
           <p className="sc-room-voice">In the room</p>
         </div>
         <p className="sc-room-label">Channels</p>

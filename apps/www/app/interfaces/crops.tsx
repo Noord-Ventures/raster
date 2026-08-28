@@ -12,12 +12,16 @@ function Lockup({ slug }: { slug: InterfaceSlug }) {
   );
 }
 
-function LijnCrop() {
+function LineCrop() {
   return (
     <div className="if-crop-scene if-crop-lijn">
-      <Lockup slug="ai-tool" />
+      <Lockup slug="line" />
       <p className="if-crop-kicker">Brief</p>
-      <p className="if-crop-line">Two sentences, same claim. The fee stays on the first page; the weeks follow it.</p>
+      <p className="if-crop-line">
+        Two sentences,
+        <br />
+        same claim.
+      </p>
       <div className="if-crop-dock">
         <span>The next line</span>
         <span className="if-crop-send">Send</span>
@@ -26,10 +30,10 @@ function LijnCrop() {
   );
 }
 
-function PersCrop() {
+function PressCrop() {
   return (
     <div className="if-crop-scene if-crop-pers">
-      <Lockup slug="dashboard" />
+      <Lockup slug="press" />
       <p className="if-crop-kicker">Sheets this week</p>
       <p className="if-crop-numeral">38</p>
       <p className="if-crop-spot" style={{ color: "#E30613" }}>
@@ -47,7 +51,7 @@ function PersCrop() {
   );
 }
 
-function MuurCrop() {
+function WallCrop() {
   return (
     <div className="if-crop-scene if-crop-muur">
       <img src="/interfaces/threads/press-sheet.jpg" alt="" />
@@ -56,18 +60,18 @@ function MuurCrop() {
   );
 }
 
-function NachtCrop() {
+function NightCrop() {
   return (
     <div className="if-crop-scene if-crop-nacht">
       <div className="if-crop-nacht-grid" />
-      <Lockup slug="fleet" />
+      <Lockup slug="night" />
       <p className="if-crop-numeral">Van 04</p>
       <p className="if-crop-kicker">Kennemerstraatweg · en route</p>
     </div>
   );
 }
 
-function AvondCrop() {
+function EveningCrop() {
   return (
     <div className="if-crop-scene if-crop-avond">
       <img src="/interfaces/food/de-buren.jpg" alt="" />
@@ -76,10 +80,10 @@ function AvondCrop() {
   );
 }
 
-function KamerCrop() {
+function RoomCrop() {
   return (
     <div className="if-crop-scene if-crop-kamer">
-      <Lockup slug="slack" />
+      <Lockup slug="room" />
       <p className="if-crop-kicker">Press</p>
       <p className="if-crop-line">Press run 14 is on the sheet. Fee is on page one.</p>
       <p className="if-crop-reply">
@@ -91,12 +95,12 @@ function KamerCrop() {
 }
 
 const CROPS: Record<InterfaceSlug, () => ReactNode> = {
-  "ai-tool": LijnCrop,
-  dashboard: PersCrop,
-  threads: MuurCrop,
-  fleet: NachtCrop,
-  delivery: AvondCrop,
-  slack: KamerCrop,
+  line: LineCrop,
+  press: PressCrop,
+  wall: WallCrop,
+  night: NightCrop,
+  evening: EveningCrop,
+  room: RoomCrop,
 };
 
 export function InterfaceCrop({ slug }: { slug: InterfaceSlug }) {

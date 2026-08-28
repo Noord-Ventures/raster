@@ -448,11 +448,11 @@ jobs:
           test -f apps/www/app/interfaces/catalog.ts
           test -f apps/www/app/interfaces/page.tsx
           test -f apps/www/app/interfaces/interfaces.css
-          for slug in ai-tool dashboard threads fleet delivery slack; do
+          for slug in line press wall night evening room; do
             test -f "apps/www/app/interfaces/$slug/page.tsx"
             test -f "apps/www/app/interfaces/$slug/board.tsx"
           done
-          test -f apps/www/app/interfaces/fleet/map.tsx
+          test -f apps/www/app/interfaces/night/map.tsx
           test -f apps/www/app/interfaces/crops.tsx
           test -f apps/www/app/interfaces/shell.tsx
           grep -q 'InterfaceCrop' apps/www/app/interfaces/page.tsx
@@ -461,6 +461,7 @@ jobs:
           grep -qi 'no tape' apps/www/app/interfaces/FEATURE.md
           grep -qi 'minimal shadow' apps/www/app/interfaces/FEATURE.md
           grep -q 'if-inspect' apps/www/app/interfaces/FEATURE.md
+          grep -q 'No rule under the description' apps/www/app/interfaces/FEATURE.md
           grep -q 'title: "Line"' apps/www/app/interfaces/catalog.ts
           grep -q 'title: "Press"' apps/www/app/interfaces/catalog.ts
           grep -q 'title: "Wall"' apps/www/app/interfaces/catalog.ts
@@ -495,7 +496,7 @@ jobs:
               process.exit(1);
             }
           '
-          for slug in ai-tool dashboard threads fleet delivery slack; do
+          for slug in line press wall night evening room; do
             grep -q 'if-inspect' "apps/www/app/interfaces/$slug/board.tsx"
           done
           if grep -n about.css apps/www/app/site.css || grep -n interfaces.css apps/www/app/site.css; then
@@ -590,7 +591,7 @@ jobs:
           fi
           grep -q 'Entry is not a show' apps/www/app/interfaces/FEATURE.md
           grep -q '@keyframes sc-confirm' apps/www/app/interfaces/scene-motion.css
-          for slug in ai-tool dashboard threads fleet delivery slack; do
+          for slug in line press wall night evening room; do
             grep -q 'var(--duration-snap)' "apps/www/app/interfaces/$slug/scene.css"
             grep -q 'var(--ease)' "apps/www/app/interfaces/$slug/scene.css"
             grep -q 'sc-fresh' "apps/www/app/interfaces/$slug/board.tsx"

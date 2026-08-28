@@ -20,7 +20,7 @@ export function Board() {
     <main className="if-board sc-night" aria-label="Night" style={{ ["--if-spot" as string]: "#E30613" }}>
       <aside className="sc-night-rail" aria-label="Field">
         <div className="sc-night-brand">
-          <Brand slug="fleet" title="Night" />
+          <Brand slug="night" title="Night" />
           <p className="sc-night-voice">On the street</p>
         </div>
         <p className="sc-night-label">Field</p>

@@ -6,9 +6,9 @@ Writers: the six live in `app/interfaces/catalog.ts`. Each proto is its own fold
 
 Each interface is a fictional little app: an English name, a mark, one or two words of voice. Not a screenshot of a real product. Not a generic component dump. Not a Linear, Notion, Figma, or Waymo clone.
 
-Landing cards are poster crops — a clipped fragment of that UI, not a tiny full-page shrink, not a title-only frame. Round 2 keeps the crops; captions follow the English names.
+Landing cards are poster crops — a clipped fragment of that UI, not a tiny full-page shrink, not a title-only frame. Type in a crop wraps on a word. A composer or photograph may run off the card; a letter may not. Captions follow the English names.
 
-Detail keeps Raster site chrome (logo, corner nav, crumb bar, Interfaces rail). The custom UI sits in a boxed specimen. Below the box: a longer description, plus meta (what, type, module, ink, use, field). No horizontal divider between the UI and the copy. The specimen is not almost-fullscreen.
+Detail keeps Raster site chrome (logo, corner nav, crumb bar, Interfaces rail). The custom UI sits in a boxed specimen. Below the box: a longer description, plus meta (what, type, module, ink, use, field). No horizontal divider between the UI and the copy. No rule under the description. The specimen is not almost-fullscreen.
 
 The boxed UI is a coherent modern product with a Raster core, not a floaty flat demo. Module, hairlines, grotesque, sentence case. Never all caps. No tape. Chrome stays mostly monochrome. A board may take one spot or a quiet hue for hierarchy. Minimal shadow is allowed. Faces may be round. App dividers run edge to edge in the pane. The boxed UI may follow `--radius-sm`.
 
@@ -17,12 +17,12 @@ Each app has two to three levels of use: list → detail → one level deeper. I
 | Surface | Route | Click path | Done |
 | --- | --- | --- | --- |
 | Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. Each card is a poster crop, then the English name. |
-| Line | `/interfaces/ai-tool` | Interfaces → Line | Modern writing chat. List → chat → a line. Centered composer, aligned. |
-| Press | `/interfaces/dashboard` | Interfaces → Press | Ops app. Floor → job → sheet. Hue in the rail. One Crouwel spot. |
-| Wall | `/interfaces/threads` | Interfaces → Wall | Social wall. Feed → thread → profile. Faces of people. |
-| Night | `/interfaces/fleet` | Interfaces → Night | SF dispatch. List → unit → trip. Readable map, traffic, one list scale. |
-| Evening | `/interfaces/delivery` | Interfaces → Evening | Kitchen list. Browse → kitchen → plate. |
-| Room | `/interfaces/slack` | Interfaces → Room | Studio room. Channel → message → thread. Faces, people in the rail. |
+| Line | `/interfaces/line` | Interfaces → Line | Modern writing chat. List → chat → a line. Centered composer, aligned. |
+| Press | `/interfaces/press` | Interfaces → Press | Ops app. Floor → job → sheet. Hue in the rail. One Crouwel spot. |
+| Wall | `/interfaces/wall` | Interfaces → Wall | Social wall. Feed → thread → profile. Faces of people. |
+| Night | `/interfaces/night` | Interfaces → Night | SF dispatch. List → unit → trip. Readable map, traffic, one list scale. |
+| Evening | `/interfaces/evening` | Interfaces → Evening | Kitchen list. Browse → kitchen → plate. |
+| Room | `/interfaces/room` | Interfaces → Room | Studio room. Channel → message → thread. Faces, people in the rail. |
 | Phone | ≤430 | Contents picker | Rail hides under 900. A stacked 44pt picker lists the six. Scene controls use the 44pt phone scale. |
 
-The six folders are `ai-tool`, `dashboard`, `threads`, `fleet`, `delivery`, `slack`. CI fails if any route disappears.
+The six folders are `line`, `press`, `wall`, `night`, `evening`, `room`. CI fails if any route disappears.

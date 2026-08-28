@@ -89,7 +89,7 @@ export function Board() {
     <main className="if-board sc-evening" aria-label="Evening">
       <aside className="sc-evening-rail" aria-label="Kitchens">
         <div className="sc-evening-brand">
-          <Brand slug="delivery" title="Evening" />
+          <Brand slug="evening" title="Evening" />
           <p className="sc-evening-voice">Tonight</p>
         </div>
         <p className="sc-evening-label">Kitchens</p>

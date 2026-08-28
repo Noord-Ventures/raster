@@ -2,5 +2,19 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "pnpm install",
   "buildCommand": "pnpm --filter www build",
-  "outputDirectory": "apps/www/out"
+  "outputDirectory": "apps/www/out",
+  "redirects": [
+    { "source": "/interfaces/ai-tool", "destination": "/interfaces/line/", "permanent": true },
+    { "source": "/interfaces/ai-tool/", "destination": "/interfaces/line/", "permanent": true },
+    { "source": "/interfaces/dashboard", "destination": "/interfaces/press/", "permanent": true },
+    { "source": "/interfaces/dashboard/", "destination": "/interfaces/press/", "permanent": true },
+    { "source": "/interfaces/threads", "destination": "/interfaces/wall/", "permanent": true },
+    { "source": "/interfaces/threads/", "destination": "/interfaces/wall/", "permanent": true },
+    { "source": "/interfaces/fleet", "destination": "/interfaces/night/", "permanent": true },
+    { "source": "/interfaces/fleet/", "destination": "/interfaces/night/", "permanent": true },
+    { "source": "/interfaces/delivery", "destination": "/interfaces/evening/", "permanent": true },
+    { "source": "/interfaces/delivery/", "destination": "/interfaces/evening/", "permanent": true },
+    { "source": "/interfaces/slack", "destination": "/interfaces/room/", "permanent": true },
+    { "source": "/interfaces/slack/", "destination": "/interfaces/room/", "permanent": true }
+  ]
 }

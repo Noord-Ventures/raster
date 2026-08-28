@@ -1,6 +1,6 @@
 export const interfaces = [
   {
-    slug: "ai-tool",
+    slug: "line",
     title: "Line",
     voice: "The next line",
     law: "A writing app. Chats in a rail, the line in the middle.",
@@ -15,7 +15,7 @@ export const interfaces = [
     note: "Local replies. No live model on this sheet.",
   },
   {
-    slug: "dashboard",
+    slug: "press",
     title: "Press",
     voice: "On press",
     law: "A press-run ledger. Range, jobs, a selected sheet.",
@@ -30,7 +30,7 @@ export const interfaces = [
     note: "Week and month rewrite the same field.",
   },
   {
-    slug: "threads",
+    slug: "wall",
     title: "Wall",
     voice: "On the wall",
     law: "A social wall. People, photographs, a thread, a profile.",
@@ -45,7 +45,7 @@ export const interfaces = [
     note: "Like a line, write a reply, open a face.",
   },
   {
-    slug: "fleet",
+    slug: "night",
     title: "Night",
     voice: "On the street",
     law: "A dispatch map of San Francisco. Units, traffic, a trip.",
@@ -60,7 +60,7 @@ export const interfaces = [
     note: "Acknowledge an alert. The list stays one scale.",
   },
   {
-    slug: "delivery",
+    slug: "evening",
     title: "Evening",
     voice: "Tonight",
     law: "A kitchen list. Photographs in cells. A plate, a bag.",
@@ -75,7 +75,7 @@ export const interfaces = [
     note: "Add a plate. The bag counts.",
   },
   {
-    slug: "slack",
+    slug: "room",
     title: "Room",
     voice: "In the room",
     law: "A studio room. Channels, people, threads. Agents with people.",

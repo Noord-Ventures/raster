@@ -144,7 +144,7 @@
   position: absolute;
   left: 20px;
   top: 20px;
-  width: 420px;
+  width: 348px;
 }
 .if-crop-lijn .if-crop-kicker { margin-top: 28px; }
 .if-crop-lijn .if-crop-line { margin-top: 8px; }
@@ -156,7 +156,7 @@
   margin-top: 36px;
   padding: 8px 8px 8px 14px;
   border: 1px solid var(--divider);
-  width: 360px;
+  width: 420px;
 }
 .if-crop-dock span { font-size: 13px; color: var(--text-secondary); }
 .if-crop-send {
@@ -395,7 +395,8 @@
   gap: 20px;
   margin: 32px 0 0;
   padding: 0;
-  border-top: 0;
+  border: 0;
+  box-shadow: none;
 }
 .if-meta dt {
   margin: 0;

@@ -5,7 +5,7 @@ import "../interfaces.css";
 import "./scene.css";
 import { Board } from "./board";
 
-const proto = interfaceBySlug("dashboard")!;
+const proto = interfaceBySlug("room")!;
 
 export const metadata: Metadata = {
   title: proto.title,
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <InterfaceShell slug="dashboard">
+    <InterfaceShell slug="room">
       <Board />
     </InterfaceShell>
   );

@@ -39,7 +39,7 @@ export function Board() {
     <main className="if-board sc-dash" aria-label="Press" style={{ ["--if-spot" as string]: "#E30613" }}>
       <aside className="sc-dash-rail" aria-label="Floor">
         <div className="sc-dash-brand">
-          <Brand slug="dashboard" title="Press" />
+          <Brand slug="press" title="Press" />
           <p className="sc-dash-voice">On press</p>
         </div>
         <p className="sc-dash-label">Floor</p>

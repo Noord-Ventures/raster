@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../../..", import.meta.url));
 const dir = join(root, "apps/www/app/interfaces");
-const slugs = ["ai-tool", "dashboard", "threads", "fleet", "delivery", "slack"];
+const slugs = ["line", "press", "wall", "night", "evening", "room"];
 const names = ["Line", "Press", "Wall", "Night", "Evening", "Room"];
 
 if (!existsSync(join(dir, "FEATURE.md"))) {
@@ -73,12 +73,35 @@ if (!css.includes(".if-specimen") || !css.includes("height: 612px")) {
   console.error("Specimen must be a 612 module box, not almost-fullscreen");
   process.exit(1);
 }
+const metaStart = css.indexOf(".if-meta {");
+if (metaStart < 0) {
+  console.error("Matter meta rule missing");
+  process.exit(1);
+}
+const metaRule = css.slice(metaStart, css.indexOf("}", metaStart));
+if (/border(-top)?:\s*1px/.test(metaRule)) {
+  console.error("Matter must not draw a horizontal rule under the description");
+  process.exit(1);
+}
+const lineCrop = css.slice(css.indexOf(".if-crop-lijn {"), css.indexOf("}", css.indexOf(".if-crop-lijn {")));
+if (!/width:\s*348px/.test(lineCrop) || /width:\s*420px/.test(lineCrop)) {
+  console.error("Line crop type must wrap inside the tile, not clip mid-word");
+  process.exit(1);
+}
+if (crops.includes("the weeks follow it")) {
+  console.error("Line crop must not run a sentence through the tile edge");
+  process.exit(1);
+}
 
 for (const name of names) {
   if (!catalog.includes(`title: "${name}"`)) {
     console.error(`catalog.ts is missing fictional title: ${name}`);
     process.exit(1);
   }
+}
+if (/slug: "(ai-tool|dashboard|threads|fleet|delivery|slack)"/.test(catalog)) {
+  console.error("Catalog slugs must match the English names, not the old category routes");
+  process.exit(1);
 }
 if (/title: "(AI tool|SaaS dashboard|Threads|Fleet|Food delivery|Chat)"/.test(catalog)) {
   console.error("Catalog titles must be invented apps, not generic categories");
@@ -130,8 +153,8 @@ if (componentsPage.includes("/interfaces")) {
   process.exit(1);
 }
 
-if (!existsSync(join(dir, "fleet", "map.tsx"))) {
-  console.error("Fleet proto must keep its three.js map in fleet/map.tsx");
+if (!existsSync(join(dir, "night", "map.tsx"))) {
+  console.error("Night proto must keep its three.js map in night/map.tsx");
   process.exit(1);
 }
 
@@ -158,6 +181,10 @@ if (!map.includes("boxed specimen") || !/no tape/i.test(map) || !/minimal shadow
 }
 if (!map.includes("if-inspect")) {
   console.error("FEATURE.md must name the inspect pane");
+  process.exit(1);
+}
+if (!map.includes("No rule under the description")) {
+  console.error("FEATURE.md must drop the page rule under the description");
   process.exit(1);
 }
 if (!map.includes("fictional little app") || !map.includes("poster crop")) {

@@ -5,7 +5,7 @@ import "../interfaces.css";
 import "./scene.css";
 import { Board } from "./board";
 
-const proto = interfaceBySlug("ai-tool")!;
+const proto = interfaceBySlug("evening")!;
 
 export const metadata: Metadata = {
   title: proto.title,
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <InterfaceShell slug="ai-tool">
+    <InterfaceShell slug="evening">
       <Board />
     </InterfaceShell>
   );

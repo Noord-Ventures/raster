@@ -89,7 +89,7 @@ export function Board() {
     <main className="if-board sc-wall" aria-label="Wall">
       <aside className="sc-wall-rail" aria-label="Today">
         <div className="sc-wall-brand">
-          <Brand slug="threads" title="Wall" />
+          <Brand slug="wall" title="Wall" />
           <p className="sc-wall-voice">On the wall</p>
         </div>
         <p className="sc-wall-label">Today</p>

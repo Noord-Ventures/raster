@@ -108,7 +108,7 @@ export function Board() {
     <main className="if-board sc-ai" aria-label="Line">
       <aside className="sc-ai-rail" aria-label="Chats">
         <div className="sc-ai-brand">
-          <Brand slug="ai-tool" title="Line" />
+          <Brand slug="line" title="Line" />
           <p className="sc-ai-voice">The next line</p>
         </div>
         <button type="button" className="sc-ai-new" onClick={fresh}>
