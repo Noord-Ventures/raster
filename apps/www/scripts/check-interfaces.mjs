@@ -250,6 +250,10 @@ if (!map.includes("fictional little app") || !map.includes("poster crop")) {
   console.error("FEATURE.md must lock fictional apps and poster crops");
   process.exit(1);
 }
+if (!map.includes("Icon")) {
+  console.error("FEATURE.md must lock Raster Icon marks");
+  process.exit(1);
+}
 if (existsSync(join(dir, "scene-fonts.ts"))) {
   console.error("Scenes must use Inter, not extra display faces");
   process.exit(1);
@@ -307,6 +311,29 @@ for (const slug of slugs) {
   if (!board.includes('from "@noorddev/raster-react"') || !board.includes("<Icon ")) {
     console.error(`${slug} board must use Raster Icon marks, not a second family`);
     process.exit(1);
+  }
+  if (/lucide-react|@heroicons|heroicons/.test(board + scene)) {
+    console.error(`${slug} must not import Lucide or Heroicons`);
+    process.exit(1);
+  }
+  const marks = [...board.matchAll(/<Icon name="([a-z0-9-]+)"/g)].map((m) => m[1]);
+  if (new Set(marks).size < 7) {
+    console.error(`${slug} board must use more Raster Icon marks on nav, lists, and chrome`);
+    process.exit(1);
+  }
+  const needed = {
+    line: ["plus", "send", "quote", "inbox"],
+    press: ["layout", "printer", "calendar"],
+    wall: ["rows", "thumbs-up", "users"],
+    night: ["truck", "map-pin", "globe"],
+    evening: ["bag", "search", "wallet"],
+    room: ["hash", "send", "message"],
+  };
+  for (const name of needed[slug]) {
+    if (!board.includes(`"${name}"`)) {
+      console.error(`${slug} board must use the ${name} Raster mark`);
+      process.exit(1);
+    }
   }
   if (/border-left:\s*2px solid transparent/.test(scene)) {
     console.error(`${slug} sidebar must not mark selected with a left rail`);

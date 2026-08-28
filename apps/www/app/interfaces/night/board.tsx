@@ -6,10 +6,10 @@ import { Brand } from "../mark";
 import { Scene } from "./map";
 
 const UNITS = [
-  { id: "04", name: "Van 04", state: "Moving", where: "Market / 3rd", trip: "Pier 70 → Mission" },
-  { id: "19", name: "Van 19", state: "Hold", where: "Embarcadero", trip: "Ferry → Folsom" },
-  { id: "03", name: "Van 03", state: "Yard", where: "16th / Rhode Island", trip: "Potrero loop" },
-  { id: "11", name: "Van 11", state: "Moving", where: "Van Ness", trip: "Civic → Geary" },
+  { id: "04", name: "Van 04", state: "Moving", where: "Market / 3rd", trip: "Pier 70 → Mission", mark: "activity" as const },
+  { id: "19", name: "Van 19", state: "Hold", where: "Embarcadero", trip: "Ferry → Folsom", mark: "pause" as const },
+  { id: "03", name: "Van 03", state: "Yard", where: "16th / Rhode Island", trip: "Potrero loop", mark: "building" as const },
+  { id: "11", name: "Van 11", state: "Moving", where: "Van Ness", trip: "Civic → Geary", mark: "activity" as const },
 ];
 
 export function Board() {
@@ -24,7 +24,10 @@ export function Board() {
           <Brand slug="night" title="Night" />
           <p className="sc-night-voice">On the street</p>
         </div>
-        <p className="sc-night-label">Fleet</p>
+        <p className="sc-night-label if-ico-row">
+          <Icon name="truck" size={12} />
+          Fleet
+        </p>
         {UNITS.map((row) => (
           <button
             key={row.id}
@@ -41,7 +44,7 @@ export function Board() {
               {row.name}
             </b>
             <i className="if-ico-row">
-              <Icon name="activity" size={12} />
+              <Icon name={row.mark} size={12} />
               {row.state}
             </i>
             <em className="if-ico-row">
@@ -54,8 +57,11 @@ export function Board() {
 
       <section className="sc-night-field">
         <header className="sc-night-head">
-          <p>
-            {item.name} · {item.state}
+          <p className="if-ico-row">
+            <Icon name="truck" size={16} />
+            {item.name}
+            <Icon name={item.mark} size={12} />
+            {item.state}
           </p>
           <button type="button" className="sc-night-ghost" onClick={() => setPane("trip")}>
             <Icon name="compass" size={12} />
@@ -74,19 +80,34 @@ export function Board() {
               <Icon name="map" size={12} />
               Trip
             </p>
-            <p className="sc-night-trip">{item.trip}</p>
-            <p>San Francisco field. Streets, water, traffic, one selected unit.</p>
+            <p className="sc-night-trip if-ico-row">
+              <Icon name="flag" size={12} />
+              {item.trip}
+            </p>
+            <p className="if-ico-row">
+              <Icon name="globe" size={12} />
+              San Francisco field. Streets, water, traffic, one selected unit.
+            </p>
             <dl>
               <div>
-                <dt>Unit</dt>
+                <dt className="if-ico-row">
+                  <Icon name="truck" size={12} />
+                  Unit
+                </dt>
                 <dd>{item.name}</dd>
               </div>
               <div>
-                <dt>State</dt>
+                <dt className="if-ico-row">
+                  <Icon name={item.mark} size={12} />
+                  State
+                </dt>
                 <dd>{item.state}</dd>
               </div>
               <div>
-                <dt>Now</dt>
+                <dt className="if-ico-row">
+                  <Icon name="map-pin" size={12} />
+                  Now
+                </dt>
                 <dd>{item.where}</dd>
               </div>
             </dl>

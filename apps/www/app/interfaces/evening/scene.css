@@ -308,7 +308,8 @@
   padding: 8px 0;
   border-bottom: 1px solid var(--divider);
 }
-.sc-evening-line span { display: grid; gap: 2px; }
+.sc-evening-line > span { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.sc-evening-line > span > span { display: grid; gap: 2px; }
 .sc-evening-line b { font-size: 13px; font-weight: 600; }
 .sc-evening-line i,
 .sc-evening-line em {
@@ -320,6 +321,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   color: var(--text) !important;
   font-weight: 600;
 }

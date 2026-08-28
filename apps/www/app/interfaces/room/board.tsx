@@ -11,13 +11,13 @@ const CHANNELS = [
   { id: "yard", name: "yard", count: 2 },
 ];
 
-const PEOPLE: { id: FaceId; name: string; state: string }[] = [
-  { id: "ilana", name: "Ilana", state: "At the desk" },
-  { id: "aziez", name: "Aziez", state: "On a line" },
-  { id: "jenny", name: "Jenny", state: "Away" },
-  { id: "christian", name: "Christian", state: "In the room" },
-  { id: "katie", name: "Katie", state: "At the desk" },
-  { id: "koen", name: "Koen", state: "On a line" },
+const PEOPLE: { id: FaceId; name: string; state: string; mark: "user-check" | "activity" | "moon" | "users" }[] = [
+  { id: "ilana", name: "Ilana", state: "At the desk", mark: "user-check" },
+  { id: "aziez", name: "Aziez", state: "On a line", mark: "activity" },
+  { id: "jenny", name: "Jenny", state: "Away", mark: "moon" },
+  { id: "christian", name: "Christian", state: "In the room", mark: "users" },
+  { id: "katie", name: "Katie", state: "At the desk", mark: "user-check" },
+  { id: "koen", name: "Koen", state: "On a line", mark: "activity" },
 ];
 
 type Msg = { id: string; who: FaceId; name: string; text: string; when: string; replies: number };
@@ -103,7 +103,7 @@ export function Board() {
             }}
           >
             <b className="if-ico-row">
-              <Icon name="hash" size={12} />
+              <Icon name="hash" size={16} />
               {row.name}
             </b>
             <i>{row.count}</i>
@@ -127,7 +127,10 @@ export function Board() {
             <Face who={row.id} />
             <span>
               <b>{row.name}</b>
-              <i>{row.state}</i>
+              <i className="if-ico-row">
+                <Icon name={row.mark} size={12} />
+                {row.state}
+              </i>
             </span>
           </button>
         ))}
@@ -135,8 +138,14 @@ export function Board() {
 
       <section className="sc-room-chat" aria-label="Channel">
         <header className="sc-room-head">
-          <p>#{room.name}</p>
-          <span>{room.count} in the room</span>
+          <p className="if-ico-row">
+            <Icon name="hash" size={16} />
+            {room.name}
+          </p>
+          <span className="if-ico-row">
+            <Icon name="users" size={12} />
+            {room.count} in the room
+          </span>
         </header>
         <div className="sc-room-lines">
           {messages.map((row) => (
@@ -154,10 +163,19 @@ export function Board() {
               <Face who={row.who} />
               <span>
                 <b>
-                  {row.name} <em>{row.when}</em>
+                  {row.name}{" "}
+                  <em className="if-ico-row">
+                    <Icon name="clock" size={12} />
+                    {row.when}
+                  </em>
                 </b>
                 {row.text}
-                {row.replies ? <i>{row.replies} replies</i> : null}
+                {row.replies ? (
+                  <i className="if-ico-row">
+                    <Icon name="reply" size={12} />
+                    {row.replies} replies
+                  </i>
+                ) : null}
               </span>
             </button>
           ))}
@@ -169,12 +187,15 @@ export function Board() {
             send();
           }}
         >
-          <input
-            value={draft}
-            placeholder={`Message #${room.name}`}
-            aria-label="Message"
-            onChange={(event) => setDraft(event.target.value)}
-          />
+          <label className="sc-room-field">
+            <Icon name="message" size={16} />
+            <input
+              value={draft}
+              placeholder={`Message #${room.name}`}
+              aria-label="Message"
+              onChange={(event) => setDraft(event.target.value)}
+            />
+          </label>
           <button type="submit" disabled={!draft.trim()}>
             <Icon name="send" size={16} />
             Send
@@ -222,7 +243,10 @@ export function Board() {
             <div className="sc-room-card">
               <Face who={person.id} size={48} />
               <b>{person.name}</b>
-              <i>{person.state}</i>
+              <i className="if-ico-row">
+                <Icon name={person.mark} size={12} />
+                {person.state}
+              </i>
             </div>
             <p>People stay in the rail. A face opens the room around them.</p>
             <button type="button" className="sc-room-ghost" onClick={() => setPane("none")}>

@@ -146,19 +146,33 @@
   padding: 8px 16px 12px;
   border-top: 1px solid var(--divider);
 }
-.sc-room-dock input {
+.sc-room-field {
   flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   height: 36px;
+  min-width: 0;
   border: 1px solid var(--divider);
   background: var(--bg);
   color: var(--text);
   border-radius: var(--radius-sm);
   padding: 0 12px;
   font: 500 13px/1 inherit;
-  outline: none;
   transition: border-color var(--duration-snap) var(--ease);
 }
-.sc-room-dock input:focus { border-color: var(--text); }
+.sc-room-field:focus-within { border-color: var(--text); }
+.sc-room-field input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  outline: none;
+  padding: 0;
+}
 .sc-room-dock button {
   appearance: none;
   display: inline-flex;
@@ -231,15 +245,15 @@
   .sc-room-ch,
   .sc-room-person,
   .sc-room-msg,
-  .sc-room-dock input,
-  .sc-room-dock button { min-height: 44px; font-size: 16px; }
+  .sc-room-field,
+  .sc-room-dock button { min-height: 44px; height: 44px; font-size: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .sc-room-ch,
   .sc-room-person,
   .sc-room-msg,
-  .sc-room-dock input,
+  .sc-room-field,
   .sc-room-dock button,
   .sc-room-ghost { transition: none; }
 }

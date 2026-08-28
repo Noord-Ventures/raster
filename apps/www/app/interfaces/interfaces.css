@@ -366,7 +366,11 @@ body:has(.if-index) {
 .if-ico-row {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+}
+.if-board .rs-icon {
+  display: block;
+  flex-shrink: 0;
 }
 .if-app {
   display: flex;

@@ -73,6 +73,9 @@
 .sc-dash-range { display: flex; gap: 16px; }
 .sc-dash-range button {
   appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   border: 0;
   border-bottom: 1px solid transparent;
   background: transparent;

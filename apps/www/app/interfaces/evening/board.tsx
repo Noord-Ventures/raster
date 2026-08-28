@@ -159,7 +159,7 @@ export function Board() {
               <div className="sc-evening-seg" role="group" aria-label="Diet">
                 {(["any", "veg", "fish"] as const).map((item) => (
                   <button key={item} type="button" aria-pressed={diet === item} onClick={() => setDiet(item)}>
-                    <Icon name="tag" size={12} />
+                    <Icon name={item === "any" ? "layers" : item === "veg" ? "tag" : "flag"} size={12} />
                     {item === "any" ? "Any" : item === "veg" ? "Veg" : "Fish"}
                   </button>
                 ))}
@@ -167,7 +167,7 @@ export function Board() {
               <div className="sc-evening-seg" role="group" aria-label="Price">
                 {([0, 1, 2] as const).map((item) => (
                   <button key={item} type="button" aria-pressed={band === item} onClick={() => setBand(item)}>
-                    <Icon name="dollar" size={12} />
+                    <Icon name={item === 0 ? "wallet" : "dollar"} size={12} />
                     {item === 0 ? "Any" : item === 1 ? "€" : "€€"}
                   </button>
                 ))}
@@ -205,9 +205,15 @@ export function Board() {
                 <Icon name="arrow-left" size={12} />
                 Stores
               </button>
-              <p>{store.name}</p>
-              <span>
-                {store.rating} · {store.eta}
+              <p className="if-ico-row">
+                <Icon name="home" size={16} />
+                {store.name}
+              </p>
+              <span className="if-ico-row">
+                <Icon name="star" size={12} />
+                {store.rating}
+                <Icon name="clock" size={12} />
+                {store.eta}
               </span>
             </header>
             <div className="sc-evening-hero">
@@ -229,9 +235,15 @@ export function Board() {
                         <img src={row.photo} alt="" />
                         <span>
                           <b>{row.name}</b>
-                          <i>{row.note}</i>
+                          <i className="if-ico-row">
+                            <Icon name="tag" size={12} />
+                            {row.note}
+                          </i>
                         </span>
-                        <em>{money(row.price)}</em>
+                        <em className="if-ico-row">
+                          <Icon name="dollar" size={12} />
+                          {money(row.price)}
+                        </em>
                       </button>
                       <button type="button" className="sc-evening-add" onClick={() => addItem(row)}>
                         <Icon name="plus" size={12} />
@@ -258,15 +270,21 @@ export function Board() {
               <>
                 {bag.map((line) => (
                   <div key={line.key} className="sc-evening-line">
-                    <span>
-                      <b>{line.name}</b>
-                      <i>{line.store}</i>
+                    <span className="if-ico-row">
+                      <Icon name="package" size={16} />
+                      <span>
+                        <b>{line.name}</b>
+                        <i>{line.store}</i>
+                      </span>
                     </span>
                     <em>{money(line.price)}</em>
                   </div>
                 ))}
-                <p className="sc-evening-total">
-                  <span>Total</span>
+                <p className="sc-evening-total if-ico-row">
+                  <span className="if-ico-row">
+                    <Icon name="wallet" size={12} />
+                    Total
+                  </span>
                   <strong>{money(total)}</strong>
                 </p>
               </>
@@ -278,7 +296,10 @@ export function Board() {
           </div>
         ) : item ? (
           <div key={item.id} className="sc-evening-sheet sc-fresh">
-            <p className="sc-evening-label">Plate</p>
+            <p className="sc-evening-label if-ico-row">
+              <Icon name="image" size={12} />
+              Plate
+            </p>
             <img src={item.photo} alt="" />
             <p className="sc-evening-dish">{item.name}</p>
             <p>

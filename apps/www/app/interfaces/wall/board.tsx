@@ -137,7 +137,10 @@ export function Board() {
           <Brand slug="wall" title="Wall" />
           <p className="sc-wall-voice">On the wall</p>
         </div>
-        <p className="sc-wall-label">People</p>
+        <p className="sc-wall-label if-ico-row">
+          <Icon name="users" size={12} />
+          People
+        </p>
         {PEOPLE.map((row) => (
           <button
             key={row.id}
@@ -160,6 +163,7 @@ export function Board() {
           <p className="if-ico-row">
             <Icon name="rows" size={16} />
             Today
+            <Icon name="calendar" size={12} />
           </p>
         </header>
         <div className="sc-wall-stream">
@@ -172,7 +176,10 @@ export function Board() {
                 <span className="sc-wall-who">
                   <Face who={row.who} />
                   <b>{row.name}</b>
-                  <i>{row.when}</i>
+                  <i className="if-ico-row">
+                    <Icon name="clock" size={12} />
+                    {row.when}
+                  </i>
                 </span>
                 <p>{row.text}</p>
                 <em className="sc-wall-meta">
@@ -184,6 +191,17 @@ export function Board() {
                     <Icon name="message" size={12} />
                     {(COMMENTS[row.id] ?? []).length} comments
                   </span>
+                  {row.photo ? (
+                    <span className="if-ico-row">
+                      <Icon name="image" size={12} />
+                      Photo
+                    </span>
+                  ) : (
+                    <span className="if-ico-row">
+                      <Icon name="quote" size={12} />
+                      Note
+                    </span>
+                  )}
                 </em>
               </button>
             </article>

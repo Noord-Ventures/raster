@@ -9,9 +9,9 @@ type Msg = { id: string; role: Role; text: string; fresh?: boolean };
 type Inspect = { kind: "line"; id: string } | { kind: "settings" } | null;
 
 const CHATS = [
-  { id: "brief", title: "Tighten the brief", preview: "Two sentences, same claim.", when: "Now" },
-  { id: "press", title: "Press run 14", preview: "Keep the weeks under the fee.", when: "Today" },
-  { id: "invoice", title: "Invoice note", preview: "The number on the cover.", when: "Yesterday" },
+  { id: "brief", title: "Tighten the brief", preview: "Two sentences, same claim.", when: "Now", icon: "quote" as const },
+  { id: "press", title: "Press run 14", preview: "Keep the weeks under the fee.", when: "Today", icon: "printer" as const },
+  { id: "invoice", title: "Invoice note", preview: "The number on the cover.", when: "Yesterday", icon: "receipt" as const },
 ] as const;
 
 const STARTED: Record<string, Msg[]> = {
@@ -116,7 +116,10 @@ export function Board() {
           <Icon name="plus" size={16} />
           New chat
         </button>
-        <p className="sc-ai-label">Chats</p>
+        <p className="sc-ai-label if-ico-row">
+          <Icon name="inbox" size={12} />
+          Chats
+        </p>
         <div className="sc-ai-chats">
           {CHATS.map((item) => (
             <button
@@ -127,11 +130,14 @@ export function Board() {
               onClick={() => openChat(item.id)}
             >
               <span className="sc-ai-chat-title">
-                <Icon name="message" size={12} />
+                <Icon name={item.icon} size={16} />
                 {item.title}
               </span>
               <span className="sc-ai-chat-preview">{item.preview}</span>
-              <span className="sc-ai-chat-when">{item.when}</span>
+              <span className="sc-ai-chat-when if-ico-row">
+                <Icon name="clock" size={12} />
+                {item.when}
+              </span>
             </button>
           ))}
         </div>
@@ -139,7 +145,10 @@ export function Board() {
 
       <section className="sc-ai-stage" aria-label="Chat">
         <header className="sc-ai-head">
-          <h1>{piece}</h1>
+          <h1 className="if-ico-row">
+            <Icon name="message" size={16} />
+            {piece}
+          </h1>
           <button
             type="button"
             className="sc-ai-gear"
@@ -192,7 +201,8 @@ export function Board() {
               )
             )}
             {pending ? (
-              <p className="sc-ai-pending" aria-live="polite">
+              <p className="sc-ai-pending if-ico-row" aria-live="polite">
+                <Icon name="activity" size={12} />
                 Writing
               </p>
             ) : null}
@@ -207,6 +217,7 @@ export function Board() {
               send();
             }}
           >
+            <Icon name="quote" size={16} />
             <input
               ref={box}
               type="text"
@@ -228,14 +239,29 @@ export function Board() {
         <div className="sc-ai-inspect">
           {inspect?.kind === "settings" ? (
             <div key="settings" className="sc-fresh">
-              <h2>Settings</h2>
-              <p>Model · local</p>
-              <p>Voice · the next line</p>
-              <p>No live model. Replies stay on this sheet.</p>
+              <h2 className="if-ico-row">
+                <Icon name="sliders" size={16} />
+                Settings
+              </h2>
+              <p className="if-ico-row">
+                <Icon name="terminal" size={12} />
+                Model · local
+              </p>
+              <p className="if-ico-row">
+                <Icon name="quote" size={12} />
+                Voice · the next line
+              </p>
+              <p className="if-ico-row">
+                <Icon name="shield" size={12} />
+                No live model. Replies stay on this sheet.
+              </p>
             </div>
           ) : looked ? (
             <div key={looked.id} className="sc-fresh">
-              <h2>This line</h2>
+              <h2 className="if-ico-row">
+                <Icon name="expand" size={16} />
+                This line
+              </h2>
               <p>{looked.text}</p>
               <button
                 type="button"

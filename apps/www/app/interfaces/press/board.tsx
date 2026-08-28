@@ -43,7 +43,10 @@ export function Board() {
           <Brand slug="press" title="Press" />
           <p className="sc-dash-voice">On press</p>
         </div>
-        <p className="sc-dash-label">Floor</p>
+        <p className="sc-dash-label if-ico-row">
+          <Icon name="layout" size={12} />
+          Floor
+        </p>
         {[
           { id: "overview", label: "Overview", meta: "Today", icon: "layout" as const },
           { id: "jobs", label: "Jobs", meta: "4", icon: "list" as const },
@@ -70,7 +73,10 @@ export function Board() {
 
       <section className="sc-dash-main">
         <div className="sc-dash-head">
-          <h1>{page === "overview" ? "Overview" : page === "jobs" ? "Jobs" : "Invoices"}</h1>
+          <h1 className="if-ico-row">
+            <Icon name={page === "overview" ? "layout" : page === "jobs" ? "list" : "receipt"} size={16} />
+            {page === "overview" ? "Overview" : page === "jobs" ? "Jobs" : "Invoices"}
+          </h1>
           <div className="sc-dash-range" role="group" aria-label="Range">
             {(["week", "month"] as const).map((item) => (
               <button
@@ -82,6 +88,7 @@ export function Board() {
                   setMetricFresh(true);
                 }}
               >
+                <Icon name={item === "week" ? "calendar" : "history"} size={12} />
                 {item === "week" ? "Week" : "Month"}
               </button>
             ))}
@@ -126,14 +133,28 @@ export function Board() {
                 }}
               >
                 <span className="if-ico-row">
-                  <Icon name="file-text" size={16} />
+                  <Icon
+                    name={item.state === "On press" ? "printer" : item.state === "Proof" ? "eye" : item.state === "Invoice" ? "receipt" : "edit"}
+                    size={16}
+                  />
                   <span>
                     {item.name}
                     <br />
-                    <small>{item.city} · {item.weeks} weeks</small>
+                    <small className="if-ico-row">
+                      <Icon name="map-pin" size={12} />
+                      {item.city}
+                      <Icon name="calendar" size={12} />
+                      {item.weeks} weeks
+                    </small>
                   </span>
                 </span>
-                <span>{item.state}</span>
+                <span className="if-ico-row">
+                  <Icon
+                    name={item.state === "On press" ? "printer" : item.state === "Proof" ? "file-text" : item.state === "Invoice" ? "receipt" : "quote"}
+                    size={12}
+                  />
+                  {item.state}
+                </span>
               </button>
             ))}
             <div key={job} className="sc-dash-detail sc-fresh">
@@ -151,9 +172,26 @@ export function Board() {
         <div className="sc-dash-inspect">
           {sheet ? (
             <div key={job} className="sc-fresh">
-              <h2>{selected.name}</h2>
+              <h2 className="if-ico-row">
+                <Icon name="file-text" size={16} />
+                {selected.name}
+              </h2>
               <p>{selected.sheet}</p>
-              <p>{selected.city} · {selected.weeks} weeks · {selected.state}</p>
+              <p className="if-ico-row">
+                <Icon name="map-pin" size={12} />
+                {selected.city}
+              </p>
+              <p className="if-ico-row">
+                <Icon name="calendar" size={12} />
+                {selected.weeks} weeks
+              </p>
+              <p className="if-ico-row">
+                <Icon
+                  name={selected.state === "On press" ? "printer" : selected.state === "Proof" ? "eye" : selected.state === "Invoice" ? "receipt" : "edit"}
+                  size={12}
+                />
+                {selected.state}
+              </p>
             </div>
           ) : null}
         </div>
