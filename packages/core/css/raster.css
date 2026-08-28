@@ -42,8 +42,8 @@
   --divider-subtle: rgba(0,0,0,0.06);
   --table-alt: rgba(0,0,0,0.02);
   --grid-line: rgba(0,0,0,0.08);
-  --radius: 6px;
-  --radius-sm: 4px;
+  --radius-sm: 4px;           /* slight Raster radius; standalone buttons */
+  --radius: var(--radius-sm);              /* alias — cards, boxes, dialogs share it */
   --radius-chrome: 0px;
   --gutter: 20px;
   --pad: 20px;
@@ -405,7 +405,7 @@ button.rs-menu-item{width:100%;text-align:left;cursor:pointer;background:none;bo
 /* ── Dialog: one question, two equal actions, no third option.
    Nested actions use Steve’s innerRadius of the frame. ── */
 .rs-dialog{
-  --rs-out:var(--radius);
+  --rs-out:var(--radius-sm);
   --rs-gap:20px;
   --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
   max-width:320px;
@@ -413,7 +413,7 @@ button.rs-menu-item{width:100%;text-align:left;cursor:pointer;background:none;bo
   border-radius:var(--rs-out);
   padding:var(--rs-gap);
   background:var(--bg);
-  box-shadow:0 12px 32px rgba(0,0,0,0.08)
+  box-shadow:none
 }
 dialog.rs-dialog{color:var(--text)}
 dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
@@ -432,7 +432,7 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 
 /* ── Card: hairline frame. Nested corners use Steve’s innerRadius. ── */
 .rs-card{
-  --rs-out:var(--radius);
+  --rs-out:var(--radius-sm);
   --rs-gap:20px;
   --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
   border:1px solid var(--divider);
@@ -459,7 +459,7 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
    Do not reassign --rs-out on the inner frame: that cycles the custom
    property and the used radius becomes 0. ── */
 .rs-nest{
-  --rs-out:var(--radius);
+  --rs-out:var(--radius-sm);
   --rs-gap:var(--pad);
   --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
   box-sizing:border-box;
@@ -623,14 +623,14 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .rs-popover-body{color:var(--text-secondary);margin:0}
 
 /* ── Sheet: a native <dialog> parked at the edge ── */
-dialog.rs-sheet{position:fixed;inset:0 0 0 auto;margin:0;height:100dvh;max-height:none;width:360px;max-width:85vw;border:none;border-left:1px solid var(--divider);border-radius:0;padding:24px 20px;background:var(--bg);color:var(--text);box-shadow:-12px 0 32px rgba(0,0,0,0.06)}
+dialog.rs-sheet{position:fixed;inset:0 0 0 auto;margin:0;height:100dvh;max-height:none;width:360px;max-width:85vw;border:none;border-left:1px solid var(--divider);border-radius:var(--radius-sm) 0 0 var(--radius-sm);padding:24px 20px;background:var(--bg);color:var(--text);box-shadow:none}
 dialog.rs-sheet::backdrop{background:rgba(0,0,0,0.25)}
-dialog.rs-sheet-left{inset:0 auto 0 0;border-left:none;border-right:1px solid var(--divider);box-shadow:12px 0 32px rgba(0,0,0,0.06)}
+dialog.rs-sheet-left{inset:0 auto 0 0;border-left:none;border-right:1px solid var(--divider);border-radius:0 var(--radius-sm) var(--radius-sm) 0;box-shadow:none}
 .rs-sheet-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}
 .rs-sheet-body{font-size:13.5px;line-height:1.6;letter-spacing:-.01em;color:var(--text-secondary);margin:0}
 
 /* ── Drawer: a native <dialog> from the bottom edge. No shadow. ── */
-dialog.rs-drawer{position:fixed;inset:auto 0 0 0;margin:0;width:100%;max-width:none;height:auto;max-height:85dvh;border:none;border-top:1px solid var(--divider);border-radius:0;padding:24px 20px;background:var(--bg);color:var(--text);box-shadow:none}
+dialog.rs-drawer{position:fixed;inset:auto 0 0 0;margin:0;width:100%;max-width:none;height:auto;max-height:85dvh;border:none;border-top:1px solid var(--divider);border-radius:var(--radius-sm) var(--radius-sm) 0 0;padding:24px 20px;background:var(--bg);color:var(--text);box-shadow:none}
 dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-drawer-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}
 .rs-drawer-body{font-size:13.5px;line-height:1.6;letter-spacing:-.01em;color:var(--text-secondary);margin:0}
@@ -870,7 +870,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 @media(max-width:480px){.rs-theme-toggle{right:25px}}
 
 /* ── Callout: a tinted, accent-edged note inside running copy ── */
-.rs-callout{background:var(--table-alt);border:1px solid var(--divider);border-left:3px solid var(--accent);border-radius:var(--radius);padding:16px 20px}
+.rs-callout{background:var(--table-alt);border:1px solid var(--divider);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:16px 20px}
 .rs-callout p{font-size:14px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.6;margin:0}
 .rs-callout p strong{color:var(--text);font-weight:600}
 @media(max-width:640px){.rs-callout{padding:14px 16px}}
@@ -1170,7 +1170,6 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
   .rs-dialog{
     max-width:calc(100vw - 32px);
     width:calc(100vw - 32px);
-    border-radius:0;
     box-shadow:none;
     padding:24px 20px;
   }

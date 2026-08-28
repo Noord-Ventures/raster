@@ -20,6 +20,7 @@ describe("concentric radius", () => {
   it("fits the −padding isosurface and clamps at 0", () => {
     expect(innerRadius(28, 16)).toBe(12);
     expect(concentricInner(28, 16)).toBe(12);
+    expect(innerRadius(4, 20)).toBe(0);
     expect(innerRadius(6, 20)).toBe(0);
     expect(innerRadius(0, 8)).toBe(0);
     expect(innerRadius(28, 0)).toBe(28);

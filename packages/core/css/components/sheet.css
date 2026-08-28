@@ -1,6 +1,6 @@
 /* ── Sheet: a native <dialog> parked at the edge ── */
-dialog.rs-sheet{position:fixed;inset:0 0 0 auto;margin:0;height:100dvh;max-height:none;width:360px;max-width:85vw;border:none;border-left:1px solid var(--divider);border-radius:0;padding:24px 20px;background:var(--bg);color:var(--text);box-shadow:-12px 0 32px rgba(0,0,0,0.06)}
+dialog.rs-sheet{position:fixed;inset:0 0 0 auto;margin:0;height:100dvh;max-height:none;width:360px;max-width:85vw;border:none;border-left:1px solid var(--divider);border-radius:var(--radius-sm) 0 0 var(--radius-sm);padding:24px 20px;background:var(--bg);color:var(--text);box-shadow:none}
 dialog.rs-sheet::backdrop{background:rgba(0,0,0,0.25)}
-dialog.rs-sheet-left{inset:0 auto 0 0;border-left:none;border-right:1px solid var(--divider);box-shadow:12px 0 32px rgba(0,0,0,0.06)}
+dialog.rs-sheet-left{inset:0 auto 0 0;border-left:none;border-right:1px solid var(--divider);border-radius:0 var(--radius-sm) var(--radius-sm) 0;box-shadow:none}
 .rs-sheet-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}
 .rs-sheet-body{font-size:13.5px;line-height:1.6;letter-spacing:-.01em;color:var(--text-secondary);margin:0}

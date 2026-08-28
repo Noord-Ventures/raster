@@ -1,10 +1,10 @@
-/* Use field: a 204-module composition. Paper, hairlines, no radius. */
+/* Use field: a 204-module composition. Paper, hairlines, slight Raster radius. */
 .rs-use {
   isolation: isolate;
   background-color: var(--bg);
   background-image: none;
   border: 1px solid var(--divider);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   box-shadow: none;
   display: grid;
   grid-template-columns: 184px minmax(0, 1fr);
@@ -16,7 +16,7 @@
   isolation: isolate;
   background-color: var(--bg);
   border: 1px solid var(--divider);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   box-shadow: none;
   margin: 8px 0 32px;
   overflow: hidden;

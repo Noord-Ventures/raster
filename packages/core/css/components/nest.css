@@ -3,7 +3,7 @@
    Do not reassign --rs-out on the inner frame: that cycles the custom
    property and the used radius becomes 0. ── */
 .rs-nest{
-  --rs-out:var(--radius);
+  --rs-out:var(--radius-sm);
   --rs-gap:var(--pad);
   --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
   box-sizing:border-box;

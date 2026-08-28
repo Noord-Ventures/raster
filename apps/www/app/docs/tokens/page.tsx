@@ -58,8 +58,8 @@ export default function TokensPage() {
 
         <h2 className="section-label">Radius</h2>
         <p className="rs-t-body">
-          Chrome stays {radius.chrome}. Surfaces that use a radius keep nested
-          corners concentric: {radius.concentric}.
+          {radius.rule} Chrome stays {radius.chrome}. Nested corners stay
+          concentric: {radius.concentric}.
         </p>
         <CodeBlock
           code={`import { innerRadius, concentricInner, concentricOuter } from "@noorddev/raster";

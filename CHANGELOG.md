@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Slight Raster radius: `--radius-sm` is 4px, the standalone button token. Cards, boxes, callouts, dialogs, sheets, drawers, catalog frames, and interface scene frames share it. `--radius` aliases `--radius-sm`. Nested inners still follow Steve Ruiz. Chrome, icon marks, empty, and charts stay 0. No shadow. Does not publish.
 - Raster icons: first complete family in `@noorddev/raster-react`. Same 16 module / 1px language. Catalog on /components/icons. Site theme-toggle is the family. Does not publish.
 - Site 204 module grid is visible on home, under the components rail, through About, and on Interfaces (title cell + field around the crops). `--grid-line` reads as a hairline. No page-frame.
 - Chrome polish: calendar days are square; month chevrons sit 1px down; grouped seams and dividers use `--divider`; button / input groups inherit `--radius-sm`. Grouped T-junctions are one stroke. Field input is a 40px integer control with 8px / 16px label and hint.
