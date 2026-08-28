@@ -290,7 +290,8 @@ describe("Icon", () => {
     const cells = container.querySelectorAll(".rs-icon-cell");
     expect(cells.length).toBeGreaterThanOrEqual(80);
     const firstPair = container.querySelector(".rs-icon-pair");
-    const sizes = [...firstPair.querySelectorAll("svg")].map((svg) => svg.getAttribute("width"));
+    expect(firstPair).toBeTruthy();
+    const sizes = [...firstPair!.querySelectorAll("svg")].map((svg) => svg.getAttribute("width"));
     expect(sizes).toEqual(["12", "16"]);
   });
 });
