@@ -103,6 +103,18 @@ if (aboutEra.includes("background-image")) {
 if (!ifCss.includes(".if-board .rs-sidebar-item") || !ifCss.includes("min-height: 44px")) {
   fail("Interface sidebars must use 44pt rows on the phone");
 }
+if (/\.if-rail \{[^}]*background:\s*var\(--bg\)/s.test(ifCss)) {
+  fail("Interfaces rail must not cover the site module grid");
+}
+if (!ifCss.includes("body:has(.if-index)") || !ifCss.includes("repeating-linear-gradient")) {
+  fail("Interfaces must paint the 204 field, including horizontals");
+}
+if (/if-list \{[^}]*padding:\s*24px/s.test(ifCss)) {
+  fail("Interfaces cards must sit on the 204, not 24px off it");
+}
+if (!ifCss.includes(".if-title {\n  min-height: 204px")) {
+  fail("Interfaces title must occupy a 204 cell");
+}
 
 const phoneCss = readFileSync(join(root, "packages/core/css/phone.css"), "utf8");
 const tokensCss = readFileSync(join(root, "packages/core/css/tokens.css"), "utf8");

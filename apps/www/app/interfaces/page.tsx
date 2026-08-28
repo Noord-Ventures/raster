@@ -15,7 +15,7 @@ export default function InterfacesPage() {
     <div className="if-index">
       <InterfacesNav />
       <main className="site-content-wide">
-        <header className="cover" style={{ paddingBottom: 24, maxWidth: 592 }}>
+        <header className="if-title">
           <h1 className="rs-t-display">Interfaces</h1>
           <p className="rs-t-sub">Six little tools. A poster crop of each.</p>
         </header>

@@ -529,6 +529,13 @@ jobs:
       - name: Interfaces is six posters
         run: |
           node apps/www/scripts/check-interfaces.mjs
+          grep -q 'body:has(.if-index)' apps/www/app/interfaces/interfaces.css
+          grep -q 'min-height: 204px' apps/www/app/interfaces/interfaces.css
+          grep -q 'margin-top: 204px' apps/www/app/interfaces/interfaces.css
+          if grep -n 'background: var(--bg)' apps/www/app/interfaces/interfaces.css | grep -q if-rail; then
+            echo "Interfaces rail must not cover the 204"
+            exit 1
+          fi
           grep -q 'href: "/interfaces"' apps/www/components/site-chrome.tsx
           grep -q 'label: "Interfaces"' apps/www/components/site-chrome.tsx
           test -f apps/www/app/interfaces/FEATURE.md
