@@ -1,7 +1,19 @@
-/* ── Dialog: one question, two equal actions, no third option ── */
-.rs-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+/* ── Dialog: one question, two equal actions, no third option.
+   Nested actions use Steve’s innerRadius of the frame. ── */
+.rs-dialog{
+  --rs-out:var(--radius);
+  --rs-gap:20px;
+  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  max-width:320px;
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  padding:var(--rs-gap);
+  background:var(--bg);
+  box-shadow:0 12px 32px rgba(0,0,0,0.08)
+}
 dialog.rs-dialog{color:var(--text)}
 dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}
 .rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}
 .rs-dialog-actions{display:flex;justify-content:flex-end;gap:8px}
+.rs-dialog .rs-btn-primary,.rs-dialog .rs-btn-ghost{border-radius:var(--rs-in)}

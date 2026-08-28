@@ -59,15 +59,16 @@ export default function TokensPage() {
         <h2 className="section-label">Radius</h2>
         <p className="rs-t-body">
           Chrome stays {radius.chrome}. Surfaces that use a radius keep nested
-          corners concentric: inner = {radius.concentric}.
+          corners concentric: {radius.concentric}.
         </p>
         <CodeBlock
-          code={`import { concentricInner, concentricOuter } from "@noorddev/raster";
+          code={`import { innerRadius, concentricInner, concentricOuter } from "@noorddev/raster";
 
-concentricInner(28, 16); // ${concentricInner(28, 16)}
-concentricOuter(12, 16); // 28
+innerRadius(28, 16);      // ${concentricInner(28, 16)}
+concentricInner(28, 16);  // ${concentricInner(28, 16)}
+concentricOuter(12, 16);  // 28
 
-// CSS: --rs-out and --rs-gap on .rs-nest; .rs-nest-in subtracts.`}
+// CSS: --rs-out and --rs-gap; --rs-in is the closed form of the fit.`}
         />
 
         <h2 className="section-label">Motion</h2>

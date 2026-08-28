@@ -1,4 +1,5 @@
-/* ── Calendar: a month of quiet squares; selected is ink ── */
+/* ── Calendar: a month of quiet squares; selected is ink.
+   Day corners follow inherited --rs-in (Steve’s innerRadius) when nested. ── */
 .rs-cal{width:252px}
 .rs-cal-head{display:flex;justify-content:space-between;align-items:center;min-height:26px;margin-bottom:8px}
 .rs-cal-title{font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:26px;color:var(--text)}
@@ -7,7 +8,7 @@
 .rs-cal-nav .rs-page{transform:translateY(1px)}
 .rs-cal-grid{display:grid;grid-template-columns:repeat(7,36px)}
 .rs-cal-dow{font-size:11px;font-weight:500;color:var(--text-secondary);text-align:center;padding:4px 0}
-.rs-cal-day{width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;font-variant-numeric:tabular-nums;color:var(--text);background:none;border:none;border-radius:var(--radius-sm);cursor:pointer;font-family:inherit;padding:0}
+.rs-cal-day{width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;font-variant-numeric:tabular-nums;color:var(--text);background:none;border:none;border-radius:var(--rs-in, var(--radius-sm));cursor:pointer;font-family:inherit;padding:0}
 .rs-cal-day:hover{background:var(--divider-subtle)}
 .rs-cal-day-out{color:var(--text-secondary);opacity:.45}
 .rs-cal-day-today{box-shadow:inset 0 0 0 1px var(--divider)}

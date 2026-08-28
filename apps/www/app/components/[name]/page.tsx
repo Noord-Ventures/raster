@@ -445,12 +445,14 @@ import { Button } from "@/components/raster/button";
 <Badge>Recommended</Badge>
 <Badge variant="solid">Delivered</Badge>
 <Badge variant="muted">In progress</Badge>`,
-  card: `import { Card, CardBody, CardLabel, CardTitle } from "@/components/raster/card";
+  card: `import { Card, CardBody, CardInner, CardLabel, CardTitle } from "@/components/raster/card";
 
 <Card>
   <CardLabel>Case study</CardLabel>
   <CardTitle>A quieter interface</CardTitle>
-  <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>
+  <CardInner>
+    <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>
+  </CardInner>
 </Card>`,
   stepper: `import { Stepper } from "@/components/raster/stepper";
 

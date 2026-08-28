@@ -1008,9 +1008,10 @@
             "rs-card",
             "rs-card-label",
             "rs-card-title",
-            "rs-card-body"
+            "rs-card-body",
+            "rs-card-in"
           ],
-          "snippet": "<div class=\"rs-card\"><span class=\"rs-card-label\">Case study</span><h3 class=\"rs-card-title\">A quieter interface</h3><p class=\"rs-card-body\">Emphasis from weight and spacing, never from a hue.</p></div>",
+          "snippet": "<div class=\"rs-card\"><span class=\"rs-card-label\">Case study</span><h3 class=\"rs-card-title\">A quieter interface</h3><div class=\"rs-card-in\"><p class=\"rs-card-body\">Emphasis from weight and spacing, never from a hue.</p></div></div>",
           "cssOnly": false,
           "registryDependencies": []
         }
@@ -1038,7 +1039,7 @@
       "name": "concentric-radius",
       "type": "registry:component",
       "title": "Concentric radius",
-      "description": "Inner radius is max(0, outer − padding). Nested frames stay concentric. Raster chrome stays square.",
+      "description": "Inner radius from Steve Ruiz's circular-corner fit, clamped at 0. Nested frames stay concentric. Raster chrome stays square.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json"

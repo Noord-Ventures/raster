@@ -19,7 +19,7 @@ export {
 } from "./components/icon";
 export { Button, type ButtonProps } from "./components/button";
 export { Badge, type BadgeProps } from "./components/badge";
-export { Card, CardLabel, CardTitle, CardBody } from "./components/card";
+export { Card, CardInner, CardLabel, CardTitle, CardBody } from "./components/card";
 export { Input, type InputProps } from "./components/input";
 export { Checkbox, type CheckboxProps } from "./components/checkbox";
 export { RadioGroup, Radio, type RadioGroupProps, type RadioProps } from "./components/radio";
@@ -93,6 +93,7 @@ export {
   NestInner,
   concentricInner,
   concentricOuter,
+  innerRadius,
   type NestProps,
 } from "./components/concentric-radius";
 export { ButtonGroup, type ButtonGroupProps } from "./components/button-group";

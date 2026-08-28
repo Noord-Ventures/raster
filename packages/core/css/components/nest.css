@@ -1,4 +1,5 @@
-/* ── Concentric radius: inner = max(0, outer − padding) ── */
+/* ── Concentric radius: Steve Ruiz innerRadius, clamped at 0.
+   --rs-in is the closed form of the circular-corner SDF fit. ── */
 .rs-nest{
   --rs-out:var(--radius);
   --rs-gap:var(--pad);

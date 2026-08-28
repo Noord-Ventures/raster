@@ -521,7 +521,7 @@ describe("BarChart", () => {
 });
 
 describe("Nest", () => {
-  it("sets concentric custom properties and nests by subtraction", () => {
+  it("sets concentric custom properties from Steve’s innerRadius", () => {
     const { container } = render(
       <Nest radius={28} pad={16}>
         <Nest pad={8}>
@@ -537,6 +537,7 @@ describe("Nest", () => {
     expect((nests[1] as HTMLElement).style.getPropertyValue("--rs-gap")).toBe("8px");
     expect(container.querySelector(".rs-nest-in")?.textContent).toBe("Board");
     expect(concentricInner(28, 16)).toBe(12);
+    expect(concentricInner(28, 16)).not.toBe(28);
   });
 });
 
