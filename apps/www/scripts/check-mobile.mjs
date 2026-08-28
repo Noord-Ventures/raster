@@ -111,8 +111,11 @@ if (!specimen.includes("body:has(.specimen-page)") || !specimen.includes("clip-p
 if (!specimen.includes("background: transparent")) {
   fail("Homepage paper must let the site 204 verticals show through");
 }
-if (!specimen.includes("background-attachment: fixed") || !specimen.includes("background-image: var(--grid-image)")) {
-  fail("Homepage field must paint the 204 grid on .specimen");
+if (!site.includes("html::before") || !site.includes("background-image: var(--grid-image)")) {
+  fail("Site 204s must paint on html::before; overflow-x:clip drops attachment:fixed");
+}
+if (site.includes("html:has(.specimen-page)::before")) {
+  fail("Homepage must keep html::before so the 204s read");
 }
 if (/\.preview-box \{[^}]*background:\s*var\(--bg\)/s.test(site)) {
   fail("Component specimens must not paint paper over the 204s next to them");

@@ -121,7 +121,7 @@ jobs:
           fi
           grep -q 'body:has(.specimen-page)' apps/www/app/specimen.css
           grep -q 'clip-path: inset(0)' apps/www/app/specimen.css
-          grep -q 'background-attachment: fixed' apps/www/app/specimen.css
+          grep -q 'html::before' apps/www/app/site.css
           if awk '/^\.preview-box \{/,/^\}/' apps/www/app/site.css | grep -q 'background: var(--bg)'; then
             echo "Component preview must not paint paper over the 204s"
             exit 1
@@ -137,18 +137,23 @@ jobs:
           node -e '
             const { readFileSync } = require("node:fs");
             const css = readFileSync("apps/www/app/specimen.css", "utf8");
+            const site = readFileSync("apps/www/app/site.css", "utf8");
+            if (!site.includes("html::before") || !site.includes("background-image: var(--grid-image)")) {
+              console.error("Site 204s must paint on html::before; overflow-x:clip drops attachment:fixed");
+              process.exit(1);
+            }
+            if (site.includes("html:has(.specimen-page)::before")) {
+              console.error("Homepage must keep html::before so the 204s read");
+              process.exit(1);
+            }
             const hasAt = css.indexOf("body:has(.specimen-page)");
             if (hasAt < 0) {
               console.error("Homepage must keep body:has(.specimen-page)");
               process.exit(1);
             }
             const hasRule = css.slice(hasAt, css.indexOf("}", hasAt));
-            if (hasRule.includes("background-image: none")) {
+            if (hasRule.includes("background-image: none") || hasRule.includes("background: var(--bg)")) {
               console.error("Homepage must not hide the site module grid");
-              process.exit(1);
-            }
-            if (!hasRule.includes("background-image: var(--grid-image)")) {
-              console.error("Homepage must keep the site module grid");
               process.exit(1);
             }
             const pageStart = css.indexOf(".specimen-page {");

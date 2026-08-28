@@ -15,6 +15,32 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
+/* 204 verticals live on html::before. html/body overflow-x:clip drops
+   background-attachment:fixed in Chromium — the miss on this preview.
+   A fixed layer does not. Clip 21px from the left on desktop so the
+   20px inset is not a page frame. Paper sits on html; body is clear. */
+html { background-color: var(--bg); }
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: var(--grid-image);
+  background-size: var(--grid-size) 100%;
+  background-repeat: repeat-x;
+  background-position: var(--grid-pos);
+}
+@media (min-width: 481px) {
+  html::before { clip-path: inset(0 0 0 21px); }
+}
+body {
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+  background-image: none;
+}
+
 /* ── Fixed corner chrome ── */
 .logo-wrap {
   position: fixed; top: 24px; left: 20px; z-index: 200;
