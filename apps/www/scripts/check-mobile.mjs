@@ -23,6 +23,13 @@ function fail(message) {
   process.exit(1);
 }
 
+if (chrome.includes("github.com/rennvaldes")) {
+  fail("Site GitHub links must point at github.com/Noord-Ventures/raster");
+}
+if (!chrome.includes("https://github.com/Noord-Ventures/raster")) {
+  fail("Site chrome must link the canonical repo");
+}
+
 if (!layout.includes("viewportFit") || !layout.includes('"cover"')) {
   fail("Root viewport must set viewportFit cover for safe-area insets");
 }
