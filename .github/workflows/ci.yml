@@ -96,13 +96,13 @@ jobs:
           assert (w, h) == (1200, 630), f"og.png must be 1200×630, got {w}×{h}"
           '
           grep -q 'specimen-page' "$page"
-          grep -q 'isSpecimenPath' apps/www/components/crumb-bar.tsx
-          if grep -n 'if (isSpecimenPath(pathname)) return null' apps/www/components/crumb-bar.tsx; then
-            echo "Homepage must keep the site crumb bar"
+          grep -q 'rs-crumb-bar' apps/www/components/crumb-bar.tsx
+          if grep -n 'return null' apps/www/components/crumb-bar.tsx; then
+            echo "Crumb bar must run on every route, including Home and About"
             exit 1
           fi
-          if grep -n 'if (isSpecimenPath(pathname) || isFieldPath(pathname)) return null' apps/www/components/crumb-bar.tsx; then
-            echo "Homepage must keep the site crumb bar"
+          if grep -n 'isFieldPath(pathname)' apps/www/components/crumb-bar.tsx; then
+            echo "About must keep the same navbar-on-scroll as home"
             exit 1
           fi
           test -f apps/www/app/specimen.css

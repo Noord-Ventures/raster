@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import * as React from "react";
 import { rasterComponents } from "@noorddev/raster";
 import { interfaceBySlug } from "@/app/interfaces/catalog";
-import { isFieldPath, isSpecimenPath } from "@/app/specimen";
 
 interface Crumb {
   label: string;
@@ -40,9 +39,9 @@ function trailFor(pathname: string): Crumb[] {
 }
 
 /**
- * The fixed top bar, on every page. Transparent at rest; once the
- * cover scrolls away it gains the paper background and its bottom
- * hairline, and the breadcrumbs appear.
+ * The fixed top bar, on every page including Home and About.
+ * Transparent at rest; once the cover scrolls away it gains the paper
+ * background and its bottom hairline, and the breadcrumbs appear.
  */
 export function CrumbBar() {
   const pathname = usePathname();
@@ -56,9 +55,6 @@ export function CrumbBar() {
   }, []);
 
   const trail = trailFor(pathname);
-
-  /* About stays a flush field. Homepage keeps the same scroll-in chrome. */
-  if (isFieldPath(pathname) && !isSpecimenPath(pathname)) return null;
 
   return (
     <nav className={`rs-crumb-bar${scrolled ? " rs-crumb-bar-scrolled" : ""}`} aria-label="Breadcrumbs">

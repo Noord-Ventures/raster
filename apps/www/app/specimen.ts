@@ -27,7 +27,7 @@ export function isSpecimenPath(pathname: string) {
   return normalizePath(pathname) === "/";
 }
 
-/** Flush field pages. About stays without a crumb bar; homepage keeps site chrome. */
+/** Flush field pages. Home and About both keep the scroll-in crumb bar. */
 export function isFieldPath(pathname: string) {
   const path = normalizePath(pathname);
   return path === "/" || path === "/about";

@@ -45,6 +45,23 @@ if (!phone.includes(".theme-toggle") || !phone.includes("display: flex")) {
 if (phone.includes(".theme-toggle { display: none") || /corner-nav,\s*\.theme-toggle/.test(phone)) {
   fail("Do not hide the theme toggle on phone");
 }
+if (!phone.includes("overflow: hidden") || !phone.includes("flex-wrap: nowrap")) {
+  fail("Phone crumb bar must clip to one line; crumbs must not wrap out of the bar");
+}
+if (chrome.includes("toggle-track") || chrome.includes("icon-moon") || chrome.includes("icon-sun")) {
+  fail("Site chrome toggle must show one icon for the current scheme, not a sliding pair");
+}
+if (!chrome.includes("<ThemeIcon dark={dark} />")) {
+  fail("Site chrome toggle must render one mark matching the current scheme");
+}
+
+const crumbs = readFileSync(join(root, "apps/www/components/crumb-bar.tsx"), "utf8");
+if (crumbs.includes("return null") || crumbs.includes("isFieldPath")) {
+  fail("About must use the same scroll-in crumb bar as home");
+}
+if (!crumbs.includes('parts[0] === "about"')) {
+  fail("Crumb bar must trail About");
+}
 
 if (!nav.includes("MobileToc") || !nav.includes("toc-mobile-item")) {
   fail("DocsNav must render a stacked phone TOC");

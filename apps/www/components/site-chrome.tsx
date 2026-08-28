@@ -83,10 +83,7 @@ export function SiteChrome() {
       </nav>
 
       <button type="button" className="theme-toggle" onClick={toggle} aria-label="Toggle color scheme">
-        <span className={`toggle-track${dark ? " is-dark" : ""}`}>
-          <Icon name="moon" size={16} className="icon-moon" />
-          <Icon name="sun" size={16} className="icon-sun" />
-        </span>
+        <ThemeIcon dark={dark} />
       </button>
 
       <button
