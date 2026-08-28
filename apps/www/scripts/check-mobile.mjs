@@ -51,6 +51,9 @@ if (!phone.includes("overflow: hidden") || !phone.includes("flex-wrap: nowrap"))
 if (phone.includes("translateY(3px)")) {
   fail("Do not translate crumb type 3px down; that sits ink below the icon midline");
 }
+if (!phone.includes(".site-logo-mark") || !phone.includes("top: 1px")) {
+  fail("Phone logo mark must sit on the same optical middle as Raster / crumbs");
+}
 if (!phone.includes("flex: 1 1 0")) {
   fail("Phone crumb leaf must shrink and ellipsize so the trail stays one line at 375");
 }

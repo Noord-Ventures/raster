@@ -18,7 +18,8 @@ html, body { margin: 0; padding: 0; }
 /* ── Fixed corner chrome ── */
 .logo-wrap {
   position: fixed; top: 24px; left: 20px; z-index: 200;
-  display: flex; align-items: center; gap: 12px;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  height: 24px;
 }
 /* The Raster glyph, bare: ink on the page, no tile (house spec: 20px). */
 .site-logo {
@@ -107,9 +108,16 @@ html, body { margin: 0; padding: 0; }
   .logo-wrap {
     top: calc(8px + env(safe-area-inset-top, 0px));
     left: calc(8px + env(safe-area-inset-left, 0px));
+    height: 44px;
+    min-height: 44px;
   }
   .site-logo {
     width: 44px; height: 44px; min-width: 44px; min-height: 44px;
+  }
+  /* Rotated mark reads high vs 15px Raster/crumbs; drop it onto that middle. */
+  .site-logo-mark {
+    position: relative;
+    top: 1px;
   }
   .corner-nav { display: none; }
   .theme-toggle {
