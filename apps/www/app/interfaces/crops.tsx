@@ -85,9 +85,19 @@ function RoomCrop() {
     <div className="if-crop-scene if-crop-kamer">
       <Lockup slug="room" />
       <p className="if-crop-kicker">Press</p>
-      <p className="if-crop-line">Press run 14 is on the sheet. Fee is on page one.</p>
+      <p className="if-crop-line">
+        Press run 14 is
+        <br />
+        on the sheet.
+        <br />
+        Fee is on page one.
+      </p>
       <p className="if-crop-reply">
-        Logged. Weeks 4–7. I will keep the timeline under the fee.
+        Logged. Weeks 4–7.
+        <br />
+        I will keep the timeline
+        <br />
+        under the fee.
         <em>Sheet · agent</em>
       </p>
     </div>

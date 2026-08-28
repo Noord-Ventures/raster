@@ -261,7 +261,7 @@
   position: absolute;
   left: 20px;
   top: 20px;
-  width: 440px;
+  width: 348px;
 }
 .if-crop-kamer .if-crop-kicker { margin-top: 32px; }
 .if-crop-kamer .if-crop-line { margin-top: 8px; font-size: 22px; letter-spacing: -0.02em; }
@@ -274,7 +274,7 @@
   letter-spacing: -0.01em;
   line-height: 1.45;
   color: var(--text-secondary);
-  width: 380px;
+  width: 348px;
 }
 .if-crop-reply em {
   display: block;

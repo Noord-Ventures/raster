@@ -17,7 +17,7 @@ Each app has two to three levels of use: list → detail → one level deeper. I
 | Surface | Route | Click path | Done |
 | --- | --- | --- | --- |
 | Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. Each card is a poster crop, then the English name. |
-| Line | `/interfaces/line` | Interfaces → Line | Modern writing chat. List → chat → a line. Centered composer, aligned. |
+| Line | `/interfaces/line` | Interfaces → Line | Modern writing chat. List → chat → a line. Centered measure. Composer in the pane, aligned. |
 | Press | `/interfaces/press` | Interfaces → Press | Ops app. Floor → job → sheet. Hue in the rail. One Crouwel spot. |
 | Wall | `/interfaces/wall` | Interfaces → Wall | Social wall. Feed → thread → profile. Faces of people. |
 | Night | `/interfaces/night` | Interfaces → Night | SF dispatch. List → unit → trip. Readable map, traffic, one list scale. |

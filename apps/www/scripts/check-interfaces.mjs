@@ -92,6 +92,22 @@ if (crops.includes("the weeks follow it")) {
   console.error("Line crop must not run a sentence through the tile edge");
   process.exit(1);
 }
+const roomCrop = css.slice(css.indexOf(".if-crop-kamer {"), css.indexOf("}", css.indexOf(".if-crop-kamer {")));
+if (!/width:\s*348px/.test(roomCrop) || /width:\s*440px/.test(roomCrop)) {
+  console.error("Room crop type must wrap inside the tile, not clip mid-word");
+  process.exit(1);
+}
+const lineScene = readFileSync(join(dir, "line", "scene.css"), "utf8");
+if (!lineScene.includes("--sc-ai-measure") || !lineScene.includes("calc(100% - 80px)")) {
+  console.error("Line composer must be a centered measure in the pane, not a full-width bar");
+  process.exit(1);
+}
+const dockStart = lineScene.indexOf(".sc-ai-dock {");
+const dockRule = lineScene.slice(dockStart, lineScene.indexOf("}", dockStart));
+if (/border-top:\s*1px/.test(dockRule)) {
+  console.error("Line dock must not be a full-pane bar");
+  process.exit(1);
+}
 
 for (const name of names) {
   if (!catalog.includes(`title: "${name}"`)) {
