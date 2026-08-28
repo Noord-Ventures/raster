@@ -120,10 +120,11 @@
     }
   },
   "radius": {
-    "base": 6,
     "small": 4,
+    "base": 4,
     "chrome": 0,
-    "concentric": "Steve Ruiz innerRadius, clamped at 0"
+    "concentric": "Steve Ruiz innerRadius, clamped at 0",
+    "rule": "One token: --radius-sm (4px), the standalone button radius. Cards and boxes share it. Nested inners follow Steve Ruiz. Chrome stays 0."
   },
   "icons": {
     "sizes": [

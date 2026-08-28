@@ -8,8 +8,8 @@
   --divider-subtle: rgba(0,0,0,0.06);
   --table-alt: rgba(0,0,0,0.02);
   --grid-line: rgba(0,0,0,0.08);
-  --radius: 6px;
-  --radius-sm: 4px;
+  --radius-sm: 4px;           /* slight Raster radius; standalone buttons */
+  --radius: var(--radius-sm);              /* alias — cards, boxes, dialogs share it */
   --radius-chrome: 0px;
   --gutter: 20px;
   --pad: 20px;

@@ -1,7 +1,7 @@
 /* ── Dialog: one question, two equal actions, no third option.
    Nested actions use Steve’s innerRadius of the frame. ── */
 .rs-dialog{
-  --rs-out:var(--radius);
+  --rs-out:var(--radius-sm);
   --rs-gap:20px;
   --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
   max-width:320px;
@@ -9,7 +9,7 @@
   border-radius:var(--rs-out);
   padding:var(--rs-gap);
   background:var(--bg);
-  box-shadow:0 12px 32px rgba(0,0,0,0.08)
+  box-shadow:none
 }
 dialog.rs-dialog{color:var(--text)}
 dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}

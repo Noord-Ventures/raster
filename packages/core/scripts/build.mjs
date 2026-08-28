@@ -38,8 +38,8 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --divider-subtle: ${color.light.dividerSubtle};
   --table-alt: ${color.light.tableAlt};
   --grid-line: ${color.light.gridLine};
-  --radius: ${radius.base}px;
-  --radius-sm: ${radius.small}px;
+  --radius-sm: ${radius.small}px;           /* slight Raster radius; standalone buttons */
+  --radius: var(--radius-sm);              /* alias — cards, boxes, dialogs share it */
   --radius-chrome: ${radius.chrome}px;
   --gutter: ${grid.gutter}px;
   --pad: ${grid.pad}px;

@@ -28,7 +28,8 @@ describe("generated raster.css", () => {
     expect(rasterCss).toContain(`--bg: ${rasterTokens.color.light.paper}`);
     expect(rasterCss).toContain(`--text: ${rasterTokens.color.light.ink}`);
     expect(rasterCss).toContain(`--bg: ${rasterTokens.color.dark.black}`);
-    expect(rasterCss).toContain(`--radius: ${rasterTokens.radius.base}px`);
+    expect(rasterCss).toContain(`--radius-sm: ${rasterTokens.radius.small}px`);
+    expect(rasterCss).toContain("--radius: var(--radius-sm)");
     expect(rasterCss).toContain(`--grid-size: ${rasterTokens.grid.module}px`);
   });
 
@@ -228,6 +229,34 @@ describe("tokens", () => {
 
   it("grid module = column + gutter", () => {
     expect(rasterTokens.grid.module).toBe(rasterTokens.grid.column + rasterTokens.grid.gutter);
+  });
+
+  it("uses one slight Raster radius, the standalone button token", () => {
+    expect(rasterTokens.radius.small).toBe(4);
+    expect(rasterTokens.radius.base).toBe(rasterTokens.radius.small);
+    expect(rasterTokens.radius.small).toBeGreaterThanOrEqual(2);
+    expect(rasterTokens.radius.small).toBeLessThanOrEqual(4);
+    expect(rasterTokens.radius.rule).toMatch(/--radius-sm/);
+    expect(rasterCss).toContain("--radius-sm: 4px");
+    expect(rasterCss).toContain("--radius: var(--radius-sm)");
+    expect(rasterCss).toMatch(/\.rs-btn-primary\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(rasterCss).toMatch(/\.rs-card\{[^}]*--rs-out:var\(--radius-sm\)/);
+    expect(rasterCss).toMatch(/\.rs-dialog\{[^}]*--rs-out:var\(--radius-sm\)/);
+    expect(rasterCss).toMatch(/\.rs-callout\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(rasterCss).toMatch(/dialog\.rs-sheet\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(rasterCss).toMatch(/dialog\.rs-drawer\{[^}]*border-radius:var\(--radius-sm\)/);
+    const site = readFileSync(join(pkgDir, "../../apps/www/app/site.css"), "utf8");
+    expect(site).toMatch(/\.gallery-item \{[^}]*border-radius: var\(--radius-sm\)/);
+    expect(site).toMatch(/\.preview-box \{[^}]*border-radius: var\(--radius-sm\)/);
+    const frames = readFileSync(join(pkgDir, "../../apps/www/app/interfaces/interfaces.css"), "utf8");
+    expect(frames).toMatch(/\.if-tile \{[^}]*border-radius: var\(--radius-sm\)/);
+    expect(frames).toMatch(/\.if-specimen \{[^}]*border-radius: var\(--radius-sm\)/);
+    const use = readFileSync(join(pkgDir, "../../apps/www/components/examples/use.css"), "utf8");
+    expect(use).toMatch(/\.rs-use \{[^}]*border-radius: var\(--radius-sm\)/);
+    expect(use).toMatch(/\.rs-scene \{[^}]*border-radius: var\(--radius-sm\)/);
+    expect(rasterCss).toMatch(/\.rs-empty\{[^}]*border-radius:0/);
+    expect(rasterCss).toMatch(/\.rs-chart\{[^}]*border-radius:0/);
+    expect(rasterTokens.radius.chrome).toBe(0);
   });
 
   it("ships the concentric-radius law", () => {

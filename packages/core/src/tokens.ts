@@ -84,12 +84,19 @@ export const rasterTokens = {
     },
   },
   radius: {
-    base: 6,
+    /**
+     * Slight Raster radius. Same token as the standalone button (`--radius-sm`).
+     * Cards, boxes, callouts, dialogs, sheets, drawers, and catalog frames
+     * share this 4px. Not 8–12. `--radius` aliases it.
+     */
     small: 4,
-    /** Raster chrome stays square. Surfaces that use a radius follow the concentric law. */
+    /** Alias of `small`. Surfaces that already read `--radius` stay on this family. */
+    base: 4,
+    /** Page chrome, icon marks, empty, and charts stay square. */
     chrome: 0,
     /** Steve Ruiz innerRadius (circular-corner fit), clamped at 0. */
     concentric: "Steve Ruiz innerRadius, clamped at 0",
+    rule: "One token: --radius-sm (4px), the standalone button radius. Cards and boxes share it. Nested inners follow Steve Ruiz. Chrome stays 0.",
   },
   icons: {
     sizes: [12, 16],

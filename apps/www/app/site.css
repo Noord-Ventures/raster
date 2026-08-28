@@ -289,8 +289,9 @@ html, body { margin: 0; padding: 0; }
   background-color: var(--bg);
   background-image: none;
   border: 1px solid var(--divider);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   box-shadow: none;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: border-color var(--duration-snap) var(--ease);
@@ -306,7 +307,7 @@ html, body { margin: 0; padding: 0; }
 .gallery-meta p { font-size: 12.5px; color: var(--text-secondary); letter-spacing: -.01em; line-height: 1.5; margin: 0; }
 
 /* ── Component page ── */
-.preview-box { border: 1px solid var(--divider); border-radius: 0; padding: 56px 32px; min-height: 204px; display: flex; align-items: center; justify-content: center; margin: 24px 0 16px; background: var(--bg); }
+.preview-box { border: 1px solid var(--divider); border-radius: var(--radius-sm); padding: 56px 32px; min-height: 204px; display: flex; align-items: center; justify-content: center; margin: 24px 0 16px; background: var(--bg); }
 .preview-box > * { max-width: 100%; }
 .preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 32px 24px; }
 .preview-cluster { display: flex; gap: 10px; align-items: center; }
