@@ -159,16 +159,10 @@ html, body { margin: 0; padding: 0; }
     overflow: hidden;
     padding: 0 calc(108px + env(safe-area-inset-right, 0px)) 0 calc(60px + env(safe-area-inset-left, 0px));
   }
-  /* Inter’s cap-height sits ~3px above the 44px icon midline (logo / toggle / menu). */
-  .rs-crumb-root,
-  .rs-crumb-bar .rs-crumbs-link,
-  .rs-crumb-bar .rs-crumbs-sep,
-  .rs-crumb-bar .rs-crumbs-here {
-    transform: translateY(3px);
-  }
   .rs-crumb-root {
     display: inline-flex; align-items: center;
     flex-shrink: 0; height: 44px; min-height: 0;
+    line-height: 1;
   }
   .rs-crumb-bar .rs-crumbs {
     display: flex;

@@ -48,8 +48,8 @@ if (phone.includes(".theme-toggle { display: none") || /corner-nav,\s*\.theme-to
 if (!phone.includes("overflow: hidden") || !phone.includes("flex-wrap: nowrap")) {
   fail("Phone crumb bar must clip to one line; crumbs must not wrap out of the bar");
 }
-if (!phone.includes("translateY(3px)") || !phone.includes(".rs-crumbs-here")) {
-  fail("Phone crumb type must sit on the same optical middle as the 44px icons");
+if (phone.includes("translateY(3px)")) {
+  fail("Do not translate crumb type 3px down; that sits ink below the icon midline");
 }
 if (!phone.includes("flex: 1 1 0")) {
   fail("Phone crumb leaf must shrink and ellipsize so the trail stays one line at 375");
