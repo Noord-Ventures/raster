@@ -145,6 +145,12 @@ if (!tokensCss.includes("--hit:44px") && !tokensCss.includes("--hit: 44px")) {
 if (!phoneCss.includes("@media(max-width:640px)") && !phoneCss.includes("@media (max-width: 640px)")) {
   fail("phone.css must recut interactive controls at 640");
 }
+if (!phoneCss.includes(".rs-cal-day") || !/\.rs-cal-day\{[^}]*width:36px;\s*height:36px/.test(phoneCss)) {
+  fail("Phone calendar selected day must stay a 36×36 square, not a 44-tall cell");
+}
+if (/\.rs-cal-day\{[^}]*height:var\(--hit\)/.test(phoneCss) || /\.rs-cal-grid\{[^}]*minmax\(0,1fr\)/.test(phoneCss)) {
+  fail("Do not stretch calendar days to fluid × 44 on phone");
+}
 for (const sel of [".rs-btn-primary", ".rs-input", ".rs-tab", ".rs-switch"]) {
   if (!phoneCss.includes(sel)) fail(`phone.css must recut ${sel}`);
 }

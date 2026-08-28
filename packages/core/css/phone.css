@@ -240,18 +240,19 @@
     min-height:var(--hit);
   }
 
-  /* Calendar: full width, 44×44 days */
-  .rs-cal{width:100%}
+  /* Calendar: 36×36 day squares (PR 17). Nav chevrons stay 44pt. */
+  .rs-cal{width:252px}
+  .rs-cal-head{min-height:var(--hit);align-items:center}
   .rs-cal-title{font-size:var(--control-fs)}
-  .rs-cal-nav{gap:8px}
-  .rs-cal-grid{grid-template-columns:repeat(7,minmax(0,1fr));width:100%}
-  .rs-cal-dow{font-size:13px;padding:8px 0}
+  .rs-cal-nav{gap:8px;flex-shrink:0}
+  .rs-cal-grid{grid-template-columns:repeat(7,36px);width:252px}
+  .rs-cal-dow{font-size:13px;padding:4px 0}
   .rs-cal-day{
-    width:100%;
-    height:var(--hit);
-    min-height:var(--hit);
-    font-size:var(--control-fs);
-    border-radius:0;
+    width:36px;
+    height:36px;
+    min-width:36px;
+    min-height:36px;
+    box-sizing:border-box;
   }
 
   /* Sidebar: 44pt rows, 16px. Desktop padding:8px 0 32px stays in sidebar.css. */
