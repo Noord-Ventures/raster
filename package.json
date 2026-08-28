@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rennvaldes/raster.git"
+    "url": "git+https://github.com/Noord-Ventures/raster.git"
   },
   "homepage": "https://raster.noord.dev",
   "type": "module",
