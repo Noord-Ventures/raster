@@ -165,6 +165,11 @@
 }
 .sc-dash-job[aria-current="true"] { font-weight: 600; }
 .sc-dash-job small { color: var(--text-secondary); font-weight: 400; }
+.sc-dash-job .if-ico-row { min-width: 0; }
+.sc-dash-job > span:last-child {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
 .sc-dash-detail {
   margin: 0;
   padding: 12px 20px 16px;
