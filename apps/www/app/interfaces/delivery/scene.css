@@ -1,214 +1,199 @@
-/* Avond. A kitchen list. Photographs occupy cells. */
+/* Evening. A kitchen list. Photographs in cells. Edge-to-edge dividers. */
 
-.sc-food {
+.sc-evening {
   height: 100%;
+  display: grid;
+  grid-template-columns: 204px minmax(0, 1fr) auto;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+.sc-evening-rail {
+  border-right: 1px solid var(--divider);
+  background: color-mix(in srgb, var(--text) 3%, var(--bg));
   display: flex;
   flex-direction: column;
   min-height: 0;
-  padding: 20px;
-  background: var(--bg);
-  color: var(--text);
   overflow: auto;
 }
-.sc-food-bar {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px 16px;
-  min-height: 36px;
-  padding: 0 0 12px;
-  border-bottom: 1px solid var(--divider);
-}
-.sc-food-where {
-  margin: 0;
-  font-size: 13px;
+.sc-evening-brand { padding: 16px 20px 8px; }
+.sc-evening-voice {
+  margin: 6px 0 0;
+  font-size: 12px;
   font-weight: 500;
   color: var(--text-secondary);
 }
-.sc-food-nav {
-  display: flex;
-  gap: 16px;
-  margin-left: auto;
-}
-.sc-food-nav button {
-  appearance: none;
-  border: 0;
-  border-bottom: 1px solid transparent;
-  background: transparent;
+.sc-evening-label {
+  margin: 12px 20px 4px;
+  font-size: 11px;
+  font-weight: 600;
   color: var(--text-secondary);
-  min-height: 32px;
-  padding: 0;
-  border-radius: 0;
-  font: 500 13px/1 inherit;
-  cursor: pointer;
-  transition: color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease);
 }
-.sc-food-nav button[aria-current="true"],
-.sc-food-nav button:hover {
-  color: var(--text);
-  border-bottom-color: var(--text);
-}
-.sc-food-bag {
+.sc-evening-kit {
   appearance: none;
-  border: 0;
-  background: var(--text);
-  color: var(--bg);
-  border-radius: var(--radius-sm);
-  min-height: 36px;
-  padding: 0 12px;
-  font: 600 13px/1 inherit;
-  cursor: pointer;
-  transition: opacity var(--duration-confirm) var(--ease);
-}
-
-.sc-food-body { padding: 16px 0 0; }
-.sc-food-tonight {
   display: grid;
-  grid-template-columns: 184px minmax(0, 1fr);
-  column-gap: 20px;
-  align-items: end;
-  margin-bottom: 16px;
-}
-.sc-food-tonight img {
-  display: block;
-  width: 184px;
-  height: 184px;
-  object-fit: cover;
-  border: 1px solid var(--divider);
-  border-radius: 0;
-}
-.sc-food-tonight p {
-  margin: 0 0 6px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-.sc-food-tonight h2 {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.sc-food-tools {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 20px;
-  margin: 0 0 16px;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 10px;
   align-items: center;
-}
-.sc-food-chip {
-  appearance: none;
+  width: 100%;
+  padding: 8px 20px;
   border: 0;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid var(--divider);
+  border-left: 2px solid transparent;
   background: transparent;
-  color: var(--text-secondary);
-  border-radius: 0;
-  min-height: 32px;
-  padding: 0;
-  font: 500 13px/1 inherit;
-  cursor: pointer;
-  transition: color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease);
-}
-.sc-food-chip[aria-pressed="true"],
-.sc-food-chip:hover {
   color: var(--text);
-  border-bottom-color: var(--text);
-}
-
-.sc-food-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 184px);
-  gap: 20px;
-}
-.sc-food-card {
-  appearance: none;
-  border: 1px solid var(--divider);
-  background: var(--bg);
-  color: inherit;
-  border-radius: 0;
-  overflow: hidden;
   text-align: left;
   cursor: pointer;
-  padding: 0;
-  font: inherit;
-  box-shadow: none;
-  transition: border-color var(--duration-snap) var(--ease);
+  font-family: inherit;
+  border-radius: 0;
+  transition: background-color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease);
 }
-.sc-food-card:hover,
-.sc-food-card[aria-current="true"] { border-color: var(--text); }
-.sc-food-card img {
+.sc-evening-kit img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 0;
+}
+.sc-evening-kit span { display: grid; gap: 2px; min-width: 0; }
+.sc-evening-kit b { font-size: 13px; font-weight: 600; letter-spacing: -0.01em; }
+.sc-evening-kit i {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.sc-evening-kit[aria-current="true"] {
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  border-left-color: var(--text);
+}
+
+.sc-evening-menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+}
+.sc-evening-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--divider);
+  font-size: 13px;
+  font-weight: 600;
+}
+.sc-evening-head span { color: var(--text-secondary); font-size: 12px; font-weight: 500; }
+.sc-evening-hero {
+  position: relative;
+  height: 140px;
+  border-bottom: 1px solid var(--divider);
+  overflow: hidden;
+}
+.sc-evening-hero img {
   display: block;
   width: 100%;
-  height: 124px;
+  height: 100%;
   object-fit: cover;
+  border-radius: 0;
 }
-.sc-food-card-body { padding: 10px 10px 12px; }
-.sc-food-card-body h3 {
-  margin: 0 0 4px;
-  font-size: 13px;
+.sc-evening-hero p {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 10px 16px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
-.sc-food-card-meta {
-  margin: 0;
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.sc-food-menu {
-  margin-top: 20px;
-  padding: 16px 0 0;
-  border-top: 1px solid var(--divider);
-  border-radius: 0;
-  background: var(--bg);
-}
-.sc-food-menu h2 {
-  margin: 0 0 6px;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-.sc-food-menu > p { margin: 0 0 12px; color: var(--text-secondary); font-size: 13px; }
-.sc-food-dishes {
+.sc-evening-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(184px, 1fr));
-  gap: 8px 20px;
+  grid-template-columns: 1fr 1fr;
 }
-.sc-food-dish {
+.sc-evening-card {
   appearance: none;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 0 0 12px;
   border: 0;
+  border-right: 1px solid var(--divider);
   border-bottom: 1px solid var(--divider);
   background: transparent;
   color: inherit;
-  border-radius: 0;
-  padding: 10px 0;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
   text-align: left;
   cursor: pointer;
-  font: 500 13px/1.3 inherit;
-  box-shadow: none;
-  transition: color var(--duration-snap) var(--ease);
+  font-family: inherit;
+  border-radius: 0;
+  transition: background-color var(--duration-snap) var(--ease);
 }
-.sc-food-dish:hover { color: var(--text); }
-.sc-food-dish span:last-child { color: var(--text-secondary); }
+.sc-evening-card:nth-child(2n) { border-right: 0; }
+.sc-evening-card img {
+  display: block;
+  width: 100%;
+  height: 88px;
+  object-fit: cover;
+  border-radius: 0;
+}
+.sc-evening-card b {
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.sc-evening-card i {
+  padding: 0 12px;
+  font-style: normal;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.sc-evening-card[aria-current="true"] {
+  background: color-mix(in srgb, var(--text) 5%, var(--bg));
+}
+.sc-evening-ghost {
+  appearance: none;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--divider);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  font: 500 12px/1 inherit;
+  cursor: pointer;
+  transition: border-color var(--duration-snap) var(--ease);
+}
+.sc-evening-ghost:hover { border-color: var(--text); }
+.sc-evening-inspect { width: 204px; padding: 16px 20px; display: grid; gap: 12px; }
+.sc-evening-inspect img {
+  width: 100%;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 0;
+}
+.sc-evening-dish { margin: 0; font-size: 15px; font-weight: 600; }
+.sc-evening-inspect p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--text-secondary); }
+
+@media (max-width: 900px) {
+  .sc-evening { grid-template-columns: 1fr; overflow: auto; }
+  .sc-evening-rail {
+    border-right: 0;
+    border-bottom: 1px solid var(--divider);
+    max-height: 180px;
+  }
+  .if-inspect.is-open { width: 100%; border-left: 0; border-top: 1px solid var(--divider); }
+  .sc-evening-inspect { width: 100%; }
+}
 
 @media (max-width: 640px) {
-  .sc-food-nav { margin-left: 0; }
-  .sc-food-nav button,
-  .sc-food-bag,
-  .sc-food-chip { min-height: 44px; font-size: 16px; }
-  .sc-food-tonight { grid-template-columns: 1fr; }
-  .sc-food-tonight img { width: 100%; height: 184px; }
-  .sc-food-grid { grid-template-columns: 1fr 1fr; }
+  .sc-evening-kit,
+  .sc-evening-card { min-height: 44px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sc-food-nav button,
-  .sc-food-bag,
-  .sc-food-chip,
-  .sc-food-card,
-  .sc-food-dish { transition: none; }
+  .sc-evening-kit,
+  .sc-evening-card,
+  .sc-evening-ghost { transition: none; }
 }

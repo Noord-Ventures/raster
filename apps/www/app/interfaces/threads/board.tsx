@@ -2,142 +2,182 @@
 
 import * as React from "react";
 import { Brand } from "../mark";
-
-type Reply = { who: string; body: string; fresh?: boolean };
+import { Face, type FaceId } from "../people";
 
 type Post = {
   id: string;
-  who: string;
-  kind: "note" | "image" | "quote";
-  body: string;
+  who: FaceId;
+  name: string;
+  when: string;
+  text: string;
   photo?: string;
   likes: number;
-  replies: Reply[];
 };
 
-const STARTED: Post[] = [
+const FEED: Post[] = [
   {
-    id: "grid",
-    who: "Inez",
-    kind: "note",
-    body: "The module is the only join. If a pane needs a second line, it is a second module.",
-    likes: 12,
-    replies: [
-      { who: "Karel", body: "Keep the hairline on the active tab only." },
-      { who: "Loes", body: "The rail stays 184. The gutter is not a stroke." },
-    ],
-  },
-  {
-    id: "proof",
-    who: "Karel",
-    kind: "image",
-    body: "Proof 09 on the press. Same ink, no second color in the chrome.",
+    id: "m1",
+    who: "inez",
+    name: "Inez Veld",
+    when: "09:14",
+    text: "The west window is the one that holds. North is just weather.",
     photo: "/interfaces/threads/press-sheet.jpg",
-    likes: 9,
-    replies: [
-      { who: "Inez", body: "Hold the spot for the field, not the frame." },
-      { who: "Bram", body: "Sheet is up at 06:00." },
-    ],
+    likes: 12,
   },
   {
-    id: "cite",
-    who: "Loes",
-    kind: "quote",
-    body: "A grid is a plan, not a decoration.",
-    likes: 7,
-    replies: [{ who: "Inez", body: "Cite hangs in the gutter. The claim stays in the measure." }],
+    id: "m2",
+    who: "karel",
+    name: "Karel Vos",
+    when: "09:02",
+    text: "Paper first. Then the street. Then the room.",
+    likes: 8,
   },
   {
-    id: "stack",
-    who: "Bram",
-    kind: "image",
-    body: "Morning stack. Registration holds.",
+    id: "m3",
+    who: "loes",
+    name: "Loes Hart",
+    when: "08:41",
+    text: "I left a note on the third post. It is still there.",
     photo: "/interfaces/threads/posters.jpg",
-    likes: 4,
-    replies: [{ who: "Karel", body: "Leave the crumb bar off the poster." }],
+    likes: 5,
+  },
+  {
+    id: "m4",
+    who: "bram",
+    name: "Bram Nijk",
+    when: "08:12",
+    text: "Morning stack. Registration holds.",
+    likes: 3,
   },
 ];
 
+const PEOPLE: { id: FaceId; name: string; line: string }[] = [
+  { id: "inez", name: "Inez Veld", line: "On the west post" },
+  { id: "karel", name: "Karel Vos", line: "Paper first" },
+  { id: "loes", name: "Loes Hart", line: "Third post" },
+  { id: "bram", name: "Bram Nijk", line: "Quiet today" },
+];
+
+const THREAD: Record<string, { who: FaceId; name: string; text: string }[]> = {
+  m1: [
+    { who: "karel", name: "Karel Vos", text: "Which window?" },
+    { who: "inez", name: "Inez Veld", text: "West. Always west." },
+    { who: "loes", name: "Loes Hart", text: "I can see it from here." },
+  ],
+  m2: [
+    { who: "inez", name: "Inez Veld", text: "Keep the hairline on the active tab only." },
+    { who: "bram", name: "Bram Nijk", text: "The rail stays 184." },
+  ],
+  m3: [{ who: "karel", name: "Karel Vos", text: "Cite hangs in the gutter." }],
+  m4: [{ who: "loes", name: "Loes Hart", text: "Leave the crumb bar off the poster." }],
+};
+
 export function Board() {
-  const [posts, setPosts] = React.useState(STARTED);
-  const [open, setOpen] = React.useState("proof");
-  const [liked, setLiked] = React.useState<Record<string, boolean>>({});
-  const [draft, setDraft] = React.useState("");
-  const post = posts.find((item) => item.id === open) ?? posts[0]!;
+  const [post, setPost] = React.useState("m1");
+  const [pane, setPane] = React.useState<"none" | "profile">("none");
+  const [who, setWho] = React.useState<FaceId>("inez");
+  const item = FEED.find((row) => row.id === post) ?? FEED[0]!;
+  const person = PEOPLE.find((row) => row.id === who) ?? PEOPLE[0]!;
+  const replies = THREAD[post] ?? [];
 
-  function like(id: string) {
-    setLiked((map) => ({ ...map, [id]: !map[id] }));
-    setPosts((rows) =>
-      rows.map((item) =>
-        item.id === id ? { ...item, likes: item.likes + (liked[id] ? -1 : 1) } : item,
-      ),
-    );
-  }
-
-  function reply() {
-    const text = draft.trim();
-    if (!text) return;
-    setDraft("");
-    setPosts((rows) =>
-      rows.map((item) =>
-        item.id === open
-          ? { ...item, replies: [...item.replies, { who: "You", body: text, fresh: true }] }
-          : item,
-      ),
-    );
+  function openProfile(id: FaceId) {
+    setWho(id);
+    setPane("profile");
   }
 
   return (
-    <main className="if-board sc-th" aria-label="Muur">
-      <section className="sc-th-feed" aria-label="Wall">
-        <header className="sc-th-head">
-          <Brand slug="threads" title="Muur" />
-          <h1>Today</h1>
-        </header>
-        {posts.map((item) => (
-          <article key={item.id} className="sc-th-post" aria-current={open === item.id}>
-            <div className="sc-th-who">
-              <strong>{item.who}</strong>
-              <span>{item.kind}</span>
-            </div>
-            {item.kind === "quote" ? <p className="sc-th-quote">{item.body}</p> : <p className="sc-th-body">{item.body}</p>}
-            {item.photo ? <img className="sc-th-photo" src={item.photo} alt="" /> : null}
-            <div className="sc-th-actions">
-              <button type="button" aria-pressed={!!liked[item.id]} onClick={() => like(item.id)}>
-                {item.likes} like
-              </button>
-              <button type="button" onClick={() => setOpen(item.id)}>
-                {item.replies.length} replies
-              </button>
-            </div>
-          </article>
+    <main className="if-board sc-wall" aria-label="Wall">
+      <aside className="sc-wall-rail" aria-label="Today">
+        <div className="sc-wall-brand">
+          <Brand slug="threads" title="Wall" />
+          <p className="sc-wall-voice">On the wall</p>
+        </div>
+        <p className="sc-wall-label">Today</p>
+        {FEED.map((row) => (
+          <button
+            key={row.id}
+            type="button"
+            className="sc-wall-post"
+            aria-current={post === row.id}
+            onClick={() => {
+              setPost(row.id);
+              setPane("none");
+              setWho(row.who);
+            }}
+          >
+            <Face who={row.who} />
+            <span>
+              <b>{row.name}</b>
+              <i>{row.text}</i>
+            </span>
+          </button>
         ))}
+        <p className="sc-wall-label">People</p>
+        {PEOPLE.map((row) => (
+          <button
+            key={row.id}
+            type="button"
+            className="sc-wall-person"
+            aria-current={who === row.id && pane === "profile"}
+            onClick={() => openProfile(row.id)}
+          >
+            <Face who={row.id} />
+            <span>
+              <b>{row.name}</b>
+              <i>{row.line}</i>
+            </span>
+          </button>
+        ))}
+      </aside>
+
+      <section className="sc-wall-thread" aria-label="Thread">
+        <header className="sc-wall-head">
+          <button type="button" className="sc-wall-who" onClick={() => openProfile(item.who)}>
+            <Face who={item.who} />
+            <span>
+              <b>{item.name}</b>
+              <i>
+                {item.when} · {replies.length} replies
+              </i>
+            </span>
+          </button>
+          <button type="button" className="sc-wall-ghost" onClick={() => openProfile(item.who)}>
+            Profile
+          </button>
+        </header>
+        <article className="sc-wall-lead">
+          {item.photo ? <img src={item.photo} alt="" /> : null}
+          <p>{item.text}</p>
+          <p className="sc-wall-meta">{item.likes} likes · {replies.length} replies</p>
+        </article>
+        <div className="sc-wall-replies">
+          {replies.map((row) => (
+            <button key={row.text} type="button" className="sc-wall-reply" onClick={() => openProfile(row.who)}>
+              <Face who={row.who} />
+              <span>
+                <b>{row.name}</b>
+                {row.text}
+              </span>
+            </button>
+          ))}
+        </div>
       </section>
 
-      <aside className="sc-th-pane" aria-label="Thread">
-        <h2>{post.who}</h2>
-        <p className="sc-th-body">{post.body}</p>
-        {post.replies.map((item, i) => (
-          <div key={i} className={item.fresh ? "sc-th-reply sc-fresh" : "sc-th-reply"}>
-            <strong>{item.who}</strong>
-            {item.body}
+      <aside className={`if-inspect${pane === "profile" ? " is-open" : ""}`} aria-label="Profile">
+        {pane === "profile" ? (
+          <div key={person.id} className="sc-wall-inspect sc-fresh">
+            <p className="sc-wall-label">Profile</p>
+            <div className="sc-wall-card">
+              <Face who={person.id} size={48} />
+              <b>{person.name}</b>
+              <i>{person.line}</i>
+            </div>
+            <p>Posts on the wall stay in the street. A face is enough to find them again.</p>
+            <button type="button" className="sc-wall-ghost" onClick={() => setPane("none")}>
+              Close
+            </button>
           </div>
-        ))}
-        <form
-          className="sc-th-composer"
-          onSubmit={(event) => {
-            event.preventDefault();
-            reply();
-          }}
-        >
-          <input
-            value={draft}
-            onChange={(event) => setDraft(event.target.value)}
-            placeholder="Write a reply"
-            aria-label="Reply"
-          />
-          <button type="submit">Reply</button>
-        </form>
+        ) : null}
       </aside>
     </main>
   );

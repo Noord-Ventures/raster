@@ -3,39 +3,44 @@
 import * as React from "react";
 import { Brand } from "../mark";
 
-type Role = "brief" | "lijn";
-type Msg = { role: Role; text: string; fresh?: boolean };
+type Role = "you" | "line";
+type Msg = { id: string; role: Role; text: string; fresh?: boolean };
+type Inspect = { kind: "line"; id: string } | { kind: "settings" } | null;
 
-const DRAFTS = [
-  { id: "brief", title: "Tighten the brief", preview: "Two sentences, same claim." },
-  { id: "press", title: "Press run 14", preview: "Keep the weeks under the fee." },
-  { id: "invoice", title: "Invoice note", preview: "The number on the cover." },
+const CHATS = [
+  { id: "brief", title: "Tighten the brief", preview: "Two sentences, same claim.", when: "Now" },
+  { id: "press", title: "Press run 14", preview: "Keep the weeks under the fee.", when: "Today" },
+  { id: "invoice", title: "Invoice note", preview: "The number on the cover.", when: "Yesterday" },
 ] as const;
 
 const STARTED: Record<string, Msg[]> = {
   brief: [
-    { role: "brief", text: "Make the intro tighter. Keep the fee on the first page." },
+    { id: "b1", role: "you", text: "Make the intro tighter. Keep the fee on the first page." },
     {
-      role: "lijn",
+      id: "b2",
+      role: "line",
       text: "Two sentences, same claim. The fee stays on the first page; the weeks follow it. Cut the opening clause and let the number do the work.",
     },
-    { role: "brief", text: "Good. Where should the timeline sit?" },
+    { id: "b3", role: "you", text: "Good. Where should the timeline sit?" },
     {
-      role: "lijn",
+      id: "b4",
+      role: "line",
       text: "Directly under the fee. Two lines, not a list. If a third week appears, it becomes a second sheet.",
     },
   ],
   press: [
-    { role: "brief", text: "Press starts week 4. What do I tell the floor?" },
+    { id: "p1", role: "you", text: "Press starts week 4. What do I tell the floor?" },
     {
-      role: "lijn",
+      id: "p2",
+      role: "line",
       text: "One note: same ink, no second color on the plate. Proofs stay in the run. If density drops, stop the sheet and ping the thread.",
     },
   ],
   invoice: [
-    { role: "brief", text: "The invoice has to match the cover." },
+    { id: "i1", role: "you", text: "The invoice has to match the cover." },
     {
-      role: "lijn",
+      id: "i2",
+      role: "line",
       text: "Use the number on page one. Do not add a second total. Date the sheet to the week the press starts.",
     },
   ],
@@ -51,30 +56,34 @@ const REPLIES = [
 ];
 
 export function Board() {
-  const [draftId, setDraftId] = React.useState<string>("brief");
+  const [chat, setChat] = React.useState("brief");
   const [messages, setMessages] = React.useState<Msg[]>(STARTED.brief ?? []);
   const [draft, setDraft] = React.useState("");
   const [pending, setPending] = React.useState(false);
+  const [inspect, setInspect] = React.useState<Inspect>(null);
   const end = React.useRef<HTMLDivElement>(null);
   const box = React.useRef<HTMLTextAreaElement>(null);
-  const piece = DRAFTS.find((item) => item.id === draftId)?.title ?? "New draft";
+  const piece = CHATS.find((item) => item.id === chat)?.title ?? "New chat";
+  const looked = inspect?.kind === "line" ? messages.find((msg) => msg.id === inspect.id) : null;
 
   React.useEffect(() => {
     end.current?.scrollIntoView({ block: "end" });
   }, [messages, pending]);
 
-  function openDraft(id: string) {
-    setDraftId(id);
+  function openChat(id: string) {
+    setChat(id);
     setMessages(STARTED[id] ?? []);
     setDraft("");
     setPending(false);
+    setInspect(null);
   }
 
   function fresh() {
-    setDraftId("new");
+    setChat("new");
     setMessages([]);
     setDraft("");
     setPending(false);
+    setInspect(null);
     box.current?.focus();
   }
 
@@ -82,42 +91,58 @@ export function Board() {
     const value = (text ?? draft).trim();
     if (!value || pending) return;
     setDraft("");
-    setMessages((rows) => [...rows, { role: "brief", text: value, fresh: true }]);
+    const you: Msg = { id: `y-${Date.now()}`, role: "you", text: value, fresh: true };
+    setMessages((rows) => [...rows, you]);
     setPending(true);
     window.setTimeout(() => {
       const reply = REPLIES[value.length % REPLIES.length]!;
-      setMessages((rows) => [...rows, { role: "lijn", text: reply, fresh: true }]);
+      setMessages((rows) => [
+        ...rows,
+        { id: `l-${Date.now()}`, role: "line", text: reply, fresh: true },
+      ]);
       setPending(false);
     }, 700);
   }
 
   return (
-    <main className="if-board sc-ai" aria-label="Lijn">
-      <aside className="sc-ai-rail" aria-label="Drafts">
-        <Brand slug="ai-tool" title="Lijn" />
-        <p className="sc-ai-voice">The next line</p>
+    <main className="if-board sc-ai" aria-label="Line">
+      <aside className="sc-ai-rail" aria-label="Chats">
+        <div className="sc-ai-brand">
+          <Brand slug="ai-tool" title="Line" />
+          <p className="sc-ai-voice">The next line</p>
+        </div>
         <button type="button" className="sc-ai-new" onClick={fresh}>
-          New draft
+          New chat
         </button>
+        <p className="sc-ai-label">Chats</p>
         <div className="sc-ai-chats">
-          {DRAFTS.map((item) => (
+          {CHATS.map((item) => (
             <button
               key={item.id}
               type="button"
               className="sc-ai-chat"
-              aria-current={draftId === item.id}
-              onClick={() => openDraft(item.id)}
+              aria-current={chat === item.id}
+              onClick={() => openChat(item.id)}
             >
               <span className="sc-ai-chat-title">{item.title}</span>
               <span className="sc-ai-chat-preview">{item.preview}</span>
+              <span className="sc-ai-chat-when">{item.when}</span>
             </button>
           ))}
         </div>
       </aside>
 
-      <section className="sc-ai-stage" aria-label="Draft">
+      <section className="sc-ai-stage" aria-label="Chat">
         <header className="sc-ai-head">
           <h1>{piece}</h1>
+          <button
+            type="button"
+            className="sc-ai-gear"
+            aria-pressed={inspect?.kind === "settings"}
+            onClick={() => setInspect((cur) => (cur?.kind === "settings" ? null : { kind: "settings" }))}
+          >
+            Settings
+          </button>
         </header>
         <div className="sc-ai-thread">
           <div className="sc-ai-measure">
@@ -133,15 +158,27 @@ export function Board() {
                 </div>
               </div>
             ) : (
-              messages.map((msg, i) =>
-                msg.role === "brief" ? (
-                  <article key={i} className={`sc-ai-msg sc-ai-msg-brief${msg.fresh ? " sc-fresh" : ""}`}>
+              messages.map((msg) =>
+                msg.role === "you" ? (
+                  <article key={msg.id} className={`sc-ai-msg sc-ai-msg-you${msg.fresh ? " sc-fresh" : ""}`}>
                     <p className="sc-ai-bubble">{msg.text}</p>
                   </article>
                 ) : (
-                  <article key={i} className={`sc-ai-msg sc-ai-msg-lijn${msg.fresh ? " sc-fresh" : ""}`}>
-                    <p className="sc-ai-who">Lijn</p>
+                  <article key={msg.id} className={`sc-ai-msg sc-ai-msg-line${msg.fresh ? " sc-fresh" : ""}`}>
+                    <p className="sc-ai-who">Line</p>
                     <p className="sc-ai-reply">{msg.text}</p>
+                    <button
+                      type="button"
+                      className="sc-ai-open"
+                      aria-pressed={inspect?.kind === "line" && inspect.id === msg.id}
+                      onClick={() =>
+                        setInspect((cur) =>
+                          cur?.kind === "line" && cur.id === msg.id ? null : { kind: "line", id: msg.id },
+                        )
+                      }
+                    >
+                      Open line
+                    </button>
                   </article>
                 ),
               )
@@ -154,7 +191,6 @@ export function Board() {
             <div ref={end} />
           </div>
         </div>
-
         <div className="sc-ai-dock">
           <form
             className="sc-ai-composer"
@@ -183,6 +219,33 @@ export function Board() {
           </form>
         </div>
       </section>
+
+      <aside className={`if-inspect${inspect ? " is-open" : ""}`} aria-label="Inspector">
+        <div className="sc-ai-inspect">
+          {inspect?.kind === "settings" ? (
+            <div key="settings" className="sc-fresh">
+              <h2>Settings</h2>
+              <p>Model · local</p>
+              <p>Voice · the next line</p>
+              <p>No live model. Replies stay on this sheet.</p>
+            </div>
+          ) : looked ? (
+            <div key={looked.id} className="sc-fresh">
+              <h2>This line</h2>
+              <p>{looked.text}</p>
+              <button
+                type="button"
+                onClick={() => {
+                  send("Rewrite that line, shorter.");
+                  setInspect(null);
+                }}
+              >
+                Rewrite
+              </button>
+            </div>
+          ) : null}
+        </div>
+      </aside>
     </main>
   );
 }

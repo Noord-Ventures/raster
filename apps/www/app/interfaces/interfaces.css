@@ -314,14 +314,14 @@
   .if-tile-matter p { font-size: 15px; line-height: 1.45; }
 }
 
-/* Detail: Raster chrome around a boxed specimen. Not almost-fullscreen. */
+/* Detail: Raster chrome around a boxed product UI. Not almost-fullscreen. */
 .if-specimen {
   margin-top: 120px;
   height: 612px;
   background: var(--bg);
   border: 1px solid var(--divider);
   border-radius: 0;
-  box-shadow: none;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04), 0 10px 28px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
 .if-board {
@@ -339,10 +339,35 @@
   color: var(--text);
 }
 .if-app span { line-height: 1; }
+.if-face {
+  display: block;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--divider-subtle);
+}
+.if-inspect {
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  min-height: 0;
+  pointer-events: none;
+  border-left: 1px solid transparent;
+  transition:
+    width var(--duration) var(--ease),
+    opacity var(--duration-snap) var(--ease),
+    border-color var(--duration-snap) var(--ease);
+}
+.if-inspect.is-open {
+  width: 204px;
+  opacity: 1;
+  pointer-events: auto;
+  border-left-color: var(--divider);
+}
 
 .if-matter {
   max-width: 592px;
-  padding: 40px 0 72px;
+  padding: 32px 0 72px;
 }
 .if-voice {
   margin: 0 0 8px;
@@ -360,13 +385,17 @@
   line-height: 1.5;
   color: var(--text);
 }
+.if-story-2 {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
 .if-meta {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 184px));
   gap: 20px;
-  margin: 40px 0 0;
-  padding: 20px 0 0;
-  border-top: 1px solid var(--divider);
+  margin: 32px 0 0;
+  padding: 0;
+  border-top: 0;
 }
 .if-meta dt {
   margin: 0;
@@ -417,5 +446,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .if-tile,
-  .if-rail a { transition: none; }
+  .if-rail a,
+  .if-inspect { transition: none; }
 }

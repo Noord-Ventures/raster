@@ -1,134 +1,134 @@
-/* Nacht. A night yard. The map occupies a cell as a dark field. */
+/* Night. A readable San Francisco dispatch. One list scale. Edge-to-edge dividers. */
 
-.sc-fleet {
+.sc-night {
   height: 100%;
   display: grid;
-  grid-template-columns: 184px minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr) auto;
-  column-gap: 20px;
-  row-gap: 0;
-  padding: 20px;
+  grid-template-columns: 204px minmax(0, 1fr) auto;
+  padding: 0;
   background: var(--bg);
   color: var(--text);
+  overflow: hidden;
 }
-.sc-fleet-map {
-  grid-column: 2;
-  grid-row: 1;
-  min-height: 0;
-  border: 1px solid var(--divider);
-  background: #0E0C0A;
-}
-.sc-fleet-map canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.sc-fleet-rail {
-  grid-column: 1;
-  grid-row: 1 / 3;
-  padding: 0 20px 0 0;
+.sc-night-rail {
   border-right: 1px solid var(--divider);
-  overflow: auto;
+  background: color-mix(in srgb, var(--text) 3%, var(--bg));
+  display: flex;
+  flex-direction: column;
   min-height: 0;
+  overflow: auto;
 }
-.sc-fleet-voice {
-  margin: 6px 0 16px;
+.sc-night-brand { padding: 16px 20px 8px; }
+.sc-night-voice {
+  margin: 6px 0 0;
   font-size: 12px;
   font-weight: 500;
-  letter-spacing: -0.01em;
   color: var(--text-secondary);
 }
-.sc-fleet-c {
-  grid-column: 2;
-  grid-row: 2;
-  padding: 12px 0 0;
-  border-top: 1px solid var(--divider);
-  margin-top: 16px;
-}
-
-.sc-fleet h2 {
-  margin: 12px 0 8px;
-  font-size: 12px;
+.sc-night-label {
+  margin: 12px 20px 4px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: -0.01em;
   color: var(--text-secondary);
-  text-transform: none;
 }
-.sc-fleet-unit {
+.sc-night-unit {
   appearance: none;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "name state" "where where";
+  gap: 2px 8px;
   width: 100%;
+  padding: 10px 20px;
   border: 0;
-  background: transparent;
-  color: inherit;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  text-align: left;
-  padding: 8px 0;
   border-bottom: 1px solid var(--divider);
-  border-radius: 0;
-  cursor: pointer;
-  font: 500 13px/1.3 inherit;
-  transition: color var(--duration-snap) var(--ease);
-}
-.sc-fleet-unit:hover,
-.sc-fleet-unit[aria-current="true"] { color: var(--text); }
-.sc-fleet-unit[aria-current="true"] { font-weight: 600; }
-.sc-fleet-unit small { color: var(--text-secondary); font-weight: 400; }
-.sc-fleet-live { color: var(--text-secondary); }
-.sc-fleet-alert {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-}
-.sc-fleet-alert p { margin: 0; font-size: 13px; line-height: 1.45; }
-.sc-fleet-alert button {
-  appearance: none;
-  border: 1px solid var(--divider);
+  border-left: 2px solid transparent;
   background: transparent;
   color: var(--text);
-  border-radius: var(--radius-sm);
-  min-height: 36px;
-  padding: 0 12px;
-  font: 500 12px/1 inherit;
+  text-align: left;
   cursor: pointer;
-  white-space: nowrap;
-  transition: border-color var(--duration-snap) var(--ease);
+  font: 500 13px/1.3 inherit;
+  border-radius: 0;
+  transition: color var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease);
 }
-.sc-fleet-alert button:hover { border-color: var(--text); }
-.sc-fleet-quiet {
-  margin: 0;
-  font-size: 13px;
+.sc-night-unit b { grid-area: name; font-weight: 600; }
+.sc-night-unit i {
+  grid-area: state;
+  font-style: normal;
+  font-size: 12px;
   color: var(--text-secondary);
 }
+.sc-night-unit em {
+  grid-area: where;
+  font-style: normal;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.sc-night-unit[aria-current="true"] {
+  background: color-mix(in srgb, var(--if-spot, var(--text)) 10%, var(--bg));
+  border-left-color: var(--if-spot, var(--text));
+}
+
+.sc-night-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+.sc-night-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--divider);
+  font-size: 13px;
+  font-weight: 600;
+}
+.sc-night-map {
+  flex: 1;
+  min-height: 0;
+  background: #e8e4dc;
+}
+.sc-night-ghost {
+  appearance: none;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--divider);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  font: 500 12px/1 inherit;
+  cursor: pointer;
+  transition: border-color var(--duration-snap) var(--ease);
+}
+.sc-night-ghost:hover { border-color: var(--text); }
+.sc-night-inspect { width: 204px; padding: 16px 20px; display: grid; gap: 12px; }
+.sc-night-trip { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.sc-night-inspect p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--text-secondary); }
+.sc-night-inspect dl { display: grid; gap: 0; margin: 0; }
+.sc-night-inspect div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--divider);
+  font-size: 13px;
+}
+.sc-night-inspect dt { color: var(--text-secondary); }
+.sc-night-inspect dd { margin: 0; font-weight: 600; }
 
 @media (max-width: 900px) {
-  .sc-fleet {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 280px auto;
-  }
-  .sc-fleet-rail,
-  .sc-fleet-map,
-  .sc-fleet-c {
-    grid-column: 1;
-    grid-row: auto;
-  }
-  .sc-fleet-rail {
-    border-right: 0;
-    border-bottom: 1px solid var(--divider);
-    padding: 0 0 12px;
-    overflow: visible;
-  }
-  .sc-fleet-map { min-height: 280px; }
+  .sc-night { grid-template-columns: 1fr; overflow: auto; }
+  .sc-night-rail { border-right: 0; border-bottom: 1px solid var(--divider); }
+  .sc-night-map { min-height: 240px; }
+  .if-inspect.is-open { width: 100%; border-left: 0; border-top: 1px solid var(--divider); }
+  .sc-night-inspect { width: 100%; }
 }
 
 @media (max-width: 640px) {
-  .sc-fleet-unit,
-  .sc-fleet-alert button { min-height: 44px; font-size: 16px; }
+  .sc-night-unit { min-height: 44px; font-size: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sc-fleet-unit,
-  .sc-fleet-alert button { transition: none; }
+  .sc-night-unit,
+  .sc-night-ghost { transition: none; }
 }

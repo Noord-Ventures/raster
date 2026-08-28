@@ -1,201 +1,194 @@
 "use client";
 
-import * as React from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-const LIVE = "#E8E8E8";
-const ALERT = "#C4C2BD";
-const NIGHT = "#0E0C0A";
-const BUILDING = "#1A1A1A";
-const GRID = "#3D3D3D";
-
-type Vehicle = {
-  id: string;
-  mesh: THREE.Mesh;
-  path: THREE.Vector3[];
-  t: number;
-  speed: number;
+type SceneProps = {
+  selected: string;
 };
 
-function rectPath(cx: number, cz: number, w: number, d: number): THREE.Vector3[] {
-  return [
-    new THREE.Vector3(cx - w, 1.2, cz - d),
-    new THREE.Vector3(cx + w, 1.2, cz - d),
-    new THREE.Vector3(cx + w, 1.2, cz + d),
-    new THREE.Vector3(cx - w, 1.2, cz + d),
-  ];
-}
+const UNITS: Record<string, { x: number; z: number }> = {
+  "04": { x: 0.35, z: 0.55 },
+  "19": { x: 1.45, z: -0.35 },
+  "03": { x: -0.55, z: 1.25 },
+  "11": { x: -0.85, z: -0.7 },
+};
 
-function follow(path: THREE.Vector3[], t: number) {
-  const n = path.length;
-  const i = Math.floor(t) % n;
-  const n1 = (i + 1) % n;
-  const local = t - Math.floor(t);
-  const from = path[i]!;
-  const to = path[n1]!;
-  return {
-    position: from.clone().lerp(to, local),
-    yaw: Math.atan2(to.x - from.x, to.z - from.z),
-  };
-}
-
-export function FleetMap({ selected = "Van 04" }: { selected?: string }) {
-  const host = React.useRef<HTMLDivElement>(null);
-  const selectedRef = React.useRef(selected);
+export function Scene({ selected }: SceneProps) {
+  const host = useRef<HTMLDivElement>(null);
+  const selectedRef = useRef(selected);
   selectedRef.current = selected;
 
-  React.useEffect(() => {
-    const el = host.current;
-    if (!el) return;
+  useEffect(() => {
+    const root = host.current;
+    if (!root) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(38, 1, 1, 9000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setClearColor(0, 0);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    el.appendChild(renderer.domElement);
+    renderer.setClearColor(0xe8e4dc, 1);
+    root.appendChild(renderer.domElement);
 
-    const ground = new THREE.Mesh(
-      new THREE.PlaneGeometry(2400, 2400),
-      new THREE.MeshBasicMaterial({ color: NIGHT, side: THREE.DoubleSide }),
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 40);
+    camera.position.set(0.2, 7.6, 6.4);
+    camera.lookAt(0.1, 0, 0.15);
+
+    const paper = new THREE.Mesh(
+      new THREE.PlaneGeometry(18, 18),
+      new THREE.MeshBasicMaterial({ color: 0xe8e4dc }),
     );
-    ground.rotation.x = -Math.PI / 2;
-    scene.add(ground);
+    paper.rotation.x = -Math.PI / 2;
+    scene.add(paper);
 
-    const grid = new THREE.GridHelper(1800, 36, GRID, GRID);
-    const gridMat = grid.material as THREE.LineBasicMaterial;
-    gridMat.transparent = true;
-    gridMat.opacity = 0.35;
-    scene.add(grid);
+    const waterN = new THREE.Mesh(
+      new THREE.PlaneGeometry(18, 4.6),
+      new THREE.MeshBasicMaterial({ color: 0xc5d2d8 }),
+    );
+    waterN.rotation.x = -Math.PI / 2;
+    waterN.position.set(0, 0.01, -4.15);
+    scene.add(waterN);
 
-    const buildingGeo = new THREE.BoxGeometry(1, 1, 1);
-    buildingGeo.translate(0, 0.5, 0);
-    const buildingMat = new THREE.MeshBasicMaterial({ color: BUILDING });
-    const buildings = new THREE.InstancedMesh(buildingGeo, buildingMat, 86);
-    const dummy = new THREE.Object3D();
-    let placed = 0;
-    for (let x = -8; x <= 8; x++) {
-      for (let z = -8; z <= 8; z++) {
-        if (placed >= 86) break;
-        if ((x + z * 3) % 4 === 0) continue;
-        const h = 8 + ((Math.abs(x * 17 + z * 31) % 28) + 6);
-        dummy.position.set(x * 42, 0, z * 42);
-        dummy.scale.set(16 + (placed % 5), h, 14 + (placed % 4));
-        dummy.updateMatrix();
-        buildings.setMatrixAt(placed, dummy.matrix);
-        placed += 1;
-      }
+    const waterE = new THREE.Mesh(
+      new THREE.PlaneGeometry(4.2, 10),
+      new THREE.MeshBasicMaterial({ color: 0xc5d2d8 }),
+    );
+    waterE.rotation.x = -Math.PI / 2;
+    waterE.position.set(4.85, 0.012, 0.2);
+    scene.add(waterE);
+
+    const street = new THREE.LineBasicMaterial({ color: 0x1a1916, transparent: true, opacity: 0.28 });
+    const avenue = new THREE.LineBasicMaterial({ color: 0x1a1916, transparent: true, opacity: 0.46 });
+
+    const addLine = (points: [number, number][], mat: THREE.LineBasicMaterial) => {
+      const geo = new THREE.BufferGeometry().setFromPoints(
+        points.map(([x, z]) => new THREE.Vector3(x, 0.02, z)),
+      );
+      scene.add(new THREE.Line(geo, mat));
+    };
+
+    for (let i = -4; i <= 3; i += 1) {
+      addLine(
+        [
+          [-3.4, i * 0.68],
+          [3.2, i * 0.68 + 0.12],
+        ],
+        street,
+      );
     }
-    buildings.count = placed;
-    scene.add(buildings);
+    for (let i = -4; i <= 4; i += 1) {
+      addLine(
+        [
+          [i * 0.7, -2.5],
+          [i * 0.7 - 0.18, 2.7],
+        ],
+        i % 2 === 0 ? avenue : street,
+      );
+    }
 
-    const activeMat = new THREE.MeshBasicMaterial({ color: LIVE });
-    const pickMat = new THREE.MeshBasicMaterial({ color: "#ffffff" });
-    const inactiveMat = new THREE.MeshBasicMaterial({ color: "#4a6464", transparent: true, opacity: 0.5 });
-    const alertMat = new THREE.MeshBasicMaterial({ color: ALERT });
-    const vanGeo = new THREE.BoxGeometry(6.2, 2.2, 3.1);
-    vanGeo.translate(0, 1.1, 0);
+    // Market Street diagonal, Embarcadero, Van Ness.
+    addLine(
+      [
+        [-2.9, 1.7],
+        [2.55, -0.55],
+      ],
+      avenue,
+    );
+    addLine(
+      [
+        [2.4, -2.2],
+        [2.55, 2.5],
+      ],
+      avenue,
+    );
+    addLine(
+      [
+        [-0.85, -2.4],
+        [-0.7, 2.55],
+      ],
+      avenue,
+    );
 
-    const actives: Vehicle[] = [
-      { id: "Van 04", mesh: new THREE.Mesh(vanGeo, activeMat), path: rectPath(-80, -40, 220, 140), t: 0.1, speed: 0.12 },
-      { id: "Van 11", mesh: new THREE.Mesh(vanGeo, activeMat), path: rectPath(40, 80, 180, 160), t: 1.4, speed: 0.09 },
-      { id: "Bike 08", mesh: new THREE.Mesh(vanGeo, activeMat), path: rectPath(-20, 20, 260, 90), t: 2.2, speed: 0.11 },
-      { id: "Boat 02", mesh: new THREE.Mesh(vanGeo, activeMat), path: rectPath(120, -90, 140, 200), t: 0.7, speed: 0.1 },
-    ];
-    for (const van of actives) scene.add(van.mesh);
+    const park = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.85, 0.7),
+      new THREE.MeshBasicMaterial({ color: 0xd3d8c6 }),
+    );
+    park.rotation.x = -Math.PI / 2;
+    park.position.set(-1.7, 0.016, -0.15);
+    scene.add(park);
 
-    const parked = [
-      new THREE.Vector3(-160, 0, 180),
-      new THREE.Vector3(-40, 0, 210),
-      new THREE.Vector3(90, 0, 200),
-      new THREE.Vector3(210, 0, 40),
-    ].map((pos) => {
-      const mesh = new THREE.Mesh(vanGeo, inactiveMat);
-      mesh.position.copy(pos);
-      mesh.position.y = 0;
+    const traffic: THREE.Mesh[] = [];
+    const car = new THREE.BoxGeometry(0.11, 0.04, 0.2);
+    for (let i = 0; i < 36; i += 1) {
+      const mesh = new THREE.Mesh(
+        car,
+        new THREE.MeshBasicMaterial({ color: i % 6 === 0 ? 0xe30613 : 0x2a2824 }),
+      );
+      mesh.userData = {
+        lane: i % 3,
+        t: i / 36,
+        speed: 0.035 + (i % 8) * 0.007,
+        offset: i,
+      };
       scene.add(mesh);
-      return mesh;
-    });
+      traffic.push(mesh);
+    }
 
-    const alertGeo = new THREE.CylinderGeometry(1.1, 1.1, 28, 8);
-    alertGeo.translate(0, 14, 0);
-    const alerts = [
-      new THREE.Vector3(80, 0, -60),
-      new THREE.Vector3(-120, 0, 90),
-    ].map((pos) => {
-      const mesh = new THREE.Mesh(alertGeo, alertMat);
-      mesh.position.copy(pos);
+    const vans = Object.entries(UNITS).map(([id, pos]) => {
+      const mesh = new THREE.Mesh(
+        new THREE.BoxGeometry(0.24, 0.11, 0.36),
+        new THREE.MeshBasicMaterial({ color: 0x1a1916 }),
+      );
+      mesh.position.set(pos.x, 0.08, pos.z);
       scene.add(mesh);
-      return mesh;
+      return { id, mesh };
     });
-
-    scene.fog = new THREE.Fog(new THREE.Color(NIGHT), 700, 3800);
-    scene.background = new THREE.Color(NIGHT);
-
-    camera.position.set(420, 380, 520);
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 0, 0);
-    controls.enableZoom = false;
-    controls.enablePan = false;
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.06;
-    controls.minPolarAngle = 0.55;
-    controls.maxPolarAngle = 1.25;
-    controls.autoRotate = false;
 
     const resize = () => {
-      const w = el.clientWidth;
-      const h = el.clientHeight;
-      camera.aspect = w / Math.max(1, h);
+      const w = root.clientWidth;
+      const h = root.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / Math.max(h, 1);
       camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
     };
     resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(el);
 
     let frame = 0;
-    let last = performance.now();
     const tick = () => {
       frame = requestAnimationFrame(tick);
-      const now = performance.now();
-      const dt = Math.min((now - last) / 1000, 0.1);
-      last = now;
-      if (!reduced) {
-        for (const van of actives) {
-          van.t += van.speed * dt;
-          const pose = follow(van.path, van.t);
-          van.mesh.position.copy(pose.position);
-          van.mesh.rotation.y = pose.yaw;
-          van.mesh.material = van.id === selectedRef.current ? pickMat : activeMat;
+      traffic.forEach((mesh) => {
+        const data = mesh.userData as { lane: number; t: number; speed: number; offset: number };
+        data.t = (data.t + data.speed * 0.01) % 1;
+        if (data.lane === 0) {
+          mesh.position.set(-3.1 + data.t * 6.2, 0.05, -1.7 + (data.offset % 5) * 0.65);
+          mesh.rotation.y = Math.PI / 2;
+        } else if (data.lane === 1) {
+          mesh.position.set(-2.3 + (data.offset % 6) * 0.75, 0.05, -2.3 + data.t * 5);
+          mesh.rotation.y = 0;
+        } else {
+          const x = -2.7 + data.t * 5.1;
+          mesh.position.set(x, 0.05, 1.55 - data.t * 2.1);
+          mesh.rotation.y = -0.4;
         }
-      }
-      controls.update();
+      });
+      vans.forEach(({ id, mesh }) => {
+        const on = id === selectedRef.current;
+        (mesh.material as THREE.MeshBasicMaterial).color.setHex(on ? 0xe30613 : 0x1a1916);
+        mesh.scale.setScalar(on ? 1.18 : 1);
+      });
       renderer.render(scene, camera);
     };
     tick();
 
+    const ro = new ResizeObserver(resize);
+    ro.observe(root);
+
     return () => {
       cancelAnimationFrame(frame);
       ro.disconnect();
-      controls.dispose();
       renderer.dispose();
-      buildingGeo.dispose();
-      vanGeo.dispose();
-      alertGeo.dispose();
-      ground.geometry.dispose();
-      (ground.material as THREE.Material).dispose();
-      buildingMat.dispose();
-      activeMat.dispose();
-      pickMat.dispose();
-      inactiveMat.dispose();
-      alertMat.dispose();
-      if (renderer.domElement.parentNode === el) el.removeChild(renderer.domElement);
-      void parked;
+      root.removeChild(renderer.domElement);
     };
   }, []);
 
-  return <div ref={host} className="sc-fleet-map if-fleet-map" aria-hidden="true" />;
+  return <div ref={host} className="sc-gl" style={{ width: "100%", height: "100%" }} />;
 }

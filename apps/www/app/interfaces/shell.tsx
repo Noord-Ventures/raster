@@ -15,6 +15,7 @@ export function InterfaceShell({ slug, children }: { slug: InterfaceSlug; childr
             {proto.title}
           </h1>
           <p className="if-story">{proto.story}</p>
+          <p className="if-story if-story-2">{proto.note}</p>
           <dl className="if-meta">
             <div>
               <dt>What</dt>
@@ -31,6 +32,14 @@ export function InterfaceShell({ slug, children }: { slug: InterfaceSlug; childr
             <div>
               <dt>Ink</dt>
               <dd>{proto.ink}</dd>
+            </div>
+            <div>
+              <dt>Use</dt>
+              <dd>{proto.use}</dd>
+            </div>
+            <div>
+              <dt>Field</dt>
+              <dd>{proto.field}</dd>
             </div>
           </dl>
         </section>

@@ -2,75 +2,86 @@
 
 import * as React from "react";
 import { Brand } from "../mark";
-import { FleetMap } from "./map";
+import { Scene } from "./map";
 
-const ACTIVE = [
-  { id: "Van 04", where: "Kennemerstraatweg", meta: "En route" },
-  { id: "Van 11", where: "Spoorbrug", meta: "En route" },
-  { id: "Bike 08", where: "Kaasmarkt", meta: "Pickup" },
-  { id: "Boat 02", where: "Oudegracht", meta: "Hold" },
-];
-
-const INACTIVE = [
-  { id: "Van 19", where: "Yard north", meta: "Parked" },
-  { id: "Van 03", where: "Yard north", meta: "Service" },
+const UNITS = [
+  { id: "04", name: "Van 04", state: "Moving", where: "Market / 3rd", trip: "Pier 70 → Mission" },
+  { id: "19", name: "Van 19", state: "Hold", where: "Embarcadero", trip: "Ferry → Folsom" },
+  { id: "03", name: "Van 03", state: "Yard", where: "16th / Rhode Island", trip: "Potrero loop" },
+  { id: "11", name: "Van 11", state: "Moving", where: "Van Ness", trip: "Civic → Geary" },
 ];
 
 export function Board() {
-  const [pick, setPick] = React.useState("Van 04");
-  const [alert, setAlert] = React.useState(true);
-  const chosen = ACTIVE.find((unit) => unit.id === pick) ?? ACTIVE[0]!;
+  const [unit, setUnit] = React.useState("04");
+  const [pane, setPane] = React.useState<"none" | "trip">("none");
+  const item = UNITS.find((row) => row.id === unit) ?? UNITS[0]!;
 
   return (
-    <main className="if-board sc-fleet" aria-label="Nacht">
-      <aside className="sc-fleet-rail" aria-label="Nacht">
-        <Brand slug="fleet" title="Nacht" />
-        <p className="sc-fleet-voice">Night</p>
-        <h2>Active</h2>
-        {ACTIVE.map((unit) => (
+    <main className="if-board sc-night" aria-label="Night" style={{ ["--if-spot" as string]: "#E30613" }}>
+      <aside className="sc-night-rail" aria-label="Field">
+        <div className="sc-night-brand">
+          <Brand slug="fleet" title="Night" />
+          <p className="sc-night-voice">On the street</p>
+        </div>
+        <p className="sc-night-label">Field</p>
+        {UNITS.map((row) => (
           <button
-            key={unit.id}
+            key={row.id}
             type="button"
-            className="sc-fleet-unit"
-            aria-current={pick === unit.id}
-            onClick={() => setPick(unit.id)}
+            className="sc-night-unit"
+            aria-current={unit === row.id}
+            onClick={() => {
+              setUnit(row.id);
+              setPane("none");
+            }}
           >
-            <span>
-              {unit.id}
-              <br />
-              <small>{unit.where}</small>
-            </span>
-            <span className="sc-fleet-live">{unit.meta}</span>
+            <b>{row.name}</b>
+            <i>{row.state}</i>
+            <em>{row.where}</em>
           </button>
         ))}
-        <h2>Yard</h2>
-        {INACTIVE.map((unit) => (
-          <div key={unit.id} className="sc-fleet-unit">
-            <span>
-              {unit.id}
-              <br />
-              <small>{unit.where}</small>
-            </span>
-            <span>{unit.meta}</span>
-          </div>
-        ))}
       </aside>
-      <FleetMap selected={pick} />
-      <section className="sc-fleet-c" aria-label="Alerts">
-        {alert ? (
-          <div className="sc-fleet-alert">
-            <p>
-              <strong>Density drop on plate 09.</strong> {chosen.id} is selected. Boat 02 is holding on
-              the Oudegracht.
-            </p>
-            <button type="button" onClick={() => setAlert(false)}>
-              Acknowledge
+
+      <section className="sc-night-field">
+        <header className="sc-night-head">
+          <p>
+            {item.name} · {item.state}
+          </p>
+          <button type="button" className="sc-night-ghost" onClick={() => setPane("trip")}>
+            Open trip
+          </button>
+        </header>
+        <div className="sc-night-map">
+          <Scene selected={unit} />
+        </div>
+      </section>
+
+      <aside className={`if-inspect${pane === "trip" ? " is-open" : ""}`} aria-label="Trip">
+        {pane === "trip" ? (
+          <div key={item.id} className="sc-night-inspect sc-fresh">
+            <p className="sc-night-label">Trip</p>
+            <p className="sc-night-trip">{item.trip}</p>
+            <p>San Francisco field. Streets, water, traffic, one selected unit.</p>
+            <dl>
+              <div>
+                <dt>Unit</dt>
+                <dd>{item.name}</dd>
+              </div>
+              <div>
+                <dt>State</dt>
+                <dd>{item.state}</dd>
+              </div>
+              <div>
+                <dt>Now</dt>
+                <dd>{item.where}</dd>
+              </div>
+            </dl>
+            <button type="button" className="sc-night-ghost" onClick={() => setPane("none")}>
+              Close
             </button>
           </div>
-        ) : (
-          <p className="sc-fleet-quiet sc-fresh">No open alerts. {chosen.id} stays selected.</p>
-        )}
-      </section>
+        ) : null}
+      </aside>
     </main>
   );
 }

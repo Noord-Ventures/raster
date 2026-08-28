@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 const root = fileURLToPath(new URL("../../..", import.meta.url));
 const dir = join(root, "apps/www/app/interfaces");
 const slugs = ["ai-tool", "dashboard", "threads", "fleet", "delivery", "slack"];
-const names = ["Lijn", "Pers", "Muur", "Nacht", "Avond", "Kamer"];
+const names = ["Line", "Press", "Wall", "Night", "Evening", "Room"];
 
 if (!existsSync(join(dir, "FEATURE.md"))) {
   console.error("Interfaces feature map missing: app/interfaces/FEATURE.md");
@@ -115,11 +115,11 @@ for (const file of walk(dir)) {
   }
 }
 
-const clones = /Linear|Notion|Figma/;
+const clones = /Linear|Notion|Figma|Waymo/;
 for (const file of walk(dir)) {
   const text = readFileSync(file, "utf8");
   if (clones.test(text) && !file.endsWith("FEATURE.md") && !file.endsWith("check-interfaces.mjs")) {
-    console.error(`Interfaces must not clone Linear/Notion/Figma: ${file}`);
+    console.error(`Interfaces must not clone Linear/Notion/Figma/Waymo: ${file}`);
     process.exit(1);
   }
 }
@@ -152,8 +152,12 @@ if (!map.includes("Entry is not a show")) {
   console.error("FEATURE.md must state the motion lock");
   process.exit(1);
 }
-if (!map.includes("boxed specimen") || !map.includes("no radius, no shadow, no tape")) {
-  console.error("FEATURE.md must lock a boxed specimen with flush chrome");
+if (!map.includes("boxed specimen") || !/no tape/i.test(map) || !/minimal shadow/i.test(map)) {
+  console.error("FEATURE.md must lock a boxed specimen: no tape, minimal shadow allowed");
+  process.exit(1);
+}
+if (!map.includes("if-inspect")) {
+  console.error("FEATURE.md must name the inspect pane");
   process.exit(1);
 }
 if (!map.includes("fictional little app") || !map.includes("poster crop")) {
@@ -166,7 +170,12 @@ if (existsSync(join(dir, "scene-fonts.ts"))) {
 }
 
 const productSkin = /Fraunces|Source_Serif|IBM_Plex|Newsreader|Iowan|Palatino|#c96442|#e08b6a|#3e1242|#007a5a|#1f8a78|#c45c26|#3ddec4|#ff6b4a|#1264a3|#5b2c6f|#071014|aubergine/i;
-const allowedRadius = /^(0|var\(--radius-sm\))$/;
+const allowedRadius = /^(0|50%|var\(--radius-sm\))$/;
+const quietShadow = (value) =>
+  value === "none" ||
+  value.startsWith("inset ") ||
+  /^0(\s+1px){1,2}\s+\d+px\s+rgba\(0,\s*0,\s*0/.test(value) ||
+  /^0\s+1px\s+2px\s+rgba\(0,\s*0,\s*0/.test(value);
 
 for (const slug of slugs) {
   const scene = readFileSync(join(dir, slug, "scene.css"), "utf8");
@@ -193,12 +202,16 @@ for (const slug of slugs) {
     process.exit(1);
   }
   const shadows = [...scene.matchAll(/box-shadow:\s*([^;]+)/g)].map((m) => m[1].trim());
-  if (shadows.some((value) => value !== "none")) {
-    console.error(`${slug} scene must stay flush: no shadow`);
+  if (shadows.some((value) => !quietShadow(value))) {
+    console.error(`${slug} scene may take a quiet shadow only`);
     process.exit(1);
   }
   if (!board.includes("sc-fresh")) {
     console.error(`${slug} board must confirm a user-caused state`);
+    process.exit(1);
+  }
+  if (!board.includes("if-inspect")) {
+    console.error(`${slug} board must open a second level (if-inspect)`);
     process.exit(1);
   }
   if (!board.includes("<Brand")) {

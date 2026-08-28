@@ -458,8 +458,15 @@ jobs:
           grep -q 'InterfaceCrop' apps/www/app/interfaces/page.tsx
           grep -q 'poster crop' apps/www/app/interfaces/page.tsx
           grep -q 'boxed specimen' apps/www/app/interfaces/FEATURE.md
-          grep -q 'no radius, no shadow, no tape' apps/www/app/interfaces/FEATURE.md
-          grep -q 'title: "Lijn"' apps/www/app/interfaces/catalog.ts
+          grep -qi 'no tape' apps/www/app/interfaces/FEATURE.md
+          grep -qi 'minimal shadow' apps/www/app/interfaces/FEATURE.md
+          grep -q 'if-inspect' apps/www/app/interfaces/FEATURE.md
+          grep -q 'title: "Line"' apps/www/app/interfaces/catalog.ts
+          grep -q 'title: "Press"' apps/www/app/interfaces/catalog.ts
+          grep -q 'title: "Wall"' apps/www/app/interfaces/catalog.ts
+          grep -q 'title: "Night"' apps/www/app/interfaces/catalog.ts
+          grep -q 'title: "Evening"' apps/www/app/interfaces/catalog.ts
+          grep -q 'title: "Room"' apps/www/app/interfaces/catalog.ts
           grep -q 'if-specimen' apps/www/app/interfaces/shell.tsx
           grep -q 'if-meta' apps/www/app/interfaces/shell.tsx
           if [ -f apps/www/app/interfaces/scene-fonts.ts ]; then
@@ -474,10 +481,23 @@ jobs:
             echo "Interfaces must stay off Tailwind and Radix"
             exit 1
           fi
-          if grep -n 'box-shadow:' apps/www/app/interfaces/interfaces.css | grep -v 'none'; then
-            echo "Interfaces chrome must not grow a shadow"
-            exit 1
-          fi
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const css = readFileSync("apps/www/app/interfaces/interfaces.css", "utf8");
+            const tile = css.slice(css.indexOf(".if-tile {"), css.indexOf("}", css.indexOf(".if-tile {")));
+            if (!tile.includes("box-shadow: none")) {
+              console.error("Landing tiles must stay flush: no shadow");
+              process.exit(1);
+            }
+            const spec = css.slice(css.indexOf(".if-specimen {"), css.indexOf("}", css.indexOf(".if-specimen {")));
+            if (!spec.includes("box-shadow:") || spec.includes("box-shadow: none")) {
+              console.error("Specimen may take a quiet shadow");
+              process.exit(1);
+            }
+          '
+          for slug in ai-tool dashboard threads fleet delivery slack; do
+            grep -q 'if-inspect' "apps/www/app/interfaces/$slug/board.tsx"
+          done
           if grep -n about.css apps/www/app/site.css || grep -n interfaces.css apps/www/app/site.css; then
             echo "Interfaces styles must stay isolated"
             exit 1

@@ -3,31 +3,27 @@
 import * as React from "react";
 import { Brand } from "../mark";
 
-type Kind = "kitchen" | "counter" | "bakery";
+type Kind = "kitchen" | "counter";
 
 type Place = {
   id: string;
   name: string;
   kind: Kind;
-  rating: string;
   time: string;
   area: string;
-  tag: string;
   photo: string;
   dish: string;
 };
 
-type Dish = { name: string; price: string; photo: string };
+type Dish = { id: string; name: string; note: string; photo: string };
 
 const PLACES: Place[] = [
   {
     id: "buren",
     name: "De Buren",
     kind: "kitchen",
-    rating: "4.8",
     time: "22 min",
     area: "Alkmaar",
-    tag: "Open",
     photo: "/interfaces/food/de-buren.jpg",
     dish: "Roast chicken, tonight",
   },
@@ -35,10 +31,8 @@ const PLACES: Place[] = [
     id: "kaas",
     name: "Kaasbar",
     kind: "counter",
-    rating: "4.6",
     time: "18 min",
     area: "Kaasmarkt",
-    tag: "Busy",
     photo: "/interfaces/food/kaasbar.jpg",
     dish: "Aged cheese board",
   },
@@ -46,10 +40,8 @@ const PLACES: Place[] = [
     id: "canal",
     name: "Canal kitchen",
     kind: "kitchen",
-    rating: "4.7",
     time: "27 min",
     area: "Oudegracht",
-    tag: "Open",
     photo: "/interfaces/food/canal.jpg",
     dish: "Saffron fish stew",
   },
@@ -57,10 +49,8 @@ const PLACES: Place[] = [
     id: "lunch",
     name: "Press lunch",
     kind: "counter",
-    rating: "4.4",
     time: "14 min",
     area: "Spoor",
-    tag: "Open",
     photo: "/interfaces/food/lunch.jpg",
     dish: "Ricotta toast",
   },
@@ -68,140 +58,119 @@ const PLACES: Place[] = [
 
 const DISHES: Record<string, Dish[]> = {
   buren: [
-    { name: "Roast chicken", price: "18", photo: "/interfaces/food/de-buren.jpg" },
-    { name: "Beet salad", price: "11", photo: "/interfaces/food/dish-salad.jpg" },
-    { name: "Leek soup", price: "9", photo: "/interfaces/food/dish-soup.jpg" },
+    { id: "chicken", name: "Roast chicken", note: "Held at the pass", photo: "/interfaces/food/de-buren.jpg" },
+    { id: "salad", name: "Beet salad", note: "Cold plate", photo: "/interfaces/food/dish-salad.jpg" },
+    { id: "soup", name: "Leek soup", note: "Slow", photo: "/interfaces/food/dish-soup.jpg" },
   ],
   kaas: [
-    { name: "Cheese board", price: "16", photo: "/interfaces/food/kaasbar.jpg" },
-    { name: "Rye and honey", price: "8", photo: "/interfaces/food/dish-pastry.jpg" },
+    { id: "board", name: "Cheese board", note: "Ready", photo: "/interfaces/food/kaasbar.jpg" },
+    { id: "rye", name: "Rye and honey", note: "Last loaf", photo: "/interfaces/food/dish-pastry.jpg" },
   ],
   canal: [
-    { name: "Fish stew", price: "21", photo: "/interfaces/food/canal.jpg" },
-    { name: "Green salad", price: "10", photo: "/interfaces/food/dish-salad.jpg" },
+    { id: "stew", name: "Fish stew", note: "On the fire", photo: "/interfaces/food/canal.jpg" },
+    { id: "greens", name: "Green salad", note: "Cold plate", photo: "/interfaces/food/dish-salad.jpg" },
   ],
   lunch: [
-    { name: "Ricotta toast", price: "12", photo: "/interfaces/food/lunch.jpg" },
-    { name: "Almond pastry", price: "6", photo: "/interfaces/food/dish-pastry.jpg" },
+    { id: "toast", name: "Ricotta toast", note: "Ready", photo: "/interfaces/food/lunch.jpg" },
+    { id: "pastry", name: "Almond pastry", note: "Evening only", photo: "/interfaces/food/dish-pastry.jpg" },
   ],
 };
 
-const FILTERS = [
-  { value: "all", label: "All" },
-  { value: "kitchen", label: "Kitchen" },
-  { value: "counter", label: "Counter" },
-] as const;
-
 export function Board() {
-  const [tab, setTab] = React.useState("browse");
-  const [filter, setFilter] = React.useState("all");
-  const [pick, setPick] = React.useState("buren");
-  const [bag, setBag] = React.useState<{ name: string; fresh?: boolean }[]>([]);
-
-  const shown = PLACES.filter((place) => filter === "all" || place.kind === filter);
-  const place = PLACES.find((item) => item.id === pick) ?? PLACES[0]!;
-  const dishes = DISHES[place.id] ?? [];
+  const [kitchen, setKitchen] = React.useState("buren");
+  const [pane, setPane] = React.useState<"none" | "plate">("none");
+  const [plate, setPlate] = React.useState("chicken");
+  const [bag, setBag] = React.useState(0);
+  const room = PLACES.find((row) => row.id === kitchen) ?? PLACES[0]!;
+  const cards = DISHES[kitchen] ?? DISHES.buren!;
+  const dish = cards.find((row) => row.id === plate) ?? cards[0]!;
 
   return (
-    <main className="if-board sc-food" aria-label="Avond">
-      <header className="sc-food-bar">
-        <Brand slug="delivery" title="Avond" />
-        <p className="sc-food-where">Tonight</p>
-        <nav className="sc-food-nav" aria-label="Avond">
-          {[
-            { id: "browse", label: "Browse" },
-            { id: "orders", label: "Bag" },
-          ].map((item) => (
+    <main className="if-board sc-evening" aria-label="Evening">
+      <aside className="sc-evening-rail" aria-label="Kitchens">
+        <div className="sc-evening-brand">
+          <Brand slug="delivery" title="Evening" />
+          <p className="sc-evening-voice">Tonight</p>
+        </div>
+        <p className="sc-evening-label">Kitchens</p>
+        {PLACES.map((row) => (
+          <button
+            key={row.id}
+            type="button"
+            className="sc-evening-kit"
+            aria-current={kitchen === row.id}
+            onClick={() => {
+              setKitchen(row.id);
+              setPane("none");
+              setPlate((DISHES[row.id] ?? DISHES.buren!)[0]!.id);
+            }}
+          >
+            <img src={row.photo} alt="" />
+            <span>
+              <b>{row.name}</b>
+              <i>
+                {row.area} · {row.time}
+              </i>
+            </span>
+          </button>
+        ))}
+      </aside>
+
+      <section className="sc-evening-menu" aria-label="Menu">
+        <header className="sc-evening-head">
+          <p>{room.name}</p>
+          <span>
+            {room.time}
+            {bag ? ` · bag ${bag}` : ""}
+          </span>
+        </header>
+        <div className="sc-evening-hero">
+          <img src={room.photo} alt="" />
+          <p>{room.dish}</p>
+        </div>
+        <div className="sc-evening-grid">
+          {cards.map((row) => (
             <button
-              key={item.id}
+              key={row.id}
               type="button"
-              aria-current={tab === item.id}
-              onClick={() => setTab(item.id)}
+              className="sc-evening-card"
+              aria-current={plate === row.id && pane === "plate"}
+              onClick={() => {
+                setPlate(row.id);
+                setPane("plate");
+              }}
             >
-              {item.label}
+              <img src={row.photo} alt="" />
+              <b>{row.name}</b>
+              <i>{row.note}</i>
             </button>
           ))}
-        </nav>
-        <button type="button" className="sc-food-bag" onClick={() => setTab("orders")}>
-          <span key={bag.length} className={bag.length ? "sc-fresh" : undefined}>Bag {bag.length}</span>
-        </button>
-      </header>
+        </div>
+      </section>
 
-      <div className="sc-food-body">
-        {tab === "orders" ? (
-          <section className="sc-food-menu" aria-label="Bag">
-            <h2>{bag.length ? "Tonight" : "Bag is empty"}</h2>
-            <p>{bag.length ? `${bag.length} in the bag.` : "Open a kitchen and add a plate."}</p>
-            {bag.map((item, i) => (
-              <p key={`${item.name}-${i}`} className={item.fresh ? "sc-fresh" : undefined}>{item.name}</p>
-            ))}
-          </section>
-        ) : (
-          <>
-            <section className="sc-food-tonight" aria-label="Tonight">
-              <img src={place.photo} alt="" />
-              <div>
-                <p>{place.area} · {place.time}</p>
-                <h2>{place.dish}</h2>
-              </div>
-            </section>
-
-            <div className="sc-food-tools">
-              {FILTERS.map((item) => (
-                <button
-                  key={item.value}
-                  type="button"
-                  className="sc-food-chip"
-                  aria-pressed={filter === item.value}
-                  onClick={() => setFilter(item.value)}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="sc-food-grid">
-              {shown.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  className="sc-food-card"
-                  aria-current={pick === item.id}
-                  onClick={() => setPick(item.id)}
-                >
-                  <img src={item.photo} alt="" />
-                  <div className="sc-food-card-body">
-                    <h3>{item.name}</h3>
-                    <p className="sc-food-card-meta">{item.rating} · {item.time}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-
-            <section className="sc-food-menu" aria-label={`${place.name} menu`}>
-              <h2>{place.name}</h2>
-              <div className="sc-food-dishes">
-                {dishes.map((dish) => (
-                  <button
-                    key={dish.name}
-                    type="button"
-                    className="sc-food-dish"
-                    onClick={() =>
-                      setBag((rows) => [
-                        ...rows.map((entry) => ({ ...entry, fresh: false })),
-                        { name: dish.name, fresh: true },
-                      ])
-                    }
-                  >
-                    <span>{dish.name}</span>
-                    <span>{dish.price} · add</span>
-                  </button>
-                ))}
-              </div>
-            </section>
-          </>
-        )}
-      </div>
+      <aside className={`if-inspect${pane === "plate" ? " is-open" : ""}`} aria-label="Plate">
+        {pane === "plate" ? (
+          <div key={dish.id} className="sc-evening-inspect sc-fresh">
+            <p className="sc-evening-label">Plate</p>
+            <img src={dish.photo} alt="" />
+            <p className="sc-evening-dish">{dish.name}</p>
+            <p>{dish.note}. The evening desk keeps the kitchen and the street on one sheet.</p>
+            <button
+              type="button"
+              className="sc-evening-ghost"
+              onClick={() => {
+                setBag((n) => n + 1);
+                setPane("none");
+              }}
+            >
+              Add to bag
+            </button>
+            <button type="button" className="sc-evening-ghost" onClick={() => setPane("none")}>
+              Close
+            </button>
+          </div>
+        ) : null}
+      </aside>
     </main>
   );
 }
