@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Brand } from "../mark";
 
 type Kind = "kitchen" | "counter" | "bakery";
 
@@ -63,28 +64,6 @@ const PLACES: Place[] = [
     photo: "/interfaces/food/lunch.jpg",
     dish: "Ricotta toast",
   },
-  {
-    id: "north",
-    name: "North plate",
-    kind: "kitchen",
-    rating: "4.9",
-    time: "31 min",
-    area: "Beverkoog",
-    tag: "Later",
-    photo: "/interfaces/food/north.jpg",
-    dish: "Duck with cherries",
-  },
-  {
-    id: "bakery",
-    name: "Sheet bakery",
-    kind: "bakery",
-    rating: "4.5",
-    time: "16 min",
-    area: "Centrum",
-    tag: "Open",
-    photo: "/interfaces/food/bakery.jpg",
-    dish: "Morning loaves",
-  },
 ];
 
 const DISHES: Record<string, Dish[]> = {
@@ -105,47 +84,33 @@ const DISHES: Record<string, Dish[]> = {
     { name: "Ricotta toast", price: "12", photo: "/interfaces/food/lunch.jpg" },
     { name: "Almond pastry", price: "6", photo: "/interfaces/food/dish-pastry.jpg" },
   ],
-  north: [
-    { name: "Duck plate", price: "24", photo: "/interfaces/food/north.jpg" },
-    { name: "Winter soup", price: "10", photo: "/interfaces/food/dish-soup.jpg" },
-  ],
-  bakery: [
-    { name: "Country loaf", price: "7", photo: "/interfaces/food/bakery.jpg" },
-    { name: "Almond pastry", price: "5", photo: "/interfaces/food/dish-pastry.jpg" },
-  ],
 };
 
 const FILTERS = [
   { value: "all", label: "All" },
   { value: "kitchen", label: "Kitchen" },
   { value: "counter", label: "Counter" },
-  { value: "bakery", label: "Bakery" },
 ] as const;
 
 export function Board() {
   const [tab, setTab] = React.useState("browse");
   const [filter, setFilter] = React.useState("all");
-  const [query, setQuery] = React.useState("");
   const [pick, setPick] = React.useState("buren");
   const [bag, setBag] = React.useState<{ name: string; fresh?: boolean }[]>([]);
 
-  const shown = PLACES.filter((place) => {
-    const kindOk = filter === "all" || place.kind === filter;
-    const q = query.trim().toLowerCase();
-    const textOk = !q || `${place.name} ${place.area} ${place.dish}`.toLowerCase().includes(q);
-    return kindOk && textOk;
-  });
+  const shown = PLACES.filter((place) => filter === "all" || place.kind === filter);
   const place = PLACES.find((item) => item.id === pick) ?? PLACES[0]!;
   const dishes = DISHES[place.id] ?? [];
 
   return (
-    <main className="if-board sc-food" aria-label="Food delivery">
+    <main className="if-board sc-food" aria-label="Avond">
       <header className="sc-food-bar">
-        <p className="sc-food-where">Alkmaar</p>
-        <nav className="sc-food-nav" aria-label="Food">
+        <Brand slug="delivery" title="Avond" />
+        <p className="sc-food-where">Tonight</p>
+        <nav className="sc-food-nav" aria-label="Avond">
           {[
             { id: "browse", label: "Browse" },
-            { id: "orders", label: "Orders" },
+            { id: "orders", label: "Bag" },
           ].map((item) => (
             <button
               key={item.id}
@@ -182,13 +147,6 @@ export function Board() {
             </section>
 
             <div className="sc-food-tools">
-              <input
-                className="sc-food-search"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Kitchen, street, dish"
-                aria-label="Search"
-              />
               {FILTERS.map((item) => (
                 <button
                   key={item.value}
@@ -213,14 +171,8 @@ export function Board() {
                 >
                   <img src={item.photo} alt="" />
                   <div className="sc-food-card-body">
-                    <p className="sc-food-card-meta">
-                      {item.area} · {item.tag}
-                    </p>
                     <h3>{item.name}</h3>
-                    <div className="sc-food-card-row">
-                      <span>{item.rating} rating</span>
-                      <span>{item.time}</span>
-                    </div>
+                    <p className="sc-food-card-meta">{item.rating} · {item.time}</p>
                   </div>
                 </button>
               ))}
@@ -228,9 +180,6 @@ export function Board() {
 
             <section className="sc-food-menu" aria-label={`${place.name} menu`}>
               <h2>{place.name}</h2>
-              <p>
-                {place.rating} rating · {place.kind} · {place.time}
-              </p>
               <div className="sc-food-dishes">
                 {dishes.map((dish) => (
                   <button
@@ -244,11 +193,8 @@ export function Board() {
                       ])
                     }
                   >
-                    <img src={dish.photo} alt="" />
-                    <div>
-                      <h3>{dish.name}</h3>
-                      <p>{dish.price} · add</p>
-                    </div>
+                    <span>{dish.name}</span>
+                    <span>{dish.price} · add</span>
                   </button>
                 ))}
               </div>

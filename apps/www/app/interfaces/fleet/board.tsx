@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Brand } from "../mark";
 import { FleetMap } from "./map";
 
 const ACTIVE = [
@@ -13,8 +14,6 @@ const ACTIVE = [
 const INACTIVE = [
   { id: "Van 19", where: "Yard north", meta: "Parked" },
   { id: "Van 03", where: "Yard north", meta: "Service" },
-  { id: "Bike 14", where: "Spoor", meta: "Parked" },
-  { id: "Boat 06", where: "Haven", meta: "Idle" },
 ];
 
 export function Board() {
@@ -23,10 +22,11 @@ export function Board() {
   const chosen = ACTIVE.find((unit) => unit.id === pick) ?? ACTIVE[0]!;
 
   return (
-    <main className="if-board sc-fleet" aria-label="Fleet">
-      <FleetMap selected={pick} />
-      <section className="sc-fleet-hud sc-fleet-a" aria-label="Active fleet">
-        <h2>Active fleet</h2>
+    <main className="if-board sc-fleet" aria-label="Nacht">
+      <aside className="sc-fleet-rail" aria-label="Nacht">
+        <Brand slug="fleet" title="Nacht" />
+        <p className="sc-fleet-voice">Night</p>
+        <h2>Active</h2>
         {ACTIVE.map((unit) => (
           <button
             key={unit.id}
@@ -43,9 +43,7 @@ export function Board() {
             <span className="sc-fleet-live">{unit.meta}</span>
           </button>
         ))}
-      </section>
-      <section className="sc-fleet-hud sc-fleet-b" aria-label="Inactive objects">
-        <h2>Inactive</h2>
+        <h2>Yard</h2>
         {INACTIVE.map((unit) => (
           <div key={unit.id} className="sc-fleet-unit">
             <span>
@@ -56,8 +54,9 @@ export function Board() {
             <span>{unit.meta}</span>
           </div>
         ))}
-      </section>
-      <section className="sc-fleet-hud sc-fleet-c" aria-label="Alerts">
+      </aside>
+      <FleetMap selected={pick} />
+      <section className="sc-fleet-c" aria-label="Alerts">
         {alert ? (
           <div className="sc-fleet-alert">
             <p>

@@ -1,45 +1,46 @@
 "use client";
 
 import * as React from "react";
+import { Brand } from "../mark";
 
 type Kind = "person" | "agent";
-type Line = { who: string; initials: string; kind: Kind; body: string; fresh?: boolean };
+type Line = { who: string; kind: Kind; body: string; fresh?: boolean };
 
 const CHANNELS = [
   { id: "press", label: "Press" },
   { id: "studio", label: "Studio" },
-  { id: "raster", label: "Raster" },
+  { id: "floor", label: "Floor" },
 ] as const;
 
 const PEOPLE = [
-  { id: "renn", label: "Renn", kind: "person" as const },
+  { id: "inez", label: "Inez", kind: "person" as const },
   { id: "sheet", label: "Sheet", kind: "agent" as const },
   { id: "proof", label: "Proof", kind: "agent" as const },
 ];
 
 const START: Record<string, Line[]> = {
   press: [
-    { who: "Renn", initials: "RV", kind: "person", body: "Press run 14 is on the sheet. Fee is on page one." },
-    { who: "Sheet", initials: "SH", kind: "agent", body: "Logged. Weeks 4–7. I will keep the timeline under the fee." },
-    { who: "Noord", initials: "NO", kind: "person", body: "Proofs stay in the same ink." },
-    { who: "Proof", initials: "PR", kind: "agent", body: "Watching the plate. I will ping if the density drops." },
+    { who: "Inez", kind: "person", body: "Press run 14 is on the sheet. Fee is on page one." },
+    { who: "Sheet", kind: "agent", body: "Logged. Weeks 4–7. I will keep the timeline under the fee." },
+    { who: "Karel", kind: "person", body: "Proofs stay in the same ink." },
+    { who: "Proof", kind: "agent", body: "Watching the plate. I will ping if the density drops." },
   ],
   studio: [
-    { who: "Noord", initials: "NO", kind: "person", body: "Alkmaar desk is in." },
-    { who: "Sheet", initials: "SH", kind: "agent", body: "Calendar is on week 34. Three jobs in proof." },
-    { who: "Renn", initials: "RV", kind: "person", body: "Leave the crumb bar off the poster." },
+    { who: "Karel", kind: "person", body: "Alkmaar desk is in." },
+    { who: "Sheet", kind: "agent", body: "Calendar is on week 34. Three jobs in proof." },
+    { who: "Inez", kind: "person", body: "Leave the crumb bar off the poster." },
   ],
-  raster: [
-    { who: "Renn", initials: "RV", kind: "person", body: "Interfaces is a sibling of Components." },
-    { who: "Proof", initials: "PR", kind: "agent", body: "Six routes. I will fail CI if one disappears." },
-    { who: "Sheet", initials: "SH", kind: "agent", body: "Catalog only. No second kit on the chrome." },
+  floor: [
+    { who: "Inez", kind: "person", body: "Plate 09 goes up at six." },
+    { who: "Proof", kind: "agent", body: "Density is within the band." },
+    { who: "Sheet", kind: "agent", body: "I will keep the run on one ink." },
   ],
-  renn: [{ who: "Renn", initials: "RV", kind: "person", body: "Hold the spot for the field." }],
+  inez: [{ who: "Inez", kind: "person", body: "Hold the spot for the field." }],
   sheet: [
-    { who: "Sheet", initials: "SH", kind: "agent", body: "I read the brief. Two sentences, same claim." },
-    { who: "You", initials: "YO", kind: "person", body: "Apply it on the canvas, not in chat." },
+    { who: "Sheet", kind: "agent", body: "I read the brief. Two sentences, same claim." },
+    { who: "You", kind: "person", body: "Apply it on the canvas, not in chat." },
   ],
-  proof: [{ who: "Proof", initials: "PR", kind: "agent", body: "Plate 09 is within density." }],
+  proof: [{ who: "Proof", kind: "agent", body: "Plate 09 is within density." }],
 };
 
 export function Board() {
@@ -60,14 +61,15 @@ export function Board() {
     setDraft("");
     setLines((map) => ({
       ...map,
-      [room]: [...(map[room] ?? []), { who: "You", initials: "YO", kind: "person", body: text, fresh: true }],
+      [room]: [...(map[room] ?? []), { who: "You", kind: "person", body: text, fresh: true }],
     }));
   }
 
   return (
-    <main className="if-board sc-sl" aria-label="Chat">
-      <aside className="sc-sl-rail" aria-label="Channels">
-        <p className="sc-sl-ws">Desk</p>
+    <main className="if-board sc-sl" aria-label="Kamer">
+      <aside className="sc-sl-rail" aria-label="Rooms">
+        <Brand slug="slack" title="Kamer" />
+        <p className="sc-sl-voice">In the room</p>
         <p className="sc-sl-label">Channels</p>
         {CHANNELS.map((item) => (
           <button
@@ -92,7 +94,7 @@ export function Board() {
         ))}
       </aside>
 
-      <section className="sc-sl-main" aria-label="Chat">
+      <section className="sc-sl-main" aria-label="Thread">
         <div className="sc-sl-head">
           <h1>{title}</h1>
           <span>{mixed ? "People and agents" : "People"}</span>
@@ -102,9 +104,6 @@ export function Board() {
             const key = `${room}-${i}`;
             return (
               <article key={key} className={line.fresh ? "sc-sl-line sc-fresh" : "sc-sl-line"}>
-                <span className="sc-sl-ava">
-                  {line.initials}
-                </span>
                 <div>
                   <p className="sc-sl-who">
                     {line.who}
@@ -147,22 +146,6 @@ export function Board() {
           <button type="submit">Send</button>
         </form>
       </section>
-
-      <aside className="sc-sl-side" aria-label="Room">
-        <h2>In the room</h2>
-        <p className="sc-sl-person">
-          Renn <span>Person</span>
-        </p>
-        <p className="sc-sl-person">
-          Noord <span>Person</span>
-        </p>
-        <p className="sc-sl-person">
-          Sheet <span>Agent</span>
-        </p>
-        <p className="sc-sl-person">
-          Proof <span>Agent</span>
-        </p>
-      </aside>
     </main>
   );
 }

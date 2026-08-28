@@ -1,29 +1,32 @@
-/* Chat. A Raster channel list, not a Slack skin. */
+/* Kamer. A studio room. Not a chat-product skin. */
 
 .sc-sl {
-  min-height: 100dvh;
+  height: 100%;
   display: grid;
-  grid-template-columns: 184px minmax(0, 1fr) 184px;
+  grid-template-columns: 184px minmax(0, 1fr);
   column-gap: 20px;
-  padding: 72px 20px 20px;
+  padding: 20px;
   background: var(--bg);
   color: var(--text);
 }
 .sc-sl-rail {
-  padding: 20px 20px 20px 0;
-  border-right: 1px solid var(--grid-line);
+  padding: 0 20px 0 0;
+  border-right: 1px solid var(--divider);
   display: flex;
   flex-direction: column;
   gap: 0;
+  overflow: auto;
+  min-height: 0;
 }
-.sc-sl-ws {
-  margin: 0 0 20px;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+.sc-sl-voice {
+  margin: 6px 0 12px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
 }
 .sc-sl-label {
-  margin: 16px 0 4px;
+  margin: 14px 0 4px;
   font-size: 12px;
   font-weight: 600;
   color: var(--text-secondary);
@@ -49,12 +52,13 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  min-height: calc(100dvh - 92px);
+  min-height: 0;
+  height: 100%;
 }
 .sc-sl-head {
-  min-height: 40px;
-  padding: 20px 0 12px;
-  border-bottom: 1px solid var(--grid-line);
+  min-height: 32px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--divider);
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -72,22 +76,14 @@
 .sc-sl-thread {
   flex: 1;
   overflow: auto;
-  padding: 12px 0;
+  padding: 8px 0;
+  min-height: 0;
 }
 .sc-sl-line {
-  display: grid;
-  grid-template-columns: 32px minmax(0, 1fr);
-  column-gap: 12px;
   padding: 10px 0;
   border-radius: 0;
-  border-bottom: 1px solid var(--grid-line);
+  border-bottom: 1px solid var(--divider);
   transition: opacity var(--duration-snap) var(--ease);
-}
-.sc-sl-ava {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  padding-top: 2px;
 }
 .sc-sl-who { margin: 0 0 2px; font-size: 13px; font-weight: 600; }
 .sc-sl-who em {
@@ -114,12 +110,12 @@
 .sc-sl-react[aria-pressed="true"] { color: var(--text); }
 
 .sc-sl-composer {
-  margin: 8px 0 16px;
+  margin: 8px 0 0;
   display: flex;
   gap: 8px;
   padding: 4px 4px 4px 12px;
-  border: 1px solid var(--grid-line);
-  border-radius: 0;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-sm);
   background: var(--bg);
   box-shadow: none;
   transition: border-color var(--duration-snap) var(--ease);
@@ -129,7 +125,7 @@
   flex: 1;
   border: 0;
   resize: none;
-  min-height: 40px;
+  min-height: 36px;
   background: transparent;
   color: inherit;
   font: 500 15px/1.45 inherit;
@@ -141,7 +137,7 @@
   border: 0;
   background: var(--text);
   color: var(--bg);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   min-height: 36px;
   padding: 0 14px;
   font: 600 13px/1 inherit;
@@ -149,41 +145,20 @@
   transition: opacity var(--duration-snap) var(--ease);
 }
 
-.sc-sl-side {
-  padding: 20px 0 24px;
-  border-left: 1px solid var(--grid-line);
-  padding-left: 20px;
-}
-.sc-sl-side h2 { margin: 0 0 12px; font-size: 12px; font-weight: 600; color: var(--text-secondary); }
-.sc-sl-person {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--grid-line);
-  font-size: 14px;
-}
-.sc-sl-person span { color: var(--text-secondary); font-size: 12px; }
-
 @media (max-width: 900px) {
   .sc-sl { grid-template-columns: 1fr; }
   .sc-sl-rail {
     border-right: 0;
-    border-bottom: 1px solid var(--grid-line);
+    border-bottom: 1px solid var(--divider);
     flex-direction: row;
     flex-wrap: wrap;
     gap: 8px 16px;
-    padding: 12px 0;
+    padding: 0 0 12px;
+    overflow: visible;
   }
-  .sc-sl-ws { width: 100%; margin-bottom: 0; }
+  .sc-sl-voice { width: 100%; margin-bottom: 0; }
   .sc-sl-label { width: 100%; }
-  .sc-sl-main { min-height: 0; }
-  .sc-sl-side {
-    border-left: 0;
-    border-top: 1px solid var(--grid-line);
-    padding-left: 0;
-    padding-top: 20px;
-  }
+  .sc-sl-main { min-height: 280px; }
 }
 
 @media (max-width: 640px) {

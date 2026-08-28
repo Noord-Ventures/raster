@@ -1,26 +1,29 @@
-/* Food. Photographs in Raster cells, not a delivery-app skin. */
+/* Avond. A kitchen list. Photographs occupy cells. */
 
 .sc-food {
-  min-height: 100dvh;
-  padding: 72px 20px 72px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 20px;
   background: var(--bg);
   color: var(--text);
+  overflow: auto;
 }
 .sc-food-bar {
   display: flex;
-  align-items: baseline;
-  justify-content: flex-start;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 12px 20px;
-  min-height: 40px;
-  padding: 20px 0 12px;
-  border-bottom: 1px solid var(--grid-line);
+  gap: 10px 16px;
+  min-height: 36px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--divider);
 }
 .sc-food-where {
   margin: 0;
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
 }
 .sc-food-nav {
   display: flex;
@@ -33,7 +36,7 @@
   border-bottom: 1px solid transparent;
   background: transparent;
   color: var(--text-secondary);
-  min-height: 40px;
+  min-height: 32px;
   padding: 0;
   border-radius: 0;
   font: 500 13px/1 inherit;
@@ -50,28 +53,28 @@
   border: 0;
   background: var(--text);
   color: var(--bg);
-  border-radius: 0;
-  min-height: 40px;
-  padding: 0 14px;
+  border-radius: var(--radius-sm);
+  min-height: 36px;
+  padding: 0 12px;
   font: 600 13px/1 inherit;
   cursor: pointer;
   transition: opacity var(--duration-confirm) var(--ease);
 }
 
-.sc-food-body { padding: 20px 0 40px; }
+.sc-food-body { padding: 16px 0 0; }
 .sc-food-tonight {
   display: grid;
-  grid-template-columns: 388px minmax(0, 1fr);
+  grid-template-columns: 184px minmax(0, 1fr);
   column-gap: 20px;
   align-items: end;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 .sc-food-tonight img {
   display: block;
-  width: 388px;
-  height: 204px;
+  width: 184px;
+  height: 184px;
   object-fit: cover;
-  border: 1px solid var(--grid-line);
+  border: 1px solid var(--divider);
   border-radius: 0;
 }
 .sc-food-tonight p {
@@ -90,22 +93,10 @@
 .sc-food-tools {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 20px;
-  margin: 20px 0;
+  gap: 8px 20px;
+  margin: 0 0 16px;
   align-items: center;
 }
-.sc-food-search {
-  flex: 1 1 240px;
-  min-height: 40px;
-  border: 1px solid var(--grid-line);
-  background: var(--bg);
-  color: var(--text);
-  border-radius: 0;
-  padding: 0 12px;
-  font: 500 15px/1 inherit;
-  transition: border-color var(--duration-snap) var(--ease);
-}
-.sc-food-search:focus-visible { outline: 1px solid var(--text); outline-offset: 2px; }
 .sc-food-chip {
   appearance: none;
   border: 0;
@@ -113,7 +104,7 @@
   background: transparent;
   color: var(--text-secondary);
   border-radius: 0;
-  min-height: 40px;
+  min-height: 32px;
   padding: 0;
   font: 500 13px/1 inherit;
   cursor: pointer;
@@ -132,7 +123,7 @@
 }
 .sc-food-card {
   appearance: none;
-  border: 1px solid var(--grid-line);
+  border: 1px solid var(--divider);
   background: var(--bg);
   color: inherit;
   border-radius: 0;
@@ -149,94 +140,74 @@
 .sc-food-card img {
   display: block;
   width: 100%;
-  height: 184px;
+  height: 124px;
   object-fit: cover;
 }
-.sc-food-card-body { padding: 12px 0 0; }
-.sc-food-card-meta {
-  margin: 0 0 4px;
-  font-size: 12px;
-  color: var(--text-secondary);
-}
+.sc-food-card-body { padding: 10px 10px 12px; }
 .sc-food-card-body h3 {
-  margin: 0 0 6px;
-  font-size: 15px;
+  margin: 0 0 4px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
-.sc-food-card-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
+.sc-food-card-meta {
+  margin: 0;
   font-size: 12px;
   color: var(--text-secondary);
 }
 
 .sc-food-menu {
-  margin-top: 28px;
-  padding: 20px 0 0;
-  border-top: 1px solid var(--grid-line);
+  margin-top: 20px;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--divider);
   border-radius: 0;
   background: var(--bg);
 }
 .sc-food-menu h2 {
   margin: 0 0 6px;
-  font-size: 22px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
-.sc-food-menu > p { margin: 0 0 18px; color: var(--text-secondary); }
+.sc-food-menu > p { margin: 0 0 12px; color: var(--text-secondary); font-size: 13px; }
 .sc-food-dishes {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 184px);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(184px, 1fr));
+  gap: 8px 20px;
 }
 .sc-food-dish {
-  border: 1px solid var(--grid-line);
-  background: var(--bg);
+  appearance: none;
+  border: 0;
+  border-bottom: 1px solid var(--divider);
+  background: transparent;
   color: inherit;
   border-radius: 0;
-  overflow: hidden;
-  padding: 0;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
   text-align: left;
   cursor: pointer;
-  font: inherit;
+  font: 500 13px/1.3 inherit;
   box-shadow: none;
-  transition: border-color var(--duration-snap) var(--ease);
+  transition: color var(--duration-snap) var(--ease);
 }
-.sc-food-dish:hover { border-color: var(--text); }
-.sc-food-dish img {
-  display: block;
-  width: 100%;
-  height: 184px;
-  object-fit: cover;
-}
-.sc-food-dish div { padding: 12px 0 0; }
-.sc-food-dish h3 {
-  margin: 0 0 4px;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-.sc-food-dish p { margin: 0; font-size: 13px; color: var(--text-secondary); }
+.sc-food-dish:hover { color: var(--text); }
+.sc-food-dish span:last-child { color: var(--text-secondary); }
 
 @media (max-width: 640px) {
-  .sc-food-bar { padding-top: 12px; }
   .sc-food-nav { margin-left: 0; }
-  .sc-food-where { font-size: 22px; }
   .sc-food-nav button,
   .sc-food-bag,
   .sc-food-chip { min-height: 44px; font-size: 16px; }
   .sc-food-tonight { grid-template-columns: 1fr; }
-  .sc-food-tonight img { width: 100%; height: 204px; }
-  .sc-food-grid,
-  .sc-food-dishes { grid-template-columns: 1fr; }
+  .sc-food-tonight img { width: 100%; height: 184px; }
+  .sc-food-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .sc-food-nav button,
   .sc-food-bag,
-  .sc-food-search,
   .sc-food-chip,
   .sc-food-card,
   .sc-food-dish { transition: none; }

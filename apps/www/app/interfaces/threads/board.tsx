@@ -1,13 +1,13 @@
 "use client";
 
 import * as React from "react";
+import { Brand } from "../mark";
 
-type Reply = { who: string; initials: string; body: string; fresh?: boolean };
+type Reply = { who: string; body: string; fresh?: boolean };
 
 type Post = {
   id: string;
   who: string;
-  initials: string;
   kind: "note" | "image" | "quote";
   body: string;
   photo?: string;
@@ -18,47 +18,43 @@ type Post = {
 const STARTED: Post[] = [
   {
     id: "grid",
-    who: "Renn",
-    initials: "RV",
+    who: "Inez",
     kind: "note",
     body: "The module is the only join. If a pane needs a second line, it is a second module.",
     likes: 12,
     replies: [
-      { who: "Noord", initials: "NO", body: "Keep the hairline on the active tab only." },
-      { who: "Sheet", initials: "SH", body: "The rail stays 184. The gutter is not a stroke." },
+      { who: "Karel", body: "Keep the hairline on the active tab only." },
+      { who: "Loes", body: "The rail stays 184. The gutter is not a stroke." },
     ],
   },
   {
     id: "proof",
-    who: "Noord",
-    initials: "NO",
+    who: "Karel",
     kind: "image",
     body: "Proof 09 on the press. Same ink, no second color in the chrome.",
     photo: "/interfaces/threads/press-sheet.jpg",
     likes: 9,
     replies: [
-      { who: "Renn", initials: "RV", body: "Hold the spot for the field, not the frame." },
-      { who: "Press", initials: "PR", body: "Sheet is up at 06:00." },
+      { who: "Inez", body: "Hold the spot for the field, not the frame." },
+      { who: "Bram", body: "Sheet is up at 06:00." },
     ],
   },
   {
     id: "cite",
-    who: "Sheet",
-    initials: "SH",
+    who: "Loes",
     kind: "quote",
     body: "A grid is a plan, not a decoration.",
     likes: 7,
-    replies: [{ who: "Renn", initials: "RV", body: "Cite hangs in the gutter. The claim stays in the measure." }],
+    replies: [{ who: "Inez", body: "Cite hangs in the gutter. The claim stays in the measure." }],
   },
   {
     id: "stack",
-    who: "Press",
-    initials: "PR",
+    who: "Bram",
     kind: "image",
     body: "Morning stack. Registration holds.",
     photo: "/interfaces/threads/posters.jpg",
     likes: 4,
-    replies: [{ who: "Noord", initials: "NO", body: "Leave the crumb bar off the poster." }],
+    replies: [{ who: "Karel", body: "Leave the crumb bar off the poster." }],
   },
 ];
 
@@ -85,20 +81,22 @@ export function Board() {
     setPosts((rows) =>
       rows.map((item) =>
         item.id === open
-          ? { ...item, replies: [...item.replies, { who: "You", initials: "YO", body: text, fresh: true }] }
+          ? { ...item, replies: [...item.replies, { who: "You", body: text, fresh: true }] }
           : item,
       ),
     );
   }
 
   return (
-    <main className="if-board sc-th" aria-label="Threads">
-      <section className="sc-th-feed" aria-label="Feed">
-        <h1>Today</h1>
+    <main className="if-board sc-th" aria-label="Muur">
+      <section className="sc-th-feed" aria-label="Wall">
+        <header className="sc-th-head">
+          <Brand slug="threads" title="Muur" />
+          <h1>Today</h1>
+        </header>
         {posts.map((item) => (
           <article key={item.id} className="sc-th-post" aria-current={open === item.id}>
             <div className="sc-th-who">
-              <span className="sc-th-avatar">{item.initials}</span>
               <strong>{item.who}</strong>
               <span>{item.kind}</span>
             </div>

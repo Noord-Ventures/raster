@@ -1,11 +1,12 @@
 "use client";
 
 import * as React from "react";
+import { Brand } from "../mark";
 
-type Role = "user" | "assistant";
+type Role = "brief" | "lijn";
 type Msg = { role: Role; text: string; fresh?: boolean };
 
-const CHATS = [
+const DRAFTS = [
   { id: "brief", title: "Tighten the brief", preview: "Two sentences, same claim." },
   { id: "press", title: "Press run 14", preview: "Keep the weeks under the fee." },
   { id: "invoice", title: "Invoice note", preview: "The number on the cover." },
@@ -13,28 +14,28 @@ const CHATS = [
 
 const STARTED: Record<string, Msg[]> = {
   brief: [
-    { role: "user", text: "Make the intro tighter. Keep the fee on the first page." },
+    { role: "brief", text: "Make the intro tighter. Keep the fee on the first page." },
     {
-      role: "assistant",
-      text: "Two sentences, same claim. The fee stays on the first page; the weeks follow it. I would cut the opening clause and let the number do the work.",
+      role: "lijn",
+      text: "Two sentences, same claim. The fee stays on the first page; the weeks follow it. Cut the opening clause and let the number do the work.",
     },
-    { role: "user", text: "Good. Where should the timeline sit?" },
+    { role: "brief", text: "Good. Where should the timeline sit?" },
     {
-      role: "assistant",
+      role: "lijn",
       text: "Directly under the fee. Two lines, not a list. If a third week appears, it becomes a second sheet.",
     },
   ],
   press: [
-    { role: "user", text: "Press starts week 4. What do I tell the floor?" },
+    { role: "brief", text: "Press starts week 4. What do I tell the floor?" },
     {
-      role: "assistant",
+      role: "lijn",
       text: "One note: same ink, no second color on the plate. Proofs stay in the run. If density drops, stop the sheet and ping the thread.",
     },
   ],
   invoice: [
-    { role: "user", text: "The invoice has to match the cover." },
+    { role: "brief", text: "The invoice has to match the cover." },
     {
-      role: "assistant",
+      role: "lijn",
       text: "Use the number on page one. Do not add a second total. Date the sheet to the week the press starts.",
     },
   ],
@@ -46,30 +47,31 @@ const REPLIES = [
   "I can keep that on the sheet. Two sentences, same claim.",
   "Place it under the fee. If it needs a third line, it is a second module.",
   "Done as a note, not a list. The number stays first.",
-  "I would leave the chrome quiet and put the color on the field only.",
+  "Leave the chrome quiet and put the color on the field only.",
 ];
 
 export function Board() {
-  const [chat, setChat] = React.useState<string>("brief");
+  const [draftId, setDraftId] = React.useState<string>("brief");
   const [messages, setMessages] = React.useState<Msg[]>(STARTED.brief ?? []);
   const [draft, setDraft] = React.useState("");
   const [pending, setPending] = React.useState(false);
   const end = React.useRef<HTMLDivElement>(null);
   const box = React.useRef<HTMLTextAreaElement>(null);
+  const piece = DRAFTS.find((item) => item.id === draftId)?.title ?? "New draft";
 
   React.useEffect(() => {
     end.current?.scrollIntoView({ block: "end" });
   }, [messages, pending]);
 
-  function openChat(id: string) {
-    setChat(id);
+  function openDraft(id: string) {
+    setDraftId(id);
     setMessages(STARTED[id] ?? []);
     setDraft("");
     setPending(false);
   }
 
   function fresh() {
-    setChat("new");
+    setDraftId("new");
     setMessages([]);
     setDraft("");
     setPending(false);
@@ -80,29 +82,31 @@ export function Board() {
     const value = (text ?? draft).trim();
     if (!value || pending) return;
     setDraft("");
-    setMessages((rows) => [...rows, { role: "user", text: value, fresh: true }]);
+    setMessages((rows) => [...rows, { role: "brief", text: value, fresh: true }]);
     setPending(true);
     window.setTimeout(() => {
       const reply = REPLIES[value.length % REPLIES.length]!;
-      setMessages((rows) => [...rows, { role: "assistant", text: reply, fresh: true }]);
+      setMessages((rows) => [...rows, { role: "lijn", text: reply, fresh: true }]);
       setPending(false);
     }, 700);
   }
 
   return (
-    <main className="if-board sc-ai" aria-label="AI tool">
-      <aside className="sc-ai-rail" aria-label="Chats">
+    <main className="if-board sc-ai" aria-label="Lijn">
+      <aside className="sc-ai-rail" aria-label="Drafts">
+        <Brand slug="ai-tool" title="Lijn" />
+        <p className="sc-ai-voice">The next line</p>
         <button type="button" className="sc-ai-new" onClick={fresh}>
-          New chat
+          New draft
         </button>
         <div className="sc-ai-chats">
-          {CHATS.map((item) => (
+          {DRAFTS.map((item) => (
             <button
               key={item.id}
               type="button"
               className="sc-ai-chat"
-              aria-current={chat === item.id}
-              onClick={() => openChat(item.id)}
+              aria-current={draftId === item.id}
+              onClick={() => openDraft(item.id)}
             >
               <span className="sc-ai-chat-title">{item.title}</span>
               <span className="sc-ai-chat-preview">{item.preview}</span>
@@ -111,12 +115,15 @@ export function Board() {
         </div>
       </aside>
 
-      <section className="sc-ai-stage" aria-label="Conversation">
+      <section className="sc-ai-stage" aria-label="Draft">
+        <header className="sc-ai-head">
+          <h1>{piece}</h1>
+        </header>
         <div className="sc-ai-thread">
           <div className="sc-ai-measure">
             {messages.length === 0 ? (
               <div className="sc-ai-empty">
-                <h1 className="sc-ai-hello">Write the next line</h1>
+                <p className="sc-ai-hello">The next line</p>
                 <div className="sc-ai-hints">
                   {HINTS.map((hint) => (
                     <button key={hint} type="button" className="sc-ai-hint" onClick={() => send(hint)}>
@@ -127,14 +134,13 @@ export function Board() {
               </div>
             ) : (
               messages.map((msg, i) =>
-                msg.role === "user" ? (
-                  <article key={i} className={`sc-ai-msg sc-ai-msg-user${msg.fresh ? " sc-fresh" : ""}`}>
-                    <p className="sc-ai-who">You</p>
+                msg.role === "brief" ? (
+                  <article key={i} className={`sc-ai-msg sc-ai-msg-brief${msg.fresh ? " sc-fresh" : ""}`}>
                     <p className="sc-ai-bubble">{msg.text}</p>
                   </article>
                 ) : (
-                  <article key={i} className={`sc-ai-msg${msg.fresh ? " sc-fresh" : ""}`}>
-                    <p className="sc-ai-who">Assistant</p>
+                  <article key={i} className={`sc-ai-msg sc-ai-msg-lijn${msg.fresh ? " sc-fresh" : ""}`}>
+                    <p className="sc-ai-who">Lijn</p>
                     <p className="sc-ai-reply">{msg.text}</p>
                   </article>
                 ),
@@ -161,8 +167,8 @@ export function Board() {
               ref={box}
               rows={1}
               value={draft}
-              placeholder="A line"
-              aria-label="Message"
+              placeholder="The next line"
+              aria-label="Line"
               onChange={(event) => setDraft(event.target.value)}
               onKeyDown={(event) => {
                 if (event.key === "Enter" && !event.shiftKey) {
@@ -175,7 +181,6 @@ export function Board() {
               Send
             </button>
           </form>
-          <p className="sc-ai-note">Local replies. No live model on this sheet.</p>
         </div>
       </section>
     </main>

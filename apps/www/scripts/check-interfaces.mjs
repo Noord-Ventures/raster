@@ -2,12 +2,13 @@
 // disappears, if the section is buried in Components, or if a second kit
 // (Tailwind / Radix) appears in the section.
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../../..", import.meta.url));
 const dir = join(root, "apps/www/app/interfaces");
 const slugs = ["ai-tool", "dashboard", "threads", "fleet", "delivery", "slack"];
+const names = ["Lijn", "Pers", "Muur", "Nacht", "Avond", "Kamer"];
 
 if (!existsSync(join(dir, "FEATURE.md"))) {
   console.error("Interfaces feature map missing: app/interfaces/FEATURE.md");
@@ -27,6 +28,9 @@ const index = readFileSync(join(dir, "page.tsx"), "utf8");
 const map = readFileSync(join(dir, "FEATURE.md"), "utf8");
 const chrome = readFileSync(join(root, "apps/www/components/site-chrome.tsx"), "utf8");
 const crumbs = readFileSync(join(root, "apps/www/components/crumb-bar.tsx"), "utf8");
+const css = readFileSync(join(dir, "interfaces.css"), "utf8");
+const crops = existsSync(join(dir, "crops.tsx")) ? readFileSync(join(dir, "crops.tsx"), "utf8") : "";
+const shell = existsSync(join(dir, "shell.tsx")) ? readFileSync(join(dir, "shell.tsx"), "utf8") : "";
 
 if (!chrome.includes('href: "/interfaces"') || !chrome.includes('label: "Interfaces"')) {
   console.error("Interfaces must be a first-class corner-nav sibling");
@@ -51,6 +55,33 @@ if (extras.length) {
 
 if (!index.includes("interfaces.map") || !index.includes("`/interfaces/${item.slug}`")) {
   console.error("Interfaces index must list the six from catalog.ts");
+  process.exit(1);
+}
+if (!index.includes("InterfaceCrop")) {
+  console.error("Interfaces index must render poster crops, not title-only cards");
+  process.exit(1);
+}
+if (!crops.includes("if-crop-scene")) {
+  console.error("Poster crops must be UI fragments, not empty frames");
+  process.exit(1);
+}
+if (!shell.includes("if-specimen") || !shell.includes("if-meta") || !shell.includes("if-story")) {
+  console.error("Detail pages must box the specimen and print description + meta");
+  process.exit(1);
+}
+if (!css.includes(".if-specimen") || !css.includes("height: 612px")) {
+  console.error("Specimen must be a 612 module box, not almost-fullscreen");
+  process.exit(1);
+}
+
+for (const name of names) {
+  if (!catalog.includes(`title: "${name}"`)) {
+    console.error(`catalog.ts is missing fictional title: ${name}`);
+    process.exit(1);
+  }
+}
+if (/title: "(AI tool|SaaS dashboard|Threads|Fleet|Food delivery|Chat)"/.test(catalog)) {
+  console.error("Catalog titles must be invented apps, not generic categories");
   process.exit(1);
 }
 
@@ -84,6 +115,15 @@ for (const file of walk(dir)) {
   }
 }
 
+const clones = /Linear|Notion|Figma/;
+for (const file of walk(dir)) {
+  const text = readFileSync(file, "utf8");
+  if (clones.test(text) && !file.endsWith("FEATURE.md") && !file.endsWith("check-interfaces.mjs")) {
+    console.error(`Interfaces must not clone Linear/Notion/Figma: ${file}`);
+    process.exit(1);
+  }
+}
+
 const componentsPage = readFileSync(join(root, "apps/www/app/components/page.tsx"), "utf8");
 if (componentsPage.includes("/interfaces")) {
   console.error("Interfaces must not be buried inside the Components page");
@@ -112,8 +152,12 @@ if (!map.includes("Entry is not a show")) {
   console.error("FEATURE.md must state the motion lock");
   process.exit(1);
 }
-if (!map.includes("Raster product demo") || !map.includes("no radius")) {
-  console.error("FEATURE.md must lock scenes as Raster product demos");
+if (!map.includes("boxed specimen") || !map.includes("no radius, no shadow, no tape")) {
+  console.error("FEATURE.md must lock a boxed specimen with flush chrome");
+  process.exit(1);
+}
+if (!map.includes("fictional little app") || !map.includes("poster crop")) {
+  console.error("FEATURE.md must lock fictional apps and poster crops");
   process.exit(1);
 }
 if (existsSync(join(dir, "scene-fonts.ts"))) {
@@ -122,38 +166,43 @@ if (existsSync(join(dir, "scene-fonts.ts"))) {
 }
 
 const productSkin = /Fraunces|Source_Serif|IBM_Plex|Newsreader|Iowan|Palatino|#c96442|#e08b6a|#3e1242|#007a5a|#1f8a78|#c45c26|#3ddec4|#ff6b4a|#1264a3|#5b2c6f|#071014|aubergine/i;
+const allowedRadius = /^(0|var\(--radius-sm\))$/;
 
 for (const slug of slugs) {
-  const css = readFileSync(join(dir, slug, "scene.css"), "utf8");
-  if (!css.includes("var(--duration-snap)") || !css.includes("var(--ease)")) {
+  const scene = readFileSync(join(dir, slug, "scene.css"), "utf8");
+  const board = readFileSync(join(dir, slug, "board.tsx"), "utf8");
+  if (!scene.includes("var(--duration-snap)") || !scene.includes("var(--ease)")) {
     console.error(`${slug} scene must use Raster snap/ease tokens`);
     process.exit(1);
   }
-  if (!css.includes("prefers-reduced-motion")) {
+  if (!scene.includes("prefers-reduced-motion")) {
     console.error(`${slug} scene must honor reduced motion`);
     process.exit(1);
   }
-  if (/translateY|stagger|animation-delay/.test(css)) {
+  if (/translateY|stagger|animation-delay/.test(scene)) {
     console.error(`${slug} scene must not fade-up or stagger`);
     process.exit(1);
   }
-  if (productSkin.test(css) || productSkin.test(readFileSync(join(dir, slug, "board.tsx"), "utf8"))) {
+  if (productSkin.test(scene) || productSkin.test(board)) {
     console.error(`${slug} must stay Raster: no product skin, no extra face, no reference hue`);
     process.exit(1);
   }
-  const radii = [...css.matchAll(/border-radius:\s*([^;]+)/g)].map((m) => m[1].trim());
-  if (radii.some((value) => value !== "0")) {
-    console.error(`${slug} scene must stay flush: no radius`);
+  const radii = [...scene.matchAll(/border-radius:\s*([^;]+)/g)].map((m) => m[1].trim());
+  if (radii.some((value) => !allowedRadius.test(value))) {
+    console.error(`${slug} scene chrome stays flush; boxed UI may use --radius-sm only`);
     process.exit(1);
   }
-  const shadows = [...css.matchAll(/box-shadow:\s*([^;]+)/g)].map((m) => m[1].trim());
+  const shadows = [...scene.matchAll(/box-shadow:\s*([^;]+)/g)].map((m) => m[1].trim());
   if (shadows.some((value) => value !== "none")) {
     console.error(`${slug} scene must stay flush: no shadow`);
     process.exit(1);
   }
-  const board = readFileSync(join(dir, slug, "board.tsx"), "utf8");
   if (!board.includes("sc-fresh")) {
     console.error(`${slug} board must confirm a user-caused state`);
+    process.exit(1);
+  }
+  if (!board.includes("<Brand")) {
+    console.error(`${slug} board must carry the invented brand`);
     process.exit(1);
   }
 }

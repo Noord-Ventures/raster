@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Brand } from "../mark";
 
 const WEEK = { sheets: 38, proofs: 12, press: 4, series: [12, 18, 15, 26, 24, 11, 9] };
 const MONTH = { sheets: 142, proofs: 41, press: 9, series: [28, 34, 31, 42, 38, 22, 19] };
@@ -15,7 +16,7 @@ const JOBS = [
 function Line({ values }: { values: number[] }) {
   const max = Math.max(...values);
   const w = 560;
-  const h = 180;
+  const h = 120;
   const step = w / (values.length - 1);
   const pts = values.map((v, i) => `${i * step},${h - (v / max) * (h - 16)}`).join(" ");
   return (
@@ -35,9 +36,10 @@ export function Board() {
   const selected = JOBS.find((item) => item.id === job) ?? JOBS[0]!;
 
   return (
-    <main className="if-board sc-dash" aria-label="SaaS dashboard">
-      <aside className="sc-dash-rail" aria-label="Jobs">
-        <p className="sc-dash-brand">Jobs</p>
+    <main className="if-board sc-dash" aria-label="Pers" style={{ ["--if-spot" as string]: "#E30613" }}>
+      <aside className="sc-dash-rail" aria-label="Pers">
+        <Brand slug="dashboard" title="Pers" />
+        <p className="sc-dash-voice">On press</p>
         {[
           { id: "overview", label: "Overview" },
           { id: "jobs", label: "Jobs" },
@@ -85,7 +87,7 @@ export function Board() {
           </article>
           <article className="sc-dash-metric">
             <p>On press</p>
-            <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.press}</strong>
+            <strong key={range} className={`sc-dash-spot${metricFresh ? " sc-fresh" : ""}`}>{data.press}</strong>
           </article>
         </div>
 

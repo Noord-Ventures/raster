@@ -453,9 +453,15 @@ jobs:
             test -f "apps/www/app/interfaces/$slug/board.tsx"
           done
           test -f apps/www/app/interfaces/fleet/map.tsx
-          grep -q 'Working posters. The catalog, composed.' apps/www/app/interfaces/page.tsx
-          grep -q 'Raster product demo' apps/www/app/interfaces/FEATURE.md
-          grep -q 'no radius' apps/www/app/interfaces/FEATURE.md
+          test -f apps/www/app/interfaces/crops.tsx
+          test -f apps/www/app/interfaces/shell.tsx
+          grep -q 'InterfaceCrop' apps/www/app/interfaces/page.tsx
+          grep -q 'poster crop' apps/www/app/interfaces/page.tsx
+          grep -q 'boxed specimen' apps/www/app/interfaces/FEATURE.md
+          grep -q 'no radius, no shadow, no tape' apps/www/app/interfaces/FEATURE.md
+          grep -q 'title: "Lijn"' apps/www/app/interfaces/catalog.ts
+          grep -q 'if-specimen' apps/www/app/interfaces/shell.tsx
+          grep -q 'if-meta' apps/www/app/interfaces/shell.tsx
           if [ -f apps/www/app/interfaces/scene-fonts.ts ]; then
             echo "Scenes must use Inter, not extra display faces"
             exit 1

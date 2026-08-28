@@ -1,57 +1,62 @@
-/* Threads. A Raster feed, not an editorial-app skin. */
+/* Muur. A studio wall. Photographs occupy a cell. */
 
 .sc-th {
-  min-height: 100dvh;
+  height: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 592px) 184px;
+  grid-template-columns: minmax(0, 1fr) 184px;
   column-gap: 20px;
-  justify-content: start;
-  padding: 72px 20px 40px;
+  padding: 20px;
   background: var(--bg);
   color: var(--text);
+  overflow: hidden;
 }
 .sc-th-feed {
   min-width: 0;
-  padding: 20px 0 40px;
+  overflow: auto;
+  padding: 0 0 8px;
+}
+.sc-th-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--divider);
 }
 .sc-th-feed h1 {
-  margin: 0 0 20px;
-  font-size: 38px;
+  margin: 0;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 .sc-th-post {
   background: var(--bg);
   border-radius: 0;
   box-shadow: none;
-  padding: 20px 0;
+  padding: 16px 0;
   margin-bottom: 0;
-  border-bottom: 1px solid var(--grid-line);
+  border-bottom: 1px solid var(--divider);
 }
 .sc-th-post[aria-current="true"] .sc-th-who strong { text-decoration: underline; text-underline-offset: 3px; }
 .sc-th-who {
   display: flex;
   align-items: baseline;
   gap: 10px;
-  margin-bottom: 10px;
-}
-.sc-th-avatar {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
+  margin-bottom: 8px;
 }
 .sc-th-who strong { font-size: 13px; letter-spacing: -0.01em; }
 .sc-th-who span { color: var(--text-secondary); font-size: 12px; }
 .sc-th-body {
   margin: 0;
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.55;
   letter-spacing: -0.01em;
 }
 .sc-th-quote {
   margin: 0;
   padding: 0;
-  border-left: 1px solid var(--grid-line);
+  border-left: 1px solid var(--divider);
   padding-left: 20px;
   font-size: 22px;
   font-weight: 600;
@@ -61,7 +66,7 @@
 .sc-th-photo {
   display: block;
   width: 100%;
-  height: 204px;
+  height: 184px;
   object-fit: cover;
   border-radius: 0;
   margin-top: 12px;
@@ -69,14 +74,14 @@
 .sc-th-actions {
   display: flex;
   gap: 16px;
-  margin-top: 14px;
+  margin-top: 12px;
 }
 .sc-th-actions button {
   appearance: none;
   border: 0;
   background: transparent;
   color: var(--text-secondary);
-  min-height: 36px;
+  min-height: 32px;
   padding: 0;
   border-radius: 0;
   font: 500 13px/1 inherit;
@@ -87,24 +92,25 @@
 .sc-th-actions button[aria-pressed="true"] { color: var(--text); }
 
 .sc-th-pane {
-  padding: 20px 0 32px;
-  border-left: 1px solid var(--grid-line);
-  padding-left: 20px;
+  padding: 0 0 0 20px;
+  border-left: 1px solid var(--divider);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  min-height: 0;
+  overflow: auto;
 }
 .sc-th-pane h2 {
   margin: 0;
-  font-size: 22px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
 .sc-th-reply {
   padding: 10px 0;
-  border-top: 1px solid var(--grid-line);
-  font-size: 14px;
-  line-height: 1.5;
+  border-top: 1px solid var(--divider);
+  font-size: 13px;
+  line-height: 1.45;
 }
 .sc-th-reply strong { display: block; margin-bottom: 2px; font-size: 12px; }
 .sc-th-composer {
@@ -114,11 +120,11 @@
 }
 .sc-th-composer input {
   flex: 1;
-  min-height: 40px;
-  border: 1px solid var(--grid-line);
+  min-height: 36px;
+  border: 1px solid var(--divider);
   background: var(--bg);
   color: inherit;
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   padding: 0 12px;
   font: 500 14px/1 inherit;
   transition: border-color var(--duration-snap) var(--ease);
@@ -129,8 +135,8 @@
   border: 0;
   background: var(--text);
   color: var(--bg);
-  border-radius: 0;
-  min-height: 40px;
+  border-radius: var(--radius-sm);
+  min-height: 36px;
   padding: 0 14px;
   font: 600 13px/1 inherit;
   cursor: pointer;
@@ -138,19 +144,17 @@
 }
 
 @media (max-width: 900px) {
-  .sc-th { grid-template-columns: 1fr; }
+  .sc-th { grid-template-columns: 1fr; overflow: auto; }
   .sc-th-pane {
     border-left: 0;
-    border-top: 1px solid var(--grid-line);
-    padding-left: 0;
-    padding-top: 20px;
+    border-top: 1px solid var(--divider);
+    padding: 16px 0 0;
   }
 }
 
 @media (max-width: 640px) {
   .sc-th-actions button,
   .sc-th-composer button { min-height: 44px; font-size: 16px; }
-  .sc-th-feed h1 { font-size: 28px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
