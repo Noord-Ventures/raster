@@ -8,6 +8,8 @@ Each interface is a fictional little app: an English name, a mark, one or two wo
 
 Landing cards are poster crops — a clipped fragment of that UI, not a tiny full-page shrink, not a title-only frame. Type in a crop wraps on a word. A composer or photograph may run off the card; a letter may not. Captions follow the English names.
 
+The site 204 (184 + 20) shows on `/interfaces` the same as home. Type occupies the first cell. Cards sit on the grid. No dropped horizontals or vanished verticals. Ink is `--grid-line`, quieter than `--divider`. Do not raise opacity. Detail routes keep the field around the boxed specimen.
+
 Detail keeps Raster site chrome (logo, corner nav, crumb bar, Interfaces rail). The custom UI sits in a boxed specimen. Below the box: a longer description, plus meta (what, type, module, ink, use, field). No horizontal divider between the UI and the copy. No rule under the description. The specimen is not almost-fullscreen.
 
 The boxed UI is a coherent modern product with a Raster core, not a floaty flat demo. Module, hairlines, grotesque, sentence case. Never all caps. No tape. Chrome stays mostly monochrome. A board may take one spot or a quiet hue for hierarchy. Minimal shadow is allowed. Faces may be round. App dividers run edge to edge in the pane. The boxed UI may follow `--radius-sm`.
@@ -16,8 +18,8 @@ Each app has two to three levels of use: list → detail → one level deeper. I
 
 | Surface | Route | Click path | Done |
 | --- | --- | --- | --- |
-| Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. Each card is a poster crop, then the English name. |
-| Line | `/interfaces/line` | Interfaces → Line | Modern writing chat. List → chat → a line. Centered measure. Composer in the pane, aligned. |
+| Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. Title occupies a 204 cell. Each card is a poster crop on the 204, then the English name. The field under the title and around the crops reads as the module. |
+| Line | `/interfaces/line` | Interfaces → Line | Modern writing chat. List → chat → a line. Centered measure. Composer in the pane, aligned. Site 204s run around the box. |
 | Press | `/interfaces/press` | Interfaces → Press | Ops app. Floor → job → sheet. Hue in the rail. One Crouwel spot. |
 | Wall | `/interfaces/wall` | Interfaces → Wall | Social wall. Feed → thread → profile. Faces of people. |
 | Night | `/interfaces/night` | Interfaces → Night | SF dispatch. List → unit → trip. Readable map, traffic, one list scale. |

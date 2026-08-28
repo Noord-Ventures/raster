@@ -76,15 +76,44 @@ if (!specimen.includes("min-width: 481px") || !about.includes("min-width: 481px"
 if (specimen.includes("padding: 0 1px 1px 0") || /padding:\s*1px;/.test(specimen)) {
   fail("Homepage must open on the right and bottom; do not restore an outer frame");
 }
+if (specimen.includes("background-image: none")) {
+  fail("Homepage must not hide the site module grid");
+}
 if (!specimen.includes("body:has(.specimen-page)") || !specimen.includes("clip-path: inset(0)")) {
-  fail("Homepage must cover the page grid and clip any edge hairline");
+  fail("Homepage must keep the site grid and clip any edge hairline");
+}
+if (!specimen.includes("background: transparent")) {
+  fail("Homepage paper must let the site 204 verticals show through");
+}
+if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
+  fail("Catalog secondaries must not cover the site module grid");
 }
 if (!about.includes("padding: 0 1px 1px 0")) {
   fail("About must keep its right and bottom hairline");
 }
+const aboutCell = about.slice(about.indexOf(".field-cell {"), about.indexOf("}", about.indexOf(".field-cell {")));
+if (!aboutCell.includes("background-image: var(--grid-image)") || !aboutCell.includes("background-position: var(--grid-pos)") || !aboutCell.includes("background-attachment: fixed")) {
+  fail("About must share the site 204 spine with home, not a local hero tile");
+}
+const aboutEra = about.slice(about.indexOf(".field-cell-era {"), about.indexOf("}", about.indexOf(".field-cell-era {")));
+if (aboutEra.includes("background-image")) {
+  fail("About hero must not paint a local unpositioned grid");
+}
 
 if (!ifCss.includes(".if-board .rs-sidebar-item") || !ifCss.includes("min-height: 44px")) {
   fail("Interface sidebars must use 44pt rows on the phone");
+}
+if (/\.if-rail \{[^}]*background:\s*var\(--bg\)/s.test(ifCss)) {
+  fail("Interfaces rail must not cover the site module grid");
+}
+if (!ifCss.includes("body:has(.if-index)") || !ifCss.includes("repeating-linear-gradient")) {
+  fail("Interfaces must paint the 204 field, including horizontals");
+}
+if (/if-list \{[^}]*padding:\s*24px/s.test(ifCss)) {
+  fail("Interfaces cards must sit on the 204, not 24px off it");
+}
+if (!ifCss.includes(".if-title {\n  min-height: 204px")) {
+  fail("Interfaces title must occupy a 204 cell");
 }
 
 const phoneCss = readFileSync(join(root, "packages/core/css/phone.css"), "utf8");

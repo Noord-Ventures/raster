@@ -1,6 +1,26 @@
 @import "./scene-motion.css";
 /* Interfaces section. Isolated. Do not move these rules into site.css. */
 
+/* Same 204 as home: body verticals at --grid-pos, plus horizontals at
+   204 / 408 / 612 so the field reads as a module. Ink is --grid-line
+   (already quieter than --divider). Do not raise opacity. No line at
+   y=0 — that would read as a page frame. */
+body:has(.if-index) {
+  background-image:
+    var(--grid-image),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 203px,
+      var(--grid-line) 203px,
+      var(--grid-line) 204px
+    );
+  background-size: var(--grid-size) 100vh, 100% 204px;
+  background-repeat: repeat-x, repeat-y;
+  background-attachment: fixed, fixed;
+  background-position: var(--grid-pos), 0 0;
+}
+
 .if-index {
   --ml: 0px;
   display: flex;
@@ -26,7 +46,7 @@
     flex-direction: column;
     padding-top: calc(72px + env(safe-area-inset-top, 0px));
   }
-  .if-index .cover { padding-top: 32px; }
+  .if-index .if-title { padding-top: 32px; }
 }
 @media (max-width: 640px) {
   .if-index { padding-top: calc(56px + env(safe-area-inset-top, 0px)); }
@@ -43,7 +63,7 @@
   padding: 120px 20px 72px 0;
   overflow-y: auto;
   scrollbar-width: none;
-  background: var(--bg);
+  background: transparent;
 }
 @media (min-width: 900px) {
   .if-rail { display: block; }
@@ -69,20 +89,35 @@
 .if-rail a[aria-current="page"] { font-weight: 500; }
 .if-rail a:focus-visible { outline: 1px solid var(--text); outline-offset: 2px; }
 
-/* Landing: poster crops, not title-only frames. 388 × 408 = two modules. */
+/* Title occupies the first 204 cell. Type sits on the field. */
+.if-title {
+  min-height: 204px;
+  max-width: 592px;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: transparent;
+}
+.if-title .rs-t-sub { margin-top: 16px; }
+
+/* Landing: poster crops sit on the 204. 388 × 408 = two modules.
+   No 24px pad — that dropped the first horizontal and shoved cards
+   off the module. Row gap 0 so the second row starts on 612. */
 .if-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, 388px);
-  gap: var(--gutter);
-  padding: 24px 0 72px;
+  column-gap: var(--gutter);
+  row-gap: 0;
+  padding: 0 0 72px;
 }
 .if-tile {
   isolation: isolate;
   display: grid;
   grid-template-rows: 1fr auto;
   height: 408px;
-  background: var(--bg);
-  border: 1px solid var(--divider);
+  background: transparent;
+  border: 1px solid var(--grid-line);
   border-radius: 0;
   box-shadow: none;
   text-decoration: none;
@@ -100,7 +135,7 @@
   overflow: hidden;
   pointer-events: none;
   user-select: none;
-  background: var(--bg);
+  background: transparent;
 }
 .if-crop-scene { color: var(--text); }
 .if-crop-lockup {
@@ -287,8 +322,8 @@
 
 .if-tile-matter {
   padding: 12px 20px 14px;
-  border-top: 1px solid var(--divider);
-  background: var(--bg);
+  border-top: 1px solid var(--grid-line);
+  background: transparent;
 }
 .if-tile-matter h2 {
   margin: 0 0 2px;
@@ -308,7 +343,7 @@
 }
 
 @media (max-width: 640px) {
-  .if-list { grid-template-columns: 1fr; padding: 16px 0 calc(72px + env(safe-area-inset-bottom, 0px)); }
+  .if-list { grid-template-columns: 1fr; padding: 0 0 calc(72px + env(safe-area-inset-bottom, 0px)); }
   .if-tile { height: 408px; }
   .if-tile-matter h2 { font-size: 16px; }
   .if-tile-matter p { font-size: 15px; line-height: 1.45; }
@@ -316,7 +351,7 @@
 
 /* Detail: Raster chrome around a boxed product UI. Not almost-fullscreen. */
 .if-specimen {
-  margin-top: 120px;
+  margin-top: 204px;
   height: 612px;
   background: var(--bg);
   border: 1px solid var(--divider);

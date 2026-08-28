@@ -120,17 +120,39 @@ jobs:
           fi
           grep -q 'body:has(.specimen-page)' apps/www/app/specimen.css
           grep -q 'clip-path: inset(0)' apps/www/app/specimen.css
+          if grep -n 'rgba(0,0,0,0.025)' packages/core/src/tokens.ts; then
+            echo "Module grid-line must read; 0.025 is invisible on paper"
+            exit 1
+          fi
+          if grep -n 'rgba(255,255,255,0.01)' packages/core/src/tokens.ts; then
+            echo "Dark module grid-line must read; 0.01 is invisible"
+            exit 1
+          fi
           node -e '
             const { readFileSync } = require("node:fs");
             const css = readFileSync("apps/www/app/specimen.css", "utf8");
+            const hasAt = css.indexOf("body:has(.specimen-page)");
+            if (hasAt < 0) {
+              console.error("Homepage must keep body:has(.specimen-page)");
+              process.exit(1);
+            }
+            const hasRule = css.slice(hasAt, css.indexOf("}", hasAt));
+            if (hasRule.includes("background-image: none")) {
+              console.error("Homepage must not hide the site module grid");
+              process.exit(1);
+            }
+            if (!hasRule.includes("background-image: var(--grid-image)")) {
+              console.error("Homepage must keep the site module grid");
+              process.exit(1);
+            }
             const pageStart = css.indexOf(".specimen-page {");
             if (pageStart < 0) {
               console.error("Homepage .specimen-page rule missing");
               process.exit(1);
             }
             const pageRule = css.slice(pageStart, css.indexOf("}", pageStart));
-            if (!pageRule.includes("background: var(--bg)") || /border:\s*1px/.test(pageRule)) {
-              console.error("Homepage paper must be flush: opaque, no page border");
+            if (!pageRule.includes("background: transparent") || /border:\s*1px/.test(pageRule)) {
+              console.error("Homepage must let the site grid show through: transparent paper, no page border");
               process.exit(1);
             }
             const start = css.indexOf(".specimen {");
@@ -143,12 +165,22 @@ jobs:
               console.error("Homepage specimen must have padding: 0");
               process.exit(1);
             }
-            if (!rule.includes("background: var(--bg)")) {
-              console.error("Homepage leftover must be paper, not a divider sliver");
+            if (!rule.includes("background: transparent")) {
+              console.error("Homepage leftover must not cover the site grid");
+              process.exit(1);
+            }
+            if (rule.includes("background: var(--divider)")) {
+              console.error("Homepage leftover must not be a divider sliver");
               process.exit(1);
             }
             if (/border-(top|right|bottom|left)/.test(rule) || /padding:\s*0\s+1px/.test(rule)) {
               console.error("Homepage must not draw a frame on any side");
+              process.exit(1);
+            }
+            const cellAt = css.indexOf(".specimen-cell {");
+            const cellRule = css.slice(cellAt, css.indexOf("}", cellAt));
+            if (!cellRule.includes("background: transparent")) {
+              console.error("Specimen cells must not cover the site grid");
               process.exit(1);
             }
           '
@@ -423,6 +455,20 @@ jobs:
           grep -q 'field-spec-hair' "$page"
           grep -q 'field-spec-flush' "$page"
           grep -q 'padding: 0 1px 1px 0' "$css"
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const css = readFileSync("apps/www/app/about/about.css", "utf8");
+            const cell = css.slice(css.indexOf(".field-cell {"), css.indexOf("}", css.indexOf(".field-cell {")));
+            if (!cell.includes("background-image: var(--grid-image)") || !cell.includes("background-position: var(--grid-pos)") || !cell.includes("background-attachment: fixed")) {
+              console.error("About cells must paint the same fixed site 204 as home");
+              process.exit(1);
+            }
+            const era = css.slice(css.indexOf(".field-cell-era {"), css.indexOf("}", css.indexOf(".field-cell-era {")));
+            if (era.includes("background-image")) {
+              console.error("About hero must not paint a local unpositioned grid");
+              process.exit(1);
+            }
+          '
           grep -q 'field-grotesque' "$page"
           grep -q '204' "$facts"
           grep -q 'Hairlines' "$facts"
@@ -483,6 +529,13 @@ jobs:
       - name: Interfaces is six posters
         run: |
           node apps/www/scripts/check-interfaces.mjs
+          grep -q 'body:has(.if-index)' apps/www/app/interfaces/interfaces.css
+          grep -q 'min-height: 204px' apps/www/app/interfaces/interfaces.css
+          grep -q 'margin-top: 204px' apps/www/app/interfaces/interfaces.css
+          if grep -n 'background: var(--bg)' apps/www/app/interfaces/interfaces.css | grep -q if-rail; then
+            echo "Interfaces rail must not cover the 204"
+            exit 1
+          fi
           grep -q 'href: "/interfaces"' apps/www/components/site-chrome.tsx
           grep -q 'label: "Interfaces"' apps/www/components/site-chrome.tsx
           test -f apps/www/app/interfaces/FEATURE.md
@@ -531,6 +584,10 @@ jobs:
               console.error("Landing tiles must stay flush: no shadow");
               process.exit(1);
             }
+            if (/background:\s*var\(--bg\)/.test(tile) || !tile.includes("background: transparent") || !tile.includes("var(--grid-line)")) {
+              console.error("Interfaces tiles must sit on the 204, ink --grid-line");
+              process.exit(1);
+            }
             const spec = css.slice(css.indexOf(".if-specimen {"), css.indexOf("}", css.indexOf(".if-specimen {")));
             if (!spec.includes("box-shadow:") || spec.includes("box-shadow: none")) {
               console.error("Specimen may take a quiet shadow");
@@ -569,7 +626,11 @@ jobs:
             echo "Secondaries column must not grow its own left rule"
             exit 1
           fi
-          grep -q 'background: var(--bg)' apps/www/components/docs-nav/docs-nav.css
+          if awk '/^\.toc-sub \{/,/^\}/' apps/www/components/docs-nav/docs-nav.css | grep -E 'background:\s*var\(--bg\)'; then
+            echo "Catalog secondaries must not cover the site module grid"
+            exit 1
+          fi
+          grep -q 'background: transparent' apps/www/components/docs-nav/docs-nav.css
           grep -q 'width: 204px' apps/www/components/docs-nav/docs-nav.css
           grep -q '408 module line' apps/www/components/docs-nav/docs-nav.css
           if grep -n 'margin-left: 1px' apps/www/components/docs-nav/docs-nav.css; then

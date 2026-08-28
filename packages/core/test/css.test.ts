@@ -208,6 +208,19 @@ describe("tokens", () => {
     for (let i = 1; i < sizes.length; i++) expect(sizes[i]!).toBeLessThan(sizes[i - 1]!);
   });
 
+  it("paints a readable module grid, quieter than chrome hairlines", () => {
+    const light = rasterTokens.color.light;
+    const dark = rasterTokens.color.dark;
+    const alpha = (value: string) => Number(value.match(/rgba?\([^)]*?,\s*([\d.]+)\s*\)/)?.[1]);
+    expect(alpha(light.gridLine)).toBeGreaterThan(0.05);
+    expect(alpha(light.gridLine)).toBeLessThan(alpha(light.divider));
+    expect(alpha(dark.gridLine)).toBeGreaterThan(0.05);
+    expect(alpha(dark.gridLine)).toBeLessThan(alpha(dark.divider));
+    expect(rasterCss).toContain(`--grid-line: ${light.gridLine}`);
+    expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(0,0,0,0\.025\)/);
+    expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(255,255,255,0\.01\)/);
+  });
+
   it("grid module = column + gutter", () => {
     expect(rasterTokens.grid.module).toBe(rasterTokens.grid.column + rasterTokens.grid.gutter);
   });
