@@ -13,13 +13,13 @@ export function Use() {
             </div>
           </div>
           <div className="rs-use-stack">
-            <p className="rs-use-kicker">Subtracted</p>
+            <p className="rs-use-kicker">Fitted</p>
             <Nest radius={28} pad={16} style={{ width: 184 }}>
               <NestInner />
             </Nest>
           </div>
         </div>
-        <p className="rs-use-copy">Inner = max(0, outer − padding).</p>
+        <p className="rs-use-copy">Steve Ruiz innerRadius, clamped at 0.</p>
       </div>
     </article>
   );

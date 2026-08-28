@@ -43,7 +43,7 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --radius-chrome: ${radius.chrome}px;
   --gutter: ${grid.gutter}px;
   --pad: ${grid.pad}px;
-  /* Concentric: inner = max(0, outer − padding). Default radius vs --pad is 0. */
+  /* Concentric: Steve Ruiz innerRadius result. Closed form of the circular-corner fit. Default radius vs --pad is 0. */
   --radius-in: max(0px, calc(var(--radius) - var(--pad)));
   --ease: ${motion.easing};
   --duration-snap: ${motion.snap};

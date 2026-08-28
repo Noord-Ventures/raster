@@ -24,7 +24,7 @@
     },
     {
       "path": "raster/styles/button-group.css",
-      "content": "/* ── Button group: flush joined actions, one hairline between ──\n   The group owns the outer stroke and the Button radius. Inner\n   joins are a start-edge only, so T-junctions do not stack rgba. */\n.rs-btn-group{display:inline-flex;align-items:stretch;box-sizing:border-box;height:40px;border:1px solid var(--divider);border-radius:var(--radius-sm);overflow:hidden}\n.rs-btn-group:has(> .rs-btn-sm){height:36px}\n.rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{box-sizing:border-box;height:auto;border:0;border-radius:0;margin:0}\n.rs-btn-group > * + *{border-inline-start:1px solid var(--divider)}\n.rs-btn-group > .rs-btn-primary{position:relative;z-index:1}\n",
+      "content": "/* ── Button group: flush joined actions, one hairline between ──\n   The group owns the outer stroke. Inner radius is Steve’s\n   innerRadius(--rs-out, --rs-gap); flush groups have no pad. */\n.rs-btn-group{\n  --rs-out:var(--radius-sm);\n  --rs-gap:0px;\n  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  display:inline-flex;\n  align-items:stretch;\n  box-sizing:border-box;\n  height:40px;\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  overflow:hidden\n}\n.rs-btn-group:has(> .rs-btn-sm){height:36px}\n.rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{box-sizing:border-box;height:auto;border:0;border-radius:0;margin:0}\n.rs-btn-group > * + *{border-inline-start:1px solid var(--divider)}\n.rs-btn-group > .rs-btn-primary{position:relative;z-index:1}\n",
       "type": "registry:file",
       "target": "styles/raster/button-group.css"
     }

@@ -1,12 +1,68 @@
 import * as React from "react";
 import { cx } from "../cx";
 
-/** inner = max(0, outer − padding) */
-export function concentricInner(outer: number, padding: number): number {
-  return Math.max(0, outer - padding);
+/**
+ * Steve Ruiz innerRadius: fit a circle to the −padding isosurface of a
+ * circular corner SDF. The initial guess R = outerRadius is the wrong answer.
+ * Clamp at 0. https://x.com/steveruizok/status/2072651352908370013
+ */
+export function innerRadius(
+  outerRadius: number,
+  padding: number,
+  { lr = 0.1, epochs = 5000 }: { lr?: number; epochs?: number } = {},
+): number {
+  const key = `${outerRadius}:${padding}:${lr}:${epochs}`;
+  const hit = innerRadiusCache.get(key);
+  if (hit != null) return hit;
+  const result = computeInnerRadius(outerRadius, padding, lr, epochs);
+  innerRadiusCache.set(key, result);
+  return result;
 }
 
-/** outer = inner + padding */
+const innerRadiusCache = new Map<string, number>();
+
+function computeInnerRadius(
+  outerRadius: number,
+  padding: number,
+  lr: number,
+  epochs: number,
+): number {
+  if (!Number.isFinite(outerRadius) || outerRadius <= 0) return 0;
+  if (!Number.isFinite(padding) || padding <= 0) return Math.max(0, outerRadius);
+  if (padding >= outerRadius) return 0;
+
+  const sdf = (x: number, y: number) => Math.hypot(x - outerRadius, y - outerRadius) - outerRadius;
+  const targets: Array<[number, number]> = [];
+  for (let t = Math.PI; t <= 1.5 * Math.PI; t += 0.01) {
+    let r = outerRadius;
+    for (let i = 0; i < 100; i++) {
+      const x = outerRadius + r * Math.cos(t);
+      const y = outerRadius + r * Math.sin(t);
+      r -= sdf(x, y) + padding;
+    }
+    targets.push([outerRadius + r * Math.cos(t), outerRadius + r * Math.sin(t)]);
+  }
+
+  let R = outerRadius; // initial guess: the wrong answer
+  const n = targets.length;
+  for (let e = 0; e < epochs; e++) {
+    let grad = 0;
+    for (const [x, y] of targets) {
+      const d = Math.hypot(x - outerRadius, y - outerRadius);
+      grad += 2 * (R - d);
+    }
+    R -= lr * (grad / n);
+  }
+  if (!Number.isFinite(R) || R <= 0) return 0;
+  const rounded = Math.round(R * 1e6) / 1e6;
+  const nearest = Math.round(rounded);
+  return Math.abs(rounded - nearest) < 1e-4 ? nearest : rounded;
+}
+
+export function concentricInner(outer: number, padding: number): number {
+  return innerRadius(outer, padding);
+}
+
 export function concentricOuter(inner: number, padding: number): number {
   return Math.max(0, inner) + Math.max(0, padding);
 }
@@ -23,7 +79,7 @@ function nestVars(out?: number, gap?: number): React.CSSProperties {
 export interface NestProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Outer radius in px. Nested nests inherit the parent inner radius. */
   radius?: number;
-  /** Padding in px. Subtracted from the outer radius. */
+  /** Padding in px. Inset for Steve’s innerRadius. */
   pad?: number;
 }
 

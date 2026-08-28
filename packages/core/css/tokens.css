@@ -13,7 +13,7 @@
   --radius-chrome: 0px;
   --gutter: 20px;
   --pad: 20px;
-  /* Concentric: inner = max(0, outer − padding). Default radius vs --pad is 0. */
+  /* Concentric: Steve Ruiz innerRadius result. Closed form of the circular-corner fit. Default radius vs --pad is 0. */
   --radius-in: max(0px, calc(var(--radius) - var(--pad)));
   --ease: cubic-bezier(0.2, 0, 0, 1);
   --duration-snap: 0.12s;

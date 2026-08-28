@@ -55,7 +55,7 @@ export function DatePicker({
         <Icon name="calendar" size={16} />
       </button>
       {open && (
-        <div className="rs-menu" style={{ padding: 12, right: "auto" }}>
+        <div className="rs-menu" style={{ right: "auto" }}>
           <Calendar
             value={value}
             onSelect={(d) => {

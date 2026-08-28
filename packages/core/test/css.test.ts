@@ -87,12 +87,15 @@ describe("generated raster.css", () => {
     const toggle = readFileSync(join(pkgDir, "css/components/toggle.css"), "utf8");
     const phone = readFileSync(join(pkgDir, "css/phone.css"), "utf8");
     expect(group).toMatch(/\.rs-btn-group\{[^}]*border:1px solid var\(--divider\)/);
-    expect(group).toMatch(/\.rs-btn-group\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(group).toMatch(/\.rs-btn-group\{[^}]*--rs-out:var\(--radius-sm\)/);
+    expect(group).toMatch(/\.rs-btn-group\{[^}]*--rs-in:max\(0px,calc\(var\(--rs-out\) - var\(--rs-gap\)\)\)/);
+    expect(group).toMatch(/\.rs-btn-group\{[^}]*border-radius:var\(--rs-out\)/);
     expect(group).toMatch(/> \* \+ \*\{border-inline-start:1px solid var\(--divider\)\}/);
     expect(group).not.toMatch(/margin-inline-start:-1px/);
     expect(group).not.toMatch(/border-inline-start-color:transparent/);
     expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*border:1px solid var\(--divider\)/);
-    expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*--rs-out:var\(--radius-sm\)/);
+    expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*border-radius:var\(--rs-out\)/);
     expect(toggle).toMatch(/\.rs-toggle \+ \.rs-toggle\{border-inline-start:1px solid var\(--divider\)\}/);
     expect(toggle).not.toMatch(/margin-left:-1px/);
     expect(phone).not.toMatch(/\.rs-toggle-group .rs-toggle\{[^}]*margin-left:-1px/);
@@ -117,7 +120,8 @@ describe("generated raster.css", () => {
   it("lets grouped fields inherit the standalone input radius", () => {
     const inputGroup = readFileSync(join(pkgDir, "css/components/input-group.css"), "utf8");
     const native = readFileSync(join(pkgDir, "css/components/native-select.css"), "utf8");
-    expect(inputGroup).toMatch(/border-radius:var\(--radius-sm\)/);
+    expect(inputGroup).toMatch(/--rs-out:var\(--radius-sm\)/);
+    expect(inputGroup).toMatch(/border-radius:var\(--rs-out\)/);
     expect(native).toMatch(/border-radius:var\(--radius-sm\)/);
   });
 
@@ -210,11 +214,23 @@ describe("tokens", () => {
 
   it("ships the concentric-radius law", () => {
     expect(rasterTokens.radius.chrome).toBe(0);
-    expect(rasterTokens.radius.concentric).toBe("max(0, outer − padding)");
+    expect(rasterTokens.radius.concentric).toBe("Steve Ruiz innerRadius, clamped at 0");
     expect(rasterCss).toContain("--radius-chrome: 0px");
     expect(rasterCss).toContain("--radius-in: max(0px, calc(var(--radius) - var(--pad)))");
     expect(rasterCss).toMatch(/\.rs-nest\{/);
     expect(rasterCss).toMatch(/\.rs-nest-in\{/);
+    expect(rasterCss).toContain("--rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)))");
+    for (const cls of [".rs-card{", ".rs-dialog{", ".rs-btn-group{", ".rs-input{", ".rs-input-group{"]) {
+      expect(rasterCss).toContain(cls);
+    }
+    expect(rasterCss).toMatch(/\.rs-card-in\{[^}]*border-radius:var\(--rs-in\)/);
+    expect(rasterCss).toMatch(/\.rs-cal-day\{[^}]*border-radius:var\(--rs-in/);
+    expect(rasterCss).toMatch(/\.rs-dialog \.rs-btn-primary,[^{]*\{[^}]*border-radius:var\(--rs-in\)/);
+    // Inner frames inherit --rs-in. Reassigning --rs-out from itself cycles
+    // the custom property and the used radius becomes 0.
+    const nestIn = rasterCss.match(/\.rs-nest-in\{[^}]*\}/)?.[0] ?? "";
+    expect(nestIn).toMatch(/border-radius:var\(--rs-in\)/);
+    expect(nestIn).not.toMatch(/--rs-out:/);
   });
 
   it("ships short named motion and refuses a load show", () => {

@@ -47,7 +47,7 @@
   --radius-chrome: 0px;
   --gutter: 20px;
   --pad: 20px;
-  /* Concentric: inner = max(0, outer − padding). Default radius vs --pad is 0. */
+  /* Concentric: Steve Ruiz innerRadius result. Closed form of the circular-corner fit. Default radius vs --pad is 0. */
   --radius-in: max(0px, calc(var(--radius) - var(--pad)));
   --ease: cubic-bezier(0.2, 0, 0, 1);
   --duration-snap: 0.12s;
@@ -142,9 +142,20 @@ body{
 .rs-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}
 
 /* ── Button group: flush joined actions, one hairline between ──
-   The group owns the outer stroke and the Button radius. Inner
-   joins are a start-edge only, so T-junctions do not stack rgba. */
-.rs-btn-group{display:inline-flex;align-items:stretch;box-sizing:border-box;height:40px;border:1px solid var(--divider);border-radius:var(--radius-sm);overflow:hidden}
+   The group owns the outer stroke. Inner radius is Steve’s
+   innerRadius(--rs-out, --rs-gap); flush groups have no pad. */
+.rs-btn-group{
+  --rs-out:var(--radius-sm);
+  --rs-gap:0px;
+  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  display:inline-flex;
+  align-items:stretch;
+  box-sizing:border-box;
+  height:40px;
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  overflow:hidden
+}
 .rs-btn-group:has(> .rs-btn-sm){height:36px}
 .rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{box-sizing:border-box;height:auto;border:0;border-radius:0;margin:0}
 .rs-btn-group > * + *{border-inline-start:1px solid var(--divider)}
@@ -165,7 +176,22 @@ body{
    Gaps are 8px (4/8). */
 .rs-field{width:100%;display:flex;flex-direction:column;gap:8px}
 .rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}
-.rs-input{box-sizing:border-box;height:var(--control-h);border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;line-height:calc(var(--control-h) - 2px);padding:0 10px;outline:none;font-family:inherit}
+.rs-input{
+  --rs-out:var(--radius-sm);
+  --rs-gap:0px;
+  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  box-sizing:border-box;
+  height:var(--control-h);
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  background:var(--bg);
+  color:var(--text);
+  font-size:14px;
+  line-height:calc(var(--control-h) - 2px);
+  padding:0 10px;
+  outline:none;
+  font-family:inherit
+}
 .rs-input:focus{border-color:var(--accent)}
 .rs-input-full{width:100%}
 .rs-input-ok{border-color:var(--text) !important}
@@ -177,12 +203,26 @@ body{
 .rs-form{display:flex;flex-direction:column;gap:16px;max-width:388px;margin:0}
 .rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}
 
-/* ── Input group: addon and field share one hairline ── */
-.rs-input-group{display:flex;align-items:stretch;box-sizing:border-box;width:100%;height:var(--control-h);border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);overflow:hidden}
+/* ── Input group: addon and field share one hairline.
+   Outer radius is the standalone input; innerRadius with no pad. ── */
+.rs-input-group{
+  --rs-out:var(--radius-sm);
+  --rs-gap:0px;
+  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  display:flex;
+  align-items:stretch;
+  box-sizing:border-box;
+  width:100%;
+  height:var(--control-h);
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  background:var(--bg);
+  overflow:hidden
+}
 .rs-input-group:focus-within{border-color:var(--accent)}
 .rs-input-addon{display:flex;align-items:center;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);background:var(--table-alt);white-space:nowrap}
 .rs-input-group > * + *{border-inline-start:1px solid var(--divider)}
-.rs-input-group .rs-input{border:none;border-radius:0;flex:1;min-width:0;height:auto;line-height:calc(var(--control-h) - 2px)}
+.rs-input-group .rs-input{border:none;border-radius:var(--rs-in);flex:1;min-width:0;height:auto;line-height:calc(var(--control-h) - 2px)}
 .rs-input-group .rs-input:focus{outline:none}
 .rs-input-group-end .rs-input-addon{border-inline-start:1px solid var(--divider)}
 
@@ -192,11 +232,24 @@ body{
 [data-theme="dark"] .rs-native-select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' width='16' height='16' fill='none' stroke='%23E8E8E8' stroke-width='1' stroke-linecap='butt' stroke-linejoin='miter'><g transform='rotate(90 8 8)'><path d='M5.5 3.5 L10.5 8 L5.5 12.5' vector-effect='non-scaling-stroke'/></g></svg>")}
 
 /* ── Inline form: the action lives inside the field ── */
-.rs-inline-field{display:flex;align-items:center;gap:8px;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:4px 6px 4px 12px;transition:border-color var(--duration-snap) var(--ease)}
+.rs-inline-field{
+  --rs-out:var(--radius-sm);
+  --rs-gap:4px;
+  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  display:flex;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  background:var(--bg);
+  padding:var(--rs-gap) 6px var(--rs-gap) 12px;
+  transition:border-color var(--duration-snap) var(--ease)
+}
 .rs-inline-field:focus-within{border-color:var(--accent)}
 .rs-inline-input{flex:1;min-width:0;border:none;background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);outline:none;padding:7px 0}
 .rs-inline-input::placeholder{color:var(--text-secondary)}
-.rs-inline-btn{height:28px;padding:0 16px;font-size:12.5px;min-width:0;border-radius:var(--radius-sm);white-space:nowrap}
+.rs-inline-btn{height:28px;padding:0 16px;font-size:12.5px;min-width:0;border-radius:var(--rs-in);white-space:nowrap}
 .rs-reveal{max-width:0;opacity:0;overflow:hidden;transition:max-width var(--duration) var(--ease),opacity var(--duration) var(--ease)}
 .rs-reveal-in{max-width:160px;opacity:1}
 .rs-subscribed{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text);animation:rsConfirm var(--duration-confirm) var(--ease)}
@@ -329,19 +382,45 @@ button.rs-page{padding:0;background:none;font-family:inherit;cursor:pointer}
 .rs-select .rs-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px}
 .rs-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}
 button.rs-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%}
-.rs-menu{border:1px solid var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+.rs-menu{
+  --rs-out:var(--radius-sm);
+  --rs-gap:0px;
+  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  margin-top:6px;
+  overflow:hidden;
+  background:var(--bg);
+  box-shadow:0 8px 24px rgba(0,0,0,0.06)
+}
+.rs-menu:has(.rs-cal){
+  --rs-gap:12px;
+  padding:var(--rs-gap)
+}
 .rs-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider)}
 .rs-menu-item:last-child{border-bottom:none}
 .rs-menu-item.rs-menu-item-active,button.rs-menu-item-active{background:var(--divider-subtle)}
 button.rs-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
 
-/* ── Dialog: one question, two equal actions, no third option ── */
-.rs-dialog{max-width:320px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px;background:var(--bg);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+/* ── Dialog: one question, two equal actions, no third option.
+   Nested actions use Steve’s innerRadius of the frame. ── */
+.rs-dialog{
+  --rs-out:var(--radius);
+  --rs-gap:20px;
+  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  max-width:320px;
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  padding:var(--rs-gap);
+  background:var(--bg);
+  box-shadow:0 12px 32px rgba(0,0,0,0.08)
+}
 dialog.rs-dialog{color:var(--text)}
 dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}
 .rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}
 .rs-dialog-actions{display:flex;justify-content:flex-end;gap:8px}
+.rs-dialog .rs-btn-primary,.rs-dialog .rs-btn-ghost{border-radius:var(--rs-in)}
 
 /* ── Badges: outline for recommendations, solid for done, muted for pending ── */
 .rs-badge{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;line-height:1.4;border-radius:var(--radius-sm)}
@@ -351,13 +430,34 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 /* ── Mono chip: technical identifiers ── */
 .rs-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}
 
-/* ── Card ── */
-.rs-card{border:1px solid var(--divider);border-radius:var(--radius);padding:20px;max-width:360px}
+/* ── Card: hairline frame. Nested corners use Steve’s innerRadius. ── */
+.rs-card{
+  --rs-out:var(--radius);
+  --rs-gap:20px;
+  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  padding:var(--rs-gap);
+  max-width:360px
+}
 .rs-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}
 .rs-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}
 .rs-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}
+.rs-card-in{
+  box-sizing:border-box;
+  border:1px solid var(--divider);
+  border-radius:var(--rs-in);
+  min-height:48px;
+  padding:12px;
+  background:var(--bg)
+}
+.rs-card .rs-btn-primary,.rs-card .rs-btn-ghost,.rs-card .rs-input,.rs-card .rs-textarea{border-radius:var(--rs-in)}
+.rs-card .rs-btn-group{--rs-out:var(--rs-in);border-radius:var(--rs-out)}
 
-/* ── Concentric radius: inner = max(0, outer − padding) ── */
+/* ── Concentric radius: Steve Ruiz innerRadius, clamped at 0.
+   --rs-in is the closed form of the circular-corner fit.
+   Do not reassign --rs-out on the inner frame: that cycles the custom
+   property and the used radius becomes 0. ── */
 .rs-nest{
   --rs-out:var(--radius);
   --rs-gap:var(--pad);
@@ -369,11 +469,9 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
   background:var(--bg);
 }
 .rs-nest-in{
-  --rs-out:max(0px,calc(var(--rs-out) - var(--rs-gap)));
-  --rs-in:var(--rs-out);
   box-sizing:border-box;
   border:1px solid var(--divider);
-  border-radius:var(--rs-out);
+  border-radius:var(--rs-in);
   min-height:72px;
   background:var(--bg);
 }
@@ -503,7 +601,18 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 /* ── Toggle: a press switch; on is ink, like everything on ── */
 .rs-toggle{display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:32px;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;background:none;border:1px solid var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:background-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease),border-color var(--duration-snap) var(--ease)}
 .rs-toggle[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:var(--bg)}
-.rs-toggle-group{display:inline-flex;align-items:stretch;box-sizing:border-box;height:32px;border:1px solid var(--divider);border-radius:var(--radius-sm);overflow:hidden}
+.rs-toggle-group{
+  --rs-out:var(--radius-sm);
+  --rs-gap:0px;
+  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  display:inline-flex;
+  align-items:stretch;
+  box-sizing:border-box;
+  height:32px;
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  overflow:hidden
+}
 .rs-toggle-group .rs-toggle{height:auto;border:0;border-radius:0;margin:0}
 .rs-toggle-group .rs-toggle + .rs-toggle{border-inline-start:1px solid var(--divider)}
 .rs-toggle-group .rs-toggle[aria-pressed="true"]{position:relative;z-index:1}
@@ -684,7 +793,8 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-command-hint{font-size:11px;color:var(--text-secondary)}
 .rs-command-empty{padding:20px;text-align:center;font-size:13px;color:var(--text-secondary)}
 
-/* ── Calendar: a month of quiet squares; selected is ink ── */
+/* ── Calendar: a month of quiet squares; selected is ink.
+   Day corners follow inherited --rs-in (Steve’s innerRadius) when nested. ── */
 .rs-cal{width:252px}
 .rs-cal-head{display:flex;justify-content:space-between;align-items:center;min-height:26px;margin-bottom:8px}
 .rs-cal-title{font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:26px;color:var(--text)}
@@ -693,7 +803,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-cal-nav .rs-page{transform:translateY(1px)}
 .rs-cal-grid{display:grid;grid-template-columns:repeat(7,36px)}
 .rs-cal-dow{font-size:11px;font-weight:500;color:var(--text-secondary);text-align:center;padding:4px 0}
-.rs-cal-day{width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;font-variant-numeric:tabular-nums;color:var(--text);background:none;border:none;border-radius:var(--radius-sm);cursor:pointer;font-family:inherit;padding:0}
+.rs-cal-day{width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;font-variant-numeric:tabular-nums;color:var(--text);background:none;border:none;border-radius:var(--rs-in, var(--radius-sm));cursor:pointer;font-family:inherit;padding:0}
 .rs-cal-day:hover{background:var(--divider-subtle)}
 .rs-cal-day-out{color:var(--text-secondary);opacity:.45}
 .rs-cal-day-today{box-shadow:inset 0 0 0 1px var(--divider)}

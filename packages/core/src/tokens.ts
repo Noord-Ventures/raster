@@ -87,8 +87,8 @@ export const rasterTokens = {
     small: 4,
     /** Raster chrome stays square. Surfaces that use a radius follow the concentric law. */
     chrome: 0,
-    /** inner = max(0, outer − padding); outer = inner + padding */
-    concentric: "max(0, outer − padding)",
+    /** Steve Ruiz innerRadius (circular-corner fit), clamped at 0. */
+    concentric: "Steve Ruiz innerRadius, clamped at 0",
   },
   icons: {
     sizes: [12, 16],

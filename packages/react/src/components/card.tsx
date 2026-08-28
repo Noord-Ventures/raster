@@ -7,6 +7,10 @@ export const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDi
   },
 );
 
+export function CardInner({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cx("rs-card-in", className)} {...props} />;
+}
+
 export function CardLabel({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
   return <span className={cx("rs-card-label", className)} {...props} />;
 }

@@ -11,7 +11,7 @@
   "files": [
     {
       "path": "raster/card.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  function Card({ className, ...props }, ref) {\n    return <div ref={ref} className={cx(\"rs-card\", className)} {...props} />;\n  },\n);\n\nexport function CardLabel({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-card-label\", className)} {...props} />;\n}\n\nexport function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {\n  return <h3 className={cx(\"rs-card-title\", className)} {...props} />;\n}\n\nexport function CardBody({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-card-body\", className)} {...props} />;\n}\n",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  function Card({ className, ...props }, ref) {\n    return <div ref={ref} className={cx(\"rs-card\", className)} {...props} />;\n  },\n);\n\nexport function CardInner({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return <div className={cx(\"rs-card-in\", className)} {...props} />;\n}\n\nexport function CardLabel({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  return <span className={cx(\"rs-card-label\", className)} {...props} />;\n}\n\nexport function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {\n  return <h3 className={cx(\"rs-card-title\", className)} {...props} />;\n}\n\nexport function CardBody({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  return <p className={cx(\"rs-card-body\", className)} {...props} />;\n}\n",
       "type": "registry:component",
       "target": "components/raster/card.tsx"
     },
@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/card.css",
-      "content": "/* ── Card ── */\n.rs-card{border:1px solid var(--divider);border-radius:var(--radius);padding:20px;max-width:360px}\n.rs-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}\n.rs-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}\n.rs-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}\n",
+      "content": "/* ── Card: hairline frame. Nested corners use Steve’s innerRadius. ── */\n.rs-card{\n  --rs-out:var(--radius);\n  --rs-gap:20px;\n  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  padding:var(--rs-gap);\n  max-width:360px\n}\n.rs-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}\n.rs-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}\n.rs-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}\n.rs-card-in{\n  box-sizing:border-box;\n  border:1px solid var(--divider);\n  border-radius:var(--rs-in);\n  min-height:48px;\n  padding:12px;\n  background:var(--bg)\n}\n.rs-card .rs-btn-primary,.rs-card .rs-btn-ghost,.rs-card .rs-input,.rs-card .rs-textarea{border-radius:var(--rs-in)}\n.rs-card .rs-btn-group{--rs-out:var(--rs-in);border-radius:var(--rs-out)}\n",
       "type": "registry:file",
       "target": "styles/raster/card.css"
     }
@@ -35,9 +35,10 @@
         "rs-card",
         "rs-card-label",
         "rs-card-title",
-        "rs-card-body"
+        "rs-card-body",
+        "rs-card-in"
       ],
-      "snippet": "<div class=\"rs-card\"><span class=\"rs-card-label\">Case study</span><h3 class=\"rs-card-title\">A quieter interface</h3><p class=\"rs-card-body\">Emphasis from weight and spacing, never from a hue.</p></div>",
+      "snippet": "<div class=\"rs-card\"><span class=\"rs-card-label\">Case study</span><h3 class=\"rs-card-title\">A quieter interface</h3><div class=\"rs-card-in\"><p class=\"rs-card-body\">Emphasis from weight and spacing, never from a hue.</p></div></div>",
       "cssOnly": false,
       "registryDependencies": []
     }

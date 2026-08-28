@@ -4,7 +4,22 @@
    Gaps are 8px (4/8). */
 .rs-field{width:100%;display:flex;flex-direction:column;gap:8px}
 .rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}
-.rs-input{box-sizing:border-box;height:var(--control-h);border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;line-height:calc(var(--control-h) - 2px);padding:0 10px;outline:none;font-family:inherit}
+.rs-input{
+  --rs-out:var(--radius-sm);
+  --rs-gap:0px;
+  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  box-sizing:border-box;
+  height:var(--control-h);
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  background:var(--bg);
+  color:var(--text);
+  font-size:14px;
+  line-height:calc(var(--control-h) - 2px);
+  padding:0 10px;
+  outline:none;
+  font-family:inherit
+}
 .rs-input:focus{border-color:var(--accent)}
 .rs-input-full{width:100%}
 .rs-input-ok{border-color:var(--text) !important}
