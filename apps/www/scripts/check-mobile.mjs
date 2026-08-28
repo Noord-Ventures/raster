@@ -45,6 +45,32 @@ if (!phone.includes(".theme-toggle") || !phone.includes("display: flex")) {
 if (phone.includes(".theme-toggle { display: none") || /corner-nav,\s*\.theme-toggle/.test(phone)) {
   fail("Do not hide the theme toggle on phone");
 }
+if (!phone.includes("overflow: hidden") || !phone.includes("flex-wrap: nowrap")) {
+  fail("Phone crumb bar must clip to one line; crumbs must not wrap out of the bar");
+}
+if (phone.includes("translateY(3px)")) {
+  fail("Do not translate crumb type 3px down; that sits ink below the icon midline");
+}
+if (!phone.includes(".site-logo-mark") || !phone.includes("top: 1px")) {
+  fail("Phone logo mark must sit on the same optical middle as Raster / crumbs");
+}
+if (!phone.includes("flex: 1 1 0")) {
+  fail("Phone crumb leaf must shrink and ellipsize so the trail stays one line at 375");
+}
+if (chrome.includes("toggle-track") || chrome.includes("icon-moon") || chrome.includes("icon-sun") || chrome.includes("SunIcon") || chrome.includes("MoonIcon")) {
+  fail("Site chrome toggle must show one mark, not a sun/moon pair");
+}
+if (!chrome.includes('d="M2 4.5h5M11 4.5h3M2 11.5h3M9 11.5h5"') || !chrome.includes("<SettingsMark />")) {
+  fail("Site chrome toggle must use the sliders mark from renatovaldes.com");
+}
+
+const crumbs = readFileSync(join(root, "apps/www/components/crumb-bar.tsx"), "utf8");
+if (crumbs.includes("return null") || crumbs.includes("isFieldPath")) {
+  fail("About must use the same scroll-in crumb bar as home");
+}
+if (!crumbs.includes('parts[0] === "about"')) {
+  fail("Crumb bar must trail About");
+}
 
 if (!nav.includes("MobileToc") || !nav.includes("toc-mobile-item")) {
   fail("DocsNav must render a stacked phone TOC");
@@ -127,6 +153,12 @@ if (!tokensCss.includes("--hit:44px") && !tokensCss.includes("--hit: 44px")) {
 }
 if (!phoneCss.includes("@media(max-width:640px)") && !phoneCss.includes("@media (max-width: 640px)")) {
   fail("phone.css must recut interactive controls at 640");
+}
+if (!phoneCss.includes(".rs-cal-day") || !/\.rs-cal-day\{[^}]*width:36px;\s*height:36px/.test(phoneCss)) {
+  fail("Phone calendar selected day must stay a 36×36 square, not a 44-tall cell");
+}
+if (/\.rs-cal-day\{[^}]*height:var\(--hit\)/.test(phoneCss) || /\.rs-cal-grid\{[^}]*minmax\(0,1fr\)/.test(phoneCss)) {
+  fail("Do not stretch calendar days to fluid × 44 on phone");
 }
 for (const sel of [".rs-btn-primary", ".rs-input", ".rs-tab", ".rs-switch"]) {
   if (!phoneCss.includes(sel)) fail(`phone.css must recut ${sel}`);

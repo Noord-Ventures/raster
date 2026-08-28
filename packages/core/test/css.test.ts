@@ -75,11 +75,16 @@ describe("generated raster.css", () => {
 
   it("keeps calendar days square and drops the month chevrons 1px", () => {
     const cal = readFileSync(join(pkgDir, "css/components/calendar.css"), "utf8");
+    const phone = readFileSync(join(pkgDir, "css/phone.css"), "utf8");
     expect(cal).toMatch(/\.rs-cal-day\{[^}]*width:36px;height:36px/);
     expect(cal).not.toMatch(/height:32px/);
     expect(cal).toMatch(/\.rs-cal-nav \.rs-page\{transform:translateY\(1px\)\}/);
     expect(cal).toMatch(/\.rs-cal-title\{[^}]*line-height:26px/);
     expect(rasterCss).toMatch(/\.rs-cal-day\{[^}]*width:36px;height:36px/);
+    expect(phone).toMatch(/\.rs-cal-day\{[^}]*width:36px;\s*height:36px/);
+    expect(phone).toMatch(/\.rs-cal-grid\{[^}]*repeat\(7,36px\)/);
+    expect(phone).not.toMatch(/\.rs-cal-day\{[^}]*height:var\(--hit\)/);
+    expect(phone).not.toMatch(/\.rs-cal-grid\{[^}]*minmax\(0,1fr\)/);
   });
 
   it("joins button groups on one hairline and the button radius", () => {
