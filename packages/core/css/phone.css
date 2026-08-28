@@ -81,16 +81,17 @@
     text-align:center;
   }
 
-  /* Stepper: 44pt marks, 16px names, more air. Already stacks at 640. */
-  .rs-steps{gap:20px}
+  /* Stepper: 44pt dots stay circles; hairlines still meet the marks. */
+  .rs-steps{gap:0}
   .rs-step{min-width:0;gap:6px}
   .rs-step-dot{
     width:var(--hit);
     height:var(--hit);
-    border-radius:0;
+    border-radius:50%;
     font-size:15px;
     margin-bottom:8px;
   }
+  .rs-step-line{top:calc(var(--hit) / 2);left:var(--hit)}
   .rs-step-name{font-size:var(--control-fs)}
   .rs-step-sub{font-size:13px}
 

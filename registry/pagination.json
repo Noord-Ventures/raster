@@ -3,7 +3,7 @@
   "name": "pagination",
   "type": "registry:component",
   "title": "Pagination",
-  "description": "Squares, not pills; the current page is solid ink.",
+  "description": "Square page controls. Current page is solid ink.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

@@ -1,3 +1,4 @@
-/* ── Spinner: a hairline ring. Motion stops under reduced-motion ── */
-.rs-spinner{display:inline-block;width:16px;height:16px;border:1.5px solid var(--divider);border-top-color:var(--text);border-radius:0;animation:rs-spin .7s linear infinite;vertical-align:middle}
+/* ── Spinner: 1px currentColor hairline ring. Raster icon law. ── */
+.rs-spinner{display:inline-flex;width:16px;height:16px;color:var(--text);vertical-align:middle}
+.rs-spinner svg{display:block;width:16px;height:16px;animation:rs-spin .7s linear infinite}
 @keyframes rs-spin{to{transform:rotate(360deg)}}

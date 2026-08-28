@@ -3,7 +3,7 @@
   "name": "tooltip",
   "type": "registry:component",
   "title": "Tooltip",
-  "description": "CSS only. Shows on hover and keyboard focus.",
+  "description": "Label on hover and keyboard focus.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

@@ -3,7 +3,7 @@
   "name": "kbd",
   "type": "registry:component",
   "title": "Kbd",
-  "description": "Keys in the mono stack with a pressed bottom edge.",
+  "description": "Mono key cap with a 1px frame and a heavier bottom edge.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"
@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/kbd.css",
-      "content": "/* ── Kbd: keys in the mono stack with a pressed bottom edge ── */\n.rs-kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);background:var(--bg);border:1px solid var(--divider);border-bottom-width:2px;border-radius:var(--radius-sm);padding:2px 6px;line-height:1.2}\n",
+      "content": "/* ── Kbd: keys in the mono stack with a pressed bottom edge ── */\n.rs-kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);background:var(--bg);border:1px solid var(--divider);border-bottom-width:2px;border-radius:var(--radius-sm);padding:2px 6px;line-height:1.2}\n.rs-kbd-pair{display:inline-flex;align-items:stretch;margin-inline-start:10px;vertical-align:middle}\n.rs-kbd-pair .rs-kbd:first-child{border-start-end-radius:0;border-end-end-radius:0}\n.rs-kbd-pair .rs-kbd + .rs-kbd{margin-inline-start:-1px;border-start-start-radius:0;border-end-start-radius:0}\n",
       "type": "registry:file",
       "target": "styles/raster/kbd.css"
     }
@@ -32,7 +32,8 @@
     "raster": {
       "category": "content",
       "classes": [
-        "rs-kbd"
+        "rs-kbd",
+        "rs-kbd-pair"
       ],
       "snippet": "<kbd class=\"rs-kbd\">⌘</kbd> <kbd class=\"rs-kbd\">K</kbd>",
       "cssOnly": false,

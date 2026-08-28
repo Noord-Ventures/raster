@@ -3,7 +3,7 @@
   "name": "alert-dialog",
   "type": "registry:component",
   "title": "Alert dialog",
-  "description": "Native <dialog> that requires an explicit answer. Escape and light dismiss are disabled.",
+  "description": "Native dialog that must be answered. Escape and light dismiss are off.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

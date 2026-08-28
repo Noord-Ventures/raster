@@ -3,7 +3,7 @@
   "name": "empty",
   "type": "registry:component",
   "title": "Empty",
-  "description": "A vacant cell. Title, one sentence, optional action.",
+  "description": "Placeholder cell with a title, a sentence, and an optional action.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

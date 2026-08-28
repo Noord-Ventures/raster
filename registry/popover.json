@@ -3,7 +3,7 @@
   "name": "popover",
   "type": "registry:component",
   "title": "Popover",
-  "description": "Native Popover API: top layer, light dismiss.",
+  "description": "Native Popover API. Top layer, light dismiss.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

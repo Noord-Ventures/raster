@@ -48,12 +48,12 @@ export function Donut({
           strokeDasharray={`${pct * C} ${C}`}
           transform="rotate(-90 48 48)"
         />
-        <text className="rs-chart-donut-label" x="48" y={caption ? 46 : 51} textAnchor="middle">
+        <text className="rs-chart-donut-label" x="48" y={caption ? 46 : 49} textAnchor="middle">
           {format(value)}
           {unit ? ` ${unit}` : ""}
         </text>
         {caption && (
-          <text className="rs-chart-donut-caption" x="48" y="60" textAnchor="middle">
+          <text className="rs-chart-donut-caption" x="48" y="57" textAnchor="middle">
             {caption}
           </text>
         )}

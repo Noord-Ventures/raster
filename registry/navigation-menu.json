@@ -3,7 +3,7 @@
   "name": "navigation-menu",
   "type": "registry:component",
   "title": "Navigation menu",
-  "description": "Links in a row; the current page is ink.",
+  "description": "Horizontal links. The current page is full ink.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

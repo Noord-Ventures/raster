@@ -3,7 +3,7 @@
   "name": "toggle",
   "type": "registry:component",
   "title": "Toggle",
-  "description": "Press switch and group. Pressed is ink; state lives in aria-pressed.",
+  "description": "Pressable control. Pressed fills ink. State is aria-pressed.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

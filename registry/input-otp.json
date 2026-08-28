@@ -3,7 +3,7 @@
   "name": "input-otp",
   "type": "registry:component",
   "title": "One-time code",
-  "description": "One cell per character. Auto-advance, backspace, paste.",
+  "description": "One cell per character. Auto-advance, backspace, and paste.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

@@ -3,7 +3,7 @@
   "name": "inline-form",
   "type": "registry:component",
   "title": "Inline form",
-  "description": "One field, one action. The action sits inside the field and appears once input validates.",
+  "description": "One field with the submit action inside. The button appears after the input validates.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

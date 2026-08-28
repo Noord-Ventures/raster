@@ -12,8 +12,9 @@ export interface ThemeToggleProps
 }
 
 /**
- * Fixed top right. Sun and moon slide on a track; the button sets
+ * One mark. Moon on paper, sun on black. The button sets
  * data-theme="dark" on <html> and persists the choice.
+ * Apps pin it top-right; catalog and previews use the inline modifier.
  */
 export function ThemeToggle({
   storageKey = "raster-theme",
@@ -50,10 +51,7 @@ export function ThemeToggle({
       onClick={toggle}
       {...props}
     >
-      <span className={cx("rs-theme-track", dark && "rs-theme-track-dark")}>
-        <Icon name="moon" size={16} className="rs-theme-moon" />
-        <Icon name="sun" size={16} className="rs-theme-sun" />
-      </span>
+      <Icon name={dark ? "sun" : "moon"} size={16} className={dark ? "rs-theme-sun" : "rs-theme-moon"} />
     </button>
   );
 }

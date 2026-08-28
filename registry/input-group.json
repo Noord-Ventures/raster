@@ -3,7 +3,7 @@
   "name": "input-group",
   "type": "registry:component",
   "title": "Input group",
-  "description": "Addon and field share one hairline.",
+  "description": "Addon and field share a 1px border.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

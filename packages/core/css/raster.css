@@ -142,8 +142,9 @@ body{
 .rs-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}
 
 /* ── Button group: flush joined actions, one hairline between ──
-   The group owns the outer stroke. Inner radius is Steve’s
-   innerRadius(--rs-out, --rs-gap); flush groups have no pad. */
+   The group owns the outer stroke. Join ink is --divider (chrome
+   gridline) in both schemes. A 1px gap on a divider field is the
+   rule; child border:0 cannot eat it. Ghosts sit on paper. */
 .rs-btn-group{
   --rs-out:var(--radius-sm);
   --rs-gap:0px;
@@ -154,11 +155,15 @@ body{
   height:40px;
   border:1px solid var(--divider);
   border-radius:var(--rs-out);
+  background:var(--divider);
+  gap:1px;
   overflow:hidden
 }
 .rs-btn-group:has(> .rs-btn-sm){height:36px}
 .rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{box-sizing:border-box;height:auto;border:0;border-radius:0;margin:0}
-.rs-btn-group > * + *{border-inline-start:1px solid var(--divider)}
+.rs-btn-group > .rs-btn-ghost{background:var(--bg)}
+.rs-btn-group > .rs-btn-ghost:hover{background:var(--divider)}
+.rs-btn-group > .rs-btn-ghost:disabled{background:var(--bg)}
 .rs-btn-group > .rs-btn-primary{position:relative;z-index:1}
 
 /* ── Text link: underlined by its hairline, never colored ── */
@@ -476,16 +481,15 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
   background:var(--bg);
 }
 
-/* ── Stepper ── */
-.rs-steps{display:flex;align-items:flex-start;gap:8px}
-.rs-step{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:78px}
-.rs-step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--divider);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;background:var(--bg)}
+/* ── Stepper: numbered dots joined by hairlines that meet the marks ── */
+.rs-steps{display:flex;align-items:flex-start;width:100%;max-width:100%;gap:0}
+.rs-step{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;flex:1 1 0;min-width:0}
+.rs-step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--divider);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;background:var(--bg);position:relative;z-index:1}
 .rs-step-done{background:var(--text);border-color:var(--text);color:var(--bg)}
 .rs-step-active{border-color:var(--text);color:var(--text)}
 .rs-step-name{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);line-height:1.2}
 .rs-step-sub{font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}
-.rs-step-line{flex:1;height:1px;background:var(--divider);margin-top:12px;min-width:14px}
-@media(max-width:640px){.rs-steps{flex-direction:column;gap:14px}.rs-step-line{display:none}}
+.rs-step-line{position:absolute;top:11.5px;left:24px;right:0;height:1px;background:var(--divider);margin:0;min-width:0;z-index:0}
 
 /* ── Table: hairline rows on the open grid; no cell borders ──
    Scoped to .rs-table so linking raster.css never restyles a table
@@ -577,8 +581,9 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .rs-empty-body{margin:0;font-size:13.5px;line-height:1.55;letter-spacing:-.01em;color:var(--text-secondary)}
 .rs-empty-action{margin-top:8px;width:fit-content}
 
-/* ── Spinner: a hairline ring. Motion stops under reduced-motion ── */
-.rs-spinner{display:inline-block;width:16px;height:16px;border:1.5px solid var(--divider);border-top-color:var(--text);border-radius:0;animation:rs-spin .7s linear infinite;vertical-align:middle}
+/* ── Spinner: 1px currentColor hairline ring. Raster icon law. ── */
+.rs-spinner{display:inline-flex;width:16px;height:16px;color:var(--text);vertical-align:middle}
+.rs-spinner svg{display:block;width:16px;height:16px;animation:rs-spin .7s linear infinite}
 @keyframes rs-spin{to{transform:rotate(360deg)}}
 
 /* ── Tooltip: CSS-only, shows on hover and keyboard focus alike ── */
@@ -693,12 +698,12 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-chart-share-seg:nth-child(2){background:var(--text-secondary)}
 .rs-chart-share-seg:nth-child(3){background:var(--divider)}
 .rs-chart-share-seg-spot{background:var(--rs-chart-spot)}
-.rs-chart-hist{fill:var(--text)}
+.rs-chart-hist{fill:var(--divider);stroke:none}
 .rs-chart-donut{display:block}
 .rs-chart-donut-track{fill:none;stroke:var(--divider);stroke-width:1}
 .rs-chart-donut-value{fill:none;stroke:var(--rs-chart-spot);stroke-width:1;stroke-linecap:butt}
-.rs-chart-donut-label{fill:var(--text);font-size:16px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.rs-chart-donut-caption{fill:var(--text-secondary);font-size:11px;font-weight:500}
+.rs-chart-donut-label{fill:var(--text);font-size:12px;font-weight:500;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.rs-chart-donut-caption{fill:var(--text-secondary);font-size:8px;font-weight:500;letter-spacing:.06em}
 .rs-chart-multi{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:20px}
 .rs-chart-multi-cap{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
 .rs-chart-multi .rs-chart-field{padding:12px}
@@ -722,6 +727,9 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 
 /* ── Kbd: keys in the mono stack with a pressed bottom edge ── */
 .rs-kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);background:var(--bg);border:1px solid var(--divider);border-bottom-width:2px;border-radius:var(--radius-sm);padding:2px 6px;line-height:1.2}
+.rs-kbd-pair{display:inline-flex;align-items:stretch;margin-inline-start:10px;vertical-align:middle}
+.rs-kbd-pair .rs-kbd:first-child{border-start-end-radius:0;border-end-end-radius:0}
+.rs-kbd-pair .rs-kbd + .rs-kbd{margin-inline-start:-1px;border-start-start-radius:0;border-end-start-radius:0}
 
 /* ── One-time code: one quiet cell per character ── */
 .rs-otp{display:flex;gap:8px}
@@ -741,7 +749,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 
 /* ── Sidebar: one 204 module rail, flush items, hairline edge.
    Last item keeps air before the foot rule. ── */
-.rs-sidebar{width:204px;min-height:204px;display:flex;flex-direction:column;border-right:1px solid var(--divider);background:var(--bg);border-radius:0}
+.rs-sidebar{width:204px;min-height:204px;display:flex;flex-direction:column;border:1px solid var(--divider);background:var(--bg);border-radius:0}
 .rs-sidebar-head{padding:16px 20px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);border-bottom:1px solid var(--divider)}
 .rs-sidebar-nav{display:flex;flex-direction:column;padding:8px 0 32px;flex:1}
 .rs-sidebar-item,
@@ -761,11 +769,12 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-sidebar-label{padding:16px 20px 4px;font-size:12px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary)}
 .rs-sidebar-foot{padding:12px 20px;border-top:1px solid var(--divider);font-size:12px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary)}
 
-/* ── Carousel: native scroll snap; the platform owns the physics ── */
-.rs-carousel{position:relative}
-.rs-carousel-track{display:flex;gap:var(--gutter);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);padding:2px 12px}
+/* ── Carousel: native scroll snap; edges feather; slides are Raster chrome ── */
+.rs-carousel{position:relative;width:100%;max-width:100%}
+.rs-carousel-track{display:flex;gap:var(--gutter);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 28px,#000 calc(100% - 36px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 28px,#000 calc(100% - 36px),transparent 100%);padding:2px 0}
 .rs-carousel-track::-webkit-scrollbar{display:none}
 .rs-carousel-track>*{scroll-snap-align:start;flex-shrink:0}
+.rs-carousel-slide{box-sizing:border-box;width:140px;padding:14px;border:1px solid var(--divider);border-radius:var(--radius-sm);box-shadow:none;background:var(--bg)}
 .rs-carousel-nav{display:flex;gap:5px;margin-top:10px}
 @media(prefers-reduced-motion:reduce){.rs-carousel-track{scroll-behavior:auto}}
 
@@ -825,16 +834,16 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 @media(min-width:940px){.rs-flow{grid-template-columns:repeat(3,184px)}}
 @media(min-width:1280px){.rs-flow{grid-template-columns:repeat(4,184px)}}
 @media(min-width:1448px){.rs-flow{grid-template-columns:repeat(5,184px)}}
-.rs-flow-step{position:relative;border:1px dashed var(--divider);border-radius:10px;padding:14px 34px 16px 14px;background:var(--bg);transition:border-color var(--duration-snap) var(--ease)}
+.rs-flow-step{position:relative;border:1px dashed var(--divider);border-radius:var(--radius-sm);padding:14px 34px 16px 14px;background:var(--bg);transition:border-color var(--duration-snap) var(--ease)}
 .rs-flow-step:hover{border-color:var(--accent)}
 .rs-flow-step::after{content:"";position:absolute;top:15px;right:13px;width:8px;height:14px;background-image:radial-gradient(currentColor 1.1px,transparent 1.3px);background-size:4px 5px;color:var(--text-secondary);opacity:.4}
 .rs-flow-num{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--divider);background:var(--bg);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);margin-bottom:14px}
 .rs-flow-step h4{display:inline-block;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text);border-bottom:1px dashed var(--divider);padding-bottom:1px;margin:0 0 8px}
 .rs-flow-step p{font-size:12.5px;line-height:1.55;color:var(--text-secondary);letter-spacing:-.005em;margin:0}
 .rs-flow-subs{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
-.rs-flow-subs span{font-size:11px;line-height:1;padding:3px 7px;border:1px dashed var(--divider);border-radius:5px;color:var(--text-secondary);letter-spacing:-.005em}
+.rs-flow-subs span{font-size:11px;line-height:1;padding:3px 7px;border:1px dashed var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);letter-spacing:-.005em}
 .rs-flow-subs .rs-flow-sub-add{width:18px;padding:3px 0;text-align:center;opacity:.7}
-.rs-flow-add{display:flex;align-items:center;gap:8px;margin-top:14px;border:1px dashed var(--divider);border-radius:10px;padding:12px 14px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);background:none;width:184px;max-width:100%;transition:border-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease);font-family:inherit;cursor:pointer}
+.rs-flow-add{display:flex;align-items:center;gap:8px;margin-top:14px;border:1px dashed var(--divider);border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);background:none;width:184px;max-width:100%;transition:border-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease);font-family:inherit;cursor:pointer}
 .rs-flow-add:hover{border-color:var(--accent);color:var(--text)}
 .rs-flow-plus{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;font-size:13px;line-height:1}
 
@@ -856,21 +865,16 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-ai-input{margin-top:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);padding:10px 12px;font-size:12.5px;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center}
 .rs-ai-send{color:var(--text);font-weight:600}
 
-/* ── Theme toggle: fixed top right; the sun/moon pair slides on a track ── */
-.rs-theme-toggle{position:fixed;top:24px;right:20px;z-index:200;width:24px;height:24px;padding:4px;overflow:hidden;background:none;border:none;border-radius:var(--radius-sm);cursor:pointer;color:var(--text-secondary);outline:none;filter:drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))}
+/* ── Theme toggle: one mark. Apps pin it top-right; inline sits in flow. ── */
+.rs-theme-toggle{position:fixed;top:24px;right:20px;z-index:200;width:24px;height:24px;padding:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:none;border:none;border-radius:0;cursor:pointer;color:var(--text-secondary);outline:none;filter:drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))}
 .rs-theme-toggle:hover{color:var(--accent)}
 .rs-theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.rs-theme-track{display:flex;flex-direction:column;align-items:center;gap:8px;transition:transform var(--duration) var(--ease)}
-.rs-theme-sun,.rs-theme-moon{width:16px;height:16px;flex-shrink:0;transition:opacity var(--duration) var(--ease)}
-.rs-theme-track .rs-theme-moon{opacity:1}
-.rs-theme-track .rs-theme-sun{opacity:.35}
-.rs-theme-track-dark{transform:translateY(-24px)}
-.rs-theme-track-dark .rs-theme-sun{opacity:1}
-.rs-theme-track-dark .rs-theme-moon{opacity:.35}
-@media(max-width:480px){.rs-theme-toggle{right:25px}}
+.rs-theme-sun,.rs-theme-moon{width:16px;height:16px;display:block;flex-shrink:0}
+.rs-theme-toggle-inline{position:relative;top:auto;right:auto;z-index:1;filter:none}
+@media(max-width:480px){.rs-theme-toggle:not(.rs-theme-toggle-inline){right:25px}}
 
-/* ── Callout: a tinted, accent-edged note inside running copy ── */
-.rs-callout{background:var(--table-alt);border:1px solid var(--divider);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:16px 20px}
+/* ── Callout: paper field, hairline frame, 3px ink left, slight Raster radius. ── */
+.rs-callout{background:var(--bg);border:1px solid var(--divider);border-left:3px solid var(--text);border-radius:var(--radius-sm);box-shadow:none;padding:16px 20px}
 .rs-callout p{font-size:14px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.6;margin:0}
 .rs-callout p strong{color:var(--text);font-weight:600}
 @media(max-width:640px){.rs-callout{padding:14px 16px}}
@@ -978,16 +982,17 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
     text-align:center;
   }
 
-  /* Stepper: 44pt marks, 16px names, more air. Already stacks at 640. */
-  .rs-steps{gap:20px}
+  /* Stepper: 44pt dots stay circles; hairlines still meet the marks. */
+  .rs-steps{gap:0}
   .rs-step{min-width:0;gap:6px}
   .rs-step-dot{
     width:var(--hit);
     height:var(--hit);
-    border-radius:0;
+    border-radius:50%;
     font-size:15px;
     margin-bottom:8px;
   }
+  .rs-step-line{top:calc(var(--hit) / 2);left:var(--hit)}
   .rs-step-name{font-size:var(--control-fs)}
   .rs-step-sub{font-size:13px}
 
@@ -1245,6 +1250,6 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 @media(prefers-reduced-motion:reduce){
   .rs-reveal,.rs-crumb-bar .rs-crumbs,.rs-tip::after,.rs-hover-card-panel{transition:none}
   .rs-subscribed,.rs-toast{animation:none}
-  .rs-theme-track,.rs-theme-sun,.rs-theme-moon{transition:none}
-  .rs-spinner{animation:none;border-top-color:var(--text)}
+  .rs-theme-sun,.rs-theme-moon{transition:none}
+  .rs-spinner svg{animation:none}
 }

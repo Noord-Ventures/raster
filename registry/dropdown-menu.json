@@ -3,7 +3,7 @@
   "name": "dropdown-menu",
   "type": "registry:component",
   "title": "Dropdown menu",
-  "description": "Action menu with menu semantics and keyboard navigation.",
+  "description": "Action menu with menuitem roles and arrow-key movement.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

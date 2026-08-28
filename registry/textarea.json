@@ -3,7 +3,7 @@
   "name": "textarea",
   "type": "registry:component",
   "title": "Textarea",
-  "description": "The quiet field, taller. Vertical resize only.",
+  "description": "Multiline field, vertical resize only.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

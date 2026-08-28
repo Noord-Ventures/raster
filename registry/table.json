@@ -3,7 +3,7 @@
   "name": "table",
   "type": "registry:component",
   "title": "Table",
-  "description": "Hairline rows on the open grid; no cell borders, last column right-aligned. Total rows carry 2px rules.",
+  "description": "Open grid, 1px row rules, last column right-aligned. Total rows use 2px rules.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

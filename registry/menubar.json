@@ -3,7 +3,7 @@
   "name": "menubar",
   "type": "registry:component",
   "title": "Menubar",
-  "description": "Dropdown menus in a hairline strip.",
+  "description": "Row of dropdowns in a 1px strip.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

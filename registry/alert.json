@@ -3,7 +3,7 @@
   "name": "alert",
   "type": "registry:component",
   "title": "Alert",
-  "description": "Hairline frame with an ink icon. Solid ink variant for critical.",
+  "description": "1px frame with an icon. Solid ink variant for critical.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

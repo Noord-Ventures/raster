@@ -3,7 +3,7 @@
   "name": "toggle-group",
   "type": "registry:component",
   "title": "Toggle group",
-  "description": "One pressed at a time. Joined hairlines.",
+  "description": "Joined toggles, one pressed, 1px between.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

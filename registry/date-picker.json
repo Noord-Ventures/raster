@@ -3,7 +3,7 @@
   "name": "date-picker",
   "type": "registry:component",
   "title": "Date picker",
-  "description": "Hairline trigger with a calendar overlay.",
+  "description": "1px trigger that opens a calendar overlay.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",
