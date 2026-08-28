@@ -15,10 +15,11 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
-/* 204 verticals live on html::before. html/body overflow-x:clip drops
-   background-attachment:fixed in Chromium — the miss on this preview.
-   A fixed layer does not. Clip 21px from the left on desktop so the
-   20px inset is not a page frame. Paper sits on html; body is clear. */
+/* Inner-page 204 verticals live on html::before. html/body overflow-x:clip
+   drops background-attachment:fixed in Chromium. A fixed layer does not.
+   Ink is --grid-line (quieter than chrome --divider). Clip 21px from the
+   left on desktop so the 20px inset is not a page frame. Homepage kills
+   this overlay so Raster / tagline / install are boxed cells, not a cage. */
 html { background-color: var(--bg); }
 html::before {
   content: "";

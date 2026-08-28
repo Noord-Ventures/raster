@@ -1,11 +1,15 @@
 /* Homepage specimen. Imported only by app/page.tsx. */
 
-/* Site 204s live on html::before (site.css). overflow-x:clip drops
-   body background-attachment:fixed, which is why this field stayed
-   blank. Paper stays clear so that layer shows through. Clip-path
-   still kills edge hairlines so the 20px inset is not a page frame. */
+/* Homepage is boxed 204 cells (cell shadows). The site gutter
+   overlay on html::before would cut through Raster, the tagline,
+   and the install line — a cage, not a field. Kill it here only.
+   Components and the rest keep the overlay. Clip-path still
+   kills edge hairlines so the 20px inset is not a page frame. */
+html:has(.specimen-page)::before {
+  display: none;
+}
 body:has(.specimen-page) {
-  background-color: transparent;
+  background: transparent;
 }
 
 .specimen-page {
@@ -42,8 +46,9 @@ body:has(.specimen-page) {
     "kitc"
     "kitd";
   grid-auto-rows: minmax(204px, auto);
-  /* Paper is clear so html::before 204s run through the field.
-     clip-path kills the leftover edge hairline, not the overlay. */
+  /* Paper to the viewport via html. Internal lines are cell shadows
+     in chrome --divider, clipped at the field edge so no hairline
+     reads as a page frame. Gutters stay off this page. */
   background: transparent;
   padding: 0;
   gap: 0;

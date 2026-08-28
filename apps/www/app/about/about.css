@@ -95,6 +95,8 @@
 .field-cell-grot {
   grid-area: grot;
   container-type: inline-size;
+  min-height: 408px;
+  gap: 20px;
 }
 .field-cell-hist { grid-area: hist; }
 .field-cell-faq {
@@ -308,7 +310,9 @@
   font-size: clamp(4.5rem, 22cqw, 10rem);
   font-weight: 600;
   letter-spacing: -.05em;
-  line-height: .8;
+  /* .8 let the g sit on the caption and the A on Grotesque.
+     Keep the display size; leading and a 408 cell clear the overlap. */
+  line-height: 1;
   color: var(--text);
 }
 

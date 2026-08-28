@@ -7,7 +7,7 @@
   --divider: rgba(0,0,0,0.10);
   --divider-subtle: rgba(0,0,0,0.06);
   --table-alt: rgba(0,0,0,0.02);
-  --grid-line: rgba(0,0,0,0.08);
+  --grid-line: rgba(0,0,0,0.04);
   --radius-sm: 4px;           /* slight Raster radius; standalone buttons */
   --radius: var(--radius-sm);              /* alias — cards, boxes, dialogs share it */
   --radius-chrome: 0px;
@@ -38,7 +38,7 @@
   --divider: rgba(255,255,255,0.12);
   --divider-subtle: rgba(255,255,255,0.07);
   --table-alt: rgba(255,255,255,0.03);
-  --grid-line: rgba(255,255,255,0.10);
+  --grid-line: rgba(255,255,255,0.05);
 }
 /* Mobile grid (≤480): two fluid columns, three 25px gutters
    (edge · middle · edge). Column width = 50vw − 37.5px; the background

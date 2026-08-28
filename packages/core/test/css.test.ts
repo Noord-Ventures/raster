@@ -222,12 +222,17 @@ describe("tokens", () => {
     const light = rasterTokens.color.light;
     const dark = rasterTokens.color.dark;
     const alpha = (value: string) => Number(value.match(/rgba?\([^)]*?,\s*([\d.]+)\s*\)/)?.[1]);
-    expect(alpha(light.gridLine)).toBeGreaterThan(0.05);
+    // 0.08/0.10 caged inner pages. 0.025/0.01 were invisible. 0.04/0.05 still reads.
+    expect(alpha(light.gridLine)).toBeGreaterThan(0.03);
+    expect(alpha(light.gridLine)).toBeLessThan(0.06);
     expect(alpha(light.gridLine)).toBeLessThan(alpha(light.divider));
-    expect(alpha(dark.gridLine)).toBeGreaterThan(0.05);
+    expect(alpha(dark.gridLine)).toBeGreaterThan(0.03);
+    expect(alpha(dark.gridLine)).toBeLessThan(0.08);
     expect(alpha(dark.gridLine)).toBeLessThan(alpha(dark.divider));
     expect(rasterCss).toContain(`--grid-line: ${light.gridLine}`);
+    expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(0,0,0,0\.08\)/);
     expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(0,0,0,0\.025\)/);
+    expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(255,255,255,0\.10\)/);
     expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(255,255,255,0\.01\)/);
   });
 

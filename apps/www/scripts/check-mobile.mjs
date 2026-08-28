@@ -112,10 +112,10 @@ if (!specimen.includes("background: transparent")) {
   fail("Homepage paper must let the site 204 verticals show through");
 }
 if (!site.includes("html::before") || !site.includes("background-image: var(--grid-image)")) {
-  fail("Site 204s must paint on html::before; overflow-x:clip drops attachment:fixed");
+  fail("Inner-page 204s must paint on html::before; overflow-x:clip drops attachment:fixed");
 }
-if (site.includes("html:has(.specimen-page)::before")) {
-  fail("Homepage must keep html::before so the 204s read");
+if (!specimen.includes("html:has(.specimen-page)::before") || !/html:has\(\.specimen-page\)::before\s*\{[^}]*display:\s*none/.test(specimen)) {
+  fail("Homepage must kill html::before so gutters do not cut Raster, the tagline, or install");
 }
 if (/\.preview-box \{[^}]*background:\s*var\(--bg\)/s.test(site)) {
   fail("Component specimens must not paint paper over the 204s next to them");

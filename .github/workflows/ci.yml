@@ -122,12 +122,21 @@ jobs:
           grep -q 'body:has(.specimen-page)' apps/www/app/specimen.css
           grep -q 'clip-path: inset(0)' apps/www/app/specimen.css
           grep -q 'html::before' apps/www/app/site.css
+          grep -q 'html:has(.specimen-page)::before' apps/www/app/specimen.css
           if awk '/^\.preview-box \{/,/^\}/' apps/www/app/site.css | grep -q 'background: var(--bg)'; then
             echo "Component preview must not paint paper over the 204s"
             exit 1
           fi
           if grep -n 'rgba(0,0,0,0.025)' packages/core/src/tokens.ts; then
             echo "Module grid-line must read; 0.025 is invisible on paper"
+            exit 1
+          fi
+          if grep -n 'gridLine: "rgba(0,0,0,0.08)"' packages/core/src/tokens.ts; then
+            echo "Inner-page gutter --grid-line must be quieter than 0.08"
+            exit 1
+          fi
+          if grep -n 'gridLine: "rgba(255,255,255,0.10)"' packages/core/src/tokens.ts; then
+            echo "Dark inner-page gutter must be quieter than 0.10"
             exit 1
           fi
           if grep -n 'rgba(255,255,255,0.01)' packages/core/src/tokens.ts; then
@@ -139,11 +148,15 @@ jobs:
             const css = readFileSync("apps/www/app/specimen.css", "utf8");
             const site = readFileSync("apps/www/app/site.css", "utf8");
             if (!site.includes("html::before") || !site.includes("background-image: var(--grid-image)")) {
-              console.error("Site 204s must paint on html::before; overflow-x:clip drops attachment:fixed");
+              console.error("Inner-page 204s must paint on html::before; overflow-x:clip drops attachment:fixed");
               process.exit(1);
             }
-            if (site.includes("html:has(.specimen-page)::before")) {
-              console.error("Homepage must keep html::before so the 204s read");
+            if (!css.includes("html:has(.specimen-page)::before")) {
+              console.error("Homepage must kill html::before so gutters do not cut Raster, the tagline, or install");
+              process.exit(1);
+            }
+            if (css.includes('html:has(.specimen-page)::before') && !/html:has\(\.specimen-page\)::before\s*\{[^}]*display:\s*none/.test(css)) {
+              console.error("Homepage html::before kill must be display:none");
               process.exit(1);
             }
             const hasAt = css.indexOf("body:has(.specimen-page)");
@@ -486,6 +499,24 @@ jobs:
             }
           '
           grep -q 'field-grotesque' "$page"
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const css = readFileSync("apps/www/app/about/about.css", "utf8");
+            const grot = css.slice(css.indexOf(".field-grotesque {"), css.indexOf("}", css.indexOf(".field-grotesque {")));
+            if (/line-height:\s*\.?8\b/.test(grot)) {
+              console.error("Ag specimen must not use tight .8 leading; caption collides with the g");
+              process.exit(1);
+            }
+            if (!grot.includes("line-height: 1")) {
+              console.error("Ag specimen needs unit leading so Grotesque / Ag / caption do not overlap");
+              process.exit(1);
+            }
+            const cell = css.slice(css.indexOf(".field-cell-grot {"), css.indexOf("}", css.indexOf(".field-cell-grot {")));
+            if (!cell.includes("min-height: 408px")) {
+              console.error("Grotesque cell must be two modules so the display can keep its size");
+              process.exit(1);
+            }
+          '
           grep -q 'field-cell-use' "$page"
           grep -q 'field-cell-spec' "$page"
           grep -q 'field-notes' "$page"
@@ -604,6 +635,20 @@ jobs:
           grep -q 'width: calc(100% + 40px)' "$starter"
           grep -q 'padding: 20px' "$starter"
           grep -q 'Module cells sit flush on the gridline' "$starter"
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const html = readFileSync("packages/cli/src/starter.html", "utf8");
+            const ag = html.slice(html.indexOf(".sp-ag {"), html.indexOf("}", html.indexOf(".sp-ag {")));
+            if (/line-height:\s*\.?8\b/.test(ag)) {
+              console.error("Starter Ag must not use tight .8 leading");
+              process.exit(1);
+            }
+            const grot = html.slice(html.indexOf(".sp-grot {"), html.indexOf("}", html.indexOf(".sp-grot {")));
+            if (!grot.includes("min-height: 408px")) {
+              console.error("Starter Grotesque cell must be two modules");
+              process.exit(1);
+            }
+          '
           if grep -nE 'Dark scheme|Light scheme|The programme is visible|No radius|Flush · 0' "$starter"; then
             echo "Starter must use an icon scheme toggle and US descriptive copy"
             exit 1
