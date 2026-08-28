@@ -66,8 +66,14 @@ if (!index.includes("if-title")) {
   process.exit(1);
 }
 const baseCss = readFileSync(join(root, "packages/core/css/base.css"), "utf8");
-if (!baseCss.includes("html::before") || !baseCss.includes("clip-path:inset(0 0 0 21px)") || !baseCss.includes("repeating-linear-gradient")) {
-  console.error("Site 204 must paint on html::before (horizontals included) and clip the 20px page frame");
+if (!baseCss.includes("html::before") || !baseCss.includes("clip-path:inset(0 0 0 21px)") || !baseCss.includes("var(--grid-image)")) {
+  console.error("Site gutter overlay must paint verticals on html::before and clip the 20px page frame");
+  process.exit(1);
+}
+const beforeAt = baseCss.indexOf("html::before{");
+const beforeRule = beforeAt >= 0 ? baseCss.slice(beforeAt, baseCss.indexOf("}", beforeAt)) : "";
+if (beforeRule.includes("repeating-linear-gradient")) {
+  console.error("Gutter overlay must not paint 204 horizontals — that cages type");
   process.exit(1);
 }
 if (!css.includes("body:has(.if-index)") || !css.includes("background: transparent")) {

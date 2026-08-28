@@ -4,8 +4,9 @@
    markup uses the rs- names. */
 
 /* ── Base ──
-   Raster owns the page: paper on html, ink on body, and a fixed 204
-   field painted on html::before so overflow-x:clip cannot drop it. */
+   Raster owns the page: paper on html, ink on body, and quiet
+   gutter verticals on html::before so overflow-x:clip cannot drop
+   them. */
 html{scroll-behavior:smooth;font-size:16px;overflow-x:clip;background-color:var(--bg)}
 html::before{
   content:"";
@@ -13,10 +14,10 @@ html::before{
   inset:0;
   z-index:0;
   pointer-events:none;
-  background-image:var(--grid-image),repeating-linear-gradient(to bottom,transparent 0,transparent 203px,var(--grid-line) 203px,var(--grid-line) 204px);
-  background-size:var(--grid-size) 100vh,100% 204px;
-  background-repeat:repeat-x,repeat-y;
-  background-position:var(--grid-pos),0 0
+  background-image:var(--grid-image);
+  background-size:var(--grid-size) 100%;
+  background-repeat:repeat-x;
+  background-position:var(--grid-pos)
 }
 @media(min-width:481px){html::before{clip-path:inset(0 0 0 21px)}}
 body{

@@ -154,11 +154,17 @@ jobs:
             }
             const base = readFileSync("packages/core/css/base.css", "utf8");
             if (!base.includes("html::before") || !base.includes("clip-path:inset(0 0 0 21px)")) {
-              console.error("Site 204 must paint on html::before and clip the 20px page frame");
+              console.error("Site gutter overlay must paint on html::before and clip the 20px page frame");
               process.exit(1);
             }
-            if (!base.includes("repeating-linear-gradient")) {
-              console.error("Site 204 must include horizontals so the module reads");
+            if (!base.includes("var(--grid-image)")) {
+              console.error("Site gutter overlay must paint verticals");
+              process.exit(1);
+            }
+            const beforeAt = base.indexOf("html::before{");
+            const beforeRule = beforeAt >= 0 ? base.slice(beforeAt, base.indexOf("}", beforeAt)) : "";
+            if (beforeRule.includes("repeating-linear-gradient")) {
+              console.error("Gutter overlay must not paint 204 horizontals");
               process.exit(1);
             }
             const pageStart = css.indexOf(".specimen-page {");
