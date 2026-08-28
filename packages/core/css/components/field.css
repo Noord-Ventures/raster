@@ -1,14 +1,17 @@
-/* ── Field: quiet input: hairline border, ink focus, label above ── */
-.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}
-.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}
-.rs-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}
+/* ── Field: quiet input: hairline border, ink focus, label above ──
+   Control height matches Button (40 / --control-h). Label and hint
+   sit on a 16px line-box so the 1px hairline lands on integer y.
+   Gaps are 8px (4/8). */
+.rs-field{width:100%;display:flex;flex-direction:column;gap:8px}
+.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}
+.rs-input{box-sizing:border-box;height:var(--control-h);border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;line-height:calc(var(--control-h) - 2px);padding:0 10px;outline:none;font-family:inherit}
 .rs-input:focus{border-color:var(--accent)}
 .rs-input-full{width:100%}
 .rs-input-ok{border-color:var(--text) !important}
-.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}
+.rs-feedback{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px;margin:0;min-height:16px}
 .rs-feedback-ok{color:var(--text)}
 .rs-feedback svg{flex-shrink:0}
-.rs-field-hint{font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.45}
-.rs-field-error{font-size:12px;font-weight:500;color:var(--text);letter-spacing:-.01em;line-height:1.45}
+.rs-field-hint{margin:0;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}
+.rs-field-error{margin:0;font-size:12px;font-weight:500;color:var(--text);letter-spacing:-.01em;line-height:16px}
 .rs-form{display:flex;flex-direction:column;gap:16px;max-width:388px;margin:0}
-.rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}
+.rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}

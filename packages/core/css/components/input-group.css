@@ -1,7 +1,8 @@
 /* ── Input group: addon and field share one hairline ── */
-.rs-input-group{display:flex;align-items:stretch;width:100%;border:1px solid var(--divider);border-radius:0;background:var(--bg)}
+.rs-input-group{display:flex;align-items:stretch;box-sizing:border-box;width:100%;height:var(--control-h);border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);overflow:hidden}
 .rs-input-group:focus-within{border-color:var(--accent)}
-.rs-input-addon{display:flex;align-items:center;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);background:var(--table-alt);border-right:1px solid var(--divider);white-space:nowrap}
-.rs-input-group .rs-input{border:none;border-radius:0;flex:1;min-width:0}
+.rs-input-addon{display:flex;align-items:center;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);background:var(--table-alt);white-space:nowrap}
+.rs-input-group > * + *{border-inline-start:1px solid var(--divider)}
+.rs-input-group .rs-input{border:none;border-radius:0;flex:1;min-width:0;height:auto;line-height:calc(var(--control-h) - 2px)}
 .rs-input-group .rs-input:focus{outline:none}
-.rs-input-group-end .rs-input-addon{border-right:none;border-left:1px solid var(--divider)}
+.rs-input-group-end .rs-input-addon{border-inline-start:1px solid var(--divider)}

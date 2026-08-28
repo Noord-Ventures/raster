@@ -141,10 +141,13 @@ body{
 .rs-btn-primary:focus-visible,.rs-btn-ghost:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .rs-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}
 
-/* ── Button group: flush joined actions, one hairline between ── */
-.rs-btn-group{display:inline-flex;align-items:stretch}
-.rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{border-radius:0;margin-inline-start:-1px}
-.rs-btn-group > :first-child{margin-inline-start:0}
+/* ── Button group: flush joined actions, one hairline between ──
+   The group owns the outer stroke and the Button radius. Inner
+   joins are a start-edge only, so T-junctions do not stack rgba. */
+.rs-btn-group{display:inline-flex;align-items:stretch;box-sizing:border-box;height:40px;border:1px solid var(--divider);border-radius:var(--radius-sm);overflow:hidden}
+.rs-btn-group:has(> .rs-btn-sm){height:36px}
+.rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{box-sizing:border-box;height:auto;border:0;border-radius:0;margin:0}
+.rs-btn-group > * + *{border-inline-start:1px solid var(--divider)}
 .rs-btn-group > .rs-btn-primary{position:relative;z-index:1}
 
 /* ── Text link: underlined by its hairline, never colored ── */
@@ -156,31 +159,35 @@ body{
 .rs-link-underline{color:var(--text);text-decoration:none;border-bottom:none;background-image:linear-gradient(var(--divider),var(--divider));background-size:calc(100% - 1px) 1px;background-position:1px 100%;background-repeat:no-repeat;transition:background-image var(--duration-snap) var(--ease)}
 .rs-link-underline:hover{background-image:linear-gradient(var(--accent),var(--accent))}
 
-/* ── Field: quiet input: hairline border, ink focus, label above ── */
-.rs-field{width:100%;display:flex;flex-direction:column;gap:5px}
-.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}
-.rs-input{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;padding:8px 10px;outline:none;font-family:inherit}
+/* ── Field: quiet input: hairline border, ink focus, label above ──
+   Control height matches Button (40 / --control-h). Label and hint
+   sit on a 16px line-box so the 1px hairline lands on integer y.
+   Gaps are 8px (4/8). */
+.rs-field{width:100%;display:flex;flex-direction:column;gap:8px}
+.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}
+.rs-input{box-sizing:border-box;height:var(--control-h);border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;line-height:calc(var(--control-h) - 2px);padding:0 10px;outline:none;font-family:inherit}
 .rs-input:focus{border-color:var(--accent)}
 .rs-input-full{width:100%}
 .rs-input-ok{border-color:var(--text) !important}
-.rs-feedback{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-top:7px;min-height:15px}
+.rs-feedback{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px;margin:0;min-height:16px}
 .rs-feedback-ok{color:var(--text)}
 .rs-feedback svg{flex-shrink:0}
-.rs-field-hint{font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.45}
-.rs-field-error{font-size:12px;font-weight:500;color:var(--text);letter-spacing:-.01em;line-height:1.45}
+.rs-field-hint{margin:0;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}
+.rs-field-error{margin:0;font-size:12px;font-weight:500;color:var(--text);letter-spacing:-.01em;line-height:16px}
 .rs-form{display:flex;flex-direction:column;gap:16px;max-width:388px;margin:0}
-.rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}
+.rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}
 
 /* ── Input group: addon and field share one hairline ── */
-.rs-input-group{display:flex;align-items:stretch;width:100%;border:1px solid var(--divider);border-radius:0;background:var(--bg)}
+.rs-input-group{display:flex;align-items:stretch;box-sizing:border-box;width:100%;height:var(--control-h);border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);overflow:hidden}
 .rs-input-group:focus-within{border-color:var(--accent)}
-.rs-input-addon{display:flex;align-items:center;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);background:var(--table-alt);border-right:1px solid var(--divider);white-space:nowrap}
-.rs-input-group .rs-input{border:none;border-radius:0;flex:1;min-width:0}
+.rs-input-addon{display:flex;align-items:center;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);background:var(--table-alt);white-space:nowrap}
+.rs-input-group > * + *{border-inline-start:1px solid var(--divider)}
+.rs-input-group .rs-input{border:none;border-radius:0;flex:1;min-width:0;height:auto;line-height:calc(var(--control-h) - 2px)}
 .rs-input-group .rs-input:focus{outline:none}
-.rs-input-group-end .rs-input-addon{border-right:none;border-left:1px solid var(--divider)}
+.rs-input-group-end .rs-input-addon{border-inline-start:1px solid var(--divider)}
 
 /* ── Native select: the platform list, Raster chrome ── */
-.rs-native-select{appearance:none;font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;color:var(--text);background:var(--bg) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'><path d='M4 6l4 4 4-4' stroke='%231A1A1A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat right 10px center;border:1px solid var(--divider);border-radius:0;padding:8px 32px 8px 10px;outline:none;width:100%}
+.rs-native-select{appearance:none;box-sizing:border-box;height:var(--control-h);font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;line-height:calc(var(--control-h) - 2px);color:var(--text);background:var(--bg) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'><path d='M4 6l4 4 4-4' stroke='%231A1A1A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat right 10px center;border:1px solid var(--divider);border-radius:var(--radius-sm);padding:0 32px 0 10px;outline:none;width:100%}
 .rs-native-select:focus{border-color:var(--accent)}
 [data-theme="dark"] .rs-native-select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'><path d='M4 6l4 4 4-4' stroke='%23E8E8E8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>")}
 
@@ -189,7 +196,7 @@ body{
 .rs-inline-field:focus-within{border-color:var(--accent)}
 .rs-inline-input{flex:1;min-width:0;border:none;background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);outline:none;padding:7px 0}
 .rs-inline-input::placeholder{color:var(--text-secondary)}
-.rs-inline-btn{height:28px;padding:0 16px;font-size:12.5px;min-width:0;border-radius:3px;white-space:nowrap}
+.rs-inline-btn{height:28px;padding:0 16px;font-size:12.5px;min-width:0;border-radius:var(--radius-sm);white-space:nowrap}
 .rs-reveal{max-width:0;opacity:0;overflow:hidden;transition:max-width var(--duration) var(--ease),opacity var(--duration) var(--ease)}
 .rs-reveal-in{max-width:160px;opacity:1}
 .rs-subscribed{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text);animation:rsConfirm var(--duration-confirm) var(--ease)}
@@ -288,7 +295,7 @@ button.rs-tab.rs-tab-active{
    appear. From 900px the root crumb holds the TOC column; the inner row
    starts one module in at the 1024px rail. */
 .rs-crumb-bar{position:fixed;top:0;left:0;right:0;z-index:160;display:flex;align-items:center;height:72px;font-size:13px;font-weight:500;letter-spacing:-.01em;line-height:1.3;background:none;border-bottom:1px solid transparent;transition:var(--transition)}
-.rs-crumb-bar-scrolled{background:var(--bg);border-bottom-color:var(--divider-subtle)}
+.rs-crumb-bar-scrolled{background:var(--bg);border-bottom-color:var(--divider)}
 .rs-crumb-bar-inner{display:flex;align-items:center;gap:20px;width:100%;min-width:0;padding:0 56px 0 76px}
 .rs-crumb-bar .rs-crumbs{margin:0;min-width:0;overflow:hidden;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity var(--duration) var(--ease)}
 .rs-crumb-bar-scrolled .rs-crumbs{opacity:1;pointer-events:auto}
@@ -312,7 +319,7 @@ button.rs-tab.rs-tab-active{
 /* ── Pagination: squares, not pills ── */
 .rs-pages{display:flex;align-items:center;gap:5px}
 .rs-page{width:26px;height:26px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-secondary);border:1px solid transparent}
-.rs-page:not(.rs-page-gap):not(.rs-page-on){border-color:var(--divider-subtle)}
+.rs-page:not(.rs-page-gap):not(.rs-page-on){border-color:var(--divider)}
 .rs-page.rs-page-on,button.rs-page-on{background:var(--text);color:var(--bg);font-weight:600}
 button.rs-page{padding:0;background:none;font-family:inherit;cursor:pointer}
 
@@ -322,7 +329,7 @@ button.rs-page{padding:0;background:none;font-family:inherit;cursor:pointer}
 .rs-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}
 button.rs-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%}
 .rs-menu{border:1px solid var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
-.rs-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle)}
+.rs-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider)}
 .rs-menu-item:last-child{border-bottom:none}
 .rs-menu-item.rs-menu-item-active,button.rs-menu-item-active{background:var(--divider-subtle)}
 button.rs-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
@@ -388,7 +395,7 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .rs-table th{text-align:left;font-weight:600;color:var(--text);letter-spacing:-.01em;padding:10px 16px 10px 12px;border-bottom:2px solid var(--divider);font-size:13px}
 .rs-table th:first-child{padding-left:20px}
 .rs-table th:last-child{padding-right:20px}
-.rs-table td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);vertical-align:top}
+.rs-table td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider);vertical-align:top}
 .rs-table td:first-child{padding-left:20px}
 .rs-table td:last-child{padding-right:20px}
 .rs-table tr:nth-child(even) td{background:var(--table-alt)}
@@ -407,8 +414,8 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .rs-icons svg{width:16px;height:16px;flex-shrink:0}
 
 /* ── Accordion: native <details>; one open at a time via the name attribute ── */
-.rs-acc{border-top:1px solid var(--divider-subtle)}
-.rs-acc-item{border-bottom:1px solid var(--divider-subtle)}
+.rs-acc{border-top:1px solid var(--divider)}
+.rs-acc-item{border-bottom:1px solid var(--divider)}
 .rs-acc-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
 .rs-acc-item summary::-webkit-details-marker{display:none}
 .rs-acc-chevron{flex-shrink:0;color:var(--text-secondary);transition:transform var(--duration) var(--ease)}
@@ -445,9 +452,11 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .rs-textarea:focus{border-color:var(--accent)}
 .rs-textarea::placeholder{color:var(--text-secondary)}
 
-/* ── Separator: a hairline, horizontal or vertical ── */
-.rs-sep{border:none;border-top:1px solid var(--divider-subtle);margin:20px 0}
-.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider-subtle);margin:0 12px}
+/* ── Separator: a hairline, horizontal or vertical.
+   Chrome lines share --divider with outer strokes. The page field
+   grid stays --grid-line; that is texture, not chrome. */
+.rs-sep{border:none;border-top:1px solid var(--divider);margin:20px 0}
+.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider);margin:0 12px}
 
 /* ── Skeleton: a quiet pulse; still under reduced motion ── */
 .rs-skeleton{display:block;background:var(--divider-subtle);border-radius:var(--radius-sm);animation:rsSkel 1.6s ease-in-out infinite}
@@ -479,15 +488,14 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 @media(prefers-reduced-motion:reduce){.rs-toast{animation:none}}
 
 /* ── Menu separators: for action menus ── */
-.rs-menu-sep{border:none;border-top:1px solid var(--divider-subtle);margin:4px 0}
+.rs-menu-sep{border:none;border-top:1px solid var(--divider);margin:4px 0}
 
 /* ── Toggle: a press switch; on is ink, like everything on ── */
 .rs-toggle{display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:32px;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;background:none;border:1px solid var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:background-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease),border-color var(--duration-snap) var(--ease)}
 .rs-toggle[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:var(--bg)}
-.rs-toggle-group{display:inline-flex}
-.rs-toggle-group .rs-toggle{border-radius:0;margin-left:-1px}
-.rs-toggle-group .rs-toggle:first-child{border-radius:var(--radius-sm) 0 0 var(--radius-sm);margin-left:0}
-.rs-toggle-group .rs-toggle:last-child{border-radius:0 var(--radius-sm) var(--radius-sm) 0}
+.rs-toggle-group{display:inline-flex;align-items:stretch;box-sizing:border-box;height:32px;border:1px solid var(--divider);border-radius:var(--radius-sm);overflow:hidden}
+.rs-toggle-group .rs-toggle{height:auto;border:0;border-radius:0;margin:0}
+.rs-toggle-group .rs-toggle + .rs-toggle{border-inline-start:1px solid var(--divider)}
 .rs-toggle-group .rs-toggle[aria-pressed="true"]{position:relative;z-index:1}
 
 /* ── Popover: the native Popover API: top layer, light dismiss ── */
@@ -529,7 +537,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
 .rs-chart-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
 .rs-chart-value{font-size:20px;font-weight:600;letter-spacing:-.02em;color:var(--text);font-variant-numeric:tabular-nums}
-.rs-chart-grid{stroke:var(--divider-subtle);stroke-width:1}
+.rs-chart-grid{stroke:var(--divider);stroke-width:1}
 .rs-chart-baseline{stroke:var(--divider);stroke-width:1}
 .rs-chart-axis{fill:var(--text-secondary);font-size:11px;font-weight:500;letter-spacing:0;font-variant-numeric:tabular-nums}
 .rs-chart-line{fill:none;stroke:var(--text);stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter}
@@ -594,7 +602,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-hover-card:hover .rs-hover-card-panel,.rs-hover-card:focus-within .rs-hover-card-panel{opacity:1;visibility:visible}
 
 /* ── Kbd: keys in the mono stack with a pressed bottom edge ── */
-.rs-kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);background:var(--bg);border:1px solid var(--divider);border-bottom-width:2px;border-radius:4px;padding:2px 6px;line-height:1.2}
+.rs-kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);background:var(--bg);border:1px solid var(--divider);border-bottom-width:2px;border-radius:var(--radius-sm);padding:2px 6px;line-height:1.2}
 
 /* ── One-time code: one quiet cell per character ── */
 .rs-otp{display:flex;gap:8px}
@@ -657,7 +665,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 
 /* ── Command: one input, everything reachable ── */
 .rs-command{width:480px;max-width:90vw;padding:0;overflow:hidden}
-.rs-command-input{width:100%;border:none;border-bottom:1px solid var(--divider-subtle);background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);padding:14px 16px;outline:none}
+.rs-command-input{width:100%;border:none;border-bottom:1px solid var(--divider);background:none;font-family:inherit;font-size:14px;letter-spacing:-.01em;color:var(--text);padding:14px 16px;outline:none}
 .rs-command-input::placeholder{color:var(--text-secondary)}
 .rs-command-list{max-height:320px;overflow-y:auto;padding:6px}
 .rs-command-group{font-size:11px;font-weight:600;letter-spacing:-.01em;color:var(--text-secondary);padding:8px 10px 4px}
@@ -668,12 +676,14 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 
 /* ── Calendar: a month of quiet squares; selected is ink ── */
 .rs-cal{width:252px}
-.rs-cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.rs-cal-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.rs-cal-head{display:flex;justify-content:space-between;align-items:center;min-height:26px;margin-bottom:8px}
+.rs-cal-title{font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:26px;color:var(--text)}
 .rs-cal-nav{display:flex;gap:5px}
+/* Inter ‹ › sit high in the em; the 26px nav chrome reads ~1px above the title ink. */
+.rs-cal-nav .rs-page{transform:translateY(1px)}
 .rs-cal-grid{display:grid;grid-template-columns:repeat(7,36px)}
 .rs-cal-dow{font-size:11px;font-weight:500;color:var(--text-secondary);text-align:center;padding:4px 0}
-.rs-cal-day{width:36px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;font-variant-numeric:tabular-nums;color:var(--text);background:none;border:none;border-radius:var(--radius-sm);cursor:pointer;font-family:inherit;padding:0}
+.rs-cal-day{width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;font-variant-numeric:tabular-nums;color:var(--text);background:none;border:none;border-radius:var(--radius-sm);cursor:pointer;font-family:inherit;padding:0}
 .rs-cal-day:hover{background:var(--divider-subtle)}
 .rs-cal-day-out{color:var(--text-secondary);opacity:.45}
 .rs-cal-day-today{box-shadow:inset 0 0 0 1px var(--divider)}
@@ -709,17 +719,17 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-flow-plus{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border:1px solid currentColor;border-radius:50%;font-size:13px;line-height:1}
 
 /* ── Assistant panel: monochrome chat surface ── */
-.rs-ai{display:flex;flex-direction:column;gap:16px;max-width:560px;border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:20px}
+.rs-ai{display:flex;flex-direction:column;gap:16px;max-width:560px;border:1px solid var(--divider);border-radius:var(--radius);padding:20px}
 .rs-ai-head{display:flex;justify-content:space-between;align-items:center}
 .rs-ai-title{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text)}
 .rs-ai-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}
 .rs-ai-status i{width:6px;height:6px;border-radius:50%;background:var(--text)}
 .rs-ai-msg{display:flex;width:100%}
 .rs-ai-user{justify-content:flex-end}
-.rs-ai-user-block{background:var(--table-alt);border:1px solid var(--divider-subtle);border-radius:var(--radius);padding:10px 14px;font-size:13.5px;color:var(--text);letter-spacing:-.01em;max-width:85%}
+.rs-ai-user-block{background:var(--table-alt);border:1px solid var(--divider);border-radius:var(--radius);padding:10px 14px;font-size:13.5px;color:var(--text);letter-spacing:-.01em;max-width:85%}
 .rs-ai-reply{font-size:13.5px;line-height:1.6;color:var(--text);letter-spacing:-.01em;margin:0}
 .rs-ai-card{border:1px solid var(--divider);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;align-items:flex-start}
-.rs-ai-tag{font-size:10.5px;font-weight:600;letter-spacing:.02em;color:var(--text);border:1px solid var(--divider);border-radius:5px;padding:2px 8px;margin-bottom:10px}
+.rs-ai-tag{font-size:10.5px;font-weight:600;letter-spacing:.02em;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);padding:2px 8px;margin-bottom:10px}
 .rs-ai-text{font-size:13px;color:var(--text);line-height:1.5;margin:0}
 .rs-ai-done{display:flex;align-items:baseline;gap:8px;margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--text-secondary)}
 .rs-ai-done svg{flex-shrink:0;transform:translateY(1.5px);color:var(--text)}
@@ -752,7 +762,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
 .rs-cite a{color:var(--text-secondary);text-decoration:none;transition:color var(--duration-snap) var(--ease)}
 .rs-cite a:hover{color:var(--accent)}
 .rs-refs{list-style:none;counter-reset:ref;margin:4px 0 8px;padding:0}
-.rs-refs li{counter-increment:ref;position:relative;padding:10px 0;font-size:13px;font-weight:500;line-height:1.65;color:var(--text-secondary);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);scroll-margin-top:88px}
+.rs-refs li{counter-increment:ref;position:relative;padding:10px 0;font-size:13px;font-weight:500;line-height:1.65;color:var(--text-secondary);letter-spacing:-.01em;border-bottom:1px solid var(--divider);scroll-margin-top:88px}
 .rs-refs li:last-child{border-bottom:none}
 .rs-refs li::before{content:counter(ref);position:absolute;left:-16px;top:11px;width:12px;text-align:right;font-size:11px;font-weight:600;color:var(--accent)}
 .rs-refs li:target{background:var(--table-alt)}
@@ -778,7 +788,7 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
     border-radius:0;
   }
   .rs-btn-sm{height:var(--control-h);min-height:var(--hit);font-size:var(--control-fs);padding:0 16px;min-width:0}
-  .rs-btn-group{display:flex;width:100%}
+  .rs-btn-group{display:flex;width:100%;height:var(--control-h);border-radius:0}
   .rs-btn-group>.rs-btn-primary,.rs-btn-group>.rs-btn-ghost{flex:1;min-width:0}
 
   /* Field / input: 16px so iOS does not zoom; 44pt hit; label steps up. */
@@ -786,16 +796,18 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
   .rs-field-label,.rs-label{font-size:var(--control-label)}
   .rs-input{
     min-height:var(--hit);
+    height:var(--control-h);
     font-size:16px;
-    padding:12px 14px;
+    padding:0 14px;
+    line-height:calc(var(--control-h) - 2px);
     border-radius:0;
   }
-  .rs-feedback,.rs-field-hint,.rs-field-error{font-size:14px;margin-top:4px}
+  .rs-feedback,.rs-field-hint,.rs-field-error{font-size:14px;line-height:16px;margin:0}
   .rs-form{max-width:none;width:100%;gap:20px}
 
   /* Textarea / native select */
   .rs-textarea{font-size:16px;padding:12px 14px;border-radius:0;min-height:132px}
-  .rs-native-select{min-height:var(--hit);font-size:16px;padding:12px 36px 12px 14px;border-radius:0}
+  .rs-native-select{min-height:var(--hit);height:var(--control-h);font-size:16px;padding:0 36px 0 14px;line-height:calc(var(--control-h) - 2px);border-radius:0}
 
   /* Checkbox / radio: 44pt rows, larger mark, 17px label */
   .rs-choice,.rs-radio{
@@ -903,10 +915,8 @@ dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
     font-size:var(--control-fs);
     border-radius:0;
   }
-  .rs-toggle-group{display:flex;width:100%}
-  .rs-toggle-group .rs-toggle{flex:1;border-radius:0;margin-left:-1px}
-  .rs-toggle-group .rs-toggle:first-child{border-radius:0;margin-left:0}
-  .rs-toggle-group .rs-toggle:last-child{border-radius:0}
+  .rs-toggle-group{display:flex;width:100%;height:var(--hit);border-radius:0}
+  .rs-toggle-group .rs-toggle{flex:1;border:0;border-radius:0;margin:0}
 
   /* Slider: thicker track, larger thumb, ±20px hit */
   .rs-slider{height:4px;margin:20px 0;border-radius:0}
