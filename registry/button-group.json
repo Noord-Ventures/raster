@@ -24,7 +24,7 @@
     },
     {
       "path": "raster/styles/button-group.css",
-      "content": "/* ── Button group: flush joined actions, one hairline between ── */\n.rs-btn-group{display:inline-flex;align-items:stretch}\n.rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{border-radius:0;margin-inline-start:-1px}\n.rs-btn-group > :first-child{margin-inline-start:0}\n.rs-btn-group > .rs-btn-primary{position:relative;z-index:1}\n",
+      "content": "/* ── Button group: flush joined actions, one hairline between ──\n   Outer corners inherit the standalone Button radius. Joins collapse\n   to a single stroke so rgba hairlines do not stack darker. */\n.rs-btn-group{display:inline-flex;align-items:stretch}\n.rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{border-radius:0;margin-inline-start:-1px}\n.rs-btn-group > :first-child{margin-inline-start:0;border-start-start-radius:var(--radius-sm);border-end-start-radius:var(--radius-sm)}\n.rs-btn-group > :last-child{border-start-end-radius:var(--radius-sm);border-end-end-radius:var(--radius-sm)}\n.rs-btn-group > :only-child{border-radius:var(--radius-sm)}\n.rs-btn-group > .rs-btn-ghost + .rs-btn-ghost{border-inline-start-color:transparent}\n.rs-btn-group > .rs-btn-primary{position:relative;z-index:1}\n",
       "type": "registry:file",
       "target": "styles/raster/button-group.css"
     }

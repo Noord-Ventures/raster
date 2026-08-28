@@ -49,10 +49,15 @@ body{
 .bb-btn-primary:focus-visible,.bb-btn-ghost:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .bb-btn-sm{height:36px;padding:0 14px;font-size:13px;min-width:104px}
 
-/* ── Button group: flush joined actions, one hairline between ── */
+/* ── Button group: flush joined actions, one hairline between ──
+   Outer corners inherit the standalone Button radius. Joins collapse
+   to a single stroke so rgba hairlines do not stack darker. */
 .rs-btn-group{display:inline-flex;align-items:stretch}
 .rs-btn-group > .bb-btn-primary,.rs-btn-group > .bb-btn-ghost{border-radius:0;margin-inline-start:-1px}
-.rs-btn-group > :first-child{margin-inline-start:0}
+.rs-btn-group > :first-child{margin-inline-start:0;border-start-start-radius:var(--radius-sm);border-end-start-radius:var(--radius-sm)}
+.rs-btn-group > :last-child{border-start-end-radius:var(--radius-sm);border-end-end-radius:var(--radius-sm)}
+.rs-btn-group > :only-child{border-radius:var(--radius-sm)}
+.rs-btn-group > .bb-btn-ghost + .bb-btn-ghost{border-inline-start-color:transparent}
 .rs-btn-group > .bb-btn-primary{position:relative;z-index:1}
 
 /* ── Text link: underlined by its hairline, never colored ── */
@@ -80,7 +85,7 @@ body{
 .rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em}
 
 /* ── Input group: addon and field share one hairline ── */
-.rs-input-group{display:flex;align-items:stretch;width:100%;border:1px solid var(--divider);border-radius:0;background:var(--bg)}
+.rs-input-group{display:flex;align-items:stretch;width:100%;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg)}
 .rs-input-group:focus-within{border-color:var(--accent)}
 .rs-input-addon{display:flex;align-items:center;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);background:var(--table-alt);border-right:1px solid var(--divider);white-space:nowrap}
 .rs-input-group .bb-sig-input{border:none;border-radius:0;flex:1;min-width:0}
@@ -166,7 +171,7 @@ button.bb-tab.bb-tab-active{
    appear. From 900px the root crumb holds the TOC column; the inner row
    starts one module in at the 1024px rail. */
 .rs-crumb-bar{position:fixed;top:0;left:0;right:0;z-index:160;display:flex;align-items:center;height:72px;font-size:13px;font-weight:500;letter-spacing:-.01em;line-height:1.3;background:none;border-bottom:1px solid transparent;transition:var(--transition)}
-.rs-crumb-bar-scrolled{background:var(--bg);border-bottom-color:var(--divider-subtle)}
+.rs-crumb-bar-scrolled{background:var(--bg);border-bottom-color:var(--divider)}
 .rs-crumb-bar-inner{display:flex;align-items:center;gap:20px;width:100%;min-width:0;padding:0 56px 0 76px}
 .rs-crumb-bar .bb-crumbs-demo{margin:0;min-width:0;overflow:hidden;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity var(--duration) var(--ease)}
 .rs-crumb-bar-scrolled .bb-crumbs-demo{opacity:1;pointer-events:auto}
@@ -193,7 +198,7 @@ button.bb-tab.bb-tab-active{
 .bb-dropdown{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;border:1px solid var(--divider);border-radius:var(--radius-sm);font-size:14px;color:var(--text);letter-spacing:-.01em}
 button.bb-dropdown{cursor:pointer;font-family:inherit;background:none;width:100%}
 .bb-menu{border:1px solid var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
-.bb-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle)}
+.bb-menu-item{display:block;padding:9px 12px;font-size:14px;color:var(--text);letter-spacing:-.01em;border-bottom:1px solid var(--divider)}
 .bb-menu-item:last-child{border-bottom:none}
 .bb-menu-item.bb-menu-item-active,button.bb-menu-item-active{background:var(--divider-subtle)}
 button.bb-menu-item{width:100%;text-align:left;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
@@ -227,7 +232,7 @@ table{width:calc(100% + 40px);border-collapse:collapse;margin:16px 0 24px -20px;
 table th{text-align:left;font-weight:600;color:var(--text);letter-spacing:-.01em;padding:10px 16px 10px 12px;border-bottom:2px solid var(--divider);font-size:13px}
 table th:first-child{padding-left:20px}
 table th:last-child{padding-right:20px}
-table td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);vertical-align:top}
+table td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider);vertical-align:top}
 table td:first-child{padding-left:20px}
 table td:last-child{padding-right:20px}
 table tr:nth-child(even) td{background:var(--table-alt)}

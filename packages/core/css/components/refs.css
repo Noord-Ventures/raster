@@ -5,7 +5,7 @@
 .rs-cite a{color:var(--text-secondary);text-decoration:none;transition:color var(--duration-snap) var(--ease)}
 .rs-cite a:hover{color:var(--accent)}
 .rs-refs{list-style:none;counter-reset:ref;margin:4px 0 8px;padding:0}
-.rs-refs li{counter-increment:ref;position:relative;padding:10px 0;font-size:13px;font-weight:500;line-height:1.65;color:var(--text-secondary);letter-spacing:-.01em;border-bottom:1px solid var(--divider-subtle);scroll-margin-top:88px}
+.rs-refs li{counter-increment:ref;position:relative;padding:10px 0;font-size:13px;font-weight:500;line-height:1.65;color:var(--text-secondary);letter-spacing:-.01em;border-bottom:1px solid var(--divider);scroll-margin-top:88px}
 .rs-refs li:last-child{border-bottom:none}
 .rs-refs li::before{content:counter(ref);position:absolute;left:-16px;top:11px;width:12px;text-align:right;font-size:11px;font-weight:600;color:var(--accent)}
 .rs-refs li:target{background:var(--table-alt)}

@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/pagination.css",
-      "content": "/* ── Pagination: squares, not pills ── */\n.rs-pages{display:flex;align-items:center;gap:5px}\n.rs-page{width:26px;height:26px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-secondary);border:1px solid transparent}\n.rs-page:not(.rs-page-gap):not(.rs-page-on){border-color:var(--divider-subtle)}\n.rs-page.rs-page-on,button.rs-page-on{background:var(--text);color:var(--bg);font-weight:600}\nbutton.rs-page{padding:0;background:none;font-family:inherit;cursor:pointer}\n",
+      "content": "/* ── Pagination: squares, not pills ── */\n.rs-pages{display:flex;align-items:center;gap:5px}\n.rs-page{width:26px;height:26px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-secondary);border:1px solid transparent}\n.rs-page:not(.rs-page-gap):not(.rs-page-on){border-color:var(--divider)}\n.rs-page.rs-page-on,button.rs-page-on{background:var(--text);color:var(--bg);font-weight:600}\nbutton.rs-page{padding:0;background:none;font-family:inherit;cursor:pointer}\n",
       "type": "registry:file",
       "target": "styles/raster/pagination.css"
     }

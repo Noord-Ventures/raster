@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/separator.css",
-      "content": "/* ── Separator: a hairline, horizontal or vertical ── */\n.rs-sep{border:none;border-top:1px solid var(--divider-subtle);margin:20px 0}\n.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider-subtle);margin:0 12px}\n",
+      "content": "/* ── Separator: a hairline, horizontal or vertical.\n   Chrome lines share --divider with outer strokes. The page field\n   grid stays --grid-line; that is texture, not chrome. */\n.rs-sep{border:none;border-top:1px solid var(--divider);margin:20px 0}\n.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider);margin:0 12px}\n",
       "type": "registry:file",
       "target": "styles/raster/separator.css"
     }

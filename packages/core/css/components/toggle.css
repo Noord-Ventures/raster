@@ -5,4 +5,5 @@
 .rs-toggle-group .rs-toggle{border-radius:0;margin-left:-1px}
 .rs-toggle-group .rs-toggle:first-child{border-radius:var(--radius-sm) 0 0 var(--radius-sm);margin-left:0}
 .rs-toggle-group .rs-toggle:last-child{border-radius:0 var(--radius-sm) var(--radius-sm) 0}
+.rs-toggle-group .rs-toggle + .rs-toggle{border-left-color:transparent}
 .rs-toggle-group .rs-toggle[aria-pressed="true"]{position:relative;z-index:1}

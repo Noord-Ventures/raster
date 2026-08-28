@@ -65,6 +65,42 @@ describe("generated raster.css", () => {
     expect(rasterCss).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:32px\}/);
   });
 
+  it("keeps calendar days square and drops the month chevrons 1px", () => {
+    const cal = readFileSync(join(pkgDir, "css/components/calendar.css"), "utf8");
+    expect(cal).toMatch(/\.rs-cal-day\{[^}]*width:36px;height:36px/);
+    expect(cal).not.toMatch(/height:32px/);
+    expect(cal).toMatch(/\.rs-cal-nav \.rs-page\{transform:translateY\(1px\)\}/);
+    expect(cal).toMatch(/\.rs-cal-title\{[^}]*line-height:26px/);
+    expect(rasterCss).toMatch(/\.rs-cal-day\{[^}]*width:36px;height:36px/);
+  });
+
+  it("joins button groups on one hairline and the button radius", () => {
+    const group = readFileSync(join(pkgDir, "css/components/button-group.css"), "utf8");
+    expect(group).toMatch(/border-start-start-radius:var\(--radius-sm\)/);
+    expect(group).toMatch(/border-start-end-radius:var\(--radius-sm\)/);
+    expect(group).toMatch(/\.rs-btn-ghost \+ \.rs-btn-ghost\{border-inline-start-color:transparent\}/);
+    expect(rasterCss).toMatch(/\.rs-btn-group > :first-child\{[^}]*border-start-start-radius:var\(--radius-sm\)/);
+  });
+
+  it("lets grouped fields inherit the standalone input radius", () => {
+    const inputGroup = readFileSync(join(pkgDir, "css/components/input-group.css"), "utf8");
+    const native = readFileSync(join(pkgDir, "css/components/native-select.css"), "utf8");
+    expect(inputGroup).toMatch(/border-radius:var\(--radius-sm\)/);
+    expect(native).toMatch(/border-radius:var\(--radius-sm\)/);
+  });
+
+  it("paints chrome hairlines in the divider ink, not the subtle fill", () => {
+    const sep = readFileSync(join(pkgDir, "css/components/separator.css"), "utf8");
+    const page = readFileSync(join(pkgDir, "css/components/pagination.css"), "utf8");
+    const crumb = readFileSync(join(pkgDir, "css/components/crumb-bar.css"), "utf8");
+    expect(sep).toMatch(/border-top:1px solid var\(--divider\)/);
+    expect(sep).toMatch(/background:var\(--divider\)/);
+    expect(sep).not.toMatch(/--divider-subtle/);
+    expect(page).toMatch(/border-color:var\(--divider\)/);
+    expect(crumb).toMatch(/border-bottom-color:var\(--divider\)/);
+    expect(rasterCss).toMatch(/\.rs-sep\{[^}]*var\(--divider\)/);
+  });
+
   it("marks only the active tab with a hairline", () => {
     const tabs = readFileSync(join(pkgDir, "css/components/tabs.css"), "utf8");
     expect(tabs).not.toMatch(/1\.5px/);

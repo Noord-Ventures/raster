@@ -1,5 +1,10 @@
-/* ── Button group: flush joined actions, one hairline between ── */
+/* ── Button group: flush joined actions, one hairline between ──
+   Outer corners inherit the standalone Button radius. Joins collapse
+   to a single stroke so rgba hairlines do not stack darker. */
 .rs-btn-group{display:inline-flex;align-items:stretch}
 .rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{border-radius:0;margin-inline-start:-1px}
-.rs-btn-group > :first-child{margin-inline-start:0}
+.rs-btn-group > :first-child{margin-inline-start:0;border-start-start-radius:var(--radius-sm);border-end-start-radius:var(--radius-sm)}
+.rs-btn-group > :last-child{border-start-end-radius:var(--radius-sm);border-end-end-radius:var(--radius-sm)}
+.rs-btn-group > :only-child{border-radius:var(--radius-sm)}
+.rs-btn-group > .rs-btn-ghost + .rs-btn-ghost{border-inline-start-color:transparent}
 .rs-btn-group > .rs-btn-primary{position:relative;z-index:1}

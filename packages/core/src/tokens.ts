@@ -15,8 +15,11 @@ export const rasterTokens = {
       paper: "#FAF8F2",
       ink: "#1A1A1A",
       gray: "#6B6B6B",
+      /** Chrome hairlines: outer strokes, joins, rows, separators. */
       divider: "rgba(0,0,0,0.10)",
+      /** Fills only (hover, skeleton, muted). Not a second line ink. */
       dividerSubtle: "rgba(0,0,0,0.06)",
+      /** Page-field module grid. Texture behind chrome, not a stroke. */
       gridLine: "rgba(0,0,0,0.025)",
       tableAlt: "rgba(0,0,0,0.02)",
     },
