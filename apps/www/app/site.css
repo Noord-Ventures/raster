@@ -8,7 +8,7 @@
      modules, so edges step from grid line to grid line on resize.
      The catalog rail drops that inset below 1440 (writer in docs-nav)
      so the two navs sit in columns 1 and 2 on a narrow desktop.
-   - Reading measure is 592px (3 modules); covers pad 120px down.
+   - Reading measure is 592px (3 modules); covers occupy the first 204 cell.
    - A fixed 72px crumb bar; breadcrumbs appear once the page cover
      scrolls away. The docs rail lives in components/docs-nav. */
 
@@ -274,8 +274,14 @@ html, body { margin: 0; padding: 0; }
 .site-content-wide { flex-shrink: 1; width: 100%; min-width: 0; padding-bottom: 72px; }
 @media (max-width: 800px) { .site-content { width: 100%; max-width: 100%; } }
 
-/* ── Cover: every page opens 120px down ── */
-.cover { padding-top: 120px; padding-bottom: 64px; }
+/* ── Cover: type occupies the first 204 cell ── */
+.cover {
+  min-height: 204px;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 .cover .rs-t-sub { margin-top: 16px; }
 
 /* ── Component gallery: cards span two whole modules ── */

@@ -38,7 +38,7 @@
   --text: #1A1A1A;                      /* ink */
   --text-secondary: #6B6B6B;            /* gray */
   --accent: #1A1A1A;                   /* the "accent" is ink; monochrome */
-  --divider: rgba(0,0,0,0.10);
+  --divider: rgba(0,0,0,0.08);
   --divider-subtle: rgba(0,0,0,0.06);
   --table-alt: rgba(0,0,0,0.02);
   --grid-line: rgba(0,0,0,0.08);
@@ -69,7 +69,7 @@
   --text: #E8E8E8;
   --text-secondary: #949494;
   --accent: #E8E8E8;
-  --divider: rgba(255,255,255,0.12);
+  --divider: rgba(255,255,255,0.10);
   --divider-subtle: rgba(255,255,255,0.07);
   --table-alt: rgba(255,255,255,0.03);
   --grid-line: rgba(255,255,255,0.10);
@@ -96,17 +96,28 @@
 }
 
 /* ── Base ──
-   Raster owns the page: paper background, ink text, and the visible
-   204px module grid drawn behind everything. */
-html{scroll-behavior:smooth;font-size:16px;overflow-x:clip}
+   Raster owns the page: paper on html, ink on body, and a fixed 204
+   field painted on html::before so overflow-x:clip cannot drop it.
+   Clip 21px from the left on desktop so the 20px inset line does not
+   read as a page frame. Horizontals start at 204, not y=0. */
+html{scroll-behavior:smooth;font-size:16px;overflow-x:clip;background-color:var(--bg)}
+html::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:var(--grid-image),repeating-linear-gradient(to bottom,transparent 0,transparent 203px,var(--grid-line) 203px,var(--grid-line) 204px);
+  background-size:var(--grid-size) 100vh,100% 204px;
+  background-repeat:repeat-x,repeat-y;
+  background-position:var(--grid-pos),0 0
+}
+@media(min-width:481px){html::before{clip-path:inset(0 0 0 21px)}}
 body{
+  position:relative;
+  z-index:1;
   overflow-x:clip;
-  background-color:var(--bg);
-  background-image:var(--grid-image);
-  background-size:var(--grid-size) 100vh;
-  background-repeat:repeat-x;
-  background-attachment:fixed;
-  background-position:var(--grid-pos);
+  background-color:transparent;
   color:var(--text);
   font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
   font-weight:500;
@@ -565,8 +576,7 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .rs-textarea::placeholder{color:var(--text-secondary)}
 
 /* ── Separator: a hairline, horizontal or vertical.
-   Chrome lines share --divider with outer strokes. The page field
-   grid stays --grid-line; that is texture, not chrome. */
+   Chrome and the page 204 share one ink (--divider = --grid-line). */
 .rs-sep{border:none;border-top:1px solid var(--divider);margin:20px 0}
 .rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider);margin:0 12px}
 

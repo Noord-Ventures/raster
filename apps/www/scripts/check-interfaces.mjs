@@ -65,8 +65,13 @@ if (!index.includes("if-title")) {
   console.error("Interfaces title must occupy a 204 cell");
   process.exit(1);
 }
-if (!css.includes("body:has(.if-index)") || !css.includes("repeating-linear-gradient")) {
-  console.error("Interfaces must paint the 204 field (verticals + horizontals)");
+const baseCss = readFileSync(join(root, "packages/core/css/base.css"), "utf8");
+if (!baseCss.includes("html::before") || !baseCss.includes("clip-path:inset(0 0 0 21px)") || !baseCss.includes("repeating-linear-gradient")) {
+  console.error("Site 204 must paint on html::before (horizontals included) and clip the 20px page frame");
+  process.exit(1);
+}
+if (!css.includes("body:has(.if-index)") || !css.includes("background: transparent")) {
+  console.error("Interfaces paper must stay open so the site 204 overlay reads through");
   process.exit(1);
 }
 if (/\.if-rail \{[^}]*background:\s*var\(--bg\)/s.test(css)) {
@@ -88,7 +93,7 @@ if (/background:\s*var\(--bg\)/.test(tileRule) || !tileRule.includes("background
   process.exit(1);
 }
 if (!tileRule.includes("var(--grid-line)") || tileRule.includes("var(--divider)")) {
-  console.error("Interfaces tile edges must be --grid-line, quieter than --divider");
+  console.error("Interfaces tile edges must be --grid-line (same ink as --divider)");
   process.exit(1);
 }
 const specRule = css.slice(css.indexOf(".if-specimen {"), css.indexOf("}", css.indexOf(".if-specimen {")));
