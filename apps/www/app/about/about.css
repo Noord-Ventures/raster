@@ -196,7 +196,7 @@
   flex: 1;
   min-width: 0;
   margin: 0;
-  padding: 12px 14px;
+  padding: 20px;
   background: var(--table-alt);
   border-top: 1px solid var(--divider);
   border-bottom: 1px solid var(--divider);
@@ -230,22 +230,40 @@
 }
 
 .field-spec-module {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 1px;
-  background: var(--divider);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.field-spec-module span {
-  display: flex;
-  align-items: flex-end;
-  padding: 8px;
+.field-mod204 {
+  flex: 1;
+  min-height: 88px;
+  display: grid;
+  grid-template-columns: 184fr 20fr;
+  border: 1px solid var(--divider);
   background: var(--bg);
+}
+
+.field-col184 {
+  background: var(--table-alt);
+  border-right: 1px solid var(--text);
+}
+
+.field-gut20 {
+  background: var(--bg);
+}
+
+.field-mod-dim {
+  display: grid;
+  grid-template-columns: 184fr 20fr;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: -.01em;
   color: var(--text-secondary);
+}
+
+.field-mod-dim span:last-child {
+  text-align: center;
 }
 
 .field-spec-hair {
@@ -258,22 +276,31 @@
   );
 }
 
+.field-cell-flush {
+  overflow: visible;
+}
+
 .field-spec-flush {
-  margin: 0 -20px;
+  box-sizing: border-box;
+  width: calc(100% + 40px);
+  max-width: none;
+  margin: 0 0 0 -20px;
   border-top: 1px solid var(--divider);
   border-bottom: 1px solid var(--divider);
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 12px 20px;
+  flex-direction: column;
 }
 
-.field-spec-flush span {
-  font-size: clamp(52px, 10vw, 88px);
-  font-weight: 600;
-  letter-spacing: -.045em;
-  line-height: .85;
-  color: var(--text);
+.field-flush-row {
+  flex: 1;
+  min-height: 40px;
+  box-sizing: border-box;
+  padding: 20px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.field-flush-row:last-child {
+  border-bottom: 0;
 }
 
 .field-grotesque {

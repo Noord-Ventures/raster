@@ -31,6 +31,13 @@ describe("init", () => {
     expect(page).toContain("workhorse of a design system");
     expect(page).toContain("rs-btn-primary");
     expect(page).toContain("184 column + 20 gutter");
+    expect(page).toContain("rs-kbd");
+    expect(page).toContain("rs-chart");
+    expect(page).toContain("scheme-moon");
+    expect(page).toContain("Module cells sit flush on the gridline");
+    expect(page).not.toContain("Dark scheme");
+    expect(page).not.toContain("programme");
+    expect(page).not.toContain("No radius");
     expect(page).not.toContain("Hello world");
     expect(page).not.toContain("lighthouse");
     expect(page).not.toContain("U+0041");

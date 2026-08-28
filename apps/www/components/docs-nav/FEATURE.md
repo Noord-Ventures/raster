@@ -2,7 +2,7 @@
 
 What it is, how to get there, what done looks like.
 
-Writers: catalog groups are `packages/core/src/schema.ts` (`rasterCategories`). Face, law, and command are `apps/www/app/specimen.ts`. Numbered laws are `apps/www/app/specimen-laws.ts`. Homepage `/` and About `/about` use the same scroll-in crumb bar as docs and components: transparent at rest, paper and a 1px divider after scroll.
+Writers: catalog groups are `packages/core/src/schema.ts` (`rasterCategories`). Face, law, and command are `apps/www/app/specimen.ts`. Numbered laws are `apps/www/app/specimen-laws.ts`. Homepage `/` and About `/about` use the same scroll-in crumb bar as docs and components: transparent at rest, paper and a 1px divider after scroll. About trail is Raster / About.
 
 | Surface | Route | Click path | Done |
 | --- | --- | --- | --- |
@@ -12,6 +12,6 @@ Writers: catalog groups are `packages/core/src/schema.ts` (`rasterCategories`). 
 | Getting started | `/docs` | Corner → Docs | Short rail: Getting started, Tokens. Command is the one in `app/specimen.ts` (`npx @noorddev/raster-cli init`). Command and code blocks carry a quiet copy control. Under 900 the rail hides; a stacked 44pt contents picker takes its place. |
 | Tokens | `/docs/tokens` | Docs → Tokens | Same short rail. Same phone picker. |
 | Phone | ≤430 | Burger, theme, contents | 44pt hits on chrome, TOC, catalog tiles, copy. Kit controls recut at ≤640 (44pt, 16px, full-width). Safe-area insets. One column. Desktop rail and 20px mark stay. |
-| About | `/about` | Corner → About | Flush field. Site 204 verticals run the full page, same spine as home (20 / 204 / 224 / 408) — not a local hero tile. Same navbar-on-scroll as home. A modernist homage — Swiss Style and Dutch modernism. Josef Müller-Brockmann and Wim Crouwel as type-in-cells; Max Bill, Karl Gerstner, Emil Ruder, Armin Hofmann, Piet Zwart, Paul Schuitema, Otto Treumann, Total Design, Swiss Style. Illustrated programme: 204, hairlines, flush / 0, grotesque. Credits (Inter, Noord, Renato, packages) are a 12px colophon, not a masthead. Isolated files under `app/about`. |
+| About | `/about` | Corner → About | Workhorse specimen in the Inter register. Flush field. Site 204 verticals run the full page, same spine as home (20 / 204 / 224 / 408) — not a local hero tile. Same navbar-on-scroll as home. What it is, usage, free & open, type on the module, then history. Illustrated program: 204 as 184 column + 20 gutter, hairlines, flush cells on the gridline, grotesque. Credits (Inter, Noord, Renato, packages) are a 12px colophon, not a masthead. Isolated files under `app/about`. |
 
 The components rail is groups → items. It is not Getting started / Foundations / Components.

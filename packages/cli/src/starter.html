@@ -36,6 +36,7 @@
         flex-direction: column;
         justify-content: space-between;
         gap: 16px;
+        overflow: visible;
       }
       .sp-face { grid-area: face; justify-content: flex-end; min-height: 408px; container-type: inline-size; }
       .sp-lead { grid-area: lead; }
@@ -45,7 +46,7 @@
       .sp-run { grid-area: run; justify-content: flex-start; }
       .sp-mod { grid-area: mod; }
       .sp-hair { grid-area: hair; }
-      .sp-flush { grid-area: flush; }
+      .sp-flush { grid-area: flush; overflow: visible; }
       .sp-grot { grid-area: grot; container-type: inline-size; }
       .sp-kit { grid-area: kit; justify-content: flex-start; min-height: 408px; }
       .sp-faq { grid-area: faq; justify-content: flex-start; }
@@ -78,10 +79,10 @@
       .sp-code-stack { display: flex; flex-direction: column; gap: 8px; max-width: 44em; width: 100%; }
       .sp-code {
         margin: 0;
-        padding: 12px 14px;
+        padding: 20px;
         background: var(--table-alt);
-        border-top: 1px solid var(--divider);
-        border-bottom: 1px solid var(--divider);
+        border: 1px solid var(--divider);
+        border-radius: var(--radius-sm);
         overflow-x: auto;
         font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
         font-size: 12.5px;
@@ -107,22 +108,33 @@
       }
       .sp-diagram {
         flex: 1;
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .sp-mod204 {
+        flex: 1;
         min-height: 88px;
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: 1px;
-        background: var(--divider);
-      }
-      .sp-diagram span {
-        display: flex;
-        align-items: flex-end;
-        padding: 8px;
+        grid-template-columns: 184fr 20fr;
+        border: 1px solid var(--divider);
         background: var(--bg);
+      }
+      .sp-col184 {
+        background: var(--table-alt);
+        border-right: 1px solid var(--text);
+      }
+      .sp-gut20 { background: var(--bg); }
+      .sp-dim {
+        display: grid;
+        grid-template-columns: 184fr 20fr;
         font-size: 12px;
         font-weight: 600;
+        letter-spacing: -.01em;
         color: var(--text-secondary);
       }
+      .sp-dim-gut { text-align: center; }
       .sp-rules {
         flex: 1;
         min-height: 88px;
@@ -135,19 +147,25 @@
         );
       }
       .sp-zero {
+        box-sizing: border-box;
         flex: 1;
         min-height: 88px;
-        margin: 0 -20px;
-        padding: 12px 20px;
+        width: calc(100% + 40px);
+        max-width: none;
+        margin: 0 0 0 -20px;
         border-top: 1px solid var(--divider);
         border-bottom: 1px solid var(--divider);
         display: flex;
-        align-items: flex-end;
-        font-size: clamp(52px, 10vw, 88px);
-        font-weight: 600;
-        letter-spacing: -.045em;
-        line-height: .85;
+        flex-direction: column;
       }
+      .sp-flush-row {
+        flex: 1;
+        min-height: 40px;
+        box-sizing: border-box;
+        padding: 20px;
+        border-bottom: 1px solid var(--divider);
+      }
+      .sp-flush-row:last-child { border-bottom: 0; }
       .sp-ag {
         margin: 0;
         font-size: clamp(4.5rem, 22cqw, 10rem);
@@ -157,12 +175,23 @@
       }
       .sp-kit-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
       .sp-kit-form { max-width: 388px; width: 100%; }
-      .sp-scheme {
+      .sp-kit .rs-chart-field { padding: 20px; max-width: 408px; }
+      .sp-keys { display: inline-flex; align-items: center; gap: 6px; }
+      button.sp-scheme {
         position: fixed;
         top: 20px;
         right: 20px;
         z-index: 20;
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
       }
+      .sp-scheme svg { display: block; }
       .sp-colo p {
         margin: 0;
         font-size: 12px;
@@ -209,7 +238,33 @@
     </style>
   </head>
   <body>
-    <button type="button" class="rs-btn-ghost rs-btn-sm sp-scheme" id="scheme">Dark scheme</button>
+    <button
+      type="button"
+      class="rs-btn-ghost rs-btn-sm sp-scheme"
+      id="scheme"
+      aria-label="Toggle color scheme"
+      title="Toggle color scheme"
+    >
+      <svg id="scheme-moon" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+        <path
+          d="M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="butt"
+          stroke-linejoin="miter"
+        />
+      </svg>
+      <svg id="scheme-sun" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true" hidden>
+        <circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1" />
+        <path
+          d="M8 2 V3.5M8 12.5 V14M2 8 H3.5M12.5 8 H14M4.4 4.4 L5.3 5.3M10.7 10.7 L11.6 11.6M11.6 4.4 L10.7 5.3M5.3 10.7 L4.4 11.6"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="butt"
+          stroke-linejoin="miter"
+        />
+      </svg>
+    </button>
     <main class="sp" aria-label="Raster specimen">
       <div class="sp-field">
         <section class="sp-cell sp-face" aria-labelledby="sp-title">
@@ -239,7 +294,7 @@
             <pre class="sp-code">&lt;button class="rs-btn-primary"&gt;Save&lt;/button&gt;</pre>
             <pre class="sp-code">html[data-theme="dark"]</pre>
           </div>
-          <p class="sp-mark">Dark scheme: set data-theme="dark" on the root element. The control in the corner does that.</p>
+          <p class="sp-mark">The mark in the corner sets data-theme="dark" on the root element.</p>
         </section>
 
         <section class="sp-cell sp-free">
@@ -275,25 +330,33 @@
 
         <section class="sp-cell sp-mod" aria-label="204 module">
           <p class="sp-kicker">204</p>
-          <div class="sp-diagram" aria-hidden="true">
-            <span>204</span>
-            <span>184</span>
-            <span>20</span>
-            <span></span>
-          </div>
+          <figure class="sp-diagram">
+            <div class="sp-mod204" aria-hidden="true">
+              <div class="sp-col184"></div>
+              <div class="sp-gut20"></div>
+            </div>
+            <figcaption class="sp-dim">
+              <span>184</span>
+              <span class="sp-dim-gut">20</span>
+            </figcaption>
+          </figure>
           <p class="sp-mark">184 column + 20 gutter.</p>
         </section>
 
         <section class="sp-cell sp-hair" aria-label="Hairlines">
           <p class="sp-kicker">Hairlines</p>
           <div class="sp-rules" aria-hidden="true"></div>
-          <p class="sp-mark">The programme is visible. A 1px line, not a box.</p>
+          <p class="sp-mark">Hairlines mark the module. A 1px line, not a box.</p>
         </section>
 
         <section class="sp-cell sp-flush" aria-label="Flush cells">
-          <p class="sp-kicker">Flush · 0</p>
-          <div class="sp-zero" aria-hidden="true">0</div>
-          <p class="sp-mark">No radius. Cells meet the line.</p>
+          <p class="sp-kicker">Flush</p>
+          <div class="sp-zero" aria-hidden="true">
+            <div class="sp-flush-row"></div>
+            <div class="sp-flush-row"></div>
+            <div class="sp-flush-row"></div>
+          </div>
+          <p class="sp-mark">Module cells sit flush on the gridline.</p>
         </section>
 
         <section class="sp-cell sp-grot" aria-label="Grotesque">
@@ -309,6 +372,10 @@
             <button type="button" class="rs-btn-ghost">Cancel</button>
             <span class="rs-badge">Recommended</span>
             <span class="rs-badge-muted">In progress</span>
+            <span class="sp-keys">
+              <kbd class="rs-kbd">⌘</kbd>
+              <kbd class="rs-kbd">K</kbd>
+            </span>
           </div>
           <div class="sp-kit-form">
             <div class="rs-field">
@@ -316,6 +383,19 @@
               <input class="rs-input rs-input-full" id="sp-name" value="Raster" />
               <p class="rs-field-hint">As it appears on the invoice.</p>
             </div>
+          </div>
+          <div class="rs-chart rs-chart-field" aria-label="Jobs this week">
+            <div class="rs-chart-head">
+              <p class="rs-chart-title">Jobs</p>
+              <p class="rs-chart-value">184</p>
+            </div>
+            <svg viewBox="0 0 240 88" role="img" aria-label="Line, 184 jobs">
+              <line class="rs-chart-grid" x1="0" y1="22" x2="240" y2="22" />
+              <line class="rs-chart-grid" x1="0" y1="44" x2="240" y2="44" />
+              <line class="rs-chart-grid" x1="0" y1="66" x2="240" y2="66" />
+              <line class="rs-chart-baseline" x1="0" y1="87" x2="240" y2="87" />
+              <path class="rs-chart-line" d="M0 70 L40 58 L80 62 L120 36 L160 44 L200 22 L240 28" />
+            </svg>
           </div>
           <div class="rs-tabs" role="tablist">
             <span class="rs-tab rs-tab-active">Overview</span>
@@ -381,9 +461,15 @@
       (function () {
         var root = document.documentElement;
         var btn = document.getElementById("scheme");
-        if (!btn) return;
+        var sun = document.getElementById("scheme-sun");
+        var moon = document.getElementById("scheme-moon");
+        if (!btn || !sun || !moon) return;
         function sync() {
-          btn.textContent = root.getAttribute("data-theme") === "dark" ? "Light scheme" : "Dark scheme";
+          var dark = root.getAttribute("data-theme") === "dark";
+          sun.hidden = !dark;
+          moon.hidden = dark;
+          btn.setAttribute("aria-label", dark ? "Use light scheme" : "Use dark scheme");
+          btn.setAttribute("title", btn.getAttribute("aria-label"));
         }
         btn.addEventListener("click", function () {
           if (root.getAttribute("data-theme") === "dark") root.removeAttribute("data-theme");

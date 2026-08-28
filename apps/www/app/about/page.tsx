@@ -10,7 +10,7 @@ import {
   noord,
   notes,
   person,
-  programme,
+  program,
   specimen,
   typeface,
   usage,
@@ -97,36 +97,42 @@ export default function AboutPage() {
         </section>
 
         <section className="field-cell field-cell-mod" aria-label="204 module">
-          <p className="field-kicker">{programme.module.kicker}</p>
-          <div className="field-spec field-spec-module" aria-hidden="true">
-            <span>204</span>
-            <span>184</span>
-            <span>20</span>
-            <span />
+          <p className="field-kicker">{program.module.kicker}</p>
+          <div className="field-spec field-spec-module" aria-label="204 module: 184 column and 20 gutter">
+            <div className="field-mod204">
+              <div className="field-col184" />
+              <div className="field-gut20" />
+            </div>
+            <div className="field-mod-dim">
+              <span>184</span>
+              <span>20</span>
+            </div>
           </div>
-          <p className="field-mark">{programme.module.law}</p>
+          <p className="field-mark">{program.module.law}</p>
         </section>
 
         <section className="field-cell field-cell-hair" aria-label="Hairlines">
-          <p className="field-kicker">{programme.hairline.kicker}</p>
+          <p className="field-kicker">{program.hairline.kicker}</p>
           <div className="field-spec field-spec-hair" aria-hidden="true" />
-          <p className="field-mark">{programme.hairline.law}</p>
+          <p className="field-mark">{program.hairline.law}</p>
         </section>
 
         <section className="field-cell field-cell-flush" aria-label="Flush cells">
-          <p className="field-kicker">{programme.flush.kicker}</p>
+          <p className="field-kicker">{program.flush.kicker}</p>
           <div className="field-spec field-spec-flush" aria-hidden="true">
-            <span>0</span>
+            <div className="field-flush-row" />
+            <div className="field-flush-row" />
+            <div className="field-flush-row" />
           </div>
-          <p className="field-mark">{programme.flush.law}</p>
+          <p className="field-mark">{program.flush.law}</p>
         </section>
 
         <section className="field-cell field-cell-grot" aria-label="Grotesque">
-          <p className="field-kicker">{programme.grotesque.kicker}</p>
+          <p className="field-kicker">{program.grotesque.kicker}</p>
           <p className="field-grotesque" aria-hidden="true">
-            {programme.grotesque.mark}
+            {program.grotesque.mark}
           </p>
-          <p className="field-mark">{programme.grotesque.law}</p>
+          <p className="field-mark">{program.grotesque.law}</p>
         </section>
 
         <section className="field-cell field-cell-hist">
