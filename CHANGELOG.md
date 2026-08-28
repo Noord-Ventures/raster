@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Raster icons: first complete family in `@noorddev/raster-react`. Same 16 module / 1px language. Catalog on /components/icons. Site theme-toggle is the family. Does not publish.
+- Site 204 module grid is visible on home and under the components rail. `--grid-line` reads as a hairline. No page-frame.
 - Chrome polish: calendar days are square; month chevrons sit 1px down; grouped seams and dividers use `--divider`; button / input groups inherit `--radius-sm`. Grouped T-junctions are one stroke. Field input is a 40px integer control with 8px / 16px label and hint.
 - www: quieter credits. About is a modernist homage (Swiss Style, Dutch modernism, names as type-in-cells, illustrated 204 / hairline / flush / grotesque). Homepage install command is a primary CTA.
 - Homepage opens on the right and bottom; no outer frame. About and interior chrome keep their hairlines.

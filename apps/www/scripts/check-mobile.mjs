@@ -76,8 +76,17 @@ if (!specimen.includes("min-width: 481px") || !about.includes("min-width: 481px"
 if (specimen.includes("padding: 0 1px 1px 0") || /padding:\s*1px;/.test(specimen)) {
   fail("Homepage must open on the right and bottom; do not restore an outer frame");
 }
+if (specimen.includes("background-image: none")) {
+  fail("Homepage must not hide the site module grid");
+}
 if (!specimen.includes("body:has(.specimen-page)") || !specimen.includes("clip-path: inset(0)")) {
-  fail("Homepage must cover the page grid and clip any edge hairline");
+  fail("Homepage must keep the site grid and clip any edge hairline");
+}
+if (!specimen.includes("background: transparent")) {
+  fail("Homepage paper must let the site 204 verticals show through");
+}
+if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
+  fail("Catalog secondaries must not cover the site module grid");
 }
 if (!about.includes("padding: 0 1px 1px 0")) {
   fail("About must keep its right and bottom hairline");

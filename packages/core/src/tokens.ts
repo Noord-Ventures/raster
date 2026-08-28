@@ -19,8 +19,9 @@ export const rasterTokens = {
       divider: "rgba(0,0,0,0.10)",
       /** Fills only (hover, skeleton, muted). Not a second line ink. */
       dividerSubtle: "rgba(0,0,0,0.06)",
-      /** Page-field module grid. Texture behind chrome, not a stroke. */
-      gridLine: "rgba(0,0,0,0.025)",
+      /** Page-field module grid. Hairline behind chrome, quieter than
+          --divider, strong enough to read on paper. */
+      gridLine: "rgba(0,0,0,0.08)",
       tableAlt: "rgba(0,0,0,0.02)",
     },
     dark: {
@@ -29,7 +30,7 @@ export const rasterTokens = {
       gray: "#949494",
       divider: "rgba(255,255,255,0.12)",
       dividerSubtle: "rgba(255,255,255,0.07)",
-      gridLine: "rgba(255,255,255,0.01)",
+      gridLine: "rgba(255,255,255,0.10)",
       tableAlt: "rgba(255,255,255,0.03)",
     },
     /** Ink → paper, the in-between steps. Monochrome: there is no accent. */

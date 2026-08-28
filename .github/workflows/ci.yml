@@ -120,17 +120,39 @@ jobs:
           fi
           grep -q 'body:has(.specimen-page)' apps/www/app/specimen.css
           grep -q 'clip-path: inset(0)' apps/www/app/specimen.css
+          if grep -n 'rgba(0,0,0,0.025)' packages/core/src/tokens.ts; then
+            echo "Module grid-line must read; 0.025 is invisible on paper"
+            exit 1
+          fi
+          if grep -n 'rgba(255,255,255,0.01)' packages/core/src/tokens.ts; then
+            echo "Dark module grid-line must read; 0.01 is invisible"
+            exit 1
+          fi
           node -e '
             const { readFileSync } = require("node:fs");
             const css = readFileSync("apps/www/app/specimen.css", "utf8");
+            const hasAt = css.indexOf("body:has(.specimen-page)");
+            if (hasAt < 0) {
+              console.error("Homepage must keep body:has(.specimen-page)");
+              process.exit(1);
+            }
+            const hasRule = css.slice(hasAt, css.indexOf("}", hasAt));
+            if (hasRule.includes("background-image: none")) {
+              console.error("Homepage must not hide the site module grid");
+              process.exit(1);
+            }
+            if (!hasRule.includes("background-image: var(--grid-image)")) {
+              console.error("Homepage must keep the site module grid");
+              process.exit(1);
+            }
             const pageStart = css.indexOf(".specimen-page {");
             if (pageStart < 0) {
               console.error("Homepage .specimen-page rule missing");
               process.exit(1);
             }
             const pageRule = css.slice(pageStart, css.indexOf("}", pageStart));
-            if (!pageRule.includes("background: var(--bg)") || /border:\s*1px/.test(pageRule)) {
-              console.error("Homepage paper must be flush: opaque, no page border");
+            if (!pageRule.includes("background: transparent") || /border:\s*1px/.test(pageRule)) {
+              console.error("Homepage must let the site grid show through: transparent paper, no page border");
               process.exit(1);
             }
             const start = css.indexOf(".specimen {");
@@ -143,12 +165,22 @@ jobs:
               console.error("Homepage specimen must have padding: 0");
               process.exit(1);
             }
-            if (!rule.includes("background: var(--bg)")) {
-              console.error("Homepage leftover must be paper, not a divider sliver");
+            if (!rule.includes("background: transparent")) {
+              console.error("Homepage leftover must not cover the site grid");
+              process.exit(1);
+            }
+            if (rule.includes("background: var(--divider)")) {
+              console.error("Homepage leftover must not be a divider sliver");
               process.exit(1);
             }
             if (/border-(top|right|bottom|left)/.test(rule) || /padding:\s*0\s+1px/.test(rule)) {
               console.error("Homepage must not draw a frame on any side");
+              process.exit(1);
+            }
+            const cellAt = css.indexOf(".specimen-cell {");
+            const cellRule = css.slice(cellAt, css.indexOf("}", cellAt));
+            if (!cellRule.includes("background: transparent")) {
+              console.error("Specimen cells must not cover the site grid");
               process.exit(1);
             }
           '
@@ -569,7 +601,11 @@ jobs:
             echo "Secondaries column must not grow its own left rule"
             exit 1
           fi
-          grep -q 'background: var(--bg)' apps/www/components/docs-nav/docs-nav.css
+          if awk '/^\.toc-sub \{/,/^\}/' apps/www/components/docs-nav/docs-nav.css | grep -E 'background:\s*var\(--bg\)'; then
+            echo "Catalog secondaries must not cover the site module grid"
+            exit 1
+          fi
+          grep -q 'background: transparent' apps/www/components/docs-nav/docs-nav.css
           grep -q 'width: 204px' apps/www/components/docs-nav/docs-nav.css
           grep -q '408 module line' apps/www/components/docs-nav/docs-nav.css
           if grep -n 'margin-left: 1px' apps/www/components/docs-nav/docs-nav.css; then

@@ -41,12 +41,12 @@
      column (204). Groups are 184; the rail is 388 and ends on the
      408 module line (20 pad + 388). The layout gutter then starts
      catalog type and tiles on the following column, not in a gutter.
-     Paper covers the 184-line so it cannot read as an inset stroke. */
+     No paper cover — the site 204 verticals run under the rail. */
   width: 204px;
   margin-left: 0;
   padding-left: 20px;
   padding-right: 20px;
-  background: var(--bg);
+  background: transparent;
 }
 .toc-sub:empty { display: none; }
 .toc::-webkit-scrollbar { display: none; }

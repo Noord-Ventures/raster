@@ -1,9 +1,11 @@
 /* Homepage specimen. Imported only by app/page.tsx. */
 
-/* Cover the site grid on home only. The 20px inset module line
-   was reading as a box around the page. About keeps that grid. */
+/* Site 204 module grid stays on home. The flush-homepage pass hid it
+   because the 20px inset line read as a page frame. Clip-path still
+   kills edge hairlines; the module verticals stay. Paper is transparent
+   so body --grid-image shows through. */
 body:has(.specimen-page) {
-  background-image: none;
+  background-image: var(--grid-image);
 }
 
 .specimen-page {
@@ -11,7 +13,7 @@ body:has(.specimen-page) {
   min-height: 100dvh;
   margin: 0;
   border: none;
-  background: var(--bg);
+  background: transparent;
 }
 .specimen {
   display: grid;
@@ -40,9 +42,9 @@ body:has(.specimen-page) {
     "kitc"
     "kitd";
   grid-auto-rows: minmax(204px, auto);
-  /* Paper to the viewport. Internal lines are cell shadows, clipped
-     at the field edge so no hairline reads as a page frame. */
-  background: var(--bg);
+  /* Paper to the viewport via body. Internal lines are cell shadows,
+     clipped at the field edge so no hairline reads as a page frame. */
+  background: transparent;
   padding: 0;
   gap: 0;
   clip-path: inset(0);
@@ -51,7 +53,7 @@ body:has(.specimen-page) {
   min-width: 0;
   min-height: 204px;
   padding: 20px;
-  background: var(--bg);
+  background: transparent;
   display: flex;
   flex-direction: column;
   overflow: visible;
