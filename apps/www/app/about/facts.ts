@@ -109,6 +109,12 @@ export const field = [
     },
   },
   {
+    name: "Thérèse Moll",
+    years: "1934–1961",
+    place: "Basel · Cambridge",
+    mark: "Gerstner atelier. 200 Jahre Geigy, 1958. Modular type at MIT.",
+  },
+  {
     name: "Emil Ruder",
     years: "1914–1970",
     place: "Basel",
@@ -129,6 +135,24 @@ export const field = [
     },
   },
   {
+    name: "Nelly Rudin",
+    years: "1928–2013",
+    place: "Basel · Zurich",
+    mark: "Geigy. Müller-Brockmann studio. SAFFA poster, 1958.",
+  },
+  {
+    name: "Rosmarie Tissi",
+    years: "1937",
+    place: "Zurich",
+    mark: "Odermatt & Tissi. Posters. A reformer of Swiss Style.",
+  },
+  {
+    name: "Shizuko Yoshikawa",
+    years: "1934–2019",
+    place: "Ulm · Zurich",
+    mark: "Müller-Brockmann studio. Nō-Theater. Swiss Poster of the Year, 1975.",
+  },
+  {
     name: "Piet Zwart",
     years: "1885–1977",
     place: "Rotterdam",
@@ -139,6 +163,16 @@ export const field = [
     years: "1897–1973",
     place: "Rotterdam",
     mark: "Photomontage. Constructivism.",
+  },
+  {
+    name: "Fré Cohen",
+    years: "1903–1943",
+    place: "Amsterdam",
+    mark: "SDAP. Stadsdrukkerij Amsterdam.",
+    work: {
+      src: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Cohen_fre_sdap_nvv_poster_1926.png",
+      alt: "SDAP / NVV poster, 1926",
+    },
   },
   {
     name: "Otto Treumann",
