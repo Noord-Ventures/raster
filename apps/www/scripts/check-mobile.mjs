@@ -213,4 +213,4 @@ if (/toast|Toaster|rs-toast/.test(block)) {
   fail("Copy must confirm on the control, not via toast");
 }
 
-console.log("Phone chrome: 44pt hits, safe-area, stacked TOC, copy control.\n");
+console.log("Phone chrome: 44pt hits, safe-area, stacked TOC, copy control.");
