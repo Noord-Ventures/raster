@@ -32,6 +32,11 @@
     "n07"
     "n08"
     "n09"
+    "n10"
+    "n11"
+    "n12"
+    "n13"
+    "n14"
     "faq"
     "colo";
   grid-auto-rows: minmax(204px, auto);
@@ -89,6 +94,11 @@
 .field-cell-n07 { grid-area: n07; }
 .field-cell-n08 { grid-area: n08; }
 .field-cell-n09 { grid-area: n09; }
+.field-cell-n10 { grid-area: n10; }
+.field-cell-n11 { grid-area: n11; }
+.field-cell-n12 { grid-area: n12; }
+.field-cell-n13 { grid-area: n13; }
+.field-cell-n14 { grid-area: n14; }
 .field-cell-mod { grid-area: mod; }
 .field-cell-hair { grid-area: hair; }
 .field-cell-flush { grid-area: flush; }
@@ -221,6 +231,42 @@
   min-width: 32px;
   min-height: 32px;
   margin-top: 6px;
+}
+
+.field-cell-has-work {
+  padding: 0;
+  gap: 0;
+  min-height: 408px;
+  justify-content: flex-end;
+}
+
+.field-work {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 204px;
+  overflow: hidden;
+}
+
+.field-work img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.field-matter {
+  padding: 20px;
+  background: var(--bg);
+  border-top: 1px solid var(--grid-line);
+}
+
+.field-matter .field-kicker,
+.field-matter .field-name,
+.field-matter .field-mark {
+  max-width: none;
 }
 
 .field-spec {
@@ -395,7 +441,10 @@
       "n03 n04"
       "n05 n06"
       "n07 n08"
-      "n09 faq"
+      "n09 n10"
+      "n11 n12"
+      "n13 n14"
+      "faq faq"
       "colo colo";
   }
 }
@@ -418,7 +467,10 @@
       "n03 n03 n04 n04"
       "n05 n05 n06 n06"
       "n07 n07 n08 n08"
-      "n09 n09 faq faq"
+      "n09 n09 n10 n10"
+      "n11 n11 n12 n12"
+      "n13 n13 n14 n14"
+      "faq faq faq faq"
       "colo colo colo colo";
   }
 }
@@ -438,7 +490,9 @@
       "n01 n01 n02 n02 n03 n03"
       "n04 n04 n05 n05 n06 n06"
       "n07 n07 n08 n08 n09 n09"
-      "faq faq faq colo colo colo";
+      "n10 n10 n11 n11 n12 n12"
+      "n13 n13 n14 n14 faq faq"
+      "colo colo colo colo colo colo";
   }
 }
 
