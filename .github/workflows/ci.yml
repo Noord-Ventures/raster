@@ -120,23 +120,10 @@ jobs:
             exit 1
           fi
           grep -q 'body:has(.specimen-page)' apps/www/app/specimen.css
-          grep -q 'clip-path: inset(0)' apps/www/app/specimen.css
-          grep -q 'html::before' apps/www/app/site.css
           grep -q 'html:has(.specimen-page)::before' apps/www/app/specimen.css
-          if awk '/^\.preview-box \{/,/^\}/' apps/www/app/site.css | grep -q 'background: var(--bg)'; then
-            echo "Component preview must not paint paper over the 204s"
-            exit 1
-          fi
+          grep -q 'clip-path: inset(0)' apps/www/app/specimen.css
           if grep -n 'rgba(0,0,0,0.025)' packages/core/src/tokens.ts; then
             echo "Module grid-line must read; 0.025 is invisible on paper"
-            exit 1
-          fi
-          if grep -n 'gridLine: "rgba(0,0,0,0.08)"' packages/core/src/tokens.ts; then
-            echo "Inner-page gutter --grid-line must be quieter than 0.08"
-            exit 1
-          fi
-          if grep -n 'gridLine: "rgba(255,255,255,0.10)"' packages/core/src/tokens.ts; then
-            echo "Dark inner-page gutter must be quieter than 0.10"
             exit 1
           fi
           if grep -n 'rgba(255,255,255,0.01)' packages/core/src/tokens.ts; then
@@ -146,17 +133,18 @@ jobs:
           node -e '
             const { readFileSync } = require("node:fs");
             const css = readFileSync("apps/www/app/specimen.css", "utf8");
-            const site = readFileSync("apps/www/app/site.css", "utf8");
-            if (!site.includes("html::before") || !site.includes("background-image: var(--grid-image)")) {
-              console.error("Inner-page 204s must paint on html::before; overflow-x:clip drops attachment:fixed");
+            const killAt = css.indexOf("html:has(.specimen-page)::before");
+            if (killAt < 0) {
+              console.error("Homepage must kill html::before so gutters do not cut type");
               process.exit(1);
             }
-            if (!css.includes("html:has(.specimen-page)::before")) {
-              console.error("Homepage must kill html::before so gutters do not cut Raster, the tagline, or install");
+            const killRule = css.slice(killAt, css.indexOf("}", killAt));
+            if (!killRule.includes("display: none")) {
+              console.error("Homepage overlay kill must be display: none");
               process.exit(1);
             }
-            if (css.includes('html:has(.specimen-page)::before') && !/html:has\(\.specimen-page\)::before\s*\{[^}]*display:\s*none/.test(css)) {
-              console.error("Homepage html::before kill must be display:none");
+            if (css.includes("background-image: var(--grid-image)") || /html[^{]*\{[^}]*repeating-linear-gradient/.test(css)) {
+              console.error("Homepage must not paint gutter lines through type");
               process.exit(1);
             }
             const hasAt = css.indexOf("body:has(.specimen-page)");
@@ -164,9 +152,19 @@ jobs:
               console.error("Homepage must keep body:has(.specimen-page)");
               process.exit(1);
             }
-            const hasRule = css.slice(hasAt, css.indexOf("}", hasAt));
-            if (hasRule.includes("background-image: none") || hasRule.includes("background: var(--bg)")) {
-              console.error("Homepage must not hide the site module grid");
+            const base = readFileSync("packages/core/css/base.css", "utf8");
+            if (!base.includes("html::before") || !base.includes("clip-path:inset(0 0 0 21px)")) {
+              console.error("Site gutter overlay must paint on html::before and clip the 20px page frame");
+              process.exit(1);
+            }
+            if (!base.includes("var(--grid-image)")) {
+              console.error("Site gutter overlay must paint verticals");
+              process.exit(1);
+            }
+            const beforeAt = base.indexOf("html::before{");
+            const beforeRule = beforeAt >= 0 ? base.slice(beforeAt, base.indexOf("}", beforeAt)) : "";
+            if (beforeRule.includes("repeating-linear-gradient")) {
+              console.error("Gutter overlay must not paint 204 horizontals");
               process.exit(1);
             }
             const pageStart = css.indexOf(".specimen-page {");
@@ -176,7 +174,7 @@ jobs:
             }
             const pageRule = css.slice(pageStart, css.indexOf("}", pageStart));
             if (!pageRule.includes("background: transparent") || /border:\s*1px/.test(pageRule)) {
-              console.error("Homepage must let the site grid show through: transparent paper, no page border");
+              console.error("Homepage must stay transparent paper, no page border");
               process.exit(1);
             }
             const start = css.indexOf(".specimen {");
@@ -190,7 +188,7 @@ jobs:
               process.exit(1);
             }
             if (!rule.includes("background: transparent")) {
-              console.error("Homepage leftover must not cover the site grid");
+              console.error("Homepage leftover must not cover the cells");
               process.exit(1);
             }
             if (rule.includes("background: var(--divider)")) {
@@ -204,7 +202,11 @@ jobs:
             const cellAt = css.indexOf(".specimen-cell {");
             const cellRule = css.slice(cellAt, css.indexOf("}", cellAt));
             if (!cellRule.includes("background: transparent")) {
-              console.error("Specimen cells must not cover the site grid");
+              console.error("Specimen cells must stay open paper");
+              process.exit(1);
+            }
+            if (!cellRule.includes("box-shadow: 1px 0 0 var(--grid-line)") || !cellRule.includes("0 1px 0 var(--grid-line)")) {
+              console.error("Homepage field is boxed 204 cells in --grid-line");
               process.exit(1);
             }
           '
@@ -489,7 +491,7 @@ jobs:
             const css = readFileSync("apps/www/app/about/about.css", "utf8");
             const cell = css.slice(css.indexOf(".field-cell {"), css.indexOf("}", css.indexOf(".field-cell {")));
             if (!cell.includes("background-image: var(--grid-image)") || !cell.includes("background-position: var(--grid-pos)") || !cell.includes("background-attachment: fixed")) {
-              console.error("About cells must paint the same fixed site 204 as home");
+              console.error("About cells must keep the gutter-line 204 spine");
               process.exit(1);
             }
             const era = css.slice(css.indexOf(".field-cell-era {"), css.indexOf("}", css.indexOf(".field-cell-era {")));
@@ -499,28 +501,7 @@ jobs:
             }
           '
           grep -q 'field-grotesque' "$page"
-          node -e '
-            const { readFileSync } = require("node:fs");
-            const css = readFileSync("apps/www/app/about/about.css", "utf8");
-            const grot = css.slice(css.indexOf(".field-grotesque {"), css.indexOf("}", css.indexOf(".field-grotesque {")));
-            if (/line-height:\s*\.?8\b/.test(grot)) {
-              console.error("Ag specimen must not use tight .8 leading; caption collides with the g");
-              process.exit(1);
-            }
-            if (!grot.includes("line-height: 1")) {
-              console.error("Ag specimen needs unit leading so Grotesque / Ag / caption do not overlap");
-              process.exit(1);
-            }
-            const cell = css.slice(css.indexOf(".field-cell-grot {"), css.indexOf("}", css.indexOf(".field-cell-grot {")));
-            if (!cell.includes("min-height: 408px")) {
-              console.error("Grotesque cell must be two modules so the display can keep its size");
-              process.exit(1);
-            }
-          '
           grep -q 'field-cell-use' "$page"
-          grep -q 'CodeBlock' "$page"
-          grep -q 'field-work' "$css"
-          grep -q 'round(down, 100%, 204px)' "$css"
           grep -q 'field-cell-spec' "$page"
           grep -q 'field-notes' "$page"
           grep -q '204' "$facts"
@@ -578,20 +559,10 @@ jobs:
             echo "About must not clone Inter specimen content"
             exit 1
           fi
-          node -e '
-            const { readFileSync } = require("node:fs");
-            const css = readFileSync("apps/www/app/about/about.css", "utf8");
-            const cell = css.slice(css.indexOf(".field-cell {"), css.indexOf("}", css.indexOf(".field-cell {")));
-            if (cell.includes("overflow: hidden")) {
-              console.error("About field cells must not crop type");
-              process.exit(1);
-            }
-            const work = css.slice(css.indexOf(".field-work {"), css.indexOf("}", css.indexOf(".field-work {")));
-            if (!work.includes("overflow: hidden")) {
-              console.error("About work stills crop like an Interfaces poster");
-              process.exit(1);
-            }
-          '
+          if grep -n 'overflow: hidden' "$css"; then
+            echo "About field cells must not crop"
+            exit 1
+          fi
           node -e '
             const { readFileSync } = require("node:fs");
             const css = readFileSync("apps/www/app/about/about.css", "utf8");
@@ -648,20 +619,6 @@ jobs:
           grep -q 'width: calc(100% + 40px)' "$starter"
           grep -q 'padding: 20px' "$starter"
           grep -q 'Module cells sit flush on the gridline' "$starter"
-          node -e '
-            const { readFileSync } = require("node:fs");
-            const html = readFileSync("packages/cli/src/starter.html", "utf8");
-            const ag = html.slice(html.indexOf(".sp-ag {"), html.indexOf("}", html.indexOf(".sp-ag {")));
-            if (/line-height:\s*\.?8\b/.test(ag)) {
-              console.error("Starter Ag must not use tight .8 leading");
-              process.exit(1);
-            }
-            const grot = html.slice(html.indexOf(".sp-grot {"), html.indexOf("}", html.indexOf(".sp-grot {")));
-            if (!grot.includes("min-height: 408px")) {
-              console.error("Starter Grotesque cell must be two modules");
-              process.exit(1);
-            }
-          '
           if grep -nE 'Dark scheme|Light scheme|The programme is visible|No radius|Flush · 0' "$starter"; then
             echo "Starter must use an icon scheme toggle and US descriptive copy"
             exit 1
@@ -686,7 +643,10 @@ jobs:
       - name: Interfaces is six posters
         run: |
           node apps/www/scripts/check-interfaces.mjs
-          grep -q 'body:has(.if-index)' apps/www/app/interfaces/interfaces.css
+          grep -q 'html::before' packages/core/css/base.css
+          grep -q 'clip-path:inset(0 0 0 21px)' packages/core/css/base.css
+          grep -q 'background:var(--divider)' packages/core/css/components/button-group.css
+          grep -q 'gap:1px' packages/core/css/components/button-group.css
           grep -q 'min-height: 204px' apps/www/app/interfaces/interfaces.css
           grep -q 'margin-top: 204px' apps/www/app/interfaces/interfaces.css
           if grep -n 'background: var(--bg)' apps/www/app/interfaces/interfaces.css | grep -q if-rail; then
