@@ -3,7 +3,7 @@
   "name": "spinner",
   "type": "registry:component",
   "title": "Spinner",
-  "description": "Hairline ring. Stops under prefers-reduced-motion.",
+  "description": "16px 1px ring. Animation stops when prefers-reduced-motion is on.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"
@@ -11,7 +11,7 @@
   "files": [
     {
       "path": "raster/spinner.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {\n  label?: string;\n}\n\n/** Hairline ring. Stops under prefers-reduced-motion. */\nexport function Spinner({ label = \"Loading\", className, ...props }: SpinnerProps) {\n  return <span role=\"status\" aria-label={label} className={cx(\"rs-spinner\", className)} {...props} />;\n}\n",
+      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {\n  label?: string;\n}\n\n/** Hairline ring. Stops under prefers-reduced-motion. */\nexport function Spinner({ label = \"Loading\", className, ...props }: SpinnerProps) {\n  return (\n    <span role=\"status\" aria-label={label} className={cx(\"rs-spinner\", className)} {...props}>\n      <svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" aria-hidden=\"true\">\n        <circle\n          cx=\"8\"\n          cy=\"8\"\n          r=\"6.5\"\n          stroke=\"currentColor\"\n          strokeWidth=\"1\"\n          strokeLinecap=\"butt\"\n          strokeLinejoin=\"miter\"\n          vectorEffect=\"non-scaling-stroke\"\n          strokeDasharray=\"28 13\"\n        />\n      </svg>\n    </span>\n  );\n}\n",
       "type": "registry:component",
       "target": "components/raster/spinner.tsx"
     },
@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/spinner.css",
-      "content": "/* ── Spinner: a hairline ring. Motion stops under reduced-motion ── */\n.rs-spinner{display:inline-block;width:16px;height:16px;border:1.5px solid var(--divider);border-top-color:var(--text);border-radius:0;animation:rs-spin .7s linear infinite;vertical-align:middle}\n@keyframes rs-spin{to{transform:rotate(360deg)}}\n",
+      "content": "/* ── Spinner: 1px currentColor hairline ring. Raster icon law. ── */\n.rs-spinner{display:inline-flex;width:16px;height:16px;color:var(--text);vertical-align:middle}\n.rs-spinner svg{display:block;width:16px;height:16px;animation:rs-spin .7s linear infinite}\n@keyframes rs-spin{to{transform:rotate(360deg)}}\n",
       "type": "registry:file",
       "target": "styles/raster/spinner.css"
     }
@@ -34,7 +34,7 @@
       "classes": [
         "rs-spinner"
       ],
-      "snippet": "<span class=\"rs-spinner\" role=\"status\" aria-label=\"Loading\"></span>",
+      "snippet": "<span class=\"rs-spinner\" role=\"status\" aria-label=\"Loading\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"6.5\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\" stroke-dasharray=\"28 13\" vector-effect=\"non-scaling-stroke\"/></svg></span>",
       "cssOnly": false,
       "registryDependencies": []
     }

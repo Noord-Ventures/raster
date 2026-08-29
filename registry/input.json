@@ -3,7 +3,7 @@
   "name": "input",
   "type": "registry:component",
   "title": "Input",
-  "description": "Quiet field: hairline border, ink focus, label above at 12px.",
+  "description": "Text field. 1px border, ink focus, 12px label above.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

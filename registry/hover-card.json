@@ -3,7 +3,7 @@
   "name": "hover-card",
   "type": "registry:component",
   "title": "Hover card",
-  "description": "Preview panel on hover or keyboard focus. CSS only.",
+  "description": "Preview panel on hover and keyboard focus.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

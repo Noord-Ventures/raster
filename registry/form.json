@@ -3,7 +3,7 @@
   "name": "form",
   "type": "registry:component",
   "title": "Form",
-  "description": "Fields stacked on the grid; one primary action at the end.",
+  "description": "Stacked fields with one primary action at the end.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

@@ -3,7 +3,7 @@
   "name": "radio",
   "type": "registry:component",
   "title": "Radio",
-  "description": "One choice; the dot is ink.",
+  "description": "Single-choice control. Selected dot is ink.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

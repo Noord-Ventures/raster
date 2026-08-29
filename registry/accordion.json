@@ -3,7 +3,7 @@
   "name": "accordion",
   "type": "registry:component",
   "title": "Accordion",
-  "description": "Native <details> rows on hairlines. The name attribute keeps one item open at a time; no JavaScript.",
+  "description": "Native details rows on 1px rules. Shared name keeps one item open.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

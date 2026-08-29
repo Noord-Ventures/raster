@@ -1,4 +1,4 @@
-/* Wall. A social network. Faces in the rail. Edge-to-edge dividers. */
+/* Wall. A social feed. People in the rail. Posts in the measure. */
 
 .sc-wall {
   height: 100%;
@@ -30,7 +30,6 @@
   font-weight: 600;
   color: var(--text-secondary);
 }
-.sc-wall-post,
 .sc-wall-person {
   appearance: none;
   display: grid;
@@ -40,7 +39,6 @@
   width: 100%;
   border: 0;
   border-bottom: 1px solid var(--divider);
-  border-left: 2px solid transparent;
   background: transparent;
   color: var(--text);
   text-align: left;
@@ -48,29 +46,25 @@
   padding: 10px 20px;
   cursor: pointer;
   font-family: inherit;
-  transition: color var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease);
+  transition: color var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease);
 }
-.sc-wall-post span,
 .sc-wall-person span,
-.sc-wall-reply span,
-.sc-wall-who span {
+.sc-wall-note span {
   display: grid;
   gap: 2px;
   min-width: 0;
 }
-.sc-wall-post b,
 .sc-wall-person b,
-.sc-wall-reply b,
-.sc-wall-who b,
-.sc-wall-card b {
+.sc-wall-note b,
+.sc-wall-face b,
+.sc-wall-who b {
   font-weight: 600;
   font-size: 13px;
   letter-spacing: -0.01em;
 }
-.sc-wall-post i,
 .sc-wall-person i,
-.sc-wall-who i,
-.sc-wall-card i {
+.sc-wall-face i,
+.sc-wall-who i {
   font-style: normal;
   font-size: 12px;
   font-weight: 500;
@@ -79,86 +73,97 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.sc-wall-post[aria-current="true"],
 .sc-wall-person[aria-current="true"] {
   color: var(--text);
+  font-weight: 600;
   background: color-mix(in srgb, var(--text) 7%, transparent);
-  border-left-color: var(--text);
 }
 
-.sc-wall-thread {
+.sc-wall-feed {
   min-width: 0;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden;
 }
 .sc-wall-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
   min-height: 48px;
   padding: 0 16px;
   border-bottom: 1px solid var(--divider);
+  font-size: 13px;
+  font-weight: 600;
 }
-.sc-wall-who {
+.sc-wall-head p { margin: 0; }
+.sc-wall-stream {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  column-count: 2;
+  column-gap: 12px;
+  padding: 12px;
+}
+.sc-wall-card {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  overflow: hidden;
+}
+.sc-wall-card.is-on { background: color-mix(in srgb, var(--text) 5%, var(--bg)); }
+.sc-wall-open {
   appearance: none;
   display: grid;
-  grid-template-columns: 28px minmax(0, 1fr);
-  gap: 10px;
-  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0 0 12px;
   border: 0;
   background: transparent;
   color: inherit;
   text-align: left;
   cursor: pointer;
   font-family: inherit;
-  padding: 0;
 }
-.sc-wall-lead {
-  padding: 0 0 16px;
-  border-bottom: 1px solid var(--divider);
-}
-.sc-wall-lead img {
+.sc-wall-open img {
   display: block;
   width: 100%;
-  height: 180px;
+  height: auto;
   object-fit: cover;
   border-radius: 0;
 }
-.sc-wall-lead p {
-  margin: 16px 16px 0;
-  max-width: 42ch;
-  font-size: 15px;
+.sc-wall-who {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px 0;
+}
+.sc-wall-open p {
+  margin: 0;
+  padding: 0 12px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.01em;
-  line-height: 1.5;
+  line-height: 1.45;
 }
+.sc-wall-open em,
 .sc-wall-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--text-secondary);
-  font-size: 12px !important;
-  font-weight: 600 !important;
 }
-.sc-wall-replies { padding: 8px 0; }
-.sc-wall-reply {
-  appearance: none;
-  display: grid;
-  grid-template-columns: 28px minmax(0, 1fr);
-  gap: 10px;
-  width: 100%;
-  padding: 10px 16px;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
-  font: 500 13px/1.45 inherit;
-  transition: background-color var(--duration-snap) var(--ease);
-}
-.sc-wall-reply:hover { background: color-mix(in srgb, var(--text) 4%, transparent); }
 .sc-wall-ghost {
   appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   height: 28px;
   padding: 0 10px;
   border: 1px solid var(--divider);
@@ -172,12 +177,26 @@
 .sc-wall-ghost:hover { border-color: var(--text); }
 .sc-wall-inspect { width: 204px; padding: 16px 20px; display: grid; gap: 12px; }
 .sc-wall-inspect p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--text-secondary); }
-.sc-wall-card {
+.sc-wall-face {
   display: grid;
   gap: 8px;
   justify-items: start;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--divider);
+}
+.sc-wall-note {
+  appearance: none;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: 500 13px/1.45 inherit;
 }
 
 @media (max-width: 900px) {
@@ -185,21 +204,19 @@
   .sc-wall-rail {
     border-right: 0;
     border-bottom: 1px solid var(--divider);
-    max-height: 180px;
+    max-height: 160px;
   }
+  .sc-wall-stream { column-count: 1; }
   .if-inspect.is-open { width: 100%; border-left: 0; border-top: 1px solid var(--divider); }
   .sc-wall-inspect { width: 100%; }
 }
 
 @media (max-width: 640px) {
-  .sc-wall-post,
   .sc-wall-person,
-  .sc-wall-reply { min-height: 44px; font-size: 16px; }
+  .sc-wall-open { min-height: 44px; font-size: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sc-wall-post,
   .sc-wall-person,
-  .sc-wall-reply,
   .sc-wall-ghost { transition: none; }
 }

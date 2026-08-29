@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
 
 type Role = "you" | "line";
@@ -8,9 +9,9 @@ type Msg = { id: string; role: Role; text: string; fresh?: boolean };
 type Inspect = { kind: "line"; id: string } | { kind: "settings" } | null;
 
 const CHATS = [
-  { id: "brief", title: "Tighten the brief", preview: "Two sentences, same claim.", when: "Now" },
-  { id: "press", title: "Press run 14", preview: "Keep the weeks under the fee.", when: "Today" },
-  { id: "invoice", title: "Invoice note", preview: "The number on the cover.", when: "Yesterday" },
+  { id: "brief", title: "Tighten the brief", preview: "Two sentences, same claim.", when: "Now", icon: "quote" as const },
+  { id: "press", title: "Press run 14", preview: "Keep the weeks under the fee.", when: "Today", icon: "printer" as const },
+  { id: "invoice", title: "Invoice note", preview: "The number on the cover.", when: "Yesterday", icon: "receipt" as const },
 ] as const;
 
 const STARTED: Record<string, Msg[]> = {
@@ -62,7 +63,7 @@ export function Board() {
   const [pending, setPending] = React.useState(false);
   const [inspect, setInspect] = React.useState<Inspect>(null);
   const end = React.useRef<HTMLDivElement>(null);
-  const box = React.useRef<HTMLTextAreaElement>(null);
+  const box = React.useRef<HTMLInputElement>(null);
   const piece = CHATS.find((item) => item.id === chat)?.title ?? "New chat";
   const looked = inspect?.kind === "line" ? messages.find((msg) => msg.id === inspect.id) : null;
 
@@ -111,10 +112,14 @@ export function Board() {
           <Brand slug="line" title="Line" />
           <p className="sc-ai-voice">The next line</p>
         </div>
-        <button type="button" className="sc-ai-new" onClick={fresh}>
+        <button type="button" className="rs-btn-ghost sc-ai-new" onClick={fresh}>
+          <Icon name="plus" size={16} />
           New chat
         </button>
-        <p className="sc-ai-label">Chats</p>
+        <p className="sc-ai-label if-ico-row">
+          <Icon name="inbox" size={12} />
+          Chats
+        </p>
         <div className="sc-ai-chats">
           {CHATS.map((item) => (
             <button
@@ -124,9 +129,15 @@ export function Board() {
               aria-current={chat === item.id}
               onClick={() => openChat(item.id)}
             >
-              <span className="sc-ai-chat-title">{item.title}</span>
+              <span className="sc-ai-chat-title">
+                <Icon name={item.icon} size={16} />
+                {item.title}
+              </span>
               <span className="sc-ai-chat-preview">{item.preview}</span>
-              <span className="sc-ai-chat-when">{item.when}</span>
+              <span className="sc-ai-chat-when if-ico-row">
+                <Icon name="clock" size={12} />
+                {item.when}
+              </span>
             </button>
           ))}
         </div>
@@ -134,13 +145,17 @@ export function Board() {
 
       <section className="sc-ai-stage" aria-label="Chat">
         <header className="sc-ai-head">
-          <h1>{piece}</h1>
+          <h1 className="if-ico-row">
+            <Icon name="message" size={16} />
+            {piece}
+          </h1>
           <button
             type="button"
             className="sc-ai-gear"
             aria-pressed={inspect?.kind === "settings"}
             onClick={() => setInspect((cur) => (cur?.kind === "settings" ? null : { kind: "settings" }))}
           >
+            <Icon name="sliders" size={16} />
             Settings
           </button>
         </header>
@@ -152,6 +167,7 @@ export function Board() {
                 <div className="sc-ai-hints">
                   {HINTS.map((hint) => (
                     <button key={hint} type="button" className="sc-ai-hint" onClick={() => send(hint)}>
+                      <Icon name="quote" size={12} />
                       {hint}
                     </button>
                   ))}
@@ -177,6 +193,7 @@ export function Board() {
                         )
                       }
                     >
+                      <Icon name="expand" size={12} />
                       Open line
                     </button>
                   </article>
@@ -184,7 +201,8 @@ export function Board() {
               )
             )}
             {pending ? (
-              <p className="sc-ai-pending" aria-live="polite">
+              <p className="sc-ai-pending if-ico-row" aria-live="polite">
+                <Icon name="activity" size={12} />
                 Writing
               </p>
             ) : null}
@@ -199,21 +217,18 @@ export function Board() {
               send();
             }}
           >
-            <textarea
+            <Icon name="quote" size={16} />
+            <input
               ref={box}
-              rows={1}
+              type="text"
               value={draft}
               placeholder="The next line"
               aria-label="Line"
+              autoComplete="off"
               onChange={(event) => setDraft(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" && !event.shiftKey) {
-                  event.preventDefault();
-                  send();
-                }
-              }}
             />
             <button type="submit" className="sc-ai-send" disabled={!draft.trim() || pending}>
+              <Icon name="send" size={16} />
               Send
             </button>
           </form>
@@ -224,14 +239,29 @@ export function Board() {
         <div className="sc-ai-inspect">
           {inspect?.kind === "settings" ? (
             <div key="settings" className="sc-fresh">
-              <h2>Settings</h2>
-              <p>Model · local</p>
-              <p>Voice · the next line</p>
-              <p>No live model. Replies stay on this sheet.</p>
+              <h2 className="if-ico-row">
+                <Icon name="sliders" size={16} />
+                Settings
+              </h2>
+              <p className="if-ico-row">
+                <Icon name="terminal" size={12} />
+                Model · local
+              </p>
+              <p className="if-ico-row">
+                <Icon name="quote" size={12} />
+                Voice · the next line
+              </p>
+              <p className="if-ico-row">
+                <Icon name="shield" size={12} />
+                No live model. Replies stay on this sheet.
+              </p>
             </div>
           ) : looked ? (
             <div key={looked.id} className="sc-fresh">
-              <h2>This line</h2>
+              <h2 className="if-ico-row">
+                <Icon name="expand" size={16} />
+                This line
+              </h2>
               <p>{looked.text}</p>
               <button
                 type="button"
@@ -240,6 +270,7 @@ export function Board() {
                   setInspect(null);
                 }}
               >
+                <Icon name="edit" size={12} />
                 Rewrite
               </button>
             </div>

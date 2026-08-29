@@ -3,7 +3,7 @@
   "name": "field",
   "type": "registry:component",
   "title": "Field",
-  "description": "Label, control, hint or error. The stack every form is made of.",
+  "description": "Label, control, and a hint or error stacked in one cell.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

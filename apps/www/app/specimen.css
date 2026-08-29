@@ -62,7 +62,7 @@ body:has(.specimen-page) {
   display: flex;
   flex-direction: column;
   overflow: visible;
-  box-shadow: 1px 0 0 var(--divider), 0 1px 0 var(--divider);
+  box-shadow: 1px 0 0 var(--grid-line), 0 1px 0 var(--grid-line);
 }
 .specimen-cell-face {
   grid-area: face;

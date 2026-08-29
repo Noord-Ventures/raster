@@ -11,6 +11,8 @@ export const rasterCategories = [
   "feedback",
   "surfaces",
   "content",
+  "icons",
+  "charts",
   "patterns",
 ] as const;
 

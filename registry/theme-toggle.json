@@ -3,7 +3,7 @@
   "name": "theme-toggle",
   "type": "registry:component",
   "title": "Theme toggle",
-  "description": "Fixed top right. Sun and moon slide on a track; the choice persists in localStorage.",
+  "description": "Icon that swaps moon and sun with the color scheme. Saved in localStorage.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"
@@ -11,7 +11,7 @@
   "files": [
     {
       "path": "raster/theme-toggle.tsx",
-      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { cx } from \"./cx\";\nimport { Icon } from \"./icon\";\n\nexport interface ThemeToggleProps\n  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, \"onChange\"> {\n  /** localStorage key the choice persists under. */\n  storageKey?: string;\n  onThemeChange?: (dark: boolean) => void;\n}\n\n/**\n * Fixed top right. Sun and moon slide on a track; the button sets\n * data-theme=\"dark\" on <html> and persists the choice.\n */\nexport function ThemeToggle({\n  storageKey = \"raster-theme\",\n  onThemeChange,\n  className,\n  onClick,\n  ...props\n}: ThemeToggleProps) {\n  const [dark, setDark] = React.useState<boolean | null>(null);\n\n  React.useEffect(() => {\n    setDark(document.documentElement.dataset.theme === \"dark\");\n  }, []);\n\n  const toggle = (e: React.MouseEvent<HTMLButtonElement>) => {\n    const next = document.documentElement.dataset.theme !== \"dark\";\n    if (next) document.documentElement.dataset.theme = \"dark\";\n    else delete document.documentElement.dataset.theme;\n    try {\n      localStorage.setItem(storageKey, next ? \"dark\" : \"light\");\n    } catch {\n      /* private mode */\n    }\n    setDark(next);\n    onThemeChange?.(next);\n    onClick?.(e);\n  };\n\n  return (\n    <button\n      type=\"button\"\n      className={cx(\"rs-theme-toggle\", className)}\n      aria-label=\"Toggle color scheme\"\n      onClick={toggle}\n      {...props}\n    >\n      <span className={cx(\"rs-theme-track\", dark && \"rs-theme-track-dark\")}>\n        <Icon name=\"moon\" size={16} className=\"rs-theme-moon\" />\n        <Icon name=\"sun\" size={16} className=\"rs-theme-sun\" />\n      </span>\n    </button>\n  );\n}\n",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { cx } from \"./cx\";\nimport { Icon } from \"./icon\";\n\nexport interface ThemeToggleProps\n  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, \"onChange\"> {\n  /** localStorage key the choice persists under. */\n  storageKey?: string;\n  onThemeChange?: (dark: boolean) => void;\n}\n\n/**\n * One mark. Moon on paper, sun on black. The button sets\n * data-theme=\"dark\" on <html> and persists the choice.\n * Apps pin it top-right; catalog and previews use the inline modifier.\n */\nexport function ThemeToggle({\n  storageKey = \"raster-theme\",\n  onThemeChange,\n  className,\n  onClick,\n  ...props\n}: ThemeToggleProps) {\n  const [dark, setDark] = React.useState<boolean | null>(null);\n\n  React.useEffect(() => {\n    setDark(document.documentElement.dataset.theme === \"dark\");\n  }, []);\n\n  const toggle = (e: React.MouseEvent<HTMLButtonElement>) => {\n    const next = document.documentElement.dataset.theme !== \"dark\";\n    if (next) document.documentElement.dataset.theme = \"dark\";\n    else delete document.documentElement.dataset.theme;\n    try {\n      localStorage.setItem(storageKey, next ? \"dark\" : \"light\");\n    } catch {\n      /* private mode */\n    }\n    setDark(next);\n    onThemeChange?.(next);\n    onClick?.(e);\n  };\n\n  return (\n    <button\n      type=\"button\"\n      className={cx(\"rs-theme-toggle\", className)}\n      aria-label=\"Toggle color scheme\"\n      onClick={toggle}\n      {...props}\n    >\n      <Icon name={dark ? \"sun\" : \"moon\"} size={16} className={dark ? \"rs-theme-sun\" : \"rs-theme-moon\"} />\n    </button>\n  );\n}\n",
       "type": "registry:component",
       "target": "components/raster/theme-toggle.tsx"
     },
@@ -35,7 +35,7 @@
     },
     {
       "path": "raster/styles/theme-toggle.css",
-      "content": "/* ── Theme toggle: fixed top right; the sun/moon pair slides on a track ── */\n.rs-theme-toggle{position:fixed;top:24px;right:20px;z-index:200;width:24px;height:24px;padding:4px;overflow:hidden;background:none;border:none;border-radius:var(--radius-sm);cursor:pointer;color:var(--text-secondary);outline:none;filter:drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))}\n.rs-theme-toggle:hover{color:var(--accent)}\n.rs-theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}\n.rs-theme-track{display:flex;flex-direction:column;align-items:center;gap:8px;transition:transform var(--duration) var(--ease)}\n.rs-theme-sun,.rs-theme-moon{width:16px;height:16px;flex-shrink:0;transition:opacity var(--duration) var(--ease)}\n.rs-theme-track .rs-theme-moon{opacity:1}\n.rs-theme-track .rs-theme-sun{opacity:.35}\n.rs-theme-track-dark{transform:translateY(-24px)}\n.rs-theme-track-dark .rs-theme-sun{opacity:1}\n.rs-theme-track-dark .rs-theme-moon{opacity:.35}\n@media(max-width:480px){.rs-theme-toggle{right:25px}}\n",
+      "content": "/* ── Theme toggle: one mark. Apps pin it top-right; inline sits in flow. ── */\n.rs-theme-toggle{position:fixed;top:24px;right:20px;z-index:200;width:24px;height:24px;padding:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:none;border:none;border-radius:0;cursor:pointer;color:var(--text-secondary);outline:none;filter:drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))}\n.rs-theme-toggle:hover{color:var(--accent)}\n.rs-theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}\n.rs-theme-sun,.rs-theme-moon{width:16px;height:16px;display:block;flex-shrink:0}\n.rs-theme-toggle-inline{position:relative;top:auto;right:auto;z-index:1;filter:none}\n@media(max-width:480px){.rs-theme-toggle:not(.rs-theme-toggle-inline){right:25px}}\n",
       "type": "registry:file",
       "target": "styles/raster/theme-toggle.css"
     }
@@ -45,12 +45,11 @@
       "category": "actions",
       "classes": [
         "rs-theme-toggle",
-        "rs-theme-track",
-        "rs-theme-track-dark",
+        "rs-theme-toggle-inline",
         "rs-theme-sun",
         "rs-theme-moon"
       ],
-      "snippet": "<button class=\"rs-theme-toggle\" aria-label=\"Toggle color scheme\"><span class=\"rs-theme-track\"><svg class=\"rs-theme-moon\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5\" vector-effect=\"non-scaling-stroke\"/></svg><svg class=\"rs-theme-sun\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><circle cx=\"8\" cy=\"8\" r=\"2.5\" vector-effect=\"non-scaling-stroke\"/><path d=\"M8 2 V3.5 M8 12.5 V14 M2 8 H3.5 M12.5 8 H14 M4.4 4.4 L5.3 5.3 M10.7 10.7 L11.6 11.6 M11.6 4.4 L10.7 5.3 M5.3 10.7 L4.4 11.6\" vector-effect=\"non-scaling-stroke\"/></svg></span></button>",
+      "snippet": "<button class=\"rs-theme-toggle rs-theme-toggle-inline\" aria-label=\"Toggle color scheme\"><svg class=\"rs-theme-moon\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5\" vector-effect=\"non-scaling-stroke\"/></svg></button>",
       "cssOnly": false,
       "registryDependencies": []
     }

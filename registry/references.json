@@ -3,7 +3,7 @@
   "name": "references",
   "type": "registry:component",
   "title": "References",
-  "description": "Inline citations, a numbered hairline list, and a cite box. Numerals hang in the gutter.",
+  "description": "Inline citations, a numbered 1px list, and a cite box. Numerals hang in the gutter.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

@@ -3,7 +3,7 @@
   "name": "concentric-radius",
   "type": "registry:component",
   "title": "Concentric radius",
-  "description": "Inner radius from Steve Ruiz's circular-corner fit, clamped at 0. Nested frames stay concentric. Raster chrome stays square.",
+  "description": "Nested frames. Inner radius is the circular-corner fit, clamped at 0.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

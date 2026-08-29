@@ -3,7 +3,7 @@
   "name": "dialog",
   "type": "registry:component",
   "title": "Dialog",
-  "description": "One question, two equal-sized actions, no third option.",
+  "description": "Modal with a title, body, and two equal actions.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

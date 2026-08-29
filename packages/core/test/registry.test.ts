@@ -2,7 +2,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { rasterComponents } from "../src/registry";
-import { validateRegistry } from "../src/schema";
+import { rasterCategories, validateRegistry } from "../src/schema";
 
 const cssDir = join(import.meta.dirname, "../css");
 const reactSrcDir = join(import.meta.dirname, "../../react/src");
@@ -17,6 +17,15 @@ const allClasses = new Set(rasterComponents.flatMap((c) => c.classes));
 describe("registry structure", () => {
   it("is well-formed", () => {
     expect(validateRegistry(rasterComponents)).toEqual([]);
+  });
+
+  it("lifts icons and charts into their own catalog sections", () => {
+    expect(rasterCategories).toContain("icons");
+    expect(rasterCategories).toContain("charts");
+    expect(rasterComponents.find((c) => c.name === "icons")?.category).toBe("icons");
+    for (const name of ["chart", "bar-chart", "area-chart", "scatter-chart", "donut", "histogram", "small-multiples"]) {
+      expect(rasterComponents.find((c) => c.name === name)?.category, name).toBe("charts");
+    }
   });
 
   it("lists every CSS file that exists on disk", () => {

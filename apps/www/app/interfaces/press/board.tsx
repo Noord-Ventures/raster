@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
 
 const WEEK = { sheets: 38, proofs: 12, press: 4, series: [12, 18, 15, 26, 24, 11, 9] };
@@ -42,11 +43,14 @@ export function Board() {
           <Brand slug="press" title="Press" />
           <p className="sc-dash-voice">On press</p>
         </div>
-        <p className="sc-dash-label">Floor</p>
+        <p className="sc-dash-label if-ico-row">
+          <Icon name="layout" size={12} />
+          Floor
+        </p>
         {[
-          { id: "overview", label: "Overview", meta: "Today" },
-          { id: "jobs", label: "Jobs", meta: "4" },
-          { id: "invoices", label: "Invoices", meta: "2" },
+          { id: "overview", label: "Overview", meta: "Today", icon: "layout" as const },
+          { id: "jobs", label: "Jobs", meta: "4", icon: "list" as const },
+          { id: "invoices", label: "Invoices", meta: "2", icon: "receipt" as const },
         ].map((item) => (
           <button
             key={item.id}
@@ -58,7 +62,10 @@ export function Board() {
               setSheet(false);
             }}
           >
-            <span>{item.label}</span>
+            <span className="if-ico-row">
+              <Icon name={item.icon} size={16} />
+              {item.label}
+            </span>
             <em>{item.meta}</em>
           </button>
         ))}
@@ -66,7 +73,10 @@ export function Board() {
 
       <section className="sc-dash-main">
         <div className="sc-dash-head">
-          <h1>{page === "overview" ? "Overview" : page === "jobs" ? "Jobs" : "Invoices"}</h1>
+          <h1 className="if-ico-row">
+            <Icon name={page === "overview" ? "layout" : page === "jobs" ? "list" : "receipt"} size={16} />
+            {page === "overview" ? "Overview" : page === "jobs" ? "Jobs" : "Invoices"}
+          </h1>
           <div className="sc-dash-range" role="group" aria-label="Range">
             {(["week", "month"] as const).map((item) => (
               <button
@@ -78,6 +88,7 @@ export function Board() {
                   setMetricFresh(true);
                 }}
               >
+                <Icon name={item === "week" ? "calendar" : "history"} size={12} />
                 {item === "week" ? "Week" : "Month"}
               </button>
             ))}
@@ -86,26 +97,29 @@ export function Board() {
 
         <div className="sc-dash-metrics">
           <article className="sc-dash-metric">
-            <p>Sheets this {range}</p>
+            <p className="if-ico-row"><Icon name="layers" size={12} /> Sheets this {range}</p>
             <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.sheets}</strong>
           </article>
           <article className="sc-dash-metric">
-            <p>Proofs</p>
+            <p className="if-ico-row"><Icon name="file-text" size={12} /> Proofs</p>
             <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.proofs}</strong>
           </article>
           <article className="sc-dash-metric">
-            <p>On press</p>
+            <p className="if-ico-row"><Icon name="printer" size={12} /> On press</p>
             <strong key={range} className={`sc-dash-spot${metricFresh ? " sc-fresh" : ""}`}>{data.press}</strong>
           </article>
         </div>
 
         <div className="sc-dash-split">
           <article className="sc-dash-card">
-            <h2>Throughput</h2>
+            <h2 className="if-ico-row"><Icon name="trending-up" size={12} /> Throughput</h2>
             <Line values={data.series} />
           </article>
-          <article className="sc-dash-card">
-            <h2>{page === "invoices" ? "Open invoices" : "Jobs"}</h2>
+          <article className="sc-dash-card sc-dash-jobs">
+            <h2 className="if-ico-row">
+              <Icon name={page === "invoices" ? "receipt" : "list"} size={12} />
+              {page === "invoices" ? "Open invoices" : "Jobs"}
+            </h2>
             {JOBS.map((item) => (
               <button
                 key={item.id}
@@ -118,10 +132,16 @@ export function Board() {
                   setSheet(false);
                 }}
               >
-                <span>
-                  {item.name}
-                  <br />
-                  <small>{item.city} · {item.weeks} weeks</small>
+                <span className="if-ico-row">
+                  <Icon
+                    name={item.state === "On press" ? "printer" : item.state === "Proof" ? "eye" : item.state === "Invoice" ? "receipt" : "edit"}
+                    size={16}
+                  />
+                  <span>
+                    {item.name}
+                    <br />
+                    <small>{item.city} · {item.weeks} weeks</small>
+                  </span>
                 </span>
                 <span>{item.state}</span>
               </button>
@@ -129,6 +149,7 @@ export function Board() {
             <div key={job} className="sc-dash-detail sc-fresh">
               <p>{selected.note}</p>
               <button type="button" onClick={() => setSheet(true)}>
+                <Icon name="file" size={12} />
                 Open sheet
               </button>
             </div>
@@ -140,9 +161,26 @@ export function Board() {
         <div className="sc-dash-inspect">
           {sheet ? (
             <div key={job} className="sc-fresh">
-              <h2>{selected.name}</h2>
+              <h2 className="if-ico-row">
+                <Icon name="file-text" size={16} />
+                {selected.name}
+              </h2>
               <p>{selected.sheet}</p>
-              <p>{selected.city} · {selected.weeks} weeks · {selected.state}</p>
+              <p className="if-ico-row">
+                <Icon name="map-pin" size={12} />
+                {selected.city}
+              </p>
+              <p className="if-ico-row">
+                <Icon name="calendar" size={12} />
+                {selected.weeks} weeks
+              </p>
+              <p className="if-ico-row">
+                <Icon
+                  name={selected.state === "On press" ? "printer" : selected.state === "Proof" ? "eye" : selected.state === "Invoice" ? "receipt" : "edit"}
+                  size={12}
+                />
+                {selected.state}
+              </p>
             </div>
           ) : null}
         </div>

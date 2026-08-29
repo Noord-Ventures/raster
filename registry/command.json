@@ -3,7 +3,7 @@
   "name": "command",
   "type": "registry:component",
   "title": "Command",
-  "description": "Command palette in a native <dialog>. Filter, arrows, enter.",
+  "description": "Command palette in a native dialog. Filter, arrows, enter.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

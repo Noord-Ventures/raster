@@ -3,7 +3,7 @@
   "name": "item",
   "type": "registry:component",
   "title": "Item",
-  "description": "A flush row. Title occupies the cell; meta trails.",
+  "description": "Flush row: title and description on the left, meta on the right.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

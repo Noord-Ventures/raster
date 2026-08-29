@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
 import { Face, type FaceId } from "../people";
 
@@ -11,114 +12,141 @@ type Post = {
   when: string;
   text: string;
   photo?: string;
+  ratio?: string;
   likes: number;
 };
+
+type Inspect = { kind: "post"; id: string } | { kind: "profile"; who: FaceId } | null;
 
 const FEED: Post[] = [
   {
     id: "m1",
-    who: "inez",
-    name: "Inez Veld",
+    who: "ilana",
+    name: "Ilana",
     when: "09:14",
     text: "The west window is the one that holds. North is just weather.",
     photo: "/interfaces/threads/press-sheet.jpg",
+    ratio: "4 / 5",
     likes: 12,
   },
   {
     id: "m2",
-    who: "karel",
-    name: "Karel Vos",
+    who: "aziez",
+    name: "Aziez",
     when: "09:02",
     text: "Paper first. Then the street. Then the room.",
     likes: 8,
   },
   {
     id: "m3",
-    who: "loes",
-    name: "Loes Hart",
+    who: "jenny",
+    name: "Jenny",
     when: "08:41",
     text: "I left a note on the third post. It is still there.",
     photo: "/interfaces/threads/posters.jpg",
+    ratio: "1 / 1",
     likes: 5,
   },
   {
     id: "m4",
-    who: "bram",
-    name: "Bram Nijk",
+    who: "christian",
+    name: "Christian",
     when: "08:12",
     text: "Morning stack. Registration holds.",
     likes: 3,
   },
+  {
+    id: "m5",
+    who: "katie",
+    name: "Katie",
+    when: "07:58",
+    text: "Cite hangs in the gutter. Leave the type on the sheet.",
+    photo: "/interfaces/threads/press-sheet.jpg",
+    ratio: "5 / 4",
+    likes: 7,
+  },
+  {
+    id: "m6",
+    who: "koen",
+    name: "Koen",
+    when: "07:40",
+    text: "A grid is a plan, not a decoration.",
+    likes: 9,
+  },
+  {
+    id: "m7",
+    who: "gianpiero",
+    name: "Gianpiero",
+    when: "07:11",
+    text: "The rail stays 184.",
+    photo: "/interfaces/threads/posters.jpg",
+    ratio: "3 / 4",
+    likes: 4,
+  },
 ];
 
 const PEOPLE: { id: FaceId; name: string; line: string }[] = [
-  { id: "inez", name: "Inez Veld", line: "On the west post" },
-  { id: "karel", name: "Karel Vos", line: "Paper first" },
-  { id: "loes", name: "Loes Hart", line: "Third post" },
-  { id: "bram", name: "Bram Nijk", line: "Quiet today" },
+  { id: "ilana", name: "Ilana", line: "On the west post" },
+  { id: "aziez", name: "Aziez", line: "Paper first" },
+  { id: "jenny", name: "Jenny", line: "Third post" },
+  { id: "christian", name: "Christian", line: "Quiet today" },
+  { id: "katie", name: "Katie", line: "On the sheet" },
+  { id: "koen", name: "Koen", line: "In the gutter" },
+  { id: "gianpiero", name: "Gianpiero", line: "On the rail" },
+  { id: "senka", name: "Senka", line: "At the desk" },
 ];
 
-const THREAD: Record<string, { who: FaceId; name: string; text: string }[]> = {
+const COMMENTS: Record<string, { who: FaceId; name: string; text: string }[]> = {
   m1: [
-    { who: "karel", name: "Karel Vos", text: "Which window?" },
-    { who: "inez", name: "Inez Veld", text: "West. Always west." },
-    { who: "loes", name: "Loes Hart", text: "I can see it from here." },
+    { who: "aziez", name: "Aziez", text: "Which window?" },
+    { who: "ilana", name: "Ilana", text: "West. Always west." },
+    { who: "jenny", name: "Jenny", text: "I can see it from here." },
   ],
   m2: [
-    { who: "inez", name: "Inez Veld", text: "Keep the hairline on the active tab only." },
-    { who: "bram", name: "Bram Nijk", text: "The rail stays 184." },
+    { who: "ilana", name: "Ilana", text: "Keep the hairline on the active tab only." },
+    { who: "christian", name: "Christian", text: "The rail stays 184." },
   ],
-  m3: [{ who: "karel", name: "Karel Vos", text: "Cite hangs in the gutter." }],
-  m4: [{ who: "loes", name: "Loes Hart", text: "Leave the crumb bar off the poster." }],
+  m3: [{ who: "aziez", name: "Aziez", text: "Cite hangs in the gutter." }],
+  m4: [{ who: "jenny", name: "Jenny", text: "Leave the crumb bar off the poster." }],
+  m5: [{ who: "koen", name: "Koen", text: "The number stays first." }],
+  m6: [{ who: "katie", name: "Katie", text: "Put the color on the field only." }],
+  m7: [{ who: "senka", name: "Senka", text: "One module. No second rail." }],
 };
 
 export function Board() {
   const [post, setPost] = React.useState("m1");
-  const [pane, setPane] = React.useState<"none" | "profile">("none");
-  const [who, setWho] = React.useState<FaceId>("inez");
+  const [inspect, setInspect] = React.useState<Inspect>(null);
   const item = FEED.find((row) => row.id === post) ?? FEED[0]!;
-  const person = PEOPLE.find((row) => row.id === who) ?? PEOPLE[0]!;
-  const replies = THREAD[post] ?? [];
+  const personId = inspect?.kind === "profile" ? inspect.who : item.who;
+  const person = PEOPLE.find((row) => row.id === personId) ?? PEOPLE[0]!;
+  const notes = COMMENTS[inspect?.kind === "post" ? inspect.id : post] ?? [];
+
+  function openPost(id: string) {
+    setPost(id);
+    setInspect({ kind: "post", id });
+  }
 
   function openProfile(id: FaceId) {
-    setWho(id);
-    setPane("profile");
+    setInspect({ kind: "profile", who: id });
   }
 
   return (
     <main className="if-board sc-wall" aria-label="Wall">
-      <aside className="sc-wall-rail" aria-label="Today">
+      <aside className="sc-wall-rail" aria-label="People">
         <div className="sc-wall-brand">
           <Brand slug="wall" title="Wall" />
           <p className="sc-wall-voice">On the wall</p>
         </div>
-        <p className="sc-wall-label">Today</p>
-        {FEED.map((row) => (
-          <button
-            key={row.id}
-            type="button"
-            className="sc-wall-post"
-            aria-current={post === row.id}
-            onClick={() => {
-              setPost(row.id);
-              setPane("none");
-              setWho(row.who);
-            }}
-          >
-            <Face who={row.who} />
-            <span>
-              <b>{row.name}</b>
-              <i>{row.text}</i>
-            </span>
-          </button>
-        ))}
-        <p className="sc-wall-label">People</p>
+        <p className="sc-wall-label if-ico-row">
+          <Icon name="users" size={12} />
+          People
+        </p>
         {PEOPLE.map((row) => (
           <button
             key={row.id}
             type="button"
             className="sc-wall-person"
-            aria-current={who === row.id && pane === "profile"}
+            aria-current={inspect?.kind === "profile" && inspect.who === row.id}
             onClick={() => openProfile(row.id)}
           >
             <Face who={row.id} />
@@ -130,50 +158,91 @@ export function Board() {
         ))}
       </aside>
 
-      <section className="sc-wall-thread" aria-label="Thread">
+      <section className="sc-wall-feed" aria-label="Feed">
         <header className="sc-wall-head">
-          <button type="button" className="sc-wall-who" onClick={() => openProfile(item.who)}>
-            <Face who={item.who} />
-            <span>
-              <b>{item.name}</b>
-              <i>
-                {item.when} · {replies.length} replies
-              </i>
-            </span>
-          </button>
-          <button type="button" className="sc-wall-ghost" onClick={() => openProfile(item.who)}>
-            Profile
-          </button>
+          <p className="if-ico-row">
+            <Icon name="rows" size={16} />
+            Today
+          </p>
         </header>
-        <article className="sc-wall-lead">
-          {item.photo ? <img src={item.photo} alt="" /> : null}
-          <p>{item.text}</p>
-          <p className="sc-wall-meta">{item.likes} likes · {replies.length} replies</p>
-        </article>
-        <div className="sc-wall-replies">
-          {replies.map((row) => (
-            <button key={row.text} type="button" className="sc-wall-reply" onClick={() => openProfile(row.who)}>
-              <Face who={row.who} />
-              <span>
-                <b>{row.name}</b>
-                {row.text}
-              </span>
-            </button>
+        <div className="sc-wall-stream">
+          {FEED.map((row) => (
+            <article key={row.id} className={`sc-wall-card${post === row.id && inspect?.kind === "post" ? " is-on" : ""}`}>
+              <button type="button" className="sc-wall-open" onClick={() => openPost(row.id)}>
+                {row.photo ? (
+                  <img src={row.photo} alt="" style={{ aspectRatio: row.ratio ?? "4 / 5" }} />
+                ) : null}
+                <span className="sc-wall-who">
+                  <Face who={row.who} />
+                  <b>{row.name}</b>
+                  <i className="if-ico-row">
+                    <Icon name="clock" size={12} />
+                    {row.when}
+                  </i>
+                </span>
+                <p>{row.text}</p>
+                <em className="sc-wall-meta">
+                  <span className="if-ico-row">
+                    <Icon name="thumbs-up" size={12} />
+                    {row.likes} likes
+                  </span>
+                  <span className="if-ico-row">
+                    <Icon name="message" size={12} />
+                    {(COMMENTS[row.id] ?? []).length} comments
+                  </span>
+                  {row.photo ? (
+                    <span className="if-ico-row">
+                      <Icon name="image" size={12} />
+                      Photo
+                    </span>
+                  ) : (
+                    <span className="if-ico-row">
+                      <Icon name="quote" size={12} />
+                      Note
+                    </span>
+                  )}
+                </em>
+              </button>
+            </article>
           ))}
         </div>
       </section>
 
-      <aside className={`if-inspect${pane === "profile" ? " is-open" : ""}`} aria-label="Profile">
-        {pane === "profile" ? (
+      <aside className={`if-inspect${inspect ? " is-open" : ""}`} aria-label={inspect?.kind === "profile" ? "Profile" : "Comments"}>
+        {inspect?.kind === "profile" ? (
           <div key={person.id} className="sc-wall-inspect sc-fresh">
-            <p className="sc-wall-label">Profile</p>
-            <div className="sc-wall-card">
+            <p className="sc-wall-label if-ico-row">
+              <Icon name="user" size={12} />
+              Profile
+            </p>
+            <div className="sc-wall-face">
               <Face who={person.id} size={48} />
               <b>{person.name}</b>
               <i>{person.line}</i>
             </div>
             <p>Posts on the wall stay in the street. A face is enough to find them again.</p>
-            <button type="button" className="sc-wall-ghost" onClick={() => setPane("none")}>
+            <button type="button" className="sc-wall-ghost" onClick={() => setInspect(null)}>
+              <Icon name="close" size={12} />
+              Close
+            </button>
+          </div>
+        ) : inspect?.kind === "post" ? (
+          <div key={item.id} className="sc-wall-inspect sc-fresh">
+            <p className="sc-wall-label if-ico-row">
+              <Icon name="message" size={12} />
+              Comments
+            </p>
+            {notes.map((row) => (
+              <button key={row.text} type="button" className="sc-wall-note" onClick={() => openProfile(row.who)}>
+                <Face who={row.who} />
+                <span>
+                  <b>{row.name}</b>
+                  {row.text}
+                </span>
+              </button>
+            ))}
+            <button type="button" className="sc-wall-ghost" onClick={() => setInspect(null)}>
+              <Icon name="close" size={12} />
               Close
             </button>
           </div>

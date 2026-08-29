@@ -3,7 +3,7 @@
   "name": "button",
   "type": "registry:component",
   "title": "Button",
-  "description": "Solid ink primary and hairline ghost. One primary per view. 40px tall; 36px small variant.",
+  "description": "Solid ink primary and 1px ghost. 40px tall; 36px small.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

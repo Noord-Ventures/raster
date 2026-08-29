@@ -3,7 +3,7 @@
   "name": "collapsible",
   "type": "registry:component",
   "title": "Collapsible",
-  "description": "A bare native <details>.",
+  "description": "Native details disclosure.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

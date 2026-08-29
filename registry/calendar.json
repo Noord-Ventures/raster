@@ -3,7 +3,7 @@
   "name": "calendar",
   "type": "registry:component",
   "title": "Calendar",
-  "description": "Month grid. Selected is ink; today is a hairline. Weeks start on Monday.",
+  "description": "Month grid. Selected day is ink; today is a 1px outline. Weeks start Monday.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

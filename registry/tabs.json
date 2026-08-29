@@ -3,7 +3,7 @@
   "name": "tabs",
   "type": "registry:component",
   "title": "Tabs",
-  "description": "One line of type. Hairline on the active tab only.",
+  "description": "Text tabs in one row. Active tab has a 1px underline.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

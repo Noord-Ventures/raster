@@ -3,7 +3,7 @@
   "name": "button-group",
   "type": "registry:component",
   "title": "Button group",
-  "description": "Flush joined actions. One hairline between.",
+  "description": "Joined ghost buttons with a 1px rule between.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

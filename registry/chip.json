@@ -3,7 +3,7 @@
   "name": "chip",
   "type": "registry:component",
   "title": "Mono chip",
-  "description": "Technical identifiers set in the mono stack with a mixed hairline.",
+  "description": "Mono identifier with a 1px mixed border.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

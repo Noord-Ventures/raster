@@ -4,17 +4,27 @@
    markup uses the rs- names. */
 
 /* ── Base ──
-   Raster owns the page: paper background, ink text, and the visible
-   204px module grid drawn behind everything. */
-html{scroll-behavior:smooth;font-size:16px;overflow-x:clip}
-body{
-  overflow-x:clip;
-  background-color:var(--bg);
+   Raster owns the page: paper on html, ink on body, and quiet
+   gutter verticals on html::before so overflow-x:clip cannot drop
+   them. */
+html{scroll-behavior:smooth;font-size:16px;overflow-x:clip;background-color:var(--bg)}
+html::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
   background-image:var(--grid-image);
-  background-size:var(--grid-size) 100vh;
+  background-size:var(--grid-size) 100%;
   background-repeat:repeat-x;
-  background-attachment:fixed;
-  background-position:var(--grid-pos);
+  background-position:var(--grid-pos)
+}
+@media(min-width:481px){html::before{clip-path:inset(0 0 0 21px)}}
+body{
+  position:relative;
+  z-index:1;
+  overflow-x:clip;
+  background-color:transparent;
   color:var(--text);
   font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
   font-weight:500;
@@ -444,16 +454,17 @@ table tr.rs-total-row td{font-weight:500;color:var(--text);border-top:2px solid 
     text-align:center;
   }
 
-  /* Stepper: 44pt marks, 16px names, more air. Already stacks at 640. */
-  .rs-steps{gap:20px}
+  /* Stepper: 44pt dots stay circles; hairlines still meet the marks. */
+  .rs-steps{gap:0}
   .rs-step{min-width:0;gap:6px}
   .rs-step-dot{
     width:var(--hit);
     height:var(--hit);
-    border-radius:0;
+    border-radius:50%;
     font-size:15px;
     margin-bottom:8px;
   }
+  .rs-step-line{top:calc(var(--hit) / 2);left:var(--hit)}
   .rs-step-name{font-size:var(--control-fs)}
   .rs-step-sub{font-size:13px}
 
@@ -711,6 +722,6 @@ table tr.rs-total-row td{font-weight:500;color:var(--text);border-top:2px solid 
 @media(prefers-reduced-motion:reduce){
   .rs-reveal,.rs-crumb-bar .bb-crumbs-demo,.rs-tip::after,.rs-hover-card-panel{transition:none}
   .rs-subscribed,.rs-toast{animation:none}
-  .rs-theme-track,.rs-theme-sun,.rs-theme-moon{transition:none}
-  .rs-spinner{animation:none;border-top-color:var(--text)}
+  .rs-theme-sun,.rs-theme-moon{transition:none}
+  .rs-spinner svg{animation:none}
 }

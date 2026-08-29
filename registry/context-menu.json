@@ -3,7 +3,7 @@
   "name": "context-menu",
   "type": "registry:component",
   "title": "Context menu",
-  "description": "Right-click menu at the pointer. Escape and outside clicks close it.",
+  "description": "Menu at the pointer on right-click. Escape and outside click close it.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

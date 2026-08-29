@@ -3,7 +3,7 @@
   "name": "scroll-area",
   "type": "registry:component",
   "title": "Scroll area",
-  "description": "Hidden scrollbar; feathered top and bottom edges.",
+  "description": "Overflow box with the scrollbar hidden and 20px feathers at the ends.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

@@ -1,7 +1,8 @@
-/* ── Carousel: native scroll snap; the platform owns the physics ── */
-.rs-carousel{position:relative}
-.rs-carousel-track{display:flex;gap:var(--gutter);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);padding:2px 12px}
+/* ── Carousel: native scroll snap; edges feather; slides are Raster chrome ── */
+.rs-carousel{position:relative;width:100%;max-width:100%}
+.rs-carousel-track{display:flex;gap:var(--gutter);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 28px,#000 calc(100% - 36px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 28px,#000 calc(100% - 36px),transparent 100%);padding:2px 0}
 .rs-carousel-track::-webkit-scrollbar{display:none}
 .rs-carousel-track>*{scroll-snap-align:start;flex-shrink:0}
+.rs-carousel-slide{box-sizing:border-box;width:140px;padding:14px;border:1px solid var(--divider);border-radius:var(--radius-sm);box-shadow:none;background:var(--bg)}
 .rs-carousel-nav{display:flex;gap:5px;margin-top:10px}
 @media(prefers-reduced-motion:reduce){.rs-carousel-track{scroll-behavior:auto}}

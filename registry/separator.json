@@ -3,7 +3,7 @@
   "name": "separator",
   "type": "registry:component",
   "title": "Separator",
-  "description": "A hairline, horizontal or vertical.",
+  "description": "1px rule, horizontal or vertical.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

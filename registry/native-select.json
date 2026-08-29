@@ -3,7 +3,7 @@
   "name": "native-select",
   "type": "registry:component",
   "title": "Native select",
-  "description": "The platform list. Raster chrome. No custom menu.",
+  "description": "Native select with Raster 1px chrome.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"
