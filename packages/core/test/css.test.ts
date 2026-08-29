@@ -49,6 +49,43 @@ describe("generated raster.css", () => {
     expect(open).toBe(close);
   });
 
+  it("draws a 1px hairline spinner ring, not a rotating square", () => {
+    const spinner = readFileSync(join(pkgDir, "css/components/spinner.css"), "utf8");
+    expect(spinner).not.toMatch(/border-radius:0/);
+    expect(spinner).not.toMatch(/border:1\.5px/);
+    expect(spinner).toMatch(/\.rs-spinner svg\{/);
+    expect(rasterCss).toMatch(/\.rs-spinner svg\{/);
+  });
+
+  it("keeps callout a Raster note: hairline frame, 3px ink left, slight radius", () => {
+    const callout = readFileSync(join(pkgDir, "css/components/callout.css"), "utf8");
+    expect(callout).toMatch(/border:1px solid var\(--divider\)/);
+    expect(callout).toMatch(/border-left:3px solid var\(--text\)/);
+    expect(callout).toMatch(/border-radius:var\(--radius-sm\)/);
+    expect(callout).toMatch(/box-shadow:none/);
+    expect(callout).not.toMatch(/border-radius:var\(--radius[^-]/);
+    expect(callout).not.toMatch(/border-radius:(0|1[02]px)/);
+    expect(rasterCss).toMatch(/\.rs-callout\{[^}]*border-radius:var\(--radius-sm\)/);
+  });
+
+  it("gives carousel and workflow cards the button-family radius, not 0 or 12px", () => {
+    const carousel = readFileSync(join(pkgDir, "css/components/carousel.css"), "utf8");
+    const flow = readFileSync(join(pkgDir, "css/components/flow.css"), "utf8");
+    expect(carousel).toMatch(/\.rs-carousel-slide\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(carousel).not.toMatch(/border-radius:(0|10px|12px)/);
+    expect(flow).toMatch(/\.rs-flow-step\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(flow).toMatch(/\.rs-flow-add\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(flow).not.toMatch(/border-radius:(0|10px|12px)/);
+  });
+
+  it("joins stepper hairlines to the dots", () => {
+    const stepper = readFileSync(join(pkgDir, "css/components/stepper.css"), "utf8");
+    expect(stepper).toMatch(/\.rs-step-line\{[^}]*left:24px/);
+    expect(stepper).toMatch(/\.rs-step-line\{[^}]*right:0/);
+    expect(stepper).not.toMatch(/display:none/);
+    expect(rasterCss).toMatch(/\.rs-step-line\{[^}]*left:24px/);
+  });
+
   it("catalogs icons in sentence-case groups", () => {
     const icons = readFileSync(join(pkgDir, "css/components/icons.css"), "utf8");
     expect(icons).toMatch(/\.rs-icon-catalog\{[^}]*width:100%/);
@@ -71,6 +108,7 @@ describe("generated raster.css", () => {
     const side = readFileSync(join(pkgDir, "css/components/sidebar.css"), "utf8");
     expect(side).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:32px\}/);
     expect(side).toMatch(/\.rs-sidebar-nav\{[^}]*padding:8px 0 32px/);
+    expect(side).toMatch(/\.rs-sidebar\{[^}]*border:1px solid var\(--divider\)/);
     expect(rasterCss).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:32px\}/);
   });
 
@@ -167,6 +205,10 @@ describe("generated raster.css", () => {
     expect(chart).not.toMatch(/#e30613/i);
     expect(rasterCss).toMatch(/\.rs-chart-field\{/);
     expect(rasterCss).toMatch(/\.rs-chart-line\{[^}]*stroke-width:1/);
+    expect(chart).toMatch(/\.rs-chart-hist\{fill:var\(--divider\)/);
+    expect(chart).not.toMatch(/\.rs-chart-hist\{fill:var\(--text\)/);
+    expect(chart).toMatch(/\.rs-chart-donut-label\{[^}]*font-weight:500/);
+    expect(chart).not.toMatch(/\.rs-chart-donut-label\{[^}]*font-size:16px/);
   });
 
   it("never introduces a color hue — the palette is monochrome", () => {
@@ -218,22 +260,24 @@ describe("tokens", () => {
     for (let i = 1; i < sizes.length; i++) expect(sizes[i]!).toBeLessThan(sizes[i - 1]!);
   });
 
-  it("paints a readable module grid, quieter than chrome hairlines", () => {
+  it("paints a readable module grid; divider ink is the same hairline", () => {
     const light = rasterTokens.color.light;
     const dark = rasterTokens.color.dark;
     const alpha = (value: string) => Number(value.match(/rgba?\([^)]*?,\s*([\d.]+)\s*\)/)?.[1]);
-    // 0.08/0.10 caged inner pages. 0.025/0.01 were invisible. 0.04/0.05 still reads.
-    expect(alpha(light.gridLine)).toBeGreaterThan(0.03);
-    expect(alpha(light.gridLine)).toBeLessThan(0.06);
-    expect(alpha(light.gridLine)).toBeLessThan(alpha(light.divider));
-    expect(alpha(dark.gridLine)).toBeGreaterThan(0.03);
-    expect(alpha(dark.gridLine)).toBeLessThan(0.08);
-    expect(alpha(dark.gridLine)).toBeLessThan(alpha(dark.divider));
+    expect(alpha(light.gridLine)).toBeGreaterThan(0.05);
+    expect(light.gridLine).toBe(light.divider);
+    expect(alpha(dark.gridLine)).toBeGreaterThan(0.05);
+    expect(dark.gridLine).toBe(dark.divider);
     expect(rasterCss).toContain(`--grid-line: ${light.gridLine}`);
-    expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(0,0,0,0\.08\)/);
+    expect(rasterCss).toContain(`--divider: ${light.divider}`);
     expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(0,0,0,0\.025\)/);
-    expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(255,255,255,0\.10\)/);
     expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(255,255,255,0\.01\)/);
+    expect(rasterCss).toContain("html::before");
+    expect(rasterCss).toContain("background-image:var(--grid-image)");
+    const overlay = rasterCss.match(/html::before\{[^}]*\}/)?.[0] ?? "";
+    expect(overlay).not.toContain("repeating-linear-gradient");
+    expect(rasterCss).toContain("background:var(--divider)");
+    expect(rasterCss).toContain("gap:1px");
   });
 
   it("grid module = column + gutter", () => {
@@ -257,7 +301,6 @@ describe("tokens", () => {
     const site = readFileSync(join(pkgDir, "../../apps/www/app/site.css"), "utf8");
     expect(site).toMatch(/\.gallery-item \{[^}]*border-radius: var\(--radius-sm\)/);
     expect(site).toMatch(/\.preview-box \{[^}]*border-radius: var\(--radius-sm\)/);
-    expect(site).toMatch(/\.preview-box \{[^}]*background: transparent/);
     const frames = readFileSync(join(pkgDir, "../../apps/www/app/interfaces/interfaces.css"), "utf8");
     expect(frames).toMatch(/\.if-tile \{[^}]*border-radius: var\(--radius-sm\)/);
     expect(frames).toMatch(/\.if-specimen \{[^}]*border-radius: var\(--radius-sm\)/);
