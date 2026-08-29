@@ -1,11 +1,10 @@
 @import "./scene-motion.css";
 /* Interfaces section. Isolated. Do not move these rules into site.css. */
 
-/* Quiet verticals come from html::before in site.css. Do not paint
-   page-level 204 horizontals here — that caged Line, Press, Night,
-   the title, and the crops. Night's map grid stays in-card. */
+/* Site 204 is html::before in core base. Paper stays open so the
+   field runs through the title cell and around the crops. */
 body:has(.if-index) {
-  background-image: none;
+  background: transparent;
 }
 
 .if-index {
@@ -350,6 +349,15 @@ body:has(.if-index) {
   height: 100%;
   min-height: 0;
 }
+.if-ico-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.if-board .rs-icon {
+  display: block;
+  flex-shrink: 0;
+}
 .if-app {
   display: flex;
   align-items: center;
@@ -367,6 +375,16 @@ body:has(.if-index) {
   border-radius: 50%;
   flex-shrink: 0;
   background: var(--divider-subtle);
+}
+.if-face-inits {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 8%, var(--bg));
 }
 .if-inspect {
   width: 0;

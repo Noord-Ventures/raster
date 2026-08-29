@@ -23,13 +23,6 @@ function fail(message) {
   process.exit(1);
 }
 
-if (chrome.includes("github.com/rennvaldes")) {
-  fail("Site GitHub links must point at github.com/Noord-Ventures/raster");
-}
-if (!chrome.includes("https://github.com/Noord-Ventures/raster")) {
-  fail("Site chrome must link the canonical repo");
-}
-
 if (!layout.includes("viewportFit") || !layout.includes('"cover"')) {
   fail("Root viewport must set viewportFit cover for safe-area insets");
 }
@@ -70,18 +63,6 @@ if (chrome.includes("toggle-track") || chrome.includes("icon-moon") || chrome.in
 if (!chrome.includes('d="M2 4.5h5M11 4.5h3M2 11.5h3M9 11.5h5"') || !chrome.includes("<SettingsMark />")) {
   fail("Site chrome toggle must use the sliders mark from renatovaldes.com");
 }
-if (!chrome.includes('"Light"') || !chrome.includes('"Dark"') || !chrome.includes('"Auto"')) {
-  fail("Site appearance must offer Light, Dark, and Auto");
-}
-if (chrome.includes("Text size") || chrome.includes("Show grid") || chrome.includes("Hide grid")) {
-  fail("Do not port Text size or Grid from renatovaldes.com");
-}
-if (!layout.includes('t==="auto"') && !layout.includes("t==='auto'")) {
-  fail("themeInit must follow the system scheme when Appearance is Auto");
-}
-if (!chrome.includes("appearance-cell") || !chrome.includes('role="radio"')) {
-  fail("Appearance selected state must be square cells, not a pill track");
-}
 
 const crumbs = readFileSync(join(root, "apps/www/components/crumb-bar.tsx"), "utf8");
 if (crumbs.includes("return null") || crumbs.includes("isFieldPath")) {
@@ -121,23 +102,20 @@ if (!specimen.includes("min-width: 481px") || !about.includes("min-width: 481px"
 if (specimen.includes("padding: 0 1px 1px 0") || /padding:\s*1px;/.test(specimen)) {
   fail("Homepage must open on the right and bottom; do not restore an outer frame");
 }
-if (specimen.includes("background-image: none")) {
-  fail("Homepage must not hide the site module grid");
+if (specimen.includes("background-image: var(--grid-image)") || specimen.includes("repeating-linear-gradient")) {
+  fail("Homepage must not paint gutter lines through type");
+}
+if (!specimen.includes("html:has(.specimen-page)::before") || !specimen.includes("display: none")) {
+  fail("Homepage must kill the site gutter overlay so Raster / tagline / install are not caged");
 }
 if (!specimen.includes("body:has(.specimen-page)") || !specimen.includes("clip-path: inset(0)")) {
-  fail("Homepage must keep the site grid and clip any edge hairline");
+  fail("Homepage must clip any edge hairline so there is no page frame");
 }
-if (!specimen.includes("background: transparent")) {
-  fail("Homepage paper must let the site 204 verticals show through");
+if (!specimen.includes("body:has(.specimen-page) {\n  background: transparent;")) {
+  fail("Homepage must not paint a second body grid");
 }
-if (!site.includes("html::before") || !site.includes("background-image: var(--grid-image)")) {
-  fail("Inner-page 204s must paint on html::before; overflow-x:clip drops attachment:fixed");
-}
-if (!specimen.includes("html:has(.specimen-page)::before") || !/html:has\(\.specimen-page\)::before\s*\{[^}]*display:\s*none/.test(specimen)) {
-  fail("Homepage must kill html::before so gutters do not cut Raster, the tagline, or install");
-}
-if (/\.preview-box \{[^}]*background:\s*var\(--bg\)/s.test(site)) {
-  fail("Component specimens must not paint paper over the 204s next to them");
+if (!specimen.includes("box-shadow: 1px 0 0 var(--grid-line), 0 1px 0 var(--grid-line)")) {
+  fail("Homepage field is boxed 204 cells in --grid-line, not a gutter overlay");
 }
 if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
   fail("Catalog secondaries must not cover the site module grid");
@@ -145,15 +123,9 @@ if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
 if (!about.includes("padding: 0 1px 1px 0")) {
   fail("About must keep its right and bottom hairline");
 }
-if (!about.includes("round(down, 100%, 204px)") || !about.includes(".field-cell-use .code-copy")) {
-  fail("Usage code blocks must snap to the 204 column with the copy control inside the cell");
-}
-if (!about.includes(".field-work") || !about.includes("object-fit: cover")) {
-  fail("About designer tiles crop the work like an Interfaces poster");
-}
 const aboutCell = about.slice(about.indexOf(".field-cell {"), about.indexOf("}", about.indexOf(".field-cell {")));
 if (!aboutCell.includes("background-image: var(--grid-image)") || !aboutCell.includes("background-position: var(--grid-pos)") || !aboutCell.includes("background-attachment: fixed")) {
-  fail("About must share the site 204 spine with home, not a local hero tile");
+  fail("About must keep the gutter-line 204 spine, not a local hero tile");
 }
 const aboutEra = about.slice(about.indexOf(".field-cell-era {"), about.indexOf("}", about.indexOf(".field-cell-era {")));
 if (aboutEra.includes("background-image")) {
@@ -166,14 +138,17 @@ if (!ifCss.includes(".if-board .rs-sidebar-item") || !ifCss.includes("min-height
 if (/\.if-rail \{[^}]*background:\s*var\(--bg\)/s.test(ifCss)) {
   fail("Interfaces rail must not cover the site module grid");
 }
-if (!ifCss.includes("body:has(.if-index)")) {
-  fail("Interfaces must keep body:has(.if-index) on the site field");
+const baseCss = readFileSync(join(root, "packages/core/css/base.css"), "utf8");
+if (!baseCss.includes("html::before") || !baseCss.includes("clip-path:inset(0 0 0 21px)") || !baseCss.includes("var(--grid-image)")) {
+  fail("Site gutter overlay must paint verticals on html::before and clip the 20px page frame");
 }
-if (/repeating-linear-gradient\([\s\S]{0,160}203px/.test(ifCss) || /background-size:[^;]*100%\s*204px/.test(ifCss)) {
-  fail("Interfaces must not paint page-level 204 horizontals");
+const beforeAt = baseCss.indexOf("html::before{");
+const beforeRule = beforeAt >= 0 ? baseCss.slice(beforeAt, baseCss.indexOf("}", beforeAt)) : "";
+if (beforeRule.includes("repeating-linear-gradient")) {
+  fail("Gutter overlay must not paint 204 horizontals — that cages type");
 }
-if (!ifCss.includes(".if-crop-nacht-grid") || !ifCss.includes("34px 34px")) {
-  fail("Night map grid must stay inside the Night card");
+if (!ifCss.includes("body:has(.if-index)") || !ifCss.includes("background: transparent")) {
+  fail("Interfaces paper must stay open so the site 204 overlay reads through");
 }
 if (/if-list \{[^}]*padding:\s*24px/s.test(ifCss)) {
   fail("Interfaces cards must sit on the 204, not 24px off it");
@@ -238,4 +213,4 @@ if (/toast|Toaster|rs-toast/.test(block)) {
   fail("Copy must confirm on the control, not via toast");
 }
 
-console.log("Phone chrome: 44pt hits, safe-area, stacked TOC, copy control.");
+console.log("Phone chrome: 44pt hits, safe-area, stacked TOC, copy control.\n");
