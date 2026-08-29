@@ -133,6 +133,13 @@ for (const name of ["Rosmarie Tissi", "Nelly Rudin", "Thérèse Moll", "Shizuko 
 if (!facts.includes("Cohen_fre_sdap_nvv_poster_1926")) {
   fail("Fré Cohen must keep the 1926 SDAP Commons work crop");
 }
+for (const src of [
+  "/about/moll-200-jahre-geigy.jpg",
+  "/about/rudin-saffa-1958.jpg",
+  "/about/yoshikawa-m42.jpg",
+]) {
+  if (!facts.includes(src)) fail(`About field must crop ${src}`);
+}
 const aboutCell = about.slice(about.indexOf(".field-cell {"), about.indexOf("}", about.indexOf(".field-cell {")));
 if (!aboutCell.includes("background-image: var(--grid-image)") || !aboutCell.includes("background-position: var(--grid-pos)") || !aboutCell.includes("background-attachment: fixed")) {
   fail("About must keep the gutter-line 204 spine, not a local hero tile");

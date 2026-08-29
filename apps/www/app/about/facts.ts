@@ -112,8 +112,11 @@ export const field = [
     name: "Thérèse Moll",
     years: "1934–1961",
     place: "Basel · Cambridge",
-    mark: "Gerstner atelier. 200 Jahre Geigy, 1958. Modular type at MIT.",
-    // Type-only. 7 Geigy objects on eMuseum. ZHdK blocks publish. People-page photo is a portrait. See SOURCES.md.
+    mark: "200 Jahre Geigy, 1958. Gerstner atelier. Modular type at MIT.",
+    work: {
+      src: "/about/moll-200-jahre-geigy.jpg",
+      alt: "200 Jahre Geigy, 1958",
+    },
   },
   {
     name: "Emil Ruder",
@@ -139,8 +142,11 @@ export const field = [
     name: "Nelly Rudin",
     years: "1928–2013",
     place: "Basel · Zurich",
-    mark: "Geigy. Müller-Brockmann studio. SAFFA poster, 1958.",
-    // Type-only. Posters on eMuseum. SAFFA is © VG Bild-Kunst. Same ZHdK block. See SOURCES.md.
+    mark: "Saffa 1958 Zürich catalog. Geigy. Müller-Brockmann studio.",
+    work: {
+      src: "/about/rudin-saffa-1958.jpg",
+      alt: "Saffa 1958 Zürich catalog",
+    },
   },
   {
     name: "Rosmarie Tissi",
@@ -156,8 +162,11 @@ export const field = [
     name: "Shizuko Yoshikawa",
     years: "1934–2019",
     place: "Ulm · Zurich",
-    mark: "Müller-Brockmann studio. Nō-Theater. Swiss Poster of the Year, 1975.",
-    // Type-only. MoMA 429.1985 via Art Resource/Scala. Nō-Theater banned. Commons is signatures. See SOURCES.md.
+    mark: "m42 farbschatten, 1977–82. Müller-Brockmann studio.",
+    work: {
+      src: "/about/yoshikawa-m42.jpg",
+      alt: "m42 farbschatten, 1977–82",
+    },
   },
   {
     name: "Piet Zwart",
