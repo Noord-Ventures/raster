@@ -69,10 +69,6 @@ export const featured = [
     years: "1914–1996",
     place: "Zurich",
     mark: "Grid Systems in Graphic Design. Neue Grafik, 1958.",
-    work: {
-      src: "/about/mueller-brockmann-grid-systems.jpg",
-      alt: "Cover of Grid Systems in Graphic Design",
-    },
   },
   {
     id: "wc",
@@ -80,10 +76,6 @@ export const featured = [
     years: "1928–2019",
     place: "Amsterdam",
     mark: "Stedelijk posters. New Alphabet, 1967. Total Design, 1963.",
-    work: {
-      src: "/about/crouwel-new-alphabet.png",
-      alt: "New Alphabet type specimen",
-    },
   },
 ] as const;
 
@@ -93,64 +85,24 @@ export const field = [
     years: "1908–1994",
     place: "Zurich · Ulm",
     mark: "HfG Ulm. Concrete art.",
-    work: {
-      src: "/about/bill-hfg-ulm.jpg",
-      alt: "HfG Ulm, architecture by Max Bill, 1955",
-    },
   },
   {
     name: "Karl Gerstner",
     years: "1930–2017",
     place: "Basel",
     mark: "Designing Programmes, 1964.",
-    work: {
-      src: "/about/gerstner-designing-programmes.jpg",
-      alt: "Cover of Designing Programmes",
-    },
-  },
-  {
-    name: "Thérèse Moll",
-    years: "1934–1961",
-    place: "Basel · Cambridge",
-    mark: "Gerstner atelier. 200 Jahre Geigy, 1958. Modular type at MIT.",
   },
   {
     name: "Emil Ruder",
     years: "1914–1970",
     place: "Basel",
     mark: "Typographie.",
-    work: {
-      src: "/about/ruder-typographie.jpg",
-      alt: "Cover of Typographie",
-    },
   },
   {
     name: "Armin Hofmann",
     years: "1920–2020",
     place: "Basel",
     mark: "Graphic Design Manual.",
-    work: {
-      src: "/about/hofmann-form-farbe.jpg",
-      alt: "Form Farbe poster, Gewerbemuseum Winterthur, 1951",
-    },
-  },
-  {
-    name: "Nelly Rudin",
-    years: "1928–2013",
-    place: "Basel · Zurich",
-    mark: "Geigy. Müller-Brockmann studio. SAFFA poster, 1958.",
-  },
-  {
-    name: "Rosmarie Tissi",
-    years: "1937",
-    place: "Zurich",
-    mark: "Odermatt & Tissi. Posters. A reformer of Swiss Style.",
-  },
-  {
-    name: "Shizuko Yoshikawa",
-    years: "1934–2019",
-    place: "Ulm · Zurich",
-    mark: "Müller-Brockmann studio. Nō-Theater. Swiss Poster of the Year, 1975.",
   },
   {
     name: "Piet Zwart",
@@ -165,16 +117,6 @@ export const field = [
     mark: "Photomontage. Constructivism.",
   },
   {
-    name: "Fré Cohen",
-    years: "1903–1943",
-    place: "Amsterdam",
-    mark: "SDAP. Stadsdrukkerij Amsterdam.",
-    work: {
-      src: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Cohen_fre_sdap_nvv_poster_1926.png",
-      alt: "SDAP / NVV poster, 1926",
-    },
-  },
-  {
     name: "Otto Treumann",
     years: "1919–2001",
     place: "Amsterdam",
@@ -185,20 +127,12 @@ export const field = [
     years: "1963",
     place: "Amsterdam",
     mark: "Crouwel, Wissing, Kramer. TD.",
-    work: {
-      src: "/about/total-design-logo.jpg",
-      alt: "Total Design mark",
-    },
   },
   {
     name: "Swiss Style",
     years: "1950s",
     place: "Switzerland",
     mark: "International Typographic Style. Objective. Modular.",
-    work: {
-      src: "/about/neue-grafik.jpg",
-      alt: "Neue Grafik, July 1963",
-    },
   },
 ] as const;
 
@@ -249,7 +183,7 @@ export const notes = [
   },
   {
     q: "Where do I report a problem?",
-    a: "github.com/Noord-Ventures/raster. Issues and pull requests. The packages are @noorddev/raster, @noorddev/raster-react, and @noorddev/raster-cli.",
+    a: "github.com/rennvaldes/raster. Issues and pull requests. The packages are @noorddev/raster, @noorddev/raster-react, and @noorddev/raster-cli.",
   },
 ] as const;
 
@@ -279,5 +213,5 @@ export const person = {
   heading: "Renato Valdés Olmos",
   copyright: "MIT © Noord / Renato Valdés-Olmos",
   year: "2026",
-  repo: "https://github.com/Noord-Ventures/raster",
+  repo: "https://github.com/rennvaldes/raster",
 };

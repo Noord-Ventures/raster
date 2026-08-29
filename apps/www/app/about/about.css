@@ -32,11 +32,6 @@
     "n07"
     "n08"
     "n09"
-    "n10"
-    "n11"
-    "n12"
-    "n13"
-    "n14"
     "faq"
     "colo";
   grid-auto-rows: minmax(204px, auto);
@@ -94,19 +89,12 @@
 .field-cell-n07 { grid-area: n07; }
 .field-cell-n08 { grid-area: n08; }
 .field-cell-n09 { grid-area: n09; }
-.field-cell-n10 { grid-area: n10; }
-.field-cell-n11 { grid-area: n11; }
-.field-cell-n12 { grid-area: n12; }
-.field-cell-n13 { grid-area: n13; }
-.field-cell-n14 { grid-area: n14; }
 .field-cell-mod { grid-area: mod; }
 .field-cell-hair { grid-area: hair; }
 .field-cell-flush { grid-area: flush; }
 .field-cell-grot {
   grid-area: grot;
   container-type: inline-size;
-  min-height: 408px;
-  gap: 20px;
 }
 .field-cell-hist { grid-area: hist; }
 .field-cell-faq {
@@ -193,76 +181,46 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: max(round(down, 100%, 204px), 204px);
-  max-width: none;
+  width: 100%;
+  max-width: 44em;
 }
 
-.field-cell-use .code-block {
-  position: relative;
+.field-code-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
   width: 100%;
-  max-width: none;
+}
+
+.field-code {
+  flex: 1;
+  min-width: 0;
   margin: 0;
   padding: 20px;
-  background-color: var(--bg);
-  background-image: linear-gradient(var(--table-alt), var(--table-alt));
-  border: none;
+  background: var(--table-alt);
   border-top: 1px solid var(--divider);
   border-bottom: 1px solid var(--divider);
-  border-radius: 0;
-  box-shadow: none;
+  overflow-x: auto;
 }
 
-.field-cell-use .code-block pre {
-  padding-right: 36px;
+.field-code code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text);
 }
 
 .field-cell-use .code-copy {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: var(--bg);
+  position: static;
+  top: auto;
+  right: auto;
+  background: none;
   flex-shrink: 0;
   width: 32px;
   height: 32px;
   min-width: 32px;
   min-height: 32px;
-  margin: 0;
-}
-
-.field-cell-has-work {
-  padding: 0;
-  gap: 0;
-  min-height: 408px;
-  justify-content: flex-end;
-}
-
-.field-work {
-  position: relative;
-  flex: 1 1 auto;
-  min-height: 204px;
-  overflow: hidden;
-}
-
-.field-work img {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.field-matter {
-  padding: 20px;
-  background: var(--bg);
-  border-top: 1px solid var(--grid-line);
-}
-
-.field-matter .field-kicker,
-.field-matter .field-name,
-.field-matter .field-mark {
-  max-width: none;
+  margin-top: 6px;
 }
 
 .field-spec {
@@ -350,9 +308,7 @@
   font-size: clamp(4.5rem, 22cqw, 10rem);
   font-weight: 600;
   letter-spacing: -.05em;
-  /* .8 let the g sit on the caption and the A on Grotesque.
-     Keep the display size; leading and a 408 cell clear the overlap. */
-  line-height: 1;
+  line-height: .8;
   color: var(--text);
 }
 
@@ -439,10 +395,7 @@
       "n03 n04"
       "n05 n06"
       "n07 n08"
-      "n09 n10"
-      "n11 n12"
-      "n13 n14"
-      "faq faq"
+      "n09 faq"
       "colo colo";
   }
 }
@@ -465,10 +418,7 @@
       "n03 n03 n04 n04"
       "n05 n05 n06 n06"
       "n07 n07 n08 n08"
-      "n09 n09 n10 n10"
-      "n11 n11 n12 n12"
-      "n13 n13 n14 n14"
-      "faq faq faq faq"
+      "n09 n09 faq faq"
       "colo colo colo colo";
   }
 }
@@ -488,9 +438,7 @@
       "n01 n01 n02 n02 n03 n03"
       "n04 n04 n05 n05 n06 n06"
       "n07 n07 n08 n08 n09 n09"
-      "n10 n10 n11 n11 n12 n12"
-      "n13 n13 n14 n14 faq faq"
-      "colo colo colo colo colo colo";
+      "faq faq faq colo colo colo";
   }
 }
 
@@ -514,15 +462,5 @@
     height: 44px;
     min-width: 44px;
     min-height: 44px;
-    top: 4px;
-    right: 4px;
-  }
-  .field-cell-use .code-block pre { padding-right: 56px; }
-}
-
-@media (max-width: 480px) {
-  .field-code-stack {
-    width: calc(100vw - 50px);
-    margin-left: 5px;
   }
 }
