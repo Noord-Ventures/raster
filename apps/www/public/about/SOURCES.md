@@ -61,6 +61,6 @@ No Creative Commons line on the object pages below.
 - **MoMA**. Yoshikawa *Theater 11* / Nō-Theater is © — banned. *Japanische Plakate heute* (1978), object 429.1985, licenses via Art Resource / Scala. Do not hotlink or download.
 - **Cooper Hewitt**. Rudin appears only as a name on Helmut Schmid’s *typography today* poster, not as her work.
 - **Internet Archive / Flickr CC**. No rights-clean still of a named work.
-- **Yoshikawa public sculpture** (*Farbschatten Nr. 108* Irchel; *vier mögliche progressionen* Höngg; *wasser-relief-landschaft* Witikon, destroyed). Foundation pages document the works; no CC still of those pieces found. Commons Irchel photos are the atrium / park, not her relief.
+- **SYJMB foundation / shizukoyoshikawa.ch**. Documents public sculptures. Do not hotlink or download. No reusable license on those pages.
 
 Wire a `work: { src, alt }` only when a page states a reusable license (CC / PD / equivalent) on that URL. Vera verifies. Do not mint READY from the agent side.
