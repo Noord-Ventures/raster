@@ -112,10 +112,10 @@ export const field = [
     name: "Thérèse Moll",
     years: "1934–1961",
     place: "Basel · Cambridge",
-    mark: "200 Jahre Geigy, 1958. Gerstner atelier. Modular type at MIT.",
+    mark: "Micorène, c. 1958. Gerstner atelier. Modular type at MIT.",
     work: {
-      src: "/about/moll-200-jahre-geigy.jpg",
-      alt: "200 Jahre Geigy, 1958",
+      src: "/about/moll-micorene.jpg",
+      alt: "Micorène, c. 1958",
     },
   },
   {
@@ -142,10 +142,10 @@ export const field = [
     name: "Nelly Rudin",
     years: "1928–2013",
     place: "Basel · Zurich",
-    mark: "Saffa 1958 Zürich catalog. Geigy. Müller-Brockmann studio.",
+    mark: "Saffa 1958 Zürich, 1958. Geigy. Müller-Brockmann studio.",
     work: {
       src: "/about/rudin-saffa-1958.jpg",
-      alt: "Saffa 1958 Zürich catalog",
+      alt: "Saffa 1958 Zürich, 1958",
     },
   },
   {
@@ -162,10 +162,10 @@ export const field = [
     name: "Shizuko Yoshikawa",
     years: "1934–2019",
     place: "Ulm · Zurich",
-    mark: "m42 farbschatten, 1977–82. Müller-Brockmann studio.",
+    mark: "Japanische Plakate heute, 1978. Müller-Brockmann studio.",
     work: {
-      src: "/about/yoshikawa-m42.jpg",
-      alt: "m42 farbschatten, 1977–82",
+      src: "/about/yoshikawa-japanische-plakate-heute.jpg",
+      alt: "Japanische Plakate heute, 1978",
     },
   },
   {
