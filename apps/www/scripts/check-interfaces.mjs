@@ -65,16 +65,19 @@ if (!index.includes("if-title")) {
   console.error("Interfaces title must occupy a 204 cell");
   process.exit(1);
 }
-if (!css.includes("body:has(.if-index)")) {
-  console.error("Interfaces must keep body:has(.if-index) so the page stays on the site field");
+const baseCss = readFileSync(join(root, "packages/core/css/base.css"), "utf8");
+if (!baseCss.includes("html::before") || !baseCss.includes("clip-path:inset(0 0 0 21px)") || !baseCss.includes("var(--grid-image)")) {
+  console.error("Site gutter overlay must paint verticals on html::before and clip the 20px page frame");
   process.exit(1);
 }
-if (/repeating-linear-gradient\([\s\S]{0,160}203px/.test(css) || /background-size:[^;]*100%\s*204px/.test(css)) {
-  console.error("Interfaces must not paint page-level 204 horizontals");
+const beforeAt = baseCss.indexOf("html::before{");
+const beforeRule = beforeAt >= 0 ? baseCss.slice(beforeAt, baseCss.indexOf("}", beforeAt)) : "";
+if (beforeRule.includes("repeating-linear-gradient")) {
+  console.error("Gutter overlay must not paint 204 horizontals — that cages type");
   process.exit(1);
 }
-if (!css.includes(".if-crop-nacht-grid") || !css.includes("34px 34px")) {
-  console.error("Night map grid must stay inside the Night card");
+if (!css.includes("body:has(.if-index)") || !css.includes("background: transparent")) {
+  console.error("Interfaces paper must stay open so the site 204 overlay reads through");
   process.exit(1);
 }
 if (/\.if-rail \{[^}]*background:\s*var\(--bg\)/s.test(css)) {
@@ -96,7 +99,7 @@ if (/background:\s*var\(--bg\)/.test(tileRule) || !tileRule.includes("background
   process.exit(1);
 }
 if (!tileRule.includes("var(--grid-line)") || tileRule.includes("var(--divider)")) {
-  console.error("Interfaces tile edges must be --grid-line, quieter than --divider");
+  console.error("Interfaces tile edges must be --grid-line (same ink as --divider)");
   process.exit(1);
 }
 const specRule = css.slice(css.indexOf(".if-specimen {"), css.indexOf("}", css.indexOf(".if-specimen {")));
@@ -106,10 +109,6 @@ if (!specRule.includes("margin-top: 204px")) {
 }
 if (!map.includes("Type occupies the first cell") || !map.includes("--grid-line")) {
   console.error("FEATURE.md must lock the Interfaces 204 field");
-  process.exit(1);
-}
-if (!map.includes("No page-level 204 horizontals") || !map.includes("Night's map grid stays")) {
-  console.error("FEATURE.md must drop page-level 204 horizontals and keep the Night card grid");
   process.exit(1);
 }
 if (!crops.includes("if-crop-scene")) {
@@ -159,6 +158,10 @@ if (/border-top:\s*1px/.test(dockRule)) {
   console.error("Line dock must not be a full-pane bar");
   process.exit(1);
 }
+if (/line-height:\s*44px/.test(lineScene)) {
+  console.error("Line composer type must sit in the middle of the field");
+  process.exit(1);
+}
 
 for (const name of names) {
   if (!catalog.includes(`title: "${name}"`)) {
@@ -196,7 +199,7 @@ const walk = (from) => {
   return out;
 };
 
-const banned = /tailwind|@radix-ui|@radix\//;
+const banned = /tailwind|@radix-ui|@radix\/;
 for (const file of walk(dir)) {
   const text = readFileSync(file, "utf8");
   if (banned.test(text)) {
@@ -258,13 +261,21 @@ if (!map.includes("fictional little app") || !map.includes("poster crop")) {
   console.error("FEATURE.md must lock fictional apps and poster crops");
   process.exit(1);
 }
+if (!map.includes("Icon")) {
+  console.error("FEATURE.md must lock Raster Icon marks");
+  process.exit(1);
+}
+if (!map.includes("--radius-sm") || !/not pills/i.test(map)) {
+  console.error("FEATURE.md must lock cards and boxes to --radius-sm, not pills");
+  process.exit(1);
+}
 if (existsSync(join(dir, "scene-fonts.ts"))) {
   console.error("Scenes must use Inter, not extra display faces");
   process.exit(1);
 }
 
 const productSkin = /Fraunces|Source_Serif|IBM_Plex|Newsreader|Iowan|Palatino|#c96442|#e08b6a|#3e1242|#007a5a|#1f8a78|#c45c26|#3ddec4|#ff6b4a|#1264a3|#5b2c6f|#071014|aubergine/i;
-const allowedRadius = /^(0|50%|var\(--radius-sm\))$/;
+const allowedRadius = /^(0|50%|var\(--radius-sm\)|var\(--radius\))$/;
 const quietShadow = (value) =>
   value === "none" ||
   value.startsWith("inset ") ||
@@ -292,7 +303,11 @@ for (const slug of slugs) {
   }
   const radii = [...scene.matchAll(/border-radius:\s*([^;]+)/g)].map((m) => m[1].trim());
   if (radii.some((value) => !allowedRadius.test(value))) {
-    console.error(`${slug} scene chrome stays flush; boxed UI may use --radius-sm only`);
+    console.error(`${slug} cards and boxes use --radius-sm; chrome stays 0; not pills`);
+    process.exit(1);
+  }
+  if (/border-radius:\s*(999|9999|100vw)/.test(scene)) {
+    console.error(`${slug} must not use pill radius`);
     process.exit(1);
   }
   const shadows = [...scene.matchAll(/box-shadow:\s*([^;]+)/g)].map((m) => m[1].trim());
@@ -312,6 +327,88 @@ for (const slug of slugs) {
     console.error(`${slug} board must carry the invented brand`);
     process.exit(1);
   }
+  if (!board.includes('from "@noorddev/raster-react"') || !board.includes("<Icon ")) {
+    console.error(`${slug} board must use Raster Icon marks, not a second family`);
+    process.exit(1);
+  }
+  if (/lucide-react|@heroicons|heroicons/.test(board + scene)) {
+    console.error(`${slug} must not import Lucide or Heroicons`);
+    process.exit(1);
+  }
+  const marks = [...board.matchAll(/<Icon name="([a-z0-9-]+)"/g)].map((m) => m[1]);
+  if (new Set(marks).size < 7) {
+    console.error(`${slug} board must use more Raster Icon marks on nav, lists, and chrome`);
+    process.exit(1);
+  }
+  const needed = {
+    line: ["plus", "send", "quote", "inbox"],
+    press: ["layout", "printer", "calendar"],
+    wall: ["rows", "thumbs-up", "users"],
+    night: ["truck", "map-pin", "globe"],
+    evening: ["bag", "search", "wallet"],
+    room: ["hash", "send", "message"],
+  };
+  for (const name of needed[slug]) {
+    if (!board.includes(`"${name}"`)) {
+      console.error(`${slug} board must use the ${name} Raster mark`);
+      process.exit(1);
+    }
+  }
+  if (/border-left:\s*2px solid transparent/.test(scene)) {
+    console.error(`${slug} sidebar must not mark selected with a left rail`);
+    process.exit(1);
+  }
+}
+
+const wallBoard = readFileSync(join(dir, "wall", "board.tsx"), "utf8");
+const wallScene = readFileSync(join(dir, "wall", "scene.css"), "utf8");
+if (wallBoard.includes('aria-label="Thread"') || !wallBoard.includes('aria-label="Feed"')) {
+  console.error("Wall primary view must be a feed, not a thread");
+  process.exit(1);
+}
+const wallCard = wallScene.slice(wallScene.indexOf(".sc-wall-card {"), wallScene.indexOf("}", wallScene.indexOf(".sc-wall-card {")));
+if (!wallCard.includes("var(--radius-sm)")) {
+  console.error("Wall feed cards must use --radius-sm, the button radius");
+  process.exit(1);
+}
+
+const eveningBoard = readFileSync(join(dir, "evening", "board.tsx"), "utf8");
+const eveningScene = readFileSync(join(dir, "evening", "scene.css"), "utf8");
+if (!eveningBoard.includes("sc-evening-store") || !eveningBoard.includes("Bag")) {
+  console.error("Evening must be a store market with a bag, not a thin kitchen list");
+  process.exit(1);
+}
+const eveningStore = eveningScene.slice(eveningScene.indexOf(".sc-evening-store {"), eveningScene.indexOf("}", eveningScene.indexOf(".sc-evening-store {")));
+const eveningSearch = eveningScene.slice(eveningScene.indexOf(".sc-evening-search {"), eveningScene.indexOf("}", eveningScene.indexOf(".sc-evening-search {")));
+const eveningSeg = eveningScene.slice(eveningScene.indexOf(".sc-evening-seg {"), eveningScene.indexOf("}", eveningScene.indexOf(".sc-evening-seg {")));
+const eveningSegBtn = eveningScene.slice(eveningScene.indexOf(".sc-evening-seg button {"), eveningScene.indexOf("}", eveningScene.indexOf(".sc-evening-seg button {")));
+if (!eveningStore.includes("var(--radius-sm)") || !eveningSearch.includes("var(--radius-sm)") || !eveningSeg.includes("var(--radius-sm)")) {
+  console.error("Evening cards and boxes must use --radius-sm, the button radius");
+  process.exit(1);
+}
+if (!/border-radius:\s*0/.test(eveningSegBtn)) {
+  console.error("Evening filter segments must stay square inside, not pills");
+  process.exit(1);
+}
+
+const nightMap = readFileSync(join(dir, "night", "map.tsx"), "utf8");
+if (!nightMap.includes("BUILDINGS") || !nightMap.includes("TubeGeometry")) {
+  console.error("Night field must be a street of buildings with a route, not a flat grid");
+  process.exit(1);
+}
+
+const people = readFileSync(join(dir, "people.tsx"), "utf8");
+if (/Inez Veld|Karel Vos|Loes Hart|Bram Nijk|Maya Ort|Owen Hart/.test(people + wallBoard + readFileSync(join(dir, "room", "board.tsx"), "utf8"))) {
+  console.error("Interfaces people must come from renatovaldes.com/work, not invented names");
+  process.exit(1);
+}
+if (!people.includes("Ilana") || !people.includes("Aziez") || !people.includes("Koen")) {
+  console.error("Interfaces people must include first names from /work");
+  process.exit(1);
+}
+if (!catalog.includes('what: "AI chat"') || !catalog.includes('what: "Dashboard"') || !catalog.includes('what: "Social feed"') || !catalog.includes('what: "Fleet management"') || !catalog.includes('what: "Order out"') || !catalog.includes('what: "Team chat"')) {
+  console.error("Catalog must lock the six Interfaces: AI chat, Dashboard, Social feed, Fleet management, Order out, Team chat");
+  process.exit(1);
 }
 
 console.log(`ok: ${slugs.length} Interfaces routes`);
