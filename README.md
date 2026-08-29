@@ -2,7 +2,7 @@
 
 A poster you can install.
 
-Public door: [getraster.com](https://getraster.com). Host today: [raster.noord.dev](https://raster.noord.dev).
+Public door: [getraster.com](https://getraster.com). Host today: [raster.noord.dev](https://raster.noord.dev). Source: [github.com/Noord-Ventures/raster](https://github.com/Noord-Ventures/raster).
 
 This repo contains the tokens, CSS, React components, registry, CLI, and documentation site.
 

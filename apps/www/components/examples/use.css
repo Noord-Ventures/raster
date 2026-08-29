@@ -1,7 +1,7 @@
 /* Use field: a 204-module composition. Paper, hairlines, slight Raster radius. */
 .rs-use {
   isolation: isolate;
-  background-color: var(--bg);
+  background-color: transparent;
   background-image: none;
   border: 1px solid var(--divider);
   border-radius: var(--radius-sm);
@@ -14,7 +14,7 @@
 }
 .rs-scene {
   isolation: isolate;
-  background-color: var(--bg);
+  background-color: transparent;
   border: 1px solid var(--divider);
   border-radius: var(--radius-sm);
   box-shadow: none;
@@ -41,7 +41,7 @@
   margin: 0;
   padding: 20px 16px 18px;
   border-right: 1px solid var(--divider);
-  background: var(--bg);
+  background: transparent;
   font-size: clamp(28px, 5vw, 42px);
   font-weight: 600;
   letter-spacing: -.035em;
@@ -58,7 +58,7 @@
   justify-content: space-between;
   gap: 16px;
   min-width: 0;
-  background: var(--bg);
+  background: transparent;
 }
 .rs-use-kicker {
   margin: 0;

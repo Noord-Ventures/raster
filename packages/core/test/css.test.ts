@@ -260,14 +260,17 @@ describe("tokens", () => {
     for (let i = 1; i < sizes.length; i++) expect(sizes[i]!).toBeLessThan(sizes[i - 1]!);
   });
 
-  it("paints a readable module grid; divider ink is the same hairline", () => {
+  it("paints a readable module grid quieter than chrome divider", () => {
     const light = rasterTokens.color.light;
     const dark = rasterTokens.color.dark;
     const alpha = (value: string) => Number(value.match(/rgba?\([^)]*?,\s*([\d.]+)\s*\)/)?.[1]);
-    expect(alpha(light.gridLine)).toBeGreaterThan(0.05);
-    expect(light.gridLine).toBe(light.divider);
-    expect(alpha(dark.gridLine)).toBeGreaterThan(0.05);
-    expect(dark.gridLine).toBe(dark.divider);
+    // 0.08/0.10 caged inner pages. 0.025/0.01 were invisible. 0.04/0.05 still reads.
+    expect(alpha(light.gridLine)).toBeGreaterThan(0.03);
+    expect(alpha(light.gridLine)).toBeLessThan(0.06);
+    expect(alpha(light.gridLine)).toBeLessThan(alpha(light.divider));
+    expect(alpha(dark.gridLine)).toBeGreaterThan(0.03);
+    expect(alpha(dark.gridLine)).toBeLessThan(0.08);
+    expect(alpha(dark.gridLine)).toBeLessThan(alpha(dark.divider));
     expect(rasterCss).toContain(`--grid-line: ${light.gridLine}`);
     expect(rasterCss).toContain(`--divider: ${light.divider}`);
     expect(rasterCss).not.toMatch(/--grid-line:\s*rgba\(0,0,0,0\.025\)/);

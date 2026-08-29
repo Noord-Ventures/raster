@@ -15,7 +15,7 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const themeInit = `(function(){try{var t=localStorage.getItem("raster-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.dataset.theme="dark"}catch(e){}})()`;
+const themeInit = `(function(){try{var t=localStorage.getItem("raster-theme");var dark=t==="dark"||((!t||t==="auto")&&matchMedia("(prefers-color-scheme: dark)").matches);if(dark)document.documentElement.dataset.theme="dark";else delete document.documentElement.dataset.theme}catch(e){}})()`;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

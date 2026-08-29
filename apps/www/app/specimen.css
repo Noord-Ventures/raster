@@ -46,8 +46,9 @@ body:has(.specimen-page) {
     "kitc"
     "kitd";
   grid-auto-rows: minmax(204px, auto);
-  /* Paper to the viewport via body. Internal lines are cell shadows,
-     clipped at the field edge so no hairline reads as a page frame. */
+  /* Paper to the viewport via html. Internal lines are cell shadows
+     in chrome --divider, clipped at the field edge so no hairline
+     reads as a page frame. Gutters stay off this page. */
   background: transparent;
   padding: 0;
   gap: 0;
