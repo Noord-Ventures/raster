@@ -559,10 +559,23 @@ jobs:
             echo "About must not clone Inter specimen content"
             exit 1
           fi
-          if grep -n 'overflow: hidden' "$css"; then
-            echo "About field cells must not crop"
-            exit 1
-          fi
+          node -e '
+            const { readFileSync } = require("node:fs");
+            const css = readFileSync("apps/www/app/about/about.css", "utf8");
+            const stripped = css.replace(/\.field-work\s*\{[^}]*\}/g, "");
+            if (/overflow:\s*hidden/.test(stripped)) {
+              console.error("About field cells must not crop");
+              process.exit(1);
+            }
+            if (!/\.field-work\s*\{[^}]*overflow:\s*hidden/.test(css)) {
+              console.error("Work stills crop inside .field-work");
+              process.exit(1);
+            }
+            if (!css.includes("jmb jmb wc wc") || !css.includes("jmb jmb jmb wc wc wc")) {
+              console.error("Brockmann and Crouwel must pair on desktop");
+              process.exit(1);
+            }
+          '
           node -e '
             const { readFileSync } = require("node:fs");
             const css = readFileSync("apps/www/app/about/about.css", "utf8");

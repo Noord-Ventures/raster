@@ -112,7 +112,11 @@ export const field = [
     name: "Thérèse Moll",
     years: "1934–1961",
     place: "Basel · Cambridge",
-    mark: "Gerstner atelier. 200 Jahre Geigy, 1958. Modular type at MIT.",
+    mark: "Micorène, c. 1958. Gerstner atelier. Modular type at MIT.",
+    work: {
+      src: "/about/moll-micorene.jpg",
+      alt: "Micorène, c. 1958",
+    },
   },
   {
     name: "Emil Ruder",
@@ -138,31 +142,51 @@ export const field = [
     name: "Nelly Rudin",
     years: "1928–2013",
     place: "Basel · Zurich",
-    mark: "Geigy. Müller-Brockmann studio. SAFFA poster, 1958.",
+    mark: "Saffa 1958 Zürich, 1958. Geigy. Müller-Brockmann studio.",
+    work: {
+      src: "/about/rudin-saffa-1958.jpg",
+      alt: "Saffa 1958 Zürich, 1958",
+    },
   },
   {
     name: "Rosmarie Tissi",
     years: "1937",
     place: "Zurich",
-    mark: "Odermatt & Tissi. Posters. A reformer of Swiss Style.",
+    mark: "20 CHF Gertrud Kurz, 1992. Odermatt & Tissi.",
+    work: {
+      src: "https://upload.wikimedia.org/wikipedia/commons/7/78/Swiss-Commemorative-Coin-1992-CHF-20-obverse.png",
+      alt: "20 CHF Gertrud Kurz reverse, 1992",
+    },
   },
   {
     name: "Shizuko Yoshikawa",
     years: "1934–2019",
     place: "Ulm · Zurich",
-    mark: "Müller-Brockmann studio. Nō-Theater. Swiss Poster of the Year, 1975.",
+    mark: "Japanische Plakate heute, 1978. Müller-Brockmann studio.",
+    work: {
+      src: "/about/yoshikawa-japanische-plakate-heute.jpg",
+      alt: "Japanische Plakate heute, 1978",
+    },
   },
   {
     name: "Piet Zwart",
     years: "1885–1977",
     place: "Rotterdam",
-    mark: "NKF catalog. Typotekt.",
+    mark: "Bruynzeel kitchen, 1938. Typotekt.",
+    work: {
+      src: "/about/zwart-bruynzeel.jpg",
+      alt: "Bruynzeel kitchen, 1938",
+    },
   },
   {
     name: "Paul Schuitema",
     years: "1897–1973",
     place: "Rotterdam",
-    mark: "Photomontage. Constructivism.",
+    mark: "Chair no. 35, 1934. Photomontage. Constructivism.",
+    work: {
+      src: "/about/schuitema-chair-35.jpg",
+      alt: "Chair no. 35, 1934",
+    },
   },
   {
     name: "Fré Cohen",
@@ -178,7 +202,11 @@ export const field = [
     name: "Otto Treumann",
     years: "1919–2001",
     place: "Amsterdam",
-    mark: "Postwar Dutch posters.",
+    mark: "Memorial plaque, Station Vught, 1984.",
+    work: {
+      src: "/about/treumann-vught.jpg",
+      alt: "Memorial plaque at Station Vught, 1984",
+    },
   },
   {
     name: "Total Design",
