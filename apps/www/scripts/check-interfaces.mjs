@@ -199,7 +199,7 @@ const walk = (from) => {
   return out;
 };
 
-const banned = /tailwind|@radix-ui|@radix\/;
+const banned = /tailwind|@radix-ui|@radix\//;
 for (const file of walk(dir)) {
   const text = readFileSync(file, "utf8");
   if (banned.test(text)) {
