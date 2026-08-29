@@ -144,7 +144,11 @@ export const field = [
     name: "Rosmarie Tissi",
     years: "1937",
     place: "Zurich",
-    mark: "Odermatt & Tissi. Posters. A reformer of Swiss Style.",
+    mark: "20 CHF Gertrud Kurz, 1992. Odermatt & Tissi.",
+    work: {
+      src: "https://upload.wikimedia.org/wikipedia/commons/7/78/Swiss-Commemorative-Coin-1992-CHF-20-obverse.png",
+      alt: "20 CHF Gertrud Kurz reverse, 1992",
+    },
   },
   {
     name: "Shizuko Yoshikawa",
@@ -156,13 +160,21 @@ export const field = [
     name: "Piet Zwart",
     years: "1885–1977",
     place: "Rotterdam",
-    mark: "NKF catalog. Typotekt.",
+    mark: "Bruynzeel kitchen, 1938. Typotekt.",
+    work: {
+      src: "/about/zwart-bruynzeel.jpg",
+      alt: "Bruynzeel kitchen, 1938",
+    },
   },
   {
     name: "Paul Schuitema",
     years: "1897–1973",
     place: "Rotterdam",
-    mark: "Photomontage. Constructivism.",
+    mark: "Chair no. 35, 1934. Photomontage. Constructivism.",
+    work: {
+      src: "/about/schuitema-chair-35.jpg",
+      alt: "Chair no. 35, 1934",
+    },
   },
   {
     name: "Fré Cohen",
@@ -178,7 +190,11 @@ export const field = [
     name: "Otto Treumann",
     years: "1919–2001",
     place: "Amsterdam",
-    mark: "Postwar Dutch posters.",
+    mark: "Memorial plaque, Station Vught, 1984.",
+    work: {
+      src: "/about/treumann-vught.jpg",
+      alt: "Memorial plaque at Station Vught, 1984",
+    },
   },
   {
     name: "Total Design",
