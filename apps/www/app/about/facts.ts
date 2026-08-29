@@ -113,6 +113,7 @@ export const field = [
     years: "1934–1961",
     place: "Basel · Cambridge",
     mark: "Gerstner atelier. 200 Jahre Geigy, 1958. Modular type at MIT.",
+    // Geigy stills exist (eMuseum). No reusable license on the page. See public/about/SOURCES.md.
   },
   {
     name: "Emil Ruder",
@@ -139,6 +140,7 @@ export const field = [
     years: "1928–2013",
     place: "Basel · Zurich",
     mark: "Geigy. Müller-Brockmann studio. SAFFA poster, 1958.",
+    // SAFFA 1958 poster exists (eMuseum). No reusable license on the page. See public/about/SOURCES.md.
   },
   {
     name: "Rosmarie Tissi",
@@ -155,6 +157,7 @@ export const field = [
     years: "1934–2019",
     place: "Ulm · Zurich",
     mark: "Müller-Brockmann studio. Nō-Theater. Swiss Poster of the Year, 1975.",
+    // Posters exist (eMuseum Tonhalle / Farbschatten). No reusable license. Nō-Theater banned. See public/about/SOURCES.md.
   },
   {
     name: "Piet Zwart",

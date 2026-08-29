@@ -18,4 +18,49 @@ Stills of the work, not portraits. Wikimedia Commons. Type-only tiles had no rig
 | schuitema-chair-35.jpg | Paul Schuitema, Chair no. 35, 1934. Museum Boijmans Van Beuningen. MoMA photomontages are © Nederlands Fotomuseum. | Paul Schuitema - Chair No. 35 - 1934 - Boijmans V 1666 (KN&V).jpg | CC BY 4.0 (Sandra Fauconnier) |
 | treumann-vught.jpg | Otto Treumann, memorial plaque, Station Vught, 1984. Posters were deleted from Commons (undelete 2072). | DSC06240 Station Vught, metselwerk tekst 14000 joden gedeporteerd.JPG | CC0 1.0 (Havang) |
 
-Left type-only after a Commons / Europeana / Flickr Commons / Internet Archive / museum open-access search (no rights-clean still of a work, only portraits or signatures): Thérèse Moll (200 Jahre Geigy — Commons has only File:Thérèse Moll dessin.png, a portrait), Nelly Rudin (SAFFA 1958 — Commons has only File:Nelly Rudin.svg, a portrait), Shizuko Yoshikawa (Nō-Theater — Commons has only signatures; MoMA Theater 11 is ©).
+## Moll, Rudin, Yoshikawa — works exist; no reusable URL yet
+
+These three are not “type-only because there are no images.” The stills are in collections. The pages do not grant a reusable license, so `facts.ts` is not wired. Skip portraits (`File:Thérèse Moll dessin.png`, `File:Nelly Rudin.svg`) and Yoshikawa signature scans. Ban the Nō-Theater / Theater 11 poster (MoMA ©). Do not invent rights.
+
+### Museum für Gestaltung / eMuseum (holds the work; blocks reuse)
+
+Footer on every object page, also at https://www.emuseum.ch/rights (dated 01/06/2022):
+
+> The pictures in the database are reproduced as a digital catalogue of the collections and serve exclusively to illustrate the collection stocks. Any use for the benefit of third parties - publication of the pictures or other commercial use - is not permitted without the permission of the copyright holder.
+
+German footer on the same pages:
+
+> Die Bilder der Datenbank sind als digitaler Katalog der Sammlungen wiedergegeben und dienen ausschliesslich der Illustration der Sammlungsbestände. Jede Verwendung zugunsten Dritter - Veröffentlichung der Bilder oder sonstige kommerzielle Nutzung - ist ohne die Erlaubnis der Rechteinhaber:innen nicht zulässig.
+
+Museum legal notices (https://museum-gestaltung.ch/en/legal-notices):
+
+> The owners of these rights are the respective authors or rights holders. Unless otherwise stated, the rights are held by the Museum/ZHdK.
+> These rights shall be usable only within the use authorisation envisaged under applicable law. Where no legal provisions for the assignment of rights exist, contractual permission must be obtained.
+> Insofar as individual rights are subject to an open license (for instance, under an open Creative Commons Condition), these rights of use shall be usable pursuant to the stipulated conditions.
+
+ZHdK ELLA (https://ella.zhdk.ch/werkzeug/emuseum/):
+
+> Die Digitalisate dürfen nicht ohne Genehmigung kommerziell genutzt oder veröffentlicht werden.
+
+No Creative Commons line on the object pages below.
+
+| Name | Work on eMuseum | Page |
+| --- | --- | --- |
+| Thérèse Moll | Geigy ads: Micorène, Micoren, Butazolidin Geigy (A GEIG 108), Traugott Sandmeyer, Geigy, Medomin Geigy. People: https://www.emuseum.ch/people/52679/therese-moll (7 objects). *200 Jahre Geigy* itself is not in this hit list. | e.g. https://www.emuseum.ch/objects/45311/butazolidin-geigy — Credit Line: “Zürcher Hochschule der Künste / Museum für Gestaltung Zürich / Grafiksammlung” |
+| Nelly Rudin | **Saffa - 1958 - Zürich**, Design Nelly Rudin, object 21-0120 | https://www.emuseum.ch/objects/100773/saffa--1958--zurich — Credit Line: “Zürcher Hochschule der Künste / Museum für Gestaltung Zürich / Plakatsammlung” |
+| Shizuko Yoshikawa | Farbschatten exhibition poster (33-0074); Tonhalle-Orchester Zürich / Rudolf Kempe 1972 (A JMBR 143-8 and related). People: https://www.emuseum.ch/people/7001/shizuko-yoshikawa | https://www.emuseum.ch/objects/102462/shizuko-yoshikawa--farbschatten---reliefbilder-und-portfol ; https://www.emuseum.ch/objects/165399/tonhalle-orchester-zurich-rudolf-kempe |
+
+### Other collections (searched; no reusable work crop)
+
+- **e-periodica** (ETH Library). SAFFA 1958 article names Rudin’s poster (https://www.e-periodica.ch/cntmng?pid=swz-003%3A1958%3A31%3A%3A17). Terms (https://www.e-periodica.ch/digbib/terms): “Die auf E-Periodica veröffentlichten Dokumente stehen Einzelpersonen für die Nutzung zu privaten und nicht kommerziellen Zwecken sowie zu Bildungszwecken frei zur Verfügung.” And: “Das Veröffentlichen von Bildern in Print- und Online-Publikationen sowie auf Social Media-Kanälen oder Webseiten ist nur mit vorheriger Genehmigung der Rechteinhaber erlaubt.”
+- **e-rara**. Search for *200 Jahre Geigy* / Therese Moll hit a Visual Library browser-verification wall (`Verifying your browser`). Indexed Geigy titles found earlier are 19th-c. / 1919 firm history, not the 1958 Moll booklet. No license quoted because the terms page did not load past the check.
+- **Europeana**. Open-reuse search for “Shizuko Yoshikawa” returned 0 results. Record API: `Invalid API key`. Website search for Therese Moll + `REUSABILITY:open` returned 403.
+- **Swiss National Library poster catalog**. `https://www.posters.nb.admin.ch/search` → 404. Helveticat search endpoint returned 400. No object page, so no license to quote.
+- **MIT Dome / MIT Libraries / MIT Museum**. No Moll-designed Summer Session announcement found. Dome records that do load often state “Copyright Not Evaluated” (rightsstatements.org/vocab/CNE/1.0/). MIT Museum summer-session brochure 1989.068.0217 is 1972, not Moll (1959).
+- **Wikimedia Commons** (re-checked, not used as the stop). Moll: portrait only. Rudin: portrait SVG only. Yoshikawa: signatures only. No work file.
+- **MoMA**. Yoshikawa *Theater 11* / Nō-Theater is © — banned. *Japanische Plakate heute* (1978) is also a MoMA collection object with no open-access grant on the page.
+- **Cooper Hewitt**. Rudin appears only as a name on Helmut Schmid’s *typography today* poster, not as her work.
+- **Internet Archive / Flickr CC**. No rights-clean still of a named work.
+- **Yoshikawa public sculpture** (*Farbschatten Nr. 108* Irchel; *vier mögliche progressionen* Höngg; *wasser-relief-landschaft* Witikon, destroyed). Foundation pages document the works; no CC still of those pieces found. Commons Irchel photos are the atrium / park, not her relief.
+
+Wire a `work: { src, alt }` only when a page states a reusable license (CC / PD / equivalent) on that URL. Vera verifies. Do not mint READY from the agent side.
