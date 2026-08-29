@@ -18,9 +18,9 @@ Stills of the work, not portraits. Wikimedia Commons. Type-only tiles had no rig
 | schuitema-chair-35.jpg | Paul Schuitema, Chair no. 35, 1934. Museum Boijmans Van Beuningen. MoMA photomontages are © Nederlands Fotomuseum. | Paul Schuitema - Chair No. 35 - 1934 - Boijmans V 1666 (KN&V).jpg | CC BY 4.0 (Sandra Fauconnier) |
 | treumann-vught.jpg | Otto Treumann, memorial plaque, Station Vught, 1984. Posters were deleted from Commons (undelete 2072). | DSC06240 Station Vught, metselwerk tekst 14000 joden gedeporteerd.JPG | CC0 1.0 (Havang) |
 
-## Moll, Rudin, Yoshikawa — works exist; no reusable URL yet
+## Moll, Rudin, Yoshikawa — type-only on this branch
 
-These three are not “type-only because there are no images.” The stills are in collections. The pages do not grant a reusable license, so `facts.ts` is not wired. Skip portraits (`File:Thérèse Moll dessin.png`, `File:Nelly Rudin.svg`) and Yoshikawa signature scans. Ban the Nō-Theater / Theater 11 poster (MoMA ©). Do not invent rights.
+The stills exist. The collections that hold them block reuse. Do not hotlink or download from eMuseum, MoMA, or the SYJMB foundation. `facts.ts` stays without a `work` field. Skip portraits (`File:Thérèse Moll dessin.png`, `File:Nelly Rudin.svg`, eMuseum people-page photo of Moll) and Yoshikawa signature scans. Ban the Nō-Theater / Theater 11 poster. Do not invent rights. Vera reports to Ilana. Do not mint READY.
 
 ### Museum für Gestaltung / eMuseum (holds the work; blocks reuse)
 
@@ -44,11 +44,11 @@ ZHdK ELLA (https://ella.zhdk.ch/werkzeug/emuseum/):
 
 No Creative Commons line on the object pages below.
 
-| Name | Work on eMuseum | Page |
+| Name | What the collection holds | Why not wired |
 | --- | --- | --- |
-| Thérèse Moll | Geigy ads: Micorène, Micoren, Butazolidin Geigy (A GEIG 108), Traugott Sandmeyer, Geigy, Medomin Geigy. People: https://www.emuseum.ch/people/52679/therese-moll (7 objects). *200 Jahre Geigy* itself is not in this hit list. | e.g. https://www.emuseum.ch/objects/45311/butazolidin-geigy — Credit Line: “Zürcher Hochschule der Künste / Museum für Gestaltung Zürich / Grafiksammlung” |
-| Nelly Rudin | **Saffa - 1958 - Zürich**, Design Nelly Rudin, object 21-0120 | https://www.emuseum.ch/objects/100773/saffa--1958--zurich — Credit Line: “Zürcher Hochschule der Künste / Museum für Gestaltung Zürich / Plakatsammlung” |
-| Shizuko Yoshikawa | Farbschatten exhibition poster (33-0074); Tonhalle-Orchester Zürich / Rudolf Kempe 1972 (A JMBR 143-8 and related). People: https://www.emuseum.ch/people/7001/shizuko-yoshikawa | https://www.emuseum.ch/objects/102462/shizuko-yoshikawa--farbschatten---reliefbilder-und-portfol ; https://www.emuseum.ch/objects/165399/tonhalle-orchester-zurich-rudolf-kempe |
+| Thérèse Moll | 7 Geigy objects: https://www.emuseum.ch/people/52679/therese-moll/objects. People-page photo is a portrait — skip. | ZHdK: digitals may not be published without permission. Same eMuseum footer. Do not hotlink or download. |
+| Nelly Rudin | Posters at https://www.emuseum.ch/search/nelly%20rudin including SAFFA 1958. | SAFFA is © VG Bild-Kunst. Same ZHdK / eMuseum block. Do not hotlink or download. |
+| Shizuko Yoshikawa | MoMA 429.1985 *Japanische Plakate heute* (1978). Commons is signatures only. Nō-Theater / Theater 11 banned. | MoMA licenses that poster via Art Resource / Scala. Do not hotlink or download from MoMA or SYJMB. |
 
 ### Other collections (searched; no reusable work crop)
 
@@ -58,7 +58,7 @@ No Creative Commons line on the object pages below.
 - **Swiss National Library poster catalog**. `https://www.posters.nb.admin.ch/search` → 404. Helveticat search endpoint returned 400. No object page, so no license to quote.
 - **MIT Dome / MIT Libraries / MIT Museum**. No Moll-designed Summer Session announcement found. Dome records that do load often state “Copyright Not Evaluated” (rightsstatements.org/vocab/CNE/1.0/). MIT Museum summer-session brochure 1989.068.0217 is 1972, not Moll (1959).
 - **Wikimedia Commons** (re-checked, not used as the stop). Moll: portrait only. Rudin: portrait SVG only. Yoshikawa: signatures only. No work file.
-- **MoMA**. Yoshikawa *Theater 11* / Nō-Theater is © — banned. *Japanische Plakate heute* (1978) is also a MoMA collection object with no open-access grant on the page.
+- **MoMA**. Yoshikawa *Theater 11* / Nō-Theater is © — banned. *Japanische Plakate heute* (1978), object 429.1985, licenses via Art Resource / Scala. Do not hotlink or download.
 - **Cooper Hewitt**. Rudin appears only as a name on Helmut Schmid’s *typography today* poster, not as her work.
 - **Internet Archive / Flickr CC**. No rights-clean still of a named work.
 - **Yoshikawa public sculpture** (*Farbschatten Nr. 108* Irchel; *vier mögliche progressionen* Höngg; *wasser-relief-landschaft* Witikon, destroyed). Foundation pages document the works; no CC still of those pieces found. Commons Irchel photos are the atrium / park, not her relief.
