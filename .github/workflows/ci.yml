@@ -571,7 +571,7 @@ jobs:
               console.error("Work stills crop inside .field-work");
               process.exit(1);
             }
-            if (!css.includes('"jmb jmb wc wc"') || !css.includes('"jmb jmb jmb wc wc wc"')) {
+            if (!css.includes("jmb jmb wc wc") || !css.includes("jmb jmb jmb wc wc wc")) {
               console.error("Brockmann and Crouwel must pair on desktop");
               process.exit(1);
             }
