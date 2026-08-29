@@ -131,14 +131,14 @@
   font-size: clamp(1.5rem, 4.2vw, 2.5rem);
   font-weight: 600;
   letter-spacing: -.035em;
-  line-height: .95;
+  line-height: 1.12;
   text-wrap: balance;
 }
 
 .field-name-feature {
   font-size: clamp(2.5rem, 7vw, 7rem);
   letter-spacing: -.045em;
-  line-height: .85;
+  line-height: 1.05;
 }
 
 .field-kicker {
@@ -172,7 +172,7 @@
   font-size: 13px;
   font-weight: 500;
   letter-spacing: -.01em;
-  line-height: 1.4;
+  line-height: 1.55;
   color: var(--text-secondary);
   text-wrap: balance;
   max-width: 22em;
@@ -233,6 +233,10 @@
   margin-top: 6px;
 }
 
+.field-cell:has(> .field-name) {
+  gap: 20px;
+}
+
 .field-cell-has-work {
   padding: 0;
   gap: 0;
@@ -258,6 +262,9 @@
 }
 
 .field-matter {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   padding: 20px;
   background: var(--bg);
   border-top: 1px solid var(--grid-line);
@@ -450,6 +457,12 @@
 }
 
 @media (min-width: 816px) {
+  .field-name-feature {
+    font-size: clamp(1.75rem, 3.2vw, 3.25rem);
+    letter-spacing: -.04em;
+    line-height: 1.1;
+  }
+
   .field {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-areas:
@@ -461,8 +474,7 @@
       "mod mod hair hair"
       "flush flush grot grot"
       "hist hist hist hist"
-      "jmb jmb jmb jmb"
-      "wc wc wc wc"
+      "jmb jmb wc wc"
       "n01 n01 n02 n02"
       "n03 n03 n04 n04"
       "n05 n05 n06 n06"
@@ -485,8 +497,7 @@
       "free free spec spec spec spec"
       "mod mod hair hair flush flush"
       "grot grot grot hist hist hist"
-      "jmb jmb jmb jmb jmb jmb"
-      "wc wc wc wc wc wc"
+      "jmb jmb jmb wc wc wc"
       "n01 n01 n02 n02 n03 n03"
       "n04 n04 n05 n05 n06 n06"
       "n07 n07 n08 n08 n09 n09"
