@@ -571,6 +571,18 @@ jobs:
               console.error("Work stills crop inside .field-work");
               process.exit(1);
             }
+            if (/object-fit:\s*cover/.test(css)) {
+              console.error("About stills must not cover-crop");
+              process.exit(1);
+            }
+            if (!/object-fit:\s*contain/.test(css)) {
+              console.error("About stills sit contain on paper");
+              process.exit(1);
+            }
+            if (css.includes("3654") || css.includes("n13 n13 n13")) {
+              console.error("Total Design must not be a landscape banner span");
+              process.exit(1);
+            }
             if (!css.includes("jmb jmb wc wc") || !css.includes("jmb jmb jmb wc wc wc")) {
               console.error("Brockmann and Crouwel must pair on desktop");
               process.exit(1);

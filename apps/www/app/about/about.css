@@ -240,66 +240,36 @@
   gap: 20px;
 }
 
+/* Gallery prints: intact work on paper, even 20px matte. Never cover. */
 .field-cell-has-work {
-  padding: 0;
-  gap: 0;
+  padding: 20px;
+  gap: 20px;
   min-height: 408px;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .field-work {
   position: relative;
-  flex: 1 1 auto;
-  min-height: 204px;
+  flex: 0 0 auto;
+  min-height: 0;
   overflow: hidden;
+  background: var(--bg);
 }
 
 .field-work img {
-  position: absolute;
-  inset: 0;
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Total Design lockup is landscape ~4.6:1 (3654/787). Contain, never
-   cover. Height follows the mark — not a 408 square well. */
-.field-cell-n13.field-cell-has-work {
-  min-height: 0;
-  justify-content: flex-start;
-}
-
-.field-cell-n13 .field-work {
-  flex: 0 0 auto;
-  min-height: 0;
-  aspect-ratio: 3654 / 787;
-  background: #000;
-}
-
-.field-cell-n13 .field-work img {
+  height: auto;
   object-fit: contain;
-}
-
-/* Work cells pad 0 so stills bleed. On one- and two-column About,
-   n13 is the full viewport — the black well reads as a banner and
-   the mark kisses the edge. Inset the well by the module 20px so
-   it sits on paper; caption (.field-matter) stays as-is. 816px+
-   already shares the row — do not change that contain. */
-@media (max-width: 815px) {
-  .field-cell-n13 .field-work {
-    margin: 20px 20px 0;
-  }
+  object-position: center;
 }
 
 .field-matter {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
-  background: var(--bg);
-  border-top: 1px solid var(--grid-line);
+  padding: 0;
+  background: transparent;
 }
 
 .field-matter .field-kicker,
@@ -484,8 +454,7 @@
       "n07 n08"
       "n09 n10"
       "n11 n12"
-      "n13 n13"
-      "n14 n14"
+      "n13 n14"
       "faq faq"
       "colo colo";
   }
@@ -537,7 +506,7 @@
       "n04 n04 n05 n05 n06 n06"
       "n07 n07 n08 n08 n09 n09"
       "n10 n10 n11 n11 n12 n12"
-      "n13 n13 n13 n14 n14 n14"
+      "n13 n13 n14 n14 n14 n14"
       "faq faq faq faq faq faq"
       "colo colo colo colo colo colo";
   }
