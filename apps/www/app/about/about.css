@@ -282,6 +282,17 @@
   object-fit: contain;
 }
 
+/* Work cells pad 0 so stills bleed. On one- and two-column About,
+   n13 is the full viewport — the black well reads as a banner and
+   the mark kisses the edge. Inset the well by the module 20px so
+   it sits on paper; caption (.field-matter) stays as-is. 816px+
+   already shares the row — do not change that contain. */
+@media (max-width: 815px) {
+  .field-cell-n13 .field-work {
+    margin: 20px 20px 0;
+  }
+}
+
 .field-matter {
   display: flex;
   flex-direction: column;
