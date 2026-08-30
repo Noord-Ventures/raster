@@ -1,4 +1,16 @@
-/* About / field. Isolated. Do not move these rules into site.css. */
+/* About / field. Isolated. Do not move these rules into site.css.
+
+   Box grid: gutters are the cell edges (1px --divider through the
+   field gap), not the main 204 overlay. Kill html::before here so
+   verticals do not run through type or stills. Docs / components /
+   interfaces keep the quiet main-grid overlay. */
+
+html:has(.field-page)::before {
+  display: none;
+}
+body:has(.field-page) {
+  background: transparent;
+}
 
 .field-page {
   width: 100%;
@@ -37,9 +49,18 @@
     "n12"
     "n13"
     "n14"
+    "n15"
+    "n16"
+    "n17"
+    "n18"
+    "n19"
+    "n20"
     "faq"
     "colo";
   grid-auto-rows: minmax(204px, auto);
+  /* Box-cell edges: --divider (same family as the Components 204
+     line, twice --grid-line) so the seams are countable. Not a
+     repeating overlay through type or stills. */
   background: var(--divider);
   padding: 0 1px 1px 0;
   gap: 1px;
@@ -49,14 +70,7 @@
   min-width: 0;
   min-height: 204px;
   padding: 20px;
-  /* Same site 204 as home: body spine at --grid-pos (20 / 204 / 224 /
-     408), fixed, full page. Not a local hero tile at 0 (204k−20). */
-  background-color: var(--bg);
-  background-image: var(--grid-image);
-  background-size: var(--grid-size) 100vh;
-  background-repeat: repeat-x;
-  background-attachment: fixed;
-  background-position: var(--grid-pos);
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -99,12 +113,21 @@
 .field-cell-n12 { grid-area: n12; }
 .field-cell-n13 { grid-area: n13; }
 .field-cell-n14 { grid-area: n14; }
+.field-cell-n15 { grid-area: n15; }
+.field-cell-n16 { grid-area: n16; }
+.field-cell-n17 { grid-area: n17; }
+.field-cell-n18 { grid-area: n18; }
+.field-cell-n19 { grid-area: n19; }
+.field-cell-n20 { grid-area: n20; }
 .field-cell-mod { grid-area: mod; }
 .field-cell-hair { grid-area: hair; }
 .field-cell-flush { grid-area: flush; }
 .field-cell-grot {
   grid-area: grot;
   container-type: inline-size;
+  /* Two 204 modules so kicker, Ag, and the law stay separate. */
+  min-height: 408px;
+  gap: 20px;
 }
 .field-cell-hist { grid-area: hist; }
 .field-cell-faq {
@@ -237,27 +260,27 @@
   gap: 20px;
 }
 
+/* Gallery prints: intact work on paper, even 20px matte. Never cover. */
 .field-cell-has-work {
-  padding: 0;
-  gap: 0;
+  padding: 20px;
+  gap: 20px;
   min-height: 408px;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .field-work {
   position: relative;
-  flex: 1 1 auto;
-  min-height: 204px;
+  flex: 0 0 auto;
+  min-height: 0;
   overflow: hidden;
+  background: var(--bg);
 }
 
 .field-work img {
-  position: absolute;
-  inset: 0;
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   object-position: center;
 }
 
@@ -265,9 +288,8 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
-  background: var(--bg);
-  border-top: 1px solid var(--grid-line);
+  padding: 0;
+  background: transparent;
 }
 
 .field-matter .field-kicker,
@@ -362,6 +384,8 @@
   font-weight: 600;
   letter-spacing: -.05em;
   line-height: .8;
+  /* Inter descender (~0.24em) sits inside the specimen box, not on the law. */
+  padding-block-end: 0.25em;
   color: var(--text);
 }
 
@@ -451,6 +475,9 @@
       "n09 n10"
       "n11 n12"
       "n13 n14"
+      "n15 n16"
+      "n17 n18"
+      "n19 n20"
       "faq faq"
       "colo colo";
   }
@@ -482,6 +509,9 @@
       "n09 n09 n10 n10"
       "n11 n11 n12 n12"
       "n13 n13 n14 n14"
+      "n15 n15 n16 n16"
+      "n17 n17 n18 n18"
+      "n19 n19 n20 n20"
       "faq faq faq faq"
       "colo colo colo colo";
   }
@@ -502,7 +532,10 @@
       "n04 n04 n05 n05 n06 n06"
       "n07 n07 n08 n08 n09 n09"
       "n10 n10 n11 n11 n12 n12"
-      "n13 n13 n14 n14 faq faq"
+      "n13 n13 n14 n14 n15 n15"
+      "n16 n16 n17 n17 n18 n18"
+      "n19 n19 n20 n20 n20 n20"
+      "faq faq faq faq faq faq"
       "colo colo colo colo colo colo";
   }
 }

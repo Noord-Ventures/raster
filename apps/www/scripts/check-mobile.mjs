@@ -114,8 +114,11 @@ if (!specimen.includes("body:has(.specimen-page)") || !specimen.includes("clip-p
 if (!specimen.includes("body:has(.specimen-page) {\n  background: transparent;")) {
   fail("Homepage must not paint a second body grid");
 }
-if (!specimen.includes("box-shadow: 1px 0 0 var(--grid-line), 0 1px 0 var(--grid-line)")) {
-  fail("Homepage field is boxed 204 cells in --grid-line, not a gutter overlay");
+if (!specimen.includes("gap: 1px") || !specimen.includes("background: var(--divider)")) {
+  fail("Homepage box seams must be 1px --divider gaps, countable");
+}
+if (specimen.includes("box-shadow: 1px 0 0 var(--grid-line)")) {
+  fail("Homepage seams must not be a --grid-line shadow whisper");
 }
 if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
   fail("Catalog secondaries must not cover the site module grid");
@@ -123,12 +126,40 @@ if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
 if (!about.includes("padding: 0 1px 1px 0")) {
   fail("About must keep its right and bottom hairline");
 }
-if (!about.includes(".field-work") || !about.includes("object-fit: cover")) {
-  fail("About designer tiles crop the work like an Interfaces poster");
+const aboutField = about.slice(about.indexOf(".field {"), about.indexOf("}", about.indexOf(".field {")));
+if (!aboutField.includes("gap: 1px") || !aboutField.includes("background: var(--divider)")) {
+  fail("About box seams must be 1px --divider gaps, countable");
+}
+if (aboutField.includes("background: var(--grid-line)")) {
+  fail("About seams must not be a --grid-line whisper");
+}
+if (!about.includes(".field-work") || !about.includes("object-fit: contain")) {
+  fail("About stills sit contain on paper");
+}
+if (about.includes("object-fit: cover")) {
+  fail("About stills must not cover-crop");
 }
 const facts = readFileSync(join(root, "apps/www/app/about/facts.ts"), "utf8");
-for (const name of ["Rosmarie Tissi", "Nelly Rudin", "Thérèse Moll", "Shizuko Yoshikawa", "Fré Cohen"]) {
+for (const name of [
+  "Rosmarie Tissi",
+  "Nelly Rudin",
+  "Thérèse Moll",
+  "Shizuko Yoshikawa",
+  "Fré Cohen",
+  "Richard Paul Lohse",
+  "Hans Neuburg",
+  "Carlo Vivarelli",
+  "Willem Sandberg",
+  "Jurriaan Schrofer",
+  "Benno Wissing",
+]) {
   if (!facts.includes(name)) fail(`About field must include ${name}`);
+}
+if (!facts.includes('name: "International Typographic Style"')) {
+  fail("Movement tile is International Typographic Style, not Swiss Style");
+}
+if (facts.includes("Swiss Style")) {
+  fail("Influence copy uses International Typographic Style, not Swiss Style");
 }
 if (!facts.includes("Cohen_fre_sdap_nvv_poster_1926")) {
   fail("Fré Cohen must keep the 1926 SDAP Commons work crop");
@@ -137,12 +168,60 @@ for (const src of [
   "/about/moll-micorene.jpg",
   "/about/rudin-saffa-1958.jpg",
   "/about/yoshikawa-japanische-plakate-heute.jpg",
+  "/about/lohse-100-jahre-eisenbeton.jpg",
+  "/about/neuburg-konstruktive-grafik.jpg",
+  "/about/vivarelli-fur-das-alter.jpg",
+  "/about/sandberg-stedelijk-email-1954.jpg",
+  "/about/schrofer-de-letter-op-straat.jpg",
+  "/about/wissing-schiphol-signposting.jpg",
 ]) {
   if (!facts.includes(src)) fail(`About facts must wire ${src}`);
 }
+for (const leftover of [
+  "/about/lohse-serial.jpg",
+  "/about/neuburg-neue-grafik.jpg",
+  "/about/vivarelli-neue-grafik.jpg",
+  "/about/sandberg-stedelijk.jpg",
+  "/about/schrofer-letterforms.jpg",
+  "/about/wissing-total-design.jpg",
+]) {
+  if (facts.includes(leftover)) fail(`About must not keep placeholder still ${leftover}`);
+}
+for (const mark of [
+  "100 Jahre Eisenbeton. Kunstgewerbemuseum Zürich, 1950.",
+  "Konstruktive Grafik. Kunstgewerbemuseum Zürich, 1958.",
+  "Für das Alter. Per la vecchiaia, 1949.",
+  "Stedelijk Museum enamel sign. Torn paper, 1954.",
+  "De letter op straat. Meijer, 1956.",
+  "Schiphol signage. Total Design, 1967.",
+]) {
+  if (!facts.includes(mark)) fail(`About field must keep mark: ${mark}`);
+}
+if (!facts.includes("/about/neue-grafik.jpg")) {
+  fail("ITS tile keeps the July 1963 Neue Grafik still");
+}
+const neuburgAt = facts.indexOf('name: "Hans Neuburg"');
+if (neuburgAt < 0) fail("About field must include Hans Neuburg");
+const neuburgBlock = facts.slice(neuburgAt, facts.indexOf("},", facts.indexOf("src:", neuburgAt)) + 2);
+if (neuburgBlock.includes("/about/neue-grafik.jpg")) {
+  fail("Neuburg still must not reuse the ITS July 1963 Neue Grafik");
+}
+if (!about.includes(".field-cell-n20") || !about.includes("n19 n19 n20 n20 n20 n20")) {
+  fail("About field must run through n20; last 6-col row is Wissing + ITS");
+}
 const aboutCell = about.slice(about.indexOf(".field-cell {"), about.indexOf("}", about.indexOf(".field-cell {")));
-if (!aboutCell.includes("background-image: var(--grid-image)") || !aboutCell.includes("background-position: var(--grid-pos)") || !aboutCell.includes("background-attachment: fixed")) {
-  fail("About must keep the gutter-line 204 spine, not a local hero tile");
+if (aboutCell.includes("background-image") || aboutCell.includes("--grid-image") || aboutCell.includes("background-attachment: fixed")) {
+  fail("About boxed cells must not paint the main 204 overlay");
+}
+const aboutKill = about.indexOf("html:has(.field-page)::before");
+if (aboutKill < 0) {
+  fail("About must kill html::before so the main grid does not cut type");
+}
+if (!about.slice(aboutKill, about.indexOf("}", aboutKill)).includes("display: none")) {
+  fail("About overlay kill must be display: none");
+}
+if (about.includes("background-image: var(--grid-image)")) {
+  fail("About must not paint gutter lines through type or stills");
 }
 const aboutEra = about.slice(about.indexOf(".field-cell-era {"), about.indexOf("}", about.indexOf(".field-cell-era {")));
 if (aboutEra.includes("background-image")) {

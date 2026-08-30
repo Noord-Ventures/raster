@@ -59,7 +59,7 @@ export const specimen = {
 
 export const history = {
   kicker: "History",
-  body: "The program comes from Swiss Style and Dutch modernism. Josef Müller-Brockmann drew it. Wim Crouwel put it on the press at Total Design.",
+  body: "The program comes from International Typographic Style and Dutch modernism. Josef Müller-Brockmann drew it. Wim Crouwel put it on the press at Total Design.",
 };
 
 export const featured = [
@@ -88,6 +88,36 @@ export const featured = [
 ] as const;
 
 export const field = [
+  {
+    name: "Richard Paul Lohse",
+    years: "1902–1988",
+    place: "Zurich",
+    mark: "100 Jahre Eisenbeton. Kunstgewerbemuseum Zürich, 1950.",
+    work: {
+      src: "/about/lohse-100-jahre-eisenbeton.jpg",
+      alt: "100 Jahre Eisenbeton, Kunstgewerbemuseum Zürich, 1950",
+    },
+  },
+  {
+    name: "Hans Neuburg",
+    years: "1904–1983",
+    place: "Zurich",
+    mark: "Konstruktive Grafik. Kunstgewerbemuseum Zürich, 1958.",
+    work: {
+      src: "/about/neuburg-konstruktive-grafik.jpg",
+      alt: "Konstruktive Grafik, Kunstgewerbemuseum Zürich, 1958",
+    },
+  },
+  {
+    name: "Carlo Vivarelli",
+    years: "1919–1986",
+    place: "Zurich",
+    mark: "Für das Alter. Per la vecchiaia, 1949.",
+    work: {
+      src: "/about/vivarelli-fur-das-alter.jpg",
+      alt: "Für das Alter. Per la vecchiaia, 1949",
+    },
+  },
   {
     name: "Max Bill",
     years: "1908–1994",
@@ -154,8 +184,8 @@ export const field = [
     place: "Zurich",
     mark: "20 CHF Gertrud Kurz, 1992. Odermatt & Tissi.",
     work: {
-      src: "https://upload.wikimedia.org/wikipedia/commons/7/78/Swiss-Commemorative-Coin-1992-CHF-20-obverse.png",
-      alt: "20 CHF Gertrud Kurz reverse, 1992",
+      src: "/about/tissi-gertrud-kurz.jpg",
+      alt: "Münzkabinett Berlin. GERTRUD KURZ, 1890/1972.",
     },
   },
   {
@@ -209,17 +239,47 @@ export const field = [
     },
   },
   {
-    name: "Total Design",
-    years: "1963",
+    name: "Willem Sandberg",
+    years: "1897–1984",
     place: "Amsterdam",
-    mark: "Crouwel, Wissing, Kramer. TD.",
+    mark: "Stedelijk Museum enamel sign. Torn paper, 1954.",
     work: {
-      src: "/about/total-design-logo.jpg",
-      alt: "Total Design mark",
+      src: "/about/sandberg-stedelijk-email-1954.jpg",
+      alt: "Stedelijk Museum enamel sign, 1954",
     },
   },
   {
-    name: "Swiss Style",
+    name: "Jurriaan Schrofer",
+    years: "1926–1990",
+    place: "The Hague",
+    mark: "De letter op straat. Meijer, 1956.",
+    work: {
+      src: "/about/schrofer-de-letter-op-straat.jpg",
+      alt: "De letter op straat, 1956",
+    },
+  },
+  {
+    name: "Total Design",
+    years: "1971",
+    place: "Amsterdam",
+    mark: "Stedelijk, co westerik, 24 sep–7 nov 1971.",
+    work: {
+      src: "/about/total-design-westerik-1971.jpg",
+      alt: "Total Design / Crouwel, co westerik, Stedelijk 24 sep–7 nov 1971",
+    },
+  },
+  {
+    name: "Benno Wissing",
+    years: "1923–2008",
+    place: "Rotterdam · Amsterdam",
+    mark: "Schiphol signage. Total Design, 1967.",
+    work: {
+      src: "/about/wissing-schiphol-signposting.jpg",
+      alt: "Schiphol signage, Total Design, 1967",
+    },
+  },
+  {
+    name: "International Typographic Style",
     years: "1950s",
     place: "Switzerland",
     mark: "International Typographic Style. Objective. Modular.",

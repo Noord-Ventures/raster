@@ -1,10 +1,9 @@
 /* Homepage specimen. Imported only by app/page.tsx. */
 
-/* Homepage is boxed 204 cells (cell shadows). The site gutter
-   overlay on html::before would cut through Raster, the tagline,
-   and the install line — a cage, not a field. Kill it here only.
-   Components and the rest keep the overlay. Clip-path still
-   kills edge hairlines so the 20px inset is not a page frame. */
+/* Two grids: boxed pages (home, About) use cell-edge hairlines.
+   The site gutter overlay on html::before is the main 204 for docs /
+   components / interfaces. Kill it here so it does not cut Raster,
+   the tagline, or the install line. */
 html:has(.specimen-page)::before {
   display: none;
 }
@@ -46,23 +45,22 @@ body:has(.specimen-page) {
     "kitc"
     "kitd";
   grid-auto-rows: minmax(204px, auto);
-  /* Paper to the viewport via html. Internal lines are cell shadows
-     in chrome --divider, clipped at the field edge so no hairline
-     reads as a page frame. Gutters stay off this page. */
-  background: transparent;
+  /* Internal box seams only. --divider is the visible chrome hairline
+     in the same family as the main-grid --grid-line. No outer frame:
+     clip-path eats edge overflow so this is not a page cage. */
+  background: var(--divider);
   padding: 0;
-  gap: 0;
+  gap: 1px;
   clip-path: inset(0);
 }
 .specimen-cell {
   min-width: 0;
   min-height: 204px;
   padding: 20px;
-  background: transparent;
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   overflow: visible;
-  box-shadow: 1px 0 0 var(--grid-line), 0 1px 0 var(--grid-line);
 }
 .specimen-cell-face {
   grid-area: face;
