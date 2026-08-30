@@ -97,8 +97,12 @@ if (!cover900.includes("padding-top: 120px") || !cover900.includes("justify-cont
 if (!nav.includes('data-toc="groups"') || !nav.includes('data-toc="items"')) {
   fail("Do not collapse the two-column TOC to fake the H1 align");
 }
-if (ifCss.includes("@media (min-width: 900px)") && !ifCss.slice(ifCss.indexOf(".if-title {")).includes("padding-top: 120px")) {
-  fail("Interfaces H1 must share the rail first-row line on desktop");
+if (ifCss.includes(".if-title")) {
+  fail("Interfaces must not keep a parallel if-title spacer; cover owns the 204 cell");
+}
+const ifIndex = readFileSync(join(root, "apps/www/app/interfaces/page.tsx"), "utf8");
+if (!ifIndex.includes('className="cover"')) {
+  fail("Interfaces H1 must use the shared cover so it shares the rail first-row line");
 }
 
 if (!block.includes("writeText") || !block.includes("Copied") || !block.includes("aria-live")) {
@@ -273,8 +277,8 @@ if (!ifCss.includes("body:has(.if-index)") || !ifCss.includes("background: trans
 if (/if-list \{[^}]*padding:\s*24px/s.test(ifCss)) {
   fail("Interfaces cards must sit on the 204, not 24px off it");
 }
-if (!ifCss.includes(".if-title {\n  min-height: 204px")) {
-  fail("Interfaces title must occupy a 204 cell");
+if (!site.includes(".cover {\n  min-height: 204px")) {
+  fail("Catalog cover must occupy a 204 cell");
 }
 
 const phoneCss = readFileSync(join(root, "packages/core/css/phone.css"), "utf8");

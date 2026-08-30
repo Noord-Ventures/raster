@@ -32,7 +32,7 @@ body:has(.if-index) {
     flex-direction: column;
     padding-top: calc(72px + env(safe-area-inset-top, 0px));
   }
-  .if-index .if-title { padding-top: 32px; }
+  .if-index .cover { padding-top: 32px; }
 }
 @media (max-width: 640px) {
   .if-index { padding-top: calc(56px + env(safe-area-inset-top, 0px)); }
@@ -75,24 +75,8 @@ body:has(.if-index) {
 .if-rail a[aria-current="page"] { font-weight: 500; }
 .if-rail a:focus-visible { outline: 1px solid var(--text); outline-offset: 2px; }
 
-/* Title occupies the first 204 cell. On desktop the H1 top shares
-   the rail first-row line (120px). Type sits on the field. */
-.if-title {
-  min-height: 204px;
-  max-width: 592px;
-  padding: 20px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  background: transparent;
-}
-@media (min-width: 900px) {
-  .if-title {
-    padding-top: 120px;
-    justify-content: flex-start;
-  }
-}
-.if-title .rs-t-sub { margin-top: 16px; }
+/* Title uses shared .cover in site.css so H1 top = TOC first-row
+   line at scroll 0. Do not keep a parallel spacer here. */
 
 /* Landing: poster crops sit on the 204. 388 × 408 = two modules.
    No 24px pad — that dropped the first horizontal and shoved cards

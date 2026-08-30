@@ -61,8 +61,12 @@ if (!index.includes("InterfaceCrop")) {
   console.error("Interfaces index must render poster crops, not title-only cards");
   process.exit(1);
 }
-if (!index.includes("if-title")) {
-  console.error("Interfaces title must occupy a 204 cell");
+if (!index.includes('className="cover"')) {
+  console.error("Interfaces title must use the shared cover so H1 shares the rail first-row line");
+  process.exit(1);
+}
+if (index.includes("if-title") || css.includes(".if-title")) {
+  console.error("Interfaces must not keep a parallel if-title spacer; cover owns the 204 cell");
   process.exit(1);
 }
 const baseCss = readFileSync(join(root, "packages/core/css/base.css"), "utf8");
@@ -90,14 +94,6 @@ if (/\.if-rail \{[^}]*background:\s*var\(--bg\)/s.test(css)) {
 }
 if (/if-list \{[^}]*padding:\s*24px/s.test(css)) {
   console.error("Interfaces cards must sit on the 204, not 24px off it");
-  process.exit(1);
-}
-if (!css.includes(".if-title {\n  min-height: 204px")) {
-  console.error("Interfaces title cell must be 204");
-  process.exit(1);
-}
-if (!css.includes("padding-top: 120px") || !css.includes("justify-content: flex-start")) {
-  console.error("Interfaces H1 must share the rail first-row line on desktop");
   process.exit(1);
 }
 const tileAt = css.indexOf(".if-tile {");
