@@ -49,6 +49,12 @@ body:has(.field-page) {
     "n12"
     "n13"
     "n14"
+    "n15"
+    "n16"
+    "n17"
+    "n18"
+    "n19"
+    "n20"
     "faq"
     "colo";
   grid-auto-rows: minmax(204px, auto);
@@ -107,6 +113,12 @@ body:has(.field-page) {
 .field-cell-n12 { grid-area: n12; }
 .field-cell-n13 { grid-area: n13; }
 .field-cell-n14 { grid-area: n14; }
+.field-cell-n15 { grid-area: n15; }
+.field-cell-n16 { grid-area: n16; }
+.field-cell-n17 { grid-area: n17; }
+.field-cell-n18 { grid-area: n18; }
+.field-cell-n19 { grid-area: n19; }
+.field-cell-n20 { grid-area: n20; }
 .field-cell-mod { grid-area: mod; }
 .field-cell-hair { grid-area: hair; }
 .field-cell-flush { grid-area: flush; }
@@ -463,6 +475,9 @@ body:has(.field-page) {
       "n09 n10"
       "n11 n12"
       "n13 n14"
+      "n15 n16"
+      "n17 n18"
+      "n19 n20"
       "faq faq"
       "colo colo";
   }
@@ -494,6 +509,9 @@ body:has(.field-page) {
       "n09 n09 n10 n10"
       "n11 n11 n12 n12"
       "n13 n13 n14 n14"
+      "n15 n15 n16 n16"
+      "n17 n17 n18 n18"
+      "n19 n19 n20 n20"
       "faq faq faq faq"
       "colo colo colo colo";
   }
@@ -514,7 +532,9 @@ body:has(.field-page) {
       "n04 n04 n05 n05 n06 n06"
       "n07 n07 n08 n08 n09 n09"
       "n10 n10 n11 n11 n12 n12"
-      "n13 n13 n14 n14 n14 n14"
+      "n13 n13 n14 n14 n15 n15"
+      "n16 n16 n17 n17 n18 n18"
+      "n19 n19 n20 n20 n20 n20"
       "faq faq faq faq faq faq"
       "colo colo colo colo colo colo";
   }

@@ -59,7 +59,7 @@ export const specimen = {
 
 export const history = {
   kicker: "History",
-  body: "The program comes from Swiss Style and Dutch modernism. Josef Müller-Brockmann drew it. Wim Crouwel put it on the press at Total Design.",
+  body: "The program comes from International Typographic Style and Dutch modernism. Josef Müller-Brockmann drew it. Wim Crouwel put it on the press at Total Design.",
 };
 
 export const featured = [
@@ -88,6 +88,36 @@ export const featured = [
 ] as const;
 
 export const field = [
+  {
+    name: "Richard Paul Lohse",
+    years: "1902–1988",
+    place: "Zurich",
+    mark: "Neue Grafik, 1958. Serial painting.",
+    work: {
+      src: "/about/lohse-serial.jpg",
+      alt: "Serial painting",
+    },
+  },
+  {
+    name: "Hans Neuburg",
+    years: "1904–1983",
+    place: "Zurich",
+    mark: "Neue Grafik. Zurich.",
+    work: {
+      src: "/about/neuburg-neue-grafik.jpg",
+      alt: "Neue Grafik, Zurich",
+    },
+  },
+  {
+    name: "Carlo Vivarelli",
+    years: "1919–1986",
+    place: "Zurich",
+    mark: "Neue Grafik, 1958.",
+    work: {
+      src: "/about/vivarelli-neue-grafik.jpg",
+      alt: "Neue Grafik, 1958",
+    },
+  },
   {
     name: "Max Bill",
     years: "1908–1994",
@@ -209,6 +239,26 @@ export const field = [
     },
   },
   {
+    name: "Willem Sandberg",
+    years: "1897–1984",
+    place: "Amsterdam",
+    mark: "Stedelijk Museum. Catalogues.",
+    work: {
+      src: "/about/sandberg-stedelijk.jpg",
+      alt: "Stedelijk Museum catalogues",
+    },
+  },
+  {
+    name: "Jurriaan Schrofer",
+    years: "1926–1990",
+    place: "The Hague",
+    mark: "Letterforms. Phototypography.",
+    work: {
+      src: "/about/schrofer-letterforms.jpg",
+      alt: "Letterforms, phototypography",
+    },
+  },
+  {
     name: "Total Design",
     years: "1971",
     place: "Amsterdam",
@@ -219,7 +269,17 @@ export const field = [
     },
   },
   {
-    name: "Swiss Style",
+    name: "Benno Wissing",
+    years: "1923–2008",
+    place: "Rotterdam · Amsterdam",
+    mark: "Total Design, 1963.",
+    work: {
+      src: "/about/wissing-total-design.jpg",
+      alt: "Total Design, 1963",
+    },
+  },
+  {
+    name: "International Typographic Style",
     years: "1950s",
     place: "Switzerland",
     mark: "International Typographic Style. Objective. Modular.",

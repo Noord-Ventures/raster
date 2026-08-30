@@ -446,7 +446,7 @@ jobs:
           grep -q 'kicker: "Specimen"' "$facts"
           grep -q 'kicker: "History"' "$facts"
           grep -q 'heading: WORD' "$facts"
-          grep -q 'Swiss Style' "$facts"
+          grep -q 'International Typographic Style' "$facts"
           grep -q 'Dutch modernism' "$facts"
           grep -q 'Josef Müller-Brockmann' "$facts"
           grep -q 'Wim Crouwel' "$facts"
@@ -457,6 +457,12 @@ jobs:
           grep -q 'Piet Zwart' "$facts"
           grep -q 'Paul Schuitema' "$facts"
           grep -q 'Otto Treumann' "$facts"
+          grep -q 'Richard Paul Lohse' "$facts"
+          grep -q 'Hans Neuburg' "$facts"
+          grep -q 'Carlo Vivarelli' "$facts"
+          grep -q 'Willem Sandberg' "$facts"
+          grep -q 'Jurriaan Schrofer' "$facts"
+          grep -q 'Benno Wissing' "$facts"
           grep -q 'Total Design' "$facts"
           grep -q 'Neue Grafik' "$facts"
           grep -q 'Grid Systems' "$facts"
@@ -533,6 +539,10 @@ jobs:
           grep -q 'Module cells sit flush on the gridline' "$facts"
           grep -q 'Hairlines mark the module' "$facts"
           grep -q 'The program comes from' "$facts"
+          if grep -n 'Swiss Style' "$facts"; then
+            echo "Influence copy uses International Typographic Style, not Swiss Style"
+            exit 1
+          fi
           if grep -nE 'The programme is visible|No radius|Flush · 0' "$facts" "$page"; then
             echo "About must not keep the old flush/programme slogans"
             exit 1
@@ -605,6 +615,10 @@ jobs:
             }
             if (css.includes("3654") || css.includes("n13 n13 n13")) {
               console.error("Total Design must not be a landscape banner span");
+              process.exit(1);
+            }
+            if (!css.includes(".field-cell-n20") || !css.includes("n19 n19 n20 n20 n20 n20")) {
+              console.error("About field must run through n20; last 6-col row is Wissing + ITS");
               process.exit(1);
             }
             if (!css.includes("jmb jmb wc wc") || !css.includes("jmb jmb jmb wc wc wc")) {

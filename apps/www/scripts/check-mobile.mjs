@@ -140,8 +140,26 @@ if (about.includes("object-fit: cover")) {
   fail("About stills must not cover-crop");
 }
 const facts = readFileSync(join(root, "apps/www/app/about/facts.ts"), "utf8");
-for (const name of ["Rosmarie Tissi", "Nelly Rudin", "Thérèse Moll", "Shizuko Yoshikawa", "Fré Cohen"]) {
+for (const name of [
+  "Rosmarie Tissi",
+  "Nelly Rudin",
+  "Thérèse Moll",
+  "Shizuko Yoshikawa",
+  "Fré Cohen",
+  "Richard Paul Lohse",
+  "Hans Neuburg",
+  "Carlo Vivarelli",
+  "Willem Sandberg",
+  "Jurriaan Schrofer",
+  "Benno Wissing",
+]) {
   if (!facts.includes(name)) fail(`About field must include ${name}`);
+}
+if (!facts.includes('name: "International Typographic Style"')) {
+  fail("Movement tile is International Typographic Style, not Swiss Style");
+}
+if (facts.includes("Swiss Style")) {
+  fail("Influence copy uses International Typographic Style, not Swiss Style");
 }
 if (!facts.includes("Cohen_fre_sdap_nvv_poster_1926")) {
   fail("Fré Cohen must keep the 1926 SDAP Commons work crop");
@@ -150,8 +168,26 @@ for (const src of [
   "/about/moll-micorene.jpg",
   "/about/rudin-saffa-1958.jpg",
   "/about/yoshikawa-japanische-plakate-heute.jpg",
+  "/about/lohse-serial.jpg",
+  "/about/neuburg-neue-grafik.jpg",
+  "/about/vivarelli-neue-grafik.jpg",
+  "/about/sandberg-stedelijk.jpg",
+  "/about/schrofer-letterforms.jpg",
+  "/about/wissing-total-design.jpg",
 ]) {
   if (!facts.includes(src)) fail(`About facts must wire ${src}`);
+}
+if (!facts.includes("/about/neue-grafik.jpg")) {
+  fail("ITS tile keeps the July 1963 Neue Grafik still");
+}
+const neuburgAt = facts.indexOf('name: "Hans Neuburg"');
+if (neuburgAt < 0) fail("About field must include Hans Neuburg");
+const neuburgBlock = facts.slice(neuburgAt, facts.indexOf("},", facts.indexOf("src:", neuburgAt)) + 2);
+if (neuburgBlock.includes("/about/neue-grafik.jpg")) {
+  fail("Neuburg still must not reuse the ITS July 1963 Neue Grafik");
+}
+if (!about.includes(".field-cell-n20") || !about.includes("n19 n19 n20 n20 n20 n20")) {
+  fail("About field must run through n20; last 6-col row is Wissing + ITS");
 }
 const aboutCell = about.slice(about.indexOf(".field-cell {"), about.indexOf("}", about.indexOf(".field-cell {")));
 if (aboutCell.includes("background-image") || aboutCell.includes("--grid-image") || aboutCell.includes("background-attachment: fixed")) {

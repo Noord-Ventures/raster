@@ -20,3 +20,9 @@ Stills of the work, not portraits. Local About stills, same treatment as the oth
 | moll-micorene.jpg | Thérèse Moll, Micorène, c. 1958 | Local About still |
 | rudin-saffa-1958.jpg | Nelly Rudin, Saffa 1958 Zürich catalog. Face in the design is Monica Brügger | Local About still |
 | yoshikawa-japanische-plakate-heute.jpg | Shizuko Yoshikawa, Japanische Plakate heute, 1978 | Local About still |
+| lohse-serial.jpg | Richard Paul Lohse, serial painting | Museum/archive scan, landing as git blob |
+| neuburg-neue-grafik.jpg | Hans Neuburg, Neue Grafik, Zurich (not the July 1963 ITS still) | Museum/archive scan, landing as git blob |
+| vivarelli-neue-grafik.jpg | Carlo Vivarelli, Neue Grafik, 1958 | Museum/archive scan, landing as git blob |
+| sandberg-stedelijk.jpg | Willem Sandberg, Stedelijk Museum catalogues | Museum/archive scan, landing as git blob |
+| schrofer-letterforms.jpg | Jurriaan Schrofer, letterforms, phototypography | Museum/archive scan, landing as git blob |
+| wissing-total-design.jpg | Benno Wissing, Total Design, 1963 | Museum/archive scan, landing as git blob |
