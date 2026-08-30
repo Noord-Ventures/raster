@@ -123,8 +123,11 @@ if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
 if (!about.includes("padding: 0 1px 1px 0")) {
   fail("About must keep its right and bottom hairline");
 }
-if (!about.includes(".field-work") || !about.includes("object-fit: cover")) {
-  fail("About designer tiles crop the work like an Interfaces poster");
+if (!about.includes(".field-work") || !about.includes("object-fit: contain")) {
+  fail("About stills sit contain on paper");
+}
+if (about.includes("object-fit: cover")) {
+  fail("About stills must not cover-crop");
 }
 const facts = readFileSync(join(root, "apps/www/app/about/facts.ts"), "utf8");
 for (const name of ["Rosmarie Tissi", "Nelly Rudin", "Thérèse Moll", "Shizuko Yoshikawa", "Fré Cohen"]) {
