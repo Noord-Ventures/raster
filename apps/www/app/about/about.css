@@ -105,6 +105,9 @@
 .field-cell-grot {
   grid-area: grot;
   container-type: inline-size;
+  /* Two 204 modules so kicker, Ag, and the law stay separate. */
+  min-height: 408px;
+  gap: 20px;
 }
 .field-cell-hist { grid-area: hist; }
 .field-cell-faq {
@@ -362,6 +365,8 @@
   font-weight: 600;
   letter-spacing: -.05em;
   line-height: .8;
+  /* Inter descender (~0.24em) sits inside the specimen box, not on the law. */
+  padding-block-end: 0.25em;
   color: var(--text);
 }
 
