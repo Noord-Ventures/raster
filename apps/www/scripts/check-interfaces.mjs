@@ -69,6 +69,10 @@ if (index.includes("if-title") || css.includes(".if-title")) {
   console.error("Interfaces must not keep a parallel if-title spacer; cover owns the 204 cell");
   process.exit(1);
 }
+if (css.includes("min-height: 204px")) {
+  console.error("Cover owns the 204 cell in site.css; do not keep a parallel min-height 204 in interfaces.css");
+  process.exit(1);
+}
 const baseCss = readFileSync(join(root, "packages/core/css/base.css"), "utf8");
 if (!baseCss.includes("html::before") || !baseCss.includes("var(--grid-image)")) {
   console.error("Site gutter overlay must paint verticals on html::before");

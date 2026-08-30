@@ -742,7 +742,11 @@ jobs:
           fi
           grep -q 'background:var(--divider)' packages/core/css/components/button-group.css
           grep -q 'gap:1px' packages/core/css/components/button-group.css
-          grep -q 'min-height: 204px' apps/www/app/interfaces/interfaces.css
+          grep -q 'min-height: 204px' apps/www/app/site.css
+          if ! awk '/^\.cover \{/,/^\}/' apps/www/app/site.css | grep -q 'min-height: 204px'; then
+            echo "Cover must occupy a 204 cell"
+            exit 1
+          fi
           grep -q 'margin-top: 204px' apps/www/app/interfaces/interfaces.css
           if grep -n 'background: var(--bg)' apps/www/app/interfaces/interfaces.css | grep -q if-rail; then
             echo "Interfaces rail must not cover the 204"

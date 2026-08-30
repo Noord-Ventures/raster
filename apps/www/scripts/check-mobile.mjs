@@ -280,6 +280,9 @@ if (/if-list \{[^}]*padding:\s*24px/s.test(ifCss)) {
 if (!site.includes(".cover {\n  min-height: 204px")) {
   fail("Catalog cover must occupy a 204 cell");
 }
+if (!/@media \(max-width: 899px\) \{\s*\.cover \{\s*min-height: 0;/.test(site)) {
+  fail("Phone cover must drop the 204 cell once the rail hides");
+}
 
 const phoneCss = readFileSync(join(root, "packages/core/css/phone.css"), "utf8");
 const tokensCss = readFileSync(join(root, "packages/core/css/tokens.css"), "utf8");

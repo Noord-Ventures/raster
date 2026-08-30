@@ -32,7 +32,11 @@ body:has(.if-index) {
     flex-direction: column;
     padding-top: calc(72px + env(safe-area-inset-top, 0px));
   }
-  .if-index .cover { padding-top: 32px; }
+  .if-index .cover {
+    min-height: 0;
+    padding-top: 32px;
+    justify-content: flex-start;
+  }
 }
 @media (max-width: 640px) {
   .if-index { padding-top: calc(56px + env(safe-area-inset-top, 0px)); }
@@ -457,6 +461,7 @@ body:has(.if-index) {
 
 @media (max-width: 640px) {
   .if-specimen {
+    margin-top: 24px;
     height: 680px;
     min-height: 612px;
   }

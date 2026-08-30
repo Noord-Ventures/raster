@@ -350,7 +350,11 @@ body {
     padding-top: calc(72px + env(safe-area-inset-top, 0px));
   }
   .site-layout .cover,
-  .if-index .cover { padding-top: 32px; }
+  .if-index .cover {
+    min-height: 0;
+    padding-top: 32px;
+    justify-content: flex-start;
+  }
 }
 @media (max-width: 640px) {
   .site-layout { padding-top: calc(56px + env(safe-area-inset-top, 0px)); }
@@ -377,6 +381,12 @@ body {
     justify-content: flex-start;
   }
   .cover .component-head { margin-top: 0; }
+}
+@media (max-width: 899px) {
+  .cover {
+    min-height: 0;
+    justify-content: flex-start;
+  }
 }
 .cover .rs-t-sub { margin-top: 16px; }
 
