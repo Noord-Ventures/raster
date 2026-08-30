@@ -98,9 +98,10 @@
 /* ── Base ──
    Raster owns the page: paper on html, ink on body, and quiet
    gutter verticals on html::before so overflow-x:clip cannot drop
-   them. Clip 21px from the left on desktop so the 20px inset is
-   not a page frame. No 204 horizontals — those cage the type.
-   Homepage kills this overlay and keeps boxed cells only. */
+   them. --grid-pos: 20px 0 puts the first tile line on the left
+   20px gutter; that utmost left gutter must paint. Do not clip
+   it. No 204 horizontals — those cage the type. Homepage and
+   About kill this overlay and keep boxed cells only. */
 html{scroll-behavior:smooth;font-size:16px;overflow-x:clip;background-color:var(--bg)}
 html::before{
   content:"";
@@ -113,7 +114,6 @@ html::before{
   background-repeat:repeat-x;
   background-position:var(--grid-pos)
 }
-@media(min-width:481px){html::before{clip-path:inset(0 0 0 21px)}}
 body{
   position:relative;
   z-index:1;
@@ -577,7 +577,8 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .rs-textarea::placeholder{color:var(--text-secondary)}
 
 /* ── Separator: a hairline, horizontal or vertical.
-   Chrome and the page 204 share one ink (--divider = --grid-line). */
+   Chrome uses --divider (the stronger of the two grid inks).
+   The page 204 uses --grid-line. Same family, two steps. */
 .rs-sep{border:none;border-top:1px solid var(--divider);margin:20px 0}
 .rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider);margin:0 12px}
 

@@ -17,10 +17,11 @@ html, body { margin: 0; padding: 0; }
 
 /* Inner-page 204 verticals live on html::before. html/body overflow-x:clip
    drops background-attachment:fixed in Chromium. A fixed layer does not.
-   Ink is --grid-line (quieter than chrome --divider). Clip 21px from the
-   left on desktop so the 20px inset is not a page frame. Homepage kills
-   this overlay so boxed pages (home, About) are cell-edge gutters,
-   not a cage through type. Components / docs / interfaces keep it. */
+   Ink is --grid-line (quieter than the Home / About --divider cage).
+   --grid-pos: 20px 0 puts the first tile line on the left 20px gutter;
+   that utmost left gutter must paint — do not clip it. Homepage and
+   About kill this overlay so boxed pages are cell-edge gutters, not a
+   cage through type. Components / docs / interfaces keep it. */
 html { background-color: var(--bg); }
 html::before {
   content: "";
@@ -32,9 +33,6 @@ html::before {
   background-size: var(--grid-size) 100%;
   background-repeat: repeat-x;
   background-position: var(--grid-pos);
-}
-@media (min-width: 481px) {
-  html::before { clip-path: inset(0 0 0 21px); }
 }
 body {
   position: relative;

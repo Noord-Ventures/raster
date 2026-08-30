@@ -51,9 +51,11 @@ export default function TokensPage() {
 
         <h2 className="section-label">The grid</h2>
         <p className="rs-t-body">
-          {grid.module}px modules: a {grid.column}px column and a {grid.gutter}px gutter,
-          drawn faintly across every page. Content boxes span whole modules; edges step from
-          grid line to grid line on resize.
+          {grid.module}px modules: a {grid.column}px column and a {grid.gutter}px gutter.
+          Inner pages draw the quiet `--grid-line` verticals, including the left gutter.
+          Home and About use a stronger `--divider` cell cage, with `--grid-line` only
+          on the left and right of the box. Content boxes span whole modules; edges
+          step from grid line to grid line on resize.
         </p>
 
         <h2 className="section-label">Radius</h2>

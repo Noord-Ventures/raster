@@ -117,14 +117,20 @@ if (!specimen.includes("body:has(.specimen-page) {\n  background: transparent;")
 if (!specimen.includes("gap: 1px") || !specimen.includes("background: var(--divider)")) {
   fail("Homepage box seams must be 1px --divider gaps, countable");
 }
-if (specimen.includes("box-shadow: 1px 0 0 var(--grid-line)")) {
-  fail("Homepage seams must not be a --grid-line shadow whisper");
+if (!specimen.includes("box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line)")) {
+  fail("Homepage L/R box margins must be inset --grid-line, quieter than the cage");
+}
+if (specimen.includes("box-shadow: 1px 0 0 var(--grid-line)") && !specimen.includes("inset 1px 0 0 var(--grid-line)")) {
+  fail("Homepage cell seams must stay --divider, not an outer --grid-line whisper");
 }
 if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
   fail("Catalog secondaries must not cover the site module grid");
 }
-if (!about.includes("padding: 0 1px 1px 0")) {
-  fail("About must keep its right and bottom hairline");
+if (!about.includes("padding: 0 0 1px 0")) {
+  fail("About must keep its bottom cage hairline");
+}
+if (!about.includes("box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line)")) {
+  fail("About L/R box margins must be inset --grid-line, quieter than the cage");
 }
 const aboutField = about.slice(about.indexOf(".field {"), about.indexOf("}", about.indexOf(".field {")));
 if (!aboutField.includes("gap: 1px") || !aboutField.includes("background: var(--divider)")) {
@@ -235,8 +241,11 @@ if (/\.if-rail \{[^}]*background:\s*var\(--bg\)/s.test(ifCss)) {
   fail("Interfaces rail must not cover the site module grid");
 }
 const baseCss = readFileSync(join(root, "packages/core/css/base.css"), "utf8");
-if (!baseCss.includes("html::before") || !baseCss.includes("clip-path:inset(0 0 0 21px)") || !baseCss.includes("var(--grid-image)")) {
-  fail("Site gutter overlay must paint verticals on html::before and clip the 20px page frame");
+if (!baseCss.includes("html::before") || !baseCss.includes("var(--grid-image)")) {
+  fail("Site gutter overlay must paint verticals on html::before");
+}
+if (baseCss.includes("clip-path:inset(0 0 0 21px)") || site.includes("clip-path: inset(0 0 0 21px)")) {
+  fail("Left inner-page gutter must paint; do not clip 21px off html::before");
 }
 const beforeAt = baseCss.indexOf("html::before{");
 const beforeRule = beforeAt >= 0 ? baseCss.slice(beforeAt, baseCss.indexOf("}", beforeAt)) : "";

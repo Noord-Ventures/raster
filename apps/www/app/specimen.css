@@ -1,6 +1,7 @@
 /* Homepage specimen. Imported only by app/page.tsx. */
 
-/* Two grids: boxed pages (home, About) use cell-edge hairlines.
+/* Two grids, two inks. Boxed pages (home, About) use a --divider
+   cell-edge cage. L/R box margins are the quieter --grid-line.
    The site gutter overlay on html::before is the main 204 for docs /
    components / interfaces. Kill it here so it does not cut Raster,
    the tagline, or the install line. */
@@ -45,12 +46,14 @@ body:has(.specimen-page) {
     "kitc"
     "kitd";
   grid-auto-rows: minmax(204px, auto);
-  /* Internal box seams only. --divider is the visible chrome hairline
-     in the same family as the main-grid --grid-line. No outer frame:
-     clip-path eats edge overflow so this is not a page cage. */
+  /* Cell seams: --divider, the stronger of the two grid inks.
+     L/R box margins: --grid-line, quieter, highlighting the box
+     not a repeating 204. clip-path eats --divider edge overflow
+     so the cage is not a page frame. */
   background: var(--divider);
   padding: 0;
   gap: 1px;
+  box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line);
   clip-path: inset(0);
 }
 .specimen-cell {

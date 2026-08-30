@@ -66,8 +66,12 @@ if (!index.includes("if-title")) {
   process.exit(1);
 }
 const baseCss = readFileSync(join(root, "packages/core/css/base.css"), "utf8");
-if (!baseCss.includes("html::before") || !baseCss.includes("clip-path:inset(0 0 0 21px)") || !baseCss.includes("var(--grid-image)")) {
-  console.error("Site gutter overlay must paint verticals on html::before and clip the 20px page frame");
+if (!baseCss.includes("html::before") || !baseCss.includes("var(--grid-image)")) {
+  console.error("Site gutter overlay must paint verticals on html::before");
+  process.exit(1);
+}
+if (baseCss.includes("clip-path:inset(0 0 0 21px)")) {
+  console.error("Left inner-page gutter must paint; do not clip 21px off html::before");
   process.exit(1);
 }
 const beforeAt = baseCss.indexOf("html::before{");
@@ -99,7 +103,7 @@ if (/background:\s*var\(--bg\)/.test(tileRule) || !tileRule.includes("background
   process.exit(1);
 }
 if (!tileRule.includes("var(--grid-line)") || tileRule.includes("var(--divider)")) {
-  console.error("Interfaces tile edges must be --grid-line (same ink as --divider)");
+  console.error("Interfaces tile edges must be --grid-line, the quiet 204 ink");
   process.exit(1);
 }
 const specRule = css.slice(css.indexOf(".if-specimen {"), css.indexOf("}", css.indexOf(".if-specimen {")));
