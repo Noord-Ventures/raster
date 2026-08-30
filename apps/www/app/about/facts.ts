@@ -245,7 +245,7 @@ export const field = [
     mark: "Stedelijk Museum. Catalogues.",
     work: {
       src: "/about/sandberg-stedelijk.jpg",
-      alt: "Stedelijk Museum catalogues",
+      alt: "Stedelijk Museum. Catalogues.",
     },
   },
   {
