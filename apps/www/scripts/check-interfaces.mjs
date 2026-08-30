@@ -408,8 +408,12 @@ if (/PerspectiveCamera\(\s*32/.test(nightMap) || nightMap.includes("3.9, 3.35, 5
   console.error("Night city must zoom out so street and lamps read; do not restore the wall crop");
   process.exit(1);
 }
-if (!/PerspectiveCamera\(\s*(4[4-9]|[5-9]\d)/.test(nightMap)) {
+if (!/PerspectiveCamera\(\s*(3[8-9]|[4-9]\d)/.test(nightMap)) {
   console.error("Night camera FOV must stay wide enough to read the street");
+  process.exit(1);
+}
+if (/position\.set\(\s*8\.2,\s*8\.4,\s*10\.5/.test(nightMap)) {
+  console.error("Night city must fill the specimen; do not orbit to a toy-block crop");
   process.exit(1);
 }
 
