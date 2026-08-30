@@ -264,6 +264,24 @@
   object-position: center;
 }
 
+/* Total Design lockup is landscape ~4.6:1 (3654/787). Contain, never
+   cover. Height follows the mark — not a 408 square well. */
+.field-cell-n13.field-cell-has-work {
+  min-height: 0;
+  justify-content: flex-start;
+}
+
+.field-cell-n13 .field-work {
+  flex: 0 0 auto;
+  min-height: 0;
+  aspect-ratio: 3654 / 787;
+  background: #000;
+}
+
+.field-cell-n13 .field-work img {
+  object-fit: contain;
+}
+
 .field-matter {
   display: flex;
   flex-direction: column;
@@ -455,7 +473,8 @@
       "n07 n08"
       "n09 n10"
       "n11 n12"
-      "n13 n14"
+      "n13 n13"
+      "n14 n14"
       "faq faq"
       "colo colo";
   }
@@ -507,7 +526,8 @@
       "n04 n04 n05 n05 n06 n06"
       "n07 n07 n08 n08 n09 n09"
       "n10 n10 n11 n11 n12 n12"
-      "n13 n13 n14 n14 faq faq"
+      "n13 n13 n13 n14 n14 n14"
+      "faq faq faq faq faq faq"
       "colo colo colo colo colo colo";
   }
 }
