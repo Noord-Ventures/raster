@@ -21,8 +21,8 @@ type Inspect = { kind: "post"; id: string } | { kind: "profile"; who: FaceId } |
 const FEED: Post[] = [
   {
     id: "m1",
-    who: "ilana",
-    name: "Ilana",
+    who: "aziez",
+    name: "Aziez",
     when: "09:14",
     text: "The west window is the one that holds. North is just weather.",
     photo: "/interfaces/threads/press-sheet.jpg",
@@ -31,8 +31,8 @@ const FEED: Post[] = [
   },
   {
     id: "m2",
-    who: "aziez",
-    name: "Aziez",
+    who: "jenny",
+    name: "Jenny",
     when: "09:02",
     text: "Paper first. Then the street. Then the room.",
     likes: 8,
@@ -49,16 +49,16 @@ const FEED: Post[] = [
   },
   {
     id: "m4",
-    who: "christian",
-    name: "Christian",
+    who: "koen",
+    name: "Koen",
     when: "08:12",
     text: "Morning stack. Registration holds.",
     likes: 3,
   },
   {
     id: "m5",
-    who: "katie",
-    name: "Katie",
+    who: "gianpiero",
+    name: "Gianpiero",
     when: "07:58",
     text: "Cite hangs in the gutter. Leave the type on the sheet.",
     photo: "/interfaces/threads/press-sheet.jpg",
@@ -86,31 +86,27 @@ const FEED: Post[] = [
 ];
 
 const PEOPLE: { id: FaceId; name: string; line: string }[] = [
-  { id: "ilana", name: "Ilana", line: "On the west post" },
   { id: "aziez", name: "Aziez", line: "Paper first" },
   { id: "jenny", name: "Jenny", line: "Third post" },
-  { id: "christian", name: "Christian", line: "Quiet today" },
-  { id: "katie", name: "Katie", line: "On the sheet" },
   { id: "koen", name: "Koen", line: "In the gutter" },
   { id: "gianpiero", name: "Gianpiero", line: "On the rail" },
-  { id: "senka", name: "Senka", line: "At the desk" },
 ];
 
 const COMMENTS: Record<string, { who: FaceId; name: string; text: string }[]> = {
   m1: [
-    { who: "aziez", name: "Aziez", text: "Which window?" },
-    { who: "ilana", name: "Ilana", text: "West. Always west." },
-    { who: "jenny", name: "Jenny", text: "I can see it from here." },
+    { who: "jenny", name: "Jenny", text: "Which window?" },
+    { who: "aziez", name: "Aziez", text: "West. Always west." },
+    { who: "koen", name: "Koen", text: "I can see it from here." },
   ],
   m2: [
-    { who: "ilana", name: "Ilana", text: "Keep the hairline on the active tab only." },
-    { who: "christian", name: "Christian", text: "The rail stays 184." },
+    { who: "gianpiero", name: "Gianpiero", text: "Keep the hairline on the active tab only." },
+    { who: "koen", name: "Koen", text: "The rail stays 184." },
   ],
   m3: [{ who: "aziez", name: "Aziez", text: "Cite hangs in the gutter." }],
   m4: [{ who: "jenny", name: "Jenny", text: "Leave the crumb bar off the poster." }],
   m5: [{ who: "koen", name: "Koen", text: "The number stays first." }],
-  m6: [{ who: "katie", name: "Katie", text: "Put the color on the field only." }],
-  m7: [{ who: "senka", name: "Senka", text: "One module. No second rail." }],
+  m6: [{ who: "aziez", name: "Aziez", text: "Put the color on the field only." }],
+  m7: [{ who: "jenny", name: "Jenny", text: "One module. No second rail." }],
 };
 
 export function Board() {

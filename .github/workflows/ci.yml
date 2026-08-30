@@ -788,6 +788,10 @@ jobs:
             echo "Interfaces must stay off Tailwind and Radix"
             exit 1
           fi
+          if grep -R -n -E '\b(Katie|Christian|Senka|Ilana)\b' apps/www/app/interfaces apps/www/app/specimen.ts packages/cli/src/starter.html apps/www/app/page.tsx; then
+            echo "Katie, Christian, Senka, and Ilana cannot return in Interfaces or specimen copy"
+            exit 1
+          fi
           node -e '
             const { readFileSync } = require("node:fs");
             const css = readFileSync("apps/www/app/interfaces/interfaces.css", "utf8");

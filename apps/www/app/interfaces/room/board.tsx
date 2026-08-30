@@ -12,41 +12,39 @@ const CHANNELS = [
 ];
 
 const PEOPLE: { id: FaceId; name: string; state: string; mark: "user-check" | "activity" | "moon" | "users" }[] = [
-  { id: "ilana", name: "Ilana", state: "At the desk", mark: "user-check" },
   { id: "aziez", name: "Aziez", state: "On a line", mark: "activity" },
   { id: "jenny", name: "Jenny", state: "Away", mark: "moon" },
-  { id: "christian", name: "Christian", state: "In the room", mark: "users" },
-  { id: "katie", name: "Katie", state: "At the desk", mark: "user-check" },
   { id: "koen", name: "Koen", state: "On a line", mark: "activity" },
+  { id: "gianpiero", name: "Gianpiero", state: "At the desk", mark: "user-check" },
 ];
 
 type Msg = { id: string; who: FaceId; name: string; text: string; when: string; replies: number };
 
 const LINES: Record<string, Msg[]> = {
   desk: [
-    { id: "d1", who: "ilana", name: "Ilana", text: "The room holds the line. Keep the thread on this post.", when: "09:14", replies: 2 },
+    { id: "d1", who: "gianpiero", name: "Gianpiero", text: "The room holds the line. Keep the thread on this post.", when: "09:14", replies: 2 },
     { id: "d2", who: "aziez", name: "Aziez", text: "I left the sheet on the west wall.", when: "09:16", replies: 0 },
     { id: "d3", who: "jenny", name: "Jenny", text: "Read. I will take the next one.", when: "09:18", replies: 1 },
-    { id: "d4", who: "katie", name: "Katie", text: "Logged. Weeks 4–7. I will keep the timeline under the fee.", when: "09:19", replies: 0 },
+    { id: "d4", who: "koen", name: "Koen", text: "Logged. Weeks 4–7. I will keep the timeline under the fee.", when: "09:19", replies: 0 },
   ],
   press: [
-    { id: "p1", who: "christian", name: "Christian", text: "Form 12 is on the stone.", when: "08:41", replies: 1 },
-    { id: "p2", who: "ilana", name: "Ilana", text: "Hold the second pass.", when: "08:50", replies: 0 },
+    { id: "p1", who: "gianpiero", name: "Gianpiero", text: "Form 12 is on the stone.", when: "08:41", replies: 1 },
+    { id: "p2", who: "jenny", name: "Jenny", text: "Hold the second pass.", when: "08:50", replies: 0 },
     { id: "p3", who: "koen", name: "Koen", text: "Density is within the band.", when: "08:52", replies: 0 },
   ],
   yard: [
     { id: "y1", who: "aziez", name: "Aziez", text: "Van 04 is back.", when: "07:12", replies: 1 },
-    { id: "y2", who: "christian", name: "Christian", text: "Yard is quiet. Hold the loop.", when: "07:20", replies: 0 },
+    { id: "y2", who: "koen", name: "Koen", text: "Yard is quiet. Hold the loop.", when: "07:20", replies: 0 },
   ],
 };
 
 const THREAD: Record<string, { who: FaceId; name: string; text: string }[]> = {
   d1: [
     { who: "aziez", name: "Aziez", text: "Which post?" },
-    { who: "ilana", name: "Ilana", text: "West. The one that holds." },
+    { who: "gianpiero", name: "Gianpiero", text: "West. The one that holds." },
   ],
-  d3: [{ who: "katie", name: "Katie", text: "I have it." }],
-  p1: [{ who: "ilana", name: "Ilana", text: "Keep the same ink." }],
+  d3: [{ who: "koen", name: "Koen", text: "I have it." }],
+  p1: [{ who: "jenny", name: "Jenny", text: "Keep the same ink." }],
   y1: [{ who: "koen", name: "Koen", text: "Logged." }],
 };
 
@@ -54,7 +52,7 @@ export function Board() {
   const [channel, setChannel] = React.useState("desk");
   const [pane, setPane] = React.useState<"none" | "thread" | "person">("none");
   const [line, setLine] = React.useState("d1");
-  const [who, setWho] = React.useState<FaceId>("ilana");
+  const [who, setWho] = React.useState<FaceId>("aziez");
   const [draft, setDraft] = React.useState("");
   const [extra, setExtra] = React.useState<Record<string, Msg[]>>({});
   const room = CHANNELS.find((row) => row.id === channel) ?? CHANNELS[0]!;
@@ -69,8 +67,8 @@ export function Board() {
     setDraft("");
     const msg: Msg = {
       id: `you-${Date.now()}`,
-      who: "katie",
-      name: "Katie",
+      who: "jenny",
+      name: "Jenny",
       text,
       when: "Now",
       replies: 0,

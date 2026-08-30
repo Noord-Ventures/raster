@@ -123,10 +123,10 @@ export function Scene({ selected }: SceneProps) {
     root.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0xe8e4dc, 9, 20);
-    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 40);
-    camera.position.set(3.9, 3.35, 5.55);
-    camera.lookAt(-0.15, 0.28, -1.35);
+    scene.fog = new THREE.Fog(0xe8e4dc, 22, 44);
+    const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 60);
+    camera.position.set(8.2, 8.4, 10.5);
+    camera.lookAt(0, 0.15, -0.5);
 
     scene.add(new THREE.AmbientLight(0xe8e4dc, 0.72));
     const sun = new THREE.DirectionalLight(0xfff6ea, 0.85);

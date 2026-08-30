@@ -21,8 +21,8 @@ Each app has two to three levels of use: list → detail → one level deeper. I
 | Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. Title occupies a 204 cell. At scroll 0 the H1 top shares the rail first-row line. Each card is a poster crop on the 204, then the English name. The field under the title and around the crops reads as the module. |
 | Line | `/interfaces/line` | Interfaces → Line | AI chat. List → chat → a line. Centered measure. Composer in the pane, aligned. Site 204s run around the box. |
 | Press | `/interfaces/press` | Interfaces → Press | Dashboard. Floor → job → sheet. Hue in the rail. One Crouwel spot. |
-| Wall | `/interfaces/wall` | Interfaces → Wall | Social feed. Feed → post → profile. Masonry on desktop, a stream on the phone. Comments sit in the inspect. First names from /work. |
-| Night | `/interfaces/night` | Interfaces → Night | Fleet management. List → unit → trip. A street you look down. Buildings, a route, one selected unit. |
+| Wall | `/interfaces/wall` | Interfaces → Wall | Social feed. Feed → post → profile. Masonry on desktop, a stream on the phone. Comments sit in the inspect. First names from /work keepers only: Aziez, Jenny, Koen, Gianpiero. |
+| Night | `/interfaces/night` | Interfaces → Night | Fleet management. List → unit → trip. A street you look down. Buildings, street, and lamps in frame. Not a facade wall crop. A route, one selected unit. |
 | Evening | `/interfaces/evening` | Interfaces → Evening | Order out. Stores → store → bag. Top bar, filters, a grid. Bag is a sheet. |
 | Room | `/interfaces/room` | Interfaces → Room | Team chat. Channel → message → thread. People in the rail. Not Wall. |
 | Phone | ≤430 | Contents picker | Rail hides under 900. A stacked 44pt picker lists the six. Scene controls use the 44pt phone scale. |

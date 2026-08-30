@@ -404,15 +404,50 @@ if (!nightMap.includes("BUILDINGS") || !nightMap.includes("TubeGeometry")) {
   console.error("Night field must be a street of buildings with a route, not a flat grid");
   process.exit(1);
 }
+if (/PerspectiveCamera\(\s*32/.test(nightMap) || nightMap.includes("3.9, 3.35, 5.55")) {
+  console.error("Night city must zoom out so street and lamps read; do not restore the wall crop");
+  process.exit(1);
+}
+if (!/PerspectiveCamera\(\s*(4[4-9]|[5-9]\d)/.test(nightMap)) {
+  console.error("Night camera FOV must stay wide enough to read the street");
+  process.exit(1);
+}
 
 const people = readFileSync(join(dir, "people.tsx"), "utf8");
-if (/Inez Veld|Karel Vos|Loes Hart|Bram Nijk|Maya Ort|Owen Hart/.test(people + wallBoard + readFileSync(join(dir, "room", "board.tsx"), "utf8"))) {
+const roomBoard = readFileSync(join(dir, "room", "board.tsx"), "utf8");
+if (/Inez Veld|Karel Vos|Loes Hart|Bram Nijk|Maya Ort|Owen Hart/.test(people + wallBoard + roomBoard)) {
   console.error("Interfaces people must come from renatovaldes.com/work, not invented names");
   process.exit(1);
 }
-if (!people.includes("Ilana") || !people.includes("Aziez") || !people.includes("Koen")) {
-  console.error("Interfaces people must include first names from /work");
+const keepers = ["Aziez Soekha", "Jenny Lo", "Koen Bok", "Gianpiero Puleo"];
+if (keepers.some((name) => !people.includes(name))) {
+  console.error("Interfaces people must keep Aziez, Jenny, Koen, and Gianpiero from /work");
   process.exit(1);
+}
+const forbidden = /\b(Katie|Christian|Senka|Ilana)\b/;
+const specimenPaths = [
+  join(root, "apps/www/app/specimen.ts"),
+  join(root, "packages/cli/src/starter.html"),
+  join(root, "apps/www/app/page.tsx"),
+];
+for (const file of [...walk(dir), ...specimenPaths.filter((path) => existsSync(path))]) {
+  if (forbidden.test(readFileSync(file, "utf8"))) {
+    console.error(`Katie, Christian, Senka, and Ilana cannot return in Interfaces or specimen copy: ${file}`);
+    process.exit(1);
+  }
+}
+const portraits = join(root, "apps/www/public/interfaces/people");
+for (const name of ["aziez", "jenny", "koen", "gianpiero"]) {
+  if (!existsSync(join(portraits, `${name}.jpg`))) {
+    console.error(`Keeper portrait missing: ${name}.jpg`);
+    process.exit(1);
+  }
+}
+for (const name of ["katie", "christian", "senka", "ilana"]) {
+  if (existsSync(join(portraits, `${name}.jpg`))) {
+    console.error(`Forbidden portrait must not ship: ${name}.jpg`);
+    process.exit(1);
+  }
 }
 if (!catalog.includes('what: "AI chat"') || !catalog.includes('what: "Dashboard"') || !catalog.includes('what: "Social feed"') || !catalog.includes('what: "Fleet management"') || !catalog.includes('what: "Order out"') || !catalog.includes('what: "Team chat"')) {
   console.error("Catalog must lock the six Interfaces: AI chat, Dashboard, Social feed, Fleet management, Order out, Team chat");
