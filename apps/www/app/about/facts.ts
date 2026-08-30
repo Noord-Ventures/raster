@@ -154,8 +154,8 @@ export const field = [
     place: "Zurich",
     mark: "20 CHF Gertrud Kurz, 1992. Odermatt & Tissi.",
     work: {
-      src: "https://upload.wikimedia.org/wikipedia/commons/7/78/Swiss-Commemorative-Coin-1992-CHF-20-obverse.png",
-      alt: "20 CHF Gertrud Kurz reverse, 1992",
+      src: "/about/tissi-gertrud-kurz.jpg",
+      alt: "Münzkabinett Berlin. GERTRUD KURZ, 1890/1972.",
     },
   },
   {
@@ -210,12 +210,12 @@ export const field = [
   },
   {
     name: "Total Design",
-    years: "1963",
+    years: "1971",
     place: "Amsterdam",
-    mark: "Crouwel, Wissing, Kramer. TD.",
+    mark: "Stedelijk, co westerik, 24 sep–7 nov 1971.",
     work: {
-      src: "/about/total-design-logo.jpg",
-      alt: "Total Design mark",
+      src: "/about/total-design-westerik-1971.jpg",
+      alt: "Total Design / Crouwel, co westerik, Stedelijk 24 sep–7 nov 1971",
     },
   },
   {
