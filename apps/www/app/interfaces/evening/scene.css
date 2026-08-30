@@ -335,17 +335,58 @@
 }
 
 @media (max-width: 640px) {
-  .sc-evening-bar {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    min-height: 56px;
+  .sc-evening {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) auto;
+    overflow: hidden;
+    position: relative;
   }
-  .sc-evening-addr { display: none; }
-  .sc-evening-search,
-  .sc-evening-bag,
+  .sc-evening-bar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "brand addr" "search search";
+    min-height: 0;
+    gap: 8px;
+    padding: 10px 16px 12px;
+  }
+  .sc-evening-bar .if-app { grid-area: brand; }
+  .sc-evening-addr {
+    display: inline-flex;
+    grid-area: addr;
+    justify-self: end;
+    align-self: center;
+  }
+  .sc-evening-search {
+    grid-area: search;
+    min-height: 44px;
+    height: 44px;
+    font-size: 16px;
+  }
+  .sc-evening-bag { display: none; }
+  .sc-evening-stores {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
+  }
+  .sc-evening-store {
+    grid-template-columns: 72px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-width: 0 0 1px;
+    border-radius: 0;
+  }
+  .sc-evening-store img {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-sm);
+  }
+  .sc-evening-store span { padding: 0; }
+  .sc-evening-filters { padding: 8px 16px; }
   .sc-evening-add,
   .sc-evening-ghost,
   .sc-evening-seg button { min-height: 44px; height: 44px; font-size: 16px; }
   .sc-evening-item-open { min-height: 44px; }
+  .sc-evening-hero { height: 128px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

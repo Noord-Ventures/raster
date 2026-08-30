@@ -62,6 +62,7 @@ export function Board() {
   const [draft, setDraft] = React.useState("");
   const [pending, setPending] = React.useState(false);
   const [inspect, setInspect] = React.useState<Inspect>(null);
+  const [phonePane, setPhonePane] = React.useState<"inbox" | "thread">("thread");
   const end = React.useRef<HTMLDivElement>(null);
   const box = React.useRef<HTMLInputElement>(null);
   const piece = CHATS.find((item) => item.id === chat)?.title ?? "New chat";
@@ -77,6 +78,7 @@ export function Board() {
     setDraft("");
     setPending(false);
     setInspect(null);
+    setPhonePane("thread");
   }
 
   function fresh() {
@@ -85,6 +87,7 @@ export function Board() {
     setDraft("");
     setPending(false);
     setInspect(null);
+    setPhonePane("thread");
     box.current?.focus();
   }
 
@@ -106,7 +109,7 @@ export function Board() {
   }
 
   return (
-    <main className="if-board sc-ai" aria-label="Line">
+    <main className="if-board sc-ai" data-pane={phonePane} aria-label="Line">
       <aside className="sc-ai-rail" aria-label="Chats">
         <div className="sc-ai-brand">
           <Brand slug="line" title="Line" />
@@ -145,6 +148,10 @@ export function Board() {
 
       <section className="sc-ai-stage" aria-label="Chat">
         <header className="sc-ai-head">
+          <button type="button" className="sc-ai-back" onClick={() => setPhonePane("inbox")}>
+            <Icon name="arrow-left" size={16} />
+            Chats
+          </button>
           <h1 className="if-ico-row">
             <Icon name="message" size={16} />
             {piece}
@@ -234,6 +241,28 @@ export function Board() {
           </form>
         </div>
       </section>
+
+      <nav className="if-thumb" aria-label="Line">
+        <button
+          type="button"
+          aria-current={phonePane === "inbox"}
+          onClick={() => {
+            setPhonePane("inbox");
+            setInspect(null);
+          }}
+        >
+          <Icon name="inbox" size={16} />
+          Chats
+        </button>
+        <button
+          type="button"
+          aria-current={phonePane === "thread"}
+          onClick={() => setPhonePane("thread")}
+        >
+          <Icon name="message" size={16} />
+          Line
+        </button>
+      </nav>
 
       <aside className={`if-inspect${inspect ? " is-open" : ""}`} aria-label="Inspector">
         <div className="sc-ai-inspect">

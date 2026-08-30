@@ -212,6 +212,48 @@
 }
 
 @media (max-width: 640px) {
+  .sc-wall {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    overflow: hidden;
+    position: relative;
+  }
+  .sc-wall-rail {
+    flex-direction: row;
+    align-items: stretch;
+    overflow: auto;
+    max-height: none;
+    border-right: 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .sc-wall-voice,
+  .sc-wall-label { display: none; }
+  .sc-wall-brand {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    border-right: 1px solid var(--divider);
+  }
+  .sc-wall-person {
+    min-width: 72px;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 6px;
+    padding: 10px 12px;
+    border-bottom: 0;
+    border-right: 1px solid var(--divider);
+  }
+  .sc-wall-person i { display: none; }
+  .sc-wall-stream {
+    column-count: 1;
+    padding: 0;
+  }
+  .sc-wall-card {
+    margin-bottom: 0;
+    border-radius: 0;
+    border-width: 0 0 1px;
+  }
   .sc-wall-person,
   .sc-wall-open { min-height: 44px; font-size: 16px; }
 }

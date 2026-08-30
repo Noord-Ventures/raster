@@ -257,6 +257,28 @@ export function Board() {
         )}
       </section>
 
+      <nav className="if-thumb" aria-label="Evening">
+        <button
+          type="button"
+          aria-current={page === "market" && inspect?.kind !== "bag"}
+          onClick={() => {
+            setPage("market");
+            setInspect(null);
+          }}
+        >
+          <Icon name="home" size={16} />
+          Stores
+        </button>
+        <button
+          type="button"
+          aria-pressed={inspect?.kind === "bag"}
+          onClick={() => setInspect((cur) => (cur?.kind === "bag" ? null : { kind: "bag" }))}
+        >
+          <Icon name="bag" size={16} />
+          Bag{count ? ` ${count}` : ""}
+        </button>
+      </nav>
+
       <aside className={`if-inspect${inspect ? " is-open" : ""}`} aria-label={inspect?.kind === "bag" ? "Bag" : "Plate"}>
         {inspect?.kind === "bag" ? (
           <div key={`bag-${count}`} className="sc-evening-sheet sc-fresh">

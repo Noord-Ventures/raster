@@ -398,6 +398,16 @@ if (!/border-radius:\s*0/.test(eveningSegBtn)) {
   console.error("Evening filter segments must stay square inside, not pills");
   process.exit(1);
 }
+const eveningPhoneAt = eveningScene.lastIndexOf("@media (max-width: 640px)");
+const eveningPhone = eveningPhoneAt >= 0 ? eveningScene.slice(eveningPhoneAt) : "";
+if (!eveningPhone.includes("72px minmax(0, 1fr)") || eveningPhone.includes("1fr 1fr")) {
+  console.error("Evening at 640 must be one column of thumb-left store rows, not a two-column card grid");
+  process.exit(1);
+}
+if (!eveningBoard.includes("if-thumb") || !eveningBoard.includes("Stores")) {
+  console.error("Evening phone must keep a thumb bar for stores and the bag");
+  process.exit(1);
+}
 
 const nightMap = readFileSync(join(dir, "night", "map.tsx"), "utf8");
 if (!nightMap.includes("BUILDINGS") || !nightMap.includes("TubeGeometry")) {

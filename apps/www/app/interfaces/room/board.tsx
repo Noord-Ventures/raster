@@ -55,6 +55,7 @@ export function Board() {
   const [who, setWho] = React.useState<FaceId>("aziez");
   const [draft, setDraft] = React.useState("");
   const [extra, setExtra] = React.useState<Record<string, Msg[]>>({});
+  const [phonePane, setPhonePane] = React.useState<"channels" | "chat">("chat");
   const room = CHANNELS.find((row) => row.id === channel) ?? CHANNELS[0]!;
   const messages = [...(LINES[channel] ?? LINES.desk!), ...(extra[channel] ?? [])];
   const person = PEOPLE.find((row) => row.id === who) ?? PEOPLE[0]!;
@@ -78,7 +79,7 @@ export function Board() {
   }
 
   return (
-    <main className="if-board sc-room" aria-label="Room">
+    <main className="if-board sc-room" data-pane={phonePane} aria-label="Room">
       <aside className="sc-room-rail" aria-label="People">
         <div className="sc-room-brand">
           <Brand slug="room" title="Room" />
@@ -98,6 +99,7 @@ export function Board() {
               setChannel(row.id);
               setPane("none");
               setLine((LINES[row.id] ?? LINES.desk!)[0]!.id);
+              setPhonePane("chat");
             }}
           >
             <b className="if-ico-row">
@@ -200,6 +202,28 @@ export function Board() {
           </button>
         </form>
       </section>
+
+      <nav className="if-thumb" aria-label="Room">
+        <button
+          type="button"
+          aria-current={phonePane === "channels"}
+          onClick={() => {
+            setPhonePane("channels");
+            setPane("none");
+          }}
+        >
+          <Icon name="hash" size={16} />
+          Channels
+        </button>
+        <button
+          type="button"
+          aria-current={phonePane === "chat"}
+          onClick={() => setPhonePane("chat")}
+        >
+          <Icon name="message" size={16} />
+          Room
+        </button>
+      </nav>
 
       <aside className={`if-inspect${pane !== "none" ? " is-open" : ""}`} aria-label="Thread">
         {pane === "thread" ? (
