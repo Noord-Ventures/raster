@@ -1,4 +1,16 @@
-/* About / field. Isolated. Do not move these rules into site.css. */
+/* About / field. Isolated. Do not move these rules into site.css.
+
+   Box grid: gutters are the cell edges (1px --grid-line through the
+   field gap), not the main 204 overlay. Kill html::before here so
+   verticals do not run through type or stills. Docs / components /
+   interfaces keep the quiet main-grid overlay. */
+
+html:has(.field-page)::before {
+  display: none;
+}
+body:has(.field-page) {
+  background: transparent;
+}
 
 .field-page {
   width: 100%;
@@ -40,7 +52,8 @@
     "faq"
     "colo";
   grid-auto-rows: minmax(204px, auto);
-  background: var(--divider);
+  /* Box-cell edges, not a repeating 204 field over the boxes. */
+  background: var(--grid-line);
   padding: 0 1px 1px 0;
   gap: 1px;
 }
@@ -49,14 +62,7 @@
   min-width: 0;
   min-height: 204px;
   padding: 20px;
-  /* Same site 204 as home: body spine at --grid-pos (20 / 204 / 224 /
-     408), fixed, full page. Not a local hero tile at 0 (204k−20). */
-  background-color: var(--bg);
-  background-image: var(--grid-image);
-  background-size: var(--grid-size) 100vh;
-  background-repeat: repeat-x;
-  background-attachment: fixed;
-  background-position: var(--grid-pos);
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

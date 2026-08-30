@@ -144,8 +144,18 @@ for (const src of [
   if (!facts.includes(src)) fail(`About facts must wire ${src}`);
 }
 const aboutCell = about.slice(about.indexOf(".field-cell {"), about.indexOf("}", about.indexOf(".field-cell {")));
-if (!aboutCell.includes("background-image: var(--grid-image)") || !aboutCell.includes("background-position: var(--grid-pos)") || !aboutCell.includes("background-attachment: fixed")) {
-  fail("About must keep the gutter-line 204 spine, not a local hero tile");
+if (aboutCell.includes("background-image") || aboutCell.includes("--grid-image") || aboutCell.includes("background-attachment: fixed")) {
+  fail("About boxed cells must not paint the main 204 overlay");
+}
+const aboutKill = about.indexOf("html:has(.field-page)::before");
+if (aboutKill < 0) {
+  fail("About must kill html::before so the main grid does not cut type");
+}
+if (!about.slice(aboutKill, about.indexOf("}", aboutKill)).includes("display: none")) {
+  fail("About overlay kill must be display: none");
+}
+if (about.includes("background-image: var(--grid-image)")) {
+  fail("About must not paint gutter lines through type or stills");
 }
 const aboutEra = about.slice(about.indexOf(".field-cell-era {"), about.indexOf("}", about.indexOf(".field-cell-era {")));
 if (aboutEra.includes("background-image")) {

@@ -490,8 +490,22 @@ jobs:
             const { readFileSync } = require("node:fs");
             const css = readFileSync("apps/www/app/about/about.css", "utf8");
             const cell = css.slice(css.indexOf(".field-cell {"), css.indexOf("}", css.indexOf(".field-cell {")));
-            if (!cell.includes("background-image: var(--grid-image)") || !cell.includes("background-position: var(--grid-pos)") || !cell.includes("background-attachment: fixed")) {
-              console.error("About cells must keep the gutter-line 204 spine");
+            if (cell.includes("background-image") || cell.includes("--grid-image") || cell.includes("background-attachment: fixed")) {
+              console.error("About boxed cells must not paint the main 204 overlay");
+              process.exit(1);
+            }
+            const killAt = css.indexOf("html:has(.field-page)::before");
+            if (killAt < 0) {
+              console.error("About must kill html::before so the main grid does not cut type");
+              process.exit(1);
+            }
+            const killRule = css.slice(killAt, css.indexOf("}", killAt));
+            if (!killRule.includes("display: none")) {
+              console.error("About overlay kill must be display: none");
+              process.exit(1);
+            }
+            if (css.includes("background-image: var(--grid-image)")) {
+              console.error("About must not paint gutter lines through type or stills");
               process.exit(1);
             }
             const era = css.slice(css.indexOf(".field-cell-era {"), css.indexOf("}", css.indexOf(".field-cell-era {")));

@@ -19,7 +19,8 @@ html, body { margin: 0; padding: 0; }
    drops background-attachment:fixed in Chromium. A fixed layer does not.
    Ink is --grid-line (quieter than chrome --divider). Clip 21px from the
    left on desktop so the 20px inset is not a page frame. Homepage kills
-   this overlay so Raster / tagline / install are boxed cells, not a cage. */
+   this overlay so boxed pages (home, About) are cell-edge gutters,
+   not a cage through type. Components / docs / interfaces keep it. */
 html { background-color: var(--bg); }
 html::before {
   content: "";

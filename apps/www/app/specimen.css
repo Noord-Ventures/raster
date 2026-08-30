@@ -1,10 +1,9 @@
 /* Homepage specimen. Imported only by app/page.tsx. */
 
-/* Homepage is boxed 204 cells (cell shadows). The site gutter
-   overlay on html::before would cut through Raster, the tagline,
-   and the install line — a cage, not a field. Kill it here only.
-   Components and the rest keep the overlay. Clip-path still
-   kills edge hairlines so the 20px inset is not a page frame. */
+/* Two grids: boxed pages (home, About) use cell-edge hairlines.
+   The site gutter overlay on html::before is the main 204 for docs /
+   components / interfaces. Kill it here so it does not cut Raster,
+   the tagline, or the install line. */
 html:has(.specimen-page)::before {
   display: none;
 }
