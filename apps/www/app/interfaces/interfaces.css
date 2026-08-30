@@ -75,7 +75,8 @@ body:has(.if-index) {
 .if-rail a[aria-current="page"] { font-weight: 500; }
 .if-rail a:focus-visible { outline: 1px solid var(--text); outline-offset: 2px; }
 
-/* Title occupies the first 204 cell. Type sits on the field. */
+/* Title occupies the first 204 cell. On desktop the H1 top shares
+   the rail first-row line (120px). Type sits on the field. */
 .if-title {
   min-height: 204px;
   max-width: 592px;
@@ -84,6 +85,12 @@ body:has(.if-index) {
   flex-direction: column;
   justify-content: flex-end;
   background: transparent;
+}
+@media (min-width: 900px) {
+  .if-title {
+    padding-top: 120px;
+    justify-content: flex-start;
+  }
 }
 .if-title .rs-t-sub { margin-top: 16px; }
 

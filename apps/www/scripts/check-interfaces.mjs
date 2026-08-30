@@ -96,6 +96,10 @@ if (!css.includes(".if-title {\n  min-height: 204px")) {
   console.error("Interfaces title cell must be 204");
   process.exit(1);
 }
+if (!css.includes("padding-top: 120px") || !css.includes("justify-content: flex-start")) {
+  console.error("Interfaces H1 must share the rail first-row line on desktop");
+  process.exit(1);
+}
 const tileAt = css.indexOf(".if-tile {");
 const tileRule = css.slice(tileAt, css.indexOf("}", tileAt));
 if (/background:\s*var\(--bg\)/.test(tileRule) || !tileRule.includes("background: transparent")) {

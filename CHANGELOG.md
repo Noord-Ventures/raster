@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Catalog H1 top shares the TOC first-row line at scroll 0 (docs, components, interfaces). Cover is not a flex-end spacer above the rail. Two-column TOC stays. Does not publish.
 - Two gridline hues, same ink family. `--grid-line` is the quieter step: inner-page 204 on docs / components / interfaces, plus Home / About / starter L/R box margins. `--divider` is the slightly stronger step: Home / About / starter 1px cell-edge cage. `--divider-subtle` stays a fill, not a gridline. The utmost left inner gutter paints; the 21px `html::before` clip is gone. Home / About / starter still kill the repeating 204 so it does not cut type or stills. Does not publish.
 - Slight Raster radius: `--radius-sm` is 4px, the standalone button token. Cards, boxes, callouts, dialogs, sheets, drawers, catalog frames, and interface scene frames share it. `--radius` aliases `--radius-sm`. Nested inners still follow Steve Ruiz. Chrome, icon marks, empty, and charts stay 0. No shadow. Does not publish.
 - About is a workhorse specimen in the Inter register: what it is, who it is for, pasteable usage, free & open, type on the module, then history. The 204 spine stays (20 / 204 / 224 / 408). Navbar on scroll on About. `npx @noorddev/raster-cli init` writes `index.html` as a real specimen, not a hello-world shell. Preview at `/starter`.

@@ -86,6 +86,21 @@ if (!navCss.includes("@media (min-width: 900px)") || !ifCss.includes("@media (mi
   fail("Desktop rails must stay off the phone");
 }
 
+const tocRail = navCss.slice(navCss.indexOf(".toc-rail {"), navCss.indexOf("}", navCss.indexOf(".toc-rail {")));
+if (!tocRail.includes("padding: 120px 0 72px")) {
+  fail("TOC rail first row stays at 120px");
+}
+const cover900 = site.slice(site.indexOf("@media (min-width: 900px)"));
+if (!cover900.includes("padding-top: 120px") || !cover900.includes("justify-content: flex-start")) {
+  fail("Desktop cover H1 must share the TOC first-row line, not sit above the rail");
+}
+if (!nav.includes('data-toc="groups"') || !nav.includes('data-toc="items"')) {
+  fail("Do not collapse the two-column TOC to fake the H1 align");
+}
+if (ifCss.includes("@media (min-width: 900px)") && !ifCss.slice(ifCss.indexOf(".if-title {")).includes("padding-top: 120px")) {
+  fail("Interfaces H1 must share the rail first-row line on desktop");
+}
+
 if (!block.includes("writeText") || !block.includes("Copied") || !block.includes("aria-live")) {
   fail("Code blocks must copy on the control and confirm on themselves");
 }
