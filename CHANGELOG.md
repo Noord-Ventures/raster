@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Evening store stills are real Unsplash photographs, not generated food. Same paths under `apps/www/public/interfaces/food/`. DoorDash-like cards and Raster chrome stay. Does not publish.
 - Catalog H1 top shares the TOC first-row line at scroll 0 (docs, components, interfaces). Cover is not a flex-end spacer above the rail. Two-column TOC stays. Does not publish.
 - Interfaces people are /work keepers only: Aziez Soekha, Jenny Lo, Koen Bok, Gianpiero Puleo. Night city camera zooms out so buildings, street, and lamps read. Does not publish.
 - Two gridline hues, same ink family. `--grid-line` is the quieter step: inner-page 204 on docs / components / interfaces, plus Home / About / starter L/R box margins. `--divider` is the slightly stronger step: Home / About / starter 1px cell-edge cage. `--divider-subtle` stays a fill, not a gridline. The utmost left inner gutter paints; the 21px `html::before` clip is gone. Home / About / starter still kill the repeating 204 so it does not cut type or stills. Does not publish.
