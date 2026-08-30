@@ -248,10 +248,10 @@
     overflow: hidden;
     position: relative;
   }
-  .sc-room[data-pane="chat"] .sc-room-label,
-  .sc-room[data-pane="chat"] .sc-room-ch,
-  .sc-room[data-pane="chat"] .sc-room-person,
-  .sc-room[data-pane="chat"] .sc-room-voice { display: none; }
+  .if-board.sc-room[data-pane="chat"] .sc-room-label,
+  .if-board.sc-room[data-pane="chat"] .sc-room-ch,
+  .if-board.sc-room[data-pane="chat"] .sc-room-person,
+  .if-board.sc-room[data-pane="chat"] .sc-room-voice { display: none; }
   .sc-room[data-pane="chat"] .sc-room-rail {
     overflow: hidden;
     max-height: none;
@@ -266,7 +266,7 @@
     overflow: auto;
   }
   .sc-room-brand { padding: 10px 16px; }
-  .sc-room-chat { min-height: 0; }
+  .sc-room-chat { min-height: 0; overflow: hidden; }
   .sc-room-ch,
   .sc-room-person,
   .sc-room-msg,

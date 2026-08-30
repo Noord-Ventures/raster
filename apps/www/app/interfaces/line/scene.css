@@ -339,12 +339,14 @@
     overflow: hidden;
     position: relative;
   }
-  .sc-ai-rail { display: none; }
+  .if-board.sc-ai:not([data-pane="inbox"]) > .sc-ai-rail,
+  .sc-ai[data-pane="thread"] > .sc-ai-rail { display: none; }
   .sc-ai[data-pane="inbox"] .sc-ai-stage { display: none; }
   .sc-ai[data-pane="inbox"] .sc-ai-rail {
     display: flex;
     max-height: none;
     border-bottom: 0;
+    overflow: auto;
   }
   .sc-ai-chats { flex-direction: column; overflow: visible; }
   .sc-ai-chat {
@@ -368,7 +370,7 @@
   .sc-ai-back:hover { color: var(--text); }
   .sc-ai-head { gap: 8px; }
   .sc-ai-head h1 { flex: 1; min-width: 0; }
-  .sc-ai-stage { min-height: 0; height: auto; }
+  .sc-ai-stage { min-height: 0; height: auto; overflow: hidden; }
   .sc-ai-stage { --sc-ai-measure: calc(100% - 24px); }
   .sc-ai-new,
   .sc-ai-chat,

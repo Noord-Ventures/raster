@@ -216,13 +216,14 @@
     overflow: hidden;
     position: relative;
   }
-  .sc-dash-label,
-  .sc-dash-nav,
-  .sc-dash-voice { display: none; }
+  .if-board.sc-dash .sc-dash-label,
+  .if-board.sc-dash .sc-dash-nav,
+  .if-board.sc-dash .sc-dash-voice { display: none; }
   .sc-dash-rail {
     border-right: 0;
     border-bottom: 1px solid var(--divider);
     overflow: hidden;
+    max-height: none;
   }
   .sc-dash-brand { padding: 10px 16px; }
   .sc-dash-main { min-height: 0; overflow: auto; }
@@ -237,7 +238,6 @@
   .sc-dash-metric:last-child { border-right: 0; }
   .sc-dash-metric strong { font-size: 22px; margin-top: 6px; }
   .sc-dash-split { grid-template-columns: 1fr; }
-  .sc-dash-nav,
   .sc-dash-range button,
   .sc-dash-job { min-height: 44px; font-size: 16px; }
 }

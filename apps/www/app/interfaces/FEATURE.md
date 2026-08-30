@@ -25,6 +25,6 @@ Each app has two to three levels of use: list → detail → one level deeper. I
 | Night | `/interfaces/night` | Interfaces → Night | Fleet management. List → unit → trip. A street you look down. Buildings, street, and lamps in frame. Not a facade wall crop. A route, one selected unit. On the phone: map first, fleet in the thumb. |
 | Evening | `/interfaces/evening` | Interfaces → Evening | Order out. Stores → store → bag. Two-column store cards on desktop. Stacked store rows and a thumb bar on the phone. Bag is a sheet. |
 | Room | `/interfaces/room` | Interfaces → Room | Team chat. Channel → message → thread. People in the rail. Not Wall. On the phone: the channel, not a 204 rail stacked on the thread. |
-| Phone | ≤430 | Contents picker | Rail hides under 900. A stacked 44pt picker lists the six. Scene controls use the 44pt phone scale. Each boxed demo at 390 is a phone UI, not the desktop scene scaled down. |
+| Phone | ≤430 | Contents picker | Rail hides under 900. A stacked 44pt picker lists the six. Scene controls use the 44pt phone scale. Each boxed demo at 390 is a phone UI, not the desktop scene scaled down. Evening chips wrap in frame. Wall stories keep all four keepers. Night dollies back so street and lamps read. |
 
 The six folders are `line`, `press`, `wall`, `night`, `evening`, `room`. CI fails if any route disappears.

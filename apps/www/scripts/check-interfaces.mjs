@@ -400,8 +400,42 @@ if (!eveningPhone.includes("72px minmax(0, 1fr)") || eveningPhone.includes("1fr 
   console.error("Evening at 640 must be one column of thumb-left store rows, not a two-column card grid");
   process.exit(1);
 }
+if (!eveningPhone.includes("flex-wrap: wrap") || !eveningPhone.includes("flex: 0 0 auto")) {
+  console.error("Evening phone chips must wrap as whole segments, not shrink and clip");
+  process.exit(1);
+}
 if (!eveningBoard.includes("if-thumb") || !eveningBoard.includes("Stores")) {
   console.error("Evening phone must keep a thumb bar for stores and the bag");
+  process.exit(1);
+}
+
+const wallPhoneAt = wallScene.lastIndexOf("@media (max-width: 640px)");
+const wallPhone = wallPhoneAt >= 0 ? wallScene.slice(wallPhoneAt) : "";
+if (!wallBoard.includes("sc-wall-faces") || !wallPhone.includes("repeat(4, minmax(0, 1fr))")) {
+  console.error("Wall phone must keep a four-up people strip so Gianpiero stays in frame");
+  process.exit(1);
+}
+if (!wallPhone.includes("sc-wall-rail { display: none")) {
+  console.error("Wall phone must hide the desktop people rail, not squeeze it");
+  process.exit(1);
+}
+if (!wallPhone.includes("max-height: 168px") && !wallPhone.includes("height: 168px")) {
+  console.error("Wall phone post photos must cap height so they do not overflow the specimen");
+  process.exit(1);
+}
+
+const lineScenePhoneAt = lineScene.lastIndexOf("@media (max-width: 640px)");
+const linePhone = lineScenePhoneAt >= 0 ? lineScene.slice(lineScenePhoneAt) : "";
+if (!linePhone.includes('data-pane="thread"') || !linePhone.includes("display: none")) {
+  console.error("Line phone must hide the chat rail on the thread pane");
+  process.exit(1);
+}
+
+const pressScene = readFileSync(join(dir, "press", "scene.css"), "utf8");
+const pressPhoneAt = pressScene.lastIndexOf("@media (max-width: 640px)");
+const pressPhone = pressPhoneAt >= 0 ? pressScene.slice(pressPhoneAt) : "";
+if (!pressPhone.includes("sc-dash-nav") || !pressPhone.includes("display: none")) {
+  console.error("Press phone must hide Floor nav, not stack it on the KPIs");
   process.exit(1);
 }
 
@@ -420,6 +454,14 @@ if (!/PerspectiveCamera\(\s*(3[8-9]|[4-9]\d)/.test(nightMap)) {
 }
 if (/position\.set\(\s*8\.2,\s*8\.4,\s*10\.5/.test(nightMap)) {
   console.error("Night city must fill the specimen; do not orbit to a toy-block crop");
+  process.exit(1);
+}
+if (nightMap.includes("6.0, 6.4, 8.4")) {
+  console.error("Night tall-well camera must dolly back past 6.0, 6.4, 8.4 so street and lamps read");
+  process.exit(1);
+}
+if (!nightMap.includes("6.8, 7.2, 9.2")) {
+  console.error("Night phone camera must stay at the street-and-lamps dolly, not a tighter crop");
   process.exit(1);
 }
 

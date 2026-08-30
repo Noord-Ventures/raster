@@ -382,15 +382,27 @@
   }
   .sc-evening-store span { padding: 0; }
   .sc-evening-filters {
+    display: flex;
     flex-wrap: wrap;
+    align-items: stretch;
     overflow: visible;
     gap: 8px;
-    padding: 8px 16px 10px;
+    padding: 8px 12px 10px;
+  }
+  .sc-evening-seg {
+    flex: 0 0 auto;
+    max-width: 100%;
+    overflow: visible;
   }
   .sc-evening-add,
-  .sc-evening-ghost,
-  .sc-evening-seg button { min-height: 44px; height: 44px; font-size: 16px; }
-  .sc-evening-seg button { padding: 0 8px; }
+  .sc-evening-ghost { min-height: 44px; height: 44px; font-size: 16px; }
+  .sc-evening-seg button {
+    min-height: 36px;
+    height: 36px;
+    font-size: 13px;
+    padding: 0 8px;
+    gap: 4px;
+  }
   .sc-evening-item-open { min-height: 44px; }
   .sc-evening-hero { height: 128px; }
 }

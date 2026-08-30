@@ -517,6 +517,9 @@ body:has(.if-index) {
     color: var(--text);
     font-weight: 600;
   }
+  .if-board img {
+    max-width: 100%;
+  }
   .if-matter { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
   .if-meta { grid-template-columns: 1fr; }
   .if-board .rs-sidebar-item {

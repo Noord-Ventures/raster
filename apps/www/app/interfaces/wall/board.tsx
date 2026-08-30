@@ -155,6 +155,22 @@ export function Board() {
       </aside>
 
       <section className="sc-wall-feed" aria-label="Feed">
+        <div className="sc-wall-faces" aria-label="People">
+          {PEOPLE.map((row) => (
+            <button
+              key={row.id}
+              type="button"
+              className="sc-wall-person"
+              aria-current={inspect?.kind === "profile" && inspect.who === row.id}
+              onClick={() => openProfile(row.id)}
+            >
+              <Face who={row.id} />
+              <span>
+                <b>{row.name}</b>
+              </span>
+            </button>
+          ))}
+        </div>
         <header className="sc-wall-head">
           <p className="if-ico-row">
             <Icon name="rows" size={16} />
@@ -165,9 +181,7 @@ export function Board() {
           {FEED.map((row) => (
             <article key={row.id} className={`sc-wall-card${post === row.id && inspect?.kind === "post" ? " is-on" : ""}`}>
               <button type="button" className="sc-wall-open" onClick={() => openPost(row.id)}>
-                {row.photo ? (
-                  <img src={row.photo} alt="" style={{ aspectRatio: row.ratio ?? "4 / 5" }} />
-                ) : null}
+                {row.photo ? <img src={row.photo} alt="" /> : null}
                 <span className="sc-wall-who">
                   <Face who={row.who} />
                   <b>{row.name}</b>
