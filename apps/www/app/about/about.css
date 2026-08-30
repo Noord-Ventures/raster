@@ -1,6 +1,6 @@
 /* About / field. Isolated. Do not move these rules into site.css.
 
-   Box grid: gutters are the cell edges (1px --grid-line through the
+   Box grid: gutters are the cell edges (1px --divider through the
    field gap), not the main 204 overlay. Kill html::before here so
    verticals do not run through type or stills. Docs / components /
    interfaces keep the quiet main-grid overlay. */
@@ -52,8 +52,10 @@ body:has(.field-page) {
     "faq"
     "colo";
   grid-auto-rows: minmax(204px, auto);
-  /* Box-cell edges, not a repeating 204 field over the boxes. */
-  background: var(--grid-line);
+  /* Box-cell edges: --divider (same family as the Components 204
+     line, twice --grid-line) so the seams are countable. Not a
+     repeating overlay through type or stills. */
+  background: var(--divider);
   padding: 0 1px 1px 0;
   gap: 1px;
 }

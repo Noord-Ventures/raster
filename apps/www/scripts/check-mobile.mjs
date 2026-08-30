@@ -114,14 +114,24 @@ if (!specimen.includes("body:has(.specimen-page)") || !specimen.includes("clip-p
 if (!specimen.includes("body:has(.specimen-page) {\n  background: transparent;")) {
   fail("Homepage must not paint a second body grid");
 }
-if (!specimen.includes("box-shadow: 1px 0 0 var(--grid-line), 0 1px 0 var(--grid-line)")) {
-  fail("Homepage field is boxed 204 cells in --grid-line, not a gutter overlay");
+if (!specimen.includes("gap: 1px") || !specimen.includes("background: var(--divider)")) {
+  fail("Homepage box seams must be 1px --divider gaps, countable");
+}
+if (specimen.includes("box-shadow: 1px 0 0 var(--grid-line)")) {
+  fail("Homepage seams must not be a --grid-line shadow whisper");
 }
 if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
   fail("Catalog secondaries must not cover the site module grid");
 }
 if (!about.includes("padding: 0 1px 1px 0")) {
   fail("About must keep its right and bottom hairline");
+}
+const aboutField = about.slice(about.indexOf(".field {"), about.indexOf("}", about.indexOf(".field {")));
+if (!aboutField.includes("gap: 1px") || !aboutField.includes("background: var(--divider)")) {
+  fail("About box seams must be 1px --divider gaps, countable");
+}
+if (aboutField.includes("background: var(--grid-line)")) {
+  fail("About seams must not be a --grid-line whisper");
 }
 if (!about.includes(".field-work") || !about.includes("object-fit: contain")) {
   fail("About stills sit contain on paper");
