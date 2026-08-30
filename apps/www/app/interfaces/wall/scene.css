@@ -227,32 +227,42 @@
     border-bottom: 1px solid var(--divider);
   }
   .sc-wall-voice,
-  .sc-wall-label { display: none; }
-  .sc-wall-brand {
-    display: flex;
-    align-items: center;
-    padding: 10px 16px;
-    border-right: 1px solid var(--divider);
-  }
+  .sc-wall-label,
+  .sc-wall-brand { display: none; }
   .sc-wall-person {
-    min-width: 72px;
+    flex: 1;
+    min-width: 0;
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
     gap: 6px;
-    padding: 10px 12px;
+    padding: 10px 4px;
     border-bottom: 0;
     border-right: 1px solid var(--divider);
   }
+  .sc-wall-person:last-child { border-right: 0; }
+  .sc-wall-person b {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
   .sc-wall-person i { display: none; }
+  .sc-wall-feed { min-height: 0; overflow: hidden; }
   .sc-wall-stream {
     column-count: 1;
     padding: 0;
+    overflow: auto;
+    min-height: 0;
   }
   .sc-wall-card {
     margin-bottom: 0;
     border-radius: 0;
     border-width: 0 0 1px;
+  }
+  .sc-wall-open img {
+    height: 200px;
+    max-height: 200px;
+    object-fit: cover;
   }
   .sc-wall-person,
   .sc-wall-open { min-height: 44px; font-size: 16px; }

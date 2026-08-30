@@ -339,9 +339,10 @@
     overflow: hidden;
     position: relative;
   }
-  .sc-ai[data-pane="thread"] .sc-ai-rail { display: none; }
+  .sc-ai-rail { display: none; }
   .sc-ai[data-pane="inbox"] .sc-ai-stage { display: none; }
   .sc-ai[data-pane="inbox"] .sc-ai-rail {
+    display: flex;
     max-height: none;
     border-bottom: 0;
   }

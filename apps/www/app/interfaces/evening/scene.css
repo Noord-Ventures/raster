@@ -381,10 +381,16 @@
     border-radius: var(--radius-sm);
   }
   .sc-evening-store span { padding: 0; }
-  .sc-evening-filters { padding: 8px 16px; }
+  .sc-evening-filters {
+    flex-wrap: wrap;
+    overflow: visible;
+    gap: 8px;
+    padding: 8px 16px 10px;
+  }
   .sc-evening-add,
   .sc-evening-ghost,
   .sc-evening-seg button { min-height: 44px; height: 44px; font-size: 16px; }
+  .sc-evening-seg button { padding: 0 8px; }
   .sc-evening-item-open { min-height: 44px; }
   .sc-evening-hero { height: 128px; }
 }

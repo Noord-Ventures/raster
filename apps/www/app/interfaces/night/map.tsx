@@ -302,6 +302,12 @@ export function Scene({ selected }: SceneProps) {
       const h = root.clientHeight;
       renderer.setSize(w, h, false);
       camera.aspect = w / Math.max(h, 1);
+      if (h > w * 1.15) {
+        camera.position.set(6.0, 6.4, 8.4);
+      } else {
+        camera.position.set(5.1, 5.5, 7.4);
+      }
+      camera.lookAt(0, 0.12, -0.7);
       camera.updateProjectionMatrix();
     };
     resize();

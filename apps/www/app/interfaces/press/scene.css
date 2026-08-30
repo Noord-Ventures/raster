@@ -225,7 +225,7 @@
     overflow: hidden;
   }
   .sc-dash-brand { padding: 10px 16px; }
-  .sc-dash-main { min-height: 0; }
+  .sc-dash-main { min-height: 0; overflow: auto; }
   .sc-dash-metrics {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
