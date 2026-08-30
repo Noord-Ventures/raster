@@ -115,7 +115,12 @@ export function Scene({ selected }: SceneProps) {
     const root = host.current;
     if (!root) return;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    } catch {
+      return;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0xe8e4dc, 1);
     renderer.shadowMap.enabled = true;
