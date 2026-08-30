@@ -360,7 +360,7 @@ body {
 @media (max-width: 800px) { .site-content { width: 100%; max-width: 100%; } }
 
 /* ── Cover: type occupies the first 204 cell.
-   Desktop: H1 top shares the TOC first-row line (toc-rail 120px).
+   Desktop: H1 top shares the TOC first-row line (catalog rail 120px).
    Not a flex-end spacer that parks the title above the rail. Phone
    keeps the 32px cover pad once the rail hides. */
 .cover {
