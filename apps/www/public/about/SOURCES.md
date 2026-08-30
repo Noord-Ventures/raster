@@ -20,9 +20,9 @@ Stills of the work, not portraits. Local About stills, same treatment as the oth
 | moll-micorene.jpg | Thérèse Moll, Micorène, c. 1958 | Local About still |
 | rudin-saffa-1958.jpg | Nelly Rudin, Saffa 1958 Zürich catalog. Face in the design is Monica Brügger | Local About still |
 | yoshikawa-japanische-plakate-heute.jpg | Shizuko Yoshikawa, Japanische Plakate heute, 1978 | Local About still |
-| lohse-serial.jpg | Richard Paul Lohse, serial painting | Museum/archive scan, landing as git blob |
-| neuburg-neue-grafik.jpg | Hans Neuburg, Neue Grafik, Zurich (not the July 1963 ITS still) | Museum/archive scan, landing as git blob |
-| vivarelli-neue-grafik.jpg | Carlo Vivarelli, Neue Grafik, 1958 | Museum/archive scan, landing as git blob |
-| sandberg-stedelijk.jpg | Willem Sandberg, Stedelijk Museum catalogues | Museum/archive scan, landing as git blob |
-| schrofer-letterforms.jpg | Jurriaan Schrofer, letterforms, phototypography | Museum/archive scan, landing as git blob |
-| wissing-total-design.jpg | Benno Wissing, Total Design, 1963 | Museum/archive scan, landing as git blob |
+| lohse-100-jahre-eisenbeton.jpg | Richard Paul Lohse, 100 Jahre Eisenbeton, Kunstgewerbemuseum Zürich, 1950 | Museum/archive scan, landing as git blob |
+| neuburg-konstruktive-grafik.jpg | Hans Neuburg, Konstruktive Grafik, Kunstgewerbemuseum Zürich, 1958 (not the July 1963 ITS still) | Museum/archive scan, landing as git blob |
+| vivarelli-fur-das-alter.jpg | Carlo Vivarelli, Für das Alter. Per la vecchiaia, 1949 | Museum/archive scan, landing as git blob |
+| sandberg-stedelijk-email-1954.jpg | Willem Sandberg, Stedelijk Museum enamel sign, 1954 | Museum/archive scan, landing as git blob |
+| schrofer-de-letter-op-straat.jpg | Jurriaan Schrofer, De letter op straat, Meijer, 1956 | Museum/archive scan, landing as git blob |
+| wissing-schiphol-signposting.jpg | Benno Wissing, Schiphol signage, Total Design, 1967 | Museum/archive scan, landing as git blob |

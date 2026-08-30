@@ -168,6 +168,16 @@ for (const src of [
   "/about/moll-micorene.jpg",
   "/about/rudin-saffa-1958.jpg",
   "/about/yoshikawa-japanische-plakate-heute.jpg",
+  "/about/lohse-100-jahre-eisenbeton.jpg",
+  "/about/neuburg-konstruktive-grafik.jpg",
+  "/about/vivarelli-fur-das-alter.jpg",
+  "/about/sandberg-stedelijk-email-1954.jpg",
+  "/about/schrofer-de-letter-op-straat.jpg",
+  "/about/wissing-schiphol-signposting.jpg",
+]) {
+  if (!facts.includes(src)) fail(`About facts must wire ${src}`);
+}
+for (const leftover of [
   "/about/lohse-serial.jpg",
   "/about/neuburg-neue-grafik.jpg",
   "/about/vivarelli-neue-grafik.jpg",
@@ -175,7 +185,17 @@ for (const src of [
   "/about/schrofer-letterforms.jpg",
   "/about/wissing-total-design.jpg",
 ]) {
-  if (!facts.includes(src)) fail(`About facts must wire ${src}`);
+  if (facts.includes(leftover)) fail(`About must not keep placeholder still ${leftover}`);
+}
+for (const mark of [
+  "100 Jahre Eisenbeton. Kunstgewerbemuseum Zürich, 1950.",
+  "Konstruktive Grafik. Kunstgewerbemuseum Zürich, 1958.",
+  "Für das Alter. Per la vecchiaia, 1949.",
+  "Stedelijk Museum enamel sign. Torn paper, 1954.",
+  "De letter op straat. Meijer, 1956.",
+  "Schiphol signage. Total Design, 1967.",
+]) {
+  if (!facts.includes(mark)) fail(`About field must keep mark: ${mark}`);
 }
 if (!facts.includes("/about/neue-grafik.jpg")) {
   fail("ITS tile keeps the July 1963 Neue Grafik still");
