@@ -48,15 +48,15 @@ export const interfaces = [
     slug: "night",
     title: "Night",
     voice: "On the street",
-    law: "Fleet management. Units, a street, a trip.",
+    law: "Fleet management. Units, a city field, a trip.",
     story:
-      "Night is fleet management for a city yard. The map is San Francisco, with a street you look down. Select a unit, then open its trip. The field is readable on paper. Chrome stays Raster. Not a branded robotaxi.",
+      "Night is fleet management for a city yard. The map is San Francisco at city scale: many blocks, a readable street grid, small units. Select a unit, then open its trip. The field is readable on paper. Chrome stays Raster. Not a branded robotaxi.",
     what: "Fleet management",
     type: "City field, units, trip",
     module: "204",
     ink: "Paper field. Ink streets. One spot on the selected unit.",
     use: "List → unit → trip",
-    field: "A street you look down. Buildings, a route, one selected unit.",
+    field: "A neighborhood you look across. Many blocks, a street grid, one selected unit.",
     note: "Acknowledge an alert. The list stays one scale.",
   },
   {
