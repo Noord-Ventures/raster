@@ -460,12 +460,16 @@ if (/position\.set\(\s*8\.2,\s*8\.4,\s*10\.5/.test(nightMap)) {
   console.error("Night city must fill the specimen; do not orbit to a toy-block crop");
   process.exit(1);
 }
-if (nightMap.includes("6.0, 6.4, 8.4")) {
-  console.error("Night tall-well camera must dolly back past 6.0, 6.4, 8.4 so street and lamps read");
+if (nightMap.includes("6.0, 6.4, 8.4") || nightMap.includes("6.8, 7.2, 9.2") || nightMap.includes("5.1, 5.5, 7.4")) {
+  console.error("Night camera must go to city scale; do not keep the three-tower dolly");
   process.exit(1);
 }
-if (!nightMap.includes("6.8, 7.2, 9.2")) {
-  console.error("Night phone camera must stay at the street-and-lamps dolly, not a tighter crop");
+if (!nightMap.includes("17, 22, 19") || !nightMap.includes("14, 18, 16")) {
+  console.error("Night map well must use the city-scale camera, not a street crop");
+  process.exit(1);
+}
+if (!nightMap.includes("const CITY = 5") || !nightMap.includes("const PITCH = 2.2")) {
+  console.error("Night field must instance a neighborhood of blocks, not three towers");
   process.exit(1);
 }
 
