@@ -127,6 +127,9 @@ body:has(.specimen-page) {
 .specimen-cell-kit-d { grid-area: kitd; }
 .specimen-face {
   margin: 0;
+  /* Optical left: Inter 600, UPM 2048. R lsb 150 so the stem
+     meets the cell pad, not the glyph box. Pair with .specimen-law A. */
+  margin-left: calc(-150 / 2048 * 1em);
   font-size: clamp(4.5rem, 30cqw, 24rem);
   font-weight: 600;
   letter-spacing: -.045em;
@@ -135,6 +138,8 @@ body:has(.specimen-page) {
 }
 .specimen-law {
   margin: 0;
+  /* Optical left: Inter 600 A lsb 50. Ink with Raster, not bounding boxes. */
+  margin-left: calc(-50 / 2048 * 1em);
   font-size: clamp(1.5rem, 12cqw, 3.75rem);
   font-weight: 600;
   letter-spacing: -.035em;

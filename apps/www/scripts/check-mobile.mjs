@@ -208,6 +208,14 @@ if ((aboutPage.match(/field-code-row/g) ?? []).length !== 1) {
 if (!aboutPage.includes("{usage.specimen}")) {
   fail("About Usage must render the one-shot specimen");
 }
+const faceHang = "calc(-150 / 2048 * 1em)";
+const aHang = "calc(-50 / 2048 * 1em)";
+if (!specimen.includes(faceHang) || !specimen.includes(aHang)) {
+  fail("Home Raster and law must hang Inter 600 sidebearings (R 150, A 50 / 2048)");
+}
+if (!about.includes(faceHang) || !about.includes(".field-cell-era .field-kicker") || !about.includes(aHang)) {
+  fail("About Raster and era kicker must hang Inter 600 sidebearings (R 150, A 50 / 2048)");
+}
 for (const name of [
   "Rosmarie Tissi",
   "Nelly Rudin",

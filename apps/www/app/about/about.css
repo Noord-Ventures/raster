@@ -144,6 +144,9 @@ body:has(.field-page) {
 
 .field-face {
   margin: 0;
+  /* Optical left: Inter 600, UPM 2048. R lsb 150 so the stem
+     meets the era kicker A, not the glyph box. */
+  margin-left: calc(-150 / 2048 * 1em);
   font-size: clamp(4.5rem, 28cqw, 18rem);
   font-weight: 600;
   letter-spacing: -.045em;
@@ -172,6 +175,11 @@ body:has(.field-page) {
   font-weight: 600;
   letter-spacing: -.01em;
   color: var(--text-secondary);
+}
+
+.field-cell-era .field-kicker {
+  /* Optical left: Inter 600 A lsb 50. Same pad line as Raster. */
+  margin-left: calc(-50 / 2048 * 1em);
 }
 
 .field-copy {
