@@ -41,7 +41,7 @@ export const usage = {
   command: COMMAND,
   html: `<link rel="stylesheet" href="styles/raster.css" />`,
   control: `<button class="rs-btn-primary">Save</button>`,
-  specimen: `${COMMAND}
+  specimen: `npx @noorddev/raster-cli init
 
 <link rel="stylesheet" href="styles/raster.css" />
 

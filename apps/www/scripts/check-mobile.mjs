@@ -124,7 +124,9 @@ if (specimen.includes("align-items: flex-start") && specimen.includes(".specimen
 if (/specimen-cell-command \.code-copy \{[^}]*margin-top: 8px/.test(specimen)) {
   fail("Homepage copy control must not use a compensatory margin-top");
 }
-const codeCopy = site.slice(site.indexOf(".code-copy {"), site.indexOf("}", site.indexOf(".code-copy {")));
+const copyStart = site.indexOf(".code-copy {\n  position: absolute");
+if (copyStart < 0) fail("Docs copy control must be optically centered in the code box");
+const codeCopy = site.slice(copyStart, site.indexOf("}", copyStart));
 if (codeCopy.includes("top: 8px") || !codeCopy.includes("top: 50%") || !codeCopy.includes("translateY(-50%)")) {
   fail("Docs copy control must be optically centered in the code box");
 }
