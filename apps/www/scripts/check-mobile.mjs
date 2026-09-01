@@ -441,8 +441,14 @@ if (!layout.includes("SiteFooter") || !footer.includes("getraster.com") || !foot
 if (!footer.includes("RasterMark") || !footer.includes("site-footer-about") || footer.includes("site-footer-imprint")) {
   fail("Footer must be RasterMark | stacked links | about copy, not the MIT-only imprint row");
 }
+if (
+  !footer.includes("Raster is built and designed in the north by") ||
+  !footer.includes('href="https://noord.dev"') ||
+  !footer.includes(">Noord</a>")
+) {
+  fail("Footer about copy must link Noord to https://noord.dev");
+}
 for (const sentence of [
-  "Raster is built and designed in the north by Noord.",
   "Inspired by Dutch and Swiss modernism — the International Typographic Style.",
   "Free and open source under the MIT license.",
 ]) {
