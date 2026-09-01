@@ -7,8 +7,8 @@ export type SwagItem = {
 
 /**
  * Raster swag blanks. Stills live in /public/swag and can be swapped
- * when Ilana sends Noord-page reference shots — keep slugs and print
- * areas; only replace the JPEG.
+ * for Noord green-screen templates — keep slugs and print areas; only
+ * replace the JPEG. Do not DOM-stamp a second mark on the still.
  */
 export const SWAG: SwagItem[] = [
   { slug: "hoodie", title: "Hoodie", print: "Chest", still: "/swag/hoodie.jpg" },

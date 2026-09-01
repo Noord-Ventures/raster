@@ -41,7 +41,12 @@ if (!page.includes("from \"@/components/raster-mark\"") && !page.includes("from 
   fail.push("swag must import RasterMark from the shared module");
 }
 if (!page.includes('className="swag-mark"')) fail.push("swag hero must render RasterMark in the corner slot");
-if (!page.includes("swag-print-mark")) fail.push("swag stills must overlay RasterMark on print areas");
+if (page.includes("PrintMark") || page.includes("swag-print-mark") || page.includes("swag-print-sheet")) {
+  fail.push("swag stills must not DOM-stamp RasterMark over product photos");
+}
+if (css.includes("swag-print-mark") || css.includes("swag-print-svg") || css.includes("swag-print-knockout")) {
+  fail.push("swag CSS must not position a second mark on product stills");
+}
 if (!css.includes("top: 24px") || !css.includes("left: 20px")) {
   fail.push("swag hero mark must sit at top 24 / left 20");
 }

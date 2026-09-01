@@ -1,6 +1,6 @@
 /**
  * The Raster mark from the noord library page, bare.
- * Rotation lives on .site-logo-mark (chrome) or the swag print class.
+ * Rotation lives on .site-logo-mark (chrome).
  * Do not invent a second path set.
  */
 export function RasterMark({ className = "site-logo-mark" }: { className?: string }) {

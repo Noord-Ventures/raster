@@ -438,6 +438,23 @@ if (!kit.includes('"toggle-group"') || !kit.includes('"card"') || !kit.includes(
 if (!layout.includes("SiteFooter") || !footer.includes("getraster.com") || !footer.includes("MIT")) {
   fail("Root layout must render a sitewide footer with factual imprint");
 }
+if (!footer.includes("RasterMark") || !footer.includes("site-footer-about") || footer.includes("site-footer-imprint")) {
+  fail("Footer must be RasterMark | stacked links | about copy, not the MIT-only imprint row");
+}
+for (const sentence of [
+  "Raster is built and designed in the north by Noord.",
+  "Inspired by Dutch and Swiss modernism — the International Typographic Style.",
+  "Free and open source under the MIT license.",
+]) {
+  if (!footer.includes(sentence)) fail(`Footer about copy must include: ${sentence}`);
+}
+const footerNav = site.slice(site.indexOf(".site-footer-nav {"), site.indexOf("}", site.indexOf(".site-footer-nav {")));
+if (!footerNav.includes("flex-direction: column")) {
+  fail("Footer links must be one stacked column");
+}
+if (footerNav.includes("flex-wrap: wrap")) {
+  fail("Footer must not be a horizontal link row");
+}
 if (
   !site.includes("left: 224px") ||
   !site.includes('body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav')

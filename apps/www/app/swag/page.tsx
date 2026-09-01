@@ -8,26 +8,6 @@ export const metadata: Metadata = {
   description: "Raster merch. Coming soon.",
 };
 
-function PrintMark({ sheet }: { sheet?: boolean }) {
-  const unit = (
-    <span className="swag-print-mark">
-      <RasterMark className="swag-print-svg swag-print-knockout" />
-      <RasterMark className="swag-print-svg" />
-    </span>
-  );
-  if (!sheet) return unit;
-  return (
-    <div className="swag-print-sheet" aria-hidden="true">
-      {Array.from({ length: 8 }, (_, i) => (
-        <span key={i} className="swag-print-mark">
-          <RasterMark className="swag-print-svg swag-print-knockout" />
-          <RasterMark className="swag-print-svg" />
-        </span>
-      ))}
-    </div>
-  );
-}
-
 export default function SwagPage() {
   return (
     <main className="swag-page" aria-label="Swag">
@@ -50,7 +30,6 @@ export default function SwagPage() {
           <article key={item.slug} className="swag-cell swag-card" id={item.slug}>
             <figure className="swag-still">
               <img src={item.still} alt={`${item.title}, ${item.print.toLowerCase()} print`} />
-              <div aria-hidden="true">{item.slug === "stickers" ? <PrintMark sheet /> : <PrintMark />}</div>
             </figure>
             <div className="swag-meta">
               <h2>{item.title}</h2>
