@@ -17,10 +17,11 @@ html, body { margin: 0; padding: 0; }
 
 /* Inner-page 204 verticals live on html::before. html/body overflow-x:clip
    drops background-attachment:fixed in Chromium. A fixed layer does not.
-   Ink is --grid-line (quieter than chrome --divider). Clip 21px from the
-   left on desktop so the 20px inset is not a page frame. Homepage kills
-   this overlay so boxed pages (home, About) are cell-edge gutters,
-   not a cage through type. Components / docs / interfaces keep it. */
+   Ink is --grid-line (quieter than the Home / About --divider cage).
+   --grid-pos: 20px 0 puts the first tile line on the left 20px gutter;
+   that utmost left gutter must paint — do not clip it. Homepage and
+   About kill this overlay so boxed pages are cell-edge gutters, not a
+   cage through type. Components / docs / interfaces keep it. */
 html { background-color: var(--bg); }
 html::before {
   content: "";
@@ -32,9 +33,6 @@ html::before {
   background-size: var(--grid-size) 100%;
   background-repeat: repeat-x;
   background-position: var(--grid-pos);
-}
-@media (min-width: 481px) {
-  html::before { clip-path: inset(0 0 0 21px); }
 }
 body {
   position: relative;
@@ -351,7 +349,12 @@ body {
     flex-direction: column;
     padding-top: calc(72px + env(safe-area-inset-top, 0px));
   }
-  .site-layout .cover { padding-top: 32px; }
+  .site-layout .cover,
+  .if-index .cover {
+    min-height: 0;
+    padding-top: 32px;
+    justify-content: flex-start;
+  }
 }
 @media (max-width: 640px) {
   .site-layout { padding-top: calc(56px + env(safe-area-inset-top, 0px)); }
@@ -361,13 +364,29 @@ body {
 .site-content-wide { flex-shrink: 1; width: 100%; min-width: 0; padding-bottom: 72px; }
 @media (max-width: 800px) { .site-content { width: 100%; max-width: 100%; } }
 
-/* ── Cover: type occupies the first 204 cell ── */
+/* ── Cover: type occupies the first 204 cell.
+   Desktop: H1 top shares the TOC first-row line (catalog rail 120px).
+   Not a flex-end spacer that parks the title above the rail. Phone
+   keeps the 32px cover pad once the rail hides. */
 .cover {
   min-height: 204px;
   padding: 20px 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+@media (min-width: 900px) {
+  .cover {
+    padding-top: 120px;
+    justify-content: flex-start;
+  }
+  .cover .component-head { margin-top: 0; }
+}
+@media (max-width: 899px) {
+  .cover {
+    min-height: 0;
+    justify-content: flex-start;
+  }
 }
 .cover .rs-t-sub { margin-top: 16px; }
 

@@ -15,10 +15,11 @@ const UNITS = [
 export function Board() {
   const [unit, setUnit] = React.useState("04");
   const [pane, setPane] = React.useState<"none" | "trip">("none");
+  const [phonePane, setPhonePane] = React.useState<"map" | "fleet">("map");
   const item = UNITS.find((row) => row.id === unit) ?? UNITS[0]!;
 
   return (
-    <main className="if-board sc-night" aria-label="Night" style={{ ["--if-spot" as string]: "#E30613" }}>
+    <main className="if-board sc-night" data-pane={phonePane} aria-label="Night" style={{ ["--if-spot" as string]: "#E30613" }}>
       <aside className="sc-night-rail" aria-label="Fleet">
         <div className="sc-night-brand">
           <Brand slug="night" title="Night" />
@@ -37,6 +38,7 @@ export function Board() {
             onClick={() => {
               setUnit(row.id);
               setPane("none");
+              setPhonePane("map");
             }}
           >
             <b className="if-ico-row">
@@ -72,6 +74,28 @@ export function Board() {
           <Scene selected={unit} />
         </div>
       </section>
+
+      <nav className="if-thumb" aria-label="Night">
+        <button
+          type="button"
+          aria-current={phonePane === "map"}
+          onClick={() => setPhonePane("map")}
+        >
+          <Icon name="map" size={16} />
+          Map
+        </button>
+        <button
+          type="button"
+          aria-current={phonePane === "fleet"}
+          onClick={() => {
+            setPhonePane("fleet");
+            setPane("none");
+          }}
+        >
+          <Icon name="truck" size={16} />
+          Fleet
+        </button>
+      </nav>
 
       <aside className={`if-inspect${pane === "trip" ? " is-open" : ""}`} aria-label="Trip">
         {pane === "trip" ? (

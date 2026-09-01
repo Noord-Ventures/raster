@@ -86,6 +86,25 @@ if (!navCss.includes("@media (min-width: 900px)") || !ifCss.includes("@media (mi
   fail("Desktop rails must stay off the phone");
 }
 
+const tocRail = navCss.slice(navCss.indexOf(".toc-rail {"), navCss.indexOf("}", navCss.indexOf(".toc-rail {")));
+if (!tocRail.includes("padding: 120px 0 72px")) {
+  fail("TOC rail first row stays at 120px");
+}
+const cover900 = site.slice(site.indexOf("@media (min-width: 900px)"));
+if (!cover900.includes("padding-top: 120px") || !cover900.includes("justify-content: flex-start")) {
+  fail("Desktop cover H1 must share the TOC first-row line, not sit above the rail");
+}
+if (!nav.includes('data-toc="groups"') || !nav.includes('data-toc="items"')) {
+  fail("Do not collapse the two-column TOC to fake the H1 align");
+}
+if (ifCss.includes(".if-title")) {
+  fail("Interfaces must not keep a parallel if-title spacer; cover owns the 204 cell");
+}
+const ifIndex = readFileSync(join(root, "apps/www/app/interfaces/page.tsx"), "utf8");
+if (!ifIndex.includes('className="cover"')) {
+  fail("Interfaces H1 must use the shared cover so it shares the rail first-row line");
+}
+
 if (!block.includes("writeText") || !block.includes("Copied") || !block.includes("aria-live")) {
   fail("Code blocks must copy on the control and confirm on themselves");
 }
@@ -117,14 +136,20 @@ if (!specimen.includes("body:has(.specimen-page) {\n  background: transparent;")
 if (!specimen.includes("gap: 1px") || !specimen.includes("background: var(--divider)")) {
   fail("Homepage box seams must be 1px --divider gaps, countable");
 }
-if (specimen.includes("box-shadow: 1px 0 0 var(--grid-line)")) {
-  fail("Homepage seams must not be a --grid-line shadow whisper");
+if (!specimen.includes("box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line)")) {
+  fail("Homepage L/R box margins must be inset --grid-line, quieter than the cage");
+}
+if (specimen.includes("box-shadow: 1px 0 0 var(--grid-line)") && !specimen.includes("inset 1px 0 0 var(--grid-line)")) {
+  fail("Homepage cell seams must stay --divider, not an outer --grid-line whisper");
 }
 if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
   fail("Catalog secondaries must not cover the site module grid");
 }
-if (!about.includes("padding: 0 1px 1px 0")) {
-  fail("About must keep its right and bottom hairline");
+if (!about.includes("padding: 0 0 1px 0")) {
+  fail("About must keep its bottom cage hairline");
+}
+if (!about.includes("box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line)")) {
+  fail("About L/R box margins must be inset --grid-line, quieter than the cage");
 }
 const aboutField = about.slice(about.indexOf(".field {"), about.indexOf("}", about.indexOf(".field {")));
 if (!aboutField.includes("gap: 1px") || !aboutField.includes("background: var(--divider)")) {
@@ -235,8 +260,11 @@ if (/\.if-rail \{[^}]*background:\s*var\(--bg\)/s.test(ifCss)) {
   fail("Interfaces rail must not cover the site module grid");
 }
 const baseCss = readFileSync(join(root, "packages/core/css/base.css"), "utf8");
-if (!baseCss.includes("html::before") || !baseCss.includes("clip-path:inset(0 0 0 21px)") || !baseCss.includes("var(--grid-image)")) {
-  fail("Site gutter overlay must paint verticals on html::before and clip the 20px page frame");
+if (!baseCss.includes("html::before") || !baseCss.includes("var(--grid-image)")) {
+  fail("Site gutter overlay must paint verticals on html::before");
+}
+if (baseCss.includes("clip-path:inset(0 0 0 21px)") || site.includes("clip-path: inset(0 0 0 21px)")) {
+  fail("Left inner-page gutter must paint; do not clip 21px off html::before");
 }
 const beforeAt = baseCss.indexOf("html::before{");
 const beforeRule = beforeAt >= 0 ? baseCss.slice(beforeAt, baseCss.indexOf("}", beforeAt)) : "";
@@ -249,8 +277,11 @@ if (!ifCss.includes("body:has(.if-index)") || !ifCss.includes("background: trans
 if (/if-list \{[^}]*padding:\s*24px/s.test(ifCss)) {
   fail("Interfaces cards must sit on the 204, not 24px off it");
 }
-if (!ifCss.includes(".if-title {\n  min-height: 204px")) {
-  fail("Interfaces title must occupy a 204 cell");
+if (!site.includes(".cover {\n  min-height: 204px")) {
+  fail("Catalog cover must occupy a 204 cell");
+}
+if (!/@media \(max-width: 899px\) \{\s*\.cover \{\s*min-height: 0;/.test(site)) {
+  fail("Phone cover must drop the 204 cell once the rail hides");
 }
 
 const phoneCss = readFileSync(join(root, "packages/core/css/phone.css"), "utf8");

@@ -10,6 +10,9 @@
     />
     <link rel="stylesheet" href="{{CSS_HREF}}" />
     <style>
+      /* Boxed specimen: --divider cell cage, --grid-line L/R margins.
+         Kill the site 204 overlay so it does not cut type. */
+      html:has(.sp)::before { display: none; }
       .sp { width: 100%; min-height: 100dvh; }
       .sp-field {
         display: grid;
@@ -20,18 +23,15 @@
           "flush" "grot" "kit" "faq" "colo";
         grid-auto-rows: minmax(204px, auto);
         background: var(--divider);
-        padding: 0 1px 1px 0;
+        padding: 0 0 1px 0;
         gap: 1px;
+        box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line);
       }
       .sp-cell {
         min-width: 0;
         min-height: 204px;
         padding: 20px;
         background-color: var(--bg);
-        background-image: var(--grid-image);
-        background-size: var(--grid-size) 100%;
-        background-position: var(--grid-pos);
-        background-attachment: fixed;
         display: flex;
         flex-direction: column;
         justify-content: space-between;

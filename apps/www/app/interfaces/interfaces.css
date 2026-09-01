@@ -32,7 +32,11 @@ body:has(.if-index) {
     flex-direction: column;
     padding-top: calc(72px + env(safe-area-inset-top, 0px));
   }
-  .if-index .if-title { padding-top: 32px; }
+  .if-index .cover {
+    min-height: 0;
+    padding-top: 32px;
+    justify-content: flex-start;
+  }
 }
 @media (max-width: 640px) {
   .if-index { padding-top: calc(56px + env(safe-area-inset-top, 0px)); }
@@ -75,17 +79,8 @@ body:has(.if-index) {
 .if-rail a[aria-current="page"] { font-weight: 500; }
 .if-rail a:focus-visible { outline: 1px solid var(--text); outline-offset: 2px; }
 
-/* Title occupies the first 204 cell. Type sits on the field. */
-.if-title {
-  min-height: 204px;
-  max-width: 592px;
-  padding: 20px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  background: transparent;
-}
-.if-title .rs-t-sub { margin-top: 16px; }
+/* Title uses shared .cover in site.css so H1 top = TOC first-row
+   line at scroll 0. Do not keep a parallel spacer here. */
 
 /* Landing: poster crops sit on the 204. 388 × 408 = two modules.
    No 24px pad — that dropped the first horizontal and shoved cards
@@ -461,12 +456,75 @@ body:has(.if-index) {
 @media (max-width: 899px) {
   .if-specimen { margin-top: 24px; height: 612px; }
 }
+/* Phone thumb bar. Hidden on desktop; boards opt in with <nav class="if-thumb">. */
+.if-thumb { display: none; }
+
 @media (max-width: 640px) {
   .if-specimen {
-    height: auto;
-    min-height: 408px;
+    margin-top: 24px;
+    height: 680px;
+    min-height: 612px;
   }
-  .if-board { min-height: 408px; height: auto; }
+  .if-board {
+    position: relative;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .if-inspect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    height: auto;
+    overflow: auto;
+    z-index: 4;
+  }
+  .if-board:has(.if-thumb) .if-inspect {
+    bottom: calc(52px + env(safe-area-inset-bottom, 0px));
+  }
+  .if-inspect.is-open {
+    width: 100%;
+    max-height: 72%;
+    background: var(--bg);
+    border-left: 0;
+    border-top: 1px solid var(--divider);
+  }
+  .if-thumb {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    align-items: stretch;
+    min-height: 52px;
+    padding: 4px 8px calc(4px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--divider);
+    background: var(--bg);
+    z-index: 2;
+  }
+  .if-thumb button {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 44px;
+    padding: 0 8px;
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    border-radius: 0;
+    font: 500 12px/1 inherit;
+    cursor: pointer;
+  }
+  .if-thumb button[aria-current="true"],
+  .if-thumb button[aria-pressed="true"] {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .if-board img {
+    max-width: 100%;
+  }
   .if-matter { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
   .if-meta { grid-template-columns: 1fr; }
   .if-board .rs-sidebar-item {

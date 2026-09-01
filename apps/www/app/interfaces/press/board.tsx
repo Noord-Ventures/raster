@@ -157,6 +157,27 @@ export function Board() {
         </div>
       </section>
 
+      <nav className="if-thumb" aria-label="Press">
+        {[
+          { id: "overview", label: "Overview", icon: "layout" as const },
+          { id: "jobs", label: "Jobs", icon: "list" as const },
+          { id: "invoices", label: "Invoices", icon: "receipt" as const },
+        ].map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            aria-current={page === item.id}
+            onClick={() => {
+              setPage(item.id);
+              setSheet(false);
+            }}
+          >
+            <Icon name={item.icon} size={16} />
+            {item.label}
+          </button>
+        ))}
+      </nav>
+
       <aside className={`if-inspect${sheet ? " is-open" : ""}`} aria-label="Sheet">
         <div className="sc-dash-inspect">
           {sheet ? (

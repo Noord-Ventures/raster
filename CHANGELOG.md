@@ -2,14 +2,18 @@
 
 ## Unreleased
 
+- Evening store stills are real Unsplash photographs, not generated food. Same paths under `apps/www/public/interfaces/food/`. DoorDash-like cards and Raster chrome stay. Does not publish.
+- Catalog H1 top shares the TOC first-row line at scroll 0 (docs, components, interfaces). Cover is not a flex-end spacer above the rail. Two-column TOC stays. Does not publish.
+- Interfaces people are /work keepers only: Aziez Soekha, Jenny Lo, Koen Bok, Gianpiero Puleo. Night fleet viz is a city-scale map well: many blocks, a readable street grid, vehicles as small units. Does not publish.
+- Two gridline hues, same ink family. `--grid-line` is the quieter step: inner-page 204 on docs / components / interfaces, plus Home / About / starter L/R box margins. `--divider` is the slightly stronger step: Home / About / starter 1px cell-edge cage. `--divider-subtle` stays a fill, not a gridline. The utmost left inner gutter paints; the 21px `html::before` clip is gone. Home / About / starter still kill the repeating 204 so it does not cut type or stills. Does not publish.
 - Slight Raster radius: `--radius-sm` is 4px, the standalone button token. Cards, boxes, callouts, dialogs, sheets, drawers, catalog frames, and interface scene frames share it. `--radius` aliases `--radius-sm`. Nested inners still follow Steve Ruiz. Chrome, icon marks, empty, and charts stay 0. No shadow. Does not publish.
 - About is a workhorse specimen in the Inter register: what it is, who it is for, pasteable usage, free & open, type on the module, then history. The 204 spine stays (20 / 204 / 224 / 408). Navbar on scroll on About. `npx @noorddev/raster-cli init` writes `index.html` as a real specimen, not a hello-world shell. Preview at `/starter`.
 - Starter / generated page recut: box padding is the 20px gutter; scheme toggle is the Raster sun/moon mark; Flush hairlines span the cell; 184+20 reads as column and gutter on the 204 module; US English; kit includes a graph and `rs-kbd`. Module cells stay flush; inner boxes may take `--radius-sm`. Same copy on About.
 - Raster icons: first complete family in `@noorddev/raster-react`. Same 16 module / 1px language. Catalog on /components/icons. Site theme-toggle is the family. Does not publish.
-- Homepage is boxed 204 cells only: no gutter overlay through Raster / tagline / install. Inner pages keep quiet `--grid-image` verticals on `html::before` (no 204 horizontals). `--divider` is the same ink as `--grid-line` (0.08 / 0.10). Button-group joins stay the 1px `--divider` gap. No 20px page frame.
+- Homepage is boxed 204 cells only: no gutter overlay through Raster / tagline / install. Inner pages keep quiet `--grid-image` verticals on `html::before` (no 204 horizontals). Button-group joins stay the 1px `--divider` gap.
 - Chrome polish: calendar days are square; month chevrons sit 1px down; grouped seams and dividers use `--divider`; button / input groups inherit `--radius-sm`. Grouped T-junctions are one stroke. Field input is a 40px integer control with 8px / 16px label and hint.
 - www: quieter credits. Homepage install command is a primary CTA.
-- Homepage opens on the right and bottom; no outer frame. About and interior chrome keep their hairlines.
+- Homepage opens on the right and bottom; no --divider outer frame. L/R box margins are the quieter `--grid-line`. About keeps its bottom cage hairline.
 - User-facing install copy uses `@noorddev` (`npx @noorddev/raster-cli init`). Does not publish.
 - www phone: 44pt hits, safe-area insets, stacked TOC, copy control. Desktop chrome stays.
 - Phone control scale (≤640): `--hit` / `--control-h` / `--control-fs` plus `phone.css` recut every interactive Raster control. Desktop poster stays.

@@ -7,25 +7,69 @@ type SceneProps = {
   selected: string;
 };
 
+const PITCH = 2.2;
+const STREET = 0.58;
+const CITY = 5;
+const SPAN = (CITY * 2 + 1) * PITCH;
+
 const UNITS: Record<string, { x: number; z: number; rot: number }> = {
-  "04": { x: 0.18, z: 1.55, rot: 0 },
-  "19": { x: 0.18, z: -0.35, rot: 0 },
-  "03": { x: -1.85, z: -1.05, rot: Math.PI / 2 },
-  "11": { x: 0.18, z: -2.55, rot: 0 },
+  "04": { x: 0.16, z: PITCH, rot: 0 },
+  "19": { x: 0.16, z: -PITCH, rot: 0 },
+  "03": { x: -PITCH, z: -0.16, rot: Math.PI / 2 },
+  "11": { x: 0.16, z: -3 * PITCH, rot: 0 },
 };
 
-const BUILDINGS: { x: number; z: number; w: number; d: number; h: number; tone: number }[] = [
-  { x: -2.15, z: 2.35, w: 1.55, d: 1.2, h: 1.7, tone: 0xddd8d0 },
-  { x: -2.05, z: 1.05, w: 1.35, d: 1.05, h: 2.15, tone: 0xd2cdc5 },
-  { x: -2.25, z: -0.15, w: 1.7, d: 0.95, h: 1.25, tone: 0xe4dfd7 },
-  { x: -2.1, z: -2.15, w: 1.45, d: 1.35, h: 1.9, tone: 0xcfcac2 },
-  { x: -2.35, z: -3.55, w: 1.25, d: 1.05, h: 1.05, tone: 0xdbd6ce },
-  { x: 2.2, z: 2.2, w: 1.4, d: 1.3, h: 1.45, tone: 0xd8d3cb },
-  { x: 2.35, z: 0.85, w: 1.6, d: 1.1, h: 2.4, tone: 0xc8c3bb },
-  { x: 2.1, z: -0.25, w: 1.2, d: 0.9, h: 1.15, tone: 0xe2ddd5 },
-  { x: 2.3, z: -2.05, w: 1.55, d: 1.2, h: 1.75, tone: 0xd0cbc3 },
-  { x: 2.15, z: -3.4, w: 1.35, d: 1.15, h: 2.05, tone: 0xccc7bf },
-];
+const TONES = [0xddd8d0, 0xd2cdc5, 0xe4dfd7, 0xcfcac2, 0xdbd6ce, 0xd8d3cb, 0xc8c3bb, 0xe2ddd5, 0xd0cbc3, 0xccc7bf];
+
+function lot(i: number, j: number) {
+  const n = Math.abs((i * 47 + j * 13) % 17);
+  return {
+    h: 0.36 + (n % 8) * 0.14,
+    w: 0.92 + (n % 3) * 0.1,
+    d: 0.92 + ((n + 2) % 3) * 0.1,
+    tone: TONES[n % TONES.length]!,
+    split: n % 5 === 0,
+  };
+}
+
+const BUILDINGS: { x: number; z: number; w: number; d: number; h: number; tone: number }[] = [];
+for (let i = -CITY; i <= CITY; i += 1) {
+  for (let j = -CITY; j <= CITY; j += 1) {
+    if (i === -3 && j === 1) continue;
+    if (j <= -CITY && i >= 2) continue;
+    const cell = lot(i, j);
+    const cx = (i + 0.5) * PITCH;
+    const cz = (j + 0.5) * PITCH;
+    const pad = STREET * 0.42;
+    if (cell.split) {
+      BUILDINGS.push({
+        x: cx - cell.w * 0.28,
+        z: cz,
+        w: cell.w * 0.52,
+        d: cell.d,
+        h: cell.h * 0.82,
+        tone: cell.tone,
+      });
+      BUILDINGS.push({
+        x: cx + cell.w * 0.3,
+        z: cz,
+        w: cell.w * 0.48,
+        d: cell.d * 0.9,
+        h: cell.h * 1.12,
+        tone: TONES[(i + j + 3) % TONES.length]!,
+      });
+    } else {
+      BUILDINGS.push({
+        x: cx,
+        z: cz,
+        w: Math.min(cell.w, PITCH - STREET - pad),
+        d: Math.min(cell.d, PITCH - STREET - pad),
+        h: cell.h,
+        tone: cell.tone,
+      });
+    }
+  }
+}
 
 function facadeTexture() {
   const canvas = document.createElement("canvas");
@@ -35,7 +79,7 @@ function facadeTexture() {
   if (!ctx) return null;
   ctx.fillStyle = "#d8d4cc";
   ctx.fillRect(0, 0, 64, 128);
-  ctx.fillStyle = "rgba(26, 25, 22, 0.16)";
+  ctx.fillStyle = "rgba(26, 25, 22, 0.12)";
   for (let y = 10; y < 118; y += 12) {
     for (let x = 8; x < 58; x += 12) {
       ctx.fillRect(x, y, 7, 8);
@@ -45,7 +89,7 @@ function facadeTexture() {
   tex.colorSpace = THREE.SRGBColorSpace;
   tex.wrapS = THREE.RepeatWrapping;
   tex.wrapT = THREE.RepeatWrapping;
-  tex.anisotropy = 4;
+  tex.anisotropy = 2;
   return tex;
 }
 
@@ -78,28 +122,28 @@ function slab(w: number, d: number, h: number, radius = 0.028) {
 function vehicle(kind: "van" | "car", ink: number) {
   const group = new THREE.Group();
   const body = new THREE.Mesh(
-    slab(kind === "van" ? 0.22 : 0.16, kind === "van" ? 0.42 : 0.3, kind === "van" ? 0.14 : 0.07, 0.03),
+    slab(kind === "van" ? 0.18 : 0.13, kind === "van" ? 0.34 : 0.24, kind === "van" ? 0.11 : 0.055, 0.024),
     new THREE.MeshLambertMaterial({ color: ink }),
   );
-  body.position.y = kind === "van" ? 0.07 : 0.045;
+  body.position.y = kind === "van" ? 0.055 : 0.036;
   body.castShadow = true;
   group.add(body);
   if (kind === "van") {
     const cabin = new THREE.Mesh(
-      slab(0.2, 0.16, 0.12, 0.02),
+      slab(0.16, 0.13, 0.09, 0.016),
       new THREE.MeshLambertMaterial({ color: ink }),
     );
-    cabin.position.set(0, 0.16, 0.1);
+    cabin.position.set(0, 0.13, 0.08);
     cabin.castShadow = true;
     group.add(cabin);
   }
-  const wheel = new THREE.CylinderGeometry(0.035, 0.035, 0.04, 10);
+  const wheel = new THREE.CylinderGeometry(0.028, 0.028, 0.032, 8);
   wheel.rotateZ(Math.PI / 2);
   const rubber = new THREE.MeshLambertMaterial({ color: 0x1a1916 });
-  const spots: [number, number][] = kind === "van" ? [[-0.1, 0.14], [0.1, 0.14], [-0.1, -0.14], [0.1, -0.14]] : [[-0.07, 0.09], [0.07, 0.09], [-0.07, -0.09], [0.07, -0.09]];
+  const spots: [number, number][] = kind === "van" ? [[-0.08, 0.11], [0.08, 0.11], [-0.08, -0.11], [0.08, -0.11]] : [[-0.055, 0.07], [0.055, 0.07], [-0.055, -0.07], [0.055, -0.07]];
   spots.forEach(([x, z]) => {
     const mesh = new THREE.Mesh(wheel, rubber);
-    mesh.position.set(x, 0.035, z);
+    mesh.position.set(x, 0.028, z);
     group.add(mesh);
   });
   group.userData.body = body;
@@ -115,7 +159,12 @@ export function Scene({ selected }: SceneProps) {
     const root = host.current;
     if (!root) return;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    } catch {
+      return;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0xe8e4dc, 1);
     renderer.shadowMap.enabled = true;
@@ -123,26 +172,26 @@ export function Scene({ selected }: SceneProps) {
     root.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0xe8e4dc, 9, 20);
-    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 40);
-    camera.position.set(3.9, 3.35, 5.55);
-    camera.lookAt(-0.15, 0.28, -1.35);
+    scene.fog = new THREE.Fog(0xe8e4dc, 38, 78);
+    const camera = new THREE.PerspectiveCamera(48, 1, 0.2, 90);
+    camera.position.set(14, 18, 16);
+    camera.lookAt(0, 0.15, -1.2);
 
-    scene.add(new THREE.AmbientLight(0xe8e4dc, 0.72));
-    const sun = new THREE.DirectionalLight(0xfff6ea, 0.85);
-    sun.position.set(5.2, 7.4, 3.4);
+    scene.add(new THREE.AmbientLight(0xe8e4dc, 0.78));
+    const sun = new THREE.DirectionalLight(0xfff6ea, 0.72);
+    sun.position.set(8, 24, 6);
     sun.castShadow = true;
     sun.shadow.mapSize.set(1024, 1024);
-    sun.shadow.camera.near = 1;
-    sun.shadow.camera.far = 22;
-    sun.shadow.camera.left = -8;
-    sun.shadow.camera.right = 8;
-    sun.shadow.camera.top = 8;
-    sun.shadow.camera.bottom = -8;
+    sun.shadow.camera.near = 2;
+    sun.shadow.camera.far = 50;
+    sun.shadow.camera.left = -18;
+    sun.shadow.camera.right = 18;
+    sun.shadow.camera.top = 18;
+    sun.shadow.camera.bottom = -18;
     scene.add(sun);
 
     const paper = new THREE.Mesh(
-      new THREE.PlaneGeometry(28, 28),
+      new THREE.PlaneGeometry(56, 56),
       new THREE.MeshLambertMaterial({ color: 0xe8e4dc }),
     );
     paper.rotation.x = -Math.PI / 2;
@@ -152,56 +201,58 @@ export function Scene({ selected }: SceneProps) {
     const street = new THREE.MeshLambertMaterial({ color: 0xc6c2ba });
     const walk = new THREE.MeshLambertMaterial({ color: 0xdedad2 });
     const mark = new THREE.MeshBasicMaterial({ color: 0xf3efe7 });
+    const run = SPAN + PITCH;
 
-    const main = new THREE.Mesh(new THREE.PlaneGeometry(1.55, 8.4), street);
-    main.rotation.x = -Math.PI / 2;
-    main.position.set(0, 0.012, -0.4);
-    main.receiveShadow = true;
-    scene.add(main);
+    for (let n = -CITY; n <= CITY + 1; n += 1) {
+      const ns = new THREE.Mesh(new THREE.PlaneGeometry(STREET, run), street);
+      ns.rotation.x = -Math.PI / 2;
+      ns.position.set(n * PITCH, 0.012, PITCH * 0.5);
+      ns.receiveShadow = true;
+      scene.add(ns);
+      const ew = new THREE.Mesh(new THREE.PlaneGeometry(run, STREET), street);
+      ew.rotation.x = -Math.PI / 2;
+      ew.position.set(PITCH * 0.5, 0.013, n * PITCH);
+      ew.receiveShadow = true;
+      scene.add(ew);
+    }
 
-    [-1.05, 0.85, -2.85].forEach((z) => {
-      const cross = new THREE.Mesh(new THREE.PlaneGeometry(7.2, 1.15), street);
-      cross.rotation.x = -Math.PI / 2;
-      cross.position.set(0, 0.013, z);
-      cross.receiveShadow = true;
-      scene.add(cross);
-    });
-
-    const side = (x: number) => {
-      const slabWalk = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.04, 8.2), walk);
-      slabWalk.position.set(x, 0.03, -0.35);
+    for (let n = -CITY; n <= CITY; n += 1) {
+      const slabWalk = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.03, run * 0.92), walk);
+      slabWalk.position.set(n * PITCH - STREET * 0.52, 0.02, PITCH * 0.5);
       slabWalk.receiveShadow = true;
       scene.add(slabWalk);
-    };
-    side(-0.98);
-    side(0.98);
+      const slabWalk2 = slabWalk.clone();
+      slabWalk2.position.x = n * PITCH + STREET * 0.52;
+      scene.add(slabWalk2);
+    }
 
-    const stripe = new THREE.BoxGeometry(0.08, 0.006, 0.42);
-    for (const z of [-1.05, 0.85]) {
-      for (let i = -4; i <= 4; i += 1) {
+    const stripe = new THREE.BoxGeometry(0.06, 0.005, 0.28);
+    for (const z of [-PITCH, PITCH, 0]) {
+      for (let i = -3; i <= 3; i += 1) {
         const bar = new THREE.Mesh(stripe, mark);
-        bar.position.set(i * 0.14, 0.02, z);
+        bar.position.set(i * 0.1, 0.018, z);
         scene.add(bar);
       }
     }
 
     const water = new THREE.Mesh(
-      new THREE.PlaneGeometry(10, 3.4),
+      new THREE.PlaneGeometry(SPAN + 8, 6.4),
       new THREE.MeshLambertMaterial({ color: 0xc5d2d8 }),
     );
     water.rotation.x = -Math.PI / 2;
-    water.position.set(0.6, 0.01, -5.6);
+    water.position.set(2.2, 0.01, -CITY * PITCH - 3.4);
     scene.add(water);
 
     const park = new THREE.Mesh(
-      new THREE.PlaneGeometry(1.6, 1.1),
+      new THREE.PlaneGeometry(PITCH - STREET, PITCH - STREET),
       new THREE.MeshLambertMaterial({ color: 0xd3d8c6 }),
     );
     park.rotation.x = -Math.PI / 2;
-    park.position.set(-3.4, 0.016, 0.85);
+    park.position.set((-3 + 0.5) * PITCH, 0.016, (1 + 0.5) * PITCH);
     scene.add(park);
 
     const windows = facadeTexture();
+    const roofMat = new THREE.MeshLambertMaterial({ color: 0xb8b3ab });
     BUILDINGS.forEach((b) => {
       const mat = new THREE.MeshLambertMaterial({
         color: b.tone,
@@ -209,68 +260,67 @@ export function Scene({ selected }: SceneProps) {
       });
       if (windows) {
         mat.map = windows.clone();
-        mat.map.repeat.set(Math.max(1, Math.round(b.w * 2)), Math.max(2, Math.round(b.h * 2)));
+        mat.map.repeat.set(Math.max(1, Math.round(b.w * 2.2)), Math.max(1, Math.round(b.h * 2.4)));
         mat.map.needsUpdate = true;
       }
       const mass = new THREE.Mesh(new THREE.BoxGeometry(b.w, b.h, b.d), mat);
       mass.position.set(b.x, b.h / 2, b.z);
-      mass.castShadow = true;
+      mass.castShadow = b.h > 0.7;
       mass.receiveShadow = true;
       scene.add(mass);
-      const roof = new THREE.Mesh(
-        new THREE.BoxGeometry(b.w * 0.92, 0.05, b.d * 0.92),
-        new THREE.MeshLambertMaterial({ color: 0xb8b3ab }),
-      );
+      const roof = new THREE.Mesh(new THREE.BoxGeometry(b.w * 0.92, 0.04, b.d * 0.92), roofMat);
       roof.position.set(b.x, b.h + 0.02, b.z);
-      roof.castShadow = true;
       scene.add(roof);
     });
 
-    const lampPole = new THREE.CylinderGeometry(0.018, 0.022, 0.72, 8);
-    const lampHead = new THREE.BoxGeometry(0.08, 0.03, 0.12);
+    const lampPole = new THREE.CylinderGeometry(0.016, 0.02, 0.62, 8);
+    const lampHead = new THREE.BoxGeometry(0.07, 0.026, 0.1);
     const inkMat = new THREE.MeshLambertMaterial({ color: 0x1a1916 });
-    for (let i = 0; i < 6; i += 1) {
-      const z = 2.4 - i * 1.05;
-      [-0.82, 0.82].forEach((x) => {
+    for (let n = -4; n <= 4; n += 1) {
+      [-STREET * 0.42, STREET * 0.42].forEach((x) => {
         const pole = new THREE.Mesh(lampPole, inkMat);
-        pole.position.set(x, 0.38, z);
+        pole.position.set(x, 0.33, n * PITCH);
         pole.castShadow = true;
         scene.add(pole);
         const head = new THREE.Mesh(lampHead, inkMat);
-        head.position.set(x + (x < 0 ? 0.04 : -0.04), 0.74, z);
+        head.position.set(x + (x < 0 ? 0.03 : -0.03), 0.64, n * PITCH);
         scene.add(head);
       });
+      if (n !== 0) {
+        const pole = new THREE.Mesh(lampPole, inkMat);
+        pole.position.set(n * PITCH, 0.33, STREET * 0.42);
+        scene.add(pole);
+        const head = new THREE.Mesh(lampHead, inkMat);
+        head.position.set(n * PITCH, 0.64, STREET * 0.42 + 0.03);
+        scene.add(head);
+      }
     }
 
-    const parked: THREE.Group[] = [];
-    const curb: [number, number, number][] = [
-      [-0.62, 2.05, Math.PI],
-      [-0.62, 0.15, Math.PI],
-      [-0.62, -1.85, Math.PI],
-      [0.62, 2.15, 0],
-      [0.62, 0.05, 0],
-      [0.62, -1.75, 0],
-      [0.62, -3.15, 0],
-    ];
+    const curb: [number, number, number][] = [];
+    for (let n = -3; n <= 3; n += 1) {
+      if (n === 0) continue;
+      curb.push([-0.28, n * PITCH * 0.7, Math.PI]);
+      curb.push([0.28, n * PITCH * 0.55, 0]);
+    }
     curb.forEach(([x, z, rot], i) => {
       const car = vehicle("car", i % 3 === 0 ? 0x3a3834 : 0x2a2824);
       car.position.set(x, 0, z);
       car.rotation.y = rot;
       scene.add(car);
-      parked.push(car);
     });
 
     const route = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(0.18, 0.03, 2.6),
-      new THREE.Vector3(0.18, 0.03, 0.85),
-      new THREE.Vector3(0.18, 0.03, -1.05),
-      new THREE.Vector3(0.18, 0.03, -2.85),
-      new THREE.Vector3(-1.85, 0.03, -2.85),
-      new THREE.Vector3(-1.85, 0.03, -1.05),
+      new THREE.Vector3(0.16, 0.03, 4 * PITCH),
+      new THREE.Vector3(0.16, 0.03, PITCH),
+      new THREE.Vector3(0.16, 0.03, -PITCH),
+      new THREE.Vector3(0.16, 0.03, -3 * PITCH),
+      new THREE.Vector3(-PITCH, 0.03, -3 * PITCH),
+      new THREE.Vector3(-PITCH, 0.03, -0.16),
+      new THREE.Vector3(-2 * PITCH, 0.03, -0.16),
     ]);
     const path = new THREE.Mesh(
-      new THREE.TubeGeometry(route, 64, 0.02, 8, false),
-      new THREE.MeshBasicMaterial({ color: 0x1a1916, transparent: true, opacity: 0.38 }),
+      new THREE.TubeGeometry(route, 96, 0.018, 8, false),
+      new THREE.MeshBasicMaterial({ color: 0x1a1916, transparent: true, opacity: 0.34 }),
     );
     scene.add(path);
 
@@ -283,9 +333,10 @@ export function Scene({ selected }: SceneProps) {
     });
 
     const traffic: THREE.Group[] = [];
-    for (let i = 0; i < 5; i += 1) {
+    for (let i = 0; i < 8; i += 1) {
       const car = vehicle("car", 0x2a2824);
-      car.userData.t = i / 5;
+      car.userData.t = i / 8;
+      car.userData.axis = i % 3 === 0 ? "ew" : "ns";
       scene.add(car);
       traffic.push(car);
     }
@@ -297,6 +348,14 @@ export function Scene({ selected }: SceneProps) {
       const h = root.clientHeight;
       renderer.setSize(w, h, false);
       camera.aspect = w / Math.max(h, 1);
+      if (h > w * 1.15) {
+        camera.position.set(17, 22, 19);
+        camera.fov = 52;
+      } else {
+        camera.position.set(14, 18, 16);
+        camera.fov = 48;
+      }
+      camera.lookAt(0, 0.15, -1.2);
       camera.updateProjectionMatrix();
     };
     resize();
@@ -306,10 +365,15 @@ export function Scene({ selected }: SceneProps) {
       frame = requestAnimationFrame(tick);
       if (!still) {
         traffic.forEach((car) => {
-          car.userData.t = ((car.userData.t as number) + 0.0016) % 1;
+          car.userData.t = ((car.userData.t as number) + 0.0011) % 1;
           const t = car.userData.t as number;
-          car.position.set(0.18, 0, 2.7 - t * 6.4);
-          car.rotation.y = 0;
+          if (car.userData.axis === "ew") {
+            car.position.set(-4.4 + t * 9.2, 0, 0.16);
+            car.rotation.y = Math.PI / 2;
+          } else {
+            car.position.set(0.16, 0, 5.2 - t * 11.4);
+            car.rotation.y = 0;
+          }
         });
       }
       vans.forEach(({ id, mesh }) => {

@@ -153,8 +153,12 @@ jobs:
               process.exit(1);
             }
             const base = readFileSync("packages/core/css/base.css", "utf8");
-            if (!base.includes("html::before") || !base.includes("clip-path:inset(0 0 0 21px)")) {
-              console.error("Site gutter overlay must paint on html::before and clip the 20px page frame");
+            if (!base.includes("html::before") || !base.includes("var(--grid-image)")) {
+              console.error("Site gutter overlay must paint on html::before");
+              process.exit(1);
+            }
+            if (base.includes("clip-path:inset(0 0 0 21px)")) {
+              console.error("Left inner-page gutter must paint; do not clip 21px off html::before");
               process.exit(1);
             }
             if (!base.includes("var(--grid-image)")) {
@@ -191,8 +195,12 @@ jobs:
               console.error("Homepage box seams must be 1px --divider gaps, countable");
               process.exit(1);
             }
-            if (rule.includes("background: var(--grid-line)") || rule.includes("box-shadow: 1px 0 0 var(--grid-line)")) {
-              console.error("Homepage seams must not be a --grid-line whisper");
+            if (!rule.includes("box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line)")) {
+              console.error("Homepage L/R box margins must be inset --grid-line");
+              process.exit(1);
+            }
+            if (rule.includes("background: var(--grid-line)")) {
+              console.error("Homepage cell seams must stay --divider, not --grid-line");
               process.exit(1);
             }
             if (/border-(top|right|bottom|left)/.test(rule) || /padding:\s*0\s+1px/.test(rule)) {
@@ -497,7 +505,8 @@ jobs:
           grep -q 'field-spec-module' "$page"
           grep -q 'field-spec-hair' "$page"
           grep -q 'field-spec-flush' "$page"
-          grep -q 'padding: 0 1px 1px 0' "$css"
+          grep -q 'padding: 0 0 1px 0' "$css"
+          grep -q 'inset 1px 0 0 var(--grid-line)' "$css"
           node -e '
             const { readFileSync } = require("node:fs");
             const css = readFileSync("apps/www/app/about/about.css", "utf8");
@@ -526,8 +535,12 @@ jobs:
               console.error("About box seams must be 1px --divider gaps, countable");
               process.exit(1);
             }
+            if (!fieldRule.includes("box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line)")) {
+              console.error("About L/R box margins must be inset --grid-line");
+              process.exit(1);
+            }
             if (fieldRule.includes("background: var(--grid-line)")) {
-              console.error("About seams must not be a --grid-line whisper");
+              console.error("About cell seams must stay --divider, not --grid-line");
               process.exit(1);
             }
             const era = css.slice(css.indexOf(".field-cell-era {"), css.indexOf("}", css.indexOf(".field-cell-era {")));
@@ -657,12 +670,16 @@ jobs:
           fi
           grep -q 'href: "/about"' apps/www/components/site-chrome.tsx
           grep -q 'label: "About"' apps/www/components/site-chrome.tsx
-          if grep -n border-left "$css"; then
-            echo "About field must not grow a left rule"
+          if grep -n 'border-left' "$css"; then
+            echo "About L/R box margins are inset --grid-line, not a border-left rule"
             exit 1
           fi
-          if grep -nE 'box-shadow:[^n]|border-radius:[^0]' "$css"; then
-            echo "About must stay flush: no shadow, no radius"
+          if grep -nE 'border-radius:[^0]' "$css"; then
+            echo "About must stay flush: no radius"
+            exit 1
+          fi
+          if grep -nE 'box-shadow:' "$css" | grep -v 'inset 1px 0 0 var(--grid-line)'; then
+            echo "About may take only the L/R --grid-line inset, no other shadow"
             exit 1
           fi
       - name: Init writes a specimen page
@@ -688,6 +705,12 @@ jobs:
           grep -q 'width: calc(100% + 40px)' "$starter"
           grep -q 'padding: 20px' "$starter"
           grep -q 'Module cells sit flush on the gridline' "$starter"
+          grep -q 'html:has(.sp)::before' "$starter"
+          grep -q 'inset 1px 0 0 var(--grid-line)' "$starter"
+          if grep -n 'background-image: var(--grid-image)' "$starter"; then
+            echo "Starter must not paint the 204 through type"
+            exit 1
+          fi
           if grep -nE 'Dark scheme|Light scheme|The programme is visible|No radius|Flush · 0' "$starter"; then
             echo "Starter must use an icon scheme toggle and US descriptive copy"
             exit 1
@@ -713,10 +736,17 @@ jobs:
         run: |
           node apps/www/scripts/check-interfaces.mjs
           grep -q 'html::before' packages/core/css/base.css
-          grep -q 'clip-path:inset(0 0 0 21px)' packages/core/css/base.css
+          if grep -n 'clip-path:inset(0 0 0 21px)' packages/core/css/base.css apps/www/app/site.css; then
+            echo "Left inner-page gutter must paint; do not clip 21px off html::before"
+            exit 1
+          fi
           grep -q 'background:var(--divider)' packages/core/css/components/button-group.css
           grep -q 'gap:1px' packages/core/css/components/button-group.css
-          grep -q 'min-height: 204px' apps/www/app/interfaces/interfaces.css
+          grep -q 'min-height: 204px' apps/www/app/site.css
+          if ! awk '/^\.cover \{/,/^\}/' apps/www/app/site.css | grep -q 'min-height: 204px'; then
+            echo "Cover must occupy a 204 cell"
+            exit 1
+          fi
           grep -q 'margin-top: 204px' apps/www/app/interfaces/interfaces.css
           if grep -n 'background: var(--bg)' apps/www/app/interfaces/interfaces.css | grep -q if-rail; then
             echo "Interfaces rail must not cover the 204"
@@ -760,6 +790,10 @@ jobs:
           fi
           if grep -R -n -E 'tailwind|@radix-ui' apps/www/app/interfaces; then
             echo "Interfaces must stay off Tailwind and Radix"
+            exit 1
+          fi
+          if grep -R -n -E '\b(Katie|Christian|Senka|Ilana)\b' apps/www/app/interfaces apps/www/app/specimen.ts packages/cli/src/starter.html apps/www/app/page.tsx; then
+            echo "Katie, Christian, Senka, and Ilana cannot return in Interfaces or specimen copy"
             exit 1
           fi
           node -e '

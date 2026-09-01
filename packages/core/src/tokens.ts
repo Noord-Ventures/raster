@@ -15,12 +15,14 @@ export const rasterTokens = {
       paper: "#FAF8F2",
       ink: "#1A1A1A",
       gray: "#6B6B6B",
-      /** Chrome hairlines and the page 204. One ink: joins, rows, field. */
+      /** Stronger of two grid inks: Home / About 1px cell-edge cage.
+          Same family as --grid-line; not a third hue. */
       divider: "rgba(0,0,0,0.08)",
-      /** Fills only (hover, skeleton, muted). Not a second line ink. */
+      /** Fills only (hover, skeleton, muted). Not a gridline. */
       dividerSubtle: "rgba(0,0,0,0.06)",
-      /** Page-field module grid. Quieter than chrome --divider. 0.08 was
-          a cage; 0.025 was invisible. 0.04 still reads on paper. */
+      /** Quieter of two grid inks: inner-page 204 + Home / About L/R
+          box margins. 0.08 caged inner pages; 0.025 was invisible.
+          0.04 still reads on paper. */
       gridLine: "rgba(0,0,0,0.04)",
       tableAlt: "rgba(0,0,0,0.02)",
     },
@@ -30,6 +32,7 @@ export const rasterTokens = {
       gray: "#949494",
       divider: "rgba(255,255,255,0.10)",
       dividerSubtle: "rgba(255,255,255,0.07)",
+      /** Quieter of two grid inks. 0.05 still reads on dark. */
       gridLine: "rgba(255,255,255,0.05)",
       tableAlt: "rgba(255,255,255,0.03)",
     },

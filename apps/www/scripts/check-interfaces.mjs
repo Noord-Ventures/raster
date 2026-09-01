@@ -61,13 +61,25 @@ if (!index.includes("InterfaceCrop")) {
   console.error("Interfaces index must render poster crops, not title-only cards");
   process.exit(1);
 }
-if (!index.includes("if-title")) {
-  console.error("Interfaces title must occupy a 204 cell");
+if (!index.includes('className="cover"')) {
+  console.error("Interfaces title must use the shared cover so H1 shares the rail first-row line");
+  process.exit(1);
+}
+if (index.includes("if-title") || css.includes(".if-title")) {
+  console.error("Interfaces must not keep a parallel if-title spacer; cover owns the 204 cell");
+  process.exit(1);
+}
+if (css.includes("min-height: 204px")) {
+  console.error("Cover owns the 204 cell in site.css; do not keep a parallel min-height 204 in interfaces.css");
   process.exit(1);
 }
 const baseCss = readFileSync(join(root, "packages/core/css/base.css"), "utf8");
-if (!baseCss.includes("html::before") || !baseCss.includes("clip-path:inset(0 0 0 21px)") || !baseCss.includes("var(--grid-image)")) {
-  console.error("Site gutter overlay must paint verticals on html::before and clip the 20px page frame");
+if (!baseCss.includes("html::before") || !baseCss.includes("var(--grid-image)")) {
+  console.error("Site gutter overlay must paint verticals on html::before");
+  process.exit(1);
+}
+if (baseCss.includes("clip-path:inset(0 0 0 21px)")) {
+  console.error("Left inner-page gutter must paint; do not clip 21px off html::before");
   process.exit(1);
 }
 const beforeAt = baseCss.indexOf("html::before{");
@@ -88,10 +100,6 @@ if (/if-list \{[^}]*padding:\s*24px/s.test(css)) {
   console.error("Interfaces cards must sit on the 204, not 24px off it");
   process.exit(1);
 }
-if (!css.includes(".if-title {\n  min-height: 204px")) {
-  console.error("Interfaces title cell must be 204");
-  process.exit(1);
-}
 const tileAt = css.indexOf(".if-tile {");
 const tileRule = css.slice(tileAt, css.indexOf("}", tileAt));
 if (/background:\s*var\(--bg\)/.test(tileRule) || !tileRule.includes("background: transparent")) {
@@ -99,7 +107,7 @@ if (/background:\s*var\(--bg\)/.test(tileRule) || !tileRule.includes("background
   process.exit(1);
 }
 if (!tileRule.includes("var(--grid-line)") || tileRule.includes("var(--divider)")) {
-  console.error("Interfaces tile edges must be --grid-line (same ink as --divider)");
+  console.error("Interfaces tile edges must be --grid-line, the quiet 204 ink");
   process.exit(1);
 }
 const specRule = css.slice(css.indexOf(".if-specimen {"), css.indexOf("}", css.indexOf(".if-specimen {")));
@@ -390,21 +398,116 @@ if (!/border-radius:\s*0/.test(eveningSegBtn)) {
   console.error("Evening filter segments must stay square inside, not pills");
   process.exit(1);
 }
+const eveningPhoneAt = eveningScene.lastIndexOf("@media (max-width: 640px)");
+const eveningPhone = eveningPhoneAt >= 0 ? eveningScene.slice(eveningPhoneAt) : "";
+if (!eveningPhone.includes("72px minmax(0, 1fr)") || eveningPhone.includes("1fr 1fr")) {
+  console.error("Evening at 640 must be one column of thumb-left store rows, not a two-column card grid");
+  process.exit(1);
+}
+if (!eveningPhone.includes("flex-wrap: wrap") || !eveningPhone.includes("flex: 0 0 auto")) {
+  console.error("Evening phone chips must wrap as whole segments, not shrink and clip");
+  process.exit(1);
+}
+if (!eveningBoard.includes("if-thumb") || !eveningBoard.includes("Stores")) {
+  console.error("Evening phone must keep a thumb bar for stores and the bag");
+  process.exit(1);
+}
+
+const wallPhoneAt = wallScene.lastIndexOf("@media (max-width: 640px)");
+const wallPhone = wallPhoneAt >= 0 ? wallScene.slice(wallPhoneAt) : "";
+if (!wallBoard.includes("sc-wall-faces") || !wallPhone.includes("repeat(4, minmax(0, 1fr))")) {
+  console.error("Wall phone must keep a four-up people strip so Gianpiero stays in frame");
+  process.exit(1);
+}
+if (!wallPhone.includes("sc-wall-rail { display: none")) {
+  console.error("Wall phone must hide the desktop people rail, not squeeze it");
+  process.exit(1);
+}
+if (!wallPhone.includes("max-height: 168px") && !wallPhone.includes("height: 168px")) {
+  console.error("Wall phone post photos must cap height so they do not overflow the specimen");
+  process.exit(1);
+}
+
+const lineScenePhoneAt = lineScene.lastIndexOf("@media (max-width: 640px)");
+const linePhone = lineScenePhoneAt >= 0 ? lineScene.slice(lineScenePhoneAt) : "";
+if (!linePhone.includes('data-pane="thread"') || !linePhone.includes("display: none")) {
+  console.error("Line phone must hide the chat rail on the thread pane");
+  process.exit(1);
+}
+
+const pressScene = readFileSync(join(dir, "press", "scene.css"), "utf8");
+const pressPhoneAt = pressScene.lastIndexOf("@media (max-width: 640px)");
+const pressPhone = pressPhoneAt >= 0 ? pressScene.slice(pressPhoneAt) : "";
+if (!pressPhone.includes("sc-dash-nav") || !pressPhone.includes("display: none")) {
+  console.error("Press phone must hide Floor nav, not stack it on the KPIs");
+  process.exit(1);
+}
 
 const nightMap = readFileSync(join(dir, "night", "map.tsx"), "utf8");
 if (!nightMap.includes("BUILDINGS") || !nightMap.includes("TubeGeometry")) {
   console.error("Night field must be a street of buildings with a route, not a flat grid");
   process.exit(1);
 }
+if (/PerspectiveCamera\(\s*32/.test(nightMap) || nightMap.includes("3.9, 3.35, 5.55")) {
+  console.error("Night city must zoom out so street and lamps read; do not restore the wall crop");
+  process.exit(1);
+}
+if (!/PerspectiveCamera\(\s*(3[8-9]|[4-9]\d)/.test(nightMap)) {
+  console.error("Night camera FOV must stay wide enough to read the street");
+  process.exit(1);
+}
+if (/position\.set\(\s*8\.2,\s*8\.4,\s*10\.5/.test(nightMap)) {
+  console.error("Night city must fill the specimen; do not orbit to a toy-block crop");
+  process.exit(1);
+}
+if (nightMap.includes("6.0, 6.4, 8.4") || nightMap.includes("6.8, 7.2, 9.2") || nightMap.includes("5.1, 5.5, 7.4")) {
+  console.error("Night camera must go to city scale; do not keep the three-tower dolly");
+  process.exit(1);
+}
+if (!nightMap.includes("17, 22, 19") || !nightMap.includes("14, 18, 16")) {
+  console.error("Night map well must use the city-scale camera, not a street crop");
+  process.exit(1);
+}
+if (!nightMap.includes("const CITY = 5") || !nightMap.includes("const PITCH = 2.2")) {
+  console.error("Night field must instance a neighborhood of blocks, not three towers");
+  process.exit(1);
+}
 
 const people = readFileSync(join(dir, "people.tsx"), "utf8");
-if (/Inez Veld|Karel Vos|Loes Hart|Bram Nijk|Maya Ort|Owen Hart/.test(people + wallBoard + readFileSync(join(dir, "room", "board.tsx"), "utf8"))) {
+const roomBoard = readFileSync(join(dir, "room", "board.tsx"), "utf8");
+if (/Inez Veld|Karel Vos|Loes Hart|Bram Nijk|Maya Ort|Owen Hart/.test(people + wallBoard + roomBoard)) {
   console.error("Interfaces people must come from renatovaldes.com/work, not invented names");
   process.exit(1);
 }
-if (!people.includes("Ilana") || !people.includes("Aziez") || !people.includes("Koen")) {
-  console.error("Interfaces people must include first names from /work");
+const keepers = ["Aziez Soekha", "Jenny Lo", "Koen Bok", "Gianpiero Puleo"];
+if (keepers.some((name) => !people.includes(name))) {
+  console.error("Interfaces people must keep Aziez, Jenny, Koen, and Gianpiero from /work");
   process.exit(1);
+}
+const forbidden = /\b(Katie|Christian|Senka|Ilana)\b/;
+const specimenPaths = [
+  join(root, "apps/www/app/specimen.ts"),
+  join(root, "packages/cli/src/starter.html"),
+  join(root, "apps/www/app/page.tsx"),
+];
+for (const file of [...walk(dir), ...specimenPaths.filter((path) => existsSync(path))]) {
+  if (forbidden.test(readFileSync(file, "utf8"))) {
+    console.error(`Katie, Christian, Senka, and Ilana cannot return in Interfaces or specimen copy: ${file}`);
+    process.exit(1);
+  }
+}
+const portraits = join(root, "apps/www/public/interfaces/people");
+for (const name of ["aziez", "jenny", "koen", "gianpiero"]) {
+  if (!existsSync(join(portraits, `${name}.jpg`))) {
+    console.error(`Keeper portrait missing: ${name}.jpg`);
+    process.exit(1);
+  }
+}
+for (const name of ["katie", "christian", "senka", "ilana"]) {
+  if (existsSync(join(portraits, `${name}.jpg`))) {
+    console.error(`Forbidden portrait must not ship: ${name}.jpg`);
+    process.exit(1);
+  }
 }
 if (!catalog.includes('what: "AI chat"') || !catalog.includes('what: "Dashboard"') || !catalog.includes('what: "Social feed"') || !catalog.includes('what: "Fleet management"') || !catalog.includes('what: "Order out"') || !catalog.includes('what: "Team chat"')) {
   console.error("Catalog must lock the six Interfaces: AI chat, Dashboard, Social feed, Fleet management, Order out, Team chat");
