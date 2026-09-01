@@ -455,6 +455,25 @@ if (!footerNav.includes("flex-direction: column")) {
 if (footerNav.includes("flex-wrap: wrap")) {
   fail("Footer must not be a horizontal link row");
 }
+const kitLive = readFileSync(join(root, "apps/www/app/specimen-kit.tsx"), "utf8");
+if (!kitLive.includes("Browse {more} more components") || !kitLive.includes('href="/components"')) {
+  fail("Homepage kit must end with Browse N more components → /components");
+}
+if (!kitLive.includes("rasterComponents.filter") || /Browse \d+ more/.test(kitLive)) {
+  fail("Browse N must be catalog minus KIT, not a hardcoded count");
+}
+if (!specimen.includes("specimen-cell-more") || !specimen.includes('"more more more more more more"')) {
+  fail("Browse row must sit on the 204 after the kit");
+}
+const cardUse = readFileSync(join(root, "apps/www/components/examples/card/use.tsx"), "utf8");
+const preview = readFileSync(join(root, "apps/www/components/preview.tsx"), "utf8");
+const registry = readFileSync(join(root, "packages/core/src/registry.ts"), "utf8");
+if (cardUse.includes("CardInner") || preview.includes("CardInner")) {
+  fail("Default Card specimen must not nest body in CardInner");
+}
+if (registry.includes('rs-card-in"><p class="rs-card-body"')) {
+  fail("Card registry snippet must not wrap body in .rs-card-in");
+}
 if (
   !site.includes("left: 224px") ||
   !site.includes('body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav')

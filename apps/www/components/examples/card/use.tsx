@@ -1,4 +1,4 @@
-import { Card, CardBody, CardInner, CardLabel, CardTitle } from "@noorddev/raster-react";
+import { Card, CardBody, CardLabel, CardTitle } from "@noorddev/raster-react";
 
 export function Use() {
   return (
@@ -8,9 +8,7 @@ export function Use() {
         <Card>
           <CardLabel>Studio note</CardLabel>
           <CardTitle>A quieter interface</CardTitle>
-          <CardInner>
-            <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>
-          </CardInner>
+          <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>
         </Card>
       </div>
     </article>

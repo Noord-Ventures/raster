@@ -8,6 +8,9 @@ import { KIT } from "./specimen";
 const slots = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"] as const;
 
 export function SpecimenKit() {
+  const shown = new Set<string>(KIT);
+  const more = rasterComponents.filter((component) => !shown.has(component.name)).length;
+
   return (
     <>
       {KIT.map((name, i) => {
@@ -29,6 +32,11 @@ export function SpecimenKit() {
           </section>
         );
       })}
+      <section className="specimen-cell specimen-cell-more" aria-label="More components">
+        <p className="specimen-more">
+          <Link href="/components">Browse {more} more components</Link>
+        </p>
+      </section>
     </>
   );
 }

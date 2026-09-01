@@ -63,7 +63,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardInner,
   CardLabel,
   CardTitle,
   Checkbox,
@@ -307,9 +306,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     <Card>
       <CardLabel>Case study</CardLabel>
       <CardTitle>A quieter interface</CardTitle>
-      <CardInner>
-        <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>
-      </CardInner>
+      <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>
     </Card>
   ),
   label: () => <Label htmlFor="demo-name">Name</Label>,

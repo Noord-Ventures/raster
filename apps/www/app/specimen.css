@@ -58,7 +58,8 @@ html:has(.specimen-page) .site-footer {
     "kiti"
     "kitj"
     "kitk"
-    "kitl";
+    "kitl"
+    "more";
   grid-auto-rows: minmax(204px, auto);
   /* Cell seams: --divider, the stronger of the two grid inks.
      L/R box margins: --grid-line, quieter, highlighting the box
@@ -147,6 +148,10 @@ html:has(.specimen-page) .site-footer {
 .specimen-cell-kit-j { grid-area: kitj; }
 .specimen-cell-kit-k { grid-area: kitk; }
 .specimen-cell-kit-l { grid-area: kitl; }
+.specimen-cell-more {
+  grid-area: more;
+  justify-content: flex-end;
+}
 .specimen-face {
   margin: 0;
   /* Optical left, hero display. Same -0.08em as About .field-face.
@@ -250,6 +255,22 @@ html:has(.specimen-page) .site-footer {
   transition: border-color var(--duration-snap) var(--ease);
 }
 .specimen-kit-name a:hover { border-color: var(--text); }
+.specimen-more {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+}
+.specimen-more a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--divider);
+  transition: color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease);
+}
+.specimen-more a:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
 .specimen-kit-live {
   min-width: 0;
   display: flex;
@@ -284,7 +305,8 @@ html:has(.specimen-page) .site-footer {
       "kite kitf"
       "kitg kith"
       "kiti kitj"
-      "kitk kitl";
+      "kitk kitl"
+      "more more";
   }
 }
 
@@ -306,7 +328,8 @@ html:has(.specimen-page) .site-footer {
       "kite kite kitf kitf"
       "kitg kitg kith kith"
       "kiti kiti kitj kitj"
-      "kitk kitk kitl kitl";
+      "kitk kitk kitl kitl"
+      "more more more more";
   }
 }
 
@@ -323,7 +346,8 @@ html:has(.specimen-page) .site-footer {
       "kita kita kitb kitb kitc kitc"
       "kitd kitd kite kite kitf kitf"
       "kitg kitg kith kith kiti kiti"
-      "kitj kitj kitk kitk kitl kitl";
+      "kitj kitj kitk kitk kitl kitl"
+      "more more more more more more";
   }
 }
 
@@ -335,7 +359,8 @@ html:has(.specimen-page) .site-footer {
     padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   }
   .specimen-command-meta a,
-  .specimen-kit-name a {
+  .specimen-kit-name a,
+  .specimen-more a {
     display: inline-flex;
     align-items: center;
     min-width: 44px;
@@ -343,6 +368,7 @@ html:has(.specimen-page) .site-footer {
   }
   .specimen-kit-name { font-size: 15px; }
   .specimen-command-meta { font-size: 15px; }
+  .specimen-more { font-size: 15px; }
   .specimen-n-text { font-size: 18px; line-height: 1.4; }
   .specimen-poster { font-size: 15px; }
   .specimen-cell-command .code-copy {

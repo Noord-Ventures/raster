@@ -250,7 +250,7 @@ export const rasterComponents: RasterComponent[] = [
     classes: ["rs-card", "rs-card-label", "rs-card-title", "rs-card-body", "rs-card-in"],
     css: ["components/card.css"],
     react: "components/card.tsx",
-    snippet: `<div class="rs-card"><span class="rs-card-label">Case study</span><h3 class="rs-card-title">A quieter interface</h3><div class="rs-card-in"><p class="rs-card-body">Emphasis from weight and spacing, never from a hue.</p></div></div>`,
+    snippet: `<div class="rs-card"><span class="rs-card-label">Case study</span><h3 class="rs-card-title">A quieter interface</h3><p class="rs-card-body">Emphasis from weight and spacing, never from a hue.</p></div>`,
   },
   {
     name: "concentric-radius",
