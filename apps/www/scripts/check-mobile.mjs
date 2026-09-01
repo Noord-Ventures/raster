@@ -502,6 +502,13 @@ const iconSrc = readFileSync(join(root, "packages/react/src/components/icon.tsx"
 if (!iconSrc.includes('variant === "filled"') || !iconSrc.includes("rs-icon-kin")) {
   fail("Icon catalog must show line | filled pairs");
 }
+if (!iconSrc.includes("size={12}") || !iconSrc.includes("size={16}") || !iconSrc.includes("size={24}")) {
+  fail("Icon catalog must draw 12, 16, and 24");
+}
+const copySlice = site.slice(site.indexOf(".code-copy {"), site.indexOf(".code-copy:hover"));
+if (!copySlice.includes("border-radius: 0") || !copySlice.includes("box-shadow: none")) {
+  fail("Copy chrome must be flush: no radius, no shadow");
+}
 if (
   !site.includes("left: 224px") ||
   !site.includes('body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav')

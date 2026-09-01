@@ -97,9 +97,7 @@ export function Icon({ name, size = 16, variant = "line", rotate, className, ...
   );
 }
 
-const sizes: IconSize[] = [12, 16, 24];
-
-/** Full family at 12, 16, and 24, line | filled, grouped. */
+/** Full family at 12, 16, and 24, line | filled, grouped. Optical center 8,8. */
 export function IconCatalog({ className }: { className?: string }) {
   return (
     <div className={cx("rs-icon-catalog", className)}>
@@ -111,14 +109,14 @@ export function IconCatalog({ className }: { className?: string }) {
               <div key={`${group.title}-${mark}`} className="rs-icon-cell">
                 <div className="rs-icon-pair">
                   <div className="rs-icon-kin" data-variant="line">
-                    {sizes.map((size) => (
-                      <Icon key={`line-${size}`} name={mark} size={size} />
-                    ))}
+                    <Icon name={mark} size={12} />
+                    <Icon name={mark} size={16} />
+                    <Icon name={mark} size={24} />
                   </div>
                   <div className="rs-icon-kin" data-variant="filled">
-                    {sizes.map((size) => (
-                      <Icon key={`filled-${size}`} name={mark} size={size} variant="filled" />
-                    ))}
+                    <Icon name={mark} size={12} variant="filled" />
+                    <Icon name={mark} size={16} variant="filled" />
+                    <Icon name={mark} size={24} variant="filled" />
                   </div>
                 </div>
                 <span className="rs-icon-label">{iconLabel(mark)}</span>
