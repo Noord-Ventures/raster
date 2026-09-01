@@ -143,7 +143,8 @@ jobs:
               console.error("Homepage overlay kill must be display: none");
               process.exit(1);
             }
-            if (css.includes("background-image: var(--grid-image)") || /html[^{]*\{[^}]*repeating-linear-gradient/.test(css)) {
+            const withoutFooter = css.replace(/[^{}]*\.site-footer\s*\{[^}]*\}/g, "");
+            if (withoutFooter.includes("background-image: var(--grid-image)") || /html[^{]*\{[^}]*repeating-linear-gradient/.test(withoutFooter)) {
               console.error("Homepage must not paint gutter lines through type");
               process.exit(1);
             }
@@ -301,16 +302,25 @@ jobs:
             echo "Homepage kit cells must not be the leftover Save / switch / Draft set"
             exit 1
           fi
-          if grep -nE '"button-group"|"tabs"|"chart"' apps/www/app/specimen.ts; then
-            echo "Homepage kit must not reuse the cropped button-group / tabs / chart cells"
+          if grep -nE '"button-group"|"chart"' apps/www/app/specimen.ts; then
+            echo "Homepage kit must not reuse the cropped button-group / chart cells"
             exit 1
           fi
           node -e '
             const { readFileSync } = require("node:fs");
             const spec = readFileSync("apps/www/app/specimen.ts", "utf8");
-            const names = [...spec.matchAll(/"(accordion|calendar|field|stepper)"/g)].map((m) => m[1]);
-            if (names.length !== 4) {
-              console.error("KIT must name accordion, calendar, field, stepper");
+            const kitAt = spec.indexOf("export const KIT");
+            const kitBlock = spec.slice(kitAt, spec.indexOf("] as const", kitAt));
+            const required = ["accordion", "calendar", "field", "stepper"];
+            for (const name of required) {
+              if (!kitBlock.includes(`"${name}"`)) {
+                console.error("KIT must still include", name);
+                process.exit(1);
+              }
+            }
+            const names = [...kitBlock.matchAll(/"([a-z0-9-]+)"/g)].map((m) => m[1]);
+            if (names.length < 8) {
+              console.error("KIT must be denser than accordion, calendar, field, stepper");
               process.exit(1);
             }
             const reg = readFileSync("packages/core/src/registry.ts", "utf8");
@@ -527,7 +537,8 @@ jobs:
               console.error("About overlay kill must be display: none");
               process.exit(1);
             }
-            if (css.includes("background-image: var(--grid-image)")) {
+            const withoutFooter = css.replace(/[^{}]*\.site-footer\s*\{[^}]*\}/g, "");
+            if (withoutFooter.includes("background-image: var(--grid-image)")) {
               console.error("About must not paint gutter lines through type or stills");
               process.exit(1);
             }

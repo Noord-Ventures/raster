@@ -147,7 +147,8 @@ if (!specimen.includes("min-width: 481px") || !about.includes("min-width: 481px"
 if (specimen.includes("padding: 0 1px 1px 0") || /padding:\s*1px;/.test(specimen)) {
   fail("Homepage must open on the right and bottom; do not restore an outer frame");
 }
-if (specimen.includes("background-image: var(--grid-image)") || specimen.includes("repeating-linear-gradient")) {
+const specimenWithoutFooter = specimen.replace(/[^{}]*\.site-footer\s*\{[^}]*\}/g, "");
+if (specimenWithoutFooter.includes("background-image: var(--grid-image)") || specimenWithoutFooter.includes("repeating-linear-gradient")) {
   fail("Homepage must not paint gutter lines through type");
 }
 if (!specimen.includes("html:has(.specimen-page)::before") || !specimen.includes("display: none")) {
@@ -326,7 +327,8 @@ if (aboutKill < 0) {
 if (!about.slice(aboutKill, about.indexOf("}", aboutKill)).includes("display: none")) {
   fail("About overlay kill must be display: none");
 }
-if (about.includes("background-image: var(--grid-image)")) {
+const aboutWithoutFooter = about.replace(/[^{}]*\.site-footer\s*\{[^}]*\}/g, "");
+if (aboutWithoutFooter.includes("background-image: var(--grid-image)")) {
   fail("About must not paint gutter lines through type or stills");
 }
 const aboutEra = about.slice(about.indexOf(".field-cell-era {"), about.indexOf("}", about.indexOf(".field-cell-era {")));

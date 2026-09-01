@@ -12,6 +12,12 @@ html:has(.field-page)::before {
 body:has(.field-page) {
   background: transparent;
 }
+html:has(.field-page) .site-footer {
+  background-image: var(--grid-image);
+  background-size: var(--grid-size) 100%;
+  background-repeat: repeat-x;
+  background-position: var(--grid-pos);
+}
 
 .field-page {
   width: 100%;

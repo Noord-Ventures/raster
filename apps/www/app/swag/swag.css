@@ -9,6 +9,12 @@ html:has(.swag-page)::before {
 body:has(.swag-page) {
   background: transparent;
 }
+html:has(.swag-page) .site-footer {
+  background-image: var(--grid-image);
+  background-size: var(--grid-size) 100%;
+  background-repeat: repeat-x;
+  background-position: var(--grid-pos);
+}
 
 .swag-page {
   width: 100%;
