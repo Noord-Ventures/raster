@@ -54,6 +54,17 @@
       "characters": 66
     },
     "caseRule": "Never all caps; labels and eyebrows are sentence case.",
+    "textScale": {
+      "default": 1,
+      "steps": [
+        0.9,
+        1,
+        1.1,
+        1.25,
+        1.4
+      ],
+      "rule": "Reading type only; chrome stays put."
+    },
     "scale": [
       {
         "name": "displayXl",

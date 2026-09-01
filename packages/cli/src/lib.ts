@@ -11,7 +11,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { rasterComponents, rasterTokens } from "@noorddev/raster";
+import { catalogComponents, rasterComponents, rasterTokens } from "@noorddev/raster";
 import bundle from "../../../registry/bundle.json" with { type: "json" };
 import { starterPage } from "./starter";
 
@@ -263,7 +263,7 @@ export interface ListEntry {
 }
 
 export function list(): ListEntry[] {
-  return rasterComponents.map((c) => ({
+  return catalogComponents.map((c) => ({
     name: c.name,
     title: c.title,
     description: c.description,

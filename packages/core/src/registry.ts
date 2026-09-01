@@ -261,6 +261,7 @@ export const rasterComponents: RasterComponent[] = [
     css: ["components/nest.css"],
     react: "components/concentric-radius.tsx",
     registryDependencies: ["button"],
+    hidden: true,
     snippet: `<div class="rs-nest" style="--rs-out:28px;--rs-gap:16px;width:184px"><div class="rs-nest-in"><button class="rs-btn-primary rs-btn-sm">Save</button></div></div>`,
   },
   {
@@ -803,3 +804,6 @@ export const rasterComponents: RasterComponent[] = [
     snippet: `<p>Set in a single ink.<sup class="rs-cite"><a href="#ref-1">1</a></sup></p><ol class="rs-refs"><li id="ref-1"><span class="rs-ref-authors">Müller-Brockmann, J.</span> Grid systems in graphic design. <a class="rs-ref-doi" href="#">niggli.ch/grid</a></li></ol>`,
   },
 ];
+
+/** Public catalog. Hidden entries stay in `rasterComponents` for CSS, Nest, and math. */
+export const catalogComponents: RasterComponent[] = rasterComponents.filter((c) => !c.hidden);

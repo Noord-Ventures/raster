@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { rasterComponents } from "../src/registry";
+import { catalogComponents, rasterComponents } from "../src/registry";
 import { rasterCategories, validateRegistry } from "../src/schema";
 
 const cssDir = join(import.meta.dirname, "../css");
@@ -17,6 +17,13 @@ const allClasses = new Set(rasterComponents.flatMap((c) => c.classes));
 describe("registry structure", () => {
   it("is well-formed", () => {
     expect(validateRegistry(rasterComponents)).toEqual([]);
+  });
+
+  it("hides concentric-radius from the public catalog and keeps the nest rule", () => {
+    const nest = rasterComponents.find((c) => c.name === "concentric-radius");
+    expect(nest?.hidden).toBe(true);
+    expect(catalogComponents.some((c) => c.name === "concentric-radius")).toBe(false);
+    expect(catalogComponents).toHaveLength(rasterComponents.filter((c) => !c.hidden).length);
   });
 
   it("lifts icons and charts into their own catalog sections", () => {

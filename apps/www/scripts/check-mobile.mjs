@@ -465,7 +465,7 @@ const kitLive = readFileSync(join(root, "apps/www/app/specimen-kit.tsx"), "utf8"
 if (!kitLive.includes("Browse {more} more components") || !kitLive.includes('href="/components"')) {
   fail("Homepage kit must end with Browse N more components → /components");
 }
-if (!kitLive.includes("rasterComponents.filter") || /Browse \d+ more/.test(kitLive)) {
+if (!kitLive.includes("catalogComponents.filter") || /Browse \d+ more/.test(kitLive)) {
   fail("Browse N must be catalog minus KIT, not a hardcoded count");
 }
 if (!specimen.includes("specimen-cell-more") || !specimen.includes('"more more more more more more"')) {
@@ -496,13 +496,23 @@ const aboutNotes = readFileSync(join(root, "apps/www/app/about/about-notes.tsx")
 if (!aboutPage.includes("AboutNotes") || !aboutNotes.includes("AccordionItem") || !aboutNotes.includes("from \"@noorddev/raster-react\"")) {
   fail("About Notes must use the Raster Accordion");
 }
-const nestUse = readFileSync(join(root, "apps/www/components/examples/concentric-radius/use.tsx"), "utf8");
-if (!nestUse.includes("Inner radius = outer") || !nestUse.includes("<Button")) {
-  fail("Concentric radius specimen must state the nested-corner rule and show a button in a nest");
+const nestCss = readFileSync(join(root, "packages/core/css/components/nest.css"), "utf8");
+const catalogPage = readFileSync(join(root, "apps/www/app/components/page.tsx"), "utf8");
+if (!/name:\s*"concentric-radius"[\s\S]*?hidden:\s*true/.test(registry) || catalogPage.includes("concentric-radius")) {
+  fail("Concentric radius stays in the registry as hidden; it is not a catalog card");
+}
+if (!catalogPage.includes("catalogComponents") || !nav.includes("catalogComponents")) {
+  fail("Catalog gallery and docs rail must list catalogComponents, not hidden entries");
+}
+if (!nestCss.includes("--rs-in") || !nestCss.includes(".rs-nest .rs-btn")) {
+  fail("Nest CSS must keep the inner-radius formula and nested button radius");
 }
 const iconCss = readFileSync(join(root, "packages/core/css/components/icons.css"), "utf8");
-if (!iconCss.includes("minmax(184px,1fr)") || !iconCss.includes("repeat(4,minmax(0,1fr))")) {
-  fail("Icon catalog must display 3–4 columns on mid/desktop, not a 112px strip");
+if (!iconCss.includes("repeat(auto-fill,184px)") || !iconCss.includes("width:184px")) {
+  fail("Icon catalog cells must sit on 184px module columns");
+}
+if (iconCss.includes("repeat(4,minmax") || iconCss.includes("repeat(3,minmax")) {
+  fail("Icon catalog must not stretch leftover 1fr tracks");
 }
 const iconSrc = readFileSync(join(root, "packages/react/src/components/icon.tsx"), "utf8");
 if (!iconSrc.includes('variant === "filled"') || !iconSrc.includes("rs-icon-kin")) {
@@ -523,6 +533,28 @@ if (
 }
 if (/body:has\(\[data-rail="catalog"\]\) \.corner-nav/.test(site)) {
   fail("Catalog gallery index must not pin corner-nav to the toc-sub column");
+}
+if (!site.includes(".settings {") || !site.includes("right: 20px") || !site.includes("position: fixed")) {
+  fail("Appearance control stays sticky on the right");
+}
+if (
+  !chrome.includes("Text size") ||
+  !chrome.includes('"Show"') ||
+  !chrome.includes('"Hide"') ||
+  !chrome.includes("--text-scale") ||
+  !chrome.includes("dataset.grid")
+) {
+  fail("Appearance menu must include working text size and grid controls");
+}
+if (!layout.includes("raster-grid") || !layout.includes("raster-text-scale") || !layout.includes("--text-scale")) {
+  fail("themeInit must restore grid and text scale before paint");
+}
+const typeCss = readFileSync(join(root, "packages/core/css/type.css"), "utf8");
+if (!typeCss.includes("--text-scale")) {
+  fail("Reading type must honor --text-scale");
+}
+if (!site.includes('html[data-grid="off"]')) {
+  fail("Grid hide must turn off the module overlay");
 }
 
 console.log("Phone chrome: 44pt hits, safe-area, stacked TOC, copy control.");

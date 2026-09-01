@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { rasterComponents } from "@noorddev/raster";
+import { catalogComponents } from "@noorddev/raster";
 import { Preview } from "@/components/preview";
 import { KIT } from "./specimen";
 
@@ -9,12 +9,12 @@ const slots = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"] as co
 
 export function SpecimenKit() {
   const shown = new Set<string>(KIT);
-  const more = rasterComponents.filter((component) => !shown.has(component.name)).length;
+  const more = catalogComponents.filter((component) => !shown.has(component.name)).length;
 
   return (
     <>
       {KIT.map((name, i) => {
-        const component = rasterComponents.find((c) => c.name === name);
+        const component = catalogComponents.find((c) => c.name === name);
         if (!component) return null;
         const slot = slots[i] ?? "a";
         return (

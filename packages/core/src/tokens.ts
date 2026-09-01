@@ -60,6 +60,7 @@ export const rasterTokens = {
     bodyLineHeight: 1.6,
     measure: { columns: 3, px: 592, characters: 66 },
     caseRule: "Never all caps; labels and eyebrows are sentence case.",
+    textScale: { default: 1, steps: [0.9, 1, 1.1, 1.25, 1.4], rule: "Reading type only; chrome stays put." },
     scale: [
       { name: "displayXl", px: 52, weight: 600, tracking: "-0.035em", lineHeight: 1.05 },
       { name: "display", px: 38, weight: 600, tracking: "-0.03em", lineHeight: 1.15 },

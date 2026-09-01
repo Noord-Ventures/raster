@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { rasterCategories, rasterComponents } from "@noorddev/raster";
+import { rasterCategories, catalogComponents } from "@noorddev/raster";
 import { DocsNav } from "@/components/docs-nav";
 import { Preview } from "@/components/preview";
 
@@ -17,7 +17,7 @@ export default function ComponentsPage() {
             <p className="rs-t-sub">The control, the name, a short law.</p>
           </header>
           {rasterCategories.map((category) => {
-            const items = rasterComponents.filter((c) => c.category === category);
+            const items = catalogComponents.filter((c) => c.category === category);
             if (items.length === 0) return null;
             return (
               <section key={category} id={category}>

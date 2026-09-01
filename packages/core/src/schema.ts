@@ -35,6 +35,8 @@ export interface RasterComponent {
   registryDependencies?: string[];
   /** Minimal HTML snippet in the house style. */
   snippet: string;
+  /** Omit from the public catalog, docs rail, and home kit count. Keep CSS, Nest, and math. */
+  hidden?: boolean;
 }
 
 const KEBAB = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;

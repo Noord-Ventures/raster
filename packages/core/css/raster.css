@@ -58,6 +58,7 @@
   --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);
   --grid-size: 204px;
   --grid-pos: 20px 0;
+  --text-scale: 1;
   /* Control scale. Desktop is the Raster poster; phone recuts in phone.css. */
   --hit: 40px;
   --control-h: 40px;
@@ -132,13 +133,14 @@ body{
 .rs-sr:focus-visible+.rs-check,.rs-sr:focus-visible+.rs-radio-dot,.rs-sr:focus-visible+.rs-switch{outline:1.5px solid var(--text);outline-offset:2px}
 
 /* ── Type scale ──
-   Hierarchy from weight, color, and position; never all caps. */
-.rs-t-xl{font-size:clamp(34px,5vw,52px);font-weight:600;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin:0;text-wrap:balance}
-.rs-t-display{font-size:38px;font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0;text-wrap:balance}
-.rs-t-title{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0;text-wrap:balance}
-.rs-t-sub{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.5;color:var(--text-secondary);margin:0;text-wrap:pretty}
-.rs-t-body{font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin:0;text-wrap:pretty}
-.rs-t-label{font-size:13px;font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--text);margin:0}
+   Hierarchy from weight, color, and position; never all caps.
+   --text-scale (Appearance → Text size) multiplies reading type only. */
+.rs-t-xl{font-size:calc(clamp(34px,5vw,52px) * var(--text-scale, 1));font-weight:600;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin:0;text-wrap:balance}
+.rs-t-display{font-size:calc(38px * var(--text-scale, 1));font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0;text-wrap:balance}
+.rs-t-title{font-size:calc(22px * var(--text-scale, 1));font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0;text-wrap:balance}
+.rs-t-sub{font-size:calc(17px * var(--text-scale, 1));font-weight:500;letter-spacing:-.01em;line-height:1.5;color:var(--text-secondary);margin:0;text-wrap:pretty}
+.rs-t-body{font-size:calc(15px * var(--text-scale, 1));font-weight:500;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin:0;text-wrap:pretty}
+.rs-t-label{font-size:calc(13px * var(--text-scale, 1));font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--text);margin:0}
 
 /* ── Inline code ── */
 .rs-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}
@@ -538,19 +540,14 @@ dialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}
 .rs-icon-catalog{width:100%;display:flex;flex-direction:column;gap:28px;text-align:left;align-self:stretch}
 .rs-icon-group{display:flex;flex-direction:column;gap:12px}
 .rs-icon-group-title{margin:0;font-size:12px;font-weight:600;letter-spacing:0;color:var(--text-secondary);text-transform:none}
-.rs-icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:20px var(--gutter)}
-.rs-icon-cell{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.rs-icon-grid{display:grid;grid-template-columns:repeat(auto-fill,184px);column-gap:var(--gutter);row-gap:20px;justify-content:start;width:100%}
+.rs-icon-cell{display:flex;flex-direction:column;align-items:flex-start;gap:8px;width:184px}
 .rs-icon-pair{display:flex;align-items:center;gap:16px;min-height:24px}
 .rs-icon-kin{display:flex;align-items:center;gap:8px;min-height:24px}
 .rs-icon-label{font-size:11px;line-height:1.3;color:var(--text-secondary);text-transform:none}
-@media(min-width:481px){
-  .rs-icon-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-}
-@media(min-width:816px){
-  .rs-icon-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-}
 @media(max-width:480px){
   .rs-icon-grid{grid-template-columns:minmax(0,1fr)}
+  .rs-icon-cell{width:100%}
 }
 
 /* ── Accordion: native <details>; one open at a time via the name attribute ── */

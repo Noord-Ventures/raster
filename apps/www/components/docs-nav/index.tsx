@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import { rasterCategories, rasterComponents, type RasterCategory } from "@noorddev/raster";
+import { rasterCategories, catalogComponents, type RasterCategory } from "@noorddev/raster";
 import { MobileToc } from "@/components/toc-mobile";
 import "./docs-nav.css";
 
@@ -18,11 +18,11 @@ function here(pathname: string, href: string) {
 function pageGroup(pathname: string): RasterCategory | null {
   const match = pathname.match(/^\/components\/([^/]+)\/?$/);
   if (!match) return pathname.startsWith("/components") ? rasterCategories[0]! : null;
-  return rasterComponents.find((c) => c.name === match[1])?.category ?? rasterCategories[0]!;
+  return catalogComponents.find((c) => c.name === match[1])?.category ?? rasterCategories[0]!;
 }
 
 const groups = rasterCategories.filter((category) =>
-  rasterComponents.some((c) => c.category === category),
+  catalogComponents.some((c) => c.category === category),
 );
 
 function docsLabel(pathname: string) {
@@ -30,7 +30,7 @@ function docsLabel(pathname: string) {
   if (here(pathname, "/docs")) return "Getting started";
   if (pathname.startsWith("/components/")) {
     const name = pathname.split("/")[2];
-    return rasterComponents.find((c) => c.name === name)?.title ?? "Components";
+    return catalogComponents.find((c) => c.name === name)?.title ?? "Components";
   }
   return "Components";
 }
@@ -80,7 +80,7 @@ export function DocsNav() {
   const catalogMobile = (
     <>
       {groups.map((category) => {
-        const items = rasterComponents.filter((c) => c.category === category);
+        const items = catalogComponents.filter((c) => c.category === category);
         const expanded = openGroup === category;
         return (
           <div key={category} className="toc-mobile-group">
@@ -145,7 +145,7 @@ export function DocsNav() {
     );
   }
 
-  const items = shown ? rasterComponents.filter((c) => c.category === shown) : [];
+  const items = shown ? catalogComponents.filter((c) => c.category === shown) : [];
 
   return (
     <>

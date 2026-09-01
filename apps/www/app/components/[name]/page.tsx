@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { rasterComponents } from "@noorddev/raster";
+import { catalogComponents } from "@noorddev/raster";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
 import { InAction } from "@/components/examples/scene";
 import { Preview } from "@/components/preview";
 
 export function generateStaticParams() {
-  return rasterComponents.map((c) => ({ name: c.name }));
+  return catalogComponents.map((c) => ({ name: c.name }));
 }
 
 export async function generateMetadata({
@@ -16,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ name: string }>;
 }): Promise<Metadata> {
   const { name } = await params;
-  const component = rasterComponents.find((c) => c.name === name);
+  const component = catalogComponents.find((c) => c.name === name);
   return { title: component?.title ?? "Components", description: component?.description };
 }
 
@@ -467,7 +467,7 @@ export default async function ComponentPage({
   params: Promise<{ name: string }>;
 }) {
   const { name } = await params;
-  const component = rasterComponents.find((c) => c.name === name);
+  const component = catalogComponents.find((c) => c.name === name);
   if (!component) notFound();
 
   const usage = reactUsage[component.name];
