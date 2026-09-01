@@ -28,8 +28,16 @@ function applyGrid(grid: GridPref) {
   document.documentElement.dataset.grid = grid;
 }
 
-function applyTextScale(scale: number) {
-  document.documentElement.style.setProperty("--text-scale", String(scale));
+function persistTextScale(scale: number) {
+  const pct = String(Math.round(scale * 100));
+  const root = document.documentElement;
+  root.style.setProperty("--text-scale", String(scale));
+  root.setAttribute("data-text-scale", pct);
+  try {
+    localStorage.setItem("raster-text-scale", pct);
+  } catch {
+    /* private mode */
+  }
 }
 
 function readScheme(): Scheme {
@@ -81,7 +89,7 @@ function useSettings() {
     setTextIndex(nextText);
     applyScheme(nextScheme);
     applyGrid(nextGrid);
-    applyTextScale(TEXT_STEPS[nextText]!);
+    persistTextScale(TEXT_STEPS[nextText]!);
   }, []);
 
   React.useEffect(() => {
@@ -116,13 +124,7 @@ function useSettings() {
   const stepText = (delta: number) => {
     const next = Math.max(0, Math.min(TEXT_STEPS.length - 1, textIndex + delta));
     setTextIndex(next);
-    const scale = TEXT_STEPS[next]!;
-    try {
-      localStorage.setItem("raster-text-scale", String(Math.round(scale * 100)));
-    } catch {
-      /* private mode */
-    }
-    applyTextScale(scale);
+    persistTextScale(TEXT_STEPS[next]!);
   };
 
   return { scheme, selectScheme, grid, selectGrid, textIndex, stepText };

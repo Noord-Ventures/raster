@@ -426,11 +426,14 @@ if (/toast|Toaster|rs-toast/.test(block)) {
 const laws = readFileSync(join(root, "apps/www/app/specimen-laws.ts"), "utf8");
 const kit = readFileSync(join(root, "apps/www/app/specimen.ts"), "utf8");
 const footer = readFileSync(join(root, "apps/www/components/site-footer.tsx"), "utf8");
-for (const word of ["Simple", "Beautiful", "Opinionated", "Elegant", "Clear", "Legible", "Solid", "Versatile", "Customizable", "Minimal"]) {
+for (const word of ["Simple", "Minimal", "Opinionated", "Elegant", "Clear", "Legible", "Solid", "Versatile", "Customizable"]) {
   if (!laws.includes(`text: "${word}"`)) fail(`Homepage principles must include ${word}`);
 }
+if (laws.includes('text: "Beautiful"')) {
+  fail("Homepage principles replaced Beautiful with Minimal");
+}
 if (laws.includes("The grid is the idea.")) {
-  fail("Homepage principles are Renato's ten words, not the old grid sentences");
+  fail("Homepage principles are Renato's nine words, not the old grid sentences");
 }
 if (!kit.includes('"toggle-group"') || !kit.includes('"card"') || !kit.includes('"pagination"')) {
   fail("Homepage kit must be denser than accordion, calendar, field, stepper");
@@ -566,11 +569,16 @@ if (!appear.includes("border-radius: 0") || appear.includes("10px")) {
 if (!site.includes(".text-stepper button") || !site.slice(site.indexOf(".text-stepper button {"), site.indexOf(".text-stepper button:hover")).includes("border-radius: 0")) {
   fail("Text size −/+ are hairline squares, radius 0");
 }
-if (!site.includes("max-width: 208px") || !site.includes(".rs-crumb-root")) {
-  fail("Desktop crumbs must clip left of corner-nav (224 − 16px)");
+if (!site.includes("--nav-left") || !site.includes("var(--nav-left) - 8px") || !site.includes("body .rs-crumb-root")) {
+  fail("Desktop crumb bar must end 8px left of corner-nav; root must not be a 184px track");
 }
-if (!chrome.includes("Math.round(scale * 100)") || !layout.includes("n>3")) {
-  fail("Text size must persist as a percent in localStorage and restore before paint");
+if (
+  !chrome.includes("Math.round(scale * 100)") ||
+  !layout.includes("n>3") ||
+  !layout.includes("data-text-scale") ||
+  !chrome.includes("data-text-scale")
+) {
+  fail("Text size must persist as a percent in localStorage and restore on html[data-text-scale] before paint");
 }
 
 console.log("Phone chrome: 44pt hits, safe-area, stacked TOC, copy control.");

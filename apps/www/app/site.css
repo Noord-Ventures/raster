@@ -25,6 +25,11 @@ html, body { margin: 0; padding: 0; }
    Components also paints the page-grid L/R box edge (same --grid-line
    inset as home/about margins) so scroll 0 shows page grid + 204. */
 html { background-color: var(--bg); --text-scale: 1; }
+html[data-text-scale="90"] { --text-scale: 0.9; }
+html[data-text-scale="100"] { --text-scale: 1; }
+html[data-text-scale="110"] { --text-scale: 1.1; }
+html[data-text-scale="125"] { --text-scale: 1.25; }
+html[data-text-scale="140"] { --text-scale: 1.4; }
 html::before {
   content: "";
   position: fixed;
@@ -52,6 +57,7 @@ body {
   z-index: 1;
   background-color: transparent;
   background-image: none;
+  --nav-left: 224px;
 }
 
 /* ── Fixed corner chrome ── */
@@ -73,7 +79,7 @@ body {
 .site-logo-mark { width: 20px; height: 20px; transform: rotate(-45deg); }
 
 .corner-nav {
-  position: fixed; top: 24px; left: 224px; right: auto; z-index: 200;
+  position: fixed; top: 24px; left: var(--nav-left); right: auto; z-index: 200;
   display: flex; align-items: center; gap: 20px; height: 24px;
   filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
 }
@@ -88,6 +94,9 @@ body {
   }
 }
 @media (min-width: 1440px) {
+  body:has([data-rail="catalog"]):not(:has(.catalog-page)) {
+    --nav-left: 428px;
+  }
   body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav {
     left: 428px;
   }
@@ -98,26 +107,50 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   opacity: 0;
   pointer-events: none;
 }
-/* Corner-nav owns x=224 (428 on wide catalog detail). Crumbs stay in
-   the module to the LEFT of that edge, with a 16px gutter. Do not
-   reuse the library’s 1024 one-module inset — that was for a
-   right-docked nav. */
-@media (min-width: 900px) {
+/* Geometric clip: the crumb bar itself ends 8px left of .corner-nav.
+   Overflow hidden is not enough — getBoundingClientRect of a 184px
+   root or an ellipsized trail still intersects .corner-nav a.
+   Kill the library’s 1024 inset and 184px root; hide the trail while
+   nav sits on column 2 (224). Wide catalog detail (nav at 428) can
+   show the trail in the extra module. */
+@media (min-width: 641px) {
+  body .rs-crumb-bar {
+    right: auto;
+    width: calc(var(--nav-left) - 8px);
+    overflow: hidden;
+  }
   body .rs-crumb-bar-inner {
-    margin-left: 0;
+    margin-left: 0 !important;
     padding-left: 76px;
-    max-width: 208px;
+    padding-right: 0;
+    width: 100%;
+    max-width: 100%;
     overflow: hidden;
     box-sizing: border-box;
   }
   body .rs-crumb-root {
-    width: auto;
+    width: auto !important;
     max-width: 100%;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  body .rs-crumb-bar .rs-crumbs {
+    display: none;
   }
 }
 @media (min-width: 1440px) {
-  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .rs-crumb-bar-inner {
-    max-width: 412px;
+  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .rs-crumb-bar .rs-crumbs {
+    display: flex;
+    min-width: 0;
+    flex: 1 1 0;
+    overflow: hidden;
+  }
+  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .rs-crumb-bar .rs-crumbs-here,
+  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .rs-crumb-bar .rs-crumbs-link {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 }
 .corner-nav a {
@@ -354,6 +387,8 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     line-height: 1;
     overflow: hidden;
     align-items: flex-start;
+    width: auto;
+    right: 0;
   }
   .rs-crumb-bar-inner {
     display: flex;

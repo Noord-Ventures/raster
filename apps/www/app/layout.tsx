@@ -16,7 +16,7 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const themeInit = `(function(){try{var r=document.documentElement,t=localStorage.getItem("raster-theme");var dark=t==="dark"||((!t||t==="auto")&&matchMedia("(prefers-color-scheme: dark)").matches);if(dark)r.dataset.theme="dark";else delete r.dataset.theme;if(localStorage.getItem("raster-grid")==="off")r.setAttribute("data-grid","off");var s=localStorage.getItem("raster-text-scale");if(s!=null){var n=parseFloat(s);if(isFinite(n)&&n>0){if(n>3)n=n/100;r.style.setProperty("--text-scale",String(n))}}}catch(e){}})()`;
+const themeInit = `(function(){try{var r=document.documentElement,t=localStorage.getItem("raster-theme");var dark=t==="dark"||((!t||t==="auto")&&matchMedia("(prefers-color-scheme: dark)").matches);if(dark)r.dataset.theme="dark";else delete r.dataset.theme;if(localStorage.getItem("raster-grid")==="off")r.setAttribute("data-grid","off");var s=localStorage.getItem("raster-text-scale");if(s!=null){var n=parseFloat(s);if(isFinite(n)&&n>0){if(n>3)n=n/100;r.style.setProperty("--text-scale",String(n));r.setAttribute("data-text-scale",String(Math.round(n*100)))}}}catch(e){}})()`;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
