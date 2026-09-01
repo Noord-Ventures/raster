@@ -196,17 +196,33 @@ const componentsPage = readFileSync(join(root, "apps/www/app/components/page.tsx
 if (!componentsPage.includes("catalog-page")) {
   fail("Components index must mark catalog-page so the two grids paint");
 }
-if (!facts.includes("usage.specimen") && !facts.includes("specimen:")) {
-  fail("About Usage must ship one specimen block");
+const usageBlock = facts.slice(facts.indexOf("export const usage"), facts.indexOf("export const license"));
+if (usageBlock.includes("paste this in the document head") || aboutPage.includes("paste this in the document head")) {
+  fail("About Usage must not tell people to paste the CLI or a button into the head");
 }
-if (!facts.includes("npx @noorddev/raster-cli init") || !facts.includes('<link rel="stylesheet" href="styles/raster.css" />') || !facts.includes("rs-btn-primary")) {
-  fail("About Usage specimen must be CLI, then head link, then body");
+if (usageBlock.includes("specimen:") || aboutPage.includes("{usage.specimen}")) {
+  fail("About Usage must not dump CLI, link, and button into one paste-in-head block");
 }
-if ((aboutPage.match(/field-code-row/g) ?? []).length !== 1) {
-  fail("About Usage must be one-shot, not three stacked code rows");
+if (!usageBlock.includes('commandWhere: "Terminal"') || !usageBlock.includes('htmlWhere: "Head"') || !usageBlock.includes('controlWhere: "Body"')) {
+  fail("About Usage steps must be labeled Terminal, Head, Body");
 }
-if (!aboutPage.includes("{usage.specimen}")) {
-  fail("About Usage must render the one-shot specimen");
+if (!usageBlock.includes("command: COMMAND") || !usageBlock.includes('<link rel="stylesheet" href="styles/raster.css" />') || !usageBlock.includes("rs-btn-primary")) {
+  fail("About Usage must show CLI, then head link, then body control");
+}
+if ((aboutPage.match(/field-code-row/g) ?? []).length !== 3) {
+  fail("About Usage must be three labeled rows: terminal, head, body");
+}
+if (!aboutPage.includes("{usage.command}") || !aboutPage.includes("{usage.html}") || !aboutPage.includes("{usage.control}")) {
+  fail("About Usage must render CLI, head, and body as separate rows");
+}
+if (!usageBlock.includes("index.html") || !usageBlock.includes("styles/raster.css") || !usageBlock.includes("raster.json") || !usageBlock.includes("Inter")) {
+  fail("About Usage must name what init writes: CSS, Inter, index.html, raster.json");
+}
+if (!usageBlock.includes("one-shot Raster landing") || !usageBlock.includes("not a thin shell")) {
+  fail("About Usage must explain the generated index.html landing");
+}
+if (!usageBlock.includes("There is no CDN")) {
+  fail("About Usage must not invent a CDN");
 }
 const faceHang = "margin-left: -0.08em";
 if (!specimen.includes(".specimen-face") || !/specimen-face \{[\s\S]*?margin-left: -0\.08em/.test(specimen)) {
