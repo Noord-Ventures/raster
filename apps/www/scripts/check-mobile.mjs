@@ -438,8 +438,14 @@ if (!kit.includes('"toggle-group"') || !kit.includes('"card"') || !kit.includes(
 if (!layout.includes("SiteFooter") || !footer.includes("getraster.com") || !footer.includes("MIT")) {
   fail("Root layout must render a sitewide footer with factual imprint");
 }
-if (!site.includes("left: 224px") || !site.includes('body:has([data-rail="catalog"]) .corner-nav')) {
-  fail("Top-nav Components must align with the catalog second sidebar");
+if (
+  !site.includes("left: 224px") ||
+  !site.includes('body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav')
+) {
+  fail("Top-nav Components must align with the catalog second sidebar on detail routes");
+}
+if (/body:has\(\[data-rail="catalog"\]\) \.corner-nav/.test(site)) {
+  fail("Catalog gallery index must not pin corner-nav to the toc-sub column");
 }
 
 console.log("Phone chrome: 44pt hits, safe-area, stacked TOC, copy control.");

@@ -78,16 +78,19 @@ body {
   filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
 }
 /* Catalog mid/desktop: the word Components left-edge = .toc-sub
-   content (204 + 20). Wide desktop follows the rail when the
-   one-module inset returns. Do not invent a third nav. */
+   content (204 + 20) on component DETAIL routes. The gallery index
+   (.catalog-page) keeps the default right-docked corner-nav so the
+   scrolled crumb "Components" cannot run through "Interfaces".
+   Wide desktop follows the rail when the one-module inset returns.
+   Do not invent a third nav. */
 @media (min-width: 900px) {
-  body:has([data-rail="catalog"]) .corner-nav {
+  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav {
     left: 224px;
     right: auto;
   }
 }
 @media (min-width: 1440px) {
-  body:has([data-rail="catalog"]) .corner-nav {
+  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav {
     left: 428px;
   }
 }
