@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Copy pass. Homepage laws are ten checkable rules, not ten adjectives. About lead, usage, specimen, notes, and colophon recut; field captions carry the year of the work shown. Docs and Tokens drop studio vocabulary (the door, the host we run today) and the literal-backtick grid paragraph. Six registry descriptions tightened; the line chart is titled Line chart. Interfaces stories lose the spec-sheet negations; Evening is kitchens throughout; Wall and Press no longer repeat a line inside one feed. Swag says coming soon once. README motion is the token value (0.12–0.18s) and the chart list matches the registry. Starter and colophon point at Noord-Ventures. Does not publish.
 - Evening store stills are real Unsplash photographs, not generated food. Same paths under `apps/www/public/interfaces/food/`. DoorDash-like cards and Raster chrome stay. Does not publish.
 - Catalog H1 top shares the TOC first-row line at scroll 0 (docs, components, interfaces). Cover is not a flex-end spacer above the rail. Two-column TOC stays. Does not publish.
 - Interfaces people are /work keepers only: Aziez Soekha, Jenny Lo, Koen Bok, Gianpiero Puleo. Night fleet viz is a city-scale map well: many blocks, a readable street grid, vehicles as small units. Does not publish.

@@ -35,7 +35,7 @@
         "rs-hover-card",
         "rs-hover-card-panel"
       ],
-      "snippet": "<span class=\"rs-hover-card\"><span tabindex=\"0\">@noord</span><span class=\"rs-hover-card-panel\">Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>",
+      "snippet": "<span class=\"rs-hover-card\"><span tabindex=\"0\">@noord</span><span class=\"rs-hover-card-panel\">Noord, an AI lab between Alkmaar and Silicon Valley.</span></span>",
       "cssOnly": false,
       "registryDependencies": []
     }

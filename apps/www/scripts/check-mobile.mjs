@@ -219,8 +219,8 @@ if (!aboutPage.includes("{usage.command}") || !aboutPage.includes("{usage.html}"
 if (!usageBlock.includes("index.html") || !usageBlock.includes("styles/raster.css") || !usageBlock.includes("raster.json") || !usageBlock.includes("Inter")) {
   fail("About Usage must name what init writes: CSS, Inter, index.html, raster.json");
 }
-if (!usageBlock.includes("one-shot Raster landing") || !usageBlock.includes("not a thin shell")) {
-  fail("About Usage must explain the generated index.html landing");
+if (!usageBlock.includes("a specimen page") || !usageBlock.includes("Edit it; it is yours.")) {
+  fail("About Usage must explain the generated index.html specimen and hand it over");
 }
 if (!usageBlock.includes("There is no CDN")) {
   fail("About Usage must not invent a CDN");
@@ -426,11 +426,14 @@ if (/toast|Toaster|rs-toast/.test(block)) {
 const laws = readFileSync(join(root, "apps/www/app/specimen-laws.ts"), "utf8");
 const kit = readFileSync(join(root, "apps/www/app/specimen.ts"), "utf8");
 const footer = readFileSync(join(root, "apps/www/components/site-footer.tsx"), "utf8");
-for (const word of ["Simple", "Beautiful", "Opinionated", "Elegant", "Clear", "Legible", "Solid", "Versatile", "Customizable", "Minimal"]) {
-  if (!laws.includes(`text: "${word}"`)) fail(`Homepage principles must include ${word}`);
+for (const law of ["One ink, no accent", "Hairlines, not boxes", "The grid is visible", "The module is 204", "Cells sit flush", "One face, Inter", "Sentence case, always", "Native elements first", "Nothing bounces", "CSS you own"]) {
+  if (!laws.includes(`text: "${law}"`)) fail(`Homepage laws must include ${law}`);
 }
 if (laws.includes("The grid is the idea.")) {
-  fail("Homepage principles are Renato's ten words, not the old grid sentences");
+  fail("Homepage laws are checkable rules, not the old grid sentences");
+}
+if (/text: "[A-Za-z]+"\s*\}/.test(laws)) {
+  fail("Homepage laws are rules, not single adjectives");
 }
 if (!kit.includes('"toggle-group"') || !kit.includes('"card"') || !kit.includes('"pagination"')) {
   fail("Homepage kit must be denser than accordion, calendar, field, stepper");

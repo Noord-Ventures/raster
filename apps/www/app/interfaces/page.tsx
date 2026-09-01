@@ -17,7 +17,7 @@ export default function InterfacesPage() {
       <main className="site-content-wide">
           <header className="cover" style={{ maxWidth: 592 }}>
           <h1 className="rs-t-display">Interfaces</h1>
-          <p className="rs-t-sub">Six little tools. A poster crop of each.</p>
+          <p className="rs-t-sub">Six invented tools. A poster crop of each.</p>
         </header>
         <div className="if-list">
           {interfaces.map((item) => (

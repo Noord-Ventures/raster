@@ -86,7 +86,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "native-select",
     title: "Native select",
-    description: "Native select with Raster 1px chrome.",
+    description: "The platform select in 1px chrome.",
     category: "forms",
     classes: ["rs-native-select"],
     css: ["components/native-select.css"],
@@ -127,7 +127,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "switch",
     title: "Switch",
-    description: "32×18 control. On fills ink; off is a 1px track. The thumb moves; the box stays 32px.",
+    description: "32×18. On fills ink; off is a 1px track. Only the thumb moves.",
     category: "forms",
     classes: ["rs-switch", "rs-switch-on"],
     css: ["components/switch.css"],
@@ -147,7 +147,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "progress",
     title: "Progress",
-    description: "4px bar. Percentage is set in the label.",
+    description: "4px bar. The label carries the percentage.",
     category: "feedback",
     classes: ["rs-progress", "rs-progress-head"],
     css: ["components/progress.css"],
@@ -500,7 +500,7 @@ export const rasterComponents: RasterComponent[] = [
   },
   {
     name: "chart",
-    title: "Charts",
+    title: "Line chart",
     description: "Line on a 204 field. 1px grid, ink marks. Series use solid, dashed, gray, or dotted. One optional spot color.",
     category: "charts",
     classes: ["rs-chart", "rs-chart-line", "rs-chart-grid", "rs-chart-axis", "rs-chart-bar", "rs-spark"],
@@ -555,7 +555,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "histogram",
     title: "Histogram",
-    description: "Histogram. Adjacent bins, 1px between.",
+    description: "Adjacent bins, 1px between.",
     category: "charts",
     classes: ["rs-chart-hist"],
     css: ["components/chart.css"],
@@ -593,7 +593,7 @@ export const rasterComponents: RasterComponent[] = [
     classes: ["rs-hover-card", "rs-hover-card-panel"],
     css: ["components/hover-card.css"],
     react: "components/hover-card.tsx",
-    snippet: `<span class="rs-hover-card"><span tabindex="0">@noord</span><span class="rs-hover-card-panel">Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>`,
+    snippet: `<span class="rs-hover-card"><span tabindex="0">@noord</span><span class="rs-hover-card-panel">Noord, an AI lab between Alkmaar and Silicon Valley.</span></span>`,
   },
   {
     name: "kbd",
@@ -766,7 +766,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "assistant",
     title: "Assistant panel",
-    description: "Chat panel: user block, reply, suggestion card, input row.",
+    description: "User block, reply, suggestion card, input row.",
     category: "patterns",
     classes: ["rs-ai", "rs-ai-head", "rs-ai-title", "rs-ai-status", "rs-ai-msg", "rs-ai-user", "rs-ai-user-block", "rs-ai-reply", "rs-ai-card", "rs-ai-tag", "rs-ai-text", "rs-ai-done", "rs-ai-input", "rs-ai-send"],
     css: ["components/assistant.css"],

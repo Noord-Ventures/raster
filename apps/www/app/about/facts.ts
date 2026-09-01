@@ -45,9 +45,9 @@ export const usage = {
   controlWhere: "Body",
   control: `<button class="rs-btn-primary">Save</button>`,
   landing:
-    "Init writes index.html — the specimen the CLI generates. That file is the one-shot Raster landing, meant to read like getraster.com: poster type, the 204 grid, the laws. It is not a thin shell.",
+    "Init writes index.html, a specimen page: poster type, the 204 grid, the laws. Edit it; it is yours.",
   files:
-    "The same command writes styles/raster.css, Inter, and raster.json. There is no CDN. Restyle the specimen toward the live home with the files on disk.",
+    "The same command writes styles/raster.css, Inter, and raster.json. Everything is on disk. There is no CDN.",
   after: "Dark scheme: set data-theme=\"dark\" on the root element.",
 };
 
@@ -59,9 +59,9 @@ export const license = {
 
 export const specimen = {
   kicker: "Specimen",
-  body: "Body is 15px, weight 500, measure about 66 characters. Headings and labels are 600. Sentence case. The module holds the type: a 204 cell, or two, or a column of them. Edges step from grid line to grid line.",
-  mid: "A button is 40 tall on the desktop and 44 on the phone. The field label sits on a 16px line so the hairline lands on an integer. Radius on a control follows the concentric law. Module cells stay flush to the gridline.",
-  long: "The smaller sizes keep a tall x-height so interface copy stays readable at 12 and 13. The larger sizes tighten tracking and let weight do the emphasis. There is no accent hue. Paper, ink, and the grays between them are the palette. Motion is 0.12 to 0.18 seconds, ease, a state the user caused — color and opacity name the change; layout rarely moves.",
+  body: "Body is 15px, weight 500, measure about 66 characters. Headings and labels are 600. Sentence case. The module holds the type: a 204 cell, or two, or a column of them. Edges step from gridline to gridline.",
+  mid: "A button is 40 tall on the desktop and 44 on the phone. The field label sits on a 16px line so the hairline lands on an integer. Nested corners stay concentric; the inner radius is fitted to the outer. Module cells sit flush on the gridline.",
+  long: "Inter’s tall x-height keeps interface copy readable at 12 and 13. The larger sizes tighten tracking and let weight do the emphasis. There is no accent hue. Paper, ink, and the grays between them are the palette. Motion is 0.12 to 0.18 seconds, ease, a state the user caused — color and opacity name the change; layout rarely moves.",
 };
 
 export const history = {
@@ -129,7 +129,7 @@ export const field = [
     name: "Max Bill",
     years: "1908–1994",
     place: "Zurich · Ulm",
-    mark: "HfG Ulm. Concrete art.",
+    mark: "HfG Ulm, 1955. Concrete art.",
     work: {
       src: "/about/bill-hfg-ulm.jpg",
       alt: "HfG Ulm, architecture by Max Bill, 1955",
@@ -159,7 +159,7 @@ export const field = [
     name: "Emil Ruder",
     years: "1914–1970",
     place: "Basel",
-    mark: "Typographie.",
+    mark: "Typographie, 1967.",
     work: {
       src: "/about/ruder-typographie.jpg",
       alt: "Cover of Typographie",
@@ -169,7 +169,7 @@ export const field = [
     name: "Armin Hofmann",
     years: "1920–2020",
     place: "Basel",
-    mark: "Graphic Design Manual.",
+    mark: "Form Farbe, 1951. Graphic Design Manual, 1965.",
     work: {
       src: "/about/hofmann-form-farbe.jpg",
       alt: "Form Farbe poster, Gewerbemuseum Winterthur, 1951",
@@ -179,7 +179,7 @@ export const field = [
     name: "Nelly Rudin",
     years: "1928–2013",
     place: "Basel · Zurich",
-    mark: "Saffa 1958 Zürich, 1958. Geigy. Müller-Brockmann studio.",
+    mark: "Saffa, Zürich, 1958. Geigy. Müller-Brockmann studio.",
     work: {
       src: "/about/rudin-saffa-1958.jpg",
       alt: "Saffa 1958 Zürich, 1958",
@@ -187,7 +187,7 @@ export const field = [
   },
   {
     name: "Rosmarie Tissi",
-    years: "1937",
+    years: "b. 1937",
     place: "Zurich",
     mark: "20 CHF Gertrud Kurz, 1992. Odermatt & Tissi.",
     work: {
@@ -229,7 +229,7 @@ export const field = [
     name: "Fré Cohen",
     years: "1903–1943",
     place: "Amsterdam",
-    mark: "SDAP. Stadsdrukkerij Amsterdam.",
+    mark: "SDAP and NVV poster, 1926. Stadsdrukkerij Amsterdam.",
     work: {
       src: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Cohen_fre_sdap_nvv_poster_1926.png",
       alt: "SDAP / NVV poster, 1926",
@@ -269,7 +269,7 @@ export const field = [
     name: "Total Design",
     years: "1971",
     place: "Amsterdam",
-    mark: "Stedelijk, co westerik, 24 sep–7 nov 1971.",
+    mark: "Co Westerik, Stedelijk, 24 Sep–7 Nov 1971.",
     work: {
       src: "/about/total-design-westerik-1971.jpg",
       alt: "Total Design / Crouwel, co westerik, Stedelijk 24 sep–7 nov 1971",
@@ -289,7 +289,7 @@ export const field = [
     name: "International Typographic Style",
     years: "1950s",
     place: "Switzerland",
-    mark: "International Typographic Style. Objective. Modular.",
+    mark: "Neue Grafik, 1958–1965. Objective and modular.",
     work: {
       src: "/about/neue-grafik.jpg",
       alt: "Neue Grafik, July 1963",
@@ -300,7 +300,7 @@ export const field = [
 export const program = {
   module: {
     kicker: "204",
-    law: `${grid.column} column + ${grid.gutter} gutter.`,
+    law: `${grid.column} column + ${grid.gutter} gutter. On a phone the field is one column; at 481 it pairs; at 816 it is four; at 1224 it is six.`,
   },
   hairline: {
     kicker: "Hairlines",
@@ -319,28 +319,12 @@ export const program = {
 
 export const notes = [
   {
-    q: "How do I install Raster?",
-    a: `${COMMAND} writes styles/raster.css, Inter, raster.json, and a specimen page (index.html). Link the stylesheet, or import it in your root layout.`,
-  },
-  {
     q: "How do I add a component?",
     a: "npx @noorddev/raster-cli add button dialog. React source lands in components/raster/. CSS-only components need no file; the classes are already in raster.css.",
   },
   {
-    q: "How do I switch to the dark scheme?",
-    a: "Set data-theme=\"dark\" on the root element. Tokens flip paper and ink. The module grid stays.",
-  },
-  {
     q: "Do I need React?",
     a: "No. Raster is CSS-first. Plain classes on plain markup. The React layer is optional and uses native elements.",
-  },
-  {
-    q: "Why Inter?",
-    a: "One grotesque for interfaces. Variable, latin + latin-ext, vendored next to the CSS. System sans is fallback only. Weights: 500 body, 600 headings and labels.",
-  },
-  {
-    q: "What is the module?",
-    a: `204 pixels: ${grid.column} column + ${grid.gutter} gutter. Content boxes span whole modules. On a phone the field is one column; at 481 it pairs; at 816 it is four; at 1224 it is six.`,
   },
   {
     q: "Where do I report a problem?",
@@ -362,8 +346,7 @@ export const noord = {
   heading: "Noord",
   span: "Alkmaar ↔ Silicon Valley",
   what: "Noord is an AI lab between Alkmaar and Silicon Valley.",
-  built: "Raster was designed and built there.",
-  who: "Renato Valdés Olmos led design and development for Raster at Noord.",
+  built: "Raster was designed and built there by Renato Valdés Olmos.",
   door: DOOR,
   host: rasterTokens.meta.url,
   packages: ["@noorddev/raster", "@noorddev/raster-react", "@noorddev/raster-cli"] as const,

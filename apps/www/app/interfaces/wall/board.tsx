@@ -103,9 +103,9 @@ const COMMENTS: Record<string, { who: FaceId; name: string; text: string }[]> = 
   ],
   m2: [
     { who: "gianpiero", name: "Gianpiero", text: "Keep the hairline on the active tab only." },
-    { who: "koen", name: "Koen", text: "The rail stays 184." },
+    { who: "koen", name: "Koen", text: "One rail, 184 wide." },
   ],
-  m3: [{ who: "aziez", name: "Aziez", text: "Cite hangs in the gutter." }],
+  m3: [{ who: "aziez", name: "Aziez", text: "Leave the numeral in the gutter." }],
   m4: [{ who: "jenny", name: "Jenny", text: "Leave the crumb bar off the poster." }],
   m5: [{ who: "koen", name: "Koen", text: "The number stays first." }],
   m6: [{ who: "aziez", name: "Aziez", text: "Put the color on the field only." }],
@@ -233,7 +233,7 @@ export function Board() {
               <b>{person.name}</b>
               <i>{person.line}</i>
             </div>
-            <p>Posts on the wall stay in the street. A face is enough to find them again.</p>
+            <p>Posts stay on the wall. A face is enough to find them again.</p>
             <button type="button" className="sc-wall-ghost" onClick={() => setInspect(null)}>
               <Icon name="close" size={12} />
               Close

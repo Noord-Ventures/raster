@@ -4,7 +4,7 @@ import { SWAG } from "./catalog";
 import "./swag.css";
 
 export const metadata: Metadata = {
-  title: "Swag — Raster",
+  title: "Swag",
   description: "Raster merch. Coming soon.",
 };
 
@@ -55,7 +55,6 @@ export default function SwagPage() {
             <div className="swag-meta">
               <h2>{item.title}</h2>
               <p className="swag-print">{item.print}</p>
-              <p className="swag-soon">Coming soon</p>
             </div>
           </article>
         ))}

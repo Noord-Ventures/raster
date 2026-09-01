@@ -52,17 +52,11 @@ export default function TokensPage() {
         <h2 className="section-label">The grid</h2>
         <p className="rs-t-body">
           {grid.module}px modules: a {grid.column}px column and a {grid.gutter}px gutter.
-          Inner pages draw the quiet `--grid-line` verticals, including the left gutter.
-          Home and About use a stronger `--divider` cell cage, with `--grid-line` only
-          on the left and right of the box. Content boxes span whole modules; edges
-          step from grid line to grid line on resize.
+          Content boxes span whole modules; edges step from gridline to gridline on resize.
         </p>
 
         <h2 className="section-label">Radius</h2>
-        <p className="rs-t-body">
-          {radius.rule} Chrome stays {radius.chrome}. Nested corners stay
-          concentric: {radius.concentric}.
-        </p>
+        <p className="rs-t-body">{radius.rule}</p>
         <CodeBlock
           code={`import { innerRadius, concentricInner, concentricOuter } from "@noorddev/raster";
 

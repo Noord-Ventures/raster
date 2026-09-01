@@ -2,7 +2,7 @@
 
 A poster you can install.
 
-Public door: [getraster.com](https://getraster.com). Host today: [raster.noord.dev](https://raster.noord.dev). Source: [github.com/Noord-Ventures/raster](https://github.com/Noord-Ventures/raster).
+Site: [getraster.com](https://getraster.com), currently served from [raster.noord.dev](https://raster.noord.dev). Source: [github.com/Noord-Ventures/raster](https://github.com/Noord-Ventures/raster).
 
 This repo contains the tokens, CSS, React components, registry, CLI, and documentation site.
 
@@ -13,7 +13,7 @@ This repo contains the tokens, CSS, React components, registry, CLI, and documen
 - **The grid is visible.** A 204px module (184px column + 20px gutter) draws faint lines across every page.
 - **CSS-first, zero dependencies.** Plain classes on plain markup. The React layer uses native elements. No Radix, no Tailwind.
 - **Sentence case, always.** Never all caps.
-- **Quiet motion.** 0.15–0.3s, ease. Color and opacity change; layout rarely moves; nothing bounces.
+- **Quiet motion.** 0.12–0.18s, ease. Color and opacity change; layout rarely moves; nothing bounces.
 
 ## Contents
 
@@ -77,13 +77,13 @@ pnpm test         # core integrity tests, react jsdom tests, cli tests
 pnpm dev          # docs site at localhost:3000
 ```
 
-## Catalogue
+## Catalog
 
-75 components, covering the everyday shadcn/ui catalogue. Each is CSS-first with an optional zero-dependency React layer.
+75 components, covering the everyday shadcn/ui catalog. Each is CSS-first with an optional zero-dependency React layer.
 
 Behavior comes from the platform where it exists. Accordion and collapsible are native `<details>`; the `name` attribute gives exclusive-open without JS. Dialog, alert dialog, sheet, and the command palette are native `<dialog>`: focus trap, Escape, backdrop. Popover uses the Popover API. Carousel uses scroll snap. Tooltip and hover card are CSS. Form controls wrap native inputs.
 
-Charts are dependency-free SVG: line, bar, sparkline, donut. Hairline grid, hover tooltip, legend from two series, and a visually hidden table for screen readers. Series differ by texture (solid, dashed, gray, dotted), not hue.
+Charts are dependency-free SVG: line, bar, area, scatter, histogram, donut, small multiples. Hairline grid, hover tooltip, legend from two series, and a visually hidden table for screen readers. Series differ by texture (solid, dashed, gray, dotted), not hue.
 
 ## Typeface
 

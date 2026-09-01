@@ -2,7 +2,7 @@ import { add, init, list, snippetFor, tokensJson } from "./lib";
 
 const VERSION = "0.3.0";
 
-const HELP = `@noorddev/raster-cli ${VERSION}, the monochrome design system
+const HELP = `@noorddev/raster-cli ${VERSION}. A design system on a modular grid.
 
 Usage
   npx @noorddev/raster-cli init [--css-dir <dir>] [--components-dir <dir>] [--compat] [--registry <url>] [--overwrite]

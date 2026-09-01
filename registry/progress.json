@@ -3,7 +3,7 @@
   "name": "progress",
   "type": "registry:component",
   "title": "Progress",
-  "description": "4px bar. Percentage is set in the label.",
+  "description": "4px bar. The label carries the percentage.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"

@@ -108,7 +108,7 @@ import { Button } from "@/components/raster/button";
 />`,
   input: `import { Input } from "@/components/raster/input";
 
-<Input label="E-mail" placeholder="renn@noord.vc" ok feedback="Looks good" />`,
+<Input label="E-mail" placeholder="you@studio.nl" ok feedback="Looks good" />`,
   "inline-form": `import { InlineForm } from "@/components/raster/inline-form";
 
 <InlineForm onSubmit={(email) => subscribe(email)} />`,
@@ -222,7 +222,7 @@ import { Button } from "@/components/raster/button";
   "hover-card": `import { HoverCard } from "@/components/raster/hover-card";
 
 <HoverCard trigger={<a className="rs-link" href="/noord">@noord</a>}>
-  Noord, a venture studio in Alkmaar.
+  Noord, an AI lab between Alkmaar and Silicon Valley.
 </HoverCard>`,
   kbd: `import { Kbd } from "@/components/raster/kbd";
 
@@ -435,7 +435,7 @@ import { Button } from "@/components/raster/button";
 
 <Dialog open={open} onClose={() => setOpen(false)}>
   <DialogTitle>Remove this item?</DialogTitle>
-  <DialogBody>This can't be undone.</DialogBody>
+  <DialogBody>This cannot be undone.</DialogBody>
   <DialogActions>
     <Button variant="ghost" size="sm" onClick={() => setOpen(false)}>Cancel</Button>
     <Button size="sm" onClick={remove}>Remove</Button>

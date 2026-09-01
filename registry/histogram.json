@@ -3,7 +3,7 @@
   "name": "histogram",
   "type": "registry:component",
   "title": "Histogram",
-  "description": "Histogram. Adjacent bins, 1px between.",
+  "description": "Adjacent bins, 1px between.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json",

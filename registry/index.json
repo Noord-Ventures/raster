@@ -337,7 +337,7 @@
       "name": "native-select",
       "type": "registry:component",
       "title": "Native select",
-      "description": "Native select with Raster 1px chrome.",
+      "description": "The platform select in 1px chrome.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json"
@@ -525,7 +525,7 @@
       "name": "switch",
       "type": "registry:component",
       "title": "Switch",
-      "description": "32×18 control. On fills ink; off is a 1px track. The thumb moves; the box stays 32px.",
+      "description": "32×18. On fills ink; off is a 1px track. Only the thumb moves.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json"
@@ -606,7 +606,7 @@
       "name": "progress",
       "type": "registry:component",
       "title": "Progress",
-      "description": "4px bar. Percentage is set in the label.",
+      "description": "4px bar. The label carries the percentage.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json"
@@ -2049,7 +2049,7 @@
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "chart",
       "type": "registry:component",
-      "title": "Charts",
+      "title": "Line chart",
       "description": "Line on a 204 field. 1px grid, ink marks. Series use solid, dashed, gray, or dotted. One optional spot color.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
@@ -2512,7 +2512,7 @@
       "name": "histogram",
       "type": "registry:component",
       "title": "Histogram",
-      "description": "Histogram. Adjacent bins, 1px between.",
+      "description": "Adjacent bins, 1px between.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json",
@@ -2761,7 +2761,7 @@
             "rs-hover-card",
             "rs-hover-card-panel"
           ],
-          "snippet": "<span class=\"rs-hover-card\"><span tabindex=\"0\">@noord</span><span class=\"rs-hover-card-panel\">Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>",
+          "snippet": "<span class=\"rs-hover-card\"><span tabindex=\"0\">@noord</span><span class=\"rs-hover-card-panel\">Noord, an AI lab between Alkmaar and Silicon Valley.</span></span>",
           "cssOnly": false,
           "registryDependencies": []
         }
@@ -3585,7 +3585,7 @@
       "name": "assistant",
       "type": "registry:component",
       "title": "Assistant panel",
-      "description": "Chat panel: user block, reply, suggestion card, input row.",
+      "description": "User block, reply, suggestion card, input row.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json"

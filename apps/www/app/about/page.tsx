@@ -241,9 +241,7 @@ export default function AboutPage() {
               {noord.heading} · {noord.span}
             </p>
             <p>{noord.what}</p>
-            <p>
-              {noord.built} {noord.who}
-            </p>
+            <p>{noord.built}</p>
             <p>
               {typeface.name}, {typeface.license} · {typeface.designer}. {typeface.ofl}.{" "}
               <a href={typeface.url}>{typeface.url.replace("https://", "")}</a>
@@ -254,7 +252,7 @@ export default function AboutPage() {
               {" · "}
               <a href={noord.host}>{noord.host.replace("https://", "")}</a>
               {" · "}
-              <a href={person.repo}>github.com/rennvaldes/raster</a>
+              <a href={person.repo}>github.com/Noord-Ventures/raster</a>
             </p>
             <p>
               {person.copyright}, {person.year}.

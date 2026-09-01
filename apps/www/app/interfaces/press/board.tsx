@@ -14,7 +14,7 @@ const JOBS = [
   { id: "14", name: "Press run 14", city: "Alkmaar", weeks: 4, state: "On press", note: "Plate is up at 06:00. Density watch on unit 09.", sheet: "Fee on page one. Timeline under the fee. Same ink." },
   { id: "09", name: "Identity 09", city: "Delft", weeks: 6, state: "Proof", note: "Second proof due Friday. Same ink.", sheet: "One mark. No second color in the chrome." },
   { id: "03", name: "Ledger 03", city: "Haarlem", weeks: 2, state: "Invoice", note: "Cover number matches the invoice.", sheet: "Date the sheet to the week the press starts." },
-  { id: "22", name: "Poster 22", city: "Utrecht", weeks: 3, state: "Brief", note: "One sheet. Scope, weeks, fee.", sheet: "A grid is a plan, not a decoration." },
+  { id: "22", name: "Poster 22", city: "Utrecht", weeks: 3, state: "Brief", note: "One sheet. Scope, weeks, fee.", sheet: "Scope on the first line. Weeks under it. Fee last." },
 ];
 
 function Line({ values }: { values: number[] }) {
