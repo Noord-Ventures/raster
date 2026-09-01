@@ -25,6 +25,23 @@
   body:has([data-rail="catalog"]) .rs-crumb-bar-inner {
     margin-left: 0;
     padding-left: 76px;
+    max-width: 224px;
+    overflow: hidden;
+  }
+}
+/* Wide catalog detail: crumbs occupy column 2 (224–408); nav starts at 428. */
+@media (min-width: 1440px) {
+  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .rs-crumb-bar-inner {
+    margin-left: 204px;
+    padding-left: 20px;
+    max-width: 204px;
+    overflow: hidden;
+  }
+}
+@media (min-width: 900px) and (max-width: 1023px) {
+  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .rs-crumb-bar-inner {
+    max-width: 224px;
+    overflow: hidden;
   }
 }
 
