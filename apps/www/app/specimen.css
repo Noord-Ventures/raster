@@ -127,9 +127,9 @@ body:has(.specimen-page) {
 .specimen-cell-kit-d { grid-area: kitd; }
 .specimen-face {
   margin: 0;
-  /* Optical left: Inter 600, UPM 2048. R lsb 150 so the stem
-     meets the cell pad, not the glyph box. Pair with .specimen-law A. */
-  margin-left: calc(-150 / 2048 * 1em);
+  /* Optical left, hero display. Same -0.08em as About .field-face.
+     Not UPM 150/2048 — that left the R stem right of the law A. */
+  margin-left: -0.08em;
   font-size: clamp(4.5rem, 30cqw, 24rem);
   font-weight: 600;
   letter-spacing: -.045em;
@@ -138,8 +138,8 @@ body:has(.specimen-page) {
 }
 .specimen-law {
   margin: 0;
-  /* Optical left: Inter 600 A lsb 50. Ink with Raster, not bounding boxes. */
-  margin-left: calc(-50 / 2048 * 1em);
+  /* Optical left, mid-display A (~1.5–3.75rem). Own fraction, not the hero's. */
+  margin-left: calc(1px - 0.03em);
   font-size: clamp(1.5rem, 12cqw, 3.75rem);
   font-weight: 600;
   letter-spacing: -.035em;
@@ -183,6 +183,8 @@ body:has(.specimen-page) {
 }
 .specimen-command {
   margin: 0;
+  /* Optical left, command display (~2–5rem). Own fraction, not the hero -0.08em. */
+  margin-left: calc(1px - 0.07em);
   font-family: inherit;
   font-size: clamp(2rem, 7.5cqw, 5rem);
   font-weight: 600;

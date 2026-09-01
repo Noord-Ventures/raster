@@ -208,13 +208,27 @@ if ((aboutPage.match(/field-code-row/g) ?? []).length !== 1) {
 if (!aboutPage.includes("{usage.specimen}")) {
   fail("About Usage must render the one-shot specimen");
 }
-const faceHang = "calc(-150 / 2048 * 1em)";
-const aHang = "calc(-50 / 2048 * 1em)";
-if (!specimen.includes(faceHang) || !specimen.includes(aHang)) {
-  fail("Home Raster and law must hang Inter 600 sidebearings (R 150, A 50 / 2048)");
+const faceHang = "margin-left: -0.08em";
+if (!specimen.includes(".specimen-face") || !/specimen-face \{[\s\S]*?margin-left: -0\.08em/.test(specimen)) {
+  fail("Home Raster must hang -0.08em at display size, not a UPM fraction");
 }
-if (!about.includes(faceHang) || !about.includes(".field-cell-era .field-kicker") || !about.includes(aHang)) {
-  fail("About Raster and era kicker must hang Inter 600 sidebearings (R 150, A 50 / 2048)");
+if (!specimen.includes("calc(1px - 0.03em)") || !specimen.includes("calc(1px - 0.07em)")) {
+  fail("Home law and command must use size-specific hangs, not the hero em");
+}
+if (specimen.includes("calc(-150 / 2048") || specimen.includes("calc(-50 / 2048")) {
+  fail("Do not hang Home type from Inter UPM sidebearings");
+}
+if (!/field-face \{[\s\S]*?margin-left: -0\.08em/.test(about)) {
+  fail("About Raster hero must hang -0.08em at display size");
+}
+if (!about.includes("calc(1px - 0.045em)")) {
+  fail("About specimen Raster must use a shallower hang so it meets the 15px body");
+}
+if (about.includes(".field-cell-era .field-kicker") && /field-cell-era \.field-kicker \{[\s\S]*?margin-left:/.test(about)) {
+  fail("About era kicker stays on the pad; do not hang the 12px rail");
+}
+if (about.includes("calc(-150 / 2048") || about.includes("calc(-50 / 2048")) {
+  fail("Do not hang About type from Inter UPM sidebearings");
 }
 for (const name of [
   "Rosmarie Tissi",

@@ -144,9 +144,10 @@ body:has(.field-page) {
 
 .field-face {
   margin: 0;
-  /* Optical left: Inter 600, UPM 2048. R lsb 150 so the stem
-     meets the era kicker A, not the glyph box. */
-  margin-left: calc(-150 / 2048 * 1em);
+  /* Optical left, hero display. Small kicker stays on the pad (the rail).
+     -0.08em is the display hang (Noord), not UPM 150/2048 — that undershot
+     the R stem vs 12px A. Do not reuse this on .field-spec-type. */
+  margin-left: -0.08em;
   font-size: clamp(4.5rem, 28cqw, 18rem);
   font-weight: 600;
   letter-spacing: -.045em;
@@ -177,9 +178,17 @@ body:has(.field-page) {
   color: var(--text-secondary);
 }
 
-.field-cell-era .field-kicker {
-  /* Optical left: Inter 600 A lsb 50. Same pad line as Raster. */
-  margin-left: calc(-50 / 2048 * 1em);
+.field-spec-type {
+  margin: 0;
+  /* Optical left, specimen display (~3–8rem). Shallower than the hero
+     -0.08em: that fraction pulled Raster past the 15px body. 15px B
+     first-ink is ~1px; hang the rest in this face's em. */
+  margin-left: calc(1px - 0.045em);
+  font-size: clamp(3rem, 12vw, 8rem);
+  font-weight: 600;
+  letter-spacing: -.045em;
+  line-height: .85;
+  color: var(--text);
 }
 
 .field-copy {
@@ -209,15 +218,6 @@ body:has(.field-page) {
   color: var(--text-secondary);
   text-wrap: balance;
   max-width: 22em;
-}
-
-.field-spec-type {
-  margin: 0;
-  font-size: clamp(3rem, 12vw, 8rem);
-  font-weight: 600;
-  letter-spacing: -.045em;
-  line-height: .85;
-  color: var(--text);
 }
 
 .field-code-stack {
