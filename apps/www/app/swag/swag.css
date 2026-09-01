@@ -42,6 +42,8 @@ body:has(.swag-page) {
   justify-content: flex-start;
   gap: 20px;
   min-height: 204px;
+  /* Corner mark sits at top 24 / left 20. Drop Store below it. */
+  padding-top: 64px;
 }
 
 .swag-kicker {

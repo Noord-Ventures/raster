@@ -33,7 +33,7 @@ for (const slug of ["hoodie", "tote", "mug", "cap", "notebook", "bottle", "stick
 }
 
 if (!catalog.includes("print:")) fail.push("catalog must name print areas");
-if (!css.includes("border-radius: 0")) fail.push("swag cards must be square");
+if (!css.includes("padding-top: 64px")) fail.push("swag Store kicker must sit below the corner mark");
 if (!css.includes("grid-auto-rows: minmax(204px, auto)")) fail.push("swag field must sit on 204");
 if (!css.includes("object-fit: contain")) fail.push("swag stills sit contain on paper");
 if (/tailwind|radix|stripe/i.test(page + css)) fail.push("no Tailwind/Radix/Stripe on swag");

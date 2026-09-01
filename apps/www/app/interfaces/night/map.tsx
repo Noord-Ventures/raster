@@ -13,8 +13,12 @@ const CITY = 5;
 const SPAN = (CITY * 2 + 1) * PITCH;
 /** City centroid: lots sit on (i + 0.5) * PITCH. */
 const LOOK_X = 1.1;
-const LOOK_Y = 0.35;
+const LOOK_Y = 0.15;
 const LOOK_Z = 1.1;
+/** Steeper than the 42° corner dolly so the neighborhood fills the well,
+    not a paper wedge in the top-left. Keep CITY / PITCH. */
+const CAM_DESK = { x: 6.8, y: 16.8, z: 6.8, fov: 46 };
+const CAM_TALL = { x: 7.6, y: 19.2, z: 7.6, fov: 50 };
 
 const UNITS: Record<string, { x: number; z: number; rot: number }> = {
   "04": { x: 0.16, z: PITCH, rot: 0 },
@@ -176,9 +180,9 @@ export function Scene({ selected }: SceneProps) {
     root.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0xe8e4dc, 22, 48);
-    const camera = new THREE.PerspectiveCamera(44, 1, 0.2, 90);
-    camera.position.set(10.4, 12.8, 11.6);
+    scene.fog = new THREE.Fog(0xe8e4dc, 34, 72);
+    const camera = new THREE.PerspectiveCamera(CAM_DESK.fov, 1, 0.2, 120);
+    camera.position.set(CAM_DESK.x, CAM_DESK.y, CAM_DESK.z);
     camera.lookAt(LOOK_X, LOOK_Y, LOOK_Z);
 
     scene.add(new THREE.AmbientLight(0xe8e4dc, 0.78));
@@ -353,11 +357,11 @@ export function Scene({ selected }: SceneProps) {
       renderer.setSize(w, h, false);
       camera.aspect = w / Math.max(h, 1);
       if (h > w * 1.15) {
-        camera.position.set(12.2, 15.0, 13.6);
-        camera.fov = 48;
+        camera.position.set(CAM_TALL.x, CAM_TALL.y, CAM_TALL.z);
+        camera.fov = CAM_TALL.fov;
       } else {
-        camera.position.set(10.4, 12.8, 11.6);
-        camera.fov = 44;
+        camera.position.set(CAM_DESK.x, CAM_DESK.y, CAM_DESK.z);
+        camera.fov = CAM_DESK.fov;
       }
       camera.lookAt(LOOK_X, LOOK_Y, LOOK_Z);
       camera.updateProjectionMatrix();

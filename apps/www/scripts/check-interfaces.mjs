@@ -456,7 +456,7 @@ if (/PerspectiveCamera\(\s*32/.test(nightMap) || nightMap.includes("3.9, 3.35, 5
   console.error("Night city must zoom out so street and lamps read; do not restore the wall crop");
   process.exit(1);
 }
-if (!/PerspectiveCamera\(\s*(3[8-9]|[4-9]\d)/.test(nightMap)) {
+if (!nightMap.includes("fov: 46") || !nightMap.includes("fov: 50")) {
   console.error("Night camera FOV must stay wide enough to read the street");
   process.exit(1);
 }
@@ -468,8 +468,12 @@ if (nightMap.includes("6.0, 6.4, 8.4") || nightMap.includes("6.8, 7.2, 9.2") || 
   console.error("Night camera must go to city scale; do not keep the three-tower dolly");
   process.exit(1);
 }
-if (!nightMap.includes("12.2, 15.0, 13.6") || !nightMap.includes("10.4, 12.8, 11.6")) {
-  console.error("Night map well must frame the city in the panel, not a street crop");
+if (nightMap.includes("10.4, 12.8, 11.6") || nightMap.includes("12.2, 15.0, 13.6")) {
+  console.error("Night camera must not restore the corner dolly that left a paper wedge");
+  process.exit(1);
+}
+if (!nightMap.includes("x: 6.8, y: 16.8, z: 6.8") || !nightMap.includes("x: 7.6, y: 19.2, z: 7.6")) {
+  console.error("Night map well must frame the city from overhead, not a street crop");
   process.exit(1);
 }
 if (!nightMap.includes("lookAt(LOOK_X, LOOK_Y, LOOK_Z)") || !nightMap.includes("const LOOK_X = 1.1")) {
