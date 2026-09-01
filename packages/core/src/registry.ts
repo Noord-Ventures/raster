@@ -245,7 +245,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "card",
     title: "Card",
-    description: "1px frame, chrome-square. Label, title, and body.",
+    description: "Typography stack: label, title, and body. No outline.",
     category: "surfaces",
     classes: ["rs-card", "rs-card-label", "rs-card-title", "rs-card-body", "rs-card-in"],
     css: ["components/card.css"],
@@ -255,12 +255,13 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "concentric-radius",
     title: "Concentric radius",
-    description: "Nested frames. Inner radius is the circular-corner fit, clamped at 0.",
+    description: "Nested corners share a position. Inner radius = outer − inset, clamped at 0.",
     category: "surfaces",
     classes: ["rs-nest", "rs-nest-in"],
     css: ["components/nest.css"],
     react: "components/concentric-radius.tsx",
-    snippet: `<div class="rs-nest" style="--rs-out:28px;--rs-gap:16px;width:184px"><div class="rs-nest-in"></div></div>`,
+    registryDependencies: ["button"],
+    snippet: `<div class="rs-nest" style="--rs-out:28px;--rs-gap:16px;width:184px"><div class="rs-nest-in"><button class="rs-btn-primary rs-btn-sm">Save</button></div></div>`,
   },
   {
     name: "stepper",
@@ -295,6 +296,7 @@ export const rasterComponents: RasterComponent[] = [
       "rs-icon-grid",
       "rs-icon-cell",
       "rs-icon-pair",
+      "rs-icon-kin",
       "rs-icon-label",
     ],
     css: ["components/icons.css"],
@@ -785,7 +787,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "callout",
     title: "Callout",
-    description: "Note in running copy. 1px frame, 3px ink left edge, slight Raster radius.",
+    description: "Note in running copy. 1px hairline, radius 0. No left bar.",
     category: "feedback",
     classes: ["rs-callout"],
     css: ["components/callout.css"],

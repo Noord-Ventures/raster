@@ -124,7 +124,7 @@
     "base": 4,
     "chrome": 0,
     "concentric": "Steve Ruiz innerRadius, clamped at 0",
-    "rule": "One token: --radius-sm (4px), the standalone button radius. Toggles share it. Cards are chrome-square (0). Nested inners follow Steve Ruiz. Chrome stays 0."
+    "rule": "One token: --radius-sm (4px), the standalone button radius. Toggles share it. Cards are chrome-square (no frame, 0). Callouts are hairline, radius 0. Nested inners follow Steve Ruiz. Chrome stays 0."
   },
   "icons": {
     "sizes": [

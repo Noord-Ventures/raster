@@ -474,6 +474,34 @@ if (cardUse.includes("CardInner") || preview.includes("CardInner")) {
 if (registry.includes('rs-card-in"><p class="rs-card-body"')) {
   fail("Card registry snippet must not wrap body in .rs-card-in");
 }
+if (registry.includes("1px frame, chrome-square")) {
+  fail("Card catalog copy is a typography stack, not a framed box");
+}
+const cardCss = readFileSync(join(root, "packages/core/css/components/card.css"), "utf8");
+const cardRule = cardCss.slice(cardCss.indexOf(".rs-card{"), cardCss.indexOf("}", cardCss.indexOf(".rs-card{")));
+if (!cardRule.includes("border:0") || cardRule.includes("border:1px")) {
+  fail("Default Card chrome must not draw an outer frame");
+}
+const calloutCss = readFileSync(join(root, "packages/core/css/components/callout.css"), "utf8");
+if (calloutCss.includes("border-left:3px") || calloutCss.includes("border-radius:var(--radius-sm)")) {
+  fail("Callout is a 1px hairline, radius 0, no left bar");
+}
+const aboutNotes = readFileSync(join(root, "apps/www/app/about/about-notes.tsx"), "utf8");
+if (!aboutPage.includes("AboutNotes") || !aboutNotes.includes("AccordionItem") || !aboutNotes.includes("from \"@noorddev/raster-react\"")) {
+  fail("About Notes must use the Raster Accordion");
+}
+const nestUse = readFileSync(join(root, "apps/www/components/examples/concentric-radius/use.tsx"), "utf8");
+if (!nestUse.includes("Inner radius = outer") || !nestUse.includes("<Button")) {
+  fail("Concentric radius specimen must state the nested-corner rule and show a button in a nest");
+}
+const iconCss = readFileSync(join(root, "packages/core/css/components/icons.css"), "utf8");
+if (!iconCss.includes("minmax(184px,1fr)") || !iconCss.includes("repeat(4,minmax(0,1fr))")) {
+  fail("Icon catalog must display 3–4 columns on mid/desktop, not a 112px strip");
+}
+const iconSrc = readFileSync(join(root, "packages/react/src/components/icon.tsx"), "utf8");
+if (!iconSrc.includes('variant === "filled"') || !iconSrc.includes("rs-icon-kin")) {
+  fail("Icon catalog must show line | filled pairs");
+}
 if (
   !site.includes("left: 224px") ||
   !site.includes('body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav')

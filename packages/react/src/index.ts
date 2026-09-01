@@ -16,6 +16,7 @@ export {
   type IconProps,
   type IconRotate,
   type IconSize,
+  type IconVariant,
 } from "./components/icon";
 export { Button, type ButtonProps } from "./components/button";
 export { Badge, type BadgeProps } from "./components/badge";

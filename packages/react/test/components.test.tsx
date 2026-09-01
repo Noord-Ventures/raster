@@ -340,8 +340,15 @@ describe("Icon", () => {
     expect(cells.length).toBeGreaterThanOrEqual(80);
     const firstPair = container.querySelector(".rs-icon-pair");
     expect(firstPair).toBeTruthy();
-    const sizes = [...firstPair!.querySelectorAll("svg")].map((svg) => svg.getAttribute("width"));
-    expect(sizes).toEqual(["12", "16", "24"]);
+    const line = firstPair!.querySelector('[data-variant="line"]');
+    const filled = firstPair!.querySelector('[data-variant="filled"]');
+    expect(line).toBeTruthy();
+    expect(filled).toBeTruthy();
+    const lineSizes = [...line!.querySelectorAll("svg")].map((svg) => svg.getAttribute("width"));
+    const filledSizes = [...filled!.querySelectorAll("svg")].map((svg) => svg.getAttribute("width"));
+    expect(lineSizes).toEqual(["12", "16", "24"]);
+    expect(filledSizes).toEqual(["12", "16", "24"]);
+    expect(filled!.querySelector(".rs-icon-filled")).toBeTruthy();
   });
 });
 

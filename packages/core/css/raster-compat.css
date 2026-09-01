@@ -304,29 +304,56 @@ dialog.bb-dialog::backdrop{background:rgba(0,0,0,0.25)}
 /* ── Mono chip: technical identifiers ── */
 .lib-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}
 
-/* ── Card: hairline frame, chrome-square. Nested corners use Steve’s innerRadius. ── */
+/* ── Card: typography stack. No outline. Chrome-square. ── */
 .bb-card-demo{
   --rs-out:0;
   --rs-gap:20px;
   --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
-  border:1px solid var(--divider);
+  border:0;
   border-radius:var(--rs-out);
-  padding:var(--rs-gap);
-  max-width:360px
+  padding:0;
+  max-width:360px;
+  background:none;
+  box-shadow:none
 }
 .bb-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}
 .bb-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}
 .bb-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}
 .rs-card-in{
   box-sizing:border-box;
-  border:1px solid var(--divider);
+  border:0;
   border-radius:var(--rs-in);
-  min-height:48px;
-  padding:12px;
-  background:var(--bg)
+  min-height:0;
+  padding:0;
+  background:none
 }
 .bb-card-demo .bb-btn-primary,.bb-card-demo .bb-btn-ghost,.bb-card-demo .bb-sig-input,.bb-card-demo .rs-textarea{border-radius:var(--rs-in)}
 .bb-card-demo .rs-btn-group{--rs-out:var(--rs-in);border-radius:var(--rs-out)}
+
+/* ── Concentric radius: Steve Ruiz innerRadius, clamped at 0.
+   --rs-in is the closed form of the circular-corner fit.
+   Do not reassign --rs-out on the inner frame: that cycles the custom
+   property and the used radius becomes 0. ── */
+.rs-nest{
+  --rs-out:var(--radius-sm);
+  --rs-gap:var(--pad);
+  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
+  box-sizing:border-box;
+  border:1px solid var(--divider);
+  border-radius:var(--rs-out);
+  padding:var(--rs-gap);
+  background:var(--bg);
+}
+.rs-nest-in{
+  box-sizing:border-box;
+  border:1px solid var(--divider);
+  border-radius:var(--rs-in);
+  min-height:72px;
+  background:var(--bg);
+  display:flex;
+  align-items:flex-end
+}
+.rs-nest .bb-btn-primary,.rs-nest .bb-btn-ghost{border-radius:var(--rs-in)}
 
 /* ── Table: hairline rows on the open grid; no cell borders ──
    Scoped to table so linking raster.css never restyles a table
@@ -358,10 +385,20 @@ table tr.rs-total-row td{font-weight:500;color:var(--text);border-top:2px solid 
 .rs-icon-catalog{width:100%;display:flex;flex-direction:column;gap:28px;text-align:left;align-self:stretch}
 .rs-icon-group{display:flex;flex-direction:column;gap:12px}
 .rs-icon-group-title{margin:0;font-size:12px;font-weight:600;letter-spacing:0;color:var(--text-secondary);text-transform:none}
-.rs-icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:16px 12px}
+.rs-icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:20px var(--gutter)}
 .rs-icon-cell{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
-.rs-icon-pair{display:flex;align-items:center;gap:10px;min-height:24px}
+.rs-icon-pair{display:flex;align-items:center;gap:16px;min-height:24px}
+.rs-icon-kin{display:flex;align-items:center;gap:8px;min-height:24px}
 .rs-icon-label{font-size:11px;line-height:1.3;color:var(--text-secondary);text-transform:none}
+@media(min-width:481px){
+  .rs-icon-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(min-width:816px){
+  .rs-icon-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:480px){
+  .rs-icon-grid{grid-template-columns:minmax(0,1fr)}
+}
 
 /* ── Menubar: dropdown menus in a hairline strip ── */
 .rs-menubar{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);padding:2px}

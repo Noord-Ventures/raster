@@ -619,7 +619,9 @@ export const demos: Record<string, () => React.ReactNode> = {
   ),
   "concentric-radius": () => (
     <Nest radius={28} pad={16} style={{ width: 184 }}>
-      <NestInner />
+      <NestInner>
+        <Button size="sm">Save</Button>
+      </NestInner>
     </Nest>
   ),
   "aspect-ratio": () => (

@@ -3,7 +3,7 @@
   "name": "card",
   "type": "registry:component",
   "title": "Card",
-  "description": "1px frame, chrome-square. Label, title, and body.",
+  "description": "Typography stack: label, title, and body. No outline.",
   "registryDependencies": [
     "https://raster.noord.dev/r/raster-base.json",
     "https://raster.noord.dev/r/inter.json"
@@ -23,7 +23,7 @@
     },
     {
       "path": "raster/styles/card.css",
-      "content": "/* ── Card: hairline frame, chrome-square. Nested corners use Steve’s innerRadius. ── */\n.rs-card{\n  --rs-out:0;\n  --rs-gap:20px;\n  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  padding:var(--rs-gap);\n  max-width:360px\n}\n.rs-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}\n.rs-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}\n.rs-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}\n.rs-card-in{\n  box-sizing:border-box;\n  border:1px solid var(--divider);\n  border-radius:var(--rs-in);\n  min-height:48px;\n  padding:12px;\n  background:var(--bg)\n}\n.rs-card .rs-btn-primary,.rs-card .rs-btn-ghost,.rs-card .rs-input,.rs-card .rs-textarea{border-radius:var(--rs-in)}\n.rs-card .rs-btn-group{--rs-out:var(--rs-in);border-radius:var(--rs-out)}\n",
+      "content": "/* ── Card: typography stack. No outline. Chrome-square. ── */\n.rs-card{\n  --rs-out:0;\n  --rs-gap:20px;\n  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  border:0;\n  border-radius:var(--rs-out);\n  padding:0;\n  max-width:360px;\n  background:none;\n  box-shadow:none\n}\n.rs-card-label{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:-.01em;display:block;margin-bottom:6px}\n.rs-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-.02em;margin:0 0 8px}\n.rs-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;line-height:1.6;margin:0}\n.rs-card-in{\n  box-sizing:border-box;\n  border:0;\n  border-radius:var(--rs-in);\n  min-height:0;\n  padding:0;\n  background:none\n}\n.rs-card .rs-btn-primary,.rs-card .rs-btn-ghost,.rs-card .rs-input,.rs-card .rs-textarea{border-radius:var(--rs-in)}\n.rs-card .rs-btn-group{--rs-out:var(--rs-in);border-radius:var(--rs-out)}\n",
       "type": "registry:file",
       "target": "styles/raster/card.css"
     }

@@ -57,15 +57,15 @@ describe("generated raster.css", () => {
     expect(rasterCss).toMatch(/\.rs-spinner svg\{/);
   });
 
-  it("keeps callout a Raster note: hairline frame, 3px ink left, slight radius", () => {
+  it("keeps callout a Raster note: 1px hairline all sides, radius 0, no left bar", () => {
     const callout = readFileSync(join(pkgDir, "css/components/callout.css"), "utf8");
     expect(callout).toMatch(/border:1px solid var\(--divider\)/);
-    expect(callout).toMatch(/border-left:3px solid var\(--text\)/);
-    expect(callout).toMatch(/border-radius:var\(--radius-sm\)/);
+    expect(callout).not.toMatch(/border-left:3px/);
+    expect(callout).toMatch(/border-radius:0/);
+    expect(callout).not.toMatch(/border-radius:var\(--radius-sm\)/);
     expect(callout).toMatch(/box-shadow:none/);
-    expect(callout).not.toMatch(/border-radius:var\(--radius[^-]/);
-    expect(callout).not.toMatch(/border-radius:(0|1[02]px)/);
-    expect(rasterCss).toMatch(/\.rs-callout\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(rasterCss).toMatch(/\.rs-callout\{[^}]*border-radius:0/);
+    expect(rasterCss).not.toMatch(/\.rs-callout\{[^}]*border-left:3px/);
   });
 
   it("gives carousel and workflow cards the button-family radius, not 0 or 12px", () => {
@@ -290,12 +290,15 @@ describe("tokens", () => {
     expect(rasterTokens.grid.module).toBe(rasterTokens.grid.column + rasterTokens.grid.gutter);
   });
 
-  it("keeps cards chrome-square and toggles on the button radius", () => {
+  it("keeps cards chrome-square and frameless, toggles on the button radius", () => {
     const card = readFileSync(join(pkgDir, "css/components/card.css"), "utf8");
     const toggle = readFileSync(join(pkgDir, "css/components/toggle.css"), "utf8");
+    const cardRule = card.slice(card.indexOf(".rs-card{"), card.indexOf("}", card.indexOf(".rs-card{")));
     expect(card).toMatch(/\.rs-card\{[^}]*--rs-out:0/);
     expect(card).toMatch(/border-radius:var\(--rs-out\)/);
     expect(card).not.toMatch(/--rs-out:var\(--radius-sm\)/);
+    expect(cardRule).toMatch(/border:0/);
+    expect(cardRule).not.toMatch(/border:1px/);
     expect(toggle).toMatch(/\.rs-toggle\{[^}]*border-radius:var\(--radius-sm\)/);
     expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*--rs-out:var\(--radius-sm\)/);
     expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*border-radius:var\(--rs-out\)/);
@@ -318,7 +321,7 @@ describe("tokens", () => {
     expect(rasterCss).toMatch(/\.rs-toggle\{[^}]*border-radius:var\(--radius-sm\)/);
     expect(rasterCss).toMatch(/\.rs-toggle-group\{[^}]*--rs-out:var\(--radius-sm\)/);
     expect(rasterCss).toMatch(/\.rs-dialog\{[^}]*--rs-out:var\(--radius-sm\)/);
-    expect(rasterCss).toMatch(/\.rs-callout\{[^}]*border-radius:var\(--radius-sm\)/);
+    expect(rasterCss).toMatch(/\.rs-callout\{[^}]*border-radius:0/);
     expect(rasterCss).toMatch(/dialog\.rs-sheet\{[^}]*border-radius:var\(--radius-sm\)/);
     expect(rasterCss).toMatch(/dialog\.rs-drawer\{[^}]*border-radius:var\(--radius-sm\)/);
     const site = readFileSync(join(pkgDir, "../../apps/www/app/site.css"), "utf8");
@@ -346,7 +349,7 @@ describe("tokens", () => {
     for (const cls of [".rs-card{", ".rs-dialog{", ".rs-btn-group{", ".rs-input{", ".rs-input-group{"]) {
       expect(rasterCss).toContain(cls);
     }
-    expect(rasterCss).toMatch(/\.rs-card-in\{[^}]*border-radius:var\(--rs-in\)/);
+    expect(rasterCss).toMatch(/\.rs-card-in\{[^}]*border:0/);
     expect(rasterCss).toMatch(/\.rs-cal-day\{[^}]*border-radius:var\(--rs-in/);
     expect(rasterCss).toMatch(/\.rs-dialog \.rs-btn-primary,[^{]*\{[^}]*border-radius:var\(--rs-in\)/);
     // Inner frames inherit --rs-in. Reassigning --rs-out from itself cycles

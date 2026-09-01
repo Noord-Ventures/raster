@@ -18,4 +18,7 @@
   border-radius:var(--rs-in);
   min-height:72px;
   background:var(--bg);
+  display:flex;
+  align-items:flex-end
 }
+.rs-nest .rs-btn-primary,.rs-nest .rs-btn-ghost{border-radius:var(--rs-in)}
