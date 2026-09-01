@@ -3,7 +3,7 @@
 export const FACE = "Inter";
 export const WORD = "Raster";
 export const LAW = "A design system on a modular grid.";
-export const POSTER = "A poster you can install.";
+export const POSTER = "Inspired by Dutch and Swiss modernism.";
 export const COMMAND = "npx @noorddev/raster-cli init";
 
 /** Public door. Do not attach DNS from this repo. */
