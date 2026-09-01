@@ -556,5 +556,15 @@ if (!typeCss.includes("--text-scale")) {
 if (!site.includes('html[data-grid="off"]')) {
   fail("Grid hide must turn off the module overlay");
 }
+if (!chrome.includes("0.9") || !chrome.includes("1.25") || !chrome.includes("1.4") || !chrome.includes("TEXT_STEPS")) {
+  fail("Text size must step 90 / 100 / 110 / 125 / 140");
+}
+const appear = site.slice(site.indexOf(".appearance-menu {"), site.indexOf(".appearance-label {"));
+if (!appear.includes("border-radius: 0") || appear.includes("10px")) {
+  fail("Appearance panel is Raster hairline radius 0, not a 10px sheet");
+}
+if (!site.includes(".text-stepper button") || !site.slice(site.indexOf(".text-stepper button {"), site.indexOf(".text-stepper button:hover")).includes("border-radius: 0")) {
+  fail("Text size −/+ are hairline squares, radius 0");
+}
 
 console.log("Phone chrome: 44pt hits, safe-area, stacked TOC, copy control.");

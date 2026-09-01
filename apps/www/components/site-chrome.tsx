@@ -161,7 +161,7 @@ function SegButtons<T extends string>({
       <p className="appearance-label" id={id}>
         {label}
       </p>
-      <div className="appearance-cells" role="group" aria-labelledby={id} style={{ gridTemplateColumns: `repeat(${options.length}, 1fr)` }}>
+      <div className="appearance-cells" role="group" aria-labelledby={id}>
         {options.map((item) => (
           <button
             key={item.value}

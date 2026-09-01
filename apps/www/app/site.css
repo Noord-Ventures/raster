@@ -123,50 +123,52 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   display: block; width: 16px; height: 16px; flex-shrink: 0;
 }
 
-/* Appearance: Raster menu. Theme, text size, grid.
-   Hairlines, sentence case, square cells. Not the 10px shadowed sheet. */
+/* Appearance: same three groups as renatovaldes.com.
+   Raster chrome: hairline, radius 0, sentence case. Not the 10px sheet. */
 .appearance-menu {
+  --rs-out: 0px;
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
   z-index: 220;
-  min-width: 228px;
+  min-width: 232px;
   margin: 0;
-  padding: 12px;
+  padding: 14px;
+  border-radius: 0;
   box-shadow: none;
 }
 .appearance-label {
   margin: 0 0 8px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: -.01em;
   color: var(--text-secondary);
   text-transform: none;
 }
 .settings-group + .settings-group {
-  margin-top: 12px;
-  padding-top: 12px;
+  margin-top: 14px;
+  padding-top: 14px;
   border-top: 1px solid var(--divider);
 }
 .appearance-cells {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1px;
-  background: var(--divider);
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--divider-subtle);
   border: 1px solid var(--divider);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
+  border-radius: 0;
 }
 .appearance-cell {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0;
-  padding: 8px 4px;
+  padding: 6px 4px;
   min-height: 32px;
   border: 0;
   border-radius: 0;
-  background: var(--bg);
+  background: none;
   color: var(--text-secondary);
   font-family: inherit;
   font-size: 13px;
@@ -178,55 +180,60 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   text-transform: none;
 }
 .appearance-cell[aria-pressed="true"] {
+  background: var(--bg);
   color: var(--text);
-  box-shadow: inset 0 0 0 1px var(--divider);
 }
 .appearance-cell:hover { color: var(--text); }
 .appearance-cell:focus-visible {
-  outline: none;
-  box-shadow: inset 0 0 0 1px var(--divider);
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 .text-stepper {
   display: flex;
   align-items: center;
-  gap: 1px;
-  background: var(--divider);
-  border: 1px solid var(--divider);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
+  gap: 6px;
+  background: none;
+  border: 0;
 }
-.text-stepper button,
-.text-stepper output {
+.text-stepper button {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  flex: none;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0;
-  min-height: 32px;
-  border: 0;
+  padding: 0;
+  border: 1px solid var(--divider);
   border-radius: 0;
-  background: var(--bg);
+  background: none;
   color: var(--text);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1;
+  cursor: pointer;
+  outline: none;
+}
+.text-stepper button:hover:not(:disabled) { border-color: var(--text); }
+.text-stepper button:disabled { opacity: .35; cursor: default; }
+.text-stepper button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.text-stepper output {
+  flex: 1;
+  min-width: 34px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-secondary);
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: -.01em;
-  line-height: 1;
-}
-.text-stepper button {
-  width: 36px;
-  flex: none;
-  padding: 0;
-  color: var(--text-secondary);
-  cursor: pointer;
-  outline: none;
-}
-.text-stepper button:hover:not(:disabled) { color: var(--text); }
-.text-stepper button:disabled { opacity: .35; cursor: default; }
-.text-stepper button:focus-visible { box-shadow: inset 0 0 0 1px var(--divider); }
-.text-stepper output {
-  flex: 1;
-  min-width: 48px;
-  color: var(--text-secondary);
+  text-align: center;
   font-variant-numeric: tabular-nums;
 }
 .nav-panel-appearance {
@@ -313,10 +320,10 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     display: flex; align-items: center;
     min-height: 44px; padding: 12px 20px; font-size: 17px;
   }
-  .appearance-cell,
-  .text-stepper button,
-  .text-stepper output { min-height: 44px; }
-  .text-stepper button { width: 44px; }
+  .appearance-cell { min-height: 44px; }
+  .text-stepper button {
+    width: 44px; height: 44px; min-width: 44px; min-height: 44px;
+  }
   .nav-panel-appearance { padding: 12px 20px 16px; }
   .rs-crumb-bar {
     height: calc(56px + env(safe-area-inset-top, 0px));
