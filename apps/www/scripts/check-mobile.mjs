@@ -569,8 +569,11 @@ if (!appear.includes("border-radius: 0") || appear.includes("10px")) {
 if (!site.includes(".text-stepper button") || !site.slice(site.indexOf(".text-stepper button {"), site.indexOf(".text-stepper button:hover")).includes("border-radius: 0")) {
   fail("Text size −/+ are hairline squares, radius 0");
 }
-if (!site.includes("--nav-left") || !site.includes("var(--nav-left) - 8px") || !site.includes("body .rs-crumb-root")) {
-  fail("Desktop crumb bar must end 8px left of corner-nav; root must not be a 184px track");
+if (!site.includes("--nav-left") || !site.includes("var(--nav-left) - 8px") || !site.includes("site-crumb-root") || !site.includes("left: 76px")) {
+  fail("Desktop Raster crumb must be viewport-fixed at 76px, 8px left of corner-nav");
+}
+if (!crumbs.includes("site-crumb-root") || !crumbs.includes("setProperty(\"left\"")) {
+  fail("Crumb bar must pin Raster clear of .corner-nav in the component, not only in CSS");
 }
 if (
   !chrome.includes("Math.round(scale * 100)") ||

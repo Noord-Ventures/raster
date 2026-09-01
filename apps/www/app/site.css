@@ -102,55 +102,41 @@ body {
   }
 }
 /* Gallery index: hide the *trail* so “Components” cannot run through
-   Interfaces. The root word is clipped by the column-1 rule below. */
+   Interfaces. The root word is pinned in column 1 below. */
 body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   opacity: 0;
   pointer-events: none;
 }
-/* Geometric clip: the crumb bar itself ends 8px left of .corner-nav.
-   Overflow hidden is not enough — getBoundingClientRect of a 184px
-   root or an ellipsized trail still intersects .corner-nav a.
-   Kill the library’s 1024 inset and 184px root; hide the trail while
-   nav sits on column 2 (224). Wide catalog detail (nav at 428) can
-   show the trail in the extra module. */
+/* Viewport-pin “Raster” in column 1. The library inset at 1024
+   (margin-left: 204px + pad) places the root on x=224 — the same
+   edge as .corner-nav — which reads as Rastenents. Overflow clip
+   on the bar does not shrink getBoundingClientRect. */
 @media (min-width: 641px) {
-  body .rs-crumb-bar {
-    right: auto;
-    width: calc(var(--nav-left) - 8px);
-    overflow: hidden;
+  html body .rs-crumb-bar {
+    right: auto !important;
+    width: calc(var(--nav-left) - 8px) !important;
+    overflow: hidden !important;
   }
-  body .rs-crumb-bar-inner {
+  html body .rs-crumb-bar-inner {
     margin-left: 0 !important;
-    padding-left: 76px;
-    padding-right: 0;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
+    padding-left: 76px !important;
+    padding-right: 0 !important;
   }
-  body .rs-crumb-root {
+  html body a.site-crumb-root {
+    position: fixed !important;
+    top: 24px !important;
+    left: 76px !important;
     width: auto !important;
-    max-width: 100%;
-    flex-shrink: 0;
-    overflow: hidden;
+    max-width: calc(var(--nav-left) - 84px) !important;
+    height: 24px !important;
+    line-height: 24px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    z-index: 198;
   }
-  body .rs-crumb-bar .rs-crumbs {
-    display: none;
-  }
-}
-@media (min-width: 1440px) {
-  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .rs-crumb-bar .rs-crumbs {
-    display: flex;
-    min-width: 0;
-    flex: 1 1 0;
-    overflow: hidden;
-  }
-  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .rs-crumb-bar .rs-crumbs-here,
-  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .rs-crumb-bar .rs-crumbs-link {
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+  html body .rs-crumb-bar .rs-crumbs {
+    display: none !important;
   }
 }
 .corner-nav a {
@@ -402,10 +388,18 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     overflow: hidden;
     padding: 0 calc(108px + env(safe-area-inset-right, 0px)) 0 calc(60px + env(safe-area-inset-left, 0px));
   }
-  .rs-crumb-root {
+  .rs-crumb-root,
+  .site-crumb-root {
     display: inline-flex; align-items: center;
     flex-shrink: 0; height: 44px; min-height: 0;
     line-height: 1;
+    position: static;
+    left: auto;
+    top: auto;
+    max-width: none;
+    width: auto;
+    overflow: visible;
+    visibility: visible;
   }
   .rs-crumb-bar .rs-crumbs {
     display: flex;
