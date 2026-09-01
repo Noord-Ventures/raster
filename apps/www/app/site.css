@@ -712,10 +712,10 @@ html[data-grid="off"] .site-footer { background-image: none !important; }
 html[data-grid="off"] .specimen,
 html[data-grid="off"] .field,
 html[data-grid="off"] .swag-field {
-  background: var(--bg);
-  gap: 0;
-  padding: 0;
-  box-shadow: none;
+  background: var(--bg) !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
