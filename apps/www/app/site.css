@@ -107,20 +107,21 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   opacity: 0;
   pointer-events: none;
 }
-/* Viewport-pin “Raster” in column 1. The library inset at 1024
-   (margin-left: 204px + pad) places the root on x=224 — the same
-   edge as .corner-nav — which reads as Rastenents. Overflow clip
-   on the bar does not shrink getBoundingClientRect. */
+/* Hide desktop crumb *labels* so “Raster” cannot sit on Components
+   (Rastenents). Do not clip the bar’s width — that paints a gray
+   stump and lets page cells (home tagline) show through the hole.
+   The bar stays full-bleed: transparent at rest, paper + hairline
+   once scrolled. Nav stays on the 204; appearance stays right. */
 @media (min-width: 641px) {
   html body .rs-crumb-bar {
-    right: auto !important;
-    width: calc(var(--nav-left) - 8px) !important;
-    overflow: hidden !important;
+    left: 0;
+    right: 0;
+    width: auto;
+    overflow: visible;
   }
   html body .rs-crumb-bar-inner {
     margin-left: 0 !important;
     padding-left: 76px !important;
-    padding-right: 0 !important;
   }
   html body a.rs-crumb-root,
   html body a.site-crumb-root,

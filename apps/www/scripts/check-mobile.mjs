@@ -569,8 +569,8 @@ if (!appear.includes("border-radius: 0") || appear.includes("10px")) {
 if (!site.includes(".text-stepper button") || !site.slice(site.indexOf(".text-stepper button {"), site.indexOf(".text-stepper button:hover")).includes("border-radius: 0")) {
   fail("Text size −/+ are hairline squares, radius 0");
 }
-if (!site.includes("--nav-left") || !site.includes("var(--nav-left) - 8px")) {
-  fail("Desktop crumb bar must end 8px left of corner-nav");
+if (site.includes("var(--nav-left) - 8px")) {
+  fail("Do not clip the crumb bar into a stump; hide desktop crumb labels only");
 }
 if (!layout.includes("display:none!important") || !layout.includes(".rs-crumb-bar a.rs-crumb-root")) {
   fail("First-paint HTML must hide desktop Raster/trail so crumbs cannot sit on Components");
