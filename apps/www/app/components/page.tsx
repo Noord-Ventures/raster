@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Components" };
 export default function ComponentsPage() {
   return (
     <>
-      <div className="site-layout">
+      <div className="site-layout catalog-page">
         <DocsNav />
         <main className="site-content-wide">
           <header className="cover" style={{ maxWidth: 592 }}>

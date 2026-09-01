@@ -37,11 +37,18 @@ export const lead = {
 
 export const usage = {
   kicker: "Usage",
-  intro: "Using Raster is one command, then a stylesheet. If you are making a web thing, paste this in the document head:",
+  intro: "Run the CLI, link the stylesheet in the head, then put a control in the body.",
+  commandWhere: "Terminal",
   command: COMMAND,
+  htmlWhere: "Head",
   html: `<link rel="stylesheet" href="styles/raster.css" />`,
+  controlWhere: "Body",
   control: `<button class="rs-btn-primary">Save</button>`,
-  after: "Then a control. Dark scheme: set data-theme=\"dark\" on the root element.",
+  landing:
+    "Init writes index.html — the specimen the CLI generates. That file is the one-shot Raster landing, meant to read like getraster.com: poster type, the 204 grid, the laws. It is not a thin shell.",
+  files:
+    "The same command writes styles/raster.css, Inter, and raster.json. There is no CDN. Restyle the specimen toward the live home with the files on disk.",
+  after: "Dark scheme: set data-theme=\"dark\" on the root element.",
 };
 
 export const license = {

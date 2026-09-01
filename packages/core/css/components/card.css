@@ -1,6 +1,6 @@
-/* ── Card: hairline frame. Nested corners use Steve’s innerRadius. ── */
+/* ── Card: hairline frame, chrome-square. Nested corners use Steve’s innerRadius. ── */
 .rs-card{
-  --rs-out:var(--radius-sm);
+  --rs-out:0;
   --rs-gap:20px;
   --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
   border:1px solid var(--divider);

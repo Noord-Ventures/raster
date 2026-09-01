@@ -84,12 +84,14 @@ body:has(.if-index) {
 
 /* Landing: poster crops sit on the 204. 388 × 408 = two modules.
    No 24px pad — that dropped the first horizontal and shoved cards
-   off the module. Row gap 0 so the second row starts on 612. */
+   off the module. Index tiles are chrome-square (radius 0), same
+   lock as Components .rs-card / --rs-out:0. Row gap is two gutters
+   so the stack is looser than a flush cage. Toggles stay rounded. */
 .if-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, 388px);
   column-gap: var(--gutter);
-  row-gap: 0;
+  row-gap: calc(2 * var(--gutter));
   padding: 0 0 72px;
 }
 .if-tile {
@@ -99,7 +101,7 @@ body:has(.if-index) {
   height: 408px;
   background: transparent;
   border: 1px solid var(--grid-line);
-  border-radius: var(--radius-sm);
+  border-radius: 0;
   box-shadow: none;
   text-decoration: none;
   color: inherit;
@@ -348,10 +350,12 @@ body:has(.if-index) {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-height: 16px;
 }
 .if-board .rs-icon {
   display: block;
   flex-shrink: 0;
+  overflow: visible;
 }
 .if-app {
   display: flex;

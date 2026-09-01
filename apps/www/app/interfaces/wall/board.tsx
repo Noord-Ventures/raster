@@ -4,6 +4,9 @@ import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
 import { Face, type FaceId } from "../people";
+import { interfaceBySlug } from "../catalog";
+
+const WHAT = interfaceBySlug("wall")!.what;
 
 type Post = {
   id: string;
@@ -127,10 +130,10 @@ export function Board() {
   }
 
   return (
-    <main className="if-board sc-wall" aria-label="Wall">
+    <main className="if-board sc-wall" aria-label={WHAT}>
       <aside className="sc-wall-rail" aria-label="People">
         <div className="sc-wall-brand">
-          <Brand slug="wall" title="Wall" />
+          <Brand slug="wall" />
           <p className="sc-wall-voice">On the wall</p>
         </div>
         <p className="sc-wall-label if-ico-row">

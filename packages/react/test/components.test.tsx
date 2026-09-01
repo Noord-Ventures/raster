@@ -204,7 +204,7 @@ describe("Icon", () => {
     expect(ICON_VIEWBOX).toBe(16);
   });
 
-  it("keeps the copy mark square at 12 and 16", () => {
+  it("keeps the copy mark square at 12, 16, and 24", () => {
     const { container, rerender } = render(<Icon name="copy" size={12} />);
     let svg = container.querySelector("svg");
     expect(svg?.getAttribute("width")).toBe("12");
@@ -214,6 +214,11 @@ describe("Icon", () => {
     svg = container.querySelector("svg");
     expect(svg?.getAttribute("width")).toBe("16");
     expect(svg?.getAttribute("height")).toBe("16");
+    rerender(<Icon name="copy" size={24} />);
+    svg = container.querySelector("svg");
+    expect(svg?.getAttribute("width")).toBe("24");
+    expect(svg?.getAttribute("height")).toBe("24");
+    expect(svg?.getAttribute("viewBox")).toBe("0 0 16 16");
   });
 
   it("draws Vera's copy: front 7×7, exposed L, no overlap", () => {
@@ -325,7 +330,7 @@ describe("Icon", () => {
     expect(rect?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
   });
 
-  it("catalogs the family in sentence-case groups at 12 and 16", () => {
+  it("catalogs the family in sentence-case groups at 12, 16, and 24", () => {
     const { container } = render(<IconCatalog />);
     expect(iconGroups.length).toBeGreaterThanOrEqual(8);
     expect(container.querySelector(".rs-icon-catalog")).toBeTruthy();
@@ -336,7 +341,7 @@ describe("Icon", () => {
     const firstPair = container.querySelector(".rs-icon-pair");
     expect(firstPair).toBeTruthy();
     const sizes = [...firstPair!.querySelectorAll("svg")].map((svg) => svg.getAttribute("width"));
-    expect(sizes).toEqual(["12", "16"]);
+    expect(sizes).toEqual(["12", "16", "24"]);
   });
 });
 

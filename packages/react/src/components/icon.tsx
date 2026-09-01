@@ -16,11 +16,12 @@ export type { IconName, IconRotate };
 export type { DrawnName, IconAlias, IconGroup } from "./icon-marks";
 
 /**
- * Raster chrome marks. Vera 28 Aug 2026.
+ * Raster chrome marks. Vera 28 Aug 2026; optical recut 1 Sep 2026.
  *
  * 16×16 module, optical center 8,8. Stroke 1, currentColor, fill none.
- * Cap butt, join miter, no rx. Hairline stays 1 CSS px at 12 and 16.
+ * Cap butt, join miter, no rx. Hairline stays 1 CSS px at 12, 16, and 24.
  * Copied is check. Accordion down is chevron-right rotated 90°.
+ * First five marks (copy, copied, chevron-left, chevron-right, close) stay as drawn.
  */
 export const ICON_STROKE = 1;
 export const ICON_VIEWBOX = 16;
@@ -34,7 +35,7 @@ export const iconInk = {
   vectorEffect: "non-scaling-stroke",
 } as const;
 
-export type IconSize = 12 | 16;
+export type IconSize = 12 | 16 | 24;
 
 function renderEl(el: MarkEl, key: number): React.ReactNode {
   switch (el.t) {
@@ -76,7 +77,7 @@ export function Icon({ name, size = 16, rotate, className, ...props }: IconProps
   );
 }
 
-/** Full family at 12 and 16, grouped. */
+/** Full family at 12, 16, and 24, grouped. */
 export function IconCatalog({ className }: { className?: string }) {
   return (
     <div className={cx("rs-icon-catalog", className)}>
@@ -89,6 +90,7 @@ export function IconCatalog({ className }: { className?: string }) {
                 <div className="rs-icon-pair">
                   <Icon name={mark} size={12} />
                   <Icon name={mark} size={16} />
+                  <Icon name={mark} size={24} />
                 </div>
                 <span className="rs-icon-label">{iconLabel(mark)}</span>
               </div>

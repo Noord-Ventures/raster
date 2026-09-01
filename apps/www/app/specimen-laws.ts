@@ -1,17 +1,17 @@
 /**
  * Numbered laws for the homepage field.
- * Short. Modular. The grid is the idea.
+ * Ten words. Sentence case. No periods.
  */
 
 export const PRINCIPLES = [
-  { n: "01", text: "The grid is the idea." },
-  { n: "02", text: "One face." },
-  { n: "03", text: "Hairlines, not boxes." },
-  { n: "04", text: "One ink." },
-  { n: "05", text: "Sentence case." },
-  { n: "06", text: "The module is enough." },
-  { n: "07", text: "Flush." },
-  { n: "08", text: "Weight and size do the work." },
-  { n: "09", text: "Motion is quiet." },
-  { n: "10", text: "As little as the field allows." },
+  { n: "01", text: "Simple" },
+  { n: "02", text: "Beautiful" },
+  { n: "03", text: "Opinionated" },
+  { n: "04", text: "Elegant" },
+  { n: "05", text: "Clear" },
+  { n: "06", text: "Legible" },
+  { n: "07", text: "Solid" },
+  { n: "08", text: "Versatile" },
+  { n: "09", text: "Customizable" },
+  { n: "10", text: "Minimal" },
 ] as const;

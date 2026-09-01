@@ -4,7 +4,7 @@ What it is, how to get there, what done looks like.
 
 Writers: the six live in `app/interfaces/catalog.ts`. Each proto is its own folder and its own route. The section is a first-class nav sibling of Components, Docs, and About — not a page inside a component.
 
-Each interface is a fictional little app: an English name, a mark, one or two words of voice. Not a screenshot of a real product. Not a generic component dump. Not a Linear, Notion, Figma, or Waymo clone.
+Each interface is a fictional little app: an English catalog name, a mark, and a `what` string for the product chrome. Inside each demo, Brand/title/masthead is `what` (AI chat, Dashboard, Social feed, Fleet management, Order out, Team chat) — not the codename. Routes and the Interfaces index still use Line / Press / Wall / Night / Evening / Room.
 
 Landing cards are poster crops — a clipped fragment of that UI, not a tiny full-page shrink, not a title-only frame. Type in a crop wraps on a word. A composer or photograph may run off the card; a letter may not. Captions follow the English names.
 
@@ -18,11 +18,11 @@ Each app has two to three levels of use: list → detail → one level deeper. I
 
 | Surface | Route | Click path | Done |
 | --- | --- | --- | --- |
-| Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. Title occupies a 204 cell. At scroll 0 the H1 top shares the rail first-row line. Each card is a poster crop on the 204, then the English name. The field under the title and around the crops reads as the module. |
+| Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. Title occupies a 204 cell. At scroll 0 the H1 top shares the rail first-row line. Each card is a poster crop on the 204, then the English name. Index tiles are chrome-square (radius 0), same lock as Components `.rs-card`. Vertical gap is two gutters so the stack is looser than a flush cage. The field under the title and around the crops reads as the module. |
 | Line | `/interfaces/line` | Interfaces → Line | AI chat. List → chat → a line. Centered measure. Composer in the pane, aligned. Site 204s run around the box. On the phone: inbox or thread, not a squeezed three-pane. |
 | Press | `/interfaces/press` | Interfaces → Press | Dashboard. Floor → job → sheet. Hue in the rail. One Crouwel spot. On the phone: compact metrics and a thumb bar, not a 204 rail stacked on the floor. |
 | Wall | `/interfaces/wall` | Interfaces → Wall | Social feed. Feed → post → profile. Masonry on desktop, a stream on the phone. People as a strip. Comments sit in the inspect. First names from /work keepers only: Aziez, Jenny, Koen, Gianpiero. |
-| Night | `/interfaces/night` | Interfaces → Night | Fleet management. List → unit → trip. A neighborhood at city scale: many blocks, a readable street grid, many buildings. Vehicles as small units. Lamps and the selected van still findable. Not a facade wall crop. Not three towers. A route, one selected unit. On the phone: map first, fleet in the thumb. |
+| Night | `/interfaces/night` | Interfaces → Night | Fleet management. List → unit → trip. A neighborhood at city scale: many blocks, a readable street grid, many buildings. Vehicles as small units. Lamps and the selected van still findable. Default camera is overhead enough that the city fills the map well on first paint — not a corner cluster, not a paper wedge in the top-left. Not a facade wall crop. Not three towers. A route, one selected unit. Brand is catalog `what` (Fleet management). On the phone: map first, fleet in the thumb. |
 | Evening | `/interfaces/evening` | Interfaces → Evening | Order out. Stores → store → bag. Two-column store cards on desktop. Stacked store rows and a thumb bar on the phone. Bag is a sheet. |
 | Room | `/interfaces/room` | Interfaces → Room | Team chat. Channel → message → thread. People in the rail. Not Wall. On the phone: the channel, not a 204 rail stacked on the thread. |
 | Phone | ≤430 | Contents picker | Rail hides under 900. A stacked 44pt picker lists the six. Scene controls use the 44pt phone scale. Each boxed demo at 390 is a phone UI, not the desktop scene scaled down. Evening chips wrap in frame. Wall stories keep all four keepers. Night map well shows a neighborhood, not three towers. |

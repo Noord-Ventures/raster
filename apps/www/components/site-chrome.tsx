@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
+import { RasterMark } from "./raster-mark";
 
 type Scheme = "light" | "dark" | "auto";
 
@@ -11,18 +12,6 @@ const schemes: { value: Scheme; label: string }[] = [
   { value: "dark", label: "Dark" },
   { value: "auto", label: "Auto" },
 ];
-
-/* The Raster mark from the noord library page, bare, rotated 45° back. */
-function RasterMark() {
-  return (
-    <svg viewBox="0 0 822 822" fill="currentColor" aria-hidden="true" className="site-logo-mark">
-      <path d="m411.128.67 128.714 128.713L334.5 334.726 129.158 540.068.405 411.315 411.128.669Z" />
-      <path d="M539.429 128.97 411.09.63 282.751 128.97v564.691l128.661 127.928 128.017-127.928V128.97Z" />
-      <path d="m500.812 347.858 128.752-128.752 192.21 192.209-128.752 128.753-96.105-96.105-96.105-96.105Z" />
-      <path d="M536.4 126 632.6 219.1 536.4 312.2Z" />
-    </svg>
-  );
-}
 
 function applyScheme(scheme: Scheme) {
   const dark =
@@ -120,10 +109,11 @@ function AppearanceCells({
 
 const links = [
   { href: "/", label: "Home", corner: false },
-  { href: "/docs", label: "Docs", corner: true },
   { href: "/components", label: "Components", corner: true },
   { href: "/interfaces", label: "Interfaces", corner: true },
+  { href: "/docs", label: "Docs", corner: true },
   { href: "/about", label: "About", corner: true },
+  { href: "/swag", label: "Swag", corner: true },
 ];
 
 export function SiteChrome() {

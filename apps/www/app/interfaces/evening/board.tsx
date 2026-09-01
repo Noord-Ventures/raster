@@ -3,6 +3,9 @@
 import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
+import { interfaceBySlug } from "../catalog";
+
+const WHAT = interfaceBySlug("evening")!.what;
 
 type Method = "delivery" | "pickup";
 type Diet = "any" | "veg" | "fish";
@@ -113,10 +116,10 @@ export function Board() {
   }
 
   return (
-    <main className="if-board sc-evening" aria-label="Evening">
+    <main className="if-board sc-evening" aria-label={WHAT}>
       <section className="sc-evening-stage">
         <header className="sc-evening-bar">
-          <Brand slug="evening" title="Evening" />
+          <Brand slug="evening" />
           <p className="sc-evening-addr if-ico-row">
             <Icon name="map-pin" size={12} />
             Langestraat 12
@@ -257,7 +260,7 @@ export function Board() {
         )}
       </section>
 
-      <nav className="if-thumb" aria-label="Evening">
+      <nav className="if-thumb" aria-label={WHAT}>
         <button
           type="button"
           aria-current={page === "market" && inspect?.kind !== "bag"}

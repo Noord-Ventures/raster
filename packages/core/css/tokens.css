@@ -9,7 +9,7 @@
   --table-alt: rgba(0,0,0,0.02);
   --grid-line: rgba(0,0,0,0.04);
   --radius-sm: 4px;           /* slight Raster radius; standalone buttons */
-  --radius: var(--radius-sm);              /* alias — cards, boxes, dialogs share it */
+  --radius: var(--radius-sm);              /* alias — buttons, boxes, dialogs share it; cards stay 0 */
   --radius-chrome: 0px;
   --gutter: 20px;
   --pad: 20px;

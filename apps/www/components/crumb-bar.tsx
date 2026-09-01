@@ -22,6 +22,8 @@ function trailFor(pathname: string): Crumb[] {
     else trail.push({ label: "Getting started" });
   } else if (parts[0] === "about") {
     trail.push({ label: "About" });
+  } else if (parts[0] === "swag") {
+    trail.push({ label: "Swag" });
   } else if (parts[0] === "components") {
     trail.push({ label: "Components", href: "/components" });
     if (parts[1]) {

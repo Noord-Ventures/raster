@@ -245,7 +245,7 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "card",
     title: "Card",
-    description: "1px frame with a label, title, and body.",
+    description: "1px frame, chrome-square. Label, title, and body.",
     category: "surfaces",
     classes: ["rs-card", "rs-card-label", "rs-card-title", "rs-card-body", "rs-card-in"],
     css: ["components/card.css"],

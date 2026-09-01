@@ -4,6 +4,9 @@ import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
 import { Scene } from "./map";
+import { interfaceBySlug } from "../catalog";
+
+const WHAT = interfaceBySlug("night")!.what;
 
 const UNITS = [
   { id: "04", name: "Van 04", state: "Moving", where: "Market / 3rd", trip: "Pier 70 → Mission", mark: "activity" as const },
@@ -19,10 +22,10 @@ export function Board() {
   const item = UNITS.find((row) => row.id === unit) ?? UNITS[0]!;
 
   return (
-    <main className="if-board sc-night" data-pane={phonePane} aria-label="Night" style={{ ["--if-spot" as string]: "#E30613" }}>
+    <main className="if-board sc-night" data-pane={phonePane} aria-label={WHAT} style={{ ["--if-spot" as string]: "#E30613" }}>
       <aside className="sc-night-rail" aria-label="Fleet">
         <div className="sc-night-brand">
-          <Brand slug="night" title="Night" />
+          <Brand slug="night" />
           <p className="sc-night-voice">On the street</p>
         </div>
         <p className="sc-night-label if-ico-row">
@@ -75,7 +78,7 @@ export function Board() {
         </div>
       </section>
 
-      <nav className="if-thumb" aria-label="Night">
+      <nav className="if-thumb" aria-label={WHAT}>
         <button
           type="button"
           aria-current={phonePane === "map"}

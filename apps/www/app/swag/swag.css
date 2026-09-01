@@ -1,0 +1,273 @@
+/* Isolated swag store. Paper, hairline, 204. Chrome-square cards.
+   Boxed like About: kill the inner-page overlay so verticals do not
+   run through stills. Cell edges are 1px --divider; L/R box margins
+   are the quieter --grid-line. No cart. */
+
+html:has(.swag-page)::before {
+  display: none;
+}
+body:has(.swag-page) {
+  background: transparent;
+}
+html:has(.swag-page) .site-footer {
+  background-image: var(--grid-image);
+  background-size: var(--grid-size) 100%;
+  background-repeat: repeat-x;
+  background-position: var(--grid-pos);
+}
+
+.swag-page {
+  width: 100%;
+  min-height: 100dvh;
+}
+
+.swag-field {
+  display: grid;
+  width: 100%;
+  min-height: 100dvh;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: minmax(204px, auto);
+  background: var(--divider);
+  padding: 0 0 1px 0;
+  gap: 1px;
+  box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line);
+}
+
+.swag-cell {
+  min-width: 0;
+  min-height: 204px;
+  padding: 20px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.swag-cell-head {
+  position: relative;
+  justify-content: flex-start;
+  gap: 20px;
+  min-height: 204px;
+  /* Slot for the real RasterMark at chrome language: top 24 / left 20.
+     Store sits below that 20px mark. */
+  padding-top: 64px;
+}
+
+.swag-mark {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--text);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.swag-kicker {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+}
+
+.swag-face {
+  margin: 0;
+  font-size: clamp(2.5rem, 7vw, 7rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  color: var(--text);
+}
+
+.swag-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 28em;
+}
+
+.swag-copy p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.swag-card {
+  border-radius: 0;
+  justify-content: flex-start;
+  gap: 20px;
+  min-height: 408px;
+}
+
+.swag-still {
+  position: relative;
+  margin: 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.swag-still img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.swag-print-mark {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  color: #1a1a1a;
+}
+
+.swag-print-svg {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform: rotate(-45deg);
+}
+
+.swag-print-knockout {
+  transform: rotate(-45deg) scale(1.22);
+  color: var(--swag-knockout, var(--bg));
+}
+
+.swag-card[id="hoodie"] {
+  --swag-knockout: #3c3c3c;
+}
+.swag-card[id="hoodie"] .swag-print-mark {
+  top: 36%;
+  left: 50%;
+  width: 11%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+
+.swag-card[id="tote"] {
+  --swag-knockout: #e6d9c6;
+}
+.swag-card[id="tote"] .swag-print-mark {
+  top: 54%;
+  left: 50%;
+  width: 28%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+
+.swag-card[id="mug"] {
+  --swag-knockout: #f4f1ec;
+}
+.swag-card[id="mug"] .swag-print-mark {
+  top: 48%;
+  left: 38%;
+  width: 18%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+
+.swag-card[id="cap"] {
+  --swag-knockout: #2a2a2a;
+}
+.swag-card[id="cap"] .swag-print-mark {
+  top: 42%;
+  left: 50%;
+  width: 13%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+
+.swag-card[id="notebook"] {
+  --swag-knockout: #6a6a6a;
+}
+.swag-card[id="notebook"] .swag-print-mark {
+  top: 48%;
+  left: 50%;
+  width: 22%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+
+.swag-card[id="bottle"] {
+  --swag-knockout: #c5c0b8;
+}
+.swag-card[id="bottle"] .swag-print-mark {
+  top: 52%;
+  left: 50%;
+  width: 22%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+
+.swag-print-sheet {
+  position: absolute;
+  top: 11%;
+  left: 29%;
+  width: 42%;
+  height: 78%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 3% 6%;
+  padding: 5% 6%;
+  pointer-events: none;
+}
+
+.swag-card[id="stickers"] {
+  --swag-knockout: #f2eee8;
+}
+.swag-card[id="stickers"] .swag-print-mark {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  inset: auto;
+  transform: none;
+}
+
+.swag-meta h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.swag-print {
+  margin: 4px 0 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+}
+
+.swag-soon {
+  margin: 12px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 481px) {
+  .swag-field {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .swag-cell-head {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 900px) {
+  .swag-field {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

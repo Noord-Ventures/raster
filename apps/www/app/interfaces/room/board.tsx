@@ -4,6 +4,9 @@ import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
 import { Face, type FaceId } from "../people";
+import { interfaceBySlug } from "../catalog";
+
+const WHAT = interfaceBySlug("room")!.what;
 
 const CHANNELS = [
   { id: "desk", name: "desk", count: 12 },
@@ -79,10 +82,10 @@ export function Board() {
   }
 
   return (
-    <main className="if-board sc-room" data-pane={phonePane} aria-label="Room">
+    <main className="if-board sc-room" data-pane={phonePane} aria-label={WHAT}>
       <aside className="sc-room-rail" aria-label="People">
         <div className="sc-room-brand">
-          <Brand slug="room" title="Room" />
+          <Brand slug="room" />
           <p className="sc-room-voice">In the room</p>
         </div>
         <p className="sc-room-label if-ico-row">
@@ -203,7 +206,7 @@ export function Board() {
         </form>
       </section>
 
-      <nav className="if-thumb" aria-label="Room">
+      <nav className="if-thumb" aria-label={WHAT}>
         <button
           type="button"
           aria-current={phonePane === "channels"}

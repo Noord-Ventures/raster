@@ -110,6 +110,16 @@ if (!tileRule.includes("var(--grid-line)") || tileRule.includes("var(--divider)"
   console.error("Interfaces tile edges must be --grid-line, the quiet 204 ink");
   process.exit(1);
 }
+if (tileRule.includes("var(--radius-sm)") || !/border-radius:\s*0/.test(tileRule)) {
+  console.error("Interfaces index tiles must be chrome-square (radius 0), same lock as Components cards");
+  process.exit(1);
+}
+const listAt = css.indexOf(".if-list {");
+const listRule = css.slice(listAt, css.indexOf("}", listAt));
+if (/row-gap:\s*0/.test(listRule) || !/row-gap:/.test(listRule)) {
+  console.error("Interfaces index must leave vertical space between tiles");
+  process.exit(1);
+}
 const specRule = css.slice(css.indexOf(".if-specimen {"), css.indexOf("}", css.indexOf(".if-specimen {")));
 if (!specRule.includes("margin-top: 204px")) {
   console.error("Detail specimen must sit on the 204, not 120px off it");
@@ -335,6 +345,10 @@ for (const slug of slugs) {
     console.error(`${slug} board must carry the invented brand`);
     process.exit(1);
   }
+  if (/title="(Line|Press|Wall|Night|Evening|Room)"/.test(board)) {
+    console.error(`${slug} product chrome must use catalog what, not the codename`);
+    process.exit(1);
+  }
   if (!board.includes('from "@noorddev/raster-react"') || !board.includes("<Icon ")) {
     console.error(`${slug} board must use Raster Icon marks, not a second family`);
     process.exit(1);
@@ -452,7 +466,7 @@ if (/PerspectiveCamera\(\s*32/.test(nightMap) || nightMap.includes("3.9, 3.35, 5
   console.error("Night city must zoom out so street and lamps read; do not restore the wall crop");
   process.exit(1);
 }
-if (!/PerspectiveCamera\(\s*(3[8-9]|[4-9]\d)/.test(nightMap)) {
+if (!nightMap.includes("fov: 46") || !nightMap.includes("fov: 50")) {
   console.error("Night camera FOV must stay wide enough to read the street");
   process.exit(1);
 }
@@ -464,8 +478,16 @@ if (nightMap.includes("6.0, 6.4, 8.4") || nightMap.includes("6.8, 7.2, 9.2") || 
   console.error("Night camera must go to city scale; do not keep the three-tower dolly");
   process.exit(1);
 }
-if (!nightMap.includes("17, 22, 19") || !nightMap.includes("14, 18, 16")) {
-  console.error("Night map well must use the city-scale camera, not a street crop");
+if (nightMap.includes("10.4, 12.8, 11.6") || nightMap.includes("12.2, 15.0, 13.6")) {
+  console.error("Night camera must not restore the corner dolly that left a paper wedge");
+  process.exit(1);
+}
+if (!nightMap.includes("x: 6.8, y: 16.8, z: 6.8") || !nightMap.includes("x: 7.6, y: 19.2, z: 7.6")) {
+  console.error("Night map well must frame the city from overhead, not a street crop");
+  process.exit(1);
+}
+if (!nightMap.includes("lookAt(LOOK_X, LOOK_Y, LOOK_Z)") || !nightMap.includes("const LOOK_X = 1.1")) {
+  console.error("Night camera must look at the city center, not empty ground");
   process.exit(1);
 }
 if (!nightMap.includes("const CITY = 5") || !nightMap.includes("const PITCH = 2.2")) {
@@ -512,6 +534,18 @@ for (const name of ["katie", "christian", "senka", "ilana"]) {
 if (!catalog.includes('what: "AI chat"') || !catalog.includes('what: "Dashboard"') || !catalog.includes('what: "Social feed"') || !catalog.includes('what: "Fleet management"') || !catalog.includes('what: "Order out"') || !catalog.includes('what: "Team chat"')) {
   console.error("Catalog must lock the six Interfaces: AI chat, Dashboard, Social feed, Fleet management, Order out, Team chat");
   process.exit(1);
+}
+const markSrc = readFileSync(join(dir, "mark.tsx"), "utf8");
+if (!markSrc.includes("interfaceBySlug") || !markSrc.includes("item?.what")) {
+  console.error("Brand must read catalog what, not a hardcoded codename");
+  process.exit(1);
+}
+for (const slug of slugs) {
+  const board = readFileSync(join(dir, slug, "board.tsx"), "utf8");
+  if (!board.includes("interfaceBySlug") || !board.includes("aria-label={WHAT}")) {
+    console.error(`${slug} product chrome must expose catalog what`);
+    process.exit(1);
+  }
 }
 
 console.log(`ok: ${slugs.length} Interfaces routes`);

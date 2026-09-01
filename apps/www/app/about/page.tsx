@@ -49,24 +49,37 @@ export default function AboutPage() {
             <p>{usage.intro}</p>
           </div>
           <div className="field-code-stack">
-            <div className="field-code-row">
-              <pre className="field-code">
-                <code>{usage.command}</code>
-              </pre>
-              <CopyControl text={usage.command} />
+            <div className="field-step">
+              <p className="field-kicker">{usage.commandWhere}</p>
+              <div className="field-code-row">
+                <pre className="field-code">
+                  <code>{usage.command}</code>
+                </pre>
+                <CopyControl text={usage.command} />
+              </div>
             </div>
-            <div className="field-code-row">
-              <pre className="field-code">
-                <code>{usage.html}</code>
-              </pre>
-              <CopyControl text={usage.html} />
+            <div className="field-step">
+              <p className="field-kicker">{usage.htmlWhere}</p>
+              <div className="field-code-row">
+                <pre className="field-code">
+                  <code>{usage.html}</code>
+                </pre>
+                <CopyControl text={usage.html} />
+              </div>
             </div>
-            <div className="field-code-row">
-              <pre className="field-code">
-                <code>{usage.control}</code>
-              </pre>
-              <CopyControl text={usage.control} />
+            <div className="field-step">
+              <p className="field-kicker">{usage.controlWhere}</p>
+              <div className="field-code-row">
+                <pre className="field-code">
+                  <code>{usage.control}</code>
+                </pre>
+                <CopyControl text={usage.control} />
+              </div>
             </div>
+          </div>
+          <div className="field-copy">
+            <p>{usage.landing}</p>
+            <p>{usage.files}</p>
           </div>
           <p className="field-mark">{usage.after}</p>
         </section>

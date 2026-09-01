@@ -996,7 +996,7 @@
       "name": "card",
       "type": "registry:component",
       "title": "Card",
-      "description": "1px frame with a label, title, and body.",
+      "description": "1px frame, chrome-square. Label, title, and body.",
       "registryDependencies": [
         "https://raster.noord.dev/r/raster-base.json",
         "https://raster.noord.dev/r/inter.json"

@@ -97,6 +97,12 @@ if (!cover900.includes("padding-top: 120px") || !cover900.includes("justify-cont
 if (!nav.includes('data-toc="groups"') || !nav.includes('data-toc="items"')) {
   fail("Do not collapse the two-column TOC to fake the H1 align");
 }
+if (!site.includes("html:has(.catalog-page)::after") || !site.includes("inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line)")) {
+  fail("Components must paint page-grid L/R (home/about margin language) plus the 204 overlay");
+}
+if (site.includes("html:has(.catalog-page)::before") && /html:has\(\.catalog-page\)::before[\s\S]{0,80}display:\s*none/.test(site)) {
+  fail("Components must keep the 204 block grid; do not kill html::before");
+}
 if (ifCss.includes(".if-title")) {
   fail("Interfaces must not keep a parallel if-title spacer; cover owns the 204 cell");
 }
@@ -111,6 +117,26 @@ if (!block.includes("writeText") || !block.includes("Copied") || !block.includes
 if (!page.includes("CopyControl") || !page.includes("specimen-command-row")) {
   fail("Homepage command must carry the same copy control");
 }
+if (specimen.includes("align-items: flex-start") && specimen.includes(".specimen-command-row")) {
+  const row = specimen.slice(specimen.indexOf(".specimen-command-row {"), specimen.indexOf("}", specimen.indexOf(".specimen-command-row {")));
+  if (row.includes("flex-start")) fail("Homepage copy control must sit on the command midline");
+}
+if (/specimen-cell-command \.code-copy \{[^}]*margin-top: 8px/.test(specimen)) {
+  fail("Homepage copy control must not use a compensatory margin-top");
+}
+const copyStart = site.indexOf(".code-copy {\n  position: absolute");
+if (copyStart < 0) fail("Docs copy control must be optically centered in the code box");
+const codeCopy = site.slice(copyStart, site.indexOf("}", copyStart));
+if (codeCopy.includes("top: 8px") || !codeCopy.includes("top: 50%") || !codeCopy.includes("translateY(-50%)")) {
+  fail("Docs copy control must be optically centered in the code box");
+}
+const useRow = about.slice(about.indexOf(".field-code-row {"), about.indexOf("}", about.indexOf(".field-code-row {")));
+if (useRow.includes("flex-start") || !useRow.includes("align-items: center")) {
+  fail("About Usage copy control must sit on the command midline");
+}
+if (/field-cell-use \.code-copy \{[^}]*margin-top: 6px/.test(about)) {
+  fail("About Usage copy control must not use a compensatory margin-top");
+}
 
 if (specimen.includes("min-width: 408px") || about.includes("min-width: 408px")) {
   fail("Phone widths must stay one column; do not start the 204 pair at 408");
@@ -121,7 +147,8 @@ if (!specimen.includes("min-width: 481px") || !about.includes("min-width: 481px"
 if (specimen.includes("padding: 0 1px 1px 0") || /padding:\s*1px;/.test(specimen)) {
   fail("Homepage must open on the right and bottom; do not restore an outer frame");
 }
-if (specimen.includes("background-image: var(--grid-image)") || specimen.includes("repeating-linear-gradient")) {
+const specimenWithoutFooter = specimen.replace(/[^{}]*\.site-footer\s*\{[^}]*\}/g, "");
+if (specimenWithoutFooter.includes("background-image: var(--grid-image)") || specimenWithoutFooter.includes("repeating-linear-gradient")) {
   fail("Homepage must not paint gutter lines through type");
 }
 if (!specimen.includes("html:has(.specimen-page)::before") || !specimen.includes("display: none")) {
@@ -165,6 +192,61 @@ if (about.includes("object-fit: cover")) {
   fail("About stills must not cover-crop");
 }
 const facts = readFileSync(join(root, "apps/www/app/about/facts.ts"), "utf8");
+const aboutPage = readFileSync(join(root, "apps/www/app/about/page.tsx"), "utf8");
+const componentsPage = readFileSync(join(root, "apps/www/app/components/page.tsx"), "utf8");
+if (!componentsPage.includes("catalog-page")) {
+  fail("Components index must mark catalog-page so the two grids paint");
+}
+const usageBlock = facts.slice(facts.indexOf("export const usage"), facts.indexOf("export const license"));
+if (usageBlock.includes("paste this in the document head") || aboutPage.includes("paste this in the document head")) {
+  fail("About Usage must not tell people to paste the CLI or a button into the head");
+}
+if (usageBlock.includes("specimen:") || aboutPage.includes("{usage.specimen}")) {
+  fail("About Usage must not dump CLI, link, and button into one paste-in-head block");
+}
+if (!usageBlock.includes('commandWhere: "Terminal"') || !usageBlock.includes('htmlWhere: "Head"') || !usageBlock.includes('controlWhere: "Body"')) {
+  fail("About Usage steps must be labeled Terminal, Head, Body");
+}
+if (!usageBlock.includes("command: COMMAND") || !usageBlock.includes('<link rel="stylesheet" href="styles/raster.css" />') || !usageBlock.includes("rs-btn-primary")) {
+  fail("About Usage must show CLI, then head link, then body control");
+}
+if ((aboutPage.match(/field-code-row/g) ?? []).length !== 3) {
+  fail("About Usage must be three labeled rows: terminal, head, body");
+}
+if (!aboutPage.includes("{usage.command}") || !aboutPage.includes("{usage.html}") || !aboutPage.includes("{usage.control}")) {
+  fail("About Usage must render CLI, head, and body as separate rows");
+}
+if (!usageBlock.includes("index.html") || !usageBlock.includes("styles/raster.css") || !usageBlock.includes("raster.json") || !usageBlock.includes("Inter")) {
+  fail("About Usage must name what init writes: CSS, Inter, index.html, raster.json");
+}
+if (!usageBlock.includes("one-shot Raster landing") || !usageBlock.includes("not a thin shell")) {
+  fail("About Usage must explain the generated index.html landing");
+}
+if (!usageBlock.includes("There is no CDN")) {
+  fail("About Usage must not invent a CDN");
+}
+const faceHang = "margin-left: -0.08em";
+if (!specimen.includes(".specimen-face") || !/specimen-face \{[\s\S]*?margin-left: -0\.08em/.test(specimen)) {
+  fail("Home Raster must hang -0.08em at display size, not a UPM fraction");
+}
+if (!specimen.includes("calc(1px - 0.03em)") || !specimen.includes("calc(1px - 0.07em)")) {
+  fail("Home law and command must use size-specific hangs, not the hero em");
+}
+if (specimen.includes("calc(-150 / 2048") || specimen.includes("calc(-50 / 2048")) {
+  fail("Do not hang Home type from Inter UPM sidebearings");
+}
+if (!/field-face \{[\s\S]*?margin-left: -0\.08em/.test(about)) {
+  fail("About Raster hero must hang -0.08em at display size");
+}
+if (!about.includes("calc(1px - 0.045em)")) {
+  fail("About specimen Raster must use a shallower hang so it meets the 15px body");
+}
+if (about.includes(".field-cell-era .field-kicker") && /field-cell-era \.field-kicker \{[\s\S]*?margin-left:/.test(about)) {
+  fail("About era kicker stays on the pad; do not hang the 12px rail");
+}
+if (about.includes("calc(-150 / 2048") || about.includes("calc(-50 / 2048")) {
+  fail("Do not hang About type from Inter UPM sidebearings");
+}
 for (const name of [
   "Rosmarie Tissi",
   "Nelly Rudin",
@@ -245,7 +327,8 @@ if (aboutKill < 0) {
 if (!about.slice(aboutKill, about.indexOf("}", aboutKill)).includes("display: none")) {
   fail("About overlay kill must be display: none");
 }
-if (about.includes("background-image: var(--grid-image)")) {
+const aboutWithoutFooter = about.replace(/[^{}]*\.site-footer\s*\{[^}]*\}/g, "");
+if (aboutWithoutFooter.includes("background-image: var(--grid-image)")) {
   fail("About must not paint gutter lines through type or stills");
 }
 const aboutEra = about.slice(about.indexOf(".field-cell-era {"), about.indexOf("}", about.indexOf(".field-cell-era {")));
@@ -338,6 +421,31 @@ for (const file of files) {
 
 if (/toast|Toaster|rs-toast/.test(block)) {
   fail("Copy must confirm on the control, not via toast");
+}
+
+const laws = readFileSync(join(root, "apps/www/app/specimen-laws.ts"), "utf8");
+const kit = readFileSync(join(root, "apps/www/app/specimen.ts"), "utf8");
+const footer = readFileSync(join(root, "apps/www/components/site-footer.tsx"), "utf8");
+for (const word of ["Simple", "Beautiful", "Opinionated", "Elegant", "Clear", "Legible", "Solid", "Versatile", "Customizable", "Minimal"]) {
+  if (!laws.includes(`text: "${word}"`)) fail(`Homepage principles must include ${word}`);
+}
+if (laws.includes("The grid is the idea.")) {
+  fail("Homepage principles are Renato's ten words, not the old grid sentences");
+}
+if (!kit.includes('"toggle-group"') || !kit.includes('"card"') || !kit.includes('"pagination"')) {
+  fail("Homepage kit must be denser than accordion, calendar, field, stepper");
+}
+if (!layout.includes("SiteFooter") || !footer.includes("getraster.com") || !footer.includes("MIT")) {
+  fail("Root layout must render a sitewide footer with factual imprint");
+}
+if (
+  !site.includes("left: 224px") ||
+  !site.includes('body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav')
+) {
+  fail("Top-nav Components must align with the catalog second sidebar on detail routes");
+}
+if (/body:has\(\[data-rail="catalog"\]\) \.corner-nav/.test(site)) {
+  fail("Catalog gallery index must not pin corner-nav to the toc-sub column");
 }
 
 console.log("Phone chrome: 44pt hits, safe-area, stacked TOC, copy control.");
