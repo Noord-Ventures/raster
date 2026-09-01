@@ -566,5 +566,11 @@ if (!appear.includes("border-radius: 0") || appear.includes("10px")) {
 if (!site.includes(".text-stepper button") || !site.slice(site.indexOf(".text-stepper button {"), site.indexOf(".text-stepper button:hover")).includes("border-radius: 0")) {
   fail("Text size −/+ are hairline squares, radius 0");
 }
+if (!site.includes("max-width: 208px") || !site.includes(".rs-crumb-root")) {
+  fail("Desktop crumbs must clip left of corner-nav (224 − 16px)");
+}
+if (!chrome.includes("Math.round(scale * 100)") || !layout.includes("n>3")) {
+  fail("Text size must persist as a percent in localStorage and restore before paint");
+}
 
 console.log("Phone chrome: 44pt hits, safe-area, stacked TOC, copy control.");

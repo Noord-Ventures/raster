@@ -52,8 +52,12 @@ function readGrid(): GridPref {
 
 function readTextIndex(): number {
   try {
-    const stored = parseFloat(localStorage.getItem("raster-text-scale") ?? "");
-    const i = TEXT_STEPS.indexOf(stored);
+    const raw = localStorage.getItem("raster-text-scale");
+    if (raw == null || raw === "") return 1;
+    const n = parseFloat(raw);
+    if (!isFinite(n)) return 1;
+    const scale = n > 3 ? n / 100 : n;
+    const i = TEXT_STEPS.findIndex((step) => Math.abs(step - scale) < 0.001);
     if (i >= 0) return i;
   } catch {
     /* private mode */
@@ -61,12 +65,14 @@ function readTextIndex(): number {
   return 1;
 }
 
+const useIsoLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+
 function useSettings() {
   const [scheme, setScheme] = React.useState<Scheme>("auto");
   const [grid, setGrid] = React.useState<GridPref>("on");
   const [textIndex, setTextIndex] = React.useState(1);
 
-  React.useEffect(() => {
+  useIsoLayoutEffect(() => {
     const nextScheme = readScheme();
     const nextGrid = readGrid();
     const nextText = readTextIndex();
@@ -112,8 +118,7 @@ function useSettings() {
     setTextIndex(next);
     const scale = TEXT_STEPS[next]!;
     try {
-      if (scale === 1) localStorage.removeItem("raster-text-scale");
-      else localStorage.setItem("raster-text-scale", String(scale));
+      localStorage.setItem("raster-text-scale", String(Math.round(scale * 100)));
     } catch {
       /* private mode */
     }
@@ -195,7 +200,7 @@ function TextStepper({
         <button type="button" aria-label="Decrease text size" disabled={index === 0} onClick={() => onStep(-1)}>
           −
         </button>
-        <output>{Math.round(scale * 100)}%</output>
+        <output suppressHydrationWarning>{Math.round(scale * 100)}%</output>
         <button
           type="button"
           aria-label="Increase text size"

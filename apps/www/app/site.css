@@ -92,11 +92,33 @@ body {
     left: 428px;
   }
 }
-/* Gallery index: text nav sits on the 204. Hide scrolled crumbs so
-   "Components" cannot run through Interfaces. Detail routes keep crumbs. */
+/* Gallery index: hide the *trail* so “Components” cannot run through
+   Interfaces. The root word is clipped by the column-1 rule below. */
 body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   opacity: 0;
   pointer-events: none;
+}
+/* Corner-nav owns x=224 (428 on wide catalog detail). Crumbs stay in
+   the module to the LEFT of that edge, with a 16px gutter. Do not
+   reuse the library’s 1024 one-module inset — that was for a
+   right-docked nav. */
+@media (min-width: 900px) {
+  body .rs-crumb-bar-inner {
+    margin-left: 0;
+    padding-left: 76px;
+    max-width: 208px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  body .rs-crumb-root {
+    width: auto;
+    max-width: 100%;
+  }
+}
+@media (min-width: 1440px) {
+  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .rs-crumb-bar-inner {
+    max-width: 412px;
+  }
 }
 .corner-nav a {
   font-size: 13px; font-weight: 500; letter-spacing: -.01em;
