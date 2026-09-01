@@ -3,6 +3,9 @@
 import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
+import { interfaceBySlug } from "../catalog";
+
+const WHAT = interfaceBySlug("line")!.what;
 
 type Role = "you" | "line";
 type Msg = { id: string; role: Role; text: string; fresh?: boolean };
@@ -109,10 +112,10 @@ export function Board() {
   }
 
   return (
-    <main className="if-board sc-ai" data-pane={phonePane} aria-label="Line">
+    <main className="if-board sc-ai" data-pane={phonePane} aria-label={WHAT}>
       <aside className="sc-ai-rail" aria-label="Chats">
         <div className="sc-ai-brand">
-          <Brand slug="line" title="Line" />
+          <Brand slug="line" />
           <p className="sc-ai-voice">The next line</p>
         </div>
         <button type="button" className="rs-btn-ghost sc-ai-new" onClick={fresh}>
@@ -230,7 +233,7 @@ export function Board() {
               type="text"
               value={draft}
               placeholder="The next line"
-              aria-label="Line"
+              aria-label="Message"
               autoComplete="off"
               onChange={(event) => setDraft(event.target.value)}
             />
@@ -242,7 +245,7 @@ export function Board() {
         </div>
       </section>
 
-      <nav className="if-thumb" aria-label="Line">
+      <nav className="if-thumb" aria-label={WHAT}>
         <button
           type="button"
           aria-current={phonePane === "inbox"}

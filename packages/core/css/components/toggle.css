@@ -1,5 +1,5 @@
 /* ── Toggle: a press switch; on is ink, like everything on ── */
-.rs-toggle{display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:32px;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;background:none;border:1px solid var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:background-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease),border-color var(--duration-snap) var(--ease)}
+.rs-toggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;min-width:32px;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;background:none;border:1px solid var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:background-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease),border-color var(--duration-snap) var(--ease)}
 .rs-toggle[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:var(--bg)}
 .rs-toggle-group{
   --rs-out:var(--radius-sm);

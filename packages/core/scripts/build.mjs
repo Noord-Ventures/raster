@@ -39,7 +39,7 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --table-alt: ${color.light.tableAlt};
   --grid-line: ${color.light.gridLine};
   --radius-sm: ${radius.small}px;           /* slight Raster radius; standalone buttons */
-  --radius: var(--radius-sm);              /* alias — cards, boxes, dialogs share it */
+  --radius: var(--radius-sm);              /* alias — buttons, boxes, dialogs share it; cards stay 0 */
   --radius-chrome: ${radius.chrome}px;
   --gutter: ${grid.gutter}px;
   --pad: ${grid.pad}px;

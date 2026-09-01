@@ -124,6 +124,7 @@ const links = [
   { href: "/components", label: "Components", corner: true },
   { href: "/interfaces", label: "Interfaces", corner: true },
   { href: "/about", label: "About", corner: true },
+  { href: "/swag", label: "Swag", corner: true },
 ];
 
 export function SiteChrome() {

@@ -21,7 +21,9 @@ html, body { margin: 0; padding: 0; }
    --grid-pos: 20px 0 puts the first tile line on the left 20px gutter;
    that utmost left gutter must paint — do not clip it. Homepage and
    About kill this overlay so boxed pages are cell-edge gutters, not a
-   cage through type. Components / docs / interfaces keep it. */
+   cage through type. Components / docs / interfaces keep it.
+   Components also paints the page-grid L/R box edge (same --grid-line
+   inset as home/about margins) so scroll 0 shows page grid + 204. */
 html { background-color: var(--bg); }
 html::before {
   content: "";
@@ -33,6 +35,17 @@ html::before {
   background-size: var(--grid-size) 100%;
   background-repeat: repeat-x;
   background-position: var(--grid-pos);
+}
+/* Page grid: outer box-edge, home/about L/R language. Block grid is
+   html::before 204. Same two hues — do not invent a third. Do not
+   paint the --divider cage through catalog type or cards. */
+html:has(.catalog-page)::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line);
 }
 body {
   position: relative;
@@ -311,7 +324,7 @@ body {
   .preview-cluster { flex-direction: column; align-items: stretch; width: 100%; gap: 12px; }
   .code-block { padding: 12px 8px 12px 16px; margin: 16px 0 32px; }
   .code-block pre { font-size: 13.5px; padding-right: 56px; }
-  .code-copy { width: 44px; height: 44px; min-width: 44px; min-height: 44px; top: 4px; right: 4px; }
+  .code-copy { width: 44px; height: 44px; min-width: 44px; min-height: 44px; top: 50%; right: 4px; }
   .class-list { gap: 8px; margin: 16px 0 32px; }
   .class-list a.rs-chip,
   .class-list .rs-chip {
@@ -401,7 +414,7 @@ body {
   background-color: var(--bg);
   background-image: none;
   border: 1px solid var(--divider);
-  border-radius: var(--radius-sm);
+  border-radius: 0;
   box-shadow: none;
   overflow: hidden;
   display: flex;
@@ -469,8 +482,9 @@ body {
 }
 .code-copy {
   position: absolute;
-  top: 8px;
+  top: 50%;
   right: 8px;
+  transform: translateY(-50%);
   width: 24px;
   height: 24px;
   padding: 0;

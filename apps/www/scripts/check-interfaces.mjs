@@ -335,6 +335,10 @@ for (const slug of slugs) {
     console.error(`${slug} board must carry the invented brand`);
     process.exit(1);
   }
+  if (/title="(Line|Press|Wall|Night|Evening|Room)"/.test(board)) {
+    console.error(`${slug} product chrome must use catalog what, not the codename`);
+    process.exit(1);
+  }
   if (!board.includes('from "@noorddev/raster-react"') || !board.includes("<Icon ")) {
     console.error(`${slug} board must use Raster Icon marks, not a second family`);
     process.exit(1);
@@ -464,8 +468,12 @@ if (nightMap.includes("6.0, 6.4, 8.4") || nightMap.includes("6.8, 7.2, 9.2") || 
   console.error("Night camera must go to city scale; do not keep the three-tower dolly");
   process.exit(1);
 }
-if (!nightMap.includes("17, 22, 19") || !nightMap.includes("14, 18, 16")) {
-  console.error("Night map well must use the city-scale camera, not a street crop");
+if (!nightMap.includes("12.2, 15.0, 13.6") || !nightMap.includes("10.4, 12.8, 11.6")) {
+  console.error("Night map well must frame the city in the panel, not a street crop");
+  process.exit(1);
+}
+if (!nightMap.includes("lookAt(LOOK_X, LOOK_Y, LOOK_Z)") || !nightMap.includes("const LOOK_X = 1.1")) {
+  console.error("Night camera must look at the city center, not empty ground");
   process.exit(1);
 }
 if (!nightMap.includes("const CITY = 5") || !nightMap.includes("const PITCH = 2.2")) {
@@ -512,6 +520,18 @@ for (const name of ["katie", "christian", "senka", "ilana"]) {
 if (!catalog.includes('what: "AI chat"') || !catalog.includes('what: "Dashboard"') || !catalog.includes('what: "Social feed"') || !catalog.includes('what: "Fleet management"') || !catalog.includes('what: "Order out"') || !catalog.includes('what: "Team chat"')) {
   console.error("Catalog must lock the six Interfaces: AI chat, Dashboard, Social feed, Fleet management, Order out, Team chat");
   process.exit(1);
+}
+const markSrc = readFileSync(join(dir, "mark.tsx"), "utf8");
+if (!markSrc.includes("interfaceBySlug") || !markSrc.includes("item?.what")) {
+  console.error("Brand must read catalog what, not a hardcoded codename");
+  process.exit(1);
+}
+for (const slug of slugs) {
+  const board = readFileSync(join(dir, slug, "board.tsx"), "utf8");
+  if (!board.includes("interfaceBySlug") || !board.includes("aria-label={WHAT}")) {
+    console.error(`${slug} product chrome must expose catalog what`);
+    process.exit(1);
+  }
 }
 
 console.log(`ok: ${slugs.length} Interfaces routes`);

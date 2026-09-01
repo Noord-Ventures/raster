@@ -1,0 +1,139 @@
+/* Isolated swag store. Paper, hairline, 204. Chrome-square cards.
+   Boxed like About: kill the inner-page overlay so verticals do not
+   run through stills. Cell edges are 1px --divider; L/R box margins
+   are the quieter --grid-line. No cart. */
+
+html:has(.swag-page)::before {
+  display: none;
+}
+body:has(.swag-page) {
+  background: transparent;
+}
+
+.swag-page {
+  width: 100%;
+  min-height: 100dvh;
+}
+
+.swag-field {
+  display: grid;
+  width: 100%;
+  min-height: 100dvh;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: minmax(204px, auto);
+  background: var(--divider);
+  padding: 0 0 1px 0;
+  gap: 1px;
+  box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line);
+}
+
+.swag-cell {
+  min-width: 0;
+  min-height: 204px;
+  padding: 20px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.swag-cell-head {
+  justify-content: flex-start;
+  gap: 20px;
+  min-height: 204px;
+}
+
+.swag-kicker {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+}
+
+.swag-face {
+  margin: 0;
+  font-size: clamp(2.5rem, 7vw, 7rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  color: var(--text);
+}
+
+.swag-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 28em;
+}
+
+.swag-copy p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.swag-card {
+  border-radius: 0;
+  justify-content: flex-start;
+  gap: 20px;
+  min-height: 408px;
+}
+
+.swag-still {
+  margin: 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.swag-still img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.swag-meta h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.swag-print {
+  margin: 4px 0 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+}
+
+.swag-soon {
+  margin: 12px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 481px) {
+  .swag-field {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .swag-cell-head {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 900px) {
+  .swag-field {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

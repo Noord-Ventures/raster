@@ -3,6 +3,9 @@
 import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
+import { interfaceBySlug } from "../catalog";
+
+const WHAT = interfaceBySlug("press")!.what;
 
 const WEEK = { sheets: 38, proofs: 12, press: 4, series: [12, 18, 15, 26, 24, 11, 9] };
 const MONTH = { sheets: 142, proofs: 41, press: 9, series: [28, 34, 31, 42, 38, 22, 19] };
@@ -37,10 +40,10 @@ export function Board() {
   const selected = JOBS.find((item) => item.id === job) ?? JOBS[0]!;
 
   return (
-    <main className="if-board sc-dash" aria-label="Press" style={{ ["--if-spot" as string]: "#E30613" }}>
+    <main className="if-board sc-dash" aria-label={WHAT} style={{ ["--if-spot" as string]: "#E30613" }}>
       <aside className="sc-dash-rail" aria-label="Floor">
         <div className="sc-dash-brand">
-          <Brand slug="press" title="Press" />
+          <Brand slug="press" />
           <p className="sc-dash-voice">On press</p>
         </div>
         <p className="sc-dash-label if-ico-row">
@@ -157,7 +160,7 @@ export function Board() {
         </div>
       </section>
 
-      <nav className="if-thumb" aria-label="Press">
+      <nav className="if-thumb" aria-label={WHAT}>
         {[
           { id: "overview", label: "Overview", icon: "layout" as const },
           { id: "jobs", label: "Jobs", icon: "list" as const },

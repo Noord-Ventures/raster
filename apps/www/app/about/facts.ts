@@ -37,11 +37,16 @@ export const lead = {
 
 export const usage = {
   kicker: "Usage",
-  intro: "Using Raster is one command, then a stylesheet. If you are making a web thing, paste this in the document head:",
+  intro: "One command, then a stylesheet in the head, then a control in the body.",
   command: COMMAND,
   html: `<link rel="stylesheet" href="styles/raster.css" />`,
   control: `<button class="rs-btn-primary">Save</button>`,
-  after: "Then a control. Dark scheme: set data-theme=\"dark\" on the root element.",
+  specimen: `${COMMAND}
+
+<link rel="stylesheet" href="styles/raster.css" />
+
+<button class="rs-btn-primary">Save</button>`,
+  after: "Dark scheme: set data-theme=\"dark\" on the root element.",
 };
 
 export const license = {

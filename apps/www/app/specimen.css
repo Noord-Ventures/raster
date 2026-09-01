@@ -106,20 +106,20 @@ body:has(.specimen-page) {
 }
 .specimen-command-row {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
 }
 .specimen-cell-command .code-copy {
   position: static;
   top: auto;
   right: auto;
+  transform: none;
   background: none;
   flex-shrink: 0;
   width: 32px;
   height: 32px;
   min-width: 32px;
   min-height: 32px;
-  margin-top: 8px;
 }
 .specimen-cell-kit-a { grid-area: kita; }
 .specimen-cell-kit-b { grid-area: kitb; }

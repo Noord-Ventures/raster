@@ -1,6 +1,7 @@
 /* ── Icons: 16 viewBox, 1px currentColor hairline. Size from the svg width. ── */
 .rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}
-.rs-icon{display:block;flex-shrink:0;color:inherit}
+.rs-icon{display:block;flex-shrink:0;overflow:visible;color:inherit}
+.rs-btn-primary .rs-icon,.rs-btn-ghost .rs-icon,.rs-toggle .rs-icon{display:block;flex-shrink:0}
 .rs-icons svg{flex-shrink:0}
 .rs-icons svg:not([width]){width:16px;height:16px}
 .rs-icon-catalog{width:100%;display:flex;flex-direction:column;gap:28px;text-align:left;align-self:stretch}

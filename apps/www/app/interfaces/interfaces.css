@@ -348,10 +348,12 @@ body:has(.if-index) {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-height: 16px;
 }
 .if-board .rs-icon {
   display: block;
   flex-shrink: 0;
+  overflow: visible;
 }
 .if-app {
   display: flex;

@@ -51,21 +51,9 @@ export default function AboutPage() {
           <div className="field-code-stack">
             <div className="field-code-row">
               <pre className="field-code">
-                <code>{usage.command}</code>
+                <code>{usage.specimen}</code>
               </pre>
-              <CopyControl text={usage.command} />
-            </div>
-            <div className="field-code-row">
-              <pre className="field-code">
-                <code>{usage.html}</code>
-              </pre>
-              <CopyControl text={usage.html} />
-            </div>
-            <div className="field-code-row">
-              <pre className="field-code">
-                <code>{usage.control}</code>
-              </pre>
-              <CopyControl text={usage.control} />
+              <CopyControl text={usage.specimen} />
             </div>
           </div>
           <p className="field-mark">{usage.after}</p>

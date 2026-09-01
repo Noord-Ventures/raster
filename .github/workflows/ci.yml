@@ -858,6 +858,7 @@ jobs:
             exit 1
           fi
           node apps/www/scripts/check-mobile.mjs
+          node apps/www/scripts/check-swag.mjs
           grep -q 'MobileToc' apps/www/components/docs-nav/index.tsx
           grep -q '44pt' apps/www/components/docs-nav/FEATURE.md
           grep -q 'viewportFit' apps/www/app/layout.tsx

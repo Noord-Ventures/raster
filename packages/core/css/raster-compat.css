@@ -52,10 +52,10 @@ body{
 .bb-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}
 
 /* ── Buttons ── */
-.bb-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity var(--duration-snap) var(--ease)}
+.bb-btn-primary{font-family:inherit;font-size:14px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 22px;background:var(--text);color:var(--bg);border:1px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:opacity var(--duration-snap) var(--ease)}
 .bb-btn-primary:hover{opacity:.85}
 .bb-btn-primary:disabled{opacity:.4;cursor:not-allowed}
-.bb-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease)}
+.bb-btn-ghost{font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 22px;background:transparent;color:var(--text);border:1px solid var(--divider);border-radius:var(--radius-sm);cursor:pointer;transition:background-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease)}
 .bb-btn-ghost:hover{background:var(--divider);border-color:transparent}
 .bb-btn-ghost:disabled{opacity:.4;cursor:not-allowed;background:transparent;border-color:var(--divider)}
 .bb-btn-primary:focus-visible,.bb-btn-ghost:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -304,9 +304,9 @@ dialog.bb-dialog::backdrop{background:rgba(0,0,0,0.25)}
 /* ── Mono chip: technical identifiers ── */
 .lib-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}
 
-/* ── Card: hairline frame. Nested corners use Steve’s innerRadius. ── */
+/* ── Card: hairline frame, chrome-square. Nested corners use Steve’s innerRadius. ── */
 .bb-card-demo{
-  --rs-out:var(--radius-sm);
+  --rs-out:0;
   --rs-gap:20px;
   --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));
   border:1px solid var(--divider);
@@ -351,7 +351,8 @@ table tr.rs-total-row td{font-weight:500;color:var(--text);border-top:2px solid 
 
 /* ── Icons: 16 viewBox, 1px currentColor hairline. Size from the svg width. ── */
 .bb-icons{display:flex;gap:18px;align-items:center;color:var(--text)}
-.rs-icon{display:block;flex-shrink:0;color:inherit}
+.rs-icon{display:block;flex-shrink:0;overflow:visible;color:inherit}
+.bb-btn-primary .rs-icon,.bb-btn-ghost .rs-icon,.rs-toggle .rs-icon{display:block;flex-shrink:0}
 .bb-icons svg{flex-shrink:0}
 .bb-icons svg:not([width]){width:16px;height:16px}
 .rs-icon-catalog{width:100%;display:flex;flex-direction:column;gap:28px;text-align:left;align-self:stretch}

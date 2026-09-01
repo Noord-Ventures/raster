@@ -1,4 +1,5 @@
 import type { InterfaceSlug } from "./catalog";
+import { interfaceBySlug } from "./catalog";
 
 /** Quiet geometric marks. One per invented tool. Inter chrome stays around them. */
 export function Mark({ slug }: { slug: InterfaceSlug }) {
@@ -30,11 +31,12 @@ export function Mark({ slug }: { slug: InterfaceSlug }) {
   );
 }
 
-export function Brand({ slug, title }: { slug: InterfaceSlug; title: string }) {
+export function Brand({ slug }: { slug: InterfaceSlug }) {
+  const item = interfaceBySlug(slug);
   return (
     <p className="if-app">
       <Mark slug={slug} />
-      <span>{title}</span>
+      <span>{item?.what ?? slug}</span>
     </p>
   );
 }

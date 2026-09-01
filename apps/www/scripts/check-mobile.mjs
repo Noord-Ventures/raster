@@ -97,6 +97,12 @@ if (!cover900.includes("padding-top: 120px") || !cover900.includes("justify-cont
 if (!nav.includes('data-toc="groups"') || !nav.includes('data-toc="items"')) {
   fail("Do not collapse the two-column TOC to fake the H1 align");
 }
+if (!site.includes("html:has(.catalog-page)::after") || !site.includes("inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line)")) {
+  fail("Components must paint page-grid L/R (home/about margin language) plus the 204 overlay");
+}
+if (site.includes("html:has(.catalog-page)::before") && /html:has\(\.catalog-page\)::before[\s\S]{0,80}display:\s*none/.test(site)) {
+  fail("Components must keep the 204 block grid; do not kill html::before");
+}
 if (ifCss.includes(".if-title")) {
   fail("Interfaces must not keep a parallel if-title spacer; cover owns the 204 cell");
 }
@@ -110,6 +116,24 @@ if (!block.includes("writeText") || !block.includes("Copied") || !block.includes
 }
 if (!page.includes("CopyControl") || !page.includes("specimen-command-row")) {
   fail("Homepage command must carry the same copy control");
+}
+if (specimen.includes("align-items: flex-start") && specimen.includes(".specimen-command-row")) {
+  const row = specimen.slice(specimen.indexOf(".specimen-command-row {"), specimen.indexOf("}", specimen.indexOf(".specimen-command-row {")));
+  if (row.includes("flex-start")) fail("Homepage copy control must sit on the command midline");
+}
+if (/specimen-cell-command \.code-copy \{[^}]*margin-top: 8px/.test(specimen)) {
+  fail("Homepage copy control must not use a compensatory margin-top");
+}
+const codeCopy = site.slice(site.indexOf(".code-copy {"), site.indexOf("}", site.indexOf(".code-copy {")));
+if (codeCopy.includes("top: 8px") || !codeCopy.includes("top: 50%") || !codeCopy.includes("translateY(-50%)")) {
+  fail("Docs copy control must be optically centered in the code box");
+}
+const useRow = about.slice(about.indexOf(".field-code-row {"), about.indexOf("}", about.indexOf(".field-code-row {")));
+if (useRow.includes("flex-start") || !useRow.includes("align-items: center")) {
+  fail("About Usage copy control must sit on the command midline");
+}
+if (/field-cell-use \.code-copy \{[^}]*margin-top: 6px/.test(about)) {
+  fail("About Usage copy control must not use a compensatory margin-top");
 }
 
 if (specimen.includes("min-width: 408px") || about.includes("min-width: 408px")) {
@@ -165,6 +189,23 @@ if (about.includes("object-fit: cover")) {
   fail("About stills must not cover-crop");
 }
 const facts = readFileSync(join(root, "apps/www/app/about/facts.ts"), "utf8");
+const aboutPage = readFileSync(join(root, "apps/www/app/about/page.tsx"), "utf8");
+const componentsPage = readFileSync(join(root, "apps/www/app/components/page.tsx"), "utf8");
+if (!componentsPage.includes("catalog-page")) {
+  fail("Components index must mark catalog-page so the two grids paint");
+}
+if (!facts.includes("usage.specimen") && !facts.includes("specimen:")) {
+  fail("About Usage must ship one specimen block");
+}
+if (!facts.includes("npx @noorddev/raster-cli init") || !facts.includes('<link rel="stylesheet" href="styles/raster.css" />') || !facts.includes("rs-btn-primary")) {
+  fail("About Usage specimen must be CLI, then head link, then body");
+}
+if ((aboutPage.match(/field-code-row/g) ?? []).length !== 1) {
+  fail("About Usage must be one-shot, not three stacked code rows");
+}
+if (!aboutPage.includes("{usage.specimen}")) {
+  fail("About Usage must render the one-shot specimen");
+}
 for (const name of [
   "Rosmarie Tissi",
   "Nelly Rudin",

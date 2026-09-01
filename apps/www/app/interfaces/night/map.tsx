@@ -11,6 +11,10 @@ const PITCH = 2.2;
 const STREET = 0.58;
 const CITY = 5;
 const SPAN = (CITY * 2 + 1) * PITCH;
+/** City centroid: lots sit on (i + 0.5) * PITCH. */
+const LOOK_X = 1.1;
+const LOOK_Y = 0.35;
+const LOOK_Z = 1.1;
 
 const UNITS: Record<string, { x: number; z: number; rot: number }> = {
   "04": { x: 0.16, z: PITCH, rot: 0 },
@@ -172,10 +176,10 @@ export function Scene({ selected }: SceneProps) {
     root.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0xe8e4dc, 38, 78);
-    const camera = new THREE.PerspectiveCamera(48, 1, 0.2, 90);
-    camera.position.set(14, 18, 16);
-    camera.lookAt(0, 0.15, -1.2);
+    scene.fog = new THREE.Fog(0xe8e4dc, 22, 48);
+    const camera = new THREE.PerspectiveCamera(44, 1, 0.2, 90);
+    camera.position.set(10.4, 12.8, 11.6);
+    camera.lookAt(LOOK_X, LOOK_Y, LOOK_Z);
 
     scene.add(new THREE.AmbientLight(0xe8e4dc, 0.78));
     const sun = new THREE.DirectionalLight(0xfff6ea, 0.72);
@@ -349,13 +353,13 @@ export function Scene({ selected }: SceneProps) {
       renderer.setSize(w, h, false);
       camera.aspect = w / Math.max(h, 1);
       if (h > w * 1.15) {
-        camera.position.set(17, 22, 19);
-        camera.fov = 52;
-      } else {
-        camera.position.set(14, 18, 16);
+        camera.position.set(12.2, 15.0, 13.6);
         camera.fov = 48;
+      } else {
+        camera.position.set(10.4, 12.8, 11.6);
+        camera.fov = 44;
       }
-      camera.lookAt(0, 0.15, -1.2);
+      camera.lookAt(LOOK_X, LOOK_Y, LOOK_Z);
       camera.updateProjectionMatrix();
     };
     resize();

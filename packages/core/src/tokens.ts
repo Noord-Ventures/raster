@@ -89,17 +89,17 @@ export const rasterTokens = {
   radius: {
     /**
      * Slight Raster radius. Same token as the standalone button (`--radius-sm`).
-     * Cards, boxes, callouts, dialogs, sheets, drawers, and catalog frames
-     * share this 4px. Not 8–12. `--radius` aliases it.
+     * Buttons, toggles, boxes, callouts, dialogs, sheets, and drawers share
+     * this 4px. Not 8–12. Cards are chrome-square (0). `--radius` aliases it.
      */
     small: 4,
     /** Alias of `small`. Surfaces that already read `--radius` stay on this family. */
     base: 4,
-    /** Page chrome, icon marks, empty, and charts stay square. */
+    /** Page chrome, cards, icon marks, empty, and charts stay square. */
     chrome: 0,
     /** Steve Ruiz innerRadius (circular-corner fit), clamped at 0. */
     concentric: "Steve Ruiz innerRadius, clamped at 0",
-    rule: "One token: --radius-sm (4px), the standalone button radius. Cards and boxes share it. Nested inners follow Steve Ruiz. Chrome stays 0.",
+    rule: "One token: --radius-sm (4px), the standalone button radius. Toggles share it. Cards are chrome-square (0). Nested inners follow Steve Ruiz. Chrome stays 0.",
   },
   icons: {
     sizes: [12, 16],

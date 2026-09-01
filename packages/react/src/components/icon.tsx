@@ -16,11 +16,12 @@ export type { IconName, IconRotate };
 export type { DrawnName, IconAlias, IconGroup } from "./icon-marks";
 
 /**
- * Raster chrome marks. Vera 28 Aug 2026.
+ * Raster chrome marks. Vera 28 Aug 2026; optical recut 1 Sep 2026.
  *
  * 16×16 module, optical center 8,8. Stroke 1, currentColor, fill none.
  * Cap butt, join miter, no rx. Hairline stays 1 CSS px at 12 and 16.
  * Copied is check. Accordion down is chevron-right rotated 90°.
+ * First five marks (copy, copied, chevron-left, chevron-right, close) stay as drawn.
  */
 export const ICON_STROKE = 1;
 export const ICON_VIEWBOX = 16;
