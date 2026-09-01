@@ -15,7 +15,20 @@ export const HOST = "https://raster.noord.dev";
  * Object cells on the poster. Names from the catalog on this branch —
  * the same kit a stranger opens under /components. Full objects, not crops.
  */
-export const KIT = ["accordion", "calendar", "field", "stepper"] as const;
+export const KIT = [
+  "accordion",
+  "calendar",
+  "field",
+  "stepper",
+  "button",
+  "toggle-group",
+  "tabs",
+  "card",
+  "slider",
+  "pagination",
+  "switch",
+  "badge",
+] as const;
 
 function normalizePath(pathname: string) {
   const path = pathname.replace(/\/+$/, "");

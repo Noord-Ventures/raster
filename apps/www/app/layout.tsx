@@ -5,6 +5,7 @@ import "./site.css";
 import "@/components/examples/use.css";
 import { CrumbBar } from "@/components/crumb-bar";
 import { SiteChrome } from "@/components/site-chrome";
+import { SiteFooter } from "@/components/site-footer";
 import { social } from "./social";
 
 export const metadata: Metadata = social;
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <SiteChrome />
         <CrumbBar />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

@@ -77,6 +77,20 @@ body {
   display: flex; align-items: center; gap: 16px; height: 24px;
   filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
 }
+/* Catalog mid/desktop: the word Components left-edge = .toc-sub
+   content (204 + 20). Wide desktop follows the rail when the
+   one-module inset returns. Do not invent a third nav. */
+@media (min-width: 900px) {
+  body:has([data-rail="catalog"]) .corner-nav {
+    left: 224px;
+    right: auto;
+  }
+}
+@media (min-width: 1440px) {
+  body:has([data-rail="catalog"]) .corner-nav {
+    left: 428px;
+  }
+}
 .corner-nav a {
   font-size: 13px; font-weight: 500; letter-spacing: -.01em;
   color: var(--text-secondary); text-decoration: none; line-height: 1;
@@ -572,13 +586,44 @@ body {
 .component-head { margin: 8px 0 4px; }
 .component-desc { max-width: 592px; }
 
-/* ── Footer: quiet hairline inside the layout ── */
+/* ── Footer: links + imprint on the 204 with gutters. Not a boxed field. ── */
 .site-footer {
-  border-top: 1px solid var(--divider-subtle); margin-top: 24px;
-  padding: 26px 0 48px; font-size: 12.5px; color: var(--text-secondary);
-  letter-spacing: -.01em; display: flex; flex-direction: column; gap: 6px;
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+  padding: 20px var(--pad) 48px;
+  border-top: 1px solid var(--grid-line);
+  background-color: var(--bg);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  color: var(--text-secondary);
 }
-.site-footer a { color: inherit; }
+.site-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px 16px;
+  width: calc(max(round(down, 100vw - 2 * var(--pad) + var(--gutter), 204px), 204px) + var(--gutter));
+  max-width: 100%;
+}
+.site-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.site-footer-imprint { margin: 0; }
+.site-footer a { color: inherit; text-decoration: none; }
+.site-footer a:hover { color: var(--text); }
+html:has(.specimen-page) .site-footer,
+html:has(.field-page) .site-footer,
+html:has(.swag-page) .site-footer {
+  background-image: var(--grid-image);
+  background-size: var(--grid-size) 100%;
+  background-repeat: repeat-x;
+  background-position: var(--grid-pos);
+}
 
 @media (prefers-reduced-motion: reduce) {
   .nav-panel,

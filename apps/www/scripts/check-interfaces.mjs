@@ -110,6 +110,16 @@ if (!tileRule.includes("var(--grid-line)") || tileRule.includes("var(--divider)"
   console.error("Interfaces tile edges must be --grid-line, the quiet 204 ink");
   process.exit(1);
 }
+if (tileRule.includes("var(--radius-sm)") || !/border-radius:\s*0/.test(tileRule)) {
+  console.error("Interfaces index tiles must be chrome-square (radius 0), same lock as Components cards");
+  process.exit(1);
+}
+const listAt = css.indexOf(".if-list {");
+const listRule = css.slice(listAt, css.indexOf("}", listAt));
+if (/row-gap:\s*0/.test(listRule) || !/row-gap:/.test(listRule)) {
+  console.error("Interfaces index must leave vertical space between tiles");
+  process.exit(1);
+}
 const specRule = css.slice(css.indexOf(".if-specimen {"), css.indexOf("}", css.indexOf(".if-specimen {")));
 if (!specRule.includes("margin-top: 204px")) {
   console.error("Detail specimen must sit on the 204, not 120px off it");

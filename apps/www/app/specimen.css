@@ -44,7 +44,15 @@ body:has(.specimen-page) {
     "kita"
     "kitb"
     "kitc"
-    "kitd";
+    "kitd"
+    "kite"
+    "kitf"
+    "kitg"
+    "kith"
+    "kiti"
+    "kitj"
+    "kitk"
+    "kitl";
   grid-auto-rows: minmax(204px, auto);
   /* Cell seams: --divider, the stronger of the two grid inks.
      L/R box margins: --grid-line, quieter, highlighting the box
@@ -125,6 +133,14 @@ body:has(.specimen-page) {
 .specimen-cell-kit-b { grid-area: kitb; }
 .specimen-cell-kit-c { grid-area: kitc; }
 .specimen-cell-kit-d { grid-area: kitd; }
+.specimen-cell-kit-e { grid-area: kite; }
+.specimen-cell-kit-f { grid-area: kitf; }
+.specimen-cell-kit-g { grid-area: kitg; }
+.specimen-cell-kit-h { grid-area: kith; }
+.specimen-cell-kit-i { grid-area: kiti; }
+.specimen-cell-kit-j { grid-area: kitj; }
+.specimen-cell-kit-k { grid-area: kitk; }
+.specimen-cell-kit-l { grid-area: kitl; }
 .specimen-face {
   margin: 0;
   /* Optical left, hero display. Same -0.08em as About .field-face.
@@ -257,10 +273,12 @@ body:has(.specimen-page) {
       "p07 p08"
       "p09 p10"
       "note note"
-      "kita kita"
-      "kitb kitb"
-      "kitc kitc"
-      "kitd kitd";
+      "kita kitb"
+      "kitc kitd"
+      "kite kitf"
+      "kitg kith"
+      "kiti kitj"
+      "kitk kitl";
   }
 }
 
@@ -278,7 +296,11 @@ body:has(.specimen-page) {
       "p09 p09 p10 p10"
       "note note note note"
       "kita kita kitb kitb"
-      "kitc kitc kitd kitd";
+      "kitc kitc kitd kitd"
+      "kite kite kitf kitf"
+      "kitg kitg kith kith"
+      "kiti kiti kitj kitj"
+      "kitk kitk kitl kitl";
   }
 }
 
@@ -293,7 +315,9 @@ body:has(.specimen-page) {
       "p07 p07 p08 p08 p09 p09"
       "p10 p10 p10 note note note"
       "kita kita kitb kitb kitc kitc"
-      "kitd kitd kitd kitd kitd kitd";
+      "kitd kitd kite kite kitf kitf"
+      "kitg kitg kith kith kiti kiti"
+      "kitj kitj kitk kitk kitl kitl";
   }
 }
 

@@ -18,7 +18,7 @@ Each app has two to three levels of use: list → detail → one level deeper. I
 
 | Surface | Route | Click path | Done |
 | --- | --- | --- | --- |
-| Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. Title occupies a 204 cell. At scroll 0 the H1 top shares the rail first-row line. Each card is a poster crop on the 204, then the English name. The field under the title and around the crops reads as the module. |
+| Interfaces index | `/interfaces` | Corner → Interfaces | Lists the six. Title occupies a 204 cell. At scroll 0 the H1 top shares the rail first-row line. Each card is a poster crop on the 204, then the English name. Index tiles are chrome-square (radius 0), same lock as Components `.rs-card`. Vertical gap is two gutters so the stack is looser than a flush cage. The field under the title and around the crops reads as the module. |
 | Line | `/interfaces/line` | Interfaces → Line | AI chat. List → chat → a line. Centered measure. Composer in the pane, aligned. Site 204s run around the box. On the phone: inbox or thread, not a squeezed three-pane. |
 | Press | `/interfaces/press` | Interfaces → Press | Dashboard. Floor → job → sheet. Hue in the rail. One Crouwel spot. On the phone: compact metrics and a thumb bar, not a 204 rail stacked on the floor. |
 | Wall | `/interfaces/wall` | Interfaces → Wall | Social feed. Feed → post → profile. Masonry on desktop, a stream on the phone. People as a strip. Comments sit in the inspect. First names from /work keepers only: Aziez, Jenny, Koen, Gianpiero. |

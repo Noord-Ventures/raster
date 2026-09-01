@@ -116,6 +116,7 @@ import { Button } from "@/components/raster/button";
 
 <Icon name="search" size={12} />
 <Icon name="search" size={16} />
+<Icon name="search" size={24} />
 <IconCatalog />`,
   checkbox: `import { Checkbox } from "@/components/raster/checkbox";
 

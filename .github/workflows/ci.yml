@@ -368,6 +368,8 @@ jobs:
           grep -q 'strokeLinecap: "butt"' "$icon"
           grep -q 'strokeLinejoin: "miter"' "$icon"
           grep -q 'ICON_STROKE = 1' "$icon"
+          grep -q '12 | 16 | 24' "$icon"
+          grep -q 'size={24}' "$icon"
           grep -q 'rotate={90}' packages/react/src/components/accordion.tsx
           grep -q 'name="chevron-right"' packages/react/src/components/accordion.tsx
           grep -q 'name="check"' packages/react/src/components/checkbox.tsx

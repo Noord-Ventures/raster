@@ -421,4 +421,23 @@ if (/toast|Toaster|rs-toast/.test(block)) {
   fail("Copy must confirm on the control, not via toast");
 }
 
+const laws = readFileSync(join(root, "apps/www/app/specimen-laws.ts"), "utf8");
+const kit = readFileSync(join(root, "apps/www/app/specimen.ts"), "utf8");
+const footer = readFileSync(join(root, "apps/www/components/site-footer.tsx"), "utf8");
+for (const word of ["Simple", "Beautiful", "Opinionated", "Elegant", "Clear", "Legible", "Solid", "Versatile", "Customizable", "Minimal"]) {
+  if (!laws.includes(`text: "${word}"`)) fail(`Homepage principles must include ${word}`);
+}
+if (laws.includes("The grid is the idea.")) {
+  fail("Homepage principles are Renato's ten words, not the old grid sentences");
+}
+if (!kit.includes('"toggle-group"') || !kit.includes('"card"') || !kit.includes('"pagination"')) {
+  fail("Homepage kit must be denser than accordion, calendar, field, stepper");
+}
+if (!layout.includes("SiteFooter") || !footer.includes("getraster.com") || !footer.includes("MIT")) {
+  fail("Root layout must render a sitewide footer with factual imprint");
+}
+if (!site.includes("left: 224px") || !site.includes('body:has([data-rail="catalog"]) .corner-nav')) {
+  fail("Top-nav Components must align with the catalog second sidebar");
+}
+
 console.log("Phone chrome: 44pt hits, safe-area, stacked TOC, copy control.");

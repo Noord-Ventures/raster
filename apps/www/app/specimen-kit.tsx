@@ -5,7 +5,7 @@ import { rasterComponents } from "@noorddev/raster";
 import { Preview } from "@/components/preview";
 import { KIT } from "./specimen";
 
-const slots = ["a", "b", "c", "d"] as const;
+const slots = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"] as const;
 
 export function SpecimenKit() {
   return (
