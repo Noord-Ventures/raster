@@ -426,14 +426,35 @@ if (/toast|Toaster|rs-toast/.test(block)) {
 const laws = readFileSync(join(root, "apps/www/app/specimen-laws.ts"), "utf8");
 const kit = readFileSync(join(root, "apps/www/app/specimen.ts"), "utf8");
 const footer = readFileSync(join(root, "apps/www/components/site-footer.tsx"), "utf8");
-for (const word of ["Simple", "Minimal", "Opinionated", "Elegant", "Clear", "Legible", "Solid", "Versatile", "Customizable"]) {
+const TEN = [
+  "Simple",
+  "Beautiful",
+  "Opinionated",
+  "Elegant",
+  "Clear",
+  "Legible",
+  "Solid",
+  "Versatile",
+  "Customizable",
+  "Minimal",
+];
+if (!laws.includes("Ten words.")) {
+  fail('Homepage principles comment must be "Ten words."');
+}
+const lawTexts = [...laws.matchAll(/text: "([^"]+)"/g)].map((m) => m[1]);
+if (lawTexts.length !== 10) {
+  fail(`Homepage principles must be ten words, got ${lawTexts.length}`);
+}
+if (lawTexts[1] !== "Beautiful") fail("Homepage principles: Beautiful is 02");
+if (lawTexts[lawTexts.length - 1] !== "Minimal") fail("Homepage principles: Minimal is last");
+if (lawTexts.join(",") !== TEN.join(",")) {
+  fail("Homepage principles must keep Renato's exact order");
+}
+for (const word of TEN) {
   if (!laws.includes(`text: "${word}"`)) fail(`Homepage principles must include ${word}`);
 }
-if (laws.includes('text: "Beautiful"')) {
-  fail("Homepage principles replaced Beautiful with Minimal");
-}
 if (laws.includes("The grid is the idea.")) {
-  fail("Homepage principles are Renato's nine words, not the old grid sentences");
+  fail("Homepage principles are Renato's ten words, not the old grid sentences");
 }
 if (!kit.includes('"toggle-group"') || !kit.includes('"card"') || !kit.includes('"pagination"')) {
   fail("Homepage kit must be denser than accordion, calendar, field, stepper");
@@ -452,10 +473,13 @@ if (
   fail("Footer about copy must link Noord to https://noord.dev");
 }
 for (const sentence of [
-  "Inspired by Dutch and Swiss modernism — the International Typographic Style.",
+  "Inspired by the International Typographic Style.",
   "Free and open source under the MIT license.",
 ]) {
   if (!footer.includes(sentence)) fail(`Footer about copy must include: ${sentence}`);
+}
+if (footer.includes("/swag") || footer.includes(">Swag<")) {
+  fail("Footer must not link Swag");
 }
 const footerNav = site.slice(site.indexOf(".site-footer-nav {"), site.indexOf("}", site.indexOf(".site-footer-nav {")));
 if (!footerNav.includes("flex-direction: column")) {
@@ -498,6 +522,21 @@ if (calloutCss.includes("border-left:3px") || calloutCss.includes("border-radius
 const aboutNotes = readFileSync(join(root, "apps/www/app/about/about-notes.tsx"), "utf8");
 if (!aboutPage.includes("AboutNotes") || !aboutNotes.includes("AccordionItem") || !aboutNotes.includes("from \"@noorddev/raster-react\"")) {
   fail("About Notes must use the Raster Accordion");
+}
+if (!aboutPage.includes("github.com/Noord-Ventures/raster") || aboutPage.includes("rennvaldes/raster")) {
+  fail("About colophon must display github.com/Noord-Ventures/raster");
+}
+if (facts.includes("rennvaldes/raster") || !facts.includes("https://github.com/Noord-Ventures/raster")) {
+  fail("About facts.person.repo must be https://github.com/Noord-Ventures/raster");
+}
+if (facts.includes("AI lab") || facts.includes("Swiss Style")) {
+  fail("About must not say AI lab or Swiss Style");
+}
+if (!facts.includes("Frontier Design Lab") || !facts.includes("International Typographic Style")) {
+  fail("About must name Noord Frontier Design Lab and International Typographic Style");
+}
+if (!facts.includes("Simple, Beautiful, Opinionated, Elegant, Clear, Legible, Solid, Versatile, Customizable, Minimal")) {
+  fail("About Notes must name Renato's ten principles");
 }
 const nestCss = readFileSync(join(root, "packages/core/css/components/nest.css"), "utf8");
 const catalogPage = readFileSync(join(root, "apps/www/app/components/page.tsx"), "utf8");

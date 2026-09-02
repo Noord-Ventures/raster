@@ -25,6 +25,11 @@ const reactUsage: Record<string, string> = {
 
 <Button>Primary action</Button>
 <Button variant="ghost" size="sm">Secondary</Button>`,
+  callout: `import { Callout } from "@/components/raster/callout";
+
+<Callout>
+  <p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p>
+</Callout>`,
   "button-group": `import { ButtonGroup } from "@/components/raster/button-group";
 import { Button } from "@/components/raster/button";
 

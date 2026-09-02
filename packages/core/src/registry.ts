@@ -792,6 +792,7 @@ export const rasterComponents: RasterComponent[] = [
     category: "feedback",
     classes: ["rs-callout"],
     css: ["components/callout.css"],
+    react: "components/callout.tsx",
     snippet: `<div class="rs-callout"><p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p></div>`,
   },
   {

@@ -21,7 +21,7 @@ export function SiteFooter() {
           <p>
             Raster is built and designed in the north by <a href="https://noord.dev">Noord</a>.
           </p>
-          <p>Inspired by Dutch and Swiss modernism — the International Typographic Style.</p>
+          <p>Inspired by the International Typographic Style.</p>
           <p>Free and open source under the MIT license.</p>
         </div>
       </div>

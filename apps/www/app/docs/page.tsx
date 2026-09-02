@@ -17,7 +17,7 @@ export default function DocsPage() {
           <header className="cover" style={{ paddingBottom: 8 }}>
             <h1 className="rs-t-display">Getting started</h1>
             <p className="rs-t-sub">
-              CSS you own. The door is {DOOR.replace("https://", "")}.
+              CSS you own. CSS-first, no Radix, no Tailwind. The door is {DOOR.replace("https://", "")}.
             </p>
           </header>
 
@@ -28,7 +28,8 @@ export default function DocsPage() {
           styles, component classes), the Inter files,{" "}
           <code className="rs-code">index.html</code> (a specimen page, not a shell), and{" "}
           <code className="rs-code">raster.json</code>. The specimen already links the
-          stylesheet. Set <code className="rs-code">data-theme=&quot;dark&quot;</code> on the
+          stylesheet. Raster is CSS-first: plain <code className="rs-code">rs-*</code>{" "}
+          classes on plain markup. Set <code className="rs-code">data-theme=&quot;dark&quot;</code> on the
           root element for the dark scheme.
         </p>
 
@@ -38,7 +39,8 @@ export default function DocsPage() {
           Copies React source into <code className="rs-code">components/raster/</code>.
           Registry dependencies install with it; dialog pulls button. CSS-only components need
           no code, the classes are already in raster.css;{" "}
-          <code className="rs-code">add</code> prints the snippet.
+          <code className="rs-code">add</code> prints the snippet. The registry lives at{" "}
+          <code className="rs-code">{HOST}/r/&lt;name&gt;.json</code>.
         </p>
 
         <h2 className="section-label">Using shadcn&apos;s CLI instead</h2>

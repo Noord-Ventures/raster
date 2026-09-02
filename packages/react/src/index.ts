@@ -1,4 +1,5 @@
 export { cx } from "./cx";
+export { rs } from "./rs";
 export {
   Icon,
   IconCatalog,
@@ -21,6 +22,7 @@ export {
 export { Button, type ButtonProps } from "./components/button";
 export { Badge, type BadgeProps } from "./components/badge";
 export { Card, CardInner, CardLabel, CardTitle, CardBody } from "./components/card";
+export { Callout, type CalloutProps } from "./components/callout";
 export { Input, type InputProps } from "./components/input";
 export { Checkbox, type CheckboxProps } from "./components/checkbox";
 export { RadioGroup, Radio, type RadioGroupProps, type RadioProps } from "./components/radio";

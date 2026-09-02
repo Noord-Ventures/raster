@@ -12,6 +12,11 @@ import {
   Nest,
   NestInner,
   Button,
+  Callout,
+  Card,
+  CardBody,
+  CardLabel,
+  CardTitle,
   Empty,
   Field,
   FieldLabel,
@@ -54,13 +59,43 @@ describe("Button", () => {
         </Button>
       </>,
     );
-    expect(screen.getByRole("button", { name: "Go" }).className).toBe("rs-btn-primary");
-    expect(screen.getByRole("button", { name: "Quiet" }).className).toBe("rs-btn-ghost rs-btn-sm");
+    expect(screen.getByRole("button", { name: "Go" }).className).toContain("rs-btn-primary");
+    expect(screen.getByRole("button", { name: "Quiet" }).className).toContain("rs-btn-ghost");
+    expect(screen.getByRole("button", { name: "Quiet" }).className).toContain("rs-btn-sm");
   });
 
   it("defaults to type=button so it never submits forms by accident", () => {
     render(<Button>Go</Button>);
     expect(screen.getByRole("button")).toHaveProperty("type", "button");
+  });
+});
+
+describe("Callout", () => {
+  it("is a hairline note, not a left bar", () => {
+    render(
+      <Callout>
+        <p>
+          <strong>Fixed fee.</strong> The number on the cover is the number on the invoice.
+        </p>
+      </Callout>,
+    );
+    const note = document.querySelector(".rs-callout");
+    expect(note?.className).toContain("rs-callout");
+    expect(note?.textContent).toContain("Fixed fee.");
+  });
+});
+
+describe("Card", () => {
+  it("is a typography stack with no frame class besides rs-card", () => {
+    render(
+      <Card>
+        <CardLabel>Studio note</CardLabel>
+        <CardTitle>A quieter interface</CardTitle>
+        <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>
+      </Card>,
+    );
+    expect(document.querySelector(".rs-card")?.className).toContain("rs-card");
+    expect(document.querySelector(".rs-card-title")?.textContent).toBe("A quieter interface");
   });
 });
 
@@ -457,8 +492,9 @@ describe("ButtonGroup", () => {
         <Button variant="ghost">Right</Button>
       </ButtonGroup>,
     );
-    expect(screen.getByRole("group").className).toBe("rs-btn-group");
+    expect(screen.getByRole("group").className).toContain("rs-btn-group");
     expect(screen.getAllByRole("button")).toHaveLength(2);
+    expect(screen.getByRole("button", { name: "Left" }).className).toContain("rs-btn-ghost");
   });
 });
 

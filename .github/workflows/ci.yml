@@ -231,6 +231,13 @@ jobs:
           grep -q 'SpecimenKit' apps/www/app/page.tsx
           grep -q 'SpecimenPrinciples' apps/www/app/page.tsx
           grep -q 'POSTER' apps/www/app/page.tsx
+          grep -q 'text: "Beautiful"' apps/www/app/specimen-laws.ts
+          grep -q 'text: "Minimal"' apps/www/app/specimen-laws.ts
+          grep -q 'Ten words.' apps/www/app/specimen-laws.ts
+          if grep -n 'Nine words.' apps/www/app/specimen-laws.ts; then
+            echo "Homepage principles are ten words, Beautiful at 02, Minimal last"
+            exit 1
+          fi
           grep -q 'specimen-index' apps/www/app/specimen-principles.tsx
           if ! awk '/^\.specimen-n \{/,/^\}/' apps/www/app/specimen.css | grep -q 'font-size: 12px'; then
             echo "Field numerals must stay a 12px index, not a poster numeral"
@@ -509,7 +516,11 @@ jobs:
             exit 1
           fi
           grep -q 'type.foundry' "$facts"
-          grep -q 'AI lab' "$facts"
+          grep -q 'Frontier Design Lab' "$facts"
+          if grep -n 'AI lab' "$facts"; then
+            echo "About colophon must not say AI lab"
+            exit 1
+          fi
           grep -q 'Alkmaar' "$facts"
           grep -q 'Silicon Valley' "$facts"
           grep -q 'designed and built' "$facts"
@@ -687,6 +698,16 @@ jobs:
           fi
           grep -q 'href: "/about"' apps/www/components/site-chrome.tsx
           grep -q 'label: "About"' apps/www/components/site-chrome.tsx
+          grep -q 'github.com/Noord-Ventures/raster' "$page"
+          if grep -n 'rennvaldes/raster' "$page" "$facts"; then
+            echo "About GitHub URL must be github.com/Noord-Ventures/raster"
+            exit 1
+          fi
+          grep -q '74 components' README.md
+          if grep -nE '75 components|78 components|79 components' README.md; then
+            echo "README catalogue must be catalogComponents length (74), not registry JSON"
+            exit 1
+          fi
           if grep -n 'border-left' "$css"; then
             echo "About L/R box margins are inset --grid-line, not a border-left rule"
             exit 1
@@ -876,6 +897,7 @@ jobs:
           fi
           node apps/www/scripts/check-mobile.mjs
           node apps/www/scripts/check-swag.mjs
+          node apps/www/scripts/check-stylex.mjs
           grep -q 'MobileToc' apps/www/components/docs-nav/index.tsx
           grep -q '44pt' apps/www/components/docs-nav/FEATURE.md
           grep -q 'viewportFit' apps/www/app/layout.tsx
