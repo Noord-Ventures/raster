@@ -37,7 +37,7 @@ export const lead = {
 
 export const usage = {
   kicker: "Usage",
-  intro: "Packages publishing soon. The command is a reference until the packages resolve. Then: run the CLI, link the stylesheet in the head, then put a control in the body.",
+  intro: "Not on npm. Link the stylesheet in the head, then put a control in the body. The CLI is not a path this ship offers.",
   commandWhere: "Terminal",
   command: COMMAND,
   htmlWhere: "Head",
@@ -45,9 +45,9 @@ export const usage = {
   controlWhere: "Body",
   control: `<button class="rs-btn-primary">Save</button>`,
   landing:
-    "Init writes index.html — the specimen the CLI generates. That file is the one-shot Raster landing, meant to read like getraster.com: poster type, the 204 grid, the laws. It is not a thin shell.",
+    "index.html is the one-shot Raster landing, meant to read like getraster.com: poster type, the 204 grid, the laws. It is not a thin shell.",
   files:
-    "The same command writes styles/raster.css, Inter, and raster.json. There is no CDN. Restyle the specimen toward the live home with the files on disk.",
+    "styles/raster.css, Inter, and raster.json live in this repo. There is no CDN. Restyle the specimen toward the live home with the files on disk.",
   after: "Dark scheme: set data-theme=\"dark\" on the root element.",
 };
 
@@ -320,11 +320,11 @@ export const program = {
 export const notes = [
   {
     q: "How do I install Raster?",
-    a: `Packages publishing soon. When they resolve, ${COMMAND} writes styles/raster.css, Inter, raster.json, and a specimen page (index.html). Link the stylesheet, or import it in your root layout. There is no CDN.`,
+    a: "Not on npm. Link styles/raster.css from this repo, or import @noorddev/raster/css after publish. There is no CDN and no CLI install on this ship.",
   },
   {
     q: "How do I add a component?",
-    a: "Packages publishing soon. Then: npx @noorddev/raster-cli add button dialog. React source lands in components/raster/. CSS-only components need no file; the classes are already in raster.css. The registry is at getraster.com/r/<name>.json.",
+    a: "Not on npm. CSS-only components need no file; the classes are already in raster.css. React source lives in this repo under packages/react. The registry is at getraster.com/r/<name>.json.",
   },
   {
     q: "How do I use Raster with Next.js or Vercel?",

@@ -114,8 +114,11 @@ if (!ifIndex.includes('className="cover"')) {
 if (!block.includes("writeText") || !block.includes("Copied") || !block.includes("aria-live")) {
   fail("Code blocks must copy on the control and confirm on themselves");
 }
-if (!page.includes("CopyControl") || !page.includes("specimen-command-row")) {
-  fail("Homepage command must carry the same copy control");
+if (page.includes("npx @noorddev/raster-cli")) {
+  fail("Homepage must not teach unpublished raster-cli as a working path");
+}
+if (!page.includes("Not on npm") || !page.includes("PACKAGES_PUBLISHED")) {
+  fail("Homepage must hide the install CTA while packages are unpublished");
 }
 if (specimen.includes("align-items: flex-start") && specimen.includes(".specimen-command-row")) {
   const row = specimen.slice(specimen.indexOf(".specimen-command-row {"), specimen.indexOf("}", specimen.indexOf(".specimen-command-row {")));

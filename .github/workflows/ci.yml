@@ -273,12 +273,16 @@ jobs:
             echo "01 must not be a larger typographic spot"
             exit 1
           fi
-          grep -q 'CopyControl' apps/www/app/page.tsx
           grep -q 'specimen-command-kicker' apps/www/app/page.tsx
-          grep -q 'Packages publishing soon' apps/www/app/page.tsx
+          grep -q 'Not on npm' apps/www/app/page.tsx
           grep -q 'PACKAGES_PUBLISHED' apps/www/app/page.tsx
-          if grep -n 'specimen-command-kicker">Install' apps/www/app/page.tsx; then
-            echo "Home must not frame COMMAND as a live Install until packages publish"
+          grep -q 'PACKAGES_PUBLISHED = false' apps/www/app/specimen.ts
+          if grep -n 'npx @noorddev/raster-cli' apps/www/app/page.tsx apps/www/app/docs/page.tsx apps/www/app/about/page.tsx apps/www/app/about/facts.ts; then
+            echo "Stranger surfaces must not teach unpublished raster-cli"
+            exit 1
+          fi
+          if grep -n 'Packages publishing soon' apps/www/app/page.tsx; then
+            echo "Home must hide the install CTA, not a soft publishing-soon that still looks runnable"
             exit 1
           fi
           node -e '

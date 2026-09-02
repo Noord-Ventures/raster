@@ -29,7 +29,7 @@ Ten words. Sentence case. No periods.
 |---|---|---|
 | `packages/core` | `@noorddev/raster` | Tokens, per-component CSS, vendored Inter, the typed registry, and the build that generates `raster.css`, `tokens.css`, the token JSON, and the 0.1 compat layer |
 | `packages/react` | `@noorddev/raster-react` | React components styled by `@noorddev/raster` CSS (`@noorddev/raster-react` depends on `@noorddev/raster`). Button, Callout, and Card also ship StyleX leaves mapped to those tokens — CSS-first default; StyleX is a compiler for those leaves, not a claim that Raster has no compiler. |
-| `packages/cli` | `@noorddev/raster-cli` | `npx @noorddev/raster-cli init` / `add` / `list` / `tokens`. Bundles the registry; works offline |
+| `packages/cli` | `@noorddev/raster-cli` | Unpublished. `init` / `add` / `list` / `tokens` after npm publish. Bundles the registry; works offline |
 | `registry/` | | Generated registry items in the shadcn registry-item schema |
 | `apps/www` | | Documentation site: gallery, per-component docs, tokens, served registry |
 
@@ -37,20 +37,9 @@ Ten words. Sentence case. No periods.
 
 Raster is CSS-first. Plain `rs-*` classes on plain markup. React is optional. No Radix, no Tailwind. Dependency-free means the CSS path: no Radix, no Tailwind — not “no compiler.”
 
-Packages publishing soon. `@noorddev/raster`, `@noorddev/raster-react`, and `@noorddev/raster-cli` are not on npm yet. Commands below are reference until they resolve.
+**Not on npm.** `@noorddev/raster`, `@noorddev/raster-react`, and `@noorddev/raster-cli` are unpublished. This ship does not offer a CLI install. Work from this repo (`pnpm install` / `pnpm build` / `pnpm dev`). Do not teach an unpublished package name as a working path.
 
-**CLI.**
-
-```sh
-npx @noorddev/raster-cli init            # writes styles/raster.css, Inter, index.html (specimen), and raster.json
-npx @noorddev/raster-cli add button dialog
-```
-
-`add` copies React source into `components/raster/`. Registry dependencies install with it. CSS-only components need no code; the classes are in raster.css.
-
-`init --compat` also writes the 0.1 class-name layer. `init --registry <url>` (or `raster.json.registry`) points `add` at a remote registry for out-of-band updates.
-
-**Plain CSS.** Import `@noorddev/raster/css` (or link the file the CLI wrote) and use the `rs-*` classes. Set `data-theme="dark"` on the root element for the dark scheme.
+**Plain CSS.** From this repo, use `packages/core/css/raster.css` (exported as `@noorddev/raster/css` after publish) and the `rs-*` classes. Set `data-theme="dark"` on the root element for the dark scheme.
 
 **Tokens.**
 
@@ -105,7 +94,7 @@ Inter, SIL OFL 1.1. Variable, latin + latin-ext, vendored next to the CSS. Syste
 
 ## Coming from 0.1
 
-0.2 renamed every class to the `rs-` prefix and scoped table styles to `.rs-table`. Sites on the 0.1 names keep working by linking the generated `css/raster-compat.css` after `raster.css`, or via `npx @noorddev/raster-cli init --compat`. The rename map is `packages/core/src/legacy.ts`.
+0.2 renamed every class to the `rs-` prefix and scoped table styles to `.rs-table`. Sites on the 0.1 names keep working by linking the generated `css/raster-compat.css` after `raster.css`. The rename map is `packages/core/src/legacy.ts`.
 
 ---
 
