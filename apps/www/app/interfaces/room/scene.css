@@ -269,6 +269,8 @@
     overflow-x: hidden;
     position: relative;
   }
+  .sc-room > .if-v1-status { grid-row: 1; }
+  .sc-room > .if-v1-nav { grid-row: 2; }
   .sc-room-rail,
   .sc-room-chat,
   .sc-room-dock,
@@ -276,6 +278,8 @@
     grid-column: auto;
     grid-row: auto;
   }
+  .sc-room[data-pane="channels"] > .sc-room-rail { grid-row: 3; }
+  .sc-room > .sc-room-dock { grid-row: 4; }
   .sc-room-brand,
   .sc-room-label,
   .sc-room-voice,
@@ -294,8 +298,14 @@
     overflow: auto;
     background: var(--bg);
   }
-  .sc-room-ch-hash,
+  .sc-room-ch-hash { display: inline; }
   .sc-room-v1-copy { display: block; }
+  .sc-room-ch,
+  .sc-room-person {
+    box-sizing: border-box;
+    width: auto;
+    align-self: stretch;
+  }
   .sc-room-ch {
     display: flex;
     flex-direction: column;
@@ -333,7 +343,7 @@
   .sc-room-dock {
     gap: 8px;
     min-height: 56px;
-    padding: 10px 12px;
+    padding: 10px 16px 16px;
   }
   .sc-room-field,
   .sc-room-dock button {
@@ -341,7 +351,13 @@
     min-height: 36px;
     font-size: 13px;
   }
-  .sc-room-dock button { min-width: 84px; font-size: 12px; }
+  .sc-room-dock button { min-width: 72px; font-size: 12px; }
+  .sc-room-dock button:disabled {
+    opacity: 1;
+    background: var(--text);
+    color: var(--bg);
+    cursor: default;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

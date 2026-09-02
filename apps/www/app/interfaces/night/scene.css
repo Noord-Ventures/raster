@@ -148,6 +148,9 @@
   }
   .sc-night-v1-mid { display: inline; font-weight: 500; }
   .sc-night-unit {
+    box-sizing: border-box;
+    width: auto;
+    align-self: stretch;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

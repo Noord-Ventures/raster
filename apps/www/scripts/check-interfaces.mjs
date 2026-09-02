@@ -468,6 +468,15 @@ if (!linePhone.includes("width: 100%") || !linePhone.includes(".sc-ai-composer")
   console.error("Line phone V1 composer must fill the dock, not a missing measure");
   process.exit(1);
 }
+const lineSendOff = linePhone.match(/\.sc-ai-send:disabled\s*\{[^}]*\}/);
+if (!lineSendOff || !/opacity:\s*1/.test(lineSendOff[0])) {
+  console.error("Line phone V1 Send stays ink when the field is empty");
+  process.exit(1);
+}
+if (!linePhone.includes("grid-row: 1") || !linePhone.includes("grid-row: 2")) {
+  console.error("Line phone V1 must pin status and nav above the inbox");
+  process.exit(1);
+}
 
 const pressScene = readFileSync(join(dir, "press", "scene.css"), "utf8");
 const pressPhoneAt = pressScene.lastIndexOf("@media (max-width: 640px)");
@@ -512,6 +521,19 @@ if (!nightMap.includes("lookAt(LOOK_X, LOOK_Y, LOOK_Z)") || !nightMap.includes("
 }
 if (!nightMap.includes("const CITY = 5") || !nightMap.includes("const PITCH = 2.2")) {
   console.error("Night field must instance a neighborhood of blocks, not three towers");
+  process.exit(1);
+}
+
+const roomScene = readFileSync(join(dir, "room", "scene.css"), "utf8");
+const roomPhoneAt = roomScene.lastIndexOf("@media (max-width: 640px)");
+const roomPhone = roomPhoneAt >= 0 ? roomScene.slice(roomPhoneAt) : "";
+if (!roomPhone.includes("width: auto") || !roomPhone.includes("align-self: stretch")) {
+  console.error("Room phone V1 channels must shrink to the pane, not 100% plus side margin");
+  process.exit(1);
+}
+const roomSendOff = roomPhone.match(/\.sc-room-dock button:disabled\s*\{[^}]*\}/);
+if (!roomSendOff || !/opacity:\s*1/.test(roomSendOff[0])) {
+  console.error("Room phone V1 Send stays ink when the field is empty");
   process.exit(1);
 }
 
