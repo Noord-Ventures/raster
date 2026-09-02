@@ -226,6 +226,7 @@
   .sc-wall-card:not(.sc-wall-v1),
   .sc-wall-who,
   .sc-wall-meta,
+  .sc-wall-open em,
   .sc-wall-open img { display: none; }
   .sc-wall-feed { min-height: 0; overflow: hidden; }
   .sc-wall-stream {

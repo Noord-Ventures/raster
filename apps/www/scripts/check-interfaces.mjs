@@ -449,6 +449,10 @@ if (wallPhone.includes("max-height: 168px") || wallPhone.includes("height: 168px
   console.error("Wall phone V1 must not show post photos");
   process.exit(1);
 }
+if (!wallPhone.includes("sc-wall-open em") || !wallPhone.includes("display: none")) {
+  console.error("Wall phone V1 must hide likes/comments meta");
+  process.exit(1);
+}
 if (!wallBoard.includes("Aziez") || !wallBoard.includes("Gianpiero") || !wallBoard.includes("On the rail before the street.")) {
   console.error("Wall phone V1 must keep all four keepers in the text feed");
   process.exit(1);
@@ -458,6 +462,10 @@ const lineScenePhoneAt = lineScene.lastIndexOf("@media (max-width: 640px)");
 const linePhone = lineScenePhoneAt >= 0 ? lineScene.slice(lineScenePhoneAt) : "";
 if (!linePhone.includes('data-pane="thread"') || !linePhone.includes("display: none")) {
   console.error("Line phone must hide the chat rail on the thread pane");
+  process.exit(1);
+}
+if (!linePhone.includes("width: 100%") || !linePhone.includes(".sc-ai-composer")) {
+  console.error("Line phone V1 composer must fill the dock, not a missing measure");
   process.exit(1);
 }
 

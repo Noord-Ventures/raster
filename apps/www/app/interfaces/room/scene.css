@@ -266,6 +266,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto auto minmax(0, 1fr) auto;
     overflow: hidden;
+    overflow-x: hidden;
     position: relative;
   }
   .sc-room-rail,

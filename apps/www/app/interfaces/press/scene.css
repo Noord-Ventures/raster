@@ -118,6 +118,7 @@
 }
 .sc-dash-metric-short { display: none; }
 .sc-dash-job-short { display: none; }
+.sc-dash-spot { color: var(--if-spot); }
 
 .sc-dash-split {
   display: grid;
