@@ -525,13 +525,23 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 }
 .cover .rs-t-sub { margin-top: 16px; }
 
-/* Catalog index (Figma Components · Raster 2:2): 592 measure, one 388
-   card column, 204 demo module. Do not paste Figma nesting. */
+/* Catalog index: 388-wide cards, 204 demo module. Auto-fill columns —
+   never a single 388 track. Phone stays one column. Do not paste nesting. */
 .catalog-page .catalog-group { margin-top: 40px; }
-.catalog-page .gallery { grid-template-columns: 388px; }
+.catalog-page .site-content {
+  width: auto;
+  max-width: none;
+  flex: 1;
+  min-width: 0;
+}
 
 /* ── Component gallery: cards span two whole modules ── */
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 24px 0 48px; }
+@media (min-width: 1100px) {
+  .catalog-page .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 388px));
+  }
+}
 @media (max-width: 480px) {
   .gallery { grid-template-columns: 1fr; }
   .catalog-page .gallery { grid-template-columns: 1fr; }

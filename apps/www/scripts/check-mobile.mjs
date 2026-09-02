@@ -200,6 +200,20 @@ const componentsPage = readFileSync(join(root, "apps/www/app/components/page.tsx
 if (!componentsPage.includes("catalog-page")) {
   fail("Components index must mark catalog-page so the two grids paint");
 }
+if (site.includes(".catalog-page .gallery { grid-template-columns: 388px; }")) {
+  fail("Catalog gallery must auto-fill columns, not lock one 388 track");
+}
+if (!site.includes(".gallery { display: grid; grid-template-columns: repeat(auto-fill, 388px);")) {
+  fail("Component gallery cards stay 388-wide auto-fill tracks");
+}
+const catalogPhoneAt = site.lastIndexOf("@media (max-width: 480px)");
+const catalogPhone = catalogPhoneAt >= 0 ? site.slice(catalogPhoneAt, catalogPhoneAt + 220) : "";
+if (!catalogPhone.includes(".catalog-page .gallery { grid-template-columns: 1fr; }")) {
+  fail("Catalog gallery stays one column at 480");
+}
+if (!site.includes(".catalog-page .gallery-demo") || !/height:\s*204px/.test(site.slice(site.indexOf(".catalog-page .gallery-demo")))) {
+  fail("Catalog demos stay a 204 module");
+}
 const usageBlock = facts.slice(facts.indexOf("export const usage"), facts.indexOf("export const license"));
 if (usageBlock.includes("paste this in the document head") || aboutPage.includes("paste this in the document head")) {
   fail("About Usage must not tell people to paste the CLI or a button into the head");
