@@ -203,8 +203,14 @@ if (!componentsPage.includes("catalog-page")) {
 if (site.includes(".catalog-page .gallery { grid-template-columns: 388px; }")) {
   fail("Catalog gallery must auto-fill columns, not lock one 388 track");
 }
+if (site.includes("one 388 card column")) {
+  fail("Catalog index is two 388 columns, not one");
+}
 if (!site.includes(".gallery { display: grid; grid-template-columns: repeat(auto-fill, 388px);")) {
   fail("Component gallery cards stay 388-wide auto-fill tracks");
+}
+if (!/catalog-page \.site-content \{[^}]*width:\s*min\(796px, 100%\)/s.test(site)) {
+  fail("Catalog index measure must be 796 so two 388 cards fit, same as icons");
 }
 const catalogPhoneAt = site.lastIndexOf("@media (max-width: 480px)");
 const catalogPhone = catalogPhoneAt >= 0 ? site.slice(catalogPhoneAt, catalogPhoneAt + 220) : "";
