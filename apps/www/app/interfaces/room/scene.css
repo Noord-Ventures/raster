@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: column;
 }
-.sc-room-brand { padding: 16px 20px 8px; }
+.sc-room-brand { padding: 12px 16px 6px; }
 .sc-room-voice {
   margin: 6px 0 0;
   font-size: 12px;
@@ -25,7 +25,7 @@
   color: var(--text-secondary);
 }
 .sc-room-label {
-  margin: 12px 20px 4px;
+  margin: 10px 16px 4px;
   font-size: 11px;
   font-weight: 600;
   color: var(--text-secondary);
@@ -49,15 +49,15 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 8px 20px;
-  min-height: 36px;
+  padding: 6px 16px;
+  min-height: 32px;
 }
 .sc-room-person {
   display: grid;
   grid-template-columns: 28px minmax(0, 1fr);
   gap: 10px;
   align-items: center;
-  padding: 8px 20px;
+  padding: 6px 16px;
 }
 .sc-room-ch b,
 .sc-room-person b,
@@ -104,7 +104,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 48px;
+  min-height: 40px;
   padding: 0 16px;
   border-bottom: 1px solid var(--divider);
   font-size: 13px;
@@ -123,7 +123,7 @@
   grid-template-columns: 28px minmax(0, 1fr);
   gap: 10px;
   width: 100%;
-  padding: 10px 16px;
+  padding: 8px 16px;
   border: 0;
   background: transparent;
   color: inherit;

@@ -22,7 +22,8 @@ export type { DrawnName, IconAlias, IconGroup } from "./icon-marks";
  * Filled: same figures, solid closed geometry, currentColor. Not a second library.
  * Cap butt, join miter, no rx. Hairline stays 1 CSS px at 12, 16, and 24.
  * Copied is check. Accordion down is chevron-right rotated 90°.
- * First five marks (copy, copied, chevron-left, chevron-right, close) stay as drawn.
+ * First five marks (copy, copied, chevron-left, chevron-right, close) stay as drawn,
+ * except L/R chevrons take a measured +0.25y optical nudge toward 8,8.
  */
 export const ICON_STROKE = 1;
 export const ICON_VIEWBOX = 16;

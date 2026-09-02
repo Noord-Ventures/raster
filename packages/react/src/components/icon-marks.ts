@@ -4,6 +4,7 @@
  * Stroke 1, currentColor, fill none on the line set, cap butt, join miter, no rx.
  * Filled kinship fills closed geometry of the same figures.
  * The first five marks stay exactly as drawn unless a measured miss.
+ * Chevron left/right: +0.25y optical nudge toward center 8,8. No filled set.
  */
 
 export type MarkEl =
@@ -180,8 +181,8 @@ export const marks: Record<DrawnName, MarkEl[]> = {
   /* Vera — do not recut */
   copy: [p("M6.5 2.5 H13.5 V9.5"), r(2.5, 6.5, 7, 7)],
   copied: [p("M3.5 8.5 L6.5 11.5 L12.5 4.5")],
-  "chevron-left": [p("M10.5 3.5 L5.5 8 L10.5 12.5")],
-  "chevron-right": [p("M5.5 3.5 L10.5 8 L5.5 12.5")],
+  "chevron-left": [p("M10.5 3.75 L5.5 8.25 L10.5 12.75")],
+  "chevron-right": [p("M5.5 3.75 L10.5 8.25 L5.5 12.75")],
   close: [p("M4.5 4.5 L11.5 11.5"), p("M11.5 4.5 L4.5 11.5")],
 
   /* Navigation — optical box ~3.5–12.5, center 8,8 */

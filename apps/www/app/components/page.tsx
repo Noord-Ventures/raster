@@ -15,8 +15,8 @@ export default function ComponentsPage() {
     <>
       <div className="site-layout catalog-page">
         <DocsNav />
-        <main className="site-content-wide">
-          <header className="cover" style={{ maxWidth: 592 }}>
+        <main className="site-content">
+          <header className="cover">
             <h1 className="rs-t-display">Components</h1>
             <p className="rs-t-sub">The control, the name, a short law.</p>
           </header>
@@ -25,10 +25,10 @@ export default function ComponentsPage() {
             if (items.length === 0) return null;
             return (
               <section key={category} id={category}>
-                <h2 className="rs-t-title" style={{ marginTop: 40 }}>
+                <h2 className="rs-t-title catalog-group">
                   {category.charAt(0).toUpperCase() + category.slice(1)}
                 </h2>
-                <div className="gallery" style={{ paddingBottom: 8 }}>
+                <div className="gallery">
                   {items.map((c) => (
                     <div key={c.name} className="gallery-item">
                       <div className="gallery-demo">

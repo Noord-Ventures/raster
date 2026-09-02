@@ -284,15 +284,14 @@ describe("Icon", () => {
         <Icon name="close" />
       </>,
     );
-    expect(container.querySelector('path[d="M10.5 3.5 L5.5 8 L10.5 12.5"]')).toBeTruthy();
-    expect(container.querySelector('path[d="M5.5 3.5 L10.5 8 L5.5 12.5"]')).toBeTruthy();
+    expect(container.querySelector('path[d="M10.5 3.75 L5.5 8.25 L10.5 12.75"]')).toBeTruthy();
+    expect(container.querySelector('path[d="M5.5 3.75 L10.5 8.25 L5.5 12.75"]')).toBeTruthy();
     expect(container.querySelector('path[d="M4.5 4.5 L11.5 11.5"]')).toBeTruthy();
     expect(container.querySelector('path[d="M11.5 4.5 L4.5 11.5"]')).toBeTruthy();
   });
 
   it("ships a complete family on the same 16 module", () => {
-    expect(iconNames.length).toBeGreaterThanOrEqual(80);
-    expect(iconNames.length).toBeLessThanOrEqual(160);
+    expect(iconNames.length).toBe(151);
     const { container } = render(
       <>
         {iconNames.map((name) => (
@@ -316,7 +315,7 @@ describe("Icon", () => {
     const { container, rerender } = render(<Icon name="success" />);
     expect(container.querySelector('path[d="M3.5 8.5 L6.5 11.5 L12.5 4.5"]')).toBeTruthy();
     rerender(<Icon name="chevron-down" />);
-    expect(container.querySelector('path[d="M5.5 3.5 L10.5 8 L5.5 12.5"]')).toBeTruthy();
+    expect(container.querySelector('path[d="M5.5 3.75 L10.5 8.25 L5.5 12.75"]')).toBeTruthy();
     expect(container.querySelector('g[transform="rotate(90 8 8)"]')).toBeTruthy();
     rerender(<Icon name="chevron-up" />);
     expect(container.querySelector('g[transform="rotate(270 8 8)"]')).toBeTruthy();

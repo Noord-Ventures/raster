@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: column;
 }
-.sc-wall-brand { padding: 16px 20px 8px; }
+.sc-wall-brand { padding: 12px 16px 6px; }
 .sc-wall-voice {
   margin: 6px 0 0;
   font-size: 12px;
@@ -25,7 +25,7 @@
   color: var(--text-secondary);
 }
 .sc-wall-label {
-  margin: 12px 20px 4px;
+  margin: 10px 16px 4px;
   font-size: 11px;
   font-weight: 600;
   color: var(--text-secondary);
@@ -43,7 +43,7 @@
   color: var(--text);
   text-align: left;
   border-radius: 0;
-  padding: 10px 20px;
+  padding: 8px 16px;
   cursor: pointer;
   font-family: inherit;
   transition: color var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease);
@@ -89,8 +89,8 @@
 .sc-wall-head {
   display: flex;
   align-items: center;
-  min-height: 48px;
-  padding: 0 16px;
+  min-height: 40px;
+  padding: 0 12px;
   border-bottom: 1px solid var(--divider);
   font-size: 13px;
   font-weight: 600;
@@ -101,12 +101,12 @@
   min-height: 0;
   overflow: auto;
   column-count: 2;
-  column-gap: 12px;
-  padding: 12px;
+  column-gap: 8px;
+  padding: 8px;
 }
 .sc-wall-card {
   break-inside: avoid;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   border: 1px solid var(--divider);
   border-radius: var(--radius-sm);
   background: var(--bg);

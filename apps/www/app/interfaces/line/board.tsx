@@ -116,7 +116,7 @@ export function Board() {
       <aside className="sc-ai-rail" aria-label="Chats">
         <div className="sc-ai-brand">
           <Brand slug="line" />
-          <p className="sc-ai-voice">The next line</p>
+          <p className="sc-ai-voice">The next line.</p>
         </div>
         <button type="button" className="rs-btn-ghost sc-ai-new" onClick={fresh}>
           <Icon name="plus" size={16} />
@@ -173,7 +173,7 @@ export function Board() {
           <div className="sc-ai-measure">
             {messages.length === 0 ? (
               <div className="sc-ai-empty">
-                <p className="sc-ai-hello">The next line</p>
+                <p className="sc-ai-hello">The next line.</p>
                 <div className="sc-ai-hints">
                   {HINTS.map((hint) => (
                     <button key={hint} type="button" className="sc-ai-hint" onClick={() => send(hint)}>

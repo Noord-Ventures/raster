@@ -176,7 +176,11 @@ export function Board() {
                 ))}
               </div>
             </div>
-            <div className="sc-evening-stores" aria-label="Stores">
+            <p className="sc-evening-kitchens if-ico-row">
+              <Icon name="building" size={12} />
+              Kitchens
+            </p>
+            <div className="sc-evening-stores" aria-label="Kitchens">
               {rooms.length === 0 ? (
                 <p className="sc-evening-empty">No kitchens on that filter.</p>
               ) : (
