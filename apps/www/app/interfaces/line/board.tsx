@@ -116,7 +116,7 @@ export function Board() {
       <aside className="sc-ai-rail" aria-label="Chats">
         <div className="sc-ai-brand">
           <Brand slug="line" />
-          <p className="sc-ai-voice">The next line.</p>
+          <p className="sc-ai-voice">The next line</p>
         </div>
         <button type="button" className="rs-btn-ghost sc-ai-new" onClick={fresh}>
           <Icon name="plus" size={16} />

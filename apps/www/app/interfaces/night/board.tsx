@@ -30,7 +30,7 @@ export function Board() {
         </div>
         <p className="sc-night-label if-ico-row">
           <Icon name="truck" size={12} />
-          Vans
+          Fleet
         </p>
         {UNITS.map((row) => (
           <button
