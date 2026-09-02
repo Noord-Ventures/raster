@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { CopyControl } from "@/components/code-block";
-import { COMMAND, LAW, POSTER, WORD } from "./specimen";
+import { COMMAND, LAW, PACKAGES_PUBLISHED, POSTER, WORD } from "./specimen";
 import { SpecimenKit } from "./specimen-kit";
 import { SpecimenPrinciples } from "./specimen-principles";
 import "./specimen.css";
@@ -24,13 +24,19 @@ export default function Home() {
         </section>
 
         <section className="specimen-cell specimen-cell-command">
-          <p className="specimen-command-kicker">Install</p>
+          <p className="specimen-command-kicker">
+            {PACKAGES_PUBLISHED ? "Install" : "Packages publishing soon"}
+          </p>
           <div className="specimen-command-row">
             <p className="specimen-command">{COMMAND}</p>
             <CopyControl text={COMMAND} />
           </div>
           <p className="specimen-command-meta">
-            <Link href="/docs">Getting started</Link>
+            {PACKAGES_PUBLISHED ? (
+              <Link href="/docs">Getting started</Link>
+            ) : (
+              <span>Reference until the packages resolve</span>
+            )}
             <span aria-hidden="true"> · </span>
             MIT
           </p>

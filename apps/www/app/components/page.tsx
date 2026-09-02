@@ -3,8 +3,12 @@ import type { Metadata } from "next";
 import { rasterCategories, catalogComponents } from "@noorddev/raster";
 import { DocsNav } from "@/components/docs-nav";
 import { Preview } from "@/components/preview";
+import { DOOR } from "../specimen";
 
-export const metadata: Metadata = { title: "Components" };
+export const metadata: Metadata = {
+  title: "Components",
+  alternates: { canonical: `${DOOR}/components/` },
+};
 
 export default function ComponentsPage() {
   return (

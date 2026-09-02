@@ -5,9 +5,9 @@
   "title": "Crumb bar",
   "description": "Fixed 72px bar. Transparent at rest; scrolled state adds paper, a bottom 1px, and the trail.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/breadcrumbs.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/breadcrumbs.json"
   ],
   "files": [
     {

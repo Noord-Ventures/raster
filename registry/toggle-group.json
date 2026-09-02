@@ -5,9 +5,9 @@
   "title": "Toggle group",
   "description": "Joined toggles, one pressed, 1px between.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/toggle.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/toggle.json"
   ],
   "files": [
     {

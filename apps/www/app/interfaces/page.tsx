@@ -3,11 +3,13 @@ import type { Metadata } from "next";
 import { interfaces } from "./catalog";
 import { InterfaceCrop } from "./crops";
 import { InterfacesNav } from "./nav";
+import { DOOR } from "../specimen";
 import "./interfaces.css";
 
 export const metadata: Metadata = {
   title: "Interfaces",
   description: "Six invented tools. A poster crop of each.",
+  alternates: { canonical: `${DOOR}/interfaces/` },
 };
 
 export default function InterfacesPage() {

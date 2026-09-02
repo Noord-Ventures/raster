@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/Noord-Ventures/raster.git"
   },
-  "homepage": "https://raster.noord.dev",
+  "homepage": "https://getraster.com",
   "type": "module",
   "engines": {
     "node": ">=22.6"

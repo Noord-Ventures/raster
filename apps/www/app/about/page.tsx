@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CopyControl } from "@/components/code-block";
+import { DOOR } from "../specimen";
 import {
   era,
   featured,
@@ -20,6 +21,7 @@ import "./about.css";
 export const metadata: Metadata = {
   title: "About",
   description: lead.what,
+  alternates: { canonical: `${DOOR}/about/` },
 };
 
 export default function AboutPage() {

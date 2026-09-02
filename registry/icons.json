@@ -5,8 +5,8 @@
   "title": "Icons",
   "description": "16 viewBox marks, 1px currentColor, butt/miter. Shipped in the React package.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json"
   ],
   "files": [
     {

@@ -5,8 +5,8 @@
   "title": "Table",
   "description": "Open grid, 1px row rules, last column right-aligned. Total rows use 2px rules.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json"
   ],
   "files": [
     {

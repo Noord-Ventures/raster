@@ -5,9 +5,9 @@
   "title": "Empty",
   "description": "Placeholder cell with a title, a sentence, and an optional action.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/button.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/button.json"
   ],
   "files": [
     {

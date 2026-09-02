@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
-import { COMMAND, DOOR, HOST, LAW } from "../specimen";
+import { COMMAND, DOOR, HOST, LAW, PACKAGES_PUBLISHED } from "../specimen";
 
 export const metadata: Metadata = {
   title: "Getting started",
   description: LAW,
+  alternates: { canonical: `${DOOR}/docs/` },
 };
 
 export default function DocsPage() {
@@ -19,6 +20,12 @@ export default function DocsPage() {
             <p className="rs-t-sub">
               CSS you own. CSS-first, no Radix, no Tailwind. The door is {DOOR.replace("https://", "")}.
             </p>
+            {PACKAGES_PUBLISHED ? null : (
+              <p className="rs-t-body">
+                Packages publishing soon. Commands below are reference until{" "}
+                <code className="rs-code">@noorddev/raster-cli</code> resolves on npm.
+              </p>
+            )}
           </header>
 
         <h2 className="section-label">1. Initialize</h2>

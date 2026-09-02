@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /swag
+Disallow: /swag/
+
+Sitemap: https://getraster.com/sitemap.xml
+Host: getraster.com

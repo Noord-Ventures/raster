@@ -2,7 +2,7 @@
   "name": "www",
   "version": "0.3.0",
   "private": true,
-  "description": "raster.noord.dev — documentation and component gallery for the Raster design system.",
+  "description": "getraster.com — documentation and component gallery for the Raster design system.",
   "type": "module",
   "scripts": {
     "prebuild": "node scripts/build-deps.mjs",

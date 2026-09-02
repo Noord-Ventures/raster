@@ -10,7 +10,7 @@ export function Use() {
           <p className="rs-use-copy">Addon and field share one hairline.</p>
           <InputGroup>
             <InputAddon>https://</InputAddon>
-            <input className="rs-input" defaultValue="raster.noord.dev" />
+            <input className="rs-input" defaultValue="getraster.com" />
           </InputGroup>
         </div>
       </div>

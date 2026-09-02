@@ -5,9 +5,9 @@
   "title": "Input group",
   "description": "Addon and field share a 1px border.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/input.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/input.json"
   ],
   "files": [
     {
@@ -37,7 +37,7 @@
         "rs-input-addon",
         "rs-input-group-end"
       ],
-      "snippet": "<div class=\"rs-input-group\"><span class=\"rs-input-addon\">https://</span><input class=\"rs-input\" placeholder=\"raster.noord.dev\" /></div>",
+      "snippet": "<div class=\"rs-input-group\"><span class=\"rs-input-addon\">https://</span><input class=\"rs-input\" placeholder=\"getraster.com\" /></div>",
       "cssOnly": false,
       "registryDependencies": [
         "input"

@@ -5,8 +5,8 @@
   "title": "Callout",
   "description": "Note in running copy. 1px hairline, radius 0. No left bar.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json"
   ],
   "files": [
     {

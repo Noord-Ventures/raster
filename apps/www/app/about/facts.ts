@@ -37,7 +37,7 @@ export const lead = {
 
 export const usage = {
   kicker: "Usage",
-  intro: "Run the CLI, link the stylesheet in the head, then put a control in the body.",
+  intro: "Packages publishing soon. The command is a reference until the packages resolve. Then: run the CLI, link the stylesheet in the head, then put a control in the body.",
   commandWhere: "Terminal",
   command: COMMAND,
   htmlWhere: "Head",
@@ -320,11 +320,11 @@ export const program = {
 export const notes = [
   {
     q: "How do I install Raster?",
-    a: `${COMMAND} writes styles/raster.css, Inter, raster.json, and a specimen page (index.html). Link the stylesheet, or import it in your root layout. There is no CDN.`,
+    a: `Packages publishing soon. When they resolve, ${COMMAND} writes styles/raster.css, Inter, raster.json, and a specimen page (index.html). Link the stylesheet, or import it in your root layout. There is no CDN.`,
   },
   {
     q: "How do I add a component?",
-    a: "npx @noorddev/raster-cli add button dialog. React source lands in components/raster/. CSS-only components need no file; the classes are already in raster.css. The registry is at raster.noord.dev/r/<name>.json.",
+    a: "Packages publishing soon. Then: npx @noorddev/raster-cli add button dialog. React source lands in components/raster/. CSS-only components need no file; the classes are already in raster.css. The registry is at getraster.com/r/<name>.json.",
   },
   {
     q: "How do I use Raster with Next.js or Vercel?",

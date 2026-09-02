@@ -5,9 +5,9 @@
   "title": "Inline form",
   "description": "One field with the submit action inside. The button appears after the input validates.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/button.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/button.json"
   ],
   "files": [
     {

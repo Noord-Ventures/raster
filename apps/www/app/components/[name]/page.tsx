@@ -63,7 +63,7 @@ import { Button } from "@/components/raster/button";
 
 <InputGroup>
   <InputAddon>https://</InputAddon>
-  <input className="rs-input" placeholder="raster.noord.dev" />
+  <input className="rs-input" placeholder="getraster.com" />
 </InputGroup>`,
   "native-select": `import { NativeSelect } from "@/components/raster/native-select";
 

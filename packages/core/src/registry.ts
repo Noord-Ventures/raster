@@ -81,7 +81,7 @@ export const rasterComponents: RasterComponent[] = [
     css: ["components/input-group.css"],
     react: "components/input-group.tsx",
     registryDependencies: ["input"],
-    snippet: `<div class="rs-input-group"><span class="rs-input-addon">https://</span><input class="rs-input" placeholder="raster.noord.dev" /></div>`,
+    snippet: `<div class="rs-input-group"><span class="rs-input-addon">https://</span><input class="rs-input" placeholder="getraster.com" /></div>`,
   },
   {
     name: "native-select",

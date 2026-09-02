@@ -16,7 +16,7 @@ import { fileURLToPath } from "node:url";
 import { rasterTokens } from "../src/tokens.ts";
 import { rasterComponents } from "../src/registry.ts";
 
-const PUBLIC_HOST = "https://raster.noord.dev";
+const PUBLIC_HOST = rasterTokens.meta.url;
 const REGISTRY_URL = process.env.RASTER_REGISTRY_URL ?? `${PUBLIC_HOST}/r`;
 const VERSION = "0.3.0";
 

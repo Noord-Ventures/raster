@@ -345,7 +345,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     <div style={{ width: 260 }}>
       <InputGroup>
         <InputAddon>https://</InputAddon>
-        <Input placeholder="raster.noord.dev" />
+        <Input placeholder="getraster.com" />
       </InputGroup>
     </div>
   ),

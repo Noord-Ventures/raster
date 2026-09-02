@@ -5,10 +5,10 @@
   "title": "Menubar",
   "description": "Row of dropdowns in a 1px strip.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/dropdown-menu.json",
-    "https://raster.noord.dev/r/select.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/dropdown-menu.json",
+    "https://getraster.com/r/select.json"
   ],
   "files": [
     {

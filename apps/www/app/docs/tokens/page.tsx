@@ -87,7 +87,7 @@ rasterTokens.color.light.paper; // "${color.light.paper}"
 rasterTokens.grid.module;       // ${grid.module}
 
 // or over the wire
-// GET https://raster.noord.dev/r/index.json
+// GET https://getraster.com/r/index.json
 // npx @noorddev/raster-cli tokens`}
         />
         </main>

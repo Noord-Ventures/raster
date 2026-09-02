@@ -5,10 +5,10 @@
   "title": "Date picker",
   "description": "1px trigger that opens a calendar overlay.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/select.json",
-    "https://raster.noord.dev/r/calendar.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/select.json",
+    "https://getraster.com/r/calendar.json"
   ],
   "files": [
     {

@@ -2,7 +2,7 @@
 
 A poster you can install.
 
-Public door: [getraster.com](https://getraster.com). Host today: [raster.noord.dev](https://raster.noord.dev). Source: [github.com/Noord-Ventures/raster](https://github.com/Noord-Ventures/raster).
+Public door: [getraster.com](https://getraster.com). Source: [github.com/Noord-Ventures/raster](https://github.com/Noord-Ventures/raster).
 
 Built at Noord Frontier Design Lab (Alkmaar ↔ Silicon Valley).
 
@@ -28,14 +28,16 @@ Ten words. Sentence case. No periods.
 | Path | Package | Contents |
 |---|---|---|
 | `packages/core` | `@noorddev/raster` | Tokens, per-component CSS, vendored Inter, the typed registry, and the build that generates `raster.css`, `tokens.css`, the token JSON, and the 0.1 compat layer |
-| `packages/react` | `@noorddev/raster-react` | React components styled by `@noorddev/raster` CSS (`@noorddev/raster-react` depends on `@noorddev/raster`). Button, Callout, and Card also ship StyleX leaves mapped to those tokens. |
+| `packages/react` | `@noorddev/raster-react` | React components styled by `@noorddev/raster` CSS (`@noorddev/raster-react` depends on `@noorddev/raster`). Button, Callout, and Card also ship StyleX leaves mapped to those tokens — CSS-first default; StyleX is a compiler for those leaves, not a claim that Raster has no compiler. |
 | `packages/cli` | `@noorddev/raster-cli` | `npx @noorddev/raster-cli init` / `add` / `list` / `tokens`. Bundles the registry; works offline |
 | `registry/` | | Generated registry items in the shadcn registry-item schema |
 | `apps/www` | | Documentation site: gallery, per-component docs, tokens, served registry |
 
 ## Usage
 
-Raster is CSS-first. Plain `rs-*` classes on plain markup. React is optional. No Radix, no Tailwind.
+Raster is CSS-first. Plain `rs-*` classes on plain markup. React is optional. No Radix, no Tailwind. Dependency-free means the CSS path: no Radix, no Tailwind — not “no compiler.”
+
+Packages publishing soon. `@noorddev/raster`, `@noorddev/raster-react`, and `@noorddev/raster-cli` are not on npm yet. Commands below are reference until they resolve.
 
 **CLI.**
 
@@ -60,7 +62,7 @@ rasterTokens.color.light.paper; // "#FAF8F2"
 **shadcn interop.** Each component is published as a registry item under `registry/` in the shadcn registry-item schema. From the public host:
 
 ```sh
-npx shadcn add https://raster.noord.dev/r/button.json
+npx shadcn add https://getraster.com/r/button.json
 ```
 
 ## Architecture

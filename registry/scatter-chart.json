@@ -5,9 +5,9 @@
   "title": "Scatter chart",
   "description": "Marks on a 1px grid. Ink, or one optional spot color.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/chart.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/chart.json"
   ],
   "files": [
     {

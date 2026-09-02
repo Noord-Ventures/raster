@@ -5,8 +5,8 @@
   "title": "Input",
   "description": "Text field. 1px border, ink focus, 12px label above.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json"
   ],
   "files": [
     {

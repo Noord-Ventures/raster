@@ -5,8 +5,8 @@
   "title": "Sidebar",
   "description": "204-wide rail with a head, nav, and foot. 1px on all four sides.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json"
   ],
   "files": [
     {

@@ -5,9 +5,9 @@
   "title": "Calendar",
   "description": "Month grid. Selected day is ink; today is a 1px outline. Weeks start Monday.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/pagination.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/pagination.json"
   ],
   "files": [
     {

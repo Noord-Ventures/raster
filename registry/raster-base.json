@@ -5,7 +5,7 @@
   "title": "Raster base",
   "description": "Tokens (light + dark), page base with the visible module grid, type scale, and reduced-motion rules.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/inter.json"
+    "https://getraster.com/r/inter.json"
   ],
   "files": [
     {

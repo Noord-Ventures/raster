@@ -31,7 +31,7 @@ jobs:
         run: pnpm test
       - name: Dead-host grep
         run: |
-          if grep -R -E 'raster\.design|raster-pied|vercel\.app' registry --include='*.json'; then
+          if grep -R -E 'raster\.design|raster-pied|vercel\.app|raster\.noord\.dev' registry --include='*.json'; then
             echo "Dead host found in generated registry JSON"
             exit 1
           fi
@@ -84,13 +84,35 @@ jobs:
             exit 1
           fi
           grep -q 'DOOR = "https://getraster.com"' "$writer"
-          grep -q 'HOST = "https://raster.noord.dev"' "$writer"
+          grep -q 'HOST = "https://getraster.com"' "$writer"
+          grep -q 'PACKAGES_PUBLISHED = false' "$writer"
+          grep -q 'COMMAND = "npx @noorddev/raster-cli init"' "$writer"
+          if grep -n 'HOST = "https://raster.noord.dev"' "$writer"; then
+            echo "HOST must be the getraster.com door, not raster.noord.dev"
+            exit 1
+          fi
           grep -q 'openGraph' apps/www/app/social.ts
           grep -q 'summary_large_image' apps/www/app/social.ts
           grep -q '/og.png' apps/www/app/social.ts
           grep -q 'return new URL(HOST)' apps/www/app/social.ts
+          grep -q 'canonical: DOOR' apps/www/app/social.ts
           grep -q 'absolute: WORD' apps/www/app/page.tsx
           test -f apps/www/public/og.png
+          test -f apps/www/public/robots.txt
+          test -f apps/www/public/sitemap.xml
+          test -f apps/www/public/favicon.svg
+          test -f apps/www/app/icon.svg
+          grep -q 'Disallow: /swag' apps/www/public/robots.txt
+          grep -q 'https://getraster.com/sitemap.xml' apps/www/public/robots.txt
+          grep -q 'https://getraster.com/' apps/www/public/sitemap.xml
+          grep -q 'https://getraster.com/about/' apps/www/public/sitemap.xml
+          grep -q 'https://getraster.com/docs/' apps/www/public/sitemap.xml
+          grep -q 'https://getraster.com/components/' apps/www/public/sitemap.xml
+          grep -q 'https://getraster.com/interfaces/' apps/www/public/sitemap.xml
+          if grep -n '/swag' apps/www/public/sitemap.xml; then
+            echo "sitemap must not list /swag"
+            exit 1
+          fi
           python3 -c '
           from pathlib import Path
           p = Path("apps/www/public/og.png").read_bytes()
@@ -253,6 +275,12 @@ jobs:
           fi
           grep -q 'CopyControl' apps/www/app/page.tsx
           grep -q 'specimen-command-kicker' apps/www/app/page.tsx
+          grep -q 'Packages publishing soon' apps/www/app/page.tsx
+          grep -q 'PACKAGES_PUBLISHED' apps/www/app/page.tsx
+          if grep -n 'specimen-command-kicker">Install' apps/www/app/page.tsx; then
+            echo "Home must not frame COMMAND as a live Install until packages publish"
+            exit 1
+          fi
           node -e '
             const { readFileSync } = require("node:fs");
             const page = readFileSync("apps/www/app/page.tsx", "utf8");

@@ -5,10 +5,10 @@
   "title": "Dropdown menu",
   "description": "Action menu with menuitem roles and arrow-key movement.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/select.json",
-    "https://raster.noord.dev/r/button.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/select.json",
+    "https://getraster.com/r/button.json"
   ],
   "files": [
     {

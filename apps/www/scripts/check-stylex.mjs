@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -70,6 +70,12 @@ if (!card.includes("borderWidth: 0") || !card.includes("boxShadow: \"none\"")) {
   fail("Card StyleX must be a typography stack with no outline");
 }
 
+if (!existsSync(join(root, "apps/www/babel.config.json"))) {
+  fail("www StyleX toolchain must use babel.config.json (Next cannot load .cjs Babel configs)");
+}
+if (!existsSync(join(root, "apps/www/postcss.config.cjs"))) {
+  fail("www StyleX toolchain must keep postcss.config.cjs");
+}
 if (!layout.includes("./stylex.css") || !stylexCss.includes("@stylex")) {
   fail("www must compile StyleX via @stylex in app/stylex.css");
 }

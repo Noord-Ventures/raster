@@ -26,6 +26,12 @@ export const social: Metadata = {
   },
   description,
   applicationName: WORD,
+  alternates: {
+    canonical: DOOR,
+  },
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+  },
   openGraph: {
     title,
     description,

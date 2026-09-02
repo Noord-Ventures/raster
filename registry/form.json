@@ -5,11 +5,11 @@
   "title": "Form",
   "description": "Stacked fields with one primary action at the end.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/field.json",
-    "https://raster.noord.dev/r/input.json",
-    "https://raster.noord.dev/r/button.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/field.json",
+    "https://getraster.com/r/input.json",
+    "https://getraster.com/r/button.json"
   ],
   "files": [
     {

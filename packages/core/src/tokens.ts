@@ -8,7 +8,7 @@ export const rasterTokens = {
   meta: {
     name: "Raster",
     description: "A monochrome, CSS-first design system.",
-    url: "https://raster.noord.dev",
+    url: "https://getraster.com",
   },
   color: {
     light: {

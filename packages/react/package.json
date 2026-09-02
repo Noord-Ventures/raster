@@ -8,7 +8,7 @@
     "url": "git+https://github.com/Noord-Ventures/raster.git",
     "directory": "packages/react"
   },
-  "homepage": "https://raster.noord.dev",
+  "homepage": "https://getraster.com",
   "publishConfig": {
     "access": "public"
   },

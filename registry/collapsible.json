@@ -5,9 +5,9 @@
   "title": "Collapsible",
   "description": "Native details disclosure.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/accordion.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/accordion.json"
   ],
   "files": [
     {

@@ -48,11 +48,11 @@ describe("init", () => {
   });
 
   it("honors --compat, --registry, and custom dirs", () => {
-    init(cwd, { cssDir: "app/styles", compat: true, registry: "https://raster.noord.dev/r" });
+    init(cwd, { cssDir: "app/styles", compat: true, registry: "https://getraster.com/r" });
     expect(existsSync(join(cwd, "app/styles/raster.css"))).toBe(true);
     expect(readFileSync(join(cwd, "app/styles/raster-compat.css"), "utf8")).toContain(".bb-btn-primary");
     expect(existsSync(join(cwd, "app/styles/fonts/inter/OFL.txt"))).toBe(true);
-    expect(loadConfig(cwd).registry).toBe("https://raster.noord.dev/r");
+    expect(loadConfig(cwd).registry).toBe("https://getraster.com/r");
   });
 
   it("never clobbers an existing file without overwrite", () => {
