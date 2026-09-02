@@ -5,9 +5,9 @@
   "title": "Bar chart",
   "description": "Vertical or horizontal. Thin ink bars, square ends. Stacks when series share a field.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/chart.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/chart.json"
   ],
   "files": [
     {

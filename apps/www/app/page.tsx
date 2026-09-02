@@ -1,7 +1,6 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { CopyControl } from "@/components/code-block";
-import { COMMAND, LAW, POSTER, WORD } from "./specimen";
+import { COMMAND, LAW, PACKAGES_PUBLISHED, POSTER, WORD } from "./specimen";
 import { SpecimenKit } from "./specimen-kit";
 import { SpecimenPrinciples } from "./specimen-principles";
 import "./specimen.css";
@@ -24,16 +23,30 @@ export default function Home() {
         </section>
 
         <section className="specimen-cell specimen-cell-command">
-          <p className="specimen-command-kicker">Install</p>
-          <div className="specimen-command-row">
-            <p className="specimen-command">{COMMAND}</p>
-            <CopyControl text={COMMAND} />
-          </div>
-          <p className="specimen-command-meta">
-            <Link href="/docs">Getting started</Link>
-            <span aria-hidden="true"> · </span>
-            MIT
-          </p>
+          {PACKAGES_PUBLISHED ? (
+            <>
+              <p className="specimen-command-kicker">Install</p>
+              <div className="specimen-command-row">
+                <p className="specimen-command">{COMMAND}</p>
+                <CopyControl text={COMMAND} />
+              </div>
+              <p className="specimen-command-meta">
+                <a href="/docs">Getting started</a>
+                <span aria-hidden="true"> · </span>
+                MIT
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="specimen-command-kicker">Source</p>
+              <p className="specimen-command">Not on npm</p>
+              <p className="specimen-command-meta">
+                <a href="https://github.com/Noord-Ventures/raster">github.com/Noord-Ventures/raster</a>
+                <span aria-hidden="true"> · </span>
+                MIT
+              </p>
+            </>
+          )}
         </section>
 
         <SpecimenPrinciples />

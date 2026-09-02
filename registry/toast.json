@@ -5,8 +5,8 @@
   "title": "Toast",
   "description": "Bottom-right status, aria-live polite, four-second dismiss.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json"
   ],
   "files": [
     {

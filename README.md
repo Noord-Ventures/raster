@@ -2,43 +2,44 @@
 
 A poster you can install.
 
-Public door: [getraster.com](https://getraster.com). Host today: [raster.noord.dev](https://raster.noord.dev). Source: [github.com/Noord-Ventures/raster](https://github.com/Noord-Ventures/raster).
+Public door: [getraster.com](https://getraster.com). Source: [github.com/Noord-Ventures/raster](https://github.com/Noord-Ventures/raster).
+
+Built at Noord Frontier Design Lab (Alkmaar ↔ Silicon Valley).
 
 This repo contains the tokens, CSS, React components, registry, CLI, and documentation site.
 
 ## Principles
 
-- **One ink, no accent.** The palette is monochrome: paper, ink, and the grays between.
-- **Hairlines, not boxes.** Rows and dividers are 1px lines on the open grid; cells and cards avoid heavy chrome.
-- **The grid is visible.** A 204px module (184px column + 20px gutter) draws faint lines across every page.
-- **CSS-first, zero dependencies.** Plain classes on plain markup. The React layer uses native elements. No Radix, no Tailwind.
-- **Sentence case, always.** Never all caps.
-- **Quiet motion.** 0.15–0.3s, ease. Color and opacity change; layout rarely moves; nothing bounces.
+Ten words. Sentence case. No periods.
+
+1. Simple
+2. Beautiful
+3. Opinionated
+4. Elegant
+5. Clear
+6. Legible
+7. Solid
+8. Versatile
+9. Customizable
+10. Minimal
 
 ## Contents
 
 | Path | Package | Contents |
 |---|---|---|
 | `packages/core` | `@noorddev/raster` | Tokens, per-component CSS, vendored Inter, the typed registry, and the build that generates `raster.css`, `tokens.css`, the token JSON, and the 0.1 compat layer |
-| `packages/react` | `@noorddev/raster-react` | React components styled by `@noorddev/raster` CSS (`@noorddev/raster-react` depends on `@noorddev/raster`) |
-| `packages/cli` | `@noorddev/raster-cli` | `npx @noorddev/raster-cli init` / `add` / `list` / `tokens`. Bundles the registry; works offline |
+| `packages/react` | `@noorddev/raster-react` | React components styled by `@noorddev/raster` CSS (`@noorddev/raster-react` depends on `@noorddev/raster`). Button, Callout, and Card also ship StyleX leaves mapped to those tokens — CSS-first default; StyleX is a compiler for those leaves, not a claim that Raster has no compiler. |
+| `packages/cli` | `@noorddev/raster-cli` | Unpublished. `init` / `add` / `list` / `tokens` after npm publish. Bundles the registry; works offline |
 | `registry/` | | Generated registry items in the shadcn registry-item schema |
 | `apps/www` | | Documentation site: gallery, per-component docs, tokens, served registry |
 
 ## Usage
 
-**CLI.**
+Raster is CSS-first. Plain `rs-*` classes on plain markup. React is optional. No Radix, no Tailwind. Dependency-free means the CSS path: no Radix, no Tailwind — not “no compiler.”
 
-```sh
-npx @noorddev/raster-cli init            # writes styles/raster.css, Inter, index.html (specimen), and raster.json
-npx @noorddev/raster-cli add button dialog
-```
+**Not on npm.** `@noorddev/raster`, `@noorddev/raster-react`, and `@noorddev/raster-cli` are unpublished. This ship does not offer a CLI install. Work from this repo (`pnpm install` / `pnpm build` / `pnpm dev`). Do not teach an unpublished package name as a working path.
 
-`add` copies React source into `components/raster/`. Registry dependencies install with it. CSS-only components need no code; the classes are in raster.css.
-
-`init --compat` also writes the 0.1 class-name layer. `init --registry <url>` (or `raster.json.registry`) points `add` at a remote registry for out-of-band updates.
-
-**Plain CSS.** Import `@noorddev/raster/css` (or link the file the CLI wrote) and use the `rs-*` classes. Set `data-theme="dark"` on the root element for the dark scheme.
+**Plain CSS.** From this repo, use `packages/core/css/raster.css` (exported as `@noorddev/raster/css` after publish) and the `rs-*` classes. Set `data-theme="dark"` on the root element for the dark scheme.
 
 **Tokens.**
 
@@ -50,7 +51,7 @@ rasterTokens.color.light.paper; // "#FAF8F2"
 **shadcn interop.** Each component is published as a registry item under `registry/` in the shadcn registry-item schema. From the public host:
 
 ```sh
-npx shadcn add https://raster.noord.dev/r/button.json
+npx shadcn add https://getraster.com/r/button.json
 ```
 
 ## Architecture
@@ -68,6 +69,8 @@ registry         registry/<name>.json          shadcn registry-item, contents in
 
 The test suite enforces what generation cannot: every registry class exists in its CSS, every snippet class has a provider, no `var()` is undefined, no styled class is missing from the registry, no hex in the system is a hue, and generated registry JSON never names a dead host.
 
+Public catalogue count is `catalogComponents`: `rasterComponents.filter(c => !c.hidden)`. Hidden entries (today: concentric-radius) stay in the registry for CSS and math. Do not count raw `registry/*.json` files as the ship number.
+
 ## Development
 
 ```sh
@@ -79,7 +82,7 @@ pnpm dev          # docs site at localhost:3000
 
 ## Catalogue
 
-75 components, covering the everyday shadcn/ui catalogue. Each is CSS-first with an optional zero-dependency React layer.
+74 components, covering the everyday shadcn/ui catalogue. Each is CSS-first with an optional zero-dependency React layer.
 
 Behavior comes from the platform where it exists. Accordion and collapsible are native `<details>`; the `name` attribute gives exclusive-open without JS. Dialog, alert dialog, sheet, and the command palette are native `<dialog>`: focus trap, Escape, backdrop. Popover uses the Popover API. Carousel uses scroll snap. Tooltip and hover card are CSS. Form controls wrap native inputs.
 
@@ -91,7 +94,7 @@ Inter, SIL OFL 1.1. Variable, latin + latin-ext, vendored next to the CSS. Syste
 
 ## Coming from 0.1
 
-0.2 renamed every class to the `rs-` prefix and scoped table styles to `.rs-table`. Sites on the 0.1 names keep working by linking the generated `css/raster-compat.css` after `raster.css`, or via `npx @noorddev/raster-cli init --compat`. The rename map is `packages/core/src/legacy.ts`.
+0.2 renamed every class to the `rs-` prefix and scoped table styles to `.rs-table`. Sites on the 0.1 names keep working by linking the generated `css/raster-compat.css` after `raster.css`. The rename map is `packages/core/src/legacy.ts`.
 
 ---
 

@@ -5,9 +5,9 @@
   "title": "Textarea",
   "description": "Multiline field, vertical resize only.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json",
-    "https://raster.noord.dev/r/input.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json",
+    "https://getraster.com/r/input.json"
   ],
   "files": [
     {

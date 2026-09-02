@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: column;
 }
-.sc-wall-brand { padding: 16px 20px 8px; }
+.sc-wall-brand { padding: 12px 16px 6px; }
 .sc-wall-voice {
   margin: 6px 0 0;
   font-size: 12px;
@@ -25,7 +25,7 @@
   color: var(--text-secondary);
 }
 .sc-wall-label {
-  margin: 12px 20px 4px;
+  margin: 10px 16px 4px;
   font-size: 11px;
   font-weight: 600;
   color: var(--text-secondary);
@@ -43,7 +43,7 @@
   color: var(--text);
   text-align: left;
   border-radius: 0;
-  padding: 10px 20px;
+  padding: 8px 16px;
   cursor: pointer;
   font-family: inherit;
   transition: color var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease);
@@ -89,8 +89,8 @@
 .sc-wall-head {
   display: flex;
   align-items: center;
-  min-height: 48px;
-  padding: 0 16px;
+  min-height: 40px;
+  padding: 0 12px;
   border-bottom: 1px solid var(--divider);
   font-size: 13px;
   font-weight: 600;
@@ -101,12 +101,12 @@
   min-height: 0;
   overflow: auto;
   column-count: 2;
-  column-gap: 12px;
-  padding: 12px;
+  column-gap: 8px;
+  padding: 8px;
 }
 .sc-wall-card {
   break-inside: avoid;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   border: 1px solid var(--divider);
   border-radius: var(--radius-sm);
   background: var(--bg);
@@ -127,6 +127,7 @@
   font-family: inherit;
 }
 .sc-wall-faces { display: none; }
+.sc-wall-v1-line { display: none; }
 .sc-wall-open img {
   display: block;
   width: 100%;
@@ -215,56 +216,52 @@
 @media (max-width: 640px) {
   .sc-wall {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr);
     overflow: hidden;
     position: relative;
   }
   .if-board.sc-wall .sc-wall-rail { display: none; }
-  .sc-wall-faces {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    border-bottom: 1px solid var(--divider);
-    background: color-mix(in srgb, var(--text) 3%, var(--bg));
-  }
-  .sc-wall-faces .sc-wall-person {
-    min-width: 0;
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-    gap: 4px;
-    padding: 8px 2px 10px;
-    border: 0;
-    font-size: 11px;
-  }
-  .sc-wall-faces .sc-wall-person b {
-    overflow: visible;
-    text-overflow: unset;
-    white-space: nowrap;
-    max-width: none;
-    font-size: 11px;
-  }
-  .sc-wall-faces .sc-wall-person i { display: none; }
+  .sc-wall-faces,
+  .sc-wall-head,
+  .sc-wall-card:not(.sc-wall-v1),
+  .sc-wall-who,
+  .sc-wall-meta,
+  .sc-wall-open em,
+  .sc-wall-open img { display: none; }
   .sc-wall-feed { min-height: 0; overflow: hidden; }
   .sc-wall-stream {
     column-count: 1;
-    padding: 0;
+    padding: 12px 16px 0;
     overflow: auto;
     min-height: 0;
   }
   .sc-wall-card {
     margin-bottom: 0;
-    border-radius: 0;
+    border-radius: var(--radius-sm);
     border-width: 0 0 1px;
     overflow: hidden;
   }
-  .sc-wall-open img {
-    width: 100%;
-    height: 168px;
-    max-height: 168px;
-    aspect-ratio: auto;
-    object-fit: cover;
+  .sc-wall-card.is-on {
+    background: color-mix(in srgb, var(--text) 4%, var(--bg));
   }
-  .sc-wall-open { min-height: 44px; }
+  .sc-wall-v1-line {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .sc-wall-open {
+    min-height: 64px;
+    gap: 2px;
+    padding: 10px 12px 8px;
+  }
+  .sc-wall-open p {
+    padding: 0;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 14px;
+    color: var(--text-secondary);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

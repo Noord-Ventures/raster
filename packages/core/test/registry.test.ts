@@ -24,6 +24,8 @@ describe("registry structure", () => {
     expect(nest?.hidden).toBe(true);
     expect(catalogComponents.some((c) => c.name === "concentric-radius")).toBe(false);
     expect(catalogComponents).toHaveLength(rasterComponents.filter((c) => !c.hidden).length);
+    expect(rasterComponents).toHaveLength(75);
+    expect(catalogComponents).toHaveLength(74);
   });
 
   it("lifts icons and charts into their own catalog sections", () => {

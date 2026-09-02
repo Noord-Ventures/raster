@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CopyControl } from "@/components/code-block";
+import { DOOR, PACKAGES_PUBLISHED } from "../specimen";
 import {
   era,
   featured,
@@ -20,6 +21,7 @@ import "./about.css";
 export const metadata: Metadata = {
   title: "About",
   description: lead.what,
+  alternates: { canonical: `${DOOR}/about/` },
 };
 
 export default function AboutPage() {
@@ -50,12 +52,12 @@ export default function AboutPage() {
           </div>
           <div className="field-code-stack">
             <div className="field-step">
-              <p className="field-kicker">{usage.commandWhere}</p>
+              <p className="field-kicker">{PACKAGES_PUBLISHED ? usage.commandWhere : "Source"}</p>
               <div className="field-code-row">
                 <pre className="field-code">
-                  <code>{usage.command}</code>
+                  <code>{PACKAGES_PUBLISHED ? usage.command : "Not on npm"}</code>
                 </pre>
-                <CopyControl text={usage.command} />
+                {PACKAGES_PUBLISHED ? <CopyControl text={usage.command} /> : null}
               </div>
             </div>
             <div className="field-step">
@@ -249,14 +251,16 @@ export default function AboutPage() {
               {" · "}
               <a href={noord.host}>{noord.host.replace("https://", "")}</a>
               {" · "}
-              <a href={person.repo}>github.com/rennvaldes/raster</a>
+              <a href={person.repo}>github.com/Noord-Ventures/raster</a>
             </p>
             <p>
               {person.copyright}, {person.year}.
             </p>
-            <p>
-              <code className="rs-code">{noord.command}</code>
-            </p>
+            {PACKAGES_PUBLISHED ? (
+              <p>
+                <code className="rs-code">{noord.command}</code>
+              </p>
+            ) : null}
           </div>
         </section>
       </div>

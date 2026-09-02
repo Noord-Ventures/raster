@@ -525,9 +525,27 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 }
 .cover .rs-t-sub { margin-top: 16px; }
 
+/* Catalog index: 388-wide cards, 204 demo module. Two columns on
+   desktop (796 measure, same as the icon catalog). Phone stays one
+   column. Do not lock a single 388 track. */
+.catalog-page .catalog-group { margin-top: 40px; }
+.catalog-page .site-content {
+  width: min(796px, 100%);
+  max-width: min(796px, 100%);
+}
+@media (min-width: 1024px) {
+  .site-layout.catalog-page {
+    --ml: 0px;
+    margin-left: 0;
+  }
+}
+
 /* ── Component gallery: cards span two whole modules ── */
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, 388px); gap: var(--gutter); padding: 24px 0 48px; }
-@media (max-width: 480px) { .gallery { grid-template-columns: 1fr; } }
+@media (max-width: 480px) {
+  .gallery { grid-template-columns: 1fr; }
+  .catalog-page .gallery { grid-template-columns: 1fr; }
+}
 /* Cards are divs with a stretched title link, so live demos never nest
    interactive elements inside an anchor. */
 .gallery-item {
@@ -549,6 +567,12 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .gallery-demo,
 .gallery-meta { background-color: var(--bg); }
 .gallery-demo { padding: 28px 24px; min-height: 204px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--divider-subtle); overflow: hidden; pointer-events: none; }
+.catalog-page .gallery-demo {
+  box-sizing: border-box;
+  height: 204px;
+  min-height: 204px;
+  padding: 0 20px;
+}
 .gallery-demo .rs-theme-toggle,
 .preview-box .rs-theme-toggle {
   position: relative;

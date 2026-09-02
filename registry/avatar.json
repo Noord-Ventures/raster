@@ -5,8 +5,8 @@
   "title": "Avatar",
   "description": "32px circle of initials, or a covering image. Broken images fall back. Rows overlap 8px.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json"
   ],
   "files": [
     {

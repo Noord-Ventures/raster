@@ -4,21 +4,22 @@ import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
 import { Face, type FaceId } from "../people";
+import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
 
 const WHAT = interfaceBySlug("room")!.what;
 
 const CHANNELS = [
-  { id: "desk", name: "desk", count: 12 },
-  { id: "press", name: "press", count: 4 },
-  { id: "yard", name: "yard", count: 2 },
+  { id: "desk", name: "desk", count: 12, preview: "12 in the room · The room holds the line." },
+  { id: "press", name: "press", count: 4, preview: "4 · Plate is up at 06:00" },
+  { id: "yard", name: "yard", count: 2, preview: "2 · Density watch on unit 09" },
 ];
 
-const PEOPLE: { id: FaceId; name: string; state: string; mark: "user-check" | "activity" | "moon" | "users" }[] = [
+const PEOPLE: { id: FaceId; name: string; state: string; mark: "user-check" | "activity" | "moon" | "users"; extra?: boolean }[] = [
   { id: "aziez", name: "Aziez", state: "On a line", mark: "activity" },
   { id: "jenny", name: "Jenny", state: "Away", mark: "moon" },
-  { id: "koen", name: "Koen", state: "On a line", mark: "activity" },
-  { id: "gianpiero", name: "Gianpiero", state: "At the desk", mark: "user-check" },
+  { id: "koen", name: "Koen", state: "On a line", mark: "activity", extra: true },
+  { id: "gianpiero", name: "Gianpiero", state: "At the desk", mark: "user-check", extra: true },
 ];
 
 type Msg = { id: string; who: FaceId; name: string; text: string; when: string; replies: number };
@@ -58,7 +59,8 @@ export function Board() {
   const [who, setWho] = React.useState<FaceId>("aziez");
   const [draft, setDraft] = React.useState("");
   const [extra, setExtra] = React.useState<Record<string, Msg[]>>({});
-  const [phonePane, setPhonePane] = React.useState<"channels" | "chat">("chat");
+  const [phonePane, setPhonePane] = React.useState<"channels" | "chat">("channels");
+  const box = React.useRef<HTMLInputElement>(null);
   const room = CHANNELS.find((row) => row.id === channel) ?? CHANNELS[0]!;
   const messages = [...(LINES[channel] ?? LINES.desk!), ...(extra[channel] ?? [])];
   const person = PEOPLE.find((row) => row.id === who) ?? PEOPLE[0]!;
@@ -83,6 +85,16 @@ export function Board() {
 
   return (
     <main className="if-board sc-room" data-pane={phonePane} aria-label={WHAT}>
+      <PhoneV1Chrome
+        heading="Room"
+        action="New"
+        onAction={() => {
+          setChannel("desk");
+          setPane("none");
+          setPhonePane("channels");
+          box.current?.focus();
+        }}
+      />
       <aside className="sc-room-rail" aria-label="People">
         <div className="sc-room-brand">
           <Brand slug="room" />
@@ -107,9 +119,11 @@ export function Board() {
           >
             <b className="if-ico-row">
               <Icon name="hash" size={16} />
+              <span className="sc-room-ch-hash"># </span>
               {row.name}
             </b>
-            <i>{row.count}</i>
+            <i className="sc-room-ch-count">{row.count}</i>
+            <span className="sc-room-v1-copy">{row.preview}</span>
           </button>
         ))}
         <p className="sc-room-label if-ico-row">
@@ -120,7 +134,7 @@ export function Board() {
           <button
             key={row.id}
             type="button"
-            className="sc-room-person"
+            className={`sc-room-person${row.extra ? " sc-room-extra" : ""}`}
             aria-current={who === row.id && pane === "person"}
             onClick={() => {
               setWho(row.id);
@@ -183,28 +197,30 @@ export function Board() {
             </button>
           ))}
         </div>
-        <form
-          className="sc-room-dock"
-          onSubmit={(event) => {
-            event.preventDefault();
-            send();
-          }}
-        >
-          <label className="sc-room-field">
-            <Icon name="message" size={16} />
-            <input
-              value={draft}
-              placeholder={`Message #${room.name}`}
-              aria-label="Message"
-              onChange={(event) => setDraft(event.target.value)}
-            />
-          </label>
-          <button type="submit" disabled={!draft.trim()}>
-            <Icon name="send" size={16} />
-            Send
-          </button>
-        </form>
       </section>
+
+      <form
+        className="sc-room-dock"
+        onSubmit={(event) => {
+          event.preventDefault();
+          send();
+        }}
+      >
+        <label className="sc-room-field">
+          <Icon name="message" size={16} />
+          <input
+            ref={box}
+            value={draft}
+            placeholder={`Message #${room.name}`}
+            aria-label="Message"
+            onChange={(event) => setDraft(event.target.value)}
+          />
+        </label>
+        <button type="submit" disabled={!draft.trim()}>
+          <Icon name="send" size={16} />
+          Send
+        </button>
+      </form>
 
       <nav className="if-thumb" aria-label={WHAT}>
         <button

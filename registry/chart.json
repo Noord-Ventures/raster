@@ -5,8 +5,8 @@
   "title": "Charts",
   "description": "Line on a 204 field. 1px grid, ink marks. Series use solid, dashed, gray, or dotted. One optional spot color.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json"
   ],
   "files": [
     {

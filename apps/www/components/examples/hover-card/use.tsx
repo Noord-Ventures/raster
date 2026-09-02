@@ -8,7 +8,7 @@ export function Use() {
         <p className="rs-use-copy">
           From{" "}
           <HoverCard trigger={<span className="rs-link">@noord</span>}>
-            Noord ships Raster. Host: raster.noord.dev.
+            Noord ships Raster. Door: getraster.com.
           </HoverCard>
           .
         </p>

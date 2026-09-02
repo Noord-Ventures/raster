@@ -5,8 +5,8 @@
   "title": "Switch",
   "description": "32×18 control. On fills ink; off is a 1px track. The thumb moves; the box stays 32px.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json"
   ],
   "files": [
     {

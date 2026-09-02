@@ -3,16 +3,20 @@ import type { Metadata } from "next";
 import { rasterCategories, catalogComponents } from "@noorddev/raster";
 import { DocsNav } from "@/components/docs-nav";
 import { Preview } from "@/components/preview";
+import { DOOR } from "../specimen";
 
-export const metadata: Metadata = { title: "Components" };
+export const metadata: Metadata = {
+  title: "Components",
+  alternates: { canonical: `${DOOR}/components/` },
+};
 
 export default function ComponentsPage() {
   return (
     <>
       <div className="site-layout catalog-page">
         <DocsNav />
-        <main className="site-content-wide">
-          <header className="cover" style={{ maxWidth: 592 }}>
+        <main className="site-content">
+          <header className="cover">
             <h1 className="rs-t-display">Components</h1>
             <p className="rs-t-sub">The control, the name, a short law.</p>
           </header>
@@ -21,10 +25,10 @@ export default function ComponentsPage() {
             if (items.length === 0) return null;
             return (
               <section key={category} id={category}>
-                <h2 className="rs-t-title" style={{ marginTop: 40 }}>
+                <h2 className="rs-t-title catalog-group">
                   {category.charAt(0).toUpperCase() + category.slice(1)}
                 </h2>
-                <div className="gallery" style={{ paddingBottom: 8 }}>
+                <div className="gallery">
                   {items.map((c) => (
                     <div key={c.name} className="gallery-item">
                       <div className="gallery-demo">

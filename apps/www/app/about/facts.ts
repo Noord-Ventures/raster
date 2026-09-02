@@ -37,7 +37,7 @@ export const lead = {
 
 export const usage = {
   kicker: "Usage",
-  intro: "Run the CLI, link the stylesheet in the head, then put a control in the body.",
+  intro: "Not on npm. Link the stylesheet in the head, then put a control in the body. The CLI is not a path this ship offers.",
   commandWhere: "Terminal",
   command: COMMAND,
   htmlWhere: "Head",
@@ -45,9 +45,9 @@ export const usage = {
   controlWhere: "Body",
   control: `<button class="rs-btn-primary">Save</button>`,
   landing:
-    "Init writes index.html — the specimen the CLI generates. That file is the one-shot Raster landing, meant to read like getraster.com: poster type, the 204 grid, the laws. It is not a thin shell.",
+    "index.html is the one-shot Raster landing, meant to read like getraster.com: poster type, the 204 grid, the laws. It is not a thin shell.",
   files:
-    "The same command writes styles/raster.css, Inter, and raster.json. There is no CDN. Restyle the specimen toward the live home with the files on disk.",
+    "styles/raster.css, Inter, and raster.json live in this repo. There is no CDN. Restyle the specimen toward the live home with the files on disk.",
   after: "Dark scheme: set data-theme=\"dark\" on the root element.",
 };
 
@@ -320,19 +320,31 @@ export const program = {
 export const notes = [
   {
     q: "How do I install Raster?",
-    a: `${COMMAND} writes styles/raster.css, Inter, raster.json, and a specimen page (index.html). Link the stylesheet, or import it in your root layout.`,
+    a: "Not on npm. Link styles/raster.css from this repo, or import @noorddev/raster/css after publish. There is no CDN and no CLI install on this ship.",
   },
   {
     q: "How do I add a component?",
-    a: "npx @noorddev/raster-cli add button dialog. React source lands in components/raster/. CSS-only components need no file; the classes are already in raster.css.",
+    a: "Not on npm. CSS-only components need no file; the classes are already in raster.css. React source lives in this repo under packages/react. The registry is at getraster.com/r/<name>.json.",
   },
   {
-    q: "How do I switch to the dark scheme?",
-    a: "Set data-theme=\"dark\" on the root element. Tokens flip paper and ink. The module grid stays.",
+    q: "How do I use Raster with Next.js or Vercel?",
+    a: "Import @noorddev/raster/css in the root layout, or link styles/raster.css. React from @noorddev/raster-react is optional. Static export works. Set data-theme=\"dark\" on the html element for the dark scheme.",
+  },
+  {
+    q: "Does Raster use Radix or Tailwind?",
+    a: "No. Raster is CSS-first. No Radix, no Tailwind. Classes start with rs-.",
+  },
+  {
+    q: "What does dependency-free mean?",
+    a: "The CSS ships with no JavaScript kit. The React layer uses native elements: details, dialog, popover, scroll snap. No Radix. No Tailwind.",
   },
   {
     q: "Do I need React?",
     a: "No. Raster is CSS-first. Plain classes on plain markup. The React layer is optional and uses native elements.",
+  },
+  {
+    q: "How do I switch to the dark scheme?",
+    a: "Set data-theme=\"dark\" on the root element. Tokens flip paper and ink. The module grid stays.",
   },
   {
     q: "Why Inter?",
@@ -341,6 +353,18 @@ export const notes = [
   {
     q: "What is the module?",
     a: `204 pixels: ${grid.column} column + ${grid.gutter} gutter. Content boxes span whole modules. On a phone the field is one column; at 481 it pairs; at 816 it is four; at 1224 it is six.`,
+  },
+  {
+    q: "What is the International Typographic Style here?",
+    a: "The influence slogan is International Typographic Style. The Dutch and Swiss names on About are the roster, not a second slogan. Paper, ink, a 204 module, hairlines.",
+  },
+  {
+    q: "What is Noord?",
+    a: "Noord Frontier Design Lab sits between Alkmaar and Silicon Valley. Raster was designed and built there. Not a fund.",
+  },
+  {
+    q: "What are the ten principles?",
+    a: "Simple, Beautiful, Opinionated, Elegant, Clear, Legible, Solid, Versatile, Customizable, Minimal. Sentence case. No periods.",
   },
   {
     q: "Where do I report a problem?",
@@ -361,7 +385,7 @@ export const typeface = {
 export const noord = {
   heading: "Noord",
   span: "Alkmaar ↔ Silicon Valley",
-  what: "Noord is an AI lab between Alkmaar and Silicon Valley.",
+  what: "Noord Frontier Design Lab sits between Alkmaar and Silicon Valley.",
   built: "Raster was designed and built there.",
   who: "Renato Valdés Olmos led design and development for Raster at Noord.",
   door: DOOR,

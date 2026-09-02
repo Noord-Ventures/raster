@@ -254,7 +254,6 @@ const links = [
   { href: "/interfaces", label: "Interfaces", corner: true },
   { href: "/docs", label: "Docs", corner: true },
   { href: "/about", label: "About", corner: true },
-  { href: "/swag", label: "Swag", corner: true },
 ];
 
 export function SiteChrome() {

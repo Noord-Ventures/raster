@@ -61,6 +61,7 @@ import {
   Badge,
   Breadcrumbs,
   Button,
+  Callout,
   Card,
   CardBody,
   CardLabel,
@@ -295,6 +296,13 @@ export const demos: Record<string, () => React.ReactNode> = {
       <Button variant="ghost">Secondary</Button>
     </div>
   ),
+  callout: () => (
+    <Callout>
+      <p>
+        <strong>Fixed fee.</strong> The number on the cover is the number on the invoice.
+      </p>
+    </Callout>
+  ),
   badge: () => (
     <div className="preview-cluster">
       <Badge>Recommended</Badge>
@@ -337,7 +345,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     <div style={{ width: 260 }}>
       <InputGroup>
         <InputAddon>https://</InputAddon>
-        <Input placeholder="raster.noord.dev" />
+        <Input placeholder="getraster.com" />
       </InputGroup>
     </div>
   ),

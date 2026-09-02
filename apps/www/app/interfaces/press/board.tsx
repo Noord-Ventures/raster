@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
+import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
 
 const WHAT = interfaceBySlug("press")!.what;
@@ -11,10 +12,10 @@ const WEEK = { sheets: 38, proofs: 12, press: 4, series: [12, 18, 15, 26, 24, 11
 const MONTH = { sheets: 142, proofs: 41, press: 9, series: [28, 34, 31, 42, 38, 22, 19] };
 
 const JOBS = [
-  { id: "14", name: "Press run 14", city: "Alkmaar", weeks: 4, state: "On press", note: "Plate is up at 06:00. Density watch on unit 09.", sheet: "Fee on page one. Timeline under the fee. Same ink." },
-  { id: "09", name: "Identity 09", city: "Delft", weeks: 6, state: "Proof", note: "Second proof due Friday. Same ink.", sheet: "One mark. No second color in the chrome." },
-  { id: "03", name: "Ledger 03", city: "Haarlem", weeks: 2, state: "Invoice", note: "Cover number matches the invoice.", sheet: "Date the sheet to the week the press starts." },
-  { id: "22", name: "Poster 22", city: "Utrecht", weeks: 3, state: "Brief", note: "One sheet. Scope, weeks, fee.", sheet: "A grid is a plan, not a decoration." },
+  { id: "14", name: "Press run 14", city: "Alkmaar", weeks: 4, state: "On press", line: "On press · Alkmaar", note: "Plate is up at 06:00. Density watch on unit 09.", sheet: "Fee on page one. Timeline under the fee. Same ink." },
+  { id: "b", name: "Proof set B", city: "Delft", weeks: 4, state: "Proof", line: "Proof · 4 weeks", note: "Second proof due Friday. Same ink.", sheet: "One mark. No second color in the chrome." },
+  { id: "09", name: "Invoice 09", city: "desk", weeks: 2, state: "Invoice", line: "Invoice · desk", note: "Cover number matches the invoice.", sheet: "Date the sheet to the week the press starts." },
+  { id: "lock", name: "Brief lock", city: "interfaces", weeks: 3, state: "Brief", line: "Brief · interfaces", note: "One sheet. Scope, weeks, fee.", sheet: "A grid is a plan, not a decoration." },
 ];
 
 function Line({ values }: { values: number[] }) {
@@ -41,6 +42,7 @@ export function Board() {
 
   return (
     <main className="if-board sc-dash" aria-label={WHAT} style={{ ["--if-spot" as string]: "#E30613" }}>
+      <PhoneV1Chrome heading="Press" action="Floor" onAction={() => { setPage("overview"); setSheet(false); }} />
       <aside className="sc-dash-rail" aria-label="Floor">
         <div className="sc-dash-brand">
           <Brand slug="press" />
@@ -100,7 +102,7 @@ export function Board() {
 
         <div className="sc-dash-metrics">
           <article className="sc-dash-metric">
-            <p className="if-ico-row"><Icon name="layers" size={12} /> Sheets this {range}</p>
+            <p className="if-ico-row"><Icon name="layers" size={12} /> <span className="sc-dash-metric-long">Sheets this {range}</span><span className="sc-dash-metric-short">Sheets</span></p>
             <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.sheets}</strong>
           </article>
           <article className="sc-dash-metric">
@@ -143,7 +145,8 @@ export function Board() {
                   <span>
                     {item.name}
                     <br />
-                    <small>{item.city} · {item.weeks} weeks</small>
+                    <small className="sc-dash-job-long">{item.city} · {item.weeks} weeks</small>
+                    <small className="sc-dash-job-short">{item.line}</small>
                   </span>
                 </span>
                 <span>{item.state}</span>

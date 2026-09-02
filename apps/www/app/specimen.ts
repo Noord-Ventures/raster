@@ -5,11 +5,13 @@ export const WORD = "Raster";
 export const LAW = "A design system on a modular grid.";
 export const POSTER = "Inspired by Dutch and Swiss modernism.";
 export const COMMAND = "npx @noorddev/raster-cli init";
+/** False until @noorddev/raster-cli resolves on npm. Keep COMMAND for after publish. */
+export const PACKAGES_PUBLISHED = false;
 
 /** Public door. Do not attach DNS from this repo. */
 export const DOOR = "https://getraster.com";
-/** Current host until the door is pointed. Registry and fonts still live here. */
-export const HOST = "https://raster.noord.dev";
+/** Public host for registry, fonts, OG, and canonical. Same as the door. */
+export const HOST = "https://getraster.com";
 
 /**
  * Object cells on the poster. Names from the catalog on this branch —

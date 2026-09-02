@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "raster",
-  "homepage": "https://raster.noord.dev",
+  "homepage": "https://getraster.com",
   "items": [
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
@@ -30,7 +30,7 @@
       "title": "Raster base",
       "description": "Tokens (light + dark), page base with the visible module grid, type scale, and reduced-motion rules.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -53,8 +53,8 @@
       "title": "Button",
       "description": "Solid ink primary and 1px ghost. 40px tall; 36px small.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -76,6 +76,16 @@
           "target": "components/raster/button.tsx"
         },
         {
+          "path": "raster/tokens.stylex.ts",
+          "type": "registry:file",
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -94,9 +104,9 @@
       "title": "Button group",
       "description": "Joined ghost buttons with a 1px rule between.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/button.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/button.json"
       ],
       "meta": {
         "raster": {
@@ -118,6 +128,21 @@
           "target": "components/raster/button-group.tsx"
         },
         {
+          "path": "raster/tokens.stylex.ts",
+          "type": "registry:file",
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
+          "path": "raster/button.tsx",
+          "type": "registry:component",
+          "target": "components/raster/button.tsx"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -136,8 +161,8 @@
       "title": "Text link",
       "description": "Text link with a hairline underline. In-copy variant is inset 1px.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -166,8 +191,8 @@
       "title": "Input",
       "description": "Text field. 1px border, ink focus, 12px label above.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -211,8 +236,8 @@
       "title": "Label",
       "description": "12px secondary label, set above the control.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -250,9 +275,9 @@
       "title": "Field",
       "description": "Label, control, and a hint or error stacked in one cell.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/input.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/input.json"
       ],
       "meta": {
         "raster": {
@@ -295,9 +320,9 @@
       "title": "Input group",
       "description": "Addon and field share a 1px border.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/input.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/input.json"
       ],
       "meta": {
         "raster": {
@@ -307,7 +332,7 @@
             "rs-input-addon",
             "rs-input-group-end"
           ],
-          "snippet": "<div class=\"rs-input-group\"><span class=\"rs-input-addon\">https://</span><input class=\"rs-input\" placeholder=\"raster.noord.dev\" /></div>",
+          "snippet": "<div class=\"rs-input-group\"><span class=\"rs-input-addon\">https://</span><input class=\"rs-input\" placeholder=\"getraster.com\" /></div>",
           "cssOnly": false,
           "registryDependencies": [
             "input"
@@ -339,8 +364,8 @@
       "title": "Native select",
       "description": "Native select with Raster 1px chrome.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -378,9 +403,9 @@
       "title": "Inline form",
       "description": "One field with the submit action inside. The button appears after the input validates.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/button.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/button.json"
       ],
       "meta": {
         "raster": {
@@ -435,8 +460,8 @@
       "title": "Radio",
       "description": "Single-choice control. Selected dot is ink.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -476,8 +501,8 @@
       "title": "Checkbox",
       "description": "Multi-choice. 16px box, 3px radius, ink fill when checked.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -527,8 +552,8 @@
       "title": "Switch",
       "description": "32×18 control. On fills ink; off is a 1px track. The thumb moves; the box stays 32px.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -567,8 +592,8 @@
       "title": "Slider",
       "description": "2px track, ink fill, 14px thumb.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -608,8 +633,8 @@
       "title": "Progress",
       "description": "4px bar. Percentage is set in the label.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -648,8 +673,8 @@
       "title": "Tabs",
       "description": "Text tabs in one row. Active tab has a 1px underline.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -689,8 +714,8 @@
       "title": "Breadcrumbs",
       "description": "Ancestor links, 40% slashes, current page at full ink.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -731,9 +756,9 @@
       "title": "Crumb bar",
       "description": "Fixed 72px bar. Transparent at rest; scrolled state adds paper, a bottom 1px, and the trail.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/breadcrumbs.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/breadcrumbs.json"
       ],
       "meta": {
         "raster": {
@@ -778,8 +803,8 @@
       "title": "Pagination",
       "description": "Square page controls. Current page is solid ink.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -790,7 +815,7 @@
             "rs-page-on",
             "rs-page-gap"
           ],
-          "snippet": "<div class=\"rs-pages\"><span class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.5 L5.5 8 L10.5 12.5\" vector-effect=\"non-scaling-stroke\"/></svg></span><span class=\"rs-page rs-page-on\">1</span><span class=\"rs-page\">2</span><span class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M5.5 3.5 L10.5 8 L5.5 12.5\" vector-effect=\"non-scaling-stroke\"/></svg></span></div>",
+          "snippet": "<div class=\"rs-pages\"><span class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.75 L5.5 8.25 L10.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></span><span class=\"rs-page rs-page-on\">1</span><span class=\"rs-page\">2</span><span class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M5.5 3.75 L10.5 8.25 L5.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></span></div>",
           "cssOnly": false,
           "registryDependencies": []
         }
@@ -830,8 +855,8 @@
       "title": "Select",
       "description": "Closed trigger with a chevron. The menu overlays the page.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -883,9 +908,9 @@
       "title": "Dialog",
       "description": "Modal with a title, body, and two equal actions.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/button.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/button.json"
       ],
       "meta": {
         "raster": {
@@ -928,8 +953,8 @@
       "title": "Badge",
       "description": "11px badge. Outline, solid, and muted fills.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -969,8 +994,8 @@
       "title": "Mono chip",
       "description": "Mono identifier with a 1px mixed border.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -998,8 +1023,8 @@
       "title": "Card",
       "description": "Typography stack: label, title, and body. No outline.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1023,6 +1048,16 @@
           "target": "components/raster/card.tsx"
         },
         {
+          "path": "raster/tokens.stylex.ts",
+          "type": "registry:file",
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -1041,9 +1076,9 @@
       "title": "Concentric radius",
       "description": "Nested corners share a position. Inner radius = outer − inset, clamped at 0.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/button.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/button.json"
       ],
       "meta": {
         "raster": {
@@ -1084,8 +1119,8 @@
       "title": "Stepper",
       "description": "Numbered dots joined by 1px lines. Done fills ink; active is outlined.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1130,8 +1165,8 @@
       "title": "Table",
       "description": "Open grid, 1px row rules, last column right-aligned. Total rows use 2px rules.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1160,8 +1195,8 @@
       "title": "Icons",
       "description": "16 viewBox marks, 1px currentColor, butt/miter. Shipped in the React package.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1213,8 +1248,8 @@
       "title": "Accordion",
       "description": "Native details rows on 1px rules. Shared name keeps one item open.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1265,8 +1300,8 @@
       "title": "Alert",
       "description": "1px frame with an icon. Solid ink variant for critical.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1317,10 +1352,10 @@
       "title": "Alert dialog",
       "description": "Native dialog that must be answered. Escape and light dismiss are off.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/dialog.json",
-        "https://raster.noord.dev/r/button.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/dialog.json",
+        "https://getraster.com/r/button.json"
       ],
       "meta": {
         "raster": {
@@ -1369,8 +1404,8 @@
       "title": "Avatar",
       "description": "32px circle of initials, or a covering image. Broken images fall back. Rows overlap 8px.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1411,8 +1446,8 @@
       "title": "Item",
       "description": "Flush row: title and description on the left, meta on the right.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1453,9 +1488,9 @@
       "title": "Textarea",
       "description": "Multiline field, vertical resize only.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/input.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/input.json"
       ],
       "meta": {
         "raster": {
@@ -1495,8 +1530,8 @@
       "title": "Separator",
       "description": "1px rule, horizontal or vertical.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1535,8 +1570,8 @@
       "title": "Skeleton",
       "description": "Divider-tone pulse. Animation stops when prefers-reduced-motion is on.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1574,9 +1609,9 @@
       "title": "Empty",
       "description": "Placeholder cell with a title, a sentence, and an optional action.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/button.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/button.json"
       ],
       "meta": {
         "raster": {
@@ -1619,8 +1654,8 @@
       "title": "Spinner",
       "description": "16px 1px ring. Animation stops when prefers-reduced-motion is on.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1658,9 +1693,9 @@
       "title": "Tooltip",
       "description": "Label on hover and keyboard focus.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/button.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/button.json"
       ],
       "meta": {
         "raster": {
@@ -1700,8 +1735,8 @@
       "title": "Toast",
       "description": "Bottom-right status, aria-live polite, four-second dismiss.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1742,10 +1777,10 @@
       "title": "Dropdown menu",
       "description": "Action menu with menuitem roles and arrow-key movement.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/select.json",
-        "https://raster.noord.dev/r/button.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/select.json",
+        "https://getraster.com/r/button.json"
       ],
       "meta": {
         "raster": {
@@ -1803,8 +1838,8 @@
       "title": "Toggle",
       "description": "Pressable control. Pressed fills ink. State is aria-pressed.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1843,9 +1878,9 @@
       "title": "Toggle group",
       "description": "Joined toggles, one pressed, 1px between.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/toggle.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/toggle.json"
       ],
       "meta": {
         "raster": {
@@ -1890,9 +1925,9 @@
       "title": "Popover",
       "description": "Native Popover API. Top layer, light dismiss.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/button.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/button.json"
       ],
       "meta": {
         "raster": {
@@ -1934,8 +1969,8 @@
       "title": "Sheet",
       "description": "Native dialog docked to a screen edge, with the platform focus trap and backdrop.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -1976,8 +2011,8 @@
       "title": "Drawer",
       "description": "Native dialog from the bottom edge, with the platform focus trap and backdrop.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -2017,8 +2052,8 @@
       "title": "Scroll area",
       "description": "Overflow box with the scrollbar hidden and 20px feathers at the ends.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -2056,8 +2091,8 @@
       "title": "Charts",
       "description": "Line on a 204 field. 1px grid, ink marks. Series use solid, dashed, gray, or dotted. One optional spot color.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -2150,9 +2185,9 @@
       "title": "Bar chart",
       "description": "Vertical or horizontal. Thin ink bars, square ends. Stacks when series share a field.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/chart.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/chart.json"
       ],
       "meta": {
         "raster": {
@@ -2242,9 +2277,9 @@
       "title": "Area chart",
       "description": "Filled field under the first series. 1px grid, textured series, one optional spot color.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/chart.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/chart.json"
       ],
       "meta": {
         "raster": {
@@ -2334,9 +2369,9 @@
       "title": "Scatter chart",
       "description": "Marks on a 1px grid. Ink, or one optional spot color.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/chart.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/chart.json"
       ],
       "meta": {
         "raster": {
@@ -2426,9 +2461,9 @@
       "title": "Donut or share",
       "description": "Ring against its total, or a flush share strip. 1px stroke.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/chart.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/chart.json"
       ],
       "meta": {
         "raster": {
@@ -2518,9 +2553,9 @@
       "title": "Histogram",
       "description": "Histogram. Adjacent bins, 1px between.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/chart.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/chart.json"
       ],
       "meta": {
         "raster": {
@@ -2610,9 +2645,9 @@
       "title": "Small multiples",
       "description": "Repeated charts on the same axes. One 184 column per panel.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/chart.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/chart.json"
       ],
       "meta": {
         "raster": {
@@ -2702,9 +2737,9 @@
       "title": "Collapsible",
       "description": "Native details disclosure.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/accordion.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/accordion.json"
       ],
       "meta": {
         "raster": {
@@ -2755,8 +2790,8 @@
       "title": "Hover card",
       "description": "Preview panel on hover and keyboard focus.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -2795,8 +2830,8 @@
       "title": "Kbd",
       "description": "Mono key cap with a 1px frame and a heavier bottom edge.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -2835,8 +2870,8 @@
       "title": "One-time code",
       "description": "One cell per character. Auto-advance, backspace, and paste.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -2874,10 +2909,10 @@
       "title": "Context menu",
       "description": "Menu at the pointer on right-click. Escape and outside click close it.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/select.json",
-        "https://raster.noord.dev/r/dropdown-menu.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/select.json",
+        "https://getraster.com/r/dropdown-menu.json"
       ],
       "meta": {
         "raster": {
@@ -2940,10 +2975,10 @@
       "title": "Menubar",
       "description": "Row of dropdowns in a 1px strip.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/dropdown-menu.json",
-        "https://raster.noord.dev/r/select.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/dropdown-menu.json",
+        "https://getraster.com/r/select.json"
       ],
       "meta": {
         "raster": {
@@ -2999,8 +3034,8 @@
       "title": "Navigation menu",
       "description": "Horizontal links. The current page is full ink.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -3038,8 +3073,8 @@
       "title": "Sidebar",
       "description": "204-wide rail with a head, nav, and foot. 1px on all four sides.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -3082,9 +3117,9 @@
       "title": "Carousel",
       "description": "Scroll-snap track. Buttons nudge one slide; ends feather.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/pagination.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/pagination.json"
       ],
       "meta": {
         "raster": {
@@ -3095,7 +3130,7 @@
             "rs-carousel-slide",
             "rs-carousel-nav"
           ],
-          "snippet": "<div class=\"rs-carousel\"><div class=\"rs-carousel-track\"><div class=\"rs-carousel-slide\">One</div><div class=\"rs-carousel-slide\">Two</div><div class=\"rs-carousel-slide\">Three</div></div><div class=\"rs-carousel-nav\"><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.5 L5.5 8 L10.5 12.5\" vector-effect=\"non-scaling-stroke\"/></svg></button><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M5.5 3.5 L10.5 8 L5.5 12.5\" vector-effect=\"non-scaling-stroke\"/></svg></button></div></div>",
+          "snippet": "<div class=\"rs-carousel\"><div class=\"rs-carousel-track\"><div class=\"rs-carousel-slide\">One</div><div class=\"rs-carousel-slide\">Two</div><div class=\"rs-carousel-slide\">Three</div></div><div class=\"rs-carousel-nav\"><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.75 L5.5 8.25 L10.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></button><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M5.5 3.75 L10.5 8.25 L5.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></button></div></div>",
           "cssOnly": false,
           "registryDependencies": [
             "pagination"
@@ -3137,8 +3172,8 @@
       "title": "Resizable",
       "description": "Two panes split by a draggable 1px handle. Arrows move it; value is in ARIA.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -3178,10 +3213,10 @@
       "title": "Combobox",
       "description": "Text field with a filtered listbox.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/input.json",
-        "https://raster.noord.dev/r/select.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/input.json",
+        "https://getraster.com/r/select.json"
       ],
       "meta": {
         "raster": {
@@ -3238,9 +3273,9 @@
       "title": "Command",
       "description": "Command palette in a native dialog. Filter, arrows, enter.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/dialog.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/dialog.json"
       ],
       "meta": {
         "raster": {
@@ -3292,9 +3327,9 @@
       "title": "Calendar",
       "description": "Month grid. Selected day is ink; today is a 1px outline. Weeks start Monday.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/pagination.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/pagination.json"
       ],
       "meta": {
         "raster": {
@@ -3311,7 +3346,7 @@
             "rs-cal-day-today",
             "rs-cal-day-selected"
           ],
-          "snippet": "<div class=\"rs-cal\"><div class=\"rs-cal-head\"><span class=\"rs-cal-title\">July 2026</span><span class=\"rs-cal-nav\"><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.5 L5.5 8 L10.5 12.5\" vector-effect=\"non-scaling-stroke\"/></svg></button><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M5.5 3.5 L10.5 8 L5.5 12.5\" vector-effect=\"non-scaling-stroke\"/></svg></button></span></div><div class=\"rs-cal-grid\"><span class=\"rs-cal-dow\">Mo</span><span class=\"rs-cal-dow\">Tu</span><span class=\"rs-cal-dow\">We</span><span class=\"rs-cal-dow\">Th</span><span class=\"rs-cal-dow\">Fr</span><span class=\"rs-cal-dow\">Sa</span><span class=\"rs-cal-dow\">Su</span><button class=\"rs-cal-day\">20</button><button class=\"rs-cal-day\">21</button><button class=\"rs-cal-day\">22</button><button class=\"rs-cal-day\">23</button><button class=\"rs-cal-day rs-cal-day-selected\">24</button><button class=\"rs-cal-day rs-cal-day-today\">25</button><button class=\"rs-cal-day\">26</button></div></div>",
+          "snippet": "<div class=\"rs-cal\"><div class=\"rs-cal-head\"><span class=\"rs-cal-title\">July 2026</span><span class=\"rs-cal-nav\"><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.75 L5.5 8.25 L10.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></button><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M5.5 3.75 L10.5 8.25 L5.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></button></span></div><div class=\"rs-cal-grid\"><span class=\"rs-cal-dow\">Mo</span><span class=\"rs-cal-dow\">Tu</span><span class=\"rs-cal-dow\">We</span><span class=\"rs-cal-dow\">Th</span><span class=\"rs-cal-dow\">Fr</span><span class=\"rs-cal-dow\">Sa</span><span class=\"rs-cal-dow\">Su</span><button class=\"rs-cal-day\">20</button><button class=\"rs-cal-day\">21</button><button class=\"rs-cal-day\">22</button><button class=\"rs-cal-day\">23</button><button class=\"rs-cal-day rs-cal-day-selected\">24</button><button class=\"rs-cal-day rs-cal-day-today\">25</button><button class=\"rs-cal-day\">26</button></div></div>",
           "cssOnly": false,
           "registryDependencies": [
             "pagination"
@@ -3353,10 +3388,10 @@
       "title": "Date picker",
       "description": "1px trigger that opens a calendar overlay.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/select.json",
-        "https://raster.noord.dev/r/calendar.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/select.json",
+        "https://getraster.com/r/calendar.json"
       ],
       "meta": {
         "raster": {
@@ -3418,9 +3453,9 @@
       "title": "Data table",
       "description": "Sortable table. Headers expose aria-sort.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/table.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/table.json"
       ],
       "meta": {
         "raster": {
@@ -3471,8 +3506,8 @@
       "title": "Aspect ratio",
       "description": "Box that holds a ratio. Media fills it.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -3510,11 +3545,11 @@
       "title": "Form",
       "description": "Stacked fields with one primary action at the end.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json",
-        "https://raster.noord.dev/r/field.json",
-        "https://raster.noord.dev/r/input.json",
-        "https://raster.noord.dev/r/button.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/field.json",
+        "https://getraster.com/r/input.json",
+        "https://getraster.com/r/button.json"
       ],
       "meta": {
         "raster": {
@@ -3556,8 +3591,8 @@
       "title": "Workflow card",
       "description": "Dashed 1px pipeline step. Drag handle, dashed chips, ghost add-step.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -3591,8 +3626,8 @@
       "title": "Assistant panel",
       "description": "Chat panel: user block, reply, suggestion card, input row.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -3633,8 +3668,8 @@
       "title": "Theme toggle",
       "description": "Icon that swaps moon and sun with the color scheme. Saved in localStorage.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -3685,8 +3720,8 @@
       "title": "Callout",
       "description": "Note in running copy. 1px hairline, radius 0. No left bar.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {
@@ -3695,11 +3730,31 @@
             "rs-callout"
           ],
           "snippet": "<div class=\"rs-callout\"><p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p></div>",
-          "cssOnly": true,
+          "cssOnly": false,
           "registryDependencies": []
         }
       },
       "files": [
+        {
+          "path": "raster/callout.tsx",
+          "type": "registry:component",
+          "target": "components/raster/callout.tsx"
+        },
+        {
+          "path": "raster/tokens.stylex.ts",
+          "type": "registry:file",
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
         {
           "path": "raster/styles/callout.css",
           "type": "registry:file",
@@ -3714,8 +3769,8 @@
       "title": "References",
       "description": "Inline citations, a numbered 1px list, and a cite box. Numerals hang in the gutter.",
       "registryDependencies": [
-        "https://raster.noord.dev/r/raster-base.json",
-        "https://raster.noord.dev/r/inter.json"
+        "https://getraster.com/r/raster-base.json",
+        "https://getraster.com/r/inter.json"
       ],
       "meta": {
         "raster": {

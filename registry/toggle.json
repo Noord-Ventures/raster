@@ -5,8 +5,8 @@
   "title": "Toggle",
   "description": "Pressable control. Pressed fills ink. State is aria-pressed.",
   "registryDependencies": [
-    "https://raster.noord.dev/r/raster-base.json",
-    "https://raster.noord.dev/r/inter.json"
+    "https://getraster.com/r/raster-base.json",
+    "https://getraster.com/r/inter.json"
   ],
   "files": [
     {

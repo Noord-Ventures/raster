@@ -16,10 +16,9 @@ function read(rel) {
 }
 
 const page = read("app/swag/page.tsx");
-const css = read("app/swag/swag.css");
-const catalog = read("app/swag/catalog.ts");
 const chrome = read("components/site-chrome.tsx");
 const crumbs = read("components/crumb-bar.tsx");
+const footer = read("components/site-footer.tsx");
 const mark = read("components/raster-mark.tsx");
 
 if (!mark.includes('viewBox="0 0 822 822"') || !mark.includes("fill=\"currentColor\"")) {
@@ -37,43 +36,37 @@ if (!chrome.includes('from "./raster-mark"') && !chrome.includes('from "./raster
   fail.push("site chrome must import RasterMark from the shared module");
 }
 if (chrome.includes("m411.128.67")) fail.push("do not duplicate RasterMark paths in site-chrome");
-if (!page.includes("from \"@/components/raster-mark\"") && !page.includes("from \"@/components/raster-mark.tsx\"")) {
-  fail.push("swag must import RasterMark from the shared module");
-}
-if (!page.includes('className="swag-mark"')) fail.push("swag hero must render RasterMark in the corner slot");
-if (page.includes("PrintMark") || page.includes("swag-print-mark") || page.includes("swag-print-sheet")) {
-  fail.push("swag stills must not DOM-stamp RasterMark over product photos");
-}
-if (css.includes("swag-print-mark") || css.includes("swag-print-svg") || css.includes("swag-print-knockout")) {
-  fail.push("swag CSS must not position a second mark on product stills");
-}
-if (!css.includes("top: 24px") || !css.includes("left: 20px")) {
-  fail.push("swag hero mark must sit at top 24 / left 20");
-}
 
-if (!page.includes('className="swag-page"')) fail.push("swag page shell missing");
-if (!page.includes('className="swag-field"')) fail.push("swag must use the 204 field");
-if (!page.includes("Coming soon")) fail.push("Coming soon copy missing");
-if (/stripe|checkout|addToCart|payment|SiteChrome/i.test(page)) fail.push("swag page must not checkout or remount chrome");
+if (!page.includes("notFound(")) {
+  fail.push("hidden /swag must 404 via notFound()");
+}
+if (/Coming soon|swag-page|swag-field|SiteChrome/i.test(page)) {
+  fail.push("hidden /swag must not render a store page");
+}
+if (/stripe|checkout|addToCart|payment/i.test(page)) {
+  fail.push("swag page must not checkout");
+}
 
 for (const slug of ["hoodie", "tote", "mug", "cap", "notebook", "bottle", "stickers"]) {
-  if (!catalog.includes(`slug: "${slug}"`)) fail.push(`catalog missing ${slug}`);
   const still = join(root, "public/swag", `${slug}.jpg`);
   if (!existsSync(still)) fail.push(`missing still public/swag/${slug}.jpg`);
 }
 
-if (!catalog.includes("print:")) fail.push("catalog must name print areas");
-if (!css.includes("padding-top: 64px")) fail.push("swag Store kicker must sit below the corner mark");
-if (!css.includes("border-radius: 0")) fail.push("swag cards stay chrome-square");
-if (!css.includes("grid-auto-rows: minmax(204px, auto)")) fail.push("swag field must sit on 204");
-if (!css.includes("object-fit: contain")) fail.push("swag stills sit contain on paper");
-if (/tailwind|radix|stripe/i.test(page + css)) fail.push("no Tailwind/Radix/Stripe on swag");
-
-if (!/href:\s*"\/swag"/.test(chrome)) fail.push("SiteChrome missing /swag");
-if (!crumbs.includes('label: "Swag"')) fail.push("crumb-bar missing Swag");
+if (/href:\s*"\/swag"/.test(chrome) || chrome.includes('label: "Swag"')) {
+  fail.push("SiteChrome must not list Swag");
+}
+if (crumbs.includes('label: "Swag"') || crumbs.includes('parts[0] === "swag"')) {
+  fail.push("crumb-bar must not trail Swag");
+}
+if (footer.includes("/swag") || footer.includes(">Swag<")) {
+  fail.push("footer must not link Swag");
+}
+if (/tailwind|@radix-ui/i.test(page + chrome + footer)) {
+  fail.push("no Tailwind/Radix on chrome or hidden swag");
+}
 
 if (fail.length) {
   console.error(fail.map((f) => `  ✗ ${f}`).join("\n"));
   process.exit(1);
 }
-console.log("swag store locks ok");
+console.log("swag hidden: 404, no nav, assets kept");

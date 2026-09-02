@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
+import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
 
 const WHAT = interfaceBySlug("line")!.what;
@@ -12,9 +13,11 @@ type Msg = { id: string; role: Role; text: string; fresh?: boolean };
 type Inspect = { kind: "line"; id: string } | { kind: "settings" } | null;
 
 const CHATS = [
-  { id: "brief", title: "Tighten the brief", preview: "Two sentences, same claim.", when: "Now", icon: "quote" as const },
-  { id: "press", title: "Press run 14", preview: "Keep the weeks under the fee.", when: "Today", icon: "printer" as const },
-  { id: "invoice", title: "Invoice note", preview: "The number on the cover.", when: "Yesterday", icon: "receipt" as const },
+  { id: "brief", title: "Tighten the brief", preview: "Make the intro tighter. Keep the fee…", when: "Now", icon: "quote" as const },
+  { id: "press", title: "Press run 14", preview: "Alkmaar · plate up at 06:00", when: "Today", icon: "printer" as const },
+  { id: "invoice", title: "Invoice note", preview: "Weeks 4–7 under the fee", when: "Yesterday", icon: "receipt" as const },
+  { id: "desk", title: "Room desk", preview: "Keep the thread on this post", when: "Today", icon: "hash" as const },
+  { id: "wall", title: "Wall morning", preview: "Paper first. Then the street.", when: "Today", icon: "rows" as const },
 ] as const;
 
 const STARTED: Record<string, Msg[]> = {
@@ -48,6 +51,14 @@ const STARTED: Record<string, Msg[]> = {
       text: "Use the number on page one. Do not add a second total. Date the sheet to the week the press starts.",
     },
   ],
+  desk: [
+    { id: "d1", role: "you", text: "Keep the thread on this post." },
+    { id: "d2", role: "line", text: "The room holds the line. Two sentences, same claim." },
+  ],
+  wall: [
+    { id: "w1", role: "you", text: "Paper first. Then the street." },
+    { id: "w2", role: "line", text: "Then the room. Leave the type on the sheet." },
+  ],
 };
 
 const HINTS = ["Tighten the intro", "Move the timeline", "Write the invoice line"];
@@ -65,7 +76,7 @@ export function Board() {
   const [draft, setDraft] = React.useState("");
   const [pending, setPending] = React.useState(false);
   const [inspect, setInspect] = React.useState<Inspect>(null);
-  const [phonePane, setPhonePane] = React.useState<"inbox" | "thread">("thread");
+  const [phonePane, setPhonePane] = React.useState<"inbox" | "thread">("inbox");
   const end = React.useRef<HTMLDivElement>(null);
   const box = React.useRef<HTMLInputElement>(null);
   const piece = CHATS.find((item) => item.id === chat)?.title ?? "New chat";
@@ -113,6 +124,7 @@ export function Board() {
 
   return (
     <main className="if-board sc-ai" data-pane={phonePane} aria-label={WHAT}>
+      <PhoneV1Chrome heading="Line" action="New" onAction={fresh} />
       <aside className="sc-ai-rail" aria-label="Chats">
         <div className="sc-ai-brand">
           <Brand slug="line" />
@@ -173,7 +185,7 @@ export function Board() {
           <div className="sc-ai-measure">
             {messages.length === 0 ? (
               <div className="sc-ai-empty">
-                <p className="sc-ai-hello">The next line</p>
+                <p className="sc-ai-hello">The next line.</p>
                 <div className="sc-ai-hints">
                   {HINTS.map((hint) => (
                     <button key={hint} type="button" className="sc-ai-hint" onClick={() => send(hint)}>
@@ -219,7 +231,8 @@ export function Board() {
             <div ref={end} />
           </div>
         </div>
-        <div className="sc-ai-dock">
+      </section>
+      <div className="sc-ai-dock">
           <form
             className="sc-ai-composer"
             onSubmit={(event) => {
@@ -232,7 +245,7 @@ export function Board() {
               ref={box}
               type="text"
               value={draft}
-              placeholder="The next line"
+              placeholder="The next line."
               aria-label="Message"
               autoComplete="off"
               onChange={(event) => setDraft(event.target.value)}
@@ -243,7 +256,6 @@ export function Board() {
             </button>
           </form>
         </div>
-      </section>
 
       <nav className="if-thumb" aria-label={WHAT}>
         <button

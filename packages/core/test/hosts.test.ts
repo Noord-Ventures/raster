@@ -6,7 +6,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 const repoRoot = join(import.meta.dirname, "../../..");
 const pkgDir = join(import.meta.dirname, "..");
 const registryDir = join(repoRoot, "registry");
-const DEAD = /raster\.design|raster-pied|vercel\.app/;
+const DEAD = /raster\.design|raster-pied|vercel\.app|raster\.noord\.dev/;
 
 let files: string[];
 
@@ -35,24 +35,24 @@ describe("generated registry hosts", () => {
     expect(hits, `leftover package scope in registry/${hits.join(", ")}`).toEqual([]);
   });
 
-  it("uses https://raster.noord.dev for homepage, raster-base, and inter", () => {
+  it("uses https://getraster.com for homepage, raster-base, and inter", () => {
     const index = JSON.parse(readFileSync(join(registryDir, "index.json"), "utf8")) as {
       homepage: string;
       items: Array<{ name: string; registryDependencies?: string[] }>;
     };
-    expect(index.homepage).toBe("https://raster.noord.dev");
+    expect(index.homepage).toBe("https://getraster.com");
 
     const inter = index.items.find((item) => item.name === "inter");
     const base = index.items.find((item) => item.name === "raster-base");
     expect(inter).toBeTruthy();
-    expect(base?.registryDependencies).toContain("https://raster.noord.dev/r/inter.json");
+    expect(base?.registryDependencies).toContain("https://getraster.com/r/inter.json");
 
     for (const item of index.items) {
       if (item.name === "inter" || item.name === "raster-base") continue;
-      expect(item.registryDependencies, item.name).toContain("https://raster.noord.dev/r/raster-base.json");
-      expect(item.registryDependencies, item.name).toContain("https://raster.noord.dev/r/inter.json");
+      expect(item.registryDependencies, item.name).toContain("https://getraster.com/r/raster-base.json");
+      expect(item.registryDependencies, item.name).toContain("https://getraster.com/r/inter.json");
       for (const dep of item.registryDependencies ?? []) {
-        expect(dep.startsWith("https://raster.noord.dev/"), `${item.name} dep ${dep}`).toBe(true);
+        expect(dep.startsWith("https://getraster.com/"), `${item.name} dep ${dep}`).toBe(true);
       }
     }
   });

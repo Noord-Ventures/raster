@@ -5,6 +5,7 @@ import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
 import { InAction } from "@/components/examples/scene";
 import { Preview } from "@/components/preview";
+import { COMMAND, PACKAGES_PUBLISHED } from "../../specimen";
 
 export function generateStaticParams() {
   return catalogComponents.map((c) => ({ name: c.name }));
@@ -25,6 +26,11 @@ const reactUsage: Record<string, string> = {
 
 <Button>Primary action</Button>
 <Button variant="ghost" size="sm">Secondary</Button>`,
+  callout: `import { Callout } from "@/components/raster/callout";
+
+<Callout>
+  <p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p>
+</Callout>`,
   "button-group": `import { ButtonGroup } from "@/components/raster/button-group";
 import { Button } from "@/components/raster/button";
 
@@ -58,7 +64,7 @@ import { Button } from "@/components/raster/button";
 
 <InputGroup>
   <InputAddon>https://</InputAddon>
-  <input className="rs-input" placeholder="raster.noord.dev" />
+  <input className="rs-input" placeholder="getraster.com" />
 </InputGroup>`,
   "native-select": `import { NativeSelect } from "@/components/raster/native-select";
 
@@ -489,7 +495,11 @@ export default async function ComponentPage({
         <InAction name={component.name} />
 
         <h2 className="section-label">Install</h2>
-        <CodeBlock code={`npx @noorddev/raster-cli add ${component.name}`} />
+        {PACKAGES_PUBLISHED ? (
+          <CodeBlock code={COMMAND.replace("init", `add ${component.name}`)} />
+        ) : (
+          <p className="rs-t-body">Not on npm. Use the markup and classes on this page.</p>
+        )}
 
         <h2 className="section-label">Markup</h2>
         <CodeBlock code={component.snippet} />
