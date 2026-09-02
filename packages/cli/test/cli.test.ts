@@ -74,8 +74,11 @@ describe("add", () => {
     expect(outcomes).toHaveLength(1);
     const source = readFileSync(join(cwd, "components/raster/button.tsx"), "utf8");
     expect(source).toContain("rs-btn-primary");
-    expect(source).toContain('from "./cx"');
+    expect(source).toContain("@stylexjs/stylex");
     expect(existsSync(join(cwd, "components/raster/cx.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "components/raster/rs.ts"))).toBe(true);
+    expect(readFileSync(join(cwd, "components/raster/rs.ts"), "utf8")).toContain('from "./cx"');
+    expect(existsSync(join(cwd, "components/raster/tokens.stylex.ts"))).toBe(true);
   });
 
   it("pulls registry dependencies in install order", async () => {

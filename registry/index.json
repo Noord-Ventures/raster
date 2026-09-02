@@ -76,6 +76,16 @@
           "target": "components/raster/button.tsx"
         },
         {
+          "path": "raster/tokens.stylex.ts",
+          "type": "registry:file",
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
@@ -116,6 +126,21 @@
           "path": "raster/button-group.tsx",
           "type": "registry:component",
           "target": "components/raster/button-group.tsx"
+        },
+        {
+          "path": "raster/tokens.stylex.ts",
+          "type": "registry:file",
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
+          "path": "raster/button.tsx",
+          "type": "registry:component",
+          "target": "components/raster/button.tsx"
         },
         {
           "path": "raster/cx.ts",
@@ -1021,6 +1046,16 @@
           "path": "raster/card.tsx",
           "type": "registry:component",
           "target": "components/raster/card.tsx"
+        },
+        {
+          "path": "raster/tokens.stylex.ts",
+          "type": "registry:file",
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
         },
         {
           "path": "raster/cx.ts",
@@ -3695,11 +3730,31 @@
             "rs-callout"
           ],
           "snippet": "<div class=\"rs-callout\"><p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p></div>",
-          "cssOnly": true,
+          "cssOnly": false,
           "registryDependencies": []
         }
       },
       "files": [
+        {
+          "path": "raster/callout.tsx",
+          "type": "registry:component",
+          "target": "components/raster/callout.tsx"
+        },
+        {
+          "path": "raster/tokens.stylex.ts",
+          "type": "registry:file",
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
+        },
         {
           "path": "raster/styles/callout.css",
           "type": "registry:file",
