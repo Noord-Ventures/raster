@@ -4,6 +4,7 @@ import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
 import { Face, type FaceId } from "../people";
+import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
 
 const WHAT = interfaceBySlug("wall")!.what;
@@ -27,7 +28,7 @@ const FEED: Post[] = [
     who: "aziez",
     name: "Aziez",
     when: "09:14",
-    text: "The west window is the one that holds. North is just weather.",
+    text: "The west window is the one that holds.",
     photo: "/interfaces/threads/press-sheet.jpg",
     ratio: "4 / 5",
     likes: 12,
@@ -45,7 +46,7 @@ const FEED: Post[] = [
     who: "jenny",
     name: "Jenny",
     when: "08:41",
-    text: "I left a note on the third post. It is still there.",
+    text: "I left a note on the third post.",
     photo: "/interfaces/threads/posters.jpg",
     ratio: "1 / 1",
     likes: 5,
@@ -62,8 +63,8 @@ const FEED: Post[] = [
     id: "m5",
     who: "gianpiero",
     name: "Gianpiero",
-    when: "07:58",
-    text: "Cite hangs in the gutter. Leave the type on the sheet.",
+    when: "07:55",
+    text: "On the rail before the street.",
     photo: "/interfaces/threads/press-sheet.jpg",
     ratio: "5 / 4",
     likes: 7,
@@ -131,6 +132,7 @@ export function Board() {
 
   return (
     <main className="if-board sc-wall" aria-label={WHAT}>
+      <PhoneV1Chrome heading="Wall" action="Post" onAction={() => openPost("m1")} />
       <aside className="sc-wall-rail" aria-label="People">
         <div className="sc-wall-brand">
           <Brand slug="wall" />
@@ -182,9 +184,12 @@ export function Board() {
         </header>
         <div className="sc-wall-stream">
           {FEED.map((row) => (
-            <article key={row.id} className={`sc-wall-card${post === row.id && inspect?.kind === "post" ? " is-on" : ""}`}>
+            <article key={row.id} className={`sc-wall-card${post === row.id ? " is-on" : ""}${["m1", "m3", "m4", "m5"].includes(row.id) ? " sc-wall-v1" : ""}`}>
               <button type="button" className="sc-wall-open" onClick={() => openPost(row.id)}>
                 {row.photo ? <img src={row.photo} alt="" /> : null}
+                <span className="sc-wall-v1-line">
+                  {row.name} · {row.when}
+                </span>
                 <span className="sc-wall-who">
                   <Face who={row.who} />
                   <b>{row.name}</b>

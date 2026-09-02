@@ -4,6 +4,7 @@
   height: 100%;
   display: grid;
   grid-template-columns: 204px minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr) auto;
   padding: 0;
   background: var(--bg);
   color: var(--text);
@@ -16,6 +17,8 @@
   background: color-mix(in srgb, var(--text) 3%, var(--bg));
   display: flex;
   flex-direction: column;
+  grid-column: 1;
+  grid-row: 1 / span 2;
 }
 .sc-room-brand { padding: 12px 16px 6px; }
 .sc-room-voice {
@@ -94,11 +97,15 @@
   font-weight: 600;
 }
 
+.sc-room-ch-hash,
+.sc-room-v1-copy { display: none; }
 .sc-room-chat {
   display: flex;
   flex-direction: column;
   min-width: 0;
   min-height: 0;
+  grid-column: 2;
+  grid-row: 1;
 }
 .sc-room-head {
   display: flex;
@@ -145,6 +152,12 @@
   min-height: 52px;
   padding: 8px 16px 12px;
   border-top: 1px solid var(--divider);
+  grid-column: 2;
+  grid-row: 2;
+}
+.sc-room > .if-inspect {
+  grid-column: 3;
+  grid-row: 1 / span 2;
 }
 .sc-room-field {
   flex: 1;
@@ -232,6 +245,13 @@
 
 @media (max-width: 900px) {
   .sc-room { grid-template-columns: 1fr; overflow: auto; }
+  .sc-room-rail,
+  .sc-room-chat,
+  .sc-room-dock,
+  .sc-room > .if-inspect {
+    grid-column: auto;
+    grid-row: auto;
+  }
   .sc-room-rail {
     border-right: 0;
     border-bottom: 1px solid var(--divider);
@@ -244,36 +264,83 @@
 @media (max-width: 640px) {
   .sc-room {
     grid-template-columns: 1fr;
-    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
     overflow: hidden;
     position: relative;
   }
-  .if-board.sc-room[data-pane="chat"] .sc-room-label,
-  .if-board.sc-room[data-pane="chat"] .sc-room-ch,
-  .if-board.sc-room[data-pane="chat"] .sc-room-person,
-  .if-board.sc-room[data-pane="chat"] .sc-room-voice { display: none; }
-  .sc-room[data-pane="chat"] .sc-room-rail {
-    overflow: hidden;
-    max-height: none;
+  .sc-room-rail,
+  .sc-room-chat,
+  .sc-room-dock,
+  .sc-room > .if-inspect {
+    grid-column: auto;
+    grid-row: auto;
   }
+  .sc-room-brand,
+  .sc-room-label,
+  .sc-room-voice,
+  .sc-room-ch-count,
+  .sc-room-ch .rs-icon,
+  .sc-room-person .rs-icon,
+  .sc-room-person .if-face,
+  .sc-room-extra,
+  .sc-room-field .rs-icon,
+  .sc-room-dock button .rs-icon { display: none; }
+  .sc-room[data-pane="chat"] .sc-room-rail { display: none; }
   .sc-room[data-pane="channels"] .sc-room-chat { display: none; }
-  .sc-room[data-pane="channels"] {
-    grid-template-rows: minmax(0, 1fr) auto;
-  }
-  .sc-room[data-pane="channels"] .sc-room-rail {
+  .sc-room-rail {
     max-height: none;
     border-bottom: 0;
     overflow: auto;
+    background: var(--bg);
   }
-  .sc-room-brand { padding: 10px 16px; }
+  .sc-room-ch-hash,
+  .sc-room-v1-copy { display: block; }
+  .sc-room-ch {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
+    min-height: 56px;
+    margin: 0 16px;
+    padding: 10px 12px 8px;
+    border-radius: var(--radius-sm);
+  }
+  .sc-room-ch:first-of-type { margin-top: 12px; }
+  .sc-room-ch[aria-current="true"],
+  .sc-room-person[aria-current="true"] {
+    background: color-mix(in srgb, var(--text) 4%, var(--bg));
+    font-weight: 500;
+  }
+  .sc-room-ch b { font-size: 13px; font-weight: 500; }
+  .sc-room-v1-copy {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+  .sc-room-person {
+    grid-template-columns: 1fr;
+    min-height: 48px;
+    margin: 0 16px;
+    padding: 10px 12px 8px;
+    border-radius: var(--radius-sm);
+  }
+  .sc-room-person b { font-size: 13px; font-weight: 500; }
+  .sc-room-person i { font-size: 11px; font-weight: 400; }
   .sc-room-chat { min-height: 0; overflow: hidden; }
-  .sc-room-ch,
-  .sc-room-person,
-  .sc-room-msg,
+  .sc-room-msg { min-height: 44px; }
+  .sc-room-dock {
+    gap: 8px;
+    min-height: 56px;
+    padding: 10px 12px;
+  }
   .sc-room-field,
-  .sc-room-dock button { min-height: 44px; height: auto; font-size: 16px; }
-  .sc-room-field,
-  .sc-room-dock button { height: 44px; }
+  .sc-room-dock button {
+    height: 36px;
+    min-height: 36px;
+    font-size: 13px;
+  }
+  .sc-room-dock button { min-width: 84px; font-size: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

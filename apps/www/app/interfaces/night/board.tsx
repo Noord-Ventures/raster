@@ -4,6 +4,7 @@ import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
 import { Scene } from "./map";
+import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
 
 const WHAT = interfaceBySlug("night")!.what;
@@ -18,11 +19,12 @@ const UNITS = [
 export function Board() {
   const [unit, setUnit] = React.useState("04");
   const [pane, setPane] = React.useState<"none" | "trip">("none");
-  const [phonePane, setPhonePane] = React.useState<"map" | "fleet">("map");
+  const [phonePane, setPhonePane] = React.useState<"map" | "fleet">("fleet");
   const item = UNITS.find((row) => row.id === unit) ?? UNITS[0]!;
 
   return (
     <main className="if-board sc-night" data-pane={phonePane} aria-label={WHAT} style={{ ["--if-spot" as string]: "#E30613" }}>
+      <PhoneV1Chrome heading="Night" action="Trip" onAction={() => setPane("trip")} />
       <aside className="sc-night-rail" aria-label="Fleet">
         <div className="sc-night-brand">
           <Brand slug="night" />
@@ -41,14 +43,14 @@ export function Board() {
             onClick={() => {
               setUnit(row.id);
               setPane("none");
-              setPhonePane("map");
             }}
           >
             <b className="if-ico-row">
               <Icon name="truck" size={16} />
               {row.name}
+              <span className="sc-night-v1-mid"> · {row.state}</span>
             </b>
-            <i className="if-ico-row">
+            <i className="if-ico-row sc-night-desk-state">
               <Icon name={row.mark} size={12} />
               {row.state}
             </i>

@@ -460,7 +460,11 @@ body:has(.if-index) {
 @media (max-width: 899px) {
   .if-specimen { margin-top: 24px; height: 612px; }
 }
-/* Phone thumb bar. Hidden on desktop; boards opt in with <nav class="if-thumb">. */
+/* Phone V1 chrome (390). Hidden on desktop. */
+.if-v1-status,
+.if-v1-nav { display: none; }
+
+/* Phone thumb bar. Hidden on desktop; V1 phones hide it at 640 too. */
 .if-thumb { display: none; }
 
 @media (max-width: 640px) {
@@ -495,16 +499,46 @@ body:has(.if-index) {
     border-left: 0;
     border-top: 1px solid var(--divider);
   }
+  .if-v1-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 44px;
+    padding: 0 20px;
+    font-size: 12px;
+    flex-shrink: 0;
+    color: var(--text);
+  }
+  .if-v1-status span:last-child { color: var(--text-secondary); font-weight: 400; }
+  .if-v1-status span:first-child { font-weight: 500; }
+  .if-v1-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    padding: 0 16px;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .if-v1-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .if-v1-action {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    min-height: 44px;
+    padding: 0;
+    font: 400 13px/1 inherit;
+    cursor: pointer;
+  }
+  .if-v1-action:hover { color: var(--text); }
   .if-thumb {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(0, 1fr);
-    align-items: stretch;
-    min-height: 52px;
-    padding: 4px 8px calc(4px + env(safe-area-inset-bottom, 0px));
-    border-top: 1px solid var(--divider);
-    background: var(--bg);
-    z-index: 2;
+    display: none;
   }
   .if-thumb button {
     appearance: none;

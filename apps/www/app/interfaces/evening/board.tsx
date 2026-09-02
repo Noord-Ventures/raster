@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
+import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
 
 const WHAT = interfaceBySlug("evening")!.what;
@@ -73,6 +74,13 @@ const MENUS: Record<string, Item[]> = {
   ],
 };
 
+const V1_KITCHENS = [
+  { id: "buren", place: "Alkmaar" },
+  { id: "canal", place: "Oudegracht" },
+  { id: "north", place: "Kennemer" },
+  { id: "folsom", place: "Mission" },
+] as const;
+
 function money(n: number) {
   return `€${n.toFixed(2)}`;
 }
@@ -116,7 +124,12 @@ export function Board() {
   }
 
   return (
-    <main className="if-board sc-evening" aria-label={WHAT}>
+    <main className="if-board sc-evening" data-page={page} aria-label={WHAT}>
+      <PhoneV1Chrome
+        heading="Evening"
+        action="Bag"
+        onAction={() => setInspect((cur) => (cur?.kind === "bag" ? null : { kind: "bag" }))}
+      />
       <section className="sc-evening-stage">
         <header className="sc-evening-bar">
           <Brand slug="evening" />
@@ -199,6 +212,26 @@ export function Board() {
                   </button>
                 ))
               )}
+            </div>
+            <div className="sc-evening-v1" aria-label="Kitchens">
+              {V1_KITCHENS.map((item) => {
+                const row = STORES.find((store) => store.id === item.id);
+                if (!row) return null;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className="sc-evening-v1-row"
+                    aria-current={storeId === item.id}
+                    onClick={() => openStore(item.id)}
+                  >
+                    <b>{row.name}</b>
+                    <i>
+                      {row.rating} · {row.eta} · {item.place} · {row.fee}
+                    </i>
+                  </button>
+                );
+              })}
             </div>
           </>
         ) : (

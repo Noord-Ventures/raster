@@ -414,31 +414,43 @@ if (!/border-radius:\s*0/.test(eveningSegBtn)) {
 }
 const eveningPhoneAt = eveningScene.lastIndexOf("@media (max-width: 640px)");
 const eveningPhone = eveningPhoneAt >= 0 ? eveningScene.slice(eveningPhoneAt) : "";
-if (!eveningPhone.includes("72px minmax(0, 1fr)") || eveningPhone.includes("1fr 1fr")) {
-  console.error("Evening at 640 must be one column of thumb-left store rows, not a two-column card grid");
+if (eveningPhone.includes("72px minmax(0, 1fr)") || /grid-template-columns:\s*1fr 1fr/.test(eveningPhone)) {
+  console.error("Evening at 640 must be a text kitchen list, not a two-column or thumb-left grid");
   process.exit(1);
 }
-if (!eveningPhone.includes("flex-wrap: wrap") || !eveningPhone.includes("flex: 0 0 auto")) {
-  console.error("Evening phone chips must wrap as whole segments, not shrink and clip");
+if (!eveningBoard.includes("sc-evening-v1") || !eveningBoard.includes("De Buren") || !eveningBoard.includes("Canal kitchen") || !eveningBoard.includes("North bakery") || !eveningBoard.includes("Folsom counter")) {
+  console.error("Evening phone V1 must list De Buren, Canal kitchen, North bakery, and Folsom counter");
   process.exit(1);
 }
-if (!eveningBoard.includes("if-thumb") || !eveningBoard.includes("Stores")) {
-  console.error("Evening phone must keep a thumb bar for stores and the bag");
+if (!eveningBoard.includes("if-thumb") || !eveningBoard.includes("Stores") || !eveningBoard.includes("Bag")) {
+  console.error("Evening must keep Stores, Bag, and phone chrome");
+  process.exit(1);
+}
+if (!eveningPhone.includes("sc-evening-stores") || !eveningPhone.includes("display: none")) {
+  console.error("Evening phone must hide photo store cards");
   process.exit(1);
 }
 
 const wallPhoneAt = wallScene.lastIndexOf("@media (max-width: 640px)");
 const wallPhone = wallPhoneAt >= 0 ? wallScene.slice(wallPhoneAt) : "";
-if (!wallBoard.includes("sc-wall-faces") || !wallPhone.includes("repeat(4, minmax(0, 1fr))")) {
-  console.error("Wall phone must keep a four-up people strip so Gianpiero stays in frame");
+if (!wallBoard.includes("sc-wall-faces") || !wallBoard.includes("sc-wall-v1")) {
+  console.error("Wall must keep desktop faces and a V1 text feed of keepers");
+  process.exit(1);
+}
+if (!wallPhone.includes("sc-wall-faces") || !wallPhone.includes("display: none")) {
+  console.error("Wall phone V1 must hide the people strip");
   process.exit(1);
 }
 if (!wallPhone.includes("sc-wall-rail { display: none")) {
   console.error("Wall phone must hide the desktop people rail, not squeeze it");
   process.exit(1);
 }
-if (!wallPhone.includes("max-height: 168px") && !wallPhone.includes("height: 168px")) {
-  console.error("Wall phone post photos must cap height so they do not overflow the specimen");
+if (wallPhone.includes("max-height: 168px") || wallPhone.includes("height: 168px")) {
+  console.error("Wall phone V1 must not show post photos");
+  process.exit(1);
+}
+if (!wallBoard.includes("Aziez") || !wallBoard.includes("Gianpiero") || !wallBoard.includes("On the rail before the street.")) {
+  console.error("Wall phone V1 must keep all four keepers in the text feed");
   process.exit(1);
 }
 
