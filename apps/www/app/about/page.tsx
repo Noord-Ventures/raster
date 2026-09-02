@@ -8,13 +8,13 @@ import {
   lead,
   license,
   noord,
-  notes,
   person,
   program,
   specimen,
   typeface,
   usage,
 } from "./facts";
+import { AboutNotes } from "./about-notes";
 import "./about.css";
 
 export const metadata: Metadata = {
@@ -224,14 +224,9 @@ export default function AboutPage() {
           <p className="field-kicker" id="notes-heading">
             Notes
           </p>
-          <dl className="field-notes">
-            {notes.map((note) => (
-              <div key={note.q} className="field-note">
-                <dt>{note.q}</dt>
-                <dd>{note.a}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="field-notes">
+            <AboutNotes />
+          </div>
         </section>
 
         <section className="field-cell field-cell-colophon" aria-label="Colophon">

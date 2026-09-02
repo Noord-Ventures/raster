@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { rasterComponents } from "@noorddev/raster";
+import { catalogComponents } from "@noorddev/raster";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
 import { InAction } from "@/components/examples/scene";
 import { Preview } from "@/components/preview";
 
 export function generateStaticParams() {
-  return rasterComponents.map((c) => ({ name: c.name }));
+  return catalogComponents.map((c) => ({ name: c.name }));
 }
 
 export async function generateMetadata({
@@ -16,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ name: string }>;
 }): Promise<Metadata> {
   const { name } = await params;
-  const component = rasterComponents.find((c) => c.name === name);
+  const component = catalogComponents.find((c) => c.name === name);
   return { title: component?.title ?? "Components", description: component?.description };
 }
 
@@ -302,9 +302,12 @@ useEffect(() => {
   rows={rows}
 />`,
   "concentric-radius": `import { Nest, NestInner } from "@/components/raster/concentric-radius";
+import { Button } from "@/components/raster/button";
 
 <Nest radius={28} pad={16}>
-  <NestInner>Board</NestInner>
+  <NestInner>
+    <Button size="sm">Save</Button>
+  </NestInner>
 </Nest>`,
   "aspect-ratio": `import { AspectRatio } from "@/components/raster/aspect-ratio";
 
@@ -446,14 +449,12 @@ import { Button } from "@/components/raster/button";
 <Badge>Recommended</Badge>
 <Badge variant="solid">Delivered</Badge>
 <Badge variant="muted">In progress</Badge>`,
-  card: `import { Card, CardBody, CardInner, CardLabel, CardTitle } from "@/components/raster/card";
+  card: `import { Card, CardBody, CardLabel, CardTitle } from "@/components/raster/card";
 
 <Card>
   <CardLabel>Case study</CardLabel>
   <CardTitle>A quieter interface</CardTitle>
-  <CardInner>
-    <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>
-  </CardInner>
+  <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>
 </Card>`,
   stepper: `import { Stepper } from "@/components/raster/stepper";
 
@@ -466,7 +467,7 @@ export default async function ComponentPage({
   params: Promise<{ name: string }>;
 }) {
   const { name } = await params;
-  const component = rasterComponents.find((c) => c.name === name);
+  const component = catalogComponents.find((c) => c.name === name);
   if (!component) notFound();
 
   const usage = reactUsage[component.name];

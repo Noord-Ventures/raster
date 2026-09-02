@@ -1,7 +1,8 @@
 /**
  * Raster icon figures. 16×16 module, optical center 8,8.
- * Vera 28 Aug 2026; third polish 1 Sep 2026.
- * Stroke 1, currentColor, fill none, cap butt, join miter, no rx.
+ * Vera 28 Aug 2026; third polish 1 Sep 2026; R1 line/filled pairs 1 Sep 2026.
+ * Stroke 1, currentColor, fill none on the line set, cap butt, join miter, no rx.
+ * Filled kinship fills closed geometry of the same figures.
  * The first five marks stay exactly as drawn unless a measured miss.
  */
 

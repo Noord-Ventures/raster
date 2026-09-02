@@ -426,17 +426,107 @@ if (/toast|Toaster|rs-toast/.test(block)) {
 const laws = readFileSync(join(root, "apps/www/app/specimen-laws.ts"), "utf8");
 const kit = readFileSync(join(root, "apps/www/app/specimen.ts"), "utf8");
 const footer = readFileSync(join(root, "apps/www/components/site-footer.tsx"), "utf8");
-for (const word of ["Simple", "Beautiful", "Opinionated", "Elegant", "Clear", "Legible", "Solid", "Versatile", "Customizable", "Minimal"]) {
+for (const word of ["Simple", "Minimal", "Opinionated", "Elegant", "Clear", "Legible", "Solid", "Versatile", "Customizable"]) {
   if (!laws.includes(`text: "${word}"`)) fail(`Homepage principles must include ${word}`);
 }
+if (laws.includes('text: "Beautiful"')) {
+  fail("Homepage principles replaced Beautiful with Minimal");
+}
 if (laws.includes("The grid is the idea.")) {
-  fail("Homepage principles are Renato's ten words, not the old grid sentences");
+  fail("Homepage principles are Renato's nine words, not the old grid sentences");
 }
 if (!kit.includes('"toggle-group"') || !kit.includes('"card"') || !kit.includes('"pagination"')) {
   fail("Homepage kit must be denser than accordion, calendar, field, stepper");
 }
 if (!layout.includes("SiteFooter") || !footer.includes("getraster.com") || !footer.includes("MIT")) {
   fail("Root layout must render a sitewide footer with factual imprint");
+}
+if (!footer.includes("RasterMark") || !footer.includes("site-footer-about") || footer.includes("site-footer-imprint")) {
+  fail("Footer must be RasterMark | stacked links | about copy, not the MIT-only imprint row");
+}
+if (
+  !footer.includes("Raster is built and designed in the north by") ||
+  !footer.includes('href="https://noord.dev"') ||
+  !footer.includes(">Noord</a>")
+) {
+  fail("Footer about copy must link Noord to https://noord.dev");
+}
+for (const sentence of [
+  "Inspired by Dutch and Swiss modernism — the International Typographic Style.",
+  "Free and open source under the MIT license.",
+]) {
+  if (!footer.includes(sentence)) fail(`Footer about copy must include: ${sentence}`);
+}
+const footerNav = site.slice(site.indexOf(".site-footer-nav {"), site.indexOf("}", site.indexOf(".site-footer-nav {")));
+if (!footerNav.includes("flex-direction: column")) {
+  fail("Footer links must be one stacked column");
+}
+if (footerNav.includes("flex-wrap: wrap")) {
+  fail("Footer must not be a horizontal link row");
+}
+const kitLive = readFileSync(join(root, "apps/www/app/specimen-kit.tsx"), "utf8");
+if (!kitLive.includes("Browse {more} more components") || !kitLive.includes('href="/components"')) {
+  fail("Homepage kit must end with Browse N more components → /components");
+}
+if (!kitLive.includes("catalogComponents.filter") || /Browse \d+ more/.test(kitLive)) {
+  fail("Browse N must be catalog minus KIT, not a hardcoded count");
+}
+if (!specimen.includes("specimen-cell-more") || !specimen.includes('"more more more more more more"')) {
+  fail("Browse row must sit on the 204 after the kit");
+}
+const cardUse = readFileSync(join(root, "apps/www/components/examples/card/use.tsx"), "utf8");
+const preview = readFileSync(join(root, "apps/www/components/preview.tsx"), "utf8");
+const registry = readFileSync(join(root, "packages/core/src/registry.ts"), "utf8");
+if (cardUse.includes("CardInner") || preview.includes("CardInner")) {
+  fail("Default Card specimen must not nest body in CardInner");
+}
+if (registry.includes('rs-card-in"><p class="rs-card-body"')) {
+  fail("Card registry snippet must not wrap body in .rs-card-in");
+}
+if (registry.includes("1px frame, chrome-square")) {
+  fail("Card catalog copy is a typography stack, not a framed box");
+}
+const cardCss = readFileSync(join(root, "packages/core/css/components/card.css"), "utf8");
+const cardRule = cardCss.slice(cardCss.indexOf(".rs-card{"), cardCss.indexOf("}", cardCss.indexOf(".rs-card{")));
+if (!cardRule.includes("border:0") || cardRule.includes("border:1px")) {
+  fail("Default Card chrome must not draw an outer frame");
+}
+const calloutCss = readFileSync(join(root, "packages/core/css/components/callout.css"), "utf8");
+if (calloutCss.includes("border-left:3px") || calloutCss.includes("border-radius:var(--radius-sm)")) {
+  fail("Callout is a 1px hairline, radius 0, no left bar");
+}
+const aboutNotes = readFileSync(join(root, "apps/www/app/about/about-notes.tsx"), "utf8");
+if (!aboutPage.includes("AboutNotes") || !aboutNotes.includes("AccordionItem") || !aboutNotes.includes("from \"@noorddev/raster-react\"")) {
+  fail("About Notes must use the Raster Accordion");
+}
+const nestCss = readFileSync(join(root, "packages/core/css/components/nest.css"), "utf8");
+const catalogPage = readFileSync(join(root, "apps/www/app/components/page.tsx"), "utf8");
+if (!/name:\s*"concentric-radius"[\s\S]*?hidden:\s*true/.test(registry) || catalogPage.includes("concentric-radius")) {
+  fail("Concentric radius stays in the registry as hidden; it is not a catalog card");
+}
+if (!catalogPage.includes("catalogComponents") || !nav.includes("catalogComponents")) {
+  fail("Catalog gallery and docs rail must list catalogComponents, not hidden entries");
+}
+if (!nestCss.includes("--rs-in") || !nestCss.includes(".rs-nest .rs-btn")) {
+  fail("Nest CSS must keep the inner-radius formula and nested button radius");
+}
+const iconCss = readFileSync(join(root, "packages/core/css/components/icons.css"), "utf8");
+if (!iconCss.includes("repeat(auto-fill,184px)") || !iconCss.includes("width:184px")) {
+  fail("Icon catalog cells must sit on 184px module columns");
+}
+if (iconCss.includes("repeat(4,minmax") || iconCss.includes("repeat(3,minmax")) {
+  fail("Icon catalog must not stretch leftover 1fr tracks");
+}
+const iconSrc = readFileSync(join(root, "packages/react/src/components/icon.tsx"), "utf8");
+if (!iconSrc.includes('variant === "filled"') || !iconSrc.includes("rs-icon-kin")) {
+  fail("Icon catalog must show line | filled pairs");
+}
+if (!iconSrc.includes("size={12}") || !iconSrc.includes("size={16}") || !iconSrc.includes("size={24}")) {
+  fail("Icon catalog must draw 12, 16, and 24");
+}
+const copySlice = site.slice(site.indexOf(".code-copy {"), site.indexOf(".code-copy:hover"));
+if (!copySlice.includes("border-radius: 0") || !copySlice.includes("box-shadow: none")) {
+  fail("Copy chrome must be flush: no radius, no shadow");
 }
 if (
   !site.includes("left: 224px") ||
@@ -446,6 +536,55 @@ if (
 }
 if (/body:has\(\[data-rail="catalog"\]\) \.corner-nav/.test(site)) {
   fail("Catalog gallery index must not pin corner-nav to the toc-sub column");
+}
+if (!site.includes(".settings {") || !site.includes("right: 20px") || !site.includes("position: fixed")) {
+  fail("Appearance control stays sticky on the right");
+}
+if (
+  !chrome.includes("Text size") ||
+  !chrome.includes('"Show"') ||
+  !chrome.includes('"Hide"') ||
+  !chrome.includes("--text-scale") ||
+  !chrome.includes("dataset.grid")
+) {
+  fail("Appearance menu must include working text size and grid controls");
+}
+if (!layout.includes("raster-grid") || !layout.includes("raster-text-scale") || !layout.includes("--text-scale")) {
+  fail("themeInit must restore grid and text scale before paint");
+}
+const typeCss = readFileSync(join(root, "packages/core/css/type.css"), "utf8");
+if (!typeCss.includes("--text-scale")) {
+  fail("Reading type must honor --text-scale");
+}
+if (!site.includes('html[data-grid="off"]')) {
+  fail("Grid hide must turn off the module overlay");
+}
+if (!chrome.includes("0.9") || !chrome.includes("1.25") || !chrome.includes("1.4") || !chrome.includes("TEXT_STEPS")) {
+  fail("Text size must step 90 / 100 / 110 / 125 / 140");
+}
+const appear = site.slice(site.indexOf(".appearance-menu {"), site.indexOf(".appearance-label {"));
+if (!appear.includes("border-radius: 0") || appear.includes("10px")) {
+  fail("Appearance panel is Raster hairline radius 0, not a 10px sheet");
+}
+if (!site.includes(".text-stepper button") || !site.slice(site.indexOf(".text-stepper button {"), site.indexOf(".text-stepper button:hover")).includes("border-radius: 0")) {
+  fail("Text size −/+ are hairline squares, radius 0");
+}
+if (site.includes("var(--nav-left) - 8px")) {
+  fail("Do not clip the crumb bar into a stump; hide desktop crumb labels only");
+}
+if (!layout.includes("display:none!important") || !layout.includes(".rs-crumb-bar a.rs-crumb-root")) {
+  fail("First-paint HTML must hide desktop Raster/trail so crumbs cannot sit on Components");
+}
+if (!crumbs.includes("site-crumb-root") || !crumbs.includes("setProperty(\"display\"")) {
+  fail("Crumb bar must hide desktop Raster/trail in the component, not only in CSS");
+}
+if (
+  !chrome.includes("Math.round(scale * 100)") ||
+  !layout.includes("n>3") ||
+  !layout.includes("data-text-scale") ||
+  !chrome.includes("data-text-scale")
+) {
+  fail("Text size must persist as a percent in localStorage and restore on html[data-text-scale] before paint");
 }
 
 console.log("Phone chrome: 44pt hits, safe-area, stacked TOC, copy control.");

@@ -60,6 +60,7 @@ export const rasterTokens = {
     bodyLineHeight: 1.6,
     measure: { columns: 3, px: 592, characters: 66 },
     caseRule: "Never all caps; labels and eyebrows are sentence case.",
+    textScale: { default: 1, steps: [0.9, 1, 1.1, 1.25, 1.4], rule: "Reading type only; chrome stays put." },
     scale: [
       { name: "displayXl", px: 52, weight: 600, tracking: "-0.035em", lineHeight: 1.05 },
       { name: "display", px: 38, weight: 600, tracking: "-0.03em", lineHeight: 1.15 },
@@ -89,8 +90,9 @@ export const rasterTokens = {
   radius: {
     /**
      * Slight Raster radius. Same token as the standalone button (`--radius-sm`).
-     * Buttons, toggles, boxes, callouts, dialogs, sheets, and drawers share
-     * this 4px. Not 8–12. Cards are chrome-square (0). `--radius` aliases it.
+     * Buttons, toggles, boxes, dialogs, sheets, and drawers share this 4px.
+     * Not 8–12. Cards are a typography stack (no frame, radius 0). Callouts are
+     * hairline, radius 0. `--radius` aliases the button token.
      */
     small: 4,
     /** Alias of `small`. Surfaces that already read `--radius` stay on this family. */
@@ -99,7 +101,7 @@ export const rasterTokens = {
     chrome: 0,
     /** Steve Ruiz innerRadius (circular-corner fit), clamped at 0. */
     concentric: "Steve Ruiz innerRadius, clamped at 0",
-    rule: "One token: --radius-sm (4px), the standalone button radius. Toggles share it. Cards are chrome-square (0). Nested inners follow Steve Ruiz. Chrome stays 0.",
+    rule: "One token: --radius-sm (4px), the standalone button radius. Toggles share it. Cards are chrome-square (no frame, 0). Callouts are hairline, radius 0. Nested inners follow Steve Ruiz. Chrome stays 0.",
   },
   icons: {
     sizes: [12, 16],

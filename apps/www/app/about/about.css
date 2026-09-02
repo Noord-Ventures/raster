@@ -413,28 +413,17 @@ html:has(.field-page) .site-footer {
 }
 
 .field-notes {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   margin: 0;
   max-width: 40em;
 }
 
-.field-note dt {
-  margin: 0 0 4px;
+.field-cell-faq .rs-acc-item summary {
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -.01em;
-  color: var(--text);
 }
 
-.field-note dd {
-  margin: 0;
+.field-cell-faq .rs-acc-body {
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: -.01em;
-  line-height: 1.5;
-  color: var(--text-secondary);
 }
 
 .field-colophon {

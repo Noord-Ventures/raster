@@ -9,10 +9,10 @@ export function Use() {
           <Icon name="search" size={12} />
           <Icon name="search" size={16} />
           <Icon name="search" size={24} />
+          <Icon name="search" size={16} variant="filled" />
           <Icon name="plus" size={16} />
-          <Icon name="filter" size={16} />
-          <Icon name="more" size={16} />
-          <p className="rs-use-copy">One family. Current color. Square module. 12, 16, 24.</p>
+          <Icon name="plus" size={16} variant="filled" />
+          <p className="rs-use-copy">One family. Line and filled. Current color. 12, 16, 24.</p>
         </div>
       </div>
     </article>

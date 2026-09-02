@@ -40,6 +40,27 @@ function trailFor(pathname: string): Crumb[] {
   return trail;
 }
 
+/** Keep visible crumb boxes left of .corner-nav (gap ≥ 8px). Survives library CSS. */
+function pinRootClearOfNav(root: HTMLElement) {
+  const trail = document.querySelector<HTMLElement>(".rs-crumb-bar .rs-crumbs");
+  if (window.matchMedia("(max-width: 640px)").matches) {
+    root.style.removeProperty("position");
+    root.style.removeProperty("top");
+    root.style.removeProperty("left");
+    root.style.removeProperty("width");
+    root.style.removeProperty("max-width");
+    root.style.removeProperty("visibility");
+    root.style.removeProperty("overflow");
+    root.style.removeProperty("height");
+    root.style.removeProperty("line-height");
+    root.style.removeProperty("display");
+    trail?.style.removeProperty("display");
+    return;
+  }
+  if (trail) trail.style.setProperty("display", "none", "important");
+  root.style.setProperty("display", "none", "important");
+}
+
 /**
  * The fixed top bar, on every page including Home and About.
  * Transparent at rest; once the cover scrolls away it gains the paper
@@ -48,6 +69,7 @@ function trailFor(pathname: string): Crumb[] {
 export function CrumbBar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
+  const rootRef = React.useRef<HTMLAnchorElement>(null);
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 110);
@@ -56,14 +78,27 @@ export function CrumbBar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const pin = React.useCallback(() => {
+    const root = rootRef.current;
+    if (root) pinRootClearOfNav(root);
+  }, []);
+
+  React.useLayoutEffect(() => {
+    pin();
+    window.addEventListener("resize", pin);
+    return () => window.removeEventListener("resize", pin);
+  }, [pin, pathname, scrolled]);
+
   const trail = trailFor(pathname);
 
   return (
     <nav className={`rs-crumb-bar${scrolled ? " rs-crumb-bar-scrolled" : ""}`} aria-label="Breadcrumbs">
+      {/* Root sits outside the inner row so the library’s 1024 inset
+          (margin-left: 204px) cannot place “Raster” on the nav column. */}
+      <Link ref={rootRef} className="rs-crumb-root site-crumb-root" href="/">
+        Raster
+      </Link>
       <div className="rs-crumb-bar-inner">
-        <Link className="rs-crumb-root" href="/">
-          Raster
-        </Link>
         {trail.length > 0 && (
           <p className="rs-crumbs">
             {trail.map((crumb, index) => {

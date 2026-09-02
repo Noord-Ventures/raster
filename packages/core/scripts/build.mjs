@@ -24,7 +24,7 @@ const write = (p, text) => {
 write("tokens/raster.tokens.json", JSON.stringify(rasterTokens, null, 2) + "\n");
 
 /* ── 2. Tokens as CSS custom properties ── */
-const { color, grid, radius, control, motion } = rasterTokens;
+const { color, grid, radius, control, motion, type } = rasterTokens;
 const c1 = grid.column;
 const gridImage = `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent ${c1}px,var(--grid-line) ${c1}px,var(--grid-line) ${c1 + 1}px,transparent ${c1 + 1}px,transparent ${grid.module}px)`;
 
@@ -54,6 +54,7 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --grid-image: ${gridImage};
   --grid-size: ${grid.module}px;
   --grid-pos: ${grid.gutter}px 0;
+  --text-scale: ${type.textScale.default};
   /* Control scale. Desktop is the Raster poster; phone recuts in phone.css. */
   --hit: ${control.desktop.hit}px;
   --control-h: ${control.desktop.height}px;

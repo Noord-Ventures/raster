@@ -68,7 +68,11 @@ jobs:
           fi
           grep -q 'WORD = "Raster"' "$writer"
           grep -q '{WORD}' "$page"
-          grep -q 'A poster you can install.' "$writer"
+          grep -q 'Inspired by Dutch and Swiss modernism.' "$writer"
+          if grep -n 'A poster you can install.' "$writer"; then
+            echo "Homepage POSTER is the modernism line, not the old install poster"
+            exit 1
+          fi
           grep -q 'A design system on a modular grid.' "$writer"
           grep -q 'npx @noorddev/raster-cli init' "$writer"
           if grep -n '@noordvc' "$writer" "$page" apps/www/app/docs/page.tsx; then

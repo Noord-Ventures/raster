@@ -24,6 +24,7 @@
   --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);
   --grid-size: 204px;
   --grid-pos: 20px 0;
+  --text-scale: 1;
   /* Control scale. Desktop is the Raster poster; phone recuts in phone.css. */
   --hit: 40px;
   --control-h: 40px;

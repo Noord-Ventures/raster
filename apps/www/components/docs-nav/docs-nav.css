@@ -22,11 +22,9 @@
     --ml: 0px;
     margin-left: 0;
   }
-  body:has([data-rail="catalog"]) .rs-crumb-bar-inner {
-    margin-left: 0;
-    padding-left: 76px;
-  }
 }
+/* Wide catalog detail: nav at 428; crumbs may use column 1+2, still
+   16px left of Components. Home / catalog index stay at 208 (site.css). */
 
 .toc {
   width: 184px; flex-shrink: 0;
