@@ -324,6 +324,7 @@
     font-weight: 500;
   }
   .sc-room-ch b { font-size: 13px; font-weight: 500; }
+  .sc-room-ch .if-ico-row { gap: 0; }
   .sc-room-v1-copy {
     font-size: 11px;
     font-weight: 400;
