@@ -614,7 +614,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   background: transparent;
 }
 .preview-box > * { max-width: 100%; }
-.preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 0; width: 100%; }
+.preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 0; border: 0; width: 100%; }
 .preview-cluster { display: flex; gap: 10px; align-items: center; }
 .code-block {
   position: relative;
