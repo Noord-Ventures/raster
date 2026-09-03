@@ -1,3 +1,4 @@
+import { Link } from "@noorddev/raster-react";
 import { UseField } from "../use-frame";
 export function Use() {
   return (
@@ -7,10 +8,10 @@ export function Use() {
         <div className="rs-use-stack">
           <p className="rs-use-kicker">Running copy</p>
           <p className="rs-use-copy">
-            Read the <a className="rs-link-underline" href="/docs">install notes</a>. The link is ink, never a second color.
+            Read the <Link underline href="/docs">install notes</Link>. The link is ink, never a second color.
           </p>
         </div>
-        <a className="rs-link" href="/components">Open the kit</a>
+        <Link href="/components">Open the kit</Link>
       </div>
     </UseField>
   );

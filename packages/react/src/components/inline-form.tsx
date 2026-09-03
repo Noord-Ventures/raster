@@ -39,7 +39,7 @@ const styles = stylex.create({
       default: raster.radiusSm,
       ["@media (max-width: 640px)"]: 0,
     },
-    backgroundColor: raster.paper,
+    backgroundColor: "var(--bg)",
     paddingBlock: {
       default: 4,
       ["@media (max-width: 640px)"]: 0,
@@ -61,15 +61,18 @@ const styles = stylex.create({
   input: {
     flexGrow: 1,
     minWidth: 0,
+    appearance: "none",
+    WebkitAppearance: "none",
     borderWidth: 0,
     backgroundColor: "transparent",
+    color: "var(--text)",
+    caretColor: "var(--text)",
     fontFamily: "inherit",
     fontSize: {
       default: 14,
       ["@media (max-width: 640px)"]: 16,
     },
     letterSpacing: "-0.01em",
-    color: raster.ink,
     outline: "none",
     paddingBlock: {
       default: 7,

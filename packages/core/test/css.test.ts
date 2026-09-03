@@ -75,12 +75,13 @@ describe("generated raster.css", () => {
 
   it("gives carousel and workflow cards the button-family radius, not 0 or 12px", () => {
     const carousel = readReact("carousel.tsx");
-    const flow = readCss("components/flow.css");
+    const flow = readReact("flow.tsx");
     expect(carousel).toMatch(/borderRadius: \{\s*default: raster.radiusSm/);
     expect(carousel).not.toMatch(/borderRadius:\s*(10|12)\b/);
-    expect(flow).toMatch(/\.rs-flow-step\{[^}]*border-radius:var\(--radius-sm\)/);
-    expect(flow).toMatch(/\.rs-flow-add\{[^}]*border-radius:var\(--radius-sm\)/);
-    expect(flow).not.toMatch(/border-radius:(0|10px|12px)/);
+    expect(flow).toMatch(/borderRadius: raster.radiusSm/);
+    expect(flow).toMatch(/rs-flow-step/);
+    expect(flow).toMatch(/rs-flow-add/);
+    expect(flow).not.toMatch(/borderRadius:\s*(0|10|12)\b/);
   });
 
   it("joins stepper hairlines to the dots", () => {
@@ -154,6 +155,9 @@ describe("generated raster.css", () => {
     expect(field).toMatch(/lineHeight: "16px"/);
     expect(input).toMatch(/height: raster.controlH/);
     expect(input).toMatch(/boxSizing: "border-box"/);
+    expect(input).toMatch(/appearance: "none"/);
+    expect(input).toMatch(/backgroundColor: "var\(--bg\)"/);
+    expect(input).toMatch(/color: "var\(--text\)"/);
     expect(field).toMatch(/hint: \{[^}]*margin: 0/s);
     expect(field).toMatch(/error: \{[^}]*margin: 0/s);
   });
@@ -225,8 +229,9 @@ describe("compat layer", () => {
     }
   });
 
-  it("restyles bare table elements for 0.1 markup", () => {
-    expect(compatCss).toMatch(/(^|\n)table\{/);
+  it("does not restyle bare tables once the table leaf is StyleX", () => {
+    expect(rasterCss).not.toMatch(/(^|\n)table\{/);
+    expect(compatCss).not.toMatch(/(^|\n)table\{/);
   });
 
   it("rewrites chained renames in the right order", () => {

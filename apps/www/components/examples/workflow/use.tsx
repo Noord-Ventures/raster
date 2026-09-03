@@ -1,3 +1,4 @@
+import { Flow, FlowBody, FlowNum, FlowStep, FlowTitle } from "@noorddev/raster-react";
 import { UseField } from "../use-frame";
 export function Use() {
   return (
@@ -5,13 +6,13 @@ export function Use() {
       <h3 className="rs-use-type">Pipe</h3>
       <div className="rs-use-body">
         <p className="rs-use-kicker">The job, in order</p>
-        <div className="rs-flow">
-          <div className="rs-flow-step">
-            <span className="rs-flow-num">1</span>
-            <h4>Proposal</h4>
-            <p>Scope, timeline, and fee on one page.</p>
-          </div>
-        </div>
+        <Flow>
+          <FlowStep>
+            <FlowNum>1</FlowNum>
+            <FlowTitle>Proposal</FlowTitle>
+            <FlowBody>Scope, timeline, and fee on one page.</FlowBody>
+          </FlowStep>
+        </Flow>
       </div>
     </UseField>
   );

@@ -2,6 +2,7 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
+import { Input, type InputProps } from "./input";
 
 export interface InputGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Place the addon after the field. */
@@ -25,7 +26,7 @@ const styles = stylex.create({
       default: raster.radiusSm,
       ["@media (max-width: 640px)"]: 0,
     },
-    backgroundColor: raster.paper,
+    backgroundColor: "var(--bg)",
     overflow: "hidden",
   },
   addon: {
@@ -63,7 +64,16 @@ export function InputGroup({ end, className, style, children, ...props }: InputG
   const sx = rs(["rs-input-group", end && "rs-input-group-end", className], styles.group);
   return (
     <div {...props} className={sx.className} style={{ ...sx.style, ...style }}>
-      {children}
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement(child) && child.type === Input) {
+          const next = child.props as InputProps;
+          return React.cloneElement(child as React.ReactElement<InputProps>, {
+            plain: next.plain ?? true,
+            grouped: next.grouped ?? true,
+          });
+        }
+        return child;
+      })}
     </div>
   );
 }

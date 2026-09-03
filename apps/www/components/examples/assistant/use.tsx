@@ -1,3 +1,4 @@
+import { Assistant, AssistantMsg, AssistantReply, AssistantUserBlock } from "@noorddev/raster-react";
 import { UseField } from "../use-frame";
 export function Use() {
   return (
@@ -5,12 +6,12 @@ export function Use() {
       <h3 className="rs-use-type">Ask</h3>
       <div className="rs-use-body">
         <p className="rs-use-kicker">On the sheet</p>
-        <div className="rs-ai">
-          <div className="rs-ai-msg rs-ai-user">
-            <div className="rs-ai-user-block">Make the intro tighter.</div>
-          </div>
-          <p className="rs-ai-reply">Done. Two sentences, same claim.</p>
-        </div>
+        <Assistant>
+          <AssistantMsg user>
+            <AssistantUserBlock>Make the intro tighter.</AssistantUserBlock>
+          </AssistantMsg>
+          <AssistantReply>Done. Two sentences, same claim.</AssistantReply>
+        </Assistant>
       </div>
     </UseField>
   );

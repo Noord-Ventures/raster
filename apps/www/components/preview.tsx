@@ -3,6 +3,10 @@
 import * as React from "react";
 import {
   Accordion,
+  Assistant,
+  AssistantMsg,
+  AssistantReply,
+  AssistantUserBlock,
   AspectRatio,
   AreaChart,
   BarChart,
@@ -14,11 +18,21 @@ import {
   Field,
   FieldHint,
   FieldLabel,
+  Flow,
+  FlowAdd,
+  FlowBody,
+  FlowNum,
+  FlowStep,
+  FlowSub,
+  FlowSubAdd,
+  FlowSubs,
+  FlowTitle,
   Form,
   InputAddon,
   InputGroup,
   Item,
   Label,
+  Link,
   NativeSelect,
   Sidebar,
   SidebarFoot,
@@ -66,6 +80,9 @@ import {
   CardBody,
   CardLabel,
   CardTitle,
+  Chip,
+  Cite,
+  CiteLink,
   Checkbox,
   Dialog,
   DialogActions,
@@ -78,6 +95,9 @@ import {
   Progress,
   Radio,
   RadioGroup,
+  RefAuthors,
+  RefItem,
+  Refs,
   ScrollArea,
   Select,
   Separator,
@@ -88,6 +108,12 @@ import {
   Slider,
   Stepper,
   Switch,
+  Table,
+  TableBody,
+  TableHead,
+  TableRow,
+  TableTd,
+  TableTh,
   ThemeToggle,
   Textarea,
   toast,
@@ -263,31 +289,75 @@ export const demos: Record<string, () => React.ReactNode> = {
   ),
   link: () => (
     <div className="preview-cluster" style={{ flexDirection: "column", alignItems: "flex-start", gap: 12 }}>
-      <a className="rs-link" href="#">
-        A text link
-      </a>
-      <a className="rs-link-underline" href="#" style={{ fontSize: 14 }}>
+      <Link href="#">A text link</Link>
+      <Link underline href="#" style={{ fontSize: 14 }}>
         An in-copy link
-      </a>
+      </Link>
     </div>
   ),
   icons: () => <IconCatalog />,
   workflow: () => (
-    <div className="rs-flow" style={{ gridTemplateColumns: "184px", width: 184 }}>
-      <div className="rs-flow-step">
-        <span className="rs-flow-num">1</span>
-        <h4>Proposal</h4>
-        <p>Scope, timeline, and fee on one page.</p>
-        <div className="rs-flow-subs">
-          <span>Brief</span>
-          <span>Fee</span>
-          <span className="rs-flow-sub-add">+</span>
-        </div>
-      </div>
-      <button type="button" className="rs-flow-add">
-        <span className="rs-flow-plus">+</span>
-        Add a step
-      </button>
+    <Flow style={{ gridTemplateColumns: "184px", width: 184 }}>
+      <FlowStep>
+        <FlowNum>1</FlowNum>
+        <FlowTitle>Proposal</FlowTitle>
+        <FlowBody>Scope, timeline, and fee on one page.</FlowBody>
+        <FlowSubs>
+          <FlowSub>Brief</FlowSub>
+          <FlowSub>Fee</FlowSub>
+          <FlowSubAdd>+</FlowSubAdd>
+        </FlowSubs>
+      </FlowStep>
+      <FlowAdd>Add a step</FlowAdd>
+    </Flow>
+  ),
+  chip: () => (
+    <div className="preview-cluster">
+      <Chip>/noord-brand</Chip>
+      <Chip>0.3.0</Chip>
+    </div>
+  ),
+  table: () => (
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableTh>Phase</TableTh>
+          <TableTh>Weeks</TableTh>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableTd>Strategy</TableTd>
+          <TableTd>2</TableTd>
+        </TableRow>
+        <TableRow>
+          <TableTd>Identity</TableTd>
+          <TableTd>4</TableTd>
+        </TableRow>
+      </TableBody>
+    </Table>
+  ),
+  assistant: () => (
+    <Assistant>
+      <AssistantMsg user>
+        <AssistantUserBlock>Make the intro tighter.</AssistantUserBlock>
+      </AssistantMsg>
+      <AssistantReply>Done. Two sentences, same claim.</AssistantReply>
+    </Assistant>
+  ),
+  references: () => (
+    <div>
+      <p>
+        Set in a single ink.
+        <Cite>
+          <CiteLink href="#preview-ref-1">1</CiteLink>
+        </Cite>
+      </p>
+      <Refs>
+        <RefItem id="preview-ref-1">
+          <RefAuthors>Müller-Brockmann, J.</RefAuthors> Grid systems in graphic design.
+        </RefItem>
+      </Refs>
     </div>
   ),
   button: () => (
@@ -322,7 +392,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     <div style={{ width: 260 }}>
       <Field>
         <FieldLabel htmlFor="demo-field">Name</FieldLabel>
-        <input id="demo-field" className="rs-input rs-input-full" placeholder="Raster" />
+        <Input plain id="demo-field" placeholder="Raster" />
         <FieldHint>As it appears on the invoice.</FieldHint>
       </Field>
     </div>
@@ -334,7 +404,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     >
       <Field>
         <FieldLabel htmlFor="demo-form-name">Name</FieldLabel>
-        <input id="demo-form-name" className="rs-input rs-input-full" placeholder="Renato" />
+        <Input plain id="demo-form-name" placeholder="Renato" />
       </Field>
       <Button type="submit" size="sm">
         Send
@@ -531,7 +601,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     </Collapsible>
   ),
   "hover-card": () => (
-    <HoverCard trigger={<span className="rs-link">@noord</span>}>
+    <HoverCard trigger={<Link href="#">@noord</Link>}>
       Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.
     </HoverCard>
   ),

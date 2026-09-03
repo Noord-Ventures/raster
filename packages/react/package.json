@@ -1,7 +1,7 @@
 {
   "name": "@noorddev/raster-react",
   "version": "0.3.0",
-  "description": "Raster React components — StyleX-owned catalogue on Raster tokens. CSS-first sheets remain in @noorddev/raster for CLI and registry.",
+  "description": "Raster React components — StyleX-owned catalogue on Raster tokens.",
   "license": "MIT",
   "repository": {
     "type": "git",

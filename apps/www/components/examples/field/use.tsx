@@ -1,4 +1,4 @@
-import { Field, FieldHint, FieldLabel } from "@noorddev/raster-react";
+import { Field, FieldHint, FieldLabel, Input } from "@noorddev/raster-react";
 import { UseField } from "../use-frame";
 
 export function Use() {
@@ -8,7 +8,7 @@ export function Use() {
       <div className="rs-use-body">
         <Field>
           <FieldLabel htmlFor="use-fee">Fixed fee</FieldLabel>
-          <input id="use-fee" className="rs-input rs-input-full" defaultValue="12.000" />
+          <Input plain id="use-fee" defaultValue="12.000" />
           <FieldHint>The number on the cover is the number on the invoice.</FieldHint>
         </Field>
       </div>

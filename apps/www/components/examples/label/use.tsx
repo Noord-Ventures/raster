@@ -1,4 +1,4 @@
-import { Label } from "@noorddev/raster-react";
+import { Input, Label } from "@noorddev/raster-react";
 import { UseField } from "../use-frame";
 
 export function Use() {
@@ -10,7 +10,7 @@ export function Use() {
           <p className="rs-use-kicker">The studio</p>
           <p className="rs-use-copy">The mark sits above the field. Twelve pixels.</p>
           <Label htmlFor="use-city">City</Label>
-          <input id="use-city" className="rs-input rs-input-full" defaultValue="Alkmaar" />
+          <Input plain id="use-city" defaultValue="Alkmaar" />
         </div>
       </div>
     </UseField>

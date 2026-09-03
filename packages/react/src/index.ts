@@ -22,6 +22,8 @@ export {
   type IconVariant,
 } from "./components/icon";
 export { Button, type ButtonProps } from "./components/button";
+export { Link, type LinkProps } from "./components/link";
+export { Chip, type ChipProps } from "./components/chip";
 export { Badge, type BadgeProps } from "./components/badge";
 export { Card, CardInner, CardLabel, CardTitle, CardBody } from "./components/card";
 export { Callout, type CalloutProps } from "./components/callout";
@@ -91,6 +93,18 @@ export { Combobox, type ComboboxProps } from "./components/combobox";
 export { Command, CommandDialog, type CommandProps, type CommandDialogProps, type CommandItem, type CommandGroup } from "./components/command";
 export { Calendar, type CalendarProps } from "./components/calendar";
 export { DatePicker, type DatePickerProps } from "./components/date-picker";
+export {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableTh,
+  TableTd,
+  type TableProps,
+  type TableRowProps,
+  type TableCellProps,
+  type TableHeaderCellProps,
+} from "./components/table";
 export { DataTable, type DataTableProps, type DataTableColumn } from "./components/data-table";
 export { AspectRatio, type AspectRatioProps } from "./components/aspect-ratio";
 export {
@@ -121,3 +135,49 @@ export {
   type SidebarItemProps,
 } from "./components/sidebar";
 export { Spinner, type SpinnerProps } from "./components/spinner";
+export {
+  Flow,
+  FlowStep,
+  FlowNum,
+  FlowTitle,
+  FlowBody,
+  FlowSubs,
+  FlowSub,
+  FlowSubAdd,
+  FlowAdd,
+  FlowPlus,
+  type FlowProps,
+  type FlowStepProps,
+  type FlowAddProps,
+} from "./components/flow";
+export {
+  Assistant,
+  AssistantHead,
+  AssistantTitle,
+  AssistantStatus,
+  AssistantMsg,
+  AssistantUserBlock,
+  AssistantReply,
+  AssistantCard,
+  AssistantTag,
+  AssistantText,
+  AssistantDone,
+  AssistantInput,
+  AssistantSend,
+  type AssistantProps,
+} from "./components/assistant";
+export {
+  Cite,
+  CiteLink,
+  Refs,
+  RefItem,
+  RefAuthors,
+  RefDoi,
+  CiteBox,
+  CiteBoxLabel,
+  CiteBoxText,
+  type CiteProps,
+  type RefsProps,
+  type RefItemProps,
+  type CiteBoxProps,
+} from "./components/refs";

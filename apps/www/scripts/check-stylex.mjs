@@ -107,6 +107,10 @@ if (!card.includes("borderWidth: 0") || !card.includes('boxShadow: "none"')) {
 if (!toggle.includes("radiusSm")) {
   fail("Toggle StyleX must keep the button radius");
 }
+const input = readFileSync(join(root, "packages/react/src/components/input.tsx"), "utf8");
+if (!input.includes('appearance: "none"') || !input.includes('backgroundColor: "var(--bg)"') || !input.includes('color: "var(--text)"')) {
+  fail("Field inputs must drop UA chrome and sit on var(--bg) / var(--text)");
+}
 
 if (!existsSync(join(root, "apps/www/babel.config.json"))) {
   fail("www StyleX toolchain must use babel.config.json (Next cannot load .cjs Babel configs)");
@@ -122,6 +126,16 @@ if (!preview.includes("Callout") || !preview.includes('from "@noorddev/raster-re
 }
 if (!preview.includes("<Button>") || !preview.includes("<Card>")) {
   fail("Components specimens must render StyleX-backed Button and Card");
+}
+if (
+  !preview.includes("<Link") ||
+  !preview.includes("<Chip") ||
+  !preview.includes("<Table") ||
+  !preview.includes("<Flow") ||
+  !preview.includes("<Assistant") ||
+  !preview.includes("<Cite")
+) {
+  fail("Components specimens must render the last six StyleX kit leaves");
 }
 if (!calloutUse.includes('from "@noorddev/raster-react"') || !calloutUse.includes("<Callout>")) {
   fail("Callout Use must render the StyleX Callout");
@@ -207,4 +221,15 @@ for (const ent of readdirSync(useDir, { withFileTypes: true })) {
   useFields += 1;
 }
 
-console.log(`StyleX catalogue: ${migrated} React leaves on Raster tokens; ${useFields} Use fields; About + Interfaces + specimen + site chrome. Six CSS-only kit entries remain.`);
+const registrySrc = readFileSync(join(root, "packages/core/src/registry.ts"), "utf8");
+if (/css:\s*\["components\//.test(registrySrc)) {
+  fail("Catalogue must not keep CSS-only kit sheets");
+}
+const kitCssDir = join(root, "packages/core/css/components");
+if (existsSync(kitCssDir) && readdirSync(kitCssDir).some((f) => f.endsWith(".css"))) {
+  fail("packages/core/css/components must have no leftover catalogue CSS sheets");
+}
+
+console.log(
+  `StyleX catalogue: ${migrated} React leaves on Raster tokens; ${useFields} Use fields; 74/74 public catalog StyleX; About + Interfaces + specimen + site chrome. Remaining CSS is document-level only (fonts, tokens, base, type, phone, motion, raster.css, raster-compat.css, stylex.css, site/specimen/about/interfaces/docs-nav/use/swag).`,
+);

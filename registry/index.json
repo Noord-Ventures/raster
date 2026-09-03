@@ -162,15 +162,30 @@
             "rs-link-underline"
           ],
           "snippet": "<div><a class=\"rs-link\" href=\"#\">A text link</a></div>\n<div><a class=\"rs-link-underline\" href=\"#\">An in-copy link</a></div>",
-          "cssOnly": true,
+          "cssOnly": false,
           "registryDependencies": []
         }
       },
       "files": [
         {
-          "path": "raster/styles/link.css",
+          "path": "raster/link.tsx",
+          "type": "registry:component",
+          "target": "components/raster/link.tsx"
+        },
+        {
+          "path": "raster/tokens.stylex.ts",
           "type": "registry:file",
-          "target": "styles/raster/link.css"
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
         }
       ]
     },
@@ -359,6 +374,11 @@
           "path": "raster/rs.ts",
           "type": "registry:file",
           "target": "components/raster/rs.ts"
+        },
+        {
+          "path": "raster/input.tsx",
+          "type": "registry:component",
+          "target": "components/raster/input.tsx"
         },
         {
           "path": "raster/cx.ts",
@@ -1099,15 +1119,30 @@
             "rs-chip"
           ],
           "snippet": "<span class=\"rs-chip\">/noord-brand</span>",
-          "cssOnly": true,
+          "cssOnly": false,
           "registryDependencies": []
         }
       },
       "files": [
         {
-          "path": "raster/styles/chip.css",
+          "path": "raster/chip.tsx",
+          "type": "registry:component",
+          "target": "components/raster/chip.tsx"
+        },
+        {
+          "path": "raster/tokens.stylex.ts",
           "type": "registry:file",
-          "target": "styles/raster/chip.css"
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
         }
       ]
     },
@@ -1276,15 +1311,30 @@
             "rs-total-row"
           ],
           "snippet": "<table class=\"rs-table\"><thead><tr><th>Phase</th><th>Weeks</th></tr></thead><tbody><tr><td>Strategy</td><td>2</td></tr><tr><td>Identity</td><td>4</td></tr></tbody></table>",
-          "cssOnly": true,
+          "cssOnly": false,
           "registryDependencies": []
         }
       },
       "files": [
         {
-          "path": "raster/styles/table.css",
+          "path": "raster/table.tsx",
+          "type": "registry:component",
+          "target": "components/raster/table.tsx"
+        },
+        {
+          "path": "raster/tokens.stylex.ts",
           "type": "registry:file",
-          "target": "styles/raster/table.css"
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
         }
       ]
     },
@@ -3962,15 +4012,30 @@
             "rs-flow-plus"
           ],
           "snippet": "<div class=\"rs-flow\" style=\"grid-template-columns:184px;width:184px\"><div class=\"rs-flow-step\"><span class=\"rs-flow-num\">1</span><h4>Proposal</h4><p>Scope, timeline, and fee on one page.</p><div class=\"rs-flow-subs\"><span>Brief</span><span>Fee</span><span class=\"rs-flow-sub-add\">+</span></div></div><button type=\"button\" class=\"rs-flow-add\"><span class=\"rs-flow-plus\">+</span> Add a step</button></div>",
-          "cssOnly": true,
+          "cssOnly": false,
           "registryDependencies": []
         }
       },
       "files": [
         {
-          "path": "raster/styles/flow.css",
+          "path": "raster/workflow.tsx",
+          "type": "registry:component",
+          "target": "components/raster/workflow.tsx"
+        },
+        {
+          "path": "raster/tokens.stylex.ts",
           "type": "registry:file",
-          "target": "styles/raster/flow.css"
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
         }
       ]
     },
@@ -4004,15 +4069,30 @@
             "rs-ai-send"
           ],
           "snippet": "<div class=\"rs-ai\"><div class=\"rs-ai-msg rs-ai-user\"><div class=\"rs-ai-user-block\">Make the intro tighter.</div></div><p class=\"rs-ai-reply\">Done. Two sentences, same claim.</p></div>",
-          "cssOnly": true,
+          "cssOnly": false,
           "registryDependencies": []
         }
       },
       "files": [
         {
-          "path": "raster/styles/assistant.css",
+          "path": "raster/assistant.tsx",
+          "type": "registry:component",
+          "target": "components/raster/assistant.tsx"
+        },
+        {
+          "path": "raster/tokens.stylex.ts",
           "type": "registry:file",
-          "target": "styles/raster/assistant.css"
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
         }
       ]
     },
@@ -4140,15 +4220,30 @@
             "rs-cite-box-text"
           ],
           "snippet": "<p>Set in a single ink.<sup class=\"rs-cite\"><a href=\"#ref-1\">1</a></sup></p><ol class=\"rs-refs\"><li id=\"ref-1\"><span class=\"rs-ref-authors\">Müller-Brockmann, J.</span> Grid systems in graphic design. <a class=\"rs-ref-doi\" href=\"#\">niggli.ch/grid</a></li></ol>",
-          "cssOnly": true,
+          "cssOnly": false,
           "registryDependencies": []
         }
       },
       "files": [
         {
-          "path": "raster/styles/refs.css",
+          "path": "raster/references.tsx",
+          "type": "registry:component",
+          "target": "components/raster/references.tsx"
+        },
+        {
+          "path": "raster/tokens.stylex.ts",
           "type": "registry:file",
-          "target": "styles/raster/refs.css"
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:file",
+          "target": "components/raster/rs.ts"
+        },
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:file",
+          "target": "components/raster/cx.ts"
         }
       ]
     }

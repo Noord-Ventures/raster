@@ -57,6 +57,12 @@ export const about = stylex.create({
   cellEnd: {
     justifyContent: "flex-end",
   },
+  cellLead: {
+    paddingTop: 24,
+  },
+  kickerNav: {
+    lineHeight: "24px",
+  },
   cellWork: {
     padding: 20,
     gap: 20,

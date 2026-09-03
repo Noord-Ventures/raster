@@ -179,6 +179,12 @@ if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
 if (!about.includes("padding: 0 0 1px 0")) {
   fail("About must keep its bottom cage hairline");
 }
+if (!about.includes("html:has(.field-page) .site-footer") || !/html:has\(\.field-page\) \.site-footer\s*\{[^}]*border-top:\s*none/s.test(about)) {
+  fail("About footer must not stack a second hairline on the field cage");
+}
+if (!about.includes(".field-cell-lead") || !/field-cell-lead \{[^}]*padding-top:\s*24px/s.test(about)) {
+  fail("About “What it is” must sit on the 24px navbar row");
+}
 if (!about.includes("box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line)")) {
   fail("About L/R box margins must be inset --grid-line, quieter than the cage");
 }
@@ -656,6 +662,9 @@ if (
 }
 if (/body:has\(\[data-rail="catalog"\]\) \.corner-nav/.test(site)) {
   fail("Catalog gallery index must not pin corner-nav to the toc-sub column");
+}
+if (site.includes("left: 428px") || /--nav-left:\s*428px/.test(site)) {
+  fail("Corner-nav must freeze at the list 224; do not jump detail to toc-sub 428");
 }
 if (!site.includes(".settings {") || !site.includes("right: 20px") || !site.includes("position: fixed")) {
   fail("Appearance control stays sticky on the right");

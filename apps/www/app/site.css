@@ -85,22 +85,13 @@ body {
   display: flex; align-items: center; gap: 20px; height: 24px;
   filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
 }
-/* Text links sit on the first content column (20 + 204). Catalog
-   detail at 1440 follows the rail (third module / toc-sub). The
-   appearance control stays sticky on the right and does not move
-   with this row. Do not pin the gallery index to toc-sub. */
+/* Text links sit on the first content column (20 + 204). List and
+   detail freeze at that 224 so the restored 204 inset does not shove
+   the top links. Do not pin the gallery index to toc-sub. */
 @media (min-width: 900px) {
   body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav {
     left: 224px;
     right: auto;
-  }
-}
-@media (min-width: 1440px) {
-  body:has([data-rail="catalog"]):not(:has(.catalog-page)) {
-    --nav-left: 428px;
-  }
-  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav {
-    left: 428px;
   }
 }
 /* Gallery index: hide the *trail* so “Components” cannot run through
@@ -625,6 +616,13 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   justify-content: center;
   margin: 24px 0 16px;
   background: transparent;
+}
+.gallery-item .preview-box,
+.gallery-demo .preview-box {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-height: 0;
 }
 .preview-box > * { max-width: 100%; }
 .preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 0; border: 0; width: 100%; }

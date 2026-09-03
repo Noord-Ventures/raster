@@ -45,8 +45,11 @@ const styles = stylex.create({
     fontSize: 18,
     fontWeight: 600,
     fontVariantNumeric: "tabular-nums",
-    color: raster.ink,
-    backgroundColor: raster.paper,
+    appearance: "none",
+    WebkitAppearance: "none",
+    color: "var(--text)",
+    caretColor: "var(--text)",
+    backgroundColor: "var(--bg)",
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderColor: {
@@ -60,6 +63,12 @@ const styles = stylex.create({
     outline: "none",
     fontFamily: "inherit",
     padding: 0,
+    ":-webkit-autofill": {
+      WebkitTextFillColor: "var(--text)",
+      caretColor: "var(--text)",
+      backgroundColor: "var(--bg)",
+      boxShadow: "inset 0 0 0 1000px var(--bg)",
+    },
   },
 });
 

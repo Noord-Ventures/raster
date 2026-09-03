@@ -1,4 +1,4 @@
-import { HoverCard } from "@noorddev/raster-react";
+import { HoverCard, Link } from "@noorddev/raster-react";
 import { UseField } from "../use-frame";
 
 export function Use() {
@@ -8,7 +8,7 @@ export function Use() {
       <div className="rs-use-body">
         <p className="rs-use-copy">
           From{" "}
-          <HoverCard trigger={<span className="rs-link">@noord</span>}>
+          <HoverCard trigger={<Link href="#">@noord</Link>}>
             Noord ships Raster. Door: getraster.com.
           </HoverCard>
           .

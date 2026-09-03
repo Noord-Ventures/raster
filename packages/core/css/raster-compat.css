@@ -52,42 +52,9 @@ body{
 /* ── Inline code ── */
 .bb-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}
 
-/* ── Text link: underlined by its hairline, never colored ── */
-.bb-link-demo{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider);transition:border-color var(--duration-snap) var(--ease)}
-.bb-link-demo:hover{border-color:var(--accent)}
-.bb-link-demo:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-/* Gradient variant: the underline is drawn one pixel inside each end,
-   so it never touches a neighbouring glyph. Hover paints it ink. */
-.rs-link-underline{color:var(--text);text-decoration:none;border-bottom:none;background-image:linear-gradient(var(--divider),var(--divider));background-size:calc(100% - 1px) 1px;background-position:1px 100%;background-repeat:no-repeat;transition:background-image var(--duration-snap) var(--ease)}
-.rs-link-underline:hover{background-image:linear-gradient(var(--accent),var(--accent))}
-
-/* ── Mono chip: technical identifiers ── */
-.lib-chip{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border:1px solid color-mix(in srgb,currentColor 35%,transparent);padding:3px 7px;line-height:1;border-radius:var(--radius-sm)}
-
-/* ── Table: hairline rows on the open grid; no cell borders ──
-   Scoped to table so linking raster.css never restyles a table
-   it doesn't own. The compat layer re-emits these on bare elements. */
-table{width:calc(100% + 40px);border-collapse:collapse;margin:16px 0 24px -20px;font-size:14px}
-table th{text-align:left;font-weight:600;color:var(--text);letter-spacing:-.01em;padding:10px 16px 10px 12px;border-bottom:2px solid var(--divider);font-size:13px}
-table th:first-child{padding-left:20px}
-table th:last-child{padding-right:20px}
-table td{padding:10px 16px 10px 12px;color:var(--text-secondary);font-weight:500;letter-spacing:-.01em;border-bottom:1px solid var(--divider);vertical-align:top}
-table td:first-child{padding-left:20px}
-table td:last-child{padding-right:20px}
-table tr:nth-child(even) td{background:var(--table-alt)}
-table td:last-child,table th:last-child{text-align:right}
-table tr.rs-total-row td{font-weight:500;color:var(--text);border-top:2px solid var(--divider);border-bottom:2px solid var(--divider)}
-@media(max-width:640px){
-  table{font-size:12px;width:calc(100% + 2*var(--pad));margin-left:calc(-1*var(--pad));margin-right:calc(-1*var(--pad))}
-  table th{padding:8px 10px;font-size:12px}
-  table td{padding:8px 10px}
-  table th:first-child,table td:first-child{padding-left:var(--pad)}
-  table th:last-child,table td:last-child{padding-right:var(--pad)}
-}
-
 /* ── Phone scale (≤640): iOS Human Interface, translated into Raster.
    Desktop paint lives on StyleX leaves. This recuts the leftover class
-   names (HTML snippets, CSS-only six, CLI starter) at 640. Do not restyle ≥900. ── */
+   names (HTML snippets, CLI starter) at 640. Do not restyle ≥900. ── */
 @media(max-width:640px){
   /* Button: full-width 44pt, 16px, flush. Small variant grows with the scale. */
   .bb-btn-primary,.bb-btn-ghost{

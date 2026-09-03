@@ -36,8 +36,11 @@ const styles = stylex.create({
       default: raster.radiusSm,
       ["@media (max-width: 640px)"]: 0,
     },
-    backgroundColor: raster.paper,
-    color: raster.ink,
+    appearance: "none",
+    WebkitAppearance: "none",
+    backgroundColor: "var(--bg)",
+    color: "var(--text)",
+    caretColor: "var(--text)",
     fontSize: {
       default: 14,
       ["@media (max-width: 640px)"]: 16,
@@ -59,6 +62,12 @@ const styles = stylex.create({
     },
     resize: "vertical",
     width: "100%",
+    ":-webkit-autofill": {
+      WebkitTextFillColor: "var(--text)",
+      caretColor: "var(--text)",
+      backgroundColor: "var(--bg)",
+      boxShadow: "inset 0 0 0 1000px var(--bg)",
+    },
   },
   feedback: {
     display: "flex",

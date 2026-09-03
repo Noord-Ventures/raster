@@ -61,6 +61,13 @@ describe("registry structure", () => {
     }
   });
 
+  it("has no leftover catalogue CSS sheets", () => {
+    for (const c of catalogComponents) {
+      expect(c.css, `${c.name} must be a StyleX leaf`).toEqual([]);
+      expect(c.react, `${c.name} must name a React source`).toBeTruthy();
+    }
+  });
+
   it("lists every CSS file that exists on disk", () => {
     for (const c of rasterComponents) {
       for (const f of c.css) {

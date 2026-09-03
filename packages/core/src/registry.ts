@@ -38,7 +38,8 @@ export const rasterComponents: RasterComponent[] = [
     description: "Text link with a hairline underline. In-copy variant is inset 1px.",
     category: "actions",
     classes: ["rs-link", "rs-link-underline"],
-    css: ["components/link.css"],
+    css: [],
+    react: "components/link.tsx",
     snippet: `<div><a class="rs-link" href="#">A text link</a></div>\n<div><a class="rs-link-underline" href="#">An in-copy link</a></div>`,
   },
   {
@@ -239,7 +240,8 @@ export const rasterComponents: RasterComponent[] = [
     description: "Mono identifier with a 1px mixed border.",
     category: "content",
     classes: ["rs-chip"],
-    css: ["components/chip.css"],
+    css: [],
+    react: "components/chip.tsx",
     snippet: `<span class="rs-chip">/noord-brand</span>`,
   },
   {
@@ -280,7 +282,8 @@ export const rasterComponents: RasterComponent[] = [
     description: "Open grid, 1px row rules, last column right-aligned. Total rows use 2px rules.",
     category: "content",
     classes: ["rs-table", "rs-total-row"],
-    css: ["components/table.css"],
+    css: [],
+    react: "components/table.tsx",
     snippet: `<table class="rs-table"><thead><tr><th>Phase</th><th>Weeks</th></tr></thead><tbody><tr><td>Strategy</td><td>2</td></tr><tr><td>Identity</td><td>4</td></tr></tbody></table>`,
   },
   {
@@ -763,7 +766,8 @@ export const rasterComponents: RasterComponent[] = [
     description: "Dashed 1px pipeline step. Drag handle, dashed chips, ghost add-step.",
     category: "patterns",
     classes: ["rs-flow", "rs-flow-step", "rs-flow-num", "rs-flow-subs", "rs-flow-sub-add", "rs-flow-add", "rs-flow-plus"],
-    css: ["components/flow.css"],
+    css: [],
+    react: "components/flow.tsx",
     snippet: `<div class="rs-flow" style="grid-template-columns:184px;width:184px"><div class="rs-flow-step"><span class="rs-flow-num">1</span><h4>Proposal</h4><p>Scope, timeline, and fee on one page.</p><div class="rs-flow-subs"><span>Brief</span><span>Fee</span><span class="rs-flow-sub-add">+</span></div></div><button type="button" class="rs-flow-add"><span class="rs-flow-plus">+</span> Add a step</button></div>`,
   },
   {
@@ -772,7 +776,8 @@ export const rasterComponents: RasterComponent[] = [
     description: "Chat panel: user block, reply, suggestion card, input row.",
     category: "patterns",
     classes: ["rs-ai", "rs-ai-head", "rs-ai-title", "rs-ai-status", "rs-ai-msg", "rs-ai-user", "rs-ai-user-block", "rs-ai-reply", "rs-ai-card", "rs-ai-tag", "rs-ai-text", "rs-ai-done", "rs-ai-input", "rs-ai-send"],
-    css: ["components/assistant.css"],
+    css: [],
+    react: "components/assistant.tsx",
     snippet: `<div class="rs-ai"><div class="rs-ai-msg rs-ai-user"><div class="rs-ai-user-block">Make the intro tighter.</div></div><p class="rs-ai-reply">Done. Two sentences, same claim.</p></div>`,
   },
   {
@@ -801,7 +806,8 @@ export const rasterComponents: RasterComponent[] = [
     description: "Inline citations, a numbered 1px list, and a cite box. Numerals hang in the gutter.",
     category: "content",
     classes: ["rs-cite", "rs-refs", "rs-ref-authors", "rs-ref-doi", "rs-cite-box", "rs-cite-box-label", "rs-cite-box-text"],
-    css: ["components/refs.css"],
+    css: [],
+    react: "components/refs.tsx",
     snippet: `<p>Set in a single ink.<sup class="rs-cite"><a href="#ref-1">1</a></sup></p><ol class="rs-refs"><li id="ref-1"><span class="rs-ref-authors">Müller-Brockmann, J.</span> Grid systems in graphic design. <a class="rs-ref-doi" href="#">niggli.ch/grid</a></li></ol>`,
   },
 ];

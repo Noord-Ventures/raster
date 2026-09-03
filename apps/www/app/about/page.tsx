@@ -27,9 +27,9 @@ export const metadata: Metadata = {
   alternates: { canonical: `${DOOR}/about/` },
 };
 
-function Kicker({ children, id }: { children: ReactNode; id?: string }) {
+function Kicker({ children, id, nav }: { children: ReactNode; id?: string; nav?: boolean }) {
   return (
-    <p id={id} {...sx("field-kicker", about.kicker)}>
+    <p id={id} {...sx("field-kicker", about.kicker, nav ? about.kickerNav : null)}>
       {children}
     </p>
   );
@@ -73,8 +73,8 @@ export default function AboutPage() {
           </h1>
         </section>
 
-        <section {...sx("field-cell field-cell-lead", about.cell)}>
-          <Kicker>{lead.kicker}</Kicker>
+        <section {...sx("field-cell field-cell-lead", about.cell, about.cellLead)}>
+          <Kicker nav>{lead.kicker}</Kicker>
           <Copy>
             <CopyP>{lead.what}</CopyP>
             <CopyP>{lead.who}</CopyP>

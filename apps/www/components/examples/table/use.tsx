@@ -1,3 +1,4 @@
+import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/raster-react";
 import { UseField } from "../use-frame";
 export function Use() {
   return (
@@ -8,13 +9,24 @@ export function Use() {
           <p className="rs-use-kicker">The job</p>
           <p className="rs-use-copy">Phases in weeks. Hairline rows, no zebra hue.</p>
         </div>
-        <table className="rs-table">
-          <thead><tr><th>Phase</th><th>Weeks</th></tr></thead>
-          <tbody>
-            <tr><td>Strategy</td><td>2</td></tr>
-            <tr><td>Identity</td><td>4</td></tr>
-          </tbody>
-        </table>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableTh>Phase</TableTh>
+              <TableTh>Weeks</TableTh>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableTd>Strategy</TableTd>
+              <TableTd>2</TableTd>
+            </TableRow>
+            <TableRow>
+              <TableTd>Identity</TableTd>
+              <TableTd>4</TableTd>
+            </TableRow>
+          </TableBody>
+        </Table>
       </div>
     </UseField>
   );

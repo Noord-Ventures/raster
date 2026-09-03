@@ -41,32 +41,84 @@ import { Button } from "@/components/raster/button";
   <Button variant="ghost">Center</Button>
   <Button variant="ghost">Right</Button>
 </ButtonGroup>`,
+  link: `import { Link } from "@/components/raster/link";
+
+<Link href="#">A text link</Link>
+<Link underline href="#">An in-copy link</Link>`,
+  chip: `import { Chip } from "@/components/raster/chip";
+
+<Chip>/noord-brand</Chip>`,
+  table: `import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@/components/raster/table";
+
+<Table>
+  <TableHead>
+    <TableRow>
+      <TableTh>Phase</TableTh>
+      <TableTh>Weeks</TableTh>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableTd>Strategy</TableTd>
+      <TableTd>2</TableTd>
+    </TableRow>
+  </TableBody>
+</Table>`,
+  workflow: `import { Flow, FlowAdd, FlowBody, FlowNum, FlowStep, FlowTitle } from "@/components/raster/flow";
+
+<Flow>
+  <FlowStep>
+    <FlowNum>1</FlowNum>
+    <FlowTitle>Proposal</FlowTitle>
+    <FlowBody>Scope, timeline, and fee on one page.</FlowBody>
+  </FlowStep>
+  <FlowAdd>Add a step</FlowAdd>
+</Flow>`,
+  assistant: `import { Assistant, AssistantMsg, AssistantReply, AssistantUserBlock } from "@/components/raster/assistant";
+
+<Assistant>
+  <AssistantMsg user>
+    <AssistantUserBlock>Make the intro tighter.</AssistantUserBlock>
+  </AssistantMsg>
+  <AssistantReply>Done. Two sentences, same claim.</AssistantReply>
+</Assistant>`,
+  references: `import { Cite, CiteLink, RefAuthors, RefItem, Refs } from "@/components/raster/refs";
+
+<p>Set in a single ink.<Cite><CiteLink href="#ref-1">1</CiteLink></Cite></p>
+<Refs>
+  <RefItem id="ref-1">
+    <RefAuthors>Müller-Brockmann, J.</RefAuthors> Grid systems in graphic design.
+  </RefItem>
+</Refs>`,
   label: `import { Label } from "@/components/raster/label";
 
 <Label htmlFor="name">Name</Label>`,
   field: `import { Field, FieldHint, FieldLabel } from "@/components/raster/field";
+import { Input } from "@/components/raster/input";
 
 <Field>
   <FieldLabel htmlFor="name">Name</FieldLabel>
-  <input id="name" className="rs-input rs-input-full" />
+  <Input plain id="name" />
   <FieldHint>As it appears on the invoice.</FieldHint>
 </Field>`,
   form: `import { Form } from "@/components/raster/form";
 import { Field, FieldLabel } from "@/components/raster/field";
+import { Input } from "@/components/raster/input";
 import { Button } from "@/components/raster/button";
 
 <Form onSubmit={save}>
   <Field>
     <FieldLabel htmlFor="name">Name</FieldLabel>
-    <input id="name" className="rs-input rs-input-full" />
+    <Input plain id="name" />
   </Field>
   <Button type="submit">Send</Button>
 </Form>`,
-  "input-group": `import { InputAddon, InputGroup } from "@/components/raster/input-group";
+  "input-group": `import { InputGroup, InputAddon } from "@/components/raster/input-group";
+import { Input } from "@/components/raster/input";
 
 <InputGroup>
   <InputAddon>https://</InputAddon>
-  <input className="rs-input" placeholder="getraster.com" />
+  <Input placeholder="getraster.com" />
 </InputGroup>`,
   "native-select": `import { NativeSelect } from "@/components/raster/native-select";
 

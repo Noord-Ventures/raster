@@ -31,6 +31,7 @@ const styles = stylex.create({
   },
   select: {
     appearance: "none",
+    WebkitAppearance: "none",
     boxSizing: "border-box",
     height: raster.controlH,
     minHeight: {
@@ -45,8 +46,9 @@ const styles = stylex.create({
     fontWeight: 500,
     letterSpacing: "-0.01em",
     lineHeight: `calc(${raster.controlH} - 2px)`,
-    color: raster.ink,
-    backgroundColor: raster.paper,
+    color: "var(--text)",
+    caretColor: "var(--text)",
+    backgroundColor: "var(--bg)",
     backgroundImage: {
       default: chevronLight,
       ':is([data-theme="dark"] *)': chevronDark,
