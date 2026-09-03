@@ -649,7 +649,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   border: none;
 }
 /* Catalog + homepage kit: the card / field cell is the frame.
-   Drop the leaf’s outer stroke so it does not stack. */
+   StyleX atomics otherwise keep the leaf stroke — zero it here. */
 .gallery-demo .rs-callout,
 .gallery-demo .rs-btn-group,
 .gallery-demo .rs-toggle-group,
@@ -664,6 +664,13 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .gallery-demo .rs-acc,
 .gallery-demo .rs-cite-box,
 .gallery-demo .rs-refs,
+.gallery-demo .rs-alert,
+.gallery-demo .rs-menubar,
+.gallery-demo .rs-dropdown,
+.gallery-demo .rs-dialog,
+.gallery-demo .rs-command,
+.gallery-demo .rs-popover,
+.gallery-demo .rs-hover-card-panel,
 .specimen-kit-live .rs-callout,
 .specimen-kit-live .rs-btn-group,
 .specimen-kit-live .rs-toggle-group,
@@ -677,8 +684,15 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .specimen-kit-live .rs-sidebar,
 .specimen-kit-live .rs-acc,
 .specimen-kit-live .rs-cite-box,
-.specimen-kit-live .rs-refs {
-  border: 0;
+.specimen-kit-live .rs-refs,
+.specimen-kit-live .rs-alert,
+.specimen-kit-live .rs-menubar,
+.specimen-kit-live .rs-dropdown,
+.specimen-kit-live .rs-dialog,
+.specimen-kit-live .rs-command,
+.specimen-kit-live .rs-popover,
+.specimen-kit-live .rs-hover-card-panel {
+  border: 0 !important;
 }
 .preview-box > * { max-width: 100%; }
 .preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 0; border: 0; width: 100%; }
