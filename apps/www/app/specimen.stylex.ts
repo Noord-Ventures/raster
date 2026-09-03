@@ -45,6 +45,20 @@ export const specimen = stylex.create({
     backgroundColor: "var(--bg)",
     display: "flex",
     flexDirection: "column",
+    overflow: "visible",
     borderRadius: 0,
+  },
+  /** Face / law: 408 module, type on the bottom so it clears the 72 crumb bar. */
+  cellEnd: {
+    justifyContent: "flex-end",
+  },
+  cellTall: {
+    minHeight: 408,
+    justifyContent: "flex-end",
+  },
+  cellCommand: {
+    minHeight: 408,
+    justifyContent: "center",
+    gap: 20,
   },
 });

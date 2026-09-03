@@ -251,6 +251,22 @@ const specimenSx = readFileSync(join(root, "apps/www/app/specimen.stylex.ts"), "
 if (!specimenSx.includes('repeat(2, minmax(0, 1fr))') || !specimenSx.includes('repeat(4, minmax(0, 1fr))') || !specimenSx.includes('repeat(6, minmax(0, 1fr))')) {
   fail("Homepage StyleX field must recut 2 / 4 / 6 columns; do not collapse to 1-col");
 }
+if (!specimenSx.includes("cellTall:") || !specimenSx.includes("minHeight: 408") || !specimenSx.includes('justifyContent: "flex-end"')) {
+  fail("Homepage StyleX face/law must be min-height 408 and justify flex-end so the lockup clears the 72 crumb bar");
+}
+if (!specimenSx.includes("overflow: \"visible\"")) {
+  fail("Homepage StyleX cells must keep overflow visible");
+}
+const homePage = readFileSync(join(root, "apps/www/app/page.tsx"), "utf8");
+if (!homePage.includes("specimen.cellTall") || !homePage.includes("specimen-cell-face")) {
+  fail("Homepage face/law must apply StyleX cellTall (408 + flex-end)");
+}
+if (!siteSx.includes("crumbBar:") || !siteSx.includes("zIndex: 160") || !/crumbBar: \{[\s\S]*?position:\s*\"fixed\"/.test(siteSx) || !/crumbBar: \{[\s\S]*?default:\s*72/.test(siteSx)) {
+  fail("Site crumb bar StyleX must be a full-bleed fixed 72 layer (z 160)");
+}
+if (!/\.rs-crumb-bar \{[\s\S]*?position:\s*fixed/.test(site) || !/\.rs-crumb-bar \{[\s\S]*?height:\s*72px/.test(site) || !/\.rs-crumb-bar \{[\s\S]*?z-index:\s*160/.test(site)) {
+  fail("Site crumb bar CSS must be a full-bleed fixed 72 layer matching live");
+}
 if (!siteSx.includes('repeat(auto-fill, 388px)') || !siteSx.includes('[at480]: "1fr"')) {
   fail("StyleX gallery must auto-fill 388 tracks and recut to 1fr at 480");
 }

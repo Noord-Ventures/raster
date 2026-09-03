@@ -105,12 +105,25 @@ body {
 }
 /* Gallery index: hide the *trail* so “Components” cannot run through
    Interfaces. The root word is pinned in column 1 below. */
-/* Paper halo on scroll — same as live crumb-bar.css. The site bar
-   uses these classes (not the React StyleX leaf), so the sheet must
-   keep the scrolled paper + hairline after the catalogue CSS drop. */
+/* Full-bleed fixed 72 layer — live crumb-bar.css. The site bar uses
+   these classes (not the React StyleX leaf). Transparent at rest;
+   scrolled paper + hairline. Logo / corner-nav keep the paper halo. */
 .rs-crumb-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 160;
+  display: flex;
+  align-items: center;
+  height: 72px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.3;
   background: none;
   border-bottom: 1px solid transparent;
+  transition: var(--transition);
 }
 .rs-crumb-bar-scrolled {
   background: var(--bg);
