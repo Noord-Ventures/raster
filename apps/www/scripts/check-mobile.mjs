@@ -654,17 +654,23 @@ const copySlice = site.slice(site.indexOf(".code-copy {"), site.indexOf(".code-c
 if (!copySlice.includes("border-radius: 0") || !copySlice.includes("box-shadow: none")) {
   fail("Copy chrome must be flush: no radius, no shadow");
 }
-if (
-  !site.includes("left: 224px") ||
-  !site.includes('body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav')
-) {
-  fail("Top-nav Components must align with the catalog second sidebar on detail routes");
+if (!site.includes("--nav-left: 224px") || !site.includes("left: var(--nav-left)")) {
+  fail("Corner-nav must freeze at the list 224 via --nav-left");
+}
+if (site.includes('body:has([data-rail="catalog"]):not(:has(.catalog-page))')) {
+  fail("Do not override corner-nav on catalog detail; list and detail share 224");
 }
 if (/body:has\(\[data-rail="catalog"\]\) \.corner-nav/.test(site)) {
   fail("Catalog gallery index must not pin corner-nav to the toc-sub column");
 }
-if (site.includes("left: 428px") || /--nav-left:\s*428px/.test(site)) {
+if (site.includes("left: 428px") || /--nav-left:\s*428px/.test(site) || siteSx.includes("428px")) {
   fail("Corner-nav must freeze at the list 224; do not jump detail to toc-sub 428");
+}
+if (!site.includes(".gallery-item .preview-box") || !site.includes(".gallery-demo .preview-box") || !site.includes(".specimen-kit-live .preview-box")) {
+  fail("Catalog / kit specimens must not stack preview-box on the card or cell");
+}
+if (!site.includes(".preview-box:has(.rs-callout)") || !site.includes(".gallery-demo .rs-callout")) {
+  fail("Boxed leaves must not sit in a second demo hairline");
 }
 if (!site.includes(".settings {") || !site.includes("right: 20px") || !site.includes("position: fixed")) {
   fail("Appearance control stays sticky on the right");

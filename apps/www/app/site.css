@@ -85,15 +85,9 @@ body {
   display: flex; align-items: center; gap: 20px; height: 24px;
   filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
 }
-/* Text links sit on the first content column (20 + 204). List and
-   detail freeze at that 224 so the restored 204 inset does not shove
-   the top links. Do not pin the gallery index to toc-sub. */
-@media (min-width: 900px) {
-  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav {
-    left: 224px;
-    right: auto;
-  }
-}
+/* Text links sit on the first content column (20 + 204). Catalog
+   INDEX and DETAIL share --nav-left: 224. Do not add a ≥1440
+   428 / toc-sub jump on body:has([data-rail="catalog"]). */
 /* Gallery index: hide the *trail* so “Components” cannot run through
    Interfaces. The root word is pinned in column 1 below. */
 /* Full-bleed fixed 72 layer — live crumb-bar.css. The site bar uses
@@ -606,6 +600,10 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .gallery-meta p { font-size: 12.5px; color: var(--text-secondary); letter-spacing: -.01em; line-height: 1.5; margin: 0; }
 
 /* ── Component page ── */
+/* One hairline per specimen (live bf282a68). .preview-box is the
+   detail frame for leaves that are not themselves a box. Catalog
+   cards (.gallery-item) and homepage kit cells already have a frame
+   — never also stroke preview-box there. */
 .preview-box {
   border: 1px solid var(--divider);
   border-radius: var(--radius-sm);
@@ -618,11 +616,69 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   background: transparent;
 }
 .gallery-item .preview-box,
-.gallery-demo .preview-box {
+.gallery-demo .preview-box,
+.specimen-kit-live .preview-box {
   border: 0;
   padding: 0;
   margin: 0;
   min-height: 0;
+  border-radius: 0;
+}
+/* Boxed leaves already paint their own outer hairline. Drop the
+   demo frame so they do not sit in a box within a box. */
+.preview-box:has(.rs-callout),
+.preview-box:has(.rs-btn-group),
+.preview-box:has(.rs-toggle-group),
+.preview-box:has(.rs-empty),
+.preview-box:has(.rs-table),
+.preview-box:has(.rs-ai),
+.preview-box:has(.rs-flow),
+.preview-box:has(.rs-input-group),
+.preview-box:has(.rs-inline-form),
+.preview-box:has(.rs-carousel),
+.preview-box:has(.rs-sidebar),
+.preview-box:has(.rs-acc),
+.preview-box:has(.rs-chart),
+.preview-box:has(.rs-cite-box),
+.preview-box:has(.rs-refs),
+.preview-box:has(.rs-field),
+.preview-box:has(.rs-form),
+.preview-box:has(.rs-cal),
+.preview-box:has(.rs-tabs),
+.preview-box:has(.rs-pages) {
+  border: none;
+}
+/* Catalog + homepage kit: the card / field cell is the frame.
+   Drop the leaf’s outer stroke so it does not stack. */
+.gallery-demo .rs-callout,
+.gallery-demo .rs-btn-group,
+.gallery-demo .rs-toggle-group,
+.gallery-demo .rs-empty,
+.gallery-demo .rs-table,
+.gallery-demo .rs-ai,
+.gallery-demo .rs-flow,
+.gallery-demo .rs-input-group,
+.gallery-demo .rs-inline-form,
+.gallery-demo .rs-carousel,
+.gallery-demo .rs-sidebar,
+.gallery-demo .rs-acc,
+.gallery-demo .rs-cite-box,
+.gallery-demo .rs-refs,
+.specimen-kit-live .rs-callout,
+.specimen-kit-live .rs-btn-group,
+.specimen-kit-live .rs-toggle-group,
+.specimen-kit-live .rs-empty,
+.specimen-kit-live .rs-table,
+.specimen-kit-live .rs-ai,
+.specimen-kit-live .rs-flow,
+.specimen-kit-live .rs-input-group,
+.specimen-kit-live .rs-inline-form,
+.specimen-kit-live .rs-carousel,
+.specimen-kit-live .rs-sidebar,
+.specimen-kit-live .rs-acc,
+.specimen-kit-live .rs-cite-box,
+.specimen-kit-live .rs-refs {
+  border: 0;
 }
 .preview-box > * { max-width: 100%; }
 .preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 0; border: 0; width: 100%; }

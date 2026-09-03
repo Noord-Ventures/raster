@@ -43,6 +43,7 @@ export const chrome = stylex.create({
   cornerNav: {
     position: "fixed",
     top: 24,
+    /* Shared with site.css --nav-left: 224. No toc-sub jump. */
     left: "var(--nav-left)",
     right: "auto",
     zIndex: 200,
