@@ -3,9 +3,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
+import * as stylex from "@stylexjs/stylex";
 import { rasterCategories, catalogComponents, type RasterCategory } from "@noorddev/raster";
 import { MobileToc } from "@/components/toc-mobile";
+import { navStyles } from "./docs-nav.stylex";
 import "./docs-nav.css";
+
+function sx(className: string, ...styles: unknown[]) {
+  const next = (stylex.props as (...args: unknown[]) => { className?: string; style?: React.CSSProperties })(...styles);
+  return { className: [className, next.className].filter(Boolean).join(" "), style: next.style };
+}
 
 function sentence(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1);
@@ -126,14 +133,14 @@ export function DocsNav() {
   if (!catalog) {
     return (
       <>
-        <div className="toc-rail">
-          <nav className="toc" aria-label="Docs">
-            <Link href="/docs" className="toc-item" aria-current={here(pathname, "/docs") ? "page" : undefined}>
+        <div {...sx("toc-rail", navStyles.rail)}>
+          <nav {...sx("toc", navStyles.toc)} aria-label="Docs">
+            <Link href="/docs" {...sx("toc-item", navStyles.item)} aria-current={here(pathname, "/docs") ? "page" : undefined}>
               Getting started
             </Link>
             <Link
               href="/docs/tokens"
-              className="toc-item"
+              {...sx("toc-item", navStyles.item)}
               aria-current={here(pathname, "/docs/tokens") ? "page" : undefined}
             >
               Tokens
@@ -149,13 +156,13 @@ export function DocsNav() {
 
   return (
     <>
-      <div className="toc-rail" data-rail="catalog" onPointerLeave={leaveRail} onBlur={leaveRail}>
-        <nav className="toc" data-toc="groups" aria-label="Component groups">
+      <div {...sx("toc-rail", navStyles.rail)} data-rail="catalog" onPointerLeave={leaveRail} onBlur={leaveRail}>
+        <nav {...sx("toc", navStyles.toc)} data-toc="groups" aria-label="Component groups">
           {groups.map((category) => (
             <Link
               key={category}
               href={`/components#${category}`}
-              className="toc-item"
+              {...sx("toc-item", navStyles.item)}
               aria-current={selected === category ? "true" : undefined}
               data-preview={shown === category ? "true" : undefined}
               onPointerEnter={() => setPreview(category)}
@@ -166,14 +173,14 @@ export function DocsNav() {
           ))}
         </nav>
 
-        <nav className="toc toc-sub" data-toc="items" aria-label={shown ? sentence(shown) : "Components"}>
+        <nav {...sx("toc toc-sub", navStyles.toc, navStyles.sub)} data-toc="items" aria-label={shown ? sentence(shown) : "Components"}>
           {items.map((c) => {
             const href = `/components/${c.name}`;
             return (
               <Link
                 key={c.name}
                 href={href}
-                className="toc-item"
+                {...sx("toc-item", navStyles.item)}
                 aria-current={here(pathname, href) ? "page" : undefined}
               >
                 {c.title}

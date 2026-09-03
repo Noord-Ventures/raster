@@ -1,5 +1,7 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster, phone } from "../tokens.stylex";
+import { rs } from "../rs";
 import { Icon } from "./icon";
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
@@ -10,6 +12,73 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /** Pages kept visible around the current one. */
   siblings?: number;
 }
+
+const styles = stylex.create({
+  pages: {
+    display: "flex",
+    alignItems: "center",
+    gap: {
+      default: 5,
+      ["@media (max-width: 640px)"]: 8,
+    },
+    flexWrap: {
+      default: null,
+      ["@media (max-width: 640px)"]: "wrap",
+    },
+  },
+  page: {
+    boxSizing: "border-box",
+    width: {
+      default: 26,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    height: {
+      default: 26,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    minWidth: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    minHeight: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    borderRadius: {
+      default: raster.radiusSm,
+      ["@media (max-width: 640px)"]: 0,
+    },
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: {
+      default: 13,
+      ["@media (max-width: 640px)"]: raster.controlFs,
+    },
+    color: raster.gray,
+    borderWidth: raster.hairline,
+    borderStyle: "solid",
+    borderColor: raster.divider,
+    padding: 0,
+    backgroundColor: "transparent",
+    fontFamily: "inherit",
+    cursor: "pointer",
+  },
+  on: {
+    backgroundColor: raster.ink,
+    color: raster.paper,
+    fontWeight: 600,
+    borderColor: "transparent",
+  },
+  gap: {
+    borderColor: "transparent",
+    cursor: "default",
+  },
+  icon: {
+    display: "block",
+    color: "inherit",
+  },
+});
 
 function pageItems(page: number, count: number, siblings: number): Array<number | "gap"> {
   const wanted = new Set<number>([1, count]);
@@ -34,45 +103,49 @@ export function Pagination({
   onPageChange,
   siblings = 1,
   className,
+  style,
   ...props
 }: PaginationProps) {
+  const nav = rs(["rs-pages", className], styles.pages);
+  const icon = rs([], styles.icon);
   return (
-    <nav aria-label="Pagination" className={cx("rs-pages", className)} {...props}>
-      <button
-        type="button"
-        className="rs-page"
-        aria-label="Previous page"
-        disabled={page <= 1}
-        onClick={() => onPageChange?.(page - 1)}
-      >
-        <Icon name="chevron-left" size={12} />
-      </button>
-      {pageItems(page, count, siblings).map((item, index) =>
-        item === "gap" ? (
-          <span key={`gap-${index}`} className="rs-page rs-page-gap" aria-hidden="true">
-            …
-          </span>
-        ) : (
-          <button
+    <nav aria-label="Pagination" {...props} className={nav.className} style={{ ...nav.style, ...style }}>
+      <PageButton aria-label="Previous page" disabled={page <= 1} onClick={() => onPageChange?.(page - 1)}>
+        <Icon name="chevron-left" size={12} className={icon.className} style={icon.style} />
+      </PageButton>
+      {pageItems(page, count, siblings).map((item, index) => {
+        if (item === "gap") {
+          const gap = rs(["rs-page", "rs-page-gap"], styles.page, styles.gap);
+          return (
+            <span key={`gap-${index}`} className={gap.className} style={gap.style} aria-hidden="true">
+              …
+            </span>
+          );
+        }
+        return (
+          <PageButton
             key={item}
-            type="button"
-            className={cx("rs-page", item === page && "rs-page-on")}
+            current={item === page}
             aria-current={item === page ? "page" : undefined}
             onClick={() => onPageChange?.(item)}
           >
             {item}
-          </button>
-        ),
-      )}
-      <button
-        type="button"
-        className="rs-page"
-        aria-label="Next page"
-        disabled={page >= count}
-        onClick={() => onPageChange?.(page + 1)}
-      >
-        <Icon name="chevron-right" size={12} />
-      </button>
+          </PageButton>
+        );
+      })}
+      <PageButton aria-label="Next page" disabled={page >= count} onClick={() => onPageChange?.(page + 1)}>
+        <Icon name="chevron-right" size={12} className={icon.className} style={icon.style} />
+      </PageButton>
     </nav>
   );
+}
+
+function PageButton({
+  current,
+  className,
+  style,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & { current?: boolean }) {
+  const sx = rs(["rs-page", current && "rs-page-on", className], styles.page, current && styles.on);
+  return <button type="button" {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }

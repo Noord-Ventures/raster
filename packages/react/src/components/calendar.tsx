@@ -1,5 +1,7 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster, phone } from "../tokens.stylex";
+import { rs } from "../rs";
 import { Icon } from "./icon";
 
 export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
@@ -18,8 +20,144 @@ function sameDay(a: Date | undefined, b: Date): boolean {
   );
 }
 
+const styles = stylex.create({
+  cal: {
+    width: 252,
+  },
+  head: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    minHeight: {
+      default: 26,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    marginBottom: 8,
+  },
+  title: {
+    fontSize: {
+      default: 13,
+      ["@media (max-width: 640px)"]: raster.controlFs,
+    },
+    fontWeight: 600,
+    letterSpacing: "-0.01em",
+    lineHeight: "26px",
+    color: raster.ink,
+  },
+  nav: {
+    display: "flex",
+    gap: {
+      default: 5,
+      ["@media (max-width: 640px)"]: 8,
+    },
+    flexShrink: 0,
+  },
+  page: {
+    boxSizing: "border-box",
+    width: {
+      default: 26,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    height: {
+      default: 26,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    minWidth: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    minHeight: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    borderRadius: {
+      default: raster.radiusSm,
+      ["@media (max-width: 640px)"]: 0,
+    },
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: {
+      default: 13,
+      ["@media (max-width: 640px)"]: raster.controlFs,
+    },
+    color: raster.gray,
+    borderWidth: raster.hairline,
+    borderStyle: "solid",
+    borderColor: raster.divider,
+    padding: 0,
+    backgroundColor: "transparent",
+    fontFamily: "inherit",
+    cursor: "pointer",
+    transform: "translateY(1px)",
+  },
+  icon: {
+    display: "block",
+    color: "inherit",
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(7, 36px)",
+    width: 252,
+  },
+  dow: {
+    fontSize: {
+      default: 11,
+      ["@media (max-width: 640px)"]: 13,
+    },
+    fontWeight: 500,
+    color: raster.gray,
+    textAlign: "center",
+    paddingTop: 4,
+    paddingBottom: 4,
+    paddingInline: 0,
+  },
+  day: {
+    boxSizing: "border-box",
+    width: 36,
+    height: 36,
+    minWidth: 36,
+    minHeight: 36,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: 13,
+    fontVariantNumeric: "tabular-nums",
+    color: raster.ink,
+    backgroundColor: {
+      default: "transparent",
+      ":hover": raster.dividerSubtle,
+      ["@media (hover: none)"]: {
+        ":hover": "transparent",
+        ":active": raster.dividerSubtle,
+      },
+    },
+    borderWidth: 0,
+    borderStyle: "none",
+    borderRadius: "var(--rs-in, var(--radius-sm))",
+    cursor: "pointer",
+    fontFamily: "inherit",
+    padding: 0,
+  },
+  out: {
+    color: raster.gray,
+    opacity: 0.45,
+  },
+  today: {
+    boxShadow: `inset 0 0 0 1px ${raster.divider}`,
+  },
+  selected: {
+    backgroundColor: {
+      default: raster.ink,
+      ":hover": raster.ink,
+    },
+    color: raster.paper,
+    fontWeight: 600,
+  },
+});
+
 /** Month grid. Selected is ink; today is a hairline. */
-export function Calendar({ value, onSelect, defaultMonth, weekStart = 1, className, ...props }: CalendarProps) {
+export function Calendar({ value, onSelect, defaultMonth, weekStart = 1, className, style, ...props }: CalendarProps) {
   const [month, setMonth] = React.useState(() => {
     const base = value ?? defaultMonth ?? new Date();
     return new Date(base.getFullYear(), base.getMonth(), 1);
@@ -38,40 +176,52 @@ export function Calendar({ value, onSelect, defaultMonth, weekStart = 1, classNa
   const dows = weekStart === 1 ? DOW : ["Su", ...DOW.slice(0, 6)];
   const shift = (delta: number) => setMonth(new Date(month.getFullYear(), month.getMonth() + delta, 1));
 
+  const cal = rs(["rs-cal", className], styles.cal);
+  const head = rs(["rs-cal-head"], styles.head);
+  const titleSx = rs(["rs-cal-title"], styles.title);
+  const nav = rs(["rs-cal-nav"], styles.nav);
+  const page = rs(["rs-page"], styles.page);
+  const icon = rs([], styles.icon);
+  const grid = rs(["rs-cal-grid"], styles.grid);
+  const dow = rs(["rs-cal-dow"], styles.dow);
+
   return (
-    <div className={cx("rs-cal", className)} {...props}>
-      <div className="rs-cal-head">
-        <span className="rs-cal-title" aria-live="polite">
+    <div {...props} className={cal.className} style={{ ...cal.style, ...style }}>
+      <div className={head.className} style={head.style}>
+        <span className={titleSx.className} style={titleSx.style} aria-live="polite">
           {title}
         </span>
-        <span className="rs-cal-nav">
-          <button type="button" className="rs-page" aria-label="Previous month" onClick={() => shift(-1)}>
-            <Icon name="chevron-left" size={12} />
+        <span className={nav.className} style={nav.style}>
+          <button type="button" className={page.className} style={page.style} aria-label="Previous month" onClick={() => shift(-1)}>
+            <Icon name="chevron-left" size={12} className={icon.className} style={icon.style} />
           </button>
-          <button type="button" className="rs-page" aria-label="Next month" onClick={() => shift(1)}>
-            <Icon name="chevron-right" size={12} />
+          <button type="button" className={page.className} style={page.style} aria-label="Next month" onClick={() => shift(1)}>
+            <Icon name="chevron-right" size={12} className={icon.className} style={icon.style} />
           </button>
         </span>
       </div>
-      <div className="rs-cal-grid" role="grid">
+      <div className={grid.className} style={grid.style} role="grid">
         {dows.map((d) => (
-          <span key={d} className="rs-cal-dow" role="columnheader">
+          <span key={d} className={dow.className} style={dow.style} role="columnheader">
             {d}
           </span>
         ))}
         {days.map((d) => {
           const out = d.getMonth() !== month.getMonth();
           const selected = sameDay(value, d);
+          const day = rs(
+            ["rs-cal-day", out && "rs-cal-day-out", sameDay(today, d) && "rs-cal-day-today", selected && "rs-cal-day-selected"],
+            styles.day,
+            out && styles.out,
+            sameDay(today, d) && styles.today,
+            selected && styles.selected,
+          );
           return (
             <button
               key={d.toISOString()}
               type="button"
-              className={cx(
-                "rs-cal-day",
-                out && "rs-cal-day-out",
-                sameDay(today, d) && "rs-cal-day-today",
-                selected && "rs-cal-day-selected",
-              )}
+              className={day.className}
+              style={day.style}
               aria-pressed={selected}
               aria-label={d.toDateString()}
               onClick={() => {

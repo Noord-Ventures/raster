@@ -1,5 +1,7 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../tokens.stylex";
+import { rs } from "../rs";
 
 export interface InputOTPProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   length?: number;
@@ -9,12 +11,65 @@ export interface InputOTPProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   "aria-label"?: string;
 }
 
+const styles = stylex.create({
+  otp: {
+    display: "flex",
+    gap: 8,
+    width: {
+      default: null,
+      ["@media (max-width: 640px)"]: "100%",
+    },
+  },
+  cell: {
+    width: {
+      default: 40,
+      ["@media (max-width: 640px)"]: "auto",
+    },
+    flexGrow: {
+      default: null,
+      ["@media (max-width: 640px)"]: 1,
+    },
+    minWidth: {
+      default: null,
+      ["@media (max-width: 640px)"]: 0,
+    },
+    height: {
+      default: 48,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    minHeight: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    textAlign: "center",
+    fontSize: 18,
+    fontWeight: 600,
+    fontVariantNumeric: "tabular-nums",
+    color: raster.ink,
+    backgroundColor: raster.paper,
+    borderWidth: raster.hairline,
+    borderStyle: "solid",
+    borderColor: {
+      default: raster.divider,
+      ":focus": raster.accent,
+    },
+    borderRadius: {
+      default: raster.radiusSm,
+      ["@media (max-width: 640px)"]: 0,
+    },
+    outline: "none",
+    fontFamily: "inherit",
+    padding: 0,
+  },
+});
+
 /** One cell per character. Auto-advance, backspace, paste. */
 export function InputOTP({
   length = 6,
   onChange,
   onComplete,
   className,
+  style,
   "aria-label": ariaLabel = "One-time code",
   ...props
 }: InputOTPProps) {
@@ -43,8 +98,11 @@ export function InputOTP({
     refs.current[Math.min(index + clean.length, length - 1)]?.focus();
   };
 
+  const sx = rs(["rs-otp", className], styles.otp);
+  const cell = rs([], styles.cell);
+
   return (
-    <div className={cx("rs-otp", className)} role="group" aria-label={ariaLabel} {...props}>
+    <div className={sx.className} style={{ ...sx.style, ...style }} role="group" aria-label={ariaLabel} {...props}>
       {chars.map((char, index) => (
         <input
           key={index}
@@ -56,6 +114,8 @@ export function InputOTP({
           maxLength={1}
           value={char}
           aria-label={`Digit ${index + 1}`}
+          className={cell.className}
+          style={cell.style}
           onChange={(e) => {
             const value = e.target.value.replace(/\D/g, "");
             if (value.length > 1) {

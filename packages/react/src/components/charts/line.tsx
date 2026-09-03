@@ -1,19 +1,26 @@
 import * as React from "react";
 import {
   ChartField,
+  ChartHead,
+  ChartLegend,
+  ChartLegendItem,
   ChartTip,
-  LINE_CLASS,
+  ChartTitle,
   LegendSwatch,
   MAX_SERIES,
   PLOT,
   SrTable,
+  areaMark,
+  chartStyles,
   defaultFormat,
+  lineMark,
   niceMax,
   stackedRows,
   ticksFor,
   type ChartAnnotation,
   type ChartSeries,
 } from "./frame";
+import { rs } from "../../rs";
 
 export interface LineChartProps extends React.HTMLAttributes<HTMLDivElement> {
   series: ChartSeries[];
@@ -86,65 +93,66 @@ export function LineChart({
     return Math.round(ratio * (n - 1));
   };
 
+  const svg = rs([], chartStyles.svg);
+  const plot = rs(["rs-chart-plot"], chartStyles.plot);
+  const gridSx = rs(["rs-chart-grid"], chartStyles.grid);
+  const axis = rs(["rs-chart-axis"], chartStyles.axis);
+  const baseline = rs(["rs-chart-baseline"], chartStyles.baseline);
+  const cursor = rs(["rs-chart-cursor"], chartStyles.cursor);
+  const ann = rs(["rs-chart-ann"], chartStyles.ann);
+  const dot = rs(["rs-chart-dot"], chartStyles.dot);
+
   return (
     <ChartField spot={spot} className={className} {...props}>
       {(yLabel || xLabel) && (
-        <div className="rs-chart-head">
-          {yLabel ? <p className="rs-chart-title">{yLabel}</p> : <span />}
-          {xLabel ? <p className="rs-chart-title">{xLabel}</p> : null}
-        </div>
+        <ChartHead>
+          {yLabel ? <ChartTitle>{yLabel}</ChartTitle> : <span />}
+          {xLabel ? <ChartTitle>{xLabel}</ChartTitle> : null}
+        </ChartHead>
       )}
-      <svg viewBox={`0 0 ${W} ${height}`} role="img" aria-label={`Line chart, ${shown.map((s) => s.name).join(" and ")}`}>
-        <g className="rs-chart-plot">
+      <svg
+        className={svg.className}
+        style={svg.style}
+        viewBox={`0 0 ${W} ${height}`}
+        role="img"
+        aria-label={`Line chart, ${shown.map((s) => s.name).join(" and ")}`}
+      >
+        <g className={plot.className} style={plot.style}>
           {grid &&
             tickVals.map((t) => (
               <g key={t}>
-                <line className="rs-chart-grid" x1={ML} x2={W - MR} y1={y(t)} y2={y(t)} />
-                <text className="rs-chart-axis" x={ML - 6} y={y(t) + 3.5} textAnchor="end">
+                <line className={gridSx.className} style={gridSx.style} x1={ML} x2={W - MR} y1={y(t)} y2={y(t)} />
+                <text className={axis.className} style={axis.style} x={ML - 6} y={y(t) + 3.5} textAnchor="end">
                   {format(t)}
                 </text>
               </g>
             ))}
-          <line className="rs-chart-baseline" x1={ML} x2={W - MR} y1={y(min)} y2={y(min)} />
+          <line className={baseline.className} style={baseline.style} x1={ML} x2={W - MR} y1={y(min)} y2={y(min)} />
           {area && shown[0] && !stacked && (
-            <path
-              className={spot ? "rs-chart-area-spot" : "rs-chart-area"}
-              d={`${path(shown[0].values)} L${x(n - 1)} ${y(min)} L${x(0)} ${y(min)} Z`}
-            />
+            <path {...areaMark(Boolean(spot))} d={`${path(shown[0].values)} L${x(n - 1)} ${y(min)} L${x(0)} ${y(min)} Z`} />
           )}
           {stacked && stacks
             ? shown.map((s, si) => {
                 const top = stacks.map((row) => row[si] ?? 0);
-                return (
-                  <path
-                    key={s.name}
-                    className={spot && si === 0 ? "rs-chart-line rs-chart-line-spot" : LINE_CLASS[si]}
-                    d={path(top)}
-                  />
-                );
+                return <path key={s.name} {...lineMark(si, Boolean(spot))} d={path(top)} />;
               })
-            : shown.map((s, si) => (
-                <path
-                  key={s.name}
-                  className={spot && si === 0 ? "rs-chart-line rs-chart-line-spot" : LINE_CLASS[si]}
-                  d={path(s.values)}
-                />
-              ))}
+            : shown.map((s, si) => <path key={s.name} {...lineMark(si, Boolean(spot))} d={path(s.values)} />)}
           {annotations?.map((a) => (
             <g key={`${a.at}-${a.label}`}>
-              <line className="rs-chart-cursor" x1={x(a.at)} x2={x(a.at)} y1={MT} y2={y(min)} />
-              <text className="rs-chart-ann" x={x(a.at) + 4} y={MT + 10}>
+              <line className={cursor.className} style={cursor.style} x1={x(a.at)} x2={x(a.at)} y1={MT} y2={y(min)} />
+              <text className={ann.className} style={ann.style} x={x(a.at) + 4} y={MT + 10}>
                 {a.label}
               </text>
             </g>
           ))}
           {hover != null && (
             <g>
-              <line className="rs-chart-cursor" x1={x(hover)} x2={x(hover)} y1={MT} y2={y(min)} />
+              <line className={cursor.className} style={cursor.style} x1={x(hover)} x2={x(hover)} y1={MT} y2={y(min)} />
               {shown.map((s, si) => (
                 <circle
                   key={si}
-                  className="rs-chart-dot"
+                  className={dot.className}
+                  style={dot.style}
                   cx={x(hover)}
                   cy={y(stacked && stacks ? (stacks[hover]?.[si] ?? 0) : (s.values[hover] ?? 0))}
                   r={3}
@@ -152,10 +160,10 @@ export function LineChart({
               ))}
             </g>
           )}
-          <text className="rs-chart-axis" x={ML} y={height - 4} textAnchor="start">
+          <text className={axis.className} style={axis.style} x={ML} y={height - 4} textAnchor="start">
             {tickLabels[0]}
           </text>
-          <text className="rs-chart-axis" x={W - MR} y={height - 4} textAnchor="end">
+          <text className={axis.className} style={axis.style} x={W - MR} y={height - 4} textAnchor="end">
             {tickLabels[n - 1]}
           </text>
           <rect
@@ -179,15 +187,15 @@ export function LineChart({
         />
       )}
       {(shown.length > 1 || unit) && (
-        <div className="rs-chart-legend">
+        <ChartLegend>
           {shown.map((s, si) => (
-            <span key={s.name} className="rs-chart-legend-item">
+            <ChartLegendItem key={s.name}>
               <LegendSwatch seriesIndex={si} spot={Boolean(spot)} />
               {s.name}
-            </span>
+            </ChartLegendItem>
           ))}
-          {unit ? <span className="rs-chart-legend-item">{unit}</span> : null}
-        </div>
+          {unit ? <ChartLegendItem>{unit}</ChartLegendItem> : null}
+        </ChartLegend>
       )}
       <SrTable caption="Chart data" labels={tickLabels} series={shown} />
     </ChartField>

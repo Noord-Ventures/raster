@@ -1,0 +1,101 @@
+import * as stylex from "@stylexjs/stylex";
+
+const phone = "@media (max-width: 640px)";
+const at900 = "@media (min-width: 900px)";
+const catalogNarrow = "@media (min-width: 1024px) and (max-width: 1439px)";
+
+/**
+ * Docs rail. 184 groups + 204 secondaries. No paper cover.
+ * Secondaries occupy gutter + column (204), end on the 408 module line.
+ */
+export const navStyles = stylex.create({
+  rail: {
+    display: {
+      default: "none",
+      [at900]: "flex",
+    },
+    flexShrink: 0,
+    alignSelf: "flex-start",
+    position: "sticky",
+    top: 0,
+    height: "100vh",
+    paddingTop: 120,
+    paddingBottom: 72,
+    gap: 0,
+  },
+  toc: {
+    width: 184,
+    flexShrink: 0,
+    height: "100%",
+    overflowY: "auto",
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+    paddingRight: 20,
+    scrollbarWidth: "none",
+    maskImage:
+      "linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 64px), transparent calc(100% - 8px))",
+    "::-webkit-scrollbar": {
+      display: "none",
+    },
+  },
+  sub: {
+    width: 204,
+    marginLeft: 0,
+    paddingLeft: 20,
+    paddingRight: 20,
+    backgroundColor: "transparent",
+    ":empty": {
+      display: "none",
+    },
+  },
+  item: {
+    display: "block",
+    paddingBlock: 5,
+    paddingInline: 0,
+    fontSize: 13,
+    fontWeight: {
+      default: 400,
+      '[aria-current="page"]': 500,
+      '[aria-current="true"]': 500,
+    },
+    letterSpacing: "-0.01em",
+    color: {
+      default: "var(--text-secondary)",
+      ":hover": "var(--text)",
+      ":focus-visible": "var(--text)",
+      '[data-preview="true"]': "var(--text)",
+      '[aria-current="true"]': "var(--text)",
+      '[aria-current="page"]': "var(--text)",
+    },
+    opacity: {
+      default: 0.6,
+      ":hover": 1,
+      ":focus-visible": 1,
+      '[data-preview="true"]': 1,
+      '[aria-current="true"]': 1,
+      '[aria-current="page"]': 1,
+    },
+    textDecoration: "none",
+    transition: "color var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)",
+    outlineWidth: {
+      default: null,
+      ":focus-visible": 1,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": "var(--text)",
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
+    },
+  },
+});
+
+void phone;
+void catalogNarrow;

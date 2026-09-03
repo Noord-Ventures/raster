@@ -1,7 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster, phone, mobileGrid } from "../tokens.stylex";
+import { rs } from "../rs";
 import { Icon } from "./icon";
 
 export interface ThemeToggleProps
@@ -10,6 +12,81 @@ export interface ThemeToggleProps
   storageKey?: string;
   onThemeChange?: (dark: boolean) => void;
 }
+
+const styles = stylex.create({
+  toggle: {
+    position: "fixed",
+    top: 24,
+    right: {
+      default: 20,
+      ["@media (max-width: 480px)"]: 25,
+    },
+    zIndex: 200,
+    width: {
+      default: 24,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    height: {
+      default: 24,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    minWidth: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    minHeight: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    padding: {
+      default: 4,
+      ["@media (max-width: 640px)"]: 12,
+    },
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+    backgroundColor: "transparent",
+    borderWidth: 0,
+    borderStyle: "none",
+    borderRadius: 0,
+    cursor: "pointer",
+    color: {
+      default: raster.gray,
+      ":hover": raster.accent,
+    },
+    outlineWidth: {
+      default: 0,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: "none",
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: "transparent",
+      ":focus-visible": raster.accent,
+    },
+    outlineOffset: {
+      default: 0,
+      ":focus-visible": 2,
+    },
+    filter: `drop-shadow(0 0 12px ${raster.paper}) drop-shadow(0 0 20px ${raster.paper})`,
+  },
+  inline: {
+    position: "relative",
+    top: "auto",
+    right: "auto",
+    zIndex: 1,
+    filter: "none",
+  },
+  mark: {
+    width: 16,
+    height: 16,
+    display: "block",
+    flexShrink: 0,
+  },
+});
 
 /**
  * One mark. Moon on paper, sun on black. The button sets
@@ -20,6 +97,7 @@ export function ThemeToggle({
   storageKey = "raster-theme",
   onThemeChange,
   className,
+  style,
   onClick,
   ...props
 }: ThemeToggleProps) {
@@ -43,15 +121,20 @@ export function ThemeToggle({
     onClick?.(e);
   };
 
+  const inline = typeof className === "string" && className.split(/\s+/).includes("rs-theme-toggle-inline");
+  const sx = rs(["rs-theme-toggle", className], styles.toggle, inline && styles.inline);
+  const mark = rs([dark ? "rs-theme-sun" : "rs-theme-moon"], styles.mark);
+
   return (
     <button
       type="button"
-      className={cx("rs-theme-toggle", className)}
       aria-label="Toggle color scheme"
       onClick={toggle}
       {...props}
+      className={sx.className}
+      style={{ ...sx.style, ...style }}
     >
-      <Icon name={dark ? "sun" : "moon"} size={16} className={dark ? "rs-theme-sun" : "rs-theme-moon"} />
+      <Icon name={dark ? "sun" : "moon"} size={16} className={mark.className} style={mark.style} />
     </button>
   );
 }

@@ -1,16 +1,22 @@
 import * as React from "react";
-import { cx } from "../../cx";
 import {
   ChartField,
+  ChartHead,
+  ChartLegend,
+  ChartLegendItem,
   ChartTip,
+  ChartTitle,
   PLOT,
   SrTable,
+  barMark,
+  chartStyles,
   defaultFormat,
   niceMax,
   stackedRows,
   ticksFor,
   type ChartSeries,
 } from "./frame";
+import { rs } from "../../rs";
 
 export type BarOrientation = "vertical" | "horizontal";
 
@@ -75,28 +81,34 @@ export function BarChart({
   const tickVals = ticksFor(max, ticks);
   const labelEvery = Math.ceil(n / 8);
 
+  const svg = rs([], chartStyles.svg);
+  const plot = rs(["rs-chart-plot"], chartStyles.plot);
+  const gridSx = rs(["rs-chart-grid"], chartStyles.grid);
+  const axis = rs(["rs-chart-axis"], chartStyles.axis);
+  const baseline = rs(["rs-chart-baseline"], chartStyles.baseline);
+
   return (
     <ChartField spot={spot} className={className} {...props}>
       {yLabel && (
-        <div className="rs-chart-head">
-          <p className="rs-chart-title">{yLabel}</p>
-        </div>
+        <ChartHead>
+          <ChartTitle>{yLabel}</ChartTitle>
+        </ChartHead>
       )}
-      <svg viewBox={`0 0 ${W} ${height}`} role="img" aria-label="Bar chart">
-        <g className="rs-chart-plot">
+      <svg className={svg.className} style={svg.style} viewBox={`0 0 ${W} ${height}`} role="img" aria-label="Bar chart">
+        <g className={plot.className} style={plot.style}>
           {grid &&
             tickVals.map((t) =>
               horizontal ? (
                 <g key={t}>
-                  <line className="rs-chart-grid" x1={xV(t)} x2={xV(t)} y1={MT} y2={height - MB} />
-                  <text className="rs-chart-axis" x={xV(t)} y={height - 4} textAnchor="middle">
+                  <line className={gridSx.className} style={gridSx.style} x1={xV(t)} x2={xV(t)} y1={MT} y2={height - MB} />
+                  <text className={axis.className} style={axis.style} x={xV(t)} y={height - 4} textAnchor="middle">
                     {format(t)}
                   </text>
                 </g>
               ) : (
                 <g key={t}>
-                  <line className="rs-chart-grid" x1={ML} x2={W - MR} y1={yV(t)} y2={yV(t)} />
-                  <text className="rs-chart-axis" x={ML - 6} y={yV(t) + 3.5} textAnchor="end">
+                  <line className={gridSx.className} style={gridSx.style} x1={ML} x2={W - MR} y1={yV(t)} y2={yV(t)} />
+                  <text className={axis.className} style={axis.style} x={ML - 6} y={yV(t) + 3.5} textAnchor="end">
                     {format(t)}
                   </text>
                 </g>
@@ -104,6 +116,11 @@ export function BarChart({
             )}
           {tickLabels.map((label, i) => {
             const values = shown.map((s) => s.values[i] ?? 0);
+            const mark = (si: number) =>
+              barMark({
+                spot: Boolean(spot) && (stacks ? si === 0 : true),
+                muted: hover != null && hover !== i,
+              });
             if (horizontal) {
               const y0 = MT + i * band + inset;
               if (stacks) {
@@ -116,11 +133,7 @@ export function BarChart({
                   return (
                     <rect
                       key={`${label}-${s.name}`}
-                      className={cx(
-                        "rs-chart-bar",
-                        spot && si === 0 && "rs-chart-bar-spot",
-                        hover != null && hover !== i && "rs-chart-bar-muted",
-                      )}
+                      {...mark(si)}
                       x={x1}
                       y={y0}
                       width={Math.max(0, x2 - x1)}
@@ -135,7 +148,7 @@ export function BarChart({
               return (
                 <rect
                   key={label}
-                  className={cx("rs-chart-bar", spot && "rs-chart-bar-spot", hover != null && hover !== i && "rs-chart-bar-muted")}
+                  {...mark(0)}
                   x={ML}
                   y={y0}
                   width={Math.max(0, xV(v) - ML)}
@@ -156,11 +169,7 @@ export function BarChart({
                 return (
                   <rect
                     key={`${label}-${s.name}`}
-                    className={cx(
-                      "rs-chart-bar",
-                      spot && si === 0 && "rs-chart-bar-spot",
-                      hover != null && hover !== i && "rs-chart-bar-muted",
-                    )}
+                    {...mark(si)}
                     x={x0}
                     y={y1}
                     width={barThick}
@@ -175,7 +184,7 @@ export function BarChart({
             return (
               <rect
                 key={label}
-                className={cx("rs-chart-bar", spot && "rs-chart-bar-spot", hover != null && hover !== i && "rs-chart-bar-muted")}
+                {...mark(0)}
                 x={x0}
                 y={yV(v)}
                 width={barThick}
@@ -186,7 +195,8 @@ export function BarChart({
             );
           })}
           <line
-            className="rs-chart-baseline"
+            className={baseline.className}
+            style={baseline.style}
             x1={ML}
             x2={horizontal ? ML : W - MR}
             y1={horizontal ? MT : yV(0)}
@@ -197,7 +207,8 @@ export function BarChart({
               i % labelEvery === 0 && (
                 <text
                   key={label}
-                  className="rs-chart-axis"
+                  className={axis.className}
+                  style={axis.style}
                   x={horizontal ? ML - 6 : ML + i * band + band / 2}
                   y={horizontal ? MT + i * band + band / 2 + 3 : height - 4}
                   textAnchor={horizontal ? "end" : "middle"}
@@ -209,9 +220,9 @@ export function BarChart({
         </g>
       </svg>
       {unit && (
-        <div className="rs-chart-legend" aria-hidden="true">
-          <span className="rs-chart-legend-item">{unit}</span>
-        </div>
+        <ChartLegend aria-hidden="true">
+          <ChartLegendItem>{unit}</ChartLegendItem>
+        </ChartLegend>
       )}
       {hover != null && tickLabels[hover] && (
         <ChartTip

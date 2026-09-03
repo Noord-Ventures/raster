@@ -108,9 +108,9 @@ describe("Badge", () => {
         <Badge variant="muted">C</Badge>
       </>,
     );
-    expect(screen.getByText("A").className).toBe("rs-badge");
-    expect(screen.getByText("B").className).toBe("rs-badge-solid");
-    expect(screen.getByText("C").className).toBe("rs-badge-muted");
+    expect(screen.getByText("A").className).toContain("rs-badge");
+    expect(screen.getByText("B").className).toContain("rs-badge-solid");
+    expect(screen.getByText("C").className).toContain("rs-badge-muted");
   });
 });
 
@@ -462,9 +462,9 @@ describe("Stepper", () => {
 describe("Breadcrumbs", () => {
   it("keeps ancestors as trail links, not a second color", () => {
     render(<Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Raster" }]} />);
-    expect(screen.getByRole("link", { name: "Studio" }).className).toBe("rs-crumbs-link");
-    expect(screen.getByText("Raster").className).toBe("rs-crumbs-here");
-    expect(screen.getByText("/").className).toBe("rs-crumbs-sep");
+    expect(screen.getByRole("link", { name: "Studio" }).className).toContain("rs-crumbs-link");
+    expect(screen.getByText("Raster").className).toContain("rs-crumbs-here");
+    expect(screen.getByText("/").className).toContain("rs-crumbs-sep");
   });
 });
 
@@ -478,7 +478,7 @@ describe("CrumbBar", () => {
     Object.defineProperty(window, "scrollY", { value: 300, configurable: true });
     fireEvent.scroll(window);
     expect(bar.className).toContain("rs-crumb-bar-scrolled");
-    expect(screen.getByText("Components").className).toBe("rs-crumbs-here");
+    expect(screen.getByText("Components").className).toContain("rs-crumbs-here");
     Object.defineProperty(window, "scrollY", { value: 0, configurable: true });
   });
 });
@@ -507,7 +507,7 @@ describe("Form and Field", () => {
         </Field>
       </Form>,
     );
-    expect(screen.getByRole("form", { name: "Contact" }).className).toBe("rs-form");
+    expect(screen.getByRole("form", { name: "Contact" }).className).toContain("rs-form");
     expect(screen.getByLabelText("Name")).toBeTruthy();
   });
 });
@@ -521,7 +521,7 @@ describe("NativeSelect", () => {
       </NativeSelect>,
     );
     const el = screen.getByRole("combobox", { name: "City" }) as HTMLSelectElement;
-    expect(el.className).toBe("rs-native-select");
+    expect(el.className).toContain("rs-native-select");
     expect(el.value).toBe("alkmaar");
   });
 });
@@ -529,15 +529,15 @@ describe("NativeSelect", () => {
 describe("Empty", () => {
   it("renders a vacant cell", () => {
     render(<Empty title="No projects yet">Start one.</Empty>);
-    expect(screen.getByText("No projects yet").className).toBe("rs-empty-title");
-    expect(screen.getByText("Start one.").className).toBe("rs-empty-body");
+    expect(screen.getByText("No projects yet").className).toContain("rs-empty-title");
+    expect(screen.getByText("Start one.").className).toContain("rs-empty-body");
   });
 });
 
 describe("Spinner", () => {
   it("exposes status semantics", () => {
     render(<Spinner label="Loading" />);
-    expect(screen.getByRole("status", { name: "Loading" }).className).toBe("rs-spinner");
+    expect(screen.getByRole("status", { name: "Loading" }).className).toContain("rs-spinner");
   });
 
   it("draws a 1px hairline circle, not a square", () => {

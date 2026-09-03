@@ -1,6 +1,26 @@
 import * as React from "react";
-import { cx } from "../../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../../tokens.stylex";
+import { rs } from "../../rs";
 import { LineChart, type LineChartProps } from "./line";
+
+const styles = stylex.create({
+  multi: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(184px, 1fr))",
+    gap: 20,
+  },
+  cap: {
+    marginTop: 0,
+    marginRight: 0,
+    marginBottom: 8,
+    marginLeft: 0,
+    fontSize: 12,
+    fontWeight: 600,
+    letterSpacing: "-0.01em",
+    color: raster.ink,
+  },
+});
 
 export type SmallMultiple = {
   title: string;
@@ -25,13 +45,15 @@ export function SmallMultiples({
   ticks = 3,
   className,
   spot,
+  style,
   ...props
 }: SmallMultiplesProps) {
+  const sx = rs(["rs-chart-multi", className], styles.multi);
   return (
-    <div className={cx("rs-chart-multi", className)} {...props}>
+    <div {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       {panels.map((p) => (
         <figure key={p.title} className="rs-chart-multi-item">
-          <figcaption className="rs-chart-multi-cap">{p.title}</figcaption>
+          <figcaption {...rs(["rs-chart-multi-cap"], styles.cap)}>{p.title}</figcaption>
           <LineChart
             series={p.series}
             labels={p.labels}

@@ -1,5 +1,7 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../tokens.stylex";
+import { rs } from "../rs";
 import {
   iconGroups,
   iconLabel,
@@ -10,6 +12,8 @@ import {
   type IconRotate,
   type MarkEl,
 } from "./icon-marks";
+
+const at480 = "@media (max-width: 480px)" as const;
 
 export { iconGroups, iconLabel, iconNames, resolveIcon };
 export type { IconName, IconRotate };
@@ -45,6 +49,75 @@ export const iconFill = {
 export type IconSize = 12 | 16 | 24;
 export type IconVariant = "line" | "filled";
 
+const styles = stylex.create({
+  icon: {
+    display: "block",
+    flexShrink: 0,
+    overflow: "visible",
+    color: "inherit",
+  },
+  catalog: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    gap: 28,
+    textAlign: "left",
+    alignSelf: "stretch",
+  },
+  group: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 12,
+  },
+  groupTitle: {
+    margin: 0,
+    fontSize: 12,
+    fontWeight: 600,
+    letterSpacing: 0,
+    color: raster.gray,
+    textTransform: "none",
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: {
+      default: "repeat(auto-fill, 184px)",
+      [at480]: "minmax(0, 1fr)",
+    },
+    columnGap: raster.gutter,
+    rowGap: 20,
+    justifyContent: "start",
+    width: "100%",
+  },
+  cell: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: 8,
+    width: {
+      default: 184,
+      [at480]: "100%",
+    },
+  },
+  pair: {
+    display: "flex",
+    alignItems: "center",
+    gap: 16,
+    minHeight: 24,
+  },
+  kin: {
+    display: "flex",
+    alignItems: "center",
+    gap: 8,
+    minHeight: 24,
+  },
+  label: {
+    fontSize: 11,
+    lineHeight: 1.3,
+    color: raster.gray,
+    textTransform: "none",
+  },
+});
+
 function isClosed(el: MarkEl): boolean {
   if (el.t === "rect" || el.t === "circle") return true;
   if (el.t === "path") return /z\s*$/i.test(el.d.trim());
@@ -79,19 +152,21 @@ export interface IconProps extends Omit<React.SVGAttributes<SVGSVGElement>, "chi
 }
 
 /** One mark. Size is the drawn square; the viewBox is always 16. */
-export function Icon({ name, size = 16, variant = "line", rotate, className, ...props }: IconProps) {
+export function Icon({ name, size = 16, variant = "line", rotate, className, style, ...props }: IconProps) {
   const resolved = resolveIcon(name);
   const turn = rotate ?? resolved.rotate;
   const nodes = marks[resolved.mark].map((el, i) => renderEl(el, i, variant));
+  const sx = rs(["rs-icon", variant === "filled" && "rs-icon-filled", className], styles.icon);
   return (
     <svg
-      className={cx("rs-icon", variant === "filled" && "rs-icon-filled", className)}
       viewBox="0 0 16 16"
       width={size}
       height={size}
       aria-hidden="true"
       {...iconInk}
       {...props}
+      className={sx.className}
+      style={{ ...sx.style, ...style }}
     >
       {turn ? <g transform={`rotate(${turn} 8 8)`}>{nodes}</g> : nodes}
     </svg>
@@ -100,27 +175,39 @@ export function Icon({ name, size = 16, variant = "line", rotate, className, ...
 
 /** Full family at 12, 16, and 24, line | filled, grouped. Optical center 8,8. */
 export function IconCatalog({ className }: { className?: string }) {
+  const catalog = rs(["rs-icon-catalog", className], styles.catalog);
+  const group = rs(["rs-icon-group"], styles.group);
+  const groupTitle = rs(["rs-icon-group-title"], styles.groupTitle);
+  const grid = rs(["rs-icon-grid"], styles.grid);
+  const cell = rs(["rs-icon-cell"], styles.cell);
+  const pair = rs(["rs-icon-pair"], styles.pair);
+  const kin = rs(["rs-icon-kin"], styles.kin);
+  const label = rs(["rs-icon-label"], styles.label);
   return (
-    <div className={cx("rs-icon-catalog", className)}>
-      {iconGroups.map((group) => (
-        <section key={group.title} className="rs-icon-group">
-          <h3 className="rs-icon-group-title">{group.title}</h3>
-          <div className="rs-icon-grid">
-            {group.names.map((mark) => (
-              <div key={`${group.title}-${mark}`} className="rs-icon-cell">
-                <div className="rs-icon-pair">
-                  <div className="rs-icon-kin" data-variant="line">
+    <div className={catalog.className} style={catalog.style}>
+      {iconGroups.map((g) => (
+        <section key={g.title} className={group.className} style={group.style}>
+          <h3 className={groupTitle.className} style={groupTitle.style}>
+            {g.title}
+          </h3>
+          <div className={grid.className} style={grid.style}>
+            {g.names.map((mark) => (
+              <div key={`${g.title}-${mark}`} className={cell.className} style={cell.style}>
+                <div className={pair.className} style={pair.style}>
+                  <div className={kin.className} style={kin.style} data-variant="line">
                     <Icon name={mark} size={12} />
                     <Icon name={mark} size={16} />
                     <Icon name={mark} size={24} />
                   </div>
-                  <div className="rs-icon-kin" data-variant="filled">
+                  <div className={kin.className} style={kin.style} data-variant="filled">
                     <Icon name={mark} size={12} variant="filled" />
                     <Icon name={mark} size={16} variant="filled" />
                     <Icon name={mark} size={24} variant="filled" />
                   </div>
                 </div>
-                <span className="rs-icon-label">{iconLabel(mark)}</span>
+                <span className={label.className} style={label.style}>
+                  {iconLabel(mark)}
+                </span>
               </div>
             ))}
           </div>

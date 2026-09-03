@@ -1,5 +1,8 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../tokens.stylex";
+import { rs } from "../rs";
+import { hidden } from "../hidden.stylex";
 import { Icon } from "./icon";
 
 export interface CheckboxProps
@@ -7,20 +10,72 @@ export interface CheckboxProps
   label?: React.ReactNode;
 }
 
+const styles = stylex.create({
+  choice: {
+    display: "flex",
+    alignItems: "center",
+    gap: {
+      default: 9,
+      ["@media (max-width: 640px)"]: 12,
+    },
+    fontSize: {
+      default: 14,
+      ["@media (max-width: 640px)"]: 17,
+    },
+    color: raster.ink,
+    letterSpacing: "-0.01em",
+    minHeight: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+  },
+  check: {
+    width: {
+      default: 16,
+      ["@media (max-width: 640px)"]: 22,
+    },
+    height: {
+      default: 16,
+      ["@media (max-width: 640px)"]: 22,
+    },
+    borderRadius: {
+      default: 3,
+      ["@media (max-width: 640px)"]: 0,
+    },
+    borderWidth: 1.5,
+    borderStyle: "solid",
+    borderColor: raster.divider,
+    flexShrink: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: raster.paper,
+    boxSizing: "border-box",
+  },
+  on: {
+    backgroundColor: raster.ink,
+    borderColor: raster.ink,
+  },
+});
+
 /** A real native checkbox; the visible 16px box mirrors its state. */
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
-  { label, className, checked, defaultChecked, onChange, ...props },
+  { label, className, style, checked, defaultChecked, onChange, ...props },
   ref,
 ) {
   const [inner, setInner] = React.useState(defaultChecked ?? false);
   const isControlled = checked !== undefined;
   const on = isControlled ? checked : inner;
+  const row = rs(["rs-choice", className], styles.choice);
+  const sr = rs(["rs-sr"], hidden.sr);
+  const box = rs(["rs-check", on && "rs-check-on"], styles.check, on && styles.on);
   return (
-    <label className={cx("rs-choice", className)}>
+    <label className={row.className} style={{ ...row.style, ...style }}>
       <input
         ref={ref}
         type="checkbox"
-        className="rs-sr"
+        className={sr.className}
+        style={sr.style}
         checked={on}
         onChange={(e) => {
           if (!isControlled) setInner(e.target.checked);
@@ -28,7 +83,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(functi
         }}
         {...props}
       />
-      <span className={cx("rs-check", on && "rs-check-on")} aria-hidden="true">
+      <span className={box.className} style={box.style} aria-hidden="true">
         {on && <Icon name="check" size={12} />}
       </span>
       {label}

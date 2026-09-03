@@ -1,13 +1,45 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../tokens.stylex";
+import { rs } from "../rs";
 
 export interface SeparatorProps extends React.HTMLAttributes<HTMLElement> {
   orientation?: "horizontal" | "vertical";
 }
 
-export function Separator({ orientation = "horizontal", className, ...props }: SeparatorProps) {
+const styles = stylex.create({
+  horizontal: {
+    borderWidth: 0,
+    borderStyle: "none",
+    borderTopWidth: raster.hairline,
+    borderTopStyle: "solid",
+    borderTopColor: raster.divider,
+    marginBlock: 20,
+    marginInline: 0,
+  },
+  vertical: {
+    display: "inline-block",
+    width: raster.hairline,
+    alignSelf: "stretch",
+    backgroundColor: raster.divider,
+    marginBlock: 0,
+    marginInline: 12,
+  },
+});
+
+export function Separator({ orientation = "horizontal", className, style, ...props }: SeparatorProps) {
   if (orientation === "vertical") {
-    return <span role="separator" aria-orientation="vertical" className={cx("rs-sep-v", className)} {...props} />;
+    const sx = rs(["rs-sep-v", className], styles.vertical);
+    return (
+      <span
+        role="separator"
+        aria-orientation="vertical"
+        {...props}
+        className={sx.className}
+        style={{ ...sx.style, ...style }}
+      />
+    );
   }
-  return <hr className={cx("rs-sep", className)} {...props} />;
+  const sx = rs(["rs-sep", className], styles.horizontal);
+  return <hr {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }

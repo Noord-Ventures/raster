@@ -1,6 +1,61 @@
 import * as React from "react";
-import { cx } from "../../cx";
-import { ChartField, defaultFormat } from "./frame";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../../tokens.stylex";
+import { rs } from "../../rs";
+import { ChartField, ChartLegend, ChartLegendItem, ChartTitle, chartStyles, defaultFormat } from "./frame";
+
+const styles = stylex.create({
+  donut: {
+    display: "block",
+  },
+  track: {
+    fill: "none",
+    stroke: raster.divider,
+    strokeWidth: 1,
+  },
+  value: {
+    fill: "none",
+    stroke: "var(--rs-chart-spot)",
+    strokeWidth: 1,
+    strokeLinecap: "butt",
+  },
+  label: {
+    fill: raster.ink,
+    fontSize: 12,
+    fontWeight: 500,
+    letterSpacing: "-0.03em",
+    fontVariantNumeric: "tabular-nums",
+  },
+  caption: {
+    fill: raster.gray,
+    fontSize: 8,
+    fontWeight: 500,
+    letterSpacing: "0.06em",
+  },
+  share: {
+    display: "flex",
+    height: 8,
+    width: "100%",
+    borderWidth: raster.hairline,
+    borderStyle: "solid",
+    borderColor: raster.divider,
+    borderRadius: 0,
+    boxShadow: "none",
+  },
+  seg: {
+    height: "100%",
+    borderRadius: 0,
+    backgroundColor: {
+      default: raster.ink,
+      ":nth-child(2)": raster.gray,
+      ":nth-child(3)": raster.divider,
+    },
+    transition: "fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)",
+  },
+  segSpot: {
+    backgroundColor: "var(--rs-chart-spot)",
+  },
+});
 
 export interface DonutProps extends React.HTMLAttributes<HTMLDivElement> {
   value: number;
@@ -29,36 +84,43 @@ export function Donut({
   const format = valueFormat ?? ((v: number) => `${Math.round((v / max) * 100)}%`);
   const pct = Math.max(0, Math.min(1, max === 0 ? 0 : value / max));
   const caption = typeof label === "string" ? label : undefined;
+  const svg = rs(["rs-chart-plot", "rs-chart-donut"], chartStyles.svg, chartStyles.plot, styles.donut);
+  const track = rs(["rs-chart-donut-track"], styles.track);
+  const valueSx = rs(["rs-chart-donut-value"], styles.value);
+  const labelSx = rs(["rs-chart-donut-label"], styles.label);
+  const captionSx = rs(["rs-chart-donut-caption"], styles.caption);
   return (
-    <ChartField spot={spot} className={cx("rs-chart-donut-wrap", className)} {...props}>
+    <ChartField spot={spot} className={className ? `rs-chart-donut-wrap ${className}` : "rs-chart-donut-wrap"} {...props}>
       <svg
-        className="rs-chart-plot rs-chart-donut"
+        className={svg.className}
+        style={svg.style}
         width={size}
         height={size}
         viewBox="0 0 96 96"
         role="img"
         aria-label={`${format(value)}${caption ? ` ${caption}` : ""}`}
       >
-        <circle className="rs-chart-donut-track" cx="48" cy="48" r={R} />
+        <circle className={track.className} style={track.style} cx="48" cy="48" r={R} />
         <circle
-          className="rs-chart-donut-value"
+          className={valueSx.className}
+          style={valueSx.style}
           cx="48"
           cy="48"
           r={R}
           strokeDasharray={`${pct * C} ${C}`}
           transform="rotate(-90 48 48)"
         />
-        <text className="rs-chart-donut-label" x="48" y={caption ? 46 : 49} textAnchor="middle">
+        <text className={labelSx.className} style={labelSx.style} x="48" y={caption ? 46 : 49} textAnchor="middle">
           {format(value)}
           {unit ? ` ${unit}` : ""}
         </text>
         {caption && (
-          <text className="rs-chart-donut-caption" x="48" y="57" textAnchor="middle">
+          <text className={captionSx.className} style={captionSx.style} x="48" y="57" textAnchor="middle">
             {caption}
           </text>
         )}
       </svg>
-      {label && !caption ? <p className="rs-chart-title">{label}</p> : null}
+      {label && !caption ? <ChartTitle>{label}</ChartTitle> : null}
     </ChartField>
   );
 }
@@ -82,25 +144,33 @@ export function Share({
 }: ShareProps) {
   const format = valueFormat ?? ((v: number) => defaultFormat(v, unit));
   const total = slices.reduce((s, x) => s + x.value, 0) || 1;
+  const share = rs(["rs-chart-share"], styles.share);
   return (
     <ChartField spot={spot} className={className} {...props}>
-      <div className="rs-chart-share" role="img" aria-label="Share">
-        {slices.map((s, i) => (
-          <div
-            key={s.label}
-            className={cx("rs-chart-share-seg", i === 0 && "rs-chart-share-seg-spot")}
-            style={{ flex: `${s.value} 1 0` }}
-            title={`${s.label} ${format(s.value)}`}
-          />
-        ))}
+      <div className={share.className} style={share.style} role="img" aria-label="Share">
+        {slices.map((s, i) => {
+          const seg = rs(
+            ["rs-chart-share-seg", i === 0 && "rs-chart-share-seg-spot"],
+            styles.seg,
+            i === 0 && styles.segSpot,
+          );
+          return (
+            <div
+              key={s.label}
+              className={seg.className}
+              style={{ ...seg.style, flex: `${s.value} 1 0` }}
+              title={`${s.label} ${format(s.value)}`}
+            />
+          );
+        })}
       </div>
-      <div className="rs-chart-legend" aria-hidden="true">
+      <ChartLegend aria-hidden="true">
         {slices.map((s) => (
-          <span key={s.label} className="rs-chart-legend-item">
+          <ChartLegendItem key={s.label}>
             {s.label} {defaultFormat((s.value / total) * 100)}%
-          </span>
+          </ChartLegendItem>
         ))}
-      </div>
+      </ChartLegend>
     </ChartField>
   );
 }

@@ -1,6 +1,18 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../tokens.stylex";
+import { rs } from "../rs";
 import { Icon } from "./icon";
+import { menuStyles } from "./dropdown-menu";
+
+const styles = stylex.create({
+  root: {
+    position: "relative",
+    display: "inline-block",
+    minWidth: 180,
+    backgroundColor: raster.paper,
+  },
+});
 
 export interface SelectOption {
   value: string;
@@ -26,6 +38,7 @@ export function Select({
   onValueChange,
   disabled,
   className,
+  style,
   ...props
 }: SelectProps) {
   const idBase = React.useId();
@@ -79,13 +92,17 @@ export function Select({
   };
 
   const selected = selectedIndex >= 0 ? options[selectedIndex] : undefined;
+  const root = rs(["rs-select", className], menuStyles.select, styles.root);
+  const trigger = rs(["rs-dropdown"], menuStyles.dropdown);
+  const menu = rs(["rs-menu"], menuStyles.menu, menuStyles.menuOverlay);
 
   return (
-    <div ref={rootRef} className={cx("rs-select", className)} {...props}>
+    <div ref={rootRef} className={root.className} style={{ ...root.style, ...style }} {...props}>
       <button
         ref={triggerRef}
         type="button"
-        className="rs-dropdown"
+        className={trigger.className}
+        style={trigger.style}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={`${idBase}-listbox`}
@@ -97,24 +114,36 @@ export function Select({
         <Icon name="chevron-right" rotate={90} />
       </button>
       {open && (
-        <div id={`${idBase}-listbox`} role="listbox" className="rs-menu" aria-activedescendant={`${idBase}-opt-${activeIndex}`}>
-          {options.map((option, index) => (
-            <button
-              key={option.value}
-              id={`${idBase}-opt-${index}`}
-              type="button"
-              role="option"
-              aria-selected={option.value === current}
-              className={cx(
-                "rs-menu-item",
-                (option.value === current || index === activeIndex) && "rs-menu-item-active",
-              )}
-              onPointerEnter={() => setActiveIndex(index)}
-              onClick={() => select(option.value)}
-            >
-              {option.label}
-            </button>
-          ))}
+        <div
+          id={`${idBase}-listbox`}
+          role="listbox"
+          className={menu.className}
+          style={menu.style}
+          aria-activedescendant={`${idBase}-opt-${activeIndex}`}
+        >
+          {options.map((option, index) => {
+            const active = option.value === current || index === activeIndex;
+            const row = rs(
+              ["rs-menu-item", active && "rs-menu-item-active"],
+              menuStyles.item,
+              active && menuStyles.itemActive,
+            );
+            return (
+              <button
+                key={option.value}
+                id={`${idBase}-opt-${index}`}
+                type="button"
+                role="option"
+                aria-selected={option.value === current}
+                className={row.className}
+                style={row.style}
+                onPointerEnter={() => setActiveIndex(index)}
+                onClick={() => select(option.value)}
+              >
+                {option.label}
+              </button>
+            );
+          })}
         </div>
       )}
     </div>

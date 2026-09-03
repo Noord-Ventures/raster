@@ -1,15 +1,53 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../tokens.stylex";
+import { rs } from "../rs";
 
 export interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {
   label?: string;
 }
 
+const spin = stylex.keyframes({
+  to: { transform: "rotate(360deg)" },
+});
+
+const styles = stylex.create({
+  spinner: {
+    display: "inline-flex",
+    width: 16,
+    height: 16,
+    color: raster.ink,
+    verticalAlign: "middle",
+  },
+  ring: {
+    display: "block",
+    width: 16,
+    height: 16,
+    animationName: {
+      default: spin,
+      "@media (prefers-reduced-motion: reduce)": "none",
+    },
+    animationDuration: "0.7s",
+    animationTimingFunction: "linear",
+    animationIterationCount: "infinite",
+  },
+});
+
 /** Hairline ring. Stops under prefers-reduced-motion. */
-export function Spinner({ label = "Loading", className, ...props }: SpinnerProps) {
+export function Spinner({ label = "Loading", className, style, ...props }: SpinnerProps) {
+  const sx = rs(["rs-spinner", className], styles.spinner);
+  const ring = rs([], styles.ring);
   return (
-    <span role="status" aria-label={label} className={cx("rs-spinner", className)} {...props}>
-      <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+    <span role="status" aria-label={label} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+      <svg
+        viewBox="0 0 16 16"
+        width="16"
+        height="16"
+        fill="none"
+        aria-hidden="true"
+        className={ring.className}
+        style={ring.style}
+      >
         <circle
           cx="8"
           cy="8"

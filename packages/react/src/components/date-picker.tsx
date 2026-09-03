@@ -1,7 +1,18 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../tokens.stylex";
+import { rs } from "../rs";
 import { Calendar } from "./calendar";
 import { Icon } from "./icon";
+import { menuStyles } from "./dropdown-menu";
+
+const styles = stylex.create({
+  calMenu: {
+    right: "auto",
+    padding: 12,
+    backgroundColor: raster.paper,
+  },
+});
 
 export interface DatePickerProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "defaultValue"> {
@@ -21,6 +32,7 @@ export function DatePicker({
   placeholder = "Pick a date",
   format = defaultDateFormat,
   className,
+  style,
   ...props
 }: DatePickerProps) {
   const rootRef = React.useRef<HTMLDivElement>(null);
@@ -42,11 +54,16 @@ export function DatePicker({
     };
   }, [open]);
 
+  const root = rs(["rs-select", className], menuStyles.select);
+  const trigger = rs(["rs-dropdown"], menuStyles.dropdown);
+  const menu = rs(["rs-menu"], menuStyles.menu, menuStyles.menuOverlay, menuStyles.menuCal, styles.calMenu);
+
   return (
-    <div ref={rootRef} className={cx("rs-select", className)} {...props}>
+    <div ref={rootRef} className={root.className} style={{ ...root.style, ...style }} {...props}>
       <button
         type="button"
-        className="rs-dropdown"
+        className={trigger.className}
+        style={trigger.style}
         aria-haspopup="dialog"
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
@@ -55,7 +72,7 @@ export function DatePicker({
         <Icon name="calendar" size={16} />
       </button>
       {open && (
-        <div className="rs-menu" style={{ right: "auto" }}>
+        <div className={menu.className} style={menu.style}>
           <Calendar
             value={value}
             onSelect={(d) => {

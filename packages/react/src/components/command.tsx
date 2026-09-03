@@ -1,5 +1,10 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster, phone as phoneMq } from "../tokens.stylex";
+import { rs } from "../rs";
+
+/** StyleX cannot read a string const from a defineVars file; keep the token import. */
+const phone = "@media (max-width: 640px)" as typeof phoneMq;
 import { Dialog } from "./dialog";
 
 export interface CommandItem {
@@ -21,6 +26,130 @@ export interface CommandProps extends React.HTMLAttributes<HTMLDivElement> {
   onDone?: () => void;
 }
 
+const styles = stylex.create({
+  palette: {
+    width: {
+      default: 480,
+      [phone]: "100%",
+    },
+    maxWidth: {
+      default: "90vw",
+      [phone]: "100%",
+    },
+    padding: 0,
+    overflow: "hidden",
+  },
+  input: {
+    boxSizing: "border-box",
+    width: "100%",
+    borderWidth: 0,
+    borderBottomWidth: raster.hairline,
+    borderStyle: "solid",
+    borderColor: raster.divider,
+    backgroundColor: "transparent",
+    fontFamily: "inherit",
+    fontSize: {
+      default: 14,
+      [phone]: 16,
+    },
+    letterSpacing: "-0.01em",
+    color: raster.ink,
+    paddingBlock: 14,
+    paddingInline: 16,
+    outline: "none",
+    minHeight: {
+      default: null,
+      [phone]: raster.hit,
+    },
+    "::placeholder": {
+      color: raster.gray,
+    },
+  },
+  list: {
+    maxHeight: 320,
+    overflowY: "auto",
+    padding: 6,
+  },
+  group: {
+    fontSize: {
+      default: 11,
+      [phone]: 13,
+    },
+    fontWeight: 600,
+    letterSpacing: "-0.01em",
+    color: raster.gray,
+    paddingTop: {
+      default: 8,
+      [phone]: 12,
+    },
+    paddingRight: {
+      default: 10,
+      [phone]: 14,
+    },
+    paddingBottom: {
+      default: 4,
+      [phone]: 6,
+    },
+    paddingLeft: {
+      default: 10,
+      [phone]: 14,
+    },
+  },
+  item: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+    width: "100%",
+    textAlign: "left",
+    borderWidth: 0,
+    backgroundColor: "transparent",
+    fontFamily: "inherit",
+    fontSize: {
+      default: 13.5,
+      [phone]: raster.controlFs,
+    },
+    letterSpacing: "-0.01em",
+    color: raster.ink,
+    paddingBlock: {
+      default: 8,
+      [phone]: 12,
+    },
+    paddingInline: {
+      default: 10,
+      [phone]: 14,
+    },
+    borderRadius: {
+      default: raster.radiusSm,
+      [phone]: 0,
+    },
+    cursor: "pointer",
+    minHeight: {
+      default: null,
+      [phone]: raster.hit,
+    },
+  },
+  itemActive: {
+    backgroundColor: raster.dividerSubtle,
+  },
+  hint: {
+    fontSize: 11,
+    color: raster.gray,
+  },
+  empty: {
+    padding: {
+      default: 20,
+      [phone]: 24,
+    },
+    textAlign: "center",
+    fontSize: {
+      default: 13,
+      [phone]: 15,
+    },
+    color: raster.gray,
+  },
+});
+
 /** Filter, arrows, enter. */
 export function Command({
   groups,
@@ -28,6 +157,7 @@ export function Command({
   emptyLabel = "Nothing found.",
   onDone,
   className,
+  style,
   ...props
 }: CommandProps) {
   const [query, setQuery] = React.useState("");
@@ -49,11 +179,18 @@ export function Command({
     item.onSelect?.();
   };
 
+  const input = rs(["rs-command-input"], styles.input);
+  const list = rs(["rs-command-list"], styles.list);
+  const empty = rs(["rs-command-empty"], styles.empty);
+  const groupSx = rs(["rs-command-group"], styles.group);
+  const hint = rs(["rs-command-hint"], styles.hint);
+
   let cursor = -1;
   return (
-    <div className={cx(className)} {...props}>
+    <div className={className} style={style} {...props}>
       <input
-        className="rs-command-input"
+        className={input.className}
+        style={input.style}
         autoFocus
         placeholder={placeholder}
         role="combobox"
@@ -80,26 +217,44 @@ export function Command({
           }
         }}
       />
-      <div className="rs-command-list" role="listbox">
-        {flat.length === 0 && <div className="rs-command-empty">{emptyLabel}</div>}
+      <div className={list.className} style={list.style} role="listbox">
+        {flat.length === 0 && (
+          <div className={empty.className} style={empty.style}>
+            {emptyLabel}
+          </div>
+        )}
         {filtered.map((group, gi) => (
           <React.Fragment key={gi}>
-            {group.label && <div className="rs-command-group">{group.label}</div>}
+            {group.label && (
+              <div className={groupSx.className} style={groupSx.style}>
+                {group.label}
+              </div>
+            )}
             {group.items.map((item) => {
               cursor++;
               const index = cursor;
+              const row = rs(
+                ["rs-command-item", index === activeIndex && "rs-command-item-active"],
+                styles.item,
+                index === activeIndex && styles.itemActive,
+              );
               return (
                 <button
                   key={item.label}
                   type="button"
                   role="option"
                   aria-selected={index === activeIndex}
-                  className={cx("rs-command-item", index === activeIndex && "rs-command-item-active")}
+                  className={row.className}
+                  style={row.style}
                   onPointerEnter={() => setActiveIndex(index)}
                   onClick={() => run(item)}
                 >
                   <span>{item.label}</span>
-                  {item.hint != null && <span className="rs-command-hint">{item.hint}</span>}
+                  {item.hint != null && (
+                    <span className={hint.className} style={hint.style}>
+                      {item.hint}
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -118,7 +273,12 @@ export interface CommandDialogProps extends CommandProps {
 /** The palette in a native <dialog>. Wire ⌘K in your app to setOpen(true). */
 export function CommandDialog({ open, onClose, className, ...props }: CommandDialogProps) {
   return (
-    <Dialog open={open} onClose={onClose} className={cx("rs-command", className)}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      className={["rs-command", className].filter(Boolean).join(" ")}
+      extraStyles={[styles.palette]}
+    >
       {open && <Command onDone={onClose} {...props} />}
     </Dialog>
   );

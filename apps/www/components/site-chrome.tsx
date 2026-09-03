@@ -3,7 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
+import * as stylex from "@stylexjs/stylex";
+import { chrome } from "@/app/site.stylex";
 import { RasterMark } from "./raster-mark";
+
+function sx(className: string, ...styles: unknown[]) {
+  const next = (stylex.props as (...args: unknown[]) => { className?: string; style?: React.CSSProperties })(...styles);
+  return { className: [className, next.className].filter(Boolean).join(" "), style: next.style };
+}
 
 type Scheme = "light" | "dark" | "auto";
 type GridPref = "on" | "off";
@@ -303,13 +310,13 @@ export function SiteChrome() {
 
   return (
     <>
-      <div className="logo-wrap">
-        <Link href="/" className="site-logo" aria-label="Raster">
+      <div {...sx("logo-wrap", chrome.logoWrap)}>
+        <Link href="/" {...sx("site-logo", chrome.logo)} aria-label="Raster">
           <RasterMark />
         </Link>
       </div>
 
-      <nav className="corner-nav" aria-label="Site">
+      <nav {...sx("corner-nav", chrome.cornerNav)} aria-label="Site">
         {links.filter((l) => l.corner).map((l) => (
           <Link key={l.href} href={l.href} aria-current={current(l.href)}>
             {l.label}
@@ -321,7 +328,7 @@ export function SiteChrome() {
       <div className="settings" ref={settingsRef}>
         <button
           type="button"
-          className="theme-toggle"
+          {...sx("theme-toggle", chrome.themeToggle)}
           aria-label="Appearance"
           aria-haspopup="true"
           aria-expanded={menuOpen}

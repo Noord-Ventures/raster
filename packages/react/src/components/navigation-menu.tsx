@@ -1,16 +1,74 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster, phone } from "../tokens.stylex";
+import { rs } from "../rs";
 
 export interface NavigationMenuProps extends React.HTMLAttributes<HTMLElement> {
   items: Array<{ label: React.ReactNode; href: string; current?: boolean }>;
 }
 
+const styles = stylex.create({
+  nav: {
+    display: "flex",
+    alignItems: "center",
+    gap: {
+      default: 22,
+      ["@media (max-width: 640px)"]: 0,
+    },
+    flexWrap: {
+      default: null,
+      ["@media (max-width: 640px)"]: "wrap",
+    },
+  },
+  link: {
+    display: {
+      default: null,
+      ["@media (max-width: 640px)"]: "inline-flex",
+    },
+    alignItems: {
+      default: null,
+      ["@media (max-width: 640px)"]: "center",
+    },
+    minHeight: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    paddingInline: {
+      default: null,
+      ["@media (max-width: 640px)"]: 12,
+    },
+    fontSize: {
+      default: 14,
+      ["@media (max-width: 640px)"]: raster.controlFs,
+    },
+    fontWeight: 500,
+    letterSpacing: "-0.01em",
+    color: {
+      default: raster.gray,
+      ":link": raster.gray,
+      ":visited": raster.gray,
+      ":hover": raster.ink,
+      '[aria-current="page"]': raster.ink,
+    },
+    textDecoration: "none",
+    transition: `color ${raster.durationSnap} ${raster.ease}`,
+  },
+});
+
 /** Links in a row; the current page is ink. */
-export function NavigationMenu({ items, className, ...props }: NavigationMenuProps) {
+export function NavigationMenu({ items, className, style, ...props }: NavigationMenuProps) {
+  const nav = rs(["rs-nav", className], styles.nav);
+  const link = rs([], styles.link);
   return (
-    <nav className={cx("rs-nav", className)} {...props}>
+    <nav {...props} className={nav.className} style={{ ...nav.style, ...style }}>
       {items.map((item, index) => (
-        <a key={index} href={item.href} aria-current={item.current ? "page" : undefined}>
+        <a
+          key={index}
+          href={item.href}
+          aria-current={item.current ? "page" : undefined}
+          className={link.className}
+          style={link.style}
+        >
           {item.label}
         </a>
       ))}

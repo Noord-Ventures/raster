@@ -1,8 +1,16 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../tokens.stylex";
+import { Dialog } from "./dialog";
 
-export interface AlertDialogProps
-  extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, "open"> {
+const styles = stylex.create({
+  lock: {
+    borderRadius: raster.radiusSm,
+    boxShadow: "none",
+  },
+});
+
+export interface AlertDialogProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, "open"> {
   open: boolean;
   onClose?: () => void;
 }
@@ -11,28 +19,21 @@ export interface AlertDialogProps
  * A native <dialog> that requires an explicit answer. Escape and
  * light dismiss are disabled.
  */
-export function AlertDialog({ open, onClose, className, children, ...props }: AlertDialogProps) {
-  const ref = React.useRef<HTMLDialogElement>(null);
-
-  React.useEffect(() => {
-    const dialog = ref.current;
-    if (!dialog) return;
-    if (open && !dialog.open) dialog.showModal();
-    else if (!open && dialog.open) dialog.close();
-  }, [open]);
-
+export function AlertDialog({ open, onClose, ...props }: AlertDialogProps) {
   return (
-    <dialog
-      ref={ref}
+    <Dialog
+      open={open}
+      onClose={onClose}
       role="alertdialog"
-      className={cx("rs-dialog", className)}
-      onClose={() => onClose?.()}
       onCancel={(e) => e.preventDefault()}
+      extraStyles={[styles.lock]}
       {...props}
-    >
-      {children}
-    </dialog>
+    />
   );
 }
 
-export { DialogTitle as AlertDialogTitle, DialogBody as AlertDialogBody, DialogActions as AlertDialogActions } from "./dialog";
+export {
+  DialogTitle as AlertDialogTitle,
+  DialogBody as AlertDialogBody,
+  DialogActions as AlertDialogActions,
+} from "./dialog";

@@ -1,7 +1,7 @@
 {
   "name": "@noorddev/raster-react",
   "version": "0.3.0",
-  "description": "Raster React components — accessible, CSS-first with StyleX leaves on Button, Callout, and Card. Styled by @noorddev/raster tokens.",
+  "description": "Raster React components — StyleX-owned catalogue on Raster tokens. CSS-first sheets remain in @noorddev/raster for CLI and registry.",
   "license": "MIT",
   "repository": {
     "type": "git",
