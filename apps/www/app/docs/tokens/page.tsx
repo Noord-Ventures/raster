@@ -9,12 +9,13 @@ export const metadata: Metadata = { title: "Tokens" };
 
 export default function TokensPage() {
   const { color, type, grid, radius, motion } = rasterTokens;
+  const cover = sx("cover", chrome.cover);
   return (
     <>
       <div className="site-layout">
         <DocsNav />
         <main {...sx("site-content", chrome.content)}>
-          <header {...sx("cover", chrome.cover)} style={{ paddingBottom: 8 }}>
+          <header className={cover.className} style={{ ...cover.style, paddingBottom: 8 }}>
             <h1 className="rs-t-display">Tokens</h1>
             <p className="rs-t-sub">
               Defined once in TypeScript. The JSON and the CSS custom properties are generated.

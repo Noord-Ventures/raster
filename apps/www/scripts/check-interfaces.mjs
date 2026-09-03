@@ -61,7 +61,7 @@ if (!index.includes("InterfaceCrop")) {
   console.error("Interfaces index must render poster crops, not title-only cards");
   process.exit(1);
 }
-if (!index.includes('className="cover"')) {
+if (!index.includes("chrome.cover") || (!index.includes('sx("cover"') && !index.includes('className="cover"'))) {
   console.error("Interfaces title must use the shared cover so H1 shares the rail first-row line");
   process.exit(1);
 }

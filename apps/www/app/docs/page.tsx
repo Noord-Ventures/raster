@@ -12,12 +12,13 @@ export const metadata: Metadata = {
 };
 
 export default function DocsPage() {
+  const cover = sx("cover", chrome.cover);
   return (
     <>
       <div className="site-layout">
         <DocsNav />
         <main {...sx("site-content", chrome.content)}>
-          <header {...sx("cover", chrome.cover)} style={{ paddingBottom: 8 }}>
+          <header className={cover.className} style={{ ...cover.style, paddingBottom: 8 }}>
             <h1 className="rs-t-display">Getting started</h1>
             <p className="rs-t-sub">
               CSS you own. CSS-first, no Radix, no Tailwind. The door is {DOOR.replace("https://", "")}.

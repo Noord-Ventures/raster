@@ -16,11 +16,12 @@ export const metadata: Metadata = {
 };
 
 export default function InterfacesPage() {
+  const cover = sx("cover", chrome.cover);
   return (
     <div {...sx("if-index", ifx.index)}>
       <InterfacesNav />
       <main {...sx("site-content-wide", chrome.contentWide)}>
-          <header className="cover" {...sx("cover", chrome.cover)} style={{ maxWidth: 592 }}>
+        <header className={cover.className} style={{ ...cover.style, maxWidth: 592 }}>
           <h1 className="rs-t-display">Interfaces</h1>
           <p className="rs-t-sub">Six little tools. A poster crop of each.</p>
         </header>

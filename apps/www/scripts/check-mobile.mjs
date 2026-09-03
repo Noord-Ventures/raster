@@ -107,7 +107,7 @@ if (ifCss.includes(".if-title")) {
   fail("Interfaces must not keep a parallel if-title spacer; cover owns the 204 cell");
 }
 const ifIndex = readFileSync(join(root, "apps/www/app/interfaces/page.tsx"), "utf8");
-if (!ifIndex.includes('className="cover"')) {
+if (!ifIndex.includes("chrome.cover") || (!ifIndex.includes('sx("cover"') && !ifIndex.includes('className="cover"'))) {
   fail("Interfaces H1 must use the shared cover so it shares the rail first-row line");
 }
 
