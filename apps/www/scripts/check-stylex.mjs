@@ -230,6 +230,21 @@ if (existsSync(kitCssDir) && readdirSync(kitCssDir).some((f) => f.endsWith(".css
   fail("packages/core/css/components must have no leftover catalogue CSS sheets");
 }
 
+const lastSix = ["link.tsx", "chip.tsx", "table.tsx", "flow.tsx", "assistant.tsx", "refs.tsx"];
+for (const name of lastSix) {
+  const file = join(root, "packages/react/src/components", name);
+  if (!existsSync(file)) fail(`Last kit sheet ${name} must be a React StyleX leaf — no leftover CSS exit`);
+  const src = readFileSync(file, "utf8");
+  if (!src.includes("stylex.create") || !src.includes("@stylexjs/stylex")) {
+    fail(`${name} must be a StyleX leaf, not a CSS leftover`);
+  }
+}
+
+const STYLEX_LEAVES = 76;
+if (migrated !== STYLEX_LEAVES) {
+  fail(`StyleX coverage must read ${STYLEX_LEAVES}/${STYLEX_LEAVES} React leaves, got ${migrated} — no 92% leftover exit`);
+}
+
 console.log(
-  `StyleX catalogue: ${migrated} React leaves on Raster tokens; ${useFields} Use fields; 74/74 public catalog StyleX; About + Interfaces + specimen + site chrome. Remaining CSS is document-level only (fonts, tokens, base, type, phone, motion, raster.css, raster-compat.css, stylex.css, site/specimen/about/interfaces/docs-nav/use/swag).`,
+  `StyleX catalogue: ${STYLEX_LEAVES}/${STYLEX_LEAVES} React leaves on Raster tokens; ${useFields} Use fields; 74/74 public catalog StyleX; About + Interfaces + specimen + site chrome. Remaining CSS is document-level only (fonts, tokens, base, type, phone, motion, raster.css, raster-compat.css, stylex.css, site/specimen/about/interfaces/docs-nav/use/swag).`,
 );
