@@ -8,8 +8,8 @@
    - The content column starts one module in (margin-left: 204px at
      the 1024px rail) and the layout width rounds DOWN to whole 204px
      modules, so edges step from grid line to grid line on resize.
-     The catalog rail drops that inset below 1440 (writer in docs-nav)
-     so the two navs sit in columns 1 and 2 on a narrow desktop.
+     Catalog index and detail keep that airy first 204 — do not zero
+     --ml / margin-left or the groups sit flush to the viewport edge.
    - Reading measure is 592px (3 modules); covers occupy the first 204 cell.
    - A fixed 72px crumb bar; breadcrumbs appear once the page cover
      scrolls away. The docs rail lives in components/docs-nav. */
@@ -105,6 +105,17 @@ body {
 }
 /* Gallery index: hide the *trail* so “Components” cannot run through
    Interfaces. The root word is pinned in column 1 below. */
+/* Paper halo on scroll — same as live crumb-bar.css. The site bar
+   uses these classes (not the React StyleX leaf), so the sheet must
+   keep the scrolled paper + hairline after the catalogue CSS drop. */
+.rs-crumb-bar {
+  background: none;
+  border-bottom: 1px solid transparent;
+}
+.rs-crumb-bar-scrolled {
+  background: var(--bg);
+  border-bottom-color: var(--divider);
+}
 body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   opacity: 0;
   pointer-events: none;
@@ -497,7 +508,8 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 }
 
 .site-content { flex-shrink: 1; width: 592px; min-width: 0; max-width: min(592px, 100%); padding-bottom: 72px; }
-.site-content:has(.rs-icon-catalog) { width: min(796px, 100%); max-width: min(796px, 100%); }
+/* Icons: 4 page-grid modules (4 × 204). StyleX iconContent owns the same measure. */
+.site-content:has(.rs-icon-catalog) { width: min(816px, 100%); max-width: min(816px, 100%); }
 .site-content-wide { flex-shrink: 1; width: 100%; min-width: 0; padding-bottom: 72px; }
 @media (max-width: 800px) { .site-content { width: 100%; max-width: 100%; } }
 
@@ -528,18 +540,12 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .cover .rs-t-sub { margin-top: 16px; }
 
 /* Catalog index: 388-wide cards, 204 demo module. Two columns on
-   desktop (796 measure, same as the icon catalog). Phone stays one
-   column. Do not lock a single 388 track. */
+   desktop (796 measure). Icons use a 4-module 816 container.
+   Phone stays one column. Do not lock a single 388 track. */
 .catalog-page .catalog-group { margin-top: 40px; }
 .catalog-page .site-content {
   width: min(796px, 100%);
   max-width: min(796px, 100%);
-}
-@media (min-width: 1024px) {
-  .site-layout.catalog-page {
-    --ml: 0px;
-    margin-left: 0;
-  }
 }
 
 /* ── Component gallery: cards span two whole modules ── */

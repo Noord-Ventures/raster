@@ -211,13 +211,42 @@ if (!site.includes(".gallery { display: grid; grid-template-columns: repeat(auto
   fail("Component gallery cards stay 388-wide auto-fill tracks");
 }
 if (!/catalog-page \.site-content \{[^}]*width:\s*min\(796px, 100%\)/s.test(site)) {
-  fail("Catalog index measure must be 796 so two 388 cards fit, same as icons");
+  fail("Catalog index measure must be 796 so two 388 cards fit");
 }
 if (!componentsPage.includes("catalogContent") || componentsPage.includes("chrome.content)")) {
   fail("Catalog index must use StyleX catalogContent (796), not the 592 content measure");
 }
 if (!siteSx.includes("catalogContent:") || !siteSx.includes('"min(796px, 100%)"')) {
   fail("StyleX catalogContent must be min(796px, 100%) so two 388 cards fit");
+}
+if (!/@media \(min-width: 1024px\) \{ \.site-layout \{ --ml: 204px; margin-left: 204px; \}/.test(site)) {
+  fail("Desktop site-layout must keep the live --ml 204px / margin-left 204px");
+}
+if (/\.site-layout\.catalog-page[\s\S]{0,80}--ml:\s*0px/.test(site) || /\.site-layout\.catalog-page[\s\S]{0,80}margin-left:\s*0/.test(site)) {
+  fail("Catalog index must keep the live blank 204; do not zero --ml / margin-left");
+}
+if (/data-rail="catalog"[\s\S]{0,160}--ml:\s*0px/.test(navCss)) {
+  fail("Catalog rail must keep the live 204 inset; do not zero --ml for data-rail=catalog");
+}
+if (!siteSx.includes("iconContent:") || !siteSx.includes('"min(816px, 100%)"')) {
+  fail("StyleX iconContent must be min(816px, 100%) — 4 × 204 modules");
+}
+if (!site.includes(".site-content:has(.rs-icon-catalog)") || !/rs-icon-catalog\) \{ width: min\(816px, 100%\)/.test(site)) {
+  fail("Icons catalog container must span 4 × 204 modules (816)");
+}
+const namePage = readFileSync(join(root, "apps/www/app/components/[name]/page.tsx"), "utf8");
+if (!namePage.includes("iconContent") || !namePage.includes('name === "icons"')) {
+  fail("Icons page must use the 4-col iconContent measure");
+}
+if (!site.includes(".rs-crumb-bar-scrolled {") || !/rs-crumb-bar-scrolled \{[^}]*background:\s*var\(--bg\)/.test(site)) {
+  fail("Scrolled crumb bar must restore paper background vs live");
+}
+if (!siteSx.includes("crumbBarScrolled:") || !siteSx.includes('backgroundColor: "var(--bg)"')) {
+  fail("StyleX crumb bar must paint paper on scroll");
+}
+const specimenSx = readFileSync(join(root, "apps/www/app/specimen.stylex.ts"), "utf8");
+if (!specimenSx.includes('repeat(2, minmax(0, 1fr))') || !specimenSx.includes('repeat(4, minmax(0, 1fr))') || !specimenSx.includes('repeat(6, minmax(0, 1fr))')) {
+  fail("Homepage StyleX field must recut 2 / 4 / 6 columns; do not collapse to 1-col");
 }
 if (!siteSx.includes('repeat(auto-fill, 388px)') || !siteSx.includes('[at480]: "1fr"')) {
   fail("StyleX gallery must auto-fill 388 tracks and recut to 1fr at 480");

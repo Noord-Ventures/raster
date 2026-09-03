@@ -1,6 +1,6 @@
 /* Docs rail. Imported only by components/docs-nav.
    StyleX owns rail/toc/item (docs-nav.stylex.ts). This sheet stays for
-   :has([data-rail]) layout cancel and CI greps. */
+   display/sticky, the 204 secondary column, and CI greps. */
 
 .toc-rail {
   display: none;
@@ -14,19 +14,9 @@
 }
 @media (min-width: 900px) { .toc-rail { display: flex; } }
 
-/* Below the 1440 wide anchor, cancel the chrome's one-module inset
-   so groups sit in column 1 and secondaries in column 2. Content
-   stays in flow after those two modules. Wide desktop keeps the
-   airy 1024 placement. No hamburger — the rail is already hidden
-   under 900, and the existing burger is site chrome only. */
-@media (min-width: 1024px) and (max-width: 1439px) {
-  .site-layout:has([data-rail="catalog"]) {
-    --ml: 0px;
-    margin-left: 0;
-  }
-}
-/* Wide catalog detail: nav at 428; crumbs may use column 1+2, still
-   16px left of Components. Home / catalog index stay at 208 (site.css). */
+/* Catalog keeps the live 204 inset at ≥1024 (site.css .site-layout).
+   Do not zero --ml / margin-left — that flushes groups to the
+   viewport edge. No hamburger: the rail hides under 900. */
 
 .toc {
   width: 184px; flex-shrink: 0;

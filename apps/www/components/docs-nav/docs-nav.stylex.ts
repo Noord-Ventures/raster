@@ -1,12 +1,11 @@
 import * as stylex from "@stylexjs/stylex";
 
-const phone = "@media (max-width: 640px)";
 const at900 = "@media (min-width: 900px)";
-const catalogNarrow = "@media (min-width: 1024px) and (max-width: 1439px)";
 
 /**
  * Docs rail. 184 groups + 204 secondaries. No paper cover.
  * Secondaries occupy gutter + column (204), end on the 408 module line.
+ * Layout inset (--ml 204) stays on .site-layout — do not zero it here.
  */
 export const navStyles = stylex.create({
   rail: {
@@ -96,6 +95,3 @@ export const navStyles = stylex.create({
     },
   },
 });
-
-void phone;
-void catalogNarrow;

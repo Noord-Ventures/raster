@@ -484,7 +484,12 @@ export default async function ComponentPage({
     <>
       <div className="site-layout">
         <DocsNav />
-        <main {...sx("site-content", chrome.content)}>
+        <main
+          {...sx(
+            "site-content",
+            component.name === "icons" ? chrome.iconContent : chrome.content,
+          )}
+        >
           <header {...sx("cover", chrome.cover)}>
             <h1 className="rs-t-display component-head">{component.title}</h1>
             <p className="rs-t-sub component-desc">{component.description}</p>

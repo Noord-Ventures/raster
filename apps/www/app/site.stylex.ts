@@ -21,6 +21,7 @@ export const chrome = stylex.create({
     justifyContent: "center",
     gap: 12,
     height: 24,
+    filter: "drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))",
   },
   logo: {
     display: "flex",
@@ -103,12 +104,20 @@ export const chrome = stylex.create({
     },
     paddingBottom: 72,
   },
-  /** Catalog index: two 388 cards + gutter. Same 796 measure as the icon catalog. */
+  /** Catalog index: two 388 cards + gutter. */
   catalogContent: {
     flexShrink: 1,
     width: "min(796px, 100%)",
     minWidth: 0,
     maxWidth: "min(796px, 100%)",
+    paddingBottom: 72,
+  },
+  /** Icons page: 4 page-grid modules (4 × 204). Cells stay auto-fill 184. */
+  iconContent: {
+    flexShrink: 1,
+    width: "min(816px, 100%)",
+    minWidth: 0,
+    maxWidth: "min(816px, 100%)",
     paddingBottom: 72,
   },
   contentWide: {
@@ -215,6 +224,17 @@ export const chrome = stylex.create({
     color: "var(--text-secondary)",
     cursor: "pointer",
     outline: "none",
+    filter: "drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))",
+  },
+  crumbBar: {
+    backgroundColor: "transparent",
+    borderBottomWidth: 1,
+    borderBottomStyle: "solid",
+    borderBottomColor: "transparent",
+  },
+  crumbBarScrolled: {
+    backgroundColor: "var(--bg)",
+    borderBottomColor: "var(--divider)",
   },
   navPanel: {
     position: "fixed",
