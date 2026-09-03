@@ -492,7 +492,8 @@ jobs:
           fi
           node apps/www/scripts/check-examples.mjs
           grep -q 'The control, the name, a short law.' apps/www/app/components/page.tsx
-          grep -q 'className="rs-scene"' apps/www/components/examples/scene.tsx
+          grep -q 'rs-scene' apps/www/components/examples/scene.tsx
+          grep -q 'use.stylex' apps/www/components/examples/scene.tsx
           grep -q '.rs-scene .rs-use-type' apps/www/components/examples/use.css
       - name: About is a workhorse specimen
         run: |

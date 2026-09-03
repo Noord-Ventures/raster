@@ -3,7 +3,7 @@
    StyleX owns index/rail/tile/specimen (interfaces.stylex.ts). This
    sheet stays for body:has(), poster crops, :has() inspect, CI locks.
 
-/* Site 204 is html::before in core base. Paper stays open so the
+   Site 204 is html::before in core base. Paper stays open so the
    field runs through the title cell and around the crops. */
 body:has(.if-index) {
   background: transparent;
