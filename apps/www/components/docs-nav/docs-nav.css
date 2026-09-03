@@ -1,4 +1,6 @@
-/* Docs rail. Imported only by components/docs-nav. */
+/* Docs rail. Imported only by components/docs-nav.
+   StyleX owns rail/toc/item (docs-nav.stylex.ts). This sheet stays for
+   :has([data-rail]) layout cancel and CI greps. */
 
 .toc-rail {
   display: none;

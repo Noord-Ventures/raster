@@ -1,6 +1,7 @@
+import { UseField } from "../use-frame";
 export function Use() {
   return (
-    <article className="rs-use" data-use="references">
+    <UseField name="references">
       <h3 className="rs-use-type">Ref</h3>
       <div className="rs-use-body">
         <p className="rs-use-copy">
@@ -12,6 +13,6 @@ export function Use() {
           </li>
         </ol>
       </div>
-    </article>
+    </UseField>
   );
 }

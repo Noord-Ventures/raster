@@ -1,8 +1,9 @@
 import { Checkbox } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="checkbox">
+    <UseField name="checkbox">
       <h3 className="rs-use-type">Pass</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -13,6 +14,6 @@ export function Use() {
           <Checkbox label="Type" />
         </div>
       </div>
-    </article>
+    </UseField>
   );
 }

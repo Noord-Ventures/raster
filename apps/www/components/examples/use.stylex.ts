@@ -151,4 +151,23 @@ export const useStyles = stylex.create({
       animationName: "none",
     },
   },
+  copied: {
+    boxSizing: "border-box",
+    width: 184,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "var(--divider)",
+    borderRadius: 28,
+    padding: 16,
+    backgroundColor: "var(--bg)",
+  },
+  copiedIn: {
+    boxSizing: "border-box",
+    minHeight: 72,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "var(--divider)",
+    borderRadius: 28,
+    backgroundColor: "var(--bg)",
+  },
 });

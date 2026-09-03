@@ -1,5 +1,7 @@
 @import "./scene-motion.css";
-/* Interfaces section. Isolated. Do not move these rules into site.css. */
+/* Interfaces section. Isolated. Do not move these rules into site.css.
+   StyleX owns index/rail/tile/specimen (interfaces.stylex.ts). This
+   sheet stays for body:has(), poster crops, :has() inspect, CI locks.
 
 /* Site 204 is html::before in core base. Paper stays open so the
    field runs through the title cell and around the crops. */

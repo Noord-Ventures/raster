@@ -3,16 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import * as stylex from "@stylexjs/stylex";
 import { rasterCategories, catalogComponents, type RasterCategory } from "@noorddev/raster";
 import { MobileToc } from "@/components/toc-mobile";
+import { sx } from "@/lib/sx";
 import { navStyles } from "./docs-nav.stylex";
 import "./docs-nav.css";
-
-function sx(className: string, ...styles: unknown[]) {
-  const next = (stylex.props as (...args: unknown[]) => { className?: string; style?: React.CSSProperties })(...styles);
-  return { className: [className, next.className].filter(Boolean).join(" "), style: next.style };
-}
 
 function sentence(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1);

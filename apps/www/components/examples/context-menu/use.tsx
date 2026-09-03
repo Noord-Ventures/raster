@@ -1,8 +1,9 @@
 import { ContextMenu } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="context-menu">
+    <UseField name="context-menu">
       <h3 className="rs-use-type">Hold</h3>
       <div className="rs-use-body">
         <ContextMenu
@@ -14,6 +15,6 @@ export function Use() {
           <p className="rs-use-copy">Right-click the sheet.</p>
         </ContextMenu>
       </div>
-    </article>
+    </UseField>
   );
 }

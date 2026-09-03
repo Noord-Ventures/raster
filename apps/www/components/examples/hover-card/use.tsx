@@ -1,8 +1,9 @@
 import { HoverCard } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="hover-card">
+    <UseField name="hover-card">
       <h3 className="rs-use-type">Who</h3>
       <div className="rs-use-body">
         <p className="rs-use-copy">
@@ -13,6 +14,6 @@ export function Use() {
           .
         </p>
       </div>
-    </article>
+    </UseField>
   );
 }

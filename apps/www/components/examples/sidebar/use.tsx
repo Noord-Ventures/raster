@@ -1,8 +1,9 @@
 import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="sidebar">
+    <UseField name="sidebar">
       <h3 className="rs-use-type">Rail</h3>
       <div className="rs-use-body">
         <Sidebar>
@@ -16,6 +17,6 @@ export function Use() {
           <SidebarFoot>0.3</SidebarFoot>
         </Sidebar>
       </div>
-    </article>
+    </UseField>
   );
 }

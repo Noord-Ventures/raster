@@ -1,4 +1,5 @@
 import { ScatterChart } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 const MARKS = [
   { x: 12, y: 18, label: "Alkmaar", group: "Press" },
@@ -13,7 +14,7 @@ const MARKS = [
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="scatter-chart">
+    <UseField name="scatter-chart">
       <h3 className="rs-use-type">Mark</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -28,6 +29,6 @@ export function Use() {
           annotations={[{ at: 40, label: "204" }]}
         />
       </div>
-    </article>
+    </UseField>
   );
 }

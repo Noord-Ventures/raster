@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { catalogComponents } from "@noorddev/raster";
+import { chrome } from "@/app/site.stylex";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
 import { InAction } from "@/components/examples/scene";
 import { Preview } from "@/components/preview";
+import { sx } from "@/lib/sx";
 import { COMMAND, PACKAGES_PUBLISHED } from "../../specimen";
 
 export function generateStaticParams() {
@@ -482,8 +484,8 @@ export default async function ComponentPage({
     <>
       <div className="site-layout">
         <DocsNav />
-        <main className="site-content">
-          <header className="cover">
+        <main {...sx("site-content", chrome.content)}>
+          <header {...sx("cover", chrome.cover)}>
             <h1 className="rs-t-display component-head">{component.title}</h1>
             <p className="rs-t-sub component-desc">{component.description}</p>
           </header>

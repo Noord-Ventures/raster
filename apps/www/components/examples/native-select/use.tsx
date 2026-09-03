@@ -1,8 +1,9 @@
 import { NativeSelect } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="native-select">
+    <UseField name="native-select">
       <h3 className="rs-use-type">City</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -15,6 +16,6 @@ export function Use() {
           <option value="rotterdam">Rotterdam</option>
         </NativeSelect>
       </div>
-    </article>
+    </UseField>
   );
 }

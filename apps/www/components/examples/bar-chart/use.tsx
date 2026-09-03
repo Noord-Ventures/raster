@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { BarChart, ToggleGroup } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 const CITIES = [
   { label: "Alkmaar", value: 42 },
@@ -13,7 +14,7 @@ const CITIES = [
 export function Use() {
   const [orientation, setOrientation] = React.useState("vertical");
   return (
-    <article className="rs-use" data-use="bar-chart">
+    <UseField name="bar-chart">
       <h3 className="rs-use-type">Press</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -36,6 +37,6 @@ export function Use() {
           orientation={orientation === "horizontal" ? "horizontal" : "vertical"}
         />
       </div>
-    </article>
+    </UseField>
   );
 }

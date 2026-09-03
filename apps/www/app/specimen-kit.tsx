@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { catalogComponents } from "@noorddev/raster";
 import { Preview } from "@/components/preview";
+import { sx } from "@/lib/sx";
 import { KIT } from "./specimen";
+import { specimen } from "./specimen.stylex";
 
 const slots = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"] as const;
 
@@ -20,7 +22,10 @@ export function SpecimenKit() {
         return (
           <section
             key={component.name}
-            className={`specimen-cell specimen-cell-demo specimen-cell-kit-${slot} specimen-cell-kit-${component.name}`}
+            {...sx(
+              `specimen-cell specimen-cell-demo specimen-cell-kit-${slot} specimen-cell-kit-${component.name}`,
+              specimen.cell,
+            )}
             aria-label={component.title}
           >
             <p className="specimen-kit-name">
@@ -32,7 +37,7 @@ export function SpecimenKit() {
           </section>
         );
       })}
-      <section className="specimen-cell specimen-cell-more" aria-label="More components">
+      <section {...sx("specimen-cell specimen-cell-more", specimen.cell)} aria-label="More components">
         <p className="specimen-more">
           <Link href="/components">Browse {more} more components</Link>
         </p>

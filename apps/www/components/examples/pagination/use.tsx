@@ -1,8 +1,9 @@
 import { Pagination } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="pagination">
+    <UseField name="pagination">
       <h3 className="rs-use-type">Leaf</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -10,6 +11,6 @@ export function Use() {
           <Pagination page={2} count={8} />
         </div>
       </div>
-    </article>
+    </UseField>
   );
 }

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { CopyControl } from "@/components/code-block";
+import { sx } from "@/lib/sx";
 import { COMMAND, LAW, PACKAGES_PUBLISHED, POSTER, WORD } from "./specimen";
 import { SpecimenKit } from "./specimen-kit";
 import { SpecimenPrinciples } from "./specimen-principles";
+import { specimen } from "./specimen.stylex";
 import "./specimen.css";
 
 export const metadata: Metadata = {
@@ -12,17 +14,17 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="specimen-page" aria-label="Raster specimen">
-      <div className="specimen">
-        <section className="specimen-cell specimen-cell-face" aria-label="Face">
+    <main {...sx("specimen-page", specimen.page)} aria-label="Raster specimen">
+      <div {...sx("specimen", specimen.field)}>
+        <section {...sx("specimen-cell specimen-cell-face", specimen.cell)} aria-label="Face">
           <p className="specimen-face">{WORD}</p>
         </section>
 
-        <section className="specimen-cell specimen-cell-law">
+        <section {...sx("specimen-cell specimen-cell-law", specimen.cell)}>
           <h1 className="specimen-law">{LAW}</h1>
         </section>
 
-        <section className="specimen-cell specimen-cell-command">
+        <section {...sx("specimen-cell specimen-cell-command", specimen.cell)}>
           {PACKAGES_PUBLISHED ? (
             <>
               <p className="specimen-command-kicker">Install</p>
@@ -51,7 +53,7 @@ export default function Home() {
 
         <SpecimenPrinciples />
 
-        <section className="specimen-cell specimen-cell-note">
+        <section {...sx("specimen-cell specimen-cell-note", specimen.cell)}>
           <p className="specimen-poster">{POSTER}</p>
         </section>
 

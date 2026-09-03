@@ -1,4 +1,6 @@
-/* Site chrome for the Raster docs site:
+/* Site chrome for the Raster docs site.
+   StyleX owns logo / corner nav / cover / gallery / content (site.stylex.ts).
+   This sheet stays for html::before, body:has() layout, appearance panel.
 
    - No header bar. Fixed corner chrome: logo top-left on the first
      grid line (20px), controls top-right, each with a paper-halo

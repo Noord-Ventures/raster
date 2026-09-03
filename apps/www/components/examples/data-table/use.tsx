@@ -1,8 +1,9 @@
 import { DataTable } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="data-table">
+    <UseField name="data-table">
       <h3 className="rs-use-type">Sort</h3>
       <div className="rs-use-body">
         <DataTable
@@ -16,6 +17,6 @@ export function Use() {
           ]}
         />
       </div>
-    </article>
+    </UseField>
   );
 }

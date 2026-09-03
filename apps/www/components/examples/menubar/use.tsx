@@ -1,8 +1,9 @@
 import { Menubar } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="menubar">
+    <UseField name="menubar">
       <h3 className="rs-use-type">Menu</h3>
       <div className="rs-use-body">
         <Menubar
@@ -12,6 +13,6 @@ export function Use() {
           ]}
         />
       </div>
-    </article>
+    </UseField>
   );
 }

@@ -3,14 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import * as stylex from "@stylexjs/stylex";
 import { chrome } from "@/app/site.stylex";
+import { sx } from "@/lib/sx";
 import { RasterMark } from "./raster-mark";
-
-function sx(className: string, ...styles: unknown[]) {
-  const next = (stylex.props as (...args: unknown[]) => { className?: string; style?: React.CSSProperties })(...styles);
-  return { className: [className, next.className].filter(Boolean).join(" "), style: next.style };
-}
 
 type Scheme = "light" | "dark" | "auto";
 type GridPref = "on" | "off";
@@ -350,7 +345,7 @@ export function SiteChrome() {
 
       <button
         type="button"
-        className="nav-toggle"
+        {...sx("nav-toggle", chrome.navToggle)}
         aria-expanded={open}
         aria-controls="navPanel"
         aria-label={open ? "Close menu" : "Open menu"}
@@ -362,14 +357,14 @@ export function SiteChrome() {
           <span />
         </span>
       </button>
-      <nav id="navPanel" className="nav-panel" data-open={open} aria-label="Site menu" aria-hidden={!open}>
+      <nav id="navPanel" {...sx("nav-panel", chrome.navPanel)} data-open={open} aria-label="Site menu" aria-hidden={!open}>
         <div className="nav-panel-links">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="nav-panel-link" aria-current={current(l.href)}>
+            <Link key={l.href} href={l.href} {...sx("nav-panel-link", chrome.navPanelLink)} aria-current={current(l.href)}>
               {l.label}
             </Link>
           ))}
-          <a href="https://github.com/Noord-Ventures/raster" className="nav-panel-link">
+          <a href="https://github.com/Noord-Ventures/raster" {...sx("nav-panel-link", chrome.navPanelLink)}>
             GitHub
           </a>
         </div>

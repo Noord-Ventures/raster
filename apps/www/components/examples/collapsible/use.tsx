@@ -1,8 +1,9 @@
 import { Collapsible } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="collapsible">
+    <UseField name="collapsible">
       <h3 className="rs-use-type">Fold</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -13,6 +14,6 @@ export function Use() {
           A poster you can install.
         </Collapsible>
       </div>
-    </article>
+    </UseField>
   );
 }

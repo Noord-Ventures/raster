@@ -1,8 +1,9 @@
 import { Skeleton } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="skeleton">
+    <UseField name="skeleton">
       <h3 className="rs-use-type">Wait</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -12,6 +13,6 @@ export function Use() {
           <Skeleton width="40%" />
         </div>
       </div>
-    </article>
+    </UseField>
   );
 }

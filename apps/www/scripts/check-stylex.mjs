@@ -135,6 +135,9 @@ const siteSx = readFileSync(join(root, "apps/www/app/site.stylex.ts"), "utf8");
 if (!siteChrome.includes("site.stylex") || !siteSx.includes("stylex.create")) {
   fail("Site chrome must own StyleX");
 }
+if (!siteSx.includes("cover:") || !siteSx.includes("galleryItem:")) {
+  fail("Site StyleX must own cover and gallery");
+}
 if (!docsNav.includes("docs-nav.stylex") || !docsNav.includes("stylex")) {
   fail("Docs rail must own StyleX");
 }
@@ -144,14 +147,61 @@ if (!useMod.includes("stylex.create") || !useMod.includes("184px minmax(0, 1fr)"
 if (!existsSync(join(root, "apps/www/components/examples/use.stylex.ts"))) {
   fail("Use StyleX module missing");
 }
+const useFrame = readFileSync(join(root, "apps/www/components/examples/use-frame.tsx"), "utf8");
+if (!useFrame.includes("stylex") || !useFrame.includes("UseField")) {
+  fail("Use field must apply StyleX through UseField");
+}
+if (!buttonUse.includes("UseField")) {
+  fail("Button Use must sit on the StyleX Use field");
+}
+
+const aboutPage = readFileSync(join(root, "apps/www/app/about/page.tsx"), "utf8");
+const aboutSx = readFileSync(join(root, "apps/www/app/about/about.stylex.ts"), "utf8");
+if (!aboutPage.includes("about.stylex") || !aboutSx.includes("stylex.create")) {
+  fail("About must own StyleX");
+}
+if (!aboutSx.includes("borderRadius: 0") || !aboutSx.includes("gap: 1")) {
+  fail("About StyleX must keep flush cells and 1px seams");
+}
+
+const ifPage = readFileSync(join(root, "apps/www/app/interfaces/page.tsx"), "utf8");
+const ifShell = readFileSync(join(root, "apps/www/app/interfaces/shell.tsx"), "utf8");
+const ifSx = readFileSync(join(root, "apps/www/app/interfaces/interfaces.stylex.ts"), "utf8");
+if (!ifPage.includes("interfaces.stylex") || !ifShell.includes("interfaces.stylex") || !ifSx.includes("stylex.create")) {
+  fail("Interfaces must own StyleX");
+}
+if (!ifSx.includes("borderRadius: 0") || !ifSx.includes("boxShadow: \"none\"")) {
+  fail("Interface tiles must stay chrome-square with no shadow");
+}
+
+const home = readFileSync(join(root, "apps/www/app/page.tsx"), "utf8");
+const specimenSx = readFileSync(join(root, "apps/www/app/specimen.stylex.ts"), "utf8");
+if (!home.includes("specimen.stylex") || !specimenSx.includes("stylex.create")) {
+  fail("Homepage specimen must own StyleX");
+}
 
 const wwwStylex = [
   "apps/www/components/docs-nav/docs-nav.stylex.ts",
   "apps/www/components/examples/use.stylex.ts",
+  "apps/www/app/site.stylex.ts",
+  "apps/www/app/about/about.stylex.ts",
+  "apps/www/app/interfaces/interfaces.stylex.ts",
+  "apps/www/app/specimen.stylex.ts",
 ];
 for (const f of wwwStylex) {
   const src = readFileSync(join(root, f), "utf8");
   if (/tailwind|@radix-ui/.test(src)) fail(`${f} must stay off Tailwind and Radix`);
 }
 
-console.log(`StyleX catalogue: ${migrated} React leaves on Raster tokens; docs-nav + Use modules; CSS-first sheets remain for CLI/registry.`);
+const useDir = join(root, "apps/www/components/examples");
+let useFields = 0;
+for (const ent of readdirSync(useDir, { withFileTypes: true })) {
+  if (!ent.isDirectory()) continue;
+  const useFile = join(useDir, ent.name, "use.tsx");
+  if (!existsSync(useFile)) continue;
+  const src = readFileSync(useFile, "utf8");
+  if (!src.includes("UseField")) fail(`${ent.name}/use.tsx must apply the StyleX Use field`);
+  useFields += 1;
+}
+
+console.log(`StyleX catalogue: ${migrated} React leaves on Raster tokens; ${useFields} Use fields; About + Interfaces + specimen + site chrome. CSS-first sheets remain for CLI/registry.`);

@@ -1,8 +1,9 @@
 import { Input } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="input">
+    <UseField name="input">
       <h3 className="rs-use-type">Name</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -11,6 +12,6 @@ export function Use() {
           <Input label="E-mail" placeholder="renn@noord.vc" />
         </div>
       </div>
-    </article>
+    </UseField>
   );
 }

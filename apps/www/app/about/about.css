@@ -1,4 +1,6 @@
 /* About / field. Isolated. Do not move these rules into site.css.
+   StyleX owns the field paint (about.stylex.ts). This sheet stays for
+   html:has() overlay kill, named grid-template-areas, and CI locks.
 
    Box grid: cell edges are 1px --divider through the field gap,
    not the main 204 overlay. L/R box margins are the quieter

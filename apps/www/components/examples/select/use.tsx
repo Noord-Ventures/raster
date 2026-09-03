@@ -1,8 +1,9 @@
 import { Select } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="select">
+    <UseField name="select">
       <h3 className="rs-use-type">Face</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -17,6 +18,6 @@ export function Use() {
           />
         </div>
       </div>
-    </article>
+    </UseField>
   );
 }

@@ -1,4 +1,6 @@
-/* Homepage specimen. Imported only by app/page.tsx. */
+/* Homepage specimen. Imported only by app/page.tsx.
+   StyleX owns cell paint (specimen.stylex.ts). This sheet stays for
+   html:has() overlay kill, named grid-template-areas, clip-path, CI.
 
 /* Two grids, two inks. Boxed pages (home, About) use a --divider
    cell-edge cage. L/R box margins are the quieter --grid-line.

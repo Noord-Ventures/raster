@@ -1,8 +1,9 @@
 import { Badge } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="badge">
+    <UseField name="badge">
       <h3 className="rs-use-type">State</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -15,6 +16,6 @@ export function Use() {
           <Badge variant="muted">Hold</Badge>
         </div>
       </div>
-    </article>
+    </UseField>
   );
 }

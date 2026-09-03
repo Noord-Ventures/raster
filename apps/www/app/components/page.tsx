@@ -1,8 +1,10 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { rasterCategories, catalogComponents } from "@noorddev/raster";
+import { chrome } from "@/app/site.stylex";
 import { DocsNav } from "@/components/docs-nav";
 import { Preview } from "@/components/preview";
+import { sx } from "@/lib/sx";
 import { DOOR } from "../specimen";
 
 export const metadata: Metadata = {
@@ -15,8 +17,8 @@ export default function ComponentsPage() {
     <>
       <div className="site-layout catalog-page">
         <DocsNav />
-        <main className="site-content">
-          <header className="cover">
+        <main {...sx("site-content", chrome.content)}>
+          <header {...sx("cover", chrome.cover)}>
             <h1 className="rs-t-display">Components</h1>
             <p className="rs-t-sub">The control, the name, a short law.</p>
           </header>
@@ -28,13 +30,13 @@ export default function ComponentsPage() {
                 <h2 className="rs-t-title catalog-group">
                   {category.charAt(0).toUpperCase() + category.slice(1)}
                 </h2>
-                <div className="gallery">
+                <div {...sx("gallery", chrome.gallery)}>
                   {items.map((c) => (
-                    <div key={c.name} className="gallery-item">
-                      <div className="gallery-demo">
+                    <div key={c.name} {...sx("gallery-item", chrome.galleryItem)}>
+                      <div {...sx("gallery-demo", chrome.galleryDemo)}>
                         <Preview name={c.name} snippet={c.snippet} />
                       </div>
-                      <div className="gallery-meta">
+                      <div {...sx("gallery-meta", chrome.galleryMeta)}>
                         <h3>
                           <Link href={`/components/${c.name}`} className="gallery-item-link">
                             {c.title}

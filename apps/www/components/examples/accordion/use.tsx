@@ -1,8 +1,9 @@
 import { Accordion, AccordionItem } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="accordion">
+    <UseField name="accordion">
       <h3 className="rs-use-type">Why</h3>
       <div className="rs-use-body">
         <Accordion exclusive>
@@ -14,6 +15,6 @@ export function Use() {
           </AccordionItem>
         </Accordion>
       </div>
-    </article>
+    </UseField>
   );
 }

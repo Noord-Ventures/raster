@@ -1,8 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { interfaces } from "./catalog";
+import { chrome } from "@/app/site.stylex";
+import { sx } from "@/lib/sx";
+import { interfaces as catalog } from "./catalog";
 import { InterfaceCrop } from "./crops";
 import { InterfacesNav } from "./nav";
+import { interfaces } from "./interfaces.stylex";
 import { DOOR } from "../specimen";
 import "./interfaces.css";
 
@@ -14,20 +17,20 @@ export const metadata: Metadata = {
 
 export default function InterfacesPage() {
   return (
-    <div className="if-index">
+    <div {...sx("if-index", interfaces.index)}>
       <InterfacesNav />
-      <main className="site-content-wide">
-          <header className="cover" style={{ maxWidth: 592 }}>
+      <main {...sx("site-content-wide", chrome.contentWide)}>
+          <header {...sx("cover", chrome.cover)} style={{ maxWidth: 592 }}>
           <h1 className="rs-t-display">Interfaces</h1>
           <p className="rs-t-sub">Six little tools. A poster crop of each.</p>
         </header>
-        <div className="if-list">
-          {interfaces.map((item) => (
-            <Link key={item.slug} href={`/interfaces/${item.slug}`} className="if-tile">
+        <div {...sx("if-list", interfaces.list)}>
+          {catalog.map((item) => (
+            <Link key={item.slug} href={`/interfaces/${item.slug}`} {...sx("if-tile", interfaces.tile)}>
               <InterfaceCrop slug={item.slug} />
-              <div className="if-tile-matter">
-                <h2>{item.title}</h2>
-                <p>{item.voice}</p>
+              <div {...sx("if-tile-matter", interfaces.tileMatter)}>
+                <h2 {...sx("", interfaces.tileTitle)}>{item.title}</h2>
+                <p {...sx("", interfaces.tileVoice)}>{item.voice}</p>
               </div>
             </Link>
           ))}

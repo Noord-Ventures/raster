@@ -1,8 +1,9 @@
 import { Icon } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="icons">
+    <UseField name="icons">
       <h3 className="rs-use-type">Go</h3>
       <div className="rs-use-body">
         <div className="rs-icons rs-use-actions">
@@ -15,6 +16,6 @@ export function Use() {
           <p className="rs-use-copy">One family. Line and filled. Current color. 12, 16, 24.</p>
         </div>
       </div>
-    </article>
+    </UseField>
   );
 }

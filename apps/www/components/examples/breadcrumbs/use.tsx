@@ -1,9 +1,10 @@
 import { Breadcrumbs } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 /** A masthead trail. One ink line, not a web crumb. */
 export function Use() {
   return (
-    <article className="rs-use" data-use="breadcrumbs">
+    <UseField name="breadcrumbs">
       <h3 className="rs-use-type">Trail</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -18,6 +19,6 @@ export function Use() {
         </div>
         <p className="rs-use-kicker">A line of type that connects</p>
       </div>
-    </article>
+    </UseField>
   );
 }

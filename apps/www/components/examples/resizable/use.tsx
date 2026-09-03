@@ -1,8 +1,9 @@
 import { Split } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="resizable">
+    <UseField name="resizable">
       <h3 className="rs-use-type">Split</h3>
       <div className="rs-use-body">
         <Split style={{ height: 88, width: "100%" }}>
@@ -10,6 +11,6 @@ export function Use() {
           <p className="rs-use-kicker">Field</p>
         </Split>
       </div>
-    </article>
+    </UseField>
   );
 }

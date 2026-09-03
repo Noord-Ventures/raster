@@ -1,6 +1,7 @@
+import { UseField } from "../use-frame";
 export function Use() {
   return (
-    <article className="rs-use" data-use="crumb-bar">
+    <UseField name="crumb-bar">
       <h3 className="rs-use-type">Bar</h3>
       <div className="rs-use-body">
         <nav className="rs-crumb-bar rs-crumb-bar-scrolled" style={{ position: "relative" }} aria-label="Breadcrumbs">
@@ -14,6 +15,6 @@ export function Use() {
         </nav>
         <p className="rs-use-copy">Transparent at rest. On scroll it gains paper and a hairline.</p>
       </div>
-    </article>
+    </UseField>
   );
 }

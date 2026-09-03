@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
+import { sx } from "@/lib/sx";
 import { type InterfaceSlug, interfaceBySlug } from "./catalog";
+import { interfaces } from "./interfaces.stylex";
 import { Mark } from "./mark";
 
 function Lockup({ slug }: { slug: InterfaceSlug }) {
@@ -116,7 +118,7 @@ const CROPS: Record<InterfaceSlug, () => ReactNode> = {
 export function InterfaceCrop({ slug }: { slug: InterfaceSlug }) {
   const Crop = CROPS[slug];
   return (
-    <div className="if-crop" aria-hidden="true">
+    <div {...sx("if-crop", interfaces.crop)} aria-hidden="true">
       <Crop />
     </div>
   );

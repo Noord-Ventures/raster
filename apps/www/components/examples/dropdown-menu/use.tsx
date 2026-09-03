@@ -1,8 +1,9 @@
 import { DropdownMenu } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="dropdown-menu">
+    <UseField name="dropdown-menu">
       <h3 className="rs-use-type">File</h3>
       <div className="rs-use-body">
         <DropdownMenu
@@ -13,6 +14,6 @@ export function Use() {
           ]}
         />
       </div>
-    </article>
+    </UseField>
   );
 }

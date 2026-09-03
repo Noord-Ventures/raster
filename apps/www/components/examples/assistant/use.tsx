@@ -1,6 +1,7 @@
+import { UseField } from "../use-frame";
 export function Use() {
   return (
-    <article className="rs-use" data-use="assistant">
+    <UseField name="assistant">
       <h3 className="rs-use-type">Ask</h3>
       <div className="rs-use-body">
         <p className="rs-use-kicker">On the sheet</p>
@@ -11,6 +12,6 @@ export function Use() {
           <p className="rs-ai-reply">Done. Two sentences, same claim.</p>
         </div>
       </div>
-    </article>
+    </UseField>
   );
 }

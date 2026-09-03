@@ -1,6 +1,7 @@
+import { UseField } from "../use-frame";
 export function Use() {
   return (
-    <article className="rs-use" data-use="workflow">
+    <UseField name="workflow">
       <h3 className="rs-use-type">Pipe</h3>
       <div className="rs-use-body">
         <p className="rs-use-kicker">The job, in order</p>
@@ -12,6 +13,6 @@ export function Use() {
           </div>
         </div>
       </div>
-    </article>
+    </UseField>
   );
 }

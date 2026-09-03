@@ -2,11 +2,12 @@
 
 import * as React from "react";
 import { Button, CommandDialog } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   const [open, setOpen] = React.useState(false);
   return (
-    <article className="rs-use" data-use="command">
+    <UseField name="command">
       <h3 className="rs-use-type">Jump</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -27,6 +28,6 @@ export function Use() {
           ]}
         />
       </div>
-    </article>
+    </UseField>
   );
 }

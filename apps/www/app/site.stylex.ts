@@ -1,5 +1,11 @@
 import * as stylex from "@stylexjs/stylex";
 
+const phone = "@media (max-width: 640px)";
+const at900 = "@media (min-width: 900px)";
+const at899 = "@media (max-width: 899px)";
+const at800 = "@media (max-width: 800px)";
+const at480 = "@media (max-width: 480px)";
+
 /**
  * Site chrome StyleX. Document-level :has() / html::before stay in site.css —
  * StyleX cannot target html from a child. No accent in chrome.
@@ -46,9 +52,26 @@ export const chrome = stylex.create({
     filter: "drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))",
   },
   themeToggle: {
-    width: 24,
-    height: 24,
-    padding: 4,
+    width: {
+      default: 24,
+      [phone]: 44,
+    },
+    height: {
+      default: 24,
+      [phone]: 44,
+    },
+    minWidth: {
+      default: null,
+      [phone]: 44,
+    },
+    minHeight: {
+      default: null,
+      [phone]: 44,
+    },
+    padding: {
+      default: 4,
+      [phone]: 0,
+    },
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -66,5 +89,152 @@ export const chrome = stylex.create({
       outlineColor: "var(--text)",
       outlineOffset: 2,
     },
+  },
+  content: {
+    flexShrink: 1,
+    width: {
+      default: 592,
+      [at800]: "100%",
+    },
+    minWidth: 0,
+    maxWidth: {
+      default: "min(592px, 100%)",
+      [at800]: "100%",
+    },
+    paddingBottom: 72,
+  },
+  contentWide: {
+    flexShrink: 1,
+    width: "100%",
+    minWidth: 0,
+    paddingBottom: 72,
+  },
+  cover: {
+    minHeight: {
+      default: 204,
+      [at899]: 0,
+    },
+    paddingTop: {
+      default: 20,
+      [at900]: 120,
+    },
+    paddingBottom: 20,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: {
+      default: "flex-end",
+      [at900]: "flex-start",
+      [at899]: "flex-start",
+    },
+  },
+  gallery: {
+    display: "grid",
+    gridTemplateColumns: {
+      default: "repeat(auto-fill, 388px)",
+      [at480]: "1fr",
+    },
+    gap: "var(--gutter)",
+    paddingTop: 24,
+    paddingBottom: 48,
+  },
+  galleryItem: {
+    position: "relative",
+    isolation: "isolate",
+    backgroundColor: "var(--bg)",
+    backgroundImage: "none",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "var(--divider)",
+    borderRadius: 0,
+    boxShadow: "none",
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column",
+  },
+  galleryDemo: {
+    padding: 28,
+    paddingInline: 24,
+    minHeight: 204,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderBottomWidth: 1,
+    borderBottomStyle: "solid",
+    borderBottomColor: "var(--divider-subtle)",
+    overflow: "hidden",
+    pointerEvents: "none",
+    backgroundColor: "var(--bg)",
+  },
+  galleryMeta: {
+    paddingTop: 14,
+    paddingRight: 20,
+    paddingBottom: 16,
+    paddingLeft: 20,
+    backgroundColor: "var(--bg)",
+  },
+  navToggle: {
+    position: "fixed",
+    top: {
+      default: 20,
+      [phone]: "calc(8px + env(safe-area-inset-top, 0px))",
+    },
+    right: {
+      default: 18,
+      [phone]: "calc(8px + env(safe-area-inset-right, 0px))",
+    },
+    zIndex: 210,
+    width: {
+      default: 24,
+      [phone]: 44,
+    },
+    height: {
+      default: 24,
+      [phone]: 44,
+    },
+    padding: {
+      default: 4,
+      [phone]: 0,
+    },
+    display: {
+      default: "none",
+      [phone]: "flex",
+    },
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent",
+    borderWidth: 0,
+    borderRadius: 0,
+    color: "var(--text-secondary)",
+    cursor: "pointer",
+    outline: "none",
+  },
+  navPanel: {
+    position: "fixed",
+    top: {
+      default: 64,
+      [phone]: "calc(60px + env(safe-area-inset-top, 0px))",
+    },
+    left: 0,
+    right: 0,
+    zIndex: 205,
+    backgroundColor: "var(--bg)",
+    borderBottomWidth: 1,
+    borderBottomStyle: "solid",
+    borderBottomColor: "var(--divider-subtle)",
+  },
+  navPanelLink: {
+    display: "block",
+    paddingTop: 12,
+    paddingRight: 18,
+    paddingBottom: 12,
+    paddingLeft: 18,
+    fontSize: 15,
+    fontWeight: 500,
+    letterSpacing: "-0.01em",
+    color: "var(--text)",
+    textDecoration: "none",
+    borderBottomWidth: 1,
+    borderBottomStyle: "solid",
+    borderBottomColor: "var(--divider-subtle)",
   },
 });
