@@ -332,6 +332,10 @@ describe("tokens", () => {
     const use = readFileSync(join(wwwDir, "components/examples/use.css"), "utf8");
     expect(use).toMatch(/\.rs-use \{[^}]*border-radius: var\(--radius-sm\)/);
     expect(use).toMatch(/\.rs-scene \{[^}]*border-radius: var\(--radius-sm\)/);
+    expect(use).toMatch(/\.rs-scene \{[^}]*border: none/);
+    expect(use).toMatch(/\.rs-use \{[^}]*border: none/);
+    expect(site).not.toMatch(/\.rs-scene \.rs-input-group/);
+    expect(site).not.toMatch(/\.rs-use \.rs-input-group/);
     expect(empty).toMatch(/borderRadius: 0/);
     expect(chart).toMatch(/borderRadius: 0/);
     expect(rasterTokens.radius.chrome).toBe(0);

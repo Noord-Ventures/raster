@@ -1,11 +1,12 @@
-/* Use field: a 204-module composition. Paper, hairlines, slight Raster radius.
-   StyleX owns the frame (use.stylex.ts + UseField). This sheet stays for
+/* Use field: a 204-module composition. The leaf is the specimen —
+   scene / UseField do not add a second card. StyleX owns the open
+   chrome (use.stylex.ts + UseField). This sheet stays for
    .rs-scene .rs-use descendants and inner type/body/kicker class names. */
 .rs-use {
   isolation: isolate;
   background-color: transparent;
   background-image: none;
-  border: 1px solid var(--divider);
+  border: none;
   border-radius: var(--radius-sm);
   box-shadow: none;
   display: grid;
@@ -17,21 +18,21 @@
 .rs-scene {
   isolation: isolate;
   background-color: transparent;
-  border: 1px solid var(--divider);
+  border: none;
   border-radius: var(--radius-sm);
   box-shadow: none;
   margin: 8px 0 32px;
-  overflow: hidden;
+  overflow: visible;
 }
 .rs-scene .rs-use {
   width: 100%;
-  border: none;
+  border: none !important;
   margin: 0;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr !important;
   min-height: 204px;
 }
 .rs-scene .rs-use-type {
-  display: none;
+  display: none !important;
 }
 .rs-use .rs-theme-toggle {
   position: relative;

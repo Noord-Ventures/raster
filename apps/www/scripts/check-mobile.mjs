@@ -675,6 +675,15 @@ if (!site.includes(".gallery-item .preview-box") || !site.includes(".gallery-dem
 if (!site.includes(".preview-box:has(.rs-callout)") || !site.includes(".gallery-demo .rs-callout")) {
   fail("Boxed leaves must not sit in a second demo hairline");
 }
+if (site.includes(".rs-scene .rs-input-group") || site.includes(".rs-use .rs-input-group") || site.includes(".rs-scene .rs-field")) {
+  fail("Use / In Action must not zero the leaf — match the unboxed top specimen");
+}
+const useCss = readFileSync(join(root, "apps/www/components/examples/use.css"), "utf8");
+const useSx = readFileSync(join(root, "apps/www/components/examples/use.stylex.ts"), "utf8");
+const sceneRule = useCss.slice(useCss.indexOf(".rs-scene {"), useCss.indexOf("}", useCss.indexOf(".rs-scene {")));
+if (/border:\s*1px/.test(sceneRule) || /scene:\s*\{[^}]*borderWidth:\s*1/s.test(useSx)) {
+  fail("In Action scene must not add a second outline around the control");
+}
 if (!site.includes(".settings {") || !site.includes("right: 20px") || !site.includes("position: fixed")) {
   fail("Appearance control stays sticky on the right");
 }

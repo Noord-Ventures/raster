@@ -53,4 +53,22 @@ if (!catalog.includes("Preview") || catalog.includes("UseSlot") || catalog.inclu
   process.exit(1);
 }
 
+const useCss = readFileSync(join(examples, "use.css"), "utf8");
+const useSx = readFileSync(join(examples, "use.stylex.ts"), "utf8");
+const site = readFileSync(join(root, "apps/www/app/site.css"), "utf8");
+const sceneRule = useCss.slice(useCss.indexOf(".rs-scene {"), useCss.indexOf("}", useCss.indexOf(".rs-scene {")));
+const useRule = useCss.slice(useCss.indexOf(".rs-use {"), useCss.indexOf("}", useCss.indexOf(".rs-use {")));
+if (/border:\s*1px/.test(sceneRule) || /border:\s*1px/.test(useRule)) {
+  console.error("In Action scene / Use field must not paint a second card around the control");
+  process.exit(1);
+}
+if (/scene:\s*\{[^}]*borderWidth:\s*1/s.test(useSx) || /use:\s*\{[^}]*borderWidth:\s*1/s.test(useSx)) {
+  console.error("StyleX scene / UseField must stay open (borderWidth 0)");
+  process.exit(1);
+}
+if (site.includes(".rs-scene .rs-input-group") || site.includes(".rs-use .rs-input-group")) {
+  console.error("Do not zero the leaf inside Use / In Action — the control keeps its hairline");
+  process.exit(1);
+}
+
 console.log(`ok: ${names.length} isolated Use files`);
