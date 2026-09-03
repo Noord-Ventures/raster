@@ -41,8 +41,8 @@ function docsLabel(pathname: string) {
  * Components rail: groups in the first 184, that group's items in the
  * second. Hover (and focus) fills the second column. The page's own
  * group stays selected so the column is never empty on load.
- * The chrome keeps the live one-module inset (--ml 204) at ≥1024
- * so groups are not flush to the viewport edge.
+ * Detail keeps the live one-module inset (--ml 204) at ≥1024.
+ * Catalog index zeros --ml in site.css like live so 796 fits.
  * Under 900 the rail hides; a stacked 44pt picker takes its place.
  */
 export function DocsNav() {

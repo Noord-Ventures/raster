@@ -228,8 +228,8 @@ if (!siteSx.includes("catalogContent:") || !siteSx.includes('"min(796px, 100%)"'
 if (!/@media \(min-width: 1024px\) \{ \.site-layout \{ --ml: 204px; margin-left: 204px; \}/.test(site)) {
   fail("Desktop site-layout must keep the live --ml 204px / margin-left 204px");
 }
-if (/\.site-layout\.catalog-page[\s\S]{0,80}--ml:\s*0px/.test(site) || /\.site-layout\.catalog-page[\s\S]{0,80}margin-left:\s*0/.test(site)) {
-  fail("Catalog index must keep the live blank 204; do not zero --ml / margin-left");
+if (!/@media \(min-width: 1024px\) \{\s*\.site-layout\.catalog-page \{\s*--ml:\s*0px;\s*margin-left:\s*0;/.test(site)) {
+  fail("Catalog index must zero --ml at ≥1024 like live so two 388 cards fit beside the rail");
 }
 if (/data-rail="catalog"[\s\S]{0,160}--ml:\s*0px/.test(navCss)) {
   fail("Catalog rail must keep the live 204 inset; do not zero --ml for data-rail=catalog");

@@ -8,8 +8,8 @@
    - The content column starts one module in (margin-left: 204px at
      the 1024px rail) and the layout width rounds DOWN to whole 204px
      modules, so edges step from grid line to grid line on resize.
-     Catalog index and detail keep that airy first 204 — do not zero
-     --ml / margin-left or the groups sit flush to the viewport edge.
+     Detail keeps that airy first 204. Catalog index zeros --ml at
+     ≥1024 (live) so the 388 rail and two 388 cards fit on 796.
    - Reading measure is 592px (3 modules); covers occupy the first 204 cell.
    - A fixed 72px crumb bar; breadcrumbs appear once the page cover
      scrolls away. The docs rail lives in components/docs-nav. */
@@ -538,12 +538,19 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .cover .rs-t-sub { margin-top: 16px; }
 
 /* Catalog index: 388-wide cards, 204 demo module. Two columns on
-   desktop (796 measure). Icons use a 4-module 816 container.
-   Phone stays one column. Do not lock a single 388 track. */
+   desktop (796 measure, same as the icon catalog). Phone stays one
+   column. Do not lock a single 388 track. Live bf282a68 zeros --ml
+   here so 388 rail + 796 content fit; detail keeps --ml 204. */
 .catalog-page .catalog-group { margin-top: 40px; }
 .catalog-page .site-content {
   width: min(796px, 100%);
   max-width: min(796px, 100%);
+}
+@media (min-width: 1024px) {
+  .site-layout.catalog-page {
+    --ml: 0px;
+    margin-left: 0;
+  }
 }
 
 /* ── Component gallery: cards span two whole modules ── */

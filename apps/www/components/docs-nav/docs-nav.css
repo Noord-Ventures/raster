@@ -14,9 +14,9 @@
 }
 @media (min-width: 900px) { .toc-rail { display: flex; } }
 
-/* Catalog keeps the live 204 inset at ≥1024 (site.css .site-layout).
-   Do not zero --ml / margin-left — that flushes groups to the
-   viewport edge. No hamburger: the rail hides under 900. */
+/* Detail keeps the live 204 inset at ≥1024 (site.css .site-layout).
+   Catalog index zeros --ml in site.css like live so 796 / two 388
+   cards fit beside this rail. No hamburger: the rail hides under 900. */
 
 .toc {
   width: 184px; flex-shrink: 0;
