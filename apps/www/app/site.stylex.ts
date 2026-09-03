@@ -103,6 +103,14 @@ export const chrome = stylex.create({
     },
     paddingBottom: 72,
   },
+  /** Catalog index: two 388 cards + gutter. Same 796 measure as the icon catalog. */
+  catalogContent: {
+    flexShrink: 1,
+    width: "min(796px, 100%)",
+    minWidth: 0,
+    maxWidth: "min(796px, 100%)",
+    paddingBottom: 72,
+  },
   contentWide: {
     flexShrink: 1,
     width: "100%",

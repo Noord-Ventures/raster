@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../../..", import.meta.url));
 const site = readFileSync(join(root, "apps/www/app/site.css"), "utf8");
+const siteSx = readFileSync(join(root, "apps/www/app/site.stylex.ts"), "utf8");
 const chrome = readFileSync(join(root, "apps/www/components/site-chrome.tsx"), "utf8");
 const layout = readFileSync(join(root, "apps/www/app/layout.tsx"), "utf8");
 const block = readFileSync(join(root, "apps/www/components/code-block.tsx"), "utf8");
@@ -211,6 +212,15 @@ if (!site.includes(".gallery { display: grid; grid-template-columns: repeat(auto
 }
 if (!/catalog-page \.site-content \{[^}]*width:\s*min\(796px, 100%\)/s.test(site)) {
   fail("Catalog index measure must be 796 so two 388 cards fit, same as icons");
+}
+if (!componentsPage.includes("catalogContent") || componentsPage.includes("chrome.content)")) {
+  fail("Catalog index must use StyleX catalogContent (796), not the 592 content measure");
+}
+if (!siteSx.includes("catalogContent:") || !siteSx.includes('"min(796px, 100%)"')) {
+  fail("StyleX catalogContent must be min(796px, 100%) so two 388 cards fit");
+}
+if (!siteSx.includes('repeat(auto-fill, 388px)') || !siteSx.includes('[at480]: "1fr"')) {
+  fail("StyleX gallery must auto-fill 388 tracks and recut to 1fr at 480");
 }
 const catalogPhoneAt = site.lastIndexOf("@media (max-width: 480px)");
 const catalogPhone = catalogPhoneAt >= 0 ? site.slice(catalogPhoneAt, catalogPhoneAt + 220) : "";

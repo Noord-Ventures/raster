@@ -138,6 +138,9 @@ if (!siteChrome.includes("site.stylex") || !siteSx.includes("stylex.create")) {
 if (!siteSx.includes("cover:") || !siteSx.includes("galleryItem:")) {
   fail("Site StyleX must own cover and gallery");
 }
+if (!siteSx.includes("catalogContent:") || !siteSx.includes('"min(796px, 100%)"')) {
+  fail("Site StyleX must own the 796 catalog measure");
+}
 if (!docsNav.includes("docs-nav.stylex") || !docsNav.includes("stylex")) {
   fail("Docs rail must own StyleX");
 }
