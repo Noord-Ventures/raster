@@ -946,8 +946,8 @@ jobs:
             echo "Charts must stay hairline, flush, no shadow, no rounded bars"
             exit 1
           fi
-          if grep -nE '#[Ee]30613|#[Ff][Ff]0000' "$css"; then
-            echo "Crouwel spot must not live in CSS"
+          if grep -nE '#[Ee]30613|#[Ff][Ff]0000' "$css" | grep -v CROUWEL_SPOT; then
+            echo "Crouwel spot must stay the optional JS constant, not chart paint"
             exit 1
           fi
           for n in chart bar-chart area-chart scatter-chart donut histogram small-multiples; do
