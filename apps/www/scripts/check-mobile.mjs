@@ -228,11 +228,14 @@ if (/\.site-layout\.catalog-page[\s\S]{0,80}--ml:\s*0px/.test(site) || /\.site-l
 if (/data-rail="catalog"[\s\S]{0,160}--ml:\s*0px/.test(navCss)) {
   fail("Catalog rail must keep the live 204 inset; do not zero --ml for data-rail=catalog");
 }
-if (!siteSx.includes("iconContent:") || !siteSx.includes('"min(816px, 100%)"')) {
-  fail("StyleX iconContent must be min(816px, 100%) — 4 × 204 modules");
+if (!siteSx.includes("iconContent:") || !siteSx.includes('"min(796px, 100%)"')) {
+  fail("StyleX iconContent must be min(796px, 100%) — 4 × 184 cells + gutters");
 }
-if (!site.includes(".site-content:has(.rs-icon-catalog)") || !/rs-icon-catalog\) \{ width: min\(816px, 100%\)/.test(site)) {
-  fail("Icons catalog container must span 4 × 204 modules (816)");
+if (!site.includes(".site-content:has(.rs-icon-catalog)") || !/rs-icon-catalog\) \{ width: min\(796px, 100%\)/.test(site)) {
+  fail("Icons catalog container must span 4 × 184 cells (796)");
+}
+if (!/\.preview-box:has\(\.rs-icon-catalog\) \{[^}]*padding:\s*0/.test(site)) {
+  fail("Icons preview must not pad 20px or the 4th 184 column will not fit");
 }
 const namePage = readFileSync(join(root, "apps/www/app/components/[name]/page.tsx"), "utf8");
 if (!namePage.includes("iconContent") || !namePage.includes('name === "icons"')) {

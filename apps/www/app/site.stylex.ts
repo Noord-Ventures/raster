@@ -112,12 +112,12 @@ export const chrome = stylex.create({
     maxWidth: "min(796px, 100%)",
     paddingBottom: 72,
   },
-  /** Icons page: 4 page-grid modules (4 × 204). Cells stay auto-fill 184. */
+  /** Icons page: 4 × 184 cells + 3 gutters (796). Cells stay auto-fill 184. */
   iconContent: {
     flexShrink: 1,
-    width: "min(816px, 100%)",
+    width: "min(796px, 100%)",
     minWidth: 0,
-    maxWidth: "min(816px, 100%)",
+    maxWidth: "min(796px, 100%)",
     paddingBottom: 72,
   },
   contentWide: {

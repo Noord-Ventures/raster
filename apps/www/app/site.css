@@ -508,8 +508,8 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 }
 
 .site-content { flex-shrink: 1; width: 592px; min-width: 0; max-width: min(592px, 100%); padding-bottom: 72px; }
-/* Icons: 4 page-grid modules (4 × 204). StyleX iconContent owns the same measure. */
-.site-content:has(.rs-icon-catalog) { width: min(816px, 100%); max-width: min(816px, 100%); }
+/* Icons: 4 × 184 cells + gutters (796). StyleX iconContent owns the same measure. */
+.site-content:has(.rs-icon-catalog) { width: min(796px, 100%); max-width: min(796px, 100%); }
 .site-content-wide { flex-shrink: 1; width: 100%; min-width: 0; padding-bottom: 72px; }
 @media (max-width: 800px) { .site-content { width: 100%; max-width: 100%; } }
 
@@ -614,7 +614,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   background: transparent;
 }
 .preview-box > * { max-width: 100%; }
-.preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 20px; width: 100%; }
+.preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 0; width: 100%; }
 .preview-cluster { display: flex; gap: 10px; align-items: center; }
 .code-block {
   position: relative;

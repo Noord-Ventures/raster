@@ -908,7 +908,11 @@ jobs:
           grep -q 'data-toc="groups"' "$nav"
           grep -q 'data-toc="items"' "$nav"
           grep -q 'data-rail="catalog"' "$nav"
-          grep -q 'max-width: 1439px' apps/www/components/docs-nav/docs-nav.css
+          if grep -n -- '--ml: 0px' apps/www/components/docs-nav/docs-nav.css; then
+            echo "Catalog rail must keep the live 204 inset; do not zero --ml"
+            exit 1
+          fi
+          grep -q 'Do not zero --ml' apps/www/components/docs-nav/docs-nav.css
           grep -q '1440' "$map"
           if grep -n toc-rail apps/www/app/site.css; then
             echo "Docs-rail styles drifted back into site chrome"
