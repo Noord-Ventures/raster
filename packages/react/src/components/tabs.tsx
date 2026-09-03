@@ -1,5 +1,7 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster, phone } from "../tokens.stylex";
+import { rs } from "../rs";
 
 interface TabsContextValue {
   value: string;
@@ -14,6 +16,111 @@ function useTabsContext(component: string): TabsContextValue {
   if (!ctx) throw new Error(`<${component}> must be used inside <Tabs>`);
   return ctx;
 }
+
+const styles = stylex.create({
+  list: {
+    display: "flex",
+    alignItems: {
+      default: "baseline",
+      ["@media (max-width: 640px)"]: "stretch",
+    },
+    gap: {
+      default: 22,
+      ["@media (max-width: 640px)"]: 0,
+    },
+    width: {
+      default: null,
+      ["@media (max-width: 640px)"]: "100%",
+    },
+    maxWidth: {
+      default: 360,
+      ["@media (max-width: 640px)"]: "none",
+    },
+    borderWidth: 0,
+    borderStyle: "none",
+    borderBottomWidth: {
+      default: 0,
+      ["@media (max-width: 640px)"]: raster.hairline,
+    },
+    borderBottomStyle: {
+      default: "none",
+      ["@media (max-width: 640px)"]: "solid",
+    },
+    borderBottomColor: {
+      default: "transparent",
+      ["@media (max-width: 640px)"]: raster.divider,
+    },
+    boxShadow: "none",
+    backgroundColor: "transparent",
+  },
+  tab: {
+    appearance: "none",
+    boxSizing: "border-box",
+    flexGrow: {
+      default: null,
+      ["@media (max-width: 640px)"]: 1,
+    },
+    flexShrink: {
+      default: null,
+      ["@media (max-width: 640px)"]: 1,
+    },
+    flexBasis: {
+      default: null,
+      ["@media (max-width: 640px)"]: 0,
+    },
+    display: {
+      default: null,
+      ["@media (max-width: 640px)"]: "inline-flex",
+    },
+    alignItems: {
+      default: null,
+      ["@media (max-width: 640px)"]: "center",
+    },
+    justifyContent: {
+      default: null,
+      ["@media (max-width: 640px)"]: "center",
+    },
+    minHeight: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    paddingBlock: {
+      default: 8,
+      ["@media (max-width: 640px)"]: 0,
+    },
+    paddingInline: {
+      default: 0,
+      ["@media (max-width: 640px)"]: 8,
+    },
+    fontSize: {
+      default: 14,
+      ["@media (max-width: 640px)"]: raster.controlFs,
+    },
+    fontFamily: "inherit",
+    fontWeight: 400,
+    color: raster.gray,
+    letterSpacing: "-0.01em",
+    textDecoration: "none",
+    textAlign: {
+      default: "left",
+      ["@media (max-width: 640px)"]: "center",
+    },
+    backgroundColor: "transparent",
+    backgroundImage: "none",
+    boxShadow: "none",
+    borderWidth: 0,
+    borderStyle: "none",
+    borderRadius: 0,
+    cursor: "pointer",
+  },
+  active: {
+    color: raster.ink,
+    fontWeight: 600,
+    borderWidth: 0,
+    borderStyle: "none",
+    boxShadow: "inset 0 -1px 0",
+  },
+});
 
 export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   value?: string;
@@ -39,7 +146,7 @@ export function Tabs({ value, defaultValue, onValueChange, children, ...props }:
   );
 }
 
-export function TabList({ className, onKeyDown, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export function TabList({ className, style, onKeyDown, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     onKeyDown?.(e);
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
@@ -53,8 +160,15 @@ export function TabList({ className, onKeyDown, ...props }: React.HTMLAttributes
     tabs[next]?.focus();
     tabs[next]?.click();
   };
+  const sx = rs(["rs-tabs", className], styles.list);
   return (
-    <div role="tablist" className={cx("rs-tabs", className)} onKeyDown={handleKeyDown} {...props} />
+    <div
+      role="tablist"
+      onKeyDown={handleKeyDown}
+      {...props}
+      className={sx.className}
+      style={{ ...sx.style, ...style }}
+    />
   );
 }
 
@@ -62,9 +176,10 @@ export interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
   value: string;
 }
 
-export function Tab({ value, className, onClick, ...props }: TabProps) {
+export function Tab({ value, className, style, onClick, ...props }: TabProps) {
   const ctx = useTabsContext("Tab");
   const selected = ctx.value === value;
+  const sx = rs(["rs-tab", selected && "rs-tab-active", className], styles.tab, selected && styles.active);
   return (
     <button
       type="button"
@@ -73,12 +188,13 @@ export function Tab({ value, className, onClick, ...props }: TabProps) {
       aria-selected={selected}
       aria-controls={`${ctx.idBase}-panel-${value}`}
       tabIndex={selected ? 0 : -1}
-      className={cx("rs-tab", selected && "rs-tab-active", className)}
       onClick={(e) => {
         ctx.setValue(value);
         onClick?.(e);
       }}
       {...props}
+      className={sx.className}
+      style={{ ...sx.style, ...style }}
     />
   );
 }

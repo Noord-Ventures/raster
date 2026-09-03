@@ -1,5 +1,6 @@
 /* ── Phone scale (≤640): iOS Human Interface, translated into Raster.
-   Desktop rules in components/*.css stay the poster. Do not restyle ≥900. ── */
+   Desktop paint lives on StyleX leaves. This recuts the leftover class
+   names (HTML snippets, CLI starter) at 640. Do not restyle ≥900. ── */
 @media(max-width:640px){
   /* Button: full-width 44pt, 16px, flush. Small variant grows with the scale. */
   .rs-btn-primary,.rs-btn-ghost{

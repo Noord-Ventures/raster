@@ -1,4 +1,0 @@
-/* ── One-time code: one quiet cell per character ── */
-.rs-otp{display:flex;gap:8px}
-.rs-otp input{width:40px;height:48px;text-align:center;font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius-sm);outline:none;font-family:inherit;padding:0}
-.rs-otp input:focus{border-color:var(--accent)}

@@ -1,8 +1,9 @@
 import { Card, CardBody, CardLabel, CardTitle } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="card">
+    <UseField name="card">
       <h3 className="rs-use-type">Case</h3>
       <div className="rs-use-body">
         <Card>
@@ -11,6 +12,6 @@ export function Use() {
           <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>
         </Card>
       </div>
-    </article>
+    </UseField>
   );
 }

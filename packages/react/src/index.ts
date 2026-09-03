@@ -1,7 +1,9 @@
 export { cx } from "./cx";
 export { rs } from "./rs";
+export { raster, phone, mobileGrid, rail, wide, rasterFont, rasterMono } from "./tokens.stylex";
 export {
   Icon,
+  Icons,
   IconCatalog,
   ICON_STROKE,
   ICON_VIEWBOX,
@@ -20,6 +22,8 @@ export {
   type IconVariant,
 } from "./components/icon";
 export { Button, type ButtonProps } from "./components/button";
+export { Link, type LinkProps } from "./components/link";
+export { Chip, type ChipProps } from "./components/chip";
 export { Badge, type BadgeProps } from "./components/badge";
 export { Card, CardInner, CardLabel, CardTitle, CardBody } from "./components/card";
 export { Callout, type CalloutProps } from "./components/callout";
@@ -78,17 +82,29 @@ export {
 } from "./components/chart";
 export { Collapsible, type CollapsibleProps } from "./components/collapsible";
 export { HoverCard, type HoverCardProps } from "./components/hover-card";
-export { Kbd } from "./components/kbd";
+export { Kbd, KbdPair } from "./components/kbd";
 export { InputOTP, type InputOTPProps } from "./components/input-otp";
 export { ContextMenu, type ContextMenuProps } from "./components/context-menu";
 export { Menubar, type MenubarProps } from "./components/menubar";
 export { NavigationMenu, type NavigationMenuProps } from "./components/navigation-menu";
-export { Carousel, type CarouselProps } from "./components/carousel";
+export { Carousel, CarouselSlide, type CarouselProps } from "./components/carousel";
 export { Split, type SplitProps } from "./components/resizable";
 export { Combobox, type ComboboxProps } from "./components/combobox";
 export { Command, CommandDialog, type CommandProps, type CommandDialogProps, type CommandItem, type CommandGroup } from "./components/command";
 export { Calendar, type CalendarProps } from "./components/calendar";
 export { DatePicker, type DatePickerProps } from "./components/date-picker";
+export {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableTh,
+  TableTd,
+  type TableProps,
+  type TableRowProps,
+  type TableCellProps,
+  type TableHeaderCellProps,
+} from "./components/table";
 export { DataTable, type DataTableProps, type DataTableColumn } from "./components/data-table";
 export { AspectRatio, type AspectRatioProps } from "./components/aspect-ratio";
 export {
@@ -119,3 +135,49 @@ export {
   type SidebarItemProps,
 } from "./components/sidebar";
 export { Spinner, type SpinnerProps } from "./components/spinner";
+export {
+  Flow,
+  FlowStep,
+  FlowNum,
+  FlowTitle,
+  FlowBody,
+  FlowSubs,
+  FlowSub,
+  FlowSubAdd,
+  FlowAdd,
+  FlowPlus,
+  type FlowProps,
+  type FlowStepProps,
+  type FlowAddProps,
+} from "./components/flow";
+export {
+  Assistant,
+  AssistantHead,
+  AssistantTitle,
+  AssistantStatus,
+  AssistantMsg,
+  AssistantUserBlock,
+  AssistantReply,
+  AssistantCard,
+  AssistantTag,
+  AssistantText,
+  AssistantDone,
+  AssistantInput,
+  AssistantSend,
+  type AssistantProps,
+} from "./components/assistant";
+export {
+  Cite,
+  CiteLink,
+  Refs,
+  RefItem,
+  RefAuthors,
+  RefDoi,
+  CiteBox,
+  CiteBoxLabel,
+  CiteBoxText,
+  type CiteProps,
+  type RefsProps,
+  type RefItemProps,
+  type CiteBoxProps,
+} from "./components/refs";

@@ -1,8 +1,9 @@
 import { Avatar, AvatarRow } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="avatar">
+    <UseField name="avatar">
       <h3 className="rs-use-type">Desk</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -15,6 +16,6 @@ export function Use() {
           <Avatar initials="R" />
         </AvatarRow>
       </div>
-    </article>
+    </UseField>
   );
 }

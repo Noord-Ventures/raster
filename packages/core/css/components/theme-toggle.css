@@ -1,7 +1,0 @@
-/* ── Theme toggle: one mark. Apps pin it top-right; inline sits in flow. ── */
-.rs-theme-toggle{position:fixed;top:24px;right:20px;z-index:200;width:24px;height:24px;padding:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:none;border:none;border-radius:0;cursor:pointer;color:var(--text-secondary);outline:none;filter:drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))}
-.rs-theme-toggle:hover{color:var(--accent)}
-.rs-theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.rs-theme-sun,.rs-theme-moon{width:16px;height:16px;display:block;flex-shrink:0}
-.rs-theme-toggle-inline{position:relative;top:auto;right:auto;z-index:1;filter:none}
-@media(max-width:480px){.rs-theme-toggle:not(.rs-theme-toggle-inline){right:25px}}

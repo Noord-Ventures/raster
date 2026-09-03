@@ -1,6 +1,18 @@
 import * as React from "react";
-import { cx } from "../../cx";
-import { CROUWEL_SPOT } from "./frame";
+import * as stylex from "@stylexjs/stylex";
+import { rs } from "../../rs";
+import { CROUWEL_SPOT, chartStyles, lineMark } from "./frame";
+
+const styles = stylex.create({
+  spark: {
+    display: "inline-block",
+    verticalAlign: "middle",
+  },
+  svg: {
+    display: "block",
+    overflow: "visible",
+  },
+});
 
 export interface SparklineProps extends React.HTMLAttributes<HTMLSpanElement> {
   values: number[];
@@ -26,18 +38,31 @@ export function Sparkline({
   const d = values.map((v, i) => `${i === 0 ? "M" : "L"}${x(i)} ${y(v)}`).join(" ");
   const last = values[values.length - 1] ?? 0;
   const color = spot === true ? CROUWEL_SPOT : typeof spot === "string" ? spot : undefined;
+  const sx = rs(["rs-spark", className], styles.spark);
+  const svg = rs([], styles.svg);
+  const line = lineMark(0, Boolean(spot));
+  const dot = rs(["rs-chart-dot"], chartStyles.dot);
   return (
     <span
-      className={cx("rs-spark", className)}
+      {...props}
+      className={sx.className}
       style={{
+        ...sx.style,
         ...(style as React.CSSProperties),
         ...(color ? ({ ["--rs-chart-spot" as string]: color } as React.CSSProperties) : null),
       }}
-      {...props}
     >
-      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`Trend ending at ${last}`}>
-        <path className={spot ? "rs-chart-line rs-chart-line-spot" : "rs-chart-line"} d={d} />
-        <circle className="rs-chart-dot" cx={x(values.length - 1)} cy={y(last)} r={2} />
+      <svg
+        className={svg.className}
+        style={svg.style}
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+        role="img"
+        aria-label={`Trend ending at ${last}`}
+      >
+        <path className={line.className} style={line.style} d={d} />
+        <circle className={dot.className} style={dot.style} cx={x(values.length - 1)} cy={y(last)} r={2} />
       </svg>
     </span>
   );

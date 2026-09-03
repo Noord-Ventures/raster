@@ -1,10 +1,11 @@
 import { SmallMultiples } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="small-multiples">
+    <UseField name="small-multiples">
       <h3 className="rs-use-type">Set</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -21,6 +22,6 @@ export function Use() {
           ]}
         />
       </div>
-    </article>
+    </UseField>
   );
 }

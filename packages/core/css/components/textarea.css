@@ -1,4 +1,0 @@
-/* ── Textarea: the quiet field, taller ── */
-.rs-textarea{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;line-height:1.55;padding:8px 10px;outline:none;font-family:inherit;min-height:96px;resize:vertical;width:100%}
-.rs-textarea:focus{border-color:var(--accent)}
-.rs-textarea::placeholder{color:var(--text-secondary)}

@@ -2,11 +2,12 @@
 
 import * as React from "react";
 import { Button, Drawer, DrawerBody, DrawerTitle } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   const [open, setOpen] = React.useState(false);
   return (
-    <article className="rs-use" data-use="drawer">
+    <UseField name="drawer">
       <h3 className="rs-use-type">Up</h3>
       <div className="rs-use-body">
         <Button variant="ghost" size="sm" onClick={() => setOpen(true)}>Open the tray</Button>
@@ -15,6 +16,6 @@ export function Use() {
           <DrawerBody>A bottom panel. Escape closes it.</DrawerBody>
         </Drawer>
       </div>
-    </article>
+    </UseField>
   );
 }

@@ -1,5 +1,0 @@
-/* ── Separator: a hairline, horizontal or vertical.
-   Chrome uses --divider (the stronger of the two grid inks).
-   The page 204 uses --grid-line. Same family, two steps. */
-.rs-sep{border:none;border-top:1px solid var(--divider);margin:20px 0}
-.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider);margin:0 12px}

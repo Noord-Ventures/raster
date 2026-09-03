@@ -1,5 +1,8 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../tokens.stylex";
+import { rs } from "../rs";
+import { hidden } from "../hidden.stylex";
 
 interface RadioGroupContextValue {
   name: string;
@@ -47,19 +50,74 @@ export interface RadioProps
   label?: React.ReactNode;
 }
 
+const styles = stylex.create({
+  radio: {
+    display: "flex",
+    alignItems: "center",
+    gap: {
+      default: 9,
+      ["@media (max-width: 640px)"]: 12,
+    },
+    fontSize: {
+      default: 14,
+      ["@media (max-width: 640px)"]: 17,
+    },
+    color: raster.ink,
+    letterSpacing: "-0.01em",
+    minHeight: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+  },
+  dot: {
+    width: {
+      default: 16,
+      ["@media (max-width: 640px)"]: 22,
+    },
+    height: {
+      default: 16,
+      ["@media (max-width: 640px)"]: 22,
+    },
+    borderRadius: "50%",
+    borderWidth: 1.5,
+    borderStyle: "solid",
+    borderColor: raster.divider,
+    position: "relative",
+    flexShrink: 0,
+    boxSizing: "border-box",
+  },
+  on: {
+    borderColor: raster.ink,
+  },
+  fill: {
+    position: "absolute",
+    inset: {
+      default: 3,
+      ["@media (max-width: 640px)"]: 5,
+    },
+    borderRadius: "50%",
+    backgroundColor: raster.ink,
+  },
+});
+
 /** A real native radio inside a RadioGroup; the ink dot mirrors its state. */
 export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(function Radio(
-  { value, label, className, onChange, ...props },
+  { value, label, className, style, onChange, ...props },
   ref,
 ) {
   const group = React.useContext(RadioGroupContext);
   const on = group ? group.value === value : undefined;
+  const row = rs(["rs-radio", className], styles.radio);
+  const sr = rs(["rs-sr"], hidden.sr);
+  const mark = rs(["rs-radio-dot", on && "rs-radio-on"], styles.dot, on && styles.on);
+  const fill = rs([], styles.fill);
   return (
-    <label className={cx("rs-radio", className)}>
+    <label className={row.className} style={{ ...row.style, ...style }}>
       <input
         ref={ref}
         type="radio"
-        className="rs-sr"
+        className={sr.className}
+        style={sr.style}
         name={group?.name}
         value={value}
         checked={on}
@@ -69,7 +127,9 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(function Rad
         }}
         {...props}
       />
-      <span className={cx("rs-radio-dot", on && "rs-radio-on")} aria-hidden="true" />
+      <span className={mark.className} style={mark.style} aria-hidden="true">
+        {on ? <span className={fill.className} style={fill.style} /> : null}
+      </span>
       {label}
     </label>
   );

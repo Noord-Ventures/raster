@@ -1,8 +1,9 @@
 import { Textarea } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="textarea">
+    <UseField name="textarea">
       <h3 className="rs-use-type">Note</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -11,6 +12,6 @@ export function Use() {
           <Textarea label="Press note" defaultValue="Keep the 184 clean. No second ink." />
         </div>
       </div>
-    </article>
+    </UseField>
   );
 }

@@ -1,5 +1,8 @@
 import * as React from "react";
-import { cx } from "../../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../../tokens.stylex";
+import { rs } from "../../rs";
+import { hidden } from "../../hidden.stylex";
 
 export interface ChartSeries {
   name: string;
@@ -19,6 +22,185 @@ export interface ChartPoint {
   group?: string;
 }
 
+const styles = stylex.create({
+  chart: {
+    position: "relative",
+    width: "100%",
+    borderRadius: 0,
+    boxShadow: "none",
+  },
+  field: {
+    isolation: "isolate",
+    backgroundColor: raster.paper,
+    borderWidth: raster.hairline,
+    borderStyle: "solid",
+    borderColor: raster.divider,
+    borderRadius: 0,
+    boxShadow: "none",
+    padding: 16,
+  },
+  svg: {
+    display: "block",
+    width: "100%",
+    height: "auto",
+    overflow: "visible",
+  },
+  plot: {
+    transformOrigin: "center",
+  },
+  head: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "baseline",
+    gap: 12,
+    marginBottom: 10,
+  },
+  title: {
+    fontSize: 13,
+    fontWeight: 600,
+    letterSpacing: "-0.01em",
+    color: raster.ink,
+  },
+  grid: {
+    stroke: raster.divider,
+    strokeWidth: 1,
+  },
+  baseline: {
+    stroke: raster.divider,
+    strokeWidth: 1,
+  },
+  axis: {
+    fill: raster.gray,
+    fontSize: 11,
+    fontWeight: 500,
+    letterSpacing: 0,
+    fontVariantNumeric: "tabular-nums",
+  },
+  line: {
+    fill: "none",
+    stroke: raster.ink,
+    strokeWidth: 1,
+    strokeLinecap: "butt",
+    strokeLinejoin: "miter",
+  },
+  lineDashed: {
+    strokeDasharray: "4 4",
+  },
+  lineMuted: {
+    stroke: raster.gray,
+  },
+  lineDotted: {
+    stroke: raster.gray,
+    strokeDasharray: "0.1 5",
+    strokeWidth: 1.5,
+    strokeLinecap: "butt",
+  },
+  lineSpot: {
+    stroke: "var(--rs-chart-spot)",
+  },
+  area: {
+    fill: raster.ink,
+    opacity: 0.08,
+    stroke: "none",
+  },
+  areaSpot: {
+    fill: "var(--rs-chart-spot)",
+    opacity: 0.16,
+    stroke: "none",
+  },
+  bar: {
+    fill: raster.ink,
+    borderRadius: 0,
+    transition: "fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)",
+  },
+  barMuted: {
+    fill: raster.divider,
+  },
+  barSpot: {
+    fill: "var(--rs-chart-spot)",
+  },
+  cursor: {
+    stroke: raster.divider,
+    strokeWidth: 1,
+  },
+  dot: {
+    fill: raster.paper,
+    stroke: raster.ink,
+    strokeWidth: 1,
+  },
+  mark: {
+    fill: raster.ink,
+    borderRadius: 0,
+    transition: "fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)",
+  },
+  markSpot: {
+    fill: "var(--rs-chart-spot)",
+  },
+  ann: {
+    fill: raster.gray,
+    fontSize: 11,
+    fontWeight: 500,
+    letterSpacing: "-0.01em",
+  },
+  tip: {
+    position: "absolute",
+    pointerEvents: "none",
+    backgroundColor: raster.paper,
+    borderWidth: raster.hairline,
+    borderStyle: "solid",
+    borderColor: raster.divider,
+    borderRadius: 0,
+    boxShadow: "none",
+    paddingBlock: 6,
+    paddingInline: 8,
+    fontSize: 12,
+    letterSpacing: "-0.01em",
+    color: raster.ink,
+    whiteSpace: "nowrap",
+    zIndex: 60,
+    transform: "translate(-50%, calc(-100% - 8px))",
+  },
+  tipLabel: {
+    display: "block",
+    fontSize: 11,
+    color: raster.gray,
+    marginBottom: 2,
+  },
+  tipRow: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 10,
+  },
+  tipName: {
+    color: raster.gray,
+  },
+  tipVal: {
+    fontWeight: 600,
+    fontVariantNumeric: "tabular-nums",
+  },
+  legend: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 14,
+    marginTop: 10,
+  },
+  legendItem: {
+    display: "flex",
+    alignItems: "center",
+    gap: 7,
+    fontSize: 12,
+    fontWeight: 500,
+    letterSpacing: "-0.01em",
+    color: raster.gray,
+  },
+  legendSvg: {
+    display: "block",
+  },
+});
+
+export const chartStyles = styles;
+
 export function ticksBetween(min: number, max: number, count = 4): number[] {
   const span = max - min || 1;
   const step = niceStep(span, count);
@@ -34,6 +216,8 @@ export const LINE_CLASS = [
   "rs-chart-line rs-chart-line-muted",
   "rs-chart-line rs-chart-line-dotted",
 ] as const;
+
+const LINE_SX = [null, styles.lineDashed, styles.lineMuted, styles.lineDotted] as const;
 
 export const MAX_SERIES = LINE_CLASS.length;
 
@@ -82,6 +266,31 @@ export function stackedRows(series: ChartSeries[]): number[][] {
   });
 }
 
+export function lineMark(seriesIndex: number, spot?: boolean) {
+  if (spot && seriesIndex === 0) {
+    return rs(["rs-chart-line", "rs-chart-line-spot"], styles.line, styles.lineSpot);
+  }
+  const classes = LINE_CLASS[seriesIndex] ?? LINE_CLASS[0];
+  return rs(classes.split(/\s+/), styles.line, LINE_SX[seriesIndex]);
+}
+
+export function areaMark(spot?: boolean) {
+  return rs([spot ? "rs-chart-area-spot" : "rs-chart-area"], spot ? styles.areaSpot : styles.area);
+}
+
+export function barMark(opts: { spot?: boolean; muted?: boolean } = {}) {
+  return rs(
+    ["rs-chart-bar", opts.spot && "rs-chart-bar-spot", opts.muted && "rs-chart-bar-muted"],
+    styles.bar,
+    opts.spot && styles.barSpot,
+    opts.muted && styles.barMuted,
+  );
+}
+
+export function scatterMark(spot?: boolean) {
+  return rs(["rs-chart-mark", spot && "rs-chart-mark-spot"], styles.mark, spot && styles.markSpot);
+}
+
 export function SrTable({
   caption,
   labels,
@@ -91,8 +300,9 @@ export function SrTable({
   labels: string[];
   series: ChartSeries[];
 }) {
+  const sx = rs(["rs-sr"], hidden.sr);
   return (
-    <table className="rs-sr">
+    <table className={sx.className} style={sx.style}>
       <caption>{caption}</caption>
       <thead>
         <tr>
@@ -119,11 +329,32 @@ export function SrTable({
 }
 
 export function LegendSwatch({ seriesIndex, spot }: { seriesIndex: number; spot?: boolean }) {
+  const svg = rs([], styles.legendSvg);
   return (
-    <svg width="18" height="4" viewBox="0 0 18 4" aria-hidden="true">
-      <path d="M0 2h18" className={spot && seriesIndex === 0 ? "rs-chart-line rs-chart-line-spot" : LINE_CLASS[seriesIndex]} />
+    <svg width="18" height="4" viewBox="0 0 18 4" aria-hidden="true" className={svg.className} style={svg.style}>
+      <path d="M0 2h18" {...lineMark(seriesIndex, spot)} />
     </svg>
   );
+}
+
+export function ChartHead({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  const sx = rs(["rs-chart-head", className], styles.head);
+  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+}
+
+export function ChartTitle({ className, style, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  const sx = rs(["rs-chart-title", className], styles.title);
+  return <p {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+}
+
+export function ChartLegend({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  const sx = rs(["rs-chart-legend", className], styles.legend);
+  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+}
+
+export function ChartLegendItem({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+  const sx = rs(["rs-chart-legend-item", className], styles.legendItem);
+  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }
 
 export function ChartTip({
@@ -137,15 +368,30 @@ export function ChartTip({
   label: string;
   rows: Array<{ name?: string; value: string }>;
 }) {
+  const tip = rs(["rs-chart-tip"], styles.tip);
+  const tipLabel = rs(["rs-chart-tip-label"], styles.tipLabel);
   return (
-    <div className="rs-chart-tip" style={{ left, top }}>
-      <span className="rs-chart-tip-label">{label}</span>
-      {rows.map((row, i) => (
-        <div key={i} className="rs-chart-tip-row">
-          {row.name ? <span className="rs-chart-tip-name">{row.name}</span> : null}
-          <span className="rs-chart-tip-val">{row.value}</span>
-        </div>
-      ))}
+    <div className={tip.className} style={{ ...tip.style, left, top }}>
+      <span className={tipLabel.className} style={tipLabel.style}>
+        {label}
+      </span>
+      {rows.map((row, i) => {
+        const tipRow = rs(["rs-chart-tip-row"], styles.tipRow);
+        const tipName = rs(["rs-chart-tip-name"], styles.tipName);
+        const tipVal = rs(["rs-chart-tip-val"], styles.tipVal);
+        return (
+          <div key={i} className={tipRow.className} style={tipRow.style}>
+            {row.name ? (
+              <span className={tipName.className} style={tipName.style}>
+                {row.name}
+              </span>
+            ) : null}
+            <span className={tipVal.className} style={tipVal.style}>
+              {row.value}
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -157,14 +403,16 @@ export interface ChartFieldProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function ChartField({ spot, className, style, children, ...props }: ChartFieldProps) {
   const color = spot === true ? CROUWEL_SPOT : typeof spot === "string" ? spot : undefined;
+  const sx = rs(["rs-chart", "rs-chart-field", className], styles.chart, styles.field);
   return (
     <div
-      className={cx("rs-chart", "rs-chart-field", className)}
+      {...props}
+      className={sx.className}
       style={{
+        ...sx.style,
         ...(style as React.CSSProperties),
         ...(color ? ({ ["--rs-chart-spot" as string]: color } as React.CSSProperties) : null),
       }}
-      {...props}
     >
       {children}
     </div>

@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../../..", import.meta.url));
 const site = readFileSync(join(root, "apps/www/app/site.css"), "utf8");
+const siteSx = readFileSync(join(root, "apps/www/app/site.stylex.ts"), "utf8");
 const chrome = readFileSync(join(root, "apps/www/components/site-chrome.tsx"), "utf8");
 const layout = readFileSync(join(root, "apps/www/app/layout.tsx"), "utf8");
 const block = readFileSync(join(root, "apps/www/components/code-block.tsx"), "utf8");
@@ -107,7 +108,7 @@ if (ifCss.includes(".if-title")) {
   fail("Interfaces must not keep a parallel if-title spacer; cover owns the 204 cell");
 }
 const ifIndex = readFileSync(join(root, "apps/www/app/interfaces/page.tsx"), "utf8");
-if (!ifIndex.includes('className="cover"')) {
+if (!ifIndex.includes("chrome.cover") || (!ifIndex.includes('sx("cover"') && !ifIndex.includes('className="cover"'))) {
   fail("Interfaces H1 must use the shared cover so it shares the rail first-row line");
 }
 
@@ -178,6 +179,12 @@ if (/\.toc-sub \{[^}]*background:\s*var\(--bg\)/s.test(navCss)) {
 if (!about.includes("padding: 0 0 1px 0")) {
   fail("About must keep its bottom cage hairline");
 }
+if (!about.includes("html:has(.field-page) .site-footer") || !/html:has\(\.field-page\) \.site-footer\s*\{[^}]*border-top:\s*none/s.test(about)) {
+  fail("About footer must not stack a second hairline on the field cage");
+}
+if (!about.includes(".field-cell-lead") || !/field-cell-lead \{[^}]*padding-top:\s*24px/s.test(about)) {
+  fail("About “What it is” must sit on the 24px navbar row");
+}
 if (!about.includes("box-shadow: inset 1px 0 0 var(--grid-line), inset -1px 0 0 var(--grid-line)")) {
   fail("About L/R box margins must be inset --grid-line, quieter than the cage");
 }
@@ -210,7 +217,64 @@ if (!site.includes(".gallery { display: grid; grid-template-columns: repeat(auto
   fail("Component gallery cards stay 388-wide auto-fill tracks");
 }
 if (!/catalog-page \.site-content \{[^}]*width:\s*min\(796px, 100%\)/s.test(site)) {
-  fail("Catalog index measure must be 796 so two 388 cards fit, same as icons");
+  fail("Catalog index measure must be 796 so two 388 cards fit");
+}
+if (!componentsPage.includes("catalogContent") || componentsPage.includes("chrome.content)")) {
+  fail("Catalog index must use StyleX catalogContent (796), not the 592 content measure");
+}
+if (!siteSx.includes("catalogContent:") || !siteSx.includes('"min(796px, 100%)"')) {
+  fail("StyleX catalogContent must be min(796px, 100%) so two 388 cards fit");
+}
+if (!/@media \(min-width: 1024px\) \{ \.site-layout \{ --ml: 204px; margin-left: 204px; \}/.test(site)) {
+  fail("Desktop site-layout must keep the live --ml 204px / margin-left 204px");
+}
+if (!/@media \(min-width: 1024px\) \{\s*\.site-layout\.catalog-page \{\s*--ml:\s*0px;\s*margin-left:\s*0;/.test(site)) {
+  fail("Catalog index must zero --ml at ≥1024 like live so two 388 cards fit beside the rail");
+}
+if (/data-rail="catalog"[\s\S]{0,160}--ml:\s*0px/.test(navCss)) {
+  fail("Catalog rail must keep the live 204 inset; do not zero --ml for data-rail=catalog");
+}
+if (!siteSx.includes("iconContent:") || !siteSx.includes('"min(796px, 100%)"')) {
+  fail("StyleX iconContent must be min(796px, 100%) — 4 × 184 cells + gutters");
+}
+if (!site.includes(".site-content:has(.rs-icon-catalog)") || !/rs-icon-catalog\) \{ width: min\(796px, 100%\)/.test(site)) {
+  fail("Icons catalog container must span 4 × 184 cells (796)");
+}
+if (!/\.preview-box:has\(\.rs-icon-catalog\) \{[^}]*padding:\s*0/.test(site) || !/\.preview-box:has\(\.rs-icon-catalog\) \{[^}]*border:\s*0/.test(site)) {
+  fail("Icons preview must not pad or frame or the 4th 184 column will not fit");
+}
+const namePage = readFileSync(join(root, "apps/www/app/components/[name]/page.tsx"), "utf8");
+if (!namePage.includes("iconContent") || !namePage.includes('name === "icons"')) {
+  fail("Icons page must use the 4-col iconContent measure");
+}
+if (!site.includes(".rs-crumb-bar-scrolled {") || !/rs-crumb-bar-scrolled \{[^}]*background:\s*var\(--bg\)/.test(site)) {
+  fail("Scrolled crumb bar must restore paper background vs live");
+}
+if (!siteSx.includes("crumbBarScrolled:") || !siteSx.includes('backgroundColor: "var(--bg)"')) {
+  fail("StyleX crumb bar must paint paper on scroll");
+}
+const specimenSx = readFileSync(join(root, "apps/www/app/specimen.stylex.ts"), "utf8");
+if (!specimenSx.includes('repeat(2, minmax(0, 1fr))') || !specimenSx.includes('repeat(4, minmax(0, 1fr))') || !specimenSx.includes('repeat(6, minmax(0, 1fr))')) {
+  fail("Homepage StyleX field must recut 2 / 4 / 6 columns; do not collapse to 1-col");
+}
+if (!specimenSx.includes("cellTall:") || !specimenSx.includes("minHeight: 408") || !specimenSx.includes('justifyContent: "flex-end"')) {
+  fail("Homepage StyleX face/law must be min-height 408 and justify flex-end so the lockup clears the 72 crumb bar");
+}
+if (!specimenSx.includes("overflow: \"visible\"")) {
+  fail("Homepage StyleX cells must keep overflow visible");
+}
+const homePage = readFileSync(join(root, "apps/www/app/page.tsx"), "utf8");
+if (!homePage.includes("specimen.cellTall") || !homePage.includes("specimen-cell-face")) {
+  fail("Homepage face/law must apply StyleX cellTall (408 + flex-end)");
+}
+if (!siteSx.includes("crumbBar:") || !siteSx.includes("zIndex: 160") || !/crumbBar: \{[\s\S]*?position:\s*\"fixed\"/.test(siteSx) || !/crumbBar: \{[\s\S]*?default:\s*72/.test(siteSx)) {
+  fail("Site crumb bar StyleX must be a full-bleed fixed 72 layer (z 160)");
+}
+if (!/\.rs-crumb-bar \{[\s\S]*?position:\s*fixed/.test(site) || !/\.rs-crumb-bar \{[\s\S]*?height:\s*72px/.test(site) || !/\.rs-crumb-bar \{[\s\S]*?z-index:\s*160/.test(site)) {
+  fail("Site crumb bar CSS must be a full-bleed fixed 72 layer matching live");
+}
+if (!siteSx.includes('repeat(auto-fill, 388px)') || !siteSx.includes('[at480]: "1fr"')) {
+  fail("StyleX gallery must auto-fill 388 tracks and recut to 1fr at 480");
 }
 const catalogPhoneAt = site.lastIndexOf("@media (max-width: 480px)");
 const catalogPhone = catalogPhoneAt >= 0 ? site.slice(catalogPhoneAt, catalogPhoneAt + 220) : "";
@@ -392,7 +456,7 @@ if (!/@media \(max-width: 899px\) \{\s*\.cover \{\s*min-height: 0;/.test(site)) 
 
 const phoneCss = readFileSync(join(root, "packages/core/css/phone.css"), "utf8");
 const tokensCss = readFileSync(join(root, "packages/core/css/tokens.css"), "utf8");
-const buttonCss = readFileSync(join(root, "packages/core/css/components/button.css"), "utf8");
+const buttonCss = readFileSync(join(root, "packages/react/src/components/button.tsx"), "utf8");
 if (!tokensCss.includes("--hit:") || !tokensCss.includes("--control-h:") || !tokensCss.includes("--control-fs:")) {
   fail("Tokens must emit --hit / --control-h / --control-fs");
 }
@@ -414,7 +478,7 @@ for (const sel of [".rs-btn-primary", ".rs-input", ".rs-tab", ".rs-switch"]) {
 if (!phoneCss.includes("min-height:var(--hit)") && !phoneCss.includes("min-height: var(--hit)")) {
   fail("phone.css must size hits with --hit");
 }
-if (!buttonCss.includes("height:40px")) {
+if (!buttonCss.includes("default: raster.controlH") && !buttonCss.includes("height:40px")) {
   fail("Desktop button must stay 40px; recut only in phone.css");
 }
 if (!phone.includes("flex-direction: column") || !phone.includes(".preview-box")) {
@@ -533,13 +597,13 @@ if (registry.includes('rs-card-in"><p class="rs-card-body"')) {
 if (registry.includes("1px frame, chrome-square")) {
   fail("Card catalog copy is a typography stack, not a framed box");
 }
-const cardCss = readFileSync(join(root, "packages/core/css/components/card.css"), "utf8");
-const cardRule = cardCss.slice(cardCss.indexOf(".rs-card{"), cardCss.indexOf("}", cardCss.indexOf(".rs-card{")));
-if (!cardRule.includes("border:0") || cardRule.includes("border:1px")) {
+const cardCss = readFileSync(join(root, "packages/react/src/components/card.tsx"), "utf8");
+const cardRule = cardCss.slice(cardCss.indexOf("card: {"), cardCss.indexOf("},", cardCss.indexOf("card: {")));
+if (!cardRule.includes("borderWidth: 0") || cardRule.includes("borderWidth: 1")) {
   fail("Default Card chrome must not draw an outer frame");
 }
-const calloutCss = readFileSync(join(root, "packages/core/css/components/callout.css"), "utf8");
-if (calloutCss.includes("border-left:3px") || calloutCss.includes("border-radius:var(--radius-sm)")) {
+const calloutCss = readFileSync(join(root, "packages/react/src/components/callout.tsx"), "utf8");
+if (calloutCss.includes("borderLeft: 3") || calloutCss.includes("borderRadius: raster.radiusSm")) {
   fail("Callout is a 1px hairline, radius 0, no left bar");
 }
 const aboutNotes = readFileSync(join(root, "apps/www/app/about/about-notes.tsx"), "utf8");
@@ -561,7 +625,7 @@ if (!facts.includes("Frontier Design Lab") || !facts.includes("International Typ
 if (!facts.includes("Simple, Beautiful, Opinionated, Elegant, Clear, Legible, Solid, Versatile, Customizable, Minimal")) {
   fail("About Notes must name Renato's ten principles");
 }
-const nestCss = readFileSync(join(root, "packages/core/css/components/nest.css"), "utf8");
+const nestCss = readFileSync(join(root, "packages/react/src/components/concentric-radius.tsx"), "utf8");
 const catalogPage = readFileSync(join(root, "apps/www/app/components/page.tsx"), "utf8");
 if (!/name:\s*"concentric-radius"[\s\S]*?hidden:\s*true/.test(registry) || catalogPage.includes("concentric-radius")) {
   fail("Concentric radius stays in the registry as hidden; it is not a catalog card");
@@ -569,11 +633,14 @@ if (!/name:\s*"concentric-radius"[\s\S]*?hidden:\s*true/.test(registry) || catal
 if (!catalogPage.includes("catalogComponents") || !nav.includes("catalogComponents")) {
   fail("Catalog gallery and docs rail must list catalogComponents, not hidden entries");
 }
-if (!nestCss.includes("--rs-in") || !nestCss.includes(".rs-nest .rs-btn")) {
-  fail("Nest CSS must keep the inner-radius formula and nested button radius");
+if (!catalogPage.includes("iconGroups") || !catalogPage.includes('category === "icons"')) {
+  fail("Icons on /components must be iconGroups subcategory cards, like Charts");
 }
-const iconCss = readFileSync(join(root, "packages/core/css/components/icons.css"), "utf8");
-if (!iconCss.includes("repeat(auto-fill,184px)") || !iconCss.includes("width:184px")) {
+if (!nestCss.includes("--rs-in") || !nestCss.includes("var(--rs-out) - var(--rs-gap)")) {
+  fail("Nest must keep the inner-radius formula");
+}
+const iconCss = readFileSync(join(root, "packages/react/src/components/icon.tsx"), "utf8");
+if (!iconCss.includes("repeat(auto-fill, 184px)") || !iconCss.includes("default: 184")) {
   fail("Icon catalog cells must sit on 184px module columns");
 }
 if (iconCss.includes("repeat(4,minmax") || iconCss.includes("repeat(3,minmax")) {
@@ -590,14 +657,23 @@ const copySlice = site.slice(site.indexOf(".code-copy {"), site.indexOf(".code-c
 if (!copySlice.includes("border-radius: 0") || !copySlice.includes("box-shadow: none")) {
   fail("Copy chrome must be flush: no radius, no shadow");
 }
-if (
-  !site.includes("left: 224px") ||
-  !site.includes('body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav')
-) {
-  fail("Top-nav Components must align with the catalog second sidebar on detail routes");
+if (!site.includes("--nav-left: 224px") || !site.includes("left: var(--nav-left)")) {
+  fail("Corner-nav must freeze at the list 224 via --nav-left");
+}
+if (site.includes('body:has([data-rail="catalog"]):not(:has(.catalog-page))')) {
+  fail("Do not override corner-nav on catalog detail; list and detail share 224");
 }
 if (/body:has\(\[data-rail="catalog"\]\) \.corner-nav/.test(site)) {
   fail("Catalog gallery index must not pin corner-nav to the toc-sub column");
+}
+if (site.includes("left: 428px") || /--nav-left:\s*428px/.test(site) || siteSx.includes("428px")) {
+  fail("Corner-nav must freeze at the list 224; do not jump detail to toc-sub 428");
+}
+if (!site.includes(".gallery-item .preview-box") || !site.includes(".gallery-demo .preview-box") || !site.includes(".specimen-kit-live .preview-box")) {
+  fail("Catalog / kit specimens must not stack preview-box on the card or cell");
+}
+if (!site.includes(".preview-box:has(.rs-callout)") || !site.includes(".gallery-demo .rs-callout")) {
+  fail("Boxed leaves must not sit in a second demo hairline");
 }
 if (!site.includes(".settings {") || !site.includes("right: 20px") || !site.includes("position: fixed")) {
   fail("Appearance control stays sticky on the right");

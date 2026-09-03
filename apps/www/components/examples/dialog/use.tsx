@@ -2,11 +2,12 @@
 
 import * as React from "react";
 import { Button, Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   const [open, setOpen] = React.useState(false);
   return (
-    <article className="rs-use" data-use="dialog">
+    <UseField name="dialog">
       <h3 className="rs-use-type">Pull</h3>
       <div className="rs-use-body">
         <p className="rs-use-copy">Remove a sheet from the run. The question sits on paper.</p>
@@ -20,6 +21,6 @@ export function Use() {
           </DialogActions>
         </Dialog>
       </div>
-    </article>
+    </UseField>
   );
 }

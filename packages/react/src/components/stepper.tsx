@@ -1,5 +1,7 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster, phone } from "../tokens.stylex";
+import { rs } from "../rs";
 
 export interface Step {
   name: React.ReactNode;
@@ -12,25 +14,138 @@ export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
   current: number;
 }
 
-export function Stepper({ steps, current, className, ...props }: StepperProps) {
+const styles = stylex.create({
+  steps: {
+    display: "flex",
+    alignItems: "flex-start",
+    width: "100%",
+    maxWidth: "100%",
+    gap: 0,
+  },
+  step: {
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: {
+      default: 3,
+      ["@media (max-width: 640px)"]: 6,
+    },
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 0,
+    minWidth: 0,
+  },
+  dot: {
+    boxSizing: "border-box",
+    width: {
+      default: 24,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    height: {
+      default: 24,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    borderRadius: "50%",
+    borderWidth: 1.5,
+    borderStyle: "solid",
+    borderColor: raster.divider,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: {
+      default: 11,
+      ["@media (max-width: 640px)"]: 15,
+    },
+    fontWeight: 600,
+    color: raster.gray,
+    marginBottom: {
+      default: 6,
+      ["@media (max-width: 640px)"]: 8,
+    },
+    backgroundColor: raster.paper,
+    position: "relative",
+    zIndex: 1,
+  },
+  done: {
+    backgroundColor: raster.ink,
+    borderColor: raster.ink,
+    color: raster.paper,
+  },
+  active: {
+    borderColor: raster.ink,
+    color: raster.ink,
+  },
+  name: {
+    fontSize: {
+      default: 13,
+      ["@media (max-width: 640px)"]: raster.controlFs,
+    },
+    fontWeight: 600,
+    letterSpacing: "-0.01em",
+    color: raster.ink,
+    lineHeight: 1.2,
+  },
+  sub: {
+    fontSize: {
+      default: 11,
+      ["@media (max-width: 640px)"]: 13,
+    },
+    fontWeight: 500,
+    color: raster.gray,
+    letterSpacing: "-0.01em",
+  },
+  line: {
+    position: "absolute",
+    top: {
+      default: 11.5,
+      ["@media (max-width: 640px)"]: `calc(${raster.hit} / 2)`,
+    },
+    left: {
+      default: 24,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    right: 0,
+    height: raster.hairline,
+    backgroundColor: raster.divider,
+    margin: 0,
+    minWidth: 0,
+    zIndex: 0,
+  },
+});
+
+export function Stepper({ steps, current, className, style, ...props }: StepperProps) {
+  const root = rs(["rs-steps", className], styles.steps);
   return (
-    <div className={cx("rs-steps", className)} {...props}>
-      {steps.map((step, index) => (
-        <div key={index} className="rs-step" aria-current={index === current ? "step" : undefined}>
-          <span
-            className={cx(
-              "rs-step-dot",
-              index < current && "rs-step-done",
-              index === current && "rs-step-active",
+    <div {...props} className={root.className} style={{ ...root.style, ...style }}>
+      {steps.map((step, index) => {
+        const row = rs(["rs-step"], styles.step);
+        const dot = rs(
+          ["rs-step-dot", index < current && "rs-step-done", index === current && "rs-step-active"],
+          styles.dot,
+          index < current && styles.done,
+          index === current && styles.active,
+        );
+        const line = rs(["rs-step-line"], styles.line);
+        const name = rs(["rs-step-name"], styles.name);
+        const sub = rs(["rs-step-sub"], styles.sub);
+        return (
+          <div key={index} className={row.className} style={row.style} aria-current={index === current ? "step" : undefined}>
+            <span className={dot.className} style={dot.style}>
+              {index + 1}
+            </span>
+            {index < steps.length - 1 && <span className={line.className} style={line.style} aria-hidden="true" />}
+            <span className={name.className} style={name.style}>
+              {step.name}
+            </span>
+            {step.sub != null && (
+              <span className={sub.className} style={sub.style}>
+                {step.sub}
+              </span>
             )}
-          >
-            {index + 1}
-          </span>
-          {index < steps.length - 1 && <span className="rs-step-line" aria-hidden="true" />}
-          <span className="rs-step-name">{step.name}</span>
-          {step.sub != null && <span className="rs-step-sub">{step.sub}</span>}
-        </div>
-      ))}
+          </div>
+        );
+      })}
     </div>
   );
 }

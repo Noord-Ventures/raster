@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { CopyControl } from "@/components/code-block";
+import { sx } from "@/lib/sx";
 import { DOOR, PACKAGES_PUBLISHED } from "../specimen";
 import {
   era,
@@ -16,6 +18,7 @@ import {
   usage,
 } from "./facts";
 import { AboutNotes } from "./about-notes";
+import { about } from "./about.stylex";
 import "./about.css";
 
 export const metadata: Metadata = {
@@ -24,165 +27,207 @@ export const metadata: Metadata = {
   alternates: { canonical: `${DOOR}/about/` },
 };
 
+function Kicker({ children, id, nav }: { children: ReactNode; id?: string; nav?: boolean }) {
+  return (
+    <p id={id} {...sx("field-kicker", about.kicker, nav ? about.kickerNav : null)}>
+      {children}
+    </p>
+  );
+}
+
+function Copy({ children, wide }: { children: ReactNode; wide?: boolean }) {
+  return (
+    <div {...sx(wide ? "field-copy field-copy-wide" : "field-copy", about.copy, wide ? about.copyWide : null)}>
+      {children}
+    </div>
+  );
+}
+
+function CopyP({ children }: { children: ReactNode }) {
+  return <p {...sx("", about.copyP)}>{children}</p>;
+}
+
+function Mark({ children }: { children: ReactNode }) {
+  return <p {...sx("field-mark", about.mark)}>{children}</p>;
+}
+
+function WorkStill({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div {...sx("field-work", about.work)}>
+      <img src={src} alt={alt} {...sx("", about.workImg)} />
+    </div>
+  );
+}
+
 export default function AboutPage() {
   return (
-    <main className="field-page" aria-label="About Raster">
-      <div className="field">
-        <section className="field-cell field-cell-era" aria-labelledby="era-heading">
-          <p className="field-kicker">{era.kicker}</p>
-          <h1 id="era-heading" className="field-face">
+    <main {...sx("field-page", about.page)} aria-label="About Raster">
+      <div {...sx("field", about.field)}>
+        <section
+          {...sx("field-cell field-cell-era", about.cell, about.cellTall, about.cellEnd)}
+          aria-labelledby="era-heading"
+        >
+          <Kicker>{era.kicker}</Kicker>
+          <h1 id="era-heading" {...sx("field-face", about.face)}>
             {era.heading}
           </h1>
         </section>
 
-        <section className="field-cell field-cell-lead">
-          <p className="field-kicker">{lead.kicker}</p>
-          <div className="field-copy">
-            <p>{lead.what}</p>
-            <p>{lead.who}</p>
-          </div>
+        <section {...sx("field-cell field-cell-lead", about.cell, about.cellLead)}>
+          <Kicker nav>{lead.kicker}</Kicker>
+          <Copy>
+            <CopyP>{lead.what}</CopyP>
+            <CopyP>{lead.who}</CopyP>
+          </Copy>
         </section>
 
-        <section className="field-cell field-cell-use" aria-labelledby="usage-heading">
-          <p className="field-kicker" id="usage-heading">
-            {usage.kicker}
-          </p>
-          <div className="field-copy">
-            <p>{usage.intro}</p>
-          </div>
-          <div className="field-code-stack">
-            <div className="field-step">
-              <p className="field-kicker">{PACKAGES_PUBLISHED ? usage.commandWhere : "Source"}</p>
-              <div className="field-code-row">
-                <pre className="field-code">
+        <section
+          {...sx("field-cell field-cell-use", about.cell, about.cellTall, about.cellStart)}
+          aria-labelledby="usage-heading"
+        >
+          <Kicker id="usage-heading">{usage.kicker}</Kicker>
+          <Copy>
+            <CopyP>{usage.intro}</CopyP>
+          </Copy>
+          <div {...sx("field-code-stack", about.codeStack)}>
+            <div {...sx("field-step", about.step)}>
+              <Kicker>{PACKAGES_PUBLISHED ? usage.commandWhere : "Source"}</Kicker>
+              <div {...sx("field-code-row", about.codeRow)}>
+                <pre {...sx("field-code", about.code)}>
                   <code>{PACKAGES_PUBLISHED ? usage.command : "Not on npm"}</code>
                 </pre>
                 {PACKAGES_PUBLISHED ? <CopyControl text={usage.command} /> : null}
               </div>
             </div>
-            <div className="field-step">
-              <p className="field-kicker">{usage.htmlWhere}</p>
-              <div className="field-code-row">
-                <pre className="field-code">
+            <div {...sx("field-step", about.step)}>
+              <Kicker>{usage.htmlWhere}</Kicker>
+              <div {...sx("field-code-row", about.codeRow)}>
+                <pre {...sx("field-code", about.code)}>
                   <code>{usage.html}</code>
                 </pre>
                 <CopyControl text={usage.html} />
               </div>
             </div>
-            <div className="field-step">
-              <p className="field-kicker">{usage.controlWhere}</p>
-              <div className="field-code-row">
-                <pre className="field-code">
+            <div {...sx("field-step", about.step)}>
+              <Kicker>{usage.controlWhere}</Kicker>
+              <div {...sx("field-code-row", about.codeRow)}>
+                <pre {...sx("field-code", about.code)}>
                   <code>{usage.control}</code>
                 </pre>
                 <CopyControl text={usage.control} />
               </div>
             </div>
           </div>
-          <div className="field-copy">
-            <p>{usage.landing}</p>
-            <p>{usage.files}</p>
-          </div>
-          <p className="field-mark">{usage.after}</p>
+          <Copy>
+            <CopyP>{usage.landing}</CopyP>
+            <CopyP>{usage.files}</CopyP>
+          </Copy>
+          <Mark>{usage.after}</Mark>
         </section>
 
-        <section className="field-cell field-cell-free">
-          <p className="field-kicker">{license.kicker}</p>
-          <div className="field-copy">
-            <p>{license.body}</p>
-            <p>
+        <section {...sx("field-cell field-cell-free", about.cell)}>
+          <Kicker>{license.kicker}</Kicker>
+          <Copy>
+            <CopyP>{license.body}</CopyP>
+            <CopyP>
               {license.type}{" "}
-              <a href={typeface.url}>{typeface.url.replace("https://", "")}</a>
-            </p>
-          </div>
+              <a href={typeface.url} {...sx("", about.link)}>
+                {typeface.url.replace("https://", "")}
+              </a>
+            </CopyP>
+          </Copy>
         </section>
 
-        <section className="field-cell field-cell-spec" aria-labelledby="specimen-heading">
-          <p className="field-kicker" id="specimen-heading">
-            {specimen.kicker}
-          </p>
-          <p className="field-spec-type" aria-hidden="true">
+        <section
+          {...sx("field-cell field-cell-spec", about.cell, about.cellTall, about.cellStart)}
+          aria-labelledby="specimen-heading"
+        >
+          <Kicker id="specimen-heading">{specimen.kicker}</Kicker>
+          <p {...sx("field-spec-type", about.specType)} aria-hidden="true">
             Raster
           </p>
-          <div className="field-copy field-copy-wide">
-            <p>{specimen.body}</p>
-            <p>{specimen.mid}</p>
-            <p>{specimen.long}</p>
-          </div>
+          <Copy wide>
+            <CopyP>{specimen.body}</CopyP>
+            <CopyP>{specimen.mid}</CopyP>
+            <CopyP>{specimen.long}</CopyP>
+          </Copy>
         </section>
 
-        <section className="field-cell field-cell-mod" aria-label="204 module">
-          <p className="field-kicker">{program.module.kicker}</p>
-          <div className="field-spec field-spec-module" aria-label="204 module: 184 column and 20 gutter">
-            <div className="field-mod204">
-              <div className="field-col184" />
-              <div className="field-gut20" />
+        <section {...sx("field-cell field-cell-mod", about.cell)} aria-label="204 module">
+          <Kicker>{program.module.kicker}</Kicker>
+          <div
+            {...sx("field-spec field-spec-module", about.spec, about.specModule)}
+            aria-label="204 module: 184 column and 20 gutter"
+          >
+            <div {...sx("field-mod204", about.mod204)}>
+              <div {...sx("field-col184", about.col184)} />
+              <div {...sx("field-gut20", about.gut20)} />
             </div>
-            <div className="field-mod-dim">
+            <div {...sx("field-mod-dim", about.modDim)}>
               <span>184</span>
               <span>20</span>
             </div>
           </div>
-          <p className="field-mark">{program.module.law}</p>
+          <Mark>{program.module.law}</Mark>
         </section>
 
-        <section className="field-cell field-cell-hair" aria-label="Hairlines">
-          <p className="field-kicker">{program.hairline.kicker}</p>
-          <div className="field-spec field-spec-hair" aria-hidden="true" />
-          <p className="field-mark">{program.hairline.law}</p>
+        <section {...sx("field-cell field-cell-hair", about.cell)} aria-label="Hairlines">
+          <Kicker>{program.hairline.kicker}</Kicker>
+          <div {...sx("field-spec field-spec-hair", about.spec, about.specHair)} aria-hidden="true" />
+          <Mark>{program.hairline.law}</Mark>
         </section>
 
-        <section className="field-cell field-cell-flush" aria-label="Flush cells">
-          <p className="field-kicker">{program.flush.kicker}</p>
-          <div className="field-spec field-spec-flush" aria-hidden="true">
-            <div className="field-flush-row" />
-            <div className="field-flush-row" />
-            <div className="field-flush-row" />
+        <section {...sx("field-cell field-cell-flush", about.cell)} aria-label="Flush cells">
+          <Kicker>{program.flush.kicker}</Kicker>
+          <div {...sx("field-spec field-spec-flush", about.spec, about.specFlush)} aria-hidden="true">
+            <div {...sx("field-flush-row", about.flushRow)} />
+            <div {...sx("field-flush-row", about.flushRow)} />
+            <div {...sx("field-flush-row", about.flushRow)} />
           </div>
-          <p className="field-mark">{program.flush.law}</p>
+          <Mark>{program.flush.law}</Mark>
         </section>
 
-        <section className="field-cell field-cell-grot" aria-label="Grotesque">
-          <p className="field-kicker">{program.grotesque.kicker}</p>
-          <p className="field-grotesque" aria-hidden="true">
+        <section {...sx("field-cell field-cell-grot", about.cell, about.cellTall)} aria-label="Grotesque">
+          <Kicker>{program.grotesque.kicker}</Kicker>
+          <p {...sx("field-grotesque", about.grotesque)} aria-hidden="true">
             {program.grotesque.mark}
           </p>
-          <p className="field-mark">{program.grotesque.law}</p>
+          <Mark>{program.grotesque.law}</Mark>
         </section>
 
-        <section className="field-cell field-cell-hist">
-          <p className="field-kicker">{history.kicker}</p>
-          <div className="field-copy">
-            <p>{history.body}</p>
-          </div>
+        <section {...sx("field-cell field-cell-hist", about.cell)}>
+          <Kicker>{history.kicker}</Kicker>
+          <Copy>
+            <CopyP>{history.body}</CopyP>
+          </Copy>
         </section>
 
         {featured.map((figure) => (
           <section
             key={figure.id}
-            className={`field-cell field-cell-${figure.id}${figure.work ? " field-cell-has-work" : ""}`}
+            {...sx(
+              `field-cell field-cell-${figure.id}${figure.work ? " field-cell-has-work" : ""}`,
+              about.cell,
+              figure.work ? about.cellWork : null,
+            )}
             aria-label={figure.name}
           >
+            {figure.work ? <WorkStill src={figure.work.src} alt={figure.work.alt} /> : null}
             {figure.work ? (
-              <div className="field-work">
-                <img src={figure.work.src} alt={figure.work.alt} />
-              </div>
-            ) : null}
-            {figure.work ? (
-              <div className="field-matter">
-                <p className="field-kicker">
+              <div {...sx("field-matter", about.matter)}>
+                <Kicker>
                   {figure.years} · {figure.place}
-                </p>
-                <h2 className="field-name field-name-feature">{figure.name}</h2>
-                <p className="field-mark">{figure.mark}</p>
+                </Kicker>
+                <h2 {...sx("field-name field-name-feature", about.name, about.nameFeature)}>{figure.name}</h2>
+                <Mark>{figure.mark}</Mark>
               </div>
             ) : (
               <>
-                <p className="field-kicker">
+                <Kicker>
                   {figure.years} · {figure.place}
-                </p>
-                <h2 className="field-name field-name-feature">{figure.name}</h2>
-                <p className="field-mark">{figure.mark}</p>
+                </Kicker>
+                <h2 {...sx("field-name field-name-feature", about.name, about.nameFeature)}>{figure.name}</h2>
+                <Mark>{figure.mark}</Mark>
               </>
             )}
           </section>
@@ -193,71 +238,77 @@ export default function AboutPage() {
           return (
             <section
               key={entry.name}
-              className={`field-cell field-cell-n${String(i + 1).padStart(2, "0")}${work ? " field-cell-has-work" : ""}`}
+              {...sx(
+                `field-cell field-cell-n${String(i + 1).padStart(2, "0")}${work ? " field-cell-has-work" : ""}`,
+                about.cell,
+                work ? about.cellWork : null,
+              )}
               aria-label={entry.name}
             >
+              {work ? <WorkStill src={work.src} alt={work.alt} /> : null}
               {work ? (
-                <div className="field-work">
-                  <img src={work.src} alt={work.alt} />
-                </div>
-              ) : null}
-              {work ? (
-                <div className="field-matter">
-                  <p className="field-kicker">
+                <div {...sx("field-matter", about.matter)}>
+                  <Kicker>
                     {entry.years} · {entry.place}
-                  </p>
-                  <h2 className="field-name">{entry.name}</h2>
-                  <p className="field-mark">{entry.mark}</p>
+                  </Kicker>
+                  <h2 {...sx("field-name", about.name)}>{entry.name}</h2>
+                  <Mark>{entry.mark}</Mark>
                 </div>
               ) : (
                 <>
-                  <p className="field-kicker">
+                  <Kicker>
                     {entry.years} · {entry.place}
-                  </p>
-                  <h2 className="field-name">{entry.name}</h2>
-                  <p className="field-mark">{entry.mark}</p>
+                  </Kicker>
+                  <h2 {...sx("field-name", about.name)}>{entry.name}</h2>
+                  <Mark>{entry.mark}</Mark>
                 </>
               )}
             </section>
           );
         })}
 
-        <section className="field-cell field-cell-faq" aria-labelledby="notes-heading">
-          <p className="field-kicker" id="notes-heading">
-            Notes
-          </p>
-          <div className="field-notes">
+        <section {...sx("field-cell field-cell-faq", about.cell, about.cellStart)} aria-labelledby="notes-heading">
+          <Kicker id="notes-heading">Notes</Kicker>
+          <div {...sx("field-notes", about.notes)}>
             <AboutNotes />
           </div>
         </section>
 
-        <section className="field-cell field-cell-colophon" aria-label="Colophon">
-          <p className="field-kicker">Colophon</p>
-          <div className="field-colophon">
-            <p>
+        <section {...sx("field-cell field-cell-colophon", about.cell, about.cellStart)} aria-label="Colophon">
+          <Kicker>Colophon</Kicker>
+          <div {...sx("field-colophon", about.colophon)}>
+            <p {...sx("", about.colophonP)}>
               {noord.heading} · {noord.span}
             </p>
-            <p>{noord.what}</p>
-            <p>
+            <p {...sx("", about.colophonP)}>{noord.what}</p>
+            <p {...sx("", about.colophonP)}>
               {noord.built} {noord.who}
             </p>
-            <p>
+            <p {...sx("", about.colophonP)}>
               {typeface.name}, {typeface.license} · {typeface.designer}. {typeface.ofl}.{" "}
-              <a href={typeface.url}>{typeface.url.replace("https://", "")}</a>
+              <a href={typeface.url} {...sx("", about.link)}>
+                {typeface.url.replace("https://", "")}
+              </a>
             </p>
-            <p>{noord.packages.join(" · ")}</p>
-            <p>
-              <a href={noord.door}>{noord.door.replace("https://", "")}</a>
+            <p {...sx("", about.colophonP)}>{noord.packages.join(" · ")}</p>
+            <p {...sx("", about.colophonP)}>
+              <a href={noord.door} {...sx("", about.link)}>
+                {noord.door.replace("https://", "")}
+              </a>
               {" · "}
-              <a href={noord.host}>{noord.host.replace("https://", "")}</a>
+              <a href={noord.host} {...sx("", about.link)}>
+                {noord.host.replace("https://", "")}
+              </a>
               {" · "}
-              <a href={person.repo}>github.com/Noord-Ventures/raster</a>
+              <a href={person.repo} {...sx("", about.link)}>
+                github.com/Noord-Ventures/raster
+              </a>
             </p>
-            <p>
+            <p {...sx("", about.colophonP)}>
               {person.copyright}, {person.year}.
             </p>
             {PACKAGES_PUBLISHED ? (
-              <p>
+              <p {...sx("", about.colophonP)}>
                 <code className="rs-code">{noord.command}</code>
               </p>
             ) : null}

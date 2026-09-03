@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import * as React from "react";
 import { rasterCategories, catalogComponents, type RasterCategory } from "@noorddev/raster";
 import { MobileToc } from "@/components/toc-mobile";
+import { sx } from "@/lib/sx";
+import { navStyles } from "./docs-nav.stylex";
 import "./docs-nav.css";
 
 function sentence(value: string) {
@@ -39,8 +41,8 @@ function docsLabel(pathname: string) {
  * Components rail: groups in the first 184, that group's items in the
  * second. Hover (and focus) fills the second column. The page's own
  * group stays selected so the column is never empty on load.
- * Below 1440 the rail occupies columns 1–2; from 1440 the chrome
- * keeps the one-module inset.
+ * Detail keeps the live one-module inset (--ml 204) at ≥1024.
+ * Catalog index zeros --ml in site.css like live so 796 fits.
  * Under 900 the rail hides; a stacked 44pt picker takes its place.
  */
 export function DocsNav() {
@@ -126,14 +128,14 @@ export function DocsNav() {
   if (!catalog) {
     return (
       <>
-        <div className="toc-rail">
-          <nav className="toc" aria-label="Docs">
-            <Link href="/docs" className="toc-item" aria-current={here(pathname, "/docs") ? "page" : undefined}>
+        <div {...sx("toc-rail", navStyles.rail)}>
+          <nav {...sx("toc", navStyles.toc)} aria-label="Docs">
+            <Link href="/docs" {...sx("toc-item", navStyles.item)} aria-current={here(pathname, "/docs") ? "page" : undefined}>
               Getting started
             </Link>
             <Link
               href="/docs/tokens"
-              className="toc-item"
+              {...sx("toc-item", navStyles.item)}
               aria-current={here(pathname, "/docs/tokens") ? "page" : undefined}
             >
               Tokens
@@ -149,13 +151,13 @@ export function DocsNav() {
 
   return (
     <>
-      <div className="toc-rail" data-rail="catalog" onPointerLeave={leaveRail} onBlur={leaveRail}>
-        <nav className="toc" data-toc="groups" aria-label="Component groups">
+      <div {...sx("toc-rail", navStyles.rail)} data-rail="catalog" onPointerLeave={leaveRail} onBlur={leaveRail}>
+        <nav {...sx("toc", navStyles.toc)} data-toc="groups" aria-label="Component groups">
           {groups.map((category) => (
             <Link
               key={category}
               href={`/components#${category}`}
-              className="toc-item"
+              {...sx("toc-item", navStyles.item)}
               aria-current={selected === category ? "true" : undefined}
               data-preview={shown === category ? "true" : undefined}
               onPointerEnter={() => setPreview(category)}
@@ -166,14 +168,14 @@ export function DocsNav() {
           ))}
         </nav>
 
-        <nav className="toc toc-sub" data-toc="items" aria-label={shown ? sentence(shown) : "Components"}>
+        <nav {...sx("toc toc-sub", navStyles.toc, navStyles.sub)} data-toc="items" aria-label={shown ? sentence(shown) : "Components"}>
           {items.map((c) => {
             const href = `/components/${c.name}`;
             return (
               <Link
                 key={c.name}
                 href={href}
-                className="toc-item"
+                {...sx("toc-item", navStyles.item)}
                 aria-current={here(pathname, href) ? "page" : undefined}
               >
                 {c.title}

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { LineChart, ToggleGroup } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 const SHEETS = [12, 18, 15, 26, 24];
@@ -10,7 +11,7 @@ const PROOFS = [4, 6, 5, 9, 7];
 export function Use() {
   const [mode, setMode] = React.useState("run");
   return (
-    <article className="rs-use" data-use="chart">
+    <UseField name="chart">
       <h3 className="rs-use-type">Run</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -41,6 +42,6 @@ export function Use() {
           inverted={mode === "invert"}
         />
       </div>
-    </article>
+    </UseField>
   );
 }

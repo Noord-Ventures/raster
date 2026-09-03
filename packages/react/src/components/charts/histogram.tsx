@@ -1,13 +1,29 @@
 import * as React from "react";
+import * as stylex from "@stylexjs/stylex";
+import { raster } from "../../tokens.stylex";
+import { rs } from "../../rs";
 import {
   ChartField,
+  ChartHead,
+  ChartLegend,
+  ChartLegendItem,
   ChartTip,
+  ChartTitle,
   PLOT,
   SrTable,
+  chartStyles,
   defaultFormat,
   niceMax,
   ticksFor,
 } from "./frame";
+
+const styles = stylex.create({
+  hist: {
+    fill: raster.divider,
+    stroke: "none",
+    borderRadius: 0,
+  },
+});
 
 export type HistogramBin = { label: string; count: number };
 
@@ -46,36 +62,43 @@ export function Histogram({
   const bw = (plotW - gap * Math.max(0, bins.length - 1)) / bins.length;
   const active = hover != null ? bins[hover] : null;
 
+  const svg = rs([], chartStyles.svg);
+  const plot = rs(["rs-chart-plot"], chartStyles.plot);
+  const gridSx = rs(["rs-chart-grid"], chartStyles.grid);
+  const axis = rs(["rs-chart-axis"], chartStyles.axis);
+  const baseline = rs(["rs-chart-baseline"], chartStyles.baseline);
+  const hist = rs(["rs-chart-hist", spot && "rs-chart-bar-spot"], styles.hist, spot && chartStyles.barSpot);
+
   return (
     <ChartField spot={spot} className={className} {...props}>
       {yLabel && (
-        <div className="rs-chart-head">
-          <p className="rs-chart-title">{yLabel}</p>
-        </div>
+        <ChartHead>
+          <ChartTitle>{yLabel}</ChartTitle>
+        </ChartHead>
       )}
-      <svg viewBox={`0 0 ${W} ${height}`} role="img" aria-label="Histogram">
-        <g className="rs-chart-plot">
+      <svg className={svg.className} style={svg.style} viewBox={`0 0 ${W} ${height}`} role="img" aria-label="Histogram">
+        <g className={plot.className} style={plot.style}>
           {grid &&
             yTicks.map((t) => {
               const y = MT + plotH - (t / max) * plotH;
               return (
                 <g key={t}>
-                  <line className="rs-chart-grid" x1={ML} x2={W - MR} y1={y} y2={y} />
-                  <text className="rs-chart-axis" x={ML - 6} y={y + 3.5} textAnchor="end">
+                  <line className={gridSx.className} style={gridSx.style} x1={ML} x2={W - MR} y1={y} y2={y} />
+                  <text className={axis.className} style={axis.style} x={ML - 6} y={y + 3.5} textAnchor="end">
                     {format(t)}
                   </text>
                 </g>
               );
             })}
-          <line className="rs-chart-baseline" x1={ML} x2={W - MR} y1={MT + plotH} y2={MT + plotH} />
+          <line className={baseline.className} style={baseline.style} x1={ML} x2={W - MR} y1={MT + plotH} y2={MT + plotH} />
           {bins.map((b, i) => {
             const h = (b.count / max) * plotH;
             const x = ML + i * (bw + gap);
             const y = MT + plotH - h;
             return (
               <g key={b.label} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)}>
-                <rect className={spot ? "rs-chart-hist rs-chart-bar-spot" : "rs-chart-hist"} x={x} y={y} width={bw} height={h} />
-                <text className="rs-chart-axis" x={x + bw / 2} y={height - 4} textAnchor="middle">
+                <rect className={hist.className} style={hist.style} x={x} y={y} width={bw} height={h} />
+                <text className={axis.className} style={axis.style} x={x + bw / 2} y={height - 4} textAnchor="middle">
                   {b.label}
                 </text>
               </g>
@@ -92,9 +115,9 @@ export function Histogram({
         />
       )}
       {unit && (
-        <div className="rs-chart-legend" aria-hidden="true">
-          <span className="rs-chart-legend-item">{unit}</span>
-        </div>
+        <ChartLegend aria-hidden="true">
+          <ChartLegendItem>{unit}</ChartLegendItem>
+        </ChartLegend>
       )}
       <SrTable
         caption="Histogram"

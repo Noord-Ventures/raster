@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MobileToc } from "@/components/toc-mobile";
+import { sx } from "@/lib/sx";
 import { interfaces } from "./catalog";
+import { interfaces as ifx } from "./interfaces.stylex";
 
 function here(pathname: string, href: string) {
   return pathname === href || pathname === `${href}/`;
@@ -45,14 +47,14 @@ export function InterfacesNav({ rail = true }: { rail?: boolean }) {
   return (
     <>
       {rail ? (
-        <nav className="if-rail" aria-label="Interfaces">
-          <Link href="/interfaces" aria-current={here(pathname, "/interfaces") ? "page" : undefined}>
+        <nav {...sx("if-rail", ifx.rail)} aria-label="Interfaces">
+          <Link href="/interfaces" {...sx("", ifx.railLink)} aria-current={here(pathname, "/interfaces") ? "page" : undefined}>
             Index
           </Link>
           {interfaces.map((item) => {
             const href = `/interfaces/${item.slug}`;
             return (
-              <Link key={item.slug} href={href} aria-current={here(pathname, href) ? "page" : undefined}>
+              <Link key={item.slug} href={href} {...sx("", ifx.railLink)} aria-current={here(pathname, href) ? "page" : undefined}>
                 {item.title}
               </Link>
             );

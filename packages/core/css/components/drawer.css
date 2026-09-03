@@ -1,5 +1,0 @@
-/* ── Drawer: a native <dialog> from the bottom edge. No shadow. ── */
-dialog.rs-drawer{position:fixed;inset:auto 0 0 0;margin:0;width:100%;max-width:none;height:auto;max-height:85dvh;border:none;border-top:1px solid var(--divider);border-radius:var(--radius-sm) var(--radius-sm) 0 0;padding:24px 20px;background:var(--bg);color:var(--text);box-shadow:none}
-dialog.rs-drawer::backdrop{background:rgba(0,0,0,0.25)}
-.rs-drawer-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}
-.rs-drawer-body{font-size:13.5px;line-height:1.6;letter-spacing:-.01em;color:var(--text-secondary);margin:0}

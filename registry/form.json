@@ -14,21 +14,27 @@
   "files": [
     {
       "path": "raster/form.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {}\n\n/** Native form. Fields stack. One primary action at the end. */\nexport function Form({ className, ...props }: FormProps) {\n  return <form className={cx(\"rs-form\", className)} {...props} />;\n}\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {}\n\nconst styles = stylex.create({\n  form: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    gap: {\n      default: 16,\n      [\"@media (max-width: 640px)\"]: 20,\n    },\n    maxWidth: {\n      default: 388,\n      [\"@media (max-width: 640px)\"]: \"none\",\n    },\n    width: {\n      default: null,\n      [\"@media (max-width: 640px)\"]: \"100%\",\n    },\n    margin: 0,\n    color: raster.ink,\n  },\n});\n\n/** Native form. Fields stack. One primary action at the end. */\nexport function Form({ className, style, ...props }: FormProps) {\n  const sx = rs([\"rs-form\", className], styles.form);\n  return <form {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n",
       "type": "registry:component",
       "target": "components/raster/form.tsx"
+    },
+    {
+      "path": "raster/tokens.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\n/**\n * StyleX vars alias Raster CSS custom properties. Not a second scale.\n * Values live in packages/core/css/tokens.css (generated from src/tokens.ts).\n */\nexport const raster = stylex.defineVars({\n  paper: \"var(--bg)\",\n  ink: \"var(--text)\",\n  gray: \"var(--text-secondary)\",\n  accent: \"var(--accent)\",\n  divider: \"var(--divider)\",\n  dividerSubtle: \"var(--divider-subtle)\",\n  tableAlt: \"var(--table-alt)\",\n  gridLine: \"var(--grid-line)\",\n  radiusSm: \"var(--radius-sm)\",\n  radius: \"var(--radius)\",\n  radiusChrome: \"var(--radius-chrome)\",\n  radiusIn: \"var(--radius-in)\",\n  pad: \"var(--pad)\",\n  gutter: \"var(--gutter)\",\n  module: \"var(--grid-size)\",\n  gridImage: \"var(--grid-image)\",\n  gridPos: \"var(--grid-pos)\",\n  hit: \"var(--hit)\",\n  controlH: \"var(--control-h)\",\n  controlFs: \"var(--control-fs)\",\n  controlLabel: \"var(--control-label)\",\n  durationSnap: \"var(--duration-snap)\",\n  duration: \"var(--duration)\",\n  durationConfirm: \"var(--duration-confirm)\",\n  ease: \"var(--ease)\",\n  transition: \"var(--transition)\",\n  textScale: \"var(--text-scale)\",\n  hairline: \"1px\",\n});\n\n/** Inter stack. Same as body in base.css. Not a token var — @font-face stays CSS. */\nexport const rasterFont =\n  \"Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif\";\n\nexport const rasterMono = \"ui-monospace, SFMono-Regular, Menlo, monospace\";\n\n/** Compile-time media keys. StyleX only folds defineConsts, not plain strings. */\nexport const mq = stylex.defineConsts({\n  phone: \"@media (max-width: 640px)\",\n  mobileGrid: \"@media (max-width: 480px)\",\n  at900: \"@media (min-width: 900px)\",\n  at899: \"@media (max-width: 899px)\",\n  rail: \"@media (min-width: 1024px)\",\n  wide: \"@media (min-width: 1440px)\",\n  reduce: \"@media (prefers-reduced-motion: reduce)\",\n  touch: \"@media (hover: none)\",\n});\n\n/** Phone recut (≤640). Desktop stays the poster. */\nexport const phone = mq.phone;\n\n/** Mobile grid (≤480). */\nexport const mobileGrid = mq.mobileGrid;\n\n/** Catalog rail. */\nexport const rail = mq.rail;\n\n/** Wide catalog. */\nexport const wide = mq.wide;\n",
+      "type": "registry:file",
+      "target": "components/raster/tokens.stylex.ts"
+    },
+    {
+      "path": "raster/rs.ts",
+      "content": "import type { CSSProperties } from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { cx } from \"./cx\";\n\ntype StyleXProps = { className?: string; style?: CSSProperties };\n\n/** Merge Raster class names with StyleX props. CSS-first classes stay on the node. */\nexport function rs(classNames: Array<string | false | null | undefined>, ...styles: unknown[]): StyleXProps {\n  const sx = (stylex.props as (...args: unknown[]) => StyleXProps)(...styles);\n  return {\n    className: cx(...classNames, sx.className),\n    style: sx.style,\n  };\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/rs.ts"
     },
     {
       "path": "raster/cx.ts",
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/field.css",
-      "content": "/* ── Field: quiet input: hairline border, ink focus, label above ──\n   Control height matches Button (40 / --control-h). Label and hint\n   sit on a 16px line-box so the 1px hairline lands on integer y.\n   Gaps are 8px (4/8). */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:8px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}\n.rs-input{\n  --rs-out:var(--radius-sm);\n  --rs-gap:0px;\n  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  box-sizing:border-box;\n  height:var(--control-h);\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  background:var(--bg);\n  color:var(--text);\n  font-size:14px;\n  line-height:calc(var(--control-h) - 2px);\n  padding:0 10px;\n  outline:none;\n  font-family:inherit\n}\n.rs-input:focus{border-color:var(--accent)}\n.rs-input-full{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px;margin:0;min-height:16px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n.rs-field-hint{margin:0;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}\n.rs-field-error{margin:0;font-size:12px;font-weight:500;color:var(--text);letter-spacing:-.01em;line-height:16px}\n.rs-form{display:flex;flex-direction:column;gap:16px;max-width:388px;margin:0}\n.rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}\n",
-      "type": "registry:file",
-      "target": "styles/raster/field.css"
     }
   ],
   "meta": {

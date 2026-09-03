@@ -1,4 +1,6 @@
 /* About / field. Isolated. Do not move these rules into site.css.
+   StyleX owns the field paint (about.stylex.ts). This sheet stays for
+   html:has() overlay kill, named grid-template-areas, and CI locks.
 
    Box grid: cell edges are 1px --divider through the field gap,
    not the main 204 overlay. L/R box margins are the quieter
@@ -13,6 +15,9 @@ body:has(.field-page) {
   background: transparent;
 }
 html:has(.field-page) .site-footer {
+  /* Field cage (padding-bottom 1px --divider) is the one hairline.
+     Do not stack a second rule on the footer. */
+  border-top: none;
   background-image: var(--grid-image);
   background-size: var(--grid-size) 100%;
   background-repeat: repeat-x;
@@ -93,7 +98,11 @@ html:has(.field-page) .site-footer {
   min-height: 408px;
 }
 
-.field-cell-lead { grid-area: lead; }
+.field-cell-lead {
+  grid-area: lead;
+  /* First content row = corner-nav (top 24 / height 24). */
+  padding-top: 24px;
+}
 .field-cell-use {
   grid-area: use;
   justify-content: flex-start;

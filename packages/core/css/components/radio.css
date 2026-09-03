@@ -1,5 +1,0 @@
-/* ── Radio: the dot is ink, never a hue ── */
-.rs-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}
-.rs-radio-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--divider);position:relative;flex-shrink:0}
-.rs-radio-on{border-color:var(--text)}
-.rs-radio-on::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--text)}

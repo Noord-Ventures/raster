@@ -1,8 +1,9 @@
 import { Switch } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="switch">
+    <UseField name="switch">
       <h3 className="rs-use-type">Night</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -11,6 +12,6 @@ export function Use() {
         </div>
         <Switch defaultChecked aria-label="Dark paper" />
       </div>
-    </article>
+    </UseField>
   );
 }

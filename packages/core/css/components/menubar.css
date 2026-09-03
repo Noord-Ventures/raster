@@ -1,5 +1,0 @@
-/* ── Menubar: dropdown menus in a hairline strip ── */
-.rs-menubar{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--divider);border-radius:var(--radius-sm);padding:2px}
-.rs-menubar .rs-select{min-width:0}
-.rs-menubar .rs-dropdown{border:none;padding:6px 10px;font-size:13px;gap:6px}
-.rs-menubar .rs-menu{min-width:180px;right:auto}

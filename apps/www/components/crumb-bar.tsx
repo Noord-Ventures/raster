@@ -4,7 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 import { rasterComponents } from "@noorddev/raster";
+import { chrome } from "@/app/site.stylex";
 import { interfaceBySlug } from "@/app/interfaces/catalog";
+import { sx } from "@/lib/sx";
 
 interface Crumb {
   label: string;
@@ -90,7 +92,14 @@ export function CrumbBar() {
   const trail = trailFor(pathname);
 
   return (
-    <nav className={`rs-crumb-bar${scrolled ? " rs-crumb-bar-scrolled" : ""}`} aria-label="Breadcrumbs">
+    <nav
+      {...sx(
+        `rs-crumb-bar${scrolled ? " rs-crumb-bar-scrolled" : ""}`,
+        chrome.crumbBar,
+        scrolled && chrome.crumbBarScrolled,
+      )}
+      aria-label="Breadcrumbs"
+    >
       {/* Root sits outside the inner row so the library’s 1024 inset
           (margin-left: 204px) cannot place “Raster” on the nav column. */}
       <Link ref={rootRef} className="rs-crumb-root site-crumb-root" href="/">

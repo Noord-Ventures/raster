@@ -1,29 +1,131 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster, phone } from "../tokens.stylex";
+import { rs } from "../rs";
 import { Icon } from "./icon";
 
 export interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   "aria-label"?: string;
 }
 
+const fade =
+  "linear-gradient(to right, transparent 0, black 28px, black calc(100% - 36px), transparent 100%)";
+
+const styles = stylex.create({
+  carousel: {
+    position: "relative",
+    width: "100%",
+    maxWidth: "100%",
+  },
+  track: {
+    display: "flex",
+    gap: raster.gutter,
+    overflowX: "auto",
+    scrollSnapType: "x mandatory",
+    scrollBehavior: {
+      default: "smooth",
+      "@media (prefers-reduced-motion: reduce)": "auto",
+    },
+    scrollbarWidth: "none",
+    "::-webkit-scrollbar": {
+      display: "none",
+    },
+    maskImage: fade,
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingInline: 0,
+  },
+  nav: {
+    display: "flex",
+    gap: {
+      default: 5,
+      ["@media (max-width: 640px)"]: 8,
+    },
+    marginTop: {
+      default: 10,
+      ["@media (max-width: 640px)"]: 14,
+    },
+  },
+  page: {
+    boxSizing: "border-box",
+    width: {
+      default: 26,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    height: {
+      default: 26,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    minWidth: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    minHeight: {
+      default: null,
+      ["@media (max-width: 640px)"]: raster.hit,
+    },
+    borderRadius: {
+      default: raster.radiusSm,
+      ["@media (max-width: 640px)"]: 0,
+    },
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: {
+      default: 13,
+      ["@media (max-width: 640px)"]: raster.controlFs,
+    },
+    color: raster.gray,
+    borderWidth: raster.hairline,
+    borderStyle: "solid",
+    borderColor: raster.divider,
+    padding: 0,
+    backgroundColor: "transparent",
+    fontFamily: "inherit",
+    cursor: "pointer",
+  },
+  icon: {
+    display: "block",
+    color: "inherit",
+  },
+  slide: {
+    flexShrink: 0,
+    scrollSnapAlign: "start",
+    borderRadius: {
+      default: raster.radiusSm,
+      ["@media (max-width: 640px)"]: 0,
+    },
+  },
+});
+
+export function CarouselSlide({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  const sx = rs(["rs-carousel-slide", className], styles.slide);
+  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+}
+
 /** Native scroll snap; the buttons nudge. */
-export function Carousel({ className, children, "aria-label": ariaLabel = "Carousel", ...props }: CarouselProps) {
+export function Carousel({ className, style, children, "aria-label": ariaLabel = "Carousel", ...props }: CarouselProps) {
   const trackRef = React.useRef<HTMLDivElement>(null);
   const nudge = (dir: 1 | -1) => {
     const track = trackRef.current;
     if (track) track.scrollBy({ left: dir * track.clientWidth * 0.8 });
   };
+  const root = rs(["rs-carousel", className], styles.carousel);
+  const track = rs(["rs-carousel-track"], styles.track);
+  const nav = rs(["rs-carousel-nav"], styles.nav);
+  const page = rs(["rs-page"], styles.page);
+  const icon = rs([], styles.icon);
   return (
-    <div className={cx("rs-carousel", className)} role="group" aria-label={ariaLabel} {...props}>
-      <div ref={trackRef} className="rs-carousel-track" tabIndex={0}>
+    <div role="group" aria-label={ariaLabel} {...props} className={root.className} style={{ ...root.style, ...style }}>
+      <div ref={trackRef} className={track.className} style={track.style} tabIndex={0}>
         {children}
       </div>
-      <div className="rs-carousel-nav">
-        <button type="button" className="rs-page" aria-label="Previous" onClick={() => nudge(-1)}>
-          <Icon name="chevron-left" size={12} />
+      <div className={nav.className} style={nav.style}>
+        <button type="button" className={page.className} style={page.style} aria-label="Previous" onClick={() => nudge(-1)}>
+          <Icon name="chevron-left" size={12} className={icon.className} style={icon.style} />
         </button>
-        <button type="button" className="rs-page" aria-label="Next" onClick={() => nudge(1)}>
-          <Icon name="chevron-right" size={12} />
+        <button type="button" className={page.className} style={page.style} aria-label="Next" onClick={() => nudge(1)}>
+          <Icon name="chevron-right" size={12} className={icon.className} style={icon.style} />
         </button>
       </div>
     </div>

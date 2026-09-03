@@ -2,12 +2,13 @@
 
 import * as React from "react";
 import { Tab, TabList, TabPanel, Tabs } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 /** An issue board. The panel confirms — opacity, short curve, no bounce. */
 export function Use() {
   const [page, setPage] = React.useState("overview");
   return (
-    <article className="rs-use rs-use-tabs" data-use="tabs">
+    <UseField name="tabs" className="rs-use-tabs">
       <h3 className="rs-use-type">Issue</h3>
       <div className="rs-use-body">
         <Tabs value={page} onValueChange={setPage}>
@@ -36,6 +37,6 @@ export function Use() {
           </TabPanel>
         </Tabs>
       </div>
-    </article>
+    </UseField>
   );
 }

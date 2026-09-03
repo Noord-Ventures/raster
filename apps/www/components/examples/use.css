@@ -1,4 +1,6 @@
-/* Use field: a 204-module composition. Paper, hairlines, slight Raster radius. */
+/* Use field: a 204-module composition. Paper, hairlines, slight Raster radius.
+   StyleX owns the frame (use.stylex.ts + UseField). This sheet stays for
+   .rs-scene .rs-use descendants and inner type/body/kicker class names. */
 .rs-use {
   isolation: isolate;
   background-color: transparent;

@@ -1,22 +1,25 @@
 import type { ReactNode } from "react";
+import { chrome } from "@/app/site.stylex";
+import { sx } from "@/lib/sx";
 import { type InterfaceSlug, interfaceBySlug } from "./catalog";
+import { interfaces } from "./interfaces.stylex";
 import { InterfacesNav } from "./nav";
 
 export function InterfaceShell({ slug, children }: { slug: InterfaceSlug; children: ReactNode }) {
   const proto = interfaceBySlug(slug)!;
   return (
-    <div className="if-index">
+    <div {...sx("if-index", interfaces.index)}>
       <InterfacesNav />
-      <main className="site-content-wide">
-        <div className="if-specimen">{children}</div>
-        <section className="if-matter" aria-labelledby={`${slug}-name`}>
-          <p className="if-voice">{proto.voice}</p>
+      <main {...sx("site-content-wide", chrome.contentWide)}>
+        <div {...sx("if-specimen", interfaces.specimen)}>{children}</div>
+        <section {...sx("if-matter", interfaces.matter)} aria-labelledby={`${slug}-name`}>
+          <p {...sx("if-voice", interfaces.voice)}>{proto.voice}</p>
           <h1 id={`${slug}-name`} className="rs-t-display">
             {proto.title}
           </h1>
-          <p className="if-story">{proto.story}</p>
-          <p className="if-story if-story-2">{proto.note}</p>
-          <dl className="if-meta">
+          <p {...sx("if-story", interfaces.story)}>{proto.story}</p>
+          <p {...sx("if-story if-story-2", interfaces.story, interfaces.story2)}>{proto.note}</p>
+          <dl {...sx("if-meta", interfaces.meta)}>
             <div>
               <dt>What</dt>
               <dd>{proto.what}</dd>

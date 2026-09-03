@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
 import { concentricInner, rasterTokens } from "@noorddev/raster";
+import { chrome } from "@/app/site.stylex";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
+import { sx } from "@/lib/sx";
 
 export const metadata: Metadata = { title: "Tokens" };
 
 export default function TokensPage() {
   const { color, type, grid, radius, motion } = rasterTokens;
+  const cover = sx("cover", chrome.cover);
   return (
     <>
       <div className="site-layout">
         <DocsNav />
-        <main className="site-content">
-          <header className="cover" style={{ paddingBottom: 8 }}>
+        <main {...sx("site-content", chrome.content)}>
+          <header className={cover.className} style={{ ...cover.style, paddingBottom: 8 }}>
             <h1 className="rs-t-display">Tokens</h1>
             <p className="rs-t-sub">
               Defined once in TypeScript. The JSON and the CSS custom properties are generated.

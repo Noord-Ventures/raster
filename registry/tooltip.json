@@ -12,21 +12,27 @@
   "files": [
     {
       "path": "raster/tooltip.tsx",
-      "content": "import * as React from \"react\";\nimport { cx } from \"./cx\";\n\nexport interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** Tip text. Plain CSS shows it on hover and on keyboard focus. */\n  tip: string;\n}\n\nexport function Tooltip({ tip, className, children, ...props }: TooltipProps) {\n  return (\n    <span className={cx(\"rs-tip\", className)} data-tip={tip} {...props}>\n      {children}\n    </span>\n  );\n}\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, phone as phoneToken } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nconst phone = \"@media (max-width: 640px)\" as typeof phoneToken;\n\nexport interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** Tip text. Plain CSS shows it on hover and on keyboard focus. */\n  tip: string;\n}\n\nconst styles = stylex.create({\n  tip: {\n    position: \"relative\",\n    display: \"inline-flex\",\n    \"::after\": {\n      content: \"attr(data-tip)\",\n      position: \"absolute\",\n      bottom: \"calc(100% + 8px)\",\n      left: \"50%\",\n      transform: \"translateX(-50%)\",\n      backgroundColor: raster.ink,\n      color: raster.paper,\n      fontSize: {\n        default: 11.5,\n        [phone]: 13,\n      },\n      fontWeight: 500,\n      letterSpacing: \"-0.01em\",\n      lineHeight: 1.3,\n      paddingBlock: {\n        default: 5,\n        [phone]: 8,\n      },\n      paddingInline: {\n        default: 9,\n        [phone]: 12,\n      },\n      borderRadius: {\n        default: raster.radiusSm,\n        [phone]: 0,\n      },\n      whiteSpace: \"nowrap\",\n      opacity: 0,\n      pointerEvents: \"none\",\n      zIndex: 180,\n      transition: `opacity ${raster.durationSnap} ${raster.ease} ${raster.durationSnap}`,\n    },\n    \":hover::after\": {\n      opacity: {\n        default: 1,\n        \"@media (hover: none)\": 0,\n      },\n    },\n    \":focus-within::after\": {\n      opacity: 1,\n    },\n    \":active::after\": {\n      opacity: {\n        default: null,\n        \"@media (hover: none)\": 1,\n      },\n    },\n  },\n});\n\nexport function Tooltip({ tip, className, style, children, ...props }: TooltipProps) {\n  const sx = rs([\"rs-tip\", className], styles.tip);\n  return (\n    <span {...props} className={sx.className} style={{ ...sx.style, ...style }} data-tip={tip}>\n      {children}\n    </span>\n  );\n}\n",
       "type": "registry:component",
       "target": "components/raster/tooltip.tsx"
+    },
+    {
+      "path": "raster/tokens.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\n/**\n * StyleX vars alias Raster CSS custom properties. Not a second scale.\n * Values live in packages/core/css/tokens.css (generated from src/tokens.ts).\n */\nexport const raster = stylex.defineVars({\n  paper: \"var(--bg)\",\n  ink: \"var(--text)\",\n  gray: \"var(--text-secondary)\",\n  accent: \"var(--accent)\",\n  divider: \"var(--divider)\",\n  dividerSubtle: \"var(--divider-subtle)\",\n  tableAlt: \"var(--table-alt)\",\n  gridLine: \"var(--grid-line)\",\n  radiusSm: \"var(--radius-sm)\",\n  radius: \"var(--radius)\",\n  radiusChrome: \"var(--radius-chrome)\",\n  radiusIn: \"var(--radius-in)\",\n  pad: \"var(--pad)\",\n  gutter: \"var(--gutter)\",\n  module: \"var(--grid-size)\",\n  gridImage: \"var(--grid-image)\",\n  gridPos: \"var(--grid-pos)\",\n  hit: \"var(--hit)\",\n  controlH: \"var(--control-h)\",\n  controlFs: \"var(--control-fs)\",\n  controlLabel: \"var(--control-label)\",\n  durationSnap: \"var(--duration-snap)\",\n  duration: \"var(--duration)\",\n  durationConfirm: \"var(--duration-confirm)\",\n  ease: \"var(--ease)\",\n  transition: \"var(--transition)\",\n  textScale: \"var(--text-scale)\",\n  hairline: \"1px\",\n});\n\n/** Inter stack. Same as body in base.css. Not a token var — @font-face stays CSS. */\nexport const rasterFont =\n  \"Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif\";\n\nexport const rasterMono = \"ui-monospace, SFMono-Regular, Menlo, monospace\";\n\n/** Compile-time media keys. StyleX only folds defineConsts, not plain strings. */\nexport const mq = stylex.defineConsts({\n  phone: \"@media (max-width: 640px)\",\n  mobileGrid: \"@media (max-width: 480px)\",\n  at900: \"@media (min-width: 900px)\",\n  at899: \"@media (max-width: 899px)\",\n  rail: \"@media (min-width: 1024px)\",\n  wide: \"@media (min-width: 1440px)\",\n  reduce: \"@media (prefers-reduced-motion: reduce)\",\n  touch: \"@media (hover: none)\",\n});\n\n/** Phone recut (≤640). Desktop stays the poster. */\nexport const phone = mq.phone;\n\n/** Mobile grid (≤480). */\nexport const mobileGrid = mq.mobileGrid;\n\n/** Catalog rail. */\nexport const rail = mq.rail;\n\n/** Wide catalog. */\nexport const wide = mq.wide;\n",
+      "type": "registry:file",
+      "target": "components/raster/tokens.stylex.ts"
+    },
+    {
+      "path": "raster/rs.ts",
+      "content": "import type { CSSProperties } from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { cx } from \"./cx\";\n\ntype StyleXProps = { className?: string; style?: CSSProperties };\n\n/** Merge Raster class names with StyleX props. CSS-first classes stay on the node. */\nexport function rs(classNames: Array<string | false | null | undefined>, ...styles: unknown[]): StyleXProps {\n  const sx = (stylex.props as (...args: unknown[]) => StyleXProps)(...styles);\n  return {\n    className: cx(...classNames, sx.className),\n    style: sx.style,\n  };\n}\n",
+      "type": "registry:file",
+      "target": "components/raster/rs.ts"
     },
     {
       "path": "raster/cx.ts",
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/tooltip.css",
-      "content": "/* ── Tooltip: CSS-only, shows on hover and keyboard focus alike ── */\n.rs-tip{position:relative;display:inline-flex}\n.rs-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);font-size:11.5px;font-weight:500;letter-spacing:-.01em;line-height:1.3;padding:5px 9px;border-radius:var(--radius-sm);white-space:nowrap;opacity:0;pointer-events:none;z-index:180;transition:opacity var(--duration-snap) var(--ease) var(--duration-snap)}\n.rs-tip:hover::after,.rs-tip:focus-within::after{opacity:1}\n@media(prefers-reduced-motion:reduce){.rs-tip::after{transition:opacity var(--duration-snap) var(--ease) var(--duration-snap)}}\n",
-      "type": "registry:file",
-      "target": "styles/raster/tooltip.css"
     }
   ],
   "meta": {

@@ -1,8 +1,9 @@
-import { InputAddon, InputGroup } from "@noorddev/raster-react";
+import { Input, InputAddon, InputGroup } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="input-group">
+    <UseField name="input-group">
       <h3 className="rs-use-type">Host</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -10,10 +11,10 @@ export function Use() {
           <p className="rs-use-copy">Addon and field share one hairline.</p>
           <InputGroup>
             <InputAddon>https://</InputAddon>
-            <input className="rs-input" defaultValue="getraster.com" />
+            <Input defaultValue="getraster.com" />
           </InputGroup>
         </div>
       </div>
-    </article>
+    </UseField>
   );
 }

@@ -1,6 +1,8 @@
-/* Homepage specimen. Imported only by app/page.tsx. */
+/* Homepage specimen. Imported only by app/page.tsx.
+   StyleX owns cell paint (specimen.stylex.ts). This sheet stays for
+   html:has() overlay kill, named grid-template-areas, clip-path, CI.
 
-/* Two grids, two inks. Boxed pages (home, About) use a --divider
+   Two grids, two inks. Boxed pages (home, About) use a --divider
    cell-edge cage. L/R box margins are the quieter --grid-line.
    The site gutter overlay on html::before is the main 204 for docs /
    components / interfaces. Kill it here so it does not cut Raster,

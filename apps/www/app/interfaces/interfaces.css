@@ -1,7 +1,9 @@
 @import "./scene-motion.css";
-/* Interfaces section. Isolated. Do not move these rules into site.css. */
+/* Interfaces section. Isolated. Do not move these rules into site.css.
+   StyleX owns index/rail/tile/specimen (interfaces.stylex.ts). This
+   sheet stays for body:has(), poster crops, :has() inspect, CI locks.
 
-/* Site 204 is html::before in core base. Paper stays open so the
+   Site 204 is html::before in core base. Paper stays open so the
    field runs through the title cell and around the crops. */
 body:has(.if-index) {
   background: transparent;
@@ -100,7 +102,8 @@ body:has(.if-index) {
   grid-template-rows: 1fr auto;
   height: 408px;
   background: transparent;
-  border: 1px solid var(--grid-line);
+  /* StyleX tile owns the one var(--grid-line) hairline. Do not also stroke. */
+  border: 0;
   border-radius: 0;
   box-shadow: none;
   text-decoration: none;
@@ -305,7 +308,8 @@ body:has(.if-index) {
 
 .if-tile-matter {
   padding: 12px 20px 14px;
-  border-top: 1px solid var(--grid-line);
+  /* StyleX tileMatter owns the --grid-line seam. */
+  border-top: 0;
   background: transparent;
 }
 .if-tile-matter h2 {
@@ -337,7 +341,8 @@ body:has(.if-index) {
   margin-top: 204px;
   height: 612px;
   background: var(--bg);
-  border: 1px solid var(--divider);
+  /* StyleX specimen owns the one --divider hairline. Do not also stroke. */
+  border: 0;
   border-radius: var(--radius-sm);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04), 0 10px 28px rgba(0, 0, 0, 0.05);
   overflow: hidden;

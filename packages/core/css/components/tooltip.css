@@ -1,5 +1,0 @@
-/* ── Tooltip: CSS-only, shows on hover and keyboard focus alike ── */
-.rs-tip{position:relative;display:inline-flex}
-.rs-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);font-size:11.5px;font-weight:500;letter-spacing:-.01em;line-height:1.3;padding:5px 9px;border-radius:var(--radius-sm);white-space:nowrap;opacity:0;pointer-events:none;z-index:180;transition:opacity var(--duration-snap) var(--ease) var(--duration-snap)}
-.rs-tip:hover::after,.rs-tip:focus-within::after{opacity:1}
-@media(prefers-reduced-motion:reduce){.rs-tip::after{transition:opacity var(--duration-snap) var(--ease) var(--duration-snap)}}

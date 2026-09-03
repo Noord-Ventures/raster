@@ -1,5 +1,9 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster, phone as phoneToken } from "../tokens.stylex";
+import { rs } from "../rs";
+
+const phone = "@media (max-width: 640px)" as typeof phoneToken;
 
 export interface ToastOptions {
   description?: React.ReactNode;
@@ -25,7 +29,109 @@ export interface ToasterProps extends React.HTMLAttributes<HTMLDivElement> {
   duration?: number;
 }
 
-export function Toaster({ duration = 4000, className, ...props }: ToasterProps) {
+const toastIn = stylex.keyframes({
+  from: { opacity: 0 },
+  to: { opacity: 1 },
+});
+
+const styles = stylex.create({
+  stack: {
+    position: "fixed",
+    bottom: {
+      default: 20,
+      [phone]: 0,
+    },
+    right: {
+      default: 20,
+      [phone]: 0,
+    },
+    left: {
+      default: null,
+      [phone]: 0,
+    },
+    zIndex: 300,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: {
+      default: "flex-end",
+      [phone]: "stretch",
+    },
+    gap: {
+      default: 8,
+      [phone]: 0,
+    },
+  },
+  toast: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: 10,
+    backgroundColor: raster.paper,
+    borderWidth: raster.hairline,
+    borderStyle: "solid",
+    borderColor: raster.divider,
+    borderRadius: {
+      default: raster.radius,
+      [phone]: 0,
+    },
+    boxShadow: {
+      default: "0 8px 24px rgba(0,0,0,0.06)",
+      [phone]: "none",
+    },
+    paddingTop: {
+      default: 10,
+      [phone]: 16,
+    },
+    paddingInline: {
+      default: 14,
+      [phone]: 20,
+    },
+    paddingBottom: {
+      default: 10,
+      [phone]: "calc(16px + env(safe-area-inset-bottom, 0px))",
+    },
+    maxWidth: {
+      default: 340,
+      [phone]: "none",
+    },
+    width: {
+      default: null,
+      [phone]: "100%",
+    },
+    animationName: {
+      default: toastIn,
+      "@media (prefers-reduced-motion: reduce)": "none",
+    },
+    animationDuration: raster.durationConfirm,
+    animationTimingFunction: raster.ease,
+  },
+  title: {
+    display: "block",
+    fontSize: {
+      default: 13,
+      [phone]: 16,
+    },
+    fontWeight: 600,
+    letterSpacing: "-0.01em",
+    color: raster.ink,
+  },
+  body: {
+    fontSize: {
+      default: 12.5,
+      [phone]: 15,
+    },
+    lineHeight: 1.5,
+    letterSpacing: "-0.01em",
+    color: raster.gray,
+    marginTop: {
+      default: 1,
+      [phone]: 4,
+    },
+    marginBottom: 0,
+    marginInline: 0,
+  },
+});
+
+export function Toaster({ duration = 4000, className, style, ...props }: ToasterProps) {
   const [items, setItems] = React.useState<ToastItem[]>([]);
 
   React.useEffect(() => {
@@ -41,16 +147,28 @@ export function Toaster({ duration = 4000, className, ...props }: ToasterProps) 
     };
   }, [duration]);
 
+  const stack = rs(["rs-toasts", className], styles.stack);
   return (
-    <div className={cx("rs-toasts", className)} role="status" aria-live="polite" {...props}>
-      {items.map((item) => (
-        <div key={item.id} className="rs-toast">
-          <div>
-            <span className="rs-toast-title">{item.title}</span>
-            {item.description != null && <p className="rs-toast-body">{item.description}</p>}
+    <div {...props} className={stack.className} style={{ ...stack.style, ...style }} role="status" aria-live="polite">
+      {items.map((item) => {
+        const card = rs(["rs-toast"], styles.toast);
+        const heading = rs(["rs-toast-title"], styles.title);
+        const body = rs(["rs-toast-body"], styles.body);
+        return (
+          <div key={item.id} className={card.className} style={card.style}>
+            <div>
+              <span className={heading.className} style={heading.style}>
+                {item.title}
+              </span>
+              {item.description != null && (
+                <p className={body.className} style={body.style}>
+                  {item.description}
+                </p>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

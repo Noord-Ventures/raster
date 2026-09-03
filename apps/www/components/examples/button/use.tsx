@@ -1,9 +1,10 @@
 import { Button } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 /** Press ticket: one primary, one ghost. The sheet is the product. */
 export function Use() {
   return (
-    <article className="rs-use" data-use="button">
+    <UseField name="button">
       <h3 className="rs-use-type">Print</h3>
       <div className="rs-use-body">
         <div className="rs-use-stack">
@@ -15,6 +16,6 @@ export function Use() {
           <Button variant="ghost">Hold</Button>
         </div>
       </div>
-    </article>
+    </UseField>
   );
 }

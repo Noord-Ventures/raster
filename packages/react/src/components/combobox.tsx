@@ -1,5 +1,11 @@
 import * as React from "react";
-import { cx } from "../cx";
+import * as stylex from "@stylexjs/stylex";
+import { raster, phone as phoneMq } from "../tokens.stylex";
+import { rs } from "../rs";
+
+/** StyleX cannot read a string const from a defineVars file; keep the token import. */
+const phone = "@media (max-width: 640px)" as typeof phoneMq;
+import { menuStyles } from "./dropdown-menu";
 import type { SelectOption } from "./select";
 
 export interface ComboboxProps
@@ -11,6 +17,36 @@ export interface ComboboxProps
   emptyLabel?: React.ReactNode;
 }
 
+const styles = stylex.create({
+  root: {
+    position: "relative",
+    display: {
+      default: "inline-block",
+      [phone]: "block",
+    },
+    minWidth: {
+      default: 200,
+      [phone]: 0,
+    },
+    width: {
+      default: null,
+      [phone]: "100%",
+    },
+  },
+  empty: {
+    padding: {
+      default: "10px 12px",
+      [phone]: 14,
+    },
+    fontSize: {
+      default: 13,
+      [phone]: 15,
+    },
+    letterSpacing: "-0.01em",
+    color: raster.gray,
+  },
+});
+
 /** Filtered listbox on the quiet field. */
 export function Combobox({
   options,
@@ -19,6 +55,7 @@ export function Combobox({
   placeholder = "Search…",
   emptyLabel = "Nothing found.",
   className,
+  style,
   ...props
 }: ComboboxProps) {
   const idBase = React.useId();
@@ -47,8 +84,12 @@ export function Combobox({
     setOpen(false);
   };
 
+  const root = rs(["rs-combobox", className], styles.root);
+  const menu = rs(["rs-menu"], menuStyles.menu, menuStyles.menuCombobox);
+  const empty = rs(["rs-combobox-empty"], styles.empty);
+
   return (
-    <div ref={rootRef} className={cx("rs-combobox", className)} {...props}>
+    <div ref={rootRef} className={root.className} style={{ ...root.style, ...style }} {...props}>
       <input
         className="rs-input rs-input-full"
         role="combobox"
@@ -86,21 +127,33 @@ export function Combobox({
         }}
       />
       {open && (
-        <div id={`${idBase}-listbox`} role="listbox" className="rs-menu">
-          {matches.length === 0 && <div className="rs-combobox-empty">{emptyLabel}</div>}
-          {matches.map((option, index) => (
-            <button
-              key={option.value}
-              type="button"
-              role="option"
-              aria-selected={option.value === value}
-              className={cx("rs-menu-item", index === activeIndex && "rs-menu-item-active")}
-              onPointerEnter={() => setActiveIndex(index)}
-              onClick={() => pick(option)}
-            >
-              {option.label}
-            </button>
-          ))}
+        <div id={`${idBase}-listbox`} role="listbox" className={menu.className} style={menu.style}>
+          {matches.length === 0 && (
+            <div className={empty.className} style={empty.style}>
+              {emptyLabel}
+            </div>
+          )}
+          {matches.map((option, index) => {
+            const row = rs(
+              ["rs-menu-item", index === activeIndex && "rs-menu-item-active"],
+              menuStyles.item,
+              index === activeIndex && menuStyles.itemActive,
+            );
+            return (
+              <button
+                key={option.value}
+                type="button"
+                role="option"
+                aria-selected={option.value === value}
+                className={row.className}
+                style={row.style}
+                onPointerEnter={() => setActiveIndex(index)}
+                onClick={() => pick(option)}
+              >
+                {option.label}
+              </button>
+            );
+          })}
         </div>
       )}
     </div>

@@ -1,8 +1,9 @@
 import { Popover, PopoverBody, PopoverTitle } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="popover">
+    <UseField name="popover">
       <h3 className="rs-use-type">More</h3>
       <div className="rs-use-body">
         <Popover trigger="Module">
@@ -10,6 +11,6 @@ export function Use() {
           <PopoverBody>184 column. 20 gutter. The page is the measure.</PopoverBody>
         </Popover>
       </div>
-    </article>
+    </UseField>
   );
 }

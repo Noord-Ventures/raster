@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { chrome } from "@/app/site.stylex";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
+import { sx } from "@/lib/sx";
 import { COMMAND, DOOR, HOST, LAW, PACKAGES_PUBLISHED } from "../specimen";
 
 export const metadata: Metadata = {
@@ -10,12 +12,13 @@ export const metadata: Metadata = {
 };
 
 export default function DocsPage() {
+  const cover = sx("cover", chrome.cover);
   return (
     <>
       <div className="site-layout">
         <DocsNav />
-        <main className="site-content">
-          <header className="cover" style={{ paddingBottom: 8 }}>
+        <main {...sx("site-content", chrome.content)}>
+          <header className={cover.className} style={{ ...cover.style, paddingBottom: 8 }}>
             <h1 className="rs-t-display">Getting started</h1>
             <p className="rs-t-sub">
               CSS you own. CSS-first, no Radix, no Tailwind. The door is {DOOR.replace("https://", "")}.

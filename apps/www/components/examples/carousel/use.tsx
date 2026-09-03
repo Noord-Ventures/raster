@@ -1,8 +1,9 @@
 import { Carousel } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   return (
-    <article className="rs-use" data-use="carousel">
+    <UseField name="carousel">
       <h3 className="rs-use-type">Flip</h3>
       <div className="rs-use-body">
         <Carousel>
@@ -11,6 +12,6 @@ export function Use() {
           <p className="rs-use-copy">Sheet 03 — the kit.</p>
         </Carousel>
       </div>
-    </article>
+    </UseField>
   );
 }

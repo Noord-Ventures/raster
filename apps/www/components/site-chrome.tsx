@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
+import { chrome } from "@/app/site.stylex";
+import { sx } from "@/lib/sx";
 import { RasterMark } from "./raster-mark";
 
 type Scheme = "light" | "dark" | "auto";
@@ -303,13 +305,13 @@ export function SiteChrome() {
 
   return (
     <>
-      <div className="logo-wrap">
-        <Link href="/" className="site-logo" aria-label="Raster">
+      <div {...sx("logo-wrap", chrome.logoWrap)}>
+        <Link href="/" {...sx("site-logo", chrome.logo)} aria-label="Raster">
           <RasterMark />
         </Link>
       </div>
 
-      <nav className="corner-nav" aria-label="Site">
+      <nav {...sx("corner-nav", chrome.cornerNav)} aria-label="Site">
         {links.filter((l) => l.corner).map((l) => (
           <Link key={l.href} href={l.href} aria-current={current(l.href)}>
             {l.label}
@@ -321,7 +323,7 @@ export function SiteChrome() {
       <div className="settings" ref={settingsRef}>
         <button
           type="button"
-          className="theme-toggle"
+          {...sx("theme-toggle", chrome.themeToggle)}
           aria-label="Appearance"
           aria-haspopup="true"
           aria-expanded={menuOpen}
@@ -343,7 +345,7 @@ export function SiteChrome() {
 
       <button
         type="button"
-        className="nav-toggle"
+        {...sx("nav-toggle", chrome.navToggle)}
         aria-expanded={open}
         aria-controls="navPanel"
         aria-label={open ? "Close menu" : "Open menu"}
@@ -355,14 +357,14 @@ export function SiteChrome() {
           <span />
         </span>
       </button>
-      <nav id="navPanel" className="nav-panel" data-open={open} aria-label="Site menu" aria-hidden={!open}>
+      <nav id="navPanel" {...sx("nav-panel", chrome.navPanel)} data-open={open} aria-label="Site menu" aria-hidden={!open}>
         <div className="nav-panel-links">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="nav-panel-link" aria-current={current(l.href)}>
+            <Link key={l.href} href={l.href} {...sx("nav-panel-link", chrome.navPanelLink)} aria-current={current(l.href)}>
               {l.label}
             </Link>
           ))}
-          <a href="https://github.com/Noord-Ventures/raster" className="nav-panel-link">
+          <a href="https://github.com/Noord-Ventures/raster" {...sx("nav-panel-link", chrome.navPanelLink)}>
             GitHub
           </a>
         </div>

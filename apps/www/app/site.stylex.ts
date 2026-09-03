@@ -1,0 +1,288 @@
+import * as stylex from "@stylexjs/stylex";
+
+const phone = "@media (max-width: 640px)";
+const at900 = "@media (min-width: 900px)";
+const at899 = "@media (max-width: 899px)";
+const at800 = "@media (max-width: 800px)";
+const at480 = "@media (max-width: 480px)";
+
+/**
+ * Site chrome StyleX. Document-level :has() / html::before stay in site.css —
+ * StyleX cannot target html from a child. No accent in chrome.
+ */
+export const chrome = stylex.create({
+  logoWrap: {
+    position: "fixed",
+    top: 24,
+    left: 20,
+    zIndex: 200,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 12,
+    height: 24,
+    filter: "drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))",
+  },
+  logo: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 20,
+    height: 20,
+    color: "var(--text)",
+    filter: "drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))",
+    transition: "var(--transition), opacity var(--duration-snap) var(--ease)",
+    ":hover": { opacity: 0.6 },
+    ":focus-visible": {
+      outlineWidth: 2,
+      outlineStyle: "solid",
+      outlineColor: "var(--text)",
+      outlineOffset: 2,
+    },
+  },
+  cornerNav: {
+    position: "fixed",
+    top: 24,
+    /* Shared with site.css --nav-left: 224. No toc-sub jump. */
+    left: "var(--nav-left)",
+    right: "auto",
+    zIndex: 200,
+    display: "flex",
+    alignItems: "center",
+    gap: 20,
+    height: 24,
+    filter: "drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))",
+  },
+  themeToggle: {
+    width: {
+      default: 24,
+      [phone]: 44,
+    },
+    height: {
+      default: 24,
+      [phone]: 44,
+    },
+    minWidth: {
+      default: null,
+      [phone]: 44,
+    },
+    minHeight: {
+      default: null,
+      [phone]: 44,
+    },
+    padding: {
+      default: 4,
+      [phone]: 0,
+    },
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+    backgroundColor: "transparent",
+    borderWidth: 0,
+    borderRadius: 0,
+    cursor: "pointer",
+    color: "var(--text-secondary)",
+    outline: "none",
+    ":hover": { color: "var(--text)" },
+    ":focus-visible": {
+      outlineWidth: 2,
+      outlineStyle: "solid",
+      outlineColor: "var(--text)",
+      outlineOffset: 2,
+    },
+  },
+  content: {
+    flexShrink: 1,
+    width: {
+      default: 592,
+      [at800]: "100%",
+    },
+    minWidth: 0,
+    maxWidth: {
+      default: "min(592px, 100%)",
+      [at800]: "100%",
+    },
+    paddingBottom: 72,
+  },
+  /** Catalog index: two 388 cards + gutter. */
+  catalogContent: {
+    flexShrink: 1,
+    width: "min(796px, 100%)",
+    minWidth: 0,
+    maxWidth: "min(796px, 100%)",
+    paddingBottom: 72,
+  },
+  /** Icons page: 4 × 184 cells + 3 gutters (796). Cells stay auto-fill 184. */
+  iconContent: {
+    flexShrink: 1,
+    width: "min(796px, 100%)",
+    minWidth: 0,
+    maxWidth: "min(796px, 100%)",
+    paddingBottom: 72,
+  },
+  contentWide: {
+    flexShrink: 1,
+    width: "100%",
+    minWidth: 0,
+    paddingBottom: 72,
+  },
+  cover: {
+    minHeight: {
+      default: 204,
+      [at899]: 0,
+    },
+    paddingTop: {
+      default: 20,
+      [at900]: 120,
+    },
+    paddingBottom: 20,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: {
+      default: "flex-end",
+      [at900]: "flex-start",
+      [at899]: "flex-start",
+    },
+  },
+  gallery: {
+    display: "grid",
+    gridTemplateColumns: {
+      default: "repeat(auto-fill, 388px)",
+      [at480]: "1fr",
+    },
+    gap: "var(--gutter)",
+    paddingTop: 24,
+    paddingBottom: 48,
+  },
+  galleryItem: {
+    position: "relative",
+    isolation: "isolate",
+    backgroundColor: "var(--bg)",
+    backgroundImage: "none",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "var(--divider)",
+    borderRadius: 0,
+    boxShadow: "none",
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column",
+  },
+  galleryDemo: {
+    padding: 28,
+    paddingInline: 24,
+    minHeight: 204,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderBottomWidth: 1,
+    borderBottomStyle: "solid",
+    borderBottomColor: "var(--divider-subtle)",
+    overflow: "hidden",
+    pointerEvents: "none",
+    backgroundColor: "var(--bg)",
+  },
+  galleryMeta: {
+    paddingTop: 14,
+    paddingRight: 20,
+    paddingBottom: 16,
+    paddingLeft: 20,
+    backgroundColor: "var(--bg)",
+  },
+  navToggle: {
+    position: "fixed",
+    top: {
+      default: 20,
+      [phone]: "calc(8px + env(safe-area-inset-top, 0px))",
+    },
+    right: {
+      default: 18,
+      [phone]: "calc(8px + env(safe-area-inset-right, 0px))",
+    },
+    zIndex: 210,
+    width: {
+      default: 24,
+      [phone]: 44,
+    },
+    height: {
+      default: 24,
+      [phone]: 44,
+    },
+    padding: {
+      default: 4,
+      [phone]: 0,
+    },
+    display: {
+      default: "none",
+      [phone]: "flex",
+    },
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent",
+    borderWidth: 0,
+    borderRadius: 0,
+    color: "var(--text-secondary)",
+    cursor: "pointer",
+    outline: "none",
+    filter: "drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))",
+  },
+  crumbBar: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 160,
+    display: "flex",
+    alignItems: "center",
+    height: {
+      default: 72,
+      [phone]: 64,
+    },
+    fontSize: {
+      default: 13,
+      [phone]: 12,
+    },
+    fontWeight: 500,
+    letterSpacing: "-0.01em",
+    lineHeight: 1.3,
+    backgroundColor: "transparent",
+    borderBottomWidth: 1,
+    borderBottomStyle: "solid",
+    borderBottomColor: "transparent",
+    transition: "var(--transition)",
+  },
+  crumbBarScrolled: {
+    backgroundColor: "var(--bg)",
+    borderBottomColor: "var(--divider)",
+  },
+  navPanel: {
+    position: "fixed",
+    top: {
+      default: 64,
+      [phone]: "calc(60px + env(safe-area-inset-top, 0px))",
+    },
+    left: 0,
+    right: 0,
+    zIndex: 205,
+    backgroundColor: "var(--bg)",
+    borderBottomWidth: 1,
+    borderBottomStyle: "solid",
+    borderBottomColor: "var(--divider-subtle)",
+  },
+  navPanelLink: {
+    display: "block",
+    paddingTop: 12,
+    paddingRight: 18,
+    paddingBottom: 12,
+    paddingLeft: 18,
+    fontSize: 15,
+    fontWeight: 500,
+    letterSpacing: "-0.01em",
+    color: "var(--text)",
+    textDecoration: "none",
+    borderBottomWidth: 1,
+    borderBottomStyle: "solid",
+    borderBottomColor: "var(--divider-subtle)",
+  },
+});

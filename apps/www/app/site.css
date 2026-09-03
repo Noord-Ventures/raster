@@ -1,4 +1,6 @@
-/* Site chrome for the Raster docs site:
+/* Site chrome for the Raster docs site.
+   StyleX owns logo / corner nav / cover / gallery / content (site.stylex.ts).
+   This sheet stays for html::before, body:has() layout, appearance panel.
 
    - No header bar. Fixed corner chrome: logo top-left on the first
      grid line (20px), controls top-right, each with a paper-halo
@@ -6,8 +8,8 @@
    - The content column starts one module in (margin-left: 204px at
      the 1024px rail) and the layout width rounds DOWN to whole 204px
      modules, so edges step from grid line to grid line on resize.
-     The catalog rail drops that inset below 1440 (writer in docs-nav)
-     so the two navs sit in columns 1 and 2 on a narrow desktop.
+     Detail keeps that airy first 204. Catalog index zeros --ml at
+     ≥1024 (live) so the 388 rail and two 388 cards fit on 796.
    - Reading measure is 592px (3 modules); covers occupy the first 204 cell.
    - A fixed 72px crumb bar; breadcrumbs appear once the page cover
      scrolls away. The docs rail lives in components/docs-nav. */
@@ -84,25 +86,34 @@ body {
   filter: drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg));
 }
 /* Text links sit on the first content column (20 + 204). Catalog
-   detail at 1440 follows the rail (third module / toc-sub). The
-   appearance control stays sticky on the right and does not move
-   with this row. Do not pin the gallery index to toc-sub. */
-@media (min-width: 900px) {
-  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav {
-    left: 224px;
-    right: auto;
-  }
-}
-@media (min-width: 1440px) {
-  body:has([data-rail="catalog"]):not(:has(.catalog-page)) {
-    --nav-left: 428px;
-  }
-  body:has([data-rail="catalog"]):not(:has(.catalog-page)) .corner-nav {
-    left: 428px;
-  }
-}
+   INDEX and DETAIL share --nav-left: 224. Do not add a ≥1440
+   428 / toc-sub jump on body:has([data-rail="catalog"]). */
 /* Gallery index: hide the *trail* so “Components” cannot run through
    Interfaces. The root word is pinned in column 1 below. */
+/* Full-bleed fixed 72 layer — live crumb-bar.css. The site bar uses
+   these classes (not the React StyleX leaf). Transparent at rest;
+   scrolled paper + hairline. Logo / corner-nav keep the paper halo. */
+.rs-crumb-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 160;
+  display: flex;
+  align-items: center;
+  height: 72px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.3;
+  background: none;
+  border-bottom: 1px solid transparent;
+  transition: var(--transition);
+}
+.rs-crumb-bar-scrolled {
+  background: var(--bg);
+  border-bottom-color: var(--divider);
+}
 body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   opacity: 0;
   pointer-events: none;
@@ -495,6 +506,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 }
 
 .site-content { flex-shrink: 1; width: 592px; min-width: 0; max-width: min(592px, 100%); padding-bottom: 72px; }
+/* Icons: 4 × 184 cells + gutters (796). StyleX iconContent owns the same measure. */
 .site-content:has(.rs-icon-catalog) { width: min(796px, 100%); max-width: min(796px, 100%); }
 .site-content-wide { flex-shrink: 1; width: 100%; min-width: 0; padding-bottom: 72px; }
 @media (max-width: 800px) { .site-content { width: 100%; max-width: 100%; } }
@@ -527,7 +539,8 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 
 /* Catalog index: 388-wide cards, 204 demo module. Two columns on
    desktop (796 measure, same as the icon catalog). Phone stays one
-   column. Do not lock a single 388 track. */
+   column. Do not lock a single 388 track. Live bf282a68 zeros --ml
+   here so 388 rail + 796 content fit; detail keeps --ml 204. */
 .catalog-page .catalog-group { margin-top: 40px; }
 .catalog-page .site-content {
   width: min(796px, 100%);
@@ -594,6 +607,10 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .gallery-meta p { font-size: 12.5px; color: var(--text-secondary); letter-spacing: -.01em; line-height: 1.5; margin: 0; }
 
 /* ── Component page ── */
+/* One hairline per specimen (live bf282a68). .preview-box is the
+   detail frame for leaves that are not themselves a box. Catalog
+   cards (.gallery-item) and homepage kit cells already have a frame
+   — never also stroke preview-box there. */
 .preview-box {
   border: 1px solid var(--divider);
   border-radius: var(--radius-sm);
@@ -605,8 +622,129 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   margin: 24px 0 16px;
   background: transparent;
 }
+.gallery-item .preview-box,
+.gallery-demo .preview-box,
+.specimen-kit-live .preview-box {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-height: 0;
+  border-radius: 0;
+}
+/* Boxed leaves already paint their own outer hairline. Drop the
+   demo frame so they do not sit in a box within a box. */
+.preview-box:has(.rs-callout),
+.preview-box:has(.rs-btn-group),
+.preview-box:has(.rs-toggle-group),
+.preview-box:has(.rs-empty),
+.preview-box:has(.rs-table),
+.preview-box:has(.rs-ai),
+.preview-box:has(.rs-flow),
+.preview-box:has(.rs-input-group),
+.preview-box:has(.rs-inline-form),
+.preview-box:has(.rs-carousel),
+.preview-box:has(.rs-sidebar),
+.preview-box:has(.rs-acc),
+.preview-box:has(.rs-chart),
+.preview-box:has(.rs-cite-box),
+.preview-box:has(.rs-refs),
+.preview-box:has(.rs-field),
+.preview-box:has(.rs-form),
+.preview-box:has(.rs-cal),
+.preview-box:has(.rs-tabs),
+.preview-box:has(.rs-pages) {
+  border: none;
+}
+/* Catalog + homepage kit: the card / field cell is the frame.
+   StyleX atomics otherwise keep the leaf stroke — zero it here. */
+.gallery-demo .rs-callout,
+.gallery-demo .rs-btn-group,
+.gallery-demo .rs-toggle-group,
+.gallery-demo .rs-empty,
+.gallery-demo .rs-table,
+.gallery-demo .rs-ai,
+.gallery-demo .rs-flow,
+.gallery-demo .rs-input-group,
+.gallery-demo .rs-inline-form,
+.gallery-demo .rs-carousel,
+.gallery-demo .rs-sidebar,
+.gallery-demo .rs-acc,
+.gallery-demo .rs-cite-box,
+.gallery-demo .rs-refs,
+.gallery-demo .rs-alert,
+.gallery-demo .rs-menubar,
+.gallery-demo .rs-dropdown,
+.gallery-demo .rs-dialog,
+.gallery-demo .rs-command,
+.gallery-demo .rs-popover,
+.gallery-demo .rs-hover-card-panel,
+.rs-scene .rs-callout,
+.rs-scene .rs-btn-group,
+.rs-scene .rs-toggle-group,
+.rs-scene .rs-empty,
+.rs-scene .rs-table,
+.rs-scene .rs-ai,
+.rs-scene .rs-flow,
+.rs-scene .rs-input-group,
+.rs-scene .rs-inline-form,
+.rs-scene .rs-carousel,
+.rs-scene .rs-sidebar,
+.rs-scene .rs-acc,
+.rs-scene .rs-cite-box,
+.rs-scene .rs-refs,
+.rs-scene .rs-alert,
+.rs-scene .rs-menubar,
+.rs-scene .rs-dropdown,
+.rs-scene .rs-dialog,
+.rs-scene .rs-command,
+.rs-scene .rs-popover,
+.rs-scene .rs-hover-card-panel,
+.rs-use .rs-callout,
+.rs-use .rs-btn-group,
+.rs-use .rs-toggle-group,
+.rs-use .rs-empty,
+.rs-use .rs-table,
+.rs-use .rs-ai,
+.rs-use .rs-flow,
+.rs-use .rs-input-group,
+.rs-use .rs-inline-form,
+.rs-use .rs-carousel,
+.rs-use .rs-sidebar,
+.rs-use .rs-acc,
+.rs-use .rs-cite-box,
+.rs-use .rs-refs,
+.rs-use .rs-alert,
+.rs-use .rs-menubar,
+.rs-use .rs-dropdown,
+.rs-use .rs-dialog,
+.rs-use .rs-command,
+.rs-use .rs-popover,
+.rs-use .rs-hover-card-panel,
+.specimen-kit-live .rs-callout,
+.specimen-kit-live .rs-btn-group,
+.specimen-kit-live .rs-toggle-group,
+.specimen-kit-live .rs-empty,
+.specimen-kit-live .rs-table,
+.specimen-kit-live .rs-ai,
+.specimen-kit-live .rs-flow,
+.specimen-kit-live .rs-input-group,
+.specimen-kit-live .rs-inline-form,
+.specimen-kit-live .rs-carousel,
+.specimen-kit-live .rs-sidebar,
+.specimen-kit-live .rs-acc,
+.specimen-kit-live .rs-cite-box,
+.specimen-kit-live .rs-refs,
+.specimen-kit-live .rs-alert,
+.specimen-kit-live .rs-menubar,
+.specimen-kit-live .rs-dropdown,
+.specimen-kit-live .rs-dialog,
+.specimen-kit-live .rs-command,
+.specimen-kit-live .rs-popover,
+.specimen-kit-live .rs-hover-card-panel {
+  border: 0 !important;
+}
 .preview-box > * { max-width: 100%; }
-.preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 20px; width: 100%; }
+.preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 0; border: 0; width: 100%; }
 .preview-cluster { display: flex; gap: 10px; align-items: center; }
 .code-block {
   position: relative;

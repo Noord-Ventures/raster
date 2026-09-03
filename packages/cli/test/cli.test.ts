@@ -89,12 +89,17 @@ describe("add", () => {
     expect(existsSync(join(cwd, "components/raster/button.tsx"))).toBe(true);
   });
 
-  it("reports unknown names and css-only components", async () => {
+  it("reports unknown names", async () => {
     init(cwd);
-    const { outcomes, unknown } = await add(cwd, ["nope", "table"]);
+    const { unknown } = await add(cwd, ["nope"]);
     expect(unknown).toEqual(["nope"]);
-    expect(outcomes[0]!.cssOnly).toBe(true);
-    expect(outcomes[0]!.results).toEqual([]);
+  });
+
+  it("writes a React leaf for table", async () => {
+    init(cwd);
+    const { outcomes } = await add(cwd, ["table"]);
+    expect(outcomes[0]!.cssOnly).toBe(false);
+    expect(existsSync(join(cwd, "components/raster/table.tsx"))).toBe(true);
   });
 
   it("respects a custom componentsDir from raster.json", async () => {

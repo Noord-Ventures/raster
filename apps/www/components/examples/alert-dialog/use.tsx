@@ -2,11 +2,12 @@
 
 import * as React from "react";
 import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from "@noorddev/raster-react";
+import { UseField } from "../use-frame";
 
 export function Use() {
   const [open, setOpen] = React.useState(false);
   return (
-    <article className="rs-use" data-use="alert-dialog">
+    <UseField name="alert-dialog">
       <h3 className="rs-use-type">Kill</h3>
       <div className="rs-use-body">
         <p className="rs-use-copy">Pull a sheet from the run. The question needs an answer.</p>
@@ -20,6 +21,6 @@ export function Use() {
           </AlertDialogActions>
         </AlertDialog>
       </div>
-    </article>
+    </UseField>
   );
 }
