@@ -14,7 +14,8 @@
 }
 @media (min-width: 900px) { .toc-rail { display: flex; } }
 
-/* Detail keeps the live 204 inset at ≥1024 (site.css .site-layout).
+/* Catalog rail does not set --ml. Do not zero --ml here.
+   Detail keeps the live 204 inset at ≥1024 (site.css .site-layout).
    Catalog index zeros --ml in site.css like live so 796 / two 388
    cards fit beside this rail. No hamburger: the rail hides under 900. */
 
