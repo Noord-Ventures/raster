@@ -29,6 +29,7 @@ const map = readFileSync(join(dir, "FEATURE.md"), "utf8");
 const chrome = readFileSync(join(root, "apps/www/components/site-chrome.tsx"), "utf8");
 const crumbs = readFileSync(join(root, "apps/www/components/crumb-bar.tsx"), "utf8");
 const css = readFileSync(join(dir, "interfaces.css"), "utf8");
+const ifSx = readFileSync(join(dir, "interfaces.stylex.ts"), "utf8");
 const crops = existsSync(join(dir, "crops.tsx")) ? readFileSync(join(dir, "crops.tsx"), "utf8") : "";
 const shell = existsSync(join(dir, "shell.tsx")) ? readFileSync(join(dir, "shell.tsx"), "utf8") : "";
 
@@ -110,6 +111,10 @@ if (!tileRule.includes("var(--grid-line)") || tileRule.includes("var(--divider)"
   console.error("Interfaces tile edges must be --grid-line, the quiet 204 ink");
   process.exit(1);
 }
+if (/border:\s*1px/.test(tileRule)) {
+  console.error("Interfaces CSS must not double the StyleX tile hairline");
+  process.exit(1);
+}
 if (tileRule.includes("var(--radius-sm)") || !/border-radius:\s*0/.test(tileRule)) {
   console.error("Interfaces index tiles must be chrome-square (radius 0), same lock as Components cards");
   process.exit(1);
@@ -123,6 +128,14 @@ if (/row-gap:\s*0/.test(listRule) || !/row-gap:/.test(listRule)) {
 const specRule = css.slice(css.indexOf(".if-specimen {"), css.indexOf("}", css.indexOf(".if-specimen {")));
 if (!specRule.includes("margin-top: 204px")) {
   console.error("Detail specimen must sit on the 204, not 120px off it");
+  process.exit(1);
+}
+if (/border:\s*1px/.test(specRule)) {
+  console.error("Interfaces CSS must not double the StyleX specimen hairline");
+  process.exit(1);
+}
+if (!ifSx.includes("borderWidth: 1") || !ifSx.includes('borderColor: "var(--grid-line)"') || !ifSx.includes('borderColor: "var(--divider)"')) {
+  console.error("StyleX must own the one tile --grid-line and specimen --divider hairline");
   process.exit(1);
 }
 if (!map.includes("Type occupies the first cell") || !map.includes("--grid-line")) {

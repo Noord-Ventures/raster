@@ -1,11 +1,16 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { rasterCategories, catalogComponents } from "@noorddev/raster";
+import { Icon, iconGroups } from "@noorddev/raster-react";
 import { chrome } from "@/app/site.stylex";
 import { DocsNav } from "@/components/docs-nav";
 import { Preview } from "@/components/preview";
 import { sx } from "@/lib/sx";
 import { DOOR } from "../specimen";
+
+function iconGroupSlug(title: string) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+}
 
 export const metadata: Metadata = {
   title: "Components",
@@ -23,6 +28,37 @@ export default function ComponentsPage() {
             <p className="rs-t-sub">The control, the name, a short law.</p>
           </header>
           {rasterCategories.map((category) => {
+            if (category === "icons") {
+              return (
+                <section key={category} id={category}>
+                  <h2 className="rs-t-title catalog-group">Icons</h2>
+                  <div {...sx("gallery", chrome.gallery)}>
+                    {iconGroups.map((group) => (
+                      <div key={group.title} {...sx("gallery-item", chrome.galleryItem)}>
+                        <div {...sx("gallery-demo", chrome.galleryDemo)}>
+                          <div className="preview-cluster" style={{ flexWrap: "wrap", justifyContent: "center", maxWidth: 280 }}>
+                            {group.names.slice(0, 8).map((name) => (
+                              <Icon key={name} name={name} size={16} />
+                            ))}
+                          </div>
+                        </div>
+                        <div {...sx("gallery-meta", chrome.galleryMeta)}>
+                          <h3>
+                            <Link
+                              href={`/components/icons#${iconGroupSlug(group.title)}`}
+                              className="gallery-item-link"
+                            >
+                              {group.title}
+                            </Link>
+                          </h3>
+                          <p>{group.names.length} marks. 16 viewBox, 1px currentColor.</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              );
+            }
             const items = catalogComponents.filter((c) => c.category === category);
             if (items.length === 0) return null;
             return (

@@ -633,6 +633,9 @@ if (!/name:\s*"concentric-radius"[\s\S]*?hidden:\s*true/.test(registry) || catal
 if (!catalogPage.includes("catalogComponents") || !nav.includes("catalogComponents")) {
   fail("Catalog gallery and docs rail must list catalogComponents, not hidden entries");
 }
+if (!catalogPage.includes("iconGroups") || !catalogPage.includes('category === "icons"')) {
+  fail("Icons on /components must be iconGroups subcategory cards, like Charts");
+}
 if (!nestCss.includes("--rs-in") || !nestCss.includes("var(--rs-out) - var(--rs-gap)")) {
   fail("Nest must keep the inner-radius formula");
 }

@@ -198,7 +198,12 @@ export function IconCatalog({ className }: { className?: string }) {
   return (
     <div className={catalog.className} style={catalog.style}>
       {iconGroups.map((g) => (
-        <section key={g.title} className={group.className} style={group.style}>
+        <section
+          key={g.title}
+          id={g.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
+          className={group.className}
+          style={group.style}
+        >
           <h3 className={groupTitle.className} style={groupTitle.style}>
             {g.title}
           </h3>
