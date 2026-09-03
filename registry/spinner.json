@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/spinner.css",
-      "content": "/* ── Spinner: 1px currentColor hairline ring. Raster icon law. ── */\n.rs-spinner{display:inline-flex;width:16px;height:16px;color:var(--text);vertical-align:middle}\n.rs-spinner svg{display:block;width:16px;height:16px;animation:rs-spin .7s linear infinite}\n@keyframes rs-spin{to{transform:rotate(360deg)}}\n",
-      "type": "registry:file",
-      "target": "styles/raster/spinner.css"
     }
   ],
   "meta": {

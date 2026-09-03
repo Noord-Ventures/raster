@@ -33,12 +33,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/empty.css",
-      "content": "/* ── Empty: a quiet vacant cell, not an illustration ── */\n.rs-empty{display:flex;flex-direction:column;justify-content:center;gap:8px;min-height:204px;padding:20px;border:1px solid var(--divider);border-radius:0}\n.rs-empty-title{margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-empty-body{margin:0;font-size:13.5px;line-height:1.55;letter-spacing:-.01em;color:var(--text-secondary)}\n.rs-empty-action{margin-top:8px;width:fit-content}\n",
-      "type": "registry:file",
-      "target": "styles/raster/empty.css"
     }
   ],
   "meta": {

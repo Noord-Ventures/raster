@@ -19,9 +19,19 @@ const styles = stylex.create({
     paddingInline: 6,
     lineHeight: 1.2,
   },
+  pair: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 4,
+  },
 });
 
 export function Kbd({ className, style, ...props }: React.HTMLAttributes<HTMLElement>) {
   const sx = rs(["rs-kbd", className], styles.kbd);
   return <kbd {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+}
+
+export function KbdPair({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+  const sx = rs(["rs-kbd-pair", className], styles.pair);
+  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }

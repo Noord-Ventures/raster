@@ -379,28 +379,29 @@ jobs:
             exit 1
           fi
           grep -q 'isolation: isolate' apps/www/app/site.css
-          grep -q 'rs-crumbs a' packages/core/css/components/breadcrumbs.css
-          grep -q 'a:link' packages/core/css/components/breadcrumbs.css
-          grep -q 'a:visited' packages/core/css/components/breadcrumbs.css
-          grep -q 'a:any-link' packages/core/css/components/breadcrumbs.css
-          grep -q 'color:var(--text)' packages/core/css/components/breadcrumbs.css
-          if grep -nE '#00[fF]|#0000ff|[Pp]urple|\\bblue\\b' packages/core/css/components/breadcrumbs.css; then
+          crumbs=packages/react/src/components/breadcrumbs.tsx
+          tabs=packages/react/src/components/tabs.tsx
+          side=packages/react/src/components/sidebar.tsx
+          grep -q '":link": raster.ink' "$crumbs"
+          grep -q '":visited": raster.ink' "$crumbs"
+          grep -q 'raster.ink' "$crumbs"
+          if grep -nE '#00[fF]|#0000ff|[Pp]urple|\\bblue\\b' "$crumbs"; then
             echo "Breadcrumb trail must stay ink — no second link color"
             exit 1
           fi
-          if grep -n '1.5px' packages/core/css/components/tabs.css; then
+          if grep -n '1.5px' "$tabs"; then
             echo "Tabs must use a hairline on the active tab only"
             exit 1
           fi
-          if grep -n 'border-bottom:1px solid var(--divider' packages/core/css/components/tabs.css; then
+          if grep -n 'borderBottomWidth: raster.hairline' "$tabs" | grep -v 640; then
             echo "Tab set must not sit on a full-width bar"
             exit 1
           fi
-          grep -q 'appearance:none' packages/core/css/components/tabs.css
-          grep -q 'inset 0 -1px 0 var(--text)' packages/core/css/components/tabs.css
-          grep -q 'padding:8px 0 32px' packages/core/css/components/sidebar.css
-          grep -q 'rs-sidebar-item:last-child' packages/core/css/components/sidebar.css
-          grep -q 'padding-bottom:32px' packages/core/css/components/sidebar.css
+          grep -q 'appearance: "none"' "$tabs"
+          grep -q 'inset 0 -1px 0' "$tabs"
+          grep -q 'paddingTop: 8' "$side"
+          grep -q 'paddingBottom: 32' "$side"
+          grep -q '":last-child": 32' "$side"
       - name: Code blocks copy
         run: |
           block=apps/www/components/code-block.tsx
@@ -811,8 +812,8 @@ jobs:
             echo "Left inner-page gutter must paint; do not clip 21px off html::before"
             exit 1
           fi
-          grep -q 'background:var(--divider)' packages/core/css/components/button-group.css
-          grep -q 'gap:1px' packages/core/css/components/button-group.css
+          grep -q 'backgroundColor: raster.divider' packages/react/src/components/button-group.tsx
+          grep -q 'gap: raster.hairline' packages/react/src/components/button-group.tsx
           grep -q 'min-height: 204px' apps/www/app/site.css
           if ! awk '/^\.cover \{/,/^\}/' apps/www/app/site.css | grep -q 'min-height: 204px'; then
             echo "Cover must occupy a 204 cell"
@@ -936,12 +937,12 @@ jobs:
           grep -q 'viewportFit' apps/www/app/layout.tsx
       - name: Charts are posters
         run: |
-          css=packages/core/css/components/chart.css
-          grep -q 'stroke-linecap:butt' "$css"
-          grep -q 'border-radius:0' "$css"
-          grep -q 'box-shadow:none' "$css"
-          grep -q 'stroke-width:1' "$css"
-          if grep -nE 'stroke-linecap:round|box-shadow:[^n]|rx=\{' "$css" packages/react/src/components/charts/*.tsx; then
+          css=packages/react/src/components/charts/frame.tsx
+          grep -q 'strokeLinecap: "butt"' "$css"
+          grep -q 'borderRadius: 0' "$css"
+          grep -q 'boxShadow: "none"' "$css"
+          grep -q 'strokeWidth: 1' "$css"
+          if grep -nE 'strokeLinecap: "round"|boxShadow: "[^n]|rx=\{' "$css" packages/react/src/components/charts/*.tsx; then
             echo "Charts must stay hairline, flush, no shadow, no rounded bars"
             exit 1
           fi
@@ -960,11 +961,11 @@ jobs:
       - name: Motion is quiet
         run: |
           tokens=packages/core/src/tokens.ts
-          chart=packages/core/css/components/chart.css
+          chart=packages/react/src/components/charts/frame.tsx
           site=apps/www/app/site.css
-          form=packages/core/css/components/inline-form.css
-          theme=packages/core/css/components/theme-toggle.css
-          toast=packages/core/css/components/toast.css
+          form=packages/react/src/components/inline-form.tsx
+          theme=packages/react/src/components/theme-toggle.tsx
+          toast=packages/react/src/components/toast.tsx
           grep -q 'snap: "0.12s"' "$tokens"
           grep -q 'ease: "0.18s"' "$tokens"
           grep -q 'confirm: "0.16s"' "$tokens"
@@ -991,7 +992,7 @@ jobs:
             grep -q 'var(--ease)' "apps/www/app/interfaces/$slug/scene.css"
             grep -q 'sc-fresh' "apps/www/app/interfaces/$slug/board.tsx"
           done
-          if grep -nE 'scale\(\.92\)|translateX\(-6px\)|translateY\((4|6)px\)' "$form" "$toast" packages/core/css/components/crumb-bar.css; then
+          if grep -nE 'scale\(\.92\)|translateX\(-6px\)|translateY\((4|6)px\)' "$form" "$toast" packages/react/src/components/crumb-bar.tsx; then
             echo "Fade-up and scale shows are out"
             exit 1
           fi

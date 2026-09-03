@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/hover-card.css",
-      "content": "/* ── Hover card: rich preview on hover or keyboard focus ── */\n.rs-hover-card{position:relative;display:inline-block}\n.rs-hover-card-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:170;width:260px;background:var(--bg);border:1px solid var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;font-size:13px;line-height:1.55;letter-spacing:-.01em;color:var(--text-secondary);opacity:0;visibility:hidden;transition:opacity var(--duration-snap) var(--ease) var(--duration-snap),visibility var(--duration-snap) var(--ease) var(--duration-snap)}\n.rs-hover-card:hover .rs-hover-card-panel,.rs-hover-card:focus-within .rs-hover-card-panel{opacity:1;visibility:visible}\n",
-      "type": "registry:file",
-      "target": "styles/raster/hover-card.css"
     }
   ],
   "meta": {

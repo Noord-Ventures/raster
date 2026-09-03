@@ -392,7 +392,7 @@ if (!/@media \(max-width: 899px\) \{\s*\.cover \{\s*min-height: 0;/.test(site)) 
 
 const phoneCss = readFileSync(join(root, "packages/core/css/phone.css"), "utf8");
 const tokensCss = readFileSync(join(root, "packages/core/css/tokens.css"), "utf8");
-const buttonCss = readFileSync(join(root, "packages/core/css/components/button.css"), "utf8");
+const buttonCss = readFileSync(join(root, "packages/react/src/components/button.tsx"), "utf8");
 if (!tokensCss.includes("--hit:") || !tokensCss.includes("--control-h:") || !tokensCss.includes("--control-fs:")) {
   fail("Tokens must emit --hit / --control-h / --control-fs");
 }
@@ -414,7 +414,7 @@ for (const sel of [".rs-btn-primary", ".rs-input", ".rs-tab", ".rs-switch"]) {
 if (!phoneCss.includes("min-height:var(--hit)") && !phoneCss.includes("min-height: var(--hit)")) {
   fail("phone.css must size hits with --hit");
 }
-if (!buttonCss.includes("height:40px")) {
+if (!buttonCss.includes("default: raster.controlH") && !buttonCss.includes("height:40px")) {
   fail("Desktop button must stay 40px; recut only in phone.css");
 }
 if (!phone.includes("flex-direction: column") || !phone.includes(".preview-box")) {
@@ -533,13 +533,13 @@ if (registry.includes('rs-card-in"><p class="rs-card-body"')) {
 if (registry.includes("1px frame, chrome-square")) {
   fail("Card catalog copy is a typography stack, not a framed box");
 }
-const cardCss = readFileSync(join(root, "packages/core/css/components/card.css"), "utf8");
-const cardRule = cardCss.slice(cardCss.indexOf(".rs-card{"), cardCss.indexOf("}", cardCss.indexOf(".rs-card{")));
-if (!cardRule.includes("border:0") || cardRule.includes("border:1px")) {
+const cardCss = readFileSync(join(root, "packages/react/src/components/card.tsx"), "utf8");
+const cardRule = cardCss.slice(cardCss.indexOf("card: {"), cardCss.indexOf("},", cardCss.indexOf("card: {")));
+if (!cardRule.includes("borderWidth: 0") || cardRule.includes("borderWidth: 1")) {
   fail("Default Card chrome must not draw an outer frame");
 }
-const calloutCss = readFileSync(join(root, "packages/core/css/components/callout.css"), "utf8");
-if (calloutCss.includes("border-left:3px") || calloutCss.includes("border-radius:var(--radius-sm)")) {
+const calloutCss = readFileSync(join(root, "packages/react/src/components/callout.tsx"), "utf8");
+if (calloutCss.includes("borderLeft: 3") || calloutCss.includes("borderRadius: raster.radiusSm")) {
   fail("Callout is a 1px hairline, radius 0, no left bar");
 }
 const aboutNotes = readFileSync(join(root, "apps/www/app/about/about-notes.tsx"), "utf8");
@@ -561,7 +561,7 @@ if (!facts.includes("Frontier Design Lab") || !facts.includes("International Typ
 if (!facts.includes("Simple, Beautiful, Opinionated, Elegant, Clear, Legible, Solid, Versatile, Customizable, Minimal")) {
   fail("About Notes must name Renato's ten principles");
 }
-const nestCss = readFileSync(join(root, "packages/core/css/components/nest.css"), "utf8");
+const nestCss = readFileSync(join(root, "packages/react/src/components/concentric-radius.tsx"), "utf8");
 const catalogPage = readFileSync(join(root, "apps/www/app/components/page.tsx"), "utf8");
 if (!/name:\s*"concentric-radius"[\s\S]*?hidden:\s*true/.test(registry) || catalogPage.includes("concentric-radius")) {
   fail("Concentric radius stays in the registry as hidden; it is not a catalog card");
@@ -569,11 +569,11 @@ if (!/name:\s*"concentric-radius"[\s\S]*?hidden:\s*true/.test(registry) || catal
 if (!catalogPage.includes("catalogComponents") || !nav.includes("catalogComponents")) {
   fail("Catalog gallery and docs rail must list catalogComponents, not hidden entries");
 }
-if (!nestCss.includes("--rs-in") || !nestCss.includes(".rs-nest .rs-btn")) {
-  fail("Nest CSS must keep the inner-radius formula and nested button radius");
+if (!nestCss.includes("--rs-in") || !nestCss.includes("var(--rs-out) - var(--rs-gap)")) {
+  fail("Nest must keep the inner-radius formula");
 }
-const iconCss = readFileSync(join(root, "packages/core/css/components/icons.css"), "utf8");
-if (!iconCss.includes("repeat(auto-fill,184px)") || !iconCss.includes("width:184px")) {
+const iconCss = readFileSync(join(root, "packages/react/src/components/icon.tsx"), "utf8");
+if (!iconCss.includes("repeat(auto-fill, 184px)") || !iconCss.includes("default: 184")) {
   fail("Icon catalog cells must sit on 184px module columns");
 }
 if (iconCss.includes("repeat(4,minmax") || iconCss.includes("repeat(3,minmax")) {

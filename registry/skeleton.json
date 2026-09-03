@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/skeleton.css",
-      "content": "/* ── Skeleton: a quiet pulse; still under reduced motion ── */\n.rs-skeleton{display:block;background:var(--divider-subtle);border-radius:var(--radius-sm);animation:rsSkel 1.6s ease-in-out infinite}\n@keyframes rsSkel{0%,100%{opacity:1}50%{opacity:.55}}\n@media(prefers-reduced-motion:reduce){.rs-skeleton{animation:none}}\n",
-      "type": "registry:file",
-      "target": "styles/raster/skeleton.css"
     }
   ],
   "meta": {

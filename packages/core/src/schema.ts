@@ -27,7 +27,7 @@ export interface RasterComponent {
   category: RasterCategory;
   /** Every CSS class this component introduces (canonical rs- names). */
   classes: string[];
-  /** CSS source files, relative to packages/core/css/. */
+  /** CSS source files, relative to packages/core/css/. Empty when StyleX owns the leaf. */
   css: string[];
   /** React source file, relative to packages/react/src/. Absent for CSS-only entries. */
   react?: string;
@@ -61,7 +61,7 @@ export function validateRegistry(components: readonly RasterComponent[]): string
     if (!(rasterCategories as readonly string[]).includes(c.category))
       problems.push(`${c.name}: unknown category "${c.category}"`);
     if (c.classes.length === 0) problems.push(`${c.name}: no classes listed`);
-    if (c.css.length === 0) problems.push(`${c.name}: no css files listed`);
+    if (c.css.length === 0 && !c.react) problems.push(`${c.name}: no css files listed`);
     if (!c.snippet.trim()) problems.push(`${c.name}: empty snippet`);
   }
 

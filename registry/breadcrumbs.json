@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/breadcrumbs.css",
-      "content": "/* ── Breadcrumbs: one ink trail. Slashes at 40%. Current page is full ink.\n   Ancestors stay Inter/ink — never a UA :link or :visited color, never an accent. ── */\n.rs-crumbs{font-size:13px;color:var(--text);letter-spacing:-.01em;display:flex;align-items:baseline;gap:8px}\n.rs-crumbs a,\n.rs-crumbs a:link,\n.rs-crumbs a:visited,\n.rs-crumbs a:hover,\n.rs-crumbs a:active,\n.rs-crumbs a:focus,\n.rs-crumbs a:focus-visible,\n.rs-crumbs a:any-link,\n.rs-crumbs a:-webkit-any-link,\n.rs-crumbs .rs-crumbs-link{\n  color:var(--text);\n  text-decoration:none;\n  background:none;\n}\n.rs-crumbs a,\n.rs-crumbs a:link,\n.rs-crumbs a:visited,\n.rs-crumbs a:any-link,\n.rs-crumbs a:-webkit-any-link,\n.rs-crumbs .rs-crumbs-link{opacity:.55}\n.rs-crumbs a:hover,.rs-crumbs a:focus-visible{opacity:1}\n.rs-crumbs-sep{color:var(--text);opacity:.4}\n.rs-crumbs-here{color:var(--text);opacity:1}\n",
-      "type": "registry:file",
-      "target": "styles/raster/breadcrumbs.css"
     }
   ],
   "meta": {

@@ -1,4 +1,0 @@
-/* ── Combobox: the quiet field with a filtered overlay ── */
-.rs-combobox{position:relative;display:inline-block;min-width:200px}
-.rs-combobox .rs-menu{position:absolute;top:100%;left:0;right:0;z-index:50;margin-top:6px;max-height:240px;overflow-y:auto}
-.rs-combobox-empty{padding:10px 12px;font-size:13px;letter-spacing:-.01em;color:var(--text-secondary)}

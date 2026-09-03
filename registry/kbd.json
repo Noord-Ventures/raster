@@ -11,7 +11,7 @@
   "files": [
     {
       "path": "raster/kbd.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nconst styles = stylex.create({\n  kbd: {\n    fontFamily: \"ui-monospace, SFMono-Regular, Menlo, monospace\",\n    fontSize: 11,\n    fontWeight: 500,\n    color: raster.gray,\n    backgroundColor: raster.paper,\n    borderWidth: raster.hairline,\n    borderStyle: \"solid\",\n    borderColor: raster.divider,\n    borderBottomWidth: 2,\n    borderRadius: raster.radiusSm,\n    paddingBlock: 2,\n    paddingInline: 6,\n    lineHeight: 1.2,\n  },\n});\n\nexport function Kbd({ className, style, ...props }: React.HTMLAttributes<HTMLElement>) {\n  const sx = rs([\"rs-kbd\", className], styles.kbd);\n  return <kbd {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nconst styles = stylex.create({\n  kbd: {\n    fontFamily: \"ui-monospace, SFMono-Regular, Menlo, monospace\",\n    fontSize: 11,\n    fontWeight: 500,\n    color: raster.gray,\n    backgroundColor: raster.paper,\n    borderWidth: raster.hairline,\n    borderStyle: \"solid\",\n    borderColor: raster.divider,\n    borderBottomWidth: 2,\n    borderRadius: raster.radiusSm,\n    paddingBlock: 2,\n    paddingInline: 6,\n    lineHeight: 1.2,\n  },\n  pair: {\n    display: \"inline-flex\",\n    alignItems: \"center\",\n    gap: 4,\n  },\n});\n\nexport function Kbd({ className, style, ...props }: React.HTMLAttributes<HTMLElement>) {\n  const sx = rs([\"rs-kbd\", className], styles.kbd);\n  return <kbd {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n\nexport function KbdPair({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  const sx = rs([\"rs-kbd-pair\", className], styles.pair);\n  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n",
       "type": "registry:component",
       "target": "components/raster/kbd.tsx"
     },
@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/kbd.css",
-      "content": "/* ── Kbd: keys in the mono stack with a pressed bottom edge ── */\n.rs-kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:500;color:var(--text-secondary);background:var(--bg);border:1px solid var(--divider);border-bottom-width:2px;border-radius:var(--radius-sm);padding:2px 6px;line-height:1.2}\n.rs-kbd-pair{display:inline-flex;align-items:stretch;margin-inline-start:10px;vertical-align:middle}\n.rs-kbd-pair .rs-kbd:first-child{border-start-end-radius:0;border-end-end-radius:0}\n.rs-kbd-pair .rs-kbd + .rs-kbd{margin-inline-start:-1px;border-start-start-radius:0;border-end-start-radius:0}\n",
-      "type": "registry:file",
-      "target": "styles/raster/kbd.css"
     }
   ],
   "meta": {

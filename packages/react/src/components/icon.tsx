@@ -56,6 +56,12 @@ const styles = stylex.create({
     overflow: "visible",
     color: "inherit",
   },
+  row: {
+    display: "flex",
+    gap: 18,
+    alignItems: "center",
+    color: raster.ink,
+  },
   catalog: {
     width: "100%",
     display: "flex",
@@ -171,6 +177,12 @@ export function Icon({ name, size = 16, variant = "line", rotate, className, sty
       {turn ? <g transform={`rotate(${turn} 8 8)`}>{nodes}</g> : nodes}
     </svg>
   );
+}
+
+/** Inline mark row. One family, current color. */
+export function Icons({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  const sx = rs(["rs-icons", className], styles.row);
+  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }
 
 /** Full family at 12, 16, and 24, line | filled, grouped. Optical center 8,8. */

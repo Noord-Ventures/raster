@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/field.css",
-      "content": "/* ── Field: quiet input: hairline border, ink focus, label above ──\n   Control height matches Button (40 / --control-h). Label and hint\n   sit on a 16px line-box so the 1px hairline lands on integer y.\n   Gaps are 8px (4/8). */\n.rs-field{width:100%;display:flex;flex-direction:column;gap:8px}\n.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}\n.rs-input{\n  --rs-out:var(--radius-sm);\n  --rs-gap:0px;\n  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  box-sizing:border-box;\n  height:var(--control-h);\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  background:var(--bg);\n  color:var(--text);\n  font-size:14px;\n  line-height:calc(var(--control-h) - 2px);\n  padding:0 10px;\n  outline:none;\n  font-family:inherit\n}\n.rs-input:focus{border-color:var(--accent)}\n.rs-input-full{width:100%}\n.rs-input-ok{border-color:var(--text) !important}\n.rs-feedback{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px;margin:0;min-height:16px}\n.rs-feedback-ok{color:var(--text)}\n.rs-feedback svg{flex-shrink:0}\n.rs-field-hint{margin:0;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}\n.rs-field-error{margin:0;font-size:12px;font-weight:500;color:var(--text);letter-spacing:-.01em;line-height:16px}\n.rs-form{display:flex;flex-direction:column;gap:16px;max-width:388px;margin:0}\n.rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-.01em;line-height:16px}\n",
-      "type": "registry:file",
-      "target": "styles/raster/field.css"
     }
   ],
   "meta": {

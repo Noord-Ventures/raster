@@ -204,4 +204,4 @@ for (const ent of readdirSync(useDir, { withFileTypes: true })) {
   useFields += 1;
 }
 
-console.log(`StyleX catalogue: ${migrated} React leaves on Raster tokens; ${useFields} Use fields; About + Interfaces + specimen + site chrome. CSS-first sheets remain for CLI/registry.`);
+console.log(`StyleX catalogue: ${migrated} React leaves on Raster tokens; ${useFields} Use fields; About + Interfaces + specimen + site chrome. Six CSS-only kit entries remain.`);

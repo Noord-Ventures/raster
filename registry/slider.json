@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/slider.css",
-      "content": "/* ── Slider: thin track with ink fill and 14px thumb ── */\n.rs-slider{position:relative;height:2px;background:var(--divider);border-radius:1px;margin:10px 0}\n.rs-slider-fill{position:absolute;left:0;top:0;bottom:0;background:var(--text);border-radius:1px}\n.rs-slider-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:1.5px solid var(--text)}\n.rs-slider input[type=range]{position:absolute;left:0;right:0;top:-8px;bottom:-8px;width:100%;height:auto;opacity:0;cursor:pointer;margin:0}\n.rs-slider:has(input[type=range]:focus-visible) .rs-slider-thumb{outline:1.5px solid var(--text);outline-offset:2px}\n",
-      "type": "registry:file",
-      "target": "styles/raster/slider.css"
     }
   ],
   "meta": {

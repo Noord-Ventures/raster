@@ -88,7 +88,20 @@ const styles = stylex.create({
     display: "block",
     color: "inherit",
   },
+  slide: {
+    flexShrink: 0,
+    scrollSnapAlign: "start",
+    borderRadius: {
+      default: raster.radiusSm,
+      ["@media (max-width: 640px)"]: 0,
+    },
+  },
 });
+
+export function CarouselSlide({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  const sx = rs(["rs-carousel-slide", className], styles.slide);
+  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+}
 
 /** Native scroll snap; the buttons nudge. */
 export function Carousel({ className, style, children, "aria-label": ariaLabel = "Carousel", ...props }: CarouselProps) {

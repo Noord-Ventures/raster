@@ -6,6 +6,10 @@ import { rasterTokens } from "../src/tokens";
 import { legacyClassMap, toLegacyCss } from "../src/legacy";
 
 const pkgDir = join(import.meta.dirname, "..");
+const reactDir = join(pkgDir, "../react/src/components");
+const wwwDir = join(pkgDir, "../../apps/www");
+const readReact = (name: string) => readFileSync(join(reactDir, name), "utf8");
+const readCss = (name: string) => readFileSync(join(pkgDir, "css", name), "utf8");
 let rasterCss: string;
 let compatCss: string;
 
@@ -35,7 +39,7 @@ describe("generated raster.css", () => {
 
   it("defaults to bundled Inter, with system sans as fallback only", () => {
     expect(rasterCss).toContain("@font-face");
-    expect(rasterCss).toContain('font-family:Inter');
+    expect(rasterCss).toContain("font-family:Inter");
     expect(rasterCss).toContain("./fonts/inter/InterVariable-latin.woff2");
     expect(rasterCss).toContain("./fonts/inter/InterVariable-latin-ext.woff2");
     expect(rasterCss).not.toMatch(/Messina|Geist|Schibsted|Heros|Plex/i);
@@ -50,76 +54,75 @@ describe("generated raster.css", () => {
   });
 
   it("draws a 1px hairline spinner ring, not a rotating square", () => {
-    const spinner = readFileSync(join(pkgDir, "css/components/spinner.css"), "utf8");
-    expect(spinner).not.toMatch(/border-radius:0/);
-    expect(spinner).not.toMatch(/border:1\.5px/);
-    expect(spinner).toMatch(/\.rs-spinner svg\{/);
-    expect(rasterCss).toMatch(/\.rs-spinner svg\{/);
+    const spinner = readReact("spinner.tsx");
+    expect(spinner).not.toMatch(/borderRadius:\s*0/);
+    expect(spinner).not.toMatch(/1\.5px/);
+    expect(spinner).toMatch(/<svg/);
+    expect(spinner).toMatch(/strokeWidth="1"/);
+    expect(spinner).toMatch(/strokeLinecap="butt"/);
+    expect(spinner).toContain('["rs-spinner"');
   });
 
   it("keeps callout a Raster note: 1px hairline all sides, radius 0, no left bar", () => {
-    const callout = readFileSync(join(pkgDir, "css/components/callout.css"), "utf8");
-    expect(callout).toMatch(/border:1px solid var\(--divider\)/);
-    expect(callout).not.toMatch(/border-left:3px/);
-    expect(callout).toMatch(/border-radius:0/);
-    expect(callout).not.toMatch(/border-radius:var\(--radius-sm\)/);
-    expect(callout).toMatch(/box-shadow:none/);
-    expect(rasterCss).toMatch(/\.rs-callout\{[^}]*border-radius:0/);
-    expect(rasterCss).not.toMatch(/\.rs-callout\{[^}]*border-left:3px/);
+    const callout = readReact("callout.tsx");
+    expect(callout).toMatch(/borderWidth: raster.hairline/);
+    expect(callout).toMatch(/borderColor: raster.divider/);
+    expect(callout).not.toMatch(/borderLeft:\s*3/);
+    expect(callout).toMatch(/borderRadius: 0/);
+    expect(callout).not.toMatch(/borderRadius: raster.radiusSm/);
+    expect(callout).toMatch(/boxShadow: "none"/);
   });
 
   it("gives carousel and workflow cards the button-family radius, not 0 or 12px", () => {
-    const carousel = readFileSync(join(pkgDir, "css/components/carousel.css"), "utf8");
-    const flow = readFileSync(join(pkgDir, "css/components/flow.css"), "utf8");
-    expect(carousel).toMatch(/\.rs-carousel-slide\{[^}]*border-radius:var\(--radius-sm\)/);
-    expect(carousel).not.toMatch(/border-radius:(0|10px|12px)/);
+    const carousel = readReact("carousel.tsx");
+    const flow = readCss("components/flow.css");
+    expect(carousel).toMatch(/borderRadius: \{\s*default: raster.radiusSm/);
+    expect(carousel).not.toMatch(/borderRadius:\s*(10|12)\b/);
     expect(flow).toMatch(/\.rs-flow-step\{[^}]*border-radius:var\(--radius-sm\)/);
     expect(flow).toMatch(/\.rs-flow-add\{[^}]*border-radius:var\(--radius-sm\)/);
     expect(flow).not.toMatch(/border-radius:(0|10px|12px)/);
   });
 
   it("joins stepper hairlines to the dots", () => {
-    const stepper = readFileSync(join(pkgDir, "css/components/stepper.css"), "utf8");
-    expect(stepper).toMatch(/\.rs-step-line\{[^}]*left:24px/);
-    expect(stepper).toMatch(/\.rs-step-line\{[^}]*right:0/);
-    expect(stepper).not.toMatch(/display:none/);
-    expect(rasterCss).toMatch(/\.rs-step-line\{[^}]*left:24px/);
+    const stepper = readReact("stepper.tsx");
+    expect(stepper).toMatch(/left: \{\s*default: 24/);
+    expect(stepper).toMatch(/right: 0/);
+    expect(stepper).not.toMatch(/display: "none"/);
+    expect(stepper).toContain('["rs-step-line"]');
   });
 
   it("catalogs icons in sentence-case groups", () => {
-    const icons = readFileSync(join(pkgDir, "css/components/icons.css"), "utf8");
-    expect(icons).toMatch(/\.rs-icon-catalog\{[^}]*width:100%/);
-    expect(icons).toMatch(/\.rs-icon-group-title\{[^}]*text-transform:none/);
-    expect(icons).toMatch(/\.rs-icon-label\{[^}]*text-transform:none/);
-    expect(icons).not.toMatch(/text-transform:uppercase/);
+    const icons = readReact("icon.tsx");
+    expect(icons).toMatch(/catalog: \{[^}]*width: "100%"/s);
+    expect(icons).toMatch(/textTransform: "none"/);
+    expect(icons).not.toMatch(/textTransform: "uppercase"/);
   });
 
   it("paints breadcrumb ancestors as ink, not a UA link color", () => {
-    const crumbs = readFileSync(join(pkgDir, "css/components/breadcrumbs.css"), "utf8");
-    expect(crumbs).toMatch(/a:link/);
-    expect(crumbs).toMatch(/a:visited/);
-    expect(crumbs).toMatch(/a:any-link/);
-    expect(crumbs).toMatch(/color:var\(--text\)/);
+    const crumbs = readReact("breadcrumbs.tsx");
+    expect(crumbs).toMatch(/":link": raster.ink/);
+    expect(crumbs).toMatch(/":visited": raster.ink/);
+    expect(crumbs).toMatch(/color: \{\s*default: raster.ink/s);
     expect(crumbs).not.toMatch(/#00[fF]|#0000ff|\bblue\b|purple/i);
-    expect(rasterCss).toMatch(/\.rs-crumbs a:link/);
   });
 
   it("leaves air under the last sidebar item before the foot rule", () => {
-    const side = readFileSync(join(pkgDir, "css/components/sidebar.css"), "utf8");
-    expect(side).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:32px\}/);
-    expect(side).toMatch(/\.rs-sidebar-nav\{[^}]*padding:8px 0 32px/);
-    expect(side).toMatch(/\.rs-sidebar\{[^}]*border:1px solid var\(--divider\)/);
-    expect(rasterCss).toMatch(/\.rs-sidebar-item:last-child\{padding-bottom:32px\}/);
+    const side = readReact("sidebar.tsx");
+    expect(side).toMatch(/":last-child": 32/);
+    expect(side).toMatch(/paddingTop: 8/);
+    expect(side).toMatch(/paddingBottom: 32/);
+    expect(side).toMatch(/borderColor: raster.divider/);
+    expect(side).toContain('["rs-sidebar"');
   });
 
   it("keeps calendar days square and drops the month chevrons 1px", () => {
-    const cal = readFileSync(join(pkgDir, "css/components/calendar.css"), "utf8");
-    const phone = readFileSync(join(pkgDir, "css/phone.css"), "utf8");
-    expect(cal).toMatch(/\.rs-cal-day\{[^}]*width:36px;height:36px/);
-    expect(cal).not.toMatch(/height:32px/);
-    expect(cal).toMatch(/\.rs-cal-nav \.rs-page\{transform:translateY\(1px\)\}/);
-    expect(cal).toMatch(/\.rs-cal-title\{[^}]*line-height:26px/);
-    expect(rasterCss).toMatch(/\.rs-cal-day\{[^}]*width:36px;height:36px/);
+    const cal = readReact("calendar.tsx");
+    const phone = readCss("phone.css");
+    expect(cal).toMatch(/width: 36/);
+    expect(cal).toMatch(/height: 36/);
+    expect(cal).not.toMatch(/height: 32/);
+    expect(cal).toMatch(/transform: "translateY\(1px\)"/);
+    expect(cal).toMatch(/gridTemplateColumns: "repeat\(7, 36px\)"/);
     expect(phone).toMatch(/\.rs-cal-day\{[^}]*width:36px;\s*height:36px/);
     expect(phone).toMatch(/\.rs-cal-grid\{[^}]*repeat\(7,36px\)/);
     expect(phone).not.toMatch(/\.rs-cal-day\{[^}]*height:var\(--hit\)/);
@@ -127,88 +130,78 @@ describe("generated raster.css", () => {
   });
 
   it("joins button groups on one hairline and the button radius", () => {
-    const group = readFileSync(join(pkgDir, "css/components/button-group.css"), "utf8");
-    const toggle = readFileSync(join(pkgDir, "css/components/toggle.css"), "utf8");
-    const phone = readFileSync(join(pkgDir, "css/phone.css"), "utf8");
-    expect(group).toMatch(/\.rs-btn-group\{[^}]*border:1px solid var\(--divider\)/);
-    expect(group).toMatch(/\.rs-btn-group\{[^}]*--rs-out:var\(--radius-sm\)/);
-    expect(group).toMatch(/\.rs-btn-group\{[^}]*--rs-in:max\(0px,calc\(var\(--rs-out\) - var\(--rs-gap\)\)\)/);
-    expect(group).toMatch(/\.rs-btn-group\{[^}]*border-radius:var\(--rs-out\)/);
-    expect(group).toMatch(/\.rs-btn-group\{[^}]*background:var\(--divider\)/);
-    expect(group).toMatch(/\.rs-btn-group\{[^}]*gap:1px/);
-    expect(group).toMatch(/> \.rs-btn-ghost\{background:var\(--bg\)\}/);
-    expect(group).not.toMatch(/margin-inline-start:-1px/);
-    expect(group).not.toMatch(/border-inline-start-color:transparent/);
-    expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*border:1px solid var\(--divider\)/);
-    expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*--rs-out:var\(--radius-sm\)/);
-    expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*border-radius:var\(--rs-out\)/);
-    expect(toggle).toMatch(/\.rs-toggle \+ \.rs-toggle\{border-inline-start:1px solid var\(--divider\)\}/);
-    expect(toggle).not.toMatch(/margin-left:-1px/);
+    const group = readReact("button-group.tsx");
+    const toggle = readReact("toggle.tsx");
+    const phone = readCss("phone.css");
+    expect(group).toMatch(/borderWidth: raster.hairline/);
+    expect(group).toMatch(/borderColor: raster.divider/);
+    expect(group).toMatch(/borderRadius: \{\s*default: raster.radiusSm/);
+    expect(group).toMatch(/backgroundColor: raster.divider/);
+    expect(group).toMatch(/gap: raster.hairline/);
+    expect(group).not.toMatch(/marginInlineStart/);
+    expect(group).not.toMatch(/borderInlineStartColor: "transparent"/);
+    expect(toggle).toMatch(/borderWidth: raster.hairline/);
+    expect(toggle).toMatch(/borderRadius: \{\s*default: raster.radiusSm/);
+    expect(toggle).toMatch(/":not\(:first-child\)": raster.hairline/);
+    expect(toggle).not.toMatch(/marginLeft: -1/);
     expect(phone).not.toMatch(/\.rs-toggle-group .rs-toggle\{[^}]*margin-left:-1px/);
-    expect(rasterCss).toMatch(/\.rs-btn-group\{[^}]*border:1px solid var\(--divider\)/);
-    expect(rasterCss).toMatch(/\.rs-btn-group\{[^}]*background:var\(--divider\)/);
-    expect(rasterCss).toMatch(/\.rs-btn-group\{[^}]*gap:1px/);
-    expect(rasterCss).toMatch(/\.rs-btn-group > \.rs-btn-ghost\{background:var\(--bg\)\}/);
   });
 
   it("sits the field input on an integer 40px control", () => {
-    const field = readFileSync(join(pkgDir, "css/components/field.css"), "utf8");
-    expect(field).toMatch(/\.rs-field\{[^}]*gap:8px/);
-    expect(field).toMatch(/\.rs-field-label\{[^}]*line-height:16px/);
-    expect(field).toMatch(/\.rs-input\{[^}]*height:var\(--control-h\)/);
-    expect(field).toMatch(/\.rs-input\{[^}]*box-sizing:border-box/);
-    expect(field).toMatch(/\.rs-field-hint\{[^}]*margin:0/);
-    expect(field).toMatch(/\.rs-field-hint\{[^}]*line-height:16px/);
-    expect(field).toMatch(/\.rs-field-error\{[^}]*margin:0/);
-    expect(field).toMatch(/\.rs-field-error\{[^}]*line-height:16px/);
-    expect(rasterCss).toMatch(/\.rs-input\{[^}]*height:var\(--control-h\)/);
-    expect(rasterCss).toMatch(/\.rs-field\{[^}]*gap:8px/);
+    const field = readReact("field.tsx");
+    const input = readReact("input.tsx");
+    expect(field).toMatch(/gap: \{\s*default: 8/);
+    expect(field).toMatch(/lineHeight: "16px"/);
+    expect(input).toMatch(/height: raster.controlH/);
+    expect(input).toMatch(/boxSizing: "border-box"/);
+    expect(field).toMatch(/hint: \{[^}]*margin: 0/s);
+    expect(field).toMatch(/error: \{[^}]*margin: 0/s);
   });
 
   it("lets grouped fields inherit the standalone input radius", () => {
-    const inputGroup = readFileSync(join(pkgDir, "css/components/input-group.css"), "utf8");
-    const native = readFileSync(join(pkgDir, "css/components/native-select.css"), "utf8");
-    expect(inputGroup).toMatch(/--rs-out:var\(--radius-sm\)/);
-    expect(inputGroup).toMatch(/border-radius:var\(--rs-out\)/);
-    expect(native).toMatch(/border-radius:var\(--radius-sm\)/);
+    const inputGroup = readReact("input-group.tsx");
+    const native = readReact("native-select.tsx");
+    expect(inputGroup).toMatch(/borderRadius: \{\s*default: raster.radiusSm/);
+    expect(native).toMatch(/borderRadius: \{\s*default: raster.radiusSm/);
   });
 
   it("paints chrome hairlines in the divider ink, not the subtle fill", () => {
-    const sep = readFileSync(join(pkgDir, "css/components/separator.css"), "utf8");
-    const page = readFileSync(join(pkgDir, "css/components/pagination.css"), "utf8");
-    const crumb = readFileSync(join(pkgDir, "css/components/crumb-bar.css"), "utf8");
-    expect(sep).toMatch(/border-top:1px solid var\(--divider\)/);
-    expect(sep).toMatch(/background:var\(--divider\)/);
-    expect(sep).not.toMatch(/--divider-subtle/);
-    expect(page).toMatch(/border-color:var\(--divider\)/);
-    expect(crumb).toMatch(/border-bottom-color:var\(--divider\)/);
-    expect(rasterCss).toMatch(/\.rs-sep\{[^}]*var\(--divider\)/);
+    const sep = readReact("separator.tsx");
+    const page = readReact("pagination.tsx");
+    const crumb = readReact("crumb-bar.tsx");
+    expect(sep).toMatch(/borderTopColor: raster.divider/);
+    expect(sep).toMatch(/backgroundColor: raster.divider/);
+    expect(sep).not.toMatch(/dividerSubtle/);
+    expect(page).toMatch(/borderColor: raster.divider/);
+    expect(crumb).toMatch(/borderBottomColor: raster.divider/);
   });
 
   it("marks only the active tab with a hairline", () => {
-    const tabs = readFileSync(join(pkgDir, "css/components/tabs.css"), "utf8");
+    const tabs = readReact("tabs.tsx");
     expect(tabs).not.toMatch(/1\.5px/);
-    expect(tabs).toMatch(/appearance:none/);
-    expect(tabs).toMatch(/inset 0 -1px 0 var\(--text\)/);
-    expect(tabs).not.toMatch(/\.rs-tabs\{[^}]*border-bottom/);
-    expect(rasterCss).toMatch(/button\.rs-tab\{[^}]*appearance:none/);
+    expect(tabs).toMatch(/appearance: "none"/);
+    expect(tabs).toMatch(/boxShadow: "inset 0 -1px 0"/);
+    expect(tabs).toContain("rs-tabs");
+    expect(tabs).toMatch(/borderWidth: 0/);
   });
 
   it("draws charts as a poster field, not a dashboard widget", () => {
-    const chart = readFileSync(join(pkgDir, "css/components/chart.css"), "utf8");
-    expect(chart).toMatch(/stroke-linecap:butt/);
-    expect(chart).toMatch(/border-radius:0/);
-    expect(chart).toMatch(/box-shadow:none/);
-    expect(chart).toMatch(/stroke-width:1/);
-    expect(chart).not.toMatch(/stroke-linecap:round/);
-    expect(chart).not.toMatch(/box-shadow:\s*[^n]/);
-    expect(chart).not.toMatch(/#e30613/i);
-    expect(rasterCss).toMatch(/\.rs-chart-field\{/);
-    expect(rasterCss).toMatch(/\.rs-chart-line\{[^}]*stroke-width:1/);
-    expect(chart).toMatch(/\.rs-chart-hist\{fill:var\(--divider\)/);
-    expect(chart).not.toMatch(/\.rs-chart-hist\{fill:var\(--text\)/);
-    expect(chart).toMatch(/\.rs-chart-donut-label\{[^}]*font-weight:500/);
-    expect(chart).not.toMatch(/\.rs-chart-donut-label\{[^}]*font-size:16px/);
+    const chart = readReact("charts/frame.tsx");
+    const hist = readReact("charts/histogram.tsx");
+    const donut = readReact("charts/donut.tsx");
+    expect(chart).toMatch(/strokeLinecap: "butt"/);
+    expect(chart).toMatch(/borderRadius: 0/);
+    expect(chart).toMatch(/boxShadow: "none"/);
+    expect(chart).toMatch(/strokeWidth: 1/);
+    expect(chart).not.toMatch(/strokeLinecap: "round"/);
+    expect(chart).not.toMatch(/fill:\s*["']#e30613/i);
+    expect(chart).toMatch(/CROUWEL_SPOT/);
+    expect(chart).toContain("rs-chart-field");
+    expect(chart).toContain("rs-chart-line");
+    expect(hist).toMatch(/fill: raster.divider/);
+    expect(hist).not.toMatch(/fill: raster.ink/);
+    expect(donut).toMatch(/fontWeight: 500/);
+    expect(donut).not.toMatch(/fontSize: 16/);
   });
 
   it("never introduces a color hue — the palette is monochrome", () => {
@@ -225,8 +218,9 @@ describe("generated raster.css", () => {
 });
 
 describe("compat layer", () => {
-  it("re-emits every legacy class name", () => {
-    for (const [, legacy] of legacyClassMap) {
+  it("re-emits every leftover CSS-first legacy class name", () => {
+    for (const [canonical, legacy] of legacyClassMap) {
+      if (!rasterCss.includes(`.${canonical}`)) continue;
       expect(compatCss.includes(`.${legacy}`), `.${legacy} missing from raster-compat.css`).toBe(true);
     }
   });
@@ -282,8 +276,6 @@ describe("tokens", () => {
     const overlay = rasterCss.match(/html::before\{[^}]*\}/)?.[0] ?? "";
     expect(overlay).not.toContain("repeating-linear-gradient");
     expect(overlay).not.toContain("clip-path");
-    expect(rasterCss).toContain("background:var(--divider)");
-    expect(rasterCss).toContain("gap:1px");
   });
 
   it("grid module = column + gutter", () => {
@@ -291,23 +283,26 @@ describe("tokens", () => {
   });
 
   it("keeps cards chrome-square and frameless, toggles on the button radius", () => {
-    const card = readFileSync(join(pkgDir, "css/components/card.css"), "utf8");
-    const toggle = readFileSync(join(pkgDir, "css/components/toggle.css"), "utf8");
-    const cardRule = card.slice(card.indexOf(".rs-card{"), card.indexOf("}", card.indexOf(".rs-card{")));
-    expect(card).toMatch(/\.rs-card\{[^}]*--rs-out:0/);
-    expect(card).toMatch(/border-radius:var\(--rs-out\)/);
-    expect(card).not.toMatch(/--rs-out:var\(--radius-sm\)/);
-    expect(cardRule).toMatch(/border:0/);
-    expect(cardRule).not.toMatch(/border:1px/);
-    expect(toggle).toMatch(/\.rs-toggle\{[^}]*border-radius:var\(--radius-sm\)/);
-    expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*--rs-out:var\(--radius-sm\)/);
-    expect(toggle).toMatch(/\.rs-toggle-group\{[^}]*border-radius:var\(--rs-out\)/);
-    expect(rasterCss).toMatch(/\.rs-card\{[^}]*--rs-out:0/);
-    expect(rasterCss).toMatch(/\.rs-toggle\{[^}]*border-radius:var\(--radius-sm\)/);
-    expect(rasterCss).toMatch(/\.rs-toggle-group\{[^}]*--rs-out:var\(--radius-sm\)/);
+    const card = readReact("card.tsx");
+    const toggle = readReact("toggle.tsx");
+    expect(card).toMatch(/card: \{[^}]*borderWidth: 0/s);
+    expect(card).toMatch(/card: \{[^}]*borderRadius: 0/s);
+    expect(card).not.toMatch(/card: \{[^}]*borderWidth: 1/s);
+    expect(toggle).toMatch(/borderRadius: \{\s*default: raster.radiusSm/);
+    expect(toggle).toContain('["rs-toggle"');
+    expect(toggle).toContain('["rs-toggle-group"');
   });
 
   it("uses one slight Raster radius, the standalone button token", () => {
+    const button = readReact("button.tsx");
+    const card = readReact("card.tsx");
+    const toggle = readReact("toggle.tsx");
+    const dialog = readReact("dialog.tsx");
+    const callout = readReact("callout.tsx");
+    const sheet = readReact("sheet.tsx");
+    const drawer = readReact("drawer.tsx");
+    const empty = readReact("empty.tsx");
+    const chart = readReact("charts/frame.tsx");
     expect(rasterTokens.radius.small).toBe(4);
     expect(rasterTokens.radius.base).toBe(rasterTokens.radius.small);
     expect(rasterTokens.radius.small).toBeGreaterThanOrEqual(2);
@@ -316,47 +311,52 @@ describe("tokens", () => {
     expect(rasterTokens.radius.rule).toMatch(/chrome-square/);
     expect(rasterCss).toContain("--radius-sm: 4px");
     expect(rasterCss).toContain("--radius: var(--radius-sm)");
-    expect(rasterCss).toMatch(/\.rs-btn-primary\{[^}]*border-radius:var\(--radius-sm\)/);
-    expect(rasterCss).toMatch(/\.rs-card\{[^}]*--rs-out:0/);
-    expect(rasterCss).toMatch(/\.rs-toggle\{[^}]*border-radius:var\(--radius-sm\)/);
-    expect(rasterCss).toMatch(/\.rs-toggle-group\{[^}]*--rs-out:var\(--radius-sm\)/);
-    expect(rasterCss).toMatch(/\.rs-dialog\{[^}]*--rs-out:var\(--radius-sm\)/);
-    expect(rasterCss).toMatch(/\.rs-callout\{[^}]*border-radius:0/);
-    expect(rasterCss).toMatch(/dialog\.rs-sheet\{[^}]*border-radius:var\(--radius-sm\)/);
-    expect(rasterCss).toMatch(/dialog\.rs-drawer\{[^}]*border-radius:var\(--radius-sm\)/);
-    const site = readFileSync(join(pkgDir, "../../apps/www/app/site.css"), "utf8");
+    expect(button).toMatch(/borderRadius: \{\s*default: raster.radiusSm/);
+    expect(card).toMatch(/borderRadius: 0/);
+    expect(toggle).toMatch(/borderRadius: \{\s*default: raster.radiusSm/);
+    expect(dialog).toMatch(/borderRadius: raster.radiusSm/);
+    expect(callout).toMatch(/borderRadius: 0/);
+    expect(sheet).toMatch(/borderTopLeftRadius: raster.radiusSm/);
+    expect(drawer).toMatch(/borderTopLeftRadius: raster.radiusSm/);
+    const site = readFileSync(join(wwwDir, "app/site.css"), "utf8");
     expect(site).toMatch(/\.gallery-item \{[^}]*border-radius: 0/);
     expect(site).toMatch(/\.preview-box \{[^}]*border-radius: var\(--radius-sm\)/);
-    const frames = readFileSync(join(pkgDir, "../../apps/www/app/interfaces/interfaces.css"), "utf8");
+    const frames = readFileSync(join(wwwDir, "app/interfaces/interfaces.css"), "utf8");
     expect(frames).toMatch(/\.if-tile \{[^}]*border-radius: 0/);
     expect(frames).toMatch(/\.if-specimen \{[^}]*border-radius: var\(--radius-sm\)/);
-    const use = readFileSync(join(pkgDir, "../../apps/www/components/examples/use.css"), "utf8");
+    const use = readFileSync(join(wwwDir, "components/examples/use.css"), "utf8");
     expect(use).toMatch(/\.rs-use \{[^}]*border-radius: var\(--radius-sm\)/);
     expect(use).toMatch(/\.rs-scene \{[^}]*border-radius: var\(--radius-sm\)/);
-    expect(rasterCss).toMatch(/\.rs-empty\{[^}]*border-radius:0/);
-    expect(rasterCss).toMatch(/\.rs-chart\{[^}]*border-radius:0/);
+    expect(empty).toMatch(/borderRadius: 0/);
+    expect(chart).toMatch(/borderRadius: 0/);
     expect(rasterTokens.radius.chrome).toBe(0);
   });
 
   it("ships the concentric-radius law", () => {
+    const nest = readReact("concentric-radius.tsx");
+    const card = readReact("card.tsx");
+    const dialog = readReact("dialog.tsx");
+    const group = readReact("button-group.tsx");
+    const input = readReact("input.tsx");
+    const inputGroup = readReact("input-group.tsx");
+    const cal = readReact("calendar.tsx");
     expect(rasterTokens.radius.chrome).toBe(0);
     expect(rasterTokens.radius.concentric).toBe("Steve Ruiz innerRadius, clamped at 0");
     expect(rasterCss).toContain("--radius-chrome: 0px");
     expect(rasterCss).toContain("--radius-in: max(0px, calc(var(--radius) - var(--pad)))");
-    expect(rasterCss).toMatch(/\.rs-nest\{/);
-    expect(rasterCss).toMatch(/\.rs-nest-in\{/);
-    expect(rasterCss).toContain("--rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)))");
-    for (const cls of [".rs-card{", ".rs-dialog{", ".rs-btn-group{", ".rs-input{", ".rs-input-group{"]) {
-      expect(rasterCss).toContain(cls);
-    }
-    expect(rasterCss).toMatch(/\.rs-card-in\{[^}]*border:0/);
-    expect(rasterCss).toMatch(/\.rs-cal-day\{[^}]*border-radius:var\(--rs-in/);
-    expect(rasterCss).toMatch(/\.rs-dialog \.rs-btn-primary,[^{]*\{[^}]*border-radius:var\(--rs-in\)/);
-    // Inner frames inherit --rs-in. Reassigning --rs-out from itself cycles
-    // the custom property and the used radius becomes 0.
-    const nestIn = rasterCss.match(/\.rs-nest-in\{[^}]*\}/)?.[0] ?? "";
-    expect(nestIn).toMatch(/border-radius:var\(--rs-in\)/);
-    expect(nestIn).not.toMatch(/--rs-out:/);
+    expect(nest).toContain('["rs-nest"');
+    expect(nest).toContain('["rs-nest-in"');
+    expect(nest).toContain('"--rs-in": "max(0px, calc(var(--rs-out) - var(--rs-gap)))"');
+    expect(card).toContain('["rs-card"');
+    expect(dialog).toContain("rs-dialog");
+    expect(group).toContain('["rs-btn-group"');
+    expect(input).toContain("rs-input");
+    expect(inputGroup).toContain("rs-input-group");
+    expect(card).toMatch(/inner: \{[^}]*borderWidth: 0/s);
+    expect(cal).toMatch(/borderRadius: "var\(--rs-in, var\(--radius-sm\)\)"/);
+    expect(dialog).toMatch(/borderRadius: 0/);
+    expect(nest).toMatch(/borderRadius: "var\(--rs-in\)"/);
+    expect(nest).not.toMatch(/inner: \{[^}]*--rs-out:/s);
   });
 
   it("ships short named motion and refuses a load show", () => {
@@ -375,16 +375,18 @@ describe("tokens", () => {
     expect(rasterCss).not.toMatch(/scale\(\.92\)/);
     expect(rasterCss).not.toMatch(/\.5s cubic-bezier/);
     expect(rasterCss).not.toMatch(/cubic-bezier\([^)]*[1-9]\.[0-9]/);
-    const site = readFileSync(join(pkgDir, "../../apps/www/app/site.css"), "utf8");
+    const site = readFileSync(join(wwwDir, "app/site.css"), "utf8");
     expect(site).not.toMatch(/translateY\(-6px\)/);
     expect(site).not.toMatch(/\.5s cubic-bezier/);
     expect(site).toContain("var(--duration-snap)");
-    const chart = readFileSync(join(pkgDir, "css/components/chart.css"), "utf8");
-    expect(chart).not.toMatch(/animation:/);
+    const chart = readReact("charts/frame.tsx");
+    expect(chart).not.toMatch(/animationName:/);
     expect(chart).not.toMatch(/stagger|animation-delay/);
   });
 
   it("emits a phone control scale at 640 without restyling desktop", () => {
+    const button = readReact("button.tsx");
+    const phone = readCss("phone.css");
     expect(rasterTokens.control.desktop.hit).toBe(40);
     expect(rasterTokens.control.phone.hit).toBe(44);
     expect(rasterTokens.control.phone.font).toBe(16);
@@ -395,10 +397,7 @@ describe("tokens", () => {
     expect(rasterCss).toContain("--hit:44px");
     expect(rasterCss).toContain("--control-h:44px");
     expect(rasterCss).toContain("--control-fs:16px");
-    const button = readFileSync(join(pkgDir, "css/components/button.css"), "utf8");
-    expect(button).toContain("height:40px");
-    expect(button).not.toMatch(/@media/);
-    const phone = readFileSync(join(pkgDir, "css/phone.css"), "utf8");
+    expect(button).toMatch(/height: \{\s*default: raster.controlH/);
     expect(phone).toMatch(/@media\(max-width:640px\)/);
     expect(phone).toContain(".rs-btn-primary");
     expect(phone).toContain(".rs-input");

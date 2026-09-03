@@ -33,12 +33,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/textarea.css",
-      "content": "/* ── Textarea: the quiet field, taller ── */\n.rs-textarea{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;line-height:1.55;padding:8px 10px;outline:none;font-family:inherit;min-height:96px;resize:vertical;width:100%}\n.rs-textarea:focus{border-color:var(--accent)}\n.rs-textarea::placeholder{color:var(--text-secondary)}\n",
-      "type": "registry:file",
-      "target": "styles/raster/textarea.css"
     }
   ],
   "meta": {

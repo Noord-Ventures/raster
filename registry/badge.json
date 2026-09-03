@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/badge.css",
-      "content": "/* ── Badges: outline for recommendations, solid for done, muted for pending ── */\n.rs-badge{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge-solid{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--bg);background:var(--text);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge-muted{font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--text-secondary);background:var(--divider-subtle);padding:4px 11px;line-height:1.4;border-radius:var(--radius-sm)}\n",
-      "type": "registry:file",
-      "target": "styles/raster/badge.css"
     }
   ],
   "meta": {

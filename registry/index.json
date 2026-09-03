@@ -89,11 +89,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/button.css",
-          "type": "registry:file",
-          "target": "styles/raster/button.css"
         }
       ]
     },
@@ -146,11 +141,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/button-group.css",
-          "type": "registry:file",
-          "target": "styles/raster/button-group.css"
         }
       ]
     },
@@ -231,11 +221,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/field.css",
-          "type": "registry:file",
-          "target": "styles/raster/field.css"
         }
       ]
     },
@@ -280,11 +265,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/field.css",
-          "type": "registry:file",
-          "target": "styles/raster/field.css"
         }
       ]
     },
@@ -335,11 +315,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/field.css",
-          "type": "registry:file",
-          "target": "styles/raster/field.css"
         }
       ]
     },
@@ -389,11 +364,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/input-group.css",
-          "type": "registry:file",
-          "target": "styles/raster/input-group.css"
         }
       ]
     },
@@ -438,11 +408,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/native-select.css",
-          "type": "registry:file",
-          "target": "styles/raster/native-select.css"
         }
       ]
     },
@@ -505,11 +470,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/inline-form.css",
-          "type": "registry:file",
-          "target": "styles/raster/inline-form.css"
         }
       ]
     },
@@ -561,11 +521,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/radio.css",
-          "type": "registry:file",
-          "target": "styles/raster/radio.css"
         }
       ]
     },
@@ -627,11 +582,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/checkbox.css",
-          "type": "registry:file",
-          "target": "styles/raster/checkbox.css"
         }
       ]
     },
@@ -677,11 +627,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/switch.css",
-          "type": "registry:file",
-          "target": "styles/raster/switch.css"
         }
       ]
     },
@@ -728,11 +673,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/slider.css",
-          "type": "registry:file",
-          "target": "styles/raster/slider.css"
         }
       ]
     },
@@ -778,11 +718,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/progress.css",
-          "type": "registry:file",
-          "target": "styles/raster/progress.css"
         }
       ]
     },
@@ -829,11 +764,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/tabs.css",
-          "type": "registry:file",
-          "target": "styles/raster/tabs.css"
         }
       ]
     },
@@ -881,11 +811,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/breadcrumbs.css",
-          "type": "registry:file",
-          "target": "styles/raster/breadcrumbs.css"
         }
       ]
     },
@@ -938,11 +863,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/crumb-bar.css",
-          "type": "registry:file",
-          "target": "styles/raster/crumb-bar.css"
         }
       ]
     },
@@ -1000,11 +920,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/pagination.css",
-          "type": "registry:file",
-          "target": "styles/raster/pagination.css"
         }
       ]
     },
@@ -1068,11 +983,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/menu.css",
-          "type": "registry:file",
-          "target": "styles/raster/menu.css"
         }
       ]
     },
@@ -1123,11 +1033,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/dialog.css",
-          "type": "registry:file",
-          "target": "styles/raster/dialog.css"
         }
       ]
     },
@@ -1174,11 +1079,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/badge.css",
-          "type": "registry:file",
-          "target": "styles/raster/badge.css"
         }
       ]
     },
@@ -1256,11 +1156,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/card.css",
-          "type": "registry:file",
-          "target": "styles/raster/card.css"
         }
       ]
     },
@@ -1309,11 +1204,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/nest.css",
-          "type": "registry:file",
-          "target": "styles/raster/nest.css"
         }
       ]
     },
@@ -1365,11 +1255,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/stepper.css",
-          "type": "registry:file",
-          "target": "styles/raster/stepper.css"
         }
       ]
     },
@@ -1458,11 +1343,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/icons.css",
-          "type": "registry:file",
-          "target": "styles/raster/icons.css"
         }
       ]
     },
@@ -1520,11 +1400,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/accordion.css",
-          "type": "registry:file",
-          "target": "styles/raster/accordion.css"
         }
       ]
     },
@@ -1582,11 +1457,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/alert.css",
-          "type": "registry:file",
-          "target": "styles/raster/alert.css"
         }
       ]
     },
@@ -1644,11 +1514,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/dialog.css",
-          "type": "registry:file",
-          "target": "styles/raster/dialog.css"
         }
       ]
     },
@@ -1696,11 +1561,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/avatar.css",
-          "type": "registry:file",
-          "target": "styles/raster/avatar.css"
         }
       ]
     },
@@ -1748,11 +1608,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/item.css",
-          "type": "registry:file",
-          "target": "styles/raster/item.css"
         }
       ]
     },
@@ -1800,11 +1655,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/textarea.css",
-          "type": "registry:file",
-          "target": "styles/raster/textarea.css"
         }
       ]
     },
@@ -1850,11 +1700,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/separator.css",
-          "type": "registry:file",
-          "target": "styles/raster/separator.css"
         }
       ]
     },
@@ -1899,11 +1744,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/skeleton.css",
-          "type": "registry:file",
-          "target": "styles/raster/skeleton.css"
         }
       ]
     },
@@ -1954,11 +1794,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/empty.css",
-          "type": "registry:file",
-          "target": "styles/raster/empty.css"
         }
       ]
     },
@@ -2003,11 +1838,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/spinner.css",
-          "type": "registry:file",
-          "target": "styles/raster/spinner.css"
         }
       ]
     },
@@ -2055,11 +1885,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/tooltip.css",
-          "type": "registry:file",
-          "target": "styles/raster/tooltip.css"
         }
       ]
     },
@@ -2107,11 +1932,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/toast.css",
-          "type": "registry:file",
-          "target": "styles/raster/toast.css"
         }
       ]
     },
@@ -2173,16 +1993,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/menu.css",
-          "type": "registry:file",
-          "target": "styles/raster/menu.css"
-        },
-        {
-          "path": "raster/styles/menu-extras.css",
-          "type": "registry:file",
-          "target": "styles/raster/menu-extras.css"
         }
       ]
     },
@@ -2228,11 +2038,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/toggle.css",
-          "type": "registry:file",
-          "target": "styles/raster/toggle.css"
         }
       ]
     },
@@ -2285,11 +2090,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/toggle.css",
-          "type": "registry:file",
-          "target": "styles/raster/toggle.css"
         }
       ]
     },
@@ -2344,11 +2144,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/popover.css",
-          "type": "registry:file",
-          "target": "styles/raster/popover.css"
         }
       ]
     },
@@ -2396,11 +2191,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/sheet.css",
-          "type": "registry:file",
-          "target": "styles/raster/sheet.css"
         }
       ]
     },
@@ -2447,11 +2237,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/drawer.css",
-          "type": "registry:file",
-          "target": "styles/raster/drawer.css"
         }
       ]
     },
@@ -2496,11 +2281,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/scroll-area.css",
-          "type": "registry:file",
-          "target": "styles/raster/scroll-area.css"
         }
       ]
     },
@@ -2605,11 +2385,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/chart.css",
-          "type": "registry:file",
-          "target": "styles/raster/chart.css"
         }
       ]
     },
@@ -2712,11 +2487,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/chart.css",
-          "type": "registry:file",
-          "target": "styles/raster/chart.css"
         }
       ]
     },
@@ -2819,11 +2589,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/chart.css",
-          "type": "registry:file",
-          "target": "styles/raster/chart.css"
         }
       ]
     },
@@ -2926,11 +2691,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/chart.css",
-          "type": "registry:file",
-          "target": "styles/raster/chart.css"
         }
       ]
     },
@@ -3033,11 +2793,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/chart.css",
-          "type": "registry:file",
-          "target": "styles/raster/chart.css"
         }
       ]
     },
@@ -3140,11 +2895,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/chart.css",
-          "type": "registry:file",
-          "target": "styles/raster/chart.css"
         }
       ]
     },
@@ -3247,11 +2997,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/chart.css",
-          "type": "registry:file",
-          "target": "styles/raster/chart.css"
         }
       ]
     },
@@ -3310,11 +3055,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/collapsible.css",
-          "type": "registry:file",
-          "target": "styles/raster/collapsible.css"
         }
       ]
     },
@@ -3360,11 +3100,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/hover-card.css",
-          "type": "registry:file",
-          "target": "styles/raster/hover-card.css"
         }
       ]
     },
@@ -3410,11 +3145,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/kbd.css",
-          "type": "registry:file",
-          "target": "styles/raster/kbd.css"
         }
       ]
     },
@@ -3459,11 +3189,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/input-otp.css",
-          "type": "registry:file",
-          "target": "styles/raster/input-otp.css"
         }
       ]
     },
@@ -3530,16 +3255,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/menu.css",
-          "type": "registry:file",
-          "target": "styles/raster/menu.css"
-        },
-        {
-          "path": "raster/styles/menu-extras.css",
-          "type": "registry:file",
-          "target": "styles/raster/menu-extras.css"
         }
       ]
     },
@@ -3604,11 +3319,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/menubar.css",
-          "type": "registry:file",
-          "target": "styles/raster/menubar.css"
         }
       ]
     },
@@ -3653,11 +3363,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/nav.css",
-          "type": "registry:file",
-          "target": "styles/raster/nav.css"
         }
       ]
     },
@@ -3707,11 +3412,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/sidebar.css",
-          "type": "registry:file",
-          "target": "styles/raster/sidebar.css"
         }
       ]
     },
@@ -3772,11 +3472,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/carousel.css",
-          "type": "registry:file",
-          "target": "styles/raster/carousel.css"
         }
       ]
     },
@@ -3823,11 +3518,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/resizable.css",
-          "type": "registry:file",
-          "target": "styles/raster/resizable.css"
         }
       ]
     },
@@ -3898,11 +3588,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/combobox.css",
-          "type": "registry:file",
-          "target": "styles/raster/combobox.css"
         }
       ]
     },
@@ -3962,11 +3647,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/command.css",
-          "type": "registry:file",
-          "target": "styles/raster/command.css"
         }
       ]
     },
@@ -4033,11 +3713,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/calendar.css",
-          "type": "registry:file",
-          "target": "styles/raster/calendar.css"
         }
       ]
     },
@@ -4108,16 +3783,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/menu.css",
-          "type": "registry:file",
-          "target": "styles/raster/menu.css"
-        },
-        {
-          "path": "raster/styles/calendar.css",
-          "type": "registry:file",
-          "target": "styles/raster/calendar.css"
         }
       ]
     },
@@ -4176,11 +3841,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/datatable.css",
-          "type": "registry:file",
-          "target": "styles/raster/datatable.css"
         }
       ]
     },
@@ -4225,11 +3885,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/ratio.css",
-          "type": "registry:file",
-          "target": "styles/raster/ratio.css"
         }
       ]
     },
@@ -4281,11 +3936,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/field.css",
-          "type": "registry:file",
-          "target": "styles/raster/field.css"
         }
       ]
     },
@@ -4420,11 +4070,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/theme-toggle.css",
-          "type": "registry:file",
-          "target": "styles/raster/theme-toggle.css"
         }
       ]
     },
@@ -4469,11 +4114,6 @@
           "path": "raster/cx.ts",
           "type": "registry:file",
           "target": "components/raster/cx.ts"
-        },
-        {
-          "path": "raster/styles/callout.css",
-          "type": "registry:file",
-          "target": "styles/raster/callout.css"
         }
       ]
     },

@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/stepper.css",
-      "content": "/* ── Stepper: numbered dots joined by hairlines that meet the marks ── */\n.rs-steps{display:flex;align-items:flex-start;width:100%;max-width:100%;gap:0}\n.rs-step{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;flex:1 1 0;min-width:0}\n.rs-step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--divider);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;background:var(--bg);position:relative;z-index:1}\n.rs-step-done{background:var(--text);border-color:var(--text);color:var(--bg)}\n.rs-step-active{border-color:var(--text);color:var(--text)}\n.rs-step-name{font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);line-height:1.2}\n.rs-step-sub{font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em}\n.rs-step-line{position:absolute;top:11.5px;left:24px;right:0;height:1px;background:var(--divider);margin:0;min-width:0;z-index:0}\n",
-      "type": "registry:file",
-      "target": "styles/raster/stepper.css"
     }
   ],
   "meta": {

@@ -39,12 +39,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/button-group.css",
-      "content": "/* ── Button group: flush joined actions, one hairline between ──\n   The group owns the outer stroke. Join ink is --divider (chrome\n   gridline) in both schemes. A 1px gap on a divider field is the\n   rule; child border:0 cannot eat it. Ghosts sit on paper. */\n.rs-btn-group{\n  --rs-out:var(--radius-sm);\n  --rs-gap:0px;\n  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  display:inline-flex;\n  align-items:stretch;\n  box-sizing:border-box;\n  height:40px;\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  background:var(--divider);\n  gap:1px;\n  overflow:hidden\n}\n.rs-btn-group:has(> .rs-btn-sm){height:36px}\n.rs-btn-group > .rs-btn-primary,.rs-btn-group > .rs-btn-ghost{box-sizing:border-box;height:auto;border:0;border-radius:0;margin:0}\n.rs-btn-group > .rs-btn-ghost{background:var(--bg)}\n.rs-btn-group > .rs-btn-ghost:hover{background:var(--divider)}\n.rs-btn-group > .rs-btn-ghost:disabled{background:var(--bg)}\n.rs-btn-group > .rs-btn-primary{position:relative;z-index:1}\n",
-      "type": "registry:file",
-      "target": "styles/raster/button-group.css"
     }
   ],
   "meta": {

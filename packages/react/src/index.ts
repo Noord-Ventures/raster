@@ -3,6 +3,7 @@ export { rs } from "./rs";
 export { raster, phone, mobileGrid, rail, wide, rasterFont, rasterMono } from "./tokens.stylex";
 export {
   Icon,
+  Icons,
   IconCatalog,
   ICON_STROKE,
   ICON_VIEWBOX,
@@ -79,12 +80,12 @@ export {
 } from "./components/chart";
 export { Collapsible, type CollapsibleProps } from "./components/collapsible";
 export { HoverCard, type HoverCardProps } from "./components/hover-card";
-export { Kbd } from "./components/kbd";
+export { Kbd, KbdPair } from "./components/kbd";
 export { InputOTP, type InputOTPProps } from "./components/input-otp";
 export { ContextMenu, type ContextMenuProps } from "./components/context-menu";
 export { Menubar, type MenubarProps } from "./components/menubar";
 export { NavigationMenu, type NavigationMenuProps } from "./components/navigation-menu";
-export { Carousel, type CarouselProps } from "./components/carousel";
+export { Carousel, CarouselSlide, type CarouselProps } from "./components/carousel";
 export { Split, type SplitProps } from "./components/resizable";
 export { Combobox, type ComboboxProps } from "./components/combobox";
 export { Command, CommandDialog, type CommandProps, type CommandDialogProps, type CommandItem, type CommandGroup } from "./components/command";

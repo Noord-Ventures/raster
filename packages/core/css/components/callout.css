@@ -1,5 +1,0 @@
-/* ── Callout: paper field, 1px hairline on all sides. Not rounded. No left bar. ── */
-.rs-callout{background:var(--bg);border:1px solid var(--divider);border-radius:0;box-shadow:none;padding:16px 20px}
-.rs-callout p{font-size:14px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.6;margin:0}
-.rs-callout p strong{color:var(--text);font-weight:600}
-@media(max-width:640px){.rs-callout{padding:14px 16px}}

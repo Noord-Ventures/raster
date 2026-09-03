@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/tabs.css",
-      "content": "/* ── Tabs: one line of type. Hairline on the active tab only. ── */\n.rs-tabs{display:flex;align-items:baseline;gap:22px;max-width:360px;border:none;box-shadow:none;background:none}\n.rs-tab,\nbutton.rs-tab{\n  -webkit-appearance:none;\n  appearance:none;\n  padding:8px 0;\n  font-size:14px;\n  font-family:inherit;\n  color:var(--text-secondary);\n  letter-spacing:-.01em;\n  text-decoration:none;\n  background:none;\n  background-image:none;\n  box-shadow:none;\n  border:none;\n  border-radius:0;\n  cursor:pointer;\n  text-align:left;\n}\n.rs-tab-active,\nbutton.rs-tab.rs-tab-active{\n  color:var(--text);\n  font-weight:600;\n  border:none;\n  box-shadow:inset 0 -1px 0 var(--text);\n}\n",
-      "type": "registry:file",
-      "target": "styles/raster/tabs.css"
     }
   ],
   "meta": {

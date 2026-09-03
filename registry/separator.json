@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/separator.css",
-      "content": "/* ── Separator: a hairline, horizontal or vertical.\n   Chrome uses --divider (the stronger of the two grid inks).\n   The page 204 uses --grid-line. Same family, two steps. */\n.rs-sep{border:none;border-top:1px solid var(--divider);margin:20px 0}\n.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background:var(--divider);margin:0 12px}\n",
-      "type": "registry:file",
-      "target": "styles/raster/separator.css"
     }
   ],
   "meta": {

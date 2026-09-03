@@ -33,12 +33,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/dialog.css",
-      "content": "/* ── Dialog: one question, two equal actions, no third option.\n   Nested actions use Steve’s innerRadius of the frame. ── */\n.rs-dialog{\n  --rs-out:var(--radius-sm);\n  --rs-gap:20px;\n  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  max-width:320px;\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  padding:var(--rs-gap);\n  background:var(--bg);\n  box-shadow:none\n}\ndialog.rs-dialog{color:var(--text)}\ndialog.rs-dialog::backdrop{background:rgba(0,0,0,0.25)}\n.rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:6px}\n.rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-.01em;line-height:1.55;margin:0 0 16px}\n.rs-dialog-actions{display:flex;justify-content:flex-end;gap:8px}\n.rs-dialog .rs-btn-primary,.rs-dialog .rs-btn-ghost{border-radius:var(--rs-in)}\n",
-      "type": "registry:file",
-      "target": "styles/raster/dialog.css"
     }
   ],
   "meta": {

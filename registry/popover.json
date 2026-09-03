@@ -39,12 +39,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/popover.css",
-      "content": "/* ── Popover: the native Popover API: top layer, light dismiss ── */\n.rs-popover{position:fixed;inset:auto;margin:0;border:1px solid var(--divider);border-radius:var(--radius);background:var(--bg);color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;width:240px;font-size:13px;line-height:1.55;letter-spacing:-.01em}\n.rs-popover-title{display:block;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--text);margin-bottom:4px}\n.rs-popover-body{color:var(--text-secondary);margin:0}\n",
-      "type": "registry:file",
-      "target": "styles/raster/popover.css"
     }
   ],
   "meta": {

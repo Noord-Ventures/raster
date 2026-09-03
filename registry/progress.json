@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/progress.css",
-      "content": "/* ── Progress: the percentage lives in the label, never in the bar ── */\n.rs-progress-head{display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-.01em;margin-bottom:7px}\n.rs-progress{height:4px;background:var(--divider-subtle);border-radius:2px;overflow:hidden}\n.rs-progress span{display:block;height:100%;background:var(--text);border-radius:2px}\n",
-      "type": "registry:file",
-      "target": "styles/raster/progress.css"
     }
   ],
   "meta": {

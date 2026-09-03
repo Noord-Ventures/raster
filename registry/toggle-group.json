@@ -39,12 +39,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/toggle.css",
-      "content": "/* ── Toggle: a press switch; on is ink, like everything on ── */\n.rs-toggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;min-width:32px;padding:0 10px;font-size:13px;font-weight:500;letter-spacing:-.01em;background:none;border:1px solid var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:background-color var(--duration-snap) var(--ease),color var(--duration-snap) var(--ease),border-color var(--duration-snap) var(--ease)}\n.rs-toggle[aria-pressed=\"true\"]{background:var(--text);border-color:var(--text);color:var(--bg)}\n.rs-toggle-group{\n  --rs-out:var(--radius-sm);\n  --rs-gap:0px;\n  --rs-in:max(0px,calc(var(--rs-out) - var(--rs-gap)));\n  display:inline-flex;\n  align-items:stretch;\n  box-sizing:border-box;\n  height:32px;\n  border:1px solid var(--divider);\n  border-radius:var(--rs-out);\n  overflow:hidden\n}\n.rs-toggle-group .rs-toggle{height:auto;border:0;border-radius:0;margin:0}\n.rs-toggle-group .rs-toggle + .rs-toggle{border-inline-start:1px solid var(--divider)}\n.rs-toggle-group .rs-toggle[aria-pressed=\"true\"]{position:relative;z-index:1}\n",
-      "type": "registry:file",
-      "target": "styles/raster/toggle.css"
     }
   ],
   "meta": {

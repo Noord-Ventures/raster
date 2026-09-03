@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/item.css",
-      "content": "/* ── Item: a flush row. Title, note, trailing meta ── */\n.rs-item{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;padding:10px 0;border-bottom:1px solid var(--divider);border-radius:0}\n.rs-item:last-child{border-bottom:none}\n.rs-item-title{margin:0;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text)}\n.rs-item-desc{margin:2px 0 0;font-size:12.5px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary)}\n.rs-item-meta{font-size:12px;font-weight:500;letter-spacing:-.01em;color:var(--text-secondary);flex-shrink:0}\n",
-      "type": "registry:file",
-      "target": "styles/raster/item.css"
     }
   ],
   "meta": {

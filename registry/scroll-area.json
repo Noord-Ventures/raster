@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/scroll-area.css",
-      "content": "/* ── Scroll area: quiet scroll with feathered edges, no scrollbar chrome ── */\n.rs-scroll{overflow-y:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);padding:12px 0}\n.rs-scroll::-webkit-scrollbar{display:none}\n",
-      "type": "registry:file",
-      "target": "styles/raster/scroll-area.css"
     }
   ],
   "meta": {

@@ -1,5 +1,5 @@
-import { readFileSync, existsSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { catalogComponents, rasterComponents } from "../src/registry";
 import { rasterCategories, validateRegistry } from "../src/schema";
@@ -13,6 +13,30 @@ const allCss = rasterComponents
   .join("\n");
 
 const allClasses = new Set(rasterComponents.flatMap((c) => c.classes));
+
+function readTree(file: string, seen = new Set<string>()): string {
+  const abs = join(reactSrcDir, file);
+  if (!existsSync(abs) || seen.has(abs)) return "";
+  seen.add(abs);
+  const text = readFileSync(abs, "utf8");
+  const rels = [
+    ...text.matchAll(/from ["']\.\/([^"']+)["']/g),
+  ].map((m) => m[1]!);
+  let extra = "";
+  for (const rel of rels) {
+    const target = join(dirname(abs), rel);
+    if (existsSync(`${target}.tsx`)) extra += readTree(join(dirname(file), `${rel}.tsx`), seen);
+    else if (existsSync(`${target}.ts`)) extra += readTree(join(dirname(file), `${rel}.ts`), seen);
+    else if (existsSync(target) && statSync(target).isDirectory()) {
+      for (const name of readdirSync(target)) {
+        if (name.endsWith(".ts") || name.endsWith(".tsx")) {
+          extra += readTree(join(dirname(file), rel, name), seen);
+        }
+      }
+    }
+  }
+  return text + extra;
+}
 
 describe("registry structure", () => {
   it("is well-formed", () => {
@@ -53,12 +77,19 @@ describe("registry structure", () => {
   });
 });
 
-describe("registry ↔ CSS parity", () => {
-  it("every declared class appears in that component's CSS", () => {
+describe("registry ↔ CSS / StyleX parity", () => {
+  it("every declared class appears in that component's CSS or StyleX source", () => {
     for (const c of rasterComponents) {
-      const css = c.css.map((f) => readFileSync(join(cssDir, f), "utf8")).join("\n");
+      if (c.css.length) {
+        const css = c.css.map((f) => readFileSync(join(cssDir, f), "utf8")).join("\n");
+        for (const cls of c.classes) {
+          expect(css.includes(`.${cls}`), `${c.name}: .${cls} not styled in ${c.css.join(", ")}`).toBe(true);
+        }
+        continue;
+      }
+      const src = c.react ? readTree(c.react) : "";
       for (const cls of c.classes) {
-        expect(css.includes(`.${cls}`), `${c.name}: .${cls} not styled in ${c.css.join(", ")}`).toBe(true);
+        expect(src.includes(cls), `${c.name}: ${cls} not on the StyleX leaf ${c.react}`).toBe(true);
       }
     }
   });

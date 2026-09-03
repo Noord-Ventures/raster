@@ -32,12 +32,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/ratio.css",
-      "content": "/* ── Aspect ratio: a box that keeps its proportions ── */\n.rs-ratio{position:relative;width:100%;overflow:hidden;border-radius:var(--radius)}\n.rs-ratio>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}\n",
-      "type": "registry:file",
-      "target": "styles/raster/ratio.css"
     }
   ],
   "meta": {

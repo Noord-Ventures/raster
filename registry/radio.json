@@ -38,12 +38,6 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
-    },
-    {
-      "path": "raster/styles/radio.css",
-      "content": "/* ── Radio: the dot is ink, never a hue ── */\n.rs-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-.01em}\n.rs-radio-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--divider);position:relative;flex-shrink:0}\n.rs-radio-on{border-color:var(--text)}\n.rs-radio-on::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--text)}\n",
-      "type": "registry:file",
-      "target": "styles/raster/radio.css"
     }
   ],
   "meta": {
