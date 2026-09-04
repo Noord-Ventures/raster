@@ -20,7 +20,7 @@ const styles = stylex.create({
     position: "absolute",
     top: "calc(100% + 8px)",
     left: 0,
-    zIndex: 170,
+    zIndex: raster.zFloat,
     width: {
       default: 260,
       [mq.phone]: "min(280px, calc(100vw - 32px))",

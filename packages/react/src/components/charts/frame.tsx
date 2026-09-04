@@ -185,7 +185,7 @@ const styles = stylex.create({
     letterSpacing: "-0.01em",
     color: raster.ink,
     whiteSpace: "nowrap",
-    zIndex: 60,
+    zIndex: raster.zFloat,
     transform: "translate(-50%, calc(-100% - 8px))",
   },
   tipLabel: {

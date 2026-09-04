@@ -27,7 +27,7 @@
 @media (prefers-reduced-motion: reduce){.rs-chart-mark{transition:none}}
 .rs-chart-mark-spot{fill:var(--rs-chart-spot)}
 .rs-chart-ann{fill:var(--text-secondary);font-size:11px;font-weight:500;letter-spacing:-0.01em}
-.rs-chart-tip{position:absolute;pointer-events:none;background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:0;box-shadow:none;padding-block:6px;padding-inline:8px;font-size:12px;letter-spacing:-0.01em;color:var(--text);white-space:nowrap;z-index:60;transform:translate(-50%, calc(-100% - 8px))}
+.rs-chart-tip{position:absolute;pointer-events:none;background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:0;box-shadow:none;padding-block:6px;padding-inline:8px;font-size:12px;letter-spacing:-0.01em;color:var(--text);white-space:nowrap;z-index:var(--z-float);transform:translate(-50%, calc(-100% - 8px))}
 .rs-chart-tip-label{display:block;font-size:11px;color:var(--text-secondary);margin-bottom:2px}
 .rs-chart-tip-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .rs-chart-tip-name{color:var(--text-secondary)}

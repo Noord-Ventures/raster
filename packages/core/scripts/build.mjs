@@ -22,7 +22,7 @@ const write = (p, text) => {
 write("tokens/raster.tokens.json", JSON.stringify(rasterTokens, null, 2) + "\n");
 
 /* ── 2. Tokens as CSS custom properties ── */
-const { color, grid, radius, control, motion, type } = rasterTokens;
+const { color, grid, radius, control, motion, type, z } = rasterTokens;
 const c1 = grid.column;
 const gridImage = `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent ${c1}px,var(--grid-line) ${c1}px,var(--grid-line) ${c1 + 1}px,transparent ${c1 + 1}px,transparent ${grid.module}px)`;
 
@@ -68,6 +68,12 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --grid-size: ${grid.module}px;
   --grid-pos: ${grid.gutter}px 0;
   --text-scale: ${type.textScale.default};
+  /* Stacking scale. Native dialog and popover use the top layer instead. */
+  --z-raised: ${z.raised};
+  --z-sticky: ${z.sticky};
+  --z-float: ${z.float};
+  --z-overlay: ${z.overlay};
+  --z-toast: ${z.toast};
   /* Contract variables a component may set inline: concentric radius and the chart spot color. */
   --rs-out: var(--radius);
   --rs-gap: var(--pad);

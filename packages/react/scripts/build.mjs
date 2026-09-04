@@ -172,4 +172,20 @@ cpSync(join(coreCss, "fonts"), join(distDir, "fonts"), { recursive: true });
 /* Types. tokens.js shares the token file's declarations. */
 execFileSync("npx", ["tsc", "-p", "tsconfig.build.json"], { cwd: pkgDir, stdio: "inherit" });
 copyFileSync(join(distDir, "tokens.stylex.d.ts"), join(distDir, "tokens.d.ts"));
+
+/* Declarations resolve like the JavaScript does under node16 resolution:
+   relative specifiers carry .js, and the token import points at the
+   compiled copy the runtime loads. */
+for (const file of walk(distDir, /\.d\.ts$/)) {
+  const dir = dirname(file);
+  const fixed = readFileSync(file, "utf8").replace(/(from\s+|import\()(["'])(\.[^"']+)\2/g, (m, lead, q, spec) => {
+    if (/\.(js|json|css)$/.test(spec)) return m;
+    const target = spec.endsWith("/tokens.stylex") && !file.endsWith("tokens.stylex.d.ts") ? spec.replace(/tokens\.stylex$/, "tokens") : spec;
+    const asFile = existsSync(join(dir, `${target}.d.ts`));
+    const asDir = existsSync(join(dir, target, "index.d.ts"));
+    if (!asFile && !asDir) return m;
+    return `${lead}${q}${asFile ? `${target}.js` : `${target}/index.js`}${q}`;
+  });
+  writeFileSync(file, fixed);
+}
 console.log(`built dist: ${rules.length} StyleX rules → raster-react.css (${css.length} bytes)`);

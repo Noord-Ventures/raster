@@ -187,7 +187,7 @@ export function FlowNum({ className, style, ...props }: React.HTMLAttributes<HTM
 
 export function FlowTitle({ className, style, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   const sx = rs([className, "rs-flow-title"], styles.title);
-  return <h4 {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+  return <h3 {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }
 
 export function FlowBody({ className, style, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {

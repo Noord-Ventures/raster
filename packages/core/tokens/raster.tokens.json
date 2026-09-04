@@ -168,6 +168,14 @@
     "wide": 1440,
     "cap": 1700
   },
+  "z": {
+    "raised": 10,
+    "sticky": 100,
+    "float": 200,
+    "overlay": 300,
+    "toast": 400,
+    "rule": "raised: a handle or thumb over its track. sticky: pinned chrome. float: menus, tooltips, hover cards, chart tooltips. overlay: the fixed fallback of a panel that has no top layer. toast: above everything."
+  },
   "control": {
     "desktop": {
       "hit": 40,

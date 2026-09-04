@@ -9,6 +9,9 @@ interface TabsContextValue {
   value: string;
   setValue: (value: string) => void;
   idBase: string;
+  /** Panels currently mounted, so a tab only claims aria-controls for one that exists. */
+  panels: ReadonlySet<string>;
+  registerPanel: (value: string) => () => void;
 }
 
 const TabsContext = React.createContext<TabsContextValue | null>(null);
@@ -174,6 +177,16 @@ export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "o
 
 export function Tabs({ value, defaultValue, onValueChange, children, ...props }: TabsProps) {
   const idBase = React.useId();
+  const [panels, setPanels] = React.useState<ReadonlySet<string>>(() => new Set());
+  const registerPanel = React.useCallback((v: string) => {
+    setPanels((prev) => (prev.has(v) ? prev : new Set(prev).add(v)));
+    return () => setPanels((prev) => {
+      if (!prev.has(v)) return prev;
+      const next = new Set(prev);
+      next.delete(v);
+      return next;
+    });
+  }, []);
   const [inner, setInner] = React.useState(defaultValue ?? "");
   const isControlled = value !== undefined;
   const current = isControlled ? value : inner;
@@ -183,7 +196,7 @@ export function Tabs({ value, defaultValue, onValueChange, children, ...props }:
   };
   return (
     <div {...props}>
-      <TabsContext.Provider value={{ value: current, setValue, idBase }}>
+      <TabsContext.Provider value={{ value: current, setValue, idBase, panels, registerPanel }}>
         {children}
       </TabsContext.Provider>
     </div>
@@ -248,7 +261,7 @@ export function Tab({ value, className, style, onClick, ...props }: TabProps) {
       role="tab"
       id={`${ctx.idBase}-tab-${value}`}
       aria-selected={selected}
-      aria-controls={`${ctx.idBase}-panel-${value}`}
+      aria-controls={ctx.panels.has(value) ? `${ctx.idBase}-panel-${value}` : undefined}
       tabIndex={selected ? 0 : -1}
       onClick={(e) => {
         ctx.setValue(value);
@@ -268,6 +281,8 @@ export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
 export function TabPanel({ value, ...props }: TabPanelProps) {
   const ctx = useTabsContext("TabPanel");
   const selected = ctx.value === value;
+  const register = ctx.registerPanel;
+  React.useEffect(() => register(value), [register, value]);
   return (
     <div
       role="tabpanel"

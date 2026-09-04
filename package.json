@@ -24,9 +24,15 @@
     "build:registry": "pnpm --filter @noorddev/raster build:registry",
     "test": "pnpm -r --filter './packages/*' test",
     "typecheck": "pnpm -r --filter './packages/*' typecheck",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "size": "node scripts/size-budget.mjs",
+    "smoke": "node scripts/smoke-tarball.mjs",
     "dev": "pnpm --filter www dev"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.12"
+    "@arethetypeswrong/cli": "^0.18",
+    "@biomejs/biome": "^2.5.12",
+    "publint": "^0.3"
   }
 }

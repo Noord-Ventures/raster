@@ -1,4 +1,3 @@
-import { execSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
@@ -42,8 +41,8 @@ function luminanceSpread(hex: string): number {
 }
 
 beforeAll(() => {
-  // Build the derived CSS so the tests always check current sources.
-  execSync("node --experimental-strip-types scripts/build.mjs", { cwd: pkgDir, stdio: "pipe" });
+  // The generated CSS is committed; CI checks it is in sync with the sources
+  // (build, then git diff --exit-code). Tests never write into the tree.
   rasterCss = readFileSync(join(pkgDir, "css/raster.css"), "utf8");
 });
 

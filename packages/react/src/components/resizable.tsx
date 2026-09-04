@@ -55,7 +55,7 @@ const styles = stylex.create({
       [mq.phone]: 0,
     },
     position: "relative",
-    zIndex: 5,
+    zIndex: raster.zRaised,
     cursor: {
       default: "col-resize",
       [mq.phone]: "row-resize",

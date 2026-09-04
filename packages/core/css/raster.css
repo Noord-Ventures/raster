@@ -67,6 +67,12 @@
   --grid-size: 204px;
   --grid-pos: 20px 0;
   --text-scale: 1;
+  /* Stacking scale. Native dialog and popover use the top layer instead. */
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-float: 200;
+  --z-overlay: 300;
+  --z-toast: 400;
   /* Contract variables a component may set inline: concentric radius and the chart spot color. */
   --rs-out: var(--radius);
   --rs-gap: var(--pad);
@@ -372,7 +378,7 @@ body{
 @media (max-width: 640px){.rs-crumbs-here{display:inline-flex;align-items:center;min-height:var(--hit)}}
 
 /* ── crumb-bar: generated from packages/react/src/components/crumb-bar.tsx ── */
-.rs-crumb-bar{position:fixed;top:0;left:0;right:0;z-index:160;display:flex;align-items:center;height:72px;font-size:13px;font-weight:500;letter-spacing:-0.01em;line-height:1.3;background-color:transparent;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:transparent;transition:var(--transition)}
+.rs-crumb-bar{position:fixed;top:0;left:0;right:0;z-index:var(--z-sticky);display:flex;align-items:center;height:72px;font-size:13px;font-weight:500;letter-spacing:-0.01em;line-height:1.3;background-color:transparent;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:transparent;transition:var(--transition)}
 @media (max-width: 640px){.rs-crumb-bar{height:64px;font-size:12px}}
 .rs-crumb-bar-scrolled{background-color:var(--bg);border-bottom-color:var(--divider)}
 .rs-crumb-bar-inner{display:flex;align-items:center;gap:20px;width:100%;min-width:0;padding-top:0;padding-bottom:0;padding-right:56px;padding-left:76px}
@@ -587,7 +593,7 @@ body{
 
 /* ── tooltip: generated from packages/react/src/components/tooltip.tsx ── */
 .rs-tip{position:relative;display:inline-flex}
-.rs-tip-bubble{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);box-sizing:border-box;width:max-content;max-width:min(280px, calc(100vw - 16px));background-color:var(--text);color:var(--bg);font-size:11.5px;font-weight:500;letter-spacing:-0.01em;line-height:1.3;padding-block:5px;padding-inline:9px;border-radius:var(--radius-sm);z-index:180;opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--duration-snap) var(--ease) var(--duration-snap), visibility var(--duration-snap) var(--ease) var(--duration-snap)}
+.rs-tip-bubble{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);box-sizing:border-box;width:max-content;max-width:min(280px, calc(100vw - 16px));background-color:var(--text);color:var(--bg);font-size:11.5px;font-weight:500;letter-spacing:-0.01em;line-height:1.3;padding-block:5px;padding-inline:9px;border-radius:var(--radius-sm);z-index:var(--z-float);opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--duration-snap) var(--ease) var(--duration-snap), visibility var(--duration-snap) var(--ease) var(--duration-snap)}
 .rs-tip:hover .rs-tip-bubble{opacity:1;visibility:visible;pointer-events:auto}
 .rs-tip:focus-within .rs-tip-bubble{opacity:1;visibility:visible;pointer-events:auto}
 .rs-tip-bubble::before{content:"";position:absolute;top:100%;left:0;right:0;height:8px}
@@ -596,7 +602,7 @@ body{
 
 /* ── toast: generated from packages/react/src/components/toast.tsx ── */
 @keyframes rs-anim-toast-in{from{opacity:0}to{opacity:1}}
-.rs-toasts{position:fixed;bottom:20px;right:20px;z-index:300;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.rs-toasts{position:fixed;bottom:20px;right:20px;z-index:var(--z-toast);display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 @media (max-width: 640px){.rs-toasts{bottom:0;right:0;left:0;align-items:stretch;gap:0}}
 .rs-toast{display:flex;align-items:flex-start;gap:10px;background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding-top:10px;padding-inline:14px;padding-bottom:10px;max-width:340px;animation-name:rs-anim-toast-in;animation-duration:var(--duration-confirm);animation-timing-function:var(--ease)}
 @media (max-width: 640px){.rs-toast{border-radius:0;box-shadow:none;padding-top:16px;padding-inline:20px;padding-bottom:calc(16px + env(safe-area-inset-bottom, 0px));max-width:none;width:100%}}
@@ -618,10 +624,10 @@ body{
 @media (max-width: 640px){.rs-dropdown{padding-block:12px;padding-inline:14px;border-radius:0;font-size:var(--control-fs);min-height:var(--hit)}}
 .rs-menu,.rs-menu.rs-context-menu-pin,.rs-menu.rs-date-picker-cal-menu,.rs-menu.rs-select-list{box-sizing:border-box;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background-color:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
 @media (max-width: 640px){.rs-menu,.rs-menu.rs-context-menu-pin,.rs-menu.rs-date-picker-cal-menu,.rs-menu.rs-select-list{border-radius:0;margin-top:0;box-shadow:none}}
-.rs-menu.rs-date-picker-cal-menu,.rs-menu,.rs-menu.rs-select-list{position:absolute;top:100%;left:0;right:0;z-index:50}
-.rs-menu.rs-context-menu-pin{position:fixed;z-index:220;margin-top:0;min-width:160px}
+.rs-menu.rs-date-picker-cal-menu,.rs-menu,.rs-menu.rs-select-list{position:absolute;top:100%;left:0;right:0;z-index:var(--z-float)}
+.rs-menu.rs-context-menu-pin{position:fixed;z-index:var(--z-float);margin-top:0;min-width:160px}
 .rs-menu.rs-date-picker-cal-menu{right:auto;padding:12px}
-.rs-menu{position:absolute;top:100%;left:0;right:0;z-index:50;max-height:240px;overflow-y:auto}
+.rs-menu{position:absolute;top:100%;left:0;right:0;z-index:var(--z-float);max-height:240px;overflow-y:auto}
 .rs-menu-item{box-sizing:border-box;display:block;padding-block:9px;padding-inline:12px;font-size:14px;color:var(--text);letter-spacing:-0.01em;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider);border-left-width:0;border-right-width:0;border-top-width:0;width:100%;text-align:left;cursor:pointer;background-color:transparent;font-family:inherit}
 .rs-menu-item:last-child{border-bottom-width:0}
 .rs-menu-item:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:-2px}
@@ -706,7 +712,7 @@ body{
 @media (prefers-reduced-motion: reduce){.rs-chart-mark{transition:none}}
 .rs-chart-mark-spot{fill:var(--rs-chart-spot)}
 .rs-chart-ann{fill:var(--text-secondary);font-size:11px;font-weight:500;letter-spacing:-0.01em}
-.rs-chart-tip{position:absolute;pointer-events:none;background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:0;box-shadow:none;padding-block:6px;padding-inline:8px;font-size:12px;letter-spacing:-0.01em;color:var(--text);white-space:nowrap;z-index:60;transform:translate(-50%, calc(-100% - 8px))}
+.rs-chart-tip{position:absolute;pointer-events:none;background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:0;box-shadow:none;padding-block:6px;padding-inline:8px;font-size:12px;letter-spacing:-0.01em;color:var(--text);white-space:nowrap;z-index:var(--z-float);transform:translate(-50%, calc(-100% - 8px))}
 .rs-chart-tip-label{display:block;font-size:11px;color:var(--text-secondary);margin-bottom:2px}
 .rs-chart-tip-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .rs-chart-tip-name{color:var(--text-secondary)}
@@ -744,7 +750,7 @@ body{
 
 /* ── hover-card: generated from packages/react/src/components/hover-card.tsx ── */
 .rs-hover-card{position:relative;display:inline-block}
-.rs-hover-card-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:170;width:260px;background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;font-size:13px;line-height:1.55;letter-spacing:-0.01em;color:var(--text-secondary);opacity:0;visibility:hidden;transition:opacity var(--duration-snap) var(--ease) var(--duration-snap), visibility var(--duration-snap) var(--ease) var(--duration-snap)}
+.rs-hover-card-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:var(--z-float);width:260px;background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;font-size:13px;line-height:1.55;letter-spacing:-0.01em;color:var(--text-secondary);opacity:0;visibility:hidden;transition:opacity var(--duration-snap) var(--ease) var(--duration-snap), visibility var(--duration-snap) var(--ease) var(--duration-snap)}
 .rs-hover-card:hover .rs-hover-card-panel{opacity:1;visibility:visible}
 .rs-hover-card:focus-within .rs-hover-card-panel{opacity:1;visibility:visible}
 .rs-hover-card-panel::before{content:"";position:absolute;bottom:100%;left:0;right:0;height:8px}
@@ -767,7 +773,7 @@ body{
 
 /* ── context-menu: generated from packages/react/src/components/context-menu.tsx ── */
 .rs-context-menu-trigger:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
-.rs-menu.rs-context-menu-pin{position:fixed;z-index:50;background-color:var(--bg)}
+.rs-menu.rs-context-menu-pin{position:fixed;z-index:var(--z-float);background-color:var(--bg)}
 
 /* ── menubar: generated from packages/react/src/components/menubar.tsx ── */
 .rs-menubar{box-sizing:border-box;display:inline-flex;align-items:center;gap:2px;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);padding:2px}
@@ -821,7 +827,7 @@ body{
 .rs-split{display:flex;flex-direction:row;width:100%}
 @media (max-width: 640px){.rs-split{flex-direction:column}}
 .rs-split-pane{min-width:0;overflow:hidden}
-.rs-split-handle{flex-shrink:0;width:9px;margin-top:0;margin-bottom:0;margin-left:-4px;margin-right:-4px;position:relative;z-index:5;cursor:col-resize;background-color:transparent;border-width:0;border-style:none;padding:0;touch-action:none}
+.rs-split-handle{flex-shrink:0;width:9px;margin-top:0;margin-bottom:0;margin-left:-4px;margin-right:-4px;position:relative;z-index:var(--z-raised);cursor:col-resize;background-color:transparent;border-width:0;border-style:none;padding:0;touch-action:none}
 .rs-split-handle:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
 .rs-split-handle::after{content:"";position:absolute;left:4px;top:0;bottom:0;width:1px;background-color:var(--control-border);forced-color-adjust:none;transition:background-color var(--duration-snap) var(--ease)}
 .rs-split-handle:hover::after{background-color:var(--text)}
@@ -944,7 +950,7 @@ body{
 .rs-ai-send{color:var(--text);font-weight:600}
 
 /* ── theme-toggle: generated from packages/react/src/components/theme-toggle.tsx ── */
-.rs-theme-toggle{position:fixed;top:24px;right:20px;z-index:200;width:24px;height:24px;padding:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;background-color:transparent;border-width:0;border-style:none;border-radius:0;cursor:pointer;color:var(--text-secondary);outline-width:0;outline-style:none;outline-color:transparent;outline-offset:0;filter:drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))}
+.rs-theme-toggle{position:fixed;top:24px;right:20px;z-index:var(--z-sticky);width:24px;height:24px;padding:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;background-color:transparent;border-width:0;border-style:none;border-radius:0;cursor:pointer;color:var(--text-secondary);outline-width:0;outline-style:none;outline-color:transparent;outline-offset:0;filter:drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))}
 .rs-theme-toggle:hover{color:var(--text)}
 .rs-theme-toggle:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
 @media (max-width: 480px){.rs-theme-toggle{right:25px}}

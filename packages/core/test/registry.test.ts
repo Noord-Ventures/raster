@@ -143,3 +143,46 @@ describe("registry ↔ CSS parity", () => {
     expect(orphans, `styled but not in the registry: ${orphans.join(", ")}`).toEqual([]);
   });
 });
+
+describe("registry copy for agents", () => {
+  const reactIndex = readFileSync(join(reactSrcDir, "index.ts"), "utf8");
+  const exported = new Set([...reactIndex.matchAll(/\b([A-Za-z_$][\w$]*)\b/g)].map((m) => m[1]!));
+
+  it("every entry carries an example, usage, accessibility notes, and aliases", () => {
+    for (const c of rasterComponents) {
+      expect(c.example, `${c.name}: example`).toBeTruthy();
+      expect(c.usage?.use.length, `${c.name}: usage.use`).toBeGreaterThan(0);
+      expect(c.usage?.avoid.length, `${c.name}: usage.avoid`).toBeGreaterThan(0);
+      expect(c.a11y?.length, `${c.name}: a11y`).toBeGreaterThan(0);
+      expect(c.aliases?.length, `${c.name}: aliases`).toBeGreaterThan(0);
+    }
+  });
+
+  it("examples import from the React package and name real exports", () => {
+    for (const c of rasterComponents) {
+      const imports = [...c.example!.matchAll(/import \{([^}]+)\} from "@noorddev\/raster-react"/g)];
+      expect(imports.length, `${c.name}: example imports from @noorddev/raster-react`).toBeGreaterThan(0);
+      expect(c.example, `${c.name}: example uses the site alias`).not.toContain("@/components/raster");
+      for (const m of imports) {
+        for (const name of m[1]!.split(",").map((s) => s.trim()).filter(Boolean)) {
+          expect(exported.has(name), `${c.name}: example imports "${name}", not exported from packages/react/src/index.ts`).toBe(true);
+        }
+      }
+    }
+  });
+
+  it("keyboard rows and copy stay in the house voice", () => {
+    for (const c of rasterComponents) {
+      for (const row of c.keyboard ?? []) {
+        expect(row.keys.trim(), `${c.name}: keys`).toBeTruthy();
+        expect(row.does.trim(), `${c.name}: does`).toBeTruthy();
+      }
+      const copy = [...c.usage!.use, ...c.usage!.avoid, ...c.a11y!, ...(c.keyboard ?? []).map((k) => k.does)];
+      for (const line of copy) {
+        expect(line, `${c.name}: em dash in "${line}"`).not.toContain("—");
+        expect(/[A-Z]{4,}/.test(line.replace(/[A-Z]+_[A-Z_]+/g, "")), `${c.name}: all caps in "${line}"`).toBe(false);
+      }
+      for (const alias of c.aliases!) expect(alias.trim(), `${c.name}: alias`).toBeTruthy();
+    }
+  });
+});

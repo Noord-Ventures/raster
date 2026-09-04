@@ -35,6 +35,12 @@ export const raster = stylex.defineVars({
   transition: "var(--transition)",
   textScale: "var(--text-scale)",
   hairline: "1px",
+  /** Stacking scale. Native dialog and popover use the top layer instead. */
+  zRaised: "var(--z-raised)",
+  zSticky: "var(--z-sticky)",
+  zFloat: "var(--z-float)",
+  zOverlay: "var(--z-overlay)",
+  zToast: "var(--z-toast)",
 });
 
 /** Inter stack. Same as body in base.css. Not a token var — @font-face stays CSS. */

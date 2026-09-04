@@ -1,0 +1,42 @@
+name: Release
+
+# Publishes @noorddev/raster, @noorddev/raster-react, @noorddev/raster-cli,
+# and @noorddev/raster-mcp with npm provenance. Runs as a dry run on every
+# manual trigger unless `publish` is set; a pushed tag v* publishes for real.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish to npm (otherwise dry run)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck && pnpm build && pnpm test && pnpm smoke
+      - name: Publish (dry run)
+        if: ${{ !(startsWith(github.ref, 'refs/tags/v') || inputs.publish) }}
+        run: pnpm -r --filter './packages/*' publish --access public --no-git-checks --dry-run
+      - name: Publish
+        if: ${{ startsWith(github.ref, 'refs/tags/v') || inputs.publish }}
+        run: pnpm -r --filter './packages/*' publish --access public --no-git-checks --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -10,7 +10,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "e2e": "node scripts/e2e.mjs"
   },
   "dependencies": {
     "@noorddev/raster": "workspace:*",
@@ -30,7 +31,9 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@types/three": "^0.184.1",
+    "axe-core": "^4",
     "babel-loader": "^10",
+    "playwright": "1.56.1",
     "typescript": "^5.9.3"
   }
 }

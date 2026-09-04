@@ -86,7 +86,7 @@ const styles = stylex.create({
       default: null,
       [mq.phone]: 0,
     },
-    zIndex: 300,
+    zIndex: raster.zToast,
     display: "flex",
     flexDirection: "column",
     alignItems: {

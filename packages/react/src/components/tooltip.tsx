@@ -45,7 +45,7 @@ const styles = stylex.create({
       default: raster.radiusSm,
       [mq.phone]: 0,
     },
-    zIndex: 180,
+    zIndex: raster.zFloat,
     opacity: {
       default: 0,
       [stylex.when.ancestor(":hover")]: {

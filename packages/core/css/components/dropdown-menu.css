@@ -6,10 +6,10 @@
 @media (max-width: 640px){.rs-dropdown{padding-block:12px;padding-inline:14px;border-radius:0;font-size:var(--control-fs);min-height:var(--hit)}}
 .rs-menu,.rs-menu.rs-context-menu-pin,.rs-menu.rs-date-picker-cal-menu,.rs-menu.rs-select-list{box-sizing:border-box;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);margin-top:6px;overflow:hidden;background-color:var(--bg);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
 @media (max-width: 640px){.rs-menu,.rs-menu.rs-context-menu-pin,.rs-menu.rs-date-picker-cal-menu,.rs-menu.rs-select-list{border-radius:0;margin-top:0;box-shadow:none}}
-.rs-menu.rs-date-picker-cal-menu,.rs-menu,.rs-menu.rs-select-list{position:absolute;top:100%;left:0;right:0;z-index:50}
-.rs-menu.rs-context-menu-pin{position:fixed;z-index:220;margin-top:0;min-width:160px}
+.rs-menu.rs-date-picker-cal-menu,.rs-menu,.rs-menu.rs-select-list{position:absolute;top:100%;left:0;right:0;z-index:var(--z-float)}
+.rs-menu.rs-context-menu-pin{position:fixed;z-index:var(--z-float);margin-top:0;min-width:160px}
 .rs-menu.rs-date-picker-cal-menu{right:auto;padding:12px}
-.rs-menu{position:absolute;top:100%;left:0;right:0;z-index:50;max-height:240px;overflow-y:auto}
+.rs-menu{position:absolute;top:100%;left:0;right:0;z-index:var(--z-float);max-height:240px;overflow-y:auto}
 .rs-menu-item{box-sizing:border-box;display:block;padding-block:9px;padding-inline:12px;font-size:14px;color:var(--text);letter-spacing:-0.01em;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider);border-left-width:0;border-right-width:0;border-top-width:0;width:100%;text-align:left;cursor:pointer;background-color:transparent;font-family:inherit}
 .rs-menu-item:last-child{border-bottom-width:0}
 .rs-menu-item:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:-2px}

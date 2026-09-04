@@ -21,7 +21,7 @@ const styles = stylex.create({
       default: 20,
       [mq.mobileGrid]: 25,
     },
-    zIndex: 200,
+    zIndex: raster.zSticky,
     width: {
       default: 24,
       [mq.phone]: raster.hit,

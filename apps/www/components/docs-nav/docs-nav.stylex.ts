@@ -69,14 +69,8 @@ export const navStyles = stylex.create({
       '[aria-current="true"]': "var(--text)",
       '[aria-current="page"]': "var(--text)",
     },
-    opacity: {
-      default: 0.6,
-      ":hover": 1,
-      ":focus-visible": 1,
-      '[data-preview="true"]': 1,
-      '[aria-current="true"]': 1,
-      '[aria-current="page"]': 1,
-    },
+    /* Gray at full opacity: 5:1 on paper. Opacity would drop it under 4.5:1. */
+    opacity: 1,
     textDecoration: "none",
     transition: "color var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)",
     outlineWidth: {

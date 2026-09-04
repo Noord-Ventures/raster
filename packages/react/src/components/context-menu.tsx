@@ -28,7 +28,7 @@ const styles = stylex.create({
   },
   pin: {
     position: "fixed",
-    zIndex: 50,
+    zIndex: raster.zFloat,
     backgroundColor: raster.paper,
   },
 });

@@ -56,7 +56,8 @@ export function CopyControl({ text }: { text: string }) {
 export function CodeBlock({ code }: { code: string }) {
   return (
     <div className="code-block">
-      <pre>{code}</pre>
+      {/* Scrolls sideways on narrow screens, so it must take keyboard focus. */}
+      <pre tabIndex={0}>{code}</pre>
       <CopyControl text={code} />
     </div>
   );

@@ -27,6 +27,12 @@
   --grid-size: 204px;
   --grid-pos: 20px 0;
   --text-scale: 1;
+  /* Stacking scale. Native dialog and popover use the top layer instead. */
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-float: 200;
+  --z-overlay: 300;
+  --z-toast: 400;
   /* Contract variables a component may set inline: concentric radius and the chart spot color. */
   --rs-out: var(--radius);
   --rs-gap: var(--pad);

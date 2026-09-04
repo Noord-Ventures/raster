@@ -222,7 +222,9 @@ export function Select({
         className={trigger.className}
         style={trigger.style}
         aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledby}
+        /* A combobox is not named by its content. Without a label prop the
+           trigger names itself, so the current value is at least announced. */
+        aria-labelledby={ariaLabelledby ?? (ariaLabel ? undefined : triggerId)}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={open ? listboxId : undefined}

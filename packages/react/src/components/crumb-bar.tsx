@@ -26,7 +26,7 @@ const styles = stylex.create({
     top: 0,
     left: 0,
     right: 0,
-    zIndex: 160,
+    zIndex: raster.zSticky,
     display: "flex",
     alignItems: "center",
     height: {

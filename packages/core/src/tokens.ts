@@ -124,6 +124,15 @@ export const rasterTokens = {
     reducedMotion: "looping demos and unsolicited entry disabled under prefers-reduced-motion",
   },
   breakpoints: { mobileGrid: 480, mobileLayout: 640, rail: 1024, wide: 1440, cap: 1700 },
+  /** Stacking scale. Native <dialog> and popover live in the top layer and need none of it. */
+  z: {
+    raised: 10,
+    sticky: 100,
+    float: 200,
+    overlay: 300,
+    toast: 400,
+    rule: "raised: a handle or thumb over its track. sticky: pinned chrome. float: menus, tooltips, hover cards, chart tooltips. overlay: the fixed fallback of a panel that has no top layer. toast: above everything.",
+  },
   /** Desktop stays the Raster poster. Phone (≤640) is a 44pt control scale. */
   control: {
     desktop: { hit: 40, height: 40, font: 14, label: 12 },

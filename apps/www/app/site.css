@@ -330,9 +330,10 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   background: var(--bg); border-bottom: 1px solid var(--divider-subtle);
   padding: 6px 0 12px;
   opacity: 0; visibility: hidden; pointer-events: none;
-  transition: opacity var(--duration) var(--ease), visibility var(--duration) var(--ease);
+  /* Visibility waits for the fade on close and flips at once on open, so focus can move in immediately. */
+  transition: opacity var(--duration) var(--ease), visibility 0s linear var(--duration);
 }
-.nav-panel[data-open="true"] { opacity: 1; visibility: visible; pointer-events: auto; }
+.nav-panel[data-open="true"] { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity var(--duration) var(--ease), visibility 0s; }
 .nav-panel-links { display: flex; flex-direction: column; }
 .nav-panel-link {
   display: block; padding: 12px 18px; font-size: 15px; font-weight: 500;
@@ -938,3 +939,36 @@ html[data-grid="off"] .swag-field {
   .nav-panel,
   .nav-toggle-icon span { transition: none; }
 }
+
+/* ── Docs prose: sub-labels, lists, two columns, and tables inside the 592 measure.
+   Tables use the Raster table classes and sit in a scroll container so a
+   390px phone never scrolls the page sideways. ── */
+.docs-sub { font-size: 13px; font-weight: 600; letter-spacing: -.01em; color: var(--text-secondary); margin: 20px 0 0; }
+.section-label + .docs-sub { margin-top: 12px; }
+.docs-sub + .code-block { margin-top: 8px; }
+.docs-sub + .rs-t-body { margin-top: 6px; }
+.site-content .rs-t-body + .rs-t-body { margin-top: 12px; }
+.site-content .code-block + .rs-t-body { margin-top: -12px; }
+.docs-list { margin: 8px 0 0; padding-left: 18px; }
+.docs-list li {
+  font-size: calc(0.9375rem * var(--text-scale, 1));
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.6;
+  color: var(--text);
+  padding: 2px 0;
+}
+.docs-list li::marker { color: var(--text-secondary); }
+.docs-list + .rs-t-body { margin-top: 12px; }
+.docs-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--gutter); }
+@media (max-width: 640px) { .docs-cols { grid-template-columns: 1fr; } }
+.docs-table { overflow-x: auto; margin: 12px calc(-1 * var(--pad)) 28px; }
+.docs-table .rs-table { margin: 0; width: 100%; min-width: 100%; }
+.docs-table .rs-table-th:last-child,
+.docs-table .rs-table-td:last-child { text-align: left; }
+.docs-table .rs-table-td:first-child { color: var(--text); white-space: nowrap; }
+.docs-table code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: 0; color: inherit; }
+.docs-table .rs-kbd { white-space: nowrap; }
+.docs-required { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 500; color: var(--text-secondary); }
+.docs-extends { margin-top: -16px; margin-bottom: 28px; font-size: 13px; color: var(--text-secondary); }
+.docs-table:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }

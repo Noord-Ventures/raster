@@ -1,4 +1,3 @@
-import { execSync } from "node:child_process";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
@@ -11,7 +10,7 @@ const DEAD = /raster\.design|raster-pied|vercel\.app|raster\.noord\.dev/;
 let files: string[];
 
 beforeAll(() => {
-  execSync("node --experimental-strip-types scripts/build-registry.mjs", { cwd: pkgDir, stdio: "pipe" });
+  // registry/ is committed and CI checks it is in sync; tests only read.
   files = readdirSync(registryDir).filter((name) => name.endsWith(".json"));
 });
 
