@@ -33,5 +33,6 @@ export default defineConfig({
   plugins: [stylexTest()],
   test: {
     environment: "jsdom",
+    setupFiles: ["./test/setup.ts"],
   },
 });

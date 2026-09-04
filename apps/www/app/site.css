@@ -18,6 +18,26 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
+/* Skip link: visually hidden until focused, then a paper chip at the
+   top-left grid line above every fixed chrome layer. */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 20px;
+  z-index: 400;
+  padding: 8px 12px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--text);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible { transform: none; outline: 2px solid var(--accent); outline-offset: 2px; }
+main:focus { outline: none; }
+
 /* Inner-page 204 verticals live on html::before. html/body overflow-x:clip
    drops background-attachment:fixed in Chromium. A fixed layer does not.
    Ink is --grid-line (quieter than the Home / About --divider cage).

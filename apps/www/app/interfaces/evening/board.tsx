@@ -38,39 +38,39 @@ type Item = {
 type Line = { key: string; id: string; store: string; name: string; price: number };
 
 const STORES: Store[] = [
-  { id: "buren", name: "De Buren", area: "Alkmaar", photo: "/interfaces/food/de-buren.jpg", rating: "4.8", fee: "€2.40", eta: "22 min", method: "delivery", diet: "any", price: 2, dish: "Roast chicken, tonight" },
-  { id: "kaas", name: "Kaasbar", area: "Kaasmarkt", photo: "/interfaces/food/kaasbar.jpg", rating: "4.6", fee: "€1.80", eta: "18 min", method: "pickup", diet: "veg", price: 2, dish: "Aged cheese board" },
-  { id: "canal", name: "Canal kitchen", area: "Oudegracht", photo: "/interfaces/food/canal.jpg", rating: "4.7", fee: "€2.90", eta: "27 min", method: "delivery", diet: "fish", price: 2, dish: "Saffron fish stew" },
-  { id: "lunch", name: "Press lunch", area: "Spoor", photo: "/interfaces/food/lunch.jpg", rating: "4.5", fee: "€1.40", eta: "14 min", method: "pickup", diet: "veg", price: 1, dish: "Ricotta toast" },
-  { id: "north", name: "North bakery", area: "Kennemerstraatweg", photo: "/interfaces/food/north.jpg", rating: "4.9", fee: "€1.20", eta: "16 min", method: "delivery", diet: "veg", price: 1, dish: "Morning loaf" },
-  { id: "folsom", name: "Folsom counter", area: "Mission", photo: "/interfaces/food/bakery.jpg", rating: "4.4", fee: "€2.10", eta: "24 min", method: "delivery", diet: "any", price: 1, dish: "Almond pastry" },
+  { id: "buren", name: "De Buren", area: "Alkmaar", photo: "/interfaces/food/de-buren.webp", rating: "4.8", fee: "€2.40", eta: "22 min", method: "delivery", diet: "any", price: 2, dish: "Roast chicken, tonight" },
+  { id: "kaas", name: "Kaasbar", area: "Kaasmarkt", photo: "/interfaces/food/kaasbar.webp", rating: "4.6", fee: "€1.80", eta: "18 min", method: "pickup", diet: "veg", price: 2, dish: "Aged cheese board" },
+  { id: "canal", name: "Canal kitchen", area: "Oudegracht", photo: "/interfaces/food/canal.webp", rating: "4.7", fee: "€2.90", eta: "27 min", method: "delivery", diet: "fish", price: 2, dish: "Saffron fish stew" },
+  { id: "lunch", name: "Press lunch", area: "Spoor", photo: "/interfaces/food/lunch.webp", rating: "4.5", fee: "€1.40", eta: "14 min", method: "pickup", diet: "veg", price: 1, dish: "Ricotta toast" },
+  { id: "north", name: "North bakery", area: "Kennemerstraatweg", photo: "/interfaces/food/north.webp", rating: "4.9", fee: "€1.20", eta: "16 min", method: "delivery", diet: "veg", price: 1, dish: "Morning loaf" },
+  { id: "folsom", name: "Folsom counter", area: "Mission", photo: "/interfaces/food/bakery.webp", rating: "4.4", fee: "€2.10", eta: "24 min", method: "delivery", diet: "any", price: 1, dish: "Almond pastry" },
 ];
 
 const MENUS: Record<string, Item[]> = {
   buren: [
-    { id: "chicken", name: "Roast chicken", note: "Held at the pass", photo: "/interfaces/food/de-buren.jpg", price: 18, cat: "Plates" },
-    { id: "salad", name: "Beet salad", note: "Cold plate", photo: "/interfaces/food/dish-salad.jpg", price: 9, cat: "Plates" },
-    { id: "soup", name: "Leek soup", note: "Slow", photo: "/interfaces/food/dish-soup.jpg", price: 8, cat: "Soup" },
+    { id: "chicken", name: "Roast chicken", note: "Held at the pass", photo: "/interfaces/food/de-buren.webp", price: 18, cat: "Plates" },
+    { id: "salad", name: "Beet salad", note: "Cold plate", photo: "/interfaces/food/dish-salad.webp", price: 9, cat: "Plates" },
+    { id: "soup", name: "Leek soup", note: "Slow", photo: "/interfaces/food/dish-soup.webp", price: 8, cat: "Soup" },
   ],
   kaas: [
-    { id: "board", name: "Cheese board", note: "Ready", photo: "/interfaces/food/kaasbar.jpg", price: 16, cat: "Boards" },
-    { id: "rye", name: "Rye and honey", note: "Last loaf", photo: "/interfaces/food/dish-pastry.jpg", price: 7, cat: "Bread" },
+    { id: "board", name: "Cheese board", note: "Ready", photo: "/interfaces/food/kaasbar.webp", price: 16, cat: "Boards" },
+    { id: "rye", name: "Rye and honey", note: "Last loaf", photo: "/interfaces/food/dish-pastry.webp", price: 7, cat: "Bread" },
   ],
   canal: [
-    { id: "stew", name: "Fish stew", note: "On the fire", photo: "/interfaces/food/canal.jpg", price: 21, cat: "Plates" },
-    { id: "greens", name: "Green salad", note: "Cold plate", photo: "/interfaces/food/dish-salad.jpg", price: 8, cat: "Plates" },
+    { id: "stew", name: "Fish stew", note: "On the fire", photo: "/interfaces/food/canal.webp", price: 21, cat: "Plates" },
+    { id: "greens", name: "Green salad", note: "Cold plate", photo: "/interfaces/food/dish-salad.webp", price: 8, cat: "Plates" },
   ],
   lunch: [
-    { id: "toast", name: "Ricotta toast", note: "Ready", photo: "/interfaces/food/lunch.jpg", price: 9, cat: "Toast" },
-    { id: "pastry", name: "Almond pastry", note: "Evening only", photo: "/interfaces/food/dish-pastry.jpg", price: 5, cat: "Sweet" },
+    { id: "toast", name: "Ricotta toast", note: "Ready", photo: "/interfaces/food/lunch.webp", price: 9, cat: "Toast" },
+    { id: "pastry", name: "Almond pastry", note: "Evening only", photo: "/interfaces/food/dish-pastry.webp", price: 5, cat: "Sweet" },
   ],
   north: [
-    { id: "loaf", name: "Morning loaf", note: "Still warm", photo: "/interfaces/food/north.jpg", price: 6, cat: "Bread" },
-    { id: "bun", name: "Butter bun", note: "Two left", photo: "/interfaces/food/bakery.jpg", price: 4, cat: "Bread" },
+    { id: "loaf", name: "Morning loaf", note: "Still warm", photo: "/interfaces/food/north.webp", price: 6, cat: "Bread" },
+    { id: "bun", name: "Butter bun", note: "Two left", photo: "/interfaces/food/bakery.webp", price: 4, cat: "Bread" },
   ],
   folsom: [
-    { id: "tart", name: "Almond pastry", note: "Evening only", photo: "/interfaces/food/dish-pastry.jpg", price: 5, cat: "Sweet" },
-    { id: "soup2", name: "Leek soup", note: "Cup", photo: "/interfaces/food/dish-soup.jpg", price: 7, cat: "Soup" },
+    { id: "tart", name: "Almond pastry", note: "Evening only", photo: "/interfaces/food/dish-pastry.webp", price: 5, cat: "Sweet" },
+    { id: "soup2", name: "Leek soup", note: "Cup", photo: "/interfaces/food/dish-soup.webp", price: 7, cat: "Soup" },
   ],
 };
 
@@ -124,7 +124,7 @@ export function Board() {
   }
 
   return (
-    <main className="if-board sc-evening" data-page={page} aria-label={WHAT}>
+    <section className="if-board sc-evening" data-page={page} aria-label={WHAT}>
       <PhoneV1Chrome
         heading="Evening"
         action="Bag"
@@ -195,7 +195,7 @@ export function Board() {
               ) : (
                 rooms.map((row) => (
                   <button key={row.id} type="button" className="sc-evening-store" onClick={() => openStore(row.id)}>
-                    <img src={row.photo} alt="" />
+                    <img src={row.photo} alt="" loading="lazy" decoding="async" />
                     <span>
                       <b>{row.name}</b>
                       <i className="if-ico-row">
@@ -253,7 +253,7 @@ export function Board() {
               </span>
             </header>
             <div className="sc-evening-hero">
-              <img src={store.photo} alt="" />
+              <img src={store.photo} alt="" loading="lazy" decoding="async" />
               <p>{store.dish}</p>
             </div>
             {cats.map((cat) => (
@@ -268,7 +268,7 @@ export function Board() {
                         className="sc-evening-item-open"
                         onClick={() => setInspect({ kind: "item", id: row.id })}
                       >
-                        <img src={row.photo} alt="" />
+                        <img src={row.photo} alt="" loading="lazy" decoding="async" />
                         <span>
                           <b>{row.name}</b>
                           <i className="if-ico-row">
@@ -358,7 +358,7 @@ export function Board() {
               <Icon name="image" size={12} />
               Plate
             </p>
-            <img src={item.photo} alt="" />
+            <img src={item.photo} alt="" loading="lazy" decoding="async" />
             <p className="sc-evening-dish">{item.name}</p>
             <p>
               {item.note}. {money(item.price)}.
@@ -374,6 +374,6 @@ export function Board() {
           </div>
         ) : null}
       </aside>
-    </main>
+    </section>
   );
 }

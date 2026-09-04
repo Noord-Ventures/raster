@@ -168,7 +168,7 @@ import { Button } from "@/components/raster/button";
 />`,
   input: `import { Input } from "@/components/raster/input";
 
-<Input label="E-mail" placeholder="renn@noord.vc" ok feedback="Looks good" />`,
+<Input label="E-mail" placeholder="you@example.com" ok feedback="Looks good" />`,
   "inline-form": `import { InlineForm } from "@/components/raster/inline-form";
 
 <InlineForm onSubmit={(email) => subscribe(email)} />`,
@@ -536,7 +536,7 @@ export default async function ComponentPage({
     <>
       <div className="site-layout">
         <DocsNav />
-        <main
+        <main id="main"
           {...sx(
             "site-content",
             component.name === "icons" ? chrome.iconContent : chrome.content,

@@ -9,7 +9,7 @@ export function Use() {
         <div className="rs-use-stack">
           <p className="rs-use-kicker">On the invoice</p>
           <p className="rs-use-copy">One field. The name is as it prints.</p>
-          <Input label="E-mail" placeholder="renn@noord.vc" />
+          <Input label="E-mail" placeholder="you@example.com" />
         </div>
       </div>
     </UseField>

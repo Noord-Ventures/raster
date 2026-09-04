@@ -3,11 +3,14 @@
 import * as React from "react";
 import { Icon } from "@noorddev/raster-react";
 import { Brand } from "../mark";
-import { Scene } from "./map";
+import dynamic from "next/dynamic";
 import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
 
 const WHAT = interfaceBySlug("night")!.what;
+
+/* three.js only loads when the night board mounts, never on the index. */
+const Scene = dynamic(() => import("./map").then((m) => m.Scene), { ssr: false });
 
 const UNITS = [
   { id: "04", name: "Van 04", state: "Moving", where: "Market / 3rd", trip: "Pier 70 → Mission", mark: "activity" as const },
@@ -23,7 +26,7 @@ export function Board() {
   const item = UNITS.find((row) => row.id === unit) ?? UNITS[0]!;
 
   return (
-    <main className="if-board sc-night" data-pane={phonePane} aria-label={WHAT} style={{ ["--if-spot" as string]: "#E30613" }}>
+    <section className="if-board sc-night" data-pane={phonePane} aria-label={WHAT} style={{ ["--if-spot" as string]: "#E30613" }}>
       <PhoneV1Chrome heading="Night" action="Trip" onAction={() => setPane("trip")} />
       <aside className="sc-night-rail" aria-label="Fleet">
         <div className="sc-night-brand">
@@ -147,6 +150,6 @@ export function Board() {
           </div>
         ) : null}
       </aside>
-    </main>
+    </section>
   );
 }

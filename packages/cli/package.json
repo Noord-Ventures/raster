@@ -26,9 +26,9 @@
   },
   "devDependencies": {
     "@noorddev/raster": "workspace:*",
-    "@types/node": "^26.1.1",
-    "tsup": "^8.3.5",
-    "typescript": "^5.7.3",
-    "vitest": "^3.0.5"
+    "@types/node": "^26.4.1",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.7"
   }
 }

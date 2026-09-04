@@ -84,7 +84,7 @@ export function Board() {
   }
 
   return (
-    <main className="if-board sc-room" data-pane={phonePane} aria-label={WHAT}>
+    <section className="if-board sc-room" data-pane={phonePane} aria-label={WHAT}>
       <PhoneV1Chrome
         heading="Room"
         action="New"
@@ -297,6 +297,6 @@ export function Board() {
           </div>
         ) : null}
       </aside>
-    </main>
+    </section>
   );
 }

@@ -5,12 +5,10 @@ export default defineConfig({
   format: ["esm"],
   sourcemap: false,
   clean: true,
-  // Bundle everything — the published CLI carries the whole system:
-  // core tokens/CSS and the generated registry, so init/add work offline.
+  // Bundle the code (core tokens and registry metadata included) so the
+  // published CLI has no runtime dependencies. The CSS, fonts, and registry
+  // snapshot are copied beside it by scripts/copy-fonts.mjs and read on use.
   noExternal: [/.*/],
-  loader: {
-    ".css": "text",
-  },
   banner: {
     js: "#!/usr/bin/env node",
   },

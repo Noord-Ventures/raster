@@ -377,22 +377,22 @@ if (!facts.includes("Cohen_fre_sdap_nvv_poster_1926")) {
   fail("Fré Cohen must keep the 1926 SDAP Commons work crop");
 }
 for (const src of [
-  "/about/moll-micorene.jpg",
-  "/about/rudin-saffa-1958.jpg",
-  "/about/yoshikawa-japanische-plakate-heute.jpg",
-  "/about/lohse-100-jahre-eisenbeton.jpg",
-  "/about/neuburg-konstruktive-grafik.jpg",
-  "/about/vivarelli-fur-das-alter.jpg",
-  "/about/sandberg-stedelijk-email-1954.jpg",
-  "/about/schrofer-de-letter-op-straat.jpg",
-  "/about/wissing-schiphol-signposting.jpg",
+  "/about/moll-micorene.webp",
+  "/about/rudin-saffa-1958.webp",
+  "/about/yoshikawa-japanische-plakate-heute.webp",
+  "/about/lohse-100-jahre-eisenbeton.webp",
+  "/about/neuburg-konstruktive-grafik.webp",
+  "/about/vivarelli-fur-das-alter.webp",
+  "/about/sandberg-stedelijk-email-1954.webp",
+  "/about/schrofer-de-letter-op-straat.webp",
+  "/about/wissing-schiphol-signposting.webp",
 ]) {
   if (!facts.includes(src)) fail(`About facts must wire ${src}`);
 }
 for (const leftover of [
   "/about/lohse-serial.jpg",
-  "/about/neuburg-neue-grafik.jpg",
-  "/about/vivarelli-neue-grafik.jpg",
+  "/about/neuburg-neue-grafik.webp",
+  "/about/vivarelli-neue-grafik.webp",
   "/about/sandberg-stedelijk.jpg",
   "/about/schrofer-letterforms.jpg",
   "/about/wissing-total-design.jpg",
@@ -409,13 +409,13 @@ for (const mark of [
 ]) {
   if (!facts.includes(mark)) fail(`About field must keep mark: ${mark}`);
 }
-if (!facts.includes("/about/neue-grafik.jpg")) {
+if (!facts.includes("/about/neue-grafik.webp")) {
   fail("ITS tile keeps the July 1963 Neue Grafik still");
 }
 const neuburgAt = facts.indexOf('name: "Hans Neuburg"');
 if (neuburgAt < 0) fail("About field must include Hans Neuburg");
 const neuburgBlock = facts.slice(neuburgAt, facts.indexOf("},", facts.indexOf("src:", neuburgAt)) + 2);
-if (neuburgBlock.includes("/about/neue-grafik.jpg")) {
+if (neuburgBlock.includes("/about/neue-grafik.webp")) {
   fail("Neuburg still must not reuse the ITS July 1963 Neue Grafik");
 }
 if (!about.includes(".field-cell-n20") || !about.includes("n19 n19 n20 n20 n20 n20")) {

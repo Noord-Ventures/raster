@@ -1,6 +1,4 @@
-import { add, init, list, snippetFor, tokensJson } from "./lib";
-
-const VERSION = "0.3.0";
+import { VERSION, add, init, list, snippetFor, tokensJson } from "./lib";
 
 const HELP = `@noorddev/raster-cli ${VERSION}, the monochrome design system
 
@@ -69,7 +67,7 @@ async function main(): Promise<void> {
       });
       console.log("Raster initialized.\n");
       reportWrites(results);
-      const cssPath = results.find((r) => r.path.endsWith("raster.css") && !r.path.endsWith("raster-compat.css"))?.path ?? "styles/raster.css";
+      const cssPath = results.find((r) => r.path.endsWith("raster.css"))?.path ?? "styles/raster.css";
       console.log(`
 Next steps
   1. Open index.html — the specimen page init writes.

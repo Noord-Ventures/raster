@@ -1,17 +1,27 @@
 // Builds @noorddev/raster-react as precompiled StyleX.
 //
-//   src/**/*.ts(x)  →  dist/**/*.js     one ESM module per source file, StyleX
-//                                        already compiled, "use client" kept
+//   src/**/*.ts(x)  →  dist/**/*.js        one ESM module per source file, StyleX
+//                                           already compiled, "use client" kept
 //                   →  dist/raster-react.css
-//                                        Raster base (tokens, page, type, touch,
-//                                        motion) + every compiled leaf, in layers
-//                   →  dist/**/*.d.ts    via tsc
+//                                           Raster base (tokens, page, type, touch,
+//                                           motion) + every compiled leaf, in layers
+//                   →  dist/tokens.stylex.js
+//                                           the token file, NOT compiled, for
+//                                           consumers who write StyleX leaves
+//                                           against Raster tokens
+//                   →  dist/tokens.js       the same tokens compiled: plain strings,
+//                                           what the components import at runtime
+//                   →  dist/**/*.d.ts       via tsc
 //
-// Consumers import the package and one stylesheet. No Babel, no PostCSS.
-// StyleX users can still `import { raster } from "@noorddev/raster-react/stylex"`
-// to write leaves against Raster tokens.
+// Two passes. Pass 1 strips types and JSX and gives relative imports .js
+// extensions. Pass 2 runs the StyleX compiler over the dist files, so var
+// hashes derive from `@noorddev/raster-react:dist/tokens.stylex.js`, the
+// exact path a consumer's compiler resolves `@noorddev/raster-react/tokens.stylex`
+// to. Compiled components then import ./tokens.js instead, because the
+// StyleX runtime throws on an uncompiled defineVars call and the
+// import-the-package path must work with no compiler at all.
 
-import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { cpSync, copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,21 +35,22 @@ const pkgDir = fileURLToPath(new URL("..", import.meta.url));
 const srcDir = join(pkgDir, "src");
 const distDir = join(pkgDir, "dist");
 const coreCss = resolve(pkgDir, "../core/css");
+const TOKENS = "tokens.stylex.js";
 
 rmSync(distDir, { recursive: true, force: true });
 mkdirSync(distDir, { recursive: true });
 
-function walk(dir, acc = []) {
+function walk(dir, test, acc = []) {
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
-    if (statSync(p).isDirectory()) walk(p, acc);
-    else if (/\.(ts|tsx)$/.test(name)) acc.push(p);
+    if (statSync(p).isDirectory()) walk(p, test, acc);
+    else if (test.test(name)) acc.push(p);
   }
   return acc;
 }
 
 /* Relative imports get explicit .js extensions so Node ESM resolves them. */
-function jsExtensions({ types: t }) {
+function jsExtensions() {
   const fix = (node, file) => {
     const spec = node.value;
     if (!spec.startsWith(".")) return;
@@ -65,8 +76,28 @@ function jsExtensions({ types: t }) {
   };
 }
 
-const rules = [];
-for (const file of walk(srcDir)) {
+/* After StyleX has resolved (and hashed) tokens.stylex.js, point the
+   runtime import at the compiled copy. */
+function runtimeTokens() {
+  const swap = (node) => {
+    if (node?.value?.endsWith(`/${TOKENS}`)) node.value = node.value.replace(TOKENS, "tokens.js");
+  };
+  return {
+    visitor: {
+      Program: {
+        exit(path) {
+          for (const stmt of path.node.body) {
+            if (stmt.type === "ImportDeclaration" || stmt.type === "ExportNamedDeclaration" || stmt.type === "ExportAllDeclaration") swap(stmt.source);
+          }
+        },
+      },
+    },
+  };
+}
+
+/* ── Pass 1: TypeScript and JSX out, .js extensions in ── */
+const staged = [];
+for (const file of walk(srcDir, /\.(ts|tsx)$/)) {
   const result = babel.transformSync(readFileSync(file, "utf8"), {
     filename: file,
     babelrc: false,
@@ -76,26 +107,43 @@ for (const file of walk(srcDir)) {
       ["@babel/preset-typescript", { isTSX: file.endsWith(".tsx"), allExtensions: true, onlyRemoveTypeImports: true }],
       ["@babel/preset-react", { runtime: "automatic" }],
     ],
-    plugins: [
-      [
-        stylexPlugin,
-        {
-          dev: false,
-          runtimeInjection: false,
-          treeshakeCompensation: true,
-          enableInlinedConditionalMerge: true,
-          unstable_moduleResolution: { type: "commonJS", rootDir: pkgDir },
-        },
-      ],
-      jsExtensions,
-    ],
+    plugins: [jsExtensions],
   });
-  if (result.metadata?.stylex) rules.push(...result.metadata.stylex);
   const dest = join(distDir, relative(srcDir, file)).replace(/\.(tsx|ts)$/, ".js");
   mkdirSync(dirname(dest), { recursive: true });
-  const mapName = `${dest.split("/").pop()}.map`;
-  writeFileSync(dest, `${result.code}\n//# sourceMappingURL=${mapName}\n`);
-  writeFileSync(`${dest}.map`, JSON.stringify(result.map));
+  staged.push({ dest, code: result.code, map: result.map });
+  writeFileSync(dest, result.code);
+}
+
+/* ── Pass 2: StyleX over dist ── */
+const stylexOptions = {
+  dev: false,
+  runtimeInjection: false,
+  treeshakeCompensation: true,
+  enableInlinedConditionalMerge: true,
+  unstable_moduleResolution: { type: "commonJS", rootDir: pkgDir },
+};
+const rules = [];
+for (const { dest, code, map } of staged) {
+  const isTokens = dest.endsWith(`/${TOKENS}`);
+  const result = babel.transformSync(code, {
+    filename: dest,
+    babelrc: false,
+    configFile: false,
+    sourceMaps: true,
+    inputSourceMap: map,
+    plugins: [[stylexPlugin, stylexOptions], runtimeTokens],
+  });
+  if (result.metadata?.stylex) rules.push(...result.metadata.stylex);
+  const out = isTokens ? dest.replace(TOKENS, "tokens.js") : dest;
+  const mapName = `${out.split("/").pop()}.map`;
+  writeFileSync(out, `${result.code}\n//# sourceMappingURL=${mapName}\n`);
+  writeFileSync(`${out}.map`, JSON.stringify(result.map));
+  if (isTokens) {
+    /* Keep the uncompiled token file for StyleX consumers; its own map is pass 1's. */
+    writeFileSync(dest, `${code}\n//# sourceMappingURL=${TOKENS}.map\n`);
+    writeFileSync(`${dest}.map`, JSON.stringify(map));
+  }
 }
 
 /* One stylesheet: Raster base layers + the compiled leaves. */
@@ -121,6 +169,7 @@ writeFileSync(join(distDir, "raster-react.css"), css);
 writeFileSync(join(distDir, "raster-react.css.d.ts"), "export {};\n");
 cpSync(join(coreCss, "fonts"), join(distDir, "fonts"), { recursive: true });
 
-/* Types. */
+/* Types. tokens.js shares the token file's declarations. */
 execFileSync("npx", ["tsc", "-p", "tsconfig.build.json"], { cwd: pkgDir, stdio: "inherit" });
+copyFileSync(join(distDir, "tokens.stylex.d.ts"), join(distDir, "tokens.d.ts"));
 console.log(`built dist: ${rules.length} StyleX rules → raster-react.css (${css.length} bytes)`);

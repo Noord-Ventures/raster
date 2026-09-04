@@ -14,7 +14,7 @@ export default function TokensPage() {
     <>
       <div className="site-layout">
         <DocsNav />
-        <main {...sx("site-content", chrome.content)}>
+        <main id="main" {...sx("site-content", chrome.content)}>
           <header className={cover.className} style={{ ...cover.style, paddingBottom: 8 }}>
             <h1 className="rs-t-display">Tokens</h1>
             <p className="rs-t-sub">

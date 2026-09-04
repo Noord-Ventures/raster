@@ -1,7 +1,7 @@
 /* ── drawer: generated from packages/react/src/components/drawer.tsx ── */
 .rs-drawer{box-sizing:border-box;position:fixed;top:auto;right:0;bottom:0;left:0;margin:0;width:100%;max-width:none;height:auto;max-height:85dvh;border-width:0;border-style:solid;border-top-width:1px;border-color:var(--divider);border-top-left-radius:var(--radius-sm);border-top-right-radius:var(--radius-sm);border-bottom-right-radius:0;border-bottom-left-radius:0;padding-block:24px;padding-inline:20px;background-color:var(--bg);color:var(--text);box-shadow:none}
-.rs-drawer::backdrop{background-color:rgba(0,0,0,0.25)}
-.rs-drawer-title{display:block;font-size:15px;font-weight:600;letter-spacing:-0.01em;color:var(--text);margin-bottom:6px}
+.rs-drawer::backdrop{background-color:rgba(0,0,0,0.25);background-color:color-mix(in srgb, var(--bg) 55%, transparent)}
+.rs-drawer-title{display:block;font-size:15px;font-weight:600;letter-spacing:-0.01em;color:var(--text);margin-top:0;margin-right:0;margin-bottom:6px;margin-left:0}
 @media (max-width: 640px){.rs-drawer-title{font-size:18px}}
 .rs-drawer-body{font-size:13.5px;line-height:1.6;letter-spacing:-0.01em;color:var(--text-secondary);margin:0}
 @media (max-width: 640px){.rs-drawer-body{font-size:16px}}

@@ -123,7 +123,7 @@ export function Board() {
   }
 
   return (
-    <main className="if-board sc-ai" data-pane={phonePane} aria-label={WHAT}>
+    <section className="if-board sc-ai" data-pane={phonePane} aria-label={WHAT}>
       <PhoneV1Chrome heading="Line" action="New" onAction={fresh} />
       <aside className="sc-ai-rail" aria-label="Chats">
         <div className="sc-ai-brand">
@@ -321,6 +321,6 @@ export function Board() {
           ) : null}
         </div>
       </aside>
-    </main>
+    </section>
   );
 }

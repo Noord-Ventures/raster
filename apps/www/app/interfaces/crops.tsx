@@ -56,7 +56,7 @@ function PressCrop() {
 function WallCrop() {
   return (
     <div className="if-crop-scene if-crop-muur">
-      <img src="/interfaces/threads/press-sheet.jpg" alt="" />
+      <img src="/interfaces/threads/press-sheet.webp" alt="" />
       <p className="if-crop-line">A grid is a plan, not a decoration.</p>
     </div>
   );
@@ -76,7 +76,7 @@ function NightCrop() {
 function EveningCrop() {
   return (
     <div className="if-crop-scene if-crop-avond">
-      <img src="/interfaces/food/de-buren.jpg" alt="" />
+      <img src="/interfaces/food/de-buren.webp" alt="" />
       <p className="if-crop-line">Roast chicken, tonight</p>
     </div>
   );

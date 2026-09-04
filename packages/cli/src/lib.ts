@@ -12,10 +12,38 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { catalogComponents, rasterComponents, rasterTokens } from "@noorddev/raster";
-import bundle from "../../../registry/bundle.json" with { type: "json" };
 import { starterPage } from "./starter";
 
-const rasterCss: string = (bundle as { css: { raster: string } }).css.raster;
+interface Bundle {
+  name: string;
+  version: string;
+  css: { raster: string };
+  items: RegistryItem[];
+}
+
+const here = dirname(fileURLToPath(import.meta.url));
+
+/** First existing path among candidates relative to this module. */
+function locate(candidates: string[], what: string): string {
+  const found = candidates.map((c) => join(here, c)).find((p) => existsSync(p));
+  if (!found) throw new Error(`Raster ${what} not found. Rebuild @noorddev/raster-cli (pnpm build) or run from the repo.`);
+  return found;
+}
+
+let cachedBundle: Bundle | undefined;
+
+/**
+ * The registry snapshot the CLI was built with. Read at first use, not
+ * bundled into the executable: dist/index.js stays small and `raster --help`
+ * never parses a registry. Published: dist/registry/bundle.json. In-repo:
+ * <repo>/registry/bundle.json.
+ */
+export function loadBundle(): Bundle {
+  cachedBundle ??= JSON.parse(readFileSync(locate(["registry/bundle.json", "../../../registry/bundle.json"], "registry bundle"), "utf8")) as Bundle;
+  return cachedBundle;
+}
+
+export const VERSION: string = (JSON.parse(readFileSync(locate(["../package.json", "package.json"], "package.json"), "utf8")) as { version: string }).version;
 
 export interface RegistryFile {
   path: string;
@@ -79,18 +107,7 @@ function writeFileSafe(cwd: string, relPath: string, content: string | Buffer, o
 
 /** Resolve vendored Inter files: published CLI dist, or the core package in-repo. */
 export function resolveFontsDir(): string {
-  const here = dirname(fileURLToPath(import.meta.url));
-  const candidates = [
-    join(here, "fonts/inter"),
-    join(here, "../fonts/inter"),
-    join(here, "../../core/css/fonts/inter"),
-    join(here, "../../../core/css/fonts/inter"),
-  ];
-  const found = candidates.find((dir) => existsSync(join(dir, "OFL.txt")));
-  if (!found) {
-    throw new Error("Raster Inter files not found. Rebuild @noorddev/raster-cli (copy-fonts) or check packages/core/css/fonts/inter.");
-  }
-  return found;
+  return dirname(locate(["fonts/inter/OFL.txt", "../fonts/inter/OFL.txt", "../../core/css/fonts/inter/OFL.txt", "../../../core/css/fonts/inter/OFL.txt"], "Inter files"));
 }
 
 function copyFonts(cwd: string, cssDir: string, overwrite: boolean): WriteResult[] {
@@ -120,7 +137,7 @@ export function init(cwd: string, options: InitOptions = {}): WriteResult[] {
   if (options.registry) config.registry = options.registry;
   const results: WriteResult[] = [];
   const cssHref = `${config.cssDir.replace(/\\/g, "/")}/raster.css`;
-  results.push(writeFileSafe(cwd, join(config.cssDir, "raster.css"), rasterCss, options.overwrite ?? false));
+  results.push(writeFileSafe(cwd, join(config.cssDir, "raster.css"), loadBundle().css.raster, options.overwrite ?? false));
   results.push(...copyFonts(cwd, config.cssDir, options.overwrite ?? false));
   results.push(writeFileSafe(cwd, "index.html", starterPage(cssHref), options.overwrite ?? false));
   results.push(
@@ -130,7 +147,7 @@ export function init(cwd: string, options: InitOptions = {}): WriteResult[] {
 }
 
 export function getItems(): RegistryItem[] {
-  return (bundle as { items: RegistryItem[] }).items;
+  return loadBundle().items;
 }
 
 export function findItem(name: string): RegistryItem | undefined {
@@ -172,16 +189,31 @@ function itemUrl(registry: string, name: string): string {
   return `${registry.replace(/\/$/, "")}/${name}.json`;
 }
 
-async function readRegistryItem(registry: string, name: string): Promise<RegistryItem> {
+/**
+ * One item from a remote registry. Returns undefined when the registry
+ * has no such item (HTTP 404, or no file in a local directory); any other
+ * failure (network, bad JSON, 5xx) throws with the location in the message
+ * so the user sees what broke instead of "unknown component".
+ */
+async function readRegistryItem(registry: string, name: string): Promise<RegistryItem | undefined> {
   const loc = itemUrl(registry, name);
   if (/^https?:\/\//.test(loc) || loc.startsWith("file:")) {
     const res = await fetch(loc);
-    if (!res.ok) throw new Error(`Failed to fetch ${loc}: ${res.status}`);
-    return (await res.json()) as RegistryItem;
+    if (res.status === 404) return undefined;
+    if (!res.ok) throw new Error(`Registry request failed: ${loc} (${res.status} ${res.statusText})`);
+    try {
+      return (await res.json()) as RegistryItem;
+    } catch (error) {
+      throw new Error(`Registry item is not JSON: ${loc} (${(error as Error).message})`);
+    }
   }
   const file = join(registry, `${name}.json`);
-  if (!existsSync(file)) throw new Error(`Registry item not found: ${file}`);
-  return JSON.parse(readFileSync(file, "utf8")) as RegistryItem;
+  if (!existsSync(file)) return undefined;
+  try {
+    return JSON.parse(readFileSync(file, "utf8")) as RegistryItem;
+  } catch (error) {
+    throw new Error(`Registry item is not JSON: ${file} (${(error as Error).message})`);
+  }
 }
 
 async function resolveFromRegistry(
@@ -194,13 +226,13 @@ async function resolveFromRegistry(
   const visit = async (name: string) => {
     if (seen.has(name)) return;
     seen.add(name);
-    try {
-      const item = await readRegistryItem(registry, name);
-      for (const dep of item.meta?.raster?.registryDependencies ?? []) await visit(dep);
-      resolved.push(item);
-    } catch {
+    const item = await readRegistryItem(registry, name);
+    if (!item) {
       unknown.push(name);
+      return;
     }
+    for (const dep of item.meta?.raster?.registryDependencies ?? []) await visit(dep);
+    resolved.push(item);
   };
   for (const name of names) await visit(name);
   return { resolved, unknown };

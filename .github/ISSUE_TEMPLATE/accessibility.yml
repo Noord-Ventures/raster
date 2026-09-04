@@ -1,0 +1,23 @@
+name: Accessibility issue
+description: A component fails with a screen reader, keyboard, or contrast check.
+labels: [a11y]
+body:
+  - type: input
+    id: component
+    attributes:
+      label: Component
+      placeholder: "date-picker"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What fails
+      description: The assistive technology and browser, the steps, and the WCAG criterion if you know it.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: The APG pattern or platform behaviour it should match.

@@ -10,7 +10,7 @@ export function Use() {
           <p className="rs-use-kicker">Press notes</p>
           <p className="rs-use-copy">One field, one action, inside the same hairline.</p>
           <InlineForm
-            placeholder="renn@noord.vc"
+            placeholder="you@example.com"
             buttonLabel="Send"
             successLabel="Noted"
             onSubmit={() => {}}

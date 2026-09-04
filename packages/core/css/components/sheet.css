@@ -1,9 +1,9 @@
 /* ── sheet: generated from packages/react/src/components/sheet.tsx ── */
 .rs-sheet{box-sizing:border-box;position:fixed;top:0;right:0;bottom:0;left:auto;margin:0;height:100dvh;max-height:none;width:360px;max-width:85vw;border-width:0;border-style:solid;border-left-width:1px;border-color:var(--divider);border-top-left-radius:var(--radius-sm);border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:var(--radius-sm);padding-block:24px;padding-inline:20px;background-color:var(--bg);color:var(--text);box-shadow:none}
-.rs-sheet::backdrop{background-color:rgba(0,0,0,0.25)}
+.rs-sheet::backdrop{background-color:rgba(0,0,0,0.25);background-color:color-mix(in srgb, var(--bg) 55%, transparent)}
 @media (max-width: 640px){.rs-sheet{width:100%;max-width:100%}}
 .rs-sheet-left{right:auto;left:0;border-left-width:0;border-right-width:1px;border-top-left-radius:0;border-top-right-radius:var(--radius-sm);border-bottom-right-radius:var(--radius-sm);border-bottom-left-radius:0;box-shadow:none}
-.rs-sheet-title{display:block;font-size:15px;font-weight:600;letter-spacing:-0.01em;color:var(--text);margin-bottom:6px}
+.rs-sheet-title{display:block;font-size:15px;font-weight:600;letter-spacing:-0.01em;color:var(--text);margin-top:0;margin-right:0;margin-bottom:6px;margin-left:0}
 @media (max-width: 640px){.rs-sheet-title{font-size:18px}}
 .rs-sheet-body{font-size:13.5px;line-height:1.6;letter-spacing:-0.01em;color:var(--text-secondary);margin:0}
 @media (max-width: 640px){.rs-sheet-body{font-size:16px}}

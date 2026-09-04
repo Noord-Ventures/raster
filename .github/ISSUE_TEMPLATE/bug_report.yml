@@ -1,0 +1,42 @@
+name: Bug report
+description: Something renders or behaves wrong.
+labels: [bug]
+body:
+  - type: input
+    id: package
+    attributes:
+      label: Package and version
+      placeholder: "@noorddev/raster-react 0.3.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: path
+    attributes:
+      label: Install path
+      options:
+        - Imported the package and its stylesheet
+        - Vendored with the Raster CLI
+        - Vendored with shadcn add
+        - CSS only (raster.css and rs- classes)
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: A minimal snippet, a StackBlitz, or a CodeSandbox.
+      render: tsx
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: "Chrome 140 on macOS 15, Next 15.5, Node 22"

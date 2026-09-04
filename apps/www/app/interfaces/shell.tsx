@@ -10,7 +10,7 @@ export function InterfaceShell({ slug, children }: { slug: InterfaceSlug; childr
   return (
     <div {...sx("if-index", interfaces.index)}>
       <InterfacesNav />
-      <main {...sx("site-content-wide", chrome.contentWide)}>
+      <main id="main" {...sx("site-content-wide", chrome.contentWide)}>
         <div {...sx("if-specimen", interfaces.specimen)}>{children}</div>
         <section {...sx("if-matter", interfaces.matter)} aria-labelledby={`${slug}-name`}>
           <p {...sx("if-voice", interfaces.voice)}>{proto.voice}</p>

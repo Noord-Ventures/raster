@@ -66,11 +66,11 @@ describe("init", () => {
 });
 
 describe("add", () => {
-  it("vendors component source plus the cx helper", async () => {
+  it("vendors component source plus the shared lib once", async () => {
     init(cwd);
     const { outcomes, unknown } = await add(cwd, ["button"]);
     expect(unknown).toEqual([]);
-    expect(outcomes).toHaveLength(1);
+    expect(outcomes.map((o) => o.item.name)).toEqual(["raster-lib", "button"]);
     const source = readFileSync(join(cwd, "components/raster/button.tsx"), "utf8");
     expect(source).toContain("rs-btn-primary");
     expect(source).toContain("@stylexjs/stylex");
@@ -83,7 +83,7 @@ describe("add", () => {
   it("pulls registry dependencies in install order", async () => {
     init(cwd);
     const { outcomes } = await add(cwd, ["dialog"]);
-    expect(outcomes.map((o) => o.item.name)).toEqual(["button", "dialog"]);
+    expect(outcomes.map((o) => o.item.name)).toEqual(["raster-lib", "button", "dialog"]);
     expect(existsSync(join(cwd, "components/raster/dialog.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "components/raster/button.tsx"))).toBe(true);
   });
@@ -92,6 +92,31 @@ describe("add", () => {
     init(cwd);
     const { unknown } = await add(cwd, ["nope"]);
     expect(unknown).toEqual(["nope"]);
+  });
+
+  it("installs every vendored file exactly once across a whole add", async () => {
+    init(cwd);
+    const { outcomes } = await add(cwd, ["select", "combobox", "date-picker", "bar-chart"]);
+    const written = outcomes.flatMap((o) => o.results.map((r) => r.path));
+    expect(new Set(written).size).toBe(written.length);
+    expect(outcomes.filter((o) => o.item.name === "dropdown-menu")).toHaveLength(1);
+    expect(existsSync(join(cwd, "components/raster/charts/frame.tsx"))).toBe(true);
+  });
+
+  it("every vendored import resolves inside the project", async () => {
+    init(cwd);
+    const { outcomes } = await add(cwd, ["chart", "sidebar", "form", "menubar"]);
+    for (const r of outcomes.flatMap((o) => o.results)) {
+      const file = join(cwd, r.path);
+      const dir = join(file, "..");
+      for (const spec of [...readFileSync(file, "utf8").matchAll(/from "(\.[^"]+)"/g)].map((m) => m[1]!)) {
+        const base = join(dir, spec);
+        expect(
+          existsSync(`${base}.ts`) || existsSync(`${base}.tsx`) || existsSync(join(base, "index.ts")),
+          `${r.path}: ${spec} resolves`,
+        ).toBe(true);
+      }
+    }
   });
 
   it("keeps nested trees intact so chart imports resolve", async () => {

@@ -18,7 +18,7 @@ import { rasterComponents } from "../src/registry.ts";
 
 const PUBLIC_HOST = rasterTokens.meta.url;
 const REGISTRY_URL = process.env.RASTER_REGISTRY_URL ?? `${PUBLIC_HOST}/r`;
-const VERSION = "0.3.0";
+const VERSION = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8")).version;
 
 const corePath = (p) => fileURLToPath(new URL(`../${p}`, import.meta.url));
 const repoPath = (p) => fileURLToPath(new URL(`../../../${p}`, import.meta.url));
@@ -99,10 +99,21 @@ const interItem = {
       target: "styles/raster/inter.css",
     },
   ],
-  meta: { raster: { category: "foundation", cssOnly: true } },
+  meta: {
+    raster: {
+      category: "foundation",
+      cssOnly: true,
+      license: "SIL Open Font License 1.1",
+      licenseUrl: "https://openfontlicense.org",
+      licenseText: readCore("css/fonts/inter/OFL.txt"),
+    },
+  },
 };
 
-const cxSource = readReact("cx.ts");
+/* Files every React component imports. They install once, as one
+   registry:lib item, and every component depends on it. */
+const LIB_FILES = ["cx.ts", "rs.ts", "tokens.stylex.ts", "hidden.stylex.ts"];
+const LIB_ITEM = "raster-lib";
 
 function posix(p) {
   return p.replaceAll("\\", "/");
@@ -118,76 +129,101 @@ function resolveLocal(fromRel, spec) {
   return null;
 }
 
-function isCx(rel) {
-  return rel === "cx" || rel === "cx.ts" || rel.endsWith("/cx.ts") || rel.endsWith("/cx");
+function isLib(rel) {
+  return LIB_FILES.includes(rel);
 }
 
-function collectReactGraph(entryRel) {
+/* The component that owns a React entry file. Chart family entries share
+   components/chart.tsx; the owner is the first registry entry naming it. */
+const ownerOfEntry = new Map();
+for (const c of rasterComponents) {
+  if (c.react && !ownerOfEntry.has(c.react)) ownerOfEntry.set(c.react, c.name);
+}
+
+/* Where a source file lands in the consumer's tree. Entry files take the
+   owning component's name; helpers keep their path under raster/. */
+function destFor(srcRel) {
+  const owner = ownerOfEntry.get(srcRel);
+  if (owner) return `raster/${owner}${srcRel.endsWith(".tsx") ? ".tsx" : ".ts"}`;
+  return `raster/${srcRel.replace(/^components\//, "")}`;
+}
+
+/* Walk a component's imports. Stops at lib files and at other components'
+   entry files: those install through registry dependencies, so no source
+   is inlined twice across the registry. */
+function collectReactGraph(component) {
+  const entry = component.react;
+  const owner = ownerOfEntry.get(entry);
   const sources = new Map();
-  const queue = [entryRel];
+  const deps = new Set([LIB_ITEM]);
+  if (owner !== component.name) {
+    deps.add(owner);
+    return { sources, deps };
+  }
+  const queue = [entry];
   while (queue.length) {
     const rel = queue.shift();
-    if (!rel || sources.has(rel) || isCx(rel)) continue;
+    if (!rel || sources.has(rel)) continue;
     const source = readReact(rel);
     sources.set(rel, source);
     for (const match of source.matchAll(/from ["'](\.[^"']+)["']/g)) {
       const resolved = resolveLocal(rel, match[1]);
-      if (resolved && !isCx(resolved)) queue.push(resolved);
+      if (!resolved) throw new Error(`${rel}: cannot resolve import ${match[1]}`);
+      if (isLib(resolved)) continue;
+      const other = ownerOfEntry.get(resolved);
+      if (other && other !== component.name) {
+        deps.add(other);
+        continue;
+      }
+      queue.push(resolved);
     }
   }
-  return sources;
+  return { sources, deps };
 }
 
-function destFor(srcRel, componentName, entryRel) {
-  if (srcRel === entryRel) {
-    const ext = srcRel.endsWith(".ts") && !srcRel.endsWith(".tsx") ? ".ts" : ".tsx";
-    return `raster/${componentName}${ext}`;
-  }
-  return `raster/${srcRel.replace(/^components\//, "")}`;
-}
-
-function rewriteImports(source, srcRel, dest, destBySrc) {
+function rewriteImports(source, srcRel, dest) {
   return source.replace(/from ["'](\.[^"']+)["']/g, (full, spec) => {
     const resolved = resolveLocal(srcRel, spec);
-    const destDir = dirname(dest);
-    let target;
-    if (!resolved || isCx(resolved)) {
-      target = "raster/cx";
-    } else {
-      target = destBySrc.get(resolved).replace(/\.(tsx|ts)$/, "");
-    }
-    let rel = posix(relative(destDir, target));
+    if (!resolved) throw new Error(`${srcRel}: cannot resolve import ${spec}`);
+    const target = destFor(resolved).replace(/\.(tsx|ts)$/, "");
+    let rel = posix(relative(dirname(dest), target));
     if (!rel.startsWith(".")) rel = `./${rel}`;
     return `from "${rel}"`;
   });
 }
 
-const items = [interItem, baseItem];
+function fileEntry(srcRel, source) {
+  const dest = destFor(srcRel);
+  const isComponent = dest.endsWith(".tsx");
+  return {
+    path: dest,
+    content: rewriteImports(source, srcRel, dest),
+    type: isComponent ? "registry:component" : "registry:file",
+    target: `components/${dest}`,
+  };
+}
+
+const libItem = {
+  $schema: "https://ui.shadcn.com/schema/registry-item.json",
+  name: LIB_ITEM,
+  type: "registry:lib",
+  title: "Raster lib",
+  description: "Shared helpers every Raster React component imports: the rs() class seam, cx, StyleX tokens, and the hidden-element leaf.",
+  dependencies: ["@stylexjs/stylex"],
+  files: LIB_FILES.map((f) => ({ ...fileEntry(f, readReact(f)), type: "registry:lib" })),
+  meta: { raster: { category: "foundation", cssOnly: false, registryDependencies: [] } },
+};
+
+const items = [interItem, baseItem, libItem];
 
 for (const component of rasterComponents) {
   const files = [];
+  const deps = new Set(component.registryDependencies ?? []);
 
   if (component.react) {
-    const graph = collectReactGraph(component.react);
-    const destBySrc = new Map(
-      [...graph.keys()].map((src) => [src, destFor(src, component.name, component.react)]),
-    );
-    for (const [srcRel, source] of graph) {
-      const dest = destBySrc.get(srcRel);
-      const ext = dest.endsWith(".ts") && !dest.endsWith(".tsx") ? "ts" : "tsx";
-      files.push({
-        path: dest,
-        content: rewriteImports(source, srcRel, dest, destBySrc),
-        type: ext === "tsx" ? "registry:component" : "registry:file",
-        target: `components/${dest}`,
-      });
-    }
-    files.push({
-      path: "raster/cx.ts",
-      content: cxSource,
-      type: "registry:file",
-      target: "components/raster/cx.ts",
-    });
+    const graph = collectReactGraph(component);
+    for (const [srcRel, source] of graph.sources) files.push(fileEntry(srcRel, source));
+    for (const d of graph.deps) deps.add(d);
   }
 
   for (const cssFile of component.css) {
@@ -200,6 +236,7 @@ for (const component of rasterComponents) {
     });
   }
 
+  const registryDependencies = [...deps];
   items.push({
     $schema: "https://ui.shadcn.com/schema/registry-item.json",
     name: component.name,
@@ -209,7 +246,7 @@ for (const component of rasterComponents) {
     registryDependencies: [
       `${REGISTRY_URL}/raster-base.json`,
       `${REGISTRY_URL}/inter.json`,
-      ...(component.registryDependencies ?? []).map((d) => `${REGISTRY_URL}/${d}.json`),
+      ...registryDependencies.map((d) => `${REGISTRY_URL}/${d}.json`),
     ],
     ...(component.react
       ? {
@@ -225,7 +262,7 @@ for (const component of rasterComponents) {
         classes: component.classes,
         snippet: component.snippet,
         cssOnly: !component.react,
-        registryDependencies: component.registryDependencies ?? [],
+        registryDependencies,
       },
     },
   });

@@ -4,14 +4,20 @@
 .rs-btn-ghost:hover,.rs-btn-primary:hover{opacity:0.85}
 .rs-btn-ghost:focus-visible,.rs-btn-primary:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
 @media (max-width: 640px){.rs-btn-ghost,.rs-btn-primary{height:var(--control-h);min-height:var(--hit);width:100%;padding-inline:20px;border-radius:0}}
+@media (prefers-reduced-motion: reduce){.rs-btn-ghost,.rs-btn-primary{transition:none}}
+@media (forced-colors: active){.rs-btn-ghost,.rs-btn-primary{opacity:1}.rs-btn-ghost:hover,.rs-btn-primary:hover{opacity:1}.rs-btn-ghost:disabled,.rs-btn-primary:disabled{opacity:1}}
 .rs-btn-primary{font-weight:600;background-color:var(--text);color:var(--bg);border-color:transparent}
+@media (forced-colors: active){.rs-btn-primary{background-color:ButtonFace;color:ButtonText;border-color:ButtonText}.rs-btn-primary:disabled{color:GrayText;border-color:GrayText}}
 .rs-btn-ghost{font-weight:500;background-color:transparent;color:var(--text);border-color:var(--divider)}
 .rs-btn-ghost:hover{background-color:var(--divider);border-color:transparent}
 .rs-btn-ghost:disabled{background-color:transparent;border-color:var(--divider)}
+@media (forced-colors: active){.rs-btn-ghost{background-color:ButtonFace;color:ButtonText;border-color:ButtonText}.rs-btn-ghost:disabled{color:GrayText;border-color:GrayText}.rs-btn-ghost:hover{border-color:Highlight}}
 .rs-btn-sm{height:36px;padding-inline:14px;font-size:13px;min-width:104px}
 @media (max-width: 640px){.rs-btn-sm{height:var(--control-h);min-height:var(--hit);padding-inline:16px;font-size:var(--control-fs);min-width:0}}
 .rs-btn-grouped{height:auto;border-width:0;border-radius:0;margin:0;min-width:0}
+.rs-btn-grouped:focus-visible{outline-offset:-2px}
 @media (max-width: 640px){.rs-btn-grouped{flex-grow:1;min-width:0}}
 .rs-btn-grouped-ghost{background-color:var(--bg)}
 .rs-btn-grouped-ghost:hover{background-color:var(--divider)}
 .rs-btn-grouped-ghost:disabled{background-color:var(--bg)}
+@media (forced-colors: active){.rs-btn-grouped-ghost{background-color:ButtonFace}}

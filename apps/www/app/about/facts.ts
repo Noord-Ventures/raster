@@ -77,7 +77,7 @@ export const featured = [
     place: "Zurich",
     mark: "Grid Systems in Graphic Design. Neue Grafik, 1958.",
     work: {
-      src: "/about/mueller-brockmann-grid-systems.jpg",
+      src: "/about/mueller-brockmann-grid-systems.webp",
       alt: "Cover of Grid Systems in Graphic Design",
     },
   },
@@ -88,7 +88,7 @@ export const featured = [
     place: "Amsterdam",
     mark: "Stedelijk posters. New Alphabet, 1967. Total Design, 1963.",
     work: {
-      src: "/about/crouwel-new-alphabet.png",
+      src: "/about/crouwel-new-alphabet.webp",
       alt: "New Alphabet type specimen",
     },
   },
@@ -101,7 +101,7 @@ export const field = [
     place: "Zurich",
     mark: "100 Jahre Eisenbeton. Kunstgewerbemuseum Zürich, 1950.",
     work: {
-      src: "/about/lohse-100-jahre-eisenbeton.jpg",
+      src: "/about/lohse-100-jahre-eisenbeton.webp",
       alt: "100 Jahre Eisenbeton, Kunstgewerbemuseum Zürich, 1950",
     },
   },
@@ -111,7 +111,7 @@ export const field = [
     place: "Zurich",
     mark: "Konstruktive Grafik. Kunstgewerbemuseum Zürich, 1958.",
     work: {
-      src: "/about/neuburg-konstruktive-grafik.jpg",
+      src: "/about/neuburg-konstruktive-grafik.webp",
       alt: "Konstruktive Grafik, Kunstgewerbemuseum Zürich, 1958",
     },
   },
@@ -121,7 +121,7 @@ export const field = [
     place: "Zurich",
     mark: "Für das Alter. Per la vecchiaia, 1949.",
     work: {
-      src: "/about/vivarelli-fur-das-alter.jpg",
+      src: "/about/vivarelli-fur-das-alter.webp",
       alt: "Für das Alter. Per la vecchiaia, 1949",
     },
   },
@@ -131,7 +131,7 @@ export const field = [
     place: "Zurich · Ulm",
     mark: "HfG Ulm. Concrete art.",
     work: {
-      src: "/about/bill-hfg-ulm.jpg",
+      src: "/about/bill-hfg-ulm.webp",
       alt: "HfG Ulm, architecture by Max Bill, 1955",
     },
   },
@@ -141,7 +141,7 @@ export const field = [
     place: "Basel",
     mark: "Designing Programmes, 1964.",
     work: {
-      src: "/about/gerstner-designing-programmes.jpg",
+      src: "/about/gerstner-designing-programmes.webp",
       alt: "Cover of Designing Programmes",
     },
   },
@@ -151,7 +151,7 @@ export const field = [
     place: "Basel · Cambridge",
     mark: "Micorène, c. 1958. Gerstner atelier. Modular type at MIT.",
     work: {
-      src: "/about/moll-micorene.jpg",
+      src: "/about/moll-micorene.webp",
       alt: "Micorène, c. 1958",
     },
   },
@@ -161,7 +161,7 @@ export const field = [
     place: "Basel",
     mark: "Typographie.",
     work: {
-      src: "/about/ruder-typographie.jpg",
+      src: "/about/ruder-typographie.webp",
       alt: "Cover of Typographie",
     },
   },
@@ -171,7 +171,7 @@ export const field = [
     place: "Basel",
     mark: "Graphic Design Manual.",
     work: {
-      src: "/about/hofmann-form-farbe.jpg",
+      src: "/about/hofmann-form-farbe.webp",
       alt: "Form Farbe poster, Gewerbemuseum Winterthur, 1951",
     },
   },
@@ -181,7 +181,7 @@ export const field = [
     place: "Basel · Zurich",
     mark: "Saffa 1958 Zürich, 1958. Geigy. Müller-Brockmann studio.",
     work: {
-      src: "/about/rudin-saffa-1958.jpg",
+      src: "/about/rudin-saffa-1958.webp",
       alt: "Saffa 1958 Zürich, 1958",
     },
   },
@@ -191,7 +191,7 @@ export const field = [
     place: "Zurich",
     mark: "20 CHF Gertrud Kurz, 1992. Odermatt & Tissi.",
     work: {
-      src: "/about/tissi-gertrud-kurz.jpg",
+      src: "/about/tissi-gertrud-kurz.webp",
       alt: "Münzkabinett Berlin. GERTRUD KURZ, 1890/1972.",
     },
   },
@@ -201,7 +201,7 @@ export const field = [
     place: "Ulm · Zurich",
     mark: "Japanische Plakate heute, 1978. Müller-Brockmann studio.",
     work: {
-      src: "/about/yoshikawa-japanische-plakate-heute.jpg",
+      src: "/about/yoshikawa-japanische-plakate-heute.webp",
       alt: "Japanische Plakate heute, 1978",
     },
   },
@@ -211,7 +211,7 @@ export const field = [
     place: "Rotterdam",
     mark: "Bruynzeel kitchen, 1938. Typotekt.",
     work: {
-      src: "/about/zwart-bruynzeel.jpg",
+      src: "/about/zwart-bruynzeel.webp",
       alt: "Bruynzeel kitchen, 1938",
     },
   },
@@ -221,7 +221,7 @@ export const field = [
     place: "Rotterdam",
     mark: "Chair no. 35, 1934. Photomontage. Constructivism.",
     work: {
-      src: "/about/schuitema-chair-35.jpg",
+      src: "/about/schuitema-chair-35.webp",
       alt: "Chair no. 35, 1934",
     },
   },
@@ -241,7 +241,7 @@ export const field = [
     place: "Amsterdam",
     mark: "Memorial plaque, Station Vught, 1984.",
     work: {
-      src: "/about/treumann-vught.jpg",
+      src: "/about/treumann-vught.webp",
       alt: "Memorial plaque at Station Vught, 1984",
     },
   },
@@ -251,7 +251,7 @@ export const field = [
     place: "Amsterdam",
     mark: "Stedelijk Museum enamel sign. Torn paper, 1954.",
     work: {
-      src: "/about/sandberg-stedelijk-email-1954.jpg",
+      src: "/about/sandberg-stedelijk-email-1954.webp",
       alt: "Stedelijk Museum enamel sign, 1954",
     },
   },
@@ -261,7 +261,7 @@ export const field = [
     place: "The Hague",
     mark: "De letter op straat. Meijer, 1956.",
     work: {
-      src: "/about/schrofer-de-letter-op-straat.jpg",
+      src: "/about/schrofer-de-letter-op-straat.webp",
       alt: "De letter op straat, 1956",
     },
   },
@@ -271,7 +271,7 @@ export const field = [
     place: "Amsterdam",
     mark: "Stedelijk, co westerik, 24 sep–7 nov 1971.",
     work: {
-      src: "/about/total-design-westerik-1971.jpg",
+      src: "/about/total-design-westerik-1971.webp",
       alt: "Total Design / Crouwel, co westerik, Stedelijk 24 sep–7 nov 1971",
     },
   },
@@ -281,7 +281,7 @@ export const field = [
     place: "Rotterdam · Amsterdam",
     mark: "Schiphol signage. Total Design, 1967.",
     work: {
-      src: "/about/wissing-schiphol-signposting.jpg",
+      src: "/about/wissing-schiphol-signposting.webp",
       alt: "Schiphol signage, Total Design, 1967",
     },
   },
@@ -291,7 +291,7 @@ export const field = [
     place: "Switzerland",
     mark: "International Typographic Style. Objective. Modular.",
     work: {
-      src: "/about/neue-grafik.jpg",
+      src: "/about/neue-grafik.webp",
       alt: "Neue Grafik, July 1963",
     },
   },

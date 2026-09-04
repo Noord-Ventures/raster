@@ -264,14 +264,32 @@ export function SiteChrome() {
   const [open, setOpen] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const settingsRef = React.useRef<HTMLDivElement>(null);
+  const navToggleRef = React.useRef<HTMLButtonElement>(null);
+  const navPanelRef = React.useRef<HTMLElement>(null);
 
   React.useEffect(() => setOpen(false), [pathname]);
   React.useEffect(() => setMenuOpen(false), [pathname]);
 
+  /* Phone menu: lock scroll, move focus to the first link, close on
+     Escape, and hand focus back to the toggle on close. */
   React.useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return () => {
+      document.body.style.overflow = "";
+    };
+    const first = navPanelRef.current?.querySelector<HTMLElement>("a, button");
+    first?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+      }
+    };
+    document.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKey);
+      navToggleRef.current?.focus();
     };
   }, [open]);
 
@@ -325,7 +343,7 @@ export function SiteChrome() {
           type="button"
           {...sx("theme-toggle", chrome.themeToggle)}
           aria-label="Appearance"
-          aria-haspopup="true"
+          aria-haspopup="dialog"
           aria-expanded={menuOpen}
           aria-controls="appearanceMenu"
           onClick={() => setMenuOpen((value) => !value)}
@@ -344,6 +362,7 @@ export function SiteChrome() {
       </div>
 
       <button
+        ref={navToggleRef}
         type="button"
         {...sx("nav-toggle", chrome.navToggle)}
         aria-expanded={open}
@@ -357,7 +376,15 @@ export function SiteChrome() {
           <span />
         </span>
       </button>
-      <nav id="navPanel" {...sx("nav-panel", chrome.navPanel)} data-open={open} aria-label="Site menu" aria-hidden={!open}>
+      <nav
+        id="navPanel"
+        ref={navPanelRef}
+        {...sx("nav-panel", chrome.navPanel)}
+        data-open={open}
+        aria-label="Site menu"
+        aria-hidden={!open}
+        inert={!open}
+      >
         <div className="nav-panel-links">
           {links.map((l) => (
             <Link key={l.href} href={l.href} {...sx("nav-panel-link", chrome.navPanelLink)} aria-current={current(l.href)}>

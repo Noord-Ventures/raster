@@ -1,14 +1,17 @@
 /* ── breadcrumbs: generated from packages/react/src/components/breadcrumbs.tsx ── */
-.rs-crumbs{font-size:13px;color:var(--text);letter-spacing:-0.01em;display:flex;align-items:baseline;gap:8px}
-@media (max-width: 640px){.rs-crumbs{font-size:var(--control-fs);align-items:center;flex-wrap:wrap;gap:6px}}
-.rs-crumbs-link{color:var(--text);text-decoration:none;background-color:transparent;opacity:0.55}
-.rs-crumbs-link:link{color:var(--text)}
-.rs-crumbs-link:visited{color:var(--text)}
-.rs-crumbs-link:hover{color:var(--text);opacity:1}
+.rs-crumbs{font-size:13px;color:var(--text);letter-spacing:-0.01em}
+@media (max-width: 640px){.rs-crumbs{font-size:var(--control-fs)}}
+.rs-crumbs-list{list-style:none;margin:0;padding:0;display:flex;align-items:baseline;gap:8px}
+@media (max-width: 640px){.rs-crumbs-list{align-items:center;flex-wrap:wrap;gap:6px}}
+.rs-crumbs-item{display:inline-flex;align-items:baseline;gap:8px}
+@media (max-width: 640px){.rs-crumbs-item{align-items:center;gap:6px}}
+.rs-crumbs-link{color:var(--text-secondary);font-weight:400;text-decoration:none;text-underline-offset:3px;background-color:transparent}
+.rs-crumbs-link:link{color:var(--text-secondary)}
+.rs-crumbs-link:visited{color:var(--text-secondary)}
+.rs-crumbs-link:hover{color:var(--text);text-decoration:underline}
 .rs-crumbs-link:active{color:var(--text)}
-.rs-crumbs-link:focus{color:var(--text)}
-.rs-crumbs-link:focus-visible{color:var(--text);opacity:1}
+.rs-crumbs-link:focus-visible{color:var(--text);outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
 @media (max-width: 640px){.rs-crumbs-link{display:inline-flex;align-items:center;min-height:var(--hit)}}
-.rs-crumbs-sep{color:var(--text);opacity:0.4}
-.rs-crumbs-here{color:var(--text);opacity:1}
+.rs-crumbs-sep{color:var(--text-secondary)}
+.rs-crumbs-here{color:var(--text);font-weight:500}
 @media (max-width: 640px){.rs-crumbs-here{display:inline-flex;align-items:center;min-height:var(--hit)}}

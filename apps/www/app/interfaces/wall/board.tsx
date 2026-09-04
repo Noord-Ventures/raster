@@ -29,7 +29,7 @@ const FEED: Post[] = [
     name: "Aziez",
     when: "09:14",
     text: "The west window is the one that holds.",
-    photo: "/interfaces/threads/press-sheet.jpg",
+    photo: "/interfaces/threads/press-sheet.webp",
     ratio: "4 / 5",
     likes: 12,
   },
@@ -47,7 +47,7 @@ const FEED: Post[] = [
     name: "Jenny",
     when: "08:41",
     text: "I left a note on the third post.",
-    photo: "/interfaces/threads/posters.jpg",
+    photo: "/interfaces/threads/posters.webp",
     ratio: "1 / 1",
     likes: 5,
   },
@@ -65,7 +65,7 @@ const FEED: Post[] = [
     name: "Gianpiero",
     when: "07:55",
     text: "On the rail before the street.",
-    photo: "/interfaces/threads/press-sheet.jpg",
+    photo: "/interfaces/threads/press-sheet.webp",
     ratio: "5 / 4",
     likes: 7,
   },
@@ -83,7 +83,7 @@ const FEED: Post[] = [
     name: "Gianpiero",
     when: "07:11",
     text: "The rail stays 184.",
-    photo: "/interfaces/threads/posters.jpg",
+    photo: "/interfaces/threads/posters.webp",
     ratio: "3 / 4",
     likes: 4,
   },
@@ -131,7 +131,7 @@ export function Board() {
   }
 
   return (
-    <main className="if-board sc-wall" aria-label={WHAT}>
+    <section className="if-board sc-wall" aria-label={WHAT}>
       <PhoneV1Chrome heading="Wall" action="Post" onAction={() => openPost("m1")} />
       <aside className="sc-wall-rail" aria-label="People">
         <div className="sc-wall-brand">
@@ -186,7 +186,7 @@ export function Board() {
           {FEED.map((row) => (
             <article key={row.id} className={`sc-wall-card${post === row.id ? " is-on" : ""}${["m1", "m3", "m4", "m5"].includes(row.id) ? " sc-wall-v1" : ""}`}>
               <button type="button" className="sc-wall-open" onClick={() => openPost(row.id)}>
-                {row.photo ? <img src={row.photo} alt="" /> : null}
+                {row.photo ? <img src={row.photo} alt="" loading="lazy" decoding="async" /> : null}
                 <span className="sc-wall-v1-line">
                   {row.name} · {row.when}
                 </span>
@@ -266,6 +266,6 @@ export function Board() {
           </div>
         ) : null}
       </aside>
-    </main>
+    </section>
   );
 }

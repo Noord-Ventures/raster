@@ -9,3 +9,7 @@
 @media (max-width: 640px){.rs-toast-title{font-size:16px}}
 .rs-toast-body{font-size:12.5px;line-height:1.5;letter-spacing:-0.01em;color:var(--text-secondary);margin-top:1px;margin-bottom:0;margin-inline:0}
 @media (max-width: 640px){.rs-toast-body{font-size:15px;margin-top:4px}}
+.rs-toast-close{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-inline-start:auto;margin-top:-4px;margin-inline-end:-6px;width:28px;height:28px;padding:0;border-width:0;border-radius:var(--radius-sm);background-color:transparent;color:var(--text);cursor:pointer}
+.rs-toast-close:hover{background-color:var(--divider)}
+.rs-toast-close:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
+@media (max-width: 640px){.rs-toast-close{margin-top:-10px;margin-inline-end:-12px;width:var(--hit);height:var(--hit)}}

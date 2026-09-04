@@ -1,7 +1,7 @@
 {
   "name": "@noorddev/raster",
   "version": "0.3.0",
-  "description": "Raster core \u2014 design tokens, component registry, and CSS. Monochrome, CSS-first, zero dependencies.",
+  "description": "Raster core — design tokens, component registry, and CSS. Monochrome, CSS-first, zero dependencies.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -31,6 +31,10 @@
       "types": "./css/raster.css.d.ts",
       "default": "./css/raster.css"
     },
+    "./css/components.css": {
+      "types": "./css/raster.css.d.ts",
+      "default": "./css/components.css"
+    },
     "./css/*": "./css/*",
     "./tokens": "./tokens/raster.tokens.json",
     "./package.json": "./package.json"
@@ -50,11 +54,11 @@
     "build:components": "node --experimental-strip-types scripts/build-components.mjs"
   },
   "devDependencies": {
-    "@types/node": "^26.1.1",
-    "esbuild": "^0.27",
-    "tsup": "^8.3.5",
-    "typescript": "^5.7.3",
-    "vitest": "^3.0.5"
+    "@types/node": "^26.4.1",
+    "esbuild": "^0.27.7",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.7"
   },
   "engines": {
     "node": ">=18.18"

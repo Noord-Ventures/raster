@@ -54,14 +54,14 @@ function Mark({ children }: { children: ReactNode }) {
 function WorkStill({ src, alt }: { src: string; alt: string }) {
   return (
     <div {...sx("field-work", about.work)}>
-      <img src={src} alt={alt} {...sx("", about.workImg)} />
+      <img src={src} alt={alt} loading="lazy" decoding="async" {...sx("", about.workImg)} />
     </div>
   );
 }
 
 export default function AboutPage() {
   return (
-    <main {...sx("field-page", about.page)} aria-label="About Raster">
+    <main id="main" {...sx("field-page", about.page)} aria-label="About Raster">
       <div {...sx("field", about.field)}>
         <section
           {...sx("field-cell field-cell-era", about.cell, about.cellTall, about.cellEnd)}

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import "@noorddev/raster/css";
+import "@noorddev/raster-react/css";
+import "@noorddev/raster/css/components.css";
 import "./stylex.css";
 import "./site.css";
 import "@/components/examples/use.css";
@@ -30,6 +31,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <style dangerouslySetInnerHTML={{ __html: crumbPin }} />
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <SiteChrome />
         <CrumbBar />
         {children}

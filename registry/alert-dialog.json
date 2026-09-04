@@ -8,7 +8,8 @@
     "https://getraster.com/r/raster-base.json",
     "https://getraster.com/r/inter.json",
     "https://getraster.com/r/dialog.json",
-    "https://getraster.com/r/button.json"
+    "https://getraster.com/r/button.json",
+    "https://getraster.com/r/raster-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -20,33 +21,9 @@
   "files": [
     {
       "path": "raster/alert-dialog.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { Dialog } from \"./dialog\";\n\nconst styles = stylex.create({\n  lock: {\n    borderRadius: raster.radiusSm,\n    boxShadow: \"none\",\n  },\n});\n\nexport interface AlertDialogProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n}\n\n/**\n * A native <dialog> that requires an explicit answer. Escape and\n * light dismiss are disabled.\n */\nexport function AlertDialog({ open, onClose, ...props }: AlertDialogProps) {\n  return (\n    <Dialog\n      open={open}\n      onClose={onClose}\n      role=\"alertdialog\"\n      onCancel={(e) => e.preventDefault()}\n      className=\"rs-alert-dialog\"\n      extraStyles={[styles.lock]}\n      {...props}\n    />\n  );\n}\n\nexport {\n  DialogTitle as AlertDialogTitle,\n  DialogBody as AlertDialogBody,\n  DialogActions as AlertDialogActions,\n} from \"./dialog\";\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { Dialog, type DialogProps } from \"./dialog\";\n\nconst styles = stylex.create({\n  lock: {\n    borderRadius: raster.radiusSm,\n    boxShadow: \"none\",\n  },\n});\n\nexport interface AlertDialogProps extends Omit<DialogProps, \"dismissable\" | \"lightDismiss\" | \"closeLabel\"> {}\n\n/**\n * A native <dialog> that requires an explicit answer. Escape and\n * light dismiss are off (closedby=\"none\"); the actions close it.\n */\nexport const AlertDialog = React.forwardRef<HTMLDialogElement, AlertDialogProps>(function AlertDialog(\n  { className, extraStyles, ...props },\n  ref,\n) {\n  return (\n    <Dialog\n      ref={ref}\n      role=\"alertdialog\"\n      dismissable={false}\n      className={className ? `rs-alert-dialog ${className}` : \"rs-alert-dialog\"}\n      extraStyles={[styles.lock, ...(extraStyles ?? [])]}\n      {...props}\n    />\n  );\n});\n\nexport {\n  DialogTitle as AlertDialogTitle,\n  DialogBody as AlertDialogBody,\n  DialogActions as AlertDialogActions,\n} from \"./dialog\";\n",
       "type": "registry:component",
       "target": "components/raster/alert-dialog.tsx"
-    },
-    {
-      "path": "raster/tokens.stylex.ts",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\n/**\n * StyleX vars alias Raster CSS custom properties. Not a second scale.\n * Values live in packages/core/css/tokens.css (generated from src/tokens.ts).\n */\nexport const raster = stylex.defineVars({\n  paper: \"var(--bg)\",\n  ink: \"var(--text)\",\n  gray: \"var(--text-secondary)\",\n  accent: \"var(--accent)\",\n  divider: \"var(--divider)\",\n  dividerSubtle: \"var(--divider-subtle)\",\n  tableAlt: \"var(--table-alt)\",\n  gridLine: \"var(--grid-line)\",\n  radiusSm: \"var(--radius-sm)\",\n  radius: \"var(--radius)\",\n  radiusChrome: \"var(--radius-chrome)\",\n  radiusIn: \"var(--radius-in)\",\n  pad: \"var(--pad)\",\n  gutter: \"var(--gutter)\",\n  module: \"var(--grid-size)\",\n  gridImage: \"var(--grid-image)\",\n  gridPos: \"var(--grid-pos)\",\n  hit: \"var(--hit)\",\n  controlH: \"var(--control-h)\",\n  controlFs: \"var(--control-fs)\",\n  controlLabel: \"var(--control-label)\",\n  durationSnap: \"var(--duration-snap)\",\n  duration: \"var(--duration)\",\n  durationConfirm: \"var(--duration-confirm)\",\n  ease: \"var(--ease)\",\n  transition: \"var(--transition)\",\n  textScale: \"var(--text-scale)\",\n  hairline: \"1px\",\n});\n\n/** Inter stack. Same as body in base.css. Not a token var — @font-face stays CSS. */\nexport const rasterFont =\n  \"Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif\";\n\nexport const rasterMono = \"ui-monospace, SFMono-Regular, Menlo, monospace\";\n\n/** Compile-time media keys. StyleX only folds defineConsts, not plain strings. */\nexport const mq = stylex.defineConsts({\n  phone: \"@media (max-width: 640px)\",\n  mobileGrid: \"@media (max-width: 480px)\",\n  at900: \"@media (min-width: 900px)\",\n  at899: \"@media (max-width: 899px)\",\n  rail: \"@media (min-width: 1024px)\",\n  wide: \"@media (min-width: 1440px)\",\n  reduce: \"@media (prefers-reduced-motion: reduce)\",\n  touch: \"@media (hover: none)\",\n});\n\n/** Phone recut (≤640). Desktop stays the poster. */\nexport const phone = mq.phone;\n\n/** Mobile grid (≤480). */\nexport const mobileGrid = mq.mobileGrid;\n\n/** Catalog rail. */\nexport const rail = mq.rail;\n\n/** Wide catalog. */\nexport const wide = mq.wide;\n",
-      "type": "registry:file",
-      "target": "components/raster/tokens.stylex.ts"
-    },
-    {
-      "path": "raster/dialog.tsx",
-      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs, type Leaves } from \"./rs\";\n\nconst phone = mq.phone;\n\nexport interface DialogProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, \"open\"> {\n  open: boolean;\n  onClose?: () => void;\n  /** Extra StyleX leaves merged after the dialog frame (command palette). */\n  extraStyles?: Leaves;\n}\n\nexport const dialogStyles = stylex.create({\n  frame: {\n    boxSizing: \"border-box\",\n    maxWidth: {\n      default: 320,\n      [mq.phone]: \"calc(100vw - 32px)\",\n    },\n    width: {\n      default: null,\n      [mq.phone]: \"calc(100vw - 32px)\",\n    },\n    borderWidth: raster.hairline,\n    borderStyle: \"solid\",\n    borderColor: raster.divider,\n    borderRadius: raster.radiusSm,\n    padding: {\n      default: 20,\n      [mq.phone]: \"24px 20px\",\n    },\n    backgroundColor: raster.paper,\n    color: raster.ink,\n    boxShadow: \"none\",\n    \"::backdrop\": {\n      backgroundColor: \"rgba(0,0,0,0.25)\",\n    },\n  },\n  title: {\n    display: \"block\",\n    fontSize: {\n      default: 15,\n      [mq.phone]: 18,\n    },\n    fontWeight: 600,\n    letterSpacing: \"-0.01em\",\n    color: raster.ink,\n    marginBottom: {\n      default: 6,\n      [mq.phone]: 10,\n    },\n  },\n  body: {\n    fontSize: {\n      default: 13.5,\n      [mq.phone]: 16,\n    },\n    color: raster.gray,\n    letterSpacing: \"-0.01em\",\n    lineHeight: 1.55,\n    marginTop: 0,\n    marginRight: 0,\n    marginBottom: {\n      default: 16,\n      [mq.phone]: 20,\n    },\n    marginLeft: 0,\n  },\n  actions: {\n    display: \"flex\",\n    justifyContent: \"flex-end\",\n    flexDirection: {\n      default: \"row\",\n      [mq.phone]: \"column\",\n    },\n    alignItems: {\n      default: \"flex-end\",\n      [mq.phone]: \"stretch\",\n    },\n    gap: {\n      default: 8,\n      [mq.phone]: 10,\n    },\n  },\n});\n\n/**\n * A native <dialog>. Focus trapping, Escape, and the backdrop come\n * from the platform.\n */\nexport function Dialog({\n  open,\n  onClose,\n  className,\n  style,\n  children,\n  extraStyles,\n  ...props\n}: DialogProps) {\n  const ref = React.useRef<HTMLDialogElement>(null);\n\n  React.useEffect(() => {\n    const dialog = ref.current;\n    if (!dialog) return;\n    if (open && !dialog.open) dialog.showModal();\n    else if (!open && dialog.open) dialog.close();\n  }, [open]);\n\n  const sx = rs([\"rs-dialog\", className], dialogStyles.frame, ...((extraStyles ?? []) as Leaves));\n  return (\n    <dialog\n      ref={ref}\n      className={sx.className}\n      style={{ ...sx.style, ...style }}\n      onClose={() => onClose?.()}\n      {...props}\n    >\n      {children}\n    </dialog>\n  );\n}\n\nexport function DialogTitle({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  const sx = rs([\"rs-dialog-title\", className], dialogStyles.title);\n  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n\nexport function DialogBody({ className, style, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  const sx = rs([\"rs-dialog-body\", className], dialogStyles.body);\n  return <p {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n\nexport function DialogActions({ className, style, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  const sx = rs([\"rs-dialog-actions\", className], dialogStyles.actions);\n  return (\n    <div {...props} className={sx.className} style={{ ...sx.style, ...style }}>\n      {React.Children.map(children, (child) => {\n        if (!React.isValidElement<{ style?: React.CSSProperties }>(child)) return child;\n        return React.cloneElement(child, {\n          style: { ...child.props.style, borderRadius: 0 },\n        });\n      })}\n    </div>\n  );\n}\n",
-      "type": "registry:component",
-      "target": "components/raster/dialog.tsx"
-    },
-    {
-      "path": "raster/rs.ts",
-      "content": "import type { CSSProperties } from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport type { CompiledStyles, InlineStyles } from \"@stylexjs/stylex\";\nimport { cx } from \"./cx\";\n\ntype Nested<T> = T | ReadonlyArray<Nested<T>>;\n\n/** Exactly what stylex.props accepts: compiled leaves, falsy, nested arrays, or a leaf with inline styles. */\nexport type Leaves = ReadonlyArray<Nested<null | undefined | CompiledStyles | boolean | Readonly<[CompiledStyles, InlineStyles]>>>;\n\ntype StyleXProps = { className?: string; style?: CSSProperties };\n\n/**\n * The one seam every component styles through: semantic rs-* class names\n * (the CSS-first contract, and what packages/core generates CSS for) merged\n * with the compiled StyleX leaves that paint the React tree.\n */\nexport function rs(classNames: Array<string | false | null | undefined>, ...styles: Leaves): StyleXProps {\n  const sx = stylex.props(...styles) as StyleXProps;\n  return {\n    className: cx(...classNames, sx.className),\n    style: sx.style,\n  };\n}\n",
-      "type": "registry:file",
-      "target": "components/raster/rs.ts"
-    },
-    {
-      "path": "raster/cx.ts",
-      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
-      "type": "registry:file",
-      "target": "components/raster/cx.ts"
     },
     {
       "path": "raster/styles/alert-dialog.css",
@@ -61,11 +38,12 @@
       "classes": [
         "rs-alert-dialog"
       ],
-      "snippet": "<dialog class=\"rs-dialog\" open><span class=\"rs-dialog-title\">Delete this workspace?</span><p class=\"rs-dialog-body\">All projects go with it.</p><div class=\"rs-dialog-actions\"><button class=\"rs-btn-ghost rs-btn-sm\">Cancel</button><button class=\"rs-btn-primary rs-btn-sm\">Delete</button></div></dialog>",
+      "snippet": "<dialog class=\"rs-dialog\" role=\"alertdialog\" closedby=\"none\" aria-labelledby=\"delete-title\" aria-describedby=\"delete-body\" open><h2 class=\"rs-dialog-title\" id=\"delete-title\">Delete this workspace?</h2><p class=\"rs-dialog-body\" id=\"delete-body\">All projects go with it.</p><div class=\"rs-dialog-actions\"><button class=\"rs-btn-ghost rs-btn-sm\">Cancel</button><button class=\"rs-btn-primary rs-btn-sm\">Delete</button></div></dialog>",
       "cssOnly": false,
       "registryDependencies": [
         "dialog",
-        "button"
+        "button",
+        "raster-lib"
       ]
     }
   }

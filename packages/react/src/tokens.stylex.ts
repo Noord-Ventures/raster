@@ -13,6 +13,8 @@ export const raster = stylex.defineVars({
   dividerSubtle: "var(--divider-subtle)",
   tableAlt: "var(--table-alt)",
   gridLine: "var(--grid-line)",
+  /** Boundary of a form control: 3:1 against the ground. Hairlines stay decorative. */
+  controlBorder: "var(--control-border)",
   radiusSm: "var(--radius-sm)",
   radius: "var(--radius)",
   radiusChrome: "var(--radius-chrome)",
@@ -51,6 +53,7 @@ export const mq = stylex.defineConsts({
   wide: "@media (min-width: 1440px)",
   reduce: "@media (prefers-reduced-motion: reduce)",
   touch: "@media (hover: none)",
+  forcedColors: "@media (forced-colors: active)",
 });
 
 /** Phone recut (≤640). Desktop stays the poster. */

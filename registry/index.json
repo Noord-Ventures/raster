@@ -25,7 +25,10 @@
       "meta": {
         "raster": {
           "category": "foundation",
-          "cssOnly": true
+          "cssOnly": true,
+          "license": "SIL Open Font License 1.1",
+          "licenseUrl": "https://openfontlicense.org",
+          "licenseText": "Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)\n\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.\nThis license is copied below, and is also available with a FAQ at:\nhttps://openfontlicense.org\n\n\n-----------------------------------------------------------\nSIL OPEN FONT LICENSE Version 1.1 - 26 February 2007\n-----------------------------------------------------------\n\nPREAMBLE\nThe goals of the Open Font License (OFL) are to stimulate worldwide\ndevelopment of collaborative font projects, to support the font creation\nefforts of academic and linguistic communities, and to provide a free and\nopen framework in which fonts may be shared and improved in partnership\nwith others.\n\nThe OFL allows the licensed fonts to be used, studied, modified and\nredistributed freely as long as they are not sold by themselves. The\nfonts, including any derivative works, can be bundled, embedded,\nredistributed and/or sold with any software provided that any reserved\nnames are not used by derivative works. The fonts and derivatives,\nhowever, cannot be released under any other type of license. The\nrequirement for fonts to remain under this license does not apply\nto any document created using the fonts or their derivatives.\n\nDEFINITIONS\n\"Font Software\" refers to the set of files released by the Copyright\nHolder(s) under this license and clearly marked as such. This may\ninclude source files, build scripts and documentation.\n\n\"Reserved Font Name\" refers to any names specified as such after the\ncopyright statement(s).\n\n\"Original Version\" refers to the collection of Font Software components as\ndistributed by the Copyright Holder(s).\n\n\"Modified Version\" refers to any derivative made by adding to, deleting,\nor substituting -- in part or in whole -- any of the components of the\nOriginal Version, by changing formats or by porting the Font Software to a\nnew environment.\n\n\"Author\" refers to any designer, engineer, programmer, technical\nwriter or other person who contributed to the Font Software.\n\nPERMISSION & CONDITIONS\nPermission is hereby granted, free of charge, to any person obtaining\na copy of the Font Software, to use, study, copy, merge, embed, modify,\nredistribute, and sell modified and unmodified copies of the Font\nSoftware, subject to the following conditions:\n\n1) Neither the Font Software nor any of its individual components,\nin Original or Modified Versions, may be sold by itself.\n\n2) Original or Modified Versions of the Font Software may be bundled,\nredistributed and/or sold with any software, provided that each copy\ncontains the above copyright notice and this license. These can be\nincluded either as stand-alone text files, human-readable headers or\nin the appropriate machine-readable metadata fields within text or\nbinary files as long as those fields can be easily viewed by the user.\n\n3) No Modified Version of the Font Software may use the Reserved Font\nName(s) unless explicit written permission is granted by the corresponding\nCopyright Holder. This restriction only applies to the primary font name as\npresented to the users.\n\n4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font\nSoftware shall not be used to promote, endorse or advertise any\nModified Version, except to acknowledge the contribution(s) of the\nCopyright Holder(s) and the Author(s) or with their explicit written\npermission.\n\n5) The Font Software, modified or unmodified, in part or in whole,\nmust be distributed entirely under this license, and must not be\ndistributed under any other license. The requirement for fonts to\nremain under this license does not apply to any document created\nusing the Font Software.\n\nTERMINATION\nThis license becomes null and void if any of the above conditions are\nnot met.\n\nDISCLAIMER\nTHE FONT SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\nOF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE\nCOPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nINCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL\nDAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM\nOTHER DEALINGS IN THE FONT SOFTWARE.\n"
         }
       },
       "files": [
@@ -61,13 +64,53 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "raster-lib",
+      "type": "registry:lib",
+      "title": "Raster lib",
+      "description": "Shared helpers every Raster React component imports: the rs() class seam, cx, StyleX tokens, and the hidden-element leaf.",
+      "dependencies": [
+        "@stylexjs/stylex"
+      ],
+      "meta": {
+        "raster": {
+          "category": "foundation",
+          "cssOnly": false,
+          "registryDependencies": []
+        }
+      },
+      "files": [
+        {
+          "path": "raster/cx.ts",
+          "type": "registry:lib",
+          "target": "components/raster/cx.ts"
+        },
+        {
+          "path": "raster/rs.ts",
+          "type": "registry:lib",
+          "target": "components/raster/rs.ts"
+        },
+        {
+          "path": "raster/tokens.stylex.ts",
+          "type": "registry:lib",
+          "target": "components/raster/tokens.stylex.ts"
+        },
+        {
+          "path": "raster/hidden.stylex.ts",
+          "type": "registry:lib",
+          "target": "components/raster/hidden.stylex.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "button",
       "type": "registry:component",
       "title": "Button",
       "description": "Solid ink primary and 1px ghost. 40px tall; 36px small.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -88,7 +131,9 @@
           ],
           "snippet": "<button class=\"rs-btn-primary\">Primary action</button>\n<button class=\"rs-btn-ghost\">Secondary</button>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -96,21 +141,6 @@
           "path": "raster/button.tsx",
           "type": "registry:component",
           "target": "components/raster/button.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/button.css",
@@ -128,7 +158,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/button.json"
+        "https://getraster.com/r/button.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -146,7 +177,8 @@
           "snippet": "<div class=\"rs-btn-group\"><button class=\"rs-btn-ghost\">Left</button><button class=\"rs-btn-ghost\">Center</button><button class=\"rs-btn-ghost\">Right</button></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "button"
+            "button",
+            "raster-lib"
           ]
         }
       },
@@ -155,26 +187,6 @@
           "path": "raster/button-group.tsx",
           "type": "registry:component",
           "target": "components/raster/button-group.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/button.tsx",
-          "type": "registry:component",
-          "target": "components/raster/button.tsx"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/button-group.css",
@@ -191,7 +203,8 @@
       "description": "Text link with a hairline underline. In-copy variant is inset 1px.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -209,7 +222,9 @@
           ],
           "snippet": "<div><a class=\"rs-link\" href=\"#\">A text link</a></div>\n<div><a class=\"rs-link-underline\" href=\"#\">An in-copy link</a></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -217,21 +232,6 @@
           "path": "raster/link.tsx",
           "type": "registry:component",
           "target": "components/raster/link.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/link.css",
@@ -245,10 +245,12 @@
       "name": "input",
       "type": "registry:component",
       "title": "Input",
-      "description": "Text field. 1px border, ink focus, 12px label above.",
+      "description": "Text field. 1px control border, 2px focus ring, 12px label above.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/field.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -266,15 +268,20 @@
             "rs-input",
             "rs-input-full",
             "rs-input-ok",
+            "rs-input-invalid",
             "rs-feedback",
             "rs-feedback-ok",
+            "rs-feedback-error",
             "rs-input-field",
             "rs-input-grouped",
             "rs-input-label"
           ],
           "snippet": "<div class=\"rs-field\"><span class=\"rs-field-label\">E-mail</span><input class=\"rs-input rs-input-full\" /></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib",
+            "field"
+          ]
         }
       },
       "files": [
@@ -282,21 +289,6 @@
           "path": "raster/input.tsx",
           "type": "registry:component",
           "target": "components/raster/input.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/input.css",
@@ -313,7 +305,8 @@
       "description": "12px secondary label, set above the control.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -330,7 +323,9 @@
           ],
           "snippet": "<label class=\"rs-label\" for=\"name\">Name</label>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -338,21 +333,6 @@
           "path": "raster/label.tsx",
           "type": "registry:component",
           "target": "components/raster/label.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/label.css",
@@ -370,7 +350,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/input.json"
+        "https://getraster.com/r/input.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -388,10 +369,11 @@
             "rs-field-hint",
             "rs-field-error"
           ],
-          "snippet": "<div class=\"rs-field\"><label class=\"rs-field-label\">Name</label><input class=\"rs-input rs-input-full\" /><p class=\"rs-field-hint\">As it appears on the invoice.</p></div>",
+          "snippet": "<div class=\"rs-field\"><label class=\"rs-field-label\" for=\"invoice-name\">Name</label><input class=\"rs-input rs-input-full\" id=\"invoice-name\" aria-describedby=\"invoice-name-hint\" /><p class=\"rs-field-hint\" id=\"invoice-name-hint\">As it appears on the invoice.</p></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "input"
+            "input",
+            "raster-lib"
           ]
         }
       },
@@ -400,21 +382,6 @@
           "path": "raster/field.tsx",
           "type": "registry:component",
           "target": "components/raster/field.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/field.css",
@@ -432,7 +399,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/input.json"
+        "https://getraster.com/r/input.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -452,7 +420,8 @@
           "snippet": "<div class=\"rs-input-group\"><span class=\"rs-input-addon\">https://</span><input class=\"rs-input\" placeholder=\"getraster.com\" /></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "input"
+            "input",
+            "raster-lib"
           ]
         }
       },
@@ -461,26 +430,6 @@
           "path": "raster/input-group.tsx",
           "type": "registry:component",
           "target": "components/raster/input-group.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/input.tsx",
-          "type": "registry:component",
-          "target": "components/raster/input.tsx"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/input-group.css",
@@ -497,7 +446,9 @@
       "description": "Native select with Raster 1px chrome.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/field.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -511,12 +462,16 @@
           "category": "forms",
           "classes": [
             "rs-native-select",
+            "rs-native-select-invalid",
             "rs-native-select-field",
             "rs-native-select-label"
           ],
           "snippet": "<select class=\"rs-native-select\"><option>Alkmaar</option><option>Amsterdam</option><option>Rotterdam</option></select>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib",
+            "field"
+          ]
         }
       },
       "files": [
@@ -524,21 +479,6 @@
           "path": "raster/native-select.tsx",
           "type": "registry:component",
           "target": "components/raster/native-select.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/native-select.css",
@@ -556,7 +496,9 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/button.json"
+        "https://getraster.com/r/button.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -580,7 +522,9 @@
           "snippet": "<div class=\"rs-inline-field\"><input class=\"rs-inline-input\" placeholder=\"Your e-mail\" /><span class=\"rs-reveal rs-reveal-in\"><button class=\"rs-btn-primary rs-inline-btn\">Subscribe</button></span></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "button"
+            "button",
+            "raster-lib",
+            "icons"
           ]
         }
       },
@@ -589,31 +533,6 @@
           "path": "raster/inline-form.tsx",
           "type": "registry:component",
           "target": "components/raster/inline-form.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/inline-form.css",
@@ -630,7 +549,8 @@
       "description": "Single-choice control. Selected dot is ink.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -650,7 +570,9 @@
           ],
           "snippet": "<label class=\"rs-radio\"><span class=\"rs-radio-dot rs-radio-on\"></span>Monthly</label>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -658,26 +580,6 @@
           "path": "raster/radio.tsx",
           "type": "registry:component",
           "target": "components/raster/radio.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/hidden.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/hidden.stylex.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/radio.css",
@@ -694,7 +596,9 @@
       "description": "Multi-choice. 16px box, 3px radius, ink fill when checked.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -713,7 +617,10 @@
           ],
           "snippet": "<label class=\"rs-choice\"><span class=\"rs-check rs-check-on\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M3.5 8.5 L6.5 11.5 L12.5 4.5\" vector-effect=\"non-scaling-stroke\"/></svg></span>Brand</label>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib",
+            "icons"
+          ]
         }
       },
       "files": [
@@ -721,36 +628,6 @@
           "path": "raster/checkbox.tsx",
           "type": "registry:component",
           "target": "components/raster/checkbox.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/hidden.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/hidden.stylex.ts"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/checkbox.css",
@@ -767,7 +644,8 @@
       "description": "32×18 control. On fills ink; off is a 1px track. The thumb moves; the box stays 32px.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -787,7 +665,9 @@
           ],
           "snippet": "<span class=\"rs-switch rs-switch-on\"><i></i></span>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -795,21 +675,6 @@
           "path": "raster/switch.tsx",
           "type": "registry:component",
           "target": "components/raster/switch.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/switch.css",
@@ -823,10 +688,12 @@
       "name": "slider",
       "type": "registry:component",
       "title": "Slider",
-      "description": "2px track, ink fill, 14px thumb.",
+      "description": "2px track, ink fill, 14px thumb on a 24px hit area.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/field.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -842,11 +709,15 @@
             "rs-slider",
             "rs-slider-fill",
             "rs-slider-thumb",
+            "rs-slider-thumb-focused",
             "rs-slider-range"
           ],
           "snippet": "<div class=\"rs-slider\"><span class=\"rs-slider-fill\" style=\"width:62%\"></span><span class=\"rs-slider-thumb\" style=\"left:62%\"></span></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib",
+            "field"
+          ]
         }
       },
       "files": [
@@ -854,21 +725,6 @@
           "path": "raster/slider.tsx",
           "type": "registry:component",
           "target": "components/raster/slider.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/slider.css",
@@ -885,7 +741,8 @@
       "description": "4px bar. Percentage is set in the label.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -902,9 +759,11 @@
             "rs-progress-head",
             "rs-progress-fill"
           ],
-          "snippet": "<div class=\"rs-progress-head\"><span>Uploading</span><span>40%</span></div><div class=\"rs-progress\"><span style=\"width:40%\"></span></div>",
+          "snippet": "<div class=\"rs-progress-head\"><span id=\"upload-label\">Uploading</span><span>40%</span></div><div class=\"rs-progress\" role=\"progressbar\" aria-labelledby=\"upload-label\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"40\"><span class=\"rs-progress-fill\" style=\"width:40%\"></span></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -912,21 +771,6 @@
           "path": "raster/progress.tsx",
           "type": "registry:component",
           "target": "components/raster/progress.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/progress.css",
@@ -943,7 +787,8 @@
       "description": "Text tabs in one row. Active tab has a 1px underline.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -957,12 +802,15 @@
           "category": "navigation",
           "classes": [
             "rs-tabs",
+            "rs-tabs-vertical",
             "rs-tab",
             "rs-tab-active"
           ],
           "snippet": "<div class=\"rs-tabs\"><span class=\"rs-tab rs-tab-active\">Overview</span><span class=\"rs-tab\">Activity</span><span class=\"rs-tab\">Settings</span></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -970,21 +818,6 @@
           "path": "raster/tabs.tsx",
           "type": "registry:component",
           "target": "components/raster/tabs.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/tabs.css",
@@ -1001,7 +834,8 @@
       "description": "Ancestor links, 40% slashes, current page at full ink.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1015,13 +849,17 @@
           "category": "navigation",
           "classes": [
             "rs-crumbs",
+            "rs-crumbs-list",
+            "rs-crumbs-item",
             "rs-crumbs-link",
             "rs-crumbs-sep",
             "rs-crumbs-here"
           ],
           "snippet": "<p class=\"rs-crumbs\"><a class=\"rs-crumbs-link\" href=\"/\">Studio</a><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Raster</span></p>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -1029,21 +867,6 @@
           "path": "raster/breadcrumbs.tsx",
           "type": "registry:component",
           "target": "components/raster/breadcrumbs.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/breadcrumbs.css",
@@ -1061,7 +884,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/breadcrumbs.json"
+        "https://getraster.com/r/breadcrumbs.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1082,6 +906,7 @@
             "rs-crumb-root-short",
             "rs-crumb-crumbs",
             "rs-crumb-crumbs-on",
+            "rs-crumb-item",
             "rs-crumb-here",
             "rs-crumb-link",
             "rs-crumb-sep"
@@ -1089,7 +914,8 @@
           "snippet": "<nav class=\"rs-crumb-bar rs-crumb-bar-scrolled\"><div class=\"rs-crumb-bar-inner\"><a class=\"rs-crumb-root\" href=\"/\"><span class=\"rs-crumb-root-full\">Raster</span><span class=\"rs-crumb-root-short\">rs</span></a><p class=\"rs-crumbs\"><span>Docs</span><span class=\"rs-crumbs-sep\">/</span><span class=\"rs-crumbs-here\">Components</span></p></div></nav>",
           "cssOnly": false,
           "registryDependencies": [
-            "breadcrumbs"
+            "breadcrumbs",
+            "raster-lib"
           ]
         }
       },
@@ -1098,21 +924,6 @@
           "path": "raster/crumb-bar.tsx",
           "type": "registry:component",
           "target": "components/raster/crumb-bar.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/crumb-bar.css",
@@ -1129,7 +940,9 @@
       "description": "Square page controls. Current page is solid ink.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1150,7 +963,10 @@
           ],
           "snippet": "<div class=\"rs-pages\"><span class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.75 L5.5 8.25 L10.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></span><span class=\"rs-page rs-page-on\">1</span><span class=\"rs-page\">2</span><span class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M5.5 3.75 L10.5 8.25 L5.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></span></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib",
+            "icons"
+          ]
         }
       },
       "files": [
@@ -1158,31 +974,6 @@
           "path": "raster/pagination.tsx",
           "type": "registry:component",
           "target": "components/raster/pagination.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/pagination.css",
@@ -1200,7 +991,9 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/dropdown-menu.json"
+        "https://getraster.com/r/dropdown-menu.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1213,12 +1006,15 @@
         "raster": {
           "category": "forms",
           "classes": [
-            "rs-select"
+            "rs-select",
+            "rs-select-list"
           ],
-          "snippet": "<button class=\"rs-dropdown\"><span>Alkmaar</span></button>\n<div class=\"rs-menu\"><button class=\"rs-menu-item rs-menu-item-active\">Alkmaar</button><button class=\"rs-menu-item\">Amsterdam</button></div>",
+          "snippet": "<button class=\"rs-dropdown\" role=\"combobox\" aria-haspopup=\"listbox\" aria-expanded=\"true\"><span>Alkmaar</span></button>\n<div class=\"rs-menu rs-select-list\" role=\"listbox\"><div class=\"rs-menu-item rs-menu-item-active\" role=\"option\" aria-selected=\"true\">Alkmaar</div><div class=\"rs-menu-item\" role=\"option\" aria-selected=\"false\">Amsterdam</div></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "dropdown-menu"
+            "dropdown-menu",
+            "raster-lib",
+            "icons"
           ]
         }
       },
@@ -1227,36 +1023,6 @@
           "path": "raster/select.tsx",
           "type": "registry:component",
           "target": "components/raster/select.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/dropdown-menu.tsx",
-          "type": "registry:component",
-          "target": "components/raster/dropdown-menu.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/select.css",
@@ -1274,7 +1040,9 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/button.json"
+        "https://getraster.com/r/button.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1290,12 +1058,15 @@
             "rs-dialog",
             "rs-dialog-title",
             "rs-dialog-body",
-            "rs-dialog-actions"
+            "rs-dialog-actions",
+            "rs-dialog-close"
           ],
-          "snippet": "<div class=\"rs-dialog\"><span class=\"rs-dialog-title\">Remove this item?</span><p class=\"rs-dialog-body\">This can't be undone.</p><div class=\"rs-dialog-actions\"><button class=\"rs-btn-ghost rs-btn-sm\">Cancel</button><button class=\"rs-btn-primary rs-btn-sm\">Remove</button></div></div>",
+          "snippet": "<div class=\"rs-dialog\" role=\"dialog\" aria-labelledby=\"remove-title\" aria-describedby=\"remove-body\"><h2 class=\"rs-dialog-title\" id=\"remove-title\">Remove this item?</h2><p class=\"rs-dialog-body\" id=\"remove-body\">This can't be undone.</p><div class=\"rs-dialog-actions\"><button class=\"rs-btn-ghost rs-btn-sm\">Cancel</button><button class=\"rs-btn-primary rs-btn-sm\">Remove</button></div></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "button"
+            "button",
+            "raster-lib",
+            "icons"
           ]
         }
       },
@@ -1304,21 +1075,6 @@
           "path": "raster/dialog.tsx",
           "type": "registry:component",
           "target": "components/raster/dialog.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/dialog.css",
@@ -1335,7 +1091,8 @@
       "description": "11px badge. Outline, solid, and muted fills.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1354,7 +1111,9 @@
           ],
           "snippet": "<span class=\"rs-badge\">Recommended</span><span class=\"rs-badge-solid\">Delivered</span><span class=\"rs-badge-muted\">In progress</span>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -1362,21 +1121,6 @@
           "path": "raster/badge.tsx",
           "type": "registry:component",
           "target": "components/raster/badge.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/badge.css",
@@ -1393,7 +1137,8 @@
       "description": "Mono identifier with a 1px mixed border.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1410,7 +1155,9 @@
           ],
           "snippet": "<span class=\"rs-chip\">/noord-brand</span>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -1418,21 +1165,6 @@
           "path": "raster/chip.tsx",
           "type": "registry:component",
           "target": "components/raster/chip.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/chip.css",
@@ -1449,7 +1181,8 @@
       "description": "Typography stack: label, title, and body. No outline.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1470,7 +1203,9 @@
           ],
           "snippet": "<div class=\"rs-card\"><span class=\"rs-card-label\">Case study</span><h3 class=\"rs-card-title\">A quieter interface</h3><p class=\"rs-card-body\">Emphasis from weight and spacing, never from a hue.</p></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -1478,21 +1213,6 @@
           "path": "raster/card.tsx",
           "type": "registry:component",
           "target": "components/raster/card.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/card.css",
@@ -1510,7 +1230,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/button.json"
+        "https://getraster.com/r/button.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1529,7 +1250,8 @@
           "snippet": "<div class=\"rs-nest\" style=\"--rs-out:28px;--rs-gap:16px;width:184px\"><div class=\"rs-nest-in\"><button class=\"rs-btn-primary rs-btn-sm\">Save</button></div></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "button"
+            "button",
+            "raster-lib"
           ]
         }
       },
@@ -1538,21 +1260,6 @@
           "path": "raster/concentric-radius.tsx",
           "type": "registry:component",
           "target": "components/raster/concentric-radius.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/concentric-radius.css",
@@ -1569,7 +1276,8 @@
       "description": "Numbered dots joined by 1px lines. Done fills ink; active is outlined.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1593,7 +1301,9 @@
           ],
           "snippet": "<div class=\"rs-steps\"><div class=\"rs-step\"><span class=\"rs-step-dot rs-step-done\">1</span><span class=\"rs-step-line\"></span><span class=\"rs-step-name\">Brief</span></div><div class=\"rs-step\"><span class=\"rs-step-dot rs-step-active\">2</span><span class=\"rs-step-name\">Design</span></div></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -1601,21 +1311,6 @@
           "path": "raster/stepper.tsx",
           "type": "registry:component",
           "target": "components/raster/stepper.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/stepper.css",
@@ -1632,7 +1327,8 @@
       "description": "Open grid, 1px row rules, last column right-aligned. Total rows use 2px rules.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1654,7 +1350,9 @@
           ],
           "snippet": "<table class=\"rs-table\"><thead><tr><th>Phase</th><th>Weeks</th></tr></thead><tbody><tr><td>Strategy</td><td>2</td></tr><tr><td>Identity</td><td>4</td></tr></tbody></table>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -1662,21 +1360,6 @@
           "path": "raster/table.tsx",
           "type": "registry:component",
           "target": "components/raster/table.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/table.css",
@@ -1693,7 +1376,8 @@
       "description": "16 viewBox marks, 1px currentColor, butt/miter. Shipped in the React package.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1719,7 +1403,9 @@
           ],
           "snippet": "<div class=\"rs-icons\"><svg class=\"rs-icon\" viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M6.5 2.5 H13.5 V9.5\" vector-effect=\"non-scaling-stroke\"/><rect x=\"2.5\" y=\"6.5\" width=\"7\" height=\"7\" vector-effect=\"non-scaling-stroke\"/></svg><svg class=\"rs-icon\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M6.5 2.5 H13.5 V9.5\" vector-effect=\"non-scaling-stroke\"/><rect x=\"2.5\" y=\"6.5\" width=\"7\" height=\"7\" vector-effect=\"non-scaling-stroke\"/></svg></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -1729,24 +1415,9 @@
           "target": "components/raster/icons.tsx"
         },
         {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
           "path": "raster/icon-marks.ts",
           "type": "registry:file",
           "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/icons.css",
@@ -1763,7 +1434,9 @@
       "description": "Native details rows on 1px rules. Shared name keeps one item open.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1785,7 +1458,10 @@
           ],
           "snippet": "<div class=\"rs-acc\"><details class=\"rs-acc-item\" name=\"faq\" open><summary>What is Raster?<svg class=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><g transform=\"rotate(90 8 8)\"><path d=\"M5.5 3.5 L10.5 8 L5.5 12.5\" vector-effect=\"non-scaling-stroke\"/></g></svg></summary><div class=\"rs-acc-body\">A monochrome, CSS-first design system.</div></details><details class=\"rs-acc-item\" name=\"faq\"><summary>Is it dependency-free?<svg class=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><g transform=\"rotate(90 8 8)\"><path d=\"M5.5 3.5 L10.5 8 L5.5 12.5\" vector-effect=\"non-scaling-stroke\"/></g></svg></summary><div class=\"rs-acc-body\">Yes. Native elements do the work.</div></details></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib",
+            "icons"
+          ]
         }
       },
       "files": [
@@ -1793,31 +1469,6 @@
           "path": "raster/accordion.tsx",
           "type": "registry:component",
           "target": "components/raster/accordion.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/accordion.css",
@@ -1834,7 +1485,9 @@
       "description": "1px frame with an icon. Solid ink variant for critical.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1858,7 +1511,10 @@
           ],
           "snippet": "<div class=\"rs-alert\" role=\"status\"><div><span class=\"rs-alert-title\">Heads up</span><p class=\"rs-alert-body\">Your workspace syncs every hour.</p></div></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib",
+            "icons"
+          ]
         }
       },
       "files": [
@@ -1866,31 +1522,6 @@
           "path": "raster/alert.tsx",
           "type": "registry:component",
           "target": "components/raster/alert.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/alert.css",
@@ -1909,7 +1540,8 @@
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
         "https://getraster.com/r/dialog.json",
-        "https://getraster.com/r/button.json"
+        "https://getraster.com/r/button.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1924,11 +1556,12 @@
           "classes": [
             "rs-alert-dialog"
           ],
-          "snippet": "<dialog class=\"rs-dialog\" open><span class=\"rs-dialog-title\">Delete this workspace?</span><p class=\"rs-dialog-body\">All projects go with it.</p><div class=\"rs-dialog-actions\"><button class=\"rs-btn-ghost rs-btn-sm\">Cancel</button><button class=\"rs-btn-primary rs-btn-sm\">Delete</button></div></dialog>",
+          "snippet": "<dialog class=\"rs-dialog\" role=\"alertdialog\" closedby=\"none\" aria-labelledby=\"delete-title\" aria-describedby=\"delete-body\" open><h2 class=\"rs-dialog-title\" id=\"delete-title\">Delete this workspace?</h2><p class=\"rs-dialog-body\" id=\"delete-body\">All projects go with it.</p><div class=\"rs-dialog-actions\"><button class=\"rs-btn-ghost rs-btn-sm\">Cancel</button><button class=\"rs-btn-primary rs-btn-sm\">Delete</button></div></dialog>",
           "cssOnly": false,
           "registryDependencies": [
             "dialog",
-            "button"
+            "button",
+            "raster-lib"
           ]
         }
       },
@@ -1937,26 +1570,6 @@
           "path": "raster/alert-dialog.tsx",
           "type": "registry:component",
           "target": "components/raster/alert-dialog.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/dialog.tsx",
-          "type": "registry:component",
-          "target": "components/raster/dialog.tsx"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/alert-dialog.css",
@@ -1973,7 +1586,8 @@
       "description": "32px circle of initials, or a covering image. Broken images fall back. Rows overlap 8px.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -1995,7 +1609,9 @@
           ],
           "snippet": "<div class=\"rs-avatar-row\"><span class=\"rs-avatar\">RV</span><span class=\"rs-avatar\">NO</span><span class=\"rs-avatar\">+3</span></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -2003,21 +1619,6 @@
           "path": "raster/avatar.tsx",
           "type": "registry:component",
           "target": "components/raster/avatar.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/avatar.css",
@@ -2034,7 +1635,8 @@
       "description": "Flush row: title and description on the left, meta on the right.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2054,7 +1656,9 @@
           ],
           "snippet": "<div class=\"rs-item\"><div><p class=\"rs-item-title\">Alkmaar</p><p class=\"rs-item-desc\">The studio city.</p></div><span class=\"rs-item-meta\">NL</span></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -2062,21 +1666,6 @@
           "path": "raster/item.tsx",
           "type": "registry:component",
           "target": "components/raster/item.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/item.css",
@@ -2094,7 +1683,9 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/input.json"
+        "https://getraster.com/r/input.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/field.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2108,6 +1699,7 @@
           "category": "forms",
           "classes": [
             "rs-textarea",
+            "rs-textarea-invalid",
             "rs-textarea-feedback",
             "rs-textarea-field",
             "rs-textarea-label"
@@ -2115,7 +1707,9 @@
           "snippet": "<div class=\"rs-field\"><span class=\"rs-field-label\">Notes</span><textarea class=\"rs-textarea\" placeholder=\"What should we know?\"></textarea></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "input"
+            "input",
+            "raster-lib",
+            "field"
           ]
         }
       },
@@ -2124,21 +1718,6 @@
           "path": "raster/textarea.tsx",
           "type": "registry:component",
           "target": "components/raster/textarea.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/textarea.css",
@@ -2155,7 +1734,8 @@
       "description": "1px rule, horizontal or vertical.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2173,7 +1753,9 @@
           ],
           "snippet": "<hr class=\"rs-sep\" />",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -2181,21 +1763,6 @@
           "path": "raster/separator.tsx",
           "type": "registry:component",
           "target": "components/raster/separator.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/separator.css",
@@ -2212,7 +1779,8 @@
       "description": "Divider-tone pulse. Animation stops when prefers-reduced-motion is on.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2229,7 +1797,9 @@
           ],
           "snippet": "<span class=\"rs-skeleton\" style=\"width:180px;height:14px\"></span>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -2237,21 +1807,6 @@
           "path": "raster/skeleton.tsx",
           "type": "registry:component",
           "target": "components/raster/skeleton.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/skeleton.css",
@@ -2269,7 +1824,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/button.json"
+        "https://getraster.com/r/button.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2290,7 +1846,8 @@
           "snippet": "<div class=\"rs-empty\"><p class=\"rs-empty-title\">No projects yet</p><p class=\"rs-empty-body\">Start one. The grid is empty on purpose.</p><div class=\"rs-empty-action\"><button class=\"rs-btn-ghost rs-btn-sm\">New project</button></div></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "button"
+            "button",
+            "raster-lib"
           ]
         }
       },
@@ -2299,21 +1856,6 @@
           "path": "raster/empty.tsx",
           "type": "registry:component",
           "target": "components/raster/empty.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/empty.css",
@@ -2330,7 +1872,8 @@
       "description": "16px 1px ring. Animation stops when prefers-reduced-motion is on.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2348,7 +1891,9 @@
           ],
           "snippet": "<span class=\"rs-spinner\" role=\"status\" aria-label=\"Loading\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"6.5\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\" stroke-dasharray=\"28 13\" vector-effect=\"non-scaling-stroke\"/></svg></span>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -2356,21 +1901,6 @@
           "path": "raster/spinner.tsx",
           "type": "registry:component",
           "target": "components/raster/spinner.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/spinner.css",
@@ -2384,11 +1914,12 @@
       "name": "tooltip",
       "type": "registry:component",
       "title": "Tooltip",
-      "description": "Label on hover and keyboard focus.",
+      "description": "Label on hover and keyboard focus; a real element that describes its trigger.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/button.json"
+        "https://getraster.com/r/button.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2401,12 +1932,14 @@
         "raster": {
           "category": "feedback",
           "classes": [
-            "rs-tip"
+            "rs-tip",
+            "rs-tip-bubble"
           ],
-          "snippet": "<span class=\"rs-tip\" data-tip=\"Copy to clipboard\"><button class=\"rs-btn-ghost rs-btn-sm\">Copy</button></span>",
+          "snippet": "<span class=\"rs-tip\"><button class=\"rs-btn-ghost rs-btn-sm\" aria-describedby=\"copy-tip\">Copy</button><span class=\"rs-tip-bubble\" role=\"tooltip\" id=\"copy-tip\">Copy to clipboard</span></span>",
           "cssOnly": false,
           "registryDependencies": [
-            "button"
+            "button",
+            "raster-lib"
           ]
         }
       },
@@ -2415,21 +1948,6 @@
           "path": "raster/tooltip.tsx",
           "type": "registry:component",
           "target": "components/raster/tooltip.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/tooltip.css",
@@ -2443,10 +1961,12 @@
       "name": "toast",
       "type": "registry:component",
       "title": "Toast",
-      "description": "Bottom-right status, aria-live polite, four-second dismiss.",
+      "description": "Bottom-right status, aria-live polite. Stays four seconds or longer for longer text; pauses on hover; closes on demand.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2462,11 +1982,15 @@
             "rs-toasts",
             "rs-toast",
             "rs-toast-title",
-            "rs-toast-body"
+            "rs-toast-body",
+            "rs-toast-close"
           ],
-          "snippet": "<div class=\"rs-toasts\" role=\"status\"><div class=\"rs-toast\"><div><span class=\"rs-toast-title\">Saved</span><p class=\"rs-toast-body\">Your changes are live.</p></div></div></div>",
+          "snippet": "<div class=\"rs-toasts\" role=\"status\" aria-live=\"polite\"><div class=\"rs-toast\"><div><span class=\"rs-toast-title\">Saved</span><p class=\"rs-toast-body\">Your changes are live.</p></div><button class=\"rs-toast-close\" type=\"button\" aria-label=\"Dismiss\">&times;</button></div></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib",
+            "icons"
+          ]
         }
       },
       "files": [
@@ -2474,21 +1998,6 @@
           "path": "raster/toast.tsx",
           "type": "registry:component",
           "target": "components/raster/toast.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/toast.css",
@@ -2506,7 +2015,9 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/button.json"
+        "https://getraster.com/r/button.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2523,12 +2034,15 @@
             "rs-dropdown",
             "rs-menu-item",
             "rs-menu-item-active",
+            "rs-menu-item-disabled",
             "rs-menu-sep"
           ],
           "snippet": "<div class=\"rs-menu\" role=\"menu\"><button class=\"rs-menu-item\" role=\"menuitem\">Rename</button><button class=\"rs-menu-item\" role=\"menuitem\">Duplicate</button><hr class=\"rs-menu-sep\" /><button class=\"rs-menu-item\" role=\"menuitem\">Delete</button></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "button"
+            "button",
+            "raster-lib",
+            "icons"
           ]
         }
       },
@@ -2537,31 +2051,6 @@
           "path": "raster/dropdown-menu.tsx",
           "type": "registry:component",
           "target": "components/raster/dropdown-menu.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/dropdown-menu.css",
@@ -2578,7 +2067,8 @@
       "description": "Pressable control. Pressed fills ink. State is aria-pressed.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2598,7 +2088,9 @@
           ],
           "snippet": "<div class=\"rs-toggle-group\"><button class=\"rs-toggle\" aria-pressed=\"true\">Left</button><button class=\"rs-toggle\" aria-pressed=\"false\">Center</button><button class=\"rs-toggle\" aria-pressed=\"false\">Right</button></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -2606,21 +2098,6 @@
           "path": "raster/toggle.tsx",
           "type": "registry:component",
           "target": "components/raster/toggle.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/toggle.css",
@@ -2638,7 +2115,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/toggle.json"
+        "https://getraster.com/r/toggle.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2656,7 +2134,8 @@
           "snippet": "<div class=\"rs-toggle-group\"><button class=\"rs-toggle\" aria-pressed=\"true\">Left</button><button class=\"rs-toggle\" aria-pressed=\"false\">Center</button><button class=\"rs-toggle\" aria-pressed=\"false\">Right</button></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "toggle"
+            "toggle",
+            "raster-lib"
           ]
         }
       },
@@ -2665,26 +2144,6 @@
           "path": "raster/toggle-group.tsx",
           "type": "registry:component",
           "target": "components/raster/toggle-group.tsx"
-        },
-        {
-          "path": "raster/toggle.tsx",
-          "type": "registry:component",
-          "target": "components/raster/toggle.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/toggle.css",
@@ -2702,7 +2161,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/button.json"
+        "https://getraster.com/r/button.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2722,7 +2182,8 @@
           "snippet": "<button class=\"rs-btn-ghost rs-btn-sm\" popovertarget=\"info\">Details</button>\n<div id=\"info\" popover=\"auto\" class=\"rs-popover\"><span class=\"rs-popover-title\">Module grid</span><p class=\"rs-popover-body\">204px modules: a 184px column and a 20px gutter.</p></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "button"
+            "button",
+            "raster-lib"
           ]
         }
       },
@@ -2731,26 +2192,6 @@
           "path": "raster/popover.tsx",
           "type": "registry:component",
           "target": "components/raster/popover.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/button.tsx",
-          "type": "registry:component",
-          "target": "components/raster/button.tsx"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/popover.css",
@@ -2767,7 +2208,9 @@
       "description": "Native dialog docked to a screen edge, with the platform focus trap and backdrop.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/dialog.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2783,11 +2226,15 @@
             "rs-sheet",
             "rs-sheet-left",
             "rs-sheet-title",
-            "rs-sheet-body"
+            "rs-sheet-body",
+            "rs-sheet-close"
           ],
-          "snippet": "<dialog class=\"rs-sheet\" open><span class=\"rs-sheet-title\">Filters</span><p class=\"rs-sheet-body\">Everything narrows from here.</p></dialog>",
+          "snippet": "<dialog class=\"rs-sheet\" aria-labelledby=\"filters-title\" open><button class=\"rs-sheet-close\" type=\"button\" aria-label=\"Close\">&times;</button><h2 class=\"rs-sheet-title\" id=\"filters-title\">Filters</h2><p class=\"rs-sheet-body\">Everything narrows from here.</p></dialog>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "dialog",
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -2795,21 +2242,6 @@
           "path": "raster/sheet.tsx",
           "type": "registry:component",
           "target": "components/raster/sheet.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/sheet.css",
@@ -2826,7 +2258,9 @@
       "description": "Native dialog from the bottom edge, with the platform focus trap and backdrop.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/dialog.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2841,11 +2275,15 @@
           "classes": [
             "rs-drawer",
             "rs-drawer-title",
-            "rs-drawer-body"
+            "rs-drawer-body",
+            "rs-drawer-close"
           ],
-          "snippet": "<dialog class=\"rs-drawer\" open><span class=\"rs-drawer-title\">Notes</span><p class=\"rs-drawer-body\">A bottom panel. Escape closes it.</p></dialog>",
+          "snippet": "<dialog class=\"rs-drawer\" aria-labelledby=\"notes-title\" open><button class=\"rs-drawer-close\" type=\"button\" aria-label=\"Close\">&times;</button><h2 class=\"rs-drawer-title\" id=\"notes-title\">Notes</h2><p class=\"rs-drawer-body\">A bottom panel. Escape closes it.</p></dialog>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "dialog",
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -2853,21 +2291,6 @@
           "path": "raster/drawer.tsx",
           "type": "registry:component",
           "target": "components/raster/drawer.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/drawer.css",
@@ -2884,7 +2307,8 @@
       "description": "Overflow box with the scrollbar hidden and 20px feathers at the ends.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2901,7 +2325,9 @@
           ],
           "snippet": "<div class=\"rs-scroll\" style=\"max-height:140px\" tabindex=\"0\"><p>Alkmaar</p><p>Amsterdam</p><p>Delft</p><p>Eindhoven</p><p>Groningen</p><p>Haarlem</p><p>Rotterdam</p><p>Utrecht</p></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -2909,21 +2335,6 @@
           "path": "raster/scroll-area.tsx",
           "type": "registry:component",
           "target": "components/raster/scroll-area.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/scroll-area.css",
@@ -2940,7 +2351,8 @@
       "description": "Line on a 204 field. 1px grid, ink marks. Series use solid, dashed, gray, or dotted. One optional spot color.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -2954,6 +2366,7 @@
           "category": "charts",
           "classes": [
             "rs-chart",
+            "rs-chart-canvas",
             "rs-chart-line",
             "rs-chart-grid",
             "rs-chart-axis",
@@ -2964,7 +2377,9 @@
           ],
           "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><line class=\"rs-chart-grid\" x1=\"0\" x2=\"240\" y1=\"56\" y2=\"56\"/><path class=\"rs-chart-line\" d=\"M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16\"/></svg></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -3024,26 +2439,6 @@
           "target": "components/raster/charts/frame.tsx"
         },
         {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/hidden.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/hidden.stylex.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
-        },
-        {
           "path": "raster/styles/chart.css",
           "type": "registry:file",
           "target": "styles/raster/chart.css"
@@ -3059,7 +2454,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/chart.json"
+        "https://getraster.com/r/chart.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -3077,86 +2473,12 @@
           "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><line class=\"rs-chart-grid\" x1=\"0\" x2=\"240\" y1=\"56\" y2=\"56\"/><rect class=\"rs-chart-bar\" x=\"20\" y=\"18\" width=\"8\" height=\"38\"/><rect class=\"rs-chart-bar\" x=\"48\" y=\"10\" width=\"8\" height=\"46\"/><rect class=\"rs-chart-bar\" x=\"76\" y=\"24\" width=\"8\" height=\"32\"/></svg></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "chart"
+            "chart",
+            "raster-lib"
           ]
         }
       },
       "files": [
-        {
-          "path": "raster/bar-chart.tsx",
-          "type": "registry:component",
-          "target": "components/raster/bar-chart.tsx"
-        },
-        {
-          "path": "raster/charts/index.ts",
-          "type": "registry:file",
-          "target": "components/raster/charts/index.ts"
-        },
-        {
-          "path": "raster/charts/line.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/line.tsx"
-        },
-        {
-          "path": "raster/charts/area.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/area.tsx"
-        },
-        {
-          "path": "raster/charts/bar.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/bar.tsx"
-        },
-        {
-          "path": "raster/charts/scatter.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/scatter.tsx"
-        },
-        {
-          "path": "raster/charts/donut.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/donut.tsx"
-        },
-        {
-          "path": "raster/charts/histogram.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/histogram.tsx"
-        },
-        {
-          "path": "raster/charts/multiples.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/multiples.tsx"
-        },
-        {
-          "path": "raster/charts/sparkline.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/sparkline.tsx"
-        },
-        {
-          "path": "raster/charts/frame.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/frame.tsx"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/hidden.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/hidden.stylex.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
-        },
         {
           "path": "raster/styles/chart.css",
           "type": "registry:file",
@@ -3173,7 +2495,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/chart.json"
+        "https://getraster.com/r/chart.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -3191,86 +2514,12 @@
           "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><path class=\"rs-chart-area\" d=\"M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16 L240 56 L0 56 Z\"/><path class=\"rs-chart-line\" d=\"M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16\"/></svg></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "chart"
+            "chart",
+            "raster-lib"
           ]
         }
       },
       "files": [
-        {
-          "path": "raster/area-chart.tsx",
-          "type": "registry:component",
-          "target": "components/raster/area-chart.tsx"
-        },
-        {
-          "path": "raster/charts/index.ts",
-          "type": "registry:file",
-          "target": "components/raster/charts/index.ts"
-        },
-        {
-          "path": "raster/charts/line.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/line.tsx"
-        },
-        {
-          "path": "raster/charts/area.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/area.tsx"
-        },
-        {
-          "path": "raster/charts/bar.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/bar.tsx"
-        },
-        {
-          "path": "raster/charts/scatter.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/scatter.tsx"
-        },
-        {
-          "path": "raster/charts/donut.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/donut.tsx"
-        },
-        {
-          "path": "raster/charts/histogram.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/histogram.tsx"
-        },
-        {
-          "path": "raster/charts/multiples.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/multiples.tsx"
-        },
-        {
-          "path": "raster/charts/sparkline.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/sparkline.tsx"
-        },
-        {
-          "path": "raster/charts/frame.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/frame.tsx"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/hidden.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/hidden.stylex.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
-        },
         {
           "path": "raster/styles/chart.css",
           "type": "registry:file",
@@ -3287,7 +2536,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/chart.json"
+        "https://getraster.com/r/chart.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -3305,86 +2555,12 @@
           "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><line class=\"rs-chart-grid\" x1=\"0\" x2=\"240\" y1=\"56\" y2=\"56\"/><circle class=\"rs-chart-mark\" cx=\"36\" cy=\"40\" r=\"2\"/><circle class=\"rs-chart-mark\" cx=\"88\" cy=\"22\" r=\"2\"/><circle class=\"rs-chart-mark\" cx=\"140\" cy=\"30\" r=\"2\"/><circle class=\"rs-chart-mark\" cx=\"196\" cy=\"14\" r=\"2\"/></svg></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "chart"
+            "chart",
+            "raster-lib"
           ]
         }
       },
       "files": [
-        {
-          "path": "raster/scatter-chart.tsx",
-          "type": "registry:component",
-          "target": "components/raster/scatter-chart.tsx"
-        },
-        {
-          "path": "raster/charts/index.ts",
-          "type": "registry:file",
-          "target": "components/raster/charts/index.ts"
-        },
-        {
-          "path": "raster/charts/line.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/line.tsx"
-        },
-        {
-          "path": "raster/charts/area.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/area.tsx"
-        },
-        {
-          "path": "raster/charts/bar.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/bar.tsx"
-        },
-        {
-          "path": "raster/charts/scatter.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/scatter.tsx"
-        },
-        {
-          "path": "raster/charts/donut.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/donut.tsx"
-        },
-        {
-          "path": "raster/charts/histogram.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/histogram.tsx"
-        },
-        {
-          "path": "raster/charts/multiples.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/multiples.tsx"
-        },
-        {
-          "path": "raster/charts/sparkline.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/sparkline.tsx"
-        },
-        {
-          "path": "raster/charts/frame.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/frame.tsx"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/hidden.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/hidden.stylex.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
-        },
         {
           "path": "raster/styles/chart.css",
           "type": "registry:file",
@@ -3401,7 +2577,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/chart.json"
+        "https://getraster.com/r/chart.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -3419,86 +2596,12 @@
           "snippet": "<div class=\"rs-chart\"><svg class=\"rs-chart-donut\" viewBox=\"0 0 96 96\" width=\"96\" height=\"96\"><circle cx=\"48\" cy=\"48\" r=\"36\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\"/></svg></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "chart"
+            "chart",
+            "raster-lib"
           ]
         }
       },
       "files": [
-        {
-          "path": "raster/donut.tsx",
-          "type": "registry:component",
-          "target": "components/raster/donut.tsx"
-        },
-        {
-          "path": "raster/charts/index.ts",
-          "type": "registry:file",
-          "target": "components/raster/charts/index.ts"
-        },
-        {
-          "path": "raster/charts/line.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/line.tsx"
-        },
-        {
-          "path": "raster/charts/area.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/area.tsx"
-        },
-        {
-          "path": "raster/charts/bar.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/bar.tsx"
-        },
-        {
-          "path": "raster/charts/scatter.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/scatter.tsx"
-        },
-        {
-          "path": "raster/charts/donut.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/donut.tsx"
-        },
-        {
-          "path": "raster/charts/histogram.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/histogram.tsx"
-        },
-        {
-          "path": "raster/charts/multiples.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/multiples.tsx"
-        },
-        {
-          "path": "raster/charts/sparkline.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/sparkline.tsx"
-        },
-        {
-          "path": "raster/charts/frame.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/frame.tsx"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/hidden.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/hidden.stylex.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
-        },
         {
           "path": "raster/styles/chart.css",
           "type": "registry:file",
@@ -3515,7 +2618,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/chart.json"
+        "https://getraster.com/r/chart.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -3533,86 +2637,12 @@
           "snippet": "<div class=\"rs-chart\"><svg viewBox=\"0 0 240 64\" width=\"240\" height=\"64\"><rect class=\"rs-chart-hist\" x=\"8\" y=\"36\" width=\"36\" height=\"20\"/><rect class=\"rs-chart-hist\" x=\"45\" y=\"20\" width=\"36\" height=\"36\"/><rect class=\"rs-chart-hist\" x=\"82\" y=\"8\" width=\"36\" height=\"48\"/><rect class=\"rs-chart-hist\" x=\"119\" y=\"24\" width=\"36\" height=\"32\"/></svg></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "chart"
+            "chart",
+            "raster-lib"
           ]
         }
       },
       "files": [
-        {
-          "path": "raster/histogram.tsx",
-          "type": "registry:component",
-          "target": "components/raster/histogram.tsx"
-        },
-        {
-          "path": "raster/charts/index.ts",
-          "type": "registry:file",
-          "target": "components/raster/charts/index.ts"
-        },
-        {
-          "path": "raster/charts/line.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/line.tsx"
-        },
-        {
-          "path": "raster/charts/area.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/area.tsx"
-        },
-        {
-          "path": "raster/charts/bar.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/bar.tsx"
-        },
-        {
-          "path": "raster/charts/scatter.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/scatter.tsx"
-        },
-        {
-          "path": "raster/charts/donut.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/donut.tsx"
-        },
-        {
-          "path": "raster/charts/histogram.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/histogram.tsx"
-        },
-        {
-          "path": "raster/charts/multiples.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/multiples.tsx"
-        },
-        {
-          "path": "raster/charts/sparkline.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/sparkline.tsx"
-        },
-        {
-          "path": "raster/charts/frame.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/frame.tsx"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/hidden.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/hidden.stylex.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
-        },
         {
           "path": "raster/styles/chart.css",
           "type": "registry:file",
@@ -3629,7 +2659,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/chart.json"
+        "https://getraster.com/r/chart.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -3647,86 +2678,12 @@
           "snippet": "<div class=\"rs-chart-multi\"><div class=\"rs-chart\"><svg viewBox=\"0 0 184 64\" width=\"184\" height=\"64\"><path class=\"rs-chart-line\" d=\"M0 40 L46 28 L92 34 L138 16 L184 22\"/></svg></div><div class=\"rs-chart\"><svg viewBox=\"0 0 184 64\" width=\"184\" height=\"64\"><path class=\"rs-chart-line\" d=\"M0 30 L46 36 L92 22 L138 28 L184 18\"/></svg></div></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "chart"
+            "chart",
+            "raster-lib"
           ]
         }
       },
       "files": [
-        {
-          "path": "raster/small-multiples.tsx",
-          "type": "registry:component",
-          "target": "components/raster/small-multiples.tsx"
-        },
-        {
-          "path": "raster/charts/index.ts",
-          "type": "registry:file",
-          "target": "components/raster/charts/index.ts"
-        },
-        {
-          "path": "raster/charts/line.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/line.tsx"
-        },
-        {
-          "path": "raster/charts/area.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/area.tsx"
-        },
-        {
-          "path": "raster/charts/bar.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/bar.tsx"
-        },
-        {
-          "path": "raster/charts/scatter.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/scatter.tsx"
-        },
-        {
-          "path": "raster/charts/donut.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/donut.tsx"
-        },
-        {
-          "path": "raster/charts/histogram.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/histogram.tsx"
-        },
-        {
-          "path": "raster/charts/multiples.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/multiples.tsx"
-        },
-        {
-          "path": "raster/charts/sparkline.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/sparkline.tsx"
-        },
-        {
-          "path": "raster/charts/frame.tsx",
-          "type": "registry:component",
-          "target": "components/raster/charts/frame.tsx"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/hidden.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/hidden.stylex.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
-        },
         {
           "path": "raster/styles/chart.css",
           "type": "registry:file",
@@ -3743,7 +2700,9 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/accordion.json"
+        "https://getraster.com/r/accordion.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -3765,7 +2724,9 @@
           "snippet": "<details class=\"rs-disclosure\"><summary>Show the details<svg class=\"rs-acc-chevron\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><g transform=\"rotate(90 8 8)\"><path d=\"M5.5 3.5 L10.5 8 L5.5 12.5\" vector-effect=\"non-scaling-stroke\"/></g></svg></summary><div class=\"rs-disclosure-body\">Here they are.</div></details>",
           "cssOnly": false,
           "registryDependencies": [
-            "accordion"
+            "accordion",
+            "raster-lib",
+            "icons"
           ]
         }
       },
@@ -3774,31 +2735,6 @@
           "path": "raster/collapsible.tsx",
           "type": "registry:component",
           "target": "components/raster/collapsible.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/collapsible.css",
@@ -3815,7 +2751,9 @@
       "description": "Preview panel on hover and keyboard focus.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/tooltip.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -3831,9 +2769,12 @@
             "rs-hover-card",
             "rs-hover-card-panel"
           ],
-          "snippet": "<span class=\"rs-hover-card\"><span tabindex=\"0\">@noord</span><span class=\"rs-hover-card-panel\">Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>",
+          "snippet": "<span class=\"rs-hover-card\"><span tabindex=\"0\" aria-describedby=\"noord-card\">@noord</span><span class=\"rs-hover-card-panel\" role=\"tooltip\" id=\"noord-card\">Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib",
+            "tooltip"
+          ]
         }
       },
       "files": [
@@ -3841,21 +2782,6 @@
           "path": "raster/hover-card.tsx",
           "type": "registry:component",
           "target": "components/raster/hover-card.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/hover-card.css",
@@ -3872,7 +2798,8 @@
       "description": "Mono key cap with a 1px frame and a heavier bottom edge.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -3890,7 +2817,9 @@
           ],
           "snippet": "<kbd class=\"rs-kbd\">⌘</kbd> <kbd class=\"rs-kbd\">K</kbd>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -3898,21 +2827,6 @@
           "path": "raster/kbd.tsx",
           "type": "registry:component",
           "target": "components/raster/kbd.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/kbd.css",
@@ -3929,7 +2843,9 @@
       "description": "One cell per character. Auto-advance, backspace, and paste.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/field.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -3943,11 +2859,15 @@
           "category": "forms",
           "classes": [
             "rs-otp",
-            "rs-otp-cell"
+            "rs-otp-cell",
+            "rs-otp-cell-invalid"
           ],
-          "snippet": "<div class=\"rs-otp\"><input maxlength=\"1\" value=\"8\" /><input maxlength=\"1\" value=\"2\" /><input maxlength=\"1\" /><input maxlength=\"1\" /></div>",
+          "snippet": "<div class=\"rs-otp\" role=\"group\" aria-label=\"One-time code\"><input class=\"rs-otp-cell\" maxlength=\"1\" value=\"8\" aria-label=\"Digit 1\" /><input class=\"rs-otp-cell\" maxlength=\"1\" value=\"2\" aria-label=\"Digit 2\" /><input class=\"rs-otp-cell\" maxlength=\"1\" aria-label=\"Digit 3\" /><input class=\"rs-otp-cell\" maxlength=\"1\" aria-label=\"Digit 4\" /></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib",
+            "field"
+          ]
         }
       },
       "files": [
@@ -3955,21 +2875,6 @@
           "path": "raster/input-otp.tsx",
           "type": "registry:component",
           "target": "components/raster/input-otp.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/input-otp.css",
@@ -3983,11 +2888,12 @@
       "name": "context-menu",
       "type": "registry:component",
       "title": "Context menu",
-      "description": "Menu at the pointer on right-click. Escape and outside click close it.",
+      "description": "Menu at the pointer on right-click, or on Shift+F10 from the keyboard. Escape and outside click close it.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/dropdown-menu.json"
+        "https://getraster.com/r/dropdown-menu.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4000,12 +2906,14 @@
         "raster": {
           "category": "actions",
           "classes": [
+            "rs-context-menu-trigger",
             "rs-context-menu-pin"
           ],
           "snippet": "<div class=\"rs-menu\" role=\"menu\"><button class=\"rs-menu-item\" role=\"menuitem\">Copy</button><button class=\"rs-menu-item\" role=\"menuitem\">Paste</button><hr class=\"rs-menu-sep\" /><button class=\"rs-menu-item\" role=\"menuitem\">Inspect</button></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "dropdown-menu"
+            "dropdown-menu",
+            "raster-lib"
           ]
         }
       },
@@ -4014,36 +2922,6 @@
           "path": "raster/context-menu.tsx",
           "type": "registry:component",
           "target": "components/raster/context-menu.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/dropdown-menu.tsx",
-          "type": "registry:component",
-          "target": "components/raster/dropdown-menu.tsx"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/context-menu.css",
@@ -4061,7 +2939,9 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/dropdown-menu.json"
+        "https://getraster.com/r/dropdown-menu.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4076,10 +2956,12 @@
           "classes": [
             "rs-menubar"
           ],
-          "snippet": "<div class=\"rs-menubar\" role=\"menubar\"><button class=\"rs-dropdown\"><span>File</span></button><button class=\"rs-dropdown\"><span>Edit</span></button><button class=\"rs-dropdown\"><span>View</span></button></div>",
+          "snippet": "<div class=\"rs-menubar\" role=\"menubar\"><button class=\"rs-dropdown\" role=\"menuitem\" aria-haspopup=\"menu\"><span>File</span></button><button class=\"rs-dropdown\" role=\"menuitem\" aria-haspopup=\"menu\"><span>Edit</span></button><button class=\"rs-dropdown\" role=\"menuitem\" aria-haspopup=\"menu\"><span>View</span></button></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "dropdown-menu"
+            "dropdown-menu",
+            "raster-lib",
+            "icons"
           ]
         }
       },
@@ -4088,36 +2970,6 @@
           "path": "raster/menubar.tsx",
           "type": "registry:component",
           "target": "components/raster/menubar.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/dropdown-menu.tsx",
-          "type": "registry:component",
-          "target": "components/raster/dropdown-menu.tsx"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/menubar.css",
@@ -4134,7 +2986,8 @@
       "description": "Horizontal links. The current page is full ink.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4152,7 +3005,9 @@
           ],
           "snippet": "<nav class=\"rs-nav\"><a href=\"#\" aria-current=\"page\">Overview</a><a href=\"#\">Docs</a><a href=\"#\">Changelog</a></nav>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -4160,21 +3015,6 @@
           "path": "raster/navigation-menu.tsx",
           "type": "registry:component",
           "target": "components/raster/navigation-menu.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/navigation-menu.css",
@@ -4191,7 +3031,8 @@
       "description": "204-wide rail with a head, nav, and foot. 1px on all four sides.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4213,7 +3054,9 @@
           ],
           "snippet": "<aside class=\"rs-sidebar\"><div class=\"rs-sidebar-head\">Raster</div><nav class=\"rs-sidebar-nav\"><p class=\"rs-sidebar-label\">Go to</p><a class=\"rs-sidebar-item\" aria-current=\"page\">Overview</a><a class=\"rs-sidebar-item\" href=\"#\">Docs</a><a class=\"rs-sidebar-item\" href=\"#\">Components</a></nav><div class=\"rs-sidebar-foot\">0.3</div></aside>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -4221,21 +3064,6 @@
           "path": "raster/sidebar.tsx",
           "type": "registry:component",
           "target": "components/raster/sidebar.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/sidebar.css",
@@ -4253,7 +3081,9 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/pagination.json"
+        "https://getraster.com/r/pagination.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4276,7 +3106,9 @@
           "snippet": "<div class=\"rs-carousel\"><div class=\"rs-carousel-track\"><div class=\"rs-carousel-slide\">One</div><div class=\"rs-carousel-slide\">Two</div><div class=\"rs-carousel-slide\">Three</div></div><div class=\"rs-carousel-nav\"><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.75 L5.5 8.25 L10.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></button><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M5.5 3.75 L10.5 8.25 L5.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></button></div></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "pagination"
+            "pagination",
+            "raster-lib",
+            "icons"
           ]
         }
       },
@@ -4285,31 +3117,6 @@
           "path": "raster/carousel.tsx",
           "type": "registry:component",
           "target": "components/raster/carousel.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/carousel.css",
@@ -4326,7 +3133,8 @@
       "description": "Two panes split by a draggable 1px handle. Arrows move it; value is in ARIA.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4345,7 +3153,9 @@
           ],
           "snippet": "<div class=\"rs-split\"><div class=\"rs-split-pane\" style=\"width:50%\">Left</div><button class=\"rs-split-handle\" role=\"separator\" aria-valuenow=\"50\"></button><div class=\"rs-split-pane\" style=\"width:50%\">Right</div></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -4353,21 +3163,6 @@
           "path": "raster/resizable.tsx",
           "type": "registry:component",
           "target": "components/raster/resizable.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/resizable.css",
@@ -4386,7 +3181,9 @@
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
         "https://getraster.com/r/input.json",
-        "https://getraster.com/r/dropdown-menu.json"
+        "https://getraster.com/r/dropdown-menu.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/select.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4402,11 +3199,13 @@
             "rs-combobox",
             "rs-combobox-empty"
           ],
-          "snippet": "<div class=\"rs-combobox\"><input class=\"rs-input rs-input-full\" role=\"combobox\" placeholder=\"Search…\" /><div class=\"rs-menu\" role=\"listbox\"><button class=\"rs-menu-item rs-menu-item-active\" role=\"option\">Alkmaar</button><button class=\"rs-menu-item\" role=\"option\">Amsterdam</button></div></div>",
+          "snippet": "<div class=\"rs-combobox\"><input class=\"rs-input rs-input-full\" role=\"combobox\" placeholder=\"Search…\" /><div class=\"rs-menu\" role=\"listbox\"><div class=\"rs-menu-item rs-menu-item-active\" role=\"option\" aria-selected=\"false\">Alkmaar</div><div class=\"rs-menu-item\" role=\"option\" aria-selected=\"false\">Amsterdam</div></div></div>",
           "cssOnly": false,
           "registryDependencies": [
             "input",
-            "dropdown-menu"
+            "dropdown-menu",
+            "raster-lib",
+            "select"
           ]
         }
       },
@@ -4415,41 +3214,6 @@
           "path": "raster/combobox.tsx",
           "type": "registry:component",
           "target": "components/raster/combobox.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/dropdown-menu.tsx",
-          "type": "registry:component",
-          "target": "components/raster/dropdown-menu.tsx"
-        },
-        {
-          "path": "raster/select.tsx",
-          "type": "registry:component",
-          "target": "components/raster/select.tsx"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/combobox.css",
@@ -4467,7 +3231,8 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/dialog.json"
+        "https://getraster.com/r/dialog.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4489,10 +3254,11 @@
             "rs-command-hint",
             "rs-command-empty"
           ],
-          "snippet": "<div class=\"rs-command\" style=\"border:1px solid var(--divider);border-radius:var(--radius)\"><input class=\"rs-command-input\" placeholder=\"Type a command or search…\" /><div class=\"rs-command-list\"><div class=\"rs-command-group\">Go to</div><button class=\"rs-command-item rs-command-item-active\"><span>Components</span><span class=\"rs-command-hint\">⌘1</span></button><button class=\"rs-command-item\"><span>Tokens</span><span class=\"rs-command-hint\">⌘2</span></button></div></div>",
+          "snippet": "<div class=\"rs-command\" style=\"border:1px solid var(--divider);border-radius:var(--radius)\"><input class=\"rs-command-input\" placeholder=\"Type a command or search…\" /><div class=\"rs-command-list\" role=\"listbox\"><div class=\"rs-command-group\">Go to</div><div class=\"rs-command-item rs-command-item-active\" role=\"option\" aria-selected=\"true\"><span>Components</span><span class=\"rs-command-hint\">⌘1</span></div><div class=\"rs-command-item\" role=\"option\" aria-selected=\"false\"><span>Tokens</span><span class=\"rs-command-hint\">⌘2</span></div></div></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "dialog"
+            "dialog",
+            "raster-lib"
           ]
         }
       },
@@ -4501,26 +3267,6 @@
           "path": "raster/command.tsx",
           "type": "registry:component",
           "target": "components/raster/command.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/dialog.tsx",
-          "type": "registry:component",
-          "target": "components/raster/dialog.tsx"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/command.css",
@@ -4538,7 +3284,9 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/pagination.json"
+        "https://getraster.com/r/pagination.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4556,6 +3304,7 @@
             "rs-cal-title",
             "rs-cal-nav",
             "rs-cal-grid",
+            "rs-cal-row",
             "rs-cal-dow",
             "rs-cal-day",
             "rs-cal-day-out",
@@ -4564,10 +3313,12 @@
             "rs-cal-icon",
             "rs-cal-page"
           ],
-          "snippet": "<div class=\"rs-cal\"><div class=\"rs-cal-head\"><span class=\"rs-cal-title\">July 2026</span><span class=\"rs-cal-nav\"><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.75 L5.5 8.25 L10.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></button><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M5.5 3.75 L10.5 8.25 L5.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></button></span></div><div class=\"rs-cal-grid\"><span class=\"rs-cal-dow\">Mo</span><span class=\"rs-cal-dow\">Tu</span><span class=\"rs-cal-dow\">We</span><span class=\"rs-cal-dow\">Th</span><span class=\"rs-cal-dow\">Fr</span><span class=\"rs-cal-dow\">Sa</span><span class=\"rs-cal-dow\">Su</span><button class=\"rs-cal-day\">20</button><button class=\"rs-cal-day\">21</button><button class=\"rs-cal-day\">22</button><button class=\"rs-cal-day\">23</button><button class=\"rs-cal-day rs-cal-day-selected\">24</button><button class=\"rs-cal-day rs-cal-day-today\">25</button><button class=\"rs-cal-day\">26</button></div></div>",
+          "snippet": "<div class=\"rs-cal\"><div class=\"rs-cal-head\"><span class=\"rs-cal-title\">July 2026</span><span class=\"rs-cal-nav\"><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.75 L5.5 8.25 L10.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></button><button class=\"rs-page\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M5.5 3.75 L10.5 8.25 L5.5 12.75\" vector-effect=\"non-scaling-stroke\"/></svg></button></span></div><div class=\"rs-cal-grid\" role=\"grid\"><div class=\"rs-cal-row\" role=\"row\"><span class=\"rs-cal-dow\" role=\"columnheader\">Mo</span><span class=\"rs-cal-dow\" role=\"columnheader\">Tu</span><span class=\"rs-cal-dow\" role=\"columnheader\">We</span><span class=\"rs-cal-dow\" role=\"columnheader\">Th</span><span class=\"rs-cal-dow\" role=\"columnheader\">Fr</span><span class=\"rs-cal-dow\" role=\"columnheader\">Sa</span><span class=\"rs-cal-dow\" role=\"columnheader\">Su</span></div><div class=\"rs-cal-row\" role=\"row\"><button class=\"rs-cal-day\" role=\"gridcell\" tabindex=\"-1\">20</button><button class=\"rs-cal-day\" role=\"gridcell\" tabindex=\"-1\">21</button><button class=\"rs-cal-day\" role=\"gridcell\" tabindex=\"-1\">22</button><button class=\"rs-cal-day\" role=\"gridcell\" tabindex=\"-1\">23</button><button class=\"rs-cal-day rs-cal-day-selected\" role=\"gridcell\" tabindex=\"0\" aria-selected=\"true\">24</button><button class=\"rs-cal-day rs-cal-day-today\" role=\"gridcell\" tabindex=\"-1\" aria-current=\"date\">25</button><button class=\"rs-cal-day\" role=\"gridcell\" tabindex=\"-1\">26</button></div></div></div>",
           "cssOnly": false,
           "registryDependencies": [
-            "pagination"
+            "pagination",
+            "raster-lib",
+            "icons"
           ]
         }
       },
@@ -4576,31 +3327,6 @@
           "path": "raster/calendar.tsx",
           "type": "registry:component",
           "target": "components/raster/calendar.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/calendar.css",
@@ -4619,7 +3345,9 @@
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
         "https://getraster.com/r/dropdown-menu.json",
-        "https://getraster.com/r/calendar.json"
+        "https://getraster.com/r/calendar.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4638,7 +3366,9 @@
           "cssOnly": false,
           "registryDependencies": [
             "dropdown-menu",
-            "calendar"
+            "calendar",
+            "raster-lib",
+            "icons"
           ]
         }
       },
@@ -4647,41 +3377,6 @@
           "path": "raster/date-picker.tsx",
           "type": "registry:component",
           "target": "components/raster/date-picker.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/calendar.tsx",
-          "type": "registry:component",
-          "target": "components/raster/calendar.tsx"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/dropdown-menu.tsx",
-          "type": "registry:component",
-          "target": "components/raster/dropdown-menu.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/date-picker.css",
@@ -4699,7 +3394,9 @@
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
         "https://getraster.com/r/inter.json",
-        "https://getraster.com/r/table.json"
+        "https://getraster.com/r/table.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4724,7 +3421,9 @@
           "snippet": "<table class=\"rs-table\"><thead><tr><th><button class=\"rs-datatable-sort\">Phase</button></th><th>Weeks</th></tr></thead><tbody><tr><td>Identity</td><td>4</td></tr><tr><td>Strategy</td><td>2</td></tr></tbody></table>",
           "cssOnly": false,
           "registryDependencies": [
-            "table"
+            "table",
+            "raster-lib",
+            "icons"
           ]
         }
       },
@@ -4733,31 +3432,6 @@
           "path": "raster/data-table.tsx",
           "type": "registry:component",
           "target": "components/raster/data-table.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/data-table.css",
@@ -4774,7 +3448,8 @@
       "description": "Box that holds a ratio. Media fills it.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4791,7 +3466,9 @@
           ],
           "snippet": "<div class=\"rs-ratio\" style=\"aspect-ratio:16/9;max-width:280px;background:var(--divider-subtle)\"></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -4799,21 +3476,6 @@
           "path": "raster/aspect-ratio.tsx",
           "type": "registry:component",
           "target": "components/raster/aspect-ratio.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/aspect-ratio.css",
@@ -4833,7 +3495,8 @@
         "https://getraster.com/r/inter.json",
         "https://getraster.com/r/field.json",
         "https://getraster.com/r/input.json",
-        "https://getraster.com/r/button.json"
+        "https://getraster.com/r/button.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4853,7 +3516,8 @@
           "registryDependencies": [
             "field",
             "input",
-            "button"
+            "button",
+            "raster-lib"
           ]
         }
       },
@@ -4862,21 +3526,6 @@
           "path": "raster/form.tsx",
           "type": "registry:component",
           "target": "components/raster/form.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/form.css",
@@ -4893,7 +3542,8 @@
       "description": "Dashed 1px pipeline step. Drag handle, dashed chips, ghost add-step.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4919,7 +3569,9 @@
           ],
           "snippet": "<div class=\"rs-flow\" style=\"grid-template-columns:184px;width:184px\"><div class=\"rs-flow-step\"><span class=\"rs-flow-num\">1</span><h4>Proposal</h4><p>Scope, timeline, and fee on one page.</p><div class=\"rs-flow-subs\"><span>Brief</span><span>Fee</span><span class=\"rs-flow-sub-add\">+</span></div></div><button type=\"button\" class=\"rs-flow-add\"><span class=\"rs-flow-plus\">+</span> Add a step</button></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -4927,21 +3579,6 @@
           "path": "raster/workflow.tsx",
           "type": "registry:component",
           "target": "components/raster/workflow.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/workflow.css",
@@ -4958,7 +3595,8 @@
       "description": "Chat panel: user block, reply, suggestion card, input row.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -4989,7 +3627,9 @@
           ],
           "snippet": "<div class=\"rs-ai\"><div class=\"rs-ai-msg rs-ai-user\"><div class=\"rs-ai-user-block\">Make the intro tighter.</div></div><p class=\"rs-ai-reply\">Done. Two sentences, same claim.</p></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -4997,21 +3637,6 @@
           "path": "raster/assistant.tsx",
           "type": "registry:component",
           "target": "components/raster/assistant.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/assistant.css",
@@ -5028,7 +3653,9 @@
       "description": "Icon that swaps moon and sun with the color scheme. Saved in localStorage.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json",
+        "https://getraster.com/r/icons.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -5048,7 +3675,10 @@
           ],
           "snippet": "<button class=\"rs-theme-toggle rs-theme-toggle-inline\" aria-label=\"Toggle color scheme\"><svg class=\"rs-theme-moon\" viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\"><path d=\"M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5\" vector-effect=\"non-scaling-stroke\"/></svg></button>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib",
+            "icons"
+          ]
         }
       },
       "files": [
@@ -5056,31 +3686,6 @@
           "path": "raster/theme-toggle.tsx",
           "type": "registry:component",
           "target": "components/raster/theme-toggle.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/icon.tsx",
-          "type": "registry:component",
-          "target": "components/raster/icon.tsx"
-        },
-        {
-          "path": "raster/icon-marks.ts",
-          "type": "registry:file",
-          "target": "components/raster/icon-marks.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/theme-toggle.css",
@@ -5097,7 +3702,8 @@
       "description": "Note in running copy. 1px hairline, radius 0. No left bar.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -5114,7 +3720,9 @@
           ],
           "snippet": "<div class=\"rs-callout\"><p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p></div>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -5122,21 +3730,6 @@
           "path": "raster/callout.tsx",
           "type": "registry:component",
           "target": "components/raster/callout.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/callout.css",
@@ -5153,7 +3746,8 @@
       "description": "Inline citations, a numbered 1px list, and a cite box. Numerals hang in the gutter.",
       "registryDependencies": [
         "https://getraster.com/r/raster-base.json",
-        "https://getraster.com/r/inter.json"
+        "https://getraster.com/r/inter.json",
+        "https://getraster.com/r/raster-lib.json"
       ],
       "dependencies": [
         "@stylexjs/stylex"
@@ -5178,7 +3772,9 @@
           ],
           "snippet": "<p>Set in a single ink.<sup class=\"rs-cite\"><a href=\"#ref-1\">1</a></sup></p><ol class=\"rs-refs\"><li id=\"ref-1\"><span class=\"rs-ref-authors\">Müller-Brockmann, J.</span> Grid systems in graphic design. <a class=\"rs-ref-doi\" href=\"#\">niggli.ch/grid</a></li></ol>",
           "cssOnly": false,
-          "registryDependencies": []
+          "registryDependencies": [
+            "raster-lib"
+          ]
         }
       },
       "files": [
@@ -5186,21 +3782,6 @@
           "path": "raster/references.tsx",
           "type": "registry:component",
           "target": "components/raster/references.tsx"
-        },
-        {
-          "path": "raster/tokens.stylex.ts",
-          "type": "registry:file",
-          "target": "components/raster/tokens.stylex.ts"
-        },
-        {
-          "path": "raster/rs.ts",
-          "type": "registry:file",
-          "target": "components/raster/rs.ts"
-        },
-        {
-          "path": "raster/cx.ts",
-          "type": "registry:file",
-          "target": "components/raster/cx.ts"
         },
         {
           "path": "raster/styles/references.css",

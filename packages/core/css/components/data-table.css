@@ -10,7 +10,8 @@
 .rs-datatable-td:first-child{padding-left:20px}
 @media (max-width: 640px){.rs-datatable-td{padding-top:14px;padding-right:12px;padding-bottom:14px;padding-left:12px;font-size:16px}.rs-datatable-td:last-child{padding-right:var(--pad)}.rs-datatable-td:first-child{padding-left:var(--pad)}}
 .rs-datatable-td-alt{background-color:var(--table-alt)}
-.rs-datatable-sort{background-color:transparent;border-width:0;border-style:none;padding:0;font-family:inherit;font-size:inherit;font-weight:600;letter-spacing:inherit;color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
-.rs-datatable-sort-icon{opacity:0.45}
-.rs-datatable-sort-icon-on{opacity:1}
+.rs-datatable-sort{background-color:transparent;border-width:0;border-style:none;padding:0;font-family:inherit;font-size:inherit;font-weight:600;letter-spacing:inherit;color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:5px;min-height:24px}
+.rs-datatable-sort:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
+.rs-datatable-sort-icon{color:var(--text-secondary);opacity:1}
+.rs-datatable-sort-icon-on{color:var(--text)}
 .rs-datatable-empty{padding-top:24px;padding-bottom:24px;padding-inline:20px;text-align:center;font-size:13px;letter-spacing:-0.01em;color:var(--text-secondary)}

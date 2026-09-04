@@ -10,3 +10,10 @@ apps/www/public/fonts/
 apps/www/public/raster.css
 apps/www/public/starter/
 packages/react/.build-components/
+
+# Local
+.env
+.env.*
+!.env.example
+*.log
+coverage/

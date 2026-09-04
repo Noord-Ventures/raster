@@ -1,5 +1,6 @@
-// Copy vendored Inter files next to the bundled CLI so `init` can
-// write them beside raster.css without reaching back into @noorddev/raster.
+// Copy what the CLI reads at runtime next to dist/index.js: the vendored
+// Inter files, the starter specimen, and the registry snapshot. The
+// executable itself stays small; nothing reaches back into @noorddev/raster.
 import { cpSync, mkdirSync, copyFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
@@ -13,3 +14,9 @@ const starterSrc = fileURLToPath(new URL("../src/starter.html", import.meta.url)
 const starterDest = fileURLToPath(new URL("../dist/starter.html", import.meta.url));
 copyFileSync(starterSrc, starterDest);
 console.log("copied starter specimen → dist/starter.html");
+
+const bundleSrc = fileURLToPath(new URL("../../../registry/bundle.json", import.meta.url));
+const bundleDest = fileURLToPath(new URL("../dist/registry/bundle.json", import.meta.url));
+mkdirSync(fileURLToPath(new URL("../dist/registry/", import.meta.url)), { recursive: true });
+copyFileSync(bundleSrc, bundleDest);
+console.log("copied registry snapshot → dist/registry/bundle.json");

@@ -1,0 +1,21 @@
+name: Feature request
+description: A component, prop, or token Raster should have.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you are trying to build and where Raster stops short.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: The API or behaviour you would expect. Sketches and markup welcome.
+  - type: textarea
+    id: prior
+    attributes:
+      label: Prior art
+      description: How shadcn/ui, Radix, or the platform handles this, if they do.

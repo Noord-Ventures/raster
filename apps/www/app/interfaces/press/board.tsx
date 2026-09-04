@@ -41,7 +41,7 @@ export function Board() {
   const selected = JOBS.find((item) => item.id === job) ?? JOBS[0]!;
 
   return (
-    <main className="if-board sc-dash" aria-label={WHAT} style={{ ["--if-spot" as string]: "#E30613" }}>
+    <section className="if-board sc-dash" aria-label={WHAT} style={{ ["--if-spot" as string]: "#E30613" }}>
       <PhoneV1Chrome heading="Press" action="Floor" onAction={() => { setPage("overview"); setSheet(false); }} />
       <aside className="sc-dash-rail" aria-label="Floor">
         <div className="sc-dash-brand">
@@ -212,6 +212,6 @@ export function Board() {
           ) : null}
         </div>
       </aside>
-    </main>
+    </section>
   );
 }

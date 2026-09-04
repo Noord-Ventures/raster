@@ -22,7 +22,7 @@ export default function ComponentsPage() {
     <>
       <div className="site-layout catalog-page">
         <DocsNav />
-        <main {...sx("site-content", chrome.catalogContent)}>
+        <main id="main" {...sx("site-content", chrome.catalogContent)}>
           <header {...sx("cover", chrome.cover)}>
             <h1 className="rs-t-display">Components</h1>
             <p className="rs-t-sub">The control, the name, a short law.</p>

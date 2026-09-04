@@ -469,7 +469,7 @@ export const demos: Record<string, () => React.ReactNode> = {
   ),
   input: () => (
     <div style={{ width: 260 }}>
-      <Input label="E-mail" placeholder="renn@noord.vc" />
+      <Input label="E-mail" placeholder="you@example.com" />
     </div>
   ),
   "inline-form": () => (

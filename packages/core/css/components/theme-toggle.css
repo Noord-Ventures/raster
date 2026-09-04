@@ -1,7 +1,7 @@
 /* ── theme-toggle: generated from packages/react/src/components/theme-toggle.tsx ── */
 .rs-theme-toggle{position:fixed;top:24px;right:20px;z-index:200;width:24px;height:24px;padding:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;background-color:transparent;border-width:0;border-style:none;border-radius:0;cursor:pointer;color:var(--text-secondary);outline-width:0;outline-style:none;outline-color:transparent;outline-offset:0;filter:drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))}
-.rs-theme-toggle:hover{color:var(--accent)}
-.rs-theme-toggle:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--accent);outline-offset:2px}
+.rs-theme-toggle:hover{color:var(--text)}
+.rs-theme-toggle:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
 @media (max-width: 480px){.rs-theme-toggle{right:25px}}
 @media (max-width: 640px){.rs-theme-toggle{width:var(--hit);height:var(--hit);min-width:var(--hit);min-height:var(--hit);padding:12px}}
 .rs-theme-toggle-inline{position:relative;top:auto;right:auto;z-index:1;filter:none}

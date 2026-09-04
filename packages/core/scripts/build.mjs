@@ -153,3 +153,16 @@ const rasterCss =
     .map(([name, files]) => `@layer ${name} {\n${files.map((f) => read(`css/${f}`)).join("\n")}\n}\n`)
     .join("\n");
 write("css/raster.css", rasterCss);
+
+/* ── 4. Components only ──
+   For pages that already load @noorddev/raster-react/css (tokens, base,
+   type, and the compiled leaves) but also render plain rs-* markup. */
+write(
+  "css/components.css",
+  `/* Raster component classes only (layer raster.components). Load after tokens, base, and type:
+   @noorddev/raster/css carries all of it; @noorddev/raster-react/css carries the React side. Generated. */
+@layer raster.components {
+${componentFiles.map((f) => read(`css/${f}`)).join("\n")}
+}
+`,
+);

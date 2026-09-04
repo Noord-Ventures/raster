@@ -48,7 +48,7 @@ describe("generated registry hosts", () => {
     expect(base?.registryDependencies).toContain("https://getraster.com/r/inter.json");
 
     for (const item of index.items) {
-      if (item.name === "inter" || item.name === "raster-base") continue;
+      if (item.name === "inter" || item.name === "raster-base" || item.name === "raster-lib") continue;
       expect(item.registryDependencies, item.name).toContain("https://getraster.com/r/raster-base.json");
       expect(item.registryDependencies, item.name).toContain("https://getraster.com/r/inter.json");
       for (const dep of item.registryDependencies ?? []) {
