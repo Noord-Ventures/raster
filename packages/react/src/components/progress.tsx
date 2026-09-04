@@ -6,7 +6,7 @@ import { rs } from "../rs";
 export interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   value: number;
   max?: number;
-  /** Label above the bar; the percentage lives here, never inside the bar. */
+  /** Label above the bar; it names the bar. The percentage lives here, never inside the bar. */
   label?: React.ReactNode;
 }
 
@@ -34,16 +34,28 @@ const styles = stylex.create({
   },
 });
 
-export function Progress({ value, max = 100, label, className, style, ...props }: ProgressProps) {
+export function Progress({
+  value,
+  max = 100,
+  label,
+  className,
+  style,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
+  ...props
+}: ProgressProps) {
+  const labelId = React.useId();
+  const now = Math.min(max, Math.max(0, value));
   const pct = Math.min(100, Math.max(0, max === 0 ? 0 : (value / max) * 100));
   const head = rs(["rs-progress-head"], styles.head);
   const bar = rs(["rs-progress"], styles.bar);
   const fill = rs(["rs-progress-fill"], styles.fill);
+  const labelledBy = ariaLabelledBy ?? (ariaLabel == null && label != null ? labelId : undefined);
   return (
     <div {...props} className={className} style={style}>
       {label != null && (
         <div className={head.className} style={head.style}>
-          <span>{label}</span>
+          <span id={labelId}>{label}</span>
           <span>{Math.round(pct)}%</span>
         </div>
       )}
@@ -51,9 +63,12 @@ export function Progress({ value, max = 100, label, className, style, ...props }
         className={bar.className}
         style={bar.style}
         role="progressbar"
+        aria-label={ariaLabel}
+        aria-labelledby={labelledBy}
         aria-valuemin={0}
         aria-valuemax={max}
-        aria-valuenow={value}
+        aria-valuenow={now}
+        aria-valuetext={`${Math.round(pct)}%`}
       >
         <span className={fill.className} style={{ ...fill.style, width: `${pct}%` }} />
       </div>

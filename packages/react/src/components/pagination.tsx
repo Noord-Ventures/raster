@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -55,20 +55,69 @@ const styles = stylex.create({
       default: 13,
       [mq.phone]: raster.controlFs,
     },
-    color: raster.gray,
+    color: {
+      default: raster.gray,
+      [mq.forcedColors]: {
+        default: "ButtonText",
+        ":disabled": "GrayText",
+      },
+    },
     borderWidth: raster.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: {
+      default: raster.controlBorder,
+      [mq.forcedColors]: {
+        default: "ButtonText",
+        ":disabled": "GrayText",
+      },
+    },
     padding: 0,
     backgroundColor: "transparent",
     fontFamily: "inherit",
-    cursor: "pointer",
+    cursor: {
+      default: "pointer",
+      ":disabled": "not-allowed",
+    },
+    opacity: {
+      default: 1,
+      ":disabled": 0.4,
+      [mq.forcedColors]: {
+        default: 1,
+        ":disabled": 1,
+      },
+    },
+    outlineWidth: {
+      default: null,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
+    },
   },
   on: {
-    backgroundColor: raster.ink,
-    color: raster.paper,
+    backgroundColor: {
+      default: raster.ink,
+      [mq.forcedColors]: "Highlight",
+    },
+    color: {
+      default: raster.paper,
+      [mq.forcedColors]: "HighlightText",
+    },
     fontWeight: 600,
-    borderColor: "transparent",
+    borderColor: {
+      default: "transparent",
+      [mq.forcedColors]: "Highlight",
+    },
+    forcedColorAdjust: "none",
   },
   gap: {
     borderColor: "transparent",

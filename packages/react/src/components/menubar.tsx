@@ -1,8 +1,11 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
-import { DropdownMenu, type DropdownMenuItem } from "./dropdown-menu";
+import { Icon } from "./icon";
+import { MenuPanel, menuStyles, type DropdownMenuItem, type MenuCloseReason } from "./dropdown-menu";
 
 export interface MenubarProps extends React.HTMLAttributes<HTMLDivElement> {
   menus: Array<{ label: React.ReactNode; items: DropdownMenuItem[] }>;
@@ -32,14 +35,150 @@ const styles = stylex.create({
   },
 });
 
-/** Dropdown menus in a hairline strip. */
-export function Menubar({ menus, className, style, ...props }: MenubarProps) {
-  const sx = rs(["rs-menubar", className], styles.bar);
+/**
+ * Dropdown menus in a hairline strip. The triggers are menuitems with one
+ * roving tab stop; ArrowLeft/ArrowRight move between them and an open
+ * menu follows.
+ */
+export function Menubar({ menus, className, style, onKeyDown, ...props }: MenubarProps) {
+  const idBase = React.useId();
+  const rootRef = React.useRef<HTMLDivElement>(null);
+  const triggerRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
+  const [focusIndex, setFocusIndex] = React.useState(0);
+  const [openIndex, setOpenIndex] = React.useState<number | null>(null);
+  const [initial, setInitial] = React.useState<"first" | "last">("first");
+  const count = menus.length;
+
+  React.useEffect(() => {
+    if (openIndex === null) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (!rootRef.current?.contains(e.target as Node)) setOpenIndex(null);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [openIndex]);
+
+  const focusTrigger = (index: number) => {
+    setFocusIndex(index);
+    triggerRefs.current[index]?.focus();
+  };
+
+  const openMenu = (index: number, at: "first" | "last" = "first") => {
+    setFocusIndex(index);
+    setInitial(at);
+    setOpenIndex(index);
+  };
+
+  const closeMenu = (reason: MenuCloseReason) => {
+    setOpenIndex(null);
+    if (reason !== "outside") triggerRefs.current[focusIndex]?.focus();
+  };
+
+  const moveTo = (index: number) => {
+    const next = (index + count) % count;
+    if (openIndex !== null) openMenu(next);
+    else focusTrigger(next);
+  };
+
+  const onBarKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    onKeyDown?.(e);
+    if (e.defaultPrevented || count === 0) return;
+    const index = triggerRefs.current.indexOf(e.target as HTMLButtonElement);
+    if (index < 0) return;
+    switch (e.key) {
+      case "ArrowRight":
+        e.preventDefault();
+        moveTo(index + 1);
+        return;
+      case "ArrowLeft":
+        e.preventDefault();
+        moveTo(index - 1);
+        return;
+      case "Home":
+        e.preventDefault();
+        moveTo(0);
+        return;
+      case "End":
+        e.preventDefault();
+        moveTo(count - 1);
+        return;
+      case "ArrowDown":
+      case "Enter":
+      case " ":
+        e.preventDefault();
+        openMenu(index, "first");
+        return;
+      case "ArrowUp":
+        e.preventDefault();
+        openMenu(index, "last");
+        return;
+      case "Escape":
+        if (openIndex !== null) {
+          e.preventDefault();
+          closeMenu("escape");
+        }
+        return;
+      default:
+        return;
+    }
+  };
+
+  const bar = rs(["rs-menubar", className], styles.bar);
+  const wrap = rs(["rs-select"], menuStyles.select);
+  const trigger = rs(["rs-dropdown"], menuStyles.dropdown);
+  const menu = rs(["rs-menu"], menuStyles.menu, menuStyles.menuOverlay);
   return (
-    <div role="menubar" {...props} className={sx.className} style={{ ...sx.style, ...style }}>
-      {menus.map((menu, index) => (
-        <DropdownMenu key={index} label={menu.label} items={menu.items} />
-      ))}
+    <div
+      ref={rootRef}
+      role="menubar"
+      {...props}
+      className={bar.className}
+      style={{ ...bar.style, ...style }}
+      onKeyDown={onBarKeyDown}
+    >
+      {menus.map((entry, index) => {
+        const triggerId = `${idBase}-trigger-${index}`;
+        const menuId = `${idBase}-menu-${index}`;
+        const isOpen = openIndex === index;
+        return (
+          <div key={index} className={wrap.className} style={wrap.style}>
+            <button
+              ref={(el) => {
+                triggerRefs.current[index] = el;
+              }}
+              id={triggerId}
+              type="button"
+              role="menuitem"
+              className={trigger.className}
+              style={trigger.style}
+              tabIndex={focusIndex === index ? 0 : -1}
+              aria-haspopup="menu"
+              aria-expanded={isOpen}
+              aria-controls={isOpen ? menuId : undefined}
+              onFocus={() => setFocusIndex(index)}
+              onClick={() => (isOpen ? closeMenu("select") : openMenu(index))}
+              onPointerEnter={() => {
+                if (openIndex !== null && openIndex !== index) openMenu(index);
+              }}
+            >
+              <span>{entry.label}</span>
+              <Icon name="chevron-right" rotate={90} />
+            </button>
+            {isOpen && (
+              <MenuPanel
+                id={menuId}
+                items={entry.items}
+                labelledBy={triggerId}
+                initial={initial}
+                className={menu.className}
+                style={menu.style}
+                onClose={closeMenu}
+                onHorizontal={(dir) => moveTo(index + dir)}
+              />
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

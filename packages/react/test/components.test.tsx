@@ -1,4 +1,3 @@
-import * as React from "react";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
@@ -293,11 +292,9 @@ describe("Icon", () => {
   it("ships a complete family on the same 16 module", () => {
     expect(iconNames.length).toBe(151);
     const { container } = render(
-      <>
-        {iconNames.map((name) => (
-          <Icon key={name} name={name} size={12} />
-        ))}
-      </>,
+      iconNames.map((name) => (
+        <Icon key={name} name={name} size={12} />
+      )),
     );
     const svgs = [...container.querySelectorAll("svg")];
     expect(svgs).toHaveLength(iconNames.length);
@@ -409,18 +406,18 @@ describe("Select", () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
     render(<Select options={options} onValueChange={onChange} />);
-    await user.click(screen.getByRole("button"));
+    await user.click(screen.getByRole("combobox"));
     await user.click(screen.getByRole("option", { name: "Amsterdam" }));
     expect(onChange).toHaveBeenCalledWith("amsterdam");
     expect(screen.queryByRole("listbox")).toBeNull();
-    expect(screen.getByRole("button").textContent).toContain("Amsterdam");
+    expect(screen.getByRole("combobox").textContent).toContain("Amsterdam");
   });
 
   it("supports keyboard: open, arrow, enter", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
     render(<Select options={options} onValueChange={onChange} />);
-    screen.getByRole("button").focus();
+    screen.getByRole("combobox").focus();
     await user.keyboard("{ArrowDown}{ArrowDown}{Enter}");
     expect(onChange).toHaveBeenCalledWith("amsterdam");
   });

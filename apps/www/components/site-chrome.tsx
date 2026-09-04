@@ -65,7 +65,7 @@ function readTextIndex(): number {
     const raw = localStorage.getItem("raster-text-scale");
     if (raw == null || raw === "") return 1;
     const n = parseFloat(raw);
-    if (!isFinite(n)) return 1;
+    if (!Number.isFinite(n)) return 1;
     const scale = n > 3 ? n / 100 : n;
     const i = TEXT_STEPS.findIndex((step) => Math.abs(step - scale) < 0.001);
     if (i >= 0) return i;

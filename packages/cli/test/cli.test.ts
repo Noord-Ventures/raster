@@ -83,7 +83,7 @@ describe("add", () => {
   it("pulls registry dependencies in install order", async () => {
     init(cwd);
     const { outcomes } = await add(cwd, ["dialog"]);
-    expect(outcomes.map((o) => o.item.name)).toEqual(["raster-lib", "button", "dialog"]);
+    expect(outcomes.map((o) => o.item.name)).toEqual(["raster-lib", "button", "icons", "dialog"]);
     expect(existsSync(join(cwd, "components/raster/dialog.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "components/raster/button.tsx"))).toBe(true);
   });

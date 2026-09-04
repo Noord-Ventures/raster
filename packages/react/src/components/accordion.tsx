@@ -34,7 +34,7 @@ const styles = stylex.create({
     paddingBlock: 14,
     paddingInline: 0,
     minHeight: {
-      default: null,
+      default: 24,
       [mq.phone]: raster.hit,
     },
     fontSize: {
@@ -47,11 +47,30 @@ const styles = stylex.create({
     "::-webkit-details-marker": {
       display: "none",
     },
+    outlineWidth: {
+      default: null,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
+    },
   },
   chevron: {
     flexShrink: 0,
     color: raster.gray,
-    transition: `transform ${raster.duration} ${raster.ease}`,
+    transition: {
+      default: `transform ${raster.duration} ${raster.ease}`,
+      [mq.reduce]: "none",
+    },
   },
   chevronOpen: {
     transform: "rotate(180deg)",

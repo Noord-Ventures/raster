@@ -182,7 +182,7 @@ function collectReactGraph(component) {
 }
 
 function rewriteImports(source, srcRel, dest) {
-  return source.replace(/from ["'](\.[^"']+)["']/g, (full, spec) => {
+  return source.replace(/from ["'](\.[^"']+)["']/g, (_full, spec) => {
     const resolved = resolveLocal(srcRel, spec);
     if (!resolved) throw new Error(`${srcRel}: cannot resolve import ${spec}`);
     const target = destFor(resolved).replace(/\.(tsx|ts)$/, "");

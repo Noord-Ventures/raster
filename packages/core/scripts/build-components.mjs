@@ -16,7 +16,7 @@
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import { basename, dirname, join, relative, resolve } from "node:path";
+import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { rasterComponents } from "../src/registry.ts";
 
@@ -264,8 +264,7 @@ const manualFor = (src, ref) => MANUAL.find(([f, n, k]) => src.endsWith(`/${f}`)
 for (const src of sources) {
   const code = readFileSync(src, "utf8");
   const re = /(?<![\w$])rs\(/g;
-  let m;
-  while ((m = re.exec(code))) {
+  for (const m of code.matchAll(re)) {
     if (code[m.index - 1] === "." && code.slice(m.index - 3, m.index) !== "...") continue;
     const open = m.index + m[0].length - 1;
     const close = scanBalanced(code, open);
@@ -305,7 +304,8 @@ for (const src of sources) {
         if (!cls) problems.push(`${where}: ${s.ref.join(".")} has no class to land on`);
         else addSel(src, s.ref, cls, where);
       } else if (s.kind === "cond") {
-        const seen = (condSeen[s.cond] = (condSeen[s.cond] ?? 0) + 1);
+        condSeen[s.cond] = (condSeen[s.cond] ?? 0) + 1;
+        const seen = condSeen[s.cond];
         const partner = classItems.filter((c) => c.kind === "cond" && c.cond === s.cond)[seen - 1] ?? classItems.find((c) => c.kind === "cond" && c.cond === s.cond);
         if (!partner) problems.push(`${where}: ${s.ref.join(".")} is conditional on "${s.cond}" but no class shares that condition`);
         else addSel(src, s.ref, partner.cls, where);

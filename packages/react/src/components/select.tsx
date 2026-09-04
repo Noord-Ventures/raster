@@ -5,7 +5,7 @@ import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
-import { menuStyles } from "./dropdown-menu";
+import { menuStyles, typeAheadIndex } from "./dropdown-menu";
 
 const styles = stylex.create({
   root: {
@@ -14,11 +14,23 @@ const styles = stylex.create({
     minWidth: 180,
     backgroundColor: raster.paper,
   },
+  list: {
+    maxHeight: 280,
+    overflowY: "auto",
+  },
 });
 
 export interface SelectOption {
   value: string;
   label: React.ReactNode;
+  /** Plain text for type-ahead and filtering when `label` is not a string. */
+  searchText?: string;
+}
+
+/** Text an option answers to: `searchText`, a string label, else the value. */
+export function optionText(option: SelectOption): string {
+  if (option.searchText) return option.searchText;
+  return typeof option.label === "string" ? option.label : option.value;
 }
 
 export interface SelectProps
@@ -31,7 +43,12 @@ export interface SelectProps
   disabled?: boolean;
 }
 
-/** Listbox on a hairline trigger; the open menu overlays. */
+const PAGE = 10;
+
+/**
+ * Select-only combobox: the trigger holds focus and points at the active
+ * option with aria-activedescendant; the listbox overlays.
+ */
 export function Select({
   options,
   value,
@@ -41,24 +58,33 @@ export function Select({
   disabled,
   className,
   style,
+  onKeyDown,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
   ...props
 }: SelectProps) {
   const idBase = React.useId();
+  const triggerId = `${idBase}-trigger`;
+  const listboxId = `${idBase}-listbox`;
+  const optionId = (index: number) => `${idBase}-opt-${index}`;
   const rootRef = React.useRef<HTMLDivElement>(null);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
+  const activeRef = React.useRef<HTMLDivElement>(null);
   const [open, setOpen] = React.useState(false);
   const [inner, setInner] = React.useState(defaultValue);
   const isControlled = value !== undefined;
   const current = isControlled ? value : inner;
   const selectedIndex = options.findIndex((o) => o.value === current);
   const [activeIndex, setActiveIndex] = React.useState(Math.max(0, selectedIndex));
+  const typed = React.useRef({ buffer: "", at: 0 });
+  const typedTimer = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-  const select = (next: string) => {
-    if (!isControlled) setInner(next);
-    onValueChange?.(next);
-    setOpen(false);
-    triggerRef.current?.focus();
-  };
+  /* Resync the highlight whenever the value changes underneath. */
+  React.useEffect(() => {
+    setActiveIndex(Math.max(0, selectedIndex));
+  }, [selectedIndex]);
+
+  React.useEffect(() => () => clearTimeout(typedTimer.current), []);
 
   React.useEffect(() => {
     if (!open) return;
@@ -69,73 +95,168 @@ export function Select({
     return () => document.removeEventListener("pointerdown", onPointerDown);
   }, [open]);
 
-  const onTriggerKeyDown = (e: React.KeyboardEvent) => {
-    if (["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key) && !open) {
-      e.preventDefault();
-      setActiveIndex(Math.max(0, selectedIndex));
-      setOpen(true);
+  React.useEffect(() => {
+    if (open) activeRef.current?.scrollIntoView?.({ block: "nearest" });
+  }, [open, activeIndex]);
+
+  const openAt = (index: number) => {
+    setActiveIndex(Math.max(0, Math.min(options.length - 1, index)));
+    setOpen(true);
+  };
+
+  const close = (restoreFocus = true) => {
+    setOpen(false);
+    if (restoreFocus) triggerRef.current?.focus();
+  };
+
+  const select = (next: string) => {
+    if (!isControlled) setInner(next);
+    onValueChange?.(next);
+    close();
+  };
+
+  const typeAhead = (key: string, from: number): number => {
+    const now = Date.now();
+    const buffer = now - typed.current.at < 500 ? typed.current.buffer + key : key;
+    typed.current = { buffer, at: now };
+    clearTimeout(typedTimer.current);
+    typedTimer.current = setTimeout(() => {
+      typed.current = { buffer: "", at: 0 };
+    }, 500);
+    return typeAheadIndex(options.map(optionText), from, buffer);
+  };
+
+  const onRootKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    onKeyDown?.(e);
+    if (e.defaultPrevented || disabled || options.length === 0) return;
+    const last = options.length - 1;
+    const printable = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
+    const typing = typed.current.buffer.length > 0 && Date.now() - typed.current.at < 500;
+
+    if (!open) {
+      if (["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) {
+        e.preventDefault();
+        openAt(selectedIndex);
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        openAt(0);
+      } else if (e.key === "End") {
+        e.preventDefault();
+        openAt(last);
+      } else if (printable && e.key !== " ") {
+        e.preventDefault();
+        const match = typeAhead(e.key, selectedIndex);
+        openAt(match >= 0 ? match : selectedIndex);
+      }
       return;
     }
-    if (!open) return;
-    if (e.key === "Escape") setOpen(false);
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setActiveIndex((i) => Math.min(options.length - 1, i + 1));
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        setActiveIndex((i) => Math.min(last, i + 1));
+        return;
+      case "ArrowUp":
+        e.preventDefault();
+        setActiveIndex((i) => Math.max(0, i - 1));
+        return;
+      case "Home":
+        e.preventDefault();
+        setActiveIndex(0);
+        return;
+      case "End":
+        e.preventDefault();
+        setActiveIndex(last);
+        return;
+      case "PageUp":
+        e.preventDefault();
+        setActiveIndex((i) => Math.max(0, i - PAGE));
+        return;
+      case "PageDown":
+        e.preventDefault();
+        setActiveIndex((i) => Math.min(last, i + PAGE));
+        return;
+      case "Escape":
+        e.preventDefault();
+        close();
+        return;
+      case "Tab":
+        close(false);
+        return;
+      case "Enter":
+      case " ": {
+        if (e.key === " " && typing) break;
+        e.preventDefault();
+        const active = options[activeIndex];
+        if (active) select(active.value);
+        return;
+      }
+      default:
+        break;
     }
-    if (e.key === "ArrowUp") {
+    if (printable) {
       e.preventDefault();
-      setActiveIndex((i) => Math.max(0, i - 1));
-    }
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      const active = options[activeIndex];
-      if (active) select(active.value);
+      const match = typeAhead(e.key, activeIndex);
+      if (match >= 0) setActiveIndex(match);
     }
   };
 
   const selected = selectedIndex >= 0 ? options[selectedIndex] : undefined;
   const root = rs(["rs-select", className], menuStyles.select, styles.root);
   const trigger = rs(["rs-dropdown"], menuStyles.dropdown);
-  const menu = rs(["rs-menu"], menuStyles.menu, menuStyles.menuOverlay);
+  const menu = rs(["rs-menu", "rs-select-list"], menuStyles.menu, menuStyles.menuOverlay, styles.list);
 
   return (
-    <div ref={rootRef} className={root.className} style={{ ...root.style, ...style }} {...props}>
+    <div
+      ref={rootRef}
+      className={root.className}
+      style={{ ...root.style, ...style }}
+      onKeyDown={onRootKeyDown}
+      {...props}
+    >
       <button
         ref={triggerRef}
+        id={triggerId}
         type="button"
+        role="combobox"
         className={trigger.className}
         style={trigger.style}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledby}
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-controls={`${idBase}-listbox`}
+        aria-controls={open ? listboxId : undefined}
+        aria-activedescendant={open && options[activeIndex] ? optionId(activeIndex) : undefined}
         disabled={disabled}
-        onClick={() => setOpen((o) => !o)}
-        onKeyDown={onTriggerKeyDown}
+        onClick={() => (open ? close() : openAt(selectedIndex))}
       >
         <span>{selected ? selected.label : placeholder}</span>
         <Icon name="chevron-right" rotate={90} />
       </button>
       {open && (
         <div
-          id={`${idBase}-listbox`}
+          id={listboxId}
           role="listbox"
+          tabIndex={-1}
+          aria-labelledby={ariaLabelledby ?? triggerId}
           className={menu.className}
           style={menu.style}
-          aria-activedescendant={`${idBase}-opt-${activeIndex}`}
+          onMouseDown={(e) => e.preventDefault()}
         >
           {options.map((option, index) => {
-            const active = option.value === current || index === activeIndex;
+            const active = index === activeIndex;
             const row = rs(
               ["rs-menu-item", active && "rs-menu-item-active"],
               menuStyles.item,
               active && menuStyles.itemActive,
             );
             return (
-              <button
+              <div
                 key={option.value}
-                id={`${idBase}-opt-${index}`}
-                type="button"
+                id={optionId(index)}
+                ref={active ? activeRef : undefined}
                 role="option"
+                tabIndex={-1}
                 aria-selected={option.value === current}
                 className={row.className}
                 style={row.style}
@@ -143,7 +264,7 @@ export function Select({
                 onClick={() => select(option.value)}
               >
                 {option.label}
-              </button>
+              </div>
             );
           })}
         </div>

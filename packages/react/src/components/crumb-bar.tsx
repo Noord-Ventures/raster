@@ -78,13 +78,19 @@ const styles = stylex.create({
     },
   },
   crumbs: {
+    listStyle: "none",
+    padding: 0,
     margin: 0,
     minWidth: 0,
     overflow: "hidden",
     whiteSpace: "nowrap",
     opacity: 0,
+    visibility: "hidden",
     pointerEvents: "none",
-    transition: `opacity ${raster.duration} ${raster.ease}`,
+    transition: {
+      default: `opacity ${raster.duration} ${raster.ease}, visibility 0s ${raster.ease} ${raster.duration}`,
+      [mq.reduce]: "none",
+    },
     fontSize: {
       default: 13,
       [mq.phone]: raster.controlFs,
@@ -107,7 +113,23 @@ const styles = stylex.create({
   },
   crumbsOn: {
     opacity: 1,
+    visibility: "visible",
     pointerEvents: "auto",
+    transition: {
+      default: `opacity ${raster.duration} ${raster.ease}, visibility 0s`,
+      [mq.reduce]: "none",
+    },
+  },
+  item: {
+    display: "inline-flex",
+    alignItems: {
+      default: "baseline",
+      [mq.phone]: "center",
+    },
+    gap: {
+      default: 8,
+      [mq.phone]: 6,
+    },
   },
   root: {
     flexShrink: 0,
@@ -141,19 +163,35 @@ const styles = stylex.create({
   },
   link: {
     color: {
-      default: raster.ink,
-      ":link": raster.ink,
-      ":visited": raster.ink,
+      default: raster.gray,
+      ":link": raster.gray,
+      ":visited": raster.gray,
       ":hover": raster.ink,
       ":active": raster.ink,
       ":focus-visible": raster.ink,
     },
-    textDecoration: "none",
+    fontWeight: 400,
+    textDecoration: {
+      default: "none",
+      ":hover": "underline",
+    },
+    textUnderlineOffset: 3,
     backgroundColor: "transparent",
-    opacity: {
-      default: 0.55,
-      ":hover": 1,
-      ":focus-visible": 1,
+    outlineWidth: {
+      default: null,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
     },
     display: {
       default: null,
@@ -169,12 +207,11 @@ const styles = stylex.create({
     },
   },
   sep: {
-    color: raster.ink,
-    opacity: 0.4,
+    color: raster.gray,
   },
   here: {
     color: raster.ink,
-    opacity: 1,
+    fontWeight: 500,
     overflow: "hidden",
     textOverflow: "ellipsis",
     display: {
@@ -195,7 +232,8 @@ const styles = stylex.create({
 /**
  * The fixed top bar of the house chrome. Transparent at rest; once the
  * page cover scrolls away it gains the paper background and its bottom
- * hairline, and the breadcrumbs fade in.
+ * hairline, and the breadcrumbs fade in. While hidden the trail is
+ * inert and invisible, so nothing focuses into an unseen link.
  */
 export function CrumbBar({ trail, threshold = 110, root, rootShort, className, style, ...props }: CrumbBarProps) {
   const [scrolled, setScrolled] = React.useState(false);
@@ -210,6 +248,7 @@ export function CrumbBar({ trail, threshold = 110, root, rootShort, className, s
   const bar = rs(["rs-crumb-bar", scrolled && "rs-crumb-bar-scrolled", className], styles.bar, scrolled && styles.scrolled);
   const inner = rs(["rs-crumb-bar-inner"], styles.inner);
   const crumbs = rs(["rs-crumbs", "rs-crumb-crumbs", scrolled && "rs-crumb-crumbs-on"], styles.crumbs, scrolled && styles.crumbsOn);
+  const item = rs(["rs-crumb-item"], styles.item);
   const rootSx = rs(["rs-crumb-root"], styles.root);
   const rootFull = rs(["rs-crumb-root-full"], styles.rootFull);
   const rootShortSx = rs(["rs-crumb-root-short"], styles.rootShort);
@@ -231,7 +270,7 @@ export function CrumbBar({ trail, threshold = 110, root, rootShort, className, s
   );
 
   return (
-    <nav aria-label="Breadcrumbs" {...props} className={bar.className} style={{ ...bar.style, ...style }}>
+    <nav aria-label="Breadcrumb" {...props} className={bar.className} style={{ ...bar.style, ...style }}>
       <div className={inner.className} style={inner.style}>
         {root &&
           (root.href ? (
@@ -243,18 +282,18 @@ export function CrumbBar({ trail, threshold = 110, root, rootShort, className, s
               {rootLabel}
             </span>
           ))}
-        <p className={crumbs.className} style={crumbs.style}>
+        <ol className={crumbs.className} style={crumbs.style} inert={!scrolled}>
           {trail.map((crumb, index) => {
             const last = index === trail.length - 1;
             return (
-              <React.Fragment key={index}>
+              <li key={index} className={item.className} style={item.style}>
                 {index > 0 && (
                   <span className={sep.className} style={sep.style} aria-hidden="true">
                     /
                   </span>
                 )}
                 {last ? (
-                  <span className={here.className} style={here.style}>
+                  <span className={here.className} style={here.style} aria-current="page">
                     {crumb.label}
                   </span>
                 ) : crumb.href ? (
@@ -266,10 +305,10 @@ export function CrumbBar({ trail, threshold = 110, root, rootShort, className, s
                     {crumb.label}
                   </span>
                 )}
-              </React.Fragment>
+              </li>
             );
           })}
-        </p>
+        </ol>
       </div>
     </nav>
   );

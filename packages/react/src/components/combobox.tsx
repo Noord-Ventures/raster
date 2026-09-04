@@ -6,15 +6,17 @@ import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 import { menuStyles } from "./dropdown-menu";
-import type { SelectOption } from "./select";
+import { optionText, type SelectOption } from "./select";
 
 export interface ComboboxProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "defaultValue"> {
   options: SelectOption[];
   value?: string;
+  defaultValue?: string;
   onValueChange?: (value: string) => void;
   placeholder?: string;
   emptyLabel?: React.ReactNode;
+  disabled?: boolean;
 }
 
 const styles = stylex.create({
@@ -47,27 +49,51 @@ const styles = stylex.create({
   },
 });
 
-/** Filtered listbox on the quiet field. */
+const PAGE = 10;
+
+/**
+ * Editable combobox: the input holds focus, filters on typed text, and
+ * points at the active option with aria-activedescendant.
+ */
 export function Combobox({
   options,
   value,
+  defaultValue,
   onValueChange,
   placeholder = "Search…",
   emptyLabel = "Nothing found.",
+  disabled,
   className,
   style,
+  id,
+  onBlur,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
   ...props
 }: ComboboxProps) {
   const idBase = React.useId();
+  const inputId = id ?? `${idBase}-input`;
+  const listboxId = `${idBase}-listbox`;
+  const optionId = (index: number) => `${idBase}-opt-${index}`;
   const rootRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const activeRef = React.useRef<HTMLDivElement>(null);
   const [open, setOpen] = React.useState(false);
-  const [query, setQuery] = React.useState("");
+  const [inner, setInner] = React.useState(defaultValue);
+  const [searchValue, setSearchValue] = React.useState("");
   const [activeIndex, setActiveIndex] = React.useState(0);
 
-  const selected = options.find((o) => o.value === value);
-  const matches = options.filter((o) =>
-    String(o.label).toLowerCase().includes(query.toLowerCase()),
-  );
+  const isControlled = value !== undefined;
+  const current = isControlled ? value : inner;
+  const selected = options.find((o) => o.value === current);
+  const needle = searchValue.trim().toLowerCase();
+  const matches = needle ? options.filter((o) => optionText(o).toLowerCase().includes(needle)) : options;
+  const hasList = open && matches.length > 0;
+
+  /* Keep the highlight on a real row as the filter shrinks the list. */
+  React.useEffect(() => {
+    setActiveIndex((i) => Math.max(0, Math.min(matches.length - 1, i)));
+  }, [matches.length]);
 
   React.useEffect(() => {
     if (!open) return;
@@ -78,10 +104,82 @@ export function Combobox({
     return () => document.removeEventListener("pointerdown", onPointerDown);
   }, [open]);
 
+  React.useEffect(() => {
+    if (hasList) activeRef.current?.scrollIntoView?.({ block: "nearest" });
+  }, [hasList, activeIndex]);
+
+  const openList = (at: "selected" | "last" = "selected") => {
+    setSearchValue("");
+    const selectedIndex = options.findIndex((o) => o.value === current);
+    setActiveIndex(at === "last" ? Math.max(0, options.length - 1) : Math.max(0, selectedIndex));
+    setOpen(true);
+  };
+
   const pick = (option: SelectOption) => {
+    if (!isControlled) setInner(option.value);
     onValueChange?.(option.value);
-    setQuery("");
+    setSearchValue("");
     setOpen(false);
+    inputRef.current?.focus();
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (disabled) return;
+    const last = matches.length - 1;
+    if (!open) {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        openList();
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        openList("last");
+      }
+      return;
+    }
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        setActiveIndex((i) => Math.min(last, i + 1));
+        return;
+      case "ArrowUp":
+        e.preventDefault();
+        setActiveIndex((i) => Math.max(0, i - 1));
+        return;
+      case "Home":
+        e.preventDefault();
+        setActiveIndex(0);
+        return;
+      case "End":
+        e.preventDefault();
+        setActiveIndex(Math.max(0, last));
+        return;
+      case "PageUp":
+        e.preventDefault();
+        setActiveIndex((i) => Math.max(0, i - PAGE));
+        return;
+      case "PageDown":
+        e.preventDefault();
+        setActiveIndex((i) => Math.min(Math.max(0, last), i + PAGE));
+        return;
+      case "Enter": {
+        const match = matches[activeIndex];
+        if (match) {
+          e.preventDefault();
+          pick(match);
+        }
+        return;
+      }
+      case "Escape":
+        e.preventDefault();
+        setSearchValue("");
+        setOpen(false);
+        return;
+      case "Tab":
+        setOpen(false);
+        return;
+      default:
+        return;
+    }
   };
 
   const root = rs(["rs-combobox", className], styles.root);
@@ -89,69 +187,80 @@ export function Combobox({
   const empty = rs(["rs-combobox-empty"], styles.empty);
 
   return (
-    <div ref={rootRef} className={root.className} style={{ ...root.style, ...style }} {...props}>
+    <div
+      ref={rootRef}
+      className={root.className}
+      style={{ ...root.style, ...style }}
+      onBlur={(e) => {
+        onBlur?.(e);
+        const to = e.relatedTarget as Node | null;
+        if (open && to && !rootRef.current?.contains(to)) setOpen(false);
+      }}
+      {...props}
+    >
       <input
+        ref={inputRef}
+        id={inputId}
         className="rs-input rs-input-full"
+        type="text"
         role="combobox"
+        autoComplete="off"
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledby}
         aria-expanded={open}
-        aria-controls={`${idBase}-listbox`}
+        aria-controls={hasList ? listboxId : undefined}
+        aria-activedescendant={hasList && matches[activeIndex] ? optionId(activeIndex) : undefined}
         aria-autocomplete="list"
+        disabled={disabled}
         placeholder={placeholder}
-        value={open ? query : String(selected?.label ?? "")}
-        onFocus={() => {
-          setQuery("");
-          setActiveIndex(0);
-          setOpen(true);
+        value={open ? searchValue : selected ? optionText(selected) : ""}
+        onClick={() => {
+          if (!open) openList();
         }}
         onChange={(e) => {
-          setQuery(e.target.value);
+          setSearchValue(e.target.value);
           setActiveIndex(0);
           setOpen(true);
         }}
-        onKeyDown={(e) => {
-          if (!open) return;
-          if (e.key === "Escape") setOpen(false);
-          if (e.key === "ArrowDown") {
-            e.preventDefault();
-            setActiveIndex((i) => Math.min(matches.length - 1, i + 1));
-          }
-          if (e.key === "ArrowUp") {
-            e.preventDefault();
-            setActiveIndex((i) => Math.max(0, i - 1));
-          }
-          if (e.key === "Enter") {
-            e.preventDefault();
-            const match = matches[activeIndex];
-            if (match) pick(match);
-          }
-        }}
+        onKeyDown={onKeyDown}
       />
       {open && (
-        <div id={`${idBase}-listbox`} role="listbox" className={menu.className} style={menu.style}>
+        <div
+          id={hasList ? listboxId : undefined}
+          role={hasList ? "listbox" : undefined}
+          aria-labelledby={hasList ? (ariaLabelledby ?? inputId) : undefined}
+          tabIndex={-1}
+          className={menu.className}
+          style={menu.style}
+          onMouseDown={(e) => e.preventDefault()}
+        >
           {matches.length === 0 && (
             <div className={empty.className} style={empty.style}>
               {emptyLabel}
             </div>
           )}
           {matches.map((option, index) => {
+            const active = index === activeIndex;
             const row = rs(
-              ["rs-menu-item", index === activeIndex && "rs-menu-item-active"],
+              ["rs-menu-item", active && "rs-menu-item-active"],
               menuStyles.item,
-              index === activeIndex && menuStyles.itemActive,
+              active && menuStyles.itemActive,
             );
             return (
-              <button
+              <div
                 key={option.value}
-                type="button"
+                id={optionId(index)}
+                ref={active ? activeRef : undefined}
                 role="option"
-                aria-selected={option.value === value}
+                tabIndex={-1}
+                aria-selected={option.value === current}
                 className={row.className}
                 style={row.style}
                 onPointerEnter={() => setActiveIndex(index)}
                 onClick={() => pick(option)}
               >
                 {option.label}
-              </button>
+              </div>
             );
           })}
         </div>

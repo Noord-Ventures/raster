@@ -24,6 +24,7 @@
   margin: 8px 0 32px;
   overflow: visible;
 }
+/* StyleX conditional rules carry :not(#\#) specificity; !important is the only override from plain CSS. */
 .rs-scene .rs-use {
   width: 100%;
   border: none !important;

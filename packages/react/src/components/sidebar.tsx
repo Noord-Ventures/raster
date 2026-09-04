@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -156,9 +156,21 @@ export function SidebarHead({ className, style, ...props }: React.HTMLAttributes
   return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }
 
-export function SidebarNav({ className, style, ...props }: React.HTMLAttributes<HTMLElement>) {
+export interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
+  /** Landmark name; pages carry several navs. */
+  "aria-label"?: string;
+}
+
+export function SidebarNav({ className, style, "aria-label": ariaLabel = "Sidebar", ...props }: SidebarNavProps) {
   const sx = rs(["rs-sidebar-nav", className], styles.nav);
-  return <nav {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+  return (
+    <nav
+      aria-label={props["aria-labelledby"] ? undefined : ariaLabel}
+      {...props}
+      className={sx.className}
+      style={{ ...sx.style, ...style }}
+    />
+  );
 }
 
 export interface SidebarItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {

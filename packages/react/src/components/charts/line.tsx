@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import {
+  ChartCanvas,
   ChartField,
   ChartHead,
   ChartLegend,
@@ -15,10 +16,15 @@ import {
   areaMark,
   chartStyles,
   defaultFormat,
+  describePlot,
   lineMark,
   niceMax,
+  plotName,
+  plotProps,
   stackedRows,
+  stepCursor,
   ticksFor,
+  useChartWidth,
   type ChartAnnotation,
   type ChartSeries,
 } from "./frame";
@@ -41,6 +47,8 @@ export interface LineChartProps extends React.HTMLAttributes<HTMLDivElement> {
   domain?: [number, number];
   spot?: boolean | string;
   valueFormat?: (value: number) => string;
+  /** BCP 47 tag for number formatting; undefined is the reader's own. */
+  locale?: string;
 }
 
 export function LineChart({
@@ -59,7 +67,10 @@ export function LineChart({
   domain,
   spot,
   valueFormat,
+  locale,
   className,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   ...props
 }: LineChartProps) {
   const shown = series.slice(0, MAX_SERIES);
@@ -71,12 +82,14 @@ export function LineChart({
   const max = domain?.[1] ?? niceMax(rawMax);
   const min = domain?.[0] ?? 0;
   const span = max - min || 1;
-  const format = valueFormat ?? ((v: number) => defaultFormat(v));
-  const tip = valueFormat ?? ((v: number) => defaultFormat(v, unit));
+  const format = valueFormat ?? ((v: number) => defaultFormat(v, undefined, locale));
+  const tip = valueFormat ?? ((v: number) => defaultFormat(v, unit, locale));
   const [hover, setHover] = React.useState<number | null>(null);
   const overlayRef = React.useRef<SVGRectElement>(null);
+  const [canvasRef, W] = useChartWidth<HTMLDivElement>();
+  const titleId = React.useId();
 
-  const { W, ML, MR, MT, MB } = PLOT;
+  const { ML, MR, MT, MB } = PLOT;
   const plotW = W - ML - MR;
   const plotH = height - MT - MB;
   const x = (i: number) => ML + (n <= 1 ? 0 : (i / (n - 1)) * plotW);
@@ -104,90 +117,102 @@ export function LineChart({
   const ann = rs(["rs-chart-ann"], chartStyles.ann);
   const dot = rs(["rs-chart-dot"], chartStyles.dot);
 
+  const name = plotName(
+    { "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy },
+    yLabel ? titleId : undefined,
+    describePlot(area ? "Area chart" : "Line chart", shown.map((s) => s.name), unit),
+  );
+  const a11y = plotProps(
+    name,
+    (key) => {
+      const next = stepCursor(key, hover, n);
+      if (next === undefined) return false;
+      setHover(next);
+      return true;
+    },
+    () => setHover(null),
+  );
+
   return (
     <ChartField spot={spot} className={className} {...props}>
       {(yLabel || xLabel) && (
         <ChartHead>
-          {yLabel ? <ChartTitle>{yLabel}</ChartTitle> : <span />}
+          {yLabel ? <ChartTitle id={titleId}>{yLabel}</ChartTitle> : <span />}
           {xLabel ? <ChartTitle>{xLabel}</ChartTitle> : null}
         </ChartHead>
       )}
-      <svg
-        className={svg.className}
-        style={svg.style}
-        viewBox={`0 0 ${W} ${height}`}
-        role="img"
-        aria-label={`Line chart, ${shown.map((s) => s.name).join(" and ")}`}
-      >
-        <g className={plot.className} style={plot.style}>
-          {grid &&
-            tickVals.map((t) => (
-              <g key={t}>
-                <line className={gridSx.className} style={gridSx.style} x1={ML} x2={W - MR} y1={y(t)} y2={y(t)} />
-                <text className={axis.className} style={axis.style} x={ML - 6} y={y(t) + 3.5} textAnchor="end">
-                  {format(t)}
+      <ChartCanvas ref={canvasRef}>
+        <svg className={svg.className} style={svg.style} viewBox={`0 0 ${W} ${height}`} {...a11y}>
+          <g className={plot.className} style={plot.style} aria-hidden="true">
+            {grid &&
+              tickVals.map((t) => (
+                <g key={t}>
+                  <line className={gridSx.className} style={gridSx.style} x1={ML} x2={W - MR} y1={y(t)} y2={y(t)} />
+                  <text className={axis.className} style={axis.style} x={ML - 6} y={y(t) + 3.5} textAnchor="end">
+                    {format(t)}
+                  </text>
+                </g>
+              ))}
+            <line className={baseline.className} style={baseline.style} x1={ML} x2={W - MR} y1={y(min)} y2={y(min)} />
+            {area && shown[0] && !stacked && (
+              <path {...areaMark(Boolean(spot))} d={`${path(shown[0].values)} L${x(n - 1)} ${y(min)} L${x(0)} ${y(min)} Z`} />
+            )}
+            {stacked && stacks
+              ? shown.map((s, si) => {
+                  const top = stacks.map((row) => row[si] ?? 0);
+                  return <path key={s.name} {...lineMark(si, Boolean(spot))} d={path(top)} />;
+                })
+              : shown.map((s, si) => <path key={s.name} {...lineMark(si, Boolean(spot))} d={path(s.values)} />)}
+            {annotations?.map((a) => (
+              <g key={`${a.at}-${a.label}`}>
+                <line className={cursor.className} style={cursor.style} x1={x(a.at)} x2={x(a.at)} y1={MT} y2={y(min)} />
+                <text className={ann.className} style={ann.style} x={x(a.at) + 4} y={MT + 10}>
+                  {a.label}
                 </text>
               </g>
             ))}
-          <line className={baseline.className} style={baseline.style} x1={ML} x2={W - MR} y1={y(min)} y2={y(min)} />
-          {area && shown[0] && !stacked && (
-            <path {...areaMark(Boolean(spot))} d={`${path(shown[0].values)} L${x(n - 1)} ${y(min)} L${x(0)} ${y(min)} Z`} />
-          )}
-          {stacked && stacks
-            ? shown.map((s, si) => {
-                const top = stacks.map((row) => row[si] ?? 0);
-                return <path key={s.name} {...lineMark(si, Boolean(spot))} d={path(top)} />;
-              })
-            : shown.map((s, si) => <path key={s.name} {...lineMark(si, Boolean(spot))} d={path(s.values)} />)}
-          {annotations?.map((a) => (
-            <g key={`${a.at}-${a.label}`}>
-              <line className={cursor.className} style={cursor.style} x1={x(a.at)} x2={x(a.at)} y1={MT} y2={y(min)} />
-              <text className={ann.className} style={ann.style} x={x(a.at) + 4} y={MT + 10}>
-                {a.label}
-              </text>
-            </g>
-          ))}
-          {hover != null && (
-            <g>
-              <line className={cursor.className} style={cursor.style} x1={x(hover)} x2={x(hover)} y1={MT} y2={y(min)} />
-              {shown.map((s, si) => (
-                <circle
-                  key={si}
-                  className={dot.className}
-                  style={dot.style}
-                  cx={x(hover)}
-                  cy={y(stacked && stacks ? (stacks[hover]?.[si] ?? 0) : (s.values[hover] ?? 0))}
-                  r={3}
-                />
-              ))}
-            </g>
-          )}
-          <text className={axis.className} style={axis.style} x={ML} y={height - 4} textAnchor="start">
-            {tickLabels[0]}
-          </text>
-          <text className={axis.className} style={axis.style} x={W - MR} y={height - 4} textAnchor="end">
-            {tickLabels[n - 1]}
-          </text>
-          <rect
-            ref={overlayRef}
-            x={ML}
-            y={0}
-            width={plotW}
-            height={height}
-            fill="transparent"
-            onMouseMove={(e) => setHover(locate(e.clientX))}
-            onMouseLeave={() => setHover(null)}
+            {hover != null && (
+              <g>
+                <line className={cursor.className} style={cursor.style} x1={x(hover)} x2={x(hover)} y1={MT} y2={y(min)} />
+                {shown.map((s, si) => (
+                  <circle
+                    key={si}
+                    className={dot.className}
+                    style={dot.style}
+                    cx={x(hover)}
+                    cy={y(stacked && stacks ? (stacks[hover]?.[si] ?? 0) : (s.values[hover] ?? 0))}
+                    r={3}
+                  />
+                ))}
+              </g>
+            )}
+            <text className={axis.className} style={axis.style} x={ML} y={height - 4} textAnchor="start">
+              {tickLabels[0]}
+            </text>
+            <text className={axis.className} style={axis.style} x={W - MR} y={height - 4} textAnchor="end">
+              {tickLabels[n - 1]}
+            </text>
+            <rect
+              ref={overlayRef}
+              x={ML}
+              y={0}
+              width={plotW}
+              height={height}
+              fill="transparent"
+              onPointerMove={(e) => setHover(locate(e.clientX))}
+              onPointerLeave={() => setHover(null)}
+            />
+          </g>
+        </svg>
+        {hover != null && (
+          <ChartTip
+            left={x(hover)}
+            top={MT}
+            label={tickLabels[hover] ?? ""}
+            rows={shown.map((s) => ({ name: s.name, value: tip(s.values[hover] ?? 0) }))}
           />
-        </g>
-      </svg>
-      {hover != null && (
-        <ChartTip
-          left={`${(x(hover) / W) * 100}%`}
-          top={`${(MT / height) * 100}%`}
-          label={tickLabels[hover] ?? ""}
-          rows={shown.map((s) => ({ name: s.name, value: tip(s.values[hover] ?? 0) }))}
-        />
-      )}
+        )}
+      </ChartCanvas>
       {(shown.length > 1 || unit) && (
         <ChartLegend>
           {shown.map((s, si) => (
@@ -199,7 +224,7 @@ export function LineChart({
           {unit ? <ChartLegendItem>{unit}</ChartLegendItem> : null}
         </ChartLegend>
       )}
-      <SrTable caption="Chart data" labels={tickLabels} series={shown} />
+      <SrTable caption={yLabel ?? describePlot("Chart data", shown.map((s) => s.name), unit)} labels={tickLabels} series={shown} />
     </ChartField>
   );
 }

@@ -324,7 +324,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  color: var(--text) !important;
+  color: var(--text);
   font-weight: 600;
 }
 

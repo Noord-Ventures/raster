@@ -53,7 +53,7 @@ const styles = stylex.create({
     cursor: "pointer",
     color: {
       default: raster.gray,
-      ":hover": raster.accent,
+      ":hover": raster.ink,
     },
     outlineWidth: {
       default: 0,
@@ -65,7 +65,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: "transparent",
-      ":focus-visible": raster.accent,
+      ":focus-visible": raster.ink,
     },
     outlineOffset: {
       default: 0,
@@ -92,6 +92,7 @@ const styles = stylex.create({
  * One mark. Moon on paper, sun on black. The button sets
  * data-theme="dark" on <html> and persists the choice.
  * Apps pin it top-right; catalog and previews use the inline modifier.
+ * The name states the action ("Switch to dark scheme"), so it changes with the state.
  */
 export function ThemeToggle({
   storageKey = "raster-theme",
@@ -128,7 +129,7 @@ export function ThemeToggle({
   return (
     <button
       type="button"
-      aria-label="Toggle color scheme"
+      aria-label={dark ? "Switch to light scheme" : "Switch to dark scheme"}
       onClick={toggle}
       {...props}
       className={sx.className}

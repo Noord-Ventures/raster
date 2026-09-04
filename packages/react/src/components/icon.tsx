@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";

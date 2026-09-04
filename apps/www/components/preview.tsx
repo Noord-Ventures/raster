@@ -125,7 +125,6 @@ import {
   PopoverTitle,
   Tab,
   TabList,
-  TabPanel,
   Tabs,
 } from "@noorddev/raster-react";
 

@@ -152,13 +152,13 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     overflow: visible;
   }
   html body .rs-crumb-bar-inner {
-    margin-left: 0 !important;
-    padding-left: 76px !important;
+    margin-left: 0;
+    padding-left: 76px;
   }
   html body a.rs-crumb-root,
   html body a.site-crumb-root,
   html body .rs-crumb-bar .rs-crumbs {
-    display: none !important;
+    display: none;
   }
 }
 .corner-nav a {
@@ -358,7 +358,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   }
   /* StyleX atomics otherwise keep display:flex — hide the desktop
      row so crumbs / appearance / hamburger are the only chrome. */
-  .corner-nav { display: none !important; }
+  .corner-nav { display: none; }
   .settings {
     top: calc(8px + env(safe-area-inset-top, 0px));
     right: calc(56px + env(safe-area-inset-right, 0px));
@@ -489,6 +489,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   .preview-box > section,
   .preview-box > article,
   .gallery-demo > div {
+    /* StyleX conditional rules carry :not(#\#) specificity; only !important beats them from here. */
     width: 100% !important;
     max-width: 100%;
   }
@@ -749,7 +750,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .specimen-kit-live .rs-command,
 .specimen-kit-live .rs-popover,
 .specimen-kit-live .rs-hover-card-panel {
-  border: 0 !important;
+  border: 0;
 }
 .preview-box > * { max-width: 100%; }
 .preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 0; border: 0; width: 100%; }
@@ -919,6 +920,8 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 }
 
 /* Grid hide: module overlay and boxed cages only. Component hairlines stay. */
+/* The cages are StyleX conditional rules (:not(#\#) specificity), so this
+   user-toggled state needs !important to win from plain CSS. */
 html[data-grid="off"]::before,
 html[data-grid="off"]::after { display: none !important; }
 html[data-grid="off"] .site-footer { background-image: none !important; }

@@ -157,6 +157,7 @@ export default function AboutPage() {
           <Kicker>{program.module.kicker}</Kicker>
           <div
             {...sx("field-spec field-spec-module", about.spec, about.specModule)}
+            role="img"
             aria-label="204 module: 184 column and 20 gutter"
           >
             <div {...sx("field-mod204", about.mod204)}>

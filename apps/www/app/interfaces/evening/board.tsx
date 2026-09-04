@@ -189,7 +189,7 @@ export function Board() {
                 ))}
               </div>
             </div>
-            <div className="sc-evening-stores" aria-label="Kitchens">
+            <div className="sc-evening-stores" role="group" aria-label="Kitchens">
               {rooms.length === 0 ? (
                 <p className="sc-evening-empty">No kitchens on that filter.</p>
               ) : (
@@ -213,7 +213,7 @@ export function Board() {
                 ))
               )}
             </div>
-            <div className="sc-evening-v1" aria-label="Kitchens">
+            <div className="sc-evening-v1" role="group" aria-label="Kitchens">
               {V1_KITCHENS.map((item) => {
                 const row = STORES.find((store) => store.id === item.id);
                 if (!row) return null;
@@ -235,7 +235,7 @@ export function Board() {
             </div>
           </>
         ) : (
-          <div className="sc-evening-menu" aria-label="Menu">
+          <div className="sc-evening-menu" role="group" aria-label="Menu">
             <header className="sc-evening-head">
               <button type="button" className="sc-evening-back" onClick={() => setPage("market")}>
                 <Icon name="arrow-left" size={12} />

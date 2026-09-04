@@ -54,6 +54,7 @@ if (extras.length) {
   process.exit(1);
 }
 
+// biome-ignore lint/suspicious/noTemplateCurlyInString: asserting the literal source text
 if (!index.includes("interfaces.map") || !index.includes("`/interfaces/${item.slug}`")) {
   console.error("Interfaces index must list the six from catalog.ts");
   process.exit(1);

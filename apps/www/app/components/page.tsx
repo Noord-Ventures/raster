@@ -19,75 +19,73 @@ export const metadata: Metadata = {
 
 export default function ComponentsPage() {
   return (
-    <>
-      <div className="site-layout catalog-page">
-        <DocsNav />
-        <main id="main" {...sx("site-content", chrome.catalogContent)}>
-          <header {...sx("cover", chrome.cover)}>
-            <h1 className="rs-t-display">Components</h1>
-            <p className="rs-t-sub">The control, the name, a short law.</p>
-          </header>
-          {rasterCategories.map((category) => {
-            if (category === "icons") {
-              return (
-                <section key={category} id={category}>
-                  <h2 className="rs-t-title catalog-group">Icons</h2>
-                  <div {...sx("gallery", chrome.gallery)}>
-                    {iconGroups.map((group) => (
-                      <div key={group.title} {...sx("gallery-item", chrome.galleryItem)}>
-                        <div {...sx("gallery-demo", chrome.galleryDemo)}>
-                          <div className="preview-cluster" style={{ flexWrap: "wrap", justifyContent: "center", maxWidth: 280 }}>
-                            {group.names.slice(0, 8).map((name) => (
-                              <Icon key={name} name={name} size={16} />
-                            ))}
-                          </div>
-                        </div>
-                        <div {...sx("gallery-meta", chrome.galleryMeta)}>
-                          <h3>
-                            <Link
-                              href={`/components/icons#${iconGroupSlug(group.title)}`}
-                              className="gallery-item-link"
-                            >
-                              {group.title}
-                            </Link>
-                          </h3>
-                          <p>{group.names.length} marks. 16 viewBox, 1px currentColor.</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              );
-            }
-            const items = catalogComponents.filter((c) => c.category === category);
-            if (items.length === 0) return null;
+    <div className="site-layout catalog-page">
+      <DocsNav />
+      <main id="main" {...sx("site-content", chrome.catalogContent)}>
+        <header {...sx("cover", chrome.cover)}>
+          <h1 className="rs-t-display">Components</h1>
+          <p className="rs-t-sub">The control, the name, a short law.</p>
+        </header>
+        {rasterCategories.map((category) => {
+          if (category === "icons") {
             return (
               <section key={category} id={category}>
-                <h2 className="rs-t-title catalog-group">
-                  {category.charAt(0).toUpperCase() + category.slice(1)}
-                </h2>
+                <h2 className="rs-t-title catalog-group">Icons</h2>
                 <div {...sx("gallery", chrome.gallery)}>
-                  {items.map((c) => (
-                    <div key={c.name} {...sx("gallery-item", chrome.galleryItem)}>
+                  {iconGroups.map((group) => (
+                    <div key={group.title} {...sx("gallery-item", chrome.galleryItem)}>
                       <div {...sx("gallery-demo", chrome.galleryDemo)}>
-                        <Preview name={c.name} snippet={c.snippet} />
+                        <div className="preview-cluster" style={{ flexWrap: "wrap", justifyContent: "center", maxWidth: 280 }}>
+                          {group.names.slice(0, 8).map((name) => (
+                            <Icon key={name} name={name} size={16} />
+                          ))}
+                        </div>
                       </div>
                       <div {...sx("gallery-meta", chrome.galleryMeta)}>
                         <h3>
-                          <Link href={`/components/${c.name}`} className="gallery-item-link">
-                            {c.title}
+                          <Link
+                            href={`/components/icons#${iconGroupSlug(group.title)}`}
+                            className="gallery-item-link"
+                          >
+                            {group.title}
                           </Link>
                         </h3>
-                        <p>{c.description}</p>
+                        <p>{group.names.length} marks. 16 viewBox, 1px currentColor.</p>
                       </div>
                     </div>
                   ))}
                 </div>
               </section>
             );
-          })}
-        </main>
-      </div>
-    </>
+          }
+          const items = catalogComponents.filter((c) => c.category === category);
+          if (items.length === 0) return null;
+          return (
+            <section key={category} id={category}>
+              <h2 className="rs-t-title catalog-group">
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </h2>
+              <div {...sx("gallery", chrome.gallery)}>
+                {items.map((c) => (
+                  <div key={c.name} {...sx("gallery-item", chrome.galleryItem)}>
+                    <div {...sx("gallery-demo", chrome.galleryDemo)}>
+                      <Preview name={c.name} snippet={c.snippet} />
+                    </div>
+                    <div {...sx("gallery-meta", chrome.galleryMeta)}>
+                      <h3>
+                        <Link href={`/components/${c.name}`} className="gallery-item-link">
+                          {c.title}
+                        </Link>
+                      </h3>
+                      <p>{c.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          );
+        })}
+      </main>
+    </div>
   );
 }

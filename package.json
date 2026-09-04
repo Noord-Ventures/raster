@@ -25,5 +25,8 @@
     "test": "pnpm -r --filter './packages/*' test",
     "typecheck": "pnpm -r --filter './packages/*' typecheck",
     "dev": "pnpm --filter www dev"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.12"
   }
 }

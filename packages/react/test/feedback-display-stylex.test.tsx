@@ -1,4 +1,3 @@
-import * as React from "react";
 import { act, cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -28,8 +27,8 @@ describe("StyleX feedback/display leaves", () => {
         Body
       </Alert>,
     );
-    expect(screen.getByRole("status").className).toContain("rs-alert");
-    expect(screen.getByRole("status").className).toContain("rs-alert-solid");
+    expect(screen.getByRole("note").className).toContain("rs-alert");
+    expect(screen.getByRole("note").className).toContain("rs-alert-solid");
     expect(screen.getByText("Note").className).toContain("rs-alert-title");
     expect(screen.getByText("Body").className).toContain("rs-alert-body");
   });

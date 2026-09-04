@@ -4,11 +4,11 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
+import { DialogCloseButton, DialogContext, dialogStyles, useDialogPart, useNativeDialog, type NativeDialogOptions } from "./dialog";
 
-
-export interface SheetProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, "open"> {
-  open: boolean;
-  onClose?: () => void;
+export interface SheetProps
+  extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, "open" | "onClose">,
+    NativeDialogOptions {
   side?: "left" | "right";
 }
 
@@ -45,7 +45,7 @@ const styles = stylex.create({
     color: raster.ink,
     boxShadow: "none",
     "::backdrop": {
-      backgroundColor: "rgba(0,0,0,0.25)",
+      backgroundColor: ["rgba(0,0,0,0.25)", `color-mix(in srgb, ${raster.paper} 55%, transparent)`],
     },
   },
   left: {
@@ -68,7 +68,10 @@ const styles = stylex.create({
     fontWeight: 600,
     letterSpacing: "-0.01em",
     color: raster.ink,
+    marginTop: 0,
+    marginRight: 0,
     marginBottom: 6,
+    marginLeft: 0,
   },
   body: {
     fontSize: {
@@ -84,38 +87,39 @@ const styles = stylex.create({
 
 /**
  * A native <dialog> at the screen edge. The platform provides the
- * focus trap, Escape, and the backdrop.
+ * focus trap, Escape, and the backdrop; the title names it.
  */
-export function Sheet({ open, onClose, side = "right", className, style, children, ...props }: SheetProps) {
-  const ref = React.useRef<HTMLDialogElement>(null);
-
-  React.useEffect(() => {
-    const dialog = ref.current;
-    if (!dialog) return;
-    if (open && !dialog.open) dialog.showModal();
-    else if (!open && dialog.open) dialog.close();
-  }, [open]);
-
+export const Sheet = React.forwardRef<HTMLDialogElement, SheetProps>(function Sheet(
+  { open, onClose, dismissable, lightDismiss, closeLabel, side = "right", className, style, children, ...props },
+  forwardedRef,
+) {
+  const { ref, context, dialogProps } = useNativeDialog({ open, onClose, dismissable, lightDismiss }, props, forwardedRef);
   const sx = rs(["rs-sheet", side === "left" && "rs-sheet-left", className], styles.frame, side === "left" && styles.left);
+  const close = rs(["rs-sheet-close"], dialogStyles.close);
   return (
-    <dialog
-      ref={ref}
-      className={sx.className}
-      style={{ ...sx.style, ...style }}
-      onClose={() => onClose?.()}
-      {...props}
-    >
-      {children}
-    </dialog>
+    <DialogContext.Provider value={context}>
+      <dialog ref={ref} {...props} {...dialogProps} className={sx.className} style={{ ...sx.style, ...style }}>
+        {closeLabel != null && (
+          <DialogCloseButton label={closeLabel} className={close.className} style={close.style} onClick={() => onClose?.()} />
+        )}
+        {children}
+      </dialog>
+    </DialogContext.Provider>
   );
+});
+
+export interface SheetTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
 }
 
-export function SheetTitle({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export function SheetTitle({ as: Tag = "h2", className, style, id, ...props }: SheetTitleProps) {
+  const titleId = useDialogPart("title", id);
   const sx = rs(["rs-sheet-title", className], styles.title);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+  return <Tag {...props} id={titleId} className={sx.className} style={{ ...sx.style, ...style }} />;
 }
 
-export function SheetBody({ className, style, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export function SheetBody({ className, style, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  const bodyId = useDialogPart("body", id);
   const sx = rs(["rs-sheet-body", className], styles.body);
-  return <p {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+  return <p {...props} id={bodyId} className={sx.className} style={{ ...sx.style, ...style }} />;
 }

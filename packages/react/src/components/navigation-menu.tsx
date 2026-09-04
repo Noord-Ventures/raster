@@ -1,10 +1,12 @@
-import * as React from "react";
+import type * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface NavigationMenuProps extends React.HTMLAttributes<HTMLElement> {
   items: Array<{ label: React.ReactNode; href: string; current?: boolean }>;
+  /** Landmark name; pages carry several navs. */
+  "aria-label"?: string;
 }
 
 const styles = stylex.create({
@@ -56,11 +58,22 @@ const styles = stylex.create({
 });
 
 /** Links in a row; the current page is ink. */
-export function NavigationMenu({ items, className, style, ...props }: NavigationMenuProps) {
+export function NavigationMenu({
+  items,
+  className,
+  style,
+  "aria-label": ariaLabel = "Primary",
+  ...props
+}: NavigationMenuProps) {
   const nav = rs(["rs-nav", className], styles.nav);
   const link = rs(["rs-nav-link"], styles.link);
   return (
-    <nav {...props} className={nav.className} style={{ ...nav.style, ...style }}>
+    <nav
+      aria-label={props["aria-labelledby"] ? undefined : ariaLabel}
+      {...props}
+      className={nav.className}
+      style={{ ...nav.style, ...style }}
+    >
       {items.map((item, index) => (
         <a
           key={index}

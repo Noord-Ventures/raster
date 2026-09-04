@@ -4,6 +4,7 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
+import { useFieldControl } from "./field";
 
 export interface SliderProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "value" | "defaultValue" | "onChange"> {
@@ -28,7 +29,7 @@ const styles = stylex.create({
       [mq.phone]: 0,
     },
     marginBlock: {
-      default: 10,
+      default: 11,
       [mq.phone]: 20,
     },
     marginInline: 0,
@@ -43,6 +44,7 @@ const styles = stylex.create({
       default: 1,
       [mq.phone]: 0,
     },
+    pointerEvents: "none",
   },
   thumb: {
     position: "absolute",
@@ -65,17 +67,26 @@ const styles = stylex.create({
     borderStyle: "solid",
     borderColor: raster.ink,
     boxSizing: "border-box",
+    pointerEvents: "none",
+  },
+  /** Keyboard focus on the hidden range paints a ring on the thumb. */
+  thumbFocused: {
+    outlineWidth: 2,
+    outlineStyle: "solid",
+    outlineColor: raster.ink,
+    outlineOffset: 2,
   },
   range: {
     position: "absolute",
     left: 0,
     right: 0,
+    // 24px tall on desktop, 44px on phones: the hit area, not the 2px track.
     top: {
-      default: -8,
+      default: -11,
       [mq.phone]: -20,
     },
     bottom: {
-      default: -8,
+      default: -11,
       [mq.phone]: -20,
     },
     width: "100%",
@@ -86,23 +97,32 @@ const styles = stylex.create({
   },
 });
 
+function isFocusVisible(el: HTMLElement): boolean {
+  try {
+    return el.matches(":focus-visible");
+  } catch {
+    return true;
+  }
+}
+
 /** A native range input drives the ink track. */
 export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(function Slider(
-  { value, defaultValue = 50, min = 0, max = 100, step = 1, onValueChange, className, style, ...props },
+  { value, defaultValue = 50, min = 0, max = 100, step = 1, onValueChange, className, style, onFocus, onBlur, ...props },
   ref,
 ) {
   const [inner, setInner] = React.useState(defaultValue);
+  const [focused, setFocused] = React.useState(false);
   const isControlled = value !== undefined;
   const current = isControlled ? value : inner;
   const pct = max === min ? 0 : ((current - min) / (max - min)) * 100;
+  const field = useFieldControl(props);
   const sx = rs(["rs-slider", className], styles.slider);
   const fill = rs(["rs-slider-fill"], styles.fill);
-  const thumb = rs(["rs-slider-thumb"], styles.thumb);
+  const thumb = rs(["rs-slider-thumb", focused && "rs-slider-thumb-focused"], styles.thumb, focused && styles.thumbFocused);
   const range = rs(["rs-slider-range"], styles.range);
   return (
     <div className={sx.className} style={{ ...sx.style, ...style }}>
       <span className={fill.className} style={{ ...fill.style, width: `${pct}%` }} />
-      <span className={thumb.className} style={{ ...thumb.style, left: `${pct}%` }} />
       <input
         ref={ref}
         type="range"
@@ -118,7 +138,18 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(function S
           onValueChange?.(next);
         }}
         {...props}
+        aria-describedby={field["aria-describedby"]}
+        aria-invalid={field["aria-invalid"]}
+        onFocus={(e) => {
+          onFocus?.(e);
+          setFocused(isFocusVisible(e.currentTarget));
+        }}
+        onBlur={(e) => {
+          onBlur?.(e);
+          setFocused(false);
+        }}
       />
+      <span className={thumb.className} style={{ ...thumb.style, left: `${pct}%` }} />
     </div>
   );
 });

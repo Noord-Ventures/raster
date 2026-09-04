@@ -4,6 +4,7 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
+import { useFieldControl } from "./field";
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: React.ReactNode;
@@ -31,7 +32,7 @@ const styles = stylex.create({
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderColor: {
-      default: raster.divider,
+      default: raster.controlBorder,
       ":focus": raster.accent,
     },
     borderRadius: {
@@ -56,7 +57,16 @@ const styles = stylex.create({
       default: 10,
       [mq.phone]: 14,
     },
-    outline: "none",
+    outlineWidth: {
+      default: 0,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: "none",
+      ":focus-visible": "solid",
+    },
+    outlineColor: raster.ink,
+    outlineOffset: 2,
     fontFamily: "inherit",
     minHeight: {
       default: 96,
@@ -70,6 +80,9 @@ const styles = stylex.create({
       backgroundColor: "var(--bg)",
       boxShadow: "inset 0 0 0 1000px var(--bg)",
     },
+  },
+  invalid: {
+    borderColor: raster.ink,
   },
   feedback: {
     display: "flex",
@@ -94,18 +107,28 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(fun
 ) {
   const autoId = React.useId();
   const areaId = id ?? autoId;
-  const field = rs(["rs-field", "rs-textarea-field"], styles.field);
+  const field = useFieldControl(props);
+  const invalid = field.invalid;
+  const stack = rs(["rs-field", "rs-textarea-field"], styles.field);
   const lab = rs(["rs-field-label", "rs-textarea-label"], styles.label);
-  const sx = rs(["rs-textarea", className], styles.area);
+  const sx = rs(["rs-textarea", invalid && "rs-textarea-invalid", className], styles.area, invalid && styles.invalid);
   const fb = rs(["rs-feedback", "rs-textarea-feedback"], styles.feedback);
   return (
-    <div className={field.className} style={field.style}>
+    <div className={stack.className} style={stack.style}>
       {label != null && (
         <label className={lab.className} style={lab.style} htmlFor={areaId}>
           {label}
         </label>
       )}
-      <textarea ref={ref} id={areaId} {...props} className={sx.className} style={{ ...sx.style, ...style }} />
+      <textarea
+        ref={ref}
+        id={areaId}
+        {...props}
+        aria-describedby={field["aria-describedby"]}
+        aria-invalid={field["aria-invalid"]}
+        className={sx.className}
+        style={{ ...sx.style, ...style }}
+      />
       {feedback != null && (
         <span className={fb.className} style={fb.style}>
           {feedback}

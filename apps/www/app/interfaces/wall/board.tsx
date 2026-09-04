@@ -160,7 +160,7 @@ export function Board() {
       </aside>
 
       <section className="sc-wall-feed" aria-label="Feed">
-        <div className="sc-wall-faces" aria-label="People">
+        <div className="sc-wall-faces" role="group" aria-label="People">
           {PEOPLE.map((row) => (
             <button
               key={row.id}

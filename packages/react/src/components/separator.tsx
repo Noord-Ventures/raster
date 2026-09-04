@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -31,7 +31,9 @@ export function Separator({ orientation = "horizontal", className, style, ...pro
   if (orientation === "vertical") {
     const sx = rs(["rs-sep-v", className], styles.vertical);
     return (
+      // biome-ignore lint/a11y/useFocusableInteractive: a static separator is not a widget; it takes no focus
       <span
+        // biome-ignore lint/a11y/useAriaPropsForRole: a non-focusable separator needs no aria-valuenow
         role="separator"
         aria-orientation="vertical"
         {...props}

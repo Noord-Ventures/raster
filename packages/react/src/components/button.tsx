@@ -47,11 +47,20 @@ const styles = stylex.create({
       default: raster.radiusSm,
       [mq.phone]: 0,
     },
-    transition: "opacity var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease), color var(--duration-snap) var(--ease)",
+    transition: {
+      default: "opacity var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease), color var(--duration-snap) var(--ease)",
+      [mq.reduce]: "none",
+    },
+    /* Hover and disabled are opacity on paper; in forced colors they become system colors instead. */
     opacity: {
       default: 1,
       ":hover": 0.85,
       ":disabled": 0.4,
+      [mq.forcedColors]: {
+        default: 1,
+        ":hover": 1,
+        ":disabled": 1,
+      },
     },
     outlineWidth: {
       default: null,
@@ -72,9 +81,24 @@ const styles = stylex.create({
   },
   primary: {
     fontWeight: 600,
-    backgroundColor: raster.ink,
-    color: raster.paper,
-    borderColor: "transparent",
+    backgroundColor: {
+      default: raster.ink,
+      [mq.forcedColors]: "ButtonFace",
+    },
+    color: {
+      default: raster.paper,
+      [mq.forcedColors]: {
+        default: "ButtonText",
+        ":disabled": "GrayText",
+      },
+    },
+    borderColor: {
+      default: "transparent",
+      [mq.forcedColors]: {
+        default: "ButtonText",
+        ":disabled": "GrayText",
+      },
+    },
   },
   ghost: {
     fontWeight: 500,
@@ -82,12 +106,24 @@ const styles = stylex.create({
       default: "transparent",
       ":hover": raster.divider,
       ":disabled": "transparent",
+      [mq.forcedColors]: "ButtonFace",
     },
-    color: raster.ink,
+    color: {
+      default: raster.ink,
+      [mq.forcedColors]: {
+        default: "ButtonText",
+        ":disabled": "GrayText",
+      },
+    },
     borderColor: {
       default: raster.divider,
       ":hover": "transparent",
       ":disabled": raster.divider,
+      [mq.forcedColors]: {
+        default: "ButtonText",
+        ":hover": "Highlight",
+        ":disabled": "GrayText",
+      },
     },
   },
   sm: {
@@ -130,12 +166,17 @@ const styles = stylex.create({
       default: 0,
       [mq.phone]: 0,
     },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": -2,
+    },
   },
   groupedGhost: {
     backgroundColor: {
       default: raster.paper,
       ":hover": raster.divider,
       ":disabled": raster.paper,
+      [mq.forcedColors]: "ButtonFace",
     },
   },
 });

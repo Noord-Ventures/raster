@@ -4,10 +4,28 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
-import type { DropdownMenuItem } from "./dropdown-menu";
-import { menuStyles } from "./dropdown-menu";
+import type { DropdownMenuItem, MenuCloseReason } from "./dropdown-menu";
+import { MenuPanel, menuStyles } from "./dropdown-menu";
 
 const styles = stylex.create({
+  trigger: {
+    outlineWidth: {
+      default: null,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
+    },
+  },
   pin: {
     position: "fixed",
     zIndex: 50,
@@ -19,69 +37,79 @@ export interface ContextMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   items: DropdownMenuItem[];
 }
 
-/** Right-click menu at the pointer. */
-export function ContextMenu({ items, className, style, children, ...props }: ContextMenuProps) {
+/**
+ * Menu at the pointer on right-click, or anchored to the trigger on
+ * Shift+F10 / the ContextMenu key. The wrapper is tabbable (pass
+ * `tabIndex={-1}` when the child is focusable itself); focus returns to
+ * whatever had it when the menu closes.
+ */
+export function ContextMenu({ items, className, style, children, onContextMenu, onKeyDown, ...props }: ContextMenuProps) {
+  const idBase = React.useId();
+  const menuId = `${idBase}-menu`;
   const [at, setAt] = React.useState<{ x: number; y: number } | null>(null);
   const menuRef = React.useRef<HTMLDivElement>(null);
+  const restoreTo = React.useRef<HTMLElement | null>(null);
 
   React.useEffect(() => {
     if (!at) return;
-    const close = () => setAt(null);
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
+    const onPointerDown = (e: PointerEvent) => {
+      if (!menuRef.current?.contains(e.target as Node)) setAt(null);
     };
-    document.addEventListener("pointerdown", close);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("pointerdown", close);
-      document.removeEventListener("keydown", onKey);
-    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
   }, [at]);
 
+  const openAt = (x: number, y: number) => {
+    restoreTo.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setAt({ x, y });
+  };
+
+  const openFromRect = (el: HTMLElement) => {
+    const r = el.getBoundingClientRect();
+    openAt(r.left, r.bottom);
+  };
+
+  const close = (reason: MenuCloseReason) => {
+    setAt(null);
+    if (reason !== "outside") restoreTo.current?.focus();
+  };
+
+  const trigger = rs(["rs-context-menu-trigger", className], styles.trigger);
   const menu = rs(["rs-menu", "rs-context-menu-pin"], menuStyles.menu, menuStyles.menuFixed, styles.pin);
   return (
     <div
-      className={className}
-      style={style}
+      tabIndex={0}
+      aria-keyshortcuts="Shift+F10"
+      className={trigger.className}
+      style={{ ...trigger.style, ...style }}
       onContextMenu={(e) => {
+        onContextMenu?.(e);
+        if (e.defaultPrevented) return;
         e.preventDefault();
-        setAt({ x: e.clientX, y: e.clientY });
+        /* A keyboard-synthesised contextmenu event carries no pointer position. */
+        if (e.clientX === 0 && e.clientY === 0) openFromRect(e.currentTarget);
+        else openAt(e.clientX, e.clientY);
+      }}
+      onKeyDown={(e) => {
+        onKeyDown?.(e);
+        if (e.defaultPrevented || at) return;
+        if ((e.key === "F10" && e.shiftKey) || e.key === "ContextMenu") {
+          e.preventDefault();
+          openFromRect(e.currentTarget);
+        }
       }}
       {...props}
     >
       {children}
       {at && (
-        <div
-          ref={menuRef}
-          role="menu"
+        <MenuPanel
+          panelRef={menuRef}
+          id={menuId}
+          items={items}
           className={menu.className}
           style={{ ...menu.style, left: at.x, top: at.y }}
-          onPointerDown={(e) => e.stopPropagation()}
-        >
-          {items.map((item, index) => {
-            if (item.separator) {
-              const sep = rs(["rs-menu-sep"], menuStyles.sep);
-              return <hr key={`sep-${index}`} className={sep.className} style={sep.style} />;
-            }
-            const row = rs(["rs-menu-item"], menuStyles.item);
-            return (
-              <button
-                key={index}
-                type="button"
-                role="menuitem"
-                disabled={item.disabled}
-                className={row.className}
-                style={row.style}
-                onClick={() => {
-                  setAt(null);
-                  item.onSelect?.();
-                }}
-              >
-                {item.label}
-              </button>
-            );
-          })}
-        </div>
+          onClose={close}
+        />
       )}
     </div>
   );

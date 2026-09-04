@@ -1,13 +1,15 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
-
+import { describeTrigger } from "./tooltip";
 
 export interface HoverCardProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** A focusable element is used as is; anything else gets one tab stop. */
   trigger: React.ReactNode;
 }
-
 
 const styles = stylex.create({
   root: {
@@ -68,17 +70,54 @@ const styles = stylex.create({
       },
     },
     transition: `opacity ${raster.durationSnap} ${raster.ease} ${raster.durationSnap}, visibility ${raster.durationSnap} ${raster.ease} ${raster.durationSnap}`,
+    // Bridges the 8px gap so the pointer can move onto the panel.
+    "::before": {
+      content: '""',
+      position: "absolute",
+      bottom: "100%",
+      left: 0,
+      right: 0,
+      height: 8,
+    },
   },
 });
 
-/** Preview panel on hover or keyboard focus. CSS only. */
-export function HoverCard({ trigger, className, style, children, ...props }: HoverCardProps) {
+/**
+ * Preview panel on hover or keyboard focus. CSS shows it; the panel
+ * describes the trigger, and Escape hides it until the pointer leaves.
+ */
+export function HoverCard({ trigger, className, style, children, onKeyDown, onPointerLeave, onBlur, ...props }: HoverCardProps) {
+  const id = React.useId();
+  const [dismissed, setDismissed] = React.useState(false);
   const sx = rs(["rs-hover-card", className], styles.root, stylex.defaultMarker());
   const panel = rs(["rs-hover-card-panel"], styles.panel);
+  const anchor = React.isValidElement(trigger) ? (
+    describeTrigger(trigger, id)
+  ) : (
+    <span tabIndex={0} aria-describedby={id}>
+      {trigger}
+    </span>
+  );
   return (
-    <span {...props} className={sx.className} style={{ ...sx.style, ...style }}>
-      <span tabIndex={0}>{trigger}</span>
-      <span className={panel.className} style={panel.style} role="tooltip">
+    <span
+      {...props}
+      className={sx.className}
+      style={{ ...sx.style, ...style }}
+      onKeyDown={(e) => {
+        onKeyDown?.(e);
+        if (e.key === "Escape") setDismissed(true);
+      }}
+      onPointerLeave={(e) => {
+        onPointerLeave?.(e);
+        setDismissed(false);
+      }}
+      onBlur={(e) => {
+        onBlur?.(e);
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setDismissed(false);
+      }}
+    >
+      {anchor}
+      <span className={panel.className} style={panel.style} role="tooltip" id={id} hidden={dismissed}>
         {children}
       </span>
     </span>

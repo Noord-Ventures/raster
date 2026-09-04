@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
-import { Dialog } from "./dialog";
+import { Dialog, type DialogProps } from "./dialog";
 
 const styles = stylex.create({
   lock: {
@@ -10,28 +10,27 @@ const styles = stylex.create({
   },
 });
 
-export interface AlertDialogProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, "open"> {
-  open: boolean;
-  onClose?: () => void;
-}
+export interface AlertDialogProps extends Omit<DialogProps, "dismissable" | "lightDismiss" | "closeLabel"> {}
 
 /**
  * A native <dialog> that requires an explicit answer. Escape and
- * light dismiss are disabled.
+ * light dismiss are off (closedby="none"); the actions close it.
  */
-export function AlertDialog({ open, onClose, ...props }: AlertDialogProps) {
+export const AlertDialog = React.forwardRef<HTMLDialogElement, AlertDialogProps>(function AlertDialog(
+  { className, extraStyles, ...props },
+  ref,
+) {
   return (
     <Dialog
-      open={open}
-      onClose={onClose}
+      ref={ref}
       role="alertdialog"
-      onCancel={(e) => e.preventDefault()}
-      className="rs-alert-dialog"
-      extraStyles={[styles.lock]}
+      dismissable={false}
+      className={className ? `rs-alert-dialog ${className}` : "rs-alert-dialog"}
+      extraStyles={[styles.lock, ...(extraStyles ?? [])]}
       {...props}
     />
   );
-}
+});
 
 export {
   DialogTitle as AlertDialogTitle,

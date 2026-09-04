@@ -56,7 +56,23 @@ const styles = stylex.create({
     color: raster.ink,
     paddingBlock: 14,
     paddingInline: 16,
-    outline: "none",
+    /* The palette clips at its edge, so the ring sits inside the field. */
+    outlineWidth: {
+      default: 0,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: "none",
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": -2,
+    },
     minHeight: {
       default: null,
       [mq.phone]: raster.hit,
@@ -96,6 +112,7 @@ const styles = stylex.create({
     },
   },
   item: {
+    boxSizing: "border-box",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
@@ -150,7 +167,9 @@ const styles = stylex.create({
   },
 });
 
-/** Filter, arrows, enter. */
+const PAGE = 10;
+
+/** Filter, arrows, enter. The input keeps focus; the list is aria-activedescendant. */
 export function Command({
   groups,
   placeholder = "Type a command or search…",
@@ -160,10 +179,15 @@ export function Command({
   style,
   ...props
 }: CommandProps) {
+  const idBase = React.useId();
+  const inputId = `${idBase}-input`;
+  const listboxId = `${idBase}-listbox`;
+  const optionId = (index: number) => `${idBase}-opt-${index}`;
+  const activeRef = React.useRef<HTMLDivElement>(null);
   const [query, setQuery] = React.useState("");
   const [activeIndex, setActiveIndex] = React.useState(0);
 
-  const q = query.toLowerCase();
+  const q = query.trim().toLowerCase();
   const filtered = groups
     .map((group) => ({
       ...group,
@@ -173,10 +197,61 @@ export function Command({
     }))
     .filter((group) => group.items.length > 0);
   const flat = filtered.flatMap((group) => group.items);
+  const hasList = flat.length > 0;
+
+  React.useEffect(() => {
+    setActiveIndex((i) => Math.max(0, Math.min(flat.length - 1, i)));
+  }, [flat.length]);
+
+  React.useEffect(() => {
+    activeRef.current?.scrollIntoView?.({ block: "nearest" });
+  }, [activeIndex, q]);
 
   const run = (item: CommandItem) => {
     onDone?.();
     item.onSelect?.();
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const last = Math.max(0, flat.length - 1);
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        setActiveIndex((i) => Math.min(last, i + 1));
+        return;
+      case "ArrowUp":
+        e.preventDefault();
+        setActiveIndex((i) => Math.max(0, i - 1));
+        return;
+      case "Home":
+        e.preventDefault();
+        setActiveIndex(0);
+        return;
+      case "End":
+        e.preventDefault();
+        setActiveIndex(last);
+        return;
+      case "PageUp":
+        e.preventDefault();
+        setActiveIndex((i) => Math.max(0, i - PAGE));
+        return;
+      case "PageDown":
+        e.preventDefault();
+        setActiveIndex((i) => Math.min(last, i + PAGE));
+        return;
+      case "Enter": {
+        e.preventDefault();
+        const item = flat[activeIndex];
+        if (item) run(item);
+        return;
+      }
+      case "Escape":
+        e.preventDefault();
+        onDone?.();
+        return;
+      default:
+        return;
+    }
   };
 
   const input = rs(["rs-command-input"], styles.input);
@@ -189,77 +264,83 @@ export function Command({
   return (
     <div className={className} style={style} {...props}>
       <input
+        id={inputId}
         className={input.className}
         style={input.style}
         autoFocus
+        type="text"
+        autoComplete="off"
         placeholder={placeholder}
         role="combobox"
-        aria-expanded="true"
+        aria-expanded={hasList}
+        aria-controls={hasList ? listboxId : undefined}
+        aria-activedescendant={hasList && flat[activeIndex] ? optionId(activeIndex) : undefined}
+        aria-autocomplete="list"
         aria-label="Command"
         value={query}
         onChange={(e) => {
           setQuery(e.target.value);
           setActiveIndex(0);
         }}
-        onKeyDown={(e) => {
-          if (e.key === "ArrowDown") {
-            e.preventDefault();
-            setActiveIndex((i) => Math.min(flat.length - 1, i + 1));
-          }
-          if (e.key === "ArrowUp") {
-            e.preventDefault();
-            setActiveIndex((i) => Math.max(0, i - 1));
-          }
-          if (e.key === "Enter") {
-            e.preventDefault();
-            const item = flat[activeIndex];
-            if (item) run(item);
-          }
-        }}
+        onKeyDown={onKeyDown}
       />
-      <div className={list.className} style={list.style} role="listbox">
+      <div
+        id={hasList ? listboxId : undefined}
+        role={hasList ? "listbox" : undefined}
+        aria-labelledby={hasList ? inputId : undefined}
+        tabIndex={-1}
+        className={list.className}
+        style={list.style}
+        onMouseDown={(e) => e.preventDefault()}
+      >
         {flat.length === 0 && (
           <div className={empty.className} style={empty.style}>
             {emptyLabel}
           </div>
         )}
-        {filtered.map((group, gi) => (
-          <React.Fragment key={gi}>
-            {group.label && (
-              <div className={groupSx.className} style={groupSx.style}>
-                {group.label}
-              </div>
-            )}
-            {group.items.map((item) => {
-              cursor++;
-              const index = cursor;
-              const row = rs(
-                ["rs-command-item", index === activeIndex && "rs-command-item-active"],
-                styles.item,
-                index === activeIndex && styles.itemActive,
-              );
-              return (
-                <button
-                  key={item.label}
-                  type="button"
-                  role="option"
-                  aria-selected={index === activeIndex}
-                  className={row.className}
-                  style={row.style}
-                  onPointerEnter={() => setActiveIndex(index)}
-                  onClick={() => run(item)}
-                >
-                  <span>{item.label}</span>
-                  {item.hint != null && (
-                    <span className={hint.className} style={hint.style}>
-                      {item.hint}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </React.Fragment>
-        ))}
+        {filtered.map((group, gi) => {
+          const groupLabelId = `${idBase}-group-${gi}`;
+          return (
+            <div key={gi} role="group" aria-labelledby={group.label ? groupLabelId : undefined}>
+              {group.label && (
+                <div id={groupLabelId} role="presentation" className={groupSx.className} style={groupSx.style}>
+                  {group.label}
+                </div>
+              )}
+              {group.items.map((item) => {
+                cursor++;
+                const index = cursor;
+                const active = index === activeIndex;
+                const row = rs(
+                  ["rs-command-item", active && "rs-command-item-active"],
+                  styles.item,
+                  active && styles.itemActive,
+                );
+                return (
+                  <div
+                    key={`${gi}-${item.label}`}
+                    id={optionId(index)}
+                    ref={active ? activeRef : undefined}
+                    role="option"
+                    tabIndex={-1}
+                    aria-selected={active}
+                    className={row.className}
+                    style={row.style}
+                    onPointerEnter={() => setActiveIndex(index)}
+                    onClick={() => run(item)}
+                  >
+                    <span>{item.label}</span>
+                    {item.hint != null && (
+                      <span className={hint.className} style={hint.style}>
+                        {item.hint}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

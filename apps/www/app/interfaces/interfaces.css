@@ -187,8 +187,8 @@ body:has(.if-index) {
   min-height: 32px;
   padding: 0 12px;
   background: var(--text);
-  color: var(--bg) !important;
-  font-size: 12px !important;
+  color: var(--bg);
+  font-size: 12px;
   font-weight: 600;
   border-radius: var(--radius-sm);
 }

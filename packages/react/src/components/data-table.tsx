@@ -145,12 +145,31 @@ const styles = stylex.create({
     display: "inline-flex",
     alignItems: "center",
     gap: 5,
+    minHeight: 24,
+    outlineWidth: {
+      default: null,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
+    },
   },
+  /* Unsorted columns show a neutral sort mark in gray; the active one is an ink arrow. */
   sortIcon: {
-    opacity: 0.45,
+    color: raster.gray,
+    opacity: 1,
   },
   sortIconOn: {
-    opacity: 1,
+    color: raster.ink,
   },
   empty: {
     paddingTop: 24,
@@ -220,7 +239,7 @@ export function DataTable<Row extends Record<string, unknown>>({
                     >
                       {column.header}
                       <Icon
-                        name={active && sort.dir === "desc" ? "arrow-down" : "arrow-up"}
+                        name={active ? (sort.dir === "desc" ? "arrow-down" : "arrow-up") : "sort"}
                         size={12}
                         className={sortIcon.className}
                         style={sortIcon.style}

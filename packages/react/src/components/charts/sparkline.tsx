@@ -1,7 +1,7 @@
-import * as React from "react";
+import type * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { rs } from "../../rs";
-import { CROUWEL_SPOT, chartStyles, lineMark } from "./frame";
+import { CROUWEL_SPOT, SrTable, chartStyles, defaultFormat, lineMark } from "./frame";
 
 const styles = stylex.create({
   spark: {
@@ -19,6 +19,11 @@ export interface SparklineProps extends React.HTMLAttributes<HTMLSpanElement> {
   width?: number;
   height?: number;
   spot?: boolean | string;
+  /** What the trend is of; leads the accessible name and the table. */
+  label?: string;
+  unit?: string;
+  /** BCP 47 tag for number formatting; undefined is the reader's own. */
+  locale?: string;
 }
 
 export function Sparkline({
@@ -28,6 +33,11 @@ export function Sparkline({
   className,
   spot,
   style,
+  label,
+  unit,
+  locale,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   ...props
 }: SparklineProps) {
   const max = Math.max(...values);
@@ -42,6 +52,13 @@ export function Sparkline({
   const svg = rs(["rs-chart-svg"], styles.svg);
   const line = lineMark(0, Boolean(spot));
   const dot = rs(["rs-chart-dot"], chartStyles.dot);
+  const name = ariaLabelledBy
+    ? { "aria-labelledby": ariaLabelledBy }
+    : {
+        "aria-label":
+          ariaLabel ??
+          `${label ? `${label}: ` : ""}trend of ${values.length} values ending at ${defaultFormat(last, unit, locale)}`,
+      };
   return (
     <span
       {...props}
@@ -59,11 +76,16 @@ export function Sparkline({
         height={height}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label={`Trend ending at ${last}`}
+        {...name}
       >
         <path className={line.className} style={line.style} d={d} />
         <circle className={dot.className} style={dot.style} cx={x(values.length - 1)} cy={y(last)} r={2} />
       </svg>
+      <SrTable
+        caption={label ?? "Trend"}
+        labels={values.map((_, i) => `${i + 1}`)}
+        series={[{ name: unit ?? label ?? "Value", values }]}
+      />
     </span>
   );
 }

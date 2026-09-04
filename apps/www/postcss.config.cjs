@@ -2,8 +2,6 @@
    marker). Same plugin options as next.config.mjs so class hashes match.
    Raster's own leaves are not scanned: they ship precompiled inside
    @noorddev/raster-react/css. */
-const path = require("node:path");
-
 const stylexBabelOptions = {
   dev: false,
   runtimeInjection: false,

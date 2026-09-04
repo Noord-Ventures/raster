@@ -19,7 +19,7 @@
   "files": [
     {
       "path": "raster/label.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}\n\nconst styles = stylex.create({\n  label: {\n    fontSize: {\n      default: 12,\n      [mq.phone]: raster.controlLabel,\n    },\n    fontWeight: 600,\n    color: raster.gray,\n    letterSpacing: \"-0.01em\",\n    lineHeight: \"16px\",\n  },\n});\n\n/** Label above a control. 12px, secondary ink. */\nexport function Label({ className, style, ...props }: LabelProps) {\n  const sx = rs([\"rs-label\", className], styles.label);\n  return <label {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n",
+      "content": "import type * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}\n\nconst styles = stylex.create({\n  label: {\n    fontSize: {\n      default: 12,\n      [mq.phone]: raster.controlLabel,\n    },\n    fontWeight: 600,\n    color: raster.gray,\n    letterSpacing: \"-0.01em\",\n    lineHeight: \"16px\",\n  },\n});\n\n/** Label above a control. 12px, secondary ink. */\nexport function Label({ className, style, ...props }: LabelProps) {\n  const sx = rs([\"rs-label\", className], styles.label);\n  return <label {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n",
       "type": "registry:component",
       "target": "components/raster/label.tsx"
     },

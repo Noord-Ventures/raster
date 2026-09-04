@@ -4,6 +4,7 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
+import { useFieldControl } from "./field";
 
 export interface InputOTPProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   length?: number;
@@ -55,14 +56,23 @@ const styles = stylex.create({
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderColor: {
-      default: raster.divider,
+      default: raster.controlBorder,
       ":focus": raster.accent,
     },
     borderRadius: {
       default: raster.radiusSm,
       [mq.phone]: 0,
     },
-    outline: "none",
+    outlineWidth: {
+      default: 0,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: "none",
+      ":focus-visible": "solid",
+    },
+    outlineColor: raster.ink,
+    outlineOffset: 2,
     fontFamily: "inherit",
     padding: 0,
     ":-webkit-autofill": {
@@ -71,6 +81,9 @@ const styles = stylex.create({
       backgroundColor: "var(--bg)",
       boxShadow: "inset 0 0 0 1000px var(--bg)",
     },
+  },
+  invalid: {
+    borderColor: raster.ink,
   },
 });
 
@@ -86,6 +99,8 @@ export function InputOTP({
 }: InputOTPProps) {
   const [chars, setChars] = React.useState<string[]>(() => Array(length).fill(""));
   const refs = React.useRef<Array<HTMLInputElement | null>>([]);
+  const field = useFieldControl(props);
+  const invalid = field.invalid;
 
   const commit = (next: string[]) => {
     setChars(next);
@@ -110,10 +125,17 @@ export function InputOTP({
   };
 
   const sx = rs(["rs-otp", className], styles.otp);
-  const cell = rs(["rs-otp-cell"], styles.cell);
+  const cell = rs(["rs-otp-cell", invalid && "rs-otp-cell-invalid"], styles.cell, invalid && styles.invalid);
 
   return (
-    <div className={sx.className} style={{ ...sx.style, ...style }} role="group" aria-label={ariaLabel} {...props}>
+    <div
+      className={sx.className}
+      style={{ ...sx.style, ...style }}
+      role="group"
+      aria-label={ariaLabel}
+      {...props}
+      aria-describedby={field["aria-describedby"]}
+    >
       {chars.map((char, index) => (
         <input
           key={index}
@@ -125,6 +147,7 @@ export function InputOTP({
           maxLength={1}
           value={char}
           aria-label={`Digit ${index + 1}`}
+          aria-invalid={field["aria-invalid"]}
           className={cell.className}
           style={cell.style}
           onChange={(e) => {

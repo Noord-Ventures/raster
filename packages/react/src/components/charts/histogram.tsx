@@ -5,6 +5,7 @@ import * as stylex from "@stylexjs/stylex";
 import { raster } from "../../tokens.stylex";
 import { rs } from "../../rs";
 import {
+  ChartCanvas,
   ChartField,
   ChartHead,
   ChartLegend,
@@ -15,8 +16,13 @@ import {
   SrTable,
   chartStyles,
   defaultFormat,
+  describePlot,
   niceMax,
+  plotName,
+  plotProps,
+  stepCursor,
   ticksFor,
+  useChartWidth,
 } from "./frame";
 
 const styles = stylex.create({
@@ -38,6 +44,8 @@ export interface HistogramProps extends React.HTMLAttributes<HTMLDivElement> {
   ticks?: number;
   valueFormat?: (n: number) => string;
   spot?: boolean | string;
+  /** BCP 47 tag for number formatting; undefined is the reader's own. */
+  locale?: string;
 }
 
 export function Histogram({
@@ -50,18 +58,23 @@ export function Histogram({
   valueFormat,
   className,
   spot,
+  locale,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   ...props
 }: HistogramProps) {
-  const format = valueFormat ?? ((v: number) => defaultFormat(v));
-  const tip = valueFormat ?? ((v: number) => defaultFormat(v, unit));
+  const format = valueFormat ?? ((v: number) => defaultFormat(v, undefined, locale));
+  const tip = valueFormat ?? ((v: number) => defaultFormat(v, unit, locale));
   const [hover, setHover] = React.useState<number | null>(null);
-  const { W, ML, MR, MT, MB } = PLOT;
+  const [canvasRef, W] = useChartWidth<HTMLDivElement>();
+  const titleId = React.useId();
+  const { ML, MR, MT, MB } = PLOT;
   const plotW = W - ML - MR;
   const plotH = height - MT - MB;
   const max = niceMax(Math.max(...bins.map((b) => b.count), 1));
   const yTicks = ticksFor(max, ticks);
   const gap = 1;
-  const bw = (plotW - gap * Math.max(0, bins.length - 1)) / bins.length;
+  const bw = (plotW - gap * Math.max(0, bins.length - 1)) / Math.max(1, bins.length);
   const active = hover != null ? bins[hover] : null;
 
   const svg = rs(["rs-chart-svg"], chartStyles.svg);
@@ -71,60 +84,78 @@ export function Histogram({
   const baseline = rs(["rs-chart-baseline"], chartStyles.baseline);
   const hist = rs(["rs-chart-hist", Boolean(spot) && "rs-chart-bar-spot"], styles.hist, Boolean(spot) && chartStyles.barSpot);
 
+  const name = plotName(
+    { "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy },
+    yLabel ? titleId : undefined,
+    describePlot("Histogram", [`${bins.length} bins`], unit),
+  );
+  const a11y = plotProps(
+    name,
+    (key) => {
+      const next = stepCursor(key, hover, bins.length);
+      if (next === undefined) return false;
+      setHover(next);
+      return true;
+    },
+    () => setHover(null),
+  );
+
   return (
     <ChartField spot={spot} className={className} {...props}>
       {yLabel && (
         <ChartHead>
-          <ChartTitle>{yLabel}</ChartTitle>
+          <ChartTitle id={titleId}>{yLabel}</ChartTitle>
         </ChartHead>
       )}
-      <svg className={svg.className} style={svg.style} viewBox={`0 0 ${W} ${height}`} role="img" aria-label="Histogram">
-        <g className={plot.className} style={plot.style}>
-          {grid &&
-            yTicks.map((t) => {
-              const y = MT + plotH - (t / max) * plotH;
+      <ChartCanvas ref={canvasRef}>
+        <svg className={svg.className} style={svg.style} viewBox={`0 0 ${W} ${height}`} {...a11y}>
+          <g className={plot.className} style={plot.style} aria-hidden="true">
+            {grid &&
+              yTicks.map((t) => {
+                const y = MT + plotH - (t / max) * plotH;
+                return (
+                  <g key={t}>
+                    <line className={gridSx.className} style={gridSx.style} x1={ML} x2={W - MR} y1={y} y2={y} />
+                    <text className={axis.className} style={axis.style} x={ML - 6} y={y + 3.5} textAnchor="end">
+                      {format(t)}
+                    </text>
+                  </g>
+                );
+              })}
+            <line className={baseline.className} style={baseline.style} x1={ML} x2={W - MR} y1={MT + plotH} y2={MT + plotH} />
+            {bins.map((b, i) => {
+              const h = (b.count / max) * plotH;
+              const x = ML + i * (bw + gap);
+              const y = MT + plotH - h;
               return (
-                <g key={t}>
-                  <line className={gridSx.className} style={gridSx.style} x1={ML} x2={W - MR} y1={y} y2={y} />
-                  <text className={axis.className} style={axis.style} x={ML - 6} y={y + 3.5} textAnchor="end">
-                    {format(t)}
+                <g key={b.label} onPointerEnter={() => setHover(i)} onPointerLeave={() => setHover(null)}>
+                  <rect className={hist.className} style={hist.style} x={x} y={y} width={bw} height={h} />
+                  <text className={axis.className} style={axis.style} x={x + bw / 2} y={height - 4} textAnchor="middle">
+                    {b.label}
                   </text>
                 </g>
               );
             })}
-          <line className={baseline.className} style={baseline.style} x1={ML} x2={W - MR} y1={MT + plotH} y2={MT + plotH} />
-          {bins.map((b, i) => {
-            const h = (b.count / max) * plotH;
-            const x = ML + i * (bw + gap);
-            const y = MT + plotH - h;
-            return (
-              <g key={b.label} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)}>
-                <rect className={hist.className} style={hist.style} x={x} y={y} width={bw} height={h} />
-                <text className={axis.className} style={axis.style} x={x + bw / 2} y={height - 4} textAnchor="middle">
-                  {b.label}
-                </text>
-              </g>
-            );
-          })}
-        </g>
-      </svg>
-      {active && (
-        <ChartTip
-          left={`${((ML + (hover ?? 0) * (bw + gap) + bw / 2) / W) * 100}%`}
-          top={`${((MT + plotH - (active.count / max) * plotH) / height) * 100}%`}
-          label={active.label}
-          rows={[{ value: tip(active.count) }]}
-        />
-      )}
+          </g>
+        </svg>
+        {active && (
+          <ChartTip
+            left={ML + (hover ?? 0) * (bw + gap) + bw / 2}
+            top={MT + plotH - (active.count / max) * plotH}
+            label={active.label}
+            rows={[{ value: tip(active.count) }]}
+          />
+        )}
+      </ChartCanvas>
       {unit && (
         <ChartLegend aria-hidden="true">
           <ChartLegendItem>{unit}</ChartLegendItem>
         </ChartLegend>
       )}
       <SrTable
-        caption="Histogram"
+        caption={yLabel ?? "Histogram"}
         labels={bins.map((b) => b.label)}
-        series={[{ name: "count", values: bins.map((b) => b.count) }]}
+        series={[{ name: unit ?? "Count", values: bins.map((b) => b.count) }]}
       />
     </ChartField>
   );

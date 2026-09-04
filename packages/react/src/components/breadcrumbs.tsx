@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -20,6 +20,11 @@ const styles = stylex.create({
     },
     color: raster.ink,
     letterSpacing: "-0.01em",
+  },
+  list: {
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
     display: "flex",
     alignItems: {
       default: "baseline",
@@ -34,23 +39,34 @@ const styles = stylex.create({
       [mq.phone]: 6,
     },
   },
+  item: {
+    display: "inline-flex",
+    alignItems: {
+      default: "baseline",
+      [mq.phone]: "center",
+    },
+    gap: {
+      default: 8,
+      [mq.phone]: 6,
+    },
+  },
+  /* Ancestors are secondary gray at full opacity; the page carries weight. */
   link: {
     color: {
-      default: raster.ink,
-      ":link": raster.ink,
-      ":visited": raster.ink,
+      default: raster.gray,
+      ":link": raster.gray,
+      ":visited": raster.gray,
       ":hover": raster.ink,
       ":active": raster.ink,
-      ":focus": raster.ink,
       ":focus-visible": raster.ink,
     },
-    textDecoration: "none",
-    backgroundColor: "transparent",
-    opacity: {
-      default: 0.55,
-      ":hover": 1,
-      ":focus-visible": 1,
+    fontWeight: 400,
+    textDecoration: {
+      default: "none",
+      ":hover": "underline",
     },
+    textUnderlineOffset: 3,
+    backgroundColor: "transparent",
     display: {
       default: null,
       [mq.phone]: "inline-flex",
@@ -63,14 +79,29 @@ const styles = stylex.create({
       default: null,
       [mq.phone]: raster.hit,
     },
+    outlineWidth: {
+      default: null,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
+    },
   },
   sep: {
-    color: raster.ink,
-    opacity: 0.4,
+    color: raster.gray,
   },
   here: {
     color: raster.ink,
-    opacity: 1,
+    fontWeight: 500,
     display: {
       default: null,
       [mq.phone]: "inline-flex",
@@ -86,38 +117,43 @@ const styles = stylex.create({
   },
 });
 
+/** A trail: ordered list in a nav, the current page marked. */
 export function Breadcrumbs({ items, className, style, ...props }: BreadcrumbsProps) {
   const nav = rs(["rs-crumbs", className], styles.crumbs);
+  const list = rs(["rs-crumbs-list"], styles.list);
+  const item = rs(["rs-crumbs-item"], styles.item);
   const link = rs(["rs-crumbs-link"], styles.link);
   const sep = rs(["rs-crumbs-sep"], styles.sep);
   const here = rs(["rs-crumbs-here"], styles.here);
   return (
-    <nav aria-label="Breadcrumbs" {...props} className={nav.className} style={{ ...nav.style, ...style }}>
-      {items.map((item, index) => {
-        const last = index === items.length - 1;
-        return (
-          <React.Fragment key={index}>
-            {index > 0 && (
-              <span className={sep.className} style={sep.style} aria-hidden="true">
-                /
-              </span>
-            )}
-            {last ? (
-              <span className={here.className} style={here.style} aria-current="page">
-                {item.label}
-              </span>
-            ) : item.href ? (
-              <a className={link.className} style={link.style} href={item.href}>
-                {item.label}
-              </a>
-            ) : (
-              <span className={link.className} style={link.style}>
-                {item.label}
-              </span>
-            )}
-          </React.Fragment>
-        );
-      })}
+    <nav aria-label="Breadcrumb" {...props} className={nav.className} style={{ ...nav.style, ...style }}>
+      <ol className={list.className} style={list.style}>
+        {items.map((crumb, index) => {
+          const last = index === items.length - 1;
+          return (
+            <li key={index} className={item.className} style={item.style}>
+              {index > 0 && (
+                <span className={sep.className} style={sep.style} aria-hidden="true">
+                  /
+                </span>
+              )}
+              {last ? (
+                <span className={here.className} style={here.style} aria-current="page">
+                  {crumb.label}
+                </span>
+              ) : crumb.href ? (
+                <a className={link.className} style={link.style} href={crumb.href}>
+                  {crumb.label}
+                </a>
+              ) : (
+                <span className={link.className} style={link.style}>
+                  {crumb.label}
+                </span>
+              )}
+            </li>
+          );
+        })}
+      </ol>
     </nav>
   );
 }

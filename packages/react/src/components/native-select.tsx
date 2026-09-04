@@ -4,6 +4,7 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
+import { useFieldControl } from "./field";
 
 export interface NativeSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: React.ReactNode;
@@ -60,7 +61,7 @@ const styles = stylex.create({
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderColor: {
-      default: raster.divider,
+      default: raster.controlBorder,
       ":focus": raster.accent,
     },
     borderRadius: {
@@ -76,8 +77,20 @@ const styles = stylex.create({
       default: 32,
       [mq.phone]: 36,
     },
-    outline: "none",
+    outlineWidth: {
+      default: 0,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: "none",
+      ":focus-visible": "solid",
+    },
+    outlineColor: raster.ink,
+    outlineOffset: 2,
     width: "100%",
+  },
+  invalid: {
+    borderColor: raster.ink,
   },
 });
 
@@ -86,17 +99,27 @@ export const NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProp
   function NativeSelect({ label, className, style, id, children, ...props }, ref) {
     const autoId = React.useId();
     const selectId = id ?? autoId;
-    const sx = rs(["rs-native-select", className], styles.select);
+    const field = useFieldControl(props);
+    const invalid = field.invalid;
+    const sx = rs(["rs-native-select", invalid && "rs-native-select-invalid", className], styles.select, invalid && styles.invalid);
     const control = (
-      <select ref={ref} id={selectId} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+      <select
+        ref={ref}
+        id={selectId}
+        {...props}
+        aria-describedby={field["aria-describedby"]}
+        aria-invalid={field["aria-invalid"]}
+        className={sx.className}
+        style={{ ...sx.style, ...style }}
+      >
         {children}
       </select>
     );
     if (label == null) return control;
-    const field = rs(["rs-field", "rs-native-select-field"], styles.field);
+    const stack = rs(["rs-field", "rs-native-select-field"], styles.field);
     const lab = rs(["rs-field-label", "rs-native-select-label"], styles.label);
     return (
-      <div className={field.className} style={field.style}>
+      <div className={stack.className} style={stack.style}>
         <label className={lab.className} style={lab.style} htmlFor={selectId}>
           {label}
         </label>

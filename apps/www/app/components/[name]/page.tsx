@@ -533,66 +533,64 @@ export default async function ComponentPage({
   const usage = reactUsage[component.name];
 
   return (
-    <>
-      <div className="site-layout">
-        <DocsNav />
-        <main id="main"
-          {...sx(
-            "site-content",
-            component.name === "icons" ? chrome.iconContent : chrome.content,
-          )}
-        >
-          <header {...sx("cover", chrome.cover)}>
-            <h1 className="rs-t-display component-head">{component.title}</h1>
-            <p className="rs-t-sub component-desc">{component.description}</p>
-          </header>
-
-        <div className="preview-box">
-          <Preview name={component.name} snippet={component.snippet} />
-        </div>
-
-        <InAction name={component.name} />
-
-        <h2 className="section-label">Install</h2>
-        {PACKAGES_PUBLISHED ? (
-          <CodeBlock code={COMMAND.replace("init", `add ${component.name}`)} />
-        ) : (
-          <p className="rs-t-body">Not on npm. Use the markup and classes on this page.</p>
+    <div className="site-layout">
+      <DocsNav />
+      <main id="main"
+        {...sx(
+          "site-content",
+          component.name === "icons" ? chrome.iconContent : chrome.content,
         )}
+      >
+        <header {...sx("cover", chrome.cover)}>
+          <h1 className="rs-t-display component-head">{component.title}</h1>
+          <p className="rs-t-sub component-desc">{component.description}</p>
+        </header>
 
-        <h2 className="section-label">Markup</h2>
-        <CodeBlock code={component.snippet} />
-
-        {usage && (
-          <>
-            <h2 className="section-label">React</h2>
-            <CodeBlock code={usage} />
-          </>
-        )}
-
-        <h2 className="section-label">Classes</h2>
-        <div className="class-list">
-          {component.classes.map((cls) => (
-            <span key={cls} className="rs-chip">
-              .{cls}
-            </span>
-          ))}
-        </div>
-
-        {(component.registryDependencies ?? []).length > 0 && (
-          <>
-            <h2 className="section-label">Depends on</h2>
-            <div className="class-list">
-              {component.registryDependencies!.map((dep) => (
-                <a key={dep} href={`/components/${dep}`} className="rs-chip">
-                  /{dep}
-                </a>
-              ))}
-            </div>
-          </>
-        )}
-        </main>
+      <div className="preview-box">
+        <Preview name={component.name} snippet={component.snippet} />
       </div>
-    </>
+
+      <InAction name={component.name} />
+
+      <h2 className="section-label">Install</h2>
+      {PACKAGES_PUBLISHED ? (
+        <CodeBlock code={COMMAND.replace("init", `add ${component.name}`)} />
+      ) : (
+        <p className="rs-t-body">Not on npm. Use the markup and classes on this page.</p>
+      )}
+
+      <h2 className="section-label">Markup</h2>
+      <CodeBlock code={component.snippet} />
+
+      {usage && (
+        <>
+          <h2 className="section-label">React</h2>
+          <CodeBlock code={usage} />
+        </>
+      )}
+
+      <h2 className="section-label">Classes</h2>
+      <div className="class-list">
+        {component.classes.map((cls) => (
+          <span key={cls} className="rs-chip">
+            .{cls}
+          </span>
+        ))}
+      </div>
+
+      {(component.registryDependencies ?? []).length > 0 && (
+        <>
+          <h2 className="section-label">Depends on</h2>
+          <div className="class-list">
+            {component.registryDependencies!.map((dep) => (
+              <a key={dep} href={`/components/${dep}`} className="rs-chip">
+                /{dep}
+              </a>
+            ))}
+          </div>
+        </>
+      )}
+      </main>
+    </div>
   );
 }

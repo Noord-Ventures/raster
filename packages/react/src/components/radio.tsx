@@ -67,7 +67,7 @@ const styles = stylex.create({
     color: raster.ink,
     letterSpacing: "-0.01em",
     minHeight: {
-      default: null,
+      default: 24,
       [mq.phone]: raster.hit,
     },
   },
@@ -83,13 +83,19 @@ const styles = stylex.create({
     borderRadius: "50%",
     borderWidth: 1.5,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: {
+      default: raster.controlBorder,
+      [mq.forcedColors]: "CanvasText",
+    },
     position: "relative",
     flexShrink: 0,
     boxSizing: "border-box",
   },
   on: {
-    borderColor: raster.ink,
+    borderColor: {
+      default: raster.ink,
+      [mq.forcedColors]: "Highlight",
+    },
   },
   fill: {
     position: "absolute",
@@ -98,7 +104,11 @@ const styles = stylex.create({
       [mq.phone]: 5,
     },
     borderRadius: "50%",
-    backgroundColor: raster.ink,
+    backgroundColor: {
+      default: raster.ink,
+      [mq.forcedColors]: "Highlight",
+    },
+    forcedColorAdjust: "none",
   },
 });
 

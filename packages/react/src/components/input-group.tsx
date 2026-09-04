@@ -19,7 +19,7 @@ const styles = stylex.create({
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderColor: {
-      default: raster.divider,
+      default: raster.controlBorder,
       ":focus-within": raster.accent,
     },
     borderRadius: {
@@ -28,6 +28,17 @@ const styles = stylex.create({
     },
     backgroundColor: "var(--bg)",
     overflow: "hidden",
+    // The group carries the ring: its overflow clips the field's own.
+    outlineWidth: {
+      default: 0,
+      ":focus-within": 2,
+    },
+    outlineStyle: {
+      default: "none",
+      ":focus-within": "solid",
+    },
+    outlineColor: raster.ink,
+    outlineOffset: 2,
   },
   addon: {
     display: "flex",
@@ -59,7 +70,7 @@ const styles = stylex.create({
   },
 });
 
-/** Addon and field share one hairline. */
+/** Addon and field share one control boundary. */
 export function InputGroup({ end, className, style, children, ...props }: InputGroupProps) {
   const sx = rs(["rs-input-group", end && "rs-input-group-end", className], styles.group);
   return (

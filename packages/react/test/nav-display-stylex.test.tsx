@@ -1,4 +1,3 @@
-import * as React from "react";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -184,7 +183,7 @@ describe("StyleX nav/data/display leaves", () => {
 
   it("renders the theme toggle mark", () => {
     render(<ThemeToggle />);
-    expect(screen.getByRole("button", { name: "Toggle color scheme" }).className).toContain("rs-theme-toggle");
+    expect(screen.getByRole("button", { name: "Switch to dark scheme" }).className).toContain("rs-theme-toggle");
   });
 
   it("sets concentric custom properties and does not reassign --rs-out on the inner frame", () => {

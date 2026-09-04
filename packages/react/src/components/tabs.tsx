@@ -55,6 +55,13 @@ const styles = stylex.create({
     boxShadow: "none",
     backgroundColor: "transparent",
   },
+  vertical: {
+    flexDirection: "column",
+    alignItems: "stretch",
+    gap: 0,
+    borderBottomWidth: 0,
+    borderBottomStyle: "none",
+  },
   tab: {
     appearance: "none",
     boxSizing: "border-box",
@@ -100,7 +107,10 @@ const styles = stylex.create({
     },
     fontFamily: "inherit",
     fontWeight: 400,
-    color: raster.gray,
+    color: {
+      default: raster.gray,
+      [mq.forcedColors]: "ButtonText",
+    },
     letterSpacing: "-0.01em",
     textDecoration: "none",
     textAlign: {
@@ -114,13 +124,45 @@ const styles = stylex.create({
     borderStyle: "none",
     borderRadius: 0,
     cursor: "pointer",
+    outlineWidth: {
+      default: null,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
+    },
   },
   active: {
-    color: raster.ink,
+    color: {
+      default: raster.ink,
+      [mq.forcedColors]: "Highlight",
+    },
     fontWeight: 600,
     borderWidth: 0,
     borderStyle: "none",
+    /* The underline is a box-shadow on paper; forced colors drop shadows, so it becomes a border there. */
     boxShadow: "inset 0 -1px 0",
+    borderBottomWidth: {
+      default: 0,
+      [mq.forcedColors]: 2,
+    },
+    borderBottomStyle: {
+      default: "none",
+      [mq.forcedColors]: "solid",
+    },
+    borderBottomColor: {
+      default: "transparent",
+      [mq.forcedColors]: "Highlight",
+    },
   },
 });
 
@@ -148,24 +190,42 @@ export function Tabs({ value, defaultValue, onValueChange, children, ...props }:
   );
 }
 
-export function TabList({ className, style, onKeyDown, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Stacked tabs answer Up/Down instead of Left/Right. */
+  orientation?: "horizontal" | "vertical";
+}
+
+/** Roving tabs: arrows step, Home/End jump, and selection follows focus. */
+export function TabList({ orientation = "horizontal", className, style, onKeyDown, ...props }: TabListProps) {
+  const vertical = orientation === "vertical";
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     onKeyDown?.(e);
-    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    if (e.defaultPrevented) return;
+    const prevKey = vertical ? "ArrowUp" : "ArrowLeft";
+    const nextKey = vertical ? "ArrowDown" : "ArrowRight";
+    if (e.key !== prevKey && e.key !== nextKey && e.key !== "Home" && e.key !== "End") return;
     const tabs = Array.from(
       e.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]:not(:disabled)'),
     );
     const index = tabs.indexOf(document.activeElement as HTMLButtonElement);
-    if (index === -1) return;
+    if (index === -1 || tabs.length === 0) return;
     e.preventDefault();
-    const next = e.key === "ArrowRight" ? (index + 1) % tabs.length : (index - 1 + tabs.length) % tabs.length;
+    const next =
+      e.key === "Home"
+        ? 0
+        : e.key === "End"
+          ? tabs.length - 1
+          : e.key === nextKey
+            ? (index + 1) % tabs.length
+            : (index - 1 + tabs.length) % tabs.length;
     tabs[next]?.focus();
     tabs[next]?.click();
   };
-  const sx = rs(["rs-tabs", className], styles.list);
+  const sx = rs(["rs-tabs", vertical && "rs-tabs-vertical", className], styles.list, vertical && styles.vertical);
   return (
     <div
       role="tablist"
+      aria-orientation={vertical ? "vertical" : undefined}
       onKeyDown={handleKeyDown}
       {...props}
       className={sx.className}

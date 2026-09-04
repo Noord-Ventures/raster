@@ -6,7 +6,7 @@
 //
 // Run with: npm run build:css  (Node ≥ 22.6)
 
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { rasterTokens } from "../src/tokens.ts";
 import { rasterComponents } from "../src/registry.ts";

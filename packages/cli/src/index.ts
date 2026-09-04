@@ -62,7 +62,7 @@ async function main(): Promise<void> {
       const results = init(cwd, {
         cssDir: typeof flags["css-dir"] === "string" ? flags["css-dir"] : undefined,
         componentsDir: typeof flags["components-dir"] === "string" ? flags["components-dir"] : undefined,
-        overwrite: Boolean(flags["overwrite"]),
+        overwrite: Boolean(flags.overwrite),
         registry: registryFlag(flags),
       });
       console.log("Raster initialized.\n");
@@ -86,7 +86,7 @@ Next steps
         process.exit(1);
       }
       const { outcomes, unknown } = await add(cwd, positional, {
-        overwrite: Boolean(flags["overwrite"]),
+        overwrite: Boolean(flags.overwrite),
         registry: registryFlag(flags),
       });
       for (const name of unknown) console.error(`✗ unknown component "${name}". See: npx @noorddev/raster-cli list`);

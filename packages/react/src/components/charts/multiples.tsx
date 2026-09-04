@@ -35,6 +35,8 @@ export interface SmallMultiplesProps extends React.HTMLAttributes<HTMLDivElement
   grid?: boolean;
   ticks?: number;
   spot?: boolean | string;
+  /** BCP 47 tag for number formatting; undefined is the reader's own. */
+  locale?: string;
 }
 
 export function SmallMultiples({
@@ -45,26 +47,35 @@ export function SmallMultiples({
   ticks = 3,
   className,
   spot,
+  locale,
   style,
   ...props
 }: SmallMultiplesProps) {
   const sx = rs(["rs-chart-multi", className], styles.multi);
+  const idBase = React.useId();
   return (
     <div {...props} className={sx.className} style={{ ...sx.style, ...style }}>
-      {panels.map((p) => (
-        <figure key={p.title} className="rs-chart-multi-item">
-          <figcaption {...rs(["rs-chart-multi-cap"], styles.cap)}>{p.title}</figcaption>
-          <LineChart
-            series={p.series}
-            labels={p.labels}
-            height={height}
-            unit={unit}
-            grid={grid}
-            ticks={ticks}
-            spot={spot}
-          />
-        </figure>
-      ))}
+      {panels.map((p, i) => {
+        const capId = `${idBase}-cap-${i}`;
+        return (
+          <figure key={p.title} className="rs-chart-multi-item">
+            <figcaption id={capId} {...rs(["rs-chart-multi-cap"], styles.cap)}>
+              {p.title}
+            </figcaption>
+            <LineChart
+              series={p.series}
+              labels={p.labels}
+              height={height}
+              unit={unit}
+              grid={grid}
+              ticks={ticks}
+              spot={spot}
+              locale={locale}
+              aria-labelledby={capId}
+            />
+          </figure>
+        );
+      })}
     </div>
   );
 }

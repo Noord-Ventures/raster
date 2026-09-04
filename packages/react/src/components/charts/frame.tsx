@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../../tokens.stylex";
+import { raster, mq } from "../../tokens.stylex";
 import { rs } from "../../rs";
 import { hidden } from "../../hidden.stylex";
 
@@ -39,11 +39,33 @@ const styles = stylex.create({
     boxShadow: "none",
     padding: 16,
   },
+  /* The canvas is measured; the svg's viewBox equals its rendered width, so type stays CSS-px sized. */
+  canvas: {
+    position: "relative",
+    width: "100%",
+    minWidth: 0,
+  },
   svg: {
     display: "block",
     width: "100%",
     height: "auto",
     overflow: "visible",
+    outlineWidth: {
+      default: null,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
+    },
   },
   plot: {
     transformOrigin: "center",
@@ -111,7 +133,10 @@ const styles = stylex.create({
   bar: {
     fill: raster.ink,
     borderRadius: 0,
-    transition: "fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)",
+    transition: {
+      default: "fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)",
+      [mq.reduce]: "none",
+    },
   },
   barMuted: {
     fill: raster.divider,
@@ -131,7 +156,10 @@ const styles = stylex.create({
   mark: {
     fill: raster.ink,
     borderRadius: 0,
-    transition: "fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)",
+    transition: {
+      default: "fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)",
+      [mq.reduce]: "none",
+    },
   },
   markSpot: {
     fill: "var(--rs-chart-spot)",
@@ -233,8 +261,29 @@ export function niceMax(raw: number): number {
   return 10 * pow;
 }
 
-export function defaultFormat(v: number, unit?: string): string {
-  const n = Math.abs(v) >= 1000 ? `${+(v / 1000).toFixed(1)}k` : `${+v.toFixed(v % 1 === 0 ? 0 : 1)}`;
+const formatters = new Map<string, Intl.NumberFormat>();
+
+function numberFormat(locale: string | undefined, options: Intl.NumberFormatOptions): Intl.NumberFormat {
+  const key = `${locale ?? ""}|${JSON.stringify(options)}`;
+  let f = formatters.get(key);
+  if (!f) {
+    f = new Intl.NumberFormat(locale, options);
+    formatters.set(key, f);
+  }
+  return f;
+}
+
+/**
+ * Locale-aware number: compact from a thousand (1.2K, 3M), else at most one
+ * decimal. `locale` undefined means the reader's own.
+ */
+export function defaultFormat(v: number, unit?: string, locale?: string): string {
+  const n = numberFormat(
+    locale,
+    Math.abs(v) >= 1000
+      ? { notation: "compact", maximumFractionDigits: 1 }
+      : { maximumFractionDigits: Number.isInteger(v) ? 0 : 1 },
+  ).format(v);
   return unit ? `${n} ${unit}` : n;
 }
 
@@ -291,6 +340,12 @@ export function scatterMark(spot?: boolean) {
   return rs(["rs-chart-mark", spot && "rs-chart-mark-spot"], styles.mark, spot && styles.markSpot);
 }
 
+export interface SrSeries {
+  name: string;
+  values: Array<number | string>;
+}
+
+/** The data behind a plot, as a screen-reader table. */
 export function SrTable({
   caption,
   labels,
@@ -298,7 +353,7 @@ export function SrTable({
 }: {
   caption: string;
   labels: string[];
-  series: ChartSeries[];
+  series: SrSeries[];
 }) {
   const sx = rs(["rs-sr"], hidden.sr);
   return (
@@ -363,15 +418,15 @@ export function ChartTip({
   label,
   rows,
 }: {
-  left: string;
-  top: string;
+  left: number | string;
+  top: number | string;
   label: string;
   rows: Array<{ name?: string; value: string }>;
 }) {
   const tip = rs(["rs-chart-tip"], styles.tip);
   const tipLabel = rs(["rs-chart-tip-label"], styles.tipLabel);
   return (
-    <div className={tip.className} style={{ ...tip.style, left, top }}>
+    <div role="status" className={tip.className} style={{ ...tip.style, left, top }}>
       <span className={tipLabel.className} style={tipLabel.style}>
         {label}
       </span>
@@ -419,4 +474,93 @@ export function ChartField({ spot, className, style, children, ...props }: Chart
   );
 }
 
+/** The canvas wraps a plot: measured for width, and the tooltip's positioning box. */
+export const ChartCanvas = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  function ChartCanvas({ className, style, ...props }, ref) {
+    const sx = rs(["rs-chart-canvas", className], styles.canvas);
+    return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+  },
+);
+
 export const PLOT = { W: 408, ML: 36, MR: 8, MT: 8, MB: 22 } as const;
+
+/**
+ * Rendered width of the canvas in CSS px, so the plot lays out in real
+ * pixels and its type keeps its size. PLOT.W on the server, before the
+ * first measure, and where ResizeObserver is missing.
+ */
+export function useChartWidth<T extends HTMLElement>(fallback: number = PLOT.W): [React.RefObject<T | null>, number] {
+  const ref = React.useRef<T | null>(null);
+  const [width, setWidth] = React.useState(fallback);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const apply = (w: number) => {
+      if (w > 0) setWidth((prev) => (Math.abs(prev - w) < 0.5 ? prev : Math.round(w)));
+    };
+    apply(el.clientWidth);
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) apply(entry.contentRect.width);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return [ref, width];
+}
+
+/**
+ * Keyboard cursor over `count` points: arrows step, Home/End jump, Escape
+ * clears. Returns undefined for keys it does not handle.
+ */
+export function stepCursor(key: string, current: number | null, count: number): number | null | undefined {
+  if (count <= 0) return undefined;
+  const last = count - 1;
+  if (key === "ArrowRight") return current == null ? 0 : Math.min(last, current + 1);
+  if (key === "ArrowLeft") return current == null ? last : Math.max(0, current - 1);
+  if (key === "Home") return 0;
+  if (key === "End") return last;
+  if (key === "Escape") return null;
+  return undefined;
+}
+
+export interface PlotNameProps {
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+}
+
+/**
+ * The plot's accessible name: an explicit label or labelledby wins, then the
+ * visible ChartTitle by id, then a composed description. Never a bare kind.
+ */
+export function plotName(explicit: PlotNameProps, titleId: string | undefined, fallback: string): PlotNameProps {
+  if (explicit["aria-labelledby"]) return { "aria-labelledby": explicit["aria-labelledby"] };
+  if (explicit["aria-label"]) return { "aria-label": explicit["aria-label"] };
+  if (titleId) return { "aria-labelledby": titleId };
+  return { "aria-label": fallback };
+}
+
+/** "Bar chart of Sheets and Proofs, in units". */
+export function describePlot(kind: string, names: string[], unit?: string): string {
+  const what = names.filter(Boolean);
+  const list = what.length > 1 ? `${what.slice(0, -1).join(", ")} and ${what[what.length - 1]}` : what[0];
+  return `${kind}${list ? ` of ${list}` : ""}${unit ? `, in ${unit}` : ""}`;
+}
+
+/** Props that make a plot a focusable, keyboard-driven group. */
+export function plotProps(
+  name: PlotNameProps,
+  onKey: (key: string) => boolean,
+  onLeave: () => void,
+): React.SVGAttributes<SVGSVGElement> {
+  return {
+    role: "group",
+    tabIndex: 0,
+    "aria-roledescription": "interactive chart",
+    ...name,
+    onKeyDown: (e) => {
+      if (onKey(e.key)) e.preventDefault();
+    },
+    onBlur: onLeave,
+  };
+}

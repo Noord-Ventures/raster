@@ -285,7 +285,7 @@ const homePage = readFileSync(join(root, "apps/www/app/page.tsx"), "utf8");
 if (!homePage.includes("specimen.cellTall") || !homePage.includes("specimen-cell-face")) {
   fail("Homepage face/law must apply StyleX cellTall (408 + flex-end)");
 }
-if (!siteSx.includes("crumbBar:") || !siteSx.includes("zIndex: 160") || !/crumbBar: \{[\s\S]*?position:\s*\"fixed\"/.test(siteSx) || !/crumbBar: \{[\s\S]*?default:\s*72/.test(siteSx)) {
+if (!siteSx.includes("crumbBar:") || !siteSx.includes("zIndex: 160") || !/crumbBar: \{[\s\S]*?position:\s*"fixed"/.test(siteSx) || !/crumbBar: \{[\s\S]*?default:\s*72/.test(siteSx)) {
   fail("Site crumb bar StyleX must be a full-bleed fixed 72 layer (z 160)");
 }
 if (!/\.rs-crumb-bar \{[\s\S]*?position:\s*fixed/.test(site) || !/\.rs-crumb-bar \{[\s\S]*?height:\s*72px/.test(site) || !/\.rs-crumb-bar \{[\s\S]*?z-index:\s*160/.test(site)) {
@@ -330,7 +330,6 @@ if (!usageBlock.includes("one-shot Raster landing") || !usageBlock.includes("not
 if (!usageBlock.includes("There is no CDN")) {
   fail("About Usage must not invent a CDN");
 }
-const faceHang = "margin-left: -0.08em";
 if (!specimen.includes(".specimen-face") || !/specimen-face \{[\s\S]*?margin-left: -0\.08em/.test(specimen)) {
   fail("Home Raster must hang -0.08em at display size, not a UPM fraction");
 }

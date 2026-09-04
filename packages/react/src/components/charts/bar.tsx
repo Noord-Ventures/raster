@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import {
+  ChartCanvas,
   ChartField,
   ChartHead,
   ChartLegend,
@@ -13,9 +14,14 @@ import {
   barMark,
   chartStyles,
   defaultFormat,
+  describePlot,
   niceMax,
+  plotName,
+  plotProps,
   stackedRows,
+  stepCursor,
   ticksFor,
+  useChartWidth,
   type ChartSeries,
 } from "./frame";
 import { rs } from "../../rs";
@@ -36,6 +42,8 @@ export interface BarChartProps extends React.HTMLAttributes<HTMLDivElement> {
   yLabel?: string;
   spot?: boolean | string;
   valueFormat?: (value: number) => string;
+  /** BCP 47 tag for number formatting; undefined is the reader's own. */
+  locale?: string;
 }
 
 export function BarChart({
@@ -52,7 +60,10 @@ export function BarChart({
   yLabel,
   spot,
   valueFormat,
+  locale,
   className,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   ...props
 }: BarChartProps) {
   const fromData: ChartSeries[] = data ? [{ name: "Value", values: data.map((d) => d.value) }] : [];
@@ -64,11 +75,13 @@ export function BarChart({
     ? Math.max(...stacks.map((row) => row[row.length - 1] ?? 0))
     : Math.max(0, ...shown.flatMap((s) => s.values));
   const max = niceMax(rawMax);
-  const format = valueFormat ?? ((v: number) => defaultFormat(v));
-  const tip = valueFormat ?? ((v: number) => defaultFormat(v, unit));
+  const format = valueFormat ?? ((v: number) => defaultFormat(v, undefined, locale));
+  const tip = valueFormat ?? ((v: number) => defaultFormat(v, unit, locale));
   const [hover, setHover] = React.useState<number | null>(null);
+  const [canvasRef, W] = useChartWidth<HTMLDivElement>();
+  const titleId = React.useId();
 
-  const { W, ML, MR, MT, MB } = PLOT;
+  const { ML, MR, MT, MB } = PLOT;
   const plotW = W - ML - MR;
   const plotH = height - MT - MB;
   const horizontal = orientation === "horizontal";
@@ -89,59 +102,113 @@ export function BarChart({
   const axis = rs(["rs-chart-axis"], chartStyles.axis);
   const baseline = rs(["rs-chart-baseline"], chartStyles.baseline);
 
+  const name = plotName(
+    { "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy },
+    yLabel ? titleId : undefined,
+    describePlot("Bar chart", shown.map((s) => s.name), unit),
+  );
+  const a11y = plotProps(
+    name,
+    (key) => {
+      const next = stepCursor(key, hover, n);
+      if (next === undefined) return false;
+      setHover(next);
+      return true;
+    },
+    () => setHover(null),
+  );
+  const hoverProps = (i: number) => ({
+    onPointerEnter: () => setHover(i),
+    onPointerLeave: () => setHover(null),
+  });
+
   return (
     <ChartField spot={spot} className={className} {...props}>
       {yLabel && (
         <ChartHead>
-          <ChartTitle>{yLabel}</ChartTitle>
+          <ChartTitle id={titleId}>{yLabel}</ChartTitle>
         </ChartHead>
       )}
-      <svg className={svg.className} style={svg.style} viewBox={`0 0 ${W} ${height}`} role="img" aria-label="Bar chart">
-        <g className={plot.className} style={plot.style}>
-          {grid &&
-            tickVals.map((t) =>
-              horizontal ? (
-                <g key={t}>
-                  <line className={gridSx.className} style={gridSx.style} x1={xV(t)} x2={xV(t)} y1={MT} y2={height - MB} />
-                  <text className={axis.className} style={axis.style} x={xV(t)} y={height - 4} textAnchor="middle">
-                    {format(t)}
-                  </text>
-                </g>
-              ) : (
-                <g key={t}>
-                  <line className={gridSx.className} style={gridSx.style} x1={ML} x2={W - MR} y1={yV(t)} y2={yV(t)} />
-                  <text className={axis.className} style={axis.style} x={ML - 6} y={yV(t) + 3.5} textAnchor="end">
-                    {format(t)}
-                  </text>
-                </g>
-              ),
-            )}
-          {tickLabels.map((label, i) => {
-            const values = shown.map((s) => s.values[i] ?? 0);
-            const mark = (si: number) =>
-              barMark({
-                spot: Boolean(spot) && (stacks ? si === 0 : true),
-                muted: hover != null && hover !== i,
-              });
-            if (horizontal) {
-              const y0 = MT + i * band + inset;
+      <ChartCanvas ref={canvasRef}>
+        <svg className={svg.className} style={svg.style} viewBox={`0 0 ${W} ${height}`} {...a11y}>
+          <g className={plot.className} style={plot.style} aria-hidden="true">
+            {grid &&
+              tickVals.map((t) =>
+                horizontal ? (
+                  <g key={t}>
+                    <line className={gridSx.className} style={gridSx.style} x1={xV(t)} x2={xV(t)} y1={MT} y2={height - MB} />
+                    <text className={axis.className} style={axis.style} x={xV(t)} y={height - 4} textAnchor="middle">
+                      {format(t)}
+                    </text>
+                  </g>
+                ) : (
+                  <g key={t}>
+                    <line className={gridSx.className} style={gridSx.style} x1={ML} x2={W - MR} y1={yV(t)} y2={yV(t)} />
+                    <text className={axis.className} style={axis.style} x={ML - 6} y={yV(t) + 3.5} textAnchor="end">
+                      {format(t)}
+                    </text>
+                  </g>
+                ),
+              )}
+            {tickLabels.map((label, i) => {
+              const values = shown.map((s) => s.values[i] ?? 0);
+              const mark = (si: number) =>
+                barMark({
+                  spot: Boolean(spot) && (stacks ? si === 0 : true),
+                  muted: hover != null && hover !== i,
+                });
+              if (horizontal) {
+                const y0 = MT + i * band + inset;
+                if (stacks) {
+                  let prev = 0;
+                  return shown.map((s, si) => {
+                    const v = s.values[i] ?? 0;
+                    const x1 = xV(prev);
+                    const x2 = xV(prev + v);
+                    prev += v;
+                    return (
+                      <rect
+                        key={`${label}-${s.name}`}
+                        {...mark(si)}
+                        x={x1}
+                        y={y0}
+                        width={Math.max(0, x2 - x1)}
+                        height={barThick}
+                        {...hoverProps(i)}
+                      />
+                    );
+                  });
+                }
+                const v = values[0] ?? 0;
+                return (
+                  <rect
+                    key={label}
+                    {...mark(0)}
+                    x={ML}
+                    y={y0}
+                    width={Math.max(0, xV(v) - ML)}
+                    height={barThick}
+                    {...hoverProps(i)}
+                  />
+                );
+              }
+              const x0 = ML + i * band + inset;
               if (stacks) {
                 let prev = 0;
                 return shown.map((s, si) => {
                   const v = s.values[i] ?? 0;
-                  const x1 = xV(prev);
-                  const x2 = xV(prev + v);
+                  const y1 = yV(prev + v);
+                  const y2 = yV(prev);
                   prev += v;
                   return (
                     <rect
                       key={`${label}-${s.name}`}
                       {...mark(si)}
-                      x={x1}
-                      y={y0}
-                      width={Math.max(0, x2 - x1)}
-                      height={barThick}
-                      onMouseEnter={() => setHover(i)}
-                      onMouseLeave={() => setHover(null)}
+                      x={x0}
+                      y={y1}
+                      width={barThick}
+                      height={Math.max(0, y2 - y1)}
+                      {...hoverProps(i)}
                     />
                   );
                 });
@@ -151,90 +218,54 @@ export function BarChart({
                 <rect
                   key={label}
                   {...mark(0)}
-                  x={ML}
-                  y={y0}
-                  width={Math.max(0, xV(v) - ML)}
-                  height={barThick}
-                  onMouseEnter={() => setHover(i)}
-                  onMouseLeave={() => setHover(null)}
+                  x={x0}
+                  y={yV(v)}
+                  width={barThick}
+                  height={Math.max(0, yV(0) - yV(v))}
+                  {...hoverProps(i)}
                 />
               );
-            }
-            const x0 = ML + i * band + inset;
-            if (stacks) {
-              let prev = 0;
-              return shown.map((s, si) => {
-                const v = s.values[i] ?? 0;
-                const y1 = yV(prev + v);
-                const y2 = yV(prev);
-                prev += v;
-                return (
-                  <rect
-                    key={`${label}-${s.name}`}
-                    {...mark(si)}
-                    x={x0}
-                    y={y1}
-                    width={barThick}
-                    height={Math.max(0, y2 - y1)}
-                    onMouseEnter={() => setHover(i)}
-                    onMouseLeave={() => setHover(null)}
-                  />
-                );
-              });
-            }
-            const v = values[0] ?? 0;
-            return (
-              <rect
-                key={label}
-                {...mark(0)}
-                x={x0}
-                y={yV(v)}
-                width={barThick}
-                height={Math.max(0, yV(0) - yV(v))}
-                onMouseEnter={() => setHover(i)}
-                onMouseLeave={() => setHover(null)}
-              />
-            );
-          })}
-          <line
-            className={baseline.className}
-            style={baseline.style}
-            x1={ML}
-            x2={horizontal ? ML : W - MR}
-            y1={horizontal ? MT : yV(0)}
-            y2={horizontal ? height - MB : yV(0)}
+            })}
+            <line
+              className={baseline.className}
+              style={baseline.style}
+              x1={ML}
+              x2={horizontal ? ML : W - MR}
+              y1={horizontal ? MT : yV(0)}
+              y2={horizontal ? height - MB : yV(0)}
+            />
+            {tickLabels.map(
+              (label, i) =>
+                i % labelEvery === 0 && (
+                  <text
+                    key={label}
+                    className={axis.className}
+                    style={axis.style}
+                    x={horizontal ? ML - 6 : ML + i * band + band / 2}
+                    y={horizontal ? MT + i * band + band / 2 + 3 : height - 4}
+                    textAnchor={horizontal ? "end" : "middle"}
+                  >
+                    {label}
+                  </text>
+                ),
+            )}
+          </g>
+        </svg>
+        {hover != null && tickLabels[hover] && (
+          <ChartTip
+            left={horizontal ? ML + (xV(shown[0]?.values[hover] ?? 0) - ML) / 2 : ML + hover * band + band / 2}
+            top={horizontal ? MT + hover * band + inset : yV(shown[0]?.values[hover] ?? 0)}
+            label={tickLabels[hover]}
+            rows={shown.map((s) => ({ name: shown.length > 1 ? s.name : undefined, value: tip(s.values[hover] ?? 0) }))}
           />
-          {tickLabels.map(
-            (label, i) =>
-              i % labelEvery === 0 && (
-                <text
-                  key={label}
-                  className={axis.className}
-                  style={axis.style}
-                  x={horizontal ? ML - 6 : ML + i * band + band / 2}
-                  y={horizontal ? MT + i * band + band / 2 + 3 : height - 4}
-                  textAnchor={horizontal ? "end" : "middle"}
-                >
-                  {label}
-                </text>
-              ),
-          )}
-        </g>
-      </svg>
+        )}
+      </ChartCanvas>
       {unit && (
         <ChartLegend aria-hidden="true">
           <ChartLegendItem>{unit}</ChartLegendItem>
         </ChartLegend>
       )}
-      {hover != null && tickLabels[hover] && (
-        <ChartTip
-          left={horizontal ? "50%" : `${((ML + hover * band + band / 2) / W) * 100}%`}
-          top={horizontal ? `${((MT + hover * band) / height) * 100}%` : `${(yV(shown[0]?.values[hover] ?? 0) / height) * 100}%`}
-          label={tickLabels[hover]}
-          rows={shown.map((s) => ({ name: shown.length > 1 ? s.name : undefined, value: tip(s.values[hover] ?? 0) }))}
-        />
-      )}
-      <SrTable caption="Chart data" labels={tickLabels} series={shown} />
+      <SrTable caption={yLabel ?? describePlot("Chart data", shown.map((s) => s.name), unit)} labels={tickLabels} series={shown} />
     </ChartField>
   );
 }

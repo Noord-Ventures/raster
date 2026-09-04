@@ -1,7 +1,7 @@
 // Every catalog name owns one Use file. No shared dump.
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
+import { join } from "node:path";
 
 const root = fileURLToPath(new URL("../../..", import.meta.url));
 const examples = join(root, "apps/www/components/examples");

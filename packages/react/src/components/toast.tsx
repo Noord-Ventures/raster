@@ -4,30 +4,66 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
-
+import { Icon } from "./icon";
 
 export interface ToastOptions {
   description?: React.ReactNode;
+  /** Overrides the computed lifetime, in milliseconds. */
+  duration?: number;
 }
 
 interface ToastItem {
   id: number;
   title: React.ReactNode;
   description?: React.ReactNode;
+  duration?: number;
 }
 
 let nextId = 1;
 const listeners = new Set<(item: ToastItem) => void>();
+/** Fired before any <Toaster /> mounted; flushed by the first one. */
+const pending: ToastItem[] = [];
 
 /** Fire a toast from anywhere; a mounted <Toaster /> renders it. */
 export function toast(title: React.ReactNode, options?: ToastOptions): void {
-  const item: ToastItem = { id: nextId++, title, description: options?.description };
-  listeners.forEach((listener) => listener(item));
+  const item: ToastItem = { id: nextId++, title, description: options?.description, duration: options?.duration };
+  if (listeners.size === 0) {
+    pending.push(item);
+    return;
+  }
+  for (const listener of listeners) listener(item);
 }
 
 export interface ToasterProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** How long a toast stays, in milliseconds. */
+  /** The shortest a toast stays, in milliseconds. Longer text stays longer. */
   duration?: number;
+  /** Accessible name of the close button on every toast. */
+  closeLabel?: string;
+}
+
+/** Characters in a node tree: what the lifetime scales with. */
+function textLength(node: React.ReactNode): number {
+  if (node == null || typeof node === "boolean") return 0;
+  if (typeof node === "string" || typeof node === "number") return String(node).length;
+  if (Array.isArray(node)) return node.reduce<number>((n, child) => n + textLength(child), 0);
+  if (React.isValidElement<{ children?: React.ReactNode }>(node)) return textLength(node.props.children);
+  return 0;
+}
+
+const PER_CHAR = 50;
+const CAP = 15000;
+
+function lifetime(item: ToastItem, min: number): number {
+  if (item.duration != null) return item.duration;
+  const chars = textLength(item.title) + textLength(item.description);
+  return Math.min(Math.max(min, CAP), min + chars * PER_CHAR);
+}
+
+interface Timer {
+  remaining: number;
+  started: number;
+  handle: ReturnType<typeof setTimeout> | null;
+  holds: Set<string>;
 }
 
 const toastIn = stylex.keyframes({
@@ -130,23 +166,116 @@ const styles = stylex.create({
     marginBottom: 0,
     marginInline: 0,
   },
+  close: {
+    boxSizing: "border-box",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    marginInlineStart: "auto",
+    marginTop: {
+      default: -4,
+      [mq.phone]: -10,
+    },
+    marginInlineEnd: {
+      default: -6,
+      [mq.phone]: -12,
+    },
+    width: {
+      default: 28,
+      [mq.phone]: raster.hit,
+    },
+    height: {
+      default: 28,
+      [mq.phone]: raster.hit,
+    },
+    padding: 0,
+    borderWidth: 0,
+    borderRadius: raster.radiusSm,
+    backgroundColor: {
+      default: "transparent",
+      ":hover": raster.divider,
+    },
+    color: raster.ink,
+    cursor: "pointer",
+    outlineWidth: {
+      default: null,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
+    },
+  },
 });
 
-export function Toaster({ duration = 4000, className, style, ...props }: ToasterProps) {
+export function Toaster({ duration = 4000, closeLabel = "Dismiss", className, style, ...props }: ToasterProps) {
   const [items, setItems] = React.useState<ToastItem[]>([]);
+  const timers = React.useRef(new Map<number, Timer>());
+  const minRef = React.useRef(duration);
+  minRef.current = duration;
+
+  const remove = React.useCallback((id: number) => {
+    const timer = timers.current.get(id);
+    if (timer?.handle) clearTimeout(timer.handle);
+    timers.current.delete(id);
+    setItems((current) => current.filter((i) => i.id !== id));
+  }, []);
+
+  const run = React.useCallback(
+    (id: number) => {
+      const timer = timers.current.get(id);
+      if (!timer || timer.handle || timer.holds.size) return;
+      timer.started = Date.now();
+      timer.handle = setTimeout(() => remove(id), timer.remaining);
+    },
+    [remove],
+  );
+
+  /** Hover and focus each hold the timer; it resumes when both let go. */
+  const hold = React.useCallback((id: number, reason: string) => {
+    const timer = timers.current.get(id);
+    if (!timer) return;
+    timer.holds.add(reason);
+    if (!timer.handle) return;
+    clearTimeout(timer.handle);
+    timer.handle = null;
+    timer.remaining = Math.max(0, timer.remaining - (Date.now() - timer.started));
+  }, []);
+
+  const release = React.useCallback(
+    (id: number, reason: string) => {
+      const timer = timers.current.get(id);
+      if (!timer) return;
+      timer.holds.delete(reason);
+      run(id);
+    },
+    [run],
+  );
 
   React.useEffect(() => {
+    const timerMap = timers.current;
     const add = (item: ToastItem) => {
+      timerMap.set(item.id, { remaining: lifetime(item, minRef.current), started: 0, handle: null, holds: new Set() });
       setItems((current) => [...current, item]);
-      setTimeout(() => {
-        setItems((current) => current.filter((i) => i.id !== item.id));
-      }, duration);
+      run(item.id);
     };
     listeners.add(add);
+    pending.splice(0).forEach(add);
     return () => {
       listeners.delete(add);
+      for (const timer of timerMap.values()) if (timer.handle) clearTimeout(timer.handle);
+      timerMap.clear();
     };
-  }, [duration]);
+  }, [run]);
 
   const stack = rs(["rs-toasts", className], styles.stack);
   return (
@@ -155,8 +284,19 @@ export function Toaster({ duration = 4000, className, style, ...props }: Toaster
         const card = rs(["rs-toast"], styles.toast);
         const heading = rs(["rs-toast-title"], styles.title);
         const body = rs(["rs-toast-body"], styles.body);
+        const close = rs(["rs-toast-close"], styles.close);
         return (
-          <div key={item.id} className={card.className} style={card.style}>
+          <div
+            key={item.id}
+            className={card.className}
+            style={card.style}
+            onPointerEnter={() => hold(item.id, "hover")}
+            onPointerLeave={() => release(item.id, "hover")}
+            onFocus={() => hold(item.id, "focus")}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget as Node | null)) release(item.id, "focus");
+            }}
+          >
             <div>
               <span className={heading.className} style={heading.style}>
                 {item.title}
@@ -167,6 +307,15 @@ export function Toaster({ duration = 4000, className, style, ...props }: Toaster
                 </p>
               )}
             </div>
+            <button
+              type="button"
+              aria-label={closeLabel}
+              className={close.className}
+              style={close.style}
+              onClick={() => remove(item.id)}
+            >
+              <Icon name="close" size={12} />
+            </button>
           </div>
         );
       })}

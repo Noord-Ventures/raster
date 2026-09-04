@@ -7,7 +7,10 @@ import { rs } from "../rs";
 
 export interface AvatarProps extends React.HTMLAttributes<HTMLSpanElement> {
   src?: string;
+  /** Image text. Defaults to `name`, then `initials`; pass "" for a decorative avatar. */
   alt?: string;
+  /** Who this is. Names the image, and the initials when there is no image. */
+  name?: string;
   /** Shown when there is no image, or when it fails to load. */
   initials?: string;
   size?: "sm" | "md" | "lg";
@@ -61,16 +64,19 @@ const styles = stylex.create({
   },
 });
 
-export function Avatar({ src, alt, initials, size = "md", className, style, ...props }: AvatarProps) {
+export function Avatar({ src, alt, name, initials, size = "md", className, style, ...props }: AvatarProps) {
   const [failed, setFailed] = React.useState(false);
   const inRow = React.useContext(AvatarRowContext);
   const showImage = src && !failed;
+  const altText = alt ?? name ?? initials ?? "";
   const sx = rs(["rs-avatar", size === "sm" && "rs-avatar-sm", size === "lg" && "rs-avatar-lg", className, inRow && "rs-avatar-in-row"], styles.avatar, size === "sm" && styles.sm, size === "lg" && styles.lg, inRow && styles.inRow);
   const img = rs(["rs-avatar-image"], styles.image);
+  /* Initials stand in for a name only when one is given; otherwise they read as plain text. */
+  const named = !showImage && name ? { role: "img" as const, "aria-label": name } : null;
   return (
-    <span {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+    <span {...named} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       {showImage ? (
-        <img className={img.className} style={img.style} src={src} alt={alt ?? ""} onError={() => setFailed(true)} />
+        <img className={img.className} style={img.style} src={src} alt={altText} onError={() => setFailed(true)} />
       ) : (
         initials
       )}

@@ -45,20 +45,55 @@ const styles = stylex.create({
     backgroundColor: "transparent",
     borderWidth: raster.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: {
+      default: raster.controlBorder,
+      [mq.forcedColors]: "ButtonText",
+    },
     borderRadius: {
       default: raster.radiusSm,
       [mq.phone]: 0,
     },
-    color: raster.gray,
+    color: {
+      default: raster.gray,
+      [mq.forcedColors]: "ButtonText",
+    },
     cursor: "pointer",
     fontFamily: "inherit",
-    transition: `background-color ${raster.durationSnap} ${raster.ease}, color ${raster.durationSnap} ${raster.ease}, border-color ${raster.durationSnap} ${raster.ease}`,
+    transition: {
+      default: `background-color ${raster.durationSnap} ${raster.ease}, color ${raster.durationSnap} ${raster.ease}, border-color ${raster.durationSnap} ${raster.ease}`,
+      [mq.reduce]: "none",
+    },
+    outlineWidth: {
+      default: null,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
+    },
   },
   pressed: {
-    backgroundColor: raster.ink,
-    borderColor: raster.ink,
-    color: raster.paper,
+    backgroundColor: {
+      default: raster.ink,
+      [mq.forcedColors]: "Highlight",
+    },
+    borderColor: {
+      default: raster.ink,
+      [mq.forcedColors]: "Highlight",
+    },
+    color: {
+      default: raster.paper,
+      [mq.forcedColors]: "HighlightText",
+    },
+    forcedColorAdjust: "none",
   },
   group: {
     display: {
@@ -77,7 +112,10 @@ const styles = stylex.create({
     },
     borderWidth: raster.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: {
+      default: raster.controlBorder,
+      [mq.forcedColors]: "ButtonText",
+    },
     borderRadius: {
       default: raster.radiusSm,
       [mq.phone]: 0,
@@ -93,6 +131,10 @@ const styles = stylex.create({
     borderWidth: 0,
     borderRadius: 0,
     margin: 0,
+    outlineOffset: {
+      default: null,
+      ":focus-visible": -2,
+    },
     borderInlineStartWidth: {
       default: 0,
       ":not(:first-child)": raster.hairline,
@@ -103,7 +145,7 @@ const styles = stylex.create({
     },
     borderInlineStartColor: {
       default: "transparent",
-      ":not(:first-child)": raster.divider,
+      ":not(:first-child)": raster.controlBorder,
     },
   },
   groupedOn: {

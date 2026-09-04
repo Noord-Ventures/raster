@@ -38,17 +38,55 @@ const styles = stylex.create({
     },
     borderWidth: 1.5,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: {
+      default: raster.controlBorder,
+      [mq.forcedColors]: "ButtonText",
+    },
     position: "relative",
     flexShrink: 0,
     padding: 0,
     backgroundColor: "transparent",
     cursor: "pointer",
-    transition: `background-color ${raster.duration} ${raster.ease}, border-color ${raster.duration} ${raster.ease}`,
+    transition: {
+      default: `background-color ${raster.duration} ${raster.ease}, border-color ${raster.duration} ${raster.ease}`,
+      [mq.reduce]: "none",
+    },
+    outlineWidth: {
+      default: null,
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
+    },
+    /* The visible track stays 32×18; the hit area grows to 24px tall. */
+    "::before": {
+      content: '""',
+      position: "absolute",
+      top: -3,
+      bottom: -3,
+      left: 0,
+      right: 0,
+    },
   },
   on: {
-    backgroundColor: raster.ink,
-    borderColor: raster.ink,
+    backgroundColor: {
+      default: raster.ink,
+      [mq.forcedColors]: "Highlight",
+    },
+    borderColor: {
+      default: raster.ink,
+      [mq.forcedColors]: "Highlight",
+    },
+    forcedColorAdjust: "none",
   },
   thumb: {
     position: "absolute",
@@ -72,11 +110,21 @@ const styles = stylex.create({
       default: "50%",
       [mq.phone]: 0,
     },
-    backgroundColor: raster.gray,
-    transition: `transform ${raster.duration} ${raster.ease}`,
+    backgroundColor: {
+      default: raster.gray,
+      [mq.forcedColors]: "ButtonText",
+    },
+    forcedColorAdjust: "none",
+    transition: {
+      default: `transform ${raster.duration} ${raster.ease}`,
+      [mq.reduce]: "none",
+    },
   },
   thumbOn: {
-    backgroundColor: raster.paper,
+    backgroundColor: {
+      default: raster.paper,
+      [mq.forcedColors]: "HighlightText",
+    },
     transform: {
       default: "translateX(14px)",
       [mq.phone]: "translateX(20px)",

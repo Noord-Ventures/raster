@@ -10,6 +10,8 @@ export interface SplitProps extends React.HTMLAttributes<HTMLDivElement> {
   initial?: number;
   min?: number;
   max?: number;
+  /** Accessible name of the handle. */
+  handleLabel?: string;
   children: [React.ReactNode, React.ReactNode];
 }
 
@@ -63,9 +65,21 @@ const styles = stylex.create({
     borderStyle: "none",
     padding: 0,
     touchAction: "none",
-    outline: {
+    outlineWidth: {
       default: null,
-      ":focus-visible": "none",
+      ":focus-visible": 2,
+    },
+    outlineStyle: {
+      default: null,
+      ":focus-visible": "solid",
+    },
+    outlineColor: {
+      default: null,
+      ":focus-visible": raster.ink,
+    },
+    outlineOffset: {
+      default: null,
+      ":focus-visible": 2,
     },
     "::after": {
       content: '""',
@@ -94,22 +108,63 @@ const styles = stylex.create({
         default: null,
         [mq.phone]: 1,
       },
-      backgroundColor: raster.divider,
-      transition: `background-color ${raster.durationSnap} ${raster.ease}`,
+      backgroundColor: {
+        default: raster.controlBorder,
+        [mq.forcedColors]: "CanvasText",
+      },
+      forcedColorAdjust: "none",
+      transition: {
+        default: `background-color ${raster.durationSnap} ${raster.ease}`,
+        [mq.reduce]: "none",
+      },
     },
     ":hover::after": {
-      backgroundColor: raster.ink,
+      backgroundColor: {
+        default: raster.ink,
+        [mq.forcedColors]: "Highlight",
+      },
     },
     ":focus-visible::after": {
-      backgroundColor: raster.ink,
+      backgroundColor: {
+        default: raster.ink,
+        [mq.forcedColors]: "Highlight",
+      },
     },
   },
 });
 
-/** Two panes on a draggable hairline. Arrow keys work. */
-export function Split({ initial = 50, min = 20, max = 80, className, style, children, ...props }: SplitProps) {
+const STACK_QUERY = "(max-width: 640px)";
+const noop = () => {};
+
+/** True once the split stacks (the phone recut). False on the server and where matchMedia is missing. */
+function useStacked(): boolean {
+  const subscribe = React.useCallback((onChange: () => void) => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return noop;
+    const mql = window.matchMedia(STACK_QUERY);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+  const read = () =>
+    typeof window !== "undefined" && typeof window.matchMedia === "function"
+      ? window.matchMedia(STACK_QUERY).matches
+      : false;
+  return React.useSyncExternalStore(subscribe, read, () => false);
+}
+
+/** Two panes on a draggable hairline. Arrows step, Home/End jump; the axis follows the layout. */
+export function Split({
+  initial = 50,
+  min = 20,
+  max = 80,
+  handleLabel = "Resize panes",
+  className,
+  style,
+  children,
+  ...props
+}: SplitProps) {
   const [share, setShare] = React.useState(initial);
   const rootRef = React.useRef<HTMLDivElement>(null);
+  const stacked = useStacked();
   const clamp = (v: number) => Math.min(max, Math.max(min, v));
 
   const onPointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
@@ -117,7 +172,14 @@ export function Split({ initial = 50, min = 20, max = 80, className, style, chil
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
     const rect = rootRef.current?.getBoundingClientRect();
     if (!rect) return;
-    const move = (ev: PointerEvent) => setShare(clamp(((ev.clientX - rect.left) / rect.width) * 100));
+    const move = (ev: PointerEvent) =>
+      setShare(
+        clamp(
+          stacked
+            ? ((ev.clientY - rect.top) / rect.height) * 100
+            : ((ev.clientX - rect.left) / rect.width) * 100,
+        ),
+      );
     const up = () => {
       document.removeEventListener("pointermove", move);
       document.removeEventListener("pointerup", up);
@@ -126,13 +188,27 @@ export function Split({ initial = 50, min = 20, max = 80, className, style, chil
     document.addEventListener("pointerup", up);
   };
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const step = e.shiftKey ? 10 : 2;
+    let next: number | null = null;
+    if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = share - step;
+    else if (e.key === "ArrowRight" || e.key === "ArrowDown") next = share + step;
+    else if (e.key === "Home") next = min;
+    else if (e.key === "End") next = max;
+    if (next === null) return;
+    e.preventDefault();
+    setShare(clamp(next));
+  };
+
   const root = rs(["rs-split", className], styles.split);
   const pane = rs(["rs-split-pane"], styles.pane);
   const handle = rs(["rs-split-handle"], styles.handle);
+  const size = (pct: number): React.CSSProperties =>
+    stacked ? { height: `${pct}%`, width: "auto" } : { width: `${pct}%` };
 
   return (
     <div ref={rootRef} {...props} className={root.className} style={{ ...root.style, ...style }}>
-      <div className={pane.className} style={{ ...pane.style, width: `${share}%` }}>
+      <div className={pane.className} style={{ ...pane.style, ...size(share) }}>
         {children[0]}
       </div>
       <button
@@ -140,18 +216,15 @@ export function Split({ initial = 50, min = 20, max = 80, className, style, chil
         className={handle.className}
         style={handle.style}
         role="separator"
-        aria-orientation="vertical"
+        aria-orientation={stacked ? "horizontal" : "vertical"}
         aria-valuenow={Math.round(share)}
         aria-valuemin={min}
         aria-valuemax={max}
-        aria-label="Resize panes"
+        aria-label={handleLabel}
         onPointerDown={onPointerDown}
-        onKeyDown={(e) => {
-          if (e.key === "ArrowLeft") setShare((s) => clamp(s - 2));
-          if (e.key === "ArrowRight") setShare((s) => clamp(s + 2));
-        }}
+        onKeyDown={onKeyDown}
       />
-      <div className={pane.className} style={{ ...pane.style, width: `${100 - share}%` }}>
+      <div className={pane.className} style={{ ...pane.style, ...size(100 - share) }}>
         {children[1]}
       </div>
     </div>
