@@ -5,7 +5,7 @@ import { DOOR, HOST } from "../../specimen";
 
 export const metadata: Metadata = {
   title: "Agents",
-  description: "Vlak for AI agents: llms.txt, markdown docs, the JSON registry, the CLI, the MCP server, and the API conventions.",
+  description: "Machine-readable Vlak documentation: llms.txt, markdown, JSON registry data, CLI output, MCP resources, and API conventions.",
   alternates: { canonical: `${DOOR}/docs/agents/` },
 };
 
@@ -52,7 +52,7 @@ export default function AgentsPage() {
   return (
     <DocsShell
       title="Agents"
-      summary="Components, tokens, and props are data. Every surface an agent needs is served as text or JSON."
+      summary="Components, tokens, props, keyboard behavior, and install paths are available as text or JSON."
     >
       <h2 className="section-label">Surfaces</h2>
       <div className="docs-table" tabIndex={0}>
@@ -76,9 +76,9 @@ export default function AgentsPage() {
         </table>
       </div>
       <p className="rs-t-body">
-        All of it is generated from one registry, so the markdown, the JSON, and the docs pages say
-        the same thing. Point a model at <code className="rs-code">llms.txt</code> first; it is
-        short and links out.
+        These surfaces are generated from one registry, so the markdown, JSON, and web documentation
+        share one source. Start with <code className="rs-code">llms.txt</code>; it is the short index
+        and links to the detailed records.
       </p>
 
       <h2 className="section-label">MCP server</h2>

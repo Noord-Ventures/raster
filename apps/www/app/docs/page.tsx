@@ -37,7 +37,7 @@ export default function DocsPage() {
   return (
     <DocsShell
       title="Getting started"
-      summary="Choose React, vendored source, or CSS. Every path comes from the same component source and produces the same pixels."
+      summary="Install precompiled React components, vendor the StyleX source, or use the CSS classes directly. All three are generated from the same leaves."
     >
       <h2 className="section-label">1. Install the React package</h2>
       <CodeBlock code={INSTALL} />
@@ -93,7 +93,7 @@ export default function DocsPage() {
         <p className="rs-t-body">
           Every component is a StyleX leaf. The React package ships it compiled with one stylesheet;
           vlak.css is projected from the same leaf onto rs-* classes; vendoring gives you the leaf
-          itself. Import it, link it, or own it. The pixels are identical.
+          itself. Import the package, link the CSS, or keep the source in your repository.
         </p>
       </Callout>
 

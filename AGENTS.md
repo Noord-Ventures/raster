@@ -1,6 +1,6 @@
 # Vlak for agents working on this repository
 
-Vlak is a monochrome design system: paper, ink, gray, hairlines, and a 204px module. This file is for coding agents changing the repository. Agents installing Vlak in their own project want the consumer surfaces at the end.
+Vlak is a minimal design system built from paper, ink, gray, hairlines, and a 204px module. This file is for coding agents changing the repository. Agents installing Vlak in their own project want the consumer surfaces at the end.
 
 ## Layout
 

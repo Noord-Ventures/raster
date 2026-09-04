@@ -31,13 +31,13 @@ export const era = {
 
 export const lead = {
   kicker: "What it is",
-  what: "Vlak is a monochrome design system for product interfaces. Its name is Dutch for plane or surface. A 204px module sets the structure: 184px of content and a 20px gutter. Inter sets the type. Hairlines mark the grid.",
-  who: "Use it for forms, tables, settings, and other everyday product UI. Import the React package, link the CSS, or vendor the source. Every component exposes stable rs-* classes.",
+  what: "Vlak is a minimal design system for product interfaces. Its name is Dutch for plane or surface: the field where type, controls, and content take shape.",
+  who: "It is built for the dense, ordinary work of software: forms, tables, settings, navigation, and states. A 204px module sets the structure. Inter carries the hierarchy. Hairlines make relationships visible without turning every element into a box.",
 };
 
 export const usage = {
   kicker: "Usage",
-  intro: "There are three ways in. Import @noorddev/vlak-react for precompiled components and one stylesheet. Run the CLI to write the stylesheet, Inter, a specimen page, and component source. Or link vlak.css and use the classes.",
+  intro: "Choose how much of the system you want to own. Import precompiled React components, vendor the StyleX source with the CLI, or use vlak.css and stable rs-* classes in plain HTML.",
   commandWhere: "Terminal",
   command: COMMAND,
   htmlWhere: "Head",
@@ -45,28 +45,30 @@ export const usage = {
   controlWhere: "Body",
   control: `<button class="rs-btn-primary">Save</button>`,
   landing:
-    "index.html is a complete Vlak specimen: poster type, the 204px grid, and the system principles.",
+    "index.html is a working specimen of the system: type, the 204px grid, controls, and the ten principles.",
   files:
-    "styles/vlak.css, Inter, and vlak.json land in your project. No CDN, no runtime fetch. Restyle the specimen toward the live home with the files on disk.",
-  after: "Dark scheme: set data-theme=\"dark\" on the root element.",
+    "The CLI writes styles/vlak.css, Inter, and vlak.json into your project. It works offline and makes no runtime request.",
+  after: "For the dark scheme, set data-theme=\"dark\" on the root element.",
 };
 
 export const license = {
-  kicker: "Free and open source",
-  body: "Vlak is free and open source. The code is MIT. You can use it in a product, a poster, or an internal tool.",
+  kicker: "Open source",
+  body: "Vlak is MIT-licensed. Use it, modify it, and ship it in commercial or personal work.",
   type: `${foundry.typeface} is ${foundry.license}, designed by ${foundry.designer}.`,
 };
 
 export const specimen = {
-  kicker: "Specimen",
-  body: "Body is 15px, weight 500, measure about 66 characters. Headings and labels are 600. Sentence case. The module holds the type: a 204 cell, or two, or a column of them. Edges step from grid line to grid line.",
-  mid: "A button is 40px tall on the desktop and 44px on the phone. The field label sits on a 16px line so the hairline lands on an integer. Control radii follow the concentric law. Module cells stay flush to the gridline.",
-  long: "The smaller sizes keep a tall x-height so interface copy stays readable at 12px and 13px. The larger sizes tighten tracking and let weight do the emphasis. There is no accent hue. Paper, ink, and the grays between them are the palette. Motion lasts 0.12 to 0.18 seconds and responds to an action. Color and opacity signal the change; layout rarely moves.",
+  kicker: "The system",
+  body: "Vlak treats an interface as a field, not a stack of cards. A 204px module gives pages a repeatable measure: one cell for a control, two for a form, several for a working surface. Content stays flush to the gridline.",
+  mid: "Body text is 15px at weight 500. Headings and labels are 600. Small text keeps Inter’s tall x-height; display sizes tighten their tracking. Sentence case and a short type scale keep the hierarchy explicit.",
+  long: "Paper, ink, and the grays between them carry the palette. Hairlines separate related regions. Concentric radii align nested controls. Motion lasts 0.12 to 0.18 seconds and answers an action; color and opacity change before layout does. Controls are 40px tall on desktop and 44px on a phone.",
 };
 
 export const history = {
-  kicker: "History",
-  body: "Vlak draws from Swiss International Typographic Style and Dutch modernism: modular grids, asymmetric composition, sans serif type, and functional hierarchy. It translates those principles from print into product interfaces.",
+  kicker: "Design lineage",
+  body: "Vlak takes a method from modernism, not a period look. From Swiss International Typographic Style: the grid as an ordering system, sans serif type, asymmetric composition, and hierarchy built from scale, weight, and space.",
+  dutch: "From Dutch modernism: a more elastic field, type used as structure, direct construction, and tension between strict systems and lively composition. The result is neither a poster theme nor a historical reproduction.",
+  now: "Vlak translates those principles into product constraints: tokens, native elements, stable classes, visible focus, predictable spacing, and components that can be inspected as data.",
 };
 
 export const featured = [
@@ -300,19 +302,19 @@ export const field = [
 export const program = {
   module: {
     kicker: "204",
-    law: `${grid.column} column + ${grid.gutter} gutter.`,
+    law: `${grid.column}px content + ${grid.gutter}px gutter. One repeatable field.`,
   },
   hairline: {
     kicker: "Hairlines",
-    law: "Hairlines mark the module. A 1px line, not a box.",
+    law: "A 1px rule marks a relationship. It does not turn every region into a card.",
   },
   flush: {
     kicker: "Flush",
-    law: "Module cells sit flush on the gridline.",
+    law: "Content edges meet the gridline. Alignment carries the composition.",
   },
   grotesque: {
     kicker: "Grotesque",
-    law: "One face. Weight and size do the work.",
+    law: "One face. Size, weight, measure, and space establish hierarchy.",
     mark: "Ag",
   },
 } as const;
@@ -335,8 +337,8 @@ export const notes = [
     a: "No. Components are StyleX leaves on native elements. No Radix, no Tailwind. Every component also carries stable rs- classes.",
   },
   {
-    q: "What does dependency-free mean?",
-    a: "The React package depends on React and @stylexjs/stylex, nothing else. Behaviour comes from the platform: details, dialog, the Popover API, scroll snap, native inputs. No Radix. No Tailwind.",
+    q: "What does the React package depend on?",
+    a: "React and @stylexjs/stylex. Behaviour otherwise comes from platform features including details, dialog, the Popover API, scroll snap, and native inputs.",
   },
   {
     q: "Do I need React?",
@@ -348,7 +350,7 @@ export const notes = [
   },
   {
     q: "Why Inter?",
-    a: "One grotesque for interfaces. Variable, latin + latin-ext, vendored next to the CSS. System sans is fallback only. Weights: 500 body, 600 headings and labels.",
+    a: "Inter keeps interface text legible at small sizes and provides the weights Vlak needs in one variable face. Latin and latin-ext files ship beside the CSS; system sans is the fallback.",
   },
   {
     q: "What is the module?",
@@ -356,7 +358,7 @@ export const notes = [
   },
   {
     q: "What is the International Typographic Style here?",
-    a: "Vlak applies modular grids, sans serif type, asymmetric composition, and functional hierarchy to product interfaces. The About page records the Swiss and Dutch work behind that approach.",
+    a: "A method for ordering information: modular grids, sans serif type, asymmetric composition, and hierarchy made with scale, weight, and space. Vlak combines it with the more elastic fields and direct construction found in Dutch modernism.",
   },
   {
     q: "What is Noord?",

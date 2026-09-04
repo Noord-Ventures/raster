@@ -92,7 +92,7 @@ export function createServer(): McpServer {
     { name: "vlak", version },
     {
       instructions:
-        "Vlak is a monochrome design system: React components (precompiled StyleX, one stylesheet), rs-* CSS, and a shadcn-compatible registry. Start with get_guide for install paths and conventions, list_components or search_components to find a component, get_component for its docs, props, and example, get_install for the exact commands, get_tokens for the design tokens.",
+        "Vlak is a minimal design system: React components (precompiled StyleX, one stylesheet), rs-* CSS, and a shadcn-compatible registry. Start with get_guide for install paths and conventions, list_components or search_components to find a component, get_component for its docs, props, and example, get_install for the exact commands, get_tokens for the design tokens.",
     },
   );
 

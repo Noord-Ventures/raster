@@ -850,15 +850,15 @@ iconNames; // every drawn mark
     classes: ["rs-acc", "rs-acc-item", "rs-acc-chevron", "rs-acc-body", "rs-acc-chevron-open", "rs-acc-summary"],
     css: ["components/accordion.css"],
     react: "components/accordion.tsx",
-    snippet: `<div class="rs-acc"><details class="rs-acc-item" name="faq" open><summary>What is Vlak?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">A monochrome, CSS-first design system.</div></details><details class="rs-acc-item" name="faq"><summary>Is it dependency-free?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">Yes. Native elements do the work.</div></details></div>`,
+    snippet: `<div class="rs-acc"><details class="rs-acc-item" name="faq" open><summary>What is Vlak?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">A minimal, CSS-first design system.</div></details><details class="rs-acc-item" name="faq"><summary>Does it require Radix?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">No. Native elements provide the behavior.</div></details></div>`,
     example: `import { Accordion, AccordionItem } from "@noorddev/vlak-react";
 
 <Accordion exclusive>
   <AccordionItem title="What is Vlak?" defaultOpen>
-    A monochrome, CSS-first design system.
+    A minimal, CSS-first design system.
   </AccordionItem>
-  <AccordionItem title="Is it dependency-free?">
-    Yes. Native elements do the work.
+  <AccordionItem title="Does it require Radix?">
+    No. Native elements provide the behavior.
   </AccordionItem>
 </Accordion>`,
     usage: {

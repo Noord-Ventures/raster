@@ -713,9 +713,9 @@ export const demos: Record<string, () => React.ReactNode> = {
     <div style={{ width: 300 }}>
       <Accordion exclusive>
         <AccordionItem title="What is Vlak?" defaultOpen>
-          A monochrome design system on a 204px module.
+          A minimal design system on a 204px module.
         </AccordionItem>
-        <AccordionItem title="Is it dependency-free?">Yes. Native elements do the work.</AccordionItem>
+        <AccordionItem title="Does it require Radix?">No. Native elements provide the behavior.</AccordionItem>
       </Accordion>
     </div>
   ),

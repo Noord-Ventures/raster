@@ -1,6 +1,6 @@
 import { VERSION, add, docsFor, init, list, search, snippetFor, tokensJson } from "./lib";
 
-const HELP = `@noorddev/vlak-cli ${VERSION}, the monochrome design system
+const HELP = `@noorddev/vlak-cli ${VERSION}, the minimal design system
 
 Usage
   npx @noorddev/vlak-cli init [--css-dir <dir>] [--components-dir <dir>] [--registry <url>] [--overwrite]

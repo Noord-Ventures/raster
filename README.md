@@ -1,6 +1,6 @@
 # Vlak
 
-Vlak is a monochrome design system for product interfaces, built on a 204px module. Its name is Dutch for plane or surface. It ships 74 accessible components as React, CSS, vendored StyleX source, and machine-readable data.
+Vlak is a minimal design system for product interfaces. Its name is Dutch for plane or surface: the field where type, controls, and content are arranged. A 204px module gives that field its structure. The 74 components ship as React, CSS, vendored StyleX source, and machine-readable data.
 
 [vlak.dev](https://vlak.dev) · [github.com/Noord-Ventures/vlak](https://github.com/Noord-Ventures/vlak)
 
@@ -8,7 +8,7 @@ Designed and built at Noord Frontier Design Lab in Alkmaar.
 
 ## Install
 
-Three ways in. All three share the same source, so nothing drifts.
+Choose the level of ownership that fits the project. Each path is generated from the same component leaves.
 
 **Import the package.** Precompiled React components and one stylesheet. No compiler to configure.
 
@@ -41,9 +41,9 @@ Dark scheme: `data-theme="dark"` on the root element. Without it the system pref
 
 ## Why Vlak
 
-Paper, ink, gray, and hairlines provide the structure. The system draws from Dutch and Swiss modernism, then translates that discipline to forms, tables, settings, and other everyday product UI.
+Vlak treats an interface as a field rather than a stack of cards. Paper, ink, gray, type, and hairlines establish hierarchy. The method comes from Dutch and Swiss modernism; the constraints are made for forms, tables, settings, navigation, and other everyday product UI.
 
-- **One source of paint.** Every component is a StyleX leaf. The React package ships it precompiled; the CSS package is generated from the same leaf. Vendor it, import it, or link the CSS: identical pixels.
+- **One source of paint.** Every component is a StyleX leaf. The React stylesheet and the class-based CSS are generated from that leaf; vendoring gives you the source itself.
 - **StyleX first.** Atomic, typed, compiled away. Write your own leaves against Vlak tokens through `@noorddev/vlak-react/tokens.stylex`.
 - **Platform first.** `<dialog>`, `<details>`, the Popover API, scroll snap, native inputs. JavaScript only where the platform has nothing.
 - **Accessibility tested.** APG patterns for listbox, menu, grid, and tabs. Focus rings, 3:1 control contrast, reduced motion, forced colours. Every interactive component has an axe test.
@@ -51,7 +51,7 @@ Paper, ink, gray, and hairlines provide the structure. The system draws from Dut
 - **Layered.** All CSS sits in cascade layers, so your overrides win without `!important`.
 - **Logical properties.** Every leaf paints its inline axis with logical properties. Set `dir="rtl"` and the system mirrors.
 - **Tokens as data.** Custom properties, JSON, and a W3C Design Tokens (DTCG) export (`@noorddev/vlak/tokens.dtcg`) for Style Dictionary, Figma Variables, and Tokens Studio.
-- **Agent-ready.** Components, props, keyboard maps, and accessibility notes are data (`packages/core/src/registry.ts` plus props extracted from the types), served as JSON, markdown, `llms.txt`, a CLI with `--json`, and an MCP server, so tools and models install and compose Vlak without guessing.
+- **Machine-readable.** Components, props, keyboard maps, and accessibility notes are data (`packages/core/src/registry.ts` plus props extracted from the types), served as JSON, markdown, `llms.txt`, CLI output, and MCP resources.
 
 ## For agents
 
@@ -79,7 +79,7 @@ Platform first · One source of paint · Accessible by default · Paper and ink 
 | `packages/core` | [`@noorddev/vlak`](packages/core/README.md) | Tokens, generated `rs-*` CSS, vendored Inter, the typed registry |
 | `packages/react` | [`@noorddev/vlak-react`](packages/react/README.md) | React components, precompiled StyleX, one stylesheet |
 | `packages/cli` | [`@noorddev/vlak-cli`](packages/cli/README.md) | `init`, `add`, `list`, `search`, `docs`, `tokens`. Offline registry snapshot |
-| `packages/mcp` | [`@noorddev/vlak-mcp`](packages/mcp/README.md) | MCP server over the same registry, for Claude Code, Cursor, and friends |
+| `packages/mcp` | [`@noorddev/vlak-mcp`](packages/mcp/README.md) | MCP server over the same registry |
 | `registry/` | | Generated registry items in the shadcn registry-item schema |
 | `apps/www` | | Documentation site: gallery, per-component docs, tokens, served registry |
 

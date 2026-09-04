@@ -219,7 +219,7 @@ function guidePage() {
   const categories = [...byCategory].filter(([, items]) => items.length).map(([c, items]) => `${c} (${items.length})`);
   return `# Vlak guide
 
-Vlak is a monochrome design system: paper, ink, gray, hairlines, and a ${vlakTokens.grid.module}px module. ${catalogComponents.length} components in ${categories.length} categories: ${categories.join(", ")}. Version ${VERSION}. Site: ${HOST}. Source: https://github.com/Noord-Ventures/vlak.
+Vlak is a minimal design system built from paper, ink, gray, hairlines, and a ${vlakTokens.grid.module}px module. ${catalogComponents.length} components in ${categories.length} categories: ${categories.join(", ")}. Version ${VERSION}. Site: ${HOST}. Source: https://github.com/Noord-Ventures/vlak.
 
 Three install paths share one source, so nothing drifts: the React package (precompiled StyleX plus one stylesheet), the vendored source (the shadcn model, through the Vlak CLI or the shadcn CLI), and CSS only (\`rs-*\` classes on plain markup).
 
@@ -321,7 +321,7 @@ function llmsIndex() {
   const lines = [
     `# Vlak`,
     ``,
-    `> A monochrome design system: paper, ink, gray, hairlines, and a ${vlakTokens.grid.module}px module. ${catalogComponents.length} React components as precompiled StyleX with one stylesheet, the same components as rs-* CSS, and a shadcn-compatible registry. Version ${VERSION}.`,
+    `> A minimal design system built from paper, ink, gray, hairlines, and a ${vlakTokens.grid.module}px module. ${catalogComponents.length} React components as precompiled StyleX with one stylesheet, the same components as rs-* CSS, and a shadcn-compatible registry. Version ${VERSION}.`,
     ``,
     `Install with \`npm install ${REACT}\` and \`import "${REACT}/css"\`, vendor the source with \`npx ${CLI} add <name>\`, or use \`npx shadcn add ${HOST}/r/<name>.json\`. Every component page below has install paths, a React example, a props table generated from the types, keyboard interactions, and accessibility notes.`,
     ``,

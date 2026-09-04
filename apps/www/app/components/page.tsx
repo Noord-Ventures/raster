@@ -25,7 +25,7 @@ export default function ComponentsPage() {
         <header {...sx("cover", chrome.cover)}>
           <h1 className="rs-t-display">Components</h1>
           <p className="rs-t-sub">
-            {catalogComponents.length} components. Live previews, usage guidance, accessibility notes, and install paths.
+            {catalogComponents.length} components, each with a live preview, install path, props, keyboard behavior, and accessibility notes.
           </p>
         </header>
         {vlakCategories.map((category) => {
@@ -52,7 +52,7 @@ export default function ComponentsPage() {
                             {group.title}
                           </Link>
                         </h3>
-                        <p>{group.names.length} marks. 16 viewBox, 1px currentColor.</p>
+                        <p>{group.names.length} marks on a 16px viewBox, drawn with 1px currentColor strokes.</p>
                       </div>
                     </div>
                   ))}

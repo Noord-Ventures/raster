@@ -2,8 +2,8 @@
 
 export const FACE = "Inter";
 export const WORD = "Vlak";
-export const LAW = "A monochrome design system for product interfaces.";
-export const POSTER = "Built on a 204px module. Drawn from Dutch and Swiss modernism.";
+export const LAW = "A minimal design system for product interfaces.";
+export const POSTER = "A 204px field for type, controls, and content. Drawn from Dutch and Swiss modernism.";
 /** The package path: precompiled React and one stylesheet. The homepage command. */
 export const INSTALL = "npm install @noorddev/vlak-react";
 /** The vendoring path: the CLI writes the CSS, Inter, and a specimen, then copies leaves. */

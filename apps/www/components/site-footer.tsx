@@ -21,8 +21,8 @@ export function SiteFooter() {
           <p>
             Vlak was designed and built at <a href="https://noord.dev">Noord</a> in Alkmaar by <a href="https://renatovaldes.com">Renn</a>.
           </p>
-          <p>Dutch and Swiss modernism, translated for product interfaces.</p>
-          <p>Free and open source under the MIT license.</p>
+          <p>A modernist method translated into practical constraints for product interfaces.</p>
+          <p>MIT-licensed. React, CSS, source, and machine-readable data.</p>
         </div>
       </div>
     </footer>

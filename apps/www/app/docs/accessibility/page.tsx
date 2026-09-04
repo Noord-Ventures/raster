@@ -110,7 +110,7 @@ export default function AccessibilityPage() {
   return (
     <DocsShell
       title="Accessibility"
-      summary="Native elements first. Where the platform has nothing, the WAI-ARIA Authoring Practices pattern, with keyboard, names, and focus."
+      summary="Native elements provide the baseline. Custom widgets follow WAI-ARIA Authoring Practices for semantics, names, keyboard behavior, and focus."
     >
       <h2 className="section-label">Commitments</h2>
       <ul className="docs-list">

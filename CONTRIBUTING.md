@@ -1,6 +1,6 @@
 # Contributing to Vlak
 
-Vlak is a monochrome design system: tokens, CSS, React components, a registry, and a CLI. Contributions that keep it small, legible, and accessible are welcome.
+Vlak is a minimal design system: tokens, CSS, React components, a registry, and a CLI. Contributions that keep it small, legible, and accessible are welcome.
 
 ## Setup
 

@@ -220,7 +220,7 @@ const layered = [
 ];
 
 const banner = `/* ═══════════════════════════════════════════════════════════════════
-   VLAK, a monochrome, CSS-first design system.
+   VLAK, a minimal, CSS-first design system.
    ${vlakTokens.meta.url}
 
    One ink, no accent hue: emphasis comes from weight, size, and

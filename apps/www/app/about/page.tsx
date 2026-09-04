@@ -23,7 +23,7 @@ import "./about.css";
 
 export const metadata: Metadata = {
   title: "About",
-  description: lead.what,
+  description: "The method, design lineage, and practical constraints behind Vlak.",
   alternates: { canonical: `${DOOR}/about/` },
 };
 
@@ -200,6 +200,8 @@ export default function AboutPage() {
           <Kicker>{history.kicker}</Kicker>
           <Copy>
             <CopyP>{history.body}</CopyP>
+            <CopyP>{history.dutch}</CopyP>
+            <CopyP>{history.now}</CopyP>
           </Copy>
         </section>
 
@@ -269,7 +271,7 @@ export default function AboutPage() {
         })}
 
         <section {...sx("field-cell field-cell-faq", about.cell, about.cellStart)} aria-labelledby="notes-heading">
-          <Kicker id="notes-heading">Notes</Kicker>
+          <Kicker id="notes-heading">Practical notes</Kicker>
           <div {...sx("field-notes", about.notes)}>
             <AboutNotes />
           </div>

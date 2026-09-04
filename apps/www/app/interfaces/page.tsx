@@ -11,7 +11,7 @@ import "./interfaces.css";
 
 export const metadata: Metadata = {
   title: "Interfaces",
-  description: "Six invented tools. A poster crop of each.",
+  description: "Six interface studies built from the same Vlak constraints.",
   alternates: { canonical: `${DOOR}/interfaces/` },
 };
 
@@ -23,7 +23,7 @@ export default function InterfacesPage() {
       <main id="main" {...sx("site-content-wide", chrome.contentWide)}>
         <header className={cover.className} style={{ ...cover.style, maxWidth: 592 }}>
           <h1 className="rs-t-display">Interfaces</h1>
-          <p className="rs-t-sub">Six little tools. A poster crop of each.</p>
+          <p className="rs-t-sub">Six interface studies. Different purposes, one set of constraints.</p>
         </header>
         <div {...sx("if-list", ifx.list)}>
           {interfaces.map((item) => (

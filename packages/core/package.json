@@ -1,7 +1,7 @@
 {
   "name": "@noorddev/vlak",
   "version": "0.4.0",
-  "description": "Vlak core — design tokens, component registry, and CSS. Monochrome, CSS-first, zero dependencies.",
+  "description": "Vlak core — design tokens, component registry, and CSS. Minimal, CSS-first, zero dependencies.",
   "license": "MIT",
   "repository": {
     "type": "git",

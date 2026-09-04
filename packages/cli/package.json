@@ -1,7 +1,7 @@
 {
   "name": "@noorddev/vlak-cli",
   "version": "0.4.0",
-  "description": "The Vlak CLI — install the monochrome design system into any project: npx @noorddev/vlak-cli init, npx @noorddev/vlak-cli add <component>.",
+  "description": "The Vlak CLI — install the minimal design system into any project: npx @noorddev/vlak-cli init, npx @noorddev/vlak-cli add <component>.",
   "license": "MIT",
   "repository": {
     "type": "git",
