@@ -1,4 +1,3102 @@
 {
   "version": "0.3.0",
-  "components": {}
+  "components": {
+    "button": {
+      "exports": [
+        {
+          "name": "Button",
+          "kind": "component",
+          "extends": "ButtonHTMLAttributes<HTMLButtonElement>",
+          "ref": "HTMLButtonElement",
+          "props": [
+            {
+              "name": "variant",
+              "type": "\"primary\" | \"ghost\"",
+              "required": false,
+              "default": "\"primary\"",
+              "description": "Solid ink primary or hairline ghost. One primary per view."
+            },
+            {
+              "name": "size",
+              "type": "\"default\" | \"sm\"",
+              "required": false,
+              "default": "\"default\""
+            },
+            {
+              "name": "grouped",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "Flush into a ButtonGroup: no own stroke, one ink seam."
+            }
+          ]
+        }
+      ]
+    },
+    "button-group": {
+      "exports": [
+        {
+          "name": "ButtonGroup",
+          "kind": "component",
+          "description": "Flush joined actions. One hairline between. Group owns the outer stroke.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        }
+      ]
+    },
+    "link": {
+      "exports": [
+        {
+          "name": "Link",
+          "kind": "component",
+          "description": "Text link with a hairline underline. In-copy variant is inset 1px.",
+          "extends": "AnchorHTMLAttributes<HTMLAnchorElement>",
+          "ref": "HTMLAnchorElement",
+          "props": [
+            {
+              "name": "underline",
+              "type": "boolean",
+              "required": false,
+              "default": "false",
+              "description": "In-copy gradient underline, inset 1px."
+            }
+          ]
+        }
+      ]
+    },
+    "input": {
+      "exports": [
+        {
+          "name": "Input",
+          "kind": "component",
+          "extends": "InputHTMLAttributes<HTMLInputElement>",
+          "ref": "HTMLInputElement",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": false,
+              "description": "Label rendered above the field at 12px."
+            },
+            {
+              "name": "ok",
+              "type": "boolean",
+              "required": false,
+              "description": "Marks the field as validated: ink border and ink feedback text."
+            },
+            {
+              "name": "feedback",
+              "type": "ReactNode",
+              "required": false,
+              "description": "Quiet feedback line under the field."
+            },
+            {
+              "name": "hint",
+              "type": "ReactNode",
+              "required": false,
+              "description": "Hint under the field; it describes the control."
+            },
+            {
+              "name": "error",
+              "type": "ReactNode",
+              "required": false,
+              "description": "Error under the field; it describes the control and marks it invalid."
+            },
+            {
+              "name": "plain",
+              "type": "boolean",
+              "required": false,
+              "description": "Control only — no field stack. For Field / InputGroup."
+            },
+            {
+              "name": "grouped",
+              "type": "boolean",
+              "required": false,
+              "description": "Flush into an InputGroup: no own stroke."
+            }
+          ]
+        }
+      ]
+    },
+    "label": {
+      "exports": [
+        {
+          "name": "Label",
+          "kind": "component",
+          "description": "Label above a control. 12px, secondary ink.",
+          "extends": "LabelHTMLAttributes<HTMLLabelElement>",
+          "ref": "HTMLLabelElement",
+          "props": []
+        }
+      ]
+    },
+    "field": {
+      "exports": [
+        {
+          "name": "Field",
+          "kind": "component",
+          "description": "Stack: label, control, hint or error. The hint and error describe the control.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "FieldError",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLParagraphElement>",
+          "ref": "HTMLParagraphElement",
+          "props": []
+        },
+        {
+          "name": "FieldHint",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLParagraphElement>",
+          "ref": "HTMLParagraphElement",
+          "props": []
+        },
+        {
+          "name": "FieldLabel",
+          "kind": "component",
+          "extends": "LabelHTMLAttributes<HTMLLabelElement>",
+          "ref": "HTMLLabelElement",
+          "props": []
+        }
+      ]
+    },
+    "input-group": {
+      "exports": [
+        {
+          "name": "InputAddon",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        },
+        {
+          "name": "InputGroup",
+          "kind": "component",
+          "description": "Addon and field share one control boundary.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "end",
+              "type": "boolean",
+              "required": false,
+              "description": "Place the addon after the field."
+            }
+          ]
+        }
+      ]
+    },
+    "native-select": {
+      "exports": [
+        {
+          "name": "NativeSelect",
+          "kind": "component",
+          "description": "The platform list. Raster chrome.",
+          "extends": "SelectHTMLAttributes<HTMLSelectElement>",
+          "ref": "HTMLSelectElement",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "inline-form": {
+      "exports": [
+        {
+          "name": "InlineForm",
+          "kind": "component",
+          "description": "One field, one action; the action sits inside the field.",
+          "extends": "Omit<FormHTMLAttributes<HTMLFormElement>, \"onSubmit\">",
+          "ref": "HTMLFormElement",
+          "props": [
+            {
+              "name": "placeholder",
+              "type": "string",
+              "required": false,
+              "default": "\"Your e-mail\""
+            },
+            {
+              "name": "buttonLabel",
+              "type": "ReactNode",
+              "required": false,
+              "default": "\"Subscribe\""
+            },
+            {
+              "name": "successLabel",
+              "type": "ReactNode",
+              "required": false,
+              "default": "\"You're on the list\""
+            },
+            {
+              "name": "validate",
+              "type": "(value: string) => boolean",
+              "required": false,
+              "default": "(v) => /.+@.+\\..+/.test(v)",
+              "description": "The action only appears once this returns true. Defaults to a loose e-mail check."
+            },
+            {
+              "name": "onSubmit",
+              "type": "(value: string) => void",
+              "required": false
+            },
+            {
+              "name": "inputProps",
+              "type": "InputHTMLAttributes<HTMLInputElement>",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "radio": {
+      "exports": [
+        {
+          "name": "Radio",
+          "kind": "component",
+          "description": "A real native radio inside a RadioGroup; the ink dot mirrors its state.",
+          "extends": "Omit<InputHTMLAttributes<HTMLInputElement>, \"type\" | \"value\">",
+          "ref": "HTMLInputElement",
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "RadioGroup",
+          "kind": "component",
+          "extends": "Omit<HTMLAttributes<HTMLDivElement>, \"onChange\">",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "name",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "onValueChange",
+              "type": "(value: string) => void",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "checkbox": {
+      "exports": [
+        {
+          "name": "Checkbox",
+          "kind": "component",
+          "description": "A real native checkbox; the visible 16px box mirrors its state.",
+          "extends": "Omit<InputHTMLAttributes<HTMLInputElement>, \"type\">",
+          "ref": "HTMLInputElement",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "switch": {
+      "exports": [
+        {
+          "name": "Switch",
+          "kind": "component",
+          "description": "A button with role=\"switch\".",
+          "extends": "Omit<ButtonHTMLAttributes<HTMLButtonElement>, \"onChange\">",
+          "ref": "HTMLButtonElement",
+          "props": [
+            {
+              "name": "checked",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "defaultChecked",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "onCheckedChange",
+              "type": "(checked: boolean) => void",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "slider": {
+      "exports": [
+        {
+          "name": "Slider",
+          "kind": "component",
+          "description": "A native range input drives the ink track.",
+          "extends": "Omit<InputHTMLAttributes<HTMLInputElement>, \"type\" | \"value\" | \"defaultValue\" | \"onChange\">",
+          "ref": "HTMLInputElement",
+          "props": [
+            {
+              "name": "value",
+              "type": "number",
+              "required": false
+            },
+            {
+              "name": "defaultValue",
+              "type": "number",
+              "required": false,
+              "default": "50"
+            },
+            {
+              "name": "min",
+              "type": "number",
+              "required": false,
+              "default": "0"
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "required": false,
+              "default": "100"
+            },
+            {
+              "name": "step",
+              "type": "number",
+              "required": false,
+              "default": "1"
+            },
+            {
+              "name": "onValueChange",
+              "type": "(value: number) => void",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "progress": {
+      "exports": [
+        {
+          "name": "Progress",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "value",
+              "type": "number",
+              "required": true
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "required": false,
+              "default": "100"
+            },
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": false,
+              "description": "Label above the bar; it names the bar. The percentage lives here, never inside the bar."
+            }
+          ]
+        }
+      ]
+    },
+    "tabs": {
+      "exports": [
+        {
+          "name": "Tab",
+          "kind": "component",
+          "extends": "ButtonHTMLAttributes<HTMLButtonElement>",
+          "ref": "HTMLButtonElement",
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "TabList",
+          "kind": "component",
+          "description": "Roving tabs: arrows step, Home/End jump, and selection follows focus.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "orientation",
+              "type": "\"horizontal\" | \"vertical\"",
+              "required": false,
+              "default": "\"horizontal\"",
+              "description": "Stacked tabs answer Up/Down instead of Left/Right."
+            }
+          ]
+        },
+        {
+          "name": "TabPanel",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "Tabs",
+          "kind": "component",
+          "extends": "Omit<HTMLAttributes<HTMLDivElement>, \"onChange\">",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "value",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "onValueChange",
+              "type": "(value: string) => void",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "breadcrumbs": {
+      "exports": [
+        {
+          "name": "Breadcrumbs",
+          "kind": "component",
+          "description": "A trail: ordered list in a nav, the current page marked.",
+          "extends": "HTMLAttributes<HTMLElement>",
+          "ref": "HTMLElement",
+          "props": [
+            {
+              "name": "items",
+              "type": "Crumb[]",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    "crumb-bar": {
+      "exports": [
+        {
+          "name": "CrumbBar",
+          "kind": "component",
+          "description": "The fixed top bar of the house chrome. Transparent at rest; once the page cover scrolls away it gains the paper background and its bottom hairline, and the breadcrumbs fade in. While hidden the trail is inert and invisible, so nothing focuses into an unseen link.",
+          "extends": "HTMLAttributes<HTMLElement>",
+          "ref": "HTMLElement",
+          "props": [
+            {
+              "name": "trail",
+              "type": "CrumbBarItem[]",
+              "required": true
+            },
+            {
+              "name": "threshold",
+              "type": "number",
+              "required": false,
+              "default": "110",
+              "description": "Pixels of scroll before the bar solidifies and the crumbs fade in."
+            },
+            {
+              "name": "root",
+              "type": "CrumbBarItem",
+              "required": false,
+              "description": "Root crumb, held in the TOC column from 900px."
+            },
+            {
+              "name": "rootShort",
+              "type": "ReactNode",
+              "required": false,
+              "description": "Abbreviated root shown on phones in place of the full label."
+            }
+          ]
+        }
+      ]
+    },
+    "pagination": {
+      "exports": [
+        {
+          "name": "Pagination",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLElement>",
+          "ref": "HTMLElement",
+          "props": [
+            {
+              "name": "page",
+              "type": "number",
+              "required": true,
+              "description": "Current 1-based page."
+            },
+            {
+              "name": "count",
+              "type": "number",
+              "required": true
+            },
+            {
+              "name": "onPageChange",
+              "type": "(page: number) => void",
+              "required": false
+            },
+            {
+              "name": "siblings",
+              "type": "number",
+              "required": false,
+              "default": "1",
+              "description": "Pages kept visible around the current one."
+            }
+          ]
+        }
+      ]
+    },
+    "select": {
+      "exports": [
+        {
+          "name": "Select",
+          "kind": "component",
+          "description": "Select-only combobox: the trigger holds focus and points at the active option with aria-activedescendant; the listbox overlays.",
+          "extends": "Omit<HTMLAttributes<HTMLDivElement>, \"onChange\" | \"defaultValue\">",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "options",
+              "type": "SelectOption[]",
+              "required": true
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "placeholder",
+              "type": "ReactNode",
+              "required": false,
+              "default": "\"Select…\""
+            },
+            {
+              "name": "onValueChange",
+              "type": "(value: string) => void",
+              "required": false
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "dialog": {
+      "exports": [
+        {
+          "name": "Dialog",
+          "kind": "component",
+          "description": "A native <dialog>. Focus trapping, Escape, and the backdrop come from the platform; the title names it and the body describes it.",
+          "extends": "Omit<DialogHTMLAttributes<HTMLDialogElement>, \"open\" | \"onClose\">",
+          "ref": "HTMLDialogElement",
+          "props": [
+            {
+              "name": "open",
+              "type": "boolean",
+              "required": true
+            },
+            {
+              "name": "onClose",
+              "type": "() => void",
+              "required": false
+            },
+            {
+              "name": "dismissable",
+              "type": "boolean",
+              "required": false,
+              "description": "Escape (and any other platform close request) asks the parent to close. Off, the dialog must be answered; maps to closedby=\"none\"."
+            },
+            {
+              "name": "lightDismiss",
+              "type": "boolean",
+              "required": false,
+              "description": "A click on the backdrop closes too; maps to closedby=\"any\"."
+            },
+            {
+              "name": "closeLabel",
+              "type": "string",
+              "required": false,
+              "description": "Renders a labelled close button in the top corner."
+            },
+            {
+              "name": "extraStyles",
+              "type": "Leaves",
+              "required": false,
+              "description": "Extra StyleX leaves merged after the dialog frame (command palette)."
+            }
+          ]
+        },
+        {
+          "name": "DialogActions",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "DialogBody",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLParagraphElement>",
+          "ref": "HTMLParagraphElement",
+          "props": []
+        },
+        {
+          "name": "DialogTitle",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLHeadingElement>",
+          "ref": "HTMLHeadingElement",
+          "props": [
+            {
+              "name": "as",
+              "type": "\"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\" | \"p\" | \"span\" | \"div\"",
+              "required": false,
+              "default": "\"h2\"",
+              "description": "Heading level. The dialog is named by this element either way."
+            }
+          ]
+        }
+      ]
+    },
+    "badge": {
+      "exports": [
+        {
+          "name": "Badge",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": [
+            {
+              "name": "variant",
+              "type": "\"outline\" | \"solid\" | \"muted\"",
+              "required": false,
+              "default": "\"outline\"",
+              "description": "Outline for recommendations, solid for done, muted for pending."
+            }
+          ]
+        }
+      ]
+    },
+    "chip": {
+      "exports": [
+        {
+          "name": "Chip",
+          "kind": "component",
+          "description": "Mono identifier with a 1px mixed border.",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        }
+      ]
+    },
+    "card": {
+      "exports": [
+        {
+          "name": "Card",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "CardBody",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLParagraphElement>",
+          "ref": "HTMLParagraphElement",
+          "props": []
+        },
+        {
+          "name": "CardInner",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "CardLabel",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        },
+        {
+          "name": "CardTitle",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLHeadingElement>",
+          "ref": "HTMLHeadingElement",
+          "props": []
+        }
+      ]
+    },
+    "concentric-radius": {
+      "exports": [
+        {
+          "name": "concentricInner",
+          "kind": "function",
+          "props": []
+        },
+        {
+          "name": "concentricOuter",
+          "kind": "function",
+          "props": []
+        },
+        {
+          "name": "innerRadius",
+          "kind": "function",
+          "description": "Steve Ruiz innerRadius: fit a circle to the −padding isosurface of a circular corner SDF. The initial guess R = outerRadius is the wrong answer. Clamp at 0. https://x.com/steveruizok/status/2072651352908370013",
+          "props": []
+        },
+        {
+          "name": "Nest",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "radius",
+              "type": "number",
+              "required": false,
+              "description": "Outer radius in px. Nested nests inherit the parent inner radius."
+            },
+            {
+              "name": "pad",
+              "type": "number",
+              "required": false,
+              "description": "Padding in px. Inset for Steve’s innerRadius."
+            }
+          ]
+        },
+        {
+          "name": "NestInner",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        }
+      ]
+    },
+    "stepper": {
+      "exports": [
+        {
+          "name": "Stepper",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "steps",
+              "type": "Step[]",
+              "required": true
+            },
+            {
+              "name": "current",
+              "type": "number",
+              "required": true,
+              "description": "0-based index of the active step; everything before it is done."
+            }
+          ]
+        }
+      ]
+    },
+    "table": {
+      "exports": [
+        {
+          "name": "Table",
+          "kind": "component",
+          "description": "Open grid, 1px row rules, last column right-aligned.",
+          "extends": "TableHTMLAttributes<HTMLTableElement>",
+          "ref": "HTMLTableElement",
+          "props": []
+        },
+        {
+          "name": "TableBody",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLTableSectionElement>",
+          "ref": "HTMLTableSectionElement",
+          "props": []
+        },
+        {
+          "name": "TableHead",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLTableSectionElement>",
+          "ref": "HTMLTableSectionElement",
+          "props": []
+        },
+        {
+          "name": "TableRow",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLTableRowElement>",
+          "ref": "HTMLTableRowElement",
+          "props": [
+            {
+              "name": "total",
+              "type": "boolean",
+              "required": false,
+              "description": "2px rules, ink cells."
+            }
+          ]
+        },
+        {
+          "name": "TableTd",
+          "kind": "component",
+          "extends": "TdHTMLAttributes<HTMLTableCellElement>",
+          "ref": "HTMLTableCellElement",
+          "props": [
+            {
+              "name": "total",
+              "type": "boolean",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "TableTh",
+          "kind": "component",
+          "extends": "ThHTMLAttributes<HTMLTableCellElement>",
+          "ref": "HTMLTableCellElement",
+          "props": []
+        }
+      ]
+    },
+    "icons": {
+      "exports": [
+        {
+          "name": "Icon",
+          "kind": "component",
+          "description": "One mark. Size is the drawn square; the viewBox is always 16.",
+          "extends": "Omit<SVGAttributes<SVGSVGElement>, \"children\" | \"rotate\">",
+          "ref": "SVGSVGElement",
+          "props": [
+            {
+              "name": "name",
+              "type": "IconName",
+              "required": true
+            },
+            {
+              "name": "size",
+              "type": "IconSize",
+              "required": false,
+              "default": "16"
+            },
+            {
+              "name": "variant",
+              "type": "IconVariant",
+              "required": false,
+              "default": "\"line\"",
+              "description": "Line hairline, or filled kinship of the same figure."
+            },
+            {
+              "name": "rotate",
+              "type": "IconRotate",
+              "required": false,
+              "description": "Same mark, spun around 8,8. Accordion down is chevron-right at 90."
+            }
+          ]
+        },
+        {
+          "name": "IconCatalog",
+          "kind": "component",
+          "description": "Full family at 12, 16, and 24, line | filled, grouped. Optical center 8,8.",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "className",
+              "type": "string",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "iconLabel",
+          "kind": "function",
+          "props": []
+        },
+        {
+          "name": "Icons",
+          "kind": "component",
+          "description": "Inline mark row. One family, current color.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "resolveIcon",
+          "kind": "function",
+          "props": []
+        }
+      ]
+    },
+    "accordion": {
+      "exports": [
+        {
+          "name": "Accordion",
+          "kind": "component",
+          "description": "Native <details> rows on hairlines.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "exclusive",
+              "type": "boolean",
+              "required": false,
+              "description": "One item open at a time, via the platform's own `name` grouping."
+            }
+          ]
+        },
+        {
+          "name": "AccordionItem",
+          "kind": "component",
+          "extends": "Omit<DetailsHTMLAttributes<HTMLDetailsElement>, \"title\">",
+          "ref": "HTMLDetailsElement",
+          "props": [
+            {
+              "name": "title",
+              "type": "ReactNode",
+              "required": true
+            },
+            {
+              "name": "defaultOpen",
+              "type": "boolean",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "alert": {
+      "exports": [
+        {
+          "name": "Alert",
+          "kind": "component",
+          "extends": "Omit<HTMLAttributes<HTMLDivElement>, \"title\">",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "title",
+              "type": "ReactNode",
+              "required": false
+            },
+            {
+              "name": "variant",
+              "type": "\"outline\" | \"solid\"",
+              "required": false,
+              "default": "\"outline\"",
+              "description": "Solid ink variant."
+            },
+            {
+              "name": "icon",
+              "type": "ReactNode",
+              "required": false
+            },
+            {
+              "name": "live",
+              "type": "\"polite\" | \"assertive\"",
+              "required": false,
+              "description": "Static content is a note. Set \"polite\" (role=status) or \"assertive\" (role=alert) only when the alert appears in response to something."
+            }
+          ]
+        }
+      ]
+    },
+    "alert-dialog": {
+      "exports": [
+        {
+          "name": "AlertDialog",
+          "kind": "component",
+          "description": "A native <dialog> that requires an explicit answer. Escape and light dismiss are off (closedby=\"none\"); the actions close it.",
+          "extends": "Omit<DialogHTMLAttributes<HTMLDialogElement>, \"open\" | \"onClose\">",
+          "ref": "HTMLDialogElement",
+          "props": [
+            {
+              "name": "open",
+              "type": "boolean",
+              "required": true
+            },
+            {
+              "name": "onClose",
+              "type": "() => void",
+              "required": false
+            },
+            {
+              "name": "extraStyles",
+              "type": "Leaves",
+              "required": false,
+              "description": "Extra StyleX leaves merged after the dialog frame (command palette)."
+            }
+          ]
+        },
+        {
+          "name": "AlertDialogActions",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "AlertDialogBody",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLParagraphElement>",
+          "ref": "HTMLParagraphElement",
+          "props": []
+        },
+        {
+          "name": "AlertDialogTitle",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLHeadingElement>",
+          "ref": "HTMLHeadingElement",
+          "props": [
+            {
+              "name": "as",
+              "type": "\"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\" | \"p\" | \"span\" | \"div\"",
+              "required": false,
+              "default": "\"h2\"",
+              "description": "Heading level. The dialog is named by this element either way."
+            }
+          ]
+        }
+      ]
+    },
+    "avatar": {
+      "exports": [
+        {
+          "name": "Avatar",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": [
+            {
+              "name": "src",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "alt",
+              "type": "string",
+              "required": false,
+              "description": "Image text. Defaults to `name`, then `initials`; pass \"\" for a decorative avatar."
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": false,
+              "description": "Who this is. Names the image, and the initials when there is no image."
+            },
+            {
+              "name": "initials",
+              "type": "string",
+              "required": false,
+              "description": "Shown when there is no image, or when it fails to load."
+            },
+            {
+              "name": "size",
+              "type": "\"sm\" | \"md\" | \"lg\"",
+              "required": false,
+              "default": "\"md\""
+            }
+          ]
+        },
+        {
+          "name": "AvatarRow",
+          "kind": "component",
+          "description": "Overlapping row with paper seams.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        }
+      ]
+    },
+    "item": {
+      "exports": [
+        {
+          "name": "Item",
+          "kind": "component",
+          "description": "A flush row. Title occupies the cell; meta trails.",
+          "extends": "Omit<HTMLAttributes<HTMLDivElement>, \"title\">",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "title",
+              "type": "ReactNode",
+              "required": true
+            },
+            {
+              "name": "description",
+              "type": "ReactNode",
+              "required": false
+            },
+            {
+              "name": "meta",
+              "type": "ReactNode",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "textarea": {
+      "exports": [
+        {
+          "name": "Textarea",
+          "kind": "component",
+          "extends": "TextareaHTMLAttributes<HTMLTextAreaElement>",
+          "ref": "HTMLTextAreaElement",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": false
+            },
+            {
+              "name": "feedback",
+              "type": "ReactNode",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "separator": {
+      "exports": [
+        {
+          "name": "Separator",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLElement>",
+          "ref": "HTMLElement",
+          "props": [
+            {
+              "name": "orientation",
+              "type": "\"horizontal\" | \"vertical\"",
+              "required": false,
+              "default": "\"horizontal\""
+            }
+          ]
+        }
+      ]
+    },
+    "skeleton": {
+      "exports": [
+        {
+          "name": "Skeleton",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": [
+            {
+              "name": "width",
+              "type": "string | number",
+              "required": false
+            },
+            {
+              "name": "height",
+              "type": "string | number",
+              "required": false,
+              "default": "14"
+            }
+          ]
+        }
+      ]
+    },
+    "empty": {
+      "exports": [
+        {
+          "name": "Empty",
+          "kind": "component",
+          "description": "A vacant cell. Title, one sentence, optional action.",
+          "extends": "Omit<HTMLAttributes<HTMLDivElement>, \"title\">",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "title",
+              "type": "ReactNode",
+              "required": false
+            },
+            {
+              "name": "action",
+              "type": "ReactNode",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "spinner": {
+      "exports": [
+        {
+          "name": "Spinner",
+          "kind": "component",
+          "description": "Hairline ring. Stops under prefers-reduced-motion.",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": [
+            {
+              "name": "label",
+              "type": "string",
+              "required": false,
+              "default": "\"Loading\""
+            }
+          ]
+        }
+      ]
+    },
+    "tooltip": {
+      "exports": [
+        {
+          "name": "Tooltip",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": [
+            {
+              "name": "tip",
+              "type": "string",
+              "required": true,
+              "description": "Tip text. Shown on hover and on keyboard focus; Escape hides it."
+            }
+          ]
+        }
+      ]
+    },
+    "toast": {
+      "exports": [
+        {
+          "name": "toast",
+          "kind": "function",
+          "description": "Fire a toast from anywhere; a mounted <Toaster /> renders it.",
+          "props": []
+        },
+        {
+          "name": "Toaster",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "duration",
+              "type": "number",
+              "required": false,
+              "default": "4000",
+              "description": "The shortest a toast stays, in milliseconds. Longer text stays longer."
+            },
+            {
+              "name": "closeLabel",
+              "type": "string",
+              "required": false,
+              "default": "\"Dismiss\"",
+              "description": "Accessible name of the close button on every toast."
+            }
+          ]
+        }
+      ]
+    },
+    "dropdown-menu": {
+      "exports": [
+        {
+          "name": "DropdownMenu",
+          "kind": "component",
+          "description": "Action menu with menu semantics and keyboard navigation.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": true
+            },
+            {
+              "name": "items",
+              "type": "DropdownMenuItem[]",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    "toggle": {
+      "exports": [
+        {
+          "name": "Toggle",
+          "kind": "component",
+          "description": "Press switch; state lives in aria-pressed.",
+          "extends": "Omit<ButtonHTMLAttributes<HTMLButtonElement>, \"onChange\">",
+          "ref": "HTMLButtonElement",
+          "props": [
+            {
+              "name": "pressed",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "defaultPressed",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "onPressedChange",
+              "type": "(pressed: boolean) => void",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "ToggleGroup",
+          "kind": "component",
+          "description": "One pressed at a time.",
+          "extends": "Omit<HTMLAttributes<HTMLDivElement>, \"onChange\">",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "options",
+              "type": "{ value: string; label: ReactNode; }[]",
+              "required": true
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "onValueChange",
+              "type": "(value: string) => void",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "toggle-group": {
+      "exports": [
+        {
+          "name": "ToggleGroup",
+          "kind": "component",
+          "description": "One pressed at a time.",
+          "extends": "Omit<HTMLAttributes<HTMLDivElement>, \"onChange\">",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "options",
+              "type": "{ value: string; label: ReactNode; }[]",
+              "required": true
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "onValueChange",
+              "type": "(value: string) => void",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "popover": {
+      "exports": [
+        {
+          "name": "Popover",
+          "kind": "component",
+          "description": "The native Popover API. The panel lives in the top layer; light dismiss comes from the platform. Anchor positioning places it where supported; otherwise it is measured, follows scroll and resize, and flips above the trigger when there is no room below.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "props": [
+            {
+              "name": "trigger",
+              "type": "ReactNode",
+              "required": true,
+              "description": "Trigger content, rendered in a ghost button."
+            },
+            {
+              "name": "align",
+              "type": "\"end\" | \"start\"",
+              "required": false,
+              "default": "\"start\"",
+              "description": "Where the panel sits relative to the trigger."
+            }
+          ]
+        },
+        {
+          "name": "PopoverBody",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLParagraphElement>",
+          "ref": "HTMLParagraphElement",
+          "props": []
+        },
+        {
+          "name": "PopoverTitle",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        }
+      ]
+    },
+    "sheet": {
+      "exports": [
+        {
+          "name": "Sheet",
+          "kind": "component",
+          "description": "A native <dialog> at the screen edge. The platform provides the focus trap, Escape, and the backdrop; the title names it.",
+          "extends": "Omit<DialogHTMLAttributes<HTMLDialogElement>, \"open\" | \"onClose\">",
+          "ref": "HTMLDialogElement",
+          "props": [
+            {
+              "name": "open",
+              "type": "boolean",
+              "required": true
+            },
+            {
+              "name": "onClose",
+              "type": "() => void",
+              "required": false
+            },
+            {
+              "name": "dismissable",
+              "type": "boolean",
+              "required": false,
+              "description": "Escape (and any other platform close request) asks the parent to close. Off, the dialog must be answered; maps to closedby=\"none\"."
+            },
+            {
+              "name": "lightDismiss",
+              "type": "boolean",
+              "required": false,
+              "description": "A click on the backdrop closes too; maps to closedby=\"any\"."
+            },
+            {
+              "name": "closeLabel",
+              "type": "string",
+              "required": false,
+              "description": "Renders a labelled close button in the top corner."
+            },
+            {
+              "name": "side",
+              "type": "\"left\" | \"right\"",
+              "required": false,
+              "default": "\"right\""
+            }
+          ]
+        },
+        {
+          "name": "SheetBody",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLParagraphElement>",
+          "ref": "HTMLParagraphElement",
+          "props": []
+        },
+        {
+          "name": "SheetTitle",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLHeadingElement>",
+          "ref": "HTMLHeadingElement",
+          "props": [
+            {
+              "name": "as",
+              "type": "\"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\" | \"p\" | \"span\" | \"div\"",
+              "required": false,
+              "default": "\"h2\""
+            }
+          ]
+        }
+      ]
+    },
+    "drawer": {
+      "exports": [
+        {
+          "name": "Drawer",
+          "kind": "component",
+          "description": "A native <dialog> from the bottom edge. The platform provides the focus trap, Escape, and the backdrop; the title names it.",
+          "extends": "Omit<DialogHTMLAttributes<HTMLDialogElement>, \"open\" | \"onClose\">",
+          "ref": "HTMLDialogElement",
+          "props": [
+            {
+              "name": "open",
+              "type": "boolean",
+              "required": true
+            },
+            {
+              "name": "onClose",
+              "type": "() => void",
+              "required": false
+            },
+            {
+              "name": "dismissable",
+              "type": "boolean",
+              "required": false,
+              "description": "Escape (and any other platform close request) asks the parent to close. Off, the dialog must be answered; maps to closedby=\"none\"."
+            },
+            {
+              "name": "lightDismiss",
+              "type": "boolean",
+              "required": false,
+              "description": "A click on the backdrop closes too; maps to closedby=\"any\"."
+            },
+            {
+              "name": "closeLabel",
+              "type": "string",
+              "required": false,
+              "description": "Renders a labelled close button in the top corner."
+            }
+          ]
+        },
+        {
+          "name": "DrawerBody",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLParagraphElement>",
+          "ref": "HTMLParagraphElement",
+          "props": []
+        },
+        {
+          "name": "DrawerTitle",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLHeadingElement>",
+          "ref": "HTMLHeadingElement",
+          "props": [
+            {
+              "name": "as",
+              "type": "\"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\" | \"p\" | \"span\" | \"div\"",
+              "required": false,
+              "default": "\"h2\""
+            }
+          ]
+        }
+      ]
+    },
+    "scroll-area": {
+      "exports": [
+        {
+          "name": "ScrollArea",
+          "kind": "component",
+          "description": "Hidden scrollbar; feathered top and bottom edges. A named, focusable region.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "maxHeight",
+              "type": "string | number",
+              "required": false,
+              "default": "240"
+            },
+            {
+              "name": "aria-label",
+              "type": "string",
+              "required": false,
+              "default": "\"Scrollable content\"",
+              "description": "Name of the scrolling region; it is keyboard-focusable, so it needs one."
+            }
+          ]
+        }
+      ]
+    },
+    "chart": {
+      "exports": [
+        {
+          "name": "LineChart",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "series",
+              "type": "ChartSeries[]",
+              "required": true
+            },
+            {
+              "name": "labels",
+              "type": "string[]",
+              "required": false
+            },
+            {
+              "name": "height",
+              "type": "number",
+              "required": false,
+              "default": "204"
+            },
+            {
+              "name": "area",
+              "type": "boolean",
+              "required": false,
+              "description": "Fill under the first series. Prefer AreaChart for a dedicated area."
+            },
+            {
+              "name": "stacked",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "inverted",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "grid",
+              "type": "boolean",
+              "required": false,
+              "default": "true"
+            },
+            {
+              "name": "ticks",
+              "type": "number",
+              "required": false,
+              "default": "4"
+            },
+            {
+              "name": "unit",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "yLabel",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "xLabel",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "annotations",
+              "type": "ChartAnnotation[]",
+              "required": false
+            },
+            {
+              "name": "domain",
+              "type": "[number, number]",
+              "required": false
+            },
+            {
+              "name": "spot",
+              "type": "string | boolean",
+              "required": false
+            },
+            {
+              "name": "valueFormat",
+              "type": "(value: number) => string",
+              "required": false
+            },
+            {
+              "name": "locale",
+              "type": "string",
+              "required": false,
+              "description": "BCP 47 tag for number formatting; undefined is the reader's own."
+            }
+          ]
+        },
+        {
+          "name": "Sparkline",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": [
+            {
+              "name": "values",
+              "type": "number[]",
+              "required": true
+            },
+            {
+              "name": "width",
+              "type": "number",
+              "required": false,
+              "default": "120"
+            },
+            {
+              "name": "height",
+              "type": "number",
+              "required": false,
+              "default": "28"
+            },
+            {
+              "name": "spot",
+              "type": "string | boolean",
+              "required": false
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "required": false,
+              "description": "What the trend is of; leads the accessible name and the table."
+            },
+            {
+              "name": "unit",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "locale",
+              "type": "string",
+              "required": false,
+              "description": "BCP 47 tag for number formatting; undefined is the reader's own."
+            }
+          ]
+        }
+      ]
+    },
+    "bar-chart": {
+      "exports": [
+        {
+          "name": "BarChart",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "data",
+              "type": "{ label: string; value: number; }[]",
+              "required": false
+            },
+            {
+              "name": "series",
+              "type": "ChartSeries[]",
+              "required": false
+            },
+            {
+              "name": "labels",
+              "type": "string[]",
+              "required": false
+            },
+            {
+              "name": "height",
+              "type": "number",
+              "required": false,
+              "default": "204"
+            },
+            {
+              "name": "orientation",
+              "type": "BarOrientation",
+              "required": false,
+              "default": "\"vertical\""
+            },
+            {
+              "name": "stacked",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "inverted",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "grid",
+              "type": "boolean",
+              "required": false,
+              "default": "true"
+            },
+            {
+              "name": "ticks",
+              "type": "number",
+              "required": false,
+              "default": "4"
+            },
+            {
+              "name": "unit",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "yLabel",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "spot",
+              "type": "string | boolean",
+              "required": false
+            },
+            {
+              "name": "valueFormat",
+              "type": "(value: number) => string",
+              "required": false
+            },
+            {
+              "name": "locale",
+              "type": "string",
+              "required": false,
+              "description": "BCP 47 tag for number formatting; undefined is the reader's own."
+            }
+          ]
+        }
+      ]
+    },
+    "area-chart": {
+      "exports": [
+        {
+          "name": "AreaChart",
+          "kind": "component",
+          "description": "Filled field. Same law as the line: hairlines, texture, one optional spot.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "series",
+              "type": "ChartSeries[]",
+              "required": true
+            },
+            {
+              "name": "labels",
+              "type": "string[]",
+              "required": false
+            },
+            {
+              "name": "height",
+              "type": "number",
+              "required": false
+            },
+            {
+              "name": "stacked",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "inverted",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "grid",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "ticks",
+              "type": "number",
+              "required": false
+            },
+            {
+              "name": "unit",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "yLabel",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "xLabel",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "annotations",
+              "type": "ChartAnnotation[]",
+              "required": false
+            },
+            {
+              "name": "domain",
+              "type": "[number, number]",
+              "required": false
+            },
+            {
+              "name": "spot",
+              "type": "string | boolean",
+              "required": false
+            },
+            {
+              "name": "valueFormat",
+              "type": "(value: number) => string",
+              "required": false
+            },
+            {
+              "name": "locale",
+              "type": "string",
+              "required": false,
+              "description": "BCP 47 tag for number formatting; undefined is the reader's own."
+            }
+          ]
+        }
+      ]
+    },
+    "scatter-chart": {
+      "exports": [
+        {
+          "name": "ScatterChart",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "points",
+              "type": "ChartPoint[]",
+              "required": true
+            },
+            {
+              "name": "height",
+              "type": "number",
+              "required": false,
+              "default": "204"
+            },
+            {
+              "name": "unit",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "xLabel",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "yLabel",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "xDomain",
+              "type": "[number, number]",
+              "required": false
+            },
+            {
+              "name": "yDomain",
+              "type": "[number, number]",
+              "required": false
+            },
+            {
+              "name": "grid",
+              "type": "boolean",
+              "required": false,
+              "default": "true"
+            },
+            {
+              "name": "ticks",
+              "type": "number",
+              "required": false,
+              "default": "4"
+            },
+            {
+              "name": "annotations",
+              "type": "ChartAnnotation[]",
+              "required": false,
+              "default": "[]"
+            },
+            {
+              "name": "valueFormat",
+              "type": "(n: number) => string",
+              "required": false
+            },
+            {
+              "name": "spot",
+              "type": "string | boolean",
+              "required": false
+            },
+            {
+              "name": "locale",
+              "type": "string",
+              "required": false,
+              "description": "BCP 47 tag for number formatting; undefined is the reader's own."
+            }
+          ]
+        }
+      ]
+    },
+    "donut": {
+      "exports": [
+        {
+          "name": "Donut",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "value",
+              "type": "number",
+              "required": true
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "required": false,
+              "default": "100"
+            },
+            {
+              "name": "size",
+              "type": "number",
+              "required": false,
+              "default": "184"
+            },
+            {
+              "name": "label",
+              "type": "ReactNode",
+              "required": false
+            },
+            {
+              "name": "unit",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "valueFormat",
+              "type": "(value: number) => string",
+              "required": false
+            },
+            {
+              "name": "spot",
+              "type": "string | boolean",
+              "required": false
+            },
+            {
+              "name": "locale",
+              "type": "string",
+              "required": false,
+              "description": "BCP 47 tag for number formatting; undefined is the reader's own."
+            }
+          ]
+        },
+        {
+          "name": "Share",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "slices",
+              "type": "ShareSlice[]",
+              "required": true
+            },
+            {
+              "name": "unit",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "valueFormat",
+              "type": "(n: number) => string",
+              "required": false
+            },
+            {
+              "name": "spot",
+              "type": "string | boolean",
+              "required": false
+            },
+            {
+              "name": "locale",
+              "type": "string",
+              "required": false,
+              "description": "BCP 47 tag for number formatting; undefined is the reader's own."
+            }
+          ]
+        }
+      ]
+    },
+    "histogram": {
+      "exports": [
+        {
+          "name": "Histogram",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "bins",
+              "type": "HistogramBin[]",
+              "required": true
+            },
+            {
+              "name": "height",
+              "type": "number",
+              "required": false,
+              "default": "204"
+            },
+            {
+              "name": "unit",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "yLabel",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "grid",
+              "type": "boolean",
+              "required": false,
+              "default": "true"
+            },
+            {
+              "name": "ticks",
+              "type": "number",
+              "required": false,
+              "default": "4"
+            },
+            {
+              "name": "valueFormat",
+              "type": "(n: number) => string",
+              "required": false
+            },
+            {
+              "name": "spot",
+              "type": "string | boolean",
+              "required": false
+            },
+            {
+              "name": "locale",
+              "type": "string",
+              "required": false,
+              "description": "BCP 47 tag for number formatting; undefined is the reader's own."
+            }
+          ]
+        }
+      ]
+    },
+    "small-multiples": {
+      "exports": [
+        {
+          "name": "SmallMultiples",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "panels",
+              "type": "SmallMultiple[]",
+              "required": true
+            },
+            {
+              "name": "height",
+              "type": "number",
+              "required": false,
+              "default": "136"
+            },
+            {
+              "name": "unit",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "grid",
+              "type": "boolean",
+              "required": false,
+              "default": "true"
+            },
+            {
+              "name": "ticks",
+              "type": "number",
+              "required": false,
+              "default": "3"
+            },
+            {
+              "name": "spot",
+              "type": "string | boolean",
+              "required": false
+            },
+            {
+              "name": "locale",
+              "type": "string",
+              "required": false,
+              "description": "BCP 47 tag for number formatting; undefined is the reader's own."
+            }
+          ]
+        }
+      ]
+    },
+    "collapsible": {
+      "exports": [
+        {
+          "name": "Collapsible",
+          "kind": "component",
+          "description": "A bare native <details>.",
+          "extends": "Omit<DetailsHTMLAttributes<HTMLDetailsElement>, \"title\">",
+          "ref": "HTMLDetailsElement",
+          "props": [
+            {
+              "name": "title",
+              "type": "ReactNode",
+              "required": true
+            },
+            {
+              "name": "defaultOpen",
+              "type": "boolean",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "hover-card": {
+      "exports": [
+        {
+          "name": "HoverCard",
+          "kind": "component",
+          "description": "Preview panel on hover or keyboard focus. CSS shows it; the panel describes the trigger, and Escape hides it until the pointer leaves.",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": [
+            {
+              "name": "trigger",
+              "type": "ReactNode",
+              "required": true,
+              "description": "A focusable element is used as is; anything else gets one tab stop."
+            }
+          ]
+        }
+      ]
+    },
+    "kbd": {
+      "exports": [
+        {
+          "name": "Kbd",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLElement>",
+          "ref": "HTMLElement",
+          "props": []
+        },
+        {
+          "name": "KbdPair",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        }
+      ]
+    },
+    "input-otp": {
+      "exports": [
+        {
+          "name": "InputOTP",
+          "kind": "component",
+          "description": "One cell per character. Auto-advance, backspace, paste.",
+          "extends": "Omit<HTMLAttributes<HTMLDivElement>, \"onChange\">",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "length",
+              "type": "number",
+              "required": false,
+              "default": "6"
+            },
+            {
+              "name": "onChange",
+              "type": "(code: string) => void",
+              "required": false
+            },
+            {
+              "name": "onComplete",
+              "type": "(code: string) => void",
+              "required": false,
+              "description": "Called once every cell is filled."
+            },
+            {
+              "name": "aria-label",
+              "type": "string",
+              "required": false,
+              "default": "\"One-time code\"",
+              "description": "Defines a string value that labels the current element."
+            }
+          ]
+        }
+      ]
+    },
+    "context-menu": {
+      "exports": [
+        {
+          "name": "ContextMenu",
+          "kind": "component",
+          "description": "Menu at the pointer on right-click, or anchored to the trigger on Shift+F10 / the ContextMenu key. The wrapper is tabbable (pass `tabIndex={-1}` when the child is focusable itself); focus returns to whatever had it when the menu closes.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "items",
+              "type": "DropdownMenuItem[]",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    "menubar": {
+      "exports": [
+        {
+          "name": "Menubar",
+          "kind": "component",
+          "description": "Dropdown menus in a hairline strip. The triggers are menuitems with one roving tab stop; ArrowLeft/ArrowRight move between them and an open menu follows.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "menus",
+              "type": "{ label: ReactNode; items: DropdownMenuItem[]; }[]",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    "navigation-menu": {
+      "exports": [
+        {
+          "name": "NavigationMenu",
+          "kind": "component",
+          "description": "Links in a row; the current page is ink.",
+          "extends": "HTMLAttributes<HTMLElement>",
+          "ref": "HTMLElement",
+          "props": [
+            {
+              "name": "items",
+              "type": "{ label: ReactNode; href: string; current?: boolean; }[]",
+              "required": true
+            },
+            {
+              "name": "aria-label",
+              "type": "string",
+              "required": false,
+              "default": "\"Primary\"",
+              "description": "Landmark name; pages carry several navs."
+            }
+          ]
+        }
+      ]
+    },
+    "sidebar": {
+      "exports": [
+        {
+          "name": "Sidebar",
+          "kind": "component",
+          "description": "One 204 module rail. Flush items, hairline edge.",
+          "extends": "HTMLAttributes<HTMLElement>",
+          "ref": "HTMLElement",
+          "props": []
+        },
+        {
+          "name": "SidebarFoot",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "SidebarHead",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "SidebarItem",
+          "kind": "component",
+          "extends": "AnchorHTMLAttributes<HTMLAnchorElement>",
+          "ref": "HTMLAnchorElement",
+          "props": [
+            {
+              "name": "current",
+              "type": "boolean",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "SidebarLabel",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLParagraphElement>",
+          "ref": "HTMLParagraphElement",
+          "props": []
+        },
+        {
+          "name": "SidebarNav",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLElement>",
+          "ref": "HTMLElement",
+          "props": [
+            {
+              "name": "aria-label",
+              "type": "string",
+              "required": false,
+              "default": "\"Sidebar\"",
+              "description": "Landmark name; pages carry several navs."
+            }
+          ]
+        }
+      ]
+    },
+    "carousel": {
+      "exports": [
+        {
+          "name": "Carousel",
+          "kind": "component",
+          "description": "Native scroll snap; the buttons nudge. The track is the named, focusable carousel region.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "aria-label",
+              "type": "string",
+              "required": false,
+              "default": "\"Carousel\"",
+              "description": "Name of the carousel region."
+            }
+          ]
+        },
+        {
+          "name": "CarouselSlide",
+          "kind": "component",
+          "description": "One slide: a named group, \"n of N\" unless you name it yourself.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        }
+      ]
+    },
+    "resizable": {
+      "exports": [
+        {
+          "name": "Split",
+          "kind": "component",
+          "description": "Two panes on a draggable hairline. Arrows step, Home/End jump; the axis follows the layout.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "initial",
+              "type": "number",
+              "required": false,
+              "default": "50",
+              "description": "Starting share of the first pane, in percent."
+            },
+            {
+              "name": "min",
+              "type": "number",
+              "required": false,
+              "default": "20"
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "required": false,
+              "default": "80"
+            },
+            {
+              "name": "handleLabel",
+              "type": "string",
+              "required": false,
+              "default": "\"Resize panes\"",
+              "description": "Accessible name of the handle."
+            },
+            {
+              "name": "children",
+              "type": "[ReactNode, ReactNode]",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    "combobox": {
+      "exports": [
+        {
+          "name": "Combobox",
+          "kind": "component",
+          "description": "Editable combobox: the input holds focus, filters on typed text, and points at the active option with aria-activedescendant.",
+          "extends": "Omit<HTMLAttributes<HTMLDivElement>, \"onChange\" | \"defaultValue\">",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "options",
+              "type": "SelectOption[]",
+              "required": true
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "onValueChange",
+              "type": "(value: string) => void",
+              "required": false
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "required": false,
+              "default": "\"Search…\""
+            },
+            {
+              "name": "emptyLabel",
+              "type": "ReactNode",
+              "required": false,
+              "default": "\"Nothing found.\""
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "command": {
+      "exports": [
+        {
+          "name": "Command",
+          "kind": "component",
+          "description": "Filter, arrows, enter. The input keeps focus; the list is aria-activedescendant.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "groups",
+              "type": "CommandGroup[]",
+              "required": true
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "required": false,
+              "default": "\"Type a command or search…\""
+            },
+            {
+              "name": "emptyLabel",
+              "type": "ReactNode",
+              "required": false,
+              "default": "\"Nothing found.\""
+            },
+            {
+              "name": "onDone",
+              "type": "() => void",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "CommandDialog",
+          "kind": "component",
+          "description": "The palette in a native <dialog>. Wire ⌘K in your app to setOpen(true).",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDialogElement",
+          "props": [
+            {
+              "name": "groups",
+              "type": "CommandGroup[]",
+              "required": true
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "emptyLabel",
+              "type": "ReactNode",
+              "required": false
+            },
+            {
+              "name": "onDone",
+              "type": "() => void",
+              "required": false
+            },
+            {
+              "name": "open",
+              "type": "boolean",
+              "required": true
+            },
+            {
+              "name": "onClose",
+              "type": "() => void",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "calendar": {
+      "exports": [
+        {
+          "name": "Calendar",
+          "kind": "component",
+          "description": "Month grid with one roving tab stop. Arrows move by day and week, Home/End to the week's ends, PageUp/PageDown by month (Shift: year). Selected is ink; today is a hairline.",
+          "extends": "Omit<HTMLAttributes<HTMLDivElement>, \"onSelect\" | \"defaultValue\">",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "value",
+              "type": "Date",
+              "required": false
+            },
+            {
+              "name": "defaultValue",
+              "type": "Date",
+              "required": false
+            },
+            {
+              "name": "onValueChange",
+              "type": "(date: Date) => void",
+              "required": false
+            },
+            {
+              "name": "onSelect",
+              "type": "(date: Date) => void",
+              "required": false,
+              "description": "Deprecated. Use `onValueChange`."
+            },
+            {
+              "name": "defaultMonth",
+              "type": "Date",
+              "required": false
+            },
+            {
+              "name": "weekStart",
+              "type": "0 | 1",
+              "required": false,
+              "default": "1",
+              "description": "0 = Sunday, 1 = Monday."
+            },
+            {
+              "name": "autoFocus",
+              "type": "boolean",
+              "required": false,
+              "description": "Move focus to the roving day on mount (a date picker opening)."
+            }
+          ]
+        }
+      ]
+    },
+    "date-picker": {
+      "exports": [
+        {
+          "name": "DatePicker",
+          "kind": "component",
+          "description": "Hairline trigger that opens a calendar in a non-modal dialog. Focus moves to the selected (or today's) day; Escape, Tab out, and a click outside close it; focus returns to the trigger.",
+          "extends": "Omit<HTMLAttributes<HTMLDivElement>, \"onChange\" | \"defaultValue\">",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "value",
+              "type": "Date",
+              "required": false
+            },
+            {
+              "name": "defaultValue",
+              "type": "Date",
+              "required": false
+            },
+            {
+              "name": "onValueChange",
+              "type": "(date: Date) => void",
+              "required": false
+            },
+            {
+              "name": "onChange",
+              "type": "(date: Date) => void",
+              "required": false,
+              "description": "Deprecated. Use `onValueChange`."
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "required": false,
+              "default": "\"Pick a date\""
+            },
+            {
+              "name": "format",
+              "type": "(date: Date) => string",
+              "required": false,
+              "default": "defaultDateFormat"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "dialogLabel",
+              "type": "string",
+              "required": false,
+              "default": "\"Choose a date\"",
+              "description": "Accessible name of the calendar dialog."
+            }
+          ]
+        }
+      ]
+    },
+    "data-table": {
+      "exports": [
+        {
+          "name": "DataTable",
+          "kind": "function",
+          "description": "Sortable rows over the plain rs-table.",
+          "props": []
+        }
+      ]
+    },
+    "aspect-ratio": {
+      "exports": [
+        {
+          "name": "AspectRatio",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "ratio",
+              "type": "number",
+              "required": false,
+              "default": "16 / 9",
+              "description": "Width over height, e.g. 16 / 9."
+            }
+          ]
+        }
+      ]
+    },
+    "form": {
+      "exports": [
+        {
+          "name": "Form",
+          "kind": "component",
+          "description": "Native form. Fields stack. One primary action at the end.",
+          "extends": "FormHTMLAttributes<HTMLFormElement>",
+          "ref": "HTMLFormElement",
+          "props": []
+        }
+      ]
+    },
+    "workflow": {
+      "exports": [
+        {
+          "name": "Flow",
+          "kind": "component",
+          "description": "Dashed 1px pipeline.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "FlowAdd",
+          "kind": "component",
+          "extends": "ButtonHTMLAttributes<HTMLButtonElement>",
+          "ref": "HTMLButtonElement",
+          "props": []
+        },
+        {
+          "name": "FlowBody",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLParagraphElement>",
+          "ref": "HTMLParagraphElement",
+          "props": []
+        },
+        {
+          "name": "FlowNum",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        },
+        {
+          "name": "FlowPlus",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        },
+        {
+          "name": "FlowStep",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "FlowSub",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        },
+        {
+          "name": "FlowSubAdd",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        },
+        {
+          "name": "FlowSubs",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "FlowTitle",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLHeadingElement>",
+          "ref": "HTMLHeadingElement",
+          "props": []
+        }
+      ]
+    },
+    "assistant": {
+      "exports": [
+        {
+          "name": "Assistant",
+          "kind": "component",
+          "description": "Chat panel: user block, reply, suggestion card, input row.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "AssistantCard",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "AssistantDone",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "AssistantHead",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "AssistantInput",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "AssistantMsg",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": [
+            {
+              "name": "user",
+              "type": "boolean",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "AssistantReply",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLParagraphElement>",
+          "ref": "HTMLParagraphElement",
+          "props": []
+        },
+        {
+          "name": "AssistantSend",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        },
+        {
+          "name": "AssistantStatus",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        },
+        {
+          "name": "AssistantTag",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        },
+        {
+          "name": "AssistantText",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLParagraphElement>",
+          "ref": "HTMLParagraphElement",
+          "props": []
+        },
+        {
+          "name": "AssistantTitle",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        },
+        {
+          "name": "AssistantUserBlock",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        }
+      ]
+    },
+    "theme-toggle": {
+      "exports": [
+        {
+          "name": "ThemeToggle",
+          "kind": "component",
+          "description": "One mark. Moon on paper, sun on black. The button sets data-theme=\"dark\" on <html> and persists the choice. Apps pin it top-right; catalog and previews use the inline modifier. The name states the action (\"Switch to dark scheme\"), so it changes with the state.",
+          "extends": "Omit<ButtonHTMLAttributes<HTMLButtonElement>, \"onChange\">",
+          "ref": "HTMLButtonElement",
+          "props": [
+            {
+              "name": "storageKey",
+              "type": "string",
+              "required": false,
+              "default": "\"raster-theme\"",
+              "description": "localStorage key the choice persists under."
+            },
+            {
+              "name": "onThemeChange",
+              "type": "(dark: boolean) => void",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    "callout": {
+      "exports": [
+        {
+          "name": "Callout",
+          "kind": "component",
+          "description": "Paper field, 1px hairline on all sides. Not rounded. No left bar.",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        }
+      ]
+    },
+    "references": {
+      "exports": [
+        {
+          "name": "Cite",
+          "kind": "component",
+          "description": "Inline superscript citation.",
+          "extends": "HTMLAttributes<HTMLElement>",
+          "ref": "HTMLElement",
+          "props": []
+        },
+        {
+          "name": "CiteBox",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "CiteBoxLabel",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "CiteBoxText",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLDivElement>",
+          "ref": "HTMLDivElement",
+          "props": []
+        },
+        {
+          "name": "CiteLink",
+          "kind": "component",
+          "extends": "AnchorHTMLAttributes<HTMLAnchorElement>",
+          "ref": "HTMLAnchorElement",
+          "props": []
+        },
+        {
+          "name": "RefAuthors",
+          "kind": "component",
+          "extends": "HTMLAttributes<HTMLSpanElement>",
+          "ref": "HTMLSpanElement",
+          "props": []
+        },
+        {
+          "name": "RefDoi",
+          "kind": "component",
+          "extends": "AnchorHTMLAttributes<HTMLAnchorElement>",
+          "ref": "HTMLAnchorElement",
+          "props": []
+        },
+        {
+          "name": "RefItem",
+          "kind": "component",
+          "extends": "LiHTMLAttributes<HTMLLIElement>",
+          "ref": "HTMLLIElement",
+          "props": []
+        },
+        {
+          "name": "Refs",
+          "kind": "component",
+          "description": "Numbered 1px list. Numerals hang in the gutter.",
+          "extends": "OlHTMLAttributes<HTMLOListElement>",
+          "ref": "HTMLOListElement",
+          "props": []
+        }
+      ]
+    }
+  }
 }

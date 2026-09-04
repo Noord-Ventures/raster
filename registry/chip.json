@@ -40,6 +40,26 @@
       "cssOnly": false,
       "registryDependencies": [
         "raster-lib"
+      ],
+      "aliases": [
+        "Chip",
+        "Mono chip",
+        "Code chip",
+        "Token"
+      ],
+      "example": "import { Chip } from \"@noorddev/raster-react\";\n\n<Chip>/noord-brand</Chip>",
+      "usage": {
+        "use": [
+          "Identifiers in monospace: paths, handles, keys, short code.",
+          "Inline in copy or in a list of tags."
+        ],
+        "avoid": [
+          "Status words; use Badge.",
+          "Removable filter tokens; the chip has no close control."
+        ]
+      },
+      "a11y": [
+        "A plain <span> set in the mono stack."
       ]
     }
   }

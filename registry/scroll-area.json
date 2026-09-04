@@ -19,7 +19,7 @@
   "files": [
     {
       "path": "raster/scroll-area.tsx",
-      "content": "import type * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {\n  maxHeight?: number | string;\n  /** Name of the scrolling region; it is keyboard-focusable, so it needs one. */\n  \"aria-label\"?: string;\n}\n\nconst styles = stylex.create({\n  scroll: {\n    overflowY: \"auto\",\n    scrollbarWidth: \"none\",\n    maskImage: \"linear-gradient(to bottom, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%)\",\n    paddingBlock: 12,\n    paddingInline: 0,\n    color: raster.ink,\n    \"::-webkit-scrollbar\": {\n      display: \"none\",\n    },\n    outlineWidth: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n    outlineStyle: {\n      default: null,\n      \":focus-visible\": \"solid\",\n    },\n    outlineColor: {\n      default: null,\n      \":focus-visible\": raster.ink,\n    },\n    outlineOffset: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n  },\n});\n\n/** Hidden scrollbar; feathered top and bottom edges. A named, focusable region. */\nexport function ScrollArea({\n  maxHeight = 240,\n  style,\n  className,\n  \"aria-label\": ariaLabel = \"Scrollable content\",\n  ...props\n}: ScrollAreaProps) {\n  const sx = rs([\"rs-scroll\", className], styles.scroll);\n  return (\n    <div\n      role=\"region\"\n      aria-label={props[\"aria-labelledby\"] ? undefined : ariaLabel}\n      className={sx.className}\n      style={{ maxHeight, ...sx.style, ...style }}\n      tabIndex={0}\n      {...props}\n    />\n  );\n}\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {\n  maxHeight?: number | string;\n  /** Name of the scrolling region; it is keyboard-focusable, so it needs one. */\n  \"aria-label\"?: string;\n}\n\nconst styles = stylex.create({\n  scroll: {\n    overflowY: \"auto\",\n    scrollbarWidth: \"none\",\n    maskImage: \"linear-gradient(to bottom, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%)\",\n    paddingBlock: 12,\n    paddingInline: 0,\n    color: raster.ink,\n    \"::-webkit-scrollbar\": {\n      display: \"none\",\n    },\n    outlineWidth: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n    outlineStyle: {\n      default: null,\n      \":focus-visible\": \"solid\",\n    },\n    outlineColor: {\n      default: null,\n      \":focus-visible\": raster.ink,\n    },\n    outlineOffset: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n  },\n});\n\n/** Hidden scrollbar; feathered top and bottom edges. A named, focusable region. */\nexport const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(function ScrollArea({\n  maxHeight = 240,\n  style,\n  className,\n  \"aria-label\": ariaLabel = \"Scrollable content\",\n  ...props\n}, ref) {\n  const sx = rs([\"rs-scroll\", className], styles.scroll);\n  return (\n    <div\n      ref={ref}\n      role=\"region\"\n      aria-label={props[\"aria-labelledby\"] ? undefined : ariaLabel}\n      className={sx.className}\n      style={{ maxHeight, ...sx.style, ...style }}\n      tabIndex={0}\n      {...props}\n    />\n  );\n});\n",
       "type": "registry:component",
       "target": "components/raster/scroll-area.tsx"
     },
@@ -40,6 +40,36 @@
       "cssOnly": false,
       "registryDependencies": [
         "raster-lib"
+      ],
+      "aliases": [
+        "Scroll area",
+        "Scroll view",
+        "Scrollable region",
+        "Overflow box"
+      ],
+      "example": "import { ScrollArea } from \"@noorddev/raster-react\";\n\n<ScrollArea maxHeight={240} aria-label=\"Cities\">\n  {cities.map((city) => <p key={city}>{city}</p>)}\n</ScrollArea>",
+      "usage": {
+        "use": [
+          "A bounded list inside a fixed layout: a sidebar, a panel, a menu of many rows.",
+          "maxHeight sets the box; the scrollbar hides and the ends feather."
+        ],
+        "avoid": [
+          "Page-level scrolling; let the page scroll.",
+          "Content that needs a visible scrollbar for orientation."
+        ]
+      },
+      "keyboard": [
+        {
+          "keys": "Tab",
+          "does": "Focuses the region"
+        },
+        {
+          "keys": "Arrow up, Arrow down, Page up, Page down",
+          "does": "Scrolls it"
+        }
+      ],
+      "a11y": [
+        "Renders role=\"region\" with tabIndex=0, so keyboards can scroll it; aria-label defaults to \"Scrollable content\", pass your own."
       ]
     }
   }

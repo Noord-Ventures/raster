@@ -45,6 +45,41 @@
       "registryDependencies": [
         "raster-lib",
         "field"
+      ],
+      "aliases": [
+        "Native select",
+        "Select element",
+        "Dropdown",
+        "HTML select"
+      ],
+      "example": "import { NativeSelect } from \"@noorddev/raster-react\";\n\n<NativeSelect label=\"City\" defaultValue=\"alkmaar\">\n  <option value=\"alkmaar\">Alkmaar</option>\n  <option value=\"amsterdam\">Amsterdam</option>\n  <option value=\"rotterdam\">Rotterdam</option>\n</NativeSelect>",
+      "usage": {
+        "use": [
+          "A short fixed list where the platform picker is fine, especially on phones.",
+          "Forms that post natively; the value travels with the form."
+        ],
+        "avoid": [
+          "Rich option labels or type-ahead over long lists; use Select or Combobox.",
+          "Fewer than three options; use Radio."
+        ]
+      },
+      "keyboard": [
+        {
+          "keys": "Space, Alt + Arrow down",
+          "does": "Opens the platform list"
+        },
+        {
+          "keys": "Arrow up, Arrow down",
+          "does": "Changes the value"
+        },
+        {
+          "keys": "Type a letter",
+          "does": "Jumps to a matching option"
+        }
+      ],
+      "a11y": [
+        "Renders a native <select> with a generated id; label renders a <label> pointing at it.",
+        "Inside Field, hint and error reach it through aria-describedby and aria-invalid."
       ]
     }
   }

@@ -53,6 +53,38 @@
       "registryDependencies": [
         "raster-lib",
         "field"
+      ],
+      "aliases": [
+        "Input",
+        "Text field",
+        "TextField",
+        "Text input"
+      ],
+      "example": "import { Input } from \"@noorddev/raster-react\";\n\n<Input label=\"E-mail\" type=\"email\" placeholder=\"you@example.com\" hint=\"We never share it.\" />\n<Input label=\"Name\" error=\"Name is required.\" />\n<Input label=\"Handle\" ok feedback=\"Available\" />",
+      "usage": {
+        "use": [
+          "Single-line text, e-mail, number, password, and search fields.",
+          "label, hint, and error together; the component wires them to the control."
+        ],
+        "avoid": [
+          "Long text; use Textarea.",
+          "A fixed set of options; use Select or NativeSelect."
+        ]
+      },
+      "keyboard": [
+        {
+          "keys": "Tab",
+          "does": "Moves focus to the field"
+        },
+        {
+          "keys": "Enter",
+          "does": "Submits the enclosing form"
+        }
+      ],
+      "a11y": [
+        "Renders a native <input> with a generated id; label points at it with htmlFor.",
+        "hint and error are linked through aria-describedby; error also sets aria-invalid and renders with role=\"alert\".",
+        "Inside Field, pass plain so Field's hint and error describe the control instead."
       ]
     }
   }

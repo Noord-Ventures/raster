@@ -1,12 +1,14 @@
-import { VERSION, add, init, list, snippetFor, tokensJson } from "./lib";
+import { VERSION, add, docsFor, init, list, search, snippetFor, tokensJson } from "./lib";
 
 const HELP = `@noorddev/raster-cli ${VERSION}, the monochrome design system
 
 Usage
   npx @noorddev/raster-cli init [--css-dir <dir>] [--components-dir <dir>] [--registry <url>] [--overwrite]
   npx @noorddev/raster-cli add <component...> [--overwrite] [--registry <url>]
-  npx @noorddev/raster-cli list
-  npx @noorddev/raster-cli tokens
+  npx @noorddev/raster-cli list [--json]
+  npx @noorddev/raster-cli search <term> [--json]
+  npx @noorddev/raster-cli docs <component | guide | index | tokens>
+  npx @noorddev/raster-cli tokens [--json]
   npx @noorddev/raster-cli help
 
 Commands
@@ -15,8 +17,13 @@ Commands
   add       Copy a component's React source into your project.
             CSS-only components need no code; add prints the snippet.
             --registry <url> loads items from that registry instead of the bundled snapshot.
-  list      Every component in the registry.
+  list      Every component in the registry. --json prints an array with no prose.
+  search    Components whose name, title, description, aliases, or classes match the term.
+  docs      The markdown page for a component (install, example, props, keyboard,
+            accessibility), or the guide, the index, or the tokens page.
   tokens    The design tokens as JSON.
+
+Everything works offline: the registry snapshot, the CSS, the docs, and Inter ship with the CLI.
 `;
 
 function parseFlags(argv: string[]): { positional: string[]; flags: Record<string, string | boolean> } {
@@ -106,6 +113,10 @@ Next steps
 
     case "list": {
       const entries = list();
+      if (flags.json) {
+        console.log(JSON.stringify(entries, null, 2));
+        break;
+      }
       const byCategory = new Map<string, typeof entries>();
       for (const entry of entries) {
         const group = byCategory.get(entry.category) ?? [];
@@ -125,6 +136,43 @@ Next steps
     case "tokens":
       console.log(tokensJson());
       break;
+
+    case "search": {
+      const term = positional.join(" ");
+      if (!term) {
+        console.error("Nothing to search for. Usage: npx @noorddev/raster-cli search <term>");
+        process.exit(1);
+      }
+      const hits = search(term);
+      if (flags.json) {
+        console.log(JSON.stringify(hits, null, 2));
+        break;
+      }
+      if (hits.length === 0) {
+        console.log(`No component matches "${term}". See: npx @noorddev/raster-cli list`);
+        break;
+      }
+      for (const hit of hits) {
+        const via = hit.matched.includes("alias") ? `  (${hit.aliases.filter((a) => a.toLowerCase().includes(term.toLowerCase())).join(", ")})` : "";
+        console.log(`${hit.name.padEnd(18)} ${hit.title.padEnd(18)} ${hit.description}${via}`);
+      }
+      break;
+    }
+
+    case "docs": {
+      const name = positional[0];
+      if (!name) {
+        console.error("Which page? Usage: npx @noorddev/raster-cli docs <component | guide | index | tokens>");
+        process.exit(1);
+      }
+      const page = docsFor(name);
+      if (!page) {
+        console.error(`No docs for "${name}". See: npx @noorddev/raster-cli list`);
+        process.exit(1);
+      }
+      process.stdout.write(page);
+      break;
+    }
 
     case "help":
     case undefined:

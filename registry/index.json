@@ -98,6 +98,11 @@
           "path": "raster/hidden.stylex.ts",
           "type": "registry:lib",
           "target": "components/raster/hidden.stylex.ts"
+        },
+        {
+          "path": "raster/merge-refs.ts",
+          "type": "registry:lib",
+          "target": "components/raster/merge-refs.ts"
         }
       ]
     },
@@ -133,6 +138,38 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Button",
+            "Primary button",
+            "Ghost button",
+            "Secondary button"
+          ],
+          "example": "import { Button } from \"@noorddev/raster-react\";\n\n<Button>Primary action</Button>\n<Button variant=\"ghost\" size=\"sm\">Secondary</Button>\n<Button disabled>Saving…</Button>",
+          "usage": {
+            "use": [
+              "One primary action per view, with ghost for the secondary action.",
+              "Submitting a form or answering a dialog."
+            ],
+            "avoid": [
+              "Navigation that changes the URL; use Link or a nav component.",
+              "On and off state; use Toggle or Switch, which carry aria-pressed and aria-checked."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus to the button"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Activates it"
+            }
+          ],
+          "a11y": [
+            "Renders a native <button>; type defaults to \"button\", so pass type=\"submit\" inside a form.",
+            "The visible text is the name. Give icon-only buttons an aria-label.",
+            "2px ink focus ring on :focus-visible. disabled uses the native attribute and 40% opacity; forced colors keep system colors."
           ]
         }
       },
@@ -179,6 +216,36 @@
           "registryDependencies": [
             "button",
             "raster-lib"
+          ],
+          "aliases": [
+            "Button group",
+            "Segmented buttons",
+            "Joined buttons"
+          ],
+          "example": "import { Button, ButtonGroup } from \"@noorddev/raster-react\";\n\n<ButtonGroup aria-label=\"Alignment\">\n  <Button variant=\"ghost\">Left</Button>\n  <Button variant=\"ghost\">Center</Button>\n  <Button variant=\"ghost\">Right</Button>\n</ButtonGroup>",
+          "usage": {
+            "use": [
+              "Two to four related actions that read as one control.",
+              "Ghost buttons; the group owns the outer stroke and the seams."
+            ],
+            "avoid": [
+              "Exclusive selection; use ToggleGroup, which tracks the pressed option.",
+              "Unrelated actions in one row; space them instead."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves between the buttons"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Activates the focused button"
+            }
+          ],
+          "a11y": [
+            "Renders role=\"group\"; pass aria-label to name it.",
+            "Children get grouped, so each Button keeps its own name and focus ring."
           ]
         }
       },
@@ -224,6 +291,37 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Link",
+            "Anchor",
+            "Text link",
+            "Inline link"
+          ],
+          "example": "import { Link } from \"@noorddev/raster-react\";\n\n<Link href=\"/docs\">A text link</Link>\n<p>Read the <Link underline href=\"/docs\">guide</Link> first.</p>",
+          "usage": {
+            "use": [
+              "Navigation to another page or anchor.",
+              "underline for links inside running copy."
+            ],
+            "avoid": [
+              "Actions that do not change the URL; use Button.",
+              "Bare hrefs with \"click here\" text; the text should name the destination."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus to the link"
+            },
+            {
+              "keys": "Enter",
+              "does": "Follows it"
+            }
+          ],
+          "a11y": [
+            "Renders a native <a>; it needs an href to be focusable.",
+            "2px ink focus ring on :focus-visible."
           ]
         }
       },
@@ -281,6 +379,38 @@
           "registryDependencies": [
             "raster-lib",
             "field"
+          ],
+          "aliases": [
+            "Input",
+            "Text field",
+            "TextField",
+            "Text input"
+          ],
+          "example": "import { Input } from \"@noorddev/raster-react\";\n\n<Input label=\"E-mail\" type=\"email\" placeholder=\"you@example.com\" hint=\"We never share it.\" />\n<Input label=\"Name\" error=\"Name is required.\" />\n<Input label=\"Handle\" ok feedback=\"Available\" />",
+          "usage": {
+            "use": [
+              "Single-line text, e-mail, number, password, and search fields.",
+              "label, hint, and error together; the component wires them to the control."
+            ],
+            "avoid": [
+              "Long text; use Textarea.",
+              "A fixed set of options; use Select or NativeSelect."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus to the field"
+            },
+            {
+              "keys": "Enter",
+              "does": "Submits the enclosing form"
+            }
+          ],
+          "a11y": [
+            "Renders a native <input> with a generated id; label points at it with htmlFor.",
+            "hint and error are linked through aria-describedby; error also sets aria-invalid and renders with role=\"alert\".",
+            "Inside Field, pass plain so Field's hint and error describe the control instead."
           ]
         }
       },
@@ -325,6 +455,25 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Label",
+            "Form label",
+            "Field label"
+          ],
+          "example": "import { Label } from \"@noorddev/raster-react\";\n\n<Label htmlFor=\"name\">Name</Label>\n<input id=\"name\" className=\"rs-input rs-input-full\" />",
+          "usage": {
+            "use": [
+              "Naming a control that does not take a label prop.",
+              "Custom layouts where the label sits apart from the field."
+            ],
+            "avoid": [
+              "Alongside Input's own label prop; it already renders one.",
+              "As a heading; use the type scale."
+            ]
+          },
+          "a11y": [
+            "Renders a native <label>; pass htmlFor with the control's id so clicks focus the control and the name is exposed."
           ]
         }
       },
@@ -374,6 +523,29 @@
           "registryDependencies": [
             "input",
             "raster-lib"
+          ],
+          "aliases": [
+            "Field",
+            "Form field",
+            "Form item",
+            "FormField",
+            "Form control"
+          ],
+          "example": "import { Field, FieldError, FieldHint, FieldLabel, Input } from \"@noorddev/raster-react\";\n\n<Field>\n  <FieldLabel htmlFor=\"name\">Name</FieldLabel>\n  <Input plain id=\"name\" />\n  <FieldHint>As it appears on the invoice.</FieldHint>\n</Field>\n\n<Field>\n  <FieldLabel htmlFor=\"iban\">IBAN</FieldLabel>\n  <Input plain id=\"iban\" />\n  <FieldError>Check the country code.</FieldError>\n</Field>",
+          "usage": {
+            "use": [
+              "Any control with a label plus a hint or an error, including NativeSelect, Textarea, Slider, and InputOTP.",
+              "Form layouts where every field stacks the same way."
+            ],
+            "avoid": [
+              "A lone Input; its label, hint, and error props do the same job.",
+              "Grouping several controls; use a fieldset with a legend."
+            ]
+          },
+          "a11y": [
+            "Field passes the ids of a rendered FieldHint and FieldError to the control through aria-describedby.",
+            "A rendered FieldError sets aria-invalid on the control and has role=\"alert\".",
+            "FieldLabel is a native <label>; pass htmlFor with the control's id."
           ]
         }
       },
@@ -422,6 +594,27 @@
           "registryDependencies": [
             "input",
             "raster-lib"
+          ],
+          "aliases": [
+            "Input group",
+            "Input addon",
+            "Prefix input",
+            "Suffix input"
+          ],
+          "example": "import { Input, InputAddon, InputGroup } from \"@noorddev/raster-react\";\n\n<InputGroup>\n  <InputAddon>https://</InputAddon>\n  <Input placeholder=\"getraster.com\" aria-label=\"Site\" />\n</InputGroup>\n\n<InputGroup end>\n  <Input placeholder=\"0.00\" aria-label=\"Amount\" />\n  <InputAddon>EUR</InputAddon>\n</InputGroup>",
+          "usage": {
+            "use": [
+              "A fixed prefix or suffix that belongs to the value: a protocol, a unit, a currency.",
+              "end to place the addon after the field."
+            ],
+            "avoid": [
+              "Buttons inside the field; use InlineForm.",
+              "Icons as decoration; the addon is text."
+            ]
+          },
+          "a11y": [
+            "The Input child is cloned with plain and grouped; it keeps its own id and name.",
+            "The addon is presentational text. Give the input an aria-label or a FieldLabel; the addon does not name it."
           ]
         }
       },
@@ -471,6 +664,41 @@
           "registryDependencies": [
             "raster-lib",
             "field"
+          ],
+          "aliases": [
+            "Native select",
+            "Select element",
+            "Dropdown",
+            "HTML select"
+          ],
+          "example": "import { NativeSelect } from \"@noorddev/raster-react\";\n\n<NativeSelect label=\"City\" defaultValue=\"alkmaar\">\n  <option value=\"alkmaar\">Alkmaar</option>\n  <option value=\"amsterdam\">Amsterdam</option>\n  <option value=\"rotterdam\">Rotterdam</option>\n</NativeSelect>",
+          "usage": {
+            "use": [
+              "A short fixed list where the platform picker is fine, especially on phones.",
+              "Forms that post natively; the value travels with the form."
+            ],
+            "avoid": [
+              "Rich option labels or type-ahead over long lists; use Select or Combobox.",
+              "Fewer than three options; use Radio."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Space, Alt + Arrow down",
+              "does": "Opens the platform list"
+            },
+            {
+              "keys": "Arrow up, Arrow down",
+              "does": "Changes the value"
+            },
+            {
+              "keys": "Type a letter",
+              "does": "Jumps to a matching option"
+            }
+          ],
+          "a11y": [
+            "Renders a native <select> with a generated id; label renders a <label> pointing at it.",
+            "Inside Field, hint and error reach it through aria-describedby and aria-invalid."
           ]
         }
       },
@@ -525,6 +753,38 @@
             "button",
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Inline form",
+            "Newsletter form",
+            "Subscribe form",
+            "Single-field form"
+          ],
+          "example": "import { InlineForm } from \"@noorddev/raster-react\";\n\n<InlineForm\n  placeholder=\"Your e-mail\"\n  buttonLabel=\"Subscribe\"\n  inputProps={{ \"aria-label\": \"E-mail\", type: \"email\" }}\n  onSubmit={(email) => subscribe(email)}\n/>",
+          "usage": {
+            "use": [
+              "One value and one action: newsletter, invite by e-mail, join a waitlist.",
+              "validate to decide when the action appears; the default is a loose e-mail check."
+            ],
+            "avoid": [
+              "More than one field; use Form with Field.",
+              "Actions with side effects that need confirmation; the success state is immediate."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Enter",
+              "does": "Submits once the value validates"
+            },
+            {
+              "keys": "Tab",
+              "does": "Reaches the button only after the value validates"
+            }
+          ],
+          "a11y": [
+            "The input has a placeholder only; pass inputProps={{ \"aria-label\": … }} to name it.",
+            "The submit button stays out of the tab order (tabIndex -1) until validate returns true.",
+            "After submit the form is replaced by the successLabel text and a check mark."
           ]
         }
       },
@@ -572,6 +832,42 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Radio",
+            "Radio group",
+            "RadioGroup",
+            "Radio button"
+          ],
+          "example": "import { useState } from \"react\";\nimport { Radio, RadioGroup } from \"@noorddev/raster-react\";\n\nconst [plan, setPlan] = useState(\"monthly\");\n\n<RadioGroup aria-label=\"Billing\" value={plan} onValueChange={setPlan}>\n  <Radio value=\"monthly\" label=\"Monthly\" />\n  <Radio value=\"yearly\" label=\"Yearly\" />\n</RadioGroup>",
+          "usage": {
+            "use": [
+              "One choice from two to six visible options.",
+              "Choices that should all be readable at once."
+            ],
+            "avoid": [
+              "Many options; use Select.",
+              "Independent on and off choices; use Checkbox."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus into the group, onto the checked radio"
+            },
+            {
+              "keys": "Arrow up, Arrow down, Arrow left, Arrow right",
+              "does": "Moves the selection"
+            },
+            {
+              "keys": "Space",
+              "does": "Selects the focused radio"
+            }
+          ],
+          "a11y": [
+            "RadioGroup renders role=\"radiogroup\"; pass aria-label or aria-labelledby to name it.",
+            "Radio is a native <input type=\"radio\"> hidden from view inside a <label>; the ink dot mirrors its state.",
+            "The group shares a generated name unless you pass one."
           ]
         }
       },
@@ -620,6 +916,37 @@
           "registryDependencies": [
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Checkbox",
+            "Check box",
+            "Tick box"
+          ],
+          "example": "import { useState } from \"react\";\nimport { Checkbox } from \"@noorddev/raster-react\";\n\nconst [opted, setOpted] = useState(false);\n\n<Checkbox label=\"Brand\" defaultChecked />\n<Checkbox label=\"Send me the newsletter\" checked={opted} onChange={(e) => setOpted(e.target.checked)} />",
+          "usage": {
+            "use": [
+              "Independent on and off choices, alone or in a list.",
+              "Consent and acknowledgement lines."
+            ],
+            "avoid": [
+              "A setting that takes effect immediately; use Switch.",
+              "One choice from many; use Radio."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus to the checkbox"
+            },
+            {
+              "keys": "Space",
+              "does": "Toggles it"
+            }
+          ],
+          "a11y": [
+            "A native <input type=\"checkbox\"> hidden from view inside a <label>; the 16px box mirrors its state.",
+            "label is the accessible name. Without one, pass aria-label.",
+            "Controlled with checked and onChange, or uncontrolled with defaultChecked."
           ]
         }
       },
@@ -667,6 +994,36 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Switch",
+            "Toggle switch"
+          ],
+          "example": "import { useState } from \"react\";\nimport { Switch } from \"@noorddev/raster-react\";\n\nconst [enabled, setEnabled] = useState(false);\n\n<Switch checked={enabled} onCheckedChange={setEnabled} aria-label=\"Notifications\" />",
+          "usage": {
+            "use": [
+              "A setting that applies as soon as it flips.",
+              "Binary state with a clear on and off."
+            ],
+            "avoid": [
+              "Choices that need a submit button; use Checkbox.",
+              "More than two states; use ToggleGroup."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus to the switch"
+            },
+            {
+              "keys": "Space, Enter",
+              "does": "Toggles it"
+            }
+          ],
+          "a11y": [
+            "A native <button> with role=\"switch\" and aria-checked.",
+            "It has no visible text; pass aria-label or aria-labelledby.",
+            "Controlled with checked and onCheckedChange, or uncontrolled with defaultChecked."
           ]
         }
       },
@@ -717,6 +1074,45 @@
           "registryDependencies": [
             "raster-lib",
             "field"
+          ],
+          "aliases": [
+            "Slider",
+            "Range",
+            "Range input"
+          ],
+          "example": "import { useState } from \"react\";\nimport { Slider } from \"@noorddev/raster-react\";\n\nconst [volume, setVolume] = useState(62);\n\n<Slider value={volume} onValueChange={setVolume} min={0} max={100} step={1} aria-label=\"Volume\" />",
+          "usage": {
+            "use": [
+              "A number inside a known range where the position matters more than the digits.",
+              "Volume, opacity, zoom, and similar live values."
+            ],
+            "avoid": [
+              "Exact values; use Input type=\"number\".",
+              "Ranges with two thumbs; the component has one."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus to the slider"
+            },
+            {
+              "keys": "Arrow right, Arrow up",
+              "does": "Increases by step"
+            },
+            {
+              "keys": "Arrow left, Arrow down",
+              "does": "Decreases by step"
+            },
+            {
+              "keys": "Home, End",
+              "does": "Jumps to min or max"
+            }
+          ],
+          "a11y": [
+            "A native <input type=\"range\"> drives the ink track; the platform exposes value, min, and max.",
+            "It has no visible text; pass aria-label or aria-labelledby.",
+            "The 14px thumb sits on a 24px hit area and shows a focus ring on :focus-visible."
           ]
         }
       },
@@ -763,6 +1159,26 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Progress",
+            "Progress bar",
+            "Meter"
+          ],
+          "example": "import { Progress } from \"@noorddev/raster-react\";\n\n<Progress label=\"Uploading\" value={40} />\n<Progress value={3} max={5} aria-label=\"Steps done\" />",
+          "usage": {
+            "use": [
+              "Determinate progress with a known total.",
+              "label to show the name and the percentage above the bar."
+            ],
+            "avoid": [
+              "Unknown duration; use Spinner.",
+              "Static ratios like storage used; a number reads better."
+            ]
+          },
+          "a11y": [
+            "Renders role=\"progressbar\" with aria-valuemin, aria-valuemax, aria-valuenow, and aria-valuetext as a percentage.",
+            "label names the bar through aria-labelledby; without one, pass aria-label."
           ]
         }
       },
@@ -810,6 +1226,46 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Tabs",
+            "Tab list",
+            "Tab bar"
+          ],
+          "example": "import { Tab, TabList, TabPanel, Tabs } from \"@noorddev/raster-react\";\n\n<Tabs defaultValue=\"overview\">\n  <TabList aria-label=\"Project\">\n    <Tab value=\"overview\">Overview</Tab>\n    <Tab value=\"activity\">Activity</Tab>\n    <Tab value=\"settings\">Settings</Tab>\n  </TabList>\n  <TabPanel value=\"overview\">…</TabPanel>\n  <TabPanel value=\"activity\">…</TabPanel>\n  <TabPanel value=\"settings\">…</TabPanel>\n</Tabs>",
+          "usage": {
+            "use": [
+              "Two to six views of the same object that share one place on the page.",
+              "orientation=\"vertical\" on TabList for a stacked rail."
+            ],
+            "avoid": [
+              "Navigation between pages; use NavigationMenu with real links.",
+              "Sequential steps; use Stepper."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus to the selected tab, then into the panel"
+            },
+            {
+              "keys": "Arrow left, Arrow right",
+              "does": "Moves to the previous or next tab and selects it (wraps)"
+            },
+            {
+              "keys": "Arrow up, Arrow down",
+              "does": "The same when orientation is vertical"
+            },
+            {
+              "keys": "Home, End",
+              "does": "First or last tab"
+            }
+          ],
+          "a11y": [
+            "TabList is role=\"tablist\" (aria-orientation when vertical); pass aria-label to name it.",
+            "Tab is a <button role=\"tab\"> with aria-selected and aria-controls; TabPanel is role=\"tabpanel\" with aria-labelledby, hidden when not selected.",
+            "One roving tab stop: only the selected tab is in the tab order.",
+            "Controlled with value and onValueChange, or uncontrolled with defaultValue."
           ]
         }
       },
@@ -859,6 +1315,36 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Breadcrumb",
+            "Breadcrumbs",
+            "Trail"
+          ],
+          "example": "import { Breadcrumbs } from \"@noorddev/raster-react\";\n\n<Breadcrumbs items={[{ label: \"Studio\", href: \"/studio\" }, { label: \"Raster\", href: \"/studio/raster\" }, { label: \"Components\" }]} />",
+          "usage": {
+            "use": [
+              "Showing where a page sits in a hierarchy three or more levels deep.",
+              "The last item is the current page and carries no href."
+            ],
+            "avoid": [
+              "Flat sites with one level.",
+              "As the primary navigation; pair it with a nav."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves between the ancestor links"
+            },
+            {
+              "keys": "Enter",
+              "does": "Follows the link"
+            }
+          ],
+          "a11y": [
+            "Renders <nav aria-label=\"Breadcrumb\"> with an ordered list.",
+            "The last item is marked aria-current=\"page\"; separators are aria-hidden."
           ]
         }
       },
@@ -916,6 +1402,37 @@
           "registryDependencies": [
             "breadcrumbs",
             "raster-lib"
+          ],
+          "aliases": [
+            "Crumb bar",
+            "Sticky header",
+            "Top bar",
+            "App bar"
+          ],
+          "example": "import { CrumbBar } from \"@noorddev/raster-react\";\n\n<CrumbBar\n  root={{ label: \"Renato Valdés Olmos\", href: \"/\" }}\n  rootShort=\"RVO\"\n  trail={[{ label: \"Components\", href: \"/components\" }, { label: \"Switch\" }]}\n  threshold={110}\n/>",
+          "usage": {
+            "use": [
+              "The fixed top bar of a long page: transparent over the cover, paper and a hairline once scrolled.",
+              "A root mark plus the trail of the current page."
+            ],
+            "avoid": [
+              "Pages without a cover; use Breadcrumbs in the flow.",
+              "Bars that hold actions or search; this one holds the trail only."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves to the root link, then the trail links once the bar is scrolled in"
+            },
+            {
+              "keys": "Enter",
+              "does": "Follows the link"
+            }
+          ],
+          "a11y": [
+            "Renders <nav aria-label=\"Breadcrumb\">; the trail is an ordered list with aria-current=\"page\" on the last item.",
+            "While the bar is transparent the trail is inert, so nothing focuses into an invisible link."
           ]
         }
       },
@@ -966,6 +1483,36 @@
           "registryDependencies": [
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Pagination",
+            "Pager",
+            "Page navigation"
+          ],
+          "example": "import { useState } from \"react\";\nimport { Pagination } from \"@noorddev/raster-react\";\n\nconst [page, setPage] = useState(1);\n\n<Pagination page={page} count={12} onPageChange={setPage} siblings={1} />",
+          "usage": {
+            "use": [
+              "Paged lists and tables where the user needs to jump to a specific page.",
+              "siblings to widen the window around the current page."
+            ],
+            "avoid": [
+              "Feeds that load more on scroll.",
+              "Fewer than three pages; a previous and next pair is enough."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves between the page buttons"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Goes to that page"
+            }
+          ],
+          "a11y": [
+            "Renders <nav aria-label=\"Pagination\"> of native buttons; the current page carries aria-current=\"page\".",
+            "Previous and next are labelled and disabled at the ends; gaps are aria-hidden."
           ]
         }
       },
@@ -1015,6 +1562,63 @@
             "dropdown-menu",
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Select",
+            "Listbox",
+            "Dropdown select",
+            "Picker"
+          ],
+          "example": "import { useState } from \"react\";\nimport { Select } from \"@noorddev/raster-react\";\n\nconst [city, setCity] = useState(\"alkmaar\");\n\n<Select\n  aria-label=\"City\"\n  options={[\n    { value: \"alkmaar\", label: \"Alkmaar\" },\n    { value: \"amsterdam\", label: \"Amsterdam\" },\n    { value: \"rotterdam\", label: \"Rotterdam\" },\n  ]}\n  value={city}\n  onValueChange={setCity}\n/>",
+          "usage": {
+            "use": [
+              "One choice from a list of five or more when the labels are short.",
+              "Lists that benefit from type-ahead and a consistent overlay across platforms."
+            ],
+            "avoid": [
+              "Free text or filtering; use Combobox.",
+              "Native form posts and phones where the platform picker is better; use NativeSelect."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Arrow down, Arrow up, Enter, Space",
+              "does": "Opens the list on the selected option"
+            },
+            {
+              "keys": "Home, End",
+              "does": "Opens on the first or last option; moves there when open"
+            },
+            {
+              "keys": "Type letters",
+              "does": "Jumps to the next matching option, open or closed"
+            },
+            {
+              "keys": "Arrow down, Arrow up",
+              "does": "Moves the active option"
+            },
+            {
+              "keys": "Page up, Page down",
+              "does": "Moves ten options"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Selects the active option and closes"
+            },
+            {
+              "keys": "Escape",
+              "does": "Closes and returns focus to the trigger"
+            },
+            {
+              "keys": "Tab",
+              "does": "Closes and moves on"
+            }
+          ],
+          "a11y": [
+            "APG select-only combobox: the trigger is a <button role=\"combobox\"> with aria-haspopup=\"listbox\", aria-expanded, aria-controls, and aria-activedescendant.",
+            "The list is role=\"listbox\" with role=\"option\" rows carrying aria-selected; focus stays on the trigger.",
+            "Pass aria-label or aria-labelledby; the listbox is labelled by the same source.",
+            "Controlled with value and onValueChange, or uncontrolled with defaultValue. A click outside closes it."
           ]
         }
       },
@@ -1067,6 +1671,42 @@
             "button",
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Dialog",
+            "Modal",
+            "Modal dialog"
+          ],
+          "example": "import { useState } from \"react\";\nimport { Button, Dialog, DialogActions, DialogBody, DialogTitle } from \"@noorddev/raster-react\";\n\nconst [open, setOpen] = useState(false);\n\n<Button variant=\"ghost\" onClick={() => setOpen(true)}>Remove</Button>\n<Dialog open={open} onClose={() => setOpen(false)} closeLabel=\"Close\">\n  <DialogTitle>Remove this item?</DialogTitle>\n  <DialogBody>This can't be undone.</DialogBody>\n  <DialogActions>\n    <Button variant=\"ghost\" size=\"sm\" onClick={() => setOpen(false)}>Cancel</Button>\n    <Button size=\"sm\" onClick={remove}>Remove</Button>\n  </DialogActions>\n</Dialog>",
+          "usage": {
+            "use": [
+              "A short decision or a form that must finish before the page continues.",
+              "One title, one sentence of body, two equal actions."
+            ],
+            "avoid": [
+              "Content the user should keep the page in view for; use Sheet or Popover.",
+              "Destructive confirmations that must not dismiss on Escape; use AlertDialog."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Escape",
+              "does": "Calls onClose (when dismissable, the default)"
+            },
+            {
+              "keys": "Tab, Shift + Tab",
+              "does": "Cycles focus inside the open dialog"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Activates the focused action"
+            }
+          ],
+          "a11y": [
+            "A native <dialog> opened with showModal(): the platform traps focus, provides the backdrop, and handles Escape.",
+            "DialogTitle (an h2 by default) names it through aria-labelledby; DialogBody describes it through aria-describedby, only while mounted.",
+            "On open, focus moves to [autofocus] or the first focusable element; on close it returns to the element that opened it.",
+            "dismissable={false} maps to closedby=\"none\"; lightDismiss adds a click on the backdrop. closeLabel renders a labelled close button. The ref is forwarded to the <dialog>."
           ]
         }
       },
@@ -1113,6 +1753,26 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Badge",
+            "Tag",
+            "Pill",
+            "Status"
+          ],
+          "example": "import { Badge } from \"@noorddev/raster-react\";\n\n<Badge>Recommended</Badge>\n<Badge variant=\"solid\">Delivered</Badge>\n<Badge variant=\"muted\">In progress</Badge>",
+          "usage": {
+            "use": [
+              "A short status or category next to a title.",
+              "solid for done, outline for a recommendation, muted for pending."
+            ],
+            "avoid": [
+              "Counts that update live; announce those elsewhere.",
+              "Clickable filters; use Toggle."
+            ]
+          },
+          "a11y": [
+            "A plain <span>; the text is all there is. Keep it to one or two words."
           ]
         }
       },
@@ -1157,6 +1817,26 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Chip",
+            "Mono chip",
+            "Code chip",
+            "Token"
+          ],
+          "example": "import { Chip } from \"@noorddev/raster-react\";\n\n<Chip>/noord-brand</Chip>",
+          "usage": {
+            "use": [
+              "Identifiers in monospace: paths, handles, keys, short code.",
+              "Inline in copy or in a list of tags."
+            ],
+            "avoid": [
+              "Status words; use Badge.",
+              "Removable filter tokens; the chip has no close control."
+            ]
+          },
+          "a11y": [
+            "A plain <span> set in the mono stack."
           ]
         }
       },
@@ -1205,6 +1885,26 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Card",
+            "Panel",
+            "Tile"
+          ],
+          "example": "import { Card, CardBody, CardLabel, CardTitle } from \"@noorddev/raster-react\";\n\n<Card>\n  <CardLabel>Case study</CardLabel>\n  <CardTitle>A quieter interface</CardTitle>\n  <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>\n</Card>",
+          "usage": {
+            "use": [
+              "A titled block of copy on the grid: label, title, body.",
+              "CardInner for a padded field inside a Nest."
+            ],
+            "avoid": [
+              "Framed boxes with shadows; Raster cards have no outline.",
+              "Interactive tiles; wrap the title in a Link instead of making the card clickable."
+            ]
+          },
+          "a11y": [
+            "CardTitle renders an <h3>; adjust the heading level with a wrapper when it breaks the outline.",
+            "The ref on Card is forwarded to the <div>."
           ]
         }
       },
@@ -1252,6 +1952,25 @@
           "registryDependencies": [
             "button",
             "raster-lib"
+          ],
+          "hidden": true,
+          "aliases": [
+            "Nested radius",
+            "Concentric corners",
+            "Inner radius"
+          ],
+          "example": "import { Button, Nest, NestInner, innerRadius } from \"@noorddev/raster-react\";\n\n<Nest radius={28} pad={16}>\n  <NestInner>\n    <Button size=\"sm\">Save</Button>\n  </NestInner>\n</Nest>\n\ninnerRadius(28, 16); // 12",
+          "usage": {
+            "use": [
+              "Nested rounded boxes whose corners must share a centre.",
+              "innerRadius(outer, pad) when you set radii by hand."
+            ],
+            "avoid": [
+              "Square chrome; Raster surfaces are 0 or 4px and rarely nest."
+            ]
+          },
+          "a11y": [
+            "Layout only. Nest sets --rs-out, --rs-gap, and --rs-in on a <div>."
           ]
         }
       },
@@ -1303,6 +2022,27 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Stepper",
+            "Steps",
+            "Progress steps",
+            "Wizard"
+          ],
+          "example": "import { Stepper } from \"@noorddev/raster-react\";\n\n<Stepper steps={[{ name: \"Brief\" }, { name: \"Design\", sub: \"In review\" }, { name: \"Build\" }]} current={1} />",
+          "usage": {
+            "use": [
+              "A fixed sequence of three to six steps where the user should see what is done and what is next.",
+              "sub for a short status under a step."
+            ],
+            "avoid": [
+              "Steps the user can jump between; use Tabs.",
+              "Progress of one task; use Progress."
+            ]
+          },
+          "a11y": [
+            "The active step carries aria-current=\"step\"; connector lines are aria-hidden.",
+            "The dots are numbered text, so the order reads without color."
           ]
         }
       },
@@ -1352,6 +2092,26 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Table",
+            "Static table",
+            "Grid"
+          ],
+          "example": "import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from \"@noorddev/raster-react\";\n\n<Table>\n  <TableHead>\n    <TableRow>\n      <TableTh scope=\"col\">Phase</TableTh>\n      <TableTh scope=\"col\">Weeks</TableTh>\n    </TableRow>\n  </TableHead>\n  <TableBody>\n    <TableRow>\n      <TableTd>Strategy</TableTd>\n      <TableTd>2</TableTd>\n    </TableRow>\n    <TableRow total>\n      <TableTd total>Total</TableTd>\n      <TableTd total>6</TableTd>\n    </TableRow>\n  </TableBody>\n</Table>",
+          "usage": {
+            "use": [
+              "Static tabular data with a last column of numbers.",
+              "total on the closing row and its cells for 2px rules."
+            ],
+            "avoid": [
+              "Sorting and empty states; use DataTable.",
+              "Layout; use the grid."
+            ]
+          },
+          "a11y": [
+            "A native <table>; use TableTh with scope for headers and add a <caption> when the table needs a name.",
+            "The ref on Table is forwarded to the <table>."
           ]
         }
       },
@@ -1405,6 +2165,27 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Icon",
+            "Icons",
+            "Icon set",
+            "Glyphs"
+          ],
+          "example": "import { Icon, IconCatalog, iconNames } from \"@noorddev/raster-react\";\n\n<Icon name=\"search\" size={12} />\n<Icon name=\"search\" size={16} />\n<Icon name=\"check\" size={24} variant=\"filled\" />\n<Icon name=\"chevron-right\" rotate={90} />\n<button type=\"button\" aria-label=\"Close\"><Icon name=\"close\" /></button>\n\niconNames; // every drawn mark\n<IconCatalog />",
+          "usage": {
+            "use": [
+              "Chrome marks at 12, 16, or 24: chevrons, close, search, sort, and the rest of the family.",
+              "rotate for the down and up chevrons; variant=\"filled\" for the solid kin."
+            ],
+            "avoid": [
+              "Illustration or brand marks; these are 1px hairline glyphs.",
+              "Icons as the only label; add text or an aria-label on the control."
+            ]
+          },
+          "a11y": [
+            "Icon renders an inline <svg aria-hidden=\"true\">; it is decorative unless you pass aria-hidden={false}, role=\"img\", and aria-label.",
+            "Icon-only controls need an aria-label; the icon never names them."
           ]
         }
       },
@@ -1461,6 +2242,37 @@
           "registryDependencies": [
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Accordion",
+            "Disclosure group",
+            "Expansion panel",
+            "FAQ"
+          ],
+          "example": "import { Accordion, AccordionItem } from \"@noorddev/raster-react\";\n\n<Accordion exclusive>\n  <AccordionItem title=\"What is Raster?\" defaultOpen>\n    A monochrome, CSS-first design system.\n  </AccordionItem>\n  <AccordionItem title=\"Is it dependency-free?\">\n    Yes. Native elements do the work.\n  </AccordionItem>\n</Accordion>",
+          "usage": {
+            "use": [
+              "FAQ and settings sections where headings should stay scannable.",
+              "exclusive to keep one item open through the platform's details name grouping."
+            ],
+            "avoid": [
+              "Hiding content most readers need; put it in the flow.",
+              "A single item; use Collapsible."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves to the next summary"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Opens or closes the item"
+            }
+          ],
+          "a11y": [
+            "Each item is a native <details> with a <summary>; the platform exposes the expanded state.",
+            "title is the summary text and the accessible name. Controlled with open and onToggle, or uncontrolled with defaultOpen."
           ]
         }
       },
@@ -1514,6 +2326,27 @@
           "registryDependencies": [
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Alert",
+            "Banner",
+            "Notice",
+            "Inline message"
+          ],
+          "example": "import { Alert } from \"@noorddev/raster-react\";\n\n<Alert title=\"Heads up\">Your workspace syncs every hour.</Alert>\n<Alert variant=\"solid\" title=\"Payment failed\" live=\"assertive\">Update your card to keep publishing.</Alert>",
+          "usage": {
+            "use": [
+              "A persistent message that belongs to the page: a warning, a limit, a state.",
+              "variant=\"solid\" for the one critical message in view."
+            ],
+            "avoid": [
+              "Transient confirmations; use toast.",
+              "Notes in running copy; use Callout."
+            ]
+          },
+          "a11y": [
+            "Static content renders role=\"note\". Pass live=\"polite\" (role=\"status\") or live=\"assertive\" (role=\"alert\") only when the alert appears in response to something.",
+            "The default icon is decorative; icon accepts your own node."
           ]
         }
       },
@@ -1562,6 +2395,41 @@
             "dialog",
             "button",
             "raster-lib"
+          ],
+          "aliases": [
+            "Alert dialog",
+            "Confirm dialog",
+            "Confirmation",
+            "Destructive confirm"
+          ],
+          "example": "import { useState } from \"react\";\nimport { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from \"@noorddev/raster-react\";\n\nconst [open, setOpen] = useState(false);\n\n<AlertDialog open={open} onClose={() => setOpen(false)}>\n  <AlertDialogTitle>Delete this workspace?</AlertDialogTitle>\n  <AlertDialogBody>All projects go with it.</AlertDialogBody>\n  <AlertDialogActions>\n    <Button variant=\"ghost\" size=\"sm\" onClick={() => setOpen(false)}>Keep it</Button>\n    <Button size=\"sm\" onClick={remove}>Delete</Button>\n  </AlertDialogActions>\n</AlertDialog>",
+          "usage": {
+            "use": [
+              "Destructive or irreversible actions that need an explicit answer.",
+              "Exactly two actions: keep and proceed."
+            ],
+            "avoid": [
+              "Anything the user may dismiss without answering; use Dialog.",
+              "Informational messages; use Alert or toast."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab, Shift + Tab",
+              "does": "Cycles focus between the actions"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Activates the focused action"
+            },
+            {
+              "keys": "Escape",
+              "does": "Does nothing; the dialog must be answered"
+            }
+          ],
+          "a11y": [
+            "A native modal <dialog> with role=\"alertdialog\" and closedby=\"none\": Escape and light dismiss are off.",
+            "AlertDialogTitle and AlertDialogBody wire aria-labelledby and aria-describedby like Dialog; focus moves in on open and returns on close."
           ]
         }
       },
@@ -1611,6 +2479,28 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Avatar",
+            "Profile picture",
+            "User image",
+            "Avatar group"
+          ],
+          "example": "import { Avatar, AvatarRow } from \"@noorddev/raster-react\";\n\n<Avatar src=\"/renn.jpg\" name=\"Renn\" initials=\"RV\" size=\"lg\" />\n<AvatarRow>\n  <Avatar name=\"Renn\" initials=\"RV\" />\n  <Avatar name=\"Noord\" initials=\"NO\" />\n  <Avatar initials=\"+3\" alt=\"\" />\n</AvatarRow>",
+          "usage": {
+            "use": [
+              "A person or organisation next to their name, or a row of collaborators.",
+              "initials as the fallback while the image loads or fails."
+            ],
+            "avoid": [
+              "Logos and product images; use AspectRatio.",
+              "Decorative circles without a subject."
+            ]
+          },
+          "a11y": [
+            "The image alt defaults to name, then initials; pass alt=\"\" for a decorative avatar.",
+            "Initials with a name render role=\"img\" with aria-label; without a name they are plain text.",
+            "A broken image falls back to the initials."
           ]
         }
       },
@@ -1658,6 +2548,26 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Item",
+            "List item",
+            "Row",
+            "Cell"
+          ],
+          "example": "import { Item } from \"@noorddev/raster-react\";\n\n<Item title=\"Alkmaar\" description=\"The studio city.\" meta=\"NL\" />",
+          "usage": {
+            "use": [
+              "Rows in a flush list: a title, a line of description, a trailing meta value.",
+              "Settings lists, results, and directories."
+            ],
+            "avoid": [
+              "Rows that navigate; wrap the title in a Link.",
+              "Tabular numbers across many columns; use Table."
+            ]
+          },
+          "a11y": [
+            "A <div> with two <p> lines and a trailing <span>; nothing is interactive by itself."
           ]
         }
       },
@@ -1710,6 +2620,32 @@
             "input",
             "raster-lib",
             "field"
+          ],
+          "aliases": [
+            "Textarea",
+            "Text area",
+            "Multiline input"
+          ],
+          "example": "import { Textarea } from \"@noorddev/raster-react\";\n\n<Textarea label=\"Notes\" placeholder=\"What should we know?\" rows={4} />",
+          "usage": {
+            "use": [
+              "Free text longer than one line.",
+              "Vertical resize only; the width follows the grid."
+            ],
+            "avoid": [
+              "Single values; use Input.",
+              "Rich text; this is a native textarea."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus to the field; Enter inserts a line break"
+            }
+          ],
+          "a11y": [
+            "A native <textarea> with a generated id; label renders a <label> pointing at it.",
+            "Inside Field, hint and error reach it through aria-describedby and aria-invalid."
           ]
         }
       },
@@ -1755,6 +2691,26 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Separator",
+            "Divider",
+            "Rule",
+            "hr"
+          ],
+          "example": "import { Separator } from \"@noorddev/raster-react\";\n\n<Separator />\n<Separator orientation=\"vertical\" style={{ height: 16 }} />",
+          "usage": {
+            "use": [
+              "A hairline between groups in a stack or a row.",
+              "orientation=\"vertical\" between inline items."
+            ],
+            "avoid": [
+              "Between every list row; rows carry their own rules.",
+              "As spacing; use the grid."
+            ]
+          },
+          "a11y": [
+            "Horizontal renders an <hr>; vertical renders role=\"separator\" with aria-orientation=\"vertical\". Neither takes focus."
           ]
         }
       },
@@ -1799,6 +2755,27 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Skeleton",
+            "Placeholder",
+            "Loading placeholder",
+            "Shimmer"
+          ],
+          "example": "import { Skeleton } from \"@noorddev/raster-react\";\n\n<Skeleton width=\"60%\" />\n<Skeleton width={240} height={14} />",
+          "usage": {
+            "use": [
+              "Holding the shape of content that is about to arrive.",
+              "One line per line of text, at the text's height."
+            ],
+            "avoid": [
+              "Waits longer than a few seconds; show a message.",
+              "Small controls; use Spinner."
+            ]
+          },
+          "a11y": [
+            "aria-hidden; it says nothing. Set aria-busy on the region and announce the load elsewhere.",
+            "The pulse stops under prefers-reduced-motion."
           ]
         }
       },
@@ -1848,6 +2825,26 @@
           "registryDependencies": [
             "button",
             "raster-lib"
+          ],
+          "aliases": [
+            "Empty",
+            "Empty state",
+            "Zero state",
+            "No results"
+          ],
+          "example": "import { Button, Empty } from \"@noorddev/raster-react\";\n\n<Empty title=\"No projects yet\" action={<Button variant=\"ghost\" size=\"sm\">New project</Button>}>\n  Start one. The grid is empty on purpose.\n</Empty>",
+          "usage": {
+            "use": [
+              "A list, table, or search with nothing to show.",
+              "One sentence and one action at most."
+            ],
+            "avoid": [
+              "Errors; use Alert.",
+              "Loading; use Skeleton."
+            ]
+          },
+          "a11y": [
+            "Plain text in a cell; the action is whatever you pass, so give it a real control."
           ]
         }
       },
@@ -1893,6 +2890,27 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Spinner",
+            "Loader",
+            "Loading indicator",
+            "Activity indicator"
+          ],
+          "example": "import { Spinner } from \"@noorddev/raster-react\";\n\n<Spinner label=\"Loading\" />",
+          "usage": {
+            "use": [
+              "Short waits of unknown length inside a control or a row.",
+              "label to say what is loading."
+            ],
+            "avoid": [
+              "Known progress; use Progress.",
+              "Whole-page waits; use Skeleton."
+            ]
+          },
+          "a11y": [
+            "Renders role=\"status\" with aria-label from label (\"Loading\" by default); the ring is aria-hidden.",
+            "The animation stops under prefers-reduced-motion."
           ]
         }
       },
@@ -1940,6 +2958,37 @@
           "registryDependencies": [
             "button",
             "raster-lib"
+          ],
+          "aliases": [
+            "Tooltip",
+            "Tip",
+            "Hint"
+          ],
+          "example": "import { Button, Tooltip } from \"@noorddev/raster-react\";\n\n<Tooltip tip=\"Copy to clipboard\">\n  <Button variant=\"ghost\" size=\"sm\" aria-label=\"Copy\">Copy</Button>\n</Tooltip>",
+          "usage": {
+            "use": [
+              "A short label for an icon-only or terse control.",
+              "Text that adds to the name, never text that replaces it."
+            ],
+            "avoid": [
+              "Content that must be read to operate the control; put it in view.",
+              "Rich content; use HoverCard."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Focuses the trigger and shows the tip"
+            },
+            {
+              "keys": "Escape",
+              "does": "Hides the tip until the pointer leaves"
+            }
+          ],
+          "a11y": [
+            "The tip is a real element with role=\"tooltip\", linked to the trigger through aria-describedby.",
+            "An element child is described directly (and given tabIndex when it cannot take focus); a text child makes the wrapper the trigger.",
+            "Shown on hover and focus; the bubble stays hoverable."
           ]
         }
       },
@@ -1990,6 +3039,38 @@
           "registryDependencies": [
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Toast",
+            "Sonner",
+            "Snackbar",
+            "Notification"
+          ],
+          "example": "import { Toaster, toast } from \"@noorddev/raster-react\";\n\n// once, in your layout\n<Toaster duration={4000} closeLabel=\"Dismiss\" />\n\n// from anywhere\ntoast(\"Saved\", { description: \"Your changes are live.\" });",
+          "usage": {
+            "use": [
+              "Confirming something that already happened: saved, sent, copied.",
+              "One line; a description only when the title needs it."
+            ],
+            "avoid": [
+              "Errors the user must act on; use Alert or AlertDialog.",
+              "Anything with a link or a button inside."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Reaches the close button of each toast"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Dismisses the toast"
+            }
+          ],
+          "a11y": [
+            "The stack is role=\"status\" with aria-live=\"polite\".",
+            "Each toast has a labelled close button (closeLabel, \"Dismiss\" by default).",
+            "Lifetime scales with the text length and pauses while hovered or focused; duration on the call overrides it."
           ]
         }
       },
@@ -2043,6 +3124,62 @@
             "button",
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Dropdown menu",
+            "Menu",
+            "Action menu",
+            "Overflow menu"
+          ],
+          "example": "import { DropdownMenu } from \"@noorddev/raster-react\";\n\n<DropdownMenu\n  label=\"Actions\"\n  items={[\n    { label: \"Rename\", onSelect: rename },\n    { label: \"Duplicate\", onSelect: duplicate },\n    { separator: true },\n    { label: \"Delete\", onSelect: remove },\n    { label: \"Archive\", disabled: true },\n  ]}\n/>",
+          "usage": {
+            "use": [
+              "Three or more actions on one object behind a single trigger.",
+              "Separators to group destructive actions at the end."
+            ],
+            "avoid": [
+              "Choosing a value; use Select.",
+              "Navigation links; use NavigationMenu."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Arrow down, Enter, Space",
+              "does": "Opens the menu on the first item"
+            },
+            {
+              "keys": "Arrow up",
+              "does": "Opens the menu on the last item"
+            },
+            {
+              "keys": "Arrow down, Arrow up",
+              "does": "Moves between items and wraps"
+            },
+            {
+              "keys": "Home, End",
+              "does": "First or last item"
+            },
+            {
+              "keys": "Type letters",
+              "does": "Moves to the next item starting with them"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Selects the item and closes"
+            },
+            {
+              "keys": "Escape",
+              "does": "Closes and returns focus to the trigger"
+            },
+            {
+              "keys": "Tab",
+              "does": "Closes and moves on"
+            }
+          ],
+          "a11y": [
+            "The trigger is a <button> with aria-haspopup=\"menu\", aria-expanded, and aria-controls; label is its name.",
+            "The panel is role=\"menu\" labelled by the trigger; items are <button role=\"menuitem\"> with one roving tab stop.",
+            "Disabled items carry aria-disabled and are skipped; separators are <hr>. A click outside closes without moving focus."
           ]
         }
       },
@@ -2090,6 +3227,36 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Toggle",
+            "Toggle button",
+            "Press button"
+          ],
+          "example": "import { useState } from \"react\";\nimport { Toggle } from \"@noorddev/raster-react\";\n\nconst [bold, setBold] = useState(false);\n\n<Toggle pressed={bold} onPressedChange={setBold} aria-label=\"Bold\">B</Toggle>",
+          "usage": {
+            "use": [
+              "A formatting or filter option that is on or off and stays in view.",
+              "Several independent toggles in a row."
+            ],
+            "avoid": [
+              "A setting that applies immediately to the app; use Switch.",
+              "One of several; use ToggleGroup."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus to the toggle"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Presses or releases it"
+            }
+          ],
+          "a11y": [
+            "A native <button> with aria-pressed.",
+            "Give icon-only toggles an aria-label. Controlled with pressed and onPressedChange, or uncontrolled with defaultPressed."
           ]
         }
       },
@@ -2136,6 +3303,36 @@
           "registryDependencies": [
             "toggle",
             "raster-lib"
+          ],
+          "aliases": [
+            "Toggle group",
+            "Segmented control",
+            "Exclusive toggles"
+          ],
+          "example": "import { useState } from \"react\";\nimport { ToggleGroup } from \"@noorddev/raster-react\";\n\nconst [align, setAlign] = useState(\"left\");\n\n<ToggleGroup\n  aria-label=\"Alignment\"\n  options={[\n    { value: \"left\", label: \"Left\" },\n    { value: \"center\", label: \"Center\" },\n    { value: \"right\", label: \"Right\" },\n  ]}\n  value={align}\n  onValueChange={setAlign}\n/>",
+          "usage": {
+            "use": [
+              "One of two to five options that should all stay visible: alignment, view mode, period.",
+              "Short labels of equal weight."
+            ],
+            "avoid": [
+              "Many or long options; use Select.",
+              "Multiple selection; use several Toggle buttons."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves between the options"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Selects the focused option"
+            }
+          ],
+          "a11y": [
+            "Renders role=\"group\" of native buttons with aria-pressed; pass aria-label to name the group.",
+            "Controlled with value and onValueChange, or uncontrolled with defaultValue."
           ]
         }
       },
@@ -2184,6 +3381,41 @@
           "registryDependencies": [
             "button",
             "raster-lib"
+          ],
+          "aliases": [
+            "Popover",
+            "Popup",
+            "Flyout"
+          ],
+          "example": "import { Popover, PopoverBody, PopoverTitle } from \"@noorddev/raster-react\";\n\n<Popover trigger=\"Details\" align=\"start\" aria-label=\"Module grid\">\n  <PopoverTitle>Module grid</PopoverTitle>\n  <PopoverBody>204px modules: a 184px column and a 20px gutter.</PopoverBody>\n</Popover>",
+          "usage": {
+            "use": [
+              "Secondary detail the user asks for and dismisses: a definition, a small form, a legend.",
+              "align=\"end\" when the trigger sits at the right edge."
+            ],
+            "avoid": [
+              "Menus; use DropdownMenu.",
+              "Anything that must block the page; use Dialog."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Enter, Space",
+              "does": "Opens or closes from the trigger"
+            },
+            {
+              "keys": "Escape",
+              "does": "Closes (platform light dismiss)"
+            },
+            {
+              "keys": "Tab",
+              "does": "Moves into the panel"
+            }
+          ],
+          "a11y": [
+            "The native Popover API: the panel is popover=\"auto\" in the top layer; the trigger is a ghost Button with popovertarget, so the platform manages aria-expanded and light dismiss.",
+            "Name the panel with aria-label or aria-labelledby; PopoverTitle is visible text only.",
+            "Placed by CSS anchor positioning where supported, else measured and flipped above when there is no room below."
           ]
         }
       },
@@ -2234,6 +3466,39 @@
           "registryDependencies": [
             "dialog",
             "raster-lib"
+          ],
+          "aliases": [
+            "Sheet",
+            "Side panel",
+            "Drawer",
+            "Slide-over",
+            "Off-canvas"
+          ],
+          "example": "import { useState } from \"react\";\nimport { Button, Sheet, SheetBody, SheetTitle } from \"@noorddev/raster-react\";\n\nconst [open, setOpen] = useState(false);\n\n<Button variant=\"ghost\" onClick={() => setOpen(true)}>Filters</Button>\n<Sheet open={open} onClose={() => setOpen(false)} side=\"right\" closeLabel=\"Close\">\n  <SheetTitle>Filters</SheetTitle>\n  <SheetBody>Everything narrows from here.</SheetBody>\n</Sheet>",
+          "usage": {
+            "use": [
+              "Filters, settings, or a detail view that slides in beside the page.",
+              "side=\"left\" for navigation on phones."
+            ],
+            "avoid": [
+              "Short decisions; use Dialog.",
+              "Content that should stay open while the page is used; the sheet is modal."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Escape",
+              "does": "Calls onClose (when dismissable, the default)"
+            },
+            {
+              "keys": "Tab, Shift + Tab",
+              "does": "Cycles focus inside the sheet"
+            }
+          ],
+          "a11y": [
+            "A native modal <dialog> docked to an edge: the platform traps focus and provides the backdrop.",
+            "SheetTitle names it through aria-labelledby; SheetBody describes it. Focus moves in on open and returns on close.",
+            "closeLabel renders a labelled close button; lightDismiss closes on a backdrop click. The ref is forwarded to the <dialog>."
           ]
         }
       },
@@ -2283,6 +3548,38 @@
           "registryDependencies": [
             "dialog",
             "raster-lib"
+          ],
+          "aliases": [
+            "Drawer",
+            "Bottom sheet",
+            "Vaul",
+            "Bottom panel"
+          ],
+          "example": "import { useState } from \"react\";\nimport { Button, Drawer, DrawerBody, DrawerTitle } from \"@noorddev/raster-react\";\n\nconst [open, setOpen] = useState(false);\n\n<Button variant=\"ghost\" onClick={() => setOpen(true)}>Notes</Button>\n<Drawer open={open} onClose={() => setOpen(false)} closeLabel=\"Close\">\n  <DrawerTitle>Notes</DrawerTitle>\n  <DrawerBody>A bottom panel. Escape closes it.</DrawerBody>\n</Drawer>",
+          "usage": {
+            "use": [
+              "Phone-first panels that rise from the bottom edge: options, a share sheet, a short form.",
+              "Content that reads in one screen."
+            ],
+            "avoid": [
+              "Desktop side panels; use Sheet.",
+              "Long content; the drawer is not a page."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Escape",
+              "does": "Calls onClose (when dismissable, the default)"
+            },
+            {
+              "keys": "Tab, Shift + Tab",
+              "does": "Cycles focus inside the drawer"
+            }
+          ],
+          "a11y": [
+            "A native modal <dialog> from the bottom edge: the platform traps focus and provides the backdrop.",
+            "DrawerTitle names it through aria-labelledby; DrawerBody describes it. Focus moves in on open and returns on close.",
+            "closeLabel renders a labelled close button. The ref is forwarded to the <dialog>."
           ]
         }
       },
@@ -2327,6 +3624,36 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Scroll area",
+            "Scroll view",
+            "Scrollable region",
+            "Overflow box"
+          ],
+          "example": "import { ScrollArea } from \"@noorddev/raster-react\";\n\n<ScrollArea maxHeight={240} aria-label=\"Cities\">\n  {cities.map((city) => <p key={city}>{city}</p>)}\n</ScrollArea>",
+          "usage": {
+            "use": [
+              "A bounded list inside a fixed layout: a sidebar, a panel, a menu of many rows.",
+              "maxHeight sets the box; the scrollbar hides and the ends feather."
+            ],
+            "avoid": [
+              "Page-level scrolling; let the page scroll.",
+              "Content that needs a visible scrollbar for orientation."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Focuses the region"
+            },
+            {
+              "keys": "Arrow up, Arrow down, Page up, Page down",
+              "does": "Scrolls it"
+            }
+          ],
+          "a11y": [
+            "Renders role=\"region\" with tabIndex=0, so keyboards can scroll it; aria-label defaults to \"Scrollable content\", pass your own."
           ]
         }
       },
@@ -2379,6 +3706,47 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Chart",
+            "Line chart",
+            "Sparkline",
+            "Trend line"
+          ],
+          "example": "import { LineChart, Sparkline } from \"@noorddev/raster-react\";\n\n<LineChart\n  height={204}\n  labels={days}\n  series={[\n    { name: \"Sheets\", values: sheets },\n    { name: \"Proofs\", values: proofs },\n  ]}\n  unit=\"sheets\"\n  yLabel=\"Output\"\n  annotations={[{ at: 3, label: \"Press\" }]}\n  spot\n/>\n\n<Sparkline values={[3, 5, 4, 8, 7, 9]} label=\"Sheets\" unit=\"k\" />",
+          "usage": {
+            "use": [
+              "Up to four series over time on one field; solid, dashed, gray, and dotted keep them apart without hue.",
+              "spot for the one accent the chart is allowed; Sparkline for a trend inside a row."
+            ],
+            "avoid": [
+              "Categories; use BarChart.",
+              "More than four series; split them into SmallMultiples."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Focuses the plot"
+            },
+            {
+              "keys": "Arrow right, Arrow left",
+              "does": "Moves the cursor across the points; a status tooltip reads the values"
+            },
+            {
+              "keys": "Home, End",
+              "does": "First or last point"
+            },
+            {
+              "keys": "Escape",
+              "does": "Clears the cursor"
+            }
+          ],
+          "a11y": [
+            "The plot is a focusable <svg role=\"group\"> with aria-roledescription=\"interactive chart\", named by aria-label, aria-labelledby, yLabel, or the series names.",
+            "A visually hidden table carries every value, so the data reads without the picture; the tooltip is role=\"status\".",
+            "Sparkline is role=\"img\" with a name built from label, the count, and the last value, plus the same hidden table.",
+            "Numbers format through Intl.NumberFormat; locale picks the reader's own by default. Marks stay visible in forced colors."
           ]
         }
       },
@@ -2475,6 +3843,45 @@
           "registryDependencies": [
             "chart",
             "raster-lib"
+          ],
+          "aliases": [
+            "Bar chart",
+            "Column chart",
+            "Stacked bar chart",
+            "Horizontal bar chart"
+          ],
+          "example": "import { BarChart } from \"@noorddev/raster-react\";\n\n<BarChart\n  height={204}\n  orientation=\"horizontal\"\n  data={[\n    { label: \"Alkmaar\", value: 42 },\n    { label: \"Delft\", value: 28 },\n  ]}\n  unit=\"issues\"\n/>\n\n<BarChart\n  labels={[\"Q1\", \"Q2\", \"Q3\"]}\n  series={[\n    { name: \"Sheets\", values: [12, 18, 9] },\n    { name: \"Proofs\", values: [4, 6, 3] },\n  ]}\n  stacked\n/>",
+          "usage": {
+            "use": [
+              "Comparing categories; data for one series, series plus labels for several.",
+              "stacked when the series share a field; orientation=\"horizontal\" for long labels."
+            ],
+            "avoid": [
+              "Continuous time; use LineChart.",
+              "Parts of one whole; use Donut or Share."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Focuses the plot"
+            },
+            {
+              "keys": "Arrow right, Arrow left",
+              "does": "Moves the cursor across the bars; a status tooltip reads the values"
+            },
+            {
+              "keys": "Home, End",
+              "does": "First or last bar"
+            },
+            {
+              "keys": "Escape",
+              "does": "Clears the cursor"
+            }
+          ],
+          "a11y": [
+            "The plot is a focusable <svg role=\"group\"> with aria-roledescription=\"interactive chart\", named by aria-label, aria-labelledby, yLabel, or the series names.",
+            "A visually hidden table carries every value; the legend is aria-hidden because the table names the series."
           ]
         }
       },
@@ -2516,6 +3923,42 @@
           "registryDependencies": [
             "chart",
             "raster-lib"
+          ],
+          "aliases": [
+            "Area chart",
+            "Filled line chart"
+          ],
+          "example": "import { AreaChart } from \"@noorddev/raster-react\";\n\n<AreaChart\n  height={204}\n  labels={days}\n  series={[{ name: \"Sheets\", values: sheets }]}\n  unit=\"sheets\"\n  annotations={[{ at: 3, label: \"Press\" }]}\n/>",
+          "usage": {
+            "use": [
+              "One series over time where the volume under the line matters.",
+              "The same props as LineChart; the first series is filled."
+            ],
+            "avoid": [
+              "Several overlapping series; the fills hide each other. Use LineChart.",
+              "Categories; use BarChart."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Focuses the plot"
+            },
+            {
+              "keys": "Arrow right, Arrow left",
+              "does": "Moves the cursor across the points; a status tooltip reads the values"
+            },
+            {
+              "keys": "Home, End",
+              "does": "First or last point"
+            },
+            {
+              "keys": "Escape",
+              "does": "Clears the cursor"
+            }
+          ],
+          "a11y": [
+            "Same as LineChart: a focusable, named plot and a visually hidden data table."
           ]
         }
       },
@@ -2557,6 +4000,44 @@
           "registryDependencies": [
             "chart",
             "raster-lib"
+          ],
+          "aliases": [
+            "Scatter chart",
+            "Scatter plot",
+            "Dot plot",
+            "XY chart"
+          ],
+          "example": "import { ScatterChart } from \"@noorddev/raster-react\";\n\n<ScatterChart\n  height={204}\n  points={[{ x: 12, y: 40 }, { x: 40, y: 22, label: \"Press\" }, { x: 60, y: 30 }]}\n  xLabel=\"Module\"\n  yLabel=\"Density\"\n  annotations={[{ at: 40, label: \"204\" }]}\n/>",
+          "usage": {
+            "use": [
+              "Two numeric variables per point; group on a point to split series.",
+              "xDomain and yDomain to pin the axes."
+            ],
+            "avoid": [
+              "Ordered categories; use BarChart.",
+              "Thousands of points; aggregate first."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Focuses the plot"
+            },
+            {
+              "keys": "Arrow right, Arrow left",
+              "does": "Moves the cursor across the points; a status tooltip reads x and y"
+            },
+            {
+              "keys": "Home, End",
+              "does": "First or last point"
+            },
+            {
+              "keys": "Escape",
+              "does": "Clears the cursor"
+            }
+          ],
+          "a11y": [
+            "A focusable, named plot with a visually hidden table of x and y per point."
           ]
         }
       },
@@ -2598,6 +4079,28 @@
           "registryDependencies": [
             "chart",
             "raster-lib"
+          ],
+          "aliases": [
+            "Donut",
+            "Donut chart",
+            "Ring chart",
+            "Pie chart",
+            "Share strip"
+          ],
+          "example": "import { Donut, Share } from \"@noorddev/raster-react\";\n\n<Donut value={72} max={100} size={184} label=\"printed\" />\n<Share slices={[{ label: \"Sheet\", value: 72 }, { label: \"Proof\", value: 18 }, { label: \"Waste\", value: 10 }]} unit=\"%\" />",
+          "usage": {
+            "use": [
+              "One value against its total as a ring, or a flush strip of shares.",
+              "label under the number in the ring."
+            ],
+            "avoid": [
+              "Comparing several values; use BarChart.",
+              "More than five slices; the strip stops reading."
+            ]
+          },
+          "a11y": [
+            "Donut renders role=\"img\" named by the caption or label and the value text; a visually hidden table carries value and max.",
+            "Share renders a named group of slices with a hidden table of label and value per slice."
           ]
         }
       },
@@ -2639,6 +4142,43 @@
           "registryDependencies": [
             "chart",
             "raster-lib"
+          ],
+          "aliases": [
+            "Histogram",
+            "Distribution chart",
+            "Frequency chart"
+          ],
+          "example": "import { Histogram } from \"@noorddev/raster-react\";\n\n<Histogram\n  height={204}\n  bins={[\n    { label: \"0–1\", count: 4 },\n    { label: \"1–2\", count: 11 },\n    { label: \"2–3\", count: 18 },\n  ]}\n  yLabel=\"Sessions\"\n/>",
+          "usage": {
+            "use": [
+              "The distribution of one variable across ordered bins.",
+              "Adjacent bins with a 1px seam; the order is the axis."
+            ],
+            "avoid": [
+              "Unordered categories; use BarChart.",
+              "Time series; use LineChart."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Focuses the plot"
+            },
+            {
+              "keys": "Arrow right, Arrow left",
+              "does": "Moves the cursor across the bins; a status tooltip reads the count"
+            },
+            {
+              "keys": "Home, End",
+              "does": "First or last bin"
+            },
+            {
+              "keys": "Escape",
+              "does": "Clears the cursor"
+            }
+          ],
+          "a11y": [
+            "A focusable, named plot with a visually hidden table of label and count per bin."
           ]
         }
       },
@@ -2680,6 +4220,36 @@
           "registryDependencies": [
             "chart",
             "raster-lib"
+          ],
+          "aliases": [
+            "Small multiples",
+            "Trellis chart",
+            "Facet grid",
+            "Panel charts"
+          ],
+          "example": "import { SmallMultiples } from \"@noorddev/raster-react\";\n\n<SmallMultiples\n  height={136}\n  panels={[\n    { title: \"Alkmaar\", labels: days, series: [{ name: \"Sheets\", values: alkmaar }] },\n    { title: \"Delft\", labels: days, series: [{ name: \"Sheets\", values: delft }] },\n  ]}\n  unit=\"sheets\"\n/>",
+          "usage": {
+            "use": [
+              "The same measure across places, products, or periods, one small line chart per panel on shared axes.",
+              "Four to eight panels in a row of 184px columns."
+            ],
+            "avoid": [
+              "Panels with different units; they no longer compare.",
+              "One series; use LineChart."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Focuses each panel's plot in turn"
+            },
+            {
+              "keys": "Arrow right, Arrow left, Home, End, Escape",
+              "does": "Move and clear the cursor inside the focused panel"
+            }
+          ],
+          "a11y": [
+            "Each panel is a <figure> with a caption; its plot is labelled by that caption and carries its own hidden table."
           ]
         }
       },
@@ -2727,6 +4297,36 @@
             "accordion",
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Collapsible",
+            "Disclosure",
+            "Details",
+            "Expander"
+          ],
+          "example": "import { Collapsible } from \"@noorddev/raster-react\";\n\n<Collapsible title=\"Show the details\">Here they are.</Collapsible>\n<Collapsible title=\"Advanced\" open={open} onToggle={(e) => setOpen(e.currentTarget.open)}>…</Collapsible>",
+          "usage": {
+            "use": [
+              "One optional block the reader can reveal: details, advanced options, a long list.",
+              "defaultOpen when most readers want it open."
+            ],
+            "avoid": [
+              "Several related sections; use Accordion.",
+              "Content everyone needs; leave it in the flow."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus to the summary"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Opens or closes it"
+            }
+          ],
+          "a11y": [
+            "A native <details> and <summary>; the platform exposes the expanded state and title is the name."
           ]
         }
       },
@@ -2774,6 +4374,37 @@
           "registryDependencies": [
             "raster-lib",
             "tooltip"
+          ],
+          "aliases": [
+            "Hover card",
+            "Preview card",
+            "Profile card",
+            "Rich tooltip"
+          ],
+          "example": "import { HoverCard, Link } from \"@noorddev/raster-react\";\n\n<HoverCard trigger={<Link href=\"/noord\">@noord</Link>}>\n  Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.\n</HoverCard>",
+          "usage": {
+            "use": [
+              "A preview of the thing a link points at: a profile, a document, a place.",
+              "Rich content that is not needed to use the link."
+            ],
+            "avoid": [
+              "One-line labels; use Tooltip.",
+              "Content with its own controls; use Popover."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Focuses the trigger and shows the card"
+            },
+            {
+              "keys": "Escape",
+              "does": "Hides the card until the pointer leaves"
+            }
+          ],
+          "a11y": [
+            "The panel is role=\"tooltip\" and describes the trigger through aria-describedby.",
+            "A focusable trigger element is used as is; anything else is wrapped in a tab stop."
           ]
         }
       },
@@ -2819,6 +4450,26 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Kbd",
+            "Keyboard key",
+            "Key cap",
+            "Shortcut"
+          ],
+          "example": "import { Kbd, KbdPair } from \"@noorddev/raster-react\";\n\n<KbdPair><Kbd>⌘</Kbd><Kbd>K</Kbd></KbdPair>",
+          "usage": {
+            "use": [
+              "Showing a shortcut next to a command or in help copy.",
+              "KbdPair to keep a chord together."
+            ],
+            "avoid": [
+              "Code; use Chip.",
+              "Buttons; a key cap is not a control."
+            ]
+          },
+          "a11y": [
+            "Renders a native <kbd>; screen readers read the characters. Spell out modifier symbols in surrounding text when they matter."
           ]
         }
       },
@@ -2867,6 +4518,47 @@
           "registryDependencies": [
             "raster-lib",
             "field"
+          ],
+          "aliases": [
+            "One-time code",
+            "OTP input",
+            "InputOTP",
+            "PIN input",
+            "Verification code"
+          ],
+          "example": "import { InputOTP } from \"@noorddev/raster-react\";\n\n<InputOTP length={6} aria-label=\"One-time code\" onComplete={(code) => verify(code)} />",
+          "usage": {
+            "use": [
+              "Numeric verification codes from SMS, mail, or an authenticator.",
+              "onComplete to submit as soon as the last cell fills."
+            ],
+            "avoid": [
+              "Alphanumeric codes; the cells strip non-digits.",
+              "Passwords; use Input type=\"password\"."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Type a digit",
+              "does": "Fills the cell and moves to the next"
+            },
+            {
+              "keys": "Backspace",
+              "does": "Clears the cell; on an empty cell moves back and clears the previous one"
+            },
+            {
+              "keys": "Arrow left, Arrow right",
+              "does": "Moves between cells"
+            },
+            {
+              "keys": "Paste",
+              "does": "Fills from the current cell onward"
+            }
+          ],
+          "a11y": [
+            "Renders role=\"group\" named by aria-label (\"One-time code\" by default); each cell is an <input> named \"Digit n\".",
+            "inputMode=\"numeric\" and autoComplete=\"one-time-code\" on the first cell let phones offer the code.",
+            "Inside Field, hint and error reach the group and cells through aria-describedby and aria-invalid."
           ]
         }
       },
@@ -2914,6 +4606,45 @@
           "registryDependencies": [
             "dropdown-menu",
             "raster-lib"
+          ],
+          "aliases": [
+            "Context menu",
+            "Right-click menu",
+            "Contextual menu"
+          ],
+          "example": "import { ContextMenu } from \"@noorddev/raster-react\";\n\n<ContextMenu items={[{ label: \"Copy\", onSelect: copy }, { label: \"Paste\", onSelect: paste }, { separator: true }, { label: \"Inspect\" }]}>\n  <Canvas />\n</ContextMenu>",
+          "usage": {
+            "use": [
+              "Actions on a region or object that already has a primary interaction: a canvas, a row, a file.",
+              "The same items shape as DropdownMenu."
+            ],
+            "avoid": [
+              "Actions with no other way in; add a visible DropdownMenu too.",
+              "Touch-only surfaces without a long-press alternative."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Shift + F10, Context menu key",
+              "does": "Opens the menu at the wrapper"
+            },
+            {
+              "keys": "Arrow down, Arrow up, Home, End, Type letters",
+              "does": "Move between items"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Selects the item and closes"
+            },
+            {
+              "keys": "Escape",
+              "does": "Closes and returns focus"
+            }
+          ],
+          "a11y": [
+            "The wrapper is a tab stop with aria-keyshortcuts=\"Shift+F10\"; pass tabIndex={-1} when the child is focusable itself.",
+            "The panel is role=\"menu\" with menuitem buttons, roving focus, and type-ahead; focus returns to whatever had it when the menu closes.",
+            "Right-click opens at the pointer; the keyboard opens at the trigger's edge."
           ]
         }
       },
@@ -2962,6 +4693,52 @@
             "dropdown-menu",
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Menubar",
+            "Menu bar",
+            "Application menu"
+          ],
+          "example": "import { Menubar } from \"@noorddev/raster-react\";\n\n<Menubar\n  menus={[\n    { label: \"File\", items: [{ label: \"New\", onSelect: create }, { label: \"Open…\", onSelect: open }] },\n    { label: \"Edit\", items: [{ label: \"Undo\", onSelect: undo }, { label: \"Redo\", onSelect: redo }] },\n  ]}\n/>",
+          "usage": {
+            "use": [
+              "Desktop-style application menus: File, Edit, View.",
+              "Tools and editors with many commands grouped by verb."
+            ],
+            "avoid": [
+              "Site navigation; use NavigationMenu.",
+              "One menu; use DropdownMenu."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus to the bar (one roving tab stop)"
+            },
+            {
+              "keys": "Arrow left, Arrow right",
+              "does": "Moves between menus; an open menu follows"
+            },
+            {
+              "keys": "Home, End",
+              "does": "First or last menu"
+            },
+            {
+              "keys": "Arrow down, Enter, Space",
+              "does": "Opens the menu on the first item"
+            },
+            {
+              "keys": "Arrow up",
+              "does": "Opens the menu on the last item"
+            },
+            {
+              "keys": "Escape",
+              "does": "Closes the open menu and returns focus to its trigger"
+            }
+          ],
+          "a11y": [
+            "Renders role=\"menubar\"; each trigger is a <button role=\"menuitem\"> with aria-haspopup=\"menu\", aria-expanded, and aria-controls.",
+            "Open panels are role=\"menu\" labelled by their trigger, with the same keyboard model as DropdownMenu."
           ]
         }
       },
@@ -3007,6 +4784,37 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Navigation menu",
+            "Nav",
+            "Top navigation",
+            "Navbar",
+            "Header links"
+          ],
+          "example": "import { NavigationMenu } from \"@noorddev/raster-react\";\n\n<NavigationMenu\n  aria-label=\"Primary\"\n  items={[\n    { label: \"Overview\", href: \"/\", current: true },\n    { label: \"Docs\", href: \"/docs\" },\n    { label: \"Changelog\", href: \"/changelog\" },\n  ]}\n/>",
+          "usage": {
+            "use": [
+              "The main links of a site in one row.",
+              "current on the item for the page you are on."
+            ],
+            "avoid": [
+              "Nested menus; keep the row flat and use a Sidebar for depth.",
+              "Actions; use Button."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves between the links"
+            },
+            {
+              "keys": "Enter",
+              "does": "Follows the link"
+            }
+          ],
+          "a11y": [
+            "Renders <nav> with aria-label (\"Primary\" by default) and plain <a> links; the current page carries aria-current=\"page\"."
           ]
         }
       },
@@ -3056,6 +4864,37 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Sidebar",
+            "Side nav",
+            "Rail",
+            "Navigation drawer"
+          ],
+          "example": "import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from \"@noorddev/raster-react\";\n\n<Sidebar>\n  <SidebarHead>Raster</SidebarHead>\n  <SidebarNav aria-label=\"Sidebar\">\n    <SidebarLabel>Go to</SidebarLabel>\n    <SidebarItem href=\"/\" current>Overview</SidebarItem>\n    <SidebarItem href=\"/docs\">Docs</SidebarItem>\n    <SidebarItem href=\"/components\">Components</SidebarItem>\n  </SidebarNav>\n  <SidebarFoot>0.3</SidebarFoot>\n</Sidebar>",
+          "usage": {
+            "use": [
+              "A 204px rail for app or docs navigation with a head, groups of links, and a foot.",
+              "SidebarLabel to name each group of items."
+            ],
+            "avoid": [
+              "Marketing sites; use NavigationMenu.",
+              "Collapsing it on desktop; the rail is the layout."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves between the items"
+            },
+            {
+              "keys": "Enter",
+              "does": "Follows the link"
+            }
+          ],
+          "a11y": [
+            "Sidebar is an <aside>; SidebarNav is a <nav> named by aria-label (\"Sidebar\" by default).",
+            "SidebarItem is an <a>; current sets aria-current=\"page\"."
           ]
         }
       },
@@ -3109,6 +4948,42 @@
             "pagination",
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Carousel",
+            "Slideshow",
+            "Embla",
+            "Swiper"
+          ],
+          "example": "import { Carousel, CarouselSlide } from \"@noorddev/raster-react\";\n\n<Carousel aria-label=\"Case studies\">\n  {cases.map((c) => (\n    <CarouselSlide key={c.id}>\n      <CaseCard {...c} />\n    </CarouselSlide>\n  ))}\n</Carousel>",
+          "usage": {
+            "use": [
+              "A row of cards or images wider than the page, browsed one nudge at a time.",
+              "Scroll snap does the alignment; the buttons nudge by 80% of the width."
+            ],
+            "avoid": [
+              "Autoplay or hero sliders; nothing moves on its own.",
+              "Essential content only reachable by scrolling; show it in the flow too."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Focuses the track, then the previous and next buttons"
+            },
+            {
+              "keys": "Arrow left, Arrow right",
+              "does": "Scrolls the focused track"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Nudges from the buttons"
+            }
+          ],
+          "a11y": [
+            "The track is role=\"region\" with aria-roledescription=\"carousel\", named by aria-label, and focusable.",
+            "CarouselSlide is role=\"group\" with aria-roledescription=\"slide\", named \"n of N\" unless you pass aria-label.",
+            "The buttons are labelled \"Previous\" and \"Next\"."
           ]
         }
       },
@@ -3155,6 +5030,50 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Resizable",
+            "Split pane",
+            "Resizable panels",
+            "Splitter",
+            "Panel group"
+          ],
+          "example": "import { Split } from \"@noorddev/raster-react\";\n\n<Split initial={60} min={30} max={80} handleLabel=\"Resize editor and preview\">\n  <Editor />\n  <Preview />\n</Split>",
+          "usage": {
+            "use": [
+              "Two panes the user sizes against each other: editor and preview, list and detail.",
+              "Percentages for initial, min, and max."
+            ],
+            "avoid": [
+              "More than two panes; nest a Split.",
+              "Layouts that should stack on phones by other rules; it stacks at 640px on its own."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Focuses the handle"
+            },
+            {
+              "keys": "Arrow left, Arrow up",
+              "does": "Shrinks the first pane by 2%"
+            },
+            {
+              "keys": "Arrow right, Arrow down",
+              "does": "Grows it by 2%"
+            },
+            {
+              "keys": "Shift + Arrow keys",
+              "does": "Moves by 10%"
+            },
+            {
+              "keys": "Home, End",
+              "does": "Jumps to min or max"
+            }
+          ],
+          "a11y": [
+            "The handle is a <button role=\"separator\"> with aria-orientation, aria-valuenow, aria-valuemin, aria-valuemax, and aria-label from handleLabel.",
+            "Below 640px the panes stack and the axis follows: the orientation flips and the arrows move vertically."
           ]
         }
       },
@@ -3206,6 +5125,62 @@
             "dropdown-menu",
             "raster-lib",
             "select"
+          ],
+          "aliases": [
+            "Combobox",
+            "Autocomplete",
+            "Typeahead",
+            "Searchable select"
+          ],
+          "example": "import { useState } from \"react\";\nimport { Combobox } from \"@noorddev/raster-react\";\n\nconst [city, setCity] = useState(\"\");\n\n<Combobox\n  aria-label=\"City\"\n  options={cities}\n  value={city}\n  onValueChange={setCity}\n  placeholder=\"Search cities…\"\n  emptyLabel=\"No city matches.\"\n/>",
+          "usage": {
+            "use": [
+              "One choice from a long list the user knows how to type: cities, people, tags.",
+              "searchText on an option when its label is not a plain string."
+            ],
+            "avoid": [
+              "Short lists; use Select.",
+              "Free-form values not in the list; the combobox only picks options."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Type",
+              "does": "Filters the options and opens the list"
+            },
+            {
+              "keys": "Arrow down",
+              "does": "Opens the list on the selected option, then moves down"
+            },
+            {
+              "keys": "Arrow up",
+              "does": "Opens the list on the last option, then moves up"
+            },
+            {
+              "keys": "Home, End",
+              "does": "First or last match"
+            },
+            {
+              "keys": "Page up, Page down",
+              "does": "Moves ten matches"
+            },
+            {
+              "keys": "Enter",
+              "does": "Picks the active match and closes"
+            },
+            {
+              "keys": "Escape",
+              "does": "Clears the search and closes"
+            },
+            {
+              "keys": "Tab",
+              "does": "Closes and moves on"
+            }
+          ],
+          "a11y": [
+            "APG editable combobox: an <input role=\"combobox\"> with aria-autocomplete=\"list\", aria-expanded, aria-controls, and aria-activedescendant; focus stays in the input.",
+            "The list is role=\"listbox\" with role=\"option\" rows carrying aria-selected; it does not open on focus alone.",
+            "Pass aria-label or aria-labelledby. Controlled with value and onValueChange, or uncontrolled with defaultValue."
           ]
         }
       },
@@ -3259,6 +5234,54 @@
           "registryDependencies": [
             "dialog",
             "raster-lib"
+          ],
+          "aliases": [
+            "Command",
+            "Command palette",
+            "cmdk",
+            "Command menu",
+            "Spotlight"
+          ],
+          "example": "import { useEffect, useState } from \"react\";\nimport { CommandDialog } from \"@noorddev/raster-react\";\n\nconst [open, setOpen] = useState(false);\n\n// wire the shortcut once in your app\nuseEffect(() => {\n  const onKey = (e: KeyboardEvent) => {\n    if (e.key === \"k\" && (e.metaKey || e.ctrlKey)) {\n      e.preventDefault();\n      setOpen(true);\n    }\n  };\n  window.addEventListener(\"keydown\", onKey);\n  return () => window.removeEventListener(\"keydown\", onKey);\n}, []);\n\n<CommandDialog\n  open={open}\n  onClose={() => setOpen(false)}\n  groups={[\n    { label: \"Go to\", items: [{ label: \"Components\", hint: \"⌘1\", onSelect: () => go(\"/components\") }] },\n    { label: \"Actions\", items: [{ label: \"New project\", keywords: \"create add\", onSelect: create }] },\n  ]}\n/>",
+          "usage": {
+            "use": [
+              "A palette of commands and destinations behind one shortcut.",
+              "keywords on an item to widen the match; hint for the shortcut label."
+            ],
+            "avoid": [
+              "Picking a value for a field; use Combobox.",
+              "Fewer than ten commands; use DropdownMenu."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Type",
+              "does": "Filters the items by label and keywords"
+            },
+            {
+              "keys": "Arrow down, Arrow up",
+              "does": "Moves the active item"
+            },
+            {
+              "keys": "Home, End",
+              "does": "First or last item"
+            },
+            {
+              "keys": "Page up, Page down",
+              "does": "Moves ten items"
+            },
+            {
+              "keys": "Enter",
+              "does": "Runs the active item and closes"
+            },
+            {
+              "keys": "Escape",
+              "does": "Closes"
+            }
+          ],
+          "a11y": [
+            "The input is role=\"combobox\" named \"Command\" with aria-autocomplete=\"list\" and aria-activedescendant; the list is role=\"listbox\" with labelled role=\"group\" sections.",
+            "CommandDialog places it in a native modal <dialog>; Command alone renders inline. The input takes focus on mount."
           ]
         }
       },
@@ -3319,6 +5342,58 @@
             "pagination",
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Calendar",
+            "Date grid",
+            "Month view",
+            "Day picker"
+          ],
+          "example": "import { useState } from \"react\";\nimport { Calendar } from \"@noorddev/raster-react\";\n\nconst [date, setDate] = useState<Date>();\n\n<Calendar value={date} onValueChange={setDate} weekStart={1} />",
+          "usage": {
+            "use": [
+              "Picking one day when the month context matters: bookings, deadlines, schedules.",
+              "Inline on the page; DatePicker wraps it in a trigger."
+            ],
+            "avoid": [
+              "Typing a known date; use Input type=\"date\".",
+              "Ranges; the grid selects one day."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Focuses the month buttons, then the roving day"
+            },
+            {
+              "keys": "Arrow left, Arrow right",
+              "does": "Previous or next day"
+            },
+            {
+              "keys": "Arrow up, Arrow down",
+              "does": "Same day the week before or after"
+            },
+            {
+              "keys": "Home, End",
+              "does": "First or last day of the week"
+            },
+            {
+              "keys": "Page up, Page down",
+              "does": "Same day the month before or after"
+            },
+            {
+              "keys": "Shift + Page up, Shift + Page down",
+              "does": "Same day the year before or after"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Selects the focused day"
+            }
+          ],
+          "a11y": [
+            "Renders role=\"grid\" labelled by the month title, which is aria-live=\"polite\"; rows are role=\"row\" and weekday headers are role=\"columnheader\" with long names.",
+            "Days are <button role=\"gridcell\"> with a full-date aria-label, aria-selected, and aria-current=\"date\" on today; one roving tab stop.",
+            "Previous and next month buttons are labelled. Controlled with value and onValueChange, or uncontrolled with defaultValue."
           ]
         }
       },
@@ -3369,6 +5444,50 @@
             "calendar",
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Date picker",
+            "DatePicker",
+            "Date input",
+            "Date field"
+          ],
+          "example": "import { useState } from \"react\";\nimport { DatePicker } from \"@noorddev/raster-react\";\n\nconst [date, setDate] = useState<Date>();\n\n<DatePicker value={date} onValueChange={setDate} placeholder=\"Pick a date\" dialogLabel=\"Choose a date\" />",
+          "usage": {
+            "use": [
+              "A date field in a form where the calendar should stay out of the way until asked.",
+              "format to render the chosen date your way."
+            ],
+            "avoid": [
+              "Dates the user knows by heart; use Input type=\"date\".",
+              "Always-visible calendars; use Calendar."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Enter, Space, Arrow down",
+              "does": "Opens the calendar"
+            },
+            {
+              "keys": "Arrow keys, Home, End, Page up, Page down",
+              "does": "Move through the calendar"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Selects the day and closes"
+            },
+            {
+              "keys": "Escape",
+              "does": "Closes and returns focus to the trigger"
+            },
+            {
+              "keys": "Tab",
+              "does": "Leaves the calendar and closes it"
+            }
+          ],
+          "a11y": [
+            "The trigger is a <button> with aria-haspopup=\"dialog\", aria-expanded, and aria-controls; the calendar sits in a non-modal role=\"dialog\" named by dialogLabel.",
+            "On open, focus moves to the selected day or today; on close it returns to the trigger.",
+            "Controlled with value and onValueChange, or uncontrolled with defaultValue."
           ]
         }
       },
@@ -3424,6 +5543,36 @@
             "table",
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Data table",
+            "Sortable table",
+            "Grid"
+          ],
+          "example": "import { DataTable } from \"@noorddev/raster-react\";\n\n<DataTable\n  columns={[\n    { key: \"phase\", header: \"Phase\", sortable: true },\n    { key: \"weeks\", header: \"Weeks\", sortable: true },\n    { key: \"owner\", header: \"Owner\", render: (row) => row.owner.name },\n  ]}\n  rows={rows}\n  rowKey={(row) => row.id}\n  emptyLabel=\"No phases yet.\"\n/>",
+          "usage": {
+            "use": [
+              "Rows from data with sortable columns and an empty state.",
+              "render for cells that are not plain values; sortValue for custom sort keys."
+            ],
+            "avoid": [
+              "Hand-written rows; use Table.",
+              "Pagination, selection, or editing; compose those around it."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves between the sort buttons"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Sorts ascending, then descending, then clears"
+            }
+          ],
+          "a11y": [
+            "Sortable headers hold a native <button>; the <th> carries aria-sort while sorted.",
+            "The empty state is plain text under the table."
           ]
         }
       },
@@ -3468,6 +5617,25 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Aspect ratio",
+            "Ratio box",
+            "Media frame"
+          ],
+          "example": "import { AspectRatio } from \"@noorddev/raster-react\";\n\n<AspectRatio ratio={16 / 9}>\n  <img src=\"/cover.jpg\" alt=\"Press hall\" />\n</AspectRatio>",
+          "usage": {
+            "use": [
+              "Images, video, and embeds that must hold a ratio before they load.",
+              "ratio as width over height."
+            ],
+            "avoid": [
+              "Text boxes; let content set the height.",
+              "Avatars; use Avatar."
+            ]
+          },
+          "a11y": [
+            "Layout only; the media inside carries its own alt or title."
           ]
         }
       },
@@ -3518,6 +5686,32 @@
             "input",
             "button",
             "raster-lib"
+          ],
+          "aliases": [
+            "Form",
+            "Form layout",
+            "Stacked form"
+          ],
+          "example": "import { Button, Field, FieldLabel, Form, Input } from \"@noorddev/raster-react\";\n\n<Form onSubmit={(e) => { e.preventDefault(); save(); }}>\n  <Field>\n    <FieldLabel htmlFor=\"name\">Name</FieldLabel>\n    <Input plain id=\"name\" required />\n  </Field>\n  <Field>\n    <FieldLabel htmlFor=\"email\">E-mail</FieldLabel>\n    <Input plain id=\"email\" type=\"email\" required />\n  </Field>\n  <Button type=\"submit\">Send</Button>\n</Form>",
+          "usage": {
+            "use": [
+              "Any form: fields stack, one primary action at the end.",
+              "Native validation attributes; the platform reports them."
+            ],
+            "avoid": [
+              "Search boxes and single fields; use InlineForm.",
+              "Multi-column layouts; stack instead."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Enter",
+              "does": "Submits from a text field"
+            }
+          ],
+          "a11y": [
+            "A native <form>; name it with aria-label or aria-labelledby when the page has more than one.",
+            "Field wires labels, hints, and errors to the controls."
           ]
         }
       },
@@ -3571,6 +5765,36 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Workflow",
+            "Pipeline",
+            "Flow card",
+            "Process steps"
+          ],
+          "example": "import { Flow, FlowAdd, FlowBody, FlowNum, FlowStep, FlowSub, FlowSubAdd, FlowSubs, FlowTitle } from \"@noorddev/raster-react\";\n\n<Flow>\n  <FlowStep>\n    <FlowNum>1</FlowNum>\n    <FlowTitle>Proposal</FlowTitle>\n    <FlowBody>Scope, timeline, and fee on one page.</FlowBody>\n    <FlowSubs>\n      <FlowSub>Brief</FlowSub>\n      <FlowSub>Fee</FlowSub>\n      <FlowSubAdd>+</FlowSubAdd>\n    </FlowSubs>\n  </FlowStep>\n  <FlowAdd onClick={addStep}>Add a step</FlowAdd>\n</Flow>",
+          "usage": {
+            "use": [
+              "Editable pipelines: numbered steps with sub-items and a ghost add action.",
+              "Builders, automations, onboarding flows."
+            ],
+            "avoid": [
+              "Read-only progress; use Stepper.",
+              "Deep trees; the pipeline is one row."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves to the add-step button"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Activates it"
+            }
+          ],
+          "a11y": [
+            "FlowAdd is a native <button>; FlowTitle is an <h4>. FlowSubAdd is a <span>: wrap it in a button when it acts."
           ]
         }
       },
@@ -3629,6 +5853,27 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Assistant",
+            "Chat panel",
+            "AI chat",
+            "Conversation",
+            "Copilot panel"
+          ],
+          "example": "import { Assistant, AssistantHead, AssistantInput, AssistantMsg, AssistantReply, AssistantSend, AssistantStatus, AssistantTitle, AssistantUserBlock } from \"@noorddev/raster-react\";\n\n<Assistant>\n  <AssistantHead>\n    <AssistantTitle>Assistant</AssistantTitle>\n    <AssistantStatus>Ready</AssistantStatus>\n  </AssistantHead>\n  <AssistantMsg user>\n    <AssistantUserBlock>Make the intro tighter.</AssistantUserBlock>\n  </AssistantMsg>\n  <AssistantReply>Done. Two sentences, same claim.</AssistantReply>\n  <AssistantInput>\n    <input aria-label=\"Message\" placeholder=\"Ask anything\" />\n    <AssistantSend>Send</AssistantSend>\n  </AssistantInput>\n</Assistant>",
+          "usage": {
+            "use": [
+              "A chat panel with a head, a message thread, and an input row.",
+              "AssistantCard and AssistantTag for a suggestion the reply proposes."
+            ],
+            "avoid": [
+              "Long transcripts without a ScrollArea.",
+              "Notifications; use toast."
+            ]
+          },
+          "a11y": [
+            "Layout parts only. Give the thread aria-live=\"polite\" if replies stream in, and make the input a real <input> with a name and the send a <button>."
           ]
         }
       },
@@ -3678,6 +5923,36 @@
           "registryDependencies": [
             "raster-lib",
             "icons"
+          ],
+          "aliases": [
+            "Theme toggle",
+            "Dark mode toggle",
+            "Color scheme switch",
+            "Mode toggle"
+          ],
+          "example": "import { ThemeToggle } from \"@noorddev/raster-react\";\n\n<ThemeToggle storageKey=\"raster-theme\" onThemeChange={(dark) => track(dark)} />",
+          "usage": {
+            "use": [
+              "Letting the reader pick light or dark and remembering it.",
+              "Top-right of the page chrome; rs-theme-toggle-inline for a spot in the flow."
+            ],
+            "avoid": [
+              "Pages that should follow the system only; leave it out and the system preference applies."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves focus to the button"
+            },
+            {
+              "keys": "Enter, Space",
+              "does": "Switches the scheme"
+            }
+          ],
+          "a11y": [
+            "A native <button> whose aria-label states the action (\"Switch to dark scheme\" or \"Switch to light scheme\").",
+            "Sets data-theme=\"dark\" on <html> and stores the choice under storageKey; read it early in your document to avoid a flash."
           ]
         }
       },
@@ -3722,6 +5997,26 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "Callout",
+            "Note",
+            "Aside",
+            "Admonition"
+          ],
+          "example": "import { Callout } from \"@noorddev/raster-react\";\n\n<Callout>\n  <p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p>\n</Callout>",
+          "usage": {
+            "use": [
+              "A note inside running copy that deserves a frame: a term, a caveat, a definition.",
+              "A bold lead-in and one or two sentences."
+            ],
+            "avoid": [
+              "Status and warnings; use Alert.",
+              "Stacking several in a row."
+            ]
+          },
+          "a11y": [
+            "A plain <div> in the reading order; add role=\"note\" and an aria-label when it should be announced as an aside."
           ]
         }
       },
@@ -3774,6 +6069,36 @@
           "cssOnly": false,
           "registryDependencies": [
             "raster-lib"
+          ],
+          "aliases": [
+            "References",
+            "Citations",
+            "Footnotes",
+            "Bibliography"
+          ],
+          "example": "import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi, RefItem, Refs } from \"@noorddev/raster-react\";\n\n<p>Set in a single ink.<Cite><CiteLink href=\"#ref-1\">1</CiteLink></Cite></p>\n\n<Refs>\n  <RefItem id=\"ref-1\">\n    <RefAuthors>Müller-Brockmann, J.</RefAuthors> Grid systems in graphic design. <RefDoi href=\"https://niggli.ch/grid\">niggli.ch/grid</RefDoi>\n  </RefItem>\n</Refs>\n\n<CiteBox>\n  <CiteBoxLabel>Cite this</CiteBoxLabel>\n  <CiteBoxText>Valdés-Olmos, R. (2026). Raster. Noord.</CiteBoxText>\n</CiteBox>",
+          "usage": {
+            "use": [
+              "Articles and papers with numbered citations and a reference list.",
+              "CiteBox for the how-to-cite block at the end."
+            ],
+            "avoid": [
+              "Footnotes with long asides; keep notes short.",
+              "Link lists; use plain Links."
+            ]
+          },
+          "keyboard": [
+            {
+              "keys": "Tab",
+              "does": "Moves between citation links"
+            },
+            {
+              "keys": "Enter",
+              "does": "Jumps to the reference"
+            }
+          ],
+          "a11y": [
+            "Cite is a <sup> holding a native <a>; give each RefItem the id the link targets. Refs is an <ol>, so the numbering is real."
           ]
         }
       },

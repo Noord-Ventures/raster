@@ -2,15 +2,18 @@
 //
 //   registry/index.json    shadcn-compatible registry index (no file contents)
 //   registry/<name>.json   shadcn-compatible registry-item, contents inlined
-//   registry/bundle.json   every item with contents, consumed by @noorddev/raster-cli
+//   registry/bundle.json   every item with contents plus the generated docs
+//                          markdown, consumed by @noorddev/raster-cli and
+//                          @noorddev/raster-mcp (both work offline)
 //
 // Components install two ways: through the raster CLI (bundles this
 // output), or through `npx shadcn add <url>/r/<name>.json` from any
 // host serving this directory.
 //
-// Run with: npm run build:registry  (Node ≥ 22.6)
+// Run with: npm run build:registry  (Node ≥ 22.6). Needs registry/docs
+// from scripts/build-docs.mjs; the npm script runs it first.
 
-import { existsSync, lstatSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join, normalize, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { rasterTokens } from "../src/tokens.ts";
@@ -112,7 +115,7 @@ const interItem = {
 
 /* Files every React component imports. They install once, as one
    registry:lib item, and every component depends on it. */
-const LIB_FILES = ["cx.ts", "rs.ts", "tokens.stylex.ts", "hidden.stylex.ts"];
+const LIB_FILES = ["cx.ts", "rs.ts", "tokens.stylex.ts", "hidden.stylex.ts", "merge-refs.ts"];
 const LIB_ITEM = "raster-lib";
 
 function posix(p) {
@@ -263,9 +266,28 @@ for (const component of rasterComponents) {
         snippet: component.snippet,
         cssOnly: !component.react,
         registryDependencies,
+        ...(component.hidden ? { hidden: true } : {}),
+        ...(component.aliases ? { aliases: component.aliases } : {}),
+        ...(component.example ? { example: component.example } : {}),
+        ...(component.usage ? { usage: component.usage } : {}),
+        ...(component.keyboard ? { keyboard: component.keyboard } : {}),
+        ...(component.a11y ? { a11y: component.a11y } : {}),
       },
     },
   });
+}
+
+/* The generated markdown docs (scripts/build-docs.mjs), so the CLI and
+   the MCP server can print them offline. */
+const docsDir = repoPath("registry/docs");
+if (!existsSync(docsDir)) throw new Error("registry/docs missing: run `npm run build:docs` first");
+const docs = { guide: "", index: "", tokens: "", components: {} };
+for (const file of readdirSync(docsDir).sort()) {
+  if (!file.endsWith(".md")) continue;
+  const name = file.slice(0, -3);
+  const text = readFileSync(join(docsDir, file), "utf8");
+  if (name in docs && name !== "components") docs[name] = text;
+  else docs.components[name] = text;
 }
 
 for (const item of items) write(`${item.name}.json`, item);
@@ -287,4 +309,5 @@ write("bundle.json", {
     raster: readCore("css/raster.css"),
   },
   items,
+  docs,
 });

@@ -38,6 +38,7 @@ describe("props.json", () => {
         expect(KINDS.has(e.kind), `${name}.${e.name}: kind "${e.kind}"`).toBe(true);
         expect(Array.isArray(e.props), `${name}.${e.name}: props`).toBe(true);
         if (e.extends !== undefined) expect(typeof e.extends).toBe("string");
+        if (e.ref !== undefined) expect(/^[A-Z]\w+Element$/.test(e.ref), `${name}.${e.name}: ref "${e.ref}"`).toBe(true);
         if (e.description !== undefined) expect(typeof e.description).toBe("string");
         for (const p of e.props) {
           expect(typeof p.name, `${name}.${e.name}.${p.name}`).toBe("string");

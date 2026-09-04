@@ -19,7 +19,7 @@
   "files": [
     {
       "path": "raster/card.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nconst styles = stylex.create({\n  card: {\n    borderWidth: 0,\n    borderStyle: \"none\",\n    borderRadius: 0,\n    padding: 0,\n    maxWidth: 360,\n    backgroundColor: \"transparent\",\n    boxShadow: \"none\",\n  },\n  inner: {\n    boxSizing: \"border-box\",\n    borderWidth: 0,\n    borderRadius: 0,\n    minHeight: 0,\n    padding: 0,\n    backgroundColor: \"transparent\",\n  },\n  label: {\n    fontSize: 12,\n    fontWeight: 600,\n    color: raster.ink,\n    letterSpacing: \"-0.01em\",\n    display: \"block\",\n    marginBottom: 6,\n  },\n  title: {\n    fontSize: 17,\n    fontWeight: 600,\n    color: raster.ink,\n    letterSpacing: \"-0.02em\",\n    marginTop: 0,\n    marginBottom: 8,\n  },\n  body: {\n    fontSize: 14,\n    color: raster.gray,\n    fontWeight: 500,\n    letterSpacing: \"-0.01em\",\n    lineHeight: 1.6,\n    margin: 0,\n  },\n});\n\nexport const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  function Card({ className, style, ...props }, ref) {\n    const sx = rs([\"rs-card\", className], styles.card);\n    return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n  },\n);\n\nexport function CardInner({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  const sx = rs([\"rs-card-in\", className], styles.inner);\n  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n\nexport function CardLabel({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  const sx = rs([\"rs-card-label\", className], styles.label);\n  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n\nexport function CardTitle({ className, style, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {\n  const sx = rs([\"rs-card-title\", className], styles.title);\n  return <h3 {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n\nexport function CardBody({ className, style, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {\n  const sx = rs([\"rs-card-body\", className], styles.body);\n  return <p {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nconst styles = stylex.create({\n  card: {\n    borderWidth: 0,\n    borderStyle: \"none\",\n    borderRadius: 0,\n    padding: 0,\n    maxWidth: 360,\n    backgroundColor: \"transparent\",\n    boxShadow: \"none\",\n  },\n  inner: {\n    boxSizing: \"border-box\",\n    borderWidth: 0,\n    borderRadius: 0,\n    minHeight: 0,\n    padding: 0,\n    backgroundColor: \"transparent\",\n  },\n  label: {\n    fontSize: 12,\n    fontWeight: 600,\n    color: raster.ink,\n    letterSpacing: \"-0.01em\",\n    display: \"block\",\n    marginBottom: 6,\n  },\n  title: {\n    fontSize: 17,\n    fontWeight: 600,\n    color: raster.ink,\n    letterSpacing: \"-0.02em\",\n    marginTop: 0,\n    marginBottom: 8,\n  },\n  body: {\n    fontSize: 14,\n    color: raster.gray,\n    fontWeight: 500,\n    letterSpacing: \"-0.01em\",\n    lineHeight: 1.6,\n    margin: 0,\n  },\n});\n\nexport const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  function Card({ className, style, ...props }, ref) {\n    const sx = rs([\"rs-card\", className], styles.card);\n    return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n  },\n);\n\nexport const CardInner = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function CardInner(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-card-in\", className], styles.inner);\n  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n\nexport const CardLabel = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function CardLabel(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-card-label\", className], styles.label);\n  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n\nexport const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(function CardTitle(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-card-title\", className], styles.title);\n  return <h3 ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n\nexport const CardBody = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function CardBody(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-card-body\", className], styles.body);\n  return <p ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
       "target": "components/raster/card.tsx"
     },
@@ -44,6 +44,26 @@
       "cssOnly": false,
       "registryDependencies": [
         "raster-lib"
+      ],
+      "aliases": [
+        "Card",
+        "Panel",
+        "Tile"
+      ],
+      "example": "import { Card, CardBody, CardLabel, CardTitle } from \"@noorddev/raster-react\";\n\n<Card>\n  <CardLabel>Case study</CardLabel>\n  <CardTitle>A quieter interface</CardTitle>\n  <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>\n</Card>",
+      "usage": {
+        "use": [
+          "A titled block of copy on the grid: label, title, body.",
+          "CardInner for a padded field inside a Nest."
+        ],
+        "avoid": [
+          "Framed boxes with shadows; Raster cards have no outline.",
+          "Interactive tiles; wrap the title in a Link instead of making the card clickable."
+        ]
+      },
+      "a11y": [
+        "CardTitle renders an <h3>; adjust the heading level with a wrapper when it breaks the outline.",
+        "The ref on Card is forwarded to the <div>."
       ]
     }
   }

@@ -1,0 +1,104 @@
+# Inline form
+
+One field with the submit action inside. The button appears after the input validates.
+
+Category: patterns  
+Name: `inline-form`  
+Also known as: Inline form, Newsletter form, Subscribe form, Single-field form  
+Page: https://getraster.com/components/inline-form/
+
+## When to use
+
+- One value and one action: newsletter, invite by e-mail, join a waitlist.
+- validate to decide when the action appears; the default is a loose e-mail check.
+
+## When not to
+
+- More than one field; use Form with Field.
+- Actions with side effects that need confirmation; the success state is immediate.
+
+## Install
+
+**React package.** Precompiled; no compiler to configure.
+
+```sh
+npm install @noorddev/raster-react
+```
+
+```tsx
+import "@noorddev/raster-react/css";
+import { InlineForm } from "@noorddev/raster-react";
+```
+
+**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+
+```sh
+npx @noorddev/raster-cli add inline-form
+```
+
+**shadcn registry.** Same files, through the shadcn CLI.
+
+```sh
+npx shadcn add https://getraster.com/r/inline-form.json
+```
+
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+
+```html
+<div class="rs-inline-field"><input class="rs-inline-input" placeholder="Your e-mail" /><span class="rs-reveal rs-reveal-in"><button class="rs-btn-primary rs-inline-btn">Subscribe</button></span></div>
+```
+
+## Example
+
+```tsx
+import { InlineForm } from "@noorddev/raster-react";
+
+<InlineForm
+  placeholder="Your e-mail"
+  buttonLabel="Subscribe"
+  inputProps={{ "aria-label": "E-mail", type: "email" }}
+  onSubmit={(email) => subscribe(email)}
+/>
+```
+
+## Props
+
+### InlineForm
+
+One field, one action; the action sits inside the field.
+
+Extends `Omit<FormHTMLAttributes<HTMLFormElement>, "onSubmit">`: every native attribute, `className`, `style`, and event handler passes through.
+
+Forwards `ref` to the `HTMLFormElement`.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `placeholder` | `string` | `"Your e-mail"` |  |
+| `buttonLabel` | `ReactNode` | `"Subscribe"` |  |
+| `successLabel` | `ReactNode` | `"You're on the list"` |  |
+| `validate` | `(value: string) => boolean` | `(v) => /.+@.+\..+/.test(v)` | The action only appears once this returns true. Defaults to a loose e-mail check. |
+| `onSubmit` | `(value: string) => void` |  |  |
+| `inputProps` | `InputHTMLAttributes<HTMLInputElement>` |  |  |
+
+## Keyboard
+
+| Keys | Does |
+| --- | --- |
+| Enter | Submits once the value validates |
+| Tab | Reaches the button only after the value validates |
+
+## Accessibility
+
+- The input has a placeholder only; pass inputProps={{ "aria-label": … }} to name it.
+- The submit button stays out of the tab order (tabIndex -1) until validate returns true.
+- After submit the form is replaced by the successLabel text and a check mark.
+
+## Classes
+
+`rs-inline-field`, `rs-inline-input`, `rs-inline-btn`, `rs-reveal`, `rs-reveal-in`, `rs-subscribed`, `rs-inline-field-btn`
+
+## Dependencies
+
+Registry dependencies: [button](button.md).  
+React: `packages/react/src/components/inline-form.tsx`  
+CSS: `packages/core/css/components/inline-form.css`

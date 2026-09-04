@@ -42,6 +42,26 @@
       "cssOnly": false,
       "registryDependencies": [
         "raster-lib"
+      ],
+      "aliases": [
+        "Badge",
+        "Tag",
+        "Pill",
+        "Status"
+      ],
+      "example": "import { Badge } from \"@noorddev/raster-react\";\n\n<Badge>Recommended</Badge>\n<Badge variant=\"solid\">Delivered</Badge>\n<Badge variant=\"muted\">In progress</Badge>",
+      "usage": {
+        "use": [
+          "A short status or category next to a title.",
+          "solid for done, outline for a recommendation, muted for pending."
+        ],
+        "avoid": [
+          "Counts that update live; announce those elsewhere.",
+          "Clickable filters; use Toggle."
+        ]
+      },
+      "a11y": [
+        "A plain <span>; the text is all there is. Keep it to one or two words."
       ]
     }
   }

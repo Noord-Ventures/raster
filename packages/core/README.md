@@ -38,7 +38,19 @@ The same tokens as JSON: `@noorddev/raster/tokens`. As custom properties: `css/t
 import { catalogComponents, rasterComponents } from "@noorddev/raster";
 ```
 
-Every component as data: name, title, description, category, the classes it uses, its CSS file, its React entry, a markup snippet, and its dependencies. The docs site, the CLI, the shadcn registry, and the test suite all read from it.
+Every component as data: name, title, description, category, the classes it uses, its CSS file, its React entry, a markup snippet, its dependencies, a React example, when to use and avoid it, its keyboard interactions, accessibility notes, and aliases (shadcn/ui, Radix, and common names). The docs site, the CLI, the MCP server, the shadcn registry, and the test suite all read from it.
+
+## Props
+
+```ts
+import props from "@noorddev/raster/props" with { type: "json" };
+```
+
+`props/props.json` lists every export of every component (`RasterPropsJson` in `src/schema.ts`): kind, description, the DOM attribute type the props extend, and each own prop with its type, whether it is required, its default, and its JSDoc. Generated from the React sources by `scripts/build-props.mjs`; never edited by hand.
+
+## Docs for agents
+
+`scripts/build-docs.mjs` writes `registry/docs/`: one markdown page per component (install paths, example, props tables, keyboard, accessibility, classes), `index.md`, `tokens.md`, `guide.md`, and `llms.txt`. The site serves them at `getraster.com/docs/<name>.md` and `getraster.com/llms.txt`; the CLI prints them with `docs <name>`; `@noorddev/raster-mcp` exposes them as tools and resources.
 
 ## Layers
 

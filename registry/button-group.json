@@ -20,7 +20,7 @@
   "files": [
     {
       "path": "raster/button-group.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\nimport type { ButtonProps } from \"./button\";\n\nexport interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst styles = stylex.create({\n  group: {\n    boxSizing: \"border-box\",\n    display: {\n      default: \"inline-flex\",\n      [mq.phone]: \"flex\",\n    },\n    alignItems: \"stretch\",\n    height: raster.controlH,\n    width: {\n      default: null,\n      [mq.phone]: \"100%\",\n    },\n    borderWidth: raster.hairline,\n    borderStyle: \"solid\",\n    borderColor: raster.divider,\n    borderRadius: {\n      default: raster.radiusSm,\n      [mq.phone]: 0,\n    },\n    backgroundColor: raster.divider,\n    gap: raster.hairline,\n    overflow: \"hidden\",\n  },\n});\n\n/** Flush joined actions. One hairline between. Group owns the outer stroke. */\nexport function ButtonGroup({ className, style, children, ...props }: ButtonGroupProps) {\n  const sx = rs([\"rs-btn-group\", className], styles.group);\n  return (\n    <div role=\"group\" {...props} className={sx.className} style={{ ...sx.style, ...style }}>\n      {React.Children.map(children, (child) =>\n        React.isValidElement(child)\n          ? React.cloneElement(child as React.ReactElement<ButtonProps>, { grouped: true })\n          : child,\n      )}\n    </div>\n  );\n}\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\nimport type { ButtonProps } from \"./button\";\n\nexport interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst styles = stylex.create({\n  group: {\n    boxSizing: \"border-box\",\n    display: {\n      default: \"inline-flex\",\n      [mq.phone]: \"flex\",\n    },\n    alignItems: \"stretch\",\n    height: raster.controlH,\n    width: {\n      default: null,\n      [mq.phone]: \"100%\",\n    },\n    borderWidth: raster.hairline,\n    borderStyle: \"solid\",\n    borderColor: raster.divider,\n    borderRadius: {\n      default: raster.radiusSm,\n      [mq.phone]: 0,\n    },\n    backgroundColor: raster.divider,\n    gap: raster.hairline,\n    overflow: \"hidden\",\n  },\n});\n\n/** Flush joined actions. One hairline between. Group owns the outer stroke. */\nexport const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(function ButtonGroup(\n  { className, style, children, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-btn-group\", className], styles.group);\n  return (\n    <div ref={ref} role=\"group\" {...props} className={sx.className} style={{ ...sx.style, ...style }}>\n      {React.Children.map(children, (child) =>\n        React.isValidElement(child)\n          ? React.cloneElement(child as React.ReactElement<ButtonProps>, { grouped: true })\n          : child,\n      )}\n    </div>\n  );\n});\n",
       "type": "registry:component",
       "target": "components/raster/button-group.tsx"
     },
@@ -42,6 +42,36 @@
       "registryDependencies": [
         "button",
         "raster-lib"
+      ],
+      "aliases": [
+        "Button group",
+        "Segmented buttons",
+        "Joined buttons"
+      ],
+      "example": "import { Button, ButtonGroup } from \"@noorddev/raster-react\";\n\n<ButtonGroup aria-label=\"Alignment\">\n  <Button variant=\"ghost\">Left</Button>\n  <Button variant=\"ghost\">Center</Button>\n  <Button variant=\"ghost\">Right</Button>\n</ButtonGroup>",
+      "usage": {
+        "use": [
+          "Two to four related actions that read as one control.",
+          "Ghost buttons; the group owns the outer stroke and the seams."
+        ],
+        "avoid": [
+          "Exclusive selection; use ToggleGroup, which tracks the pressed option.",
+          "Unrelated actions in one row; space them instead."
+        ]
+      },
+      "keyboard": [
+        {
+          "keys": "Tab",
+          "does": "Moves between the buttons"
+        },
+        {
+          "keys": "Enter, Space",
+          "does": "Activates the focused button"
+        }
+      ],
+      "a11y": [
+        "Renders role=\"group\"; pass aria-label to name it.",
+        "Children get grouped, so each Button keeps its own name and focus ring."
       ]
     }
   }

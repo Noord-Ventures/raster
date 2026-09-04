@@ -19,7 +19,7 @@
   "files": [
     {
       "path": "raster/kbd.tsx",
-      "content": "import type * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nconst styles = stylex.create({\n  kbd: {\n    fontFamily: \"ui-monospace, SFMono-Regular, Menlo, monospace\",\n    fontSize: 11,\n    fontWeight: 500,\n    color: raster.gray,\n    backgroundColor: raster.paper,\n    borderWidth: raster.hairline,\n    borderStyle: \"solid\",\n    borderColor: raster.divider,\n    borderBottomWidth: 2,\n    borderRadius: raster.radiusSm,\n    paddingBlock: 2,\n    paddingInline: 6,\n    lineHeight: 1.2,\n  },\n  pair: {\n    display: \"inline-flex\",\n    alignItems: \"center\",\n    gap: 4,\n  },\n});\n\nexport function Kbd({ className, style, ...props }: React.HTMLAttributes<HTMLElement>) {\n  const sx = rs([\"rs-kbd\", className], styles.kbd);\n  return <kbd {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n\nexport function KbdPair({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {\n  const sx = rs([\"rs-kbd-pair\", className], styles.pair);\n  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nconst styles = stylex.create({\n  kbd: {\n    fontFamily: \"ui-monospace, SFMono-Regular, Menlo, monospace\",\n    fontSize: 11,\n    fontWeight: 500,\n    color: raster.gray,\n    backgroundColor: raster.paper,\n    borderWidth: raster.hairline,\n    borderStyle: \"solid\",\n    borderColor: raster.divider,\n    borderBottomWidth: 2,\n    borderRadius: raster.radiusSm,\n    paddingBlock: 2,\n    paddingInline: 6,\n    lineHeight: 1.2,\n  },\n  pair: {\n    display: \"inline-flex\",\n    alignItems: \"center\",\n    gap: 4,\n  },\n});\n\nexport const Kbd = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(function Kbd(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-kbd\", className], styles.kbd);\n  return <kbd ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n\nexport const KbdPair = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function KbdPair(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-kbd-pair\", className], styles.pair);\n  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
       "target": "components/raster/kbd.tsx"
     },
@@ -41,6 +41,26 @@
       "cssOnly": false,
       "registryDependencies": [
         "raster-lib"
+      ],
+      "aliases": [
+        "Kbd",
+        "Keyboard key",
+        "Key cap",
+        "Shortcut"
+      ],
+      "example": "import { Kbd, KbdPair } from \"@noorddev/raster-react\";\n\n<KbdPair><Kbd>⌘</Kbd><Kbd>K</Kbd></KbdPair>",
+      "usage": {
+        "use": [
+          "Showing a shortcut next to a command or in help copy.",
+          "KbdPair to keep a chord together."
+        ],
+        "avoid": [
+          "Code; use Chip.",
+          "Buttons; a key cap is not a control."
+        ]
+      },
+      "a11y": [
+        "Renders a native <kbd>; screen readers read the characters. Spell out modifier symbols in surrounding text when they matter."
       ]
     }
   }

@@ -19,6 +19,8 @@ interface Bundle {
   version: string;
   css: { raster: string };
   items: RegistryItem[];
+  /** Generated markdown docs (registry/docs): guide, index, tokens, and one page per component. */
+  docs?: { guide: string; index: string; tokens: string; components: Record<string, string> };
 }
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -305,4 +307,70 @@ export function tokensJson(): string {
 
 export function snippetFor(name: string): string | undefined {
   return rasterComponents.find((c) => c.name === name)?.snippet;
+}
+
+/**
+ * The markdown page for a component, or one of the general pages
+ * ("guide", "index", "tokens"), from the bundled docs. Undefined when
+ * there is no such page.
+ */
+export function docsFor(name: string): string | undefined {
+  const docs = loadBundle().docs;
+  if (!docs) return undefined;
+  if (name === "guide" || name === "index" || name === "tokens") return docs[name];
+  return docs.components[name];
+}
+
+export interface SearchHit extends ListEntry {
+  aliases: string[];
+  classes: string[];
+  /** Which fields matched, in order of weight: name, title, alias, description, class. */
+  matched: string[];
+}
+
+/**
+ * Catalog components whose name, title, description, aliases, or classes
+ * contain the term (case-insensitive). Name and title hits sort first.
+ */
+export function search(term: string): SearchHit[] {
+  const q = term.trim().toLowerCase();
+  if (!q) return [];
+  const hits: Array<SearchHit & { score: number }> = [];
+  for (const c of catalogComponents) {
+    const matched: string[] = [];
+    let score = 0;
+    if (c.name.includes(q)) {
+      matched.push("name");
+      score += c.name === q ? 100 : 40;
+    }
+    if (c.title.toLowerCase().includes(q)) {
+      matched.push("title");
+      score += 30;
+    }
+    if ((c.aliases ?? []).some((a) => a.toLowerCase().includes(q))) {
+      matched.push("alias");
+      score += 20;
+    }
+    if (c.description.toLowerCase().includes(q)) {
+      matched.push("description");
+      score += 10;
+    }
+    if (c.classes.some((cls) => cls.includes(q))) {
+      matched.push("class");
+      score += 5;
+    }
+    if (matched.length === 0) continue;
+    hits.push({
+      name: c.name,
+      title: c.title,
+      description: c.description,
+      category: c.category,
+      cssOnly: !c.react,
+      aliases: c.aliases ?? [],
+      classes: c.classes,
+      matched,
+      score,
+    });
+  }
+  return hits.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name)).map(({ score: _score, ...hit }) => hit);
 }

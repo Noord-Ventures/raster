@@ -42,6 +42,36 @@
       "registryDependencies": [
         "toggle",
         "raster-lib"
+      ],
+      "aliases": [
+        "Toggle group",
+        "Segmented control",
+        "Exclusive toggles"
+      ],
+      "example": "import { useState } from \"react\";\nimport { ToggleGroup } from \"@noorddev/raster-react\";\n\nconst [align, setAlign] = useState(\"left\");\n\n<ToggleGroup\n  aria-label=\"Alignment\"\n  options={[\n    { value: \"left\", label: \"Left\" },\n    { value: \"center\", label: \"Center\" },\n    { value: \"right\", label: \"Right\" },\n  ]}\n  value={align}\n  onValueChange={setAlign}\n/>",
+      "usage": {
+        "use": [
+          "One of two to five options that should all stay visible: alignment, view mode, period.",
+          "Short labels of equal weight."
+        ],
+        "avoid": [
+          "Many or long options; use Select.",
+          "Multiple selection; use several Toggle buttons."
+        ]
+      },
+      "keyboard": [
+        {
+          "keys": "Tab",
+          "does": "Moves between the options"
+        },
+        {
+          "keys": "Enter, Space",
+          "does": "Selects the focused option"
+        }
+      ],
+      "a11y": [
+        "Renders role=\"group\" of native buttons with aria-pressed; pass aria-label to name the group.",
+        "Controlled with value and onValueChange, or uncontrolled with defaultValue."
       ]
     }
   }

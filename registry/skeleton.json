@@ -19,7 +19,7 @@
   "files": [
     {
       "path": "raster/skeleton.tsx",
-      "content": "import type * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface SkeletonProps extends React.HTMLAttributes<HTMLSpanElement> {\n  width?: number | string;\n  height?: number | string;\n}\n\nconst rsSkel = stylex.keyframes({\n  \"0%\": { opacity: 1 },\n  \"50%\": { opacity: 0.55 },\n  \"100%\": { opacity: 1 },\n});\n\nconst styles = stylex.create({\n  skeleton: {\n    display: \"block\",\n    backgroundColor: raster.dividerSubtle,\n    borderRadius: raster.radiusSm,\n    animationName: {\n      default: rsSkel,\n      [mq.reduce]: \"none\",\n    },\n    animationDuration: \"1.6s\",\n    animationTimingFunction: \"ease-in-out\",\n    animationIterationCount: \"infinite\",\n  },\n});\n\nexport function Skeleton({ width, height = 14, style, className, ...props }: SkeletonProps) {\n  const sx = rs([\"rs-skeleton\", className], styles.skeleton);\n  return (\n    <span\n      aria-hidden=\"true\"\n      {...props}\n      className={sx.className}\n      style={{ width, height, ...sx.style, ...style }}\n    />\n  );\n}\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface SkeletonProps extends React.HTMLAttributes<HTMLSpanElement> {\n  width?: number | string;\n  height?: number | string;\n}\n\nconst rsSkel = stylex.keyframes({\n  \"0%\": { opacity: 1 },\n  \"50%\": { opacity: 0.55 },\n  \"100%\": { opacity: 1 },\n});\n\nconst styles = stylex.create({\n  skeleton: {\n    display: \"block\",\n    backgroundColor: raster.dividerSubtle,\n    borderRadius: raster.radiusSm,\n    animationName: {\n      default: rsSkel,\n      [mq.reduce]: \"none\",\n    },\n    animationDuration: \"1.6s\",\n    animationTimingFunction: \"ease-in-out\",\n    animationIterationCount: \"infinite\",\n  },\n});\n\nexport const Skeleton = React.forwardRef<HTMLSpanElement, SkeletonProps>(function Skeleton(\n  { width, height = 14, style, className, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-skeleton\", className], styles.skeleton);\n  return (\n    <span\n      ref={ref}\n      aria-hidden=\"true\"\n      {...props}\n      className={sx.className}\n      style={{ width, height, ...sx.style, ...style }}\n    />\n  );\n});\n",
       "type": "registry:component",
       "target": "components/raster/skeleton.tsx"
     },
@@ -40,6 +40,27 @@
       "cssOnly": false,
       "registryDependencies": [
         "raster-lib"
+      ],
+      "aliases": [
+        "Skeleton",
+        "Placeholder",
+        "Loading placeholder",
+        "Shimmer"
+      ],
+      "example": "import { Skeleton } from \"@noorddev/raster-react\";\n\n<Skeleton width=\"60%\" />\n<Skeleton width={240} height={14} />",
+      "usage": {
+        "use": [
+          "Holding the shape of content that is about to arrive.",
+          "One line per line of text, at the text's height."
+        ],
+        "avoid": [
+          "Waits longer than a few seconds; show a message.",
+          "Small controls; use Spinner."
+        ]
+      },
+      "a11y": [
+        "aria-hidden; it says nothing. Set aria-busy on the region and announce the load elsewhere.",
+        "The pulse stops under prefers-reduced-motion."
       ]
     }
   }

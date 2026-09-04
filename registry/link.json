@@ -41,6 +41,37 @@
       "cssOnly": false,
       "registryDependencies": [
         "raster-lib"
+      ],
+      "aliases": [
+        "Link",
+        "Anchor",
+        "Text link",
+        "Inline link"
+      ],
+      "example": "import { Link } from \"@noorddev/raster-react\";\n\n<Link href=\"/docs\">A text link</Link>\n<p>Read the <Link underline href=\"/docs\">guide</Link> first.</p>",
+      "usage": {
+        "use": [
+          "Navigation to another page or anchor.",
+          "underline for links inside running copy."
+        ],
+        "avoid": [
+          "Actions that do not change the URL; use Button.",
+          "Bare hrefs with \"click here\" text; the text should name the destination."
+        ]
+      },
+      "keyboard": [
+        {
+          "keys": "Tab",
+          "does": "Moves focus to the link"
+        },
+        {
+          "keys": "Enter",
+          "does": "Follows it"
+        }
+      ],
+      "a11y": [
+        "Renders a native <a>; it needs an href to be focusable.",
+        "2px ink focus ring on :focus-visible."
       ]
     }
   }

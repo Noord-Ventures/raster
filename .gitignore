@@ -6,6 +6,9 @@ dist/
 .turbo/
 out/
 apps/www/public/r/
+apps/www/public/docs/
+apps/www/public/llms.txt
+apps/www/public/llms-full.txt
 apps/www/public/fonts/
 apps/www/public/raster.css
 apps/www/public/starter/

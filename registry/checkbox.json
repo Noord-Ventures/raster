@@ -44,6 +44,37 @@
       "registryDependencies": [
         "raster-lib",
         "icons"
+      ],
+      "aliases": [
+        "Checkbox",
+        "Check box",
+        "Tick box"
+      ],
+      "example": "import { useState } from \"react\";\nimport { Checkbox } from \"@noorddev/raster-react\";\n\nconst [opted, setOpted] = useState(false);\n\n<Checkbox label=\"Brand\" defaultChecked />\n<Checkbox label=\"Send me the newsletter\" checked={opted} onChange={(e) => setOpted(e.target.checked)} />",
+      "usage": {
+        "use": [
+          "Independent on and off choices, alone or in a list.",
+          "Consent and acknowledgement lines."
+        ],
+        "avoid": [
+          "A setting that takes effect immediately; use Switch.",
+          "One choice from many; use Radio."
+        ]
+      },
+      "keyboard": [
+        {
+          "keys": "Tab",
+          "does": "Moves focus to the checkbox"
+        },
+        {
+          "keys": "Space",
+          "does": "Toggles it"
+        }
+      ],
+      "a11y": [
+        "A native <input type=\"checkbox\"> hidden from view inside a <label>; the 16px box mirrors its state.",
+        "label is the accessible name. Without one, pass aria-label.",
+        "Controlled with checked and onChange, or uncontrolled with defaultChecked."
       ]
     }
   }

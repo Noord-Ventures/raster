@@ -2,7 +2,7 @@ import { mkdtempSync, readFileSync, existsSync, rmSync, writeFileSync, mkdirSync
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { add, init, list, loadConfig, resolveWithDependencies } from "../src/lib";
+import { add, docsFor, init, list, loadConfig, resolveWithDependencies, search } from "../src/lib";
 
 let cwd: string;
 
@@ -183,5 +183,59 @@ describe("registry resolution", () => {
       expect(unknown).toEqual([]);
       expect(resolved.length).toBeGreaterThan(0);
     }
+  });
+});
+
+describe("docs", () => {
+  it("prints the bundled markdown page for a component", () => {
+    const page = docsFor("button")!;
+    expect(page).toContain("# Button");
+    expect(page).toContain("npx @noorddev/raster-cli add button");
+    expect(page).toContain('import { Button } from "@noorddev/raster-react"');
+    expect(page).toContain("## Props");
+    expect(page).toContain("## Keyboard");
+  });
+
+  it("serves the guide, the index, and the tokens page", () => {
+    expect(docsFor("guide")).toContain("# Raster guide");
+    expect(docsFor("index")).toContain("# Raster components");
+    expect(docsFor("tokens")).toContain("--bg");
+  });
+
+  it("has a page for every listed component and none for unknown names", () => {
+    for (const entry of list()) expect(docsFor(entry.name), entry.name).toBeTruthy();
+    expect(docsFor("nope")).toBeUndefined();
+  });
+});
+
+describe("search", () => {
+  it("matches names, titles, aliases, descriptions, and classes", () => {
+    expect(search("menu").map((h) => h.name)).toContain("dropdown-menu");
+    expect(search("sonner")[0]?.name).toBe("toast");
+    expect(search("side panel")[0]?.name).toBe("sheet");
+    expect(search("rs-btn-primary").map((h) => h.name)).toContain("button");
+    expect(search("hairline").length).toBeGreaterThan(0);
+    expect(search("   ")).toEqual([]);
+    expect(search("zzzz-nothing")).toEqual([]);
+  });
+
+  it("ranks an exact name first and reports what matched", () => {
+    const hits = search("select");
+    expect(hits[0]?.name).toBe("select");
+    expect(hits[0]?.matched).toContain("name");
+    for (const hit of hits) expect(hit.matched.length).toBeGreaterThan(0);
+  });
+});
+
+describe("list", () => {
+  it("returns plain data for --json", () => {
+    const entries = list();
+    expect(entries.length).toBeGreaterThan(50);
+    for (const entry of entries) {
+      expect(typeof entry.name).toBe("string");
+      expect(typeof entry.category).toBe("string");
+      expect(typeof entry.cssOnly).toBe("boolean");
+    }
+    expect(JSON.parse(JSON.stringify(entries))).toEqual(entries);
   });
 });

@@ -44,6 +44,41 @@
         "dialog",
         "button",
         "raster-lib"
+      ],
+      "aliases": [
+        "Alert dialog",
+        "Confirm dialog",
+        "Confirmation",
+        "Destructive confirm"
+      ],
+      "example": "import { useState } from \"react\";\nimport { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from \"@noorddev/raster-react\";\n\nconst [open, setOpen] = useState(false);\n\n<AlertDialog open={open} onClose={() => setOpen(false)}>\n  <AlertDialogTitle>Delete this workspace?</AlertDialogTitle>\n  <AlertDialogBody>All projects go with it.</AlertDialogBody>\n  <AlertDialogActions>\n    <Button variant=\"ghost\" size=\"sm\" onClick={() => setOpen(false)}>Keep it</Button>\n    <Button size=\"sm\" onClick={remove}>Delete</Button>\n  </AlertDialogActions>\n</AlertDialog>",
+      "usage": {
+        "use": [
+          "Destructive or irreversible actions that need an explicit answer.",
+          "Exactly two actions: keep and proceed."
+        ],
+        "avoid": [
+          "Anything the user may dismiss without answering; use Dialog.",
+          "Informational messages; use Alert or toast."
+        ]
+      },
+      "keyboard": [
+        {
+          "keys": "Tab, Shift + Tab",
+          "does": "Cycles focus between the actions"
+        },
+        {
+          "keys": "Enter, Space",
+          "does": "Activates the focused action"
+        },
+        {
+          "keys": "Escape",
+          "does": "Does nothing; the dialog must be answered"
+        }
+      ],
+      "a11y": [
+        "A native modal <dialog> with role=\"alertdialog\" and closedby=\"none\": Escape and light dismiss are off.",
+        "AlertDialogTitle and AlertDialogBody wire aria-labelledby and aria-describedby like Dialog; focus moves in on open and returns on close."
       ]
     }
   }

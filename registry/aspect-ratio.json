@@ -19,7 +19,7 @@
   "files": [
     {
       "path": "raster/aspect-ratio.tsx",
-      "content": "import type * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Width over height, e.g. 16 / 9. */\n  ratio?: number;\n}\n\nconst styles = stylex.create({\n  box: {\n    position: \"relative\",\n    width: \"100%\",\n    overflow: \"hidden\",\n    borderRadius: raster.radius,\n  },\n});\n\nexport function AspectRatio({ ratio = 16 / 9, style, className, ...props }: AspectRatioProps) {\n  const sx = rs([\"rs-ratio\", className], styles.box);\n  return <div {...props} className={sx.className} style={{ ...sx.style, aspectRatio: ratio, ...style }} />;\n}\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Width over height, e.g. 16 / 9. */\n  ratio?: number;\n}\n\nconst styles = stylex.create({\n  box: {\n    position: \"relative\",\n    width: \"100%\",\n    overflow: \"hidden\",\n    borderRadius: raster.radius,\n  },\n});\n\nexport const AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(function AspectRatio(\n  { ratio = 16 / 9, style, className, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-ratio\", className], styles.box);\n  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, aspectRatio: ratio, ...style }} />;\n});\n",
       "type": "registry:component",
       "target": "components/raster/aspect-ratio.tsx"
     },
@@ -40,6 +40,25 @@
       "cssOnly": false,
       "registryDependencies": [
         "raster-lib"
+      ],
+      "aliases": [
+        "Aspect ratio",
+        "Ratio box",
+        "Media frame"
+      ],
+      "example": "import { AspectRatio } from \"@noorddev/raster-react\";\n\n<AspectRatio ratio={16 / 9}>\n  <img src=\"/cover.jpg\" alt=\"Press hall\" />\n</AspectRatio>",
+      "usage": {
+        "use": [
+          "Images, video, and embeds that must hold a ratio before they load.",
+          "ratio as width over height."
+        ],
+        "avoid": [
+          "Text boxes; let content set the height.",
+          "Avatars; use Avatar."
+        ]
+      },
+      "a11y": [
+        "Layout only; the media inside carries its own alt or title."
       ]
     }
   }

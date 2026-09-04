@@ -44,6 +44,38 @@
       "cssOnly": false,
       "registryDependencies": [
         "raster-lib"
+      ],
+      "aliases": [
+        "Button",
+        "Primary button",
+        "Ghost button",
+        "Secondary button"
+      ],
+      "example": "import { Button } from \"@noorddev/raster-react\";\n\n<Button>Primary action</Button>\n<Button variant=\"ghost\" size=\"sm\">Secondary</Button>\n<Button disabled>Saving…</Button>",
+      "usage": {
+        "use": [
+          "One primary action per view, with ghost for the secondary action.",
+          "Submitting a form or answering a dialog."
+        ],
+        "avoid": [
+          "Navigation that changes the URL; use Link or a nav component.",
+          "On and off state; use Toggle or Switch, which carry aria-pressed and aria-checked."
+        ]
+      },
+      "keyboard": [
+        {
+          "keys": "Tab",
+          "does": "Moves focus to the button"
+        },
+        {
+          "keys": "Enter, Space",
+          "does": "Activates it"
+        }
+      ],
+      "a11y": [
+        "Renders a native <button>; type defaults to \"button\", so pass type=\"submit\" inside a form.",
+        "The visible text is the name. Give icon-only buttons an aria-label.",
+        "2px ink focus ring on :focus-visible. disabled uses the native attribute and 40% opacity; forced colors keep system colors."
       ]
     }
   }

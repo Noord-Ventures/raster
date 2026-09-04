@@ -1,0 +1,99 @@
+# One-time code
+
+One cell per character. Auto-advance, backspace, and paste.
+
+Category: forms  
+Name: `input-otp`  
+Also known as: One-time code, OTP input, InputOTP, PIN input, Verification code  
+Page: https://getraster.com/components/input-otp/
+
+## When to use
+
+- Numeric verification codes from SMS, mail, or an authenticator.
+- onComplete to submit as soon as the last cell fills.
+
+## When not to
+
+- Alphanumeric codes; the cells strip non-digits.
+- Passwords; use Input type="password".
+
+## Install
+
+**React package.** Precompiled; no compiler to configure.
+
+```sh
+npm install @noorddev/raster-react
+```
+
+```tsx
+import "@noorddev/raster-react/css";
+import { InputOTP } from "@noorddev/raster-react";
+```
+
+**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+
+```sh
+npx @noorddev/raster-cli add input-otp
+```
+
+**shadcn registry.** Same files, through the shadcn CLI.
+
+```sh
+npx shadcn add https://getraster.com/r/input-otp.json
+```
+
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+
+```html
+<div class="rs-otp" role="group" aria-label="One-time code"><input class="rs-otp-cell" maxlength="1" value="8" aria-label="Digit 1" /><input class="rs-otp-cell" maxlength="1" value="2" aria-label="Digit 2" /><input class="rs-otp-cell" maxlength="1" aria-label="Digit 3" /><input class="rs-otp-cell" maxlength="1" aria-label="Digit 4" /></div>
+```
+
+## Example
+
+```tsx
+import { InputOTP } from "@noorddev/raster-react";
+
+<InputOTP length={6} aria-label="One-time code" onComplete={(code) => verify(code)} />
+```
+
+## Props
+
+### InputOTP
+
+One cell per character. Auto-advance, backspace, paste.
+
+Extends `Omit<HTMLAttributes<HTMLDivElement>, "onChange">`: every native attribute, `className`, `style`, and event handler passes through.
+
+Forwards `ref` to the `HTMLDivElement`.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `length` | `number` | `6` |  |
+| `onChange` | `(code: string) => void` |  |  |
+| `onComplete` | `(code: string) => void` |  | Called once every cell is filled. |
+| `aria-label` | `string` | `"One-time code"` | Defines a string value that labels the current element. |
+
+## Keyboard
+
+| Keys | Does |
+| --- | --- |
+| Type a digit | Fills the cell and moves to the next |
+| Backspace | Clears the cell; on an empty cell moves back and clears the previous one |
+| Arrow left, Arrow right | Moves between cells |
+| Paste | Fills from the current cell onward |
+
+## Accessibility
+
+- Renders role="group" named by aria-label ("One-time code" by default); each cell is an <input> named "Digit n".
+- inputMode="numeric" and autoComplete="one-time-code" on the first cell let phones offer the code.
+- Inside Field, hint and error reach the group and cells through aria-describedby and aria-invalid.
+
+## Classes
+
+`rs-otp`, `rs-otp-cell`, `rs-otp-cell-invalid`
+
+## Dependencies
+
+Registry dependencies: none.  
+React: `packages/react/src/components/input-otp.tsx`  
+CSS: `packages/core/css/components/input-otp.css`

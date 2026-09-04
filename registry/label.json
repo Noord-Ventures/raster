@@ -19,7 +19,7 @@
   "files": [
     {
       "path": "raster/label.tsx",
-      "content": "import type * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}\n\nconst styles = stylex.create({\n  label: {\n    fontSize: {\n      default: 12,\n      [mq.phone]: raster.controlLabel,\n    },\n    fontWeight: 600,\n    color: raster.gray,\n    letterSpacing: \"-0.01em\",\n    lineHeight: \"16px\",\n  },\n});\n\n/** Label above a control. 12px, secondary ink. */\nexport function Label({ className, style, ...props }: LabelProps) {\n  const sx = rs([\"rs-label\", className], styles.label);\n  return <label {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n}\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}\n\nconst styles = stylex.create({\n  label: {\n    fontSize: {\n      default: 12,\n      [mq.phone]: raster.controlLabel,\n    },\n    fontWeight: 600,\n    color: raster.gray,\n    letterSpacing: \"-0.01em\",\n    lineHeight: \"16px\",\n  },\n});\n\n/** Label above a control. 12px, secondary ink. */\nexport const Label = React.forwardRef<HTMLLabelElement, LabelProps>(function Label(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-label\", className], styles.label);\n  return <label ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
       "target": "components/raster/label.tsx"
     },
@@ -40,6 +40,25 @@
       "cssOnly": false,
       "registryDependencies": [
         "raster-lib"
+      ],
+      "aliases": [
+        "Label",
+        "Form label",
+        "Field label"
+      ],
+      "example": "import { Label } from \"@noorddev/raster-react\";\n\n<Label htmlFor=\"name\">Name</Label>\n<input id=\"name\" className=\"rs-input rs-input-full\" />",
+      "usage": {
+        "use": [
+          "Naming a control that does not take a label prop.",
+          "Custom layouts where the label sits apart from the field."
+        ],
+        "avoid": [
+          "Alongside Input's own label prop; it already renders one.",
+          "As a heading; use the type scale."
+        ]
+      },
+      "a11y": [
+        "Renders a native <label>; pass htmlFor with the control's id so clicks focus the control and the name is exposed."
       ]
     }
   }

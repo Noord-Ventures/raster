@@ -48,6 +48,32 @@
         "input",
         "raster-lib",
         "field"
+      ],
+      "aliases": [
+        "Textarea",
+        "Text area",
+        "Multiline input"
+      ],
+      "example": "import { Textarea } from \"@noorddev/raster-react\";\n\n<Textarea label=\"Notes\" placeholder=\"What should we know?\" rows={4} />",
+      "usage": {
+        "use": [
+          "Free text longer than one line.",
+          "Vertical resize only; the width follows the grid."
+        ],
+        "avoid": [
+          "Single values; use Input.",
+          "Rich text; this is a native textarea."
+        ]
+      },
+      "keyboard": [
+        {
+          "keys": "Tab",
+          "does": "Moves focus to the field; Enter inserts a line break"
+        }
+      ],
+      "a11y": [
+        "A native <textarea> with a generated id; label renders a <label> pointing at it.",
+        "Inside Field, hint and error reach it through aria-describedby and aria-invalid."
       ]
     }
   }

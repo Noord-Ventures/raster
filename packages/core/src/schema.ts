@@ -65,6 +65,8 @@ export interface RasterExport {
   description?: string;
   /** Native element or attribute set the props extend, e.g. "ButtonHTMLAttributes<HTMLButtonElement>". */
   extends?: string;
+  /** Element a forwarded ref resolves to, e.g. "HTMLButtonElement". Absent when the component forwards no ref. */
+  ref?: string;
   props: RasterProp[];
 }
 
