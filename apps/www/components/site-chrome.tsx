@@ -368,9 +368,10 @@ export function SiteChrome() {
         </div>
       </div>
 
-      <button
+      <Button
         ref={navToggleRef}
-        type="button"
+        variant="ghost"
+        grouped
         {...sx("nav-toggle", chrome.navToggle)}
         aria-expanded={open}
         aria-controls="navPanel"
@@ -382,7 +383,7 @@ export function SiteChrome() {
           <span />
           <span />
         </span>
-      </button>
+      </Button>
       <nav
         id="navPanel"
         ref={navPanelRef}

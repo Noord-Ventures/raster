@@ -1,6 +1,6 @@
 # Vlak
 
-Vlak is a minimal design system for product exploration. Its name is Dutch for plane or surface: the field where type, controls, and content are arranged. A 204px module gives that field its structure. The 74 components ship as React, CSS, vendored StyleX source, and machine-readable data.
+Vlak is a minimal design system for product exploration. Its name is Dutch for plane or surface: the field where type, controls, and content are arranged. A modular grid gives that field its structure. The 74 components ship as React, CSS, vendored StyleX source, and machine-readable data.
 
 [vlak.dev](https://vlak.dev) · [github.com/Noord-Ventures/vlak](https://github.com/Noord-Ventures/vlak)
 
@@ -67,6 +67,8 @@ Everything a coding agent needs is machine-readable and served from the same reg
 | MCP server | `npx -y @noorddev/vlak-mcp` (tools: list, search, get component, tokens, install, guide) |
 
 Conventions an agent can rely on: `value` / `defaultValue` / `onValueChange` on every selection component, `className` merges, refs forward to the root element, every interactive component is named, `"use client"` is already applied, and the `rs-*` classes are a stable contract. See [AGENTS.md](AGENTS.md) for working on this repository.
+
+For a practical page-building brief, use [design.md](design.md). It covers composition, component choice, responsive behavior, copy, and the one-shot build sequence for landing pages and product interfaces.
 
 ## System principles
 

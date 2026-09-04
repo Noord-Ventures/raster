@@ -244,7 +244,7 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
   border-top: 1px solid var(--divider-subtle);
 }
 
-/* Mobile: burger + panel replace the corner links. Theme stays in chrome. */
+/* Mobile: burger + panel replace the corner links. */
 .nav-toggle {
   position: fixed; top: 20px; right: 18px; z-index: 210;
   width: 24px; height: 24px; padding: 4px;
@@ -281,7 +281,7 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
   border-bottom: 1px solid var(--divider-subtle);
 }
 
-/* ── Phone (≤640): 44pt hits, safe-area, theme stays in chrome ── */
+/* ── Phone (≤640): one safe-area-aware, 44px chrome row ── */
 @media (max-width: 640px) {
   .logo-wrap {
     top: calc(8px + env(safe-area-inset-top, 0px));
@@ -292,31 +292,24 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
   .site-logo {
     width: 44px; height: 44px; min-width: 44px; min-height: 44px;
   }
-  /* Optical alignment against the 15px Vlak/crumb line. */
+  /* The mark, crumb and menu share one exact vertical centre. */
   .site-logo-mark {
     position: relative;
-    top: 1px;
+    top: 0;
   }
   /* StyleX atomics otherwise keep display:flex — hide the desktop
      row so crumbs / appearance / hamburger are the only chrome. */
   .corner-nav { display: none; }
-  .settings {
-    top: calc(8px + env(safe-area-inset-top, 0px));
-    right: calc(56px + env(safe-area-inset-right, 0px));
-  }
-  .theme-toggle {
-    display: flex; align-items: center; justify-content: center;
-    width: 44px; height: 44px; min-width: 44px; min-height: 44px;
-    padding: 0;
-    overflow: hidden;
-    border-radius: 0;
-  }
-  .nav-toggle {
+  /* Appearance lives in the open menu on phones; never render a second trigger. */
+  .settings { display: none !important; }
+  .nav-toggle.rs-btn-ghost {
     display: flex;
     top: calc(8px + env(safe-area-inset-top, 0px));
     right: calc(8px + env(safe-area-inset-right, 0px));
-    width: 44px; height: 44px; min-width: 44px; min-height: 44px;
-    padding: 0;
+    width: 44px !important; height: 44px; min-width: 44px; min-height: 44px;
+    padding: 0 !important;
+    border: 0;
+    background: transparent;
   }
   .nav-panel {
     top: calc(60px + env(safe-area-inset-top, 0px));
@@ -328,12 +321,12 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
   }
   .nav-panel-appearance { padding: 12px 20px 16px; }
   .site-crumb-bar {
-    height: calc(56px + env(safe-area-inset-top, 0px));
+    height: calc(60px + env(safe-area-inset-top, 0px)) !important;
     padding-top: env(safe-area-inset-top, 0px);
     font-size: 0.9375rem;
     line-height: 1;
     overflow: hidden;
-    align-items: flex-start;
+    align-items: flex-start !important;
     width: auto;
     right: 0;
   }
@@ -347,7 +340,7 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
     height: 44px;
     margin-top: 8px;
     overflow: hidden;
-    padding: 0 calc(108px + env(safe-area-inset-right, 0px)) 0 calc(60px + env(safe-area-inset-left, 0px));
+    padding: 0 calc(60px + env(safe-area-inset-right, 0px)) 0 calc(60px + env(safe-area-inset-left, 0px));
   }
   .site-crumb-bar .rs-crumb-root,
   .site-crumb-bar .site-crumb-root {
@@ -446,12 +439,11 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
 /* Mobile grid (≤480): chrome shifts onto the 25px gutters. */
 @media (max-width: 480px) {
   .logo-wrap { left: calc(8px + env(safe-area-inset-left, 0px)); }
-  .settings { right: calc(56px + env(safe-area-inset-right, 0px)); }
   .nav-toggle { right: calc(8px + env(safe-area-inset-right, 0px)); }
   .nav-panel-link, .nav-panel-appearance { padding-left: 25px; padding-right: 25px; }
   .site-crumb-bar .rs-crumb-bar-inner {
     flex-wrap: nowrap;
-    padding: 0 calc(108px + env(safe-area-inset-right, 0px)) 0 calc(60px + env(safe-area-inset-left, 0px));
+    padding: 0 calc(60px + env(safe-area-inset-right, 0px)) 0 calc(60px + env(safe-area-inset-left, 0px));
   }
   .site-crumb-bar .rs-crumbs { flex-wrap: nowrap; }
 }
