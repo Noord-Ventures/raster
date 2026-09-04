@@ -338,6 +338,14 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
   .nav-panel-appearance .text-stepper .rs-btn-ghost {
     border-radius: var(--radius-sm) !important;
   }
+  .nav-panel-appearance .text-stepper .rs-btn-ghost {
+    flex: 0 0 44px;
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px;
+    min-height: 44px;
+    padding: 0 !important;
+  }
   .site-crumb-bar {
     height: calc(60px + env(safe-area-inset-top, 0px)) !important;
     padding-top: env(safe-area-inset-top, 0px);
