@@ -328,7 +328,7 @@ describe("tokens", () => {
     expect(site).toMatch(/\.preview-box \{[^}]*border-radius: var\(--radius-sm\)/);
     const frames = readFileSync(join(wwwDir, "app/interfaces/interfaces.css"), "utf8");
     expect(frames).toMatch(/\.if-tile \{[^}]*border-radius: 0/);
-    expect(frames).toMatch(/\.if-specimen \{[^}]*border-radius: var\(--radius-sm\)/);
+    expect(frames).toMatch(/\.if-specimen \{[^}]*border-radius: 0/);
     const use = readFileSync(join(wwwDir, "components/examples/use.css"), "utf8");
     expect(use).toMatch(/\.rs-use \{[^}]*border-radius: var\(--radius-sm\)/);
     expect(use).toMatch(/\.rs-scene \{[^}]*border-radius: var\(--radius-sm\)/);
