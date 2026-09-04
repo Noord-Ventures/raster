@@ -1,12 +1,12 @@
 /* ── accordion: generated from packages/react/src/components/accordion.tsx ── */
 .rs-acc{border-top-width:1px;border-top-style:solid;border-top-color:var(--divider)}
 .rs-acc-item{border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider)}
-.rs-acc-summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px;padding-inline:0;min-height:24px;font-size:14.5px;font-weight:600;letter-spacing:-0.01em;color:var(--text)}
+.rs-acc-summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:0.75rem;padding-block:0.875rem;padding-inline:0;min-height:1.5rem;font-size:0.90625rem;font-weight:600;letter-spacing:-0.01em;color:var(--text)}
 .rs-acc-summary::-webkit-details-marker{display:none}
 .rs-acc-summary:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
-@media (max-width: 640px){.rs-acc-summary{min-height:var(--hit);font-size:17px}}
+@media (max-width: 640px){.rs-acc-summary{min-height:var(--hit);font-size:1.0625rem}}
 .rs-acc-chevron{flex-shrink:0;color:var(--text-secondary);transition:transform var(--duration) var(--ease)}
 @media (prefers-reduced-motion: reduce){.rs-acc-chevron{transition:none}}
 .rs-acc-chevron-open{transform:rotate(180deg)}
-.rs-acc-body{padding-top:0;padding-inline-end:0;padding-bottom:16px;padding-inline-start:0;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}
-@media (max-width: 640px){.rs-acc-body{padding-bottom:20px;font-size:16px}}
+.rs-acc-body{padding-top:0;padding-inline-end:0;padding-bottom:1rem;padding-inline-start:0;font-size:0.84375rem;line-height:1.6;color:var(--text-secondary)}
+@media (max-width: 640px){.rs-acc-body{padding-bottom:1.25rem;font-size:1rem}}

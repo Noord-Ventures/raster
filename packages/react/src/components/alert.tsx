@@ -19,13 +19,13 @@ export interface AlertProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "
 const styles = stylex.create({
   alert: {
     display: "flex",
-    gap: 10,
+    gap: "0.625rem",
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderColor: raster.divider,
     borderRadius: raster.radius,
-    paddingBlock: 12,
-    paddingInline: 14,
+    paddingBlock: "0.75rem",
+    paddingInline: "0.875rem",
     alignItems: "flex-start",
   },
   solid: {
@@ -42,7 +42,7 @@ const styles = stylex.create({
   },
   title: {
     display: "block",
-    fontSize: 13.5,
+    fontSize: "0.84375rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
     color: raster.ink,
@@ -51,7 +51,7 @@ const styles = stylex.create({
     color: raster.paper,
   },
   body: {
-    fontSize: 13,
+    fontSize: "0.8125rem",
     lineHeight: 1.55,
     letterSpacing: "-0.01em",
     color: raster.gray,

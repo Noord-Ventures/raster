@@ -8,14 +8,14 @@ const styles = stylex.create({
   multi: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(184px, 1fr))",
-    gap: 20,
+    gap: "1.25rem",
   },
   cap: {
     marginTop: 0,
     marginInlineEnd: 0,
-    marginBottom: 8,
+    marginBottom: "0.5rem",
     marginInlineStart: 0,
-    fontSize: 12,
+    fontSize: "0.75rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
     color: raster.ink,

@@ -28,8 +28,8 @@ const styles = stylex.create({
     flexDirection: "column",
     alignItems: "flex-start",
     gap: {
-      default: 3,
-      [mq.phone]: 6,
+      default: "0.1875rem",
+      [mq.phone]: "0.375rem",
     },
     flexGrow: 1,
     flexShrink: 1,
@@ -39,11 +39,11 @@ const styles = stylex.create({
   dot: {
     boxSizing: "border-box",
     width: {
-      default: 24,
+      default: "1.5rem",
       [mq.phone]: raster.hit,
     },
     height: {
-      default: 24,
+      default: "1.5rem",
       [mq.phone]: raster.hit,
     },
     borderRadius: "50%",
@@ -54,14 +54,14 @@ const styles = stylex.create({
     alignItems: "center",
     justifyContent: "center",
     fontSize: {
-      default: 11,
-      [mq.phone]: 15,
+      default: "0.6875rem",
+      [mq.phone]: "0.9375rem",
     },
     fontWeight: 600,
     color: raster.gray,
     marginBottom: {
-      default: 6,
-      [mq.phone]: 8,
+      default: "0.375rem",
+      [mq.phone]: "0.5rem",
     },
     backgroundColor: raster.paper,
     position: "relative",
@@ -78,7 +78,7 @@ const styles = stylex.create({
   },
   name: {
     fontSize: {
-      default: 13,
+      default: "0.8125rem",
       [mq.phone]: raster.controlFs,
     },
     fontWeight: 600,
@@ -88,8 +88,8 @@ const styles = stylex.create({
   },
   sub: {
     fontSize: {
-      default: 11,
-      [mq.phone]: 13,
+      default: "0.6875rem",
+      [mq.phone]: "0.8125rem",
     },
     fontWeight: 500,
     color: raster.gray,
@@ -98,11 +98,11 @@ const styles = stylex.create({
   line: {
     position: "absolute",
     top: {
-      default: 11.5,
+      default: "0.71875rem",
       [mq.phone]: `calc(${raster.hit} / 2)`,
     },
     insetInlineStart: {
-      default: 24,
+      default: "1.5rem",
       [mq.phone]: raster.hit,
     },
     insetInlineEnd: 0,

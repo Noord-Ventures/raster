@@ -75,11 +75,11 @@ const styles = stylex.create({
   stack: {
     position: "fixed",
     bottom: {
-      default: 20,
+      default: "1.25rem",
       [mq.phone]: 0,
     },
     insetInlineEnd: {
-      default: 20,
+      default: "1.25rem",
       [mq.phone]: 0,
     },
     insetInlineStart: {
@@ -94,14 +94,14 @@ const styles = stylex.create({
       [mq.phone]: "stretch",
     },
     gap: {
-      default: 8,
+      default: "0.5rem",
       [mq.phone]: 0,
     },
   },
   toast: {
     display: "flex",
     alignItems: "flex-start",
-    gap: 10,
+    gap: "0.625rem",
     backgroundColor: raster.paper,
     borderWidth: raster.hairline,
     borderStyle: "solid",
@@ -115,19 +115,19 @@ const styles = stylex.create({
       [mq.phone]: "none",
     },
     paddingTop: {
-      default: 10,
-      [mq.phone]: 16,
+      default: "0.625rem",
+      [mq.phone]: "1rem",
     },
     paddingInline: {
-      default: 14,
-      [mq.phone]: 20,
+      default: "0.875rem",
+      [mq.phone]: "1.25rem",
     },
     paddingBottom: {
-      default: 10,
+      default: "0.625rem",
       [mq.phone]: "calc(16px + env(safe-area-inset-bottom, 0px))",
     },
     maxWidth: {
-      default: 340,
+      default: "21.25rem",
       [mq.phone]: "none",
     },
     width: {
@@ -144,8 +144,8 @@ const styles = stylex.create({
   title: {
     display: "block",
     fontSize: {
-      default: 13,
-      [mq.phone]: 16,
+      default: "0.8125rem",
+      [mq.phone]: "1rem",
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -153,15 +153,15 @@ const styles = stylex.create({
   },
   body: {
     fontSize: {
-      default: 12.5,
-      [mq.phone]: 15,
+      default: "0.78125rem",
+      [mq.phone]: "0.9375rem",
     },
     lineHeight: 1.5,
     letterSpacing: "-0.01em",
     color: raster.gray,
     marginTop: {
       default: 1,
-      [mq.phone]: 4,
+      [mq.phone]: "0.25rem",
     },
     marginBottom: 0,
     marginInline: 0,
@@ -174,19 +174,19 @@ const styles = stylex.create({
     flexShrink: 0,
     marginInlineStart: "auto",
     marginTop: {
-      default: -4,
-      [mq.phone]: -10,
+      default: "-0.25rem",
+      [mq.phone]: "-0.625rem",
     },
     marginInlineEnd: {
-      default: -6,
-      [mq.phone]: -12,
+      default: "-0.375rem",
+      [mq.phone]: "-0.75rem",
     },
     width: {
-      default: 28,
+      default: "1.75rem",
       [mq.phone]: raster.hit,
     },
     height: {
-      default: 28,
+      default: "1.75rem",
       [mq.phone]: raster.hit,
     },
     padding: 0,

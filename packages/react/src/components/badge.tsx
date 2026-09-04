@@ -16,7 +16,7 @@ const variantClass = {
 
 const styles = stylex.create({
   base: {
-    fontSize: 11,
+    fontSize: "0.6875rem",
     fontWeight: 600,
     letterSpacing: "0.02em",
     lineHeight: 1.4,
@@ -27,20 +27,20 @@ const styles = stylex.create({
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderColor: raster.accent,
-    paddingBlock: 3,
-    paddingInline: 10,
+    paddingBlock: "0.1875rem",
+    paddingInline: "0.625rem",
   },
   solid: {
     color: raster.paper,
     backgroundColor: raster.ink,
-    paddingBlock: 4,
-    paddingInline: 11,
+    paddingBlock: "0.25rem",
+    paddingInline: "0.6875rem",
   },
   muted: {
     color: raster.ink,
     backgroundColor: raster.dividerSubtle,
-    paddingBlock: 4,
-    paddingInline: 11,
+    paddingBlock: "0.25rem",
+    paddingInline: "0.6875rem",
   },
 });
 

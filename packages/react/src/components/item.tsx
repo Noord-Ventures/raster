@@ -15,14 +15,14 @@ const styles = stylex.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 16,
+    gap: "1rem",
     minHeight: {
-      default: 48,
+      default: "3rem",
       [mq.phone]: raster.hit,
     },
     paddingBlock: {
-      default: 10,
-      [mq.phone]: 14,
+      default: "0.625rem",
+      [mq.phone]: "0.875rem",
     },
     paddingInline: 0,
     borderBottomWidth: {
@@ -36,7 +36,7 @@ const styles = stylex.create({
   title: {
     margin: 0,
     fontSize: {
-      default: 14,
+      default: "0.875rem",
       [mq.phone]: raster.controlFs,
     },
     fontWeight: 600,
@@ -48,8 +48,8 @@ const styles = stylex.create({
     marginBottom: 0,
     marginInline: 0,
     fontSize: {
-      default: 12.5,
-      [mq.phone]: 14,
+      default: "0.78125rem",
+      [mq.phone]: "0.875rem",
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -57,8 +57,8 @@ const styles = stylex.create({
   },
   meta: {
     fontSize: {
-      default: 12,
-      [mq.phone]: 14,
+      default: "0.75rem",
+      [mq.phone]: "0.875rem",
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",

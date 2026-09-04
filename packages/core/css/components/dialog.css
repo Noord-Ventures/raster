@@ -1,14 +1,14 @@
 /* ── dialog: generated from packages/react/src/components/dialog.tsx ── */
-.rs-dialog{box-sizing:border-box;max-width:320px;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);padding:20px;background-color:var(--bg);color:var(--text);box-shadow:none}
+.rs-dialog{box-sizing:border-box;max-width:20rem;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);padding:1.25rem;background-color:var(--bg);color:var(--text);box-shadow:none}
 .rs-dialog::backdrop{background-color:rgba(0,0,0,0.25);background-color:color-mix(in srgb, var(--bg) 55%, transparent)}
 @media (max-width: 640px){.rs-dialog{max-width:calc(100vw - 32px);width:calc(100vw - 32px);padding:24px 20px}}
-.rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-0.01em;color:var(--text);margin-top:0;margin-inline-end:0;margin-bottom:6px;margin-inline-start:0}
-@media (max-width: 640px){.rs-dialog-title{font-size:18px;margin-bottom:10px}}
-.rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-0.01em;line-height:1.55;margin-top:0;margin-inline-end:0;margin-bottom:16px;margin-inline-start:0}
-@media (max-width: 640px){.rs-dialog-body{font-size:16px;margin-bottom:20px}}
-.rs-dialog-actions{display:flex;justify-content:flex-end;flex-direction:row;align-items:flex-end;gap:8px}
-@media (max-width: 640px){.rs-dialog-actions{flex-direction:column;align-items:stretch;gap:10px}}
-.rs-dialog-close,.rs-drawer-close,.rs-sheet-close{float:inline-end;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin-top:-8px;margin-inline-end:-8px;margin-inline-start:8px;padding:0;border-width:0;border-radius:var(--radius-sm);background-color:transparent;color:var(--text);cursor:pointer}
+.rs-dialog-title{display:block;font-size:0.9375rem;font-weight:600;letter-spacing:-0.01em;color:var(--text);margin-top:0;margin-inline-end:0;margin-bottom:0.375rem;margin-inline-start:0}
+@media (max-width: 640px){.rs-dialog-title{font-size:1.125rem;margin-bottom:0.625rem}}
+.rs-dialog-body{font-size:0.84375rem;color:var(--text-secondary);letter-spacing:-0.01em;line-height:1.55;margin-top:0;margin-inline-end:0;margin-bottom:1rem;margin-inline-start:0}
+@media (max-width: 640px){.rs-dialog-body{font-size:1rem;margin-bottom:1.25rem}}
+.rs-dialog-actions{display:flex;justify-content:flex-end;flex-direction:row;align-items:flex-end;gap:0.5rem}
+@media (max-width: 640px){.rs-dialog-actions{flex-direction:column;align-items:stretch;gap:0.625rem}}
+.rs-dialog-close,.rs-drawer-close,.rs-sheet-close{float:inline-end;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;margin-top:-0.5rem;margin-inline-end:-0.5rem;margin-inline-start:0.5rem;padding:0;border-width:0;border-radius:var(--radius-sm);background-color:transparent;color:var(--text);cursor:pointer}
 .rs-dialog-close:hover,.rs-drawer-close:hover,.rs-sheet-close:hover{background-color:var(--divider)}
 .rs-dialog-close:focus-visible,.rs-drawer-close:focus-visible,.rs-sheet-close:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
-@media (max-width: 640px){.rs-dialog-close,.rs-drawer-close,.rs-sheet-close{width:var(--hit);height:var(--hit);margin-top:-12px;margin-inline-end:-12px}}
+@media (max-width: 640px){.rs-dialog-close,.rs-drawer-close,.rs-sheet-close{width:var(--hit);height:var(--hit);margin-top:-0.75rem;margin-inline-end:-0.75rem}}

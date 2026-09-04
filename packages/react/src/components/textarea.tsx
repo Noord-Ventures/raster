@@ -16,11 +16,11 @@ const styles = stylex.create({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    gap: 8,
+    gap: "0.5rem",
   },
   label: {
     fontSize: {
-      default: 12,
+      default: "0.75rem",
       [mq.phone]: raster.controlLabel,
     },
     fontWeight: 600,
@@ -45,17 +45,17 @@ const styles = stylex.create({
     color: "var(--text)",
     caretColor: "var(--text)",
     fontSize: {
-      default: 14,
-      [mq.phone]: 16,
+      default: "0.875rem",
+      [mq.phone]: "1rem",
     },
     lineHeight: 1.55,
     paddingBlock: {
-      default: 8,
-      [mq.phone]: 12,
+      default: "0.5rem",
+      [mq.phone]: "0.75rem",
     },
     paddingInline: {
-      default: 10,
-      [mq.phone]: 14,
+      default: "0.625rem",
+      [mq.phone]: "0.875rem",
     },
     outlineWidth: {
       default: 0,
@@ -69,8 +69,8 @@ const styles = stylex.create({
     outlineOffset: 2,
     fontFamily: "inherit",
     minHeight: {
-      default: 96,
-      [mq.phone]: 132,
+      default: "6rem",
+      [mq.phone]: "8.25rem",
     },
     resize: "vertical",
     width: "100%",
@@ -87,17 +87,17 @@ const styles = stylex.create({
   feedback: {
     display: "flex",
     alignItems: "center",
-    gap: 8,
+    gap: "0.5rem",
     fontSize: {
-      default: 12,
-      [mq.phone]: 14,
+      default: "0.75rem",
+      [mq.phone]: "0.875rem",
     },
     fontWeight: 500,
     color: raster.gray,
     letterSpacing: "-0.01em",
     lineHeight: "16px",
     margin: 0,
-    minHeight: 16,
+    minHeight: "1rem",
   },
 });
 

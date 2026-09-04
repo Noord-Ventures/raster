@@ -22,7 +22,7 @@ const styles = stylex.create({
     insetInlineStart: 0,
     zIndex: raster.zFloat,
     width: {
-      default: 260,
+      default: "16.25rem",
       [mq.phone]: "min(280px, calc(100vw - 32px))",
     },
     backgroundColor: raster.paper,
@@ -37,10 +37,10 @@ const styles = stylex.create({
       default: "0 8px 24px rgba(0,0,0,0.06)",
       [mq.phone]: "none",
     },
-    padding: 14,
+    padding: "0.875rem",
     fontSize: {
-      default: 13,
-      [mq.phone]: 15,
+      default: "0.8125rem",
+      [mq.phone]: "0.9375rem",
     },
     lineHeight: 1.55,
     letterSpacing: "-0.01em",
@@ -77,7 +77,7 @@ const styles = stylex.create({
       bottom: "100%",
       insetInlineStart: 0,
       insetInlineEnd: 0,
-      height: 8,
+      height: "0.5rem",
     },
   },
 });

@@ -22,13 +22,13 @@
   "files": [
     {
       "path": "raster/form.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {}\n\nconst styles = stylex.create({\n  form: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    gap: {\n      default: 16,\n      [mq.phone]: 20,\n    },\n    maxWidth: {\n      default: 388,\n      [mq.phone]: \"none\",\n    },\n    width: {\n      default: null,\n      [mq.phone]: \"100%\",\n    },\n    margin: 0,\n    color: raster.ink,\n  },\n});\n\n/** Native form. Fields stack. One primary action at the end. */\nexport const Form = React.forwardRef<HTMLFormElement, FormProps>(function Form(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-form\", className], styles.form);\n  return <form ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {}\n\nconst styles = stylex.create({\n  form: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    gap: {\n      default: \"1rem\",\n      [mq.phone]: \"1.25rem\",\n    },\n    maxWidth: {\n      default: 388,\n      [mq.phone]: \"none\",\n    },\n    width: {\n      default: null,\n      [mq.phone]: \"100%\",\n    },\n    margin: 0,\n    color: raster.ink,\n  },\n});\n\n/** Native form. Fields stack. One primary action at the end. */\nexport const Form = React.forwardRef<HTMLFormElement, FormProps>(function Form(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-form\", className], styles.form);\n  return <form ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
       "target": "components/raster/form.tsx"
     },
     {
       "path": "raster/styles/form.css",
-      "content": "/* ── form: generated from packages/react/src/components/form.tsx ── */\n.rs-form{display:flex;flex-direction:column;gap:16px;max-width:388px;margin:0;color:var(--text)}\n@media (max-width: 640px){.rs-form{gap:20px;max-width:none;width:100%}}\n",
+      "content": "/* ── form: generated from packages/react/src/components/form.tsx ── */\n.rs-form{display:flex;flex-direction:column;gap:1rem;max-width:388px;margin:0;color:var(--text)}\n@media (max-width: 640px){.rs-form{gap:1.25rem;max-width:none;width:100%}}\n",
       "type": "registry:file",
       "target": "styles/raster/form.css"
     }

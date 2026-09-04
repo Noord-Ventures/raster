@@ -14,12 +14,12 @@ const styles = stylex.create({
     borderRadius: 0,
     boxShadow: "none",
     paddingBlock: {
-      default: 16,
-      [mq.phone]: 14,
+      default: "1rem",
+      [mq.phone]: "0.875rem",
     },
     paddingInline: {
-      default: 20,
-      [mq.phone]: 16,
+      default: "1.25rem",
+      [mq.phone]: "1rem",
     },
   },
 });

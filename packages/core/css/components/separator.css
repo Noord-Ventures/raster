@@ -1,3 +1,3 @@
 /* ── separator: generated from packages/react/src/components/separator.tsx ── */
-.rs-sep{border-width:0;border-style:none;border-top-width:1px;border-top-style:solid;border-top-color:var(--divider);margin-block:20px;margin-inline:0}
-.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background-color:var(--divider);margin-block:0;margin-inline:12px}
+.rs-sep{border-width:0;border-style:none;border-top-width:1px;border-top-style:solid;border-top-color:var(--divider);margin-block:1.25rem;margin-inline:0}
+.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background-color:var(--divider);margin-block:0;margin-inline:0.75rem}

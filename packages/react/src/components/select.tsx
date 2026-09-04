@@ -12,11 +12,11 @@ const styles = stylex.create({
   root: {
     position: "relative",
     display: "inline-block",
-    minWidth: 180,
+    minWidth: "11.25rem",
     backgroundColor: raster.paper,
   },
   list: {
-    maxHeight: 280,
+    maxHeight: "17.5rem",
     overflowY: "auto",
   },
 });

@@ -30,7 +30,7 @@ export const menuStyles = stylex.create({
       [mq.phone]: "block",
     },
     minWidth: {
-      default: 180,
+      default: "11.25rem",
       [mq.phone]: 0,
     },
     width: {
@@ -43,14 +43,14 @@ export const menuStyles = stylex.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 12,
+    gap: "0.75rem",
     paddingBlock: {
-      default: 9,
-      [mq.phone]: 12,
+      default: "0.5625rem",
+      [mq.phone]: "0.75rem",
     },
     paddingInline: {
-      default: 12,
-      [mq.phone]: 14,
+      default: "0.75rem",
+      [mq.phone]: "0.875rem",
     },
     borderWidth: raster.hairline,
     borderStyle: "solid",
@@ -60,7 +60,7 @@ export const menuStyles = stylex.create({
       [mq.phone]: 0,
     },
     fontSize: {
-      default: 14,
+      default: "0.875rem",
       [mq.phone]: raster.controlFs,
     },
     color: raster.ink,
@@ -100,7 +100,7 @@ export const menuStyles = stylex.create({
       [mq.phone]: 0,
     },
     marginTop: {
-      default: 6,
+      default: "0.375rem",
       [mq.phone]: 0,
     },
     overflow: "hidden",
@@ -121,11 +121,11 @@ export const menuStyles = stylex.create({
     position: "fixed",
     zIndex: raster.zFloat,
     marginTop: 0,
-    minWidth: 160,
+    minWidth: "10rem",
   },
   menuCal: {
     insetInlineEnd: "auto",
-    padding: 12,
+    padding: "0.75rem",
   },
   menuCombobox: {
     position: "absolute",
@@ -133,7 +133,7 @@ export const menuStyles = stylex.create({
     insetInlineStart: 0,
     insetInlineEnd: 0,
     zIndex: raster.zFloat,
-    maxHeight: 240,
+    maxHeight: "15rem",
     overflowY: "auto",
   },
   item: {
@@ -147,15 +147,15 @@ export const menuStyles = stylex.create({
       [mq.phone]: "center",
     },
     paddingBlock: {
-      default: 9,
-      [mq.phone]: 12,
+      default: "0.5625rem",
+      [mq.phone]: "0.75rem",
     },
     paddingInline: {
-      default: 12,
-      [mq.phone]: 14,
+      default: "0.75rem",
+      [mq.phone]: "0.875rem",
     },
     fontSize: {
-      default: 14,
+      default: "0.875rem",
       [mq.phone]: raster.controlFs,
     },
     color: raster.ink,
@@ -208,7 +208,7 @@ export const menuStyles = stylex.create({
     borderTopWidth: raster.hairline,
     borderTopStyle: "solid",
     borderTopColor: raster.divider,
-    marginBlock: 4,
+    marginBlock: "0.25rem",
     marginInline: 0,
   },
 });

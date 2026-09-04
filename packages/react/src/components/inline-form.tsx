@@ -29,7 +29,7 @@ const styles = stylex.create({
       default: "center",
       [mq.phone]: "stretch",
     },
-    gap: 8,
+    gap: "0.5rem",
     width: "100%",
     borderWidth: raster.hairline,
     borderStyle: "solid",
@@ -43,15 +43,15 @@ const styles = stylex.create({
     },
     backgroundColor: "var(--bg)",
     paddingBlock: {
-      default: 4,
+      default: "0.25rem",
       [mq.phone]: 0,
     },
     paddingInlineStart: {
-      default: 12,
+      default: "0.75rem",
       [mq.phone]: 0,
     },
     paddingInlineEnd: {
-      default: 6,
+      default: "0.375rem",
       [mq.phone]: 0,
     },
     minHeight: {
@@ -71,18 +71,18 @@ const styles = stylex.create({
     caretColor: "var(--text)",
     fontFamily: "inherit",
     fontSize: {
-      default: 14,
-      [mq.phone]: 16,
+      default: "0.875rem",
+      [mq.phone]: "1rem",
     },
     letterSpacing: "-0.01em",
     outline: "none",
     paddingBlock: {
-      default: 7,
+      default: "0.4375rem",
       [mq.phone]: 0,
     },
     paddingInline: {
       default: 0,
-      [mq.phone]: 14,
+      [mq.phone]: "0.875rem",
     },
     minHeight: {
       default: null,
@@ -99,12 +99,12 @@ const styles = stylex.create({
     transition: `max-width ${raster.duration} ${raster.ease}, opacity ${raster.duration} ${raster.ease}`,
   },
   revealIn: {
-    maxWidth: 160,
+    maxWidth: "10rem",
     opacity: 1,
   },
   btn: {
     height: {
-      default: 28,
+      default: "1.75rem",
       [mq.phone]: raster.hit,
     },
     minHeight: {
@@ -112,11 +112,11 @@ const styles = stylex.create({
       [mq.phone]: raster.hit,
     },
     paddingInline: {
-      default: 16,
-      [mq.phone]: 16,
+      default: "1rem",
+      [mq.phone]: "1rem",
     },
     fontSize: {
-      default: 12.5,
+      default: "0.78125rem",
       [mq.phone]: raster.controlFs,
     },
     minWidth: 0,
@@ -139,8 +139,8 @@ const styles = stylex.create({
   subscribed: {
     display: "flex",
     alignItems: "center",
-    gap: 8,
-    fontSize: 14,
+    gap: "0.5rem",
+    fontSize: "0.875rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
     color: raster.ink,

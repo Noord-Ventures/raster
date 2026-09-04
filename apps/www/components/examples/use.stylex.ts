@@ -71,7 +71,7 @@ export const useStyles = stylex.create({
     backgroundColor: "transparent",
     fontSize: {
       default: "clamp(28px, 5vw, 42px)",
-      [phone]: 32,
+      [phone]: "2rem",
     },
     fontWeight: 600,
     letterSpacing: "-0.035em",
@@ -95,7 +95,7 @@ export const useStyles = stylex.create({
   },
   kicker: {
     margin: 0,
-    fontSize: 12,
+    fontSize: "0.75rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
     color: "var(--text-secondary)",
@@ -103,8 +103,8 @@ export const useStyles = stylex.create({
   copy: {
     margin: 0,
     fontSize: {
-      default: 14,
-      [phone]: 16,
+      default: "0.875rem",
+      [phone]: "1rem",
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",

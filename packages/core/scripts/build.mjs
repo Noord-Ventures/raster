@@ -80,10 +80,10 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --rs-in: var(--radius-in);
   --rs-chart-spot: var(--text);
   /* Control scale. Desktop is the poster; ≤640 recuts every control to 44pt. */
-  --hit: ${control.desktop.hit}px;
-  --control-h: ${control.desktop.height}px;
-  --control-fs: ${control.desktop.font}px;
-  --control-label: ${control.desktop.label}px;
+  --hit: ${control.desktop.hit / 16}rem;
+  --control-h: ${control.desktop.height / 16}rem;
+  --control-fs: ${control.desktop.font / 16}rem;
+  --control-label: ${control.desktop.label / 16}rem;
 }
 ${darkBlock('[data-theme="dark"]')}
 /* System dark scheme applies until the page decides with data-theme. */
@@ -104,10 +104,10 @@ ${darkBlock(':root:not([data-theme="light"])')}
 /* Phone control scale (≤${control.breakpoint}): 44pt hits, 16px type on fields. */
 @media(max-width:${control.breakpoint}px){
   :root{
-    --hit:${control.phone.hit}px;
-    --control-h:${control.phone.height}px;
-    --control-fs:${control.phone.font}px;
-    --control-label:${control.phone.label}px;
+    --hit:${control.phone.hit / 16}rem;
+    --control-h:${control.phone.height / 16}rem;
+    --control-fs:${control.phone.font / 16}rem;
+    --control-label:${control.phone.label / 16}rem;
   }
 }
 `;

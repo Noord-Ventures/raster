@@ -30,12 +30,12 @@ const styles = stylex.create({
     display: "flex",
     alignItems: "center",
     height: {
-      default: 72,
-      [mq.phone]: 64,
+      default: "4.5rem",
+      [mq.phone]: "4rem",
     },
     fontSize: {
-      default: 13,
-      [mq.phone]: 12,
+      default: "0.8125rem",
+      [mq.phone]: "0.75rem",
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -54,23 +54,23 @@ const styles = stylex.create({
     display: "flex",
     alignItems: "center",
     gap: {
-      default: 20,
-      [mq.at899]: 6,
+      default: "1.25rem",
+      [mq.at899]: "0.375rem",
     },
     width: "100%",
     minWidth: 0,
     paddingTop: 0,
     paddingBottom: 0,
     paddingInlineEnd: {
-      default: 56,
-      [mq.phone]: 50,
-      [mq.mobileGrid]: 56,
+      default: "3.5rem",
+      [mq.phone]: "3.125rem",
+      [mq.mobileGrid]: "3.5rem",
     },
     paddingInlineStart: {
-      default: 76,
+      default: "4.75rem",
       [mq.rail]: raster.pad,
-      [mq.phone]: 62,
-      [mq.mobileGrid]: 74,
+      [mq.phone]: "3.875rem",
+      [mq.mobileGrid]: "4.625rem",
     },
     marginInlineStart: {
       default: null,
@@ -92,7 +92,7 @@ const styles = stylex.create({
       [mq.reduce]: "none",
     },
     fontSize: {
-      default: 13,
+      default: "0.8125rem",
       [mq.phone]: raster.controlFs,
     },
     color: raster.ink,
@@ -107,8 +107,8 @@ const styles = stylex.create({
       [mq.phone]: "wrap",
     },
     gap: {
-      default: 8,
-      [mq.phone]: 6,
+      default: "0.5rem",
+      [mq.phone]: "0.375rem",
     },
   },
   crumbsOn: {
@@ -127,8 +127,8 @@ const styles = stylex.create({
       [mq.phone]: "center",
     },
     gap: {
-      default: 8,
-      [mq.phone]: 6,
+      default: "0.5rem",
+      [mq.phone]: "0.375rem",
     },
   },
   root: {

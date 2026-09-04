@@ -14,13 +14,13 @@ const styles = stylex.create({
     display: "flex",
     flexDirection: "column",
     gap: {
-      default: 8,
-      [mq.phone]: 8,
+      default: "0.5rem",
+      [mq.phone]: "0.5rem",
     },
   },
   label: {
     fontSize: {
-      default: 12,
+      default: "0.75rem",
       [mq.phone]: raster.controlLabel,
     },
     fontWeight: 600,
@@ -31,8 +31,8 @@ const styles = stylex.create({
   hint: {
     margin: 0,
     fontSize: {
-      default: 12,
-      [mq.phone]: 14,
+      default: "0.75rem",
+      [mq.phone]: "0.875rem",
     },
     fontWeight: 500,
     color: raster.gray,
@@ -42,8 +42,8 @@ const styles = stylex.create({
   error: {
     margin: 0,
     fontSize: {
-      default: 12,
-      [mq.phone]: 14,
+      default: "0.75rem",
+      [mq.phone]: "0.875rem",
     },
     fontWeight: 500,
     color: raster.ink,

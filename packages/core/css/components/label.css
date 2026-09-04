@@ -1,3 +1,3 @@
 /* ── label: generated from packages/react/src/components/label.tsx ── */
-.rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-0.01em;line-height:16px}
+.rs-label{font-size:0.75rem;font-weight:600;color:var(--text-secondary);letter-spacing:-0.01em;line-height:16px}
 @media (max-width: 640px){.rs-label{font-size:var(--control-label)}}

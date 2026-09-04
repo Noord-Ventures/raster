@@ -98,7 +98,7 @@ const styles = stylex.create({
     borderStyle: "solid",
     borderColor: raster.divider,
     borderRadius: "var(--rs-in)",
-    minHeight: 72,
+    minHeight: "4.5rem",
     backgroundColor: raster.paper,
     display: "flex",
     alignItems: "flex-end",

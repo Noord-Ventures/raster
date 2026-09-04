@@ -44,12 +44,12 @@ const styles = stylex.create({
     display: "flex",
     alignItems: "center",
     paddingInline: {
-      default: 10,
-      [mq.phone]: 14,
+      default: "0.625rem",
+      [mq.phone]: "0.875rem",
     },
     paddingBlock: 0,
     fontSize: {
-      default: 13,
+      default: "0.8125rem",
       [mq.phone]: raster.controlFs,
     },
     fontWeight: 500,

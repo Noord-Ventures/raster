@@ -14,7 +14,7 @@ const styles = stylex.create({
     display: "flex",
     alignItems: "center",
     gap: {
-      default: 22,
+      default: "1.375rem",
       [mq.phone]: 0,
     },
     flexWrap: {
@@ -37,10 +37,10 @@ const styles = stylex.create({
     },
     paddingInline: {
       default: null,
-      [mq.phone]: 12,
+      [mq.phone]: "0.75rem",
     },
     fontSize: {
-      default: 14,
+      default: "0.875rem",
       [mq.phone]: raster.controlFs,
     },
     fontWeight: 500,

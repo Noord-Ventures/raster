@@ -32,10 +32,10 @@ const styles = stylex.create({
       [mq.phone]: `calc(100% + 2 * ${raster.pad})`,
     },
     borderCollapse: "collapse",
-    marginTop: 16,
-    marginBottom: 24,
+    marginTop: "1rem",
+    marginBottom: "1.5rem",
     marginInlineStart: {
-      default: -20,
+      default: "-1.25rem",
       [mq.phone]: `calc(-1 * ${raster.pad})`,
     },
     marginInlineEnd: {
@@ -43,8 +43,8 @@ const styles = stylex.create({
       [mq.phone]: `calc(-1 * ${raster.pad})`,
     },
     fontSize: {
-      default: 14,
-      [mq.phone]: 16,
+      default: "0.875rem",
+      [mq.phone]: "1rem",
     },
   },
   th: {
@@ -56,24 +56,24 @@ const styles = stylex.create({
     color: raster.ink,
     letterSpacing: "-0.01em",
     paddingTop: {
-      default: 10,
-      [mq.phone]: 14,
+      default: "0.625rem",
+      [mq.phone]: "0.875rem",
     },
     paddingInlineEnd: {
-      default: 16,
-      [mq.phone]: 12,
+      default: "1rem",
+      [mq.phone]: "0.75rem",
       ":last-child": {
         default: 20,
         [mq.phone]: raster.pad,
       },
     },
     paddingBottom: {
-      default: 10,
-      [mq.phone]: 14,
+      default: "0.625rem",
+      [mq.phone]: "0.875rem",
     },
     paddingInlineStart: {
-      default: 12,
-      [mq.phone]: 12,
+      default: "0.75rem",
+      [mq.phone]: "0.75rem",
       ":first-child": {
         default: 20,
         [mq.phone]: raster.pad,
@@ -83,30 +83,30 @@ const styles = stylex.create({
     borderBottomStyle: "solid",
     borderBottomColor: raster.divider,
     fontSize: {
-      default: 13,
-      [mq.phone]: 15,
+      default: "0.8125rem",
+      [mq.phone]: "0.9375rem",
     },
   },
   td: {
     paddingTop: {
-      default: 10,
-      [mq.phone]: 14,
+      default: "0.625rem",
+      [mq.phone]: "0.875rem",
     },
     paddingInlineEnd: {
-      default: 16,
-      [mq.phone]: 12,
+      default: "1rem",
+      [mq.phone]: "0.75rem",
       ":last-child": {
         default: 20,
         [mq.phone]: raster.pad,
       },
     },
     paddingBottom: {
-      default: 10,
-      [mq.phone]: 14,
+      default: "0.625rem",
+      [mq.phone]: "0.875rem",
     },
     paddingInlineStart: {
-      default: 12,
-      [mq.phone]: 12,
+      default: "0.75rem",
+      [mq.phone]: "0.75rem",
       ":first-child": {
         default: 20,
         [mq.phone]: raster.pad,
@@ -121,7 +121,7 @@ const styles = stylex.create({
     verticalAlign: "top",
     fontSize: {
       default: null,
-      [mq.phone]: 16,
+      [mq.phone]: "1rem",
     },
     textAlign: {
       default: null,
@@ -144,8 +144,8 @@ const styles = stylex.create({
     cursor: "pointer",
     display: "inline-flex",
     alignItems: "center",
-    gap: 5,
-    minHeight: 24,
+    gap: "0.3125rem",
+    minHeight: "1.5rem",
     outlineWidth: {
       default: null,
       ":focus-visible": 2,
@@ -172,11 +172,11 @@ const styles = stylex.create({
     color: raster.ink,
   },
   empty: {
-    paddingTop: 24,
-    paddingBottom: 24,
-    paddingInline: 20,
+    paddingTop: "1.5rem",
+    paddingBottom: "1.5rem",
+    paddingInline: "1.25rem",
     textAlign: "center",
-    fontSize: 13,
+    fontSize: "0.8125rem",
     letterSpacing: "-0.01em",
     color: raster.gray,
   },

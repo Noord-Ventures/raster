@@ -11,7 +11,7 @@ export interface CiteBoxProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const styles = stylex.create({
   cite: {
-    fontSize: 10.5,
+    fontSize: "0.65625rem",
     fontWeight: 600,
     letterSpacing: 0,
     lineHeight: 0,
@@ -29,8 +29,8 @@ const styles = stylex.create({
   refs: {
     listStyle: "none",
     counterReset: "ref",
-    marginTop: 4,
-    marginBottom: 8,
+    marginTop: "0.25rem",
+    marginBottom: "0.5rem",
     marginInlineStart: 0,
     marginInlineEnd: 0,
     padding: 0,
@@ -38,9 +38,9 @@ const styles = stylex.create({
   item: {
     counterIncrement: "ref",
     position: "relative",
-    paddingTop: 10,
-    paddingBottom: 10,
-    fontSize: 13,
+    paddingTop: "0.625rem",
+    paddingBottom: "0.625rem",
+    fontSize: "0.8125rem",
     fontWeight: 500,
     lineHeight: 1.65,
     color: raster.gray,
@@ -58,11 +58,11 @@ const styles = stylex.create({
     "::before": {
       content: "counter(ref)",
       position: "absolute",
-      insetInlineStart: -16,
-      top: 11,
-      width: 12,
+      insetInlineStart: "-1rem",
+      top: "0.6875rem",
+      width: "0.75rem",
       textAlign: "end",
-      fontSize: 11,
+      fontSize: "0.6875rem",
       fontWeight: 600,
       color: "var(--accent)",
     },
@@ -73,7 +73,7 @@ const styles = stylex.create({
   },
   doi: {
     fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
-    fontSize: 11,
+    fontSize: "0.6875rem",
     color: {
       default: raster.gray,
       ":hover": "var(--text)",
@@ -94,20 +94,20 @@ const styles = stylex.create({
     borderColor: raster.divider,
     borderRadius: raster.radius,
     padding: {
-      default: 20,
+      default: "1.25rem",
       [mq.phone]: "14px 16px",
     },
-    marginTop: 8,
+    marginTop: "0.5rem",
   },
   boxLabel: {
-    fontSize: 12,
+    fontSize: "0.75rem",
     fontWeight: 600,
     color: raster.gray,
     letterSpacing: "-0.01em",
-    marginBottom: 8,
+    marginBottom: "0.5rem",
   },
   boxText: {
-    fontSize: 13,
+    fontSize: "0.8125rem",
     fontWeight: 500,
     color: raster.gray,
     lineHeight: 1.7,

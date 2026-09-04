@@ -1,11 +1,11 @@
 /* ── radio: generated from packages/react/src/components/radio.tsx ── */
-.rs-radio{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-0.01em;min-height:24px}
-@media (max-width: 640px){.rs-radio{gap:12px;font-size:17px;min-height:var(--hit)}}
-.rs-radio-dot{width:16px;height:16px;border-radius:50%;border-width:1.5px;border-style:solid;border-color:var(--control-border);position:relative;flex-shrink:0;box-sizing:border-box}
-@media (max-width: 640px){.rs-radio-dot{width:22px;height:22px}}
+.rs-radio{display:flex;align-items:center;gap:0.5625rem;font-size:0.875rem;color:var(--text);letter-spacing:-0.01em;min-height:1.5rem}
+@media (max-width: 640px){.rs-radio{gap:0.75rem;font-size:1.0625rem;min-height:var(--hit)}}
+.rs-radio-dot{width:1rem;height:1rem;border-radius:50%;border-width:1.5px;border-style:solid;border-color:var(--control-border);position:relative;flex-shrink:0;box-sizing:border-box}
+@media (max-width: 640px){.rs-radio-dot{width:1.375rem;height:1.375rem}}
 @media (forced-colors: active){.rs-radio-dot{border-color:CanvasText}}
 .rs-radio-on{border-color:var(--text)}
 @media (forced-colors: active){.rs-radio-on{border-color:Highlight}}
-.rs-radio-fill{position:absolute;inset:3px;border-radius:50%;background-color:var(--text);forced-color-adjust:none}
-@media (max-width: 640px){.rs-radio-fill{inset:5px}}
+.rs-radio-fill{position:absolute;inset:0.1875rem;border-radius:50%;background-color:var(--text);forced-color-adjust:none}
+@media (max-width: 640px){.rs-radio-fill{inset:0.3125rem}}
 @media (forced-colors: active){.rs-radio-fill{background-color:Highlight}}

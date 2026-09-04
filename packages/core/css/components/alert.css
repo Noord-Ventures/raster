@@ -1,9 +1,9 @@
 /* ── alert: generated from packages/react/src/components/alert.tsx ── */
-.rs-alert{display:flex;gap:10px;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);padding-block:12px;padding-inline:14px;align-items:flex-start}
+.rs-alert{display:flex;gap:0.625rem;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);padding-block:0.75rem;padding-inline:0.875rem;align-items:flex-start}
 .rs-alert-solid{background-color:var(--text);border-color:var(--text)}
 .rs-alert-icon{flex-shrink:0;margin-top:1px;color:var(--text)}
 .rs-alert-icon-solid{color:var(--bg)}
-.rs-alert-title{display:block;font-size:13.5px;font-weight:600;letter-spacing:-0.01em;color:var(--text)}
+.rs-alert-title{display:block;font-size:0.84375rem;font-weight:600;letter-spacing:-0.01em;color:var(--text)}
 .rs-alert-title-solid{color:var(--bg)}
-.rs-alert-body{font-size:13px;line-height:1.55;letter-spacing:-0.01em;color:var(--text-secondary);margin-top:2px;margin-bottom:0;margin-inline:0}
+.rs-alert-body{font-size:0.8125rem;line-height:1.55;letter-spacing:-0.01em;color:var(--text-secondary);margin-top:2px;margin-bottom:0;margin-inline:0}
 .rs-alert-body-solid{color:var(--bg)}

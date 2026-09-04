@@ -1,4 +1,4 @@
 /* ── scroll-area: generated from packages/react/src/components/scroll-area.tsx ── */
-.rs-scroll{overflow-y:auto;scrollbar-width:none;mask-image:linear-gradient(to bottom, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);padding-block:12px;padding-inline:0;color:var(--text)}
+.rs-scroll{overflow-y:auto;scrollbar-width:none;mask-image:linear-gradient(to bottom, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);padding-block:0.75rem;padding-inline:0;color:var(--text)}
 .rs-scroll::-webkit-scrollbar{display:none}
 .rs-scroll:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}

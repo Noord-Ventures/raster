@@ -10,7 +10,7 @@ export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 const styles = stylex.create({
   hairline: {
-    fontSize: 14,
+    fontSize: "0.875rem",
     color: "var(--accent)",
     textDecoration: "none",
     fontWeight: 500,

@@ -16,18 +16,18 @@ export interface ThemeToggleProps
 const styles = stylex.create({
   toggle: {
     position: "fixed",
-    top: 24,
+    top: "1.5rem",
     insetInlineEnd: {
-      default: 20,
-      [mq.mobileGrid]: 25,
+      default: "1.25rem",
+      [mq.mobileGrid]: "1.5625rem",
     },
     zIndex: raster.zSticky,
     width: {
-      default: 24,
+      default: "1.5rem",
       [mq.phone]: raster.hit,
     },
     height: {
-      default: 24,
+      default: "1.5rem",
       [mq.phone]: raster.hit,
     },
     minWidth: {
@@ -39,8 +39,8 @@ const styles = stylex.create({
       [mq.phone]: raster.hit,
     },
     padding: {
-      default: 4,
-      [mq.phone]: 12,
+      default: "0.25rem",
+      [mq.phone]: "0.75rem",
     },
     display: "flex",
     alignItems: "center",
@@ -81,8 +81,8 @@ const styles = stylex.create({
     filter: "none",
   },
   mark: {
-    width: 16,
-    height: 16,
+    width: "1rem",
+    height: "1rem",
     display: "block",
     flexShrink: 0,
   },

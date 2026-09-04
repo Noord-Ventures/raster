@@ -24,7 +24,7 @@ const styles = stylex.create({
     height: "100dvh",
     maxHeight: "none",
     width: {
-      default: 360,
+      default: "22.5rem",
       [mq.phone]: "100%",
     },
     maxWidth: {
@@ -39,8 +39,8 @@ const styles = stylex.create({
     borderStartEndRadius: 0,
     borderEndEndRadius: 0,
     borderEndStartRadius: raster.radiusSm,
-    paddingBlock: 24,
-    paddingInline: 20,
+    paddingBlock: "1.5rem",
+    paddingInline: "1.25rem",
     backgroundColor: raster.paper,
     color: raster.ink,
     boxShadow: "none",
@@ -62,21 +62,21 @@ const styles = stylex.create({
   title: {
     display: "block",
     fontSize: {
-      default: 15,
-      [mq.phone]: 18,
+      default: "0.9375rem",
+      [mq.phone]: "1.125rem",
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
     color: raster.ink,
     marginTop: 0,
     marginInlineEnd: 0,
-    marginBottom: 6,
+    marginBottom: "0.375rem",
     marginInlineStart: 0,
   },
   body: {
     fontSize: {
-      default: 13.5,
-      [mq.phone]: 16,
+      default: "0.84375rem",
+      [mq.phone]: "1rem",
     },
     lineHeight: 1.6,
     letterSpacing: "-0.01em",

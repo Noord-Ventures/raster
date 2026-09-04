@@ -8,7 +8,7 @@ export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> 
 const styles = stylex.create({
   label: {
     fontSize: {
-      default: 12,
+      default: "0.75rem",
       [mq.phone]: raster.controlLabel,
     },
     fontWeight: 600,

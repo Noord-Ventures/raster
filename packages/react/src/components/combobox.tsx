@@ -28,7 +28,7 @@ const styles = stylex.create({
       [mq.phone]: "block",
     },
     minWidth: {
-      default: 200,
+      default: "12.5rem",
       [mq.phone]: 0,
     },
     width: {
@@ -39,11 +39,11 @@ const styles = stylex.create({
   empty: {
     padding: {
       default: "10px 12px",
-      [mq.phone]: 14,
+      [mq.phone]: "0.875rem",
     },
     fontSize: {
-      default: 13,
-      [mq.phone]: 15,
+      default: "0.8125rem",
+      [mq.phone]: "0.9375rem",
     },
     letterSpacing: "-0.01em",
     color: raster.gray,

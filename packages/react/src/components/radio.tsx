@@ -57,28 +57,28 @@ const styles = stylex.create({
     display: "flex",
     alignItems: "center",
     gap: {
-      default: 9,
-      [mq.phone]: 12,
+      default: "0.5625rem",
+      [mq.phone]: "0.75rem",
     },
     fontSize: {
-      default: 14,
-      [mq.phone]: 17,
+      default: "0.875rem",
+      [mq.phone]: "1.0625rem",
     },
     color: raster.ink,
     letterSpacing: "-0.01em",
     minHeight: {
-      default: 24,
+      default: "1.5rem",
       [mq.phone]: raster.hit,
     },
   },
   dot: {
     width: {
-      default: 16,
-      [mq.phone]: 22,
+      default: "1rem",
+      [mq.phone]: "1.375rem",
     },
     height: {
-      default: 16,
-      [mq.phone]: 22,
+      default: "1rem",
+      [mq.phone]: "1.375rem",
     },
     borderRadius: "50%",
     borderWidth: 1.5,
@@ -100,8 +100,8 @@ const styles = stylex.create({
   fill: {
     position: "absolute",
     inset: {
-      default: 3,
-      [mq.phone]: 5,
+      default: "0.1875rem",
+      [mq.phone]: "0.3125rem",
     },
     borderRadius: "50%",
     backgroundColor: {

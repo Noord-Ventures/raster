@@ -21,7 +21,7 @@ const styles = stylex.create({
     position: "relative",
     height: {
       default: 2,
-      [mq.phone]: 4,
+      [mq.phone]: "0.25rem",
     },
     backgroundColor: raster.divider,
     borderRadius: {
@@ -29,8 +29,8 @@ const styles = stylex.create({
       [mq.phone]: 0,
     },
     marginBlock: {
-      default: 11,
-      [mq.phone]: 20,
+      default: "0.6875rem",
+      [mq.phone]: "1.25rem",
     },
     marginInline: 0,
   },
@@ -51,12 +51,12 @@ const styles = stylex.create({
     top: "50%",
     transform: "translate(-50%, -50%)",
     width: {
-      default: 14,
-      [mq.phone]: 22,
+      default: "0.875rem",
+      [mq.phone]: "1.375rem",
     },
     height: {
-      default: 14,
-      [mq.phone]: 22,
+      default: "0.875rem",
+      [mq.phone]: "1.375rem",
     },
     borderRadius: {
       default: "50%",
@@ -82,12 +82,12 @@ const styles = stylex.create({
     insetInlineEnd: 0,
     // 24px tall on desktop, 44px on phones: the hit area, not the 2px track.
     top: {
-      default: -11,
-      [mq.phone]: -20,
+      default: "-0.6875rem",
+      [mq.phone]: "-1.25rem",
     },
     bottom: {
-      default: -11,
-      [mq.phone]: -20,
+      default: "-0.6875rem",
+      [mq.phone]: "-1.25rem",
     },
     width: "100%",
     height: "auto",

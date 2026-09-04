@@ -87,14 +87,14 @@
 }
 .rs-use-kicker {
   margin: 0;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: -.01em;
   color: var(--text-secondary);
 }
 .rs-use-copy {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: -.01em;
   line-height: 1.45;
@@ -139,8 +139,8 @@
     border-right: none;
     border-bottom: 1px solid var(--divider);
     min-height: 88px;
-    font-size: 32px;
+    font-size: 2rem;
   }
   .rs-use-actions { flex-direction: column; align-items: stretch; width: 100%; }
-  .rs-use-copy { font-size: 16px; }
+  .rs-use-copy { font-size: 1rem; }
 }

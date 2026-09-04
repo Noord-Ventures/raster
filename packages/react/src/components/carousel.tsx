@@ -57,22 +57,22 @@ const styles = stylex.create({
   nav: {
     display: "flex",
     gap: {
-      default: 5,
-      [mq.phone]: 8,
+      default: "0.3125rem",
+      [mq.phone]: "0.5rem",
     },
     marginTop: {
-      default: 10,
-      [mq.phone]: 14,
+      default: "0.625rem",
+      [mq.phone]: "0.875rem",
     },
   },
   page: {
     boxSizing: "border-box",
     width: {
-      default: 26,
+      default: "1.625rem",
       [mq.phone]: raster.hit,
     },
     height: {
-      default: 26,
+      default: "1.625rem",
       [mq.phone]: raster.hit,
     },
     minWidth: {
@@ -91,7 +91,7 @@ const styles = stylex.create({
     alignItems: "center",
     justifyContent: "center",
     fontSize: {
-      default: 13,
+      default: "0.8125rem",
       [mq.phone]: raster.controlFs,
     },
     color: {

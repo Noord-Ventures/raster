@@ -1,3 +1,3 @@
 /* ── select: generated from packages/react/src/components/select.tsx ── */
-.rs-select{position:relative;display:inline-block;min-width:180px;background-color:var(--bg)}
-.rs-menu.rs-select-list{max-height:280px;overflow-y:auto}
+.rs-select{position:relative;display:inline-block;min-width:11.25rem;background-color:var(--bg)}
+.rs-menu.rs-select-list{max-height:17.5rem;overflow-y:auto}

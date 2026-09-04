@@ -32,7 +32,7 @@ const styles = stylex.create({
   handle: {
     flexShrink: 0,
     width: {
-      default: 9,
+      default: "0.5625rem",
       [mq.phone]: "auto",
     },
     height: {
@@ -41,18 +41,18 @@ const styles = stylex.create({
     },
     marginTop: {
       default: 0,
-      [mq.phone]: -4,
+      [mq.phone]: "-0.25rem",
     },
     marginBottom: {
       default: 0,
-      [mq.phone]: -4,
+      [mq.phone]: "-0.25rem",
     },
     marginInlineStart: {
-      default: -4,
+      default: "-0.25rem",
       [mq.phone]: 0,
     },
     marginInlineEnd: {
-      default: -4,
+      default: "-0.25rem",
       [mq.phone]: 0,
     },
     position: "relative",
@@ -86,7 +86,7 @@ const styles = stylex.create({
       content: '""',
       position: "absolute",
       insetInlineStart: {
-        default: 4,
+        default: "0.25rem",
         [mq.phone]: 0,
       },
       insetInlineEnd: {

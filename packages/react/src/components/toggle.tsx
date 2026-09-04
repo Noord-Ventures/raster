@@ -18,9 +18,9 @@ const styles = stylex.create({
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: 6,
+    gap: "0.375rem",
     height: {
-      default: 32,
+      default: "2rem",
       [mq.phone]: raster.hit,
     },
     minHeight: {
@@ -28,16 +28,16 @@ const styles = stylex.create({
       [mq.phone]: raster.hit,
     },
     minWidth: {
-      default: 32,
+      default: "2rem",
       [mq.phone]: raster.hit,
     },
     paddingBlock: 0,
     paddingInline: {
-      default: 10,
-      [mq.phone]: 14,
+      default: "0.625rem",
+      [mq.phone]: "0.875rem",
     },
     fontSize: {
-      default: 13,
+      default: "0.8125rem",
       [mq.phone]: raster.controlFs,
     },
     fontWeight: 500,
@@ -103,7 +103,7 @@ const styles = stylex.create({
     alignItems: "stretch",
     boxSizing: "border-box",
     height: {
-      default: 32,
+      default: "2rem",
       [mq.phone]: raster.hit,
     },
     width: {

@@ -20,15 +20,15 @@ const AvatarRowContext = React.createContext(false);
 
 const styles = stylex.create({
   avatar: {
-    width: 32,
-    height: 32,
+    width: "2rem",
+    height: "2rem",
     borderRadius: "50%",
     backgroundColor: raster.dividerSubtle,
     color: raster.ink,
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 12,
+    fontSize: "0.75rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
     overflow: "hidden",
@@ -36,14 +36,14 @@ const styles = stylex.create({
     userSelect: "none",
   },
   sm: {
-    width: 24,
-    height: 24,
-    fontSize: 10,
+    width: "1.5rem",
+    height: "1.5rem",
+    fontSize: "0.625rem",
   },
   lg: {
-    width: 48,
-    height: 48,
-    fontSize: 16,
+    width: "3rem",
+    height: "3rem",
+    fontSize: "1rem",
   },
   image: {
     width: "100%",
@@ -58,7 +58,7 @@ const styles = stylex.create({
     borderStyle: "solid",
     borderColor: raster.paper,
     marginInlineStart: {
-      default: -8,
+      default: "-0.5rem",
       ":first-child": 0,
     },
   },

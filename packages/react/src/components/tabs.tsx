@@ -30,7 +30,7 @@ const styles = stylex.create({
       [mq.phone]: "stretch",
     },
     gap: {
-      default: 22,
+      default: "1.375rem",
       [mq.phone]: 0,
     },
     width: {
@@ -38,7 +38,7 @@ const styles = stylex.create({
       [mq.phone]: "100%",
     },
     maxWidth: {
-      default: 360,
+      default: "22.5rem",
       [mq.phone]: "none",
     },
     borderWidth: 0,
@@ -97,15 +97,15 @@ const styles = stylex.create({
       [mq.phone]: raster.hit,
     },
     paddingBlock: {
-      default: 8,
+      default: "0.5rem",
       [mq.phone]: 0,
     },
     paddingInline: {
       default: 0,
-      [mq.phone]: 8,
+      [mq.phone]: "0.5rem",
     },
     fontSize: {
-      default: 14,
+      default: "0.875rem",
       [mq.phone]: raster.controlFs,
     },
     fontFamily: "inherit",

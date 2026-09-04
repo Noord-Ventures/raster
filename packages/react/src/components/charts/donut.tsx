@@ -22,20 +22,20 @@ const styles = stylex.create({
   /* Laid out in CSS px: the viewBox equals the rendered size, so type does not scale. */
   label: {
     fill: raster.ink,
-    fontSize: 20,
+    fontSize: "1.25rem",
     fontWeight: 500,
     letterSpacing: "-0.03em",
     fontVariantNumeric: "tabular-nums",
   },
   caption: {
     fill: raster.gray,
-    fontSize: 11,
+    fontSize: "0.6875rem",
     fontWeight: 500,
     letterSpacing: "0.06em",
   },
   share: {
     display: "flex",
-    height: 8,
+    height: "0.5rem",
     width: "100%",
     borderWidth: raster.hairline,
     borderStyle: "solid",

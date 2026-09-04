@@ -37,16 +37,16 @@ const styles = stylex.create({
       [mq.phone]: "none",
     },
     padding: {
-      default: 14,
-      [mq.phone]: 16,
+      default: "0.875rem",
+      [mq.phone]: "1rem",
     },
     width: {
-      default: 240,
+      default: "15rem",
       [mq.phone]: "min(320px, calc(100vw - 32px))",
     },
     fontSize: {
-      default: 13,
-      [mq.phone]: 16,
+      default: "0.8125rem",
+      [mq.phone]: "1rem",
     },
     lineHeight: 1.55,
     letterSpacing: "-0.01em",
@@ -54,13 +54,13 @@ const styles = stylex.create({
   title: {
     display: "block",
     fontSize: {
-      default: 13,
-      [mq.phone]: 16,
+      default: "0.8125rem",
+      [mq.phone]: "1rem",
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
     color: raster.ink,
-    marginBottom: 4,
+    marginBottom: "0.25rem",
   },
   body: {
     color: raster.gray,

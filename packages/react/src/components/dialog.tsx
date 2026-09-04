@@ -33,7 +33,7 @@ export const dialogStyles = stylex.create({
   frame: {
     boxSizing: "border-box",
     maxWidth: {
-      default: 320,
+      default: "20rem",
       [mq.phone]: "calc(100vw - 32px)",
     },
     width: {
@@ -45,7 +45,7 @@ export const dialogStyles = stylex.create({
     borderColor: raster.divider,
     borderRadius: raster.radiusSm,
     padding: {
-      default: 20,
+      default: "1.25rem",
       [mq.phone]: "24px 20px",
     },
     backgroundColor: raster.paper,
@@ -59,8 +59,8 @@ export const dialogStyles = stylex.create({
   title: {
     display: "block",
     fontSize: {
-      default: 15,
-      [mq.phone]: 18,
+      default: "0.9375rem",
+      [mq.phone]: "1.125rem",
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -68,15 +68,15 @@ export const dialogStyles = stylex.create({
     marginTop: 0,
     marginInlineEnd: 0,
     marginBottom: {
-      default: 6,
-      [mq.phone]: 10,
+      default: "0.375rem",
+      [mq.phone]: "0.625rem",
     },
     marginInlineStart: 0,
   },
   body: {
     fontSize: {
-      default: 13.5,
-      [mq.phone]: 16,
+      default: "0.84375rem",
+      [mq.phone]: "1rem",
     },
     color: raster.gray,
     letterSpacing: "-0.01em",
@@ -84,8 +84,8 @@ export const dialogStyles = stylex.create({
     marginTop: 0,
     marginInlineEnd: 0,
     marginBottom: {
-      default: 16,
-      [mq.phone]: 20,
+      default: "1rem",
+      [mq.phone]: "1.25rem",
     },
     marginInlineStart: 0,
   },
@@ -101,8 +101,8 @@ export const dialogStyles = stylex.create({
       [mq.phone]: "stretch",
     },
     gap: {
-      default: 8,
-      [mq.phone]: 10,
+      default: "0.5rem",
+      [mq.phone]: "0.625rem",
     },
   },
   /** Corner close button. Floats so the title wraps around it. */
@@ -113,22 +113,22 @@ export const dialogStyles = stylex.create({
     alignItems: "center",
     justifyContent: "center",
     width: {
-      default: 32,
+      default: "2rem",
       [mq.phone]: raster.hit,
     },
     height: {
-      default: 32,
+      default: "2rem",
       [mq.phone]: raster.hit,
     },
     marginTop: {
-      default: -8,
-      [mq.phone]: -12,
+      default: "-0.5rem",
+      [mq.phone]: "-0.75rem",
     },
     marginInlineEnd: {
-      default: -8,
-      [mq.phone]: -12,
+      default: "-0.5rem",
+      [mq.phone]: "-0.75rem",
     },
-    marginInlineStart: 8,
+    marginInlineStart: "0.5rem",
     padding: 0,
     borderWidth: 0,
     borderRadius: raster.radiusSm,

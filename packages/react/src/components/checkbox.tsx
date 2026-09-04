@@ -17,28 +17,28 @@ const styles = stylex.create({
     display: "flex",
     alignItems: "center",
     gap: {
-      default: 9,
-      [mq.phone]: 12,
+      default: "0.5625rem",
+      [mq.phone]: "0.75rem",
     },
     fontSize: {
-      default: 14,
-      [mq.phone]: 17,
+      default: "0.875rem",
+      [mq.phone]: "1.0625rem",
     },
     color: raster.ink,
     letterSpacing: "-0.01em",
     minHeight: {
-      default: 24,
+      default: "1.5rem",
       [mq.phone]: raster.hit,
     },
   },
   check: {
     width: {
-      default: 16,
-      [mq.phone]: 22,
+      default: "1rem",
+      [mq.phone]: "1.375rem",
     },
     height: {
-      default: 16,
-      [mq.phone]: 22,
+      default: "1rem",
+      [mq.phone]: "1.375rem",
     },
     borderRadius: {
       default: 3,

@@ -17,7 +17,7 @@ export interface InputOTPProps extends Omit<React.HTMLAttributes<HTMLDivElement>
 const styles = stylex.create({
   otp: {
     display: "flex",
-    gap: 8,
+    gap: "0.5rem",
     width: {
       default: null,
       [mq.phone]: "100%",
@@ -25,7 +25,7 @@ const styles = stylex.create({
   },
   cell: {
     width: {
-      default: 40,
+      default: "2.5rem",
       [mq.phone]: "auto",
     },
     flexGrow: {
@@ -37,7 +37,7 @@ const styles = stylex.create({
       [mq.phone]: 0,
     },
     height: {
-      default: 48,
+      default: "3rem",
       [mq.phone]: raster.hit,
     },
     minHeight: {
@@ -45,7 +45,7 @@ const styles = stylex.create({
       [mq.phone]: raster.hit,
     },
     textAlign: "center",
-    fontSize: 18,
+    fontSize: "1.125rem",
     fontWeight: 600,
     fontVariantNumeric: "tabular-nums",
     appearance: "none",

@@ -19,7 +19,7 @@ const styles = stylex.create({
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: 8,
+    gap: "0.5rem",
     cursor: {
       default: "pointer",
       ":disabled": "not-allowed",
@@ -38,8 +38,8 @@ const styles = stylex.create({
     },
     fontSize: raster.controlFs,
     paddingInline: {
-      default: 22,
-      [mq.phone]: 20,
+      default: "1.375rem",
+      [mq.phone]: "1.25rem",
     },
     borderWidth: raster.hairline,
     borderStyle: "solid",
@@ -127,7 +127,7 @@ const styles = stylex.create({
   },
   sm: {
     height: {
-      default: 36,
+      default: "2.25rem",
       [mq.phone]: raster.controlH,
     },
     minHeight: {
@@ -135,15 +135,15 @@ const styles = stylex.create({
       [mq.phone]: raster.hit,
     },
     paddingInline: {
-      default: 14,
-      [mq.phone]: 16,
+      default: "0.875rem",
+      [mq.phone]: "1rem",
     },
     fontSize: {
-      default: 13,
+      default: "0.8125rem",
       [mq.phone]: raster.controlFs,
     },
     minWidth: {
-      default: 104,
+      default: "6.5rem",
       [mq.phone]: 0,
     },
   },

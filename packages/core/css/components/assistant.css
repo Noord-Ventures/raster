@@ -1,16 +1,16 @@
 /* ── assistant: generated from packages/react/src/components/assistant.tsx ── */
-.rs-ai{display:flex;flex-direction:column;gap:16px;max-width:560px;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);padding:20px}
+.rs-ai{display:flex;flex-direction:column;gap:1rem;max-width:35rem;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);padding:1.25rem}
 .rs-ai-head{display:flex;justify-content:space-between;align-items:center}
-.rs-ai-title{font-size:13px;font-weight:600;letter-spacing:-0.01em;color:var(--text)}
-.rs-ai-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-0.01em}
-.rs-ai-status-dot{width:6px;height:6px;border-radius:50%;background-color:var(--text)}
+.rs-ai-title{font-size:0.8125rem;font-weight:600;letter-spacing:-0.01em;color:var(--text)}
+.rs-ai-status{display:flex;align-items:center;gap:0.375rem;font-size:0.75rem;font-weight:500;color:var(--text-secondary);letter-spacing:-0.01em}
+.rs-ai-status-dot{width:0.375rem;height:0.375rem;border-radius:50%;background-color:var(--text)}
 .rs-ai-msg{display:flex;width:100%}
 .rs-ai-user{justify-content:flex-end}
-.rs-ai-user-block{background-color:var(--table-alt);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);padding-top:10px;padding-bottom:10px;padding-inline-start:14px;padding-inline-end:14px;font-size:13.5px;color:var(--text);letter-spacing:-0.01em;max-width:85%}
-.rs-ai-reply{font-size:13.5px;line-height:1.6;color:var(--text);letter-spacing:-0.01em;margin:0}
-.rs-ai-card{border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;align-items:flex-start}
-.rs-ai-tag{font-size:10.5px;font-weight:600;letter-spacing:0.02em;color:var(--text);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);padding-block:2px;padding-inline:8px;margin-bottom:10px}
-.rs-ai-text{font-size:13px;color:var(--text);line-height:1.5;margin:0}
-.rs-ai-done{display:flex;align-items:baseline;gap:8px;margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--text-secondary)}
-.rs-ai-input{margin-top:2px;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);background-color:var(--bg);padding-top:10px;padding-bottom:10px;padding-inline-start:12px;padding-inline-end:12px;font-size:12.5px;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center}
+.rs-ai-user-block{background-color:var(--table-alt);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);padding-top:0.625rem;padding-bottom:0.625rem;padding-inline-start:0.875rem;padding-inline-end:0.875rem;font-size:0.84375rem;color:var(--text);letter-spacing:-0.01em;max-width:85%}
+.rs-ai-reply{font-size:0.84375rem;line-height:1.6;color:var(--text);letter-spacing:-0.01em;margin:0}
+.rs-ai-card{border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);padding:0.875rem;display:flex;flex-direction:column;align-items:flex-start}
+.rs-ai-tag{font-size:0.65625rem;font-weight:600;letter-spacing:0.02em;color:var(--text);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);padding-block:2px;padding-inline:0.5rem;margin-bottom:0.625rem}
+.rs-ai-text{font-size:0.8125rem;color:var(--text);line-height:1.5;margin:0}
+.rs-ai-done{display:flex;align-items:baseline;gap:0.5rem;margin-top:0.75rem;font-size:0.78125rem;line-height:1.45;color:var(--text-secondary)}
+.rs-ai-input{margin-top:2px;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);background-color:var(--bg);padding-top:0.625rem;padding-bottom:0.625rem;padding-inline-start:0.75rem;padding-inline-end:0.75rem;font-size:0.78125rem;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center}
 .rs-ai-send{color:var(--text);font-weight:600}

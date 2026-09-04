@@ -17,16 +17,16 @@ const styles = stylex.create({
     display: "inline-flex",
     boxSizing: "border-box",
     width: {
-      default: 32,
-      [mq.phone]: 64,
+      default: "2rem",
+      [mq.phone]: "4rem",
     },
     height: {
-      default: 18,
+      default: "1.125rem",
       [mq.phone]: raster.hit,
     },
     minWidth: {
       default: null,
-      [mq.phone]: 64,
+      [mq.phone]: "4rem",
     },
     minHeight: {
       default: null,
@@ -71,8 +71,8 @@ const styles = stylex.create({
     "::before": {
       content: '""',
       position: "absolute",
-      top: -3,
-      bottom: -3,
+      top: "-0.1875rem",
+      bottom: "-0.1875rem",
       insetInlineStart: 0,
       insetInlineEnd: 0,
     },
@@ -91,20 +91,20 @@ const styles = stylex.create({
   thumb: {
     position: "absolute",
     top: {
-      default: 1.5,
-      [mq.phone]: 4,
+      default: "0.09375rem",
+      [mq.phone]: "0.25rem",
     },
     insetInlineStart: {
-      default: 1.5,
-      [mq.phone]: 4,
+      default: "0.09375rem",
+      [mq.phone]: "0.25rem",
     },
     width: {
-      default: 12,
-      [mq.phone]: 36,
+      default: "0.75rem",
+      [mq.phone]: "2.25rem",
     },
     height: {
-      default: 12,
-      [mq.phone]: 36,
+      default: "0.75rem",
+      [mq.phone]: "2.25rem",
     },
     borderRadius: {
       default: "50%",

@@ -1,5 +1,5 @@
 /* ── link: generated from packages/react/src/components/link.tsx ── */
-.rs-link{font-size:14px;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-0.01em;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider);transition:border-color var(--duration-snap) var(--ease)}
+.rs-link{font-size:0.875rem;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-0.01em;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider);transition:border-color var(--duration-snap) var(--ease)}
 .rs-link:hover{border-bottom-color:var(--accent)}
 .rs-link:active{border-bottom-color:var(--accent)}
 .rs-link:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--accent);outline-offset:2px}

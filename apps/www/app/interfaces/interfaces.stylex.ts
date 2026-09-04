@@ -54,7 +54,7 @@ export const interfaces = stylex.create({
     display: "block",
     paddingTop: 5,
     paddingBottom: 5,
-    fontSize: 13,
+    fontSize: "0.8125rem",
     fontWeight: 400,
     letterSpacing: "-0.01em",
     color: "var(--text-secondary)",
@@ -114,8 +114,8 @@ export const interfaces = stylex.create({
     margin: 0,
     marginBottom: 2,
     fontSize: {
-      default: 15,
-      [phone]: 16,
+      default: "0.9375rem",
+      [phone]: "1rem",
     },
     fontWeight: 600,
     letterSpacing: "-0.02em",
@@ -125,8 +125,8 @@ export const interfaces = stylex.create({
   tileVoice: {
     margin: 0,
     fontSize: {
-      default: 13,
-      [phone]: 15,
+      default: "0.8125rem",
+      [phone]: "0.9375rem",
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -177,7 +177,7 @@ export const interfaces = stylex.create({
   voice: {
     margin: 0,
     marginBottom: 8,
-    fontSize: 13,
+    fontSize: "0.8125rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
     color: "var(--text-secondary)",
@@ -185,7 +185,7 @@ export const interfaces = stylex.create({
   story: {
     marginTop: 16,
     marginBottom: 0,
-    fontSize: 17,
+    fontSize: "1.0625rem",
     fontWeight: 500,
     letterSpacing: "-0.01em",
     lineHeight: 1.5,
@@ -193,7 +193,7 @@ export const interfaces = stylex.create({
   },
   story2: {
     color: "var(--text-secondary)",
-    fontSize: 15,
+    fontSize: "0.9375rem",
   },
   meta: {
     display: "grid",
@@ -216,7 +216,7 @@ export const interfaces = stylex.create({
     justifyContent: "space-between",
     height: 44,
     paddingInline: 20,
-    fontSize: 12,
+    fontSize: "0.75rem",
     color: "var(--text)",
     backgroundColor: "var(--bg)",
   },
@@ -236,7 +236,7 @@ export const interfaces = stylex.create({
   },
   v1Title: {
     margin: 0,
-    fontSize: 16,
+    fontSize: "1rem",
     fontWeight: 600,
     letterSpacing: "-0.02em",
   },

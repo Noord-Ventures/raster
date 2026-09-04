@@ -42,12 +42,12 @@
 .toc-sub:empty { display: none; }
 .toc::-webkit-scrollbar { display: none; }
 .toc-label {
-  font-size: 13px; font-weight: 500; letter-spacing: -.01em;
+  font-size: 0.8125rem; font-weight: 500; letter-spacing: -.01em;
   color: var(--text-secondary); margin: 18px 0 4px;
 }
 .toc-label:first-child, .toc-sub > div:first-child .toc-label { margin-top: 0; }
 .toc-item {
-  display: block; padding: 5px 0; font-size: 13px; font-weight: 400;
+  display: block; padding: 5px 0; font-size: 0.8125rem; font-weight: 400;
   letter-spacing: -.01em; color: var(--text-secondary); opacity: .6;
   text-decoration: none; transition: color var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease);
 }

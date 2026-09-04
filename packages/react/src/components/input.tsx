@@ -29,11 +29,11 @@ const styles = stylex.create({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    gap: 8,
+    gap: "0.5rem",
   },
   label: {
     fontSize: {
-      default: 12,
+      default: "0.75rem",
       [mq.phone]: raster.controlLabel,
     },
     fontWeight: 600,
@@ -64,13 +64,13 @@ const styles = stylex.create({
     color: "var(--text)",
     caretColor: "var(--text)",
     fontSize: {
-      default: 14,
-      [mq.phone]: 16,
+      default: "0.875rem",
+      [mq.phone]: "1rem",
     },
     lineHeight: `calc(${raster.controlH} - 2px)`,
     paddingInline: {
-      default: 12,
-      [mq.phone]: 14,
+      default: "0.75rem",
+      [mq.phone]: "0.875rem",
     },
     paddingBlock: 0,
     outlineWidth: {
@@ -125,17 +125,17 @@ const styles = stylex.create({
   feedback: {
     display: "flex",
     alignItems: "center",
-    gap: 8,
+    gap: "0.5rem",
     fontSize: {
-      default: 12,
-      [mq.phone]: 14,
+      default: "0.75rem",
+      [mq.phone]: "0.875rem",
     },
     fontWeight: 500,
     color: raster.gray,
     letterSpacing: "-0.01em",
     lineHeight: "16px",
     margin: 0,
-    minHeight: 16,
+    minHeight: "1rem",
   },
   feedbackOk: {
     color: raster.ink,

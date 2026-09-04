@@ -1,5 +1,5 @@
 /* ── combobox: generated from packages/react/src/components/combobox.tsx ── */
-.rs-combobox{position:relative;display:inline-block;min-width:200px}
+.rs-combobox{position:relative;display:inline-block;min-width:12.5rem}
 @media (max-width: 640px){.rs-combobox{display:block;min-width:0;width:100%}}
-.rs-combobox-empty{padding:10px 12px;font-size:13px;letter-spacing:-0.01em;color:var(--text-secondary)}
-@media (max-width: 640px){.rs-combobox-empty{padding:14px;font-size:15px}}
+.rs-combobox-empty{padding:10px 12px;font-size:0.8125rem;letter-spacing:-0.01em;color:var(--text-secondary)}
+@media (max-width: 640px){.rs-combobox-empty{padding:0.875rem;font-size:0.9375rem}}

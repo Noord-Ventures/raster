@@ -14,7 +14,7 @@ const styles = stylex.create({
     borderTopWidth: raster.hairline,
     borderTopStyle: "solid",
     borderTopColor: raster.divider,
-    marginBlock: 20,
+    marginBlock: "1.25rem",
     marginInline: 0,
   },
   vertical: {
@@ -23,7 +23,7 @@ const styles = stylex.create({
     alignSelf: "stretch",
     backgroundColor: raster.divider,
     marginBlock: 0,
-    marginInline: 12,
+    marginInline: "0.75rem",
   },
 });
 

@@ -20,11 +20,11 @@ const styles = stylex.create({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    gap: 8,
+    gap: "0.5rem",
   },
   label: {
     fontSize: {
-      default: 12,
+      default: "0.75rem",
       [mq.phone]: raster.controlLabel,
     },
     fontWeight: 600,
@@ -43,8 +43,8 @@ const styles = stylex.create({
     },
     fontFamily: "inherit",
     fontSize: {
-      default: 14,
-      [mq.phone]: 16,
+      default: "0.875rem",
+      [mq.phone]: "1rem",
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -70,12 +70,12 @@ const styles = stylex.create({
     },
     paddingBlock: 0,
     paddingInlineStart: {
-      default: 10,
-      [mq.phone]: 14,
+      default: "0.625rem",
+      [mq.phone]: "0.875rem",
     },
     paddingInlineEnd: {
-      default: 32,
-      [mq.phone]: 36,
+      default: "2rem",
+      [mq.phone]: "2.25rem",
     },
     outlineWidth: {
       default: 0,

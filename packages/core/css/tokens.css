@@ -39,10 +39,10 @@
   --rs-in: var(--radius-in);
   --rs-chart-spot: var(--text);
   /* Control scale. Desktop is the poster; ≤640 recuts every control to 44pt. */
-  --hit: 40px;
-  --control-h: 40px;
-  --control-fs: 14px;
-  --control-label: 12px;
+  --hit: 2.5rem;
+  --control-h: 2.5rem;
+  --control-fs: 0.875rem;
+  --control-label: 0.75rem;
 }
 [data-theme="dark"] {
   --bg: #0E0C0A;
@@ -85,9 +85,9 @@
 /* Phone control scale (≤640): 44pt hits, 16px type on fields. */
 @media(max-width:640px){
   :root{
-    --hit:44px;
-    --control-h:44px;
-    --control-fs:16px;
-    --control-label:15px;
+    --hit:2.75rem;
+    --control-h:2.75rem;
+    --control-fs:1rem;
+    --control-label:0.9375rem;
   }
 }

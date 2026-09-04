@@ -10,8 +10,8 @@ const styles = stylex.create({
     display: "flex",
     flexDirection: "column",
     gap: {
-      default: 16,
-      [mq.phone]: 20,
+      default: "1rem",
+      [mq.phone]: "1.25rem",
     },
     maxWidth: {
       default: 388,

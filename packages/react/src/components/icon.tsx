@@ -58,7 +58,7 @@ const styles = stylex.create({
   },
   row: {
     display: "flex",
-    gap: 18,
+    gap: "1.125rem",
     alignItems: "center",
     color: raster.ink,
   },
@@ -66,18 +66,18 @@ const styles = stylex.create({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    gap: 28,
+    gap: "1.75rem",
     textAlign: "start",
     alignSelf: "stretch",
   },
   group: {
     display: "flex",
     flexDirection: "column",
-    gap: 12,
+    gap: "0.75rem",
   },
   groupTitle: {
     margin: 0,
-    fontSize: 12,
+    fontSize: "0.75rem",
     fontWeight: 600,
     letterSpacing: 0,
     color: raster.gray,
@@ -90,7 +90,7 @@ const styles = stylex.create({
       [at480]: "minmax(0, 1fr)",
     },
     columnGap: raster.gutter,
-    rowGap: 20,
+    rowGap: "1.25rem",
     justifyContent: "start",
     width: "100%",
   },
@@ -98,7 +98,7 @@ const styles = stylex.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    gap: 8,
+    gap: "0.5rem",
     width: {
       default: 184,
       [at480]: "100%",
@@ -107,17 +107,17 @@ const styles = stylex.create({
   pair: {
     display: "flex",
     alignItems: "center",
-    gap: 16,
-    minHeight: 24,
+    gap: "1rem",
+    minHeight: "1.5rem",
   },
   kin: {
     display: "flex",
     alignItems: "center",
-    gap: 8,
-    minHeight: 24,
+    gap: "0.5rem",
+    minHeight: "1.5rem",
   },
   label: {
-    fontSize: 11,
+    fontSize: "0.6875rem",
     lineHeight: 1.3,
     color: raster.gray,
     textTransform: "none",
@@ -176,7 +176,8 @@ export const Icon = React.forwardRef<SVGSVGElement, IconProps>(function Icon(
       {...iconInk}
       {...props}
       className={sx.className}
-      style={{ ...sx.style, ...style }}
+      /* rem, so the mark scales with the text-size setting; the attributes keep the px ratio for SVG. */
+      style={{ ...sx.style, width: `${size / 16}rem`, height: `${size / 16}rem`, ...style }}
     >
       {turn ? <g transform={`rotate(${turn} 8 8)`}>{nodes}</g> : nodes}
     </svg>

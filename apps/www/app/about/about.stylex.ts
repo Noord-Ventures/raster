@@ -102,8 +102,8 @@ export const about = stylex.create({
   kicker: {
     margin: 0,
     fontSize: {
-      default: 12,
-      [phone]: 13,
+      default: "0.75rem",
+      [phone]: "0.8125rem",
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -130,8 +130,8 @@ export const about = stylex.create({
   copyP: {
     margin: 0,
     fontSize: {
-      default: 15,
-      [phone]: 16,
+      default: "0.9375rem",
+      [phone]: "1rem",
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -143,7 +143,7 @@ export const about = stylex.create({
   },
   mark: {
     margin: 0,
-    fontSize: 13,
+    fontSize: "0.8125rem",
     fontWeight: 500,
     letterSpacing: "-0.01em",
     lineHeight: 1.55,
@@ -240,7 +240,7 @@ export const about = stylex.create({
   modDim: {
     display: "grid",
     gridTemplateColumns: "184fr 20fr",
-    fontSize: 12,
+    fontSize: "0.75rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
     color: "var(--text-secondary)",
@@ -296,7 +296,7 @@ export const about = stylex.create({
   },
   colophonP: {
     margin: 0,
-    fontSize: 12,
+    fontSize: "0.75rem",
     fontWeight: 500,
     letterSpacing: "-0.01em",
     lineHeight: 1.5,

@@ -19,13 +19,13 @@
   "files": [
     {
       "path": "raster/label.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}\n\nconst styles = stylex.create({\n  label: {\n    fontSize: {\n      default: 12,\n      [mq.phone]: raster.controlLabel,\n    },\n    fontWeight: 600,\n    color: raster.gray,\n    letterSpacing: \"-0.01em\",\n    lineHeight: \"16px\",\n  },\n});\n\n/** Label above a control. 12px, secondary ink. */\nexport const Label = React.forwardRef<HTMLLabelElement, LabelProps>(function Label(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-label\", className], styles.label);\n  return <label ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}\n\nconst styles = stylex.create({\n  label: {\n    fontSize: {\n      default: \"0.75rem\",\n      [mq.phone]: raster.controlLabel,\n    },\n    fontWeight: 600,\n    color: raster.gray,\n    letterSpacing: \"-0.01em\",\n    lineHeight: \"16px\",\n  },\n});\n\n/** Label above a control. 12px, secondary ink. */\nexport const Label = React.forwardRef<HTMLLabelElement, LabelProps>(function Label(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-label\", className], styles.label);\n  return <label ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
       "target": "components/raster/label.tsx"
     },
     {
       "path": "raster/styles/label.css",
-      "content": "/* ── label: generated from packages/react/src/components/label.tsx ── */\n.rs-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-0.01em;line-height:16px}\n@media (max-width: 640px){.rs-label{font-size:var(--control-label)}}\n",
+      "content": "/* ── label: generated from packages/react/src/components/label.tsx ── */\n.rs-label{font-size:0.75rem;font-weight:600;color:var(--text-secondary);letter-spacing:-0.01em;line-height:16px}\n@media (max-width: 640px){.rs-label{font-size:var(--control-label)}}\n",
       "type": "registry:file",
       "target": "styles/raster/label.css"
     }

@@ -1,16 +1,16 @@
 /* ── references: generated from packages/react/src/components/refs.tsx ── */
-.rs-cite{font-size:10.5px;font-weight:600;letter-spacing:0;line-height:0;vertical-align:super;white-space:nowrap}
+.rs-cite{font-size:0.65625rem;font-weight:600;letter-spacing:0;line-height:0;vertical-align:super;white-space:nowrap}
 .rs-cite-cite-a{color:var(--text-secondary);text-decoration:none;transition:color var(--duration-snap) var(--ease)}
 .rs-cite-cite-a:hover{color:var(--accent)}
-.rs-refs{list-style:none;counter-reset:ref;margin-top:4px;margin-bottom:8px;margin-inline-start:0;margin-inline-end:0;padding:0}
-.rs-cite-item{counter-increment:ref;position:relative;padding-top:10px;padding-bottom:10px;font-size:13px;font-weight:500;line-height:1.65;color:var(--text-secondary);letter-spacing:-0.01em;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider);scroll-margin-top:88px}
+.rs-refs{list-style:none;counter-reset:ref;margin-top:0.25rem;margin-bottom:0.5rem;margin-inline-start:0;margin-inline-end:0;padding:0}
+.rs-cite-item{counter-increment:ref;position:relative;padding-top:0.625rem;padding-bottom:0.625rem;font-size:0.8125rem;font-weight:500;line-height:1.65;color:var(--text-secondary);letter-spacing:-0.01em;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider);scroll-margin-top:88px}
 .rs-cite-item:last-child{border-bottom-color:transparent}
 .rs-cite-item:target{background-color:var(--table-alt)}
-.rs-cite-item::before{content:counter(ref);position:absolute;inset-inline-start:-16px;top:11px;width:12px;text-align:end;font-size:11px;font-weight:600;color:var(--accent)}
+.rs-cite-item::before{content:counter(ref);position:absolute;inset-inline-start:-1rem;top:0.6875rem;width:0.75rem;text-align:end;font-size:0.6875rem;font-weight:600;color:var(--accent)}
 .rs-ref-authors{color:var(--text);font-weight:500}
-.rs-ref-doi{font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:11px;color:var(--text-secondary);text-decoration:none;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider);transition:color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease);word-break:break-all}
+.rs-ref-doi{font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:0.6875rem;color:var(--text-secondary);text-decoration:none;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider);transition:color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease);word-break:break-all}
 .rs-ref-doi:hover{color:var(--text);border-bottom-color:var(--accent)}
-.rs-cite-box{border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);padding:20px;margin-top:8px}
+.rs-cite-box{border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);padding:1.25rem;margin-top:0.5rem}
 @media (max-width: 640px){.rs-cite-box{padding:14px 16px}}
-.rs-cite-box-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-0.01em;margin-bottom:8px}
-.rs-cite-box-text{font-size:13px;font-weight:500;color:var(--text-secondary);line-height:1.7;user-select:all}
+.rs-cite-box-label{font-size:0.75rem;font-weight:600;color:var(--text-secondary);letter-spacing:-0.01em;margin-bottom:0.5rem}
+.rs-cite-box-text{font-size:0.8125rem;font-weight:500;color:var(--text-secondary);line-height:1.7;user-select:all}

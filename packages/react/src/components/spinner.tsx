@@ -14,15 +14,15 @@ const spin = stylex.keyframes({
 const styles = stylex.create({
   spinner: {
     display: "inline-flex",
-    width: 16,
-    height: 16,
+    width: "1rem",
+    height: "1rem",
     color: raster.ink,
     verticalAlign: "middle",
   },
   ring: {
     display: "block",
-    width: 16,
-    height: 16,
+    width: "1rem",
+    height: "1rem",
     animationName: {
       default: spin,
       [mq.reduce]: "none",

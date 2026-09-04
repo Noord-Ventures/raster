@@ -10,8 +10,8 @@ const styles = stylex.create({
   chip: {
     fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
     fontSize: {
-      default: 11,
-      [mq.phone]: 13,
+      default: "0.6875rem",
+      [mq.phone]: "0.8125rem",
     },
     fontWeight: 500,
     color: raster.gray,
@@ -19,12 +19,12 @@ const styles = stylex.create({
     borderStyle: "solid",
     borderColor: "color-mix(in srgb, currentColor 35%, transparent)",
     paddingBlock: {
-      default: 3,
-      [mq.phone]: 12,
+      default: "0.1875rem",
+      [mq.phone]: "0.75rem",
     },
     paddingInline: {
-      default: 7,
-      [mq.phone]: 14,
+      default: "0.4375rem",
+      [mq.phone]: "0.875rem",
     },
     lineHeight: 1,
     borderRadius: {

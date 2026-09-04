@@ -1,9 +1,9 @@
 /* ── field: generated from packages/react/src/components/field.tsx ── */
-.rs-field{width:100%;display:flex;flex-direction:column;gap:8px}
-@media (max-width: 640px){.rs-field{gap:8px}}
-.rs-field-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-0.01em;line-height:16px}
+.rs-field{width:100%;display:flex;flex-direction:column;gap:0.5rem}
+@media (max-width: 640px){.rs-field{gap:0.5rem}}
+.rs-field-label{font-size:0.75rem;font-weight:600;color:var(--text-secondary);letter-spacing:-0.01em;line-height:16px}
 @media (max-width: 640px){.rs-field-label{font-size:var(--control-label)}}
-.rs-field-hint{margin:0;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-0.01em;line-height:16px}
-@media (max-width: 640px){.rs-field-hint{font-size:14px}}
-.rs-field-error{margin:0;font-size:12px;font-weight:500;color:var(--text);letter-spacing:-0.01em;line-height:16px}
-@media (max-width: 640px){.rs-field-error{font-size:14px}}
+.rs-field-hint{margin:0;font-size:0.75rem;font-weight:500;color:var(--text-secondary);letter-spacing:-0.01em;line-height:16px}
+@media (max-width: 640px){.rs-field-hint{font-size:0.875rem}}
+.rs-field-error{margin:0;font-size:0.75rem;font-weight:500;color:var(--text);letter-spacing:-0.01em;line-height:16px}
+@media (max-width: 640px){.rs-field-error{font-size:0.875rem}}

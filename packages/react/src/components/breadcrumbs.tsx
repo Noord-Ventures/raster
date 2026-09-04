@@ -15,7 +15,7 @@ export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
 const styles = stylex.create({
   crumbs: {
     fontSize: {
-      default: 13,
+      default: "0.8125rem",
       [mq.phone]: raster.controlFs,
     },
     color: raster.ink,
@@ -35,8 +35,8 @@ const styles = stylex.create({
       [mq.phone]: "wrap",
     },
     gap: {
-      default: 8,
-      [mq.phone]: 6,
+      default: "0.5rem",
+      [mq.phone]: "0.375rem",
     },
   },
   item: {
@@ -46,8 +46,8 @@ const styles = stylex.create({
       [mq.phone]: "center",
     },
     gap: {
-      default: 8,
-      [mq.phone]: 6,
+      default: "0.5rem",
+      [mq.phone]: "0.375rem",
     },
   },
   /* Ancestors are secondary gray at full opacity; the page carries weight. */

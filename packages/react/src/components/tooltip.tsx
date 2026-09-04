@@ -27,19 +27,19 @@ const styles = stylex.create({
     backgroundColor: raster.ink,
     color: raster.paper,
     fontSize: {
-      default: 11.5,
-      [mq.phone]: 13,
+      default: "0.71875rem",
+      [mq.phone]: "0.8125rem",
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
     lineHeight: 1.3,
     paddingBlock: {
-      default: 5,
-      [mq.phone]: 8,
+      default: "0.3125rem",
+      [mq.phone]: "0.5rem",
     },
     paddingInline: {
-      default: 9,
-      [mq.phone]: 12,
+      default: "0.5625rem",
+      [mq.phone]: "0.75rem",
     },
     borderRadius: {
       default: raster.radiusSm,
@@ -84,7 +84,7 @@ const styles = stylex.create({
       top: "100%",
       insetInlineStart: 0,
       insetInlineEnd: 0,
-      height: 8,
+      height: "0.5rem",
     },
   },
 });

@@ -54,7 +54,7 @@ export const navStyles = stylex.create({
     display: "block",
     paddingBlock: 5,
     paddingInline: 0,
-    fontSize: 13,
+    fontSize: "0.8125rem",
     fontWeight: {
       default: 400,
       '[aria-current="page"]': 500,

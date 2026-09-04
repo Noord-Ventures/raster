@@ -14,14 +14,14 @@ const styles = stylex.create({
   head: {
     display: "flex",
     justifyContent: "space-between",
-    fontSize: 12,
+    fontSize: "0.75rem",
     fontWeight: 500,
     color: raster.gray,
     letterSpacing: "-0.01em",
-    marginBottom: 7,
+    marginBottom: "0.4375rem",
   },
   bar: {
-    height: 4,
+    height: "0.25rem",
     backgroundColor: raster.dividerSubtle,
     borderRadius: 2,
     overflow: "hidden",

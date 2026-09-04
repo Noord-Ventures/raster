@@ -44,21 +44,21 @@ const longDate = (d: Date) =>
 
 const styles = stylex.create({
   cal: {
-    width: 252,
+    width: "15.75rem",
   },
   head: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     minHeight: {
-      default: 26,
+      default: "1.625rem",
       [mq.phone]: raster.hit,
     },
-    marginBottom: 8,
+    marginBottom: "0.5rem",
   },
   title: {
     fontSize: {
-      default: 13,
+      default: "0.8125rem",
       [mq.phone]: raster.controlFs,
     },
     fontWeight: 600,
@@ -69,19 +69,19 @@ const styles = stylex.create({
   nav: {
     display: "flex",
     gap: {
-      default: 5,
-      [mq.phone]: 8,
+      default: "0.3125rem",
+      [mq.phone]: "0.5rem",
     },
     flexShrink: 0,
   },
   page: {
     boxSizing: "border-box",
     width: {
-      default: 26,
+      default: "1.625rem",
       [mq.phone]: raster.hit,
     },
     height: {
-      default: 26,
+      default: "1.625rem",
       [mq.phone]: raster.hit,
     },
     minWidth: {
@@ -100,7 +100,7 @@ const styles = stylex.create({
     alignItems: "center",
     justifyContent: "center",
     fontSize: {
-      default: 13,
+      default: "0.8125rem",
       [mq.phone]: raster.controlFs,
     },
     color: raster.gray,
@@ -134,7 +134,7 @@ const styles = stylex.create({
     color: "inherit",
   },
   grid: {
-    width: 252,
+    width: "15.75rem",
   },
   row: {
     display: "grid",
@@ -142,26 +142,26 @@ const styles = stylex.create({
   },
   dow: {
     fontSize: {
-      default: 11,
-      [mq.phone]: 13,
+      default: "0.6875rem",
+      [mq.phone]: "0.8125rem",
     },
     fontWeight: 500,
     color: raster.gray,
     textAlign: "center",
-    paddingTop: 4,
-    paddingBottom: 4,
+    paddingTop: "0.25rem",
+    paddingBottom: "0.25rem",
     paddingInline: 0,
   },
   day: {
     boxSizing: "border-box",
-    width: 36,
-    height: 36,
-    minWidth: 36,
-    minHeight: 36,
+    width: "2.25rem",
+    height: "2.25rem",
+    minWidth: "2.25rem",
+    minHeight: "2.25rem",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 13,
+    fontSize: "0.8125rem",
     fontVariantNumeric: "tabular-nums",
     color: raster.ink,
     backgroundColor: {

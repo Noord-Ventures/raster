@@ -5,7 +5,10 @@
    20px gutter; that utmost left gutter must paint. Do not clip
    it. No 204 horizontals — those cage the type. Homepage and
    About kill this overlay and keep boxed cells only. */
-html{scroll-behavior:smooth;overflow-x:clip;background-color:var(--bg)}
+/* --text-scale multiplies the root size, so every rem in the system (type,
+   controls, spacing inside components) follows it while the px module grid
+   stays put. Browser text settings still apply underneath. */
+html{scroll-behavior:smooth;overflow-x:clip;background-color:var(--bg);font-size:calc(100% * var(--text-scale, 1))}
 html::before{
   content:"";
   position:fixed;

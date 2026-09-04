@@ -18,14 +18,14 @@ const styles = stylex.create({
     cursor: "pointer",
     display: "inline-flex",
     alignItems: "center",
-    gap: 7,
+    gap: "0.4375rem",
     minHeight: {
-      default: 24,
+      default: "1.5rem",
       [mq.phone]: raster.hit,
     },
     fontSize: {
-      default: 13.5,
-      [mq.phone]: 17,
+      default: "0.84375rem",
+      [mq.phone]: "1.0625rem",
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -61,15 +61,15 @@ const styles = stylex.create({
   },
   body: {
     paddingTop: {
-      default: 10,
-      [mq.phone]: 12,
+      default: "0.625rem",
+      [mq.phone]: "0.75rem",
     },
     paddingInlineEnd: 0,
     paddingBottom: 0,
     paddingInlineStart: 0,
     fontSize: {
-      default: 13.5,
-      [mq.phone]: 16,
+      default: "0.84375rem",
+      [mq.phone]: "1rem",
     },
     lineHeight: 1.6,
     color: raster.gray,

@@ -187,7 +187,7 @@ html:has(.field-page) .site-footer {
 
 .field-kicker {
   margin: 0;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: -.01em;
   color: var(--text-secondary);
@@ -217,7 +217,7 @@ html:has(.field-page) .site-footer {
 
 .field-copy p {
   margin: 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 500;
   letter-spacing: -.01em;
   line-height: 1.5;
@@ -226,7 +226,7 @@ html:has(.field-page) .site-footer {
 
 .field-mark {
   margin: 0;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: -.01em;
   line-height: 1.55;
@@ -270,7 +270,7 @@ html:has(.field-page) .site-footer {
 
 .field-code code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 12.5px;
+  font-size: 0.7813rem;
   line-height: 1.5;
   color: var(--text);
 }
@@ -363,7 +363,7 @@ html:has(.field-page) .site-footer {
 .field-mod-dim {
   display: grid;
   grid-template-columns: 184fr 20fr;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: -.01em;
   color: var(--text-secondary);
@@ -427,11 +427,11 @@ html:has(.field-page) .site-footer {
 }
 
 .field-cell-faq .rs-acc-item summary {
-  font-size: 13px;
+  font-size: 0.8125rem;
 }
 
 .field-cell-faq .rs-acc-body {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
 }
 
@@ -444,7 +444,7 @@ html:has(.field-page) .site-footer {
 
 .field-colophon p {
   margin: 0;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: -.01em;
   line-height: 1.5;
@@ -568,8 +568,8 @@ html:has(.field-page) .site-footer {
   .field-cell-mit {
     padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   }
-  .field-copy p { font-size: 16px; line-height: 1.6; }
-  .field-kicker { font-size: 13px; }
+  .field-copy p { font-size: 1rem; line-height: 1.6; }
+  .field-kicker { font-size: 0.8125rem; }
   .field-cell a {
     display: inline-flex;
     align-items: center;

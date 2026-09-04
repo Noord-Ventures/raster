@@ -14,7 +14,7 @@ const styles = stylex.create({
     overflowY: "auto",
     scrollbarWidth: "none",
     maskImage: "linear-gradient(to bottom, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%)",
-    paddingBlock: 12,
+    paddingBlock: "0.75rem",
     paddingInline: 0,
     color: raster.ink,
     "::-webkit-scrollbar": {

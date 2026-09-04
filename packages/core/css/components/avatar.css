@@ -1,8 +1,8 @@
 /* ── avatar: generated from packages/react/src/components/avatar.tsx ── */
-.rs-avatar{width:32px;height:32px;border-radius:50%;background-color:var(--divider-subtle);color:var(--text);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;letter-spacing:-0.01em;overflow:hidden;flex-shrink:0;user-select:none}
-.rs-avatar-sm{width:24px;height:24px;font-size:10px}
-.rs-avatar-lg{width:48px;height:48px;font-size:16px}
+.rs-avatar{width:2rem;height:2rem;border-radius:50%;background-color:var(--divider-subtle);color:var(--text);display:inline-flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:600;letter-spacing:-0.01em;overflow:hidden;flex-shrink:0;user-select:none}
+.rs-avatar-sm{width:1.5rem;height:1.5rem;font-size:0.625rem}
+.rs-avatar-lg{width:3rem;height:3rem;font-size:1rem}
 .rs-avatar-image{width:100%;height:100%;object-fit:cover}
 .rs-avatar-row{display:flex}
-.rs-avatar-in-row{border-width:2px;border-style:solid;border-color:var(--bg);margin-inline-start:-8px}
+.rs-avatar-in-row{border-width:2px;border-style:solid;border-color:var(--bg);margin-inline-start:-0.5rem}
 .rs-avatar-in-row:first-child{margin-inline-start:0}

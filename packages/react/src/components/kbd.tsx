@@ -6,7 +6,7 @@ import { rs } from "../rs";
 const styles = stylex.create({
   kbd: {
     fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
-    fontSize: 11,
+    fontSize: "0.6875rem",
     fontWeight: 500,
     color: raster.gray,
     backgroundColor: raster.paper,
@@ -16,13 +16,13 @@ const styles = stylex.create({
     borderBottomWidth: 2,
     borderRadius: raster.radiusSm,
     paddingBlock: 2,
-    paddingInline: 6,
+    paddingInline: "0.375rem",
     lineHeight: 1.2,
   },
   pair: {
     display: "inline-flex",
     alignItems: "center",
-    gap: 4,
+    gap: "0.25rem",
   },
 });
 

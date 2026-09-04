@@ -39,10 +39,10 @@ Every custom property `@noorddev/raster/css/tokens.css` defines, generated from 
 | `--rs-gap` | `var(--pad)` |  |  |  |
 | `--rs-in` | `var(--radius-in)` |  |  |  |
 | `--rs-chart-spot` | `var(--text)` |  |  |  |
-| `--hit` | `40px` |  | `raster.hit` |  |
-| `--control-h` | `40px` |  | `raster.controlH` |  |
-| `--control-fs` | `14px` |  | `raster.controlFs` |  |
-| `--control-label` | `12px` |  | `raster.controlLabel` |  |
+| `--hit` | `2.5rem` |  | `raster.hit` |  |
+| `--control-h` | `2.5rem` |  | `raster.controlH` |  |
+| `--control-fs` | `0.875rem` |  | `raster.controlFs` |  |
+| `--control-label` | `0.75rem` |  | `raster.controlLabel` |  |
 
 ## Responsive overrides
 
@@ -59,10 +59,10 @@ Under `@media (max-width:640px)`:
 
 | Property | Value |
 | --- | --- |
-| `--hit` | `44px` |
-| `--control-h` | `44px` |
-| `--control-fs` | `16px` |
-| `--control-label` | `15px` |
+| `--hit` | `2.75rem` |
+| `--control-h` | `2.75rem` |
+| `--control-fs` | `1rem` |
+| `--control-label` | `0.9375rem` |
 
 ## Token groups
 
