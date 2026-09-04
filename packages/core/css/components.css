@@ -259,7 +259,7 @@
 .rs-badge,.rs-badge-solid,.rs-badge-muted{font-size:11px;font-weight:600;letter-spacing:0.02em;line-height:1.4;border-radius:var(--radius-sm)}
 .rs-badge{color:var(--accent);border-width:1px;border-style:solid;border-color:var(--accent);padding-block:3px;padding-inline:10px}
 .rs-badge-solid{color:var(--bg);background-color:var(--text);padding-block:4px;padding-inline:11px}
-.rs-badge-muted{color:var(--text-secondary);background-color:var(--divider-subtle);padding-block:4px;padding-inline:11px}
+.rs-badge-muted{color:var(--text);background-color:var(--divider-subtle);padding-block:4px;padding-inline:11px}
 
 /* ── chip: generated from packages/react/src/components/chip.tsx ── */
 .rs-chip{font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border-width:1px;border-style:solid;border-color:color-mix(in srgb, currentColor 35%, transparent);padding-block:3px;padding-inline:7px;line-height:1;border-radius:var(--radius-sm)}

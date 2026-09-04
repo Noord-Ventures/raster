@@ -67,16 +67,14 @@ body:has(.if-index) {
   font-size: 13px;
   font-weight: 400;
   letter-spacing: -.01em;
-  color: var(--text-secondary);
-  opacity: .6;
+  color: var(--text-secondary); /* gray at full opacity: 5:1 on paper */
   text-decoration: none;
-  transition: color var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease);
+  transition: color var(--duration-snap) var(--ease);
 }
 .if-rail a:hover,
 .if-rail a:focus-visible,
 .if-rail a[aria-current="page"] {
   color: var(--text);
-  opacity: 1;
 }
 .if-rail a[aria-current="page"] { font-weight: 500; }
 .if-rail a:focus-visible { outline: 1px solid var(--text); outline-offset: 2px; }

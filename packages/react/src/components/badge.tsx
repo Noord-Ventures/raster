@@ -37,7 +37,7 @@ const styles = stylex.create({
     paddingInline: 11,
   },
   muted: {
-    color: raster.gray,
+    color: raster.ink,
     backgroundColor: raster.dividerSubtle,
     paddingBlock: 4,
     paddingInline: 11,

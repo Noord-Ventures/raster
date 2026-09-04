@@ -27,7 +27,7 @@ const budgets = [
   ["@noorddev/raster-react dist/raster-react.css", "packages/react/dist/raster-react.css", 16 * 1024],
   ["@noorddev/raster-react dist/**/*.js (every component, bundled)", ["packages/react/dist", /\.js$/], 72 * 1024],
   ["@noorddev/raster-react components/button.js", "packages/react/dist/components/button.js", 4 * 1024],
-  ["@noorddev/raster-cli dist/index.js", "packages/cli/dist/index.js", 24 * 1024],
+  ["@noorddev/raster-cli dist/index.js (bundles the typed registry for list/search)", "packages/cli/dist/index.js", 48 * 1024],
 ];
 
 let failed = false;

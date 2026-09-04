@@ -254,7 +254,7 @@ describe("ref forwarding", () => {
     }
   });
 
-  for (const [name, { props = {}, tag, wrap = (el) => el }] of Object.entries(cases)) {
+  for (const [name, { props = {}, tag, wrap = (el: React.ReactElement) => el }] of Object.entries(cases)) {
     it(`${name} forwards its ref to <${tag}>`, () => {
       const Component = exportsByName[name] as React.ComponentType<AnyProps & React.RefAttributes<Element>>;
       const ref = React.createRef<Element>();
