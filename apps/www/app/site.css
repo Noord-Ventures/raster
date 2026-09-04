@@ -831,6 +831,8 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 }
 .class-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 28px; }
 .section-label { font-size: 13px; font-weight: 600; letter-spacing: -.01em; margin: 36px 0 0; }
+.site-content > .rs-callout { margin-top: 36px; }
+.site-content > .rs-callout .rs-t-label + .rs-t-body { margin-top: 8px; }
 .component-head { margin: 8px 0 4px; }
 .component-desc { max-width: 592px; }
 

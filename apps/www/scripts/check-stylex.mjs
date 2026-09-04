@@ -197,6 +197,22 @@ if (!home.includes("specimen.stylex") || !specimenSx.includes("stylex.create")) 
   fail("Homepage specimen must own StyleX");
 }
 
+const docs = readFileSync(join(root, "apps/www/app/docs/page.tsx"), "utf8");
+const inezStylexBody =
+  "The React layer is authored in StyleX — compile-time atomic CSS, typed against Raster tokens. The CSS file is still the door if you do not want React.";
+if (!docs.includes("<Callout>") || !docs.includes('from "@noorddev/raster-react"')) {
+  fail("Getting started must place the StyleX note as a Raster Callout");
+}
+if (!docs.includes(">StyleX</") || !docs.includes(inezStylexBody)) {
+  fail("Getting started must use Inez locked StyleX EN exactly");
+}
+if (/powered by StyleX|One language for catalogue/i.test(docs)) {
+  fail("Getting started must not add StyleX marketing beyond Inez locked EN");
+}
+if (home.includes(inezStylexBody) || /powered by StyleX/i.test(home)) {
+  fail("Homepage must not carry a second StyleX marketing layer");
+}
+
 const wwwStylex = [
   "apps/www/components/docs-nav/docs-nav.stylex.ts",
   "apps/www/components/examples/use.stylex.ts",
