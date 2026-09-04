@@ -48,6 +48,11 @@
   border-color: transparent;
   box-shadow: none;
 }
+/* Grouped controls keep their own width inside the scene's column. */
+.rs-scene .rs-btn-group,
+.rs-scene .rs-toggle-group,
+.rs-scene .rs-pages,
+.rs-scene .rs-tabs-list { width: fit-content; align-self: flex-start; max-width: 100%; }
 .rs-scene .rs-use-type {
   display: none !important;
 }

@@ -465,8 +465,8 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     float: none;
     height: auto;
     max-width: 100%;
-    font-size: calc(16px * var(--text-scale, 1));
-    line-height: 1.65;
+    font-size: calc(15px * var(--text-scale, 1));
+    line-height: 1.6;
     /* pretty/balance stacks lines on WebKit phone. Live block flow. */
     text-wrap: wrap;
   }
@@ -681,33 +681,10 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   min-height: 0;
   border-radius: 0;
 }
-/* Boxed leaves already paint their own outer hairline. Drop the
-   demo frame so they do not sit in a box within a box. */
-.preview-box:has(.rs-callout),
-.preview-box:has(.rs-btn-group),
-.preview-box:has(.rs-toggle-group),
-.preview-box:has(.rs-empty),
-.preview-box:has(.rs-table),
-.preview-box:has(.rs-ai),
-.preview-box:has(.rs-flow),
-.preview-box:has(.rs-input-group),
-.preview-box:has(.rs-inline-form),
-.preview-box:has(.rs-carousel),
-.preview-box:has(.rs-sidebar),
-.preview-box:has(.rs-acc),
-.preview-box:has(.rs-chart),
-.preview-box:has(.rs-cite-box),
-.preview-box:has(.rs-refs),
-.preview-box:has(.rs-field),
-.preview-box:has(.rs-form),
-.preview-box:has(.rs-cal),
-.preview-box:has(.rs-tabs),
-.preview-box:has(.rs-pages) {
-  border: none;
-}
-/* Panel leaves that paint their own hairline span the column, so their
-   outline sits on the same edges as the In action frame below. Small
-   grouped controls (button group, toggle group, flow) stay centred. */
+/* Every preview is framed. Panel leaves that paint their own hairline
+   span the column and drop their own stroke, so the frame is the one box
+   and sits on the same edges as the In action frame below. Small grouped
+   controls (button group, toggle group, flow) stay centred inside it. */
 .preview-box:has(.rs-ai),
 .preview-box:has(.rs-callout),
 .preview-box:has(.rs-empty),
@@ -722,6 +699,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .preview-box:has(.rs-cal),
 .preview-box:has(.rs-tabs) {
   padding: 0;
+  min-height: 0;
   align-items: stretch;
 }
 .preview-box:has(.rs-ai) > *,
@@ -738,7 +716,11 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .preview-box:has(.rs-tabs) > * {
   width: 100%;
   max-width: 100%;
+  border-color: transparent;
+  box-shadow: none;
 }
+.section-label + .preview-box,
+.section-label + .rs-scene { margin-top: 12px; }
 /* Catalog + homepage kit: the card / field cell is the frame.
    StyleX atomics otherwise keep the leaf stroke — zero it here.
    Do not also zero .rs-scene / .rs-use leaves: In Action is open,
@@ -977,10 +959,10 @@ html[data-grid="off"] .swag-field {
 /* ── Docs prose: sub-labels, lists, two columns, and tables inside the 592 measure.
    Tables use the Raster table classes and sit in a scroll container so a
    390px phone never scrolls the page sideways. ── */
-/* Docs prose reads at 400: the 500 body weight is for the poster, not for paragraphs. */
+/* Docs prose: 14px at 400. The 15px / 500 body of the type scale is for the poster, not for paragraphs. */
 .site-content .rs-t-body,
 .site-content .docs-list li,
-.site-content .docs-table .rs-table-td { font-weight: 400; }
+.site-content .docs-table .rs-table-td { font-size: calc(0.875rem * var(--text-scale, 1)); font-weight: 400; line-height: 1.6; }
 .docs-sub { font-size: 13px; font-weight: 600; letter-spacing: -.01em; color: var(--text-secondary); margin: 20px 0 0; }
 .section-label + .docs-sub { margin-top: 12px; }
 .docs-sub + .code-block { margin-top: 8px; }
@@ -989,7 +971,7 @@ html[data-grid="off"] .swag-field {
 .site-content .code-block + .rs-t-body { margin-top: -12px; }
 .docs-list { margin: 8px 0 0; padding-left: 18px; }
 .docs-list li {
-  font-size: calc(0.9375rem * var(--text-scale, 1));
+  font-size: calc(0.875rem * var(--text-scale, 1));
   font-weight: 400;
   letter-spacing: -.01em;
   line-height: 1.6;

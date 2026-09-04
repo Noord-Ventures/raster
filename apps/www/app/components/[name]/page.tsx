@@ -125,12 +125,12 @@ export default async function ComponentPage({
           <p className="rs-t-sub component-desc">{component.description}</p>
         </header>
 
-        <h2 className="rs-sr">Preview</h2>
+        <h2 className="section-label">Preview</h2>
         <div className="preview-box">
           <Preview name={component.name} snippet={component.snippet} />
         </div>
 
-        <h2 className="rs-sr">In action</h2>
+        <h2 className="section-label">In action</h2>
         <InAction name={component.name} />
 
         {usage && (usage.use.length > 0 || usage.avoid.length > 0) ? (
