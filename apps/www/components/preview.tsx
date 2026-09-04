@@ -247,17 +247,17 @@ function CommandDemo() {
 
 function CalendarDemo() {
   const [date, setDate] = React.useState<Date | undefined>(new Date(2026, 6, 24));
-  return <Calendar value={date} onSelect={setDate} />;
+  return <Calendar value={date} onValueChange={setDate} weekStart={1} />;
 }
 
 function DatePickerDemo() {
   const [date, setDate] = React.useState<Date | undefined>(new Date(2026, 6, 24));
-  return <DatePicker value={date} onChange={setDate} />;
+  return <DatePicker value={date} onValueChange={setDate} placeholder="Press date" />;
 }
 
 function PaginationDemo() {
   const [page, setPage] = React.useState(3);
-  return <Pagination page={page} count={12} onPageChange={setPage} />;
+  return <Pagination page={page} count={12} onPageChange={setPage} aria-label="Example pagination" />;
 }
 
 function SliderDemo() {
@@ -443,9 +443,9 @@ export const demos: Record<string, () => React.ReactNode> = {
   spinner: () => <Spinner />,
   drawer: DrawerDemo,
   sidebar: () => (
-    <Sidebar>
+    <Sidebar aria-label="Example sidebar">
       <SidebarHead>Raster</SidebarHead>
-      <SidebarNav>
+      <SidebarNav aria-label="Example links">
         <SidebarLabel>Go to</SidebarLabel>
         <SidebarItem href="#" current>
           Overview
@@ -639,6 +639,7 @@ export const demos: Record<string, () => React.ReactNode> = {
   ),
   "navigation-menu": () => (
     <NavigationMenu
+      aria-label="Example navigation"
       items={[
         { label: "Overview", href: "#", current: true },
         { label: "Docs", href: "#" },
@@ -647,7 +648,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     />
   ),
   carousel: () => (
-    <Carousel>
+    <Carousel aria-label="Example carousel">
       {["One", "Two", "Three", "Four"].map((n) => (
         <div key={n} className="rs-carousel-slide">
           <span className="rs-card-title" style={{ fontSize: 14 }}>
@@ -703,7 +704,7 @@ export const demos: Record<string, () => React.ReactNode> = {
   ),
   "aspect-ratio": () => (
     <AspectRatio ratio={16 / 9} style={{ width: 240, background: "var(--divider-subtle)" }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, color: "var(--text-secondary)" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, color: "var(--text)" }}>
         16 : 9
       </div>
     </AspectRatio>
@@ -712,7 +713,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     <div style={{ width: 300 }}>
       <Accordion exclusive>
         <AccordionItem title="What is Raster?" defaultOpen>
-          A monochrome, CSS-first design system.
+          A monochrome design system on a 204px module.
         </AccordionItem>
         <AccordionItem title="Is it dependency-free?">Yes. Native elements do the work.</AccordionItem>
       </Accordion>
@@ -787,7 +788,7 @@ export const demos: Record<string, () => React.ReactNode> = {
   ),
   sheet: SheetDemo,
   "scroll-area": () => (
-    <ScrollArea maxHeight={110} style={{ width: 180 }}>
+    <ScrollArea maxHeight={110} style={{ width: 180 }} aria-label="Example list">
       {["Alkmaar", "Amsterdam", "Delft", "Eindhoven", "Groningen", "Haarlem", "Rotterdam", "Utrecht"].map((c) => (
         <p key={c} className="rs-t-body" style={{ padding: "3px 0" }}>
           {c}
@@ -796,7 +797,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     </ScrollArea>
   ),
   "crumb-bar": () => (
-    <nav className="rs-crumb-bar rs-crumb-bar-scrolled" style={{ position: "relative", width: 340 }} aria-label="Breadcrumbs">
+    <nav className="rs-crumb-bar rs-crumb-bar-scrolled" style={{ position: "relative", width: 340 }} aria-label="Example crumb bar">
       <div className="rs-crumb-bar-inner" style={{ margin: 0, paddingLeft: 16 }}>
         <p className="rs-crumbs">
           <span>Raster</span>
@@ -807,11 +808,12 @@ export const demos: Record<string, () => React.ReactNode> = {
     </nav>
   ),
   breadcrumbs: () => (
-    <Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Raster" }]} />
+    <Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Raster" }]} aria-label="Example breadcrumbs" />
   ),
   pagination: PaginationDemo,
   select: () => (
     <Select
+      aria-label="City"
       options={[
         { value: "alkmaar", label: "Alkmaar" },
         { value: "amsterdam", label: "Amsterdam" },

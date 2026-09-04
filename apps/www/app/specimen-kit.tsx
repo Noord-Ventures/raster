@@ -15,6 +15,7 @@ export function SpecimenKit() {
 
   return (
     <>
+      <h2 className="rs-sr">The kit</h2>
       {KIT.map((name, i) => {
         const component = catalogComponents.find((c) => c.name === name);
         if (!component) return null;

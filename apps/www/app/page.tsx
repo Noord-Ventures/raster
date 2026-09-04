@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CopyControl } from "@/components/code-block";
 import { sx } from "@/lib/sx";
-import { COMMAND, LAW, PACKAGES_PUBLISHED, POSTER, WORD } from "./specimen";
+import { INSTALL, LAW, POSTER, WORD } from "./specimen";
 import { SpecimenKit } from "./specimen-kit";
 import { SpecimenPrinciples } from "./specimen-principles";
 import { specimen } from "./specimen.stylex";
@@ -30,30 +30,16 @@ export default function Home() {
         </section>
 
         <section {...sx("specimen-cell specimen-cell-command", specimen.cell, specimen.cellCommand)}>
-          {PACKAGES_PUBLISHED ? (
-            <>
-              <p className="specimen-command-kicker">Install</p>
-              <div className="specimen-command-row">
-                <p className="specimen-command">{COMMAND}</p>
-                <CopyControl text={COMMAND} />
-              </div>
-              <p className="specimen-command-meta">
-                <a href="/docs">Getting started</a>
-                <span aria-hidden="true"> · </span>
-                MIT
-              </p>
-            </>
-          ) : (
-            <>
-              <p className="specimen-command-kicker">Source</p>
-              <p className="specimen-command">Not on npm</p>
-              <p className="specimen-command-meta">
-                <a href="https://github.com/Noord-Ventures/raster">github.com/Noord-Ventures/raster</a>
-                <span aria-hidden="true"> · </span>
-                MIT
-              </p>
-            </>
-          )}
+          <p className="specimen-command-kicker">Install</p>
+          <div className="specimen-command-row">
+            <p className="specimen-command">{INSTALL}</p>
+            <CopyControl text={INSTALL} />
+          </div>
+          <p className="specimen-command-meta">
+            <a href="/docs">Getting started</a>
+            <span aria-hidden="true"> · </span>
+            MIT
+          </p>
         </section>
 
         <SpecimenPrinciples />

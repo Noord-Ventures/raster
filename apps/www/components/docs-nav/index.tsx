@@ -49,9 +49,21 @@ function groupLinks(category: RasterCategory) {
     }));
 }
 
+/** Docs pages in rail order. Components has its own rail. */
+export const docsPages = [
+  { href: "/docs", title: "Getting started" },
+  { href: "/docs/frameworks", title: "Frameworks" },
+  { href: "/docs/theming", title: "Theming" },
+  { href: "/docs/tokens", title: "Tokens" },
+  { href: "/docs/layers", title: "Layers" },
+  { href: "/docs/stylex", title: "StyleX" },
+  { href: "/docs/accessibility", title: "Accessibility" },
+  { href: "/docs/agents", title: "Agents" },
+] as const;
+
 function docsLabel(pathname: string) {
-  if (here(pathname, "/docs/tokens")) return "Tokens";
-  if (here(pathname, "/docs")) return "Getting started";
+  const page = docsPages.find((p) => here(pathname, p.href));
+  if (page) return page.title;
   if (pathname.startsWith("/components/")) {
     const name = pathname.split("/")[2];
     return catalogComponents.find((c) => c.name === name)?.title ?? "Components";
@@ -89,16 +101,16 @@ export function DocsNav() {
 
   const docsLinks = (
     <>
-      <Link href="/docs" className="toc-mobile-item" aria-current={here(pathname, "/docs") ? "page" : undefined}>
-        Getting started
-      </Link>
-      <Link
-        href="/docs/tokens"
-        className="toc-mobile-item"
-        aria-current={here(pathname, "/docs/tokens") ? "page" : undefined}
-      >
-        Tokens
-      </Link>
+      {docsPages.map((page) => (
+        <Link
+          key={page.href}
+          href={page.href}
+          className="toc-mobile-item"
+          aria-current={here(pathname, page.href) ? "page" : undefined}
+        >
+          {page.title}
+        </Link>
+      ))}
     </>
   );
 
@@ -150,16 +162,16 @@ export function DocsNav() {
       <>
         <div {...sx("toc-rail", navStyles.rail)}>
           <nav {...sx("toc", navStyles.toc)} aria-label="Docs">
-            <Link href="/docs" {...sx("toc-item", navStyles.item)} aria-current={here(pathname, "/docs") ? "page" : undefined}>
-              Getting started
-            </Link>
-            <Link
-              href="/docs/tokens"
-              {...sx("toc-item", navStyles.item)}
-              aria-current={here(pathname, "/docs/tokens") ? "page" : undefined}
-            >
-              Tokens
-            </Link>
+            {docsPages.map((page) => (
+              <Link
+                key={page.href}
+                href={page.href}
+                {...sx("toc-item", navStyles.item)}
+                aria-current={here(pathname, page.href) ? "page" : undefined}
+              >
+                {page.title}
+              </Link>
+            ))}
           </nav>
         </div>
         <MobileToc label={docsLabel(pathname)}>{docsLinks}</MobileToc>

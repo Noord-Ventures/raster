@@ -4,9 +4,12 @@ export const FACE = "Inter";
 export const WORD = "Raster";
 export const LAW = "A design system on a modular grid.";
 export const POSTER = "Inspired by Dutch and Swiss modernism.";
+/** The package path: precompiled React and one stylesheet. The homepage command. */
+export const INSTALL = "npm install @noorddev/raster-react";
+/** The vendoring path: the CLI writes the CSS, Inter, and a specimen, then copies leaves. */
 export const COMMAND = "npx @noorddev/raster-cli init";
-/** False until @noorddev/raster-cli resolves on npm. Keep COMMAND for after publish. */
-export const PACKAGES_PUBLISHED = false;
+/** The shadcn path: the same registry, through shadcn's CLI. */
+export const SHADCN = "npx shadcn add https://getraster.com/r/button.json";
 
 /** Public door. Do not attach DNS from this repo. */
 export const DOOR = "https://getraster.com";

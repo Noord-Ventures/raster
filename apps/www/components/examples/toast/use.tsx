@@ -15,7 +15,7 @@ export function Use() {
         <Button variant="ghost" size="sm" onClick={() => toast("Sheet saved", { description: "Issue 03 is on the press." })}>
           Save the sheet
         </Button>
-        <Toaster />
+        <Toaster closeLabel="Dismiss" />
       </div>
     </UseField>
   );

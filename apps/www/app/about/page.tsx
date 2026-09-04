@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { CopyControl } from "@/components/code-block";
 import { sx } from "@/lib/sx";
-import { DOOR, PACKAGES_PUBLISHED } from "../specimen";
+import { DOOR } from "../specimen";
 import {
   era,
   featured,
@@ -91,12 +91,12 @@ export default function AboutPage() {
           </Copy>
           <div {...sx("field-code-stack", about.codeStack)}>
             <div {...sx("field-step", about.step)}>
-              <Kicker>{PACKAGES_PUBLISHED ? usage.commandWhere : "Source"}</Kicker>
+              <Kicker>{usage.commandWhere}</Kicker>
               <div {...sx("field-code-row", about.codeRow)}>
                 <pre {...sx("field-code", about.code)}>
-                  <code>{PACKAGES_PUBLISHED ? usage.command : "Not on npm"}</code>
+                  <code>{usage.command}</code>
                 </pre>
-                {PACKAGES_PUBLISHED ? <CopyControl text={usage.command} /> : null}
+                <CopyControl text={usage.command} />
               </div>
             </div>
             <div {...sx("field-step", about.step)}>
@@ -308,11 +308,9 @@ export default function AboutPage() {
             <p {...sx("", about.colophonP)}>
               {person.copyright}, {person.year}.
             </p>
-            {PACKAGES_PUBLISHED ? (
-              <p {...sx("", about.colophonP)}>
-                <code className="rs-code">{noord.command}</code>
-              </p>
-            ) : null}
+            <p {...sx("", about.colophonP)}>
+              <code className="rs-code">{noord.command}</code>
+            </p>
           </div>
         </section>
       </div>

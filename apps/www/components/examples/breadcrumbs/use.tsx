@@ -9,6 +9,7 @@ export function Use() {
       <div className="rs-use-body">
         <div className="rs-use-stack">
           <Breadcrumbs
+            aria-label="Issue trail"
             items={[
               { label: "Studio", href: "/" },
               { label: "Raster", href: "/components" },

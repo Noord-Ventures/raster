@@ -10,6 +10,7 @@ export function Use() {
           <p className="rs-use-kicker">The only face</p>
           <p className="rs-use-copy">Inter, or Inter. Weight and size do the rest.</p>
           <Select
+            aria-label="Typeface"
             options={[
               { value: "inter", label: "Inter" },
               { value: "inter-tight", label: "Inter tight" },

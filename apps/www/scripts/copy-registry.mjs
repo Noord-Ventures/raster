@@ -1,7 +1,8 @@
 // Copies the generated registry into public/r so the exported site
 // serves it at /r/<name>.json — the URL the CLI docs and shadcn
-// interop point at.
-import { cpSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+// interop point at — and the generated docs into public/docs plus
+// llms.txt and llms-full.txt at the root, for agents.
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 const src = fileURLToPath(new URL("../../../registry", import.meta.url));
@@ -11,9 +12,32 @@ if (!existsSync(src)) {
   console.error("registry/ not found — run: pnpm --filter @noorddev/raster build:registry");
   process.exit(1);
 }
+rmSync(dest, { recursive: true, force: true });
 mkdirSync(dest, { recursive: true });
-cpSync(src, dest, { recursive: true });
+cpSync(src, dest, { recursive: true, filter: (p) => !p.includes("/registry/docs") });
 console.log("copied registry → public/r");
+
+const docsSrc = fileURLToPath(new URL("../../../registry/docs", import.meta.url));
+const docsDest = fileURLToPath(new URL("../public/docs", import.meta.url));
+const publicDir = fileURLToPath(new URL("../public", import.meta.url));
+if (!existsSync(docsSrc)) {
+  console.error("registry/docs not found — run: pnpm --filter @noorddev/raster build:registry");
+  process.exit(1);
+}
+rmSync(docsDest, { recursive: true, force: true });
+mkdirSync(docsDest, { recursive: true });
+for (const file of readdirSync(docsSrc)) {
+  const text = readFileSync(`${docsSrc}/${file}`);
+  if (file === "llms.txt" || file === "llms-full.txt") writeFileSync(`${publicDir}/${file}`, text);
+  else writeFileSync(`${docsDest}/${file}`, text);
+}
+const propsSrc = fileURLToPath(new URL("../../../packages/core/props/props.json", import.meta.url));
+if (!existsSync(propsSrc)) {
+  console.error("props.json not found — run: pnpm --filter @noorddev/raster build:props");
+  process.exit(1);
+}
+writeFileSync(`${docsDest}/props.json`, readFileSync(propsSrc));
+console.log("copied docs → public/docs, llms.txt, llms-full.txt");
 
 const fontSrc = fileURLToPath(new URL("../../../packages/core/css/fonts/inter", import.meta.url));
 const fontDest = fileURLToPath(new URL("../public/fonts/inter", import.meta.url));

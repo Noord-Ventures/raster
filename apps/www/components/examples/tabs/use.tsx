@@ -12,7 +12,7 @@ export function Use() {
       <h3 className="rs-use-type">Issue</h3>
       <div className="rs-use-body">
         <Tabs value={page} onValueChange={setPage}>
-          <TabList>
+          <TabList aria-label="Issue 03">
             <Tab value="overview">Overview</Tab>
             <Tab value="proof">Proof</Tab>
             <Tab value="type">Type</Tab>

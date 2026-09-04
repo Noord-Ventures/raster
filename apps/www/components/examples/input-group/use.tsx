@@ -11,7 +11,7 @@ export function Use() {
           <p className="rs-use-copy">Addon and field share one hairline.</p>
           <InputGroup>
             <InputAddon>https://</InputAddon>
-            <Input defaultValue="getraster.com" />
+            <Input defaultValue="getraster.com" aria-label="Domain" />
           </InputGroup>
         </div>
       </div>

@@ -8,7 +8,7 @@ export function Use() {
       <div className="rs-use-body">
         <div className="rs-use-stack">
           <p className="rs-use-kicker">The catalog</p>
-          <Pagination page={2} count={8} />
+          <Pagination page={2} count={8} aria-label="Catalogue pages" />
         </div>
       </div>
     </UseField>

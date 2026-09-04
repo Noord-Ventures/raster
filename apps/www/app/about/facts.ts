@@ -37,7 +37,7 @@ export const lead = {
 
 export const usage = {
   kicker: "Usage",
-  intro: "Not on npm. Link the stylesheet in the head, then put a control in the body. The CLI is not a path this ship offers.",
+  intro: "Three ways in. Import @noorddev/raster-react for precompiled components and one stylesheet. Or run the CLI: it writes the stylesheet, Inter, and a specimen page, and copies component source on request. Or link raster.css and use the classes.",
   commandWhere: "Terminal",
   command: COMMAND,
   htmlWhere: "Head",
@@ -47,7 +47,7 @@ export const usage = {
   landing:
     "index.html is the one-shot Raster landing, meant to read like getraster.com: poster type, the 204 grid, the laws. It is not a thin shell.",
   files:
-    "styles/raster.css, Inter, and raster.json live in this repo. There is no CDN. Restyle the specimen toward the live home with the files on disk.",
+    "styles/raster.css, Inter, and raster.json land in your project. No CDN, no runtime fetch. Restyle the specimen toward the live home with the files on disk.",
   after: "Dark scheme: set data-theme=\"dark\" on the root element.",
 };
 
@@ -320,27 +320,27 @@ export const program = {
 export const notes = [
   {
     q: "How do I install Raster?",
-    a: "Not on npm. Link styles/raster.css from this repo, or import @noorddev/raster/css after publish. There is no CDN and no CLI install on this ship.",
+    a: "npm install @noorddev/raster-react, then import @noorddev/raster-react/css once and the components where you use them. For CSS only, install @noorddev/raster and link raster.css. For vendored source, npx @noorddev/raster-cli add <name>, or npx shadcn add getraster.com/r/<name>.json.",
   },
   {
     q: "How do I add a component?",
-    a: "Not on npm. CSS-only components need no file; the classes are already in raster.css. React source lives in this repo under packages/react. The registry is at getraster.com/r/<name>.json.",
+    a: "Import it from @noorddev/raster-react, or copy its StyleX source into components/raster/ with npx @noorddev/raster-cli add <name>. The classes are already in raster.css, so CSS-only pages need no file. The registry is at getraster.com/r/<name>.json.",
   },
   {
     q: "How do I use Raster with Next.js or Vercel?",
-    a: "Import @noorddev/raster/css in the root layout, or link styles/raster.css. React from @noorddev/raster-react is optional. Static export works. Set data-theme=\"dark\" on the html element for the dark scheme.",
+    a: "Import @noorddev/raster-react/css in the root layout and use the components; stateful ones already carry \"use client\". Static export works; this site is one. Set data-theme=\"dark\" on the html element for the dark scheme.",
   },
   {
     q: "Does Raster use Radix or Tailwind?",
-    a: "No. Raster is CSS-first. No Radix, no Tailwind. Classes start with rs-.",
+    a: "No. Components are StyleX leaves on native elements. No Radix, no Tailwind. Every component also carries stable rs- classes.",
   },
   {
     q: "What does dependency-free mean?",
-    a: "The CSS ships with no JavaScript kit. The React layer uses native elements: details, dialog, popover, scroll snap. No Radix. No Tailwind.",
+    a: "The React package depends on React and @stylexjs/stylex, nothing else. Behaviour comes from the platform: details, dialog, the Popover API, scroll snap, native inputs. No Radix. No Tailwind.",
   },
   {
     q: "Do I need React?",
-    a: "No. Raster is CSS-first. Plain classes on plain markup. The React layer is optional and uses native elements.",
+    a: "No. raster.css is generated from the same StyleX leaves and paints every component through rs- classes on plain markup. React is one of three ways in.",
   },
   {
     q: "How do I switch to the dark scheme?",

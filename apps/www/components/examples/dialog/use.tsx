@@ -12,7 +12,7 @@ export function Use() {
       <div className="rs-use-body">
         <p className="rs-use-copy">Remove a sheet from the run. The question sits on paper.</p>
         <Button variant="ghost" size="sm" onClick={() => setOpen(true)}>Remove item…</Button>
-        <Dialog open={open} onClose={() => setOpen(false)}>
+        <Dialog open={open} onClose={() => setOpen(false)} closeLabel="Close">
           <DialogTitle>Remove this item?</DialogTitle>
           <DialogBody>This can&rsquo;t be undone.</DialogBody>
           <DialogActions>

@@ -6,9 +6,9 @@ export function Use() {
     <UseField name="sidebar">
       <h3 className="rs-use-type">Rail</h3>
       <div className="rs-use-body">
-        <Sidebar>
+        <Sidebar aria-label="Studio rail">
           <SidebarHead>Raster</SidebarHead>
-          <SidebarNav>
+          <SidebarNav aria-label="Studio links">
             <SidebarLabel>Go to</SidebarLabel>
             <SidebarItem href="/" current>Overview</SidebarItem>
             <SidebarItem href="/docs">Docs</SidebarItem>

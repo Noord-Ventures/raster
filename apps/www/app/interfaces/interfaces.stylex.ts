@@ -58,7 +58,6 @@ export const interfaces = stylex.create({
     fontWeight: 400,
     letterSpacing: "-0.01em",
     color: "var(--text-secondary)",
-    opacity: 0.6,
     textDecoration: "none",
   },
   list: {

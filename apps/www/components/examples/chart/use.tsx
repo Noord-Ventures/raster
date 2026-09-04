@@ -37,6 +37,7 @@ export function Use() {
             { name: "Proofs", values: PROOFS },
           ]}
           unit="sheets"
+          locale="en"
           annotations={[{ at: 3, label: "Press" }]}
           spot={mode === "spot"}
           inverted={mode === "invert"}

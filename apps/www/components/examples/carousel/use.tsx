@@ -6,7 +6,7 @@ export function Use() {
     <UseField name="carousel">
       <h3 className="rs-use-type">Flip</h3>
       <div className="rs-use-body">
-        <Carousel>
+        <Carousel aria-label="Sheets">
           <p className="rs-use-copy">Sheet 01 — the cover.</p>
           <p className="rs-use-copy">Sheet 02 — the law.</p>
           <p className="rs-use-copy">Sheet 03 — the kit.</p>

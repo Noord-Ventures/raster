@@ -11,9 +11,9 @@ export function Use() {
           <p className="rs-use-copy">Initials on paper. No photograph required.</p>
         </div>
         <AvatarRow>
-          <Avatar initials="RV" />
-          <Avatar initials="N" />
-          <Avatar initials="R" />
+          <Avatar name="Renato Valdés Olmos" initials="RV" />
+          <Avatar name="Noord" initials="N" />
+          <Avatar name="Raster" initials="R" />
         </AvatarRow>
       </div>
     </UseField>

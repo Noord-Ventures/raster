@@ -1,0 +1,135 @@
+import type { Metadata } from "next";
+import { CodeBlock } from "@/components/code-block";
+import { DocsShell } from "@/components/docs-shell";
+import { DOOR, HOST } from "../../specimen";
+
+export const metadata: Metadata = {
+  title: "Agents",
+  description: "Raster for AI agents: llms.txt, markdown docs, the JSON registry, the CLI, the MCP server, and the API conventions.",
+  alternates: { canonical: `${DOOR}/docs/agents/` },
+};
+
+const surfaces = [
+  [`${HOST}/llms.txt`, "The index: what Raster is, the install paths, one line per component"],
+  [`${HOST}/llms-full.txt`, "Everything in one file: every component's docs, props, keyboard, markup"],
+  [`${HOST}/docs/<name>.md`, "One component as markdown"],
+  [`${HOST}/r/<name>.json`, "The shadcn registry item: files, dependencies, classes"],
+  [`${HOST}/r/index.json`, "Every registry item"],
+  ["npx @noorddev/raster-cli list --json", "The catalogue as JSON, offline"],
+  ["npx @noorddev/raster-cli docs <name>", "One component's docs in the terminal"],
+  ["npx @noorddev/raster-cli tokens", "The design tokens as JSON"],
+  ["@noorddev/raster/props", "Every export's props as JSON, importable"],
+];
+
+const mcp = `{
+  "mcpServers": {
+    "raster": {
+      "command": "npx",
+      "args": ["-y", "@noorddev/raster-mcp"]
+    }
+  }
+}`;
+
+const conventions = `// State: value / defaultValue / onValueChange, everywhere a value lives
+<Select options={cities} value={city} onValueChange={setCity} />
+<Tabs defaultValue="overview" onValueChange={track} />
+<Calendar value={date} onValueChange={setDate} />
+
+// Booleans follow the same shape
+<Switch checked={on} onCheckedChange={setOn} />
+<Toggle pressed={bold} onPressedChange={setBold} />
+
+// Overlays: open + onClose, parent state is the source of truth
+<Dialog open={open} onClose={() => setOpen(false)} />
+
+// className and style merge onto the root; refs are forwarded
+<Button ref={ref} className="mine" style={{ marginTop: 8 }} />
+
+// Every component has a name or takes one
+<Slider aria-label="Volume" />`;
+
+export default function AgentsPage() {
+  return (
+    <DocsShell
+      title="Agents"
+      summary="Components, tokens, and props are data. Every surface an agent needs is served as text or JSON."
+    >
+      <h2 className="section-label">Surfaces</h2>
+      <div className="docs-table" tabIndex={0}>
+        <table className="rs-table">
+          <thead>
+            <tr className="rs-table-row">
+              <th className="rs-table-th">Where</th>
+              <th className="rs-table-th">What</th>
+            </tr>
+          </thead>
+          <tbody>
+            {surfaces.map(([where, what]) => (
+              <tr key={where} className="rs-table-row">
+                <td className="rs-table-td">
+                  <code>{where}</code>
+                </td>
+                <td className="rs-table-td">{what}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="rs-t-body">
+        All of it is generated from one registry, so the markdown, the JSON, and the docs pages say
+        the same thing. Point a model at <code className="rs-code">llms.txt</code> first; it is
+        short and links out.
+      </p>
+
+      <h2 className="section-label">MCP server</h2>
+      <CodeBlock code={mcp} />
+      <p className="rs-t-body">
+        <code className="rs-code">@noorddev/raster-mcp</code> serves the same registry over the Model
+        Context Protocol: list components, read one component&apos;s docs and props, fetch the
+        tokens, and get the install command for a given path. Works offline; the snapshot ships in
+        the package. Add the block above to your client&apos;s MCP configuration.
+      </p>
+
+      <h2 className="section-label">Conventions an agent can rely on</h2>
+      <CodeBlock code={conventions} />
+      <ul className="docs-list">
+        <li>
+          Value state is <code className="rs-code">value</code>,{" "}
+          <code className="rs-code">defaultValue</code>, <code className="rs-code">onValueChange</code>
+          . Booleans use <code className="rs-code">checked</code> or{" "}
+          <code className="rs-code">pressed</code> with the matching{" "}
+          <code className="rs-code">onCheckedChange</code> or{" "}
+          <code className="rs-code">onPressedChange</code>.
+        </li>
+        <li>
+          Overlays take <code className="rs-code">open</code> and{" "}
+          <code className="rs-code">onClose</code>. The parent owns the state; Escape and backdrop
+          clicks call <code className="rs-code">onClose</code> rather than closing on their own.
+        </li>
+        <li>
+          <code className="rs-code">className</code> and <code className="rs-code">style</code> merge
+          onto the root element. Native attributes pass through.
+        </li>
+        <li>Refs are forwarded to the element that carries the role.</li>
+        <li>
+          Every component is named or takes <code className="rs-code">aria-label</code>. Dialog
+          parts name their dialog; Field parts describe their control.
+        </li>
+        <li>
+          Every component applies stable <code className="rs-code">rs-*</code> classes. They are
+          listed in the registry and on each page; compiled class hashes are not part of the
+          contract.
+        </li>
+        <li>
+          Compound components are exported flat from the package root:{" "}
+          <code className="rs-code">Dialog</code>, <code className="rs-code">DialogTitle</code>,{" "}
+          <code className="rs-code">DialogBody</code>, <code className="rs-code">DialogActions</code>.
+        </li>
+        <li>
+          Only three install paths exist: the package, the CLI, and shadcn. No CDN, no runtime
+          fetch, no Tailwind, no Radix.
+        </li>
+      </ul>
+    </DocsShell>
+  );
+}

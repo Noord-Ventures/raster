@@ -6,7 +6,12 @@ export function Use() {
     <UseField name="alert">
       <h3 className="rs-use-type">Hold</h3>
       <div className="rs-use-body">
-        <Alert title="Press paused">Ink density drifted on the 184. Recheck the sheet.</Alert>
+        <div className="rs-use-stack">
+          <Alert title="Press paused">Ink density drifted on the 184. Recheck the sheet.</Alert>
+          <Alert variant="solid" title="Plate locked" live="polite">
+            Issue 03 is on the cylinder. No more changes.
+          </Alert>
+        </div>
       </div>
     </UseField>
   );

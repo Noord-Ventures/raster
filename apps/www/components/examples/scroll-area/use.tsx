@@ -10,7 +10,7 @@ export function Use() {
           <p className="rs-use-kicker">Towns on the sheet</p>
           <p className="rs-use-copy">The list is longer than the cell. Edges feather.</p>
         </div>
-        <ScrollArea maxHeight={110} style={{ width: 180 }}>
+        <ScrollArea maxHeight={110} style={{ width: 180 }} aria-label="Towns on the sheet">
           {["Alkmaar", "Amsterdam", "Delft", "Haarlem", "Rotterdam", "Utrecht"].map((c) => (
             <p key={c} className="rs-t-body" style={{ padding: "3px 0" }}>{c}</p>
           ))}

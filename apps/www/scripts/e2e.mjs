@@ -34,7 +34,8 @@ const fail = (msg) => failures.push(msg);
 const browser = await chromium.launch();
 
 /* axe on every page, desktop. */
-const pages = ["/", "/docs/", "/docs/tokens/", "/components/", "/about/", "/interfaces/", ...catalogComponents.map((c) => `/components/${c.name}/`)];
+const docs = ["", "frameworks/", "theming/", "tokens/", "layers/", "stylex/", "accessibility/", "agents/"].map((d) => `/docs/${d}`);
+const pages = ["/", ...docs, "/components/", "/about/", "/interfaces/", "/interfaces/evening/", ...catalogComponents.map((c) => `/components/${c.name}/`)];
 const desk = await browser.newPage({ viewport: { width: 1280, height: 900 } });
 for (const path of pages) {
   const errors = [];

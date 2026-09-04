@@ -11,7 +11,7 @@ export function Use() {
       <h3 className="rs-use-type">Up</h3>
       <div className="rs-use-body">
         <Button variant="ghost" size="sm" onClick={() => setOpen(true)}>Open the tray</Button>
-        <Drawer open={open} onClose={() => setOpen(false)}>
+        <Drawer open={open} onClose={() => setOpen(false)} lightDismiss closeLabel="Close">
           <DrawerTitle>Notes</DrawerTitle>
           <DrawerBody>A bottom panel. Escape closes it.</DrawerBody>
         </Drawer>
