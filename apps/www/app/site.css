@@ -658,6 +658,9 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 }
 .section-label + .preview-box,
 .section-label + .rs-scene { margin-top: 12px; }
+/* An open hover card hangs below its trigger; leave room for it inside the frame. */
+.preview-box:has(.rs-hover-card-open) { align-items: flex-start; padding-top: 3.5rem; padding-bottom: 9rem; }
+.gallery-demo:has(.rs-hover-card-open) { align-items: flex-start; padding-top: 2rem; }
 /* Catalog + homepage kit: the card / field cell is the frame, so panel
    leaves drop their own stroke here. Grouped controls (button group,
    toggle group, input group, dropdown) keep theirs: the frame is the control. */

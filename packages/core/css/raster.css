@@ -49,6 +49,7 @@
   --table-alt: rgba(0,0,0,0.02);
   --grid-line: rgba(0,0,0,0.04);
   --control-border: rgba(0,0,0,0.42);
+  --control-fill: #E4E2DC;
   color-scheme: light;
   --radius-sm: 4px;           /* slight Raster radius; standalone buttons */
   --radius: var(--radius-sm);              /* alias — buttons, boxes, dialogs share it; cards stay 0 */
@@ -94,6 +95,7 @@
   --table-alt: rgba(255,255,255,0.03);
   --grid-line: rgba(255,255,255,0.05);
   --control-border: rgba(255,255,255,0.38);
+  --control-fill: #242220;
   color-scheme: dark;
 }
 /* System dark scheme applies until the page decides with data-theme. */
@@ -108,6 +110,7 @@
   --table-alt: rgba(255,255,255,0.03);
   --grid-line: rgba(255,255,255,0.05);
   --control-border: rgba(255,255,255,0.38);
+  --control-fill: #242220;
   color-scheme: dark;
 }
 }
@@ -204,7 +207,7 @@ body{
 .rs-btn-primary{font-weight:600;background-color:var(--text);color:var(--bg);border-color:transparent}
 @media (forced-colors: active){.rs-btn-primary{background-color:ButtonFace;color:ButtonText;border-color:ButtonText}.rs-btn-primary:disabled{color:GrayText;border-color:GrayText}}
 .rs-btn-ghost{font-weight:500;background-color:transparent;color:var(--text);border-color:var(--divider)}
-.rs-btn-ghost:hover{background-color:var(--divider)}
+.rs-btn-ghost:hover{background-color:var(--control-fill);border-color:var(--control-fill)}
 .rs-btn-ghost:disabled{background-color:transparent;border-color:var(--divider)}
 @media (forced-colors: active){.rs-btn-ghost{background-color:ButtonFace;color:ButtonText;border-color:ButtonText}.rs-btn-ghost:disabled{color:GrayText;border-color:GrayText}.rs-btn-ghost:hover{border-color:Highlight}}
 .rs-btn-sm{height:2.25rem;padding-inline:0.875rem;font-size:0.8125rem;min-width:6.5rem}
@@ -213,7 +216,7 @@ body{
 .rs-btn-grouped:focus-visible{outline-offset:-2px}
 @media (max-width: 640px){.rs-btn-grouped{flex-grow:1;min-width:0}}
 .rs-btn-grouped-ghost{background-color:var(--bg)}
-.rs-btn-grouped-ghost:hover{background-color:var(--divider)}
+.rs-btn-grouped-ghost:hover{background-color:var(--control-fill)}
 .rs-btn-grouped-ghost:disabled{background-color:var(--bg)}
 @media (forced-colors: active){.rs-btn-grouped-ghost{background-color:ButtonFace}}
 
@@ -419,10 +422,11 @@ body{
 .rs-pages{display:flex;align-items:center;gap:0.3125rem}
 @media (max-width: 640px){.rs-pages{gap:0.5rem;flex-wrap:wrap}}
 .rs-page{box-sizing:border-box;width:1.625rem;height:1.625rem;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:0.8125rem;color:var(--text-secondary);border-width:1px;border-style:solid;border-color:var(--control-border);padding:0;background-color:transparent;font-family:inherit;cursor:pointer;opacity:1}
+.rs-page:hover{border-color:var(--control-fill);background-color:var(--control-fill)}
 .rs-page:disabled{cursor:not-allowed;opacity:0.4}
 .rs-page:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
 @media (max-width: 640px){.rs-page{width:var(--hit);height:var(--hit);min-width:var(--hit);min-height:var(--hit);border-radius:0;font-size:var(--control-fs)}}
-@media (forced-colors: active){.rs-page{color:ButtonText;border-color:ButtonText;opacity:1}.rs-page:disabled{color:GrayText;border-color:GrayText;opacity:1}}
+@media (forced-colors: active){.rs-page{color:ButtonText;border-color:ButtonText;background-color:ButtonFace;opacity:1}.rs-page:disabled{color:GrayText;border-color:GrayText;opacity:1}}
 .rs-page-on{background-color:var(--text);color:var(--bg);font-weight:600;border-color:transparent;forced-color-adjust:none}
 @media (forced-colors: active){.rs-page-on{background-color:Highlight;color:HighlightText;border-color:Highlight}}
 .rs-page-gap{border-color:transparent;cursor:default}
@@ -443,7 +447,7 @@ body{
 .rs-dialog-actions{display:flex;justify-content:flex-end;flex-direction:row;align-items:flex-end;gap:0.5rem}
 @media (max-width: 640px){.rs-dialog-actions{flex-direction:column;align-items:stretch;gap:0.625rem}}
 .rs-dialog-close,.rs-drawer-close,.rs-sheet-close{float:inline-end;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;margin-top:-0.5rem;margin-inline-end:-0.5rem;margin-inline-start:0.5rem;padding:0;border-width:0;border-radius:var(--radius-sm);background-color:transparent;color:var(--text);cursor:pointer}
-.rs-dialog-close:hover,.rs-drawer-close:hover,.rs-sheet-close:hover{background-color:var(--divider)}
+.rs-dialog-close:hover,.rs-drawer-close:hover,.rs-sheet-close:hover{background-color:var(--control-fill)}
 .rs-dialog-close:focus-visible,.rs-drawer-close:focus-visible,.rs-sheet-close:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
 @media (max-width: 640px){.rs-dialog-close,.rs-drawer-close,.rs-sheet-close{width:var(--hit);height:var(--hit);margin-top:-0.75rem;margin-inline-end:-0.75rem}}
 
@@ -615,7 +619,7 @@ body{
 .rs-toast-body{font-size:0.78125rem;line-height:1.5;letter-spacing:-0.01em;color:var(--text-secondary);margin-top:1px;margin-bottom:0;margin-inline:0}
 @media (max-width: 640px){.rs-toast-body{font-size:0.9375rem;margin-top:0.25rem}}
 .rs-toast-close{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-inline-start:auto;margin-top:-0.25rem;margin-inline-end:-0.375rem;width:1.75rem;height:1.75rem;padding:0;border-width:0;border-radius:var(--radius-sm);background-color:transparent;color:var(--text);cursor:pointer}
-.rs-toast-close:hover{background-color:var(--divider)}
+.rs-toast-close:hover{background-color:var(--control-fill)}
 .rs-toast-close:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
 @media (max-width: 640px){.rs-toast-close{margin-top:-0.625rem;margin-inline-end:-0.75rem;width:var(--hit);height:var(--hit)}}
 
@@ -641,9 +645,10 @@ body{
 
 /* ── toggle: generated from packages/react/src/components/toggle.tsx ── */
 .rs-toggle{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:0.375rem;height:2rem;min-width:2rem;padding-block:0;padding-inline:0.625rem;font-size:0.8125rem;font-weight:500;letter-spacing:-0.01em;background-color:transparent;border-width:1px;border-style:solid;border-color:var(--control-border);border-radius:var(--radius-sm);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:background-color var(--duration-snap) var(--ease), color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease)}
+.rs-toggle:hover{background-color:var(--control-fill);border-color:var(--control-fill);color:var(--text)}
 .rs-toggle:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
 @media (max-width: 640px){.rs-toggle{height:var(--hit);min-height:var(--hit);min-width:var(--hit);padding-inline:0.875rem;font-size:var(--control-fs);border-radius:0}}
-@media (forced-colors: active){.rs-toggle{border-color:ButtonText;color:ButtonText}}
+@media (forced-colors: active){.rs-toggle{background-color:ButtonFace;border-color:ButtonText;color:ButtonText}}
 @media (prefers-reduced-motion: reduce){.rs-toggle{transition:none}}
 .rs-toggle-pressed{background-color:var(--text);border-color:var(--text);color:var(--bg);forced-color-adjust:none}
 @media (forced-colors: active){.rs-toggle-pressed{background-color:Highlight;border-color:Highlight;color:HighlightText}}
@@ -759,6 +764,7 @@ body{
 .rs-hover-card-panel::before{content:"";position:absolute;bottom:100%;inset-inline-start:0;inset-inline-end:0;height:0.5rem}
 @media (max-width: 640px){.rs-hover-card-panel{width:min(280px, calc(100vw - 32px));border-radius:0;box-shadow:none;font-size:0.9375rem}}
 @media (hover: none){.rs-hover-card:hover .rs-hover-card-panel{opacity:0;visibility:hidden}.rs-hover-card:active .rs-hover-card-panel{opacity:1;visibility:visible}}
+.rs-hover-card-open{opacity:1;visibility:visible}
 
 /* ── kbd: generated from packages/react/src/components/kbd.tsx ── */
 .rs-kbd{font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:0.6875rem;font-weight:500;color:var(--text-secondary);background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-bottom-width:2px;border-radius:var(--radius-sm);padding-block:2px;padding-inline:0.375rem;line-height:1.2}
@@ -880,9 +886,9 @@ body{
 .rs-cal-dow{font-size:0.6875rem;font-weight:500;color:var(--text-secondary);text-align:center;padding-top:0.25rem;padding-bottom:0.25rem;padding-inline:0}
 @media (max-width: 640px){.rs-cal-dow{font-size:0.8125rem}}
 .rs-cal-day{box-sizing:border-box;width:2.25rem;height:2.25rem;min-width:2.25rem;min-height:2.25rem;display:flex;align-items:center;justify-content:center;font-size:0.8125rem;font-variant-numeric:tabular-nums;color:var(--text);background-color:transparent;border-width:0;border-style:none;border-radius:var(--rs-in, var(--radius-sm));cursor:pointer;font-family:inherit;padding:0}
-.rs-cal-day:hover{background-color:var(--divider-subtle)}
+.rs-cal-day:hover{background-color:var(--control-fill)}
 .rs-cal-day:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
-@media (hover: none){.rs-cal-day:hover{background-color:transparent}.rs-cal-day:active{background-color:var(--divider-subtle)}}
+@media (hover: none){.rs-cal-day:hover{background-color:transparent}.rs-cal-day:active{background-color:var(--control-fill)}}
 .rs-cal-day-out{color:var(--text-secondary)}
 .rs-cal-day-today{box-shadow:inset 0 0 0 1px var(--divider)}
 .rs-cal-day-selected{background-color:var(--text);color:var(--bg);font-weight:600}

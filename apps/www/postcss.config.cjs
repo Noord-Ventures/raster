@@ -5,6 +5,10 @@
 const stylexBabelOptions = {
   dev: false,
   runtimeInjection: false,
+  /* The site's atomics get their own prefix. Identical declarations would
+     otherwise hash to the same class as the package's, and the site's
+     unlayered copy would beat the package's layered :hover rules. */
+  classNamePrefix: "s",
   enableInlinedConditionalMerge: true,
   treeshakeCompensation: true,
   unstable_moduleResolution: { type: "commonJS", rootDir: __dirname },

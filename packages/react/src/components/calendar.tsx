@@ -166,10 +166,10 @@ const styles = stylex.create({
     color: raster.ink,
     backgroundColor: {
       default: "transparent",
-      ":hover": raster.dividerSubtle,
+      ":hover": raster.controlFill,
       [mq.touch]: {
         ":hover": "transparent",
-        ":active": raster.dividerSubtle,
+        ":active": raster.controlFill,
       },
     },
     borderWidth: 0,

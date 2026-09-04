@@ -71,6 +71,7 @@ Forwards `ref` to the `HTMLSpanElement`.
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `trigger` (required) | `ReactNode` |  | A focusable element is used as is; anything else gets one tab stop. |
+| `open` | `boolean` |  | Keep the panel shown regardless of hover or focus: for docs, tests, and static previews. |
 
 ## Keyboard
 
@@ -86,7 +87,7 @@ Forwards `ref` to the `HTMLSpanElement`.
 
 ## Classes
 
-`rs-hover-card`, `rs-hover-card-panel`
+`rs-hover-card`, `rs-hover-card-panel`, `rs-hover-card-open`
 
 ## Dependencies
 

@@ -2286,6 +2286,12 @@
               "type": "ReactNode",
               "required": true,
               "description": "A focusable element is used as is; anything else gets one tab stop."
+            },
+            {
+              "name": "open",
+              "type": "boolean",
+              "required": false,
+              "description": "Keep the panel shown regardless of hover or focus: for docs, tests, and static previews."
             }
           ]
         }

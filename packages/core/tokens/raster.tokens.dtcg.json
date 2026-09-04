@@ -43,6 +43,11 @@
         "$type": "color",
         "$value": "rgba(0,0,0,0.42)",
         "$description": "Form control boundary, 3:1. --control-border"
+      },
+      "control-fill": {
+        "$type": "color",
+        "$value": "#E4E2DC",
+        "$description": "Hover fill of a ghost control. --control-fill"
       }
     },
     "dark": {
@@ -85,6 +90,11 @@
         "$type": "color",
         "$value": "rgba(255,255,255,0.38)",
         "$description": "--control-border"
+      },
+      "control-fill": {
+        "$type": "color",
+        "$value": "#242220",
+        "$description": "--control-fill"
       }
     },
     "neutral": {

@@ -134,7 +134,7 @@ export const dialogStyles = stylex.create({
     borderRadius: raster.radiusSm,
     backgroundColor: {
       default: "transparent",
-      ":hover": raster.divider,
+      ":hover": raster.controlFill,
     },
     color: raster.ink,
     cursor: "pointer",

@@ -27,6 +27,8 @@ export const rasterTokens = {
       tableAlt: "rgba(0,0,0,0.02)",
       /** Boundary of a form control. 3:1 against paper (WCAG 1.4.11); hairlines stay decorative. */
       controlBorder: "rgba(0,0,0,0.42)",
+      /** Hover fill of a ghost control: paper with 10% ink, solid so edge and fill match. */
+      controlFill: "#E4E2DC",
     },
     dark: {
       black: "#0E0C0A",
@@ -39,6 +41,8 @@ export const rasterTokens = {
       tableAlt: "rgba(255,255,255,0.03)",
       /** 3:1 against black. */
       controlBorder: "rgba(255,255,255,0.38)",
+      /** Black with 10% white. */
+      controlFill: "#242220",
     },
     /** Ink → paper, the in-between steps. Monochrome: there is no accent. */
     neutralScale: [

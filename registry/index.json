@@ -4367,7 +4367,8 @@
           "category": "surfaces",
           "classes": [
             "rs-hover-card",
-            "rs-hover-card-panel"
+            "rs-hover-card-panel",
+            "rs-hover-card-open"
           ],
           "snippet": "<span class=\"rs-hover-card\"><span tabindex=\"0\" aria-describedby=\"noord-card\">@noord</span><span class=\"rs-hover-card-panel\" role=\"tooltip\" id=\"noord-card\">Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>",
           "cssOnly": false,

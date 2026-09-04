@@ -36,6 +36,7 @@ const darkBlock = (selector) => `${selector} {
   --table-alt: ${color.dark.tableAlt};
   --grid-line: ${color.dark.gridLine};
   --control-border: ${color.dark.controlBorder};
+  --control-fill: ${color.dark.controlFill};
   color-scheme: dark;
 }`;
 
@@ -50,6 +51,7 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --table-alt: ${color.light.tableAlt};
   --grid-line: ${color.light.gridLine};
   --control-border: ${color.light.controlBorder};
+  --control-fill: ${color.light.controlFill};
   color-scheme: light;
   --radius-sm: ${radius.small}px;           /* slight Raster radius; standalone buttons */
   --radius: var(--radius-sm);              /* alias — buttons, boxes, dialogs share it; cards stay 0 */
@@ -131,6 +133,7 @@ const dtcg = {
       "grid-line": { $type: "color", $value: color.light.gridLine, $description: "Module grid ink. --grid-line" },
       "table-alt": { $type: "color", $value: color.light.tableAlt, $description: "Alternate row. --table-alt" },
       "control-border": { $type: "color", $value: color.light.controlBorder, $description: "Form control boundary, 3:1. --control-border" },
+      "control-fill": { $type: "color", $value: color.light.controlFill, $description: "Hover fill of a ghost control. --control-fill" },
     },
     dark: {
       paper: { $type: "color", $value: color.dark.black, $description: "--bg" },
@@ -141,6 +144,7 @@ const dtcg = {
       "grid-line": { $type: "color", $value: color.dark.gridLine, $description: "--grid-line" },
       "table-alt": { $type: "color", $value: color.dark.tableAlt, $description: "--table-alt" },
       "control-border": { $type: "color", $value: color.dark.controlBorder, $description: "--control-border" },
+      "control-fill": { $type: "color", $value: color.dark.controlFill, $description: "--control-fill" },
     },
     neutral: Object.fromEntries(color.neutralScale.map((v, i) => [String(i), { $type: "color", $value: v }])),
   },

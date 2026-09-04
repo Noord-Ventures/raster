@@ -9,6 +9,8 @@ import { describeTrigger } from "./tooltip";
 export interface HoverCardProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** A focusable element is used as is; anything else gets one tab stop. */
   trigger: React.ReactNode;
+  /** Keep the panel shown regardless of hover or focus: for docs, tests, and static previews. */
+  open?: boolean;
 }
 
 const styles = stylex.create({
@@ -80,6 +82,10 @@ const styles = stylex.create({
       height: "0.5rem",
     },
   },
+  open: {
+    opacity: 1,
+    visibility: "visible",
+  },
 });
 
 /**
@@ -87,13 +93,13 @@ const styles = stylex.create({
  * describes the trigger, and Escape hides it until the pointer leaves.
  */
 export const HoverCard = React.forwardRef<HTMLSpanElement, HoverCardProps>(function HoverCard(
-  { trigger, className, style, children, onKeyDown, onPointerLeave, onBlur, ...props },
+  { trigger, open, className, style, children, onKeyDown, onPointerLeave, onBlur, ...props },
   ref,
 ) {
   const id = React.useId();
   const [dismissed, setDismissed] = React.useState(false);
   const sx = rs(["rs-hover-card", className], styles.root, stylex.defaultMarker());
-  const panel = rs(["rs-hover-card-panel"], styles.panel);
+  const panel = rs(["rs-hover-card-panel", open && "rs-hover-card-open"], styles.panel, open && styles.open);
   const anchor = React.isValidElement(trigger) ? (
     describeTrigger(trigger, id)
   ) : (

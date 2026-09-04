@@ -42,11 +42,16 @@ const styles = stylex.create({
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
-    backgroundColor: "transparent",
+    backgroundColor: {
+      default: "transparent",
+      ":hover": raster.controlFill,
+      [mq.forcedColors]: "ButtonFace",
+    },
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderColor: {
       default: raster.controlBorder,
+      ":hover": raster.controlFill,
       [mq.forcedColors]: "ButtonText",
     },
     borderRadius: {
@@ -55,6 +60,7 @@ const styles = stylex.create({
     },
     color: {
       default: raster.gray,
+      ":hover": raster.ink,
       [mq.forcedColors]: "ButtonText",
     },
     cursor: "pointer",

@@ -600,7 +600,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     </Collapsible>
   ),
   "hover-card": () => (
-    <HoverCard trigger={<Link href="#">@noord</Link>}>
+    <HoverCard open trigger={<Link href="#">@noord</Link>}>
       Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.
     </HoverCard>
   ),

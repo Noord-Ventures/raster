@@ -15,6 +15,8 @@ export const raster = stylex.defineVars({
   gridLine: "var(--grid-line)",
   /** Boundary of a form control: 3:1 against the ground. Hairlines stay decorative. */
   controlBorder: "var(--control-border)",
+  /** Hover fill of a ghost control; its edge takes the same colour. */
+  controlFill: "var(--control-fill)",
   radiusSm: "var(--radius-sm)",
   radius: "var(--radius)",
   radiusChrome: "var(--radius-chrome)",

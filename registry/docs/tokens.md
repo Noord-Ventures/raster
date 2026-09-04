@@ -15,6 +15,7 @@ Every custom property `@noorddev/raster/css/tokens.css` defines, generated from 
 | `--table-alt` | `rgba(0,0,0,0.02)` | `rgba(255,255,255,0.03)` | `raster.tableAlt` |  |
 | `--grid-line` | `rgba(0,0,0,0.04)` | `rgba(255,255,255,0.05)` | `raster.gridLine` |  |
 | `--control-border` | `rgba(0,0,0,0.42)` | `rgba(255,255,255,0.38)` | `raster.controlBorder` |  |
+| `--control-fill` | `#E4E2DC` | `#242220` | `raster.controlFill` |  |
 | `--radius-sm` | `4px` |  | `raster.radiusSm` | slight Raster radius; standalone buttons |
 | `--radius` | `var(--radius-sm)` |  | `raster.radius` | alias — buttons, boxes, dialogs share it; cards stay 0 |
 | `--radius-chrome` | `0px` |  | `raster.radiusChrome` |  |
@@ -80,6 +81,7 @@ The raw values from `rasterTokens` (`import { rasterTokens } from "@noorddev/ras
 | `light.gridLine` | `rgba(0,0,0,0.04)` |
 | `light.tableAlt` | `rgba(0,0,0,0.02)` |
 | `light.controlBorder` | `rgba(0,0,0,0.42)` |
+| `light.controlFill` | `#E4E2DC` |
 | `dark.black` | `#0E0C0A` |
 | `dark.white` | `#E8E8E8` |
 | `dark.gray` | `#949494` |
@@ -88,6 +90,7 @@ The raw values from `rasterTokens` (`import { rasterTokens } from "@noorddev/ras
 | `dark.gridLine` | `rgba(255,255,255,0.05)` |
 | `dark.tableAlt` | `rgba(255,255,255,0.03)` |
 | `dark.controlBorder` | `rgba(255,255,255,0.38)` |
+| `dark.controlFill` | `#242220` |
 | `neutralScale` | `["#1A1A1A","#3D3D3D","#6B6B6B","#949494","#C4C2BD","#E8E8E8","#FAF8F2"]` |
 | `accent` | `none; emphasis comes from weight, size, and spacing` |
 

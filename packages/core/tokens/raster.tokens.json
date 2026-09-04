@@ -13,7 +13,8 @@
       "dividerSubtle": "rgba(0,0,0,0.06)",
       "gridLine": "rgba(0,0,0,0.04)",
       "tableAlt": "rgba(0,0,0,0.02)",
-      "controlBorder": "rgba(0,0,0,0.42)"
+      "controlBorder": "rgba(0,0,0,0.42)",
+      "controlFill": "#E4E2DC"
     },
     "dark": {
       "black": "#0E0C0A",
@@ -23,7 +24,8 @@
       "dividerSubtle": "rgba(255,255,255,0.07)",
       "gridLine": "rgba(255,255,255,0.05)",
       "tableAlt": "rgba(255,255,255,0.03)",
-      "controlBorder": "rgba(255,255,255,0.38)"
+      "controlBorder": "rgba(255,255,255,0.38)",
+      "controlFill": "#242220"
     },
     "neutralScale": [
       "#1A1A1A",

@@ -1685,7 +1685,7 @@ const [open, setOpen] = useState(false);
     title: "Hover card",
     description: "Preview panel on hover and keyboard focus.",
     category: "surfaces",
-    classes: ["rs-hover-card", "rs-hover-card-panel"],
+    classes: ["rs-hover-card", "rs-hover-card-panel", "rs-hover-card-open"],
     css: ["components/hover-card.css"],
     react: "components/hover-card.tsx",
     snippet: `<span class="rs-hover-card"><span tabindex="0" aria-describedby="noord-card">@noord</span><span class="rs-hover-card-panel" role="tooltip" id="noord-card">Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>`,

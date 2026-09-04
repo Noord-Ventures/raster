@@ -104,7 +104,7 @@ const styles = stylex.create({
     fontWeight: 500,
     backgroundColor: {
       default: "transparent",
-      ":hover": raster.divider,
+      ":hover": raster.controlFill,
       ":disabled": "transparent",
       [mq.forcedColors]: "ButtonFace",
     },
@@ -117,6 +117,7 @@ const styles = stylex.create({
     },
     borderColor: {
       default: raster.divider,
+      ":hover": raster.controlFill,
       ":disabled": raster.divider,
       [mq.forcedColors]: {
         default: "ButtonText",
@@ -173,7 +174,7 @@ const styles = stylex.create({
   groupedGhost: {
     backgroundColor: {
       default: raster.paper,
-      ":hover": raster.divider,
+      ":hover": raster.controlFill,
       ":disabled": raster.paper,
       [mq.forcedColors]: "ButtonFace",
     },
