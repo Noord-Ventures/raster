@@ -47,7 +47,24 @@ Dark scheme: `data-theme="dark"` on the root element. Without it the system pref
 - **Accessibility baked in.** APG patterns for listbox, menu, grid, and tabs. Focus rings, 3:1 control contrast, reduced motion, forced colours. Every interactive component has an axe test.
 - **Small.** 12 KB gzipped for the whole React stylesheet. Zero runtime dependencies beyond React and `@stylexjs/stylex`.
 - **Layered.** All CSS sits in cascade layers, so your overrides win without `!important`.
-- **Agent-ready.** Components, tokens, and props are data (`packages/core/src/registry.ts`), served as JSON and as markdown, so tools and models can install and compose Raster without guessing.
+- **Right-to-left for free.** Every leaf paints its inline axis with logical properties. Set `dir="rtl"` and the system mirrors.
+- **Tokens as data.** Custom properties, JSON, and a W3C Design Tokens (DTCG) export (`@noorddev/raster/tokens.dtcg`) for Style Dictionary, Figma Variables, and Tokens Studio.
+- **Agent-ready.** Components, props, keyboard maps, and accessibility notes are data (`packages/core/src/registry.ts` plus props extracted from the types), served as JSON, markdown, `llms.txt`, a CLI with `--json`, and an MCP server, so tools and models install and compose Raster without guessing.
+
+## For agents
+
+Everything a coding agent needs is machine-readable and served from the same registry the docs use.
+
+| Surface | Where |
+|---|---|
+| Index for language models | [getraster.com/llms.txt](https://getraster.com/llms.txt), [llms-full.txt](https://getraster.com/llms-full.txt) |
+| One markdown page per component, tokens, and the guide | `getraster.com/docs/<name>.md`, `/docs/tokens.md`, `/docs/guide.md` |
+| shadcn registry items | `getraster.com/r/<name>.json`, index at `/r/index.json` |
+| Props extracted from the types | `@noorddev/raster/props` (JSON) |
+| CLI | `npx @noorddev/raster-cli list --json`, `search <term> --json`, `docs <name>`, `tokens --json` |
+| MCP server | `npx -y @noorddev/raster-mcp` (tools: list, search, get component, tokens, install, guide) |
+
+Conventions an agent can rely on: `value` / `defaultValue` / `onValueChange` on every selection component, `className` merges, refs forward to the root element, every interactive component is named, `"use client"` is already applied, and the `rs-*` classes are a stable contract. See [AGENTS.md](AGENTS.md) for working on this repository.
 
 ## Principles
 
@@ -61,7 +78,8 @@ Simple · Beautiful · Opinionated · Elegant · Clear · Legible · Solid · Ve
 |---|---|---|
 | `packages/core` | [`@noorddev/raster`](packages/core/README.md) | Tokens, generated `rs-*` CSS, vendored Inter, the typed registry |
 | `packages/react` | [`@noorddev/raster-react`](packages/react/README.md) | React components, precompiled StyleX, one stylesheet |
-| `packages/cli` | [`@noorddev/raster-cli`](packages/cli/README.md) | `init`, `add`, `list`, `tokens`. Offline registry snapshot |
+| `packages/cli` | [`@noorddev/raster-cli`](packages/cli/README.md) | `init`, `add`, `list`, `search`, `docs`, `tokens`. Offline registry snapshot |
+| `packages/mcp` | [`@noorddev/raster-mcp`](packages/mcp/README.md) | MCP server over the same registry, for Claude Code, Cursor, and friends |
 | `registry/` | | Generated registry items in the shadcn registry-item schema |
 | `apps/www` | | Documentation site: gallery, per-component docs, tokens, served registry |
 
@@ -74,11 +92,11 @@ packages/react/src/components/*.tsx   StyleX leaves + rs-* classes     the sourc
         │
         └─ core build-components           →  packages/core/css/components/*.css
                                             →  css/raster.css (layered)
-packages/core/src/tokens.ts             →  css/tokens.css, tokens/raster.tokens.json
-packages/core/src/registry.ts           →  registry/<name>.json, registry/bundle.json
+packages/core/src/tokens.ts             →  css/tokens.css, tokens/raster.tokens.json, tokens/raster.tokens.dtcg.json
+packages/core/src/registry.ts + types   →  registry/<name>.json, registry/bundle.json, props/props.json, registry/docs/*.md
 ```
 
-The tests enforce what generation cannot: every registry class is applied by the component's source and painted by its CSS, no `var()` is undefined, no hex in the system is a hue, no `!important` ships, and generated registry JSON never names a dead host.
+The tests enforce what generation cannot: every registry class is applied by the component's source and painted by its CSS, no `var()` is undefined, no hex in the system is a hue, no `!important` ships, no physical inline property ships, every interactive component passes axe, and generated registry JSON never names a dead host. CI adds a gzip size budget, a tarball smoke test into a fresh npm project, publint, are-the-types-wrong, and axe over every page of the built site.
 
 ## Development
 
@@ -87,8 +105,11 @@ Node 22.6 or newer, pnpm 10.
 ```sh
 pnpm install
 pnpm build        # core (components → css → registry → dist), react, cli
-pnpm test         # core integrity, react jsdom + axe, cli
+pnpm test         # core integrity, react jsdom + axe, cli, mcp
 pnpm typecheck
+pnpm lint         # biome
+pnpm size         # gzip budgets
+pnpm smoke        # pack, install into a fresh project, render, publint, attw
 pnpm dev          # docs site at localhost:3000
 ```
 
