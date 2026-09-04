@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { hidden } from "../hidden.stylex";
 
@@ -56,27 +58,27 @@ const styles = stylex.create({
     alignItems: "center",
     gap: {
       default: 9,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
     },
     fontSize: {
       default: 14,
-      ["@media (max-width: 640px)"]: 17,
+      [mq.phone]: 17,
     },
     color: raster.ink,
     letterSpacing: "-0.01em",
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
   },
   dot: {
     width: {
       default: 16,
-      ["@media (max-width: 640px)"]: 22,
+      [mq.phone]: 22,
     },
     height: {
       default: 16,
-      ["@media (max-width: 640px)"]: 22,
+      [mq.phone]: 22,
     },
     borderRadius: "50%",
     borderWidth: 1.5,
@@ -93,7 +95,7 @@ const styles = stylex.create({
     position: "absolute",
     inset: {
       default: 3,
-      ["@media (max-width: 640px)"]: 5,
+      [mq.phone]: 5,
     },
     borderRadius: "50%",
     backgroundColor: raster.ink,
@@ -110,7 +112,7 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(function Rad
   const row = rs(["rs-radio", className], styles.radio);
   const sr = rs(["rs-sr"], hidden.sr);
   const mark = rs(["rs-radio-dot", on && "rs-radio-on"], styles.dot, on && styles.on);
-  const fill = rs([], styles.fill);
+  const fill = rs(["rs-radio-fill"], styles.fill);
   return (
     <label className={row.className} style={{ ...row.style, ...style }}>
       <input

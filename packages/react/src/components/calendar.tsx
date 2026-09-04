@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -30,14 +32,14 @@ const styles = stylex.create({
     alignItems: "center",
     minHeight: {
       default: 26,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     marginBottom: 8,
   },
   title: {
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -48,7 +50,7 @@ const styles = stylex.create({
     display: "flex",
     gap: {
       default: 5,
-      ["@media (max-width: 640px)"]: 8,
+      [mq.phone]: 8,
     },
     flexShrink: 0,
   },
@@ -56,30 +58,30 @@ const styles = stylex.create({
     boxSizing: "border-box",
     width: {
       default: 26,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     height: {
       default: 26,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minWidth: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     color: raster.gray,
     borderWidth: raster.hairline,
@@ -103,7 +105,7 @@ const styles = stylex.create({
   dow: {
     fontSize: {
       default: 11,
-      ["@media (max-width: 640px)"]: 13,
+      [mq.phone]: 13,
     },
     fontWeight: 500,
     color: raster.gray,
@@ -127,7 +129,7 @@ const styles = stylex.create({
     backgroundColor: {
       default: "transparent",
       ":hover": raster.dividerSubtle,
-      ["@media (hover: none)"]: {
+      [mq.touch]: {
         ":hover": "transparent",
         ":active": raster.dividerSubtle,
       },
@@ -180,8 +182,8 @@ export function Calendar({ value, onSelect, defaultMonth, weekStart = 1, classNa
   const head = rs(["rs-cal-head"], styles.head);
   const titleSx = rs(["rs-cal-title"], styles.title);
   const nav = rs(["rs-cal-nav"], styles.nav);
-  const page = rs(["rs-page"], styles.page);
-  const icon = rs([], styles.icon);
+  const page = rs(["rs-page", "rs-cal-page"], styles.page);
+  const icon = rs(["rs-cal-icon"], styles.icon);
   const grid = rs(["rs-cal-grid"], styles.grid);
   const dow = rs(["rs-cal-dow"], styles.dow);
 

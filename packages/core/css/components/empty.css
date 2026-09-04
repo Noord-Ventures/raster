@@ -1,0 +1,6 @@
+/* ── empty: generated from packages/react/src/components/empty.tsx ── */
+.rs-empty{display:flex;flex-direction:column;justify-content:center;gap:8px;min-height:204px;padding:20px;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:0}
+.rs-empty-title{margin:0;font-size:15px;font-weight:600;letter-spacing:-0.01em;color:var(--text)}
+.rs-empty-body{margin:0;font-size:13.5px;line-height:1.55;letter-spacing:-0.01em;color:var(--text-secondary)}
+.rs-empty-action{margin-top:8px;width:fit-content}
+@media (max-width: 640px){.rs-empty-action{width:100%}}

@@ -34,7 +34,7 @@ const write = (name, data) => {
 
 /* The base style every component needs: tokens, page base, type scale,
    reduced-motion rules: everything in raster.css except components. */
-const baseCss = ["tokens.css", "base.css", "type.css", "phone.css", "motion.css"]
+const baseCss = ["tokens.css", "base.css", "type.css", "touch.css", "motion.css"]
   .map((f) => readCore(`css/${f}`))
   .join("\n");
 
@@ -83,6 +83,14 @@ const interItem = {
   title: "Inter",
   description:
     "Default face. Variable Inter (latin + latin-ext), SIL OFL 1.1. System sans is fallback only.",
+  font: {
+    family: "Inter",
+    provider: "google",
+    import: "Inter",
+    variable: "--font-sans",
+    weight: ["100 900"],
+    subsets: ["latin", "latin-ext"],
+  },
   files: [
     {
       path: "raster/styles/inter.css",
@@ -203,6 +211,13 @@ for (const component of rasterComponents) {
       `${REGISTRY_URL}/inter.json`,
       ...(component.registryDependencies ?? []).map((d) => `${REGISTRY_URL}/${d}.json`),
     ],
+    ...(component.react
+      ? {
+          dependencies: ["@stylexjs/stylex"],
+          devDependencies: ["@stylexjs/babel-plugin"],
+          docs: "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+        }
+      : {}),
     files,
     meta: {
       raster: {
@@ -233,7 +248,6 @@ write("bundle.json", {
   version: VERSION,
   css: {
     raster: readCore("css/raster.css"),
-    compat: readCore("css/raster-compat.css"),
   },
   items,
 });

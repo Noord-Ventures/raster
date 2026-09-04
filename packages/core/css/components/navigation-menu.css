@@ -1,0 +1,9 @@
+/* ── navigation-menu: generated from packages/react/src/components/navigation-menu.tsx ── */
+.rs-nav{display:flex;align-items:center;gap:22px}
+@media (max-width: 640px){.rs-nav{gap:0;flex-wrap:wrap}}
+.rs-nav-link{font-size:14px;font-weight:500;letter-spacing:-0.01em;color:var(--text-secondary);text-decoration:none;transition:color var(--duration-snap) var(--ease)}
+.rs-nav-link:link{color:var(--text-secondary)}
+.rs-nav-link:visited{color:var(--text-secondary)}
+.rs-nav-link:hover{color:var(--text)}
+.rs-nav-link[aria-current="page"]{color:var(--text)}
+@media (max-width: 640px){.rs-nav-link{display:inline-flex;align-items:center;min-height:var(--hit);padding-inline:12px;font-size:var(--control-fs)}}

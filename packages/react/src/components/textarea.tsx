@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -18,7 +20,7 @@ const styles = stylex.create({
   label: {
     fontSize: {
       default: 12,
-      ["@media (max-width: 640px)"]: raster.controlLabel,
+      [mq.phone]: raster.controlLabel,
     },
     fontWeight: 600,
     color: raster.gray,
@@ -34,7 +36,7 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     appearance: "none",
     WebkitAppearance: "none",
@@ -43,22 +45,22 @@ const styles = stylex.create({
     caretColor: "var(--text)",
     fontSize: {
       default: 14,
-      ["@media (max-width: 640px)"]: 16,
+      [mq.phone]: 16,
     },
     lineHeight: 1.55,
     paddingBlock: {
       default: 8,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
     },
     paddingInline: {
       default: 10,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     outline: "none",
     fontFamily: "inherit",
     minHeight: {
       default: 96,
-      ["@media (max-width: 640px)"]: 132,
+      [mq.phone]: 132,
     },
     resize: "vertical",
     width: "100%",
@@ -75,7 +77,7 @@ const styles = stylex.create({
     gap: 8,
     fontSize: {
       default: 12,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     fontWeight: 500,
     color: raster.gray,
@@ -92,10 +94,10 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(fun
 ) {
   const autoId = React.useId();
   const areaId = id ?? autoId;
-  const field = rs(["rs-field"], styles.field);
-  const lab = rs(["rs-field-label"], styles.label);
+  const field = rs(["rs-field", "rs-textarea-field"], styles.field);
+  const lab = rs(["rs-field-label", "rs-textarea-label"], styles.label);
   const sx = rs(["rs-textarea", className], styles.area);
-  const fb = rs(["rs-feedback"], styles.feedback);
+  const fb = rs(["rs-feedback", "rs-textarea-feedback"], styles.feedback);
   return (
     <div className={field.className} style={field.style}>
       {label != null && (

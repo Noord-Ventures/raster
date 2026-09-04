@@ -1,0 +1,4 @@
+/* ── skeleton: generated from packages/react/src/components/skeleton.tsx ── */
+@keyframes rs-anim-rs-skel{0%{opacity:1}50%{opacity:0.55}100%{opacity:1}}
+.rs-skeleton{display:block;background-color:var(--divider-subtle);border-radius:var(--radius-sm);animation-name:rs-anim-rs-skel;animation-duration:1.6s;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+@media (prefers-reduced-motion: reduce){.rs-skeleton{animation-name:none}}

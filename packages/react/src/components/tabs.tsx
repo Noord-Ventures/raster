@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 interface TabsContextValue {
@@ -22,33 +24,33 @@ const styles = stylex.create({
     display: "flex",
     alignItems: {
       default: "baseline",
-      ["@media (max-width: 640px)"]: "stretch",
+      [mq.phone]: "stretch",
     },
     gap: {
       default: 22,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     width: {
       default: null,
-      ["@media (max-width: 640px)"]: "100%",
+      [mq.phone]: "100%",
     },
     maxWidth: {
       default: 360,
-      ["@media (max-width: 640px)"]: "none",
+      [mq.phone]: "none",
     },
     borderWidth: 0,
     borderStyle: "none",
     borderBottomWidth: {
       default: 0,
-      ["@media (max-width: 640px)"]: raster.hairline,
+      [mq.phone]: raster.hairline,
     },
     borderBottomStyle: {
       default: "none",
-      ["@media (max-width: 640px)"]: "solid",
+      [mq.phone]: "solid",
     },
     borderBottomColor: {
       default: "transparent",
-      ["@media (max-width: 640px)"]: raster.divider,
+      [mq.phone]: raster.divider,
     },
     boxShadow: "none",
     backgroundColor: "transparent",
@@ -58,43 +60,43 @@ const styles = stylex.create({
     boxSizing: "border-box",
     flexGrow: {
       default: null,
-      ["@media (max-width: 640px)"]: 1,
+      [mq.phone]: 1,
     },
     flexShrink: {
       default: null,
-      ["@media (max-width: 640px)"]: 1,
+      [mq.phone]: 1,
     },
     flexBasis: {
       default: null,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     display: {
       default: null,
-      ["@media (max-width: 640px)"]: "inline-flex",
+      [mq.phone]: "inline-flex",
     },
     alignItems: {
       default: null,
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
     justifyContent: {
       default: null,
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     paddingBlock: {
       default: 8,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     paddingInline: {
       default: 0,
-      ["@media (max-width: 640px)"]: 8,
+      [mq.phone]: 8,
     },
     fontSize: {
       default: 14,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     fontFamily: "inherit",
     fontWeight: 400,
@@ -103,7 +105,7 @@ const styles = stylex.create({
     textDecoration: "none",
     textAlign: {
       default: "left",
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
     backgroundColor: "transparent",
     backgroundImage: "none",

@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
@@ -36,7 +38,7 @@ export function ContextMenu({ items, className, style, children, ...props }: Con
     };
   }, [at]);
 
-  const menu = rs(["rs-menu"], menuStyles.menu, menuStyles.menuFixed, styles.pin);
+  const menu = rs(["rs-menu", "rs-context-menu-pin"], menuStyles.menu, menuStyles.menuFixed, styles.pin);
   return (
     <div
       className={className}

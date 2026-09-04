@@ -1,9 +1,8 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone as phoneToken } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
-const phone = "@media (max-width: 640px)" as typeof phoneToken;
 
 export interface EmptyProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   title?: React.ReactNode;
@@ -41,7 +40,7 @@ const styles = stylex.create({
     marginTop: 8,
     width: {
       default: "fit-content",
-      [phone]: "100%",
+      [mq.phone]: "100%",
     },
   },
 });

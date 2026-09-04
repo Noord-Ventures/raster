@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface SliderProps
@@ -18,16 +20,16 @@ const styles = stylex.create({
     position: "relative",
     height: {
       default: 2,
-      ["@media (max-width: 640px)"]: 4,
+      [mq.phone]: 4,
     },
     backgroundColor: raster.divider,
     borderRadius: {
       default: 1,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     marginBlock: {
       default: 10,
-      ["@media (max-width: 640px)"]: 20,
+      [mq.phone]: 20,
     },
     marginInline: 0,
   },
@@ -39,7 +41,7 @@ const styles = stylex.create({
     backgroundColor: raster.ink,
     borderRadius: {
       default: 1,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
   },
   thumb: {
@@ -48,15 +50,15 @@ const styles = stylex.create({
     transform: "translate(-50%, -50%)",
     width: {
       default: 14,
-      ["@media (max-width: 640px)"]: 22,
+      [mq.phone]: 22,
     },
     height: {
       default: 14,
-      ["@media (max-width: 640px)"]: 22,
+      [mq.phone]: 22,
     },
     borderRadius: {
       default: "50%",
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     backgroundColor: raster.paper,
     borderWidth: 1.5,
@@ -70,11 +72,11 @@ const styles = stylex.create({
     right: 0,
     top: {
       default: -8,
-      ["@media (max-width: 640px)"]: -20,
+      [mq.phone]: -20,
     },
     bottom: {
       default: -8,
-      ["@media (max-width: 640px)"]: -20,
+      [mq.phone]: -20,
     },
     width: "100%",
     height: "auto",
@@ -96,7 +98,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(function S
   const sx = rs(["rs-slider", className], styles.slider);
   const fill = rs(["rs-slider-fill"], styles.fill);
   const thumb = rs(["rs-slider-thumb"], styles.thumb);
-  const range = rs([], styles.range);
+  const range = rs(["rs-slider-range"], styles.range);
   return (
     <div className={sx.className} style={{ ...sx.style, ...style }}>
       <span className={fill.className} style={{ ...fill.style, width: `${pct}%` }} />

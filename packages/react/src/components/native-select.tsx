@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface NativeSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
@@ -22,7 +24,7 @@ const styles = stylex.create({
   label: {
     fontSize: {
       default: 12,
-      ["@media (max-width: 640px)"]: raster.controlLabel,
+      [mq.phone]: raster.controlLabel,
     },
     fontWeight: 600,
     color: raster.gray,
@@ -36,12 +38,12 @@ const styles = stylex.create({
     height: raster.controlH,
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     fontFamily: "inherit",
     fontSize: {
       default: 14,
-      ["@media (max-width: 640px)"]: 16,
+      [mq.phone]: 16,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -63,16 +65,16 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     paddingBlock: 0,
     paddingInlineStart: {
       default: 10,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     paddingInlineEnd: {
       default: 32,
-      ["@media (max-width: 640px)"]: 36,
+      [mq.phone]: 36,
     },
     outline: "none",
     width: "100%",
@@ -91,8 +93,8 @@ export const NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProp
       </select>
     );
     if (label == null) return control;
-    const field = rs(["rs-field"], styles.field);
-    const lab = rs(["rs-field-label"], styles.label);
+    const field = rs(["rs-field", "rs-native-select-field"], styles.field);
+    const lab = rs(["rs-field-label", "rs-native-select-label"], styles.label);
     return (
       <div className={field.className} style={field.style}>
         <label className={lab.className} style={lab.style} htmlFor={selectId}>

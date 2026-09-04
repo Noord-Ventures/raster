@@ -151,7 +151,7 @@ export function AssistantTitle({ className, style, ...props }: React.HTMLAttribu
 
 export function AssistantStatus({ className, style, children, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
   const sx = rs(["rs-ai-status", className], styles.status);
-  const dot = rs([], styles.statusDot);
+  const dot = rs(["rs-ai-status-dot"], styles.statusDot);
   return (
     <span {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       <i className={dot.className} style={dot.style} />

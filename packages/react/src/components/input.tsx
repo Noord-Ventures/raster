@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -26,7 +28,7 @@ const styles = stylex.create({
   label: {
     fontSize: {
       default: 12,
-      ["@media (max-width: 640px)"]: raster.controlLabel,
+      [mq.phone]: raster.controlLabel,
     },
     fontWeight: 600,
     color: raster.gray,
@@ -38,7 +40,7 @@ const styles = stylex.create({
     height: raster.controlH,
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     borderWidth: raster.hairline,
     borderStyle: "solid",
@@ -48,7 +50,7 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     appearance: "none",
     WebkitAppearance: "none",
@@ -57,12 +59,12 @@ const styles = stylex.create({
     caretColor: "var(--text)",
     fontSize: {
       default: 14,
-      ["@media (max-width: 640px)"]: 16,
+      [mq.phone]: 16,
     },
     lineHeight: `calc(${raster.controlH} - 2px)`,
     paddingInline: {
       default: 12,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     paddingBlock: 0,
     outline: "none",
@@ -80,7 +82,7 @@ const styles = stylex.create({
     height: "100%",
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     flexGrow: 1,
     minWidth: 0,
@@ -99,7 +101,7 @@ const styles = stylex.create({
     gap: 8,
     fontSize: {
       default: 12,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     fontWeight: 500,
     color: raster.gray,
@@ -119,13 +121,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Inp
 ) {
   const autoId = React.useId();
   const inputId = id ?? autoId;
-  const sx = rs(
-    ["rs-input", !grouped && "rs-input-full", ok && "rs-input-ok", className],
-    styles.input,
-    !grouped && styles.full,
-    ok && styles.ok,
-    grouped && styles.grouped,
-  );
+  const sx = rs(["rs-input", !grouped && "rs-input-full", ok && "rs-input-ok", className, grouped && "rs-input-grouped"], styles.input, !grouped && styles.full, ok && styles.ok, grouped && styles.grouped);
   const control = (
     <input
       ref={ref}
@@ -136,8 +132,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Inp
     />
   );
   if (plain || grouped) return control;
-  const field = rs(["rs-field"], styles.field);
-  const lab = rs(["rs-field-label"], styles.label);
+  const field = rs(["rs-field", "rs-input-field"], styles.field);
+  const lab = rs(["rs-field-label", "rs-input-label"], styles.label);
   const fb = rs(["rs-feedback", ok && "rs-feedback-ok"], styles.feedback, ok && styles.feedbackOk);
   return (
     <div className={field.className} style={field.style}>

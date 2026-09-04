@@ -1,0 +1,7 @@
+/* ── input-group: generated from packages/react/src/components/input-group.tsx ── */
+.rs-input-group{display:flex;align-items:stretch;box-sizing:border-box;width:100%;height:var(--control-h);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);background-color:var(--bg);overflow:hidden}
+.rs-input-group:focus-within{border-color:var(--accent)}
+@media (max-width: 640px){.rs-input-group{border-radius:0}}
+.rs-input-addon{display:flex;align-items:center;padding-inline:10px;padding-block:0;font-size:13px;font-weight:500;letter-spacing:-0.01em;color:var(--text-secondary);background-color:var(--table-alt);white-space:nowrap;border-inline-start-width:1px;border-inline-start-style:solid;border-inline-start-color:var(--divider)}
+@media (max-width: 640px){.rs-input-addon{padding-inline:14px;font-size:var(--control-fs);min-height:var(--hit)}}
+.rs-input-group-end .rs-input-addon{border-inline-start-width:1px;border-inline-end-width:0}

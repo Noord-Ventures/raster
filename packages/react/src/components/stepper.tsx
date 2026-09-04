@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface Step {
@@ -29,7 +29,7 @@ const styles = stylex.create({
     alignItems: "flex-start",
     gap: {
       default: 3,
-      ["@media (max-width: 640px)"]: 6,
+      [mq.phone]: 6,
     },
     flexGrow: 1,
     flexShrink: 1,
@@ -40,11 +40,11 @@ const styles = stylex.create({
     boxSizing: "border-box",
     width: {
       default: 24,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     height: {
       default: 24,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     borderRadius: "50%",
     borderWidth: 1.5,
@@ -55,13 +55,13 @@ const styles = stylex.create({
     justifyContent: "center",
     fontSize: {
       default: 11,
-      ["@media (max-width: 640px)"]: 15,
+      [mq.phone]: 15,
     },
     fontWeight: 600,
     color: raster.gray,
     marginBottom: {
       default: 6,
-      ["@media (max-width: 640px)"]: 8,
+      [mq.phone]: 8,
     },
     backgroundColor: raster.paper,
     position: "relative",
@@ -79,7 +79,7 @@ const styles = stylex.create({
   name: {
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -89,7 +89,7 @@ const styles = stylex.create({
   sub: {
     fontSize: {
       default: 11,
-      ["@media (max-width: 640px)"]: 13,
+      [mq.phone]: 13,
     },
     fontWeight: 500,
     color: raster.gray,
@@ -99,11 +99,11 @@ const styles = stylex.create({
     position: "absolute",
     top: {
       default: 11.5,
-      ["@media (max-width: 640px)"]: `calc(${raster.hit} / 2)`,
+      [mq.phone]: `calc(${raster.hit} / 2)`,
     },
     left: {
       default: 24,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     right: 0,
     height: raster.hairline,

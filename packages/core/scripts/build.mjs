@@ -3,7 +3,6 @@
 //   src/tokens.ts     →  tokens/raster.tokens.json   (tokens as JSON)
 //                     →  css/tokens.css              (custom properties)
 //   css/* sources     →  css/raster.css              (the whole system, one file)
-//   src/legacy.ts     →  css/raster-compat.css       (0.1 class names)
 //
 // Run with: npm run build:css  (Node ≥ 22.6)
 
@@ -11,7 +10,6 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { rasterTokens } from "../src/tokens.ts";
 import { rasterComponents } from "../src/registry.ts";
-import { toLegacyCss } from "../src/legacy.ts";
 
 const root = (p) => fileURLToPath(new URL(`../${p}`, import.meta.url));
 const read = (p) => readFileSync(root(p), "utf8");
@@ -28,6 +26,19 @@ const { color, grid, radius, control, motion, type } = rasterTokens;
 const c1 = grid.column;
 const gridImage = `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent ${c1}px,var(--grid-line) ${c1}px,var(--grid-line) ${c1 + 1}px,transparent ${c1 + 1}px,transparent ${grid.module}px)`;
 
+const darkBlock = (selector) => `${selector} {
+  --bg: ${color.dark.black};
+  --text: ${color.dark.white};
+  --text-secondary: ${color.dark.gray};
+  --accent: ${color.dark.white};
+  --divider: ${color.dark.divider};
+  --divider-subtle: ${color.dark.dividerSubtle};
+  --table-alt: ${color.dark.tableAlt};
+  --grid-line: ${color.dark.gridLine};
+  --control-border: ${color.dark.controlBorder};
+  color-scheme: dark;
+}`;
+
 const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not edit by hand. */
 :root {
   --bg: ${color.light.paper};                        /* paper */
@@ -38,6 +49,8 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --divider-subtle: ${color.light.dividerSubtle};
   --table-alt: ${color.light.tableAlt};
   --grid-line: ${color.light.gridLine};
+  --control-border: ${color.light.controlBorder};
+  color-scheme: light;
   --radius-sm: ${radius.small}px;           /* slight Raster radius; standalone buttons */
   --radius: var(--radius-sm);              /* alias — buttons, boxes, dialogs share it; cards stay 0 */
   --radius-chrome: ${radius.chrome}px;
@@ -55,21 +68,21 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --grid-size: ${grid.module}px;
   --grid-pos: ${grid.gutter}px 0;
   --text-scale: ${type.textScale.default};
-  /* Control scale. Desktop is the Raster poster; phone recuts in phone.css. */
+  /* Contract variables a component may set inline: concentric radius and the chart spot color. */
+  --rs-out: var(--radius);
+  --rs-gap: var(--pad);
+  --rs-in: var(--radius-in);
+  --rs-chart-spot: var(--text);
+  /* Control scale. Desktop is the poster; ≤640 recuts every control to 44pt. */
   --hit: ${control.desktop.hit}px;
   --control-h: ${control.desktop.height}px;
   --control-fs: ${control.desktop.font}px;
   --control-label: ${control.desktop.label}px;
 }
-[data-theme="dark"] {
-  --bg: ${color.dark.black};
-  --text: ${color.dark.white};
-  --text-secondary: ${color.dark.gray};
-  --accent: ${color.dark.white};
-  --divider: ${color.dark.divider};
-  --divider-subtle: ${color.dark.dividerSubtle};
-  --table-alt: ${color.dark.tableAlt};
-  --grid-line: ${color.dark.gridLine};
+${darkBlock('[data-theme="dark"]')}
+/* System dark scheme applies until the page decides with data-theme. */
+@media (prefers-color-scheme: dark) {
+${darkBlock(':root:not([data-theme="light"])')}
 }
 /* Mobile grid (≤${grid.mobile.breakpoint}): two fluid columns, three ${grid.mobile.gutter}px gutters
    (edge · middle · edge). Column width = 50vw − ${grid.mobile.gutter * 1.5}px; the background
@@ -101,7 +114,16 @@ for (const component of rasterComponents) {
     if (!componentFiles.includes(file)) componentFiles.push(file);
   }
 }
-const sources = ["fonts.css", "tokens.css", "base.css", "type.css", ...componentFiles, "phone.css", "motion.css"];
+/* Cascade layers: every Raster rule sits in a named layer, so unlayered
+   consumer CSS wins without specificity games. @font-face stays outside. */
+const layered = [
+  ["raster.tokens", ["tokens.css"]],
+  ["raster.base", ["base.css"]],
+  ["raster.type", ["type.css"]],
+  ["raster.components", componentFiles],
+  ["raster.touch", ["touch.css"]],
+  ["raster.motion", ["motion.css"]],
+];
 
 const banner = `/* ═══════════════════════════════════════════════════════════════════
    RASTER, a monochrome, CSS-first design system.
@@ -110,6 +132,9 @@ const banner = `/* ════════════════════�
    One ink, no accent hue: emphasis comes from weight, size, and
    spacing. Hairline borders, a ${grid.module}px module grid (${grid.column}px column +
    ${grid.gutter}px gutter), sentence case everywhere.
+
+   Layers: ${layered.map(([name]) => name).join(", ")}.
+   Your own unlayered CSS overrides any of it by default.
 
    GENERATED from the css/ sources. Edit those, then run
    \`npm run build:css\`. Tokens come from src/tokens.ts.
@@ -120,21 +145,11 @@ const banner = `/* ════════════════════�
 
 `;
 
-const rasterCss = banner + sources.map((f) => read(`css/${f}`)).join("\n");
+const rasterCss =
+  banner +
+  read("css/fonts.css") +
+  `\n@layer ${layered.map(([name]) => name).join(", ")};\n\n` +
+  layered
+    .map(([name, files]) => `@layer ${name} {\n${files.map((f) => read(`css/${f}`)).join("\n")}\n}\n`)
+    .join("\n");
 write("css/raster.css", rasterCss);
-
-/* ── 4. Compat layer: the 0.1 class names ── */
-const compatBanner = `/* RASTER COMPAT, GENERATED. Re-emits Raster rules under the 0.1
-   class names (bb-*, lib-*, bare table elements) so sites built on
-   them keep working. Link this after raster.css; drop it once your
-   markup uses the rs- names. */
-
-`;
-const compatParts = [];
-for (const f of sources) {
-  const source = read(`css/${f}`);
-  const legacy = toLegacyCss(source);
-  if (legacy !== source) compatParts.push(legacy);
-}
-mkdirSync(root("css"), { recursive: true });
-write("css/raster-compat.css", compatBanner + compatParts.join("\n"));

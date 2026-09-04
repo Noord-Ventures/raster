@@ -1,0 +1,10 @@
+/* ── textarea: generated from packages/react/src/components/textarea.tsx ── */
+.rs-field.rs-textarea-field{width:100%;display:flex;flex-direction:column;gap:8px}
+.rs-field-label.rs-textarea-label{font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:-0.01em;line-height:16px}
+@media (max-width: 640px){.rs-field-label.rs-textarea-label{font-size:var(--control-label)}}
+.rs-textarea{border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);appearance:none;-webkit-appearance:none;background-color:var(--bg);color:var(--text);caret-color:var(--text);font-size:14px;line-height:1.55;padding-block:8px;padding-inline:10px;outline:none;font-family:inherit;min-height:96px;resize:vertical;width:100%}
+.rs-textarea:focus{border-color:var(--accent)}
+.rs-textarea:-webkit-autofill{-webkit-text-fill-color:var(--text);caret-color:var(--text);background-color:var(--bg);box-shadow:inset 0 0 0 1000px var(--bg)}
+@media (max-width: 640px){.rs-textarea{border-radius:0;font-size:16px;padding-block:12px;padding-inline:14px;min-height:132px}}
+.rs-feedback.rs-textarea-feedback{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-0.01em;line-height:16px;margin:0;min-height:16px}
+@media (max-width: 640px){.rs-feedback.rs-textarea-feedback{font-size:14px}}

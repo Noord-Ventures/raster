@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -33,11 +35,11 @@ const styles = stylex.create({
     paddingInline: 0,
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     fontSize: {
       default: 14.5,
-      ["@media (max-width: 640px)"]: 17,
+      [mq.phone]: 17,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -59,12 +61,12 @@ const styles = stylex.create({
     paddingRight: 0,
     paddingBottom: {
       default: 16,
-      ["@media (max-width: 640px)"]: 20,
+      [mq.phone]: 20,
     },
     paddingLeft: 0,
     fontSize: {
       default: 13.5,
-      ["@media (max-width: 640px)"]: 16,
+      [mq.phone]: 16,
     },
     lineHeight: 1.6,
     color: raster.gray,
@@ -104,8 +106,8 @@ export function AccordionItem({
   const [innerOpen, setInnerOpen] = React.useState(!!defaultOpen);
   const isOpen = open ?? innerOpen;
   const item = rs(["rs-acc-item", className], styles.item);
-  const summary = rs([], styles.summary);
-  const chevron = rs(["rs-acc-chevron"], styles.chevron, isOpen && styles.chevronOpen);
+  const summary = rs(["rs-acc-summary"], styles.summary);
+  const chevron = rs(["rs-acc-chevron", isOpen && "rs-acc-chevron-open"], styles.chevron, isOpen && styles.chevronOpen);
   const body = rs(["rs-acc-body"], styles.body);
   return (
     <details

@@ -1,0 +1,10 @@
+/* ── item: generated from packages/react/src/components/item.tsx ── */
+.rs-item{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;padding-block:10px;padding-inline:0;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider);border-radius:0}
+.rs-item:last-child{border-bottom-width:0}
+@media (max-width: 640px){.rs-item{min-height:var(--hit);padding-block:14px}}
+.rs-item-title{margin:0;font-size:14px;font-weight:600;letter-spacing:-0.01em;color:var(--text)}
+@media (max-width: 640px){.rs-item-title{font-size:var(--control-fs)}}
+.rs-item-desc{margin-top:2px;margin-bottom:0;margin-inline:0;font-size:12.5px;font-weight:500;letter-spacing:-0.01em;color:var(--text-secondary)}
+@media (max-width: 640px){.rs-item-desc{font-size:14px}}
+.rs-item-meta{font-size:12px;font-weight:500;letter-spacing:-0.01em;color:var(--text-secondary);flex-shrink:0}
+@media (max-width: 640px){.rs-item-meta{font-size:14px}}

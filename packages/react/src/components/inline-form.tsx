@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -25,7 +27,7 @@ const styles = stylex.create({
     display: "flex",
     alignItems: {
       default: "center",
-      ["@media (max-width: 640px)"]: "stretch",
+      [mq.phone]: "stretch",
     },
     gap: 8,
     width: "100%",
@@ -37,24 +39,24 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     backgroundColor: "var(--bg)",
     paddingBlock: {
       default: 4,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     paddingInlineStart: {
       default: 12,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     paddingInlineEnd: {
       default: 6,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     transition: `border-color ${raster.durationSnap} ${raster.ease}`,
   },
@@ -70,21 +72,21 @@ const styles = stylex.create({
     fontFamily: "inherit",
     fontSize: {
       default: 14,
-      ["@media (max-width: 640px)"]: 16,
+      [mq.phone]: 16,
     },
     letterSpacing: "-0.01em",
     outline: "none",
     paddingBlock: {
       default: 7,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     paddingInline: {
       default: 0,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     "::placeholder": {
       color: raster.gray,
@@ -103,24 +105,24 @@ const styles = stylex.create({
   btn: {
     height: {
       default: 28,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     paddingInline: {
       default: 16,
-      ["@media (max-width: 640px)"]: 16,
+      [mq.phone]: 16,
     },
     fontSize: {
       default: 12.5,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     minWidth: 0,
     borderRadius: {
       default: 0,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     whiteSpace: "nowrap",
     fontFamily: "inherit",
@@ -177,7 +179,7 @@ export function InlineForm({
   const sx = rs(["rs-inline-field", className], styles.field);
   const input = rs(["rs-inline-input"], styles.input);
   const reveal = rs(["rs-reveal", valid && "rs-reveal-in"], styles.reveal, valid && styles.revealIn);
-  const btn = rs(["rs-btn-primary", "rs-inline-btn"], styles.btn);
+  const btn = rs(["rs-btn-primary", "rs-inline-btn", "rs-inline-field-btn"], styles.btn);
 
   return (
     <form

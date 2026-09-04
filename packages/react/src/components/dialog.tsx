@@ -1,16 +1,17 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone as phoneMq } from "../tokens.stylex";
-import { rs } from "../rs";
+import { raster, mq } from "../tokens.stylex";
+import { rs, type Leaves } from "../rs";
 
-/** StyleX cannot read a string const from a defineVars file; keep the token import. */
-const phone = "@media (max-width: 640px)" as typeof phoneMq;
+const phone = mq.phone;
 
 export interface DialogProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, "open"> {
   open: boolean;
   onClose?: () => void;
   /** Extra StyleX leaves merged after the dialog frame (command palette). */
-  extraStyles?: unknown[];
+  extraStyles?: Leaves;
 }
 
 export const dialogStyles = stylex.create({
@@ -18,11 +19,11 @@ export const dialogStyles = stylex.create({
     boxSizing: "border-box",
     maxWidth: {
       default: 320,
-      [phone]: "calc(100vw - 32px)",
+      [mq.phone]: "calc(100vw - 32px)",
     },
     width: {
       default: null,
-      [phone]: "calc(100vw - 32px)",
+      [mq.phone]: "calc(100vw - 32px)",
     },
     borderWidth: raster.hairline,
     borderStyle: "solid",
@@ -30,7 +31,7 @@ export const dialogStyles = stylex.create({
     borderRadius: raster.radiusSm,
     padding: {
       default: 20,
-      [phone]: "24px 20px",
+      [mq.phone]: "24px 20px",
     },
     backgroundColor: raster.paper,
     color: raster.ink,
@@ -43,20 +44,20 @@ export const dialogStyles = stylex.create({
     display: "block",
     fontSize: {
       default: 15,
-      [phone]: 18,
+      [mq.phone]: 18,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
     color: raster.ink,
     marginBottom: {
       default: 6,
-      [phone]: 10,
+      [mq.phone]: 10,
     },
   },
   body: {
     fontSize: {
       default: 13.5,
-      [phone]: 16,
+      [mq.phone]: 16,
     },
     color: raster.gray,
     letterSpacing: "-0.01em",
@@ -65,7 +66,7 @@ export const dialogStyles = stylex.create({
     marginRight: 0,
     marginBottom: {
       default: 16,
-      [phone]: 20,
+      [mq.phone]: 20,
     },
     marginLeft: 0,
   },
@@ -74,15 +75,15 @@ export const dialogStyles = stylex.create({
     justifyContent: "flex-end",
     flexDirection: {
       default: "row",
-      [phone]: "column",
+      [mq.phone]: "column",
     },
     alignItems: {
       default: "flex-end",
-      [phone]: "stretch",
+      [mq.phone]: "stretch",
     },
     gap: {
       default: 8,
-      [phone]: 10,
+      [mq.phone]: 10,
     },
   },
 });
@@ -109,7 +110,7 @@ export function Dialog({
     else if (!open && dialog.open) dialog.close();
   }, [open]);
 
-  const sx = rs(["rs-dialog", className], dialogStyles.frame, ...(extraStyles ?? []));
+  const sx = rs(["rs-dialog", className], dialogStyles.frame, ...((extraStyles ?? []) as Leaves));
   return (
     <dialog
       ref={ref}

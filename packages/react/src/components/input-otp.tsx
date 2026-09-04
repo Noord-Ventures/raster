@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface InputOTPProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
@@ -17,29 +19,29 @@ const styles = stylex.create({
     gap: 8,
     width: {
       default: null,
-      ["@media (max-width: 640px)"]: "100%",
+      [mq.phone]: "100%",
     },
   },
   cell: {
     width: {
       default: 40,
-      ["@media (max-width: 640px)"]: "auto",
+      [mq.phone]: "auto",
     },
     flexGrow: {
       default: null,
-      ["@media (max-width: 640px)"]: 1,
+      [mq.phone]: 1,
     },
     minWidth: {
       default: null,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     height: {
       default: 48,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     textAlign: "center",
     fontSize: 18,
@@ -58,7 +60,7 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     outline: "none",
     fontFamily: "inherit",
@@ -108,7 +110,7 @@ export function InputOTP({
   };
 
   const sx = rs(["rs-otp", className], styles.otp);
-  const cell = rs([], styles.cell);
+  const cell = rs(["rs-otp-cell"], styles.cell);
 
   return (
     <div className={sx.className} style={{ ...sx.style, ...style }} role="group" aria-label={ariaLabel} {...props}>

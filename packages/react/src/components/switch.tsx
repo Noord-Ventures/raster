@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface SwitchProps
@@ -16,23 +18,23 @@ const styles = stylex.create({
     boxSizing: "border-box",
     width: {
       default: 32,
-      ["@media (max-width: 640px)"]: 64,
+      [mq.phone]: 64,
     },
     height: {
       default: 18,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minWidth: {
       default: null,
-      ["@media (max-width: 640px)"]: 64,
+      [mq.phone]: 64,
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     borderRadius: {
       default: 9,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     borderWidth: 1.5,
     borderStyle: "solid",
@@ -52,23 +54,23 @@ const styles = stylex.create({
     position: "absolute",
     top: {
       default: 1.5,
-      ["@media (max-width: 640px)"]: 4,
+      [mq.phone]: 4,
     },
     left: {
       default: 1.5,
-      ["@media (max-width: 640px)"]: 4,
+      [mq.phone]: 4,
     },
     width: {
       default: 12,
-      ["@media (max-width: 640px)"]: 36,
+      [mq.phone]: 36,
     },
     height: {
       default: 12,
-      ["@media (max-width: 640px)"]: 36,
+      [mq.phone]: 36,
     },
     borderRadius: {
       default: "50%",
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     backgroundColor: raster.gray,
     transition: `transform ${raster.duration} ${raster.ease}`,
@@ -77,7 +79,7 @@ const styles = stylex.create({
     backgroundColor: raster.paper,
     transform: {
       default: "translateX(14px)",
-      ["@media (max-width: 640px)"]: "translateX(20px)",
+      [mq.phone]: "translateX(20px)",
     },
   },
 });
@@ -91,7 +93,7 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(function 
   const isControlled = checked !== undefined;
   const on = isControlled ? checked : inner;
   const sx = rs(["rs-switch", on && "rs-switch-on", className], styles.track, on && styles.on);
-  const knob = rs([], styles.thumb, on && styles.thumbOn);
+  const knob = rs(["rs-switch-thumb", on && "rs-switch-thumb-on"], styles.thumb, on && styles.thumbOn);
   return (
     <button
       ref={ref}

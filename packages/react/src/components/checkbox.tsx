@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { hidden } from "../hidden.stylex";
 import { Icon } from "./icon";
@@ -16,31 +18,31 @@ const styles = stylex.create({
     alignItems: "center",
     gap: {
       default: 9,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
     },
     fontSize: {
       default: 14,
-      ["@media (max-width: 640px)"]: 17,
+      [mq.phone]: 17,
     },
     color: raster.ink,
     letterSpacing: "-0.01em",
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
   },
   check: {
     width: {
       default: 16,
-      ["@media (max-width: 640px)"]: 22,
+      [mq.phone]: 22,
     },
     height: {
       default: 16,
-      ["@media (max-width: 640px)"]: 22,
+      [mq.phone]: 22,
     },
     borderRadius: {
       default: 3,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     borderWidth: 1.5,
     borderStyle: "solid",

@@ -1,10 +1,10 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone as phoneMq } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
-/** StyleX cannot read a string const from a defineVars file; keep the token import. */
-const phone = "@media (max-width: 640px)" as typeof phoneMq;
 import { Icon } from "./icon";
 
 export interface DropdownMenuItem {
@@ -24,15 +24,15 @@ export const menuStyles = stylex.create({
     position: "relative",
     display: {
       default: "inline-block",
-      [phone]: "block",
+      [mq.phone]: "block",
     },
     minWidth: {
       default: 180,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
     width: {
       default: null,
-      [phone]: "100%",
+      [mq.phone]: "100%",
     },
   },
   dropdown: {
@@ -43,22 +43,22 @@ export const menuStyles = stylex.create({
     gap: 12,
     paddingBlock: {
       default: 9,
-      [phone]: 12,
+      [mq.phone]: 12,
     },
     paddingInline: {
       default: 12,
-      [phone]: 14,
+      [mq.phone]: 14,
     },
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderColor: raster.divider,
     borderRadius: {
       default: raster.radiusSm,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
     fontSize: {
       default: 14,
-      [phone]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     color: raster.ink,
     letterSpacing: "-0.01em",
@@ -68,7 +68,7 @@ export const menuStyles = stylex.create({
     width: "100%",
     minHeight: {
       default: null,
-      [phone]: raster.hit,
+      [mq.phone]: raster.hit,
     },
   },
   menu: {
@@ -78,17 +78,17 @@ export const menuStyles = stylex.create({
     borderColor: raster.divider,
     borderRadius: {
       default: raster.radiusSm,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
     marginTop: {
       default: 6,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
     overflow: "hidden",
     backgroundColor: raster.paper,
     boxShadow: {
       default: "0 8px 24px rgba(0,0,0,0.06)",
-      [phone]: "none",
+      [mq.phone]: "none",
     },
   },
   menuOverlay: {
@@ -121,23 +121,23 @@ export const menuStyles = stylex.create({
     boxSizing: "border-box",
     display: {
       default: "block",
-      [phone]: "flex",
+      [mq.phone]: "flex",
     },
     alignItems: {
       default: null,
-      [phone]: "center",
+      [mq.phone]: "center",
     },
     paddingBlock: {
       default: 9,
-      [phone]: 12,
+      [mq.phone]: 12,
     },
     paddingInline: {
       default: 12,
-      [phone]: 14,
+      [mq.phone]: 14,
     },
     fontSize: {
       default: 14,
-      [phone]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     color: raster.ink,
     letterSpacing: "-0.01em",
@@ -157,7 +157,7 @@ export const menuStyles = stylex.create({
     fontFamily: "inherit",
     minHeight: {
       default: null,
-      [phone]: raster.hit,
+      [mq.phone]: raster.hit,
     },
   },
   itemActive: {

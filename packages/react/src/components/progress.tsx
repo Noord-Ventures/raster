@@ -38,7 +38,7 @@ export function Progress({ value, max = 100, label, className, style, ...props }
   const pct = Math.min(100, Math.max(0, max === 0 ? 0 : (value / max) * 100));
   const head = rs(["rs-progress-head"], styles.head);
   const bar = rs(["rs-progress"], styles.bar);
-  const fill = rs([], styles.fill);
+  const fill = rs(["rs-progress-fill"], styles.fill);
   return (
     <div {...props} className={className} style={style}>
       {label != null && (

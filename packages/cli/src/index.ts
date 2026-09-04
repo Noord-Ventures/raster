@@ -5,7 +5,7 @@ const VERSION = "0.3.0";
 const HELP = `@noorddev/raster-cli ${VERSION}, the monochrome design system
 
 Usage
-  npx @noorddev/raster-cli init [--css-dir <dir>] [--components-dir <dir>] [--compat] [--registry <url>] [--overwrite]
+  npx @noorddev/raster-cli init [--css-dir <dir>] [--components-dir <dir>] [--registry <url>] [--overwrite]
   npx @noorddev/raster-cli add <component...> [--overwrite] [--registry <url>]
   npx @noorddev/raster-cli list
   npx @noorddev/raster-cli tokens
@@ -13,7 +13,6 @@ Usage
 
 Commands
   init      Write raster.css, Inter (SIL OFL 1.1), index.html (specimen), and raster.json.
-            --compat also writes the 0.1 class-name layer.
             --registry <url> stores a remote registry for add (HTTP(S) or a local directory).
   add       Copy a component's React source into your project.
             CSS-only components need no code; add prints the snippet.
@@ -65,7 +64,6 @@ async function main(): Promise<void> {
       const results = init(cwd, {
         cssDir: typeof flags["css-dir"] === "string" ? flags["css-dir"] : undefined,
         componentsDir: typeof flags["components-dir"] === "string" ? flags["components-dir"] : undefined,
-        compat: Boolean(flags["compat"]),
         overwrite: Boolean(flags["overwrite"]),
         registry: registryFlag(flags),
       });

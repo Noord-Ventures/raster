@@ -8,6 +8,13 @@
     "https://getraster.com/r/raster-base.json",
     "https://getraster.com/r/inter.json"
   ],
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "devDependencies": [
+    "@stylexjs/babel-plugin"
+  ],
+  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
       "path": "raster/icons.tsx",
@@ -23,7 +30,7 @@
     },
     {
       "path": "raster/rs.ts",
-      "content": "import type { CSSProperties } from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { cx } from \"./cx\";\n\ntype StyleXProps = { className?: string; style?: CSSProperties };\n\n/** Merge Raster class names with StyleX props. CSS-first classes stay on the node. */\nexport function rs(classNames: Array<string | false | null | undefined>, ...styles: unknown[]): StyleXProps {\n  const sx = (stylex.props as (...args: unknown[]) => StyleXProps)(...styles);\n  return {\n    className: cx(...classNames, sx.className),\n    style: sx.style,\n  };\n}\n",
+      "content": "import type { CSSProperties } from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport type { CompiledStyles, InlineStyles } from \"@stylexjs/stylex\";\nimport { cx } from \"./cx\";\n\ntype Nested<T> = T | ReadonlyArray<Nested<T>>;\n\n/** Exactly what stylex.props accepts: compiled leaves, falsy, nested arrays, or a leaf with inline styles. */\nexport type Leaves = ReadonlyArray<Nested<null | undefined | CompiledStyles | boolean | Readonly<[CompiledStyles, InlineStyles]>>>;\n\ntype StyleXProps = { className?: string; style?: CSSProperties };\n\n/**\n * The one seam every component styles through: semantic rs-* class names\n * (the CSS-first contract, and what packages/core generates CSS for) merged\n * with the compiled StyleX leaves that paint the React tree.\n */\nexport function rs(classNames: Array<string | false | null | undefined>, ...styles: Leaves): StyleXProps {\n  const sx = stylex.props(...styles) as StyleXProps;\n  return {\n    className: cx(...classNames, sx.className),\n    style: sx.style,\n  };\n}\n",
       "type": "registry:file",
       "target": "components/raster/rs.ts"
     },
@@ -38,6 +45,12 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/icons.css",
+      "content": "/* ── icons: generated from packages/react/src/components/icon.tsx ── */\n.rs-icon{display:block;flex-shrink:0;overflow:visible;color:inherit}\n.rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}\n.rs-icon-catalog{width:100%;display:flex;flex-direction:column;gap:28px;text-align:left;align-self:stretch}\n.rs-icon-group{display:flex;flex-direction:column;gap:12px}\n.rs-icon-group-title{margin:0;font-size:12px;font-weight:600;letter-spacing:0;color:var(--text-secondary);text-transform:none}\n.rs-icon-grid{display:grid;grid-template-columns:repeat(auto-fill, 184px);column-gap:var(--gutter);row-gap:20px;justify-content:start;width:100%}\n@media (max-width: 480px){.rs-icon-grid{grid-template-columns:minmax(0, 1fr)}}\n.rs-icon-cell{display:flex;flex-direction:column;align-items:flex-start;gap:8px;width:184px}\n@media (max-width: 480px){.rs-icon-cell{width:100%}}\n.rs-icon-pair{display:flex;align-items:center;gap:16px;min-height:24px}\n.rs-icon-kin{display:flex;align-items:center;gap:8px;min-height:24px}\n.rs-icon-label{font-size:11px;line-height:1.3;color:var(--text-secondary);text-transform:none}\n",
+      "type": "registry:file",
+      "target": "styles/raster/icons.css"
     }
   ],
   "meta": {

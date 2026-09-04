@@ -1,0 +1,15 @@
+/* ── table: generated from packages/react/src/components/table.tsx ── */
+.rs-table{width:calc(100% + 40px);border-collapse:collapse;margin-top:16px;margin-bottom:24px;margin-left:-20px;margin-right:0;font-size:14px}
+@media (max-width: 640px){.rs-table{width:calc(100% + 2 * var(--pad));margin-left:calc(-1 * var(--pad));margin-right:calc(-1 * var(--pad));font-size:16px}}
+.rs-table-th{text-align:left;font-weight:600;color:var(--text);letter-spacing:-0.01em;padding-top:10px;padding-bottom:10px;padding-left:12px;padding-right:16px;border-bottom-width:2px;border-bottom-style:solid;border-bottom-color:var(--divider);font-size:13px}
+.rs-table-th:last-child{text-align:right;padding-right:20px}
+.rs-table-th:first-child{padding-left:20px}
+@media (max-width: 640px){.rs-table-th{padding-top:14px;padding-bottom:14px;padding-left:12px;padding-right:12px;font-size:15px}}
+.rs-table-td{padding-top:10px;padding-bottom:10px;padding-left:12px;padding-right:16px;color:var(--text-secondary);font-weight:500;letter-spacing:-0.01em;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider);vertical-align:top;text-align:left}
+.rs-table-td:first-child{padding-left:20px}
+.rs-table-td:last-child{padding-right:20px;text-align:right}
+@media (max-width: 640px){.rs-table-td{padding-top:14px;padding-bottom:14px;padding-left:12px;padding-right:12px}}
+.rs-table-row{background-color:transparent}
+.rs-table-row:nth-child(even){background-color:var(--table-alt)}
+.rs-total-row{font-weight:500;color:var(--text);border-top-width:2px;border-top-style:solid;border-top-color:var(--divider);border-bottom-width:2px;border-bottom-style:solid;border-bottom-color:var(--divider);background-color:transparent}
+.rs-table-total-cell{font-weight:500;color:var(--text);border-top-width:2px;border-bottom-width:2px}

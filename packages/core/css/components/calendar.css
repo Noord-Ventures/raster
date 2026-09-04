@@ -1,0 +1,21 @@
+/* ── calendar: generated from packages/react/src/components/calendar.tsx ── */
+.rs-cal{width:252px}
+.rs-cal-head{display:flex;justify-content:space-between;align-items:center;min-height:26px;margin-bottom:8px}
+@media (max-width: 640px){.rs-cal-head{min-height:var(--hit)}}
+.rs-cal-title{font-size:13px;font-weight:600;letter-spacing:-0.01em;line-height:26px;color:var(--text)}
+@media (max-width: 640px){.rs-cal-title{font-size:var(--control-fs)}}
+.rs-cal-nav{display:flex;gap:5px;flex-shrink:0}
+@media (max-width: 640px){.rs-cal-nav{gap:8px}}
+.rs-page.rs-cal-page{box-sizing:border-box;width:26px;height:26px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-secondary);border-width:1px;border-style:solid;border-color:var(--divider);padding:0;background-color:transparent;font-family:inherit;cursor:pointer;transform:translateY(1px)}
+@media (max-width: 640px){.rs-page.rs-cal-page{width:var(--hit);height:var(--hit);min-width:var(--hit);min-height:var(--hit);border-radius:0;font-size:var(--control-fs)}}
+.rs-cal-icon{display:block;color:inherit}
+.rs-cal-grid{display:grid;grid-template-columns:repeat(7, 36px);width:252px}
+.rs-cal-dow{font-size:11px;font-weight:500;color:var(--text-secondary);text-align:center;padding-top:4px;padding-bottom:4px;padding-inline:0}
+@media (max-width: 640px){.rs-cal-dow{font-size:13px}}
+.rs-cal-day{box-sizing:border-box;width:36px;height:36px;min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;font-variant-numeric:tabular-nums;color:var(--text);background-color:transparent;border-width:0;border-style:none;border-radius:var(--rs-in, var(--radius-sm));cursor:pointer;font-family:inherit;padding:0}
+.rs-cal-day:hover{background-color:var(--divider-subtle)}
+@media (hover: none){.rs-cal-day:hover{background-color:transparent}.rs-cal-day:active{background-color:var(--divider-subtle)}}
+.rs-cal-day-out{color:var(--text-secondary);opacity:0.45}
+.rs-cal-day-today{box-shadow:inset 0 0 0 1px var(--divider)}
+.rs-cal-day-selected{background-color:var(--text);color:var(--bg);font-weight:600}
+.rs-cal-day-selected:hover{background-color:var(--text)}

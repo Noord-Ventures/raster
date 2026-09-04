@@ -8,10 +8,17 @@
     "https://getraster.com/r/raster-base.json",
     "https://getraster.com/r/inter.json"
   ],
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "devDependencies": [
+    "@stylexjs/babel-plugin"
+  ],
+  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
       "path": "raster/chip.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface ChipProps extends React.HTMLAttributes<HTMLSpanElement> {}\n\nconst phone = \"@media (max-width: 640px)\";\n\nconst styles = stylex.create({\n  chip: {\n    fontFamily: \"ui-monospace, SFMono-Regular, Menlo, monospace\",\n    fontSize: {\n      default: 11,\n      [phone]: 13,\n    },\n    fontWeight: 500,\n    color: raster.gray,\n    borderWidth: raster.hairline,\n    borderStyle: \"solid\",\n    borderColor: \"color-mix(in srgb, currentColor 35%, transparent)\",\n    paddingBlock: {\n      default: 3,\n      [phone]: 12,\n    },\n    paddingInline: {\n      default: 7,\n      [phone]: 14,\n    },\n    lineHeight: 1,\n    borderRadius: {\n      default: raster.radiusSm,\n      [phone]: 0,\n    },\n    display: {\n      default: null,\n      [phone]: \"inline-flex\",\n    },\n    alignItems: {\n      default: null,\n      [phone]: \"center\",\n    },\n    minHeight: {\n      default: null,\n      [phone]: raster.hit,\n    },\n  },\n});\n\n/** Mono identifier with a 1px mixed border. */\nexport const Chip = React.forwardRef<HTMLSpanElement, ChipProps>(function Chip(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-chip\", className], styles.chip);\n  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface ChipProps extends React.HTMLAttributes<HTMLSpanElement> {}\n\n\nconst styles = stylex.create({\n  chip: {\n    fontFamily: \"ui-monospace, SFMono-Regular, Menlo, monospace\",\n    fontSize: {\n      default: 11,\n      [mq.phone]: 13,\n    },\n    fontWeight: 500,\n    color: raster.gray,\n    borderWidth: raster.hairline,\n    borderStyle: \"solid\",\n    borderColor: \"color-mix(in srgb, currentColor 35%, transparent)\",\n    paddingBlock: {\n      default: 3,\n      [mq.phone]: 12,\n    },\n    paddingInline: {\n      default: 7,\n      [mq.phone]: 14,\n    },\n    lineHeight: 1,\n    borderRadius: {\n      default: raster.radiusSm,\n      [mq.phone]: 0,\n    },\n    display: {\n      default: null,\n      [mq.phone]: \"inline-flex\",\n    },\n    alignItems: {\n      default: null,\n      [mq.phone]: \"center\",\n    },\n    minHeight: {\n      default: null,\n      [mq.phone]: raster.hit,\n    },\n  },\n});\n\n/** Mono identifier with a 1px mixed border. */\nexport const Chip = React.forwardRef<HTMLSpanElement, ChipProps>(function Chip(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-chip\", className], styles.chip);\n  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
       "target": "components/raster/chip.tsx"
     },
@@ -23,7 +30,7 @@
     },
     {
       "path": "raster/rs.ts",
-      "content": "import type { CSSProperties } from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { cx } from \"./cx\";\n\ntype StyleXProps = { className?: string; style?: CSSProperties };\n\n/** Merge Raster class names with StyleX props. CSS-first classes stay on the node. */\nexport function rs(classNames: Array<string | false | null | undefined>, ...styles: unknown[]): StyleXProps {\n  const sx = (stylex.props as (...args: unknown[]) => StyleXProps)(...styles);\n  return {\n    className: cx(...classNames, sx.className),\n    style: sx.style,\n  };\n}\n",
+      "content": "import type { CSSProperties } from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport type { CompiledStyles, InlineStyles } from \"@stylexjs/stylex\";\nimport { cx } from \"./cx\";\n\ntype Nested<T> = T | ReadonlyArray<Nested<T>>;\n\n/** Exactly what stylex.props accepts: compiled leaves, falsy, nested arrays, or a leaf with inline styles. */\nexport type Leaves = ReadonlyArray<Nested<null | undefined | CompiledStyles | boolean | Readonly<[CompiledStyles, InlineStyles]>>>;\n\ntype StyleXProps = { className?: string; style?: CSSProperties };\n\n/**\n * The one seam every component styles through: semantic rs-* class names\n * (the CSS-first contract, and what packages/core generates CSS for) merged\n * with the compiled StyleX leaves that paint the React tree.\n */\nexport function rs(classNames: Array<string | false | null | undefined>, ...styles: Leaves): StyleXProps {\n  const sx = stylex.props(...styles) as StyleXProps;\n  return {\n    className: cx(...classNames, sx.className),\n    style: sx.style,\n  };\n}\n",
       "type": "registry:file",
       "target": "components/raster/rs.ts"
     },
@@ -32,6 +39,12 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/chip.css",
+      "content": "/* ── chip: generated from packages/react/src/components/chip.tsx ── */\n.rs-chip{font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:11px;font-weight:500;color:var(--text-secondary);border-width:1px;border-style:solid;border-color:color-mix(in srgb, currentColor 35%, transparent);padding-block:3px;padding-inline:7px;line-height:1;border-radius:var(--radius-sm)}\n@media (max-width: 640px){.rs-chip{font-size:13px;padding-block:12px;padding-inline:14px;border-radius:0;display:inline-flex;align-items:center;min-height:var(--hit)}}\n",
+      "type": "registry:file",
+      "target": "styles/raster/chip.css"
     }
   ],
   "meta": {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -12,13 +12,13 @@ const styles = stylex.create({
     flexDirection: "column",
     gap: {
       default: 8,
-      ["@media (max-width: 640px)"]: 8,
+      [mq.phone]: 8,
     },
   },
   label: {
     fontSize: {
       default: 12,
-      ["@media (max-width: 640px)"]: raster.controlLabel,
+      [mq.phone]: raster.controlLabel,
     },
     fontWeight: 600,
     color: raster.gray,
@@ -29,7 +29,7 @@ const styles = stylex.create({
     margin: 0,
     fontSize: {
       default: 12,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     fontWeight: 500,
     color: raster.gray,
@@ -40,7 +40,7 @@ const styles = stylex.create({
     margin: 0,
     fontSize: {
       default: 12,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     fontWeight: 500,
     color: raster.ink,

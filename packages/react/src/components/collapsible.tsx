@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -19,11 +21,11 @@ const styles = stylex.create({
     gap: 7,
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     fontSize: {
       default: 13.5,
-      ["@media (max-width: 640px)"]: 17,
+      [mq.phone]: 17,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -41,14 +43,14 @@ const styles = stylex.create({
   body: {
     paddingTop: {
       default: 10,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
     },
     paddingRight: 0,
     paddingBottom: 0,
     paddingLeft: 0,
     fontSize: {
       default: 13.5,
-      ["@media (max-width: 640px)"]: 16,
+      [mq.phone]: 16,
     },
     lineHeight: 1.6,
     color: raster.gray,
@@ -69,8 +71,8 @@ export function Collapsible({
   const [innerOpen, setInnerOpen] = React.useState(!!defaultOpen);
   const isOpen = open ?? innerOpen;
   const root = rs(["rs-disclosure", className]);
-  const summary = rs([], styles.summary);
-  const chevron = rs(["rs-acc-chevron"], styles.chevron, isOpen && styles.chevronOpen);
+  const summary = rs(["rs-disclosure-summary"], styles.summary);
+  const chevron = rs(["rs-acc-chevron", "rs-disclosure-chevron", isOpen && "rs-disclosure-chevron-open"], styles.chevron, isOpen && styles.chevronOpen);
   const body = rs(["rs-disclosure-body"], styles.body);
   return (
     <details

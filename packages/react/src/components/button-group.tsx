@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import type { ButtonProps } from "./button";
 
@@ -11,20 +11,20 @@ const styles = stylex.create({
     boxSizing: "border-box",
     display: {
       default: "inline-flex",
-      "@media (max-width: 640px)": "flex",
+      [mq.phone]: "flex",
     },
     alignItems: "stretch",
     height: raster.controlH,
     width: {
       default: null,
-      "@media (max-width: 640px)": "100%",
+      [mq.phone]: "100%",
     },
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderColor: raster.divider,
     borderRadius: {
       default: raster.radiusSm,
-      "@media (max-width: 640px)": 0,
+      [mq.phone]: 0,
     },
     backgroundColor: raster.divider,
     gap: raster.hairline,

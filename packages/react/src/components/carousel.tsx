@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -24,7 +26,7 @@ const styles = stylex.create({
     scrollSnapType: "x mandatory",
     scrollBehavior: {
       default: "smooth",
-      "@media (prefers-reduced-motion: reduce)": "auto",
+      [mq.reduce]: "auto",
     },
     scrollbarWidth: "none",
     "::-webkit-scrollbar": {
@@ -39,41 +41,41 @@ const styles = stylex.create({
     display: "flex",
     gap: {
       default: 5,
-      ["@media (max-width: 640px)"]: 8,
+      [mq.phone]: 8,
     },
     marginTop: {
       default: 10,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
   },
   page: {
     boxSizing: "border-box",
     width: {
       default: 26,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     height: {
       default: 26,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minWidth: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     color: raster.gray,
     borderWidth: raster.hairline,
@@ -93,7 +95,7 @@ const styles = stylex.create({
     scrollSnapAlign: "start",
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
   },
 });
@@ -113,8 +115,8 @@ export function Carousel({ className, style, children, "aria-label": ariaLabel =
   const root = rs(["rs-carousel", className], styles.carousel);
   const track = rs(["rs-carousel-track"], styles.track);
   const nav = rs(["rs-carousel-nav"], styles.nav);
-  const page = rs(["rs-page"], styles.page);
-  const icon = rs([], styles.icon);
+  const page = rs(["rs-page", "rs-carousel-page"], styles.page);
+  const icon = rs(["rs-carousel-icon"], styles.icon);
   return (
     <div role="group" aria-label={ariaLabel} {...props} className={root.className} style={{ ...root.style, ...style }}>
       <div ref={trackRef} className={track.className} style={track.style} tabIndex={0}>

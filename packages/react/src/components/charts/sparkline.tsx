@@ -39,7 +39,7 @@ export function Sparkline({
   const last = values[values.length - 1] ?? 0;
   const color = spot === true ? CROUWEL_SPOT : typeof spot === "string" ? spot : undefined;
   const sx = rs(["rs-spark", className], styles.spark);
-  const svg = rs([], styles.svg);
+  const svg = rs(["rs-chart-svg"], styles.svg);
   const line = lineMark(0, Boolean(spot));
   const dot = rs(["rs-chart-dot"], chartStyles.dot);
   return (

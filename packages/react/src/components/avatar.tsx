@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
@@ -63,14 +65,8 @@ export function Avatar({ src, alt, initials, size = "md", className, style, ...p
   const [failed, setFailed] = React.useState(false);
   const inRow = React.useContext(AvatarRowContext);
   const showImage = src && !failed;
-  const sx = rs(
-    ["rs-avatar", size === "sm" && "rs-avatar-sm", size === "lg" && "rs-avatar-lg", className],
-    styles.avatar,
-    size === "sm" && styles.sm,
-    size === "lg" && styles.lg,
-    inRow && styles.inRow,
-  );
-  const img = rs([], styles.image);
+  const sx = rs(["rs-avatar", size === "sm" && "rs-avatar-sm", size === "lg" && "rs-avatar-lg", className, inRow && "rs-avatar-in-row"], styles.avatar, size === "sm" && styles.sm, size === "lg" && styles.lg, inRow && styles.inRow);
+  const img = rs(["rs-avatar-image"], styles.image);
   return (
     <span {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       {showImage ? (

@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
@@ -56,7 +58,7 @@ export function DatePicker({
 
   const root = rs(["rs-select", className], menuStyles.select);
   const trigger = rs(["rs-dropdown"], menuStyles.dropdown);
-  const menu = rs(["rs-menu"], menuStyles.menu, menuStyles.menuOverlay, menuStyles.menuCal, styles.calMenu);
+  const menu = rs(["rs-menu", "rs-date-picker-cal-menu"], menuStyles.menu, menuStyles.menuOverlay, menuStyles.menuCal, styles.calMenu);
 
   return (
     <div ref={rootRef} className={root.className} style={{ ...root.style, ...style }} {...props}>

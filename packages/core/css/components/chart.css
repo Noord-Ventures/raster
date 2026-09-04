@@ -1,0 +1,48 @@
+/* ── chart: generated from packages/react/src/components/charts/frame.tsx ── */
+.rs-chart{position:relative;width:100%;border-radius:0;box-shadow:none}
+.rs-chart-field{isolation:isolate;background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:0;box-shadow:none;padding:16px}
+.rs-chart-svg,.rs-chart-plot.rs-chart-donut{display:block;width:100%;height:auto;overflow:visible}
+.rs-chart-plot,.rs-chart-plot.rs-chart-donut{transform-origin:center}
+.rs-chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+.rs-chart-title{font-size:13px;font-weight:600;letter-spacing:-0.01em;color:var(--text)}
+.rs-chart-grid{stroke:var(--divider);stroke-width:1}
+.rs-chart-baseline{stroke:var(--divider);stroke-width:1}
+.rs-chart-axis{fill:var(--text-secondary);font-size:11px;font-weight:500;letter-spacing:0;font-variant-numeric:tabular-nums}
+.rs-chart-line{fill:none;stroke:var(--text);stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter}
+.rs-chart-line-dashed{stroke-dasharray:4 4}
+.rs-chart-line-muted{stroke:var(--text-secondary)}
+.rs-chart-line-dotted{stroke:var(--text-secondary);stroke-dasharray:0.1 5;stroke-width:1.5;stroke-linecap:butt}
+.rs-chart-line-spot{stroke:var(--rs-chart-spot)}
+.rs-chart-area{fill:var(--text);opacity:0.08;stroke:none}
+.rs-chart-area-spot{fill:var(--rs-chart-spot);opacity:0.16;stroke:none}
+.rs-chart-bar{fill:var(--text);border-radius:0;transition:fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)}
+.rs-chart-bar-muted{fill:var(--divider)}
+.rs-chart-bar-spot{fill:var(--rs-chart-spot)}
+.rs-chart-cursor{stroke:var(--divider);stroke-width:1}
+.rs-chart-dot{fill:var(--bg);stroke:var(--text);stroke-width:1}
+.rs-chart-mark{fill:var(--text);border-radius:0;transition:fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)}
+.rs-chart-mark-spot{fill:var(--rs-chart-spot)}
+.rs-chart-ann{fill:var(--text-secondary);font-size:11px;font-weight:500;letter-spacing:-0.01em}
+.rs-chart-tip{position:absolute;pointer-events:none;background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:0;box-shadow:none;padding-block:6px;padding-inline:8px;font-size:12px;letter-spacing:-0.01em;color:var(--text);white-space:nowrap;z-index:60;transform:translate(-50%, calc(-100% - 8px))}
+.rs-chart-tip-label{display:block;font-size:11px;color:var(--text-secondary);margin-bottom:2px}
+.rs-chart-tip-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rs-chart-tip-name{color:var(--text-secondary)}
+.rs-chart-tip-val{font-weight:600;font-variant-numeric:tabular-nums}
+.rs-chart-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}
+.rs-chart-legend-item{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;letter-spacing:-0.01em;color:var(--text-secondary)}
+.rs-chart-legend-svg{display:block}
+.rs-chart-plot.rs-chart-donut{display:block}
+.rs-chart-donut-track{fill:none;stroke:var(--divider);stroke-width:1}
+.rs-chart-donut-value{fill:none;stroke:var(--rs-chart-spot);stroke-width:1;stroke-linecap:butt}
+.rs-chart-donut-label{fill:var(--text);font-size:12px;font-weight:500;letter-spacing:-0.03em;font-variant-numeric:tabular-nums}
+.rs-chart-donut-caption{fill:var(--text-secondary);font-size:8px;font-weight:500;letter-spacing:0.06em}
+.rs-chart-share{display:flex;height:8px;width:100%;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:0;box-shadow:none}
+.rs-chart-share-seg{height:100%;border-radius:0;background-color:var(--text);transition:fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)}
+.rs-chart-share-seg:nth-child(2){background-color:var(--text-secondary)}
+.rs-chart-share-seg:nth-child(3){background-color:var(--divider)}
+.rs-chart-share-seg-spot{background-color:var(--rs-chart-spot)}
+.rs-chart-hist{fill:var(--divider);stroke:none;border-radius:0}
+.rs-chart-multi{display:grid;grid-template-columns:repeat(auto-fill, minmax(184px, 1fr));gap:20px}
+.rs-chart-multi-cap{margin-top:0;margin-right:0;margin-bottom:8px;margin-left:0;font-size:12px;font-weight:600;letter-spacing:-0.01em;color:var(--text)}
+.rs-spark{display:inline-block;vertical-align:middle}
+.rs-chart-svg{display:block;overflow:visible}

@@ -1,7 +1,7 @@
 {
   "name": "@noorddev/raster-react",
   "version": "0.3.0",
-  "description": "Raster React components — StyleX-owned catalogue on Raster tokens.",
+  "description": "Raster React components: precompiled StyleX on Raster tokens. Import the package and one stylesheet; no compiler to configure.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -13,13 +13,27 @@
     "access": "public"
   },
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./css": {
+      "types": "./dist/raster-react.css.d.ts",
+      "default": "./dist/raster-react.css"
+    },
+    "./stylex": {
+      "types": "./dist/tokens.stylex.d.ts",
+      "default": "./src/tokens.stylex.ts"
+    },
+    "./components/*": {
+      "types": "./dist/components/*.d.ts",
+      "default": "./dist/components/*.js"
     },
     "./package.json": "./package.json"
   },
@@ -28,7 +42,7 @@
     "src"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "node scripts/build.mjs",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
@@ -37,12 +51,13 @@
     "@stylexjs/stylex": "^0.19.0"
   },
   "peerDependencies": {
-    "@noorddev/raster": ">=0.3.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.8",
+    "@babel/preset-react": "^7",
+    "@babel/preset-typescript": "^7",
     "@stylexjs/babel-plugin": "^0.19.0",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
@@ -52,8 +67,10 @@
     "jsdom": "^26.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tsup": "^8.3.5",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5"
+  },
+  "engines": {
+    "node": ">=18.18"
   }
 }

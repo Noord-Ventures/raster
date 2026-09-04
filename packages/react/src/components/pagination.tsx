@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -19,41 +19,41 @@ const styles = stylex.create({
     alignItems: "center",
     gap: {
       default: 5,
-      ["@media (max-width: 640px)"]: 8,
+      [mq.phone]: 8,
     },
     flexWrap: {
       default: null,
-      ["@media (max-width: 640px)"]: "wrap",
+      [mq.phone]: "wrap",
     },
   },
   page: {
     boxSizing: "border-box",
     width: {
       default: 26,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     height: {
       default: 26,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minWidth: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     color: raster.gray,
     borderWidth: raster.hairline,
@@ -107,7 +107,7 @@ export function Pagination({
   ...props
 }: PaginationProps) {
   const nav = rs(["rs-pages", className], styles.pages);
-  const icon = rs([], styles.icon);
+  const icon = rs(["rs-pages-icon"], styles.icon);
   return (
     <nav aria-label="Pagination" {...props} className={nav.className} style={{ ...nav.style, ...style }}>
       <PageButton aria-label="Previous page" disabled={page <= 1} onClick={() => onPageChange?.(page - 1)}>

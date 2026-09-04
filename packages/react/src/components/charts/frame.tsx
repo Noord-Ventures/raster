@@ -329,7 +329,7 @@ export function SrTable({
 }
 
 export function LegendSwatch({ seriesIndex, spot }: { seriesIndex: number; spot?: boolean }) {
-  const svg = rs([], styles.legendSvg);
+  const svg = rs(["rs-chart-legend-svg"], styles.legendSvg);
   return (
     <svg width="18" height="4" viewBox="0 0 18 4" aria-hidden="true" className={svg.className} style={svg.style}>
       <path d="M0 2h18" {...lineMark(seriesIndex, spot)} />

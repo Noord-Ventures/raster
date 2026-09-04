@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface SplitProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -16,7 +18,7 @@ const styles = stylex.create({
     display: "flex",
     flexDirection: {
       default: "row",
-      ["@media (max-width: 640px)"]: "column",
+      [mq.phone]: "column",
     },
     width: "100%",
   },
@@ -28,33 +30,33 @@ const styles = stylex.create({
     flexShrink: 0,
     width: {
       default: 9,
-      ["@media (max-width: 640px)"]: "auto",
+      [mq.phone]: "auto",
     },
     height: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     marginTop: {
       default: 0,
-      ["@media (max-width: 640px)"]: -4,
+      [mq.phone]: -4,
     },
     marginBottom: {
       default: 0,
-      ["@media (max-width: 640px)"]: -4,
+      [mq.phone]: -4,
     },
     marginLeft: {
       default: -4,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     marginRight: {
       default: -4,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     position: "relative",
     zIndex: 5,
     cursor: {
       default: "col-resize",
-      ["@media (max-width: 640px)"]: "row-resize",
+      [mq.phone]: "row-resize",
     },
     backgroundColor: "transparent",
     borderWidth: 0,
@@ -70,27 +72,27 @@ const styles = stylex.create({
       position: "absolute",
       left: {
         default: 4,
-        ["@media (max-width: 640px)"]: 0,
+        [mq.phone]: 0,
       },
       right: {
         default: null,
-        ["@media (max-width: 640px)"]: 0,
+        [mq.phone]: 0,
       },
       top: {
         default: 0,
-        ["@media (max-width: 640px)"]: "50%",
+        [mq.phone]: "50%",
       },
       bottom: {
         default: 0,
-        ["@media (max-width: 640px)"]: "auto",
+        [mq.phone]: "auto",
       },
       width: {
         default: 1,
-        ["@media (max-width: 640px)"]: "auto",
+        [mq.phone]: "auto",
       },
       height: {
         default: null,
-        ["@media (max-width: 640px)"]: 1,
+        [mq.phone]: 1,
       },
       backgroundColor: raster.divider,
       transition: `background-color ${raster.durationSnap} ${raster.ease}`,

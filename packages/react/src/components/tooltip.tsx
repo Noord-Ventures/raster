@@ -1,9 +1,8 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone as phoneToken } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
-const phone = "@media (max-width: 640px)" as typeof phoneToken;
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Tip text. Plain CSS shows it on hover and on keyboard focus. */
@@ -24,22 +23,22 @@ const styles = stylex.create({
       color: raster.paper,
       fontSize: {
         default: 11.5,
-        [phone]: 13,
+        [mq.phone]: 13,
       },
       fontWeight: 500,
       letterSpacing: "-0.01em",
       lineHeight: 1.3,
       paddingBlock: {
         default: 5,
-        [phone]: 8,
+        [mq.phone]: 8,
       },
       paddingInline: {
         default: 9,
-        [phone]: 12,
+        [mq.phone]: 12,
       },
       borderRadius: {
         default: raster.radiusSm,
-        [phone]: 0,
+        [mq.phone]: 0,
       },
       whiteSpace: "nowrap",
       opacity: 0,
@@ -50,7 +49,7 @@ const styles = stylex.create({
     ":hover::after": {
       opacity: {
         default: 1,
-        "@media (hover: none)": 0,
+        [mq.touch]: 0,
       },
     },
     ":focus-within::after": {
@@ -59,7 +58,7 @@ const styles = stylex.create({
     ":active::after": {
       opacity: {
         default: null,
-        "@media (hover: none)": 1,
+        [mq.touch]: 1,
       },
     },
   },

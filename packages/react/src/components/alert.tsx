@@ -62,9 +62,9 @@ const styles = stylex.create({
 
 export function Alert({ title, variant = "outline", icon, className, style, children, ...props }: AlertProps) {
   const sx = rs(["rs-alert", variant === "solid" && "rs-alert-solid", className], styles.alert, variant === "solid" && styles.solid);
-  const mark = rs([], styles.icon, variant === "solid" && styles.iconSolid);
-  const heading = rs(["rs-alert-title"], styles.title, variant === "solid" && styles.titleSolid);
-  const body = rs(["rs-alert-body"], styles.body, variant === "solid" && styles.bodySolid);
+  const mark = rs(["rs-alert-icon", variant === "solid" && "rs-alert-icon-solid"], styles.icon, variant === "solid" && styles.iconSolid);
+  const heading = rs(["rs-alert-title", variant === "solid" && "rs-alert-title-solid"], styles.title, variant === "solid" && styles.titleSolid);
+  const body = rs(["rs-alert-body", variant === "solid" && "rs-alert-body-solid"], styles.body, variant === "solid" && styles.bodySolid);
   return (
     <div role="status" {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       {icon ?? <Icon name="info" size={16} className={mark.className} style={mark.style} />}

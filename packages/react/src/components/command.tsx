@@ -1,10 +1,10 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone as phoneMq } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
-/** StyleX cannot read a string const from a defineVars file; keep the token import. */
-const phone = "@media (max-width: 640px)" as typeof phoneMq;
 import { Dialog } from "./dialog";
 
 export interface CommandItem {
@@ -30,11 +30,11 @@ const styles = stylex.create({
   palette: {
     width: {
       default: 480,
-      [phone]: "100%",
+      [mq.phone]: "100%",
     },
     maxWidth: {
       default: "90vw",
-      [phone]: "100%",
+      [mq.phone]: "100%",
     },
     padding: 0,
     overflow: "hidden",
@@ -50,7 +50,7 @@ const styles = stylex.create({
     fontFamily: "inherit",
     fontSize: {
       default: 14,
-      [phone]: 16,
+      [mq.phone]: 16,
     },
     letterSpacing: "-0.01em",
     color: raster.ink,
@@ -59,7 +59,7 @@ const styles = stylex.create({
     outline: "none",
     minHeight: {
       default: null,
-      [phone]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     "::placeholder": {
       color: raster.gray,
@@ -73,26 +73,26 @@ const styles = stylex.create({
   group: {
     fontSize: {
       default: 11,
-      [phone]: 13,
+      [mq.phone]: 13,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
     color: raster.gray,
     paddingTop: {
       default: 8,
-      [phone]: 12,
+      [mq.phone]: 12,
     },
     paddingRight: {
       default: 10,
-      [phone]: 14,
+      [mq.phone]: 14,
     },
     paddingBottom: {
       default: 4,
-      [phone]: 6,
+      [mq.phone]: 6,
     },
     paddingLeft: {
       default: 10,
-      [phone]: 14,
+      [mq.phone]: 14,
     },
   },
   item: {
@@ -107,26 +107,26 @@ const styles = stylex.create({
     fontFamily: "inherit",
     fontSize: {
       default: 13.5,
-      [phone]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     letterSpacing: "-0.01em",
     color: raster.ink,
     paddingBlock: {
       default: 8,
-      [phone]: 12,
+      [mq.phone]: 12,
     },
     paddingInline: {
       default: 10,
-      [phone]: 14,
+      [mq.phone]: 14,
     },
     borderRadius: {
       default: raster.radiusSm,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
     cursor: "pointer",
     minHeight: {
       default: null,
-      [phone]: raster.hit,
+      [mq.phone]: raster.hit,
     },
   },
   itemActive: {
@@ -139,12 +139,12 @@ const styles = stylex.create({
   empty: {
     padding: {
       default: 20,
-      [phone]: 24,
+      [mq.phone]: 24,
     },
     textAlign: "center",
     fontSize: {
       default: 13,
-      [phone]: 15,
+      [mq.phone]: 15,
     },
     color: raster.gray,
   },
@@ -276,7 +276,7 @@ export function CommandDialog({ open, onClose, className, ...props }: CommandDia
     <Dialog
       open={open}
       onClose={onClose}
-      className={["rs-command", className].filter(Boolean).join(" ")}
+      className={["rs-command", "rs-command-dialog", className].filter(Boolean).join(" ")}
       extraStyles={[styles.palette]}
     >
       {open && <Command onDone={onClose} {...props} />}

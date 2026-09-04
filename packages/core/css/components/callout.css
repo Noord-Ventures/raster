@@ -1,0 +1,3 @@
+/* ── callout: generated from packages/react/src/components/callout.tsx ── */
+.rs-callout{background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:0;box-shadow:none;padding-block:16px;padding-inline:20px}
+@media (max-width: 640px){.rs-callout{padding-block:14px;padding-inline:16px}}

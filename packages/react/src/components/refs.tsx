@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface CiteProps extends React.HTMLAttributes<HTMLElement> {}
@@ -8,7 +8,6 @@ export interface RefsProps extends React.OlHTMLAttributes<HTMLOListElement> {}
 export interface RefItemProps extends React.LiHTMLAttributes<HTMLLIElement> {}
 export interface CiteBoxProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const phone = "@media (max-width: 640px)";
 
 const styles = stylex.create({
   cite: {
@@ -96,7 +95,7 @@ const styles = stylex.create({
     borderRadius: raster.radius,
     padding: {
       default: 20,
-      [phone]: "14px 16px",
+      [mq.phone]: "14px 16px",
     },
     marginTop: 8,
   },
@@ -127,7 +126,7 @@ export function Cite({ className, style, children, ...props }: CiteProps) {
 }
 
 export function CiteLink({ className, style, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
-  const sx = rs([className], styles.citeA);
+  const sx = rs([className, "rs-cite-cite-a"], styles.citeA);
   return <a {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }
 
@@ -138,7 +137,7 @@ export function Refs({ className, style, ...props }: RefsProps) {
 }
 
 export function RefItem({ className, style, ...props }: RefItemProps) {
-  const sx = rs([className], styles.item);
+  const sx = rs([className, "rs-cite-item"], styles.item);
   return <li {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }
 

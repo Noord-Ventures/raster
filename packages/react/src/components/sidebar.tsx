@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface SidebarProps extends React.HTMLAttributes<HTMLElement> {}
@@ -10,7 +10,7 @@ const styles = stylex.create({
     boxSizing: "border-box",
     width: {
       default: 204,
-      ["@media (max-width: 640px)"]: "100%",
+      [mq.phone]: "100%",
     },
     minHeight: 204,
     display: "flex",
@@ -27,7 +27,7 @@ const styles = stylex.create({
     paddingInline: 20,
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -37,15 +37,15 @@ const styles = stylex.create({
     borderBottomColor: raster.divider,
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     display: {
       default: null,
-      ["@media (max-width: 640px)"]: "flex",
+      [mq.phone]: "flex",
     },
     alignItems: {
       default: null,
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
   },
   nav: {
@@ -62,30 +62,30 @@ const styles = stylex.create({
   item: {
     display: {
       default: "block",
-      ["@media (max-width: 640px)"]: "flex",
+      [mq.phone]: "flex",
     },
     alignItems: {
       default: null,
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     paddingTop: {
       default: 8,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
     },
     paddingRight: 20,
     paddingBottom: {
       default: 8,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
       ":last-child": 32,
     },
     paddingLeft: 20,
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -103,12 +103,12 @@ const styles = stylex.create({
     paddingRight: 20,
     paddingBottom: {
       default: 4,
-      ["@media (max-width: 640px)"]: 8,
+      [mq.phone]: 8,
     },
     paddingLeft: 20,
     fontSize: {
       default: 12,
-      ["@media (max-width: 640px)"]: raster.controlLabel,
+      [mq.phone]: raster.controlLabel,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -125,22 +125,22 @@ const styles = stylex.create({
     borderTopColor: raster.divider,
     fontSize: {
       default: 12,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
     color: raster.gray,
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     display: {
       default: null,
-      ["@media (max-width: 640px)"]: "flex",
+      [mq.phone]: "flex",
     },
     alignItems: {
       default: null,
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
   },
 });

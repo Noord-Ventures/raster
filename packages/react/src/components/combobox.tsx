@@ -1,10 +1,10 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone as phoneMq } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
-/** StyleX cannot read a string const from a defineVars file; keep the token import. */
-const phone = "@media (max-width: 640px)" as typeof phoneMq;
 import { menuStyles } from "./dropdown-menu";
 import type { SelectOption } from "./select";
 
@@ -22,25 +22,25 @@ const styles = stylex.create({
     position: "relative",
     display: {
       default: "inline-block",
-      [phone]: "block",
+      [mq.phone]: "block",
     },
     minWidth: {
       default: 200,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
     width: {
       default: null,
-      [phone]: "100%",
+      [mq.phone]: "100%",
     },
   },
   empty: {
     padding: {
       default: "10px 12px",
-      [phone]: 14,
+      [mq.phone]: 14,
     },
     fontSize: {
       default: 13,
-      [phone]: 15,
+      [mq.phone]: 15,
     },
     letterSpacing: "-0.01em",
     color: raster.gray,

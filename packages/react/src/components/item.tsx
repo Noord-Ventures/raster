@@ -1,9 +1,8 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone as phoneToken } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
-const phone = "@media (max-width: 640px)" as typeof phoneToken;
 
 export interface ItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   title: React.ReactNode;
@@ -19,11 +18,11 @@ const styles = stylex.create({
     gap: 16,
     minHeight: {
       default: 48,
-      [phone]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     paddingBlock: {
       default: 10,
-      [phone]: 14,
+      [mq.phone]: 14,
     },
     paddingInline: 0,
     borderBottomWidth: {
@@ -38,7 +37,7 @@ const styles = stylex.create({
     margin: 0,
     fontSize: {
       default: 14,
-      [phone]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -50,7 +49,7 @@ const styles = stylex.create({
     marginInline: 0,
     fontSize: {
       default: 12.5,
-      [phone]: 14,
+      [mq.phone]: 14,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -59,7 +58,7 @@ const styles = stylex.create({
   meta: {
     fontSize: {
       default: 12,
-      [phone]: 14,
+      [mq.phone]: 14,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",

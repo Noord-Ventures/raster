@@ -1,10 +1,10 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone as phoneMq } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
-/** StyleX cannot read a string const from a defineVars file; keep the token import. */
-const phone = "@media (max-width: 640px)" as typeof phoneMq;
 
 export interface DrawerProps extends Omit<React.DialogHTMLAttributes<HTMLDialogElement>, "open"> {
   open: boolean;
@@ -45,7 +45,7 @@ const styles = stylex.create({
     display: "block",
     fontSize: {
       default: 15,
-      [phone]: 18,
+      [mq.phone]: 18,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -55,7 +55,7 @@ const styles = stylex.create({
   body: {
     fontSize: {
       default: 13.5,
-      [phone]: 16,
+      [mq.phone]: 16,
     },
     lineHeight: 1.6,
     letterSpacing: "-0.01em",

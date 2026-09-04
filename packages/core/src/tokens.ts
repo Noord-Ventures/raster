@@ -25,6 +25,8 @@ export const rasterTokens = {
           0.04 still reads on paper. */
       gridLine: "rgba(0,0,0,0.04)",
       tableAlt: "rgba(0,0,0,0.02)",
+      /** Boundary of a form control. 3:1 against paper (WCAG 1.4.11); hairlines stay decorative. */
+      controlBorder: "rgba(0,0,0,0.42)",
     },
     dark: {
       black: "#0E0C0A",
@@ -35,6 +37,8 @@ export const rasterTokens = {
       /** Quieter of two grid inks. 0.05 still reads on dark. */
       gridLine: "rgba(255,255,255,0.05)",
       tableAlt: "rgba(255,255,255,0.03)",
+      /** 3:1 against black. */
+      controlBorder: "rgba(255,255,255,0.38)",
     },
     /** Ink → paper, the in-between steps. Monochrome: there is no accent. */
     neutralScale: [

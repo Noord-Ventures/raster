@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -27,22 +29,22 @@ const styles = stylex.create({
   table: {
     width: {
       default: "calc(100% + 40px)",
-      ["@media (max-width: 640px)"]: `calc(100% + 2 * ${raster.pad})`,
+      [mq.phone]: `calc(100% + 2 * ${raster.pad})`,
     },
     borderCollapse: "collapse",
     marginTop: 16,
     marginBottom: 24,
     marginLeft: {
       default: -20,
-      ["@media (max-width: 640px)"]: `calc(-1 * ${raster.pad})`,
+      [mq.phone]: `calc(-1 * ${raster.pad})`,
     },
     marginRight: {
       default: 0,
-      ["@media (max-width: 640px)"]: `calc(-1 * ${raster.pad})`,
+      [mq.phone]: `calc(-1 * ${raster.pad})`,
     },
     fontSize: {
       default: 14,
-      ["@media (max-width: 640px)"]: 16,
+      [mq.phone]: 16,
     },
   },
   th: {
@@ -55,26 +57,26 @@ const styles = stylex.create({
     letterSpacing: "-0.01em",
     paddingTop: {
       default: 10,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     paddingRight: {
       default: 16,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
       ":last-child": {
         default: 20,
-        ["@media (max-width: 640px)"]: raster.pad,
+        [mq.phone]: raster.pad,
       },
     },
     paddingBottom: {
       default: 10,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     paddingLeft: {
       default: 12,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
       ":first-child": {
         default: 20,
-        ["@media (max-width: 640px)"]: raster.pad,
+        [mq.phone]: raster.pad,
       },
     },
     borderBottomWidth: 2,
@@ -82,32 +84,32 @@ const styles = stylex.create({
     borderBottomColor: raster.divider,
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: 15,
+      [mq.phone]: 15,
     },
   },
   td: {
     paddingTop: {
       default: 10,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     paddingRight: {
       default: 16,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
       ":last-child": {
         default: 20,
-        ["@media (max-width: 640px)"]: raster.pad,
+        [mq.phone]: raster.pad,
       },
     },
     paddingBottom: {
       default: 10,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     paddingLeft: {
       default: 12,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
       ":first-child": {
         default: 20,
-        ["@media (max-width: 640px)"]: raster.pad,
+        [mq.phone]: raster.pad,
       },
     },
     color: raster.gray,
@@ -119,7 +121,7 @@ const styles = stylex.create({
     verticalAlign: "top",
     fontSize: {
       default: null,
-      ["@media (max-width: 640px)"]: 16,
+      [mq.phone]: 16,
     },
     textAlign: {
       default: null,
@@ -188,8 +190,8 @@ export function DataTable<Row extends Record<string, unknown>>({
   const toggle = (key: string) =>
     setSort((s) => (s?.key === key ? (s.dir === "asc" ? { key, dir: "desc" } : null) : { key, dir: "asc" }));
 
-  const table = rs(["rs-table"], styles.table);
-  const th = rs([], styles.th);
+  const table = rs(["rs-table", "rs-datatable-table"], styles.table);
+  const th = rs(["rs-datatable-th"], styles.th);
   const empty = rs(["rs-datatable-empty"], styles.empty);
 
   return (
@@ -200,7 +202,7 @@ export function DataTable<Row extends Record<string, unknown>>({
             {columns.map((column) => {
               const active = sort?.key === column.key;
               const sortBtn = rs(["rs-datatable-sort"], styles.sort);
-              const sortIcon = rs([], styles.sortIcon, active && styles.sortIconOn);
+              const sortIcon = rs(["rs-datatable-sort-icon", active && "rs-datatable-sort-icon-on"], styles.sortIcon, active && styles.sortIconOn);
               return (
                 <th
                   key={column.key}
@@ -236,7 +238,7 @@ export function DataTable<Row extends Record<string, unknown>>({
           {sorted.map((row, index) => (
             <tr key={rowKey(row, index)}>
               {columns.map((column) => {
-                const cell = rs([], styles.td, index % 2 === 1 && styles.tdAlt);
+                const cell = rs(["rs-datatable-td", index % 2 === 1 && "rs-datatable-td-alt"], styles.td, index % 2 === 1 && styles.tdAlt);
                 return (
                   <td key={column.key} className={cell.className} style={cell.style}>
                     {column.render ? column.render(row) : (row[column.key] as React.ReactNode)}

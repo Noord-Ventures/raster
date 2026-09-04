@@ -1,9 +1,10 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone as phoneToken } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
-const phone = "@media (max-width: 640px)" as typeof phoneToken;
 
 export interface ToastOptions {
   description?: React.ReactNode;
@@ -39,26 +40,26 @@ const styles = stylex.create({
     position: "fixed",
     bottom: {
       default: 20,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
     right: {
       default: 20,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
     left: {
       default: null,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
     zIndex: 300,
     display: "flex",
     flexDirection: "column",
     alignItems: {
       default: "flex-end",
-      [phone]: "stretch",
+      [mq.phone]: "stretch",
     },
     gap: {
       default: 8,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
   },
   toast: {
@@ -71,35 +72,35 @@ const styles = stylex.create({
     borderColor: raster.divider,
     borderRadius: {
       default: raster.radius,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
     boxShadow: {
       default: "0 8px 24px rgba(0,0,0,0.06)",
-      [phone]: "none",
+      [mq.phone]: "none",
     },
     paddingTop: {
       default: 10,
-      [phone]: 16,
+      [mq.phone]: 16,
     },
     paddingInline: {
       default: 14,
-      [phone]: 20,
+      [mq.phone]: 20,
     },
     paddingBottom: {
       default: 10,
-      [phone]: "calc(16px + env(safe-area-inset-bottom, 0px))",
+      [mq.phone]: "calc(16px + env(safe-area-inset-bottom, 0px))",
     },
     maxWidth: {
       default: 340,
-      [phone]: "none",
+      [mq.phone]: "none",
     },
     width: {
       default: null,
-      [phone]: "100%",
+      [mq.phone]: "100%",
     },
     animationName: {
       default: toastIn,
-      "@media (prefers-reduced-motion: reduce)": "none",
+      [mq.reduce]: "none",
     },
     animationDuration: raster.durationConfirm,
     animationTimingFunction: raster.ease,
@@ -108,7 +109,7 @@ const styles = stylex.create({
     display: "block",
     fontSize: {
       default: 13,
-      [phone]: 16,
+      [mq.phone]: 16,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
@@ -117,14 +118,14 @@ const styles = stylex.create({
   body: {
     fontSize: {
       default: 12.5,
-      [phone]: 15,
+      [mq.phone]: 15,
     },
     lineHeight: 1.5,
     letterSpacing: "-0.01em",
     color: raster.gray,
     marginTop: {
       default: 1,
-      [phone]: 4,
+      [mq.phone]: 4,
     },
     marginBottom: 0,
     marginInline: 0,

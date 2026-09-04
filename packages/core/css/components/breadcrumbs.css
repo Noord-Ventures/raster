@@ -1,0 +1,14 @@
+/* ── breadcrumbs: generated from packages/react/src/components/breadcrumbs.tsx ── */
+.rs-crumbs{font-size:13px;color:var(--text);letter-spacing:-0.01em;display:flex;align-items:baseline;gap:8px}
+@media (max-width: 640px){.rs-crumbs{font-size:var(--control-fs);align-items:center;flex-wrap:wrap;gap:6px}}
+.rs-crumbs-link{color:var(--text);text-decoration:none;background-color:transparent;opacity:0.55}
+.rs-crumbs-link:link{color:var(--text)}
+.rs-crumbs-link:visited{color:var(--text)}
+.rs-crumbs-link:hover{color:var(--text);opacity:1}
+.rs-crumbs-link:active{color:var(--text)}
+.rs-crumbs-link:focus{color:var(--text)}
+.rs-crumbs-link:focus-visible{color:var(--text);opacity:1}
+@media (max-width: 640px){.rs-crumbs-link{display:inline-flex;align-items:center;min-height:var(--hit)}}
+.rs-crumbs-sep{color:var(--text);opacity:0.4}
+.rs-crumbs-here{color:var(--text);opacity:1}
+@media (max-width: 640px){.rs-crumbs-here{display:inline-flex;align-items:center;min-height:var(--hit)}}

@@ -47,10 +47,9 @@ describe("init", () => {
     expect(loadConfig(cwd)).toMatchObject({ cssDir: "styles", componentsDir: "components/raster" });
   });
 
-  it("honors --compat, --registry, and custom dirs", () => {
-    init(cwd, { cssDir: "app/styles", compat: true, registry: "https://getraster.com/r" });
+  it("honors --registry and custom dirs", () => {
+    init(cwd, { cssDir: "app/styles", registry: "https://getraster.com/r" });
     expect(existsSync(join(cwd, "app/styles/raster.css"))).toBe(true);
-    expect(readFileSync(join(cwd, "app/styles/raster-compat.css"), "utf8")).toContain(".bb-btn-primary");
     expect(existsSync(join(cwd, "app/styles/fonts/inter/OFL.txt"))).toBe(true);
     expect(loadConfig(cwd).registry).toBe("https://getraster.com/r");
   });
@@ -93,6 +92,22 @@ describe("add", () => {
     init(cwd);
     const { unknown } = await add(cwd, ["nope"]);
     expect(unknown).toEqual(["nope"]);
+  });
+
+  it("keeps nested trees intact so chart imports resolve", async () => {
+    init(cwd);
+    await add(cwd, ["chart"]);
+    expect(existsSync(join(cwd, "components/raster/chart.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "components/raster/charts/index.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "components/raster/charts/line.tsx"))).toBe(true);
+    const line = readFileSync(join(cwd, "components/raster/charts/line.tsx"), "utf8");
+    for (const spec of [...line.matchAll(/from "(\.[^"]+)"/g)].map((m) => m[1]!)) {
+      const base = join(cwd, "components/raster/charts", spec);
+      expect(
+        existsSync(`${base}.ts`) || existsSync(`${base}.tsx`) || existsSync(join(base, "index.ts")),
+        `${spec} resolves`,
+      ).toBe(true);
+    }
   });
 
   it("writes a React leaf for table", async () => {

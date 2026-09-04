@@ -16,7 +16,6 @@ import bundle from "../../../registry/bundle.json" with { type: "json" };
 import { starterPage } from "./starter";
 
 const rasterCss: string = (bundle as { css: { raster: string } }).css.raster;
-const compatCss: string = (bundle as { css: { compat: string } }).css.compat;
 
 export interface RegistryFile {
   path: string;
@@ -108,12 +107,11 @@ function copyFonts(cwd: string, cssDir: string, overwrite: boolean): WriteResult
 export interface InitOptions {
   cssDir?: string;
   componentsDir?: string;
-  compat?: boolean;
   overwrite?: boolean;
   registry?: string;
 }
 
-/** Write raster.css, Inter files, a specimen page, and optionally the 0.1 compat layer, plus raster.json. */
+/** Write raster.css, Inter files, a specimen page, and raster.json. */
 export function init(cwd: string, options: InitOptions = {}): WriteResult[] {
   const config: RasterConfig = {
     cssDir: options.cssDir ?? defaultConfig.cssDir,
@@ -124,11 +122,6 @@ export function init(cwd: string, options: InitOptions = {}): WriteResult[] {
   const cssHref = `${config.cssDir.replace(/\\/g, "/")}/raster.css`;
   results.push(writeFileSafe(cwd, join(config.cssDir, "raster.css"), rasterCss, options.overwrite ?? false));
   results.push(...copyFonts(cwd, config.cssDir, options.overwrite ?? false));
-  if (options.compat) {
-    results.push(
-      writeFileSafe(cwd, join(config.cssDir, "raster-compat.css"), compatCss, options.overwrite ?? false),
-    );
-  }
   results.push(writeFileSafe(cwd, "index.html", starterPage(cssHref), options.overwrite ?? false));
   results.push(
     writeFileSafe(cwd, CONFIG_FILE, JSON.stringify(config, null, 2) + "\n", options.overwrite ?? false),
@@ -217,8 +210,10 @@ function writeItemFiles(cwd: string, item: RegistryItem, componentsDir: string, 
   const results: WriteResult[] = [];
   for (const file of item.files) {
     if (!file.path.endsWith(".tsx") && !file.path.endsWith(".ts")) continue;
-    const base = file.path.split("/").pop()!;
-    results.push(writeFileSafe(cwd, join(componentsDir, base), file.content, overwrite));
+    // Registry targets are `components/raster/<tree>`; keep the tree so nested
+    // imports (charts/, shared helpers) resolve exactly as they do in the source.
+    const rel = file.target.replace(/^components\/raster\//, "").replace(/^raster\//, "");
+    results.push(writeFileSafe(cwd, join(componentsDir, rel), file.content, overwrite));
   }
   return results;
 }

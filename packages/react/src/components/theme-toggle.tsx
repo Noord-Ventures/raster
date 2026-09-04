@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone, mobileGrid } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -19,28 +19,28 @@ const styles = stylex.create({
     top: 24,
     right: {
       default: 20,
-      ["@media (max-width: 480px)"]: 25,
+      [mq.mobileGrid]: 25,
     },
     zIndex: 200,
     width: {
       default: 24,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     height: {
       default: 24,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minWidth: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     padding: {
       default: 4,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
     },
     display: "flex",
     alignItems: "center",

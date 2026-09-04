@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../../tokens.stylex";
@@ -62,12 +64,12 @@ export function Histogram({
   const bw = (plotW - gap * Math.max(0, bins.length - 1)) / bins.length;
   const active = hover != null ? bins[hover] : null;
 
-  const svg = rs([], chartStyles.svg);
+  const svg = rs(["rs-chart-svg"], chartStyles.svg);
   const plot = rs(["rs-chart-plot"], chartStyles.plot);
   const gridSx = rs(["rs-chart-grid"], chartStyles.grid);
   const axis = rs(["rs-chart-axis"], chartStyles.axis);
   const baseline = rs(["rs-chart-baseline"], chartStyles.baseline);
-  const hist = rs(["rs-chart-hist", spot && "rs-chart-bar-spot"], styles.hist, spot && chartStyles.barSpot);
+  const hist = rs(["rs-chart-hist", Boolean(spot) && "rs-chart-bar-spot"], styles.hist, Boolean(spot) && chartStyles.barSpot);
 
   return (
     <ChartField spot={spot} className={className} {...props}>

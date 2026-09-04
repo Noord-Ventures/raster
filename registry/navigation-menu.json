@@ -8,10 +8,17 @@
     "https://getraster.com/r/raster-base.json",
     "https://getraster.com/r/inter.json"
   ],
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "devDependencies": [
+    "@stylexjs/babel-plugin"
+  ],
+  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
       "path": "raster/navigation-menu.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, phone } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface NavigationMenuProps extends React.HTMLAttributes<HTMLElement> {\n  items: Array<{ label: React.ReactNode; href: string; current?: boolean }>;\n}\n\nconst styles = stylex.create({\n  nav: {\n    display: \"flex\",\n    alignItems: \"center\",\n    gap: {\n      default: 22,\n      [\"@media (max-width: 640px)\"]: 0,\n    },\n    flexWrap: {\n      default: null,\n      [\"@media (max-width: 640px)\"]: \"wrap\",\n    },\n  },\n  link: {\n    display: {\n      default: null,\n      [\"@media (max-width: 640px)\"]: \"inline-flex\",\n    },\n    alignItems: {\n      default: null,\n      [\"@media (max-width: 640px)\"]: \"center\",\n    },\n    minHeight: {\n      default: null,\n      [\"@media (max-width: 640px)\"]: raster.hit,\n    },\n    paddingInline: {\n      default: null,\n      [\"@media (max-width: 640px)\"]: 12,\n    },\n    fontSize: {\n      default: 14,\n      [\"@media (max-width: 640px)\"]: raster.controlFs,\n    },\n    fontWeight: 500,\n    letterSpacing: \"-0.01em\",\n    color: {\n      default: raster.gray,\n      \":link\": raster.gray,\n      \":visited\": raster.gray,\n      \":hover\": raster.ink,\n      '[aria-current=\"page\"]': raster.ink,\n    },\n    textDecoration: \"none\",\n    transition: `color ${raster.durationSnap} ${raster.ease}`,\n  },\n});\n\n/** Links in a row; the current page is ink. */\nexport function NavigationMenu({ items, className, style, ...props }: NavigationMenuProps) {\n  const nav = rs([\"rs-nav\", className], styles.nav);\n  const link = rs([], styles.link);\n  return (\n    <nav {...props} className={nav.className} style={{ ...nav.style, ...style }}>\n      {items.map((item, index) => (\n        <a\n          key={index}\n          href={item.href}\n          aria-current={item.current ? \"page\" : undefined}\n          className={link.className}\n          style={link.style}\n        >\n          {item.label}\n        </a>\n      ))}\n    </nav>\n  );\n}\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface NavigationMenuProps extends React.HTMLAttributes<HTMLElement> {\n  items: Array<{ label: React.ReactNode; href: string; current?: boolean }>;\n}\n\nconst styles = stylex.create({\n  nav: {\n    display: \"flex\",\n    alignItems: \"center\",\n    gap: {\n      default: 22,\n      [mq.phone]: 0,\n    },\n    flexWrap: {\n      default: null,\n      [mq.phone]: \"wrap\",\n    },\n  },\n  link: {\n    display: {\n      default: null,\n      [mq.phone]: \"inline-flex\",\n    },\n    alignItems: {\n      default: null,\n      [mq.phone]: \"center\",\n    },\n    minHeight: {\n      default: null,\n      [mq.phone]: raster.hit,\n    },\n    paddingInline: {\n      default: null,\n      [mq.phone]: 12,\n    },\n    fontSize: {\n      default: 14,\n      [mq.phone]: raster.controlFs,\n    },\n    fontWeight: 500,\n    letterSpacing: \"-0.01em\",\n    color: {\n      default: raster.gray,\n      \":link\": raster.gray,\n      \":visited\": raster.gray,\n      \":hover\": raster.ink,\n      '[aria-current=\"page\"]': raster.ink,\n    },\n    textDecoration: \"none\",\n    transition: `color ${raster.durationSnap} ${raster.ease}`,\n  },\n});\n\n/** Links in a row; the current page is ink. */\nexport function NavigationMenu({ items, className, style, ...props }: NavigationMenuProps) {\n  const nav = rs([\"rs-nav\", className], styles.nav);\n  const link = rs([\"rs-nav-link\"], styles.link);\n  return (\n    <nav {...props} className={nav.className} style={{ ...nav.style, ...style }}>\n      {items.map((item, index) => (\n        <a\n          key={index}\n          href={item.href}\n          aria-current={item.current ? \"page\" : undefined}\n          className={link.className}\n          style={link.style}\n        >\n          {item.label}\n        </a>\n      ))}\n    </nav>\n  );\n}\n",
       "type": "registry:component",
       "target": "components/raster/navigation-menu.tsx"
     },
@@ -23,7 +30,7 @@
     },
     {
       "path": "raster/rs.ts",
-      "content": "import type { CSSProperties } from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { cx } from \"./cx\";\n\ntype StyleXProps = { className?: string; style?: CSSProperties };\n\n/** Merge Raster class names with StyleX props. CSS-first classes stay on the node. */\nexport function rs(classNames: Array<string | false | null | undefined>, ...styles: unknown[]): StyleXProps {\n  const sx = (stylex.props as (...args: unknown[]) => StyleXProps)(...styles);\n  return {\n    className: cx(...classNames, sx.className),\n    style: sx.style,\n  };\n}\n",
+      "content": "import type { CSSProperties } from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport type { CompiledStyles, InlineStyles } from \"@stylexjs/stylex\";\nimport { cx } from \"./cx\";\n\ntype Nested<T> = T | ReadonlyArray<Nested<T>>;\n\n/** Exactly what stylex.props accepts: compiled leaves, falsy, nested arrays, or a leaf with inline styles. */\nexport type Leaves = ReadonlyArray<Nested<null | undefined | CompiledStyles | boolean | Readonly<[CompiledStyles, InlineStyles]>>>;\n\ntype StyleXProps = { className?: string; style?: CSSProperties };\n\n/**\n * The one seam every component styles through: semantic rs-* class names\n * (the CSS-first contract, and what packages/core generates CSS for) merged\n * with the compiled StyleX leaves that paint the React tree.\n */\nexport function rs(classNames: Array<string | false | null | undefined>, ...styles: Leaves): StyleXProps {\n  const sx = stylex.props(...styles) as StyleXProps;\n  return {\n    className: cx(...classNames, sx.className),\n    style: sx.style,\n  };\n}\n",
       "type": "registry:file",
       "target": "components/raster/rs.ts"
     },
@@ -32,13 +39,20 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/navigation-menu.css",
+      "content": "/* ── navigation-menu: generated from packages/react/src/components/navigation-menu.tsx ── */\n.rs-nav{display:flex;align-items:center;gap:22px}\n@media (max-width: 640px){.rs-nav{gap:0;flex-wrap:wrap}}\n.rs-nav-link{font-size:14px;font-weight:500;letter-spacing:-0.01em;color:var(--text-secondary);text-decoration:none;transition:color var(--duration-snap) var(--ease)}\n.rs-nav-link:link{color:var(--text-secondary)}\n.rs-nav-link:visited{color:var(--text-secondary)}\n.rs-nav-link:hover{color:var(--text)}\n.rs-nav-link[aria-current=\"page\"]{color:var(--text)}\n@media (max-width: 640px){.rs-nav-link{display:inline-flex;align-items:center;min-height:var(--hit);padding-inline:12px;font-size:var(--control-fs)}}\n",
+      "type": "registry:file",
+      "target": "styles/raster/navigation-menu.css"
     }
   ],
   "meta": {
     "raster": {
       "category": "navigation",
       "classes": [
-        "rs-nav"
+        "rs-nav",
+        "rs-nav-link"
       ],
       "snippet": "<nav class=\"rs-nav\"><a href=\"#\" aria-current=\"page\">Overview</a><a href=\"#\">Docs</a><a href=\"#\">Changelog</a></nav>",
       "cssOnly": false,

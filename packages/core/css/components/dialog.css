@@ -1,0 +1,10 @@
+/* ── dialog: generated from packages/react/src/components/dialog.tsx ── */
+.rs-dialog{box-sizing:border-box;max-width:320px;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);padding:20px;background-color:var(--bg);color:var(--text);box-shadow:none}
+.rs-dialog::backdrop{background-color:rgba(0,0,0,0.25)}
+@media (max-width: 640px){.rs-dialog{max-width:calc(100vw - 32px);width:calc(100vw - 32px);padding:24px 20px}}
+.rs-dialog-title{display:block;font-size:15px;font-weight:600;letter-spacing:-0.01em;color:var(--text);margin-bottom:6px}
+@media (max-width: 640px){.rs-dialog-title{font-size:18px;margin-bottom:10px}}
+.rs-dialog-body{font-size:13.5px;color:var(--text-secondary);letter-spacing:-0.01em;line-height:1.55;margin-top:0;margin-right:0;margin-bottom:16px;margin-left:0}
+@media (max-width: 640px){.rs-dialog-body{font-size:16px;margin-bottom:20px}}
+.rs-dialog-actions{display:flex;justify-content:flex-end;flex-direction:row;align-items:flex-end;gap:8px}
+@media (max-width: 640px){.rs-dialog-actions{flex-direction:column;align-items:stretch;gap:10px}}

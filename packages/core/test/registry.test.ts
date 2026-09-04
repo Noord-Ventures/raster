@@ -48,8 +48,6 @@ describe("registry structure", () => {
     expect(nest?.hidden).toBe(true);
     expect(catalogComponents.some((c) => c.name === "concentric-radius")).toBe(false);
     expect(catalogComponents).toHaveLength(rasterComponents.filter((c) => !c.hidden).length);
-    expect(rasterComponents).toHaveLength(75);
-    expect(catalogComponents).toHaveLength(74);
   });
 
   it("lifts icons and charts into their own catalog sections", () => {
@@ -61,10 +59,9 @@ describe("registry structure", () => {
     }
   });
 
-  it("has no leftover catalogue CSS sheets", () => {
+  it("ships CSS for every catalog component (CSS-first)", () => {
     for (const c of catalogComponents) {
-      expect(c.css, `${c.name} must be a StyleX leaf`).toEqual([]);
-      expect(c.react, `${c.name} must name a React source`).toBeTruthy();
+      expect(c.css.length, `${c.name} must list its CSS`).toBeGreaterThan(0);
     }
   });
 
@@ -84,19 +81,26 @@ describe("registry structure", () => {
   });
 });
 
-describe("registry ↔ CSS / StyleX parity", () => {
-  it("every declared class appears in that component's CSS or StyleX source", () => {
+describe("registry ↔ CSS parity", () => {
+  it("every declared class is styled by that component's CSS or a declared dependency's", () => {
+    const cssFor = (c: (typeof rasterComponents)[number]): string[] => [
+      ...c.css,
+      ...(c.registryDependencies ?? []).flatMap((d) => rasterComponents.find((o) => o.name === d)?.css ?? []),
+    ];
     for (const c of rasterComponents) {
-      if (c.css.length) {
-        const css = c.css.map((f) => readFileSync(join(cssDir, f), "utf8")).join("\n");
-        for (const cls of c.classes) {
-          expect(css.includes(`.${cls}`), `${c.name}: .${cls} not styled in ${c.css.join(", ")}`).toBe(true);
-        }
-        continue;
-      }
-      const src = c.react ? readTree(c.react) : "";
+      const css = cssFor(c).map((f) => readFileSync(join(cssDir, f), "utf8")).join("\n");
       for (const cls of c.classes) {
-        expect(src.includes(cls), `${c.name}: ${cls} not on the StyleX leaf ${c.react}`).toBe(true);
+        expect(css.includes(`.${cls}`), `${c.name}: .${cls} not styled in ${c.css.join(", ")}`).toBe(true);
+      }
+    }
+  });
+
+  it("every declared class is applied by that component's React source", () => {
+    for (const c of rasterComponents) {
+      if (!c.react) continue;
+      const src = readTree(c.react);
+      for (const cls of c.classes) {
+        expect(src.includes(`"${cls}"`) || src.includes(`${cls} `) || src.includes(`${cls}"`), `${c.name}: ${cls} never applied in ${c.react}`).toBe(true);
       }
     }
   });

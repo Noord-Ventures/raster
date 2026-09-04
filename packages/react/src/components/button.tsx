@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,26 +26,26 @@ const styles = stylex.create({
     },
     height: {
       default: raster.controlH,
-      "@media (max-width: 640px)": raster.controlH,
+      [mq.phone]: raster.controlH,
     },
     minHeight: {
       default: null,
-      "@media (max-width: 640px)": raster.hit,
+      [mq.phone]: raster.hit,
     },
     width: {
       default: null,
-      "@media (max-width: 640px)": "100%",
+      [mq.phone]: "100%",
     },
     fontSize: raster.controlFs,
     paddingInline: {
       default: 22,
-      "@media (max-width: 640px)": 20,
+      [mq.phone]: 20,
     },
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderRadius: {
       default: raster.radiusSm,
-      "@media (max-width: 640px)": 0,
+      [mq.phone]: 0,
     },
     transition: "opacity var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease), color var(--duration-snap) var(--ease)",
     opacity: {
@@ -93,23 +93,23 @@ const styles = stylex.create({
   sm: {
     height: {
       default: 36,
-      "@media (max-width: 640px)": raster.controlH,
+      [mq.phone]: raster.controlH,
     },
     minHeight: {
       default: null,
-      "@media (max-width: 640px)": raster.hit,
+      [mq.phone]: raster.hit,
     },
     paddingInline: {
       default: 14,
-      "@media (max-width: 640px)": 16,
+      [mq.phone]: 16,
     },
     fontSize: {
       default: 13,
-      "@media (max-width: 640px)": raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     minWidth: {
       default: 104,
-      "@media (max-width: 640px)": 0,
+      [mq.phone]: 0,
     },
   },
   grouped: {
@@ -117,18 +117,18 @@ const styles = stylex.create({
     minHeight: null,
     width: {
       default: null,
-      "@media (max-width: 640px)": null,
+      [mq.phone]: null,
     },
     borderWidth: 0,
     borderRadius: 0,
     margin: 0,
     flexGrow: {
       default: null,
-      "@media (max-width: 640px)": 1,
+      [mq.phone]: 1,
     },
     minWidth: {
       default: 0,
-      "@media (max-width: 640px)": 0,
+      [mq.phone]: 0,
     },
   },
   groupedGhost: {
@@ -144,13 +144,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function 
   { variant = "primary", size = "default", grouped = false, type = "button", className, style, ...props },
   ref,
 ) {
-  const sx = rs(
-    [variant === "ghost" ? "rs-btn-ghost" : "rs-btn-primary", size === "sm" && "rs-btn-sm", className],
-    styles.base,
-    variant === "ghost" ? styles.ghost : styles.primary,
-    size === "sm" && styles.sm,
-    grouped && styles.grouped,
-    grouped && variant === "ghost" && styles.groupedGhost,
-  );
+  const sx = rs([variant === "ghost" ? "rs-btn-ghost" : "rs-btn-primary", size === "sm" && "rs-btn-sm", className, grouped && "rs-btn-grouped", grouped && variant === "ghost" && "rs-btn-grouped-ghost"], styles.base, variant === "ghost" ? styles.ghost : styles.primary, size === "sm" && styles.sm, grouped && styles.grouped, grouped && variant === "ghost" && styles.groupedGhost);
   return <button ref={ref} type={type} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 });

@@ -5,7 +5,7 @@
    20px gutter; that utmost left gutter must paint. Do not clip
    it. No 204 horizontals — those cage the type. Homepage and
    About kill this overlay and keep boxed cells only. */
-html{scroll-behavior:smooth;font-size:16px;overflow-x:clip;background-color:var(--bg)}
+html{scroll-behavior:smooth;overflow-x:clip;background-color:var(--bg)}
 html::before{
   content:"";
   position:fixed;

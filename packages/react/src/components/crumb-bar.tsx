@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone, mobileGrid, rail } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface CrumbBarItem {
@@ -29,11 +31,11 @@ const styles = stylex.create({
     alignItems: "center",
     height: {
       default: 72,
-      ["@media (max-width: 640px)"]: 64,
+      [mq.phone]: 64,
     },
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -53,7 +55,7 @@ const styles = stylex.create({
     alignItems: "center",
     gap: {
       default: 20,
-      ["@media (max-width: 899px)"]: 6,
+      [mq.at899]: 6,
     },
     width: "100%",
     minWidth: 0,
@@ -61,18 +63,18 @@ const styles = stylex.create({
     paddingBottom: 0,
     paddingRight: {
       default: 56,
-      ["@media (max-width: 640px)"]: 50,
-      ["@media (max-width: 480px)"]: 56,
+      [mq.phone]: 50,
+      [mq.mobileGrid]: 56,
     },
     paddingLeft: {
       default: 76,
-      ["@media (min-width: 1024px)"]: raster.pad,
-      ["@media (max-width: 640px)"]: 62,
-      ["@media (max-width: 480px)"]: 74,
+      [mq.rail]: raster.pad,
+      [mq.phone]: 62,
+      [mq.mobileGrid]: 74,
     },
     marginLeft: {
       default: null,
-      ["@media (min-width: 1024px)"]: 204,
+      [mq.rail]: 204,
     },
   },
   crumbs: {
@@ -85,22 +87,22 @@ const styles = stylex.create({
     transition: `opacity ${raster.duration} ${raster.ease}`,
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     color: raster.ink,
     letterSpacing: "-0.01em",
     display: "flex",
     alignItems: {
       default: "baseline",
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
     flexWrap: {
       default: null,
-      ["@media (max-width: 640px)"]: "wrap",
+      [mq.phone]: "wrap",
     },
     gap: {
       default: 8,
-      ["@media (max-width: 640px)"]: 6,
+      [mq.phone]: 6,
     },
   },
   crumbsOn: {
@@ -118,23 +120,23 @@ const styles = stylex.create({
     transition: `color ${raster.durationSnap} ${raster.ease}`,
     width: {
       default: null,
-      ["@media (min-width: 900px)"]: 184,
+      [mq.at900]: 184,
     },
     fontWeight: {
       default: 500,
-      ["@media (max-width: 899px)"]: 600,
+      [mq.at899]: 600,
     },
   },
   rootFull: {
     display: {
       default: null,
-      ["@media (max-width: 640px)"]: "none",
+      [mq.phone]: "none",
     },
   },
   rootShort: {
     display: {
       default: "none",
-      ["@media (max-width: 640px)"]: "inline",
+      [mq.phone]: "inline",
     },
   },
   link: {
@@ -155,15 +157,15 @@ const styles = stylex.create({
     },
     display: {
       default: null,
-      ["@media (max-width: 640px)"]: "inline-flex",
+      [mq.phone]: "inline-flex",
     },
     alignItems: {
       default: null,
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
   },
   sep: {
@@ -177,15 +179,15 @@ const styles = stylex.create({
     textOverflow: "ellipsis",
     display: {
       default: null,
-      ["@media (max-width: 640px)"]: "inline-flex",
+      [mq.phone]: "inline-flex",
     },
     alignItems: {
       default: null,
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
   },
 });
@@ -207,13 +209,13 @@ export function CrumbBar({ trail, threshold = 110, root, rootShort, className, s
 
   const bar = rs(["rs-crumb-bar", scrolled && "rs-crumb-bar-scrolled", className], styles.bar, scrolled && styles.scrolled);
   const inner = rs(["rs-crumb-bar-inner"], styles.inner);
-  const crumbs = rs(["rs-crumbs"], styles.crumbs, scrolled && styles.crumbsOn);
+  const crumbs = rs(["rs-crumbs", "rs-crumb-crumbs", scrolled && "rs-crumb-crumbs-on"], styles.crumbs, scrolled && styles.crumbsOn);
   const rootSx = rs(["rs-crumb-root"], styles.root);
   const rootFull = rs(["rs-crumb-root-full"], styles.rootFull);
   const rootShortSx = rs(["rs-crumb-root-short"], styles.rootShort);
-  const link = rs(["rs-crumbs-link"], styles.link);
-  const sep = rs(["rs-crumbs-sep"], styles.sep);
-  const here = rs(["rs-crumbs-here"], styles.here);
+  const link = rs(["rs-crumbs-link", "rs-crumb-link"], styles.link);
+  const sep = rs(["rs-crumbs-sep", "rs-crumb-sep"], styles.sep);
+  const here = rs(["rs-crumbs-here", "rs-crumb-here"], styles.here);
 
   const rootLabel = rootShort ? (
     <>

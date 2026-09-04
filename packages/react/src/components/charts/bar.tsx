@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import {
   ChartField,
@@ -81,7 +83,7 @@ export function BarChart({
   const tickVals = ticksFor(max, ticks);
   const labelEvery = Math.ceil(n / 8);
 
-  const svg = rs([], chartStyles.svg);
+  const svg = rs(["rs-chart-svg"], chartStyles.svg);
   const plot = rs(["rs-chart-plot"], chartStyles.plot);
   const gridSx = rs(["rs-chart-grid"], chartStyles.grid);
   const axis = rs(["rs-chart-axis"], chartStyles.axis);

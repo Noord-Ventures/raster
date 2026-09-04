@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface NavigationMenuProps extends React.HTMLAttributes<HTMLElement> {
@@ -13,33 +13,33 @@ const styles = stylex.create({
     alignItems: "center",
     gap: {
       default: 22,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     flexWrap: {
       default: null,
-      ["@media (max-width: 640px)"]: "wrap",
+      [mq.phone]: "wrap",
     },
   },
   link: {
     display: {
       default: null,
-      ["@media (max-width: 640px)"]: "inline-flex",
+      [mq.phone]: "inline-flex",
     },
     alignItems: {
       default: null,
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     paddingInline: {
       default: null,
-      ["@media (max-width: 640px)"]: 12,
+      [mq.phone]: 12,
     },
     fontSize: {
       default: 14,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -58,7 +58,7 @@ const styles = stylex.create({
 /** Links in a row; the current page is ink. */
 export function NavigationMenu({ items, className, style, ...props }: NavigationMenuProps) {
   const nav = rs(["rs-nav", className], styles.nav);
-  const link = rs([], styles.link);
+  const link = rs(["rs-nav-link"], styles.link);
   return (
     <nav {...props} className={nav.className} style={{ ...nav.style, ...style }}>
       {items.map((item, index) => (

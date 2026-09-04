@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {}
@@ -11,15 +11,15 @@ const styles = stylex.create({
     flexDirection: "column",
     gap: {
       default: 16,
-      ["@media (max-width: 640px)"]: 20,
+      [mq.phone]: 20,
     },
     maxWidth: {
       default: 388,
-      ["@media (max-width: 640px)"]: "none",
+      [mq.phone]: "none",
     },
     width: {
       default: null,
-      ["@media (max-width: 640px)"]: "100%",
+      [mq.phone]: "100%",
     },
     margin: 0,
     color: raster.ink,

@@ -1,10 +1,10 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone as phoneMq } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
-/** StyleX cannot read a string const from a defineVars file; keep the token import. */
-const phone = "@media (max-width: 640px)" as typeof phoneMq;
 import { Button } from "./button";
 
 export interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -25,25 +25,25 @@ const styles = stylex.create({
     borderColor: raster.divider,
     borderRadius: {
       default: raster.radius,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
     backgroundColor: raster.paper,
     color: raster.ink,
     boxShadow: {
       default: "0 8px 24px rgba(0,0,0,0.06)",
-      [phone]: "none",
+      [mq.phone]: "none",
     },
     padding: {
       default: 14,
-      [phone]: 16,
+      [mq.phone]: 16,
     },
     width: {
       default: 240,
-      [phone]: "min(320px, calc(100vw - 32px))",
+      [mq.phone]: "min(320px, calc(100vw - 32px))",
     },
     fontSize: {
       default: 13,
-      [phone]: 16,
+      [mq.phone]: 16,
     },
     lineHeight: 1.55,
     letterSpacing: "-0.01em",
@@ -52,7 +52,7 @@ const styles = stylex.create({
     display: "block",
     fontSize: {
       default: 13,
-      [phone]: 16,
+      [mq.phone]: 16,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",

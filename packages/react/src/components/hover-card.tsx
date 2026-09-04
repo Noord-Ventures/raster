@@ -1,16 +1,13 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone as phoneMq } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
-/** StyleX cannot read a string const from a defineVars file; keep the token import. */
-const phone = "@media (max-width: 640px)" as typeof phoneMq;
 
 export interface HoverCardProps extends React.HTMLAttributes<HTMLSpanElement> {
   trigger: React.ReactNode;
 }
 
-const touch = "@media (hover: none)" as const;
 
 const styles = stylex.create({
   root: {
@@ -24,7 +21,7 @@ const styles = stylex.create({
     zIndex: 170,
     width: {
       default: 260,
-      [phone]: "min(280px, calc(100vw - 32px))",
+      [mq.phone]: "min(280px, calc(100vw - 32px))",
     },
     backgroundColor: raster.paper,
     borderWidth: raster.hairline,
@@ -32,16 +29,16 @@ const styles = stylex.create({
     borderColor: raster.divider,
     borderRadius: {
       default: raster.radius,
-      [phone]: 0,
+      [mq.phone]: 0,
     },
     boxShadow: {
       default: "0 8px 24px rgba(0,0,0,0.06)",
-      [phone]: "none",
+      [mq.phone]: "none",
     },
     padding: 14,
     fontSize: {
       default: 13,
-      [phone]: 15,
+      [mq.phone]: 15,
     },
     lineHeight: 1.55,
     letterSpacing: "-0.01em",
@@ -50,24 +47,24 @@ const styles = stylex.create({
       default: 0,
       [stylex.when.ancestor(":hover")]: {
         default: 1,
-        [touch]: 0,
+        [mq.touch]: 0,
       },
       [stylex.when.ancestor(":focus-within")]: 1,
       [stylex.when.ancestor(":active")]: {
         default: null,
-        [touch]: 1,
+        [mq.touch]: 1,
       },
     },
     visibility: {
       default: "hidden",
       [stylex.when.ancestor(":hover")]: {
         default: "visible",
-        [touch]: "hidden",
+        [mq.touch]: "hidden",
       },
       [stylex.when.ancestor(":focus-within")]: "visible",
       [stylex.when.ancestor(":active")]: {
         default: null,
-        [touch]: "visible",
+        [mq.touch]: "visible",
       },
     },
     transition: `opacity ${raster.durationSnap} ${raster.ease} ${raster.durationSnap}, visibility ${raster.durationSnap} ${raster.ease} ${raster.durationSnap}`,

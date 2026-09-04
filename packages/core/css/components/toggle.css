@@ -1,0 +1,10 @@
+/* ── toggle: generated from packages/react/src/components/toggle.tsx ── */
+.rs-toggle{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;min-width:32px;padding-block:0;padding-inline:10px;font-size:13px;font-weight:500;letter-spacing:-0.01em;background-color:transparent;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:background-color var(--duration-snap) var(--ease), color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease)}
+@media (max-width: 640px){.rs-toggle{height:var(--hit);min-height:var(--hit);min-width:var(--hit);padding-inline:14px;font-size:var(--control-fs);border-radius:0}}
+.rs-toggle-pressed{background-color:var(--text);border-color:var(--text);color:var(--bg)}
+.rs-toggle-group{display:inline-flex;align-items:stretch;box-sizing:border-box;height:32px;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);overflow:hidden}
+@media (max-width: 640px){.rs-toggle-group{display:flex;height:var(--hit);width:100%;border-radius:0}}
+.rs-toggle{height:auto;border-width:0;border-radius:0;margin:0;border-inline-start-width:0;border-inline-start-style:none;border-inline-start-color:transparent}
+.rs-toggle:not(:first-child){border-inline-start-width:1px;border-inline-start-style:solid;border-inline-start-color:var(--divider)}
+@media (max-width: 640px){.rs-toggle{flex-grow:1}}
+.rs-toggle-grouped-on{position:relative;z-index:1}

@@ -1,0 +1,7 @@
+/* ── hover-card: generated from packages/react/src/components/hover-card.tsx ── */
+.rs-hover-card{position:relative;display:inline-block}
+.rs-hover-card-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:170;width:260px;background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;font-size:13px;line-height:1.55;letter-spacing:-0.01em;color:var(--text-secondary);opacity:0;visibility:hidden;transition:opacity var(--duration-snap) var(--ease) var(--duration-snap), visibility var(--duration-snap) var(--ease) var(--duration-snap)}
+.rs-hover-card:hover .rs-hover-card-panel{opacity:1;visibility:visible}
+.rs-hover-card:focus-within .rs-hover-card-panel{opacity:1;visibility:visible}
+@media (max-width: 640px){.rs-hover-card-panel{width:min(280px, calc(100vw - 32px));border-radius:0;box-shadow:none;font-size:15px}}
+@media (hover: none){.rs-hover-card:hover .rs-hover-card-panel{opacity:0;visibility:hidden}.rs-hover-card:active .rs-hover-card-panel{opacity:1;visibility:visible}}

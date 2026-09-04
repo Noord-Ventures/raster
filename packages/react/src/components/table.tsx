@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {}
@@ -13,28 +13,27 @@ export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElem
 }
 export interface TableHeaderCellProps extends React.ThHTMLAttributes<HTMLTableCellElement> {}
 
-const phone = "@media (max-width: 640px)";
 
 const styles = stylex.create({
   table: {
     width: {
       default: "calc(100% + 40px)",
-      [phone]: "calc(100% + 2 * var(--pad))",
+      [mq.phone]: "calc(100% + 2 * var(--pad))",
     },
     borderCollapse: "collapse",
     marginTop: 16,
     marginBottom: 24,
     marginLeft: {
       default: -20,
-      [phone]: "calc(-1 * var(--pad))",
+      [mq.phone]: "calc(-1 * var(--pad))",
     },
     marginRight: {
       default: 0,
-      [phone]: "calc(-1 * var(--pad))",
+      [mq.phone]: "calc(-1 * var(--pad))",
     },
     fontSize: {
       default: 14,
-      [phone]: 16,
+      [mq.phone]: 16,
     },
   },
   th: {
@@ -47,48 +46,48 @@ const styles = stylex.create({
     letterSpacing: "-0.01em",
     paddingTop: {
       default: 10,
-      [phone]: 14,
+      [mq.phone]: 14,
     },
     paddingBottom: {
       default: 10,
-      [phone]: 14,
+      [mq.phone]: 14,
     },
     paddingLeft: {
       default: 12,
       ":first-child": 20,
-      [phone]: 12,
+      [mq.phone]: 12,
     },
     paddingRight: {
       default: 16,
       ":last-child": 20,
-      [phone]: 12,
+      [mq.phone]: 12,
     },
     borderBottomWidth: 2,
     borderBottomStyle: "solid",
     borderBottomColor: raster.divider,
     fontSize: {
       default: 13,
-      [phone]: 15,
+      [mq.phone]: 15,
     },
   },
   td: {
     paddingTop: {
       default: 10,
-      [phone]: 14,
+      [mq.phone]: 14,
     },
     paddingBottom: {
       default: 10,
-      [phone]: 14,
+      [mq.phone]: 14,
     },
     paddingLeft: {
       default: 12,
       ":first-child": 20,
-      [phone]: 12,
+      [mq.phone]: 12,
     },
     paddingRight: {
       default: 16,
       ":last-child": 20,
-      [phone]: 12,
+      [mq.phone]: 12,
     },
     color: raster.gray,
     fontWeight: 500,
@@ -145,16 +144,16 @@ export function TableBody({ className, style, ...props }: React.HTMLAttributes<H
 }
 
 export function TableRow({ total, className, style, ...props }: TableRowProps) {
-  const sx = rs([total && "rs-total-row", className], styles.row, total && styles.total);
+  const sx = rs([total && "rs-total-row", className, "rs-table-row"], styles.row, total && styles.total);
   return <tr {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }
 
 export function TableTh({ className, style, ...props }: TableHeaderCellProps) {
-  const sx = rs([className], styles.th);
+  const sx = rs([className, "rs-table-th"], styles.th);
   return <th {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }
 
 export function TableTd({ total, className, style, ...props }: TableCellProps) {
-  const sx = rs([className], styles.td, total && styles.totalCell);
+  const sx = rs([className, "rs-table-td", total && "rs-table-total-cell"], styles.td, total && styles.totalCell);
   return <td {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }

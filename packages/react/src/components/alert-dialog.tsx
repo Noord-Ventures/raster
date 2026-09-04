@@ -26,6 +26,7 @@ export function AlertDialog({ open, onClose, ...props }: AlertDialogProps) {
       onClose={onClose}
       role="alertdialog"
       onCancel={(e) => e.preventDefault()}
+      className="rs-alert-dialog"
       extraStyles={[styles.lock]}
       {...props}
     />

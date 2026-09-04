@@ -8,6 +8,13 @@
     "https://getraster.com/r/raster-base.json",
     "https://getraster.com/r/inter.json"
   ],
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "devDependencies": [
+    "@stylexjs/babel-plugin"
+  ],
+  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
       "path": "raster/card.tsx",
@@ -23,7 +30,7 @@
     },
     {
       "path": "raster/rs.ts",
-      "content": "import type { CSSProperties } from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { cx } from \"./cx\";\n\ntype StyleXProps = { className?: string; style?: CSSProperties };\n\n/** Merge Raster class names with StyleX props. CSS-first classes stay on the node. */\nexport function rs(classNames: Array<string | false | null | undefined>, ...styles: unknown[]): StyleXProps {\n  const sx = (stylex.props as (...args: unknown[]) => StyleXProps)(...styles);\n  return {\n    className: cx(...classNames, sx.className),\n    style: sx.style,\n  };\n}\n",
+      "content": "import type { CSSProperties } from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport type { CompiledStyles, InlineStyles } from \"@stylexjs/stylex\";\nimport { cx } from \"./cx\";\n\ntype Nested<T> = T | ReadonlyArray<Nested<T>>;\n\n/** Exactly what stylex.props accepts: compiled leaves, falsy, nested arrays, or a leaf with inline styles. */\nexport type Leaves = ReadonlyArray<Nested<null | undefined | CompiledStyles | boolean | Readonly<[CompiledStyles, InlineStyles]>>>;\n\ntype StyleXProps = { className?: string; style?: CSSProperties };\n\n/**\n * The one seam every component styles through: semantic rs-* class names\n * (the CSS-first contract, and what packages/core generates CSS for) merged\n * with the compiled StyleX leaves that paint the React tree.\n */\nexport function rs(classNames: Array<string | false | null | undefined>, ...styles: Leaves): StyleXProps {\n  const sx = stylex.props(...styles) as StyleXProps;\n  return {\n    className: cx(...classNames, sx.className),\n    style: sx.style,\n  };\n}\n",
       "type": "registry:file",
       "target": "components/raster/rs.ts"
     },
@@ -32,6 +39,12 @@
       "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
       "type": "registry:file",
       "target": "components/raster/cx.ts"
+    },
+    {
+      "path": "raster/styles/card.css",
+      "content": "/* ── card: generated from packages/react/src/components/card.tsx ── */\n.rs-card{border-width:0;border-style:none;border-radius:0;padding:0;max-width:360px;background-color:transparent;box-shadow:none}\n.rs-card-in{box-sizing:border-box;border-width:0;border-radius:0;min-height:0;padding:0;background-color:transparent}\n.rs-card-label{font-size:12px;font-weight:600;color:var(--text);letter-spacing:-0.01em;display:block;margin-bottom:6px}\n.rs-card-title{font-size:17px;font-weight:600;color:var(--text);letter-spacing:-0.02em;margin-top:0;margin-bottom:8px}\n.rs-card-body{font-size:14px;color:var(--text-secondary);font-weight:500;letter-spacing:-0.01em;line-height:1.6;margin:0}\n",
+      "type": "registry:file",
+      "target": "styles/raster/card.css"
     }
   ],
   "meta": {

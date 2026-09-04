@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface SkeletonProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -21,7 +21,7 @@ const styles = stylex.create({
     borderRadius: raster.radiusSm,
     animationName: {
       default: rsSkel,
-      "@media (prefers-reduced-motion: reduce)": "none",
+      [mq.reduce]: "none",
     },
     animationDuration: "1.6s",
     animationTimingFunction: "ease-in-out",

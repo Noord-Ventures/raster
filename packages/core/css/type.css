@@ -2,11 +2,11 @@
    Hierarchy from weight, color, and position; never all caps.
    --text-scale (Appearance → Text size) multiplies reading type only. */
 .rs-t-xl{font-size:calc(clamp(34px,5vw,52px) * var(--text-scale, 1));font-weight:600;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin:0;text-wrap:balance}
-.rs-t-display{font-size:calc(38px * var(--text-scale, 1));font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0;text-wrap:balance}
-.rs-t-title{font-size:calc(22px * var(--text-scale, 1));font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0;text-wrap:balance}
-.rs-t-sub{font-size:calc(17px * var(--text-scale, 1));font-weight:500;letter-spacing:-.01em;line-height:1.5;color:var(--text-secondary);margin:0;text-wrap:pretty}
-.rs-t-body{font-size:calc(15px * var(--text-scale, 1));font-weight:500;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin:0;text-wrap:pretty}
-.rs-t-label{font-size:calc(13px * var(--text-scale, 1));font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--text);margin:0}
+.rs-t-display{font-size:calc(2.375rem * var(--text-scale, 1));font-weight:600;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:0;text-wrap:balance}
+.rs-t-title{font-size:calc(1.375rem * var(--text-scale, 1));font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--text);margin:0;text-wrap:balance}
+.rs-t-sub{font-size:calc(1.0625rem * var(--text-scale, 1));font-weight:500;letter-spacing:-.01em;line-height:1.5;color:var(--text-secondary);margin:0;text-wrap:pretty}
+.rs-t-body{font-size:calc(0.9375rem * var(--text-scale, 1));font-weight:500;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin:0;text-wrap:pretty}
+.rs-t-label{font-size:calc(0.8125rem * var(--text-scale, 1));font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--text);margin:0}
 
 /* ── Inline code ── */
 .rs-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;color:var(--text);background:var(--table-alt);padding:1px 5px;border-radius:var(--radius-sm);letter-spacing:0}

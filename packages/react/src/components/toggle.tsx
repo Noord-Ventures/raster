@@ -1,6 +1,8 @@
+"use client";
+
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface ToggleProps
@@ -19,24 +21,24 @@ const styles = stylex.create({
     gap: 6,
     height: {
       default: 32,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     minWidth: {
       default: 32,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     paddingBlock: 0,
     paddingInline: {
       default: 10,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -46,7 +48,7 @@ const styles = stylex.create({
     borderColor: raster.divider,
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     color: raster.gray,
     cursor: "pointer",
@@ -61,24 +63,24 @@ const styles = stylex.create({
   group: {
     display: {
       default: "inline-flex",
-      ["@media (max-width: 640px)"]: "flex",
+      [mq.phone]: "flex",
     },
     alignItems: "stretch",
     boxSizing: "border-box",
     height: {
       default: 32,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     width: {
       default: null,
-      ["@media (max-width: 640px)"]: "100%",
+      [mq.phone]: "100%",
     },
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderColor: raster.divider,
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     overflow: "hidden",
   },
@@ -86,7 +88,7 @@ const styles = stylex.create({
     height: "auto",
     flexGrow: {
       default: null,
-      ["@media (max-width: 640px)"]: 1,
+      [mq.phone]: 1,
     },
     borderWidth: 0,
     borderRadius: 0,
@@ -118,7 +120,7 @@ export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(function 
   const [inner, setInner] = React.useState(defaultPressed ?? false);
   const isControlled = pressed !== undefined;
   const on = isControlled ? pressed : inner;
-  const sx = rs(["rs-toggle", className], styles.toggle, on && styles.pressed);
+  const sx = rs(["rs-toggle", className, on && "rs-toggle-pressed"], styles.toggle, on && styles.pressed);
   return (
     <button
       ref={ref}
@@ -166,7 +168,7 @@ export function ToggleGroup({
     <div role="group" {...props} className={group.className} style={{ ...group.style, ...nest, ...style }}>
       {options.map((option) => {
         const on = option.value === current;
-        const btn = rs(["rs-toggle"], styles.toggle, styles.grouped, on && styles.pressed, on && styles.groupedOn);
+        const btn = rs(["rs-toggle", on && "rs-toggle-pressed", on && "rs-toggle-grouped-on"], styles.toggle, styles.grouped, on && styles.pressed, on && styles.groupedOn);
         return (
           <button
             key={option.value}

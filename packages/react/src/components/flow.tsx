@@ -186,12 +186,12 @@ export function FlowNum({ className, style, ...props }: React.HTMLAttributes<HTM
 }
 
 export function FlowTitle({ className, style, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  const sx = rs([className], styles.title);
+  const sx = rs([className, "rs-flow-title"], styles.title);
   return <h4 {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }
 
 export function FlowBody({ className, style, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  const sx = rs([className], styles.body);
+  const sx = rs([className, "rs-flow-body"], styles.body);
   return <p {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }
 
@@ -201,7 +201,7 @@ export function FlowSubs({ className, style, ...props }: React.HTMLAttributes<HT
 }
 
 export function FlowSub({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
-  const sx = rs([className], styles.sub);
+  const sx = rs([className, "rs-flow-sub"], styles.sub);
   return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 }
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface CalloutProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -15,11 +15,11 @@ const styles = stylex.create({
     boxShadow: "none",
     paddingBlock: {
       default: 16,
-      "@media (max-width: 640px)": 14,
+      [mq.phone]: 14,
     },
     paddingInline: {
       default: 20,
-      "@media (max-width: 640px)": 16,
+      [mq.phone]: 16,
     },
   },
 });

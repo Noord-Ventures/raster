@@ -1,0 +1,6 @@
+/* ── checkbox: generated from packages/react/src/components/checkbox.tsx ── */
+.rs-choice{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);letter-spacing:-0.01em}
+@media (max-width: 640px){.rs-choice{gap:12px;font-size:17px;min-height:var(--hit)}}
+.rs-check{width:16px;height:16px;border-radius:3px;border-width:1.5px;border-style:solid;border-color:var(--divider);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--bg);box-sizing:border-box}
+@media (max-width: 640px){.rs-check{width:22px;height:22px;border-radius:0}}
+.rs-check-on{background-color:var(--text);border-color:var(--text)}

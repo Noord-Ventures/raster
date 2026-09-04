@@ -1,7 +1,7 @@
 {
   "name": "@noorddev/raster",
   "version": "0.3.0",
-  "description": "Raster core — design tokens, component registry, and CSS. Monochrome, CSS-first, zero dependencies.",
+  "description": "Raster core \u2014 design tokens, component registry, and CSS. Monochrome, CSS-first, zero dependencies.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -23,9 +23,16 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./tokens": "./tokens/raster.tokens.json",
-    "./css": "./css/raster.css",
+    "./css": {
+      "types": "./css/raster.css.d.ts",
+      "default": "./css/raster.css"
+    },
+    "./raster.css": {
+      "types": "./css/raster.css.d.ts",
+      "default": "./css/raster.css"
+    },
     "./css/*": "./css/*",
+    "./tokens": "./tokens/raster.tokens.json",
     "./package.json": "./package.json"
   },
   "files": [
@@ -35,16 +42,21 @@
     "tokens"
   ],
   "scripts": {
-    "build:css": "node --experimental-strip-types scripts/build.mjs",
+    "build:css": "node --experimental-strip-types scripts/build-components.mjs && node --experimental-strip-types scripts/build.mjs",
     "build:registry": "node --experimental-strip-types scripts/build-registry.mjs",
     "build": "npm run build:css && tsup",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:components": "node --experimental-strip-types scripts/build-components.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.1.1",
+    "esbuild": "^0.27",
     "tsup": "^8.3.5",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5"
+  },
+  "engines": {
+    "node": ">=18.18"
   }
 }

@@ -1,0 +1,8 @@
+/* ── switch: generated from packages/react/src/components/switch.tsx ── */
+.rs-switch{display:inline-flex;box-sizing:border-box;width:32px;height:18px;border-radius:9px;border-width:1.5px;border-style:solid;border-color:var(--divider);position:relative;flex-shrink:0;padding:0;background-color:transparent;cursor:pointer;transition:background-color var(--duration) var(--ease), border-color var(--duration) var(--ease)}
+@media (max-width: 640px){.rs-switch{width:64px;height:var(--hit);min-width:64px;min-height:var(--hit);border-radius:0}}
+.rs-switch-on{background-color:var(--text);border-color:var(--text)}
+.rs-switch-thumb{position:absolute;top:1.5px;left:1.5px;width:12px;height:12px;border-radius:50%;background-color:var(--text-secondary);transition:transform var(--duration) var(--ease)}
+@media (max-width: 640px){.rs-switch-thumb{top:4px;left:4px;width:36px;height:36px;border-radius:0}}
+.rs-switch-thumb-on{background-color:var(--bg);transform:translateX(14px)}
+@media (max-width: 640px){.rs-switch-thumb-on{transform:translateX(20px)}}

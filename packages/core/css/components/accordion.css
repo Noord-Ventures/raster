@@ -1,0 +1,10 @@
+/* ── accordion: generated from packages/react/src/components/accordion.tsx ── */
+.rs-acc{border-top-width:1px;border-top-style:solid;border-top-color:var(--divider)}
+.rs-acc-item{border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider)}
+.rs-acc-summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px;padding-inline:0;font-size:14.5px;font-weight:600;letter-spacing:-0.01em;color:var(--text)}
+.rs-acc-summary::-webkit-details-marker{display:none}
+@media (max-width: 640px){.rs-acc-summary{min-height:var(--hit);font-size:17px}}
+.rs-acc-chevron{flex-shrink:0;color:var(--text-secondary);transition:transform var(--duration) var(--ease)}
+.rs-acc-chevron-open{transform:rotate(180deg)}
+.rs-acc-body{padding-top:0;padding-right:0;padding-bottom:16px;padding-left:0;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}
+@media (max-width: 640px){.rs-acc-body{padding-bottom:20px;font-size:16px}}

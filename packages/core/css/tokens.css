@@ -8,6 +8,8 @@
   --divider-subtle: rgba(0,0,0,0.06);
   --table-alt: rgba(0,0,0,0.02);
   --grid-line: rgba(0,0,0,0.04);
+  --control-border: rgba(0,0,0,0.42);
+  color-scheme: light;
   --radius-sm: 4px;           /* slight Raster radius; standalone buttons */
   --radius: var(--radius-sm);              /* alias — buttons, boxes, dialogs share it; cards stay 0 */
   --radius-chrome: 0px;
@@ -25,7 +27,12 @@
   --grid-size: 204px;
   --grid-pos: 20px 0;
   --text-scale: 1;
-  /* Control scale. Desktop is the Raster poster; phone recuts in phone.css. */
+  /* Contract variables a component may set inline: concentric radius and the chart spot color. */
+  --rs-out: var(--radius);
+  --rs-gap: var(--pad);
+  --rs-in: var(--radius-in);
+  --rs-chart-spot: var(--text);
+  /* Control scale. Desktop is the poster; ≤640 recuts every control to 44pt. */
   --hit: 40px;
   --control-h: 40px;
   --control-fs: 14px;
@@ -40,6 +47,23 @@
   --divider-subtle: rgba(255,255,255,0.07);
   --table-alt: rgba(255,255,255,0.03);
   --grid-line: rgba(255,255,255,0.05);
+  --control-border: rgba(255,255,255,0.38);
+  color-scheme: dark;
+}
+/* System dark scheme applies until the page decides with data-theme. */
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+  --bg: #0E0C0A;
+  --text: #E8E8E8;
+  --text-secondary: #949494;
+  --accent: #E8E8E8;
+  --divider: rgba(255,255,255,0.10);
+  --divider-subtle: rgba(255,255,255,0.07);
+  --table-alt: rgba(255,255,255,0.03);
+  --grid-line: rgba(255,255,255,0.05);
+  --control-border: rgba(255,255,255,0.38);
+  color-scheme: dark;
+}
 }
 /* Mobile grid (≤480): two fluid columns, three 25px gutters
    (edge · middle · edge). Column width = 50vw − 37.5px; the background

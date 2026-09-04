@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Input, type InputProps } from "./input";
 
@@ -24,7 +24,7 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     backgroundColor: "var(--bg)",
     overflow: "hidden",
@@ -34,12 +34,12 @@ const styles = stylex.create({
     alignItems: "center",
     paddingInline: {
       default: 10,
-      ["@media (max-width: 640px)"]: 14,
+      [mq.phone]: 14,
     },
     paddingBlock: 0,
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -48,7 +48,7 @@ const styles = stylex.create({
     whiteSpace: "nowrap",
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
     borderInlineStartWidth: raster.hairline,
     borderInlineStartStyle: "solid",

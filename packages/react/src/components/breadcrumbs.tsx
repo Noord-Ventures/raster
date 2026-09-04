@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface Crumb {
@@ -16,22 +16,22 @@ const styles = stylex.create({
   crumbs: {
     fontSize: {
       default: 13,
-      ["@media (max-width: 640px)"]: raster.controlFs,
+      [mq.phone]: raster.controlFs,
     },
     color: raster.ink,
     letterSpacing: "-0.01em",
     display: "flex",
     alignItems: {
       default: "baseline",
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
     flexWrap: {
       default: null,
-      ["@media (max-width: 640px)"]: "wrap",
+      [mq.phone]: "wrap",
     },
     gap: {
       default: 8,
-      ["@media (max-width: 640px)"]: 6,
+      [mq.phone]: 6,
     },
   },
   link: {
@@ -53,15 +53,15 @@ const styles = stylex.create({
     },
     display: {
       default: null,
-      ["@media (max-width: 640px)"]: "inline-flex",
+      [mq.phone]: "inline-flex",
     },
     alignItems: {
       default: null,
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
   },
   sep: {
@@ -73,15 +73,15 @@ const styles = stylex.create({
     opacity: 1,
     display: {
       default: null,
-      ["@media (max-width: 640px)"]: "inline-flex",
+      [mq.phone]: "inline-flex",
     },
     alignItems: {
       default: null,
-      ["@media (max-width: 640px)"]: "center",
+      [mq.phone]: "center",
     },
     minHeight: {
       default: null,
-      ["@media (max-width: 640px)"]: raster.hit,
+      [mq.phone]: raster.hit,
     },
   },
 });

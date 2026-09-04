@@ -4,6 +4,19 @@
   "type": "registry:font",
   "title": "Inter",
   "description": "Default face. Variable Inter (latin + latin-ext), SIL OFL 1.1. System sans is fallback only.",
+  "font": {
+    "family": "Inter",
+    "provider": "google",
+    "import": "Inter",
+    "variable": "--font-sans",
+    "weight": [
+      "100 900"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ]
+  },
   "files": [
     {
       "path": "raster/styles/inter.css",

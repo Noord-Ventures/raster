@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, phone } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { DropdownMenu, type DropdownMenuItem } from "./dropdown-menu";
 
@@ -16,18 +16,18 @@ const styles = stylex.create({
     gap: 2,
     width: {
       default: null,
-      ["@media (max-width: 640px)"]: "100%",
+      [mq.phone]: "100%",
     },
     borderWidth: raster.hairline,
     borderStyle: "solid",
     borderColor: raster.divider,
     borderRadius: {
       default: raster.radiusSm,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
     padding: {
       default: 2,
-      ["@media (max-width: 640px)"]: 0,
+      [mq.phone]: 0,
     },
   },
 });

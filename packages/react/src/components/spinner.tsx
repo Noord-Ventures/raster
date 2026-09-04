@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -25,7 +25,7 @@ const styles = stylex.create({
     height: 16,
     animationName: {
       default: spin,
-      "@media (prefers-reduced-motion: reduce)": "none",
+      [mq.reduce]: "none",
     },
     animationDuration: "0.7s",
     animationTimingFunction: "linear",
@@ -36,7 +36,7 @@ const styles = stylex.create({
 /** Hairline ring. Stops under prefers-reduced-motion. */
 export function Spinner({ label = "Loading", className, style, ...props }: SpinnerProps) {
   const sx = rs(["rs-spinner", className], styles.spinner);
-  const ring = rs([], styles.ring);
+  const ring = rs(["rs-spinner-ring"], styles.ring);
   return (
     <span role="status" aria-label={label} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       <svg
