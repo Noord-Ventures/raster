@@ -59,6 +59,12 @@ export const interfaces = stylex.create({
     letterSpacing: "-0.01em",
     color: "var(--text-secondary)",
     textDecoration: "none",
+    transition: {
+      default: "color var(--duration-snap) var(--ease)",
+      [reduce]: "none",
+    },
+    ":hover": { color: "var(--text)" },
+    ":focus-visible": { color: "var(--text)" },
   },
   list: {
     display: "grid",

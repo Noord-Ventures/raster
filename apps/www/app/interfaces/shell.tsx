@@ -52,6 +52,14 @@ export function InterfaceShell({ slug, children }: { slug: InterfaceSlug; childr
               <dd>{proto.field}</dd>
             </div>
           </dl>
+          <section className="if-modifications" aria-labelledby={`${slug}-modifications`}>
+            <h2 id={`${slug}-modifications`}>Component modifications</h2>
+            <ul>
+              {proto.modifications.map((modification) => (
+                <li key={modification}>{modification}</li>
+              ))}
+            </ul>
+          </section>
         </section>
       </main>
     </div>

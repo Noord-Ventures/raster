@@ -14,6 +14,11 @@ export const interfaces = [
     field: "Compact rail, centered reading measure, persistent composer.",
     note: "Replies are simulated locally, so the study can be explored without sending text to a model.",
     components: ["Button", "Icon", "Input", "Input group"],
+    modifications: [
+      "Inputs were joined into one edge-to-edge composer, with equal padding on every side and a fixed send action.",
+      "Buttons and icons were reduced to compact, text-first controls for the conversation rail and inspector.",
+      "Selected rows use a tonal field and hairline division instead of pills, preserving the flat Vlak structure.",
+    ],
   },
   {
     slug: "press",
@@ -30,6 +35,11 @@ export const interfaces = [
     field: "Three summary metrics above throughput and job detail.",
     note: "Changing the range recalculates the same measures, preserving orientation between week and month views.",
     components: ["Toggle group", "Icon"],
+    modifications: [
+      "The toggle group was tightened into a range switch with shared borders and flush internal edges.",
+      "Icons were aligned to the metric baseline and used only where they improve scanning.",
+      "Summary blocks borrow the card structure but remove corner rounding so the dashboard reads as one continuous grid.",
+    ],
   },
   {
     slug: "wall",
@@ -46,6 +56,11 @@ export const interfaces = [
     field: "People in the rail, masonry feed in the center, context on the right.",
     note: "Profiles remain secondary to the work and use the same side pane as comments.",
     components: ["Avatar", "Button", "Card", "Icon"],
+    modifications: [
+      "Cards were made image-first, with the media area larger than the text area and edges aligned to the feed grid.",
+      "Avatars were scaled down for authorship cues and paired with names rather than treated as decorative portraits.",
+      "At narrow widths, the rail becomes compact navigation and the masonry feed collapses to a single mobile column.",
+    ],
   },
   {
     slug: "night",
@@ -62,6 +77,11 @@ export const interfaces = [
     field: "Status rail, city-scale map, and an on-demand detail pane.",
     note: "The list keeps one visual scale so an alert changes priority without changing the surrounding layout.",
     components: ["Button", "Icon"],
+    modifications: [
+      "List rows were expanded into status-rich fleet records while retaining the base item spacing and divider logic.",
+      "The right-hand detail pane uses an icon-only close button fixed to its top-right corner.",
+      "Map controls and vehicle states use square, flush targets rather than floating rounded controls.",
+    ],
   },
   {
     slug: "evening",
@@ -78,6 +98,11 @@ export const interfaces = [
     field: "Search and filters above an image-led market; details open alongside it.",
     note: "Kitchens, dishes, and the bag share one hierarchy, keeping the transition into checkout predictable.",
     components: ["Input", "Input group", "Toggle group", "Icon"],
+    modifications: [
+      "Toggle groups were flattened into segmented filters with a restrained tonal selected state and inset keyline.",
+      "Market cards enlarge photography beyond the copy block and remove ornamental rounding from the surrounding grid.",
+      "Search and filter controls reflow into horizontal, touch-sized groups when the specimen narrows.",
+    ],
   },
   {
     slug: "room",
@@ -94,6 +119,11 @@ export const interfaces = [
     field: "Channels and people in the rail, messages in the center, thread at right.",
     note: "People and threads use the same contextual pane, keeping the message column stable.",
     components: ["Avatar", "Button", "Icon", "Input", "Input group"],
+    modifications: [
+      "The sidebar item was stripped of leading icons and given more vertical padding for a quieter text hierarchy.",
+      "Avatars were tuned for dense message rows, while thread actions remain aligned to the message baseline.",
+      "The input group becomes a full-width composer with a fixed action and equal outer padding.",
+    ],
   },
   {
     slug: "graphics",
@@ -109,6 +139,11 @@ export const interfaces = [
     field: "Control rail beside a large, image-led results canvas.",
     note: "The outputs are original generated artworks, not placeholders or reproductions of historical posters.",
     components: ["Button", "Icon", "Input", "Toggle group"],
+    modifications: [
+      "The input was enlarged into a multiline art-direction field while keeping Vlak's border, type, and focus behavior.",
+      "Toggle groups became flush format selectors; buttons use square edges and fixed heights throughout the tool rail.",
+      "Generated outputs use the card as an artwork frame, with the image dominant and metadata held to a narrow footer.",
+    ],
   },
   {
     slug: "render",
@@ -124,6 +159,11 @@ export const interfaces = [
     field: "Full toolbar chrome around a dominant visual viewport.",
     note: "The car is fictional and shown mid-process with wireframe geometry and a selected body panel.",
     components: ["Button", "Icon", "Toggle group"],
+    modifications: [
+      "Icon buttons were normalized to identical square cells and optically centered inside the vertical tool rail.",
+      "Toggle groups were compressed for viewport modes, with adjacent controls sharing borders rather than gaps.",
+      "The card surface was opened into a live 3D viewport; tool chrome stays flush to its four edges.",
+    ],
   },
   {
     slug: "drive",
@@ -139,6 +179,11 @@ export const interfaces = [
     field: "Driving status at left, active task at center, quick controls at right.",
     note: "Large targets and short labels keep the secondary interface readable at a glance.",
     components: ["Button", "Icon", "Progress", "Toggle group"],
+    modifications: [
+      "Buttons were enlarged into glanceable vehicle targets, then aligned on a strict three-column cabin grid.",
+      "Media and temperature controls use identical square hit areas with optically centered Vlak icons.",
+      "Progress was restyled as range and charge telemetry, using blue only for current state and completion.",
+    ],
   },
   {
     slug: "orbit",
@@ -154,6 +199,11 @@ export const interfaces = [
     field: "Asset rail, dominant orbital image, telemetry and pass detail.",
     note: "All organizations, satellites, and telemetry are fictional; the map is illustrative rather than real-time.",
     components: ["Button", "Icon", "Progress", "Toggle group"],
+    modifications: [
+      "The base card became a flush telemetry panel with dense rows, live values, and no independent corner treatment.",
+      "Progress components were narrowed into signal and pass indicators suitable for analytical data.",
+      "Buttons and toggles were condensed for operations use, including a fixed-height queue action and square map controls.",
+    ],
   },
   {
     slug: "frontier",
@@ -169,6 +219,11 @@ export const interfaces = [
     field: "Short navigation, direct hero, capability grid, evaluation band.",
     note: "The company, model, benchmark values, and customer references are entirely fictional.",
     components: ["Button", "Card", "Icon", "Link"],
+    modifications: [
+      "Cards were opened into border-sharing capability columns so the page reads as one editorial field.",
+      "The primary button keeps Vlak's square geometry while links use a quiet directional arrow instead of a second container.",
+      "The hero grid was extended into a subtle perspective matrix, with the content anchored to its lower-left edge.",
+    ],
   },
   {
     slug: "platforms",
@@ -184,6 +239,11 @@ export const interfaces = [
     field: "Two complete phone frames shown at equal scale.",
     note: "The comparison avoids pixel-for-pixel duplication: parity comes from shared meaning, not identical chrome.",
     components: ["Button", "Icon", "Tabs"],
+    modifications: [
+      "Shared content cards were redrawn with flush edges, then spaced according to each platform rather than duplicated pixel for pixel.",
+      "Tabs become an iOS bottom bar on one device and Android navigation on the other, while keeping the same destinations.",
+      "Buttons and icons inherit native placement and touch sizing without introducing branded platform components into Vlak.",
+    ],
   },
 ] as const;
 

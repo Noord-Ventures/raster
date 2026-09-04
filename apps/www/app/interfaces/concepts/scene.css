@@ -9,7 +9,16 @@
 /* Final interface polish: Vlak geometry, legible chrome, and equal insets. */
 .cx { font-size: 13px; line-height: 1.45; }
 .cx > header { padding-inline: 16px; }
-.cx-label, .cx-kicker { font-size: 11px; }
+.cx > header > .rs-btn-primary,
+.cx > header > .rs-btn-ghost {
+  align-self: center;
+  width: auto;
+  min-width: 0;
+  min-height: 32px;
+  height: 32px;
+  padding-inline: 14px;
+}
+.cx-label, .cx-kicker { font-size: 11px; text-transform: none; letter-spacing: -0.01em; }
 .cx .rs-btn-primary { color: var(--bg); border-radius: 0; }
 .cx .rs-btn-ghost { border-radius: 0; }
 .cx-graphics textarea,
@@ -24,7 +33,46 @@
 .cx-live-model:active { cursor: grabbing; }
 .cx-live-model canvas { display: block; width: 100%; height: 100%; }
 .cx-render-meta, .cx-timeline { pointer-events: none; }
+.cx-render > nav button {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+.cx-render > nav .rs-icon { display: block; margin: 0; }
 .cx-frontier { --bg: #f4f1e8; --text: #121212; --text-secondary: #555; }
+.cx-frontier > main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-width: none;
+  padding: 32px 34px;
+  overflow: hidden;
+}
+.cx-frontier > main::before {
+  content: "";
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  bottom: -20%;
+  height: 115%;
+  background-image:
+    linear-gradient(to right, rgba(29, 52, 189, 0.19) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29, 52, 189, 0.19) 1px, transparent 1px);
+  background-size: 32px 32px;
+  transform: perspective(360px) rotateX(62deg);
+  transform-origin: center bottom;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.38) 52%, transparent 92%);
+  pointer-events: none;
+}
+.cx-frontier > main > * { position: relative; z-index: 1; max-width: 620px; }
 .cx-frontier article .rs-card { max-width: none; }
 .cx-frontier article .rs-card-title { margin-block: 5px; }
 .cx-orbit > main img { animation: cx-earth-drift 18s ease-in-out infinite alternate; transform: scale(1.04); }
@@ -44,13 +92,44 @@
 /* A restrained, architectural cockpit: high contrast, hard divisions, one signal. */
 .cx-drive { position: relative; background: #090b0d; color: #f4f2eb; grid-template-columns: 30% 40% 30%; }
 .cx-drive > header { height: 48px; background: #111417; border-color: #353b40; }
+.cx-drive > header { display: grid; grid-template-columns: 1fr auto 1fr; }
+.cx-drive > header > span {
+  flex: none;
+  min-width: 0;
+  white-space: nowrap;
+}
+.cx-drive > header > span:last-child { justify-self: end; }
+.cx-drive > header > b { justify-self: center; }
 .cx-drive > aside, .cx-drive > main, .cx-drive > section { padding: 24px; border-color: #353b40; }
 .cx-drive .cx-kicker { color: #8d969d; }
 .cx-drive > aside > strong { font-size: 64px; font-weight: 500; letter-spacing: -.06em; }
 .cx-drive .cx-range progress { height: 2px; accent-color: #d6d16a; }
 .cx-drive .cx-route { border-width: 1px 0 0; padding: 16px 0 0; }
+.cx-drive .cx-temp button {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+.cx-drive .cx-temp .rs-icon { display: block; margin: 0; }
 .cx-drive .cx-album { width: 164px; background: #d6d16a; color: #111; font-size: 28px; letter-spacing: .08em; }
 .cx-drive .cx-player button { width: 44px; height: 44px; }
+.cx-drive .cx-player { align-items: center; }
+.cx-drive .cx-player button {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+.cx-drive .cx-player .rs-icon { display: block; margin: 0; }
 .cx-drive .cx-player .primary { background: #f4f2eb; }
 .cx-drive .cx-quick { gap: 0; border-top: 1px solid #353b40; border-left: 1px solid #353b40; }
 .cx-drive .cx-quick button { height: 72px; border-width: 0 1px 1px 0; border-color: #353b40; background: transparent; }
@@ -91,6 +170,10 @@
   .cx-drive > section > .cx-device { display: none; }
   .cx-drive .cx-quick { grid-template-columns: repeat(4, 1fr); border: 0; }
   .cx-drive .cx-quick button { height: 76px; border-bottom: 0; }
+  .cx-frontier > header { display: grid; grid-template-columns: 1fr auto; padding-inline: 16px; }
+  .cx-frontier > header nav { display: none; }
+  .cx-frontier > header > b { justify-self: start; }
+  .cx-frontier > header > .rs-btn-primary { justify-self: end; }
 }
 
 @media (prefers-reduced-motion: reduce) {

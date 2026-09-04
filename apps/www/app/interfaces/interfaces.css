@@ -334,7 +334,7 @@ body:has(.if-index) {
   background: #07101a;
   color: #f4f6fa;
 }
-.if-crop-drive span { color: #8fa1b6; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: .08em; }
+.if-crop-drive span { color: #8fa1b6; font-size: 0.6875rem; letter-spacing: -0.01em; }
 .if-crop-drive b { display: block; margin-top: 18px; font-size: 4.5rem; line-height: .9; letter-spacing: -.06em; }
 .if-crop-drive em { color: #8fa1b6; font-style: normal; }
 .if-crop-drive p { position: absolute; left: 24px; bottom: 20px; margin: 0; color: #8dbdff; }
@@ -528,6 +528,42 @@ body:has(.if-index) {
   text-underline-offset: 3px;
 }
 .if-component-list a:hover { text-decoration-color: currentColor; }
+
+.if-modifications {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--divider);
+}
+.if-modifications h2 {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.if-modifications ul {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: modifications;
+}
+.if-modifications li {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 8px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  counter-increment: modifications;
+}
+.if-modifications li::before {
+  content: counter(modifications, decimal-leading-zero);
+  font-size: 0.75rem;
+  line-height: 1.875;
+  color: var(--text-tertiary);
+}
 
 /* Kept for the phone 44pt lock. Scenes may still render an rs-sidebar. */
 .if-board .rs-sidebar-item {
