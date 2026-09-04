@@ -190,11 +190,30 @@ if (!ifPage.includes("interfaces.stylex") || !ifShell.includes("interfaces.style
 if (!ifSx.includes("borderRadius: 0") || !ifSx.includes("boxShadow: \"none\"")) {
   fail("Interface tiles must stay chrome-square with no shadow");
 }
+if (/specimen: \{[\s\S]*?borderRadius:\s*"var\(--radius-sm\)"/.test(ifSx)) {
+  fail("Interface specimen chrome must stay square");
+}
 
 const home = readFileSync(join(root, "apps/www/app/page.tsx"), "utf8");
 const specimenSx = readFileSync(join(root, "apps/www/app/specimen.stylex.ts"), "utf8");
 if (!home.includes("specimen.stylex") || !specimenSx.includes("stylex.create")) {
   fail("Homepage specimen must own StyleX");
+}
+
+const docs = readFileSync(join(root, "apps/www/app/docs/page.tsx"), "utf8");
+const inezStylexBody =
+  "The React layer is authored in StyleX — compile-time atomic CSS, typed against Raster tokens. The CSS file is still the door if you do not want React.";
+if (!docs.includes("<Callout>") || !docs.includes('from "@noorddev/raster-react"')) {
+  fail("Getting started must place the StyleX note as a Raster Callout");
+}
+if (!docs.includes(">StyleX</") || !docs.includes(inezStylexBody)) {
+  fail("Getting started must use Inez locked StyleX EN exactly");
+}
+if (/powered by StyleX|One language for catalogue/i.test(docs)) {
+  fail("Getting started must not add StyleX marketing beyond Inez locked EN");
+}
+if (home.includes(inezStylexBody) || /powered by StyleX/i.test(home)) {
+  fail("Homepage must not carry a second StyleX marketing layer");
 }
 
 const wwwStylex = [

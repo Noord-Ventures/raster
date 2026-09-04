@@ -13,14 +13,23 @@ const at480 = "@media (max-width: 480px)";
 export const chrome = stylex.create({
   logoWrap: {
     position: "fixed",
-    top: 24,
-    left: 20,
+    top: {
+      default: 24,
+      [phone]: "calc(8px + env(safe-area-inset-top, 0px))",
+    },
+    left: {
+      default: 20,
+      [phone]: "calc(8px + env(safe-area-inset-left, 0px))",
+    },
     zIndex: 200,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     gap: 12,
-    height: 24,
+    height: {
+      default: 24,
+      [phone]: 44,
+    },
     filter: "drop-shadow(0 0 12px var(--bg)) drop-shadow(0 0 20px var(--bg))",
   },
   logo: {
@@ -47,7 +56,10 @@ export const chrome = stylex.create({
     left: "var(--nav-left)",
     right: "auto",
     zIndex: 200,
-    display: "flex",
+    display: {
+      default: "flex",
+      [phone]: "none",
+    },
     alignItems: "center",
     gap: 20,
     height: 24,

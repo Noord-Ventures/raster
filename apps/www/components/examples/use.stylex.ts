@@ -8,15 +8,16 @@ const fadeIn = stylex.keyframes({
   to: { opacity: 1 },
 });
 
-/** Use field: a 204-module composition. Paper, hairlines, slight Raster radius. */
+/** Use field: a 204-module composition. The leaf is the specimen —
+    scene / UseField do not add a second card outline. */
 export const useStyles = stylex.create({
   use: {
     isolation: "isolate",
     backgroundColor: "transparent",
     backgroundImage: "none",
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "var(--divider)",
+    borderWidth: 0,
+    borderStyle: "none",
+    borderColor: "transparent",
     borderRadius: "var(--radius-sm)",
     boxShadow: "none",
     display: "grid",
@@ -35,14 +36,14 @@ export const useStyles = stylex.create({
   scene: {
     isolation: "isolate",
     backgroundColor: "transparent",
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "var(--divider)",
+    borderWidth: 0,
+    borderStyle: "none",
+    borderColor: "transparent",
     borderRadius: "var(--radius-sm)",
     boxShadow: "none",
     marginTop: 8,
     marginBottom: 32,
-    overflow: "hidden",
+    overflow: "visible",
   },
   type: {
     margin: 0,

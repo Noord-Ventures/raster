@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Callout } from "@noorddev/raster-react";
 import { chrome } from "@/app/site.stylex";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
@@ -78,6 +79,13 @@ export default function DocsPage() {
             </p>
           </>
         )}
+
+        <Callout>
+          <p className="rs-t-label">StyleX</p>
+          <p className="rs-t-body">
+            The React layer is authored in StyleX — compile-time atomic CSS, typed against Raster tokens. The CSS file is still the door if you do not want React.
+          </p>
+        </Callout>
 
         <h2 className="section-label">Using shadcn&apos;s CLI instead</h2>
         <CodeBlock code={`npx shadcn add ${HOST}/r/button.json`} />

@@ -46,6 +46,18 @@ if (!phone.includes(".theme-toggle") || !phone.includes("display: flex")) {
 if (phone.includes(".theme-toggle { display: none") || /corner-nav,\s*\.theme-toggle/.test(phone)) {
   fail("Do not hide the theme toggle on phone");
 }
+if (!phone.includes(".corner-nav { display: none !important; }")) {
+  fail("Phone must hide corner-nav (StyleX otherwise keeps display:flex)");
+}
+if (!/cornerNav:\s*\{[\s\S]*?display:\s*\{[\s\S]*?\[phone\]:\s*"none"/.test(siteSx)) {
+  fail("StyleX cornerNav must be display none at ≤640");
+}
+if (!phone.includes("text-wrap: wrap") || !phone.includes(".site-content .rs-t-body")) {
+  fail("Phone Install / body copy must be wrap, not pretty — pretty stacks lines on WebKit");
+}
+if (!layout.includes(".corner-nav{display:none!important}") && !layout.includes(".corner-nav{display:none !important}")) {
+  fail("First paint must hide corner-nav on phone before StyleX");
+}
 if (!phone.includes("overflow: hidden") || !phone.includes("flex-wrap: nowrap")) {
   fail("Phone crumb bar must clip to one line; crumbs must not wrap out of the bar");
 }
@@ -229,7 +241,13 @@ if (!/@media \(min-width: 1024px\) \{ \.site-layout \{ --ml: 204px; margin-left:
   fail("Desktop site-layout must keep the live --ml 204px / margin-left 204px");
 }
 if (!/@media \(min-width: 1024px\) \{\s*\.site-layout\.catalog-page \{\s*--ml:\s*0px;\s*margin-left:\s*0;/.test(site)) {
-  fail("Catalog index must zero --ml at ≥1024 like live so two 388 cards fit beside the rail");
+  fail("Catalog index must zero --ml at 1024–1439 so two 388 cards fit beside the rail");
+}
+if (!/@media \(min-width: 1440px\) \{\s*\.site-layout\.catalog-page \{[\s\S]*?--ml:\s*204px;[\s\S]*?margin-left:\s*204px;/.test(site)) {
+  fail("Wide catalog index must restore the airy first 204 module at ≥1440");
+}
+if (!/@media \(min-width: 1440px\) \{\s*\.site-layout\.catalog-page \{[\s\S]*?width:\s*calc\(100vw - 204px\)/.test(site)) {
+  fail("Wide catalog must size from the remaining viewport so 796 two-up still fits");
 }
 if (/data-rail="catalog"[\s\S]{0,160}--ml:\s*0px/.test(navCss)) {
   fail("Catalog rail must keep the live 204 inset; do not zero --ml for data-rail=catalog");
@@ -636,6 +654,9 @@ if (!catalogPage.includes("catalogComponents") || !nav.includes("catalogComponen
 if (!catalogPage.includes("iconGroups") || !catalogPage.includes('category === "icons"')) {
   fail("Icons on /components must be iconGroups subcategory cards, like Charts");
 }
+if (!nav.includes("iconGroups") || !nav.includes("/components/icons#") || !nav.includes("iconGroupSlug")) {
+  fail("Icons toc-sub must list iconGroups (Navigation, Actions, …) like Charts");
+}
 if (!nestCss.includes("--rs-in") || !nestCss.includes("var(--rs-out) - var(--rs-gap)")) {
   fail("Nest must keep the inner-radius formula");
 }
@@ -674,6 +695,15 @@ if (!site.includes(".gallery-item .preview-box") || !site.includes(".gallery-dem
 }
 if (!site.includes(".preview-box:has(.rs-callout)") || !site.includes(".gallery-demo .rs-callout")) {
   fail("Boxed leaves must not sit in a second demo hairline");
+}
+if (site.includes(".rs-scene .rs-input-group") || site.includes(".rs-use .rs-input-group") || site.includes(".rs-scene .rs-field")) {
+  fail("Use / In Action must not zero the leaf — match the unboxed top specimen");
+}
+const useCss = readFileSync(join(root, "apps/www/components/examples/use.css"), "utf8");
+const useSx = readFileSync(join(root, "apps/www/components/examples/use.stylex.ts"), "utf8");
+const sceneRule = useCss.slice(useCss.indexOf(".rs-scene {"), useCss.indexOf("}", useCss.indexOf(".rs-scene {")));
+if (/border:\s*1px/.test(sceneRule) || /scene:\s*\{[^}]*borderWidth:\s*1/s.test(useSx)) {
+  fail("In Action scene must not add a second outline around the control");
 }
 if (!site.includes(".settings {") || !site.includes("right: 20px") || !site.includes("position: fixed")) {
   fail("Appearance control stays sticky on the right");

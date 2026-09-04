@@ -134,6 +134,14 @@ if (/border:\s*1px/.test(specRule)) {
   console.error("Interfaces CSS must not double the StyleX specimen hairline");
   process.exit(1);
 }
+if (!/border-radius:\s*0/.test(specRule)) {
+  console.error("Interfaces specimen chrome must stay square");
+  process.exit(1);
+}
+if (!specRule.includes("box-shadow:") || specRule.includes("box-shadow: none")) {
+  console.error("Specimen may take a quiet shadow");
+  process.exit(1);
+}
 if (!ifSx.includes("borderWidth: 1") || !ifSx.includes('borderColor: "var(--grid-line)"') || !ifSx.includes('borderColor: "var(--divider)"')) {
   console.error("StyleX must own the one tile --grid-line and specimen --divider hairline");
   process.exit(1);
@@ -191,6 +199,14 @@ if (/border-top:\s*1px/.test(dockRule)) {
 }
 if (/line-height:\s*44px/.test(lineScene)) {
   console.error("Line composer type must sit in the middle of the field");
+  process.exit(1);
+}
+if (/font:\s*[^;]*\binherit\b/.test(lineScene)) {
+  console.error("Line type must use longhand font-family inherit; font shorthand with inherit is invalid");
+  process.exit(1);
+}
+if (!lineScene.includes("padding: 8px 20px") || !lineScene.includes(".sc-ai-brand { padding: 16px 20px 8px; }")) {
+  console.error("Line rail must sit on the 20px module pad, not tight 16px");
   process.exit(1);
 }
 

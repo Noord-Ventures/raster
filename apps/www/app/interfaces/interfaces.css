@@ -341,9 +341,11 @@ body:has(.if-index) {
   margin-top: 204px;
   height: 612px;
   background: var(--bg);
-  /* StyleX specimen owns the one --divider hairline. Do not also stroke. */
+  /* StyleX specimen owns the one --divider hairline. Do not also stroke.
+     Square site chrome (radius 0) with the quiet paper lift. Inner
+     cards and composers keep --radius-sm. */
   border: 0;
-  border-radius: var(--radius-sm);
+  border-radius: 0;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04), 0 10px 28px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }

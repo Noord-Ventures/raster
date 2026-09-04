@@ -9,7 +9,8 @@
      the 1024px rail) and the layout width rounds DOWN to whole 204px
      modules, so edges step from grid line to grid line on resize.
      Detail keeps that airy first 204. Catalog index zeros --ml at
-     ≥1024 (live) so the 388 rail and two 388 cards fit on 796.
+     1024–1439 so 388 rail + 796 two-up still fit; at ≥1440 it
+     restores the airy first 204 and keeps the 796 measure.
    - Reading measure is 592px (3 modules); covers occupy the first 204 cell.
    - A fixed 72px crumb bar; breadcrumbs appear once the page cover
      scrolls away. The docs rail lives in components/docs-nav. */
@@ -335,7 +336,9 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     position: relative;
     top: 1px;
   }
-  .corner-nav { display: none; }
+  /* StyleX atomics otherwise keep display:flex — hide the desktop
+     row so crumbs / appearance / hamburger are the only chrome. */
+  .corner-nav { display: none !important; }
   .settings {
     top: calc(8px + env(safe-area-inset-top, 0px));
     right: calc(56px + env(safe-area-inset-right, 0px));
@@ -435,7 +438,23 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   .site-footer { padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px)); }
   .site-content .rs-t-display { font-size: calc(32px * var(--text-scale, 1)); }
   .site-content .rs-t-sub { font-size: calc(18px * var(--text-scale, 1)); line-height: 1.45; }
-  .site-content .rs-t-body { font-size: calc(16px * var(--text-scale, 1)); line-height: 1.65; }
+  .site-content .rs-t-body {
+    display: block;
+    position: static;
+    float: none;
+    height: auto;
+    max-width: 100%;
+    font-size: calc(16px * var(--text-scale, 1));
+    line-height: 1.65;
+    /* pretty/balance stacks lines on WebKit phone. Live block flow. */
+    text-wrap: wrap;
+  }
+  .site-content > .section-label + .rs-t-body {
+    display: block;
+    position: static;
+    margin-top: 8px;
+    margin-bottom: 0;
+  }
   .section-label { font-size: 15px; margin-top: 48px; }
   .gallery { padding: 16px 0 32px; }
   .gallery-meta { padding: 18px 20px 22px; }
@@ -539,8 +558,9 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 
 /* Catalog index: 388-wide cards, 204 demo module. Two columns on
    desktop (796 measure, same as the icon catalog). Phone stays one
-   column. Do not lock a single 388 track. Live bf282a68 zeros --ml
-   here so 388 rail + 796 content fit; detail keeps --ml 204. */
+   column. Do not lock a single 388 track. Mid-desktop zeros --ml so
+   388 rail + 796 fit; wide restores the airy first 204 and sizes
+   the layout from the remaining viewport so two-up does not die. */
 .catalog-page .catalog-group { margin-top: 40px; }
 .catalog-page .site-content {
   width: min(796px, 100%);
@@ -550,6 +570,14 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   .site-layout.catalog-page {
     --ml: 0px;
     margin-left: 0;
+  }
+}
+@media (min-width: 1440px) {
+  .site-layout.catalog-page {
+    --ml: 204px;
+    margin-left: 204px;
+    width: calc(100vw - 204px);
+    max-width: none;
   }
 }
 
@@ -656,7 +684,9 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   border: none;
 }
 /* Catalog + homepage kit: the card / field cell is the frame.
-   StyleX atomics otherwise keep the leaf stroke — zero it here. */
+   StyleX atomics otherwise keep the leaf stroke — zero it here.
+   Do not also zero .rs-scene / .rs-use leaves: In Action is open,
+   so the control's own hairline is the specimen. */
 .gallery-demo .rs-callout,
 .gallery-demo .rs-btn-group,
 .gallery-demo .rs-toggle-group,
@@ -678,48 +708,6 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .gallery-demo .rs-command,
 .gallery-demo .rs-popover,
 .gallery-demo .rs-hover-card-panel,
-.rs-scene .rs-callout,
-.rs-scene .rs-btn-group,
-.rs-scene .rs-toggle-group,
-.rs-scene .rs-empty,
-.rs-scene .rs-table,
-.rs-scene .rs-ai,
-.rs-scene .rs-flow,
-.rs-scene .rs-input-group,
-.rs-scene .rs-inline-form,
-.rs-scene .rs-carousel,
-.rs-scene .rs-sidebar,
-.rs-scene .rs-acc,
-.rs-scene .rs-cite-box,
-.rs-scene .rs-refs,
-.rs-scene .rs-alert,
-.rs-scene .rs-menubar,
-.rs-scene .rs-dropdown,
-.rs-scene .rs-dialog,
-.rs-scene .rs-command,
-.rs-scene .rs-popover,
-.rs-scene .rs-hover-card-panel,
-.rs-use .rs-callout,
-.rs-use .rs-btn-group,
-.rs-use .rs-toggle-group,
-.rs-use .rs-empty,
-.rs-use .rs-table,
-.rs-use .rs-ai,
-.rs-use .rs-flow,
-.rs-use .rs-input-group,
-.rs-use .rs-inline-form,
-.rs-use .rs-carousel,
-.rs-use .rs-sidebar,
-.rs-use .rs-acc,
-.rs-use .rs-cite-box,
-.rs-use .rs-refs,
-.rs-use .rs-alert,
-.rs-use .rs-menubar,
-.rs-use .rs-dropdown,
-.rs-use .rs-dialog,
-.rs-use .rs-command,
-.rs-use .rs-popover,
-.rs-use .rs-hover-card-panel,
 .specimen-kit-live .rs-callout,
 .specimen-kit-live .rs-btn-group,
 .specimen-kit-live .rs-toggle-group,
@@ -853,6 +841,8 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 }
 .class-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 28px; }
 .section-label { font-size: 13px; font-weight: 600; letter-spacing: -.01em; margin: 36px 0 0; }
+.site-content > .rs-callout { margin-top: 36px; }
+.site-content > .rs-callout .rs-t-label + .rs-t-body { margin-top: 8px; }
 .component-head { margin: 8px 0 4px; }
 .component-desc { max-width: 592px; }
 
