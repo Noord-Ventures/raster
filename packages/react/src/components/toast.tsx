@@ -167,6 +167,10 @@ const styles = stylex.create({
     marginInline: 0,
   },
   close: {
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     boxSizing: "border-box",
     display: "inline-flex",
     alignItems: "center",

@@ -71,7 +71,10 @@ const styles = stylex.create({
         [mq.touch]: "visible",
       },
     },
-    transition: `opacity ${raster.durationSnap} ${raster.ease} ${raster.durationSnap}, visibility ${raster.durationSnap} ${raster.ease} ${raster.durationSnap}`,
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     // Bridges the 8px gap so the pointer can move onto the panel.
     "::before": {
       content: '""',

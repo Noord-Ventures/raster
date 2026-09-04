@@ -18,11 +18,12 @@
   --pad: 20px;
   /* Concentric: Steve Ruiz innerRadius result. Closed form of the circular-corner fit. Default radius vs --pad is 0. */
   --radius-in: max(0px, calc(var(--radius) - var(--pad)));
-  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --ease: cubic-bezier(0.3, 0, 0.2, 1);
   --duration-snap: 0.12s;
-  --duration: 0.18s;
+  --duration: 0.2s;
   --duration-confirm: 0.16s;
-  --transition: background-color var(--duration) var(--ease), color var(--duration) var(--ease);
+  /* The hover transition every control shares: fill, edge, ink, opacity. */
+  --transition: background-color var(--duration) var(--ease), border-color var(--duration) var(--ease), color var(--duration) var(--ease), opacity var(--duration) var(--ease);
   /* Background column grid: 204px modules (184 column + 20 gutter). */
   --grid-image: linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px);
   --grid-size: 204px;

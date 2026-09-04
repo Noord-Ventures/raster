@@ -24,7 +24,10 @@ const styles = stylex.create({
       ":hover": raster.accent,
     },
     textDecoration: "none",
-    transition: "color var(--duration-snap) var(--ease)",
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
   },
   refs: {
     listStyle: "none",
@@ -85,7 +88,10 @@ const styles = stylex.create({
       default: raster.divider,
       ":hover": raster.accent,
     },
-    transition: "color var(--duration-snap) var(--ease), border-color var(--duration-snap) var(--ease)",
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     wordBreak: "break-all",
   },
   box: {

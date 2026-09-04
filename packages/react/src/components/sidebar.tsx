@@ -60,6 +60,10 @@ const styles = stylex.create({
     flexBasis: 0,
   },
   item: {
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     display: {
       default: "block",
       [mq.phone]: "flex",

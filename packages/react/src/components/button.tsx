@@ -48,7 +48,7 @@ const styles = stylex.create({
       [mq.phone]: 0,
     },
     transition: {
-      default: "opacity var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease), color var(--duration-snap) var(--ease)",
+      default: raster.transition,
       [mq.reduce]: "none",
     },
     /* Hover and disabled are opacity on paper; in forced colors they become system colors instead. */
@@ -101,6 +101,10 @@ const styles = stylex.create({
     },
   },
   ghost: {
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     fontWeight: 500,
     backgroundColor: {
       default: "transparent",
@@ -172,6 +176,10 @@ const styles = stylex.create({
     },
   },
   groupedGhost: {
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     backgroundColor: {
       default: raster.paper,
       ":hover": raster.controlFill,

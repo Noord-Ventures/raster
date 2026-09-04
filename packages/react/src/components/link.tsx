@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -22,7 +22,10 @@ const styles = stylex.create({
       ":hover": raster.accent,
       ":active": raster.accent,
     },
-    transition: "border-color var(--duration-snap) var(--ease)",
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     outlineWidth: {
       default: null,
       ":focus-visible": 2,
@@ -53,7 +56,10 @@ const styles = stylex.create({
     backgroundSize: "calc(100% - 1px) 1px",
     backgroundPosition: "1px 100%",
     backgroundRepeat: "no-repeat",
-    transition: "background-image var(--duration-snap) var(--ease)",
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
   },
 });
 

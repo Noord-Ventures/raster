@@ -64,7 +64,8 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --duration-snap: ${motion.snap};
   --duration: ${motion.ease};
   --duration-confirm: ${motion.confirm};
-  --transition: background-color var(--duration) var(--ease), color var(--duration) var(--ease);
+  /* The hover transition every control shares: fill, edge, ink, opacity. */
+  --transition: background-color var(--duration) var(--ease), border-color var(--duration) var(--ease), color var(--duration) var(--ease), opacity var(--duration) var(--ease);
   /* Background column grid: ${grid.module}px modules (${grid.column} column + ${grid.gutter} gutter). */
   --grid-image: ${gridImage};
   --grid-size: ${grid.module}px;

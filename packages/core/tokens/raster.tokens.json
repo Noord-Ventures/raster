@@ -155,11 +155,11 @@
     "rule": "1px currentColor hairline, butt/miter, no rx, no fill; draw at 12 or 16"
   },
   "motion": {
-    "duration": "0.12–0.18s",
+    "duration": "0.12–0.2s",
     "snap": "0.12s",
-    "ease": "0.18s",
+    "ease": "0.2s",
     "confirm": "0.16s",
-    "easing": "cubic-bezier(0.2, 0, 0, 1)",
+    "easing": "cubic-bezier(0.3, 0, 0.2, 1)",
     "rule": "A state the user caused may ease, snap with a short curve, or confirm. Entry is not a show. Color and opacity name the change; nothing bounces.",
     "reducedMotion": "looping demos and unsolicited entry disabled under prefers-reduced-motion"
   },

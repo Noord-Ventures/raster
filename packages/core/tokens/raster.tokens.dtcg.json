@@ -321,7 +321,7 @@
     "ease": {
       "$type": "duration",
       "$value": {
-        "value": 180,
+        "value": 200,
         "unit": "ms"
       },
       "$description": "--duration"
@@ -337,9 +337,9 @@
     "easing": {
       "$type": "cubicBezier",
       "$value": [
+        0.3,
+        0,
         0.2,
-        0,
-        0,
         1
       ],
       "$description": "--ease"

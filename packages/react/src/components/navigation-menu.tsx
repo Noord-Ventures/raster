@@ -53,7 +53,10 @@ const styles = stylex.create({
       '[aria-current="page"]': raster.ink,
     },
     textDecoration: "none",
-    transition: `color ${raster.durationSnap} ${raster.ease}`,
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
   },
 });
 

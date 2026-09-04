@@ -151,11 +151,11 @@ Every custom property `@noorddev/raster/css/tokens.css` defines, generated from 
 | `--gutter` | `20px` |  | `raster.gutter` |  |
 | `--pad` | `20px` |  | `raster.pad` |  |
 | `--radius-in` | `max(0px, calc(var(--radius) - var(--pad)))` |  | `raster.radiusIn` |  |
-| `--ease` | `cubic-bezier(0.2, 0, 0, 1)` |  | `raster.ease` |  |
+| `--ease` | `cubic-bezier(0.3, 0, 0.2, 1)` |  | `raster.ease` |  |
 | `--duration-snap` | `0.12s` |  | `raster.durationSnap` |  |
-| `--duration` | `0.18s` |  | `raster.duration` |  |
+| `--duration` | `0.2s` |  | `raster.duration` |  |
 | `--duration-confirm` | `0.16s` |  | `raster.durationConfirm` |  |
-| `--transition` | `background-color var(--duration) var(--ease), color var(--duration) var(--ease)` |  | `raster.transition` |  |
+| `--transition` | `background-color var(--duration) var(--ease), border-color var(--duration) var(--ease), color var(--duration) var(--ease), opacity var(--duration) var(--ease)` |  | `raster.transition` |  |
 | `--grid-image` | `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px)` |  | `raster.gridImage` |  |
 | `--grid-size` | `204px` |  | `raster.module` |  |
 | `--grid-pos` | `20px 0` |  | `raster.gridPos` |  |
@@ -288,11 +288,11 @@ The raw values from `rasterTokens` (`import { rasterTokens } from "@noorddev/ras
 
 | Key | Value |
 | --- | --- |
-| `duration` | `0.12–0.18s` |
+| `duration` | `0.12–0.2s` |
 | `snap` | `0.12s` |
-| `ease` | `0.18s` |
+| `ease` | `0.2s` |
 | `confirm` | `0.16s` |
-| `easing` | `cubic-bezier(0.2, 0, 0, 1)` |
+| `easing` | `cubic-bezier(0.3, 0, 0.2, 1)` |
 | `rule` | `A state the user caused may ease, snap with a short curve, or confirm. Entry is not a show. Color and opacity name the change; nothing bounces.` |
 | `reducedMotion` | `looping demos and unsolicited entry disabled under prefers-reduced-motion` |
 

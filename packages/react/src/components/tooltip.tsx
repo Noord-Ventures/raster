@@ -77,7 +77,10 @@ const styles = stylex.create({
       [stylex.when.ancestor(":focus-within")]: "auto",
     },
     // The delay is the leave grace: the pointer can cross onto the tip.
-    transition: `opacity ${raster.durationSnap} ${raster.ease} ${raster.durationSnap}, visibility ${raster.durationSnap} ${raster.ease} ${raster.durationSnap}`,
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     "::before": {
       content: '""',
       position: "absolute",

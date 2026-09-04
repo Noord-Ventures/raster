@@ -162,6 +162,10 @@ const styles = stylex.create({
     },
   },
   link: {
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     color: {
       default: raster.gray,
       ":link": raster.gray,

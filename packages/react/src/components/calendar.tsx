@@ -153,6 +153,10 @@ const styles = stylex.create({
     paddingInline: 0,
   },
   day: {
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     boxSizing: "border-box",
     width: "2.25rem",
     height: "2.25rem",
@@ -203,6 +207,10 @@ const styles = stylex.create({
     boxShadow: `inset 0 0 0 1px ${raster.divider}`,
   },
   selected: {
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     backgroundColor: {
       default: raster.ink,
       ":hover": raster.ink,

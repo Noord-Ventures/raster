@@ -52,6 +52,10 @@ const styles = stylex.create({
   },
   /* Ancestors are secondary gray at full opacity; the page carries weight. */
   link: {
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     color: {
       default: raster.gray,
       ":link": raster.gray,

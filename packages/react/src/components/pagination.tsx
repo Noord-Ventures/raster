@@ -27,6 +27,10 @@ const styles = stylex.create({
     },
   },
   page: {
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     boxSizing: "border-box",
     width: {
       default: "1.625rem",

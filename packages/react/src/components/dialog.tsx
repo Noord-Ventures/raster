@@ -107,6 +107,10 @@ export const dialogStyles = stylex.create({
   },
   /** Corner close button. Floats so the title wraps around it. */
   close: {
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     float: "inline-end",
     boxSizing: "border-box",
     display: "inline-flex",

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface FlowProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -42,7 +42,10 @@ const styles = stylex.create({
     paddingBottom: "1rem",
     paddingInlineStart: "0.875rem",
     backgroundColor: "var(--bg)",
-    transition: "border-color var(--duration-snap) var(--ease)",
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     "::after": {
       content: '""',
       position: "absolute",
@@ -150,7 +153,10 @@ const styles = stylex.create({
     backgroundColor: "transparent",
     width: 184,
     maxWidth: "100%",
-    transition: "border-color var(--duration-snap) var(--ease), color var(--duration-snap) var(--ease)",
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     fontFamily: "inherit",
     cursor: "pointer",
   },

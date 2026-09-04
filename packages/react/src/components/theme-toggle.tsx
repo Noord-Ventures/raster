@@ -15,6 +15,10 @@ export interface ThemeToggleProps
 
 const styles = stylex.create({
   toggle: {
+    transition: {
+      default: raster.transition,
+      [mq.reduce]: "none",
+    },
     position: "fixed",
     top: "1.5rem",
     insetInlineEnd: {

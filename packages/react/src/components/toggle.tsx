@@ -66,7 +66,7 @@ const styles = stylex.create({
     cursor: "pointer",
     fontFamily: "inherit",
     transition: {
-      default: `background-color ${raster.durationSnap} ${raster.ease}, color ${raster.durationSnap} ${raster.ease}, border-color ${raster.durationSnap} ${raster.ease}`,
+      default: raster.transition,
       [mq.reduce]: "none",
     },
     outlineWidth: {
