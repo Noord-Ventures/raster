@@ -249,6 +249,9 @@ if (!/@media \(min-width: 1440px\) \{\s*\.site-layout\.catalog-page \{[\s\S]*?--
 if (!/@media \(min-width: 1440px\) \{\s*\.site-layout\.catalog-page \{[\s\S]*?width:\s*calc\(100vw - 204px\)/.test(site)) {
   fail("Wide catalog must size from the remaining viewport so 796 two-up still fits");
 }
+if (!/@media \(min-width: 1440px\) \{\s*\.site-layout\.catalog-page \{[\s\S]*?padding-right:\s*12px/.test(site)) {
+  fail("Wide catalog must steal 8px from the right pad so 796 two-up still fits beside LEFT 204");
+}
 if (/data-rail="catalog"[\s\S]{0,160}--ml:\s*0px/.test(navCss)) {
   fail("Catalog rail must keep the live 204 inset; do not zero --ml for data-rail=catalog");
 }

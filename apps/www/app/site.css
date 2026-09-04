@@ -578,6 +578,10 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     margin-left: 204px;
     width: calc(100vw - 204px);
     max-width: none;
+    /* 1236 leftover minus 20 left pad + 388 rail + 20 gap is 808.
+       Keep left pad 20 so groups stay on 224. Steal 8px from the
+       right pad so the 796 two-up still fits. */
+    padding-right: 12px;
   }
 }
 
