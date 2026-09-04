@@ -19,7 +19,7 @@ export function SiteFooter() {
         </nav>
         <div className="site-footer-about">
           <p>
-            Raster is built and designed in the north by <a href="https://noord.dev">Noord</a>.
+            Raster is designed and built <a href="https://noord.dev">in the north</a> by <a href="https://renatovaldes.com">Renn</a>.
           </p>
           <p>Inspired by the International Typographic Style.</p>
           <p>Free and open source under the MIT license.</p>
