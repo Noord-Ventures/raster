@@ -40,6 +40,28 @@ function luminanceSpread(hex: string): number {
   return Math.max(r, g, b) - Math.min(r, g, b);
 }
 
+function rgb(hex: string): [number, number, number] {
+  return [1, 3, 5].map((i) => Number.parseInt(hex.slice(i, i + 2), 16)) as [number, number, number];
+}
+
+function relativeLuminance(color: [number, number, number]): number {
+  const linear = color.map((channel) => {
+    const value = channel / 255;
+    return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+  });
+  return linear[0]! * 0.2126 + linear[1]! * 0.7152 + linear[2]! * 0.0722;
+}
+
+function contrast(foreground: [number, number, number], background: [number, number, number]): number {
+  const a = relativeLuminance(foreground);
+  const b = relativeLuminance(background);
+  return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+}
+
+function composite(ink: [number, number, number], ground: [number, number, number], alpha: number): [number, number, number] {
+  return ink.map((channel, i) => channel * alpha + ground[i]! * (1 - alpha)) as [number, number, number];
+}
+
 beforeAll(() => {
   // The generated CSS is committed; CI checks it is in sync with the sources
   // (build, then git diff --exit-code). Tests never write into the tree.
@@ -60,6 +82,32 @@ describe("generated vlak.css", () => {
     expect(vlakCss).toContain(`--bg: ${vlakTokens.color.dark.black}`);
     expect(vlakCss).toContain(`--radius-sm: ${vlakTokens.radius.small}px`);
     expect(vlakCss).toContain(`--grid-size: ${vlakTokens.grid.module}px`);
+    expect(vlakCss).toContain(`--duration-snap: ${vlakTokens.motion.response}`);
+    expect(vlakCss).toContain(`--duration-deliberate: ${vlakTokens.motion.deliberate}`);
+  });
+
+  it("encodes the interaction and reading budgets", () => {
+    expect(vlakTokens.performance.frame).toMatchObject({ hz120: 8.3, hz60: 16.7 });
+    expect(vlakTokens.performance.responseInstant.max).toBe(100);
+    expect(vlakTokens.performance.thoughtInterruption.at).toBe(1000);
+    expect(vlakTokens.performance.attentionLoss.at).toBe(10000);
+    expect(vlakTokens.control.desktop.hit).toBeGreaterThanOrEqual(44);
+    expect(vlakTokens.control.desktop.height).toBeGreaterThanOrEqual(44);
+    expect(vlakTokens.type.measure.minCharacters).toBe(45);
+    expect(vlakTokens.type.measure.maxCharacters).toBe(90);
+    expect(vlakTokens.type.bodyLineHeight).toBeGreaterThanOrEqual(1.2);
+    expect(vlakTokens.type.bodyLineHeight).toBeLessThanOrEqual(1.45);
+    expect(vlakTokens.accessibility.contrast.ordinaryText).toBe(4.5);
+    expect(vlakTokens.accessibility.contrast.largeText).toBe(3);
+  });
+
+  it("meets the contrast floors in both themes", () => {
+    const lightGround = rgb(vlakTokens.color.light.paper);
+    const darkGround = rgb(vlakTokens.color.dark.black);
+    expect(contrast(rgb(vlakTokens.color.light.gray), lightGround)).toBeGreaterThanOrEqual(4.5);
+    expect(contrast(rgb(vlakTokens.color.dark.gray), darkGround)).toBeGreaterThanOrEqual(4.5);
+    expect(contrast(composite([0, 0, 0], lightGround, 0.42), lightGround)).toBeGreaterThanOrEqual(3);
+    expect(contrast(composite([255, 255, 255], darkGround, 0.38), darkGround)).toBeGreaterThanOrEqual(3);
   });
 
   it("defaults to bundled Inter, with system sans as fallback only", () => {

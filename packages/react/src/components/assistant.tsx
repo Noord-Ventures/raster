@@ -67,7 +67,7 @@ const styles = stylex.create({
   },
   reply: {
     fontSize: "0.84375rem",
-    lineHeight: 1.6,
+    lineHeight: 1.45,
     color: "var(--text)",
     letterSpacing: "-0.01em",
     margin: 0,
@@ -98,7 +98,7 @@ const styles = stylex.create({
   text: {
     fontSize: "0.8125rem",
     color: "var(--text)",
-    lineHeight: 1.5,
+    lineHeight: 1.45,
     margin: 0,
   },
   done: {

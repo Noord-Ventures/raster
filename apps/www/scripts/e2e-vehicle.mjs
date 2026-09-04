@@ -1,91 +1,145 @@
-// SITE_URL=http://localhost:3100 node scripts/e2e-vehicle.mjs
+// Network integration checks for the actual licensed Vehicle embed.
+// Build and serve the site first, then:
+// SITE_URL=http://localhost:3100 PLAYWRIGHT_EXECUTABLE_PATH=/path/to/chrome node apps/www/scripts/e2e-vehicle.mjs
 import assert from "node:assert/strict";
+import { mkdtemp } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { chromium } from "playwright";
 
-const base = process.env.SITE_URL || "http://localhost:3000";
-const browser = await chromium.launch({
-  ...(process.env.PLAYWRIGHT_EXECUTABLE_PATH ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH } : {}),
-});
-try {
-  const page = await browser.newPage({ colorScheme: "dark", reducedMotion: "reduce" });
-  const errors = [];
-  page.on("pageerror", error => errors.push(error.message));
-  for (const width of [320, 390, 768, 1024, 1440, 2082]) {
-    await page.setViewportSize({ width, height: 1000 });
-    await page.goto(base + "/interfaces/drive/", { waitUntil: "networkidle" });
-    const geometry = await page.evaluate(() => ({
-      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      sceneOverflow: document.querySelector(".cx-drive").scrollWidth - document.querySelector(".cx-drive").clientWidth,
-      image: document.querySelector(".cx-ev-illustration img").naturalWidth,
-      blend: getComputedStyle(document.querySelector(".cx-ev-illustration img")).mixBlendMode,
-      isolatedImage: getComputedStyle(document.querySelector(".cx-ev-illustration")).isolation,
-      smallTargets: Array.from(document.querySelectorAll(".cx-drive button")).filter(button => {
-        const box = button.getBoundingClientRect();
-        return box.width < 44 || box.height < 44;
-      }).map(button => button.getAttribute("aria-label") || button.textContent),
-      clippedModes: Array.from(document.querySelectorAll(".cx-ev-modes button")).filter(button => {
-        const box = button.getBoundingClientRect();
-        const group = button.parentElement.getBoundingClientRect();
-        return box.bottom > group.bottom - 1 || box.top < group.top + 1;
-      }).map(button => button.textContent),
-      specimenHeight: document.querySelector(".if-specimen").getBoundingClientRect().height,
-      cards: Array.from(document.querySelectorAll(".cx-ev-card"), card => {
-        const box = card.getBoundingClientRect();
-        const label = card.querySelector(".rs-card-label").getBoundingClientRect();
-        const content = card.querySelector(".cx-ev-card-content").getBoundingClientRect();
-        const style = getComputedStyle(card);
-        return {
-          visible: getComputedStyle(card).display !== "none",
-          inset: [label.left - box.left, label.top - box.top, content.left - box.left, box.bottom - content.bottom - parseFloat(style.borderBottomWidth)],
-          padding: [parseFloat(style.paddingLeft), parseFloat(style.paddingTop), parseFloat(style.paddingLeft), parseFloat(style.paddingBottom)],
-          gap: card.querySelector(".cx-ev-card-content").firstElementChild.getBoundingClientRect().top - label.bottom,
-          overflow: card.scrollWidth - card.clientWidth,
-        };
-      }),
-    }));
-    assert(geometry.overflow <= 1 && geometry.sceneOverflow <= 1, `${width}px: horizontal overflow`);
-    assert(geometry.image > 1000 && geometry.blend === "screen", "Redrawn artwork must load and blend");
-    assert.equal(geometry.isolatedImage, "auto", "Artwork must blend with the scene, not an isolated transparent wrapper");
-    assert.deepEqual(geometry.smallTargets, [], `${width}px: controls must have 44px targets`);
-    assert.deepEqual(geometry.clippedModes, [], `${width}px: mode controls must fit inside their frame`);
-    assert.equal(geometry.specimenHeight, width <= 640 ? 680 : 720);
-    assert.equal(geometry.cards.length, 4);
-    geometry.cards.forEach((card, index) => {
-      assert(card.visible && card.overflow <= 1, `${width}px card ${index}: hidden or overflowing`);
-      card.inset.forEach((inset, i) => assert(Math.abs(inset - card.padding[i]) <= 1, `${width}px card ${index}: inset ${i} is ${inset}, expected ${card.padding[i]}`));
-      assert(card.gap >= 8, `${width}px card ${index}: label and content are crowded`);
+const base = (process.env.SITE_URL ?? "http://localhost:3100").replace(/\/$/, "");
+const artifacts = await mkdtemp(join(tmpdir(), "vlak-vehicle-"));
+const browser = await chromium.launch(
+  process.env.PLAYWRIGHT_EXECUTABLE_PATH ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH } : undefined,
+);
+const distance = (a, b) => Math.hypot(...a.map((value, index) => value - b[index]));
+const radius = (camera) => distance(camera.position, camera.target);
+const errors = [];
+
+async function openViewer(page) {
+  await page.goto(base + "/interfaces/render/", { waitUntil: "domcontentloaded" });
+  await page.locator(".cx-render").scrollIntoViewIfNeeded();
+}
+async function ready(page) {
+  await page.waitForSelector('[data-viewer-status="ready"]', { timeout: 60000 });
+}
+async function inspect(page, method) {
+  return page.evaluate((name) => new Promise((resolve, reject) => {
+    const timeout = setTimeout(() => reject(new Error("Viewer API response timed out: " + name)), 10000);
+    window.vehicleQaApi[name]((error, value) => {
+      clearTimeout(timeout);
+      if (error) reject(new Error(String(error)));
+      else resolve(value);
     });
-    await page.locator(".if-study").screenshot({ path: `/tmp/vlak-drive-${width}.png` });
-    console.log(`${width}px: vehicle image, four cards, insets and overflow passed`);
-  }
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto(base + "/interfaces/drive/", { waitUntil: "networkidle" });
-  await page.getByRole("button", { name: "Journey", exact: true }).click();
-  await page.getByRole("button", { name: "Start route", exact: true }).click();
-  assert(await page.getByText("355 km after arrival", { exact: true }).isVisible());
-  await page.getByRole("button", { name: "Energy", exact: true }).click();
-  await page.getByRole("button", { name: "Schedule charge", exact: true }).click();
-  assert(await page.getByText("Charge scheduled for 23:00", { exact: true }).isVisible());
-  await page.getByRole("button", { name: "Vehicle", exact: true }).click();
-  await page.getByRole("button", { name: "Locked", exact: true }).click();
-  assert(await page.getByText("Vehicle unlocked", { exact: true }).isVisible());
-  await page.getByRole("button", { name: "Lights off", exact: true }).click();
-  assert.equal(await page.locator(".cx-ev-illustration").getAttribute("data-lights"), "true");
-  await page.getByRole("button", { name: "Raise temperature", exact: true }).click();
-  assert.equal(await page.locator(".cx-ev-temperature strong").textContent(), "21°");
-  assert.equal(await page.locator(".cx-ev-track").innerText(), "Fortress Down\nLoathe");
-  await page.getByRole("button", { name: "Pause playback", exact: true }).click();
-  assert.equal(await page.locator(".cx-drive").getAttribute("data-playing"), "false");
-  await page.getByRole("button", { name: "Restart track", exact: true }).click();
-  assert.equal(await page.getByRole("progressbar", { name: "Track progress", exact: true }).getAttribute("aria-valuenow"), "0");
-  await page.getByRole("button", { name: "Skip ahead", exact: true }).click();
-  assert.equal(await page.getByRole("progressbar", { name: "Track progress", exact: true }).getAttribute("aria-valuenow"), "10");
-  await page.getByRole("button", { name: "Disconnect Mara’s phone", exact: true }).click();
-  assert(await page.getByRole("button", { name: "Resume playback", exact: true }).isDisabled());
-  await page.getByRole("button", { name: "Connect Mara’s phone", exact: true }).click();
-  assert(await page.getByRole("button", { name: "Resume playback", exact: true }).isEnabled());
-  assert.deepEqual(errors, []);
-  console.log("Vehicle controls passed: views, route, charge, locks, lights, climate, media and connectivity");
+  }), method);
+}
+
+try {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1100 } });
+  page.on("pageerror", (error) => errors.push(error.message));
+  // Capture the public API returned to the app without adding test hooks to
+  // production code or reading private state inside the cross-origin viewer.
+  await page.addInitScript(() => {
+    let viewerConstructor;
+    Object.defineProperty(window, "Sketchfab", {
+      configurable: true,
+      get: () => viewerConstructor,
+      set(value) {
+        viewerConstructor = value;
+        const original = value.prototype.init;
+        value.prototype.init = function (id, options) {
+          return original.call(this, id, { ...options, success(api) {
+            window.vehicleQaApi = api;
+            options.success(api);
+          } });
+        };
+      },
+    });
+  });
+  await openViewer(page);
+  await ready(page);
+  assert.match(await page.locator(".cx-vehicle-frame").getAttribute("src"), /034600db0cc94d64a7f3ccb19c7799fa/);
+  await page.getByRole("button", { name: "Pause turntable", exact: true }).click();
+  await page.getByRole("button", { name: "Reset camera", exact: true }).click();
+  await page.waitForTimeout(500);
+  const home = await inspect(page, "getCameraLookAt");
+  await page.waitForTimeout(400);
+  assert.ok(distance(home.position, (await inspect(page, "getCameraLookAt")).position) < 0.000001, "Paused camera must stay still");
+
+  const initialPaint = (await inspect(page, "getMaterialList")).find((item) => item.name === "Carro_Pintura").channels.AlbedoPBR.color;
+  await page.locator(".cx-render").screenshot({ path: join(artifacts, "clay-desktop.png") });
+  await page.getByRole("button", { name: "Warm clay", exact: false }).click();
+  await page.waitForTimeout(300);
+  const graphitePaint = (await inspect(page, "getMaterialList")).find((item) => item.name === "Carro_Pintura").channels.AlbedoPBR.color;
+  assert.ok(graphitePaint.reduce((a, b) => a + b, 0) < initialPaint.reduce((a, b) => a + b, 0), "Graphite must darken the actual paint material");
+  await page.getByRole("button", { name: "Show mesh", exact: true }).click();
+  await page.waitForTimeout(1400);
+  assert.equal((await inspect(page, "getWireframe")).enabled, true);
+  await page.locator(".cx-render").screenshot({ path: join(artifacts, "mesh-desktop.png") });
+  await page.getByRole("button", { name: "Show mesh", exact: true }).click();
+  await page.waitForTimeout(200);
+  assert.equal((await inspect(page, "getWireframe")).enabled, false);
+
+  await page.getByRole("button", { name: "Play turntable", exact: true }).click();
+  await page.mouse.move(0, 0);
+  await page.waitForTimeout(650);
+  assert.ok(distance(home.position, (await inspect(page, "getCameraLookAt")).position) > 0.05, "Turntable must move the actual model camera");
+  await page.getByRole("button", { name: "Pause turntable", exact: true }).click();
+  await page.getByRole("button", { name: "Reset camera", exact: true }).click();
+  await page.waitForTimeout(500);
+  assert.ok(distance(home.position, (await inspect(page, "getCameraLookAt")).position) < 0.00001, "Reset must restore the fitted starting view");
+
+  const layout = await page.evaluate(() => {
+    const frame = document.querySelector(".cx-vehicle-frame").getBoundingClientRect();
+    const credit = document.querySelector(".cx-vehicle-credit").getBoundingClientRect();
+    const timeline = document.querySelector(".cx-timeline").getBoundingClientRect();
+    return { creditBelowFrame: credit.top >= frame.bottom, timelineBelowCredit: timeline.top >= credit.bottom, overflow: document.documentElement.scrollWidth - innerWidth };
+  });
+  assert.equal(layout.creditBelowFrame, true, "Credit must not cover the native viewer");
+  assert.equal(layout.timelineBelowCredit, true, "Turntable must not cover native controls or credit");
+  assert.equal(layout.overflow, 0);
+  const smallTargets = await page.evaluate(() => [...document.querySelectorAll(".cx-render button, .cx-render a[href]")]
+    .filter((element) => element.getClientRects().length)
+    .map((element) => ({ label: element.getAttribute("aria-label") ?? element.textContent.trim(), width: element.getBoundingClientRect().width, height: element.getBoundingClientRect().height }))
+    .filter((target) => target.width < 44 || target.height < 44));
+  assert.deepEqual(smallTargets, [], "Workspace controls and credit links must have 44px targets");
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.waitForTimeout(250);
+  assert.equal(await page.getByRole("button", { name: "Play turntable", exact: true }).isDisabled(), true);
+  assert.match(await page.locator(".cx-timeline").innerText(), /Reduced motion/);
+  await page.locator(".cx-live-model").focus();
+  await page.keyboard.press("ArrowRight");
+  await page.waitForTimeout(300);
+  assert.ok(distance(home.position, (await inspect(page, "getCameraLookAt")).position) > 0.05, "Arrow key must orbit the real camera");
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.locator(".cx-render").scrollIntoViewIfNeeded();
+  await page.waitForTimeout(600);
+  const portraitCamera = await inspect(page, "getCameraLookAt");
+  assert.ok(radius(portraitCamera) > radius(home) * 1.1, "Portrait resize must refit the model instead of cropping it");
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0);
+  await page.locator(".cx-render").screenshot({ path: join(artifacts, "graphite-phone.png") });
+  await page.waitForTimeout(400);
+  assert.ok(distance(portraitCamera.position, (await inspect(page, "getCameraLookAt")).position) < 0.00001, "Resize fitting must settle");
+  assert.deepEqual(errors, [], "The integrated page should not emit JavaScript errors");
+  await page.close();
+
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+  const unavailable = await context.newPage();
+  await context.route("**/sketchfab-viewer-*.js", (route) => route.abort("internetdisconnected"));
+  await openViewer(unavailable);
+  await unavailable.waitForSelector('[data-viewer-status="error"]', { timeout: 15000 });
+  assert.match(await unavailable.locator(".cx-vehicle-status").innerText(), /internet connection and WebGL/);
+  assert.equal(await unavailable.getByRole("button", { name: "Show mesh", exact: true }).isDisabled(), true);
+  await unavailable.locator(".cx-render").screenshot({ path: join(artifacts, "offline-fallback.png") });
+  await context.unroute("**/sketchfab-viewer-*.js");
+  await unavailable.getByRole("button", { name: "Retry viewer", exact: true }).click();
+  await ready(unavailable);
+  assert.equal(await unavailable.getByRole("button", { name: "Show mesh", exact: true }).isEnabled(), true);
+  await context.close();
+  console.log("Vehicle integration passed: real camera, paint, wireframe, responsive fit, reduced motion, offline fallback and retry");
+  console.log("Screenshots: " + artifacts);
 } finally {
   await browser.close();
 }

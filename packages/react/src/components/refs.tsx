@@ -45,7 +45,7 @@ const styles = stylex.create({
     paddingBottom: "0.625rem",
     fontSize: "0.8125rem",
     fontWeight: 500,
-    lineHeight: 1.65,
+    lineHeight: 1.45,
     color: vlak.gray,
     letterSpacing: "-0.01em",
     borderBottomWidth: vlak.hairline,
@@ -116,7 +116,7 @@ const styles = stylex.create({
     fontSize: "0.8125rem",
     fontWeight: 500,
     color: vlak.gray,
-    lineHeight: 1.7,
+    lineHeight: 1.45,
     userSelect: "all",
   },
 });

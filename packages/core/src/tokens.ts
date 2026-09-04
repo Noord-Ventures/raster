@@ -65,16 +65,17 @@ export const vlakTokens = {
       url: "https://rsms.me/inter/",
     },
     weights: { body: 500, heading: 600, label: 600 },
-    bodyLineHeight: 1.6,
-    measure: { columns: 3, px: 592, characters: 66 },
+    bodyLineHeight: 1.45,
+    lineHeight: { min: 1.2, max: 1.45 },
+    measure: { columns: 3, px: 592, characters: 66, minCharacters: 45, maxCharacters: 90 },
     caseRule: "Never all caps; labels and eyebrows are sentence case.",
     textScale: { default: 1, steps: [0.9, 1, 1.1, 1.25, 1.4], rule: "Reading type only; chrome stays put." },
     scale: [
       { name: "displayXl", px: 52, weight: 600, tracking: "-0.035em", lineHeight: 1.05 },
       { name: "display", px: 38, weight: 600, tracking: "-0.03em", lineHeight: 1.15 },
       { name: "title", px: 22, weight: 600, tracking: "-0.02em", lineHeight: 1.3 },
-      { name: "subhead", px: 17, weight: 500, tracking: "-0.01em", lineHeight: 1.5 },
-      { name: "body", px: 15, weight: 500, tracking: "-0.01em", lineHeight: 1.6 },
+      { name: "subhead", px: 17, weight: 500, tracking: "-0.01em", lineHeight: 1.45 },
+      { name: "body", px: 15, weight: 500, tracking: "-0.01em", lineHeight: 1.45 },
       { name: "label", px: 13, weight: 600, tracking: "-0.01em", lineHeight: 1.3 },
     ],
   },
@@ -119,13 +120,31 @@ export const vlakTokens = {
     rule: "1px currentColor hairline, butt/miter, no rx, no fill; draw at 12 or 16",
   },
   motion: {
-    duration: "0.12–0.2s",
-    snap: "0.12s",
+    duration: "0.1–0.4s",
+    response: "0.1s",
+    snappy: "0.2s",
+    deliberate: "0.4s",
+    /** Compatibility alias for response. */
+    snap: "0.1s",
+    /** Compatibility alias for snappy transitions. */
     ease: "0.2s",
-    confirm: "0.16s",
+    /** Confirmation entrances should read as deliberate, at the low end of the range. */
+    confirm: "0.3s",
     easing: "cubic-bezier(0.3, 0, 0.2, 1)",
     rule: "A state the user caused may ease, snap with a short curve, or confirm. Entry is not a show. Color and opacity name the change; nothing bounces.",
     reducedMotion: "looping demos and unsolicited entry disabled under prefers-reduced-motion",
+  },
+  performance: {
+    frame: { hz120: 8.3, hz60: 16.7, unit: "ms" },
+    responseInstant: { max: 100, unit: "ms" },
+    thoughtInterruption: { at: 1000, unit: "ms" },
+    attentionLoss: { at: 10000, unit: "ms" },
+    rule: "A response lands within 100ms. Keep each frame under its refresh-rate budget. At 1s show progress without stealing focus; before 10s explain the wait and preserve the user's place.",
+  },
+  accessibility: {
+    contrast: { ordinaryText: 4.5, largeText: 3, controls: 3 },
+    touchTarget: { width: 44, height: 44, unit: "px" },
+    rule: "Ordinary text is at least 4.5:1, large text and control boundaries are at least 3:1, and interactive targets are at least 44px by 44px.",
   },
   breakpoints: { mobileGrid: 480, mobileLayout: 640, rail: 1024, wide: 1440, cap: 1700 },
   /** Stacking scale. Native <dialog> and popover live in the top layer and need none of it. */
@@ -137,9 +156,9 @@ export const vlakTokens = {
     toast: 400,
     rule: "raised: a handle or thumb over its track. sticky: pinned chrome. float: menus, tooltips, hover cards, chart tooltips. overlay: the fixed fallback of a panel that has no top layer. toast: above everything.",
   },
-  /** Desktop stays the Vlak poster. Phone (≤640) is a 44pt control scale. */
+  /** A 44px minimum on every viewport. Phone increases field type to avoid zoom. */
   control: {
-    desktop: { hit: 40, height: 40, font: 14, label: 12 },
+    desktop: { hit: 44, height: 44, font: 14, label: 12 },
     phone: { hit: 44, height: 44, font: 16, label: 15 },
     breakpoint: 640,
   },

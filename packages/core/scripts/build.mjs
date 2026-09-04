@@ -63,6 +63,7 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --ease: ${motion.easing};
   --duration-snap: ${motion.snap};
   --duration: ${motion.ease};
+  --duration-deliberate: ${motion.deliberate};
   --duration-confirm: ${motion.confirm};
   /* The hover transition every control shares: fill, edge, ink, opacity. */
   --transition: background-color var(--duration) var(--ease), border-color var(--duration) var(--ease), color var(--duration) var(--ease), opacity var(--duration) var(--ease);
@@ -82,7 +83,7 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --rs-gap: var(--pad);
   --rs-in: var(--radius-in);
   --rs-chart-spot: var(--text);
-  /* Control scale. Desktop is the poster; ≤640 recuts every control to 44pt. */
+  /* Control scale. Every interactive target is at least 44px; phone fields use 16px type. */
   --hit: ${control.desktop.hit / 16}rem;
   --control-h: ${control.desktop.height / 16}rem;
   --control-fs: ${control.desktop.font / 16}rem;
@@ -104,7 +105,7 @@ ${darkBlock(':root:not([data-theme="light"])')}
     --grid-pos:0 0;
   }
 }
-/* Phone control scale (≤${control.breakpoint}): 44pt hits, 16px type on fields. */
+/* Phone control scale (≤${control.breakpoint}): keep 44px hits and use 16px type on fields. */
 @media(max-width:${control.breakpoint}px){
   :root{
     --hit:${control.phone.hit / 16}rem;
@@ -182,6 +183,9 @@ const dtcg = {
       .map(([k, v]) => [k, { $type: "number", $value: v, $description: `--z-${k}` }]),
   ),
   motion: {
+    response: { $type: "duration", $value: { value: Number.parseFloat(motion.response) * 1000, unit: "ms" } },
+    snappy: { $type: "duration", $value: { value: Number.parseFloat(motion.snappy) * 1000, unit: "ms" } },
+    deliberate: { $type: "duration", $value: { value: Number.parseFloat(motion.deliberate) * 1000, unit: "ms" }, $description: "--duration-deliberate" },
     snap: { $type: "duration", $value: { value: Number.parseFloat(motion.snap) * 1000, unit: "ms" }, $description: "--duration-snap" },
     ease: { $type: "duration", $value: { value: Number.parseFloat(motion.ease) * 1000, unit: "ms" }, $description: "--duration" },
     confirm: { $type: "duration", $value: { value: Number.parseFloat(motion.confirm) * 1000, unit: "ms" }, $description: "--duration-confirm" },
@@ -190,6 +194,13 @@ const dtcg = {
       $value: motion.easing.match(/-?[\d.]+/g).map(Number),
       $description: "--ease",
     },
+  },
+  performance: {
+    "frame-120hz": { $type: "duration", $value: { value: vlakTokens.performance.frame.hz120, unit: "ms" } },
+    "frame-60hz": { $type: "duration", $value: { value: vlakTokens.performance.frame.hz60, unit: "ms" } },
+    "response-instant": { $type: "duration", $value: { value: vlakTokens.performance.responseInstant.max, unit: "ms" } },
+    "thought-interruption": { $type: "duration", $value: { value: vlakTokens.performance.thoughtInterruption.at, unit: "ms" } },
+    "attention-loss": { $type: "duration", $value: { value: vlakTokens.performance.attentionLoss.at, unit: "ms" } },
   },
   font: {
     family: { $type: "fontFamily", $value: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "system-ui", "sans-serif"] },

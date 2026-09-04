@@ -84,6 +84,9 @@ Every component applies its styles through `rs([...classes], styles.leaf)`: the 
 
 Conventions that hold across the catalogue:
 
+- Performance: a frame has 8.3ms at 120Hz or 16.7ms at 60Hz. User feedback lands within 100ms. Snappy transitions take 200–300ms; deliberate transitions take 300–500ms. At 1s, show progress without stealing focus. Before 10s, explain the wait and preserve the user's place.
+- Accessibility: interactive targets are at least 44px by 44px. Ordinary text is at least 4.5:1 against its ground; large text and control boundaries are at least 3:1.
+- Reading: body copy stays between 45 and 90 characters per line, with 66 characters as the default measure. Body line-height stays between 1.2 and 1.45 times its font size; Vlak defaults to 1.45.
 - Controlled and uncontrolled: `value` / `defaultValue` / `onValueChange` (Select, Combobox, Tabs, RadioGroup, ToggleGroup, Slider, Calendar, DatePicker); `checked` / `defaultChecked` / `onCheckedChange` (Switch); `pressed` / `defaultPressed` / `onPressedChange` (Toggle); `open` / `onClose` (Dialog, AlertDialog, Sheet, Drawer, CommandDialog). Checkbox and Radio are native inputs and use `checked` / `onChange`.
 - `className` and `style` merge with the component's own; native attributes and event handlers pass through to the root element (the props tables say which attribute set each component extends).
 - Refs: 147 of 148 exported components forward `ref` to their root element; each props table names the element (`ref` in props.json). The rest render a plain element and take no ref.

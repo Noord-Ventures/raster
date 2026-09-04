@@ -44,7 +44,7 @@ const styles = stylex.create({
       default: "0.8125rem",
       [mq.phone]: "0.9375rem",
     },
-    lineHeight: 1.55,
+    lineHeight: 1.45,
     letterSpacing: "-0.01em",
     color: vlak.gray,
     opacity: {

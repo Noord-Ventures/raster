@@ -32,7 +32,7 @@ const styles = stylex.create({
   body: {
     margin: 0,
     fontSize: "0.84375rem",
-    lineHeight: 1.55,
+    lineHeight: 1.45,
     letterSpacing: "-0.01em",
     color: vlak.gray,
   },

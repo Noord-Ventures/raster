@@ -52,7 +52,7 @@ const styles = stylex.create({
   },
   body: {
     fontSize: "0.8125rem",
-    lineHeight: 1.55,
+    lineHeight: 1.45,
     letterSpacing: "-0.01em",
     color: vlak.gray,
     marginTop: 2,

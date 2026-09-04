@@ -95,7 +95,7 @@ const styles = stylex.create({
   },
   body: {
     fontSize: "0.78125rem",
-    lineHeight: 1.55,
+    lineHeight: 1.45,
     color: vlak.gray,
     letterSpacing: "-0.005em",
     margin: 0,

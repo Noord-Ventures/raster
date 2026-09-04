@@ -10,7 +10,7 @@
 @media (prefers-reduced-motion: reduce){.rs-flow-step{transition:none}}
 .rs-flow-num{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:1.875rem;height:1.875rem;border-radius:50%;border-width:1px;border-style:solid;border-color:var(--divider);background-color:var(--bg);font-size:0.8125rem;font-weight:600;font-variant-numeric:tabular-nums;color:var(--text);margin-bottom:0.875rem}
 .rs-flow-title{display:inline-block;font-size:0.90625rem;font-weight:600;letter-spacing:-0.01em;color:var(--text);border-bottom-width:1px;border-bottom-style:dashed;border-bottom-color:var(--divider);padding-bottom:1px;margin-top:0;margin-bottom:0.5rem;margin-inline-start:0;margin-inline-end:0}
-.rs-flow-body{font-size:0.78125rem;line-height:1.55;color:var(--text-secondary);letter-spacing:-0.005em;margin:0}
+.rs-flow-body{font-size:0.78125rem;line-height:1.45;color:var(--text-secondary);letter-spacing:-0.005em;margin:0}
 .rs-flow-subs{display:flex;flex-wrap:wrap;gap:0.3125rem;margin-top:0.6875rem}
 .rs-flow-sub,.rs-flow-sub-add{font-size:0.6875rem;line-height:1;padding-block:0.1875rem;padding-inline:0.4375rem;border-width:1px;border-style:dashed;border-color:var(--divider);border-radius:var(--radius-sm);color:var(--text-secondary);letter-spacing:-0.005em}
 .rs-flow-sub-add{width:1.125rem;padding-top:0.1875rem;padding-bottom:0.1875rem;padding-inline-start:0;padding-inline-end:0;text-align:center;opacity:0.7}

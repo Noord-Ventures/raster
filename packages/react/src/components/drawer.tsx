@@ -59,7 +59,7 @@ const styles = stylex.create({
       default: "0.84375rem",
       [mq.phone]: "1rem",
     },
-    lineHeight: 1.6,
+    lineHeight: 1.45,
     letterSpacing: "-0.01em",
     color: vlak.gray,
     margin: 0,

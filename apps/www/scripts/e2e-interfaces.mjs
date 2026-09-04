@@ -60,7 +60,7 @@ try {
         if (layout.clippedBuildActions.length) failures.push(`${width}px ${route}: clipped build actions: ${layout.clippedBuildActions.join(", ")}`);
         if (layout.controlRadii.some(radius => radius !== "4px")) failures.push(`${width}px ${route}: generator controls lost their 4px radius`);
         if (layout.clippedFormats.length) failures.push(`${width}px ${route}: clipped format labels: ${layout.clippedFormats.join(", ")}`);
-        layout.links.forEach(href => componentLinks.add(href));
+        layout.links.forEach(href => { componentLinks.add(href); });
       }
       console.log(`${scheme} ${width}px: checked gallery and twelve studies`);
     }
@@ -94,6 +94,33 @@ try {
     const response = await page.request.get(base + href);
     if (!response.ok()) failures.push(`${href}: component link HTTP ${response.status()}`);
   }
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto(base + "/interfaces/drive/", { waitUntil: "networkidle" });
+  const valueTops = await page.locator(".cx-ev-panels .cx-ev-value").evaluateAll(elements => elements.map(element => Math.round(element.getBoundingClientRect().top)));
+  assert.equal(new Set(valueTops).size, 1, `EV values should share one baseline, got ${valueTops.join(", ")}`);
+  const temperatureControls = await page.locator(".cx-ev-temp-controls button").evaluateAll(elements => elements.map(element => {
+    const box = element.getBoundingClientRect();
+    return { top: box.top, left: box.left };
+  }));
+  assert.equal(temperatureControls.length, 2);
+  assert(temperatureControls[1].top > temperatureControls[0].top, "Temperature controls should stack vertically");
+  assert.equal(temperatureControls[0].left, temperatureControls[1].left, "Temperature controls should share a right edge");
+  await page.getByRole("button", { name: "Journey", exact: true }).click();
+  assert(await page.locator(".cx-ev-journey-map").isVisible(), "Journey should show its perspective map HUD");
+  await page.getByRole("button", { name: "Start route", exact: true }).click();
+  assert(await page.getByRole("button", { name: "End route", exact: true }).isVisible(), "Journey route action should update immediately");
+  await page.getByRole("button", { name: "Energy", exact: true }).click();
+  assert(await page.locator(".cx-ev-energy-cutaway").isVisible(), "Energy should show the vehicle battery cutaway");
+  assert.equal(await page.locator(".cx-ev-battery-pack i[data-charged='true']").count(), 10);
+  assert.equal(await page.getByRole("group", { name: "Playback controls" }).count(), 1, "Playback should use the Vlak Button group");
+  await page.goto(base + "/interfaces/platforms/", { waitUntil: "networkidle" });
+  const platformFonts = await page.evaluate(() => ({
+    ios: getComputedStyle(document.querySelector(".cx-phone.ios")).fontFamily,
+    android: getComputedStyle(document.querySelector(".cx-phone.android")).fontFamily,
+  }));
+  assert.match(platformFonts.ios, /-apple-system|SF Pro Display|Inter/);
+  assert.match(platformFonts.android, /Roboto|Noto Sans/);
+  console.log("EV HUDs, aligned controls, standard playback group, and platform fonts passed");
   await page.evaluate(() => Object.defineProperty(navigator.clipboard, "writeText", { configurable: true, value: () => Promise.reject(new Error("denied")) }));
   await page.locator(".if-install .if-copy-action button").click();
   assert(await page.getByRole("status").filter({ hasText: "Clipboard unavailable" }).isVisible(), "Clipboard failure should expose copyable text");

@@ -7,10 +7,10 @@
 .rs-ai-msg{display:flex;width:100%}
 .rs-ai-user{justify-content:flex-end}
 .rs-ai-user-block{background-color:var(--table-alt);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);padding-top:0.625rem;padding-bottom:0.625rem;padding-inline-start:0.875rem;padding-inline-end:0.875rem;font-size:0.84375rem;color:var(--text);letter-spacing:-0.01em;max-width:85%}
-.rs-ai-reply{font-size:0.84375rem;line-height:1.6;color:var(--text);letter-spacing:-0.01em;margin:0}
+.rs-ai-reply{font-size:0.84375rem;line-height:1.45;color:var(--text);letter-spacing:-0.01em;margin:0}
 .rs-ai-card{border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);padding:0.875rem;display:flex;flex-direction:column;align-items:flex-start}
 .rs-ai-tag{font-size:0.65625rem;font-weight:600;letter-spacing:0.02em;color:var(--text);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);padding-block:2px;padding-inline:0.5rem;margin-bottom:0.625rem}
-.rs-ai-text{font-size:0.8125rem;color:var(--text);line-height:1.5;margin:0}
+.rs-ai-text{font-size:0.8125rem;color:var(--text);line-height:1.45;margin:0}
 .rs-ai-done{display:flex;align-items:baseline;gap:0.5rem;margin-top:0.75rem;font-size:0.78125rem;line-height:1.45;color:var(--text-secondary)}
 .rs-ai-input{margin-top:2px;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);background-color:var(--bg);padding-top:0.625rem;padding-bottom:0.625rem;padding-inline-start:0.75rem;padding-inline-end:0.75rem;font-size:0.78125rem;color:var(--text-secondary);display:flex;justify-content:space-between;align-items:center}
 .rs-ai-send{color:var(--text);font-weight:600}

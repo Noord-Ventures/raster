@@ -19,9 +19,10 @@
   /* Concentric: Steve Ruiz innerRadius result. Closed form of the circular-corner fit. Default radius vs --pad is 0. */
   --radius-in: max(0px, calc(var(--radius) - var(--pad)));
   --ease: cubic-bezier(0.3, 0, 0.2, 1);
-  --duration-snap: 0.12s;
+  --duration-snap: 0.1s;
   --duration: 0.2s;
-  --duration-confirm: 0.16s;
+  --duration-deliberate: 0.4s;
+  --duration-confirm: 0.3s;
   /* The hover transition every control shares: fill, edge, ink, opacity. */
   --transition: background-color var(--duration) var(--ease), border-color var(--duration) var(--ease), color var(--duration) var(--ease), opacity var(--duration) var(--ease);
   /* Background column grid: 204px modules (184 column + 20 gutter). */
@@ -40,9 +41,9 @@
   --rs-gap: var(--pad);
   --rs-in: var(--radius-in);
   --rs-chart-spot: var(--text);
-  /* Control scale. Desktop is the poster; ≤640 recuts every control to 44pt. */
-  --hit: 2.5rem;
-  --control-h: 2.5rem;
+  /* Control scale. Every interactive target is at least 44px; phone fields use 16px type. */
+  --hit: 2.75rem;
+  --control-h: 2.75rem;
   --control-fs: 0.875rem;
   --control-label: 0.75rem;
 }
@@ -86,7 +87,7 @@
     --grid-pos:0 0;
   }
 }
-/* Phone control scale (≤640): 44pt hits, 16px type on fields. */
+/* Phone control scale (≤640): keep 44px hits and use 16px type on fields. */
 @media(max-width:640px){
   :root{
     --hit:2.75rem;

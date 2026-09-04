@@ -49,7 +49,7 @@ const styles = stylex.create({
       default: "0.8125rem",
       [mq.phone]: "1rem",
     },
-    lineHeight: 1.55,
+    lineHeight: 1.45,
     letterSpacing: "-0.01em",
   },
   title: {

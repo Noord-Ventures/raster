@@ -80,7 +80,7 @@ export const dialogStyles = stylex.create({
     },
     color: vlak.gray,
     letterSpacing: "-0.01em",
-    lineHeight: 1.55,
+    lineHeight: 1.45,
     marginTop: 0,
     marginInlineEnd: 0,
     marginBottom: {

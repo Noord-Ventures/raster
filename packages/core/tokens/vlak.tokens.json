@@ -51,11 +51,17 @@
       "heading": 600,
       "label": 600
     },
-    "bodyLineHeight": 1.6,
+    "bodyLineHeight": 1.45,
+    "lineHeight": {
+      "min": 1.2,
+      "max": 1.45
+    },
     "measure": {
       "columns": 3,
       "px": 592,
-      "characters": 66
+      "characters": 66,
+      "minCharacters": 45,
+      "maxCharacters": 90
     },
     "caseRule": "Never all caps; labels and eyebrows are sentence case.",
     "textScale": {
@@ -96,14 +102,14 @@
         "px": 17,
         "weight": 500,
         "tracking": "-0.01em",
-        "lineHeight": 1.5
+        "lineHeight": 1.45
       },
       {
         "name": "body",
         "px": 15,
         "weight": 500,
         "tracking": "-0.01em",
-        "lineHeight": 1.6
+        "lineHeight": 1.45
       },
       {
         "name": "label",
@@ -155,13 +161,49 @@
     "rule": "1px currentColor hairline, butt/miter, no rx, no fill; draw at 12 or 16"
   },
   "motion": {
-    "duration": "0.12–0.2s",
-    "snap": "0.12s",
+    "duration": "0.1–0.4s",
+    "response": "0.1s",
+    "snappy": "0.2s",
+    "deliberate": "0.4s",
+    "snap": "0.1s",
     "ease": "0.2s",
-    "confirm": "0.16s",
+    "confirm": "0.3s",
     "easing": "cubic-bezier(0.3, 0, 0.2, 1)",
     "rule": "A state the user caused may ease, snap with a short curve, or confirm. Entry is not a show. Color and opacity name the change; nothing bounces.",
     "reducedMotion": "looping demos and unsolicited entry disabled under prefers-reduced-motion"
+  },
+  "performance": {
+    "frame": {
+      "hz120": 8.3,
+      "hz60": 16.7,
+      "unit": "ms"
+    },
+    "responseInstant": {
+      "max": 100,
+      "unit": "ms"
+    },
+    "thoughtInterruption": {
+      "at": 1000,
+      "unit": "ms"
+    },
+    "attentionLoss": {
+      "at": 10000,
+      "unit": "ms"
+    },
+    "rule": "A response lands within 100ms. Keep each frame under its refresh-rate budget. At 1s show progress without stealing focus; before 10s explain the wait and preserve the user's place."
+  },
+  "accessibility": {
+    "contrast": {
+      "ordinaryText": 4.5,
+      "largeText": 3,
+      "controls": 3
+    },
+    "touchTarget": {
+      "width": 44,
+      "height": 44,
+      "unit": "px"
+    },
+    "rule": "Ordinary text is at least 4.5:1, large text and control boundaries are at least 3:1, and interactive targets are at least 44px by 44px."
   },
   "breakpoints": {
     "mobileGrid": 480,
@@ -180,8 +222,8 @@
   },
   "control": {
     "desktop": {
-      "hit": 40,
-      "height": 40,
+      "hit": 44,
+      "height": 44,
       "font": 14,
       "label": 12
     },

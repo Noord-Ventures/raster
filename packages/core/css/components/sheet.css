@@ -5,5 +5,5 @@
 .rs-sheet-left{inset-inline-end:auto;inset-inline-start:0;border-inline-start-width:0;border-inline-end-width:1px;border-start-start-radius:0;border-start-end-radius:var(--radius-sm);border-end-end-radius:var(--radius-sm);border-end-start-radius:0;box-shadow:none}
 .rs-sheet-title{display:block;font-size:0.9375rem;font-weight:600;letter-spacing:-0.01em;color:var(--text);margin-top:0;margin-inline-end:0;margin-bottom:0.375rem;margin-inline-start:0}
 @media (max-width: 640px){.rs-sheet-title{font-size:1.125rem}}
-.rs-sheet-body{font-size:0.84375rem;line-height:1.6;letter-spacing:-0.01em;color:var(--text-secondary);margin:0}
+.rs-sheet-body{font-size:0.84375rem;line-height:1.45;letter-spacing:-0.01em;color:var(--text-secondary);margin:0}
 @media (max-width: 640px){.rs-sheet-body{font-size:1rem}}

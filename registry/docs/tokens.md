@@ -23,9 +23,10 @@ Every custom property `@noorddev/vlak/css/tokens.css` defines, generated from `p
 | `--pad` | `20px` |  | `vlak.pad` |  |
 | `--radius-in` | `max(0px, calc(var(--radius) - var(--pad)))` |  | `vlak.radiusIn` |  |
 | `--ease` | `cubic-bezier(0.3, 0, 0.2, 1)` |  | `vlak.ease` |  |
-| `--duration-snap` | `0.12s` |  | `vlak.durationSnap` |  |
+| `--duration-snap` | `0.1s` |  | `vlak.durationSnap` |  |
 | `--duration` | `0.2s` |  | `vlak.duration` |  |
-| `--duration-confirm` | `0.16s` |  | `vlak.durationConfirm` |  |
+| `--duration-deliberate` | `0.4s` |  | `vlak.durationDeliberate` |  |
+| `--duration-confirm` | `0.3s` |  | `vlak.durationConfirm` |  |
 | `--transition` | `background-color var(--duration) var(--ease), border-color var(--duration) var(--ease), color var(--duration) var(--ease), opacity var(--duration) var(--ease)` |  | `vlak.transition` |  |
 | `--grid-image` | `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px)` |  | `vlak.gridImage` |  |
 | `--grid-size` | `204px` |  | `vlak.module` |  |
@@ -40,8 +41,8 @@ Every custom property `@noorddev/vlak/css/tokens.css` defines, generated from `p
 | `--rs-gap` | `var(--pad)` |  |  |  |
 | `--rs-in` | `var(--radius-in)` |  |  |  |
 | `--rs-chart-spot` | `var(--text)` |  |  |  |
-| `--hit` | `2.5rem` |  | `vlak.hit` |  |
-| `--control-h` | `2.5rem` |  | `vlak.controlH` |  |
+| `--hit` | `2.75rem` |  | `vlak.hit` |  |
+| `--control-h` | `2.75rem` |  | `vlak.controlH` |  |
 | `--control-fs` | `0.875rem` |  | `vlak.controlFs` |  |
 | `--control-label` | `0.75rem` |  | `vlak.controlLabel` |  |
 
@@ -106,15 +107,19 @@ The raw values from `vlakTokens` (`import { vlakTokens } from "@noorddev/vlak"`,
 | `weights.body` | `500` |
 | `weights.heading` | `600` |
 | `weights.label` | `600` |
-| `bodyLineHeight` | `1.6` |
+| `bodyLineHeight` | `1.45` |
+| `lineHeight.min` | `1.2` |
+| `lineHeight.max` | `1.45` |
 | `measure.columns` | `3` |
 | `measure.px` | `592` |
 | `measure.characters` | `66` |
+| `measure.minCharacters` | `45` |
+| `measure.maxCharacters` | `90` |
 | `caseRule` | `Never all caps; labels and eyebrows are sentence case.` |
 | `textScale.default` | `1` |
 | `textScale.steps` | `[0.9,1,1.1,1.25,1.4]` |
 | `textScale.rule` | `Reading type only; chrome stays put.` |
-| `scale` | `[{"name":"displayXl","px":52,"weight":600,"tracking":"-0.035em","lineHeight":1.05},{"name":"display","px":38,"weight":600,"tracking":"-0.03em","lineHeight":1.15},{"name":"title","px":22,"weight":600,"tracking":"-0.02em","lineHeight":1.3},{"name":"subhead","px":17,"weight":500,"tracking":"-0.01em","lineHeight":1.5},{"name":"body","px":15,"weight":500,"tracking":"-0.01em","lineHeight":1.6},{"name":"label","px":13,"weight":600,"tracking":"-0.01em","lineHeight":1.3}]` |
+| `scale` | `[{"name":"displayXl","px":52,"weight":600,"tracking":"-0.035em","lineHeight":1.05},{"name":"display","px":38,"weight":600,"tracking":"-0.03em","lineHeight":1.15},{"name":"title","px":22,"weight":600,"tracking":"-0.02em","lineHeight":1.3},{"name":"subhead","px":17,"weight":500,"tracking":"-0.01em","lineHeight":1.45},{"name":"body","px":15,"weight":500,"tracking":"-0.01em","lineHeight":1.45},{"name":"label","px":13,"weight":600,"tracking":"-0.01em","lineHeight":1.3}]` |
 
 ### grid
 
@@ -159,13 +164,43 @@ The raw values from `vlakTokens` (`import { vlakTokens } from "@noorddev/vlak"`,
 
 | Key | Value |
 | --- | --- |
-| `duration` | `0.12–0.2s` |
-| `snap` | `0.12s` |
+| `duration` | `0.1–0.4s` |
+| `response` | `0.1s` |
+| `snappy` | `0.2s` |
+| `deliberate` | `0.4s` |
+| `snap` | `0.1s` |
 | `ease` | `0.2s` |
-| `confirm` | `0.16s` |
+| `confirm` | `0.3s` |
 | `easing` | `cubic-bezier(0.3, 0, 0.2, 1)` |
 | `rule` | `A state the user caused may ease, snap with a short curve, or confirm. Entry is not a show. Color and opacity name the change; nothing bounces.` |
 | `reducedMotion` | `looping demos and unsolicited entry disabled under prefers-reduced-motion` |
+
+### performance
+
+| Key | Value |
+| --- | --- |
+| `frame.hz120` | `8.3` |
+| `frame.hz60` | `16.7` |
+| `frame.unit` | `ms` |
+| `responseInstant.max` | `100` |
+| `responseInstant.unit` | `ms` |
+| `thoughtInterruption.at` | `1000` |
+| `thoughtInterruption.unit` | `ms` |
+| `attentionLoss.at` | `10000` |
+| `attentionLoss.unit` | `ms` |
+| `rule` | `A response lands within 100ms. Keep each frame under its refresh-rate budget. At 1s show progress without stealing focus; before 10s explain the wait and preserve the user's place.` |
+
+### accessibility
+
+| Key | Value |
+| --- | --- |
+| `contrast.ordinaryText` | `4.5` |
+| `contrast.largeText` | `3` |
+| `contrast.controls` | `3` |
+| `touchTarget.width` | `44` |
+| `touchTarget.height` | `44` |
+| `touchTarget.unit` | `px` |
+| `rule` | `Ordinary text is at least 4.5:1, large text and control boundaries are at least 3:1, and interactive targets are at least 44px by 44px.` |
 
 ### breakpoints
 
@@ -192,8 +227,8 @@ The raw values from `vlakTokens` (`import { vlakTokens } from "@noorddev/vlak"`,
 
 | Key | Value |
 | --- | --- |
-| `desktop.hit` | `40` |
-| `desktop.height` | `40` |
+| `desktop.hit` | `44` |
+| `desktop.height` | `44` |
 | `desktop.font` | `14` |
 | `desktop.label` | `12` |
 | `phone.hit` | `44` |

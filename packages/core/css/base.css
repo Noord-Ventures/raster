@@ -28,7 +28,7 @@ body{
   color:var(--text);
   font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
   font-weight:500;
-  line-height:1.6;
+  line-height:1.45;
   transition:var(--transition);
   -webkit-font-smoothing:antialiased;
 }

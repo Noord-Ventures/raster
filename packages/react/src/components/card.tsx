@@ -42,7 +42,7 @@ const styles = stylex.create({
     color: vlak.gray,
     fontWeight: 500,
     letterSpacing: "-0.01em",
-    lineHeight: 1.6,
+    lineHeight: 1.45,
     margin: 0,
   },
 });

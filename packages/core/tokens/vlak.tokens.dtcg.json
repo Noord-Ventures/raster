@@ -184,7 +184,7 @@
       "hit": {
         "$type": "dimension",
         "$value": {
-          "value": 40,
+          "value": 44,
           "unit": "px"
         },
         "$description": "--hit"
@@ -192,7 +192,7 @@
       "height": {
         "$type": "dimension",
         "$value": {
-          "value": 40,
+          "value": 44,
           "unit": "px"
         },
         "$description": "--control-h"
@@ -310,10 +310,32 @@
     }
   },
   "motion": {
+    "response": {
+      "$type": "duration",
+      "$value": {
+        "value": 100,
+        "unit": "ms"
+      }
+    },
+    "snappy": {
+      "$type": "duration",
+      "$value": {
+        "value": 200,
+        "unit": "ms"
+      }
+    },
+    "deliberate": {
+      "$type": "duration",
+      "$value": {
+        "value": 400,
+        "unit": "ms"
+      },
+      "$description": "--duration-deliberate"
+    },
     "snap": {
       "$type": "duration",
       "$value": {
-        "value": 120,
+        "value": 100,
         "unit": "ms"
       },
       "$description": "--duration-snap"
@@ -329,7 +351,7 @@
     "confirm": {
       "$type": "duration",
       "$value": {
-        "value": 160,
+        "value": 300,
         "unit": "ms"
       },
       "$description": "--duration-confirm"
@@ -343,6 +365,43 @@
         1
       ],
       "$description": "--ease"
+    }
+  },
+  "performance": {
+    "frame-120hz": {
+      "$type": "duration",
+      "$value": {
+        "value": 8.3,
+        "unit": "ms"
+      }
+    },
+    "frame-60hz": {
+      "$type": "duration",
+      "$value": {
+        "value": 16.7,
+        "unit": "ms"
+      }
+    },
+    "response-instant": {
+      "$type": "duration",
+      "$value": {
+        "value": 100,
+        "unit": "ms"
+      }
+    },
+    "thought-interruption": {
+      "$type": "duration",
+      "$value": {
+        "value": 1000,
+        "unit": "ms"
+      }
+    },
+    "attention-loss": {
+      "$type": "duration",
+      "$value": {
+        "value": 10000,
+        "unit": "ms"
+      }
     }
   },
   "font": {

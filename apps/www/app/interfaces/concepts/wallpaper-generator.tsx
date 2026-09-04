@@ -200,7 +200,7 @@ export function WallpaperGenerator() {
   }
 
   return <div className="cx cx-graphics">
-    <header><b>Wallpaper generator</b><span>Three compositions, one starting point</span><Button size="sm" style={{ borderRadius: "var(--radius-sm)" }} disabled={exporting} onClick={exportSelected}>{exporting ? "Exporting…" : "Export 6K"}</Button></header>
+    <header><span>Three compositions, one starting point</span><Button className="cx-export-action" variant="ghost" size="sm" style={{ borderRadius: "var(--radius-sm)" }} disabled={exporting} onClick={exportSelected}>{exporting ? "Exporting…" : "Export 6K"}</Button></header>
     <aside>
       <p className="cx-label">Direction</p>
       <div className="cx-direction"><Textarea label="Variation seed" style={{ borderRadius: "var(--radius-sm)", minHeight: 0 }} value={prompt} onChange={(event) => setPrompt(event.target.value)} /></div>
@@ -213,6 +213,6 @@ export function WallpaperGenerator() {
       <Button style={{ borderRadius: "var(--radius-sm)" }} onClick={generate}><Icon name="image" size={16}/>Generate</Button>
       <p className="cx-generation-status" aria-live="polite">{status}</p>
     </aside>
-    <div className="cx-workspace"><div className="cx-results">{results.map((wallpaper, index) => <button key={wallpaper.id} className={selected === index ? "on" : ""} aria-pressed={selected === index} onClick={() => setSelected(index)}><WallpaperArt wallpaper={wallpaper} format={format}/><span>{String(index + 1).padStart(2, "0")} · {wallpaper.name}</span></button>)}</div></div>
+    <div className="cx-workspace"><div className="cx-results">{results.map((wallpaper, index) => <button type="button" key={wallpaper.id} className={selected === index ? "on" : ""} aria-pressed={selected === index} onClick={() => setSelected(index)}><WallpaperArt wallpaper={wallpaper} format={format}/><span>{String(index + 1).padStart(2, "0")} · {wallpaper.name}</span></button>)}</div></div>
   </div>;
 }

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Button } from "@noorddev/vlak-react";
-import { loadEvoqueViewer, evoqueModel, type ViewerApi, type ViewerCamera, type ViewerMaterial } from "./evoque-viewer";
+import { loadVehicleViewer, vehicleModel, type ViewerApi, type ViewerCamera, type ViewerMaterial } from "./vehicle-viewer";
 
 type ViewportProps = {
   rotating: boolean;
@@ -20,6 +20,7 @@ export function CarViewport(props: ViewportProps) {
   const [status, setStatus] = React.useState<"loading" | "ready" | "error">("loading");
   const [attempt, setAttempt] = React.useState(0);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: changing attempt intentionally reinitializes the third-party viewer
   React.useEffect(() => {
     const mount = mountRef.current;
     const iframe = iframeRef.current;
@@ -135,10 +136,10 @@ export function CarViewport(props: ViewportProps) {
       window.clearTimeout(timeout);
       fail();
     } else {
-      loadEvoqueViewer().then((Sketchfab) => {
+      loadVehicleViewer().then((Sketchfab) => {
         if (disposed) return;
         const viewer = new Sketchfab("1.12.1", iframe);
-        viewer.init(evoqueModel.id, {
+        viewer.init(vehicleModel.id, {
           autostart: 1,
           camera: 0,
           dnt: 1,
@@ -200,13 +201,13 @@ export function CarViewport(props: ViewportProps) {
     };
   }, [attempt]);
 
-  return <div className="cx-live-model cx-evoque-viewport" ref={mountRef} tabIndex={0} role="region" aria-label="Interactive Range Rover Evoque model. Drag to orbit or focus this region and use the arrow keys." data-viewer-status={status}>
-    <iframe key={attempt} ref={iframeRef} className="cx-evoque-frame" title="Range Rover Evoque 3D model by tonielpro520" allow="autoplay; fullscreen; xr-spatial-tracking" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
-    {status !== "ready" && <div className="cx-evoque-status" role="status">
-      <b>{status === "loading" ? "Loading Range Rover Evoque" : "The 3D model could not load"}</b>
+  return <div className="cx-live-model cx-vehicle-viewport" ref={mountRef} tabIndex={0} role="region" aria-label="Interactive vehicle model. Drag to orbit or focus this region and use the arrow keys." data-viewer-status={status}>
+    <iframe key={attempt} ref={iframeRef} className="cx-vehicle-frame" title="3D vehicle model by tonielpro520" allow="autoplay; fullscreen; xr-spatial-tracking" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
+    {status !== "ready" && <div className="cx-vehicle-status" role="status">
+      <b>{status === "loading" ? "Loading vehicle model" : "The 3D model could not load"}</b>
       <p>{status === "loading" ? "Preparing the detailed model and its materials." : "This viewer needs an internet connection and WebGL. Retry, or open the model on Sketchfab."}</p>
-      {status === "error" && <div><Button variant="ghost" onClick={() => setAttempt((value) => value + 1)}>Retry viewer</Button><a href={evoqueModel.url} target="_blank" rel="noreferrer">Open model ↗</a></div>}
+      {status === "error" && <div><Button variant="ghost" onClick={() => setAttempt((value) => value + 1)}>Retry viewer</Button><a href={vehicleModel.url} target="_blank" rel="noreferrer">Open model ↗</a></div>}
     </div>}
-    <p className="cx-evoque-credit"><a href={evoqueModel.url} target="_blank" rel="noreferrer">Evoque by tonielpro520</a><span>·</span><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a><span>· Paint adapted</span></p>
+    <p className="cx-vehicle-credit"><a href={vehicleModel.url} target="_blank" rel="noreferrer">Model by tonielpro520</a><span>·</span><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a><span>· Paint adapted</span></p>
   </div>;
 }

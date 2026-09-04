@@ -32,6 +32,7 @@ export const vlak = stylex.defineVars({
   controlLabel: "var(--control-label)",
   durationSnap: "var(--duration-snap)",
   duration: "var(--duration)",
+  durationDeliberate: "var(--duration-deliberate)",
   durationConfirm: "var(--duration-confirm)",
   ease: "var(--ease)",
   transition: "var(--transition)",

@@ -48,7 +48,7 @@ const styles = stylex.create({
       default: "0.875rem",
       [mq.phone]: "1rem",
     },
-    lineHeight: 1.55,
+    lineHeight: 1.45,
     paddingBlock: {
       default: "0.5rem",
       [mq.phone]: "0.75rem",

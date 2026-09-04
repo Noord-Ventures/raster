@@ -1,8 +1,8 @@
 // Public model metadata: https://api.sketchfab.com/v3/models/034600db0cc94d64a7f3ccb19c7799fa
 // Viewer API: https://sketchfab.com/developers/viewer/functions
-export const evoqueModel = {
+export const vehicleModel = {
   id: "034600db0cc94d64a7f3ccb19c7799fa",
-  url: "https://sketchfab.com/3d-models/2022-land-rover-range-rover-evoque-034600db0cc94d64a7f3ccb19c7799fa",
+  url: "https://sketchfab.com/models/034600db0cc94d64a7f3ccb19c7799fa",
 } as const;
 
 type Vector3 = [number, number, number];
@@ -40,7 +40,7 @@ type ViewerWindow = Window & { Sketchfab?: ViewerConstructor };
 
 let viewerScript: Promise<ViewerConstructor> | undefined;
 
-export function loadEvoqueViewer(): Promise<ViewerConstructor> {
+export function loadVehicleViewer(): Promise<ViewerConstructor> {
   const host = window as ViewerWindow;
   if (host.Sketchfab) return Promise.resolve(host.Sketchfab);
   if (viewerScript) return viewerScript;

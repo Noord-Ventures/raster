@@ -64,6 +64,10 @@ Run the two core builds twice and confirm `git status` is clean the second time:
 - Platform first: `<dialog>`, `<details>`, the Popover API, scroll snap, native inputs. JavaScript only where the platform has nothing, and then the APG pattern with full keyboard support.
 - No `!important` in shipped CSS. Everything sits in cascade layers so consumers override without it.
 - Accessibility is required: name, role, keyboard, focus ring, 3:1 control border, `prefers-reduced-motion`, `forced-colors`. Every interactive component has an axe test and a keyboard test.
+- Performance budgets: 8.3ms per frame at 120Hz, 16.7ms at 60Hz, and visible feedback within 100ms. Use 200–300ms for snappy transitions and 300–500ms for deliberate ones. At 1s show progress without stealing focus; before 10s explain the wait and preserve the user's place.
+- Reading and reach: every interactive target is at least 44px by 44px. Ordinary text is at least 4.5:1, large text and control boundaries are at least 3:1. Body copy stays within 45–90 characters per line and 1.2–1.45 line height; Vlak defaults to 66ch and 1.45.
+- Selected states use a full-surface change in fill, ink, or weight. Never mark selection with a vertical bar, leading border, or inset edge stripe.
+- When a page shell already names an interface, do not repeat that title inside the specimen. Use the specimen header for context, status, or actions instead.
 - Zero runtime dependencies beyond React and `@stylexjs/stylex`.
 - Controlled and uncontrolled: `value` / `defaultValue` / `onValueChange` (or `checked` / `onCheckedChange`, `pressed` / `onPressedChange`, `open` / `onClose`). `className` and `style` merge; native attributes pass through; refs forward on the element a consumer would reach for; stateful files start with `"use client"`.
 

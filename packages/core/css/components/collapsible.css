@@ -6,6 +6,6 @@
 .rs-acc-chevron.rs-disclosure-chevron{transition:transform var(--duration) var(--ease)}
 @media (prefers-reduced-motion: reduce){.rs-acc-chevron.rs-disclosure-chevron{transition:none}}
 .rs-disclosure-chevron-open{transform:rotate(180deg)}
-.rs-disclosure-body{padding-top:0.625rem;padding-inline-end:0;padding-bottom:0;padding-inline-start:0;font-size:0.84375rem;line-height:1.6;color:var(--text-secondary)}
+.rs-disclosure-body{padding-top:0.625rem;padding-inline-end:0;padding-bottom:0;padding-inline-start:0;font-size:0.84375rem;line-height:1.45;color:var(--text-secondary)}
 @media (max-width: 640px){.rs-disclosure-body{padding-top:0.75rem;font-size:1rem}}
 .rs-disclosure{display:block}
