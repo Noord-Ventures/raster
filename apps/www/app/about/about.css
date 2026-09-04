@@ -292,7 +292,7 @@ html:has(.field-page) .site-footer {
   gap: 20px;
 }
 
-/* Gallery prints: intact work on paper, even 20px matte. Never cover. */
+/* Gallery prints: intact work in a consistent museum matte. Never cover. */
 .field-cell-has-work {
   padding: 20px;
   gap: 20px;
@@ -303,15 +303,22 @@ html:has(.field-page) .site-footer {
 .field-work {
   position: relative;
   flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
   min-height: 0;
+  padding: 20px;
   overflow: hidden;
-  background: var(--bg);
+  background: var(--table-alt);
+  box-shadow: inset 0 0 0 1px var(--divider);
 }
 
 .field-work img {
   display: block;
-  width: 100%;
+  width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   object-position: center;
 }

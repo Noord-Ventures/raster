@@ -175,7 +175,8 @@ body:has(.if-index) {
   margin-top: 36px;
   padding: 8px 8px 8px 14px;
   border: 1px solid var(--divider);
-  width: 420px;
+  width: 100%;
+  box-sizing: border-box;
 }
 .if-crop-dock span { font-size: 0.8125rem; color: var(--text-secondary); }
 .if-crop-dock .if-crop-send {
@@ -195,7 +196,7 @@ body:has(.if-index) {
   position: absolute;
   left: 20px;
   top: 18px;
-  width: 420px;
+  width: 348px;
 }
 .if-crop-pers .if-crop-kicker { margin-top: 36px; }
 .if-crop-pers .if-crop-numeral { margin-top: 4px; }
@@ -207,7 +208,7 @@ body:has(.if-index) {
 }
 .if-crop-chart {
   display: block;
-  width: 400px;
+  width: 100%;
   margin-top: 16px;
   color: var(--text);
 }
@@ -215,15 +216,16 @@ body:has(.if-index) {
 .if-crop-muur { position: absolute; inset: 0; }
 .if-crop-muur img {
   position: absolute;
-  inset: 0 0 48px -72px;
-  width: 140%;
-  height: calc(100% - 48px + 40px);
+  inset: 0 0 48px;
+  width: 100%;
+  height: calc(100% - 48px);
   object-fit: cover;
+  object-position: 50% 42%;
 }
 .if-crop-muur .if-crop-line {
   position: absolute;
   left: 0;
-  right: -60px;
+  right: 0;
   bottom: 0;
   padding: 12px 20px;
   background: var(--bg);
@@ -259,15 +261,16 @@ body:has(.if-index) {
 .if-crop-avond { position: absolute; inset: 0; }
 .if-crop-avond img {
   position: absolute;
-  inset: -20px -40px 48px -90px;
-  width: 150%;
-  height: calc(100% - 8px);
+  inset: 0 0 48px;
+  width: 100%;
+  height: calc(100% - 48px);
   object-fit: cover;
+  object-position: 50% 54%;
 }
 .if-crop-avond .if-crop-line {
   position: absolute;
   left: 0;
-  right: -40px;
+  right: 0;
   bottom: 0;
   padding: 12px 20px;
   background: var(--bg);

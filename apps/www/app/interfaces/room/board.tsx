@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Icon } from "@noorddev/vlak-react";
+import { Button, Icon, Input, InputGroup } from "@noorddev/vlak-react";
 import { Brand } from "../mark";
 import { Face, type FaceId } from "../people";
 import { PhoneV1Chrome } from "../v1-chrome";
@@ -206,20 +206,20 @@ export function Board() {
           send();
         }}
       >
-        <label className="sc-room-field">
-          <Icon name="message" size={16} />
-          <input
+        <InputGroup className="sc-room-field">
+          <span className="sc-room-field-mark" aria-hidden="true"><Icon name="message" size={16} /></span>
+          <Input
             ref={box}
             value={draft}
             placeholder={`Message #${room.name}`}
             aria-label="Message"
             onChange={(event) => setDraft(event.target.value)}
           />
-        </label>
-        <button type="submit" disabled={!draft.trim()}>
+        </InputGroup>
+        <Button type="submit" size="sm" style={{ width: "auto" }} disabled={!draft.trim()}>
           <Icon name="send" size={16} />
           Send
-        </button>
+        </Button>
       </form>
 
       <nav className="if-thumb" aria-label={WHAT}>

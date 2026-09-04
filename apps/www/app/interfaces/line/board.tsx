@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Icon } from "@noorddev/vlak-react";
+import { Button, Icon, Input, InputGroup } from "@noorddev/vlak-react";
 import { Brand } from "../mark";
 import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
@@ -234,26 +234,28 @@ export function Board() {
       </section>
       <div className="sc-ai-dock">
           <form
-            className="sc-ai-composer"
+            className="sc-ai-composer-form"
             onSubmit={(event) => {
               event.preventDefault();
               send();
             }}
           >
-            <Icon name="quote" size={16} />
-            <input
-              ref={box}
-              type="text"
-              value={draft}
-              placeholder="The next line."
-              aria-label="Message"
-              autoComplete="off"
-              onChange={(event) => setDraft(event.target.value)}
-            />
-            <button type="submit" className="sc-ai-send" disabled={!draft.trim() || pending}>
-              <Icon name="send" size={16} />
-              Send
-            </button>
+            <InputGroup className="sc-ai-composer">
+              <span className="sc-ai-composer-mark" aria-hidden="true"><Icon name="quote" size={16} /></span>
+              <Input
+                ref={box}
+                type="text"
+                value={draft}
+                placeholder="The next line."
+                aria-label="Message"
+                autoComplete="off"
+                onChange={(event) => setDraft(event.target.value)}
+              />
+              <Button type="submit" grouped className="sc-ai-send" style={{ width: "auto" }} disabled={!draft.trim() || pending}>
+                <Icon name="send" size={16} />
+                Send
+              </Button>
+            </InputGroup>
           </form>
         </div>
 

@@ -1,3 +1,5 @@
+import { Avatar } from "@noorddev/vlak-react";
+
 /** People from https://renatovaldes.com/work. First names in the UI. Portraits from /work refs. */
 
 export const faces = {
@@ -12,13 +14,13 @@ export type FaceId = keyof typeof faces;
 export function Face({ who, size = 28 }: { who: FaceId; size?: number }) {
   const face = faces[who];
   return (
-    <img
+    <Avatar
       className="if-face"
       src={face.photo}
-      alt=""
-      width={size}
-      height={size}
-      style={{ width: size, height: size }}
+      alt={face.full}
+      name={face.full}
+      initials={face.initials}
+      size={size >= 48 ? "lg" : "md"}
     />
   );
 }

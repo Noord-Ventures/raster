@@ -175,6 +175,12 @@
   transition: border-color var(--duration-snap) var(--ease);
 }
 .sc-room-field:focus-within { border-color: var(--text); }
+.sc-room-field-mark {
+  display: inline-flex;
+  align-items: center;
+  padding-left: 12px;
+  color: var(--text-secondary);
+}
 .sc-room-field input {
   flex: 1;
   min-width: 0;
@@ -288,7 +294,7 @@
   .sc-room-person .rs-icon,
   .sc-room-person .if-face,
   .sc-room-extra,
-  .sc-room-field .rs-icon,
+  .sc-room-field-mark,
   .sc-room-dock button .rs-icon { display: none; }
   .sc-room[data-pane="chat"] .sc-room-rail { display: none; }
   .sc-room[data-pane="channels"] .sc-room-chat { display: none; }

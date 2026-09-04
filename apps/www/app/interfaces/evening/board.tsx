@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Icon } from "@noorddev/vlak-react";
+import { Icon, Input, InputGroup, ToggleGroup } from "@noorddev/vlak-react";
 import { Brand } from "../mark";
 import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
@@ -137,9 +137,9 @@ export function Board() {
             <Icon name="map-pin" size={12} />
             Langestraat 12
           </p>
-          <label className="sc-evening-search">
-            <Icon name="search" size={16} />
-            <input
+          <InputGroup className="sc-evening-search">
+            <span className="sc-evening-search-mark" aria-hidden="true"><Icon name="search" size={16} /></span>
+            <Input
               type="search"
               value={query}
               placeholder="Search kitchens"
@@ -149,7 +149,7 @@ export function Board() {
                 setPage("market");
               }}
             />
-          </label>
+          </InputGroup>
           <button
             type="button"
             className="sc-evening-bag"
@@ -164,30 +164,38 @@ export function Board() {
         {page === "market" ? (
           <>
             <div className="sc-evening-filters">
-              <div className="sc-evening-seg" role="group" aria-label="Method">
-                {(["delivery", "pickup"] as const).map((item) => (
-                  <button key={item} type="button" aria-pressed={method === item} onClick={() => setMethod(item)}>
-                    <Icon name={item === "delivery" ? "truck" : "package"} size={12} />
-                    {item === "delivery" ? "Delivery" : "Pickup"}
-                  </button>
-                ))}
-              </div>
-              <div className="sc-evening-seg" role="group" aria-label="Diet">
-                {(["any", "veg", "fish"] as const).map((item) => (
-                  <button key={item} type="button" aria-pressed={diet === item} onClick={() => setDiet(item)}>
-                    <Icon name={item === "any" ? "layers" : item === "veg" ? "tag" : "flag"} size={12} />
-                    {item === "any" ? "Any" : item === "veg" ? "Veg" : "Fish"}
-                  </button>
-                ))}
-              </div>
-              <div className="sc-evening-seg" role="group" aria-label="Price">
-                {([0, 1, 2] as const).map((item) => (
-                  <button key={item} type="button" aria-pressed={band === item} onClick={() => setBand(item)}>
-                    <Icon name={item === 0 ? "wallet" : "dollar"} size={12} />
-                    {item === 0 ? "Any" : item === 1 ? "€" : "€€"}
-                  </button>
-                ))}
-              </div>
+              <ToggleGroup
+                className="sc-evening-seg"
+                aria-label="Method"
+                value={method}
+                options={[
+                  { value: "delivery", label: <><Icon name="truck" size={12} />Delivery</> },
+                  { value: "pickup", label: <><Icon name="package" size={12} />Pickup</> },
+                ]}
+                onValueChange={(value) => setMethod(value as Method)}
+              />
+              <ToggleGroup
+                className="sc-evening-seg"
+                aria-label="Diet"
+                value={diet}
+                options={[
+                  { value: "any", label: <><Icon name="layers" size={12} />Any</> },
+                  { value: "veg", label: <><Icon name="tag" size={12} />Veg</> },
+                  { value: "fish", label: <><Icon name="flag" size={12} />Fish</> },
+                ]}
+                onValueChange={(value) => setDiet(value as Diet)}
+              />
+              <ToggleGroup
+                className="sc-evening-seg"
+                aria-label="Price"
+                value={String(band)}
+                options={[
+                  { value: "0", label: <><Icon name="wallet" size={12} />Any</> },
+                  { value: "1", label: <><Icon name="dollar" size={12} />€</> },
+                  { value: "2", label: <><Icon name="dollar" size={12} />€€</> },
+                ]}
+                onValueChange={(value) => setBand(Number(value) as 0 | 1 | 2)}
+              />
             </div>
             <div className="sc-evening-stores" role="group" aria-label="Kitchens">
               {rooms.length === 0 ? (

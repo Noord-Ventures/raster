@@ -260,6 +260,14 @@
   box-shadow: none;
   transition: border-color var(--duration-snap) var(--ease);
 }
+.sc-ai-composer-form { width: var(--sc-ai-measure); }
+.sc-ai-composer-form .sc-ai-composer { width: 100%; }
+.sc-ai-composer-mark {
+  display: inline-flex;
+  align-items: center;
+  padding-left: 12px;
+  color: var(--text-secondary);
+}
 .sc-ai-composer:focus-within { border-color: var(--text); }
 .sc-ai-composer input {
   flex: 1;
@@ -454,7 +462,7 @@
     border-radius: var(--radius-sm);
     background: var(--bg);
   }
-  .sc-ai-composer > .rs-icon { display: none; }
+  .sc-ai-composer-mark { display: none; }
   .sc-ai-send .rs-icon { display: none; }
   .sc-ai-send { height: 36px; min-height: 36px; min-width: 72px; font-size: 12px; }
   .sc-ai-send:disabled {

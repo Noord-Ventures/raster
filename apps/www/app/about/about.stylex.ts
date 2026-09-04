@@ -10,7 +10,7 @@ const phone = "@media (max-width: 640px)";
  * stays in about.css — StyleX cannot target html from a child.
  * Named grid areas stay in about.css (CI greps + pairing Brockmann/Crouwel).
  * Seams: 1px --divider gaps. L/R box margins: inset --grid-line.
- * Flush: radius 0. No cover-crop. Colophon 12px secondary.
+ * Flush: radius 0. Artwork sits intact in a consistent 4:3 matte. Colophon 12px secondary.
  */
 export const about = stylex.create({
   page: {
@@ -190,14 +190,21 @@ export const about = stylex.create({
     flexGrow: 0,
     flexShrink: 0,
     flexBasis: "auto",
+    display: "grid",
+    placeItems: "center",
+    aspectRatio: "4 / 3",
     minHeight: 0,
+    padding: 20,
     overflow: "hidden",
-    backgroundColor: "var(--bg)",
+    backgroundColor: "var(--table-alt)",
+    boxShadow: "inset 0 0 0 1px var(--divider)",
   },
   workImg: {
     display: "block",
-    width: "100%",
+    width: "auto",
     height: "auto",
+    maxWidth: "100%",
+    maxHeight: "100%",
     objectFit: "contain",
     objectPosition: "center",
   },

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Icon } from "@noorddev/vlak-react";
+import { Icon, ToggleGroup } from "@noorddev/vlak-react";
 import { Brand } from "../mark";
 import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
@@ -82,22 +82,19 @@ export function Board() {
             <Icon name={page === "overview" ? "layout" : page === "jobs" ? "list" : "receipt"} size={16} />
             {page === "overview" ? "Overview" : page === "jobs" ? "Jobs" : "Invoices"}
           </h1>
-          <div className="sc-dash-range" role="group" aria-label="Range">
-            {(["week", "month"] as const).map((item) => (
-              <button
-                key={item}
-                type="button"
-                aria-pressed={range === item}
-                onClick={() => {
-                  setRange(item);
-                  setMetricFresh(true);
-                }}
-              >
-                <Icon name={item === "week" ? "calendar" : "history"} size={12} />
-                {item === "week" ? "Week" : "Month"}
-              </button>
-            ))}
-          </div>
+          <ToggleGroup
+            className="sc-dash-range"
+            aria-label="Range"
+            value={range}
+            options={[
+              { value: "week", label: <><Icon name="calendar" size={12} />Week</> },
+              { value: "month", label: <><Icon name="history" size={12} />Month</> },
+            ]}
+            onValueChange={(value) => {
+              setRange(value as "week" | "month");
+              setMetricFresh(true);
+            }}
+          />
         </div>
 
         <div className="sc-dash-metrics">

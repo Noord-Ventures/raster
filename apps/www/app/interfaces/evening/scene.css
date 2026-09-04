@@ -46,6 +46,12 @@
   transition: border-color var(--duration-snap) var(--ease);
 }
 .sc-evening-search:focus-within { border-color: var(--text); }
+.sc-evening-search-mark {
+  display: inline-flex;
+  align-items: center;
+  padding-left: 10px;
+  color: var(--text-secondary);
+}
 .sc-evening-search input {
   flex: 1;
   min-width: 0;
