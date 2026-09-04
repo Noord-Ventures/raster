@@ -734,18 +734,19 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--text);
-  border: none;
+  /* A ghost control: paper, hairline, gray mark; the shared hover fill on hover. */
+  background: var(--bg);
+  border: 1px solid var(--divider);
   border-radius: var(--radius-sm);
   box-shadow: none;
-  color: var(--bg);
+  color: var(--text-secondary);
   cursor: pointer;
   font: inherit;
-  transition: opacity var(--duration-snap) var(--ease);
+  transition: var(--transition);
 }
 .code-block[data-lines="one"] .code-copy { top: 50%; transform: translateY(-50%); }
-.code-copy:hover { opacity: .8; }
-.code-copy[aria-label="Copied"] { opacity: 1; }
+.code-copy:hover { background: var(--control-fill); border-color: var(--control-fill); color: var(--text); }
+.code-copy[aria-label="Copied"] { color: var(--text); }
 .code-copy svg { display: block; }
 .code-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
