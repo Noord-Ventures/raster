@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
+import { Button, ToggleGroup } from "@noorddev/raster-react";
 import { chrome } from "@/app/site.stylex";
 import { sx } from "@/lib/sx";
 import { RasterMark } from "./raster-mark";
@@ -153,7 +154,9 @@ function SettingsMark() {
   );
 }
 
-function SegButtons<T extends string>({
+/* Settings are Raster controls: a label, a ToggleGroup for each choice,
+   ghost buttons for the text-size stepper. */
+function Choice<T extends string>({
   label,
   value,
   options,
@@ -167,22 +170,16 @@ function SegButtons<T extends string>({
   const id = `lbl-${label.replace(/\s+/g, "-").toLowerCase()}`;
   return (
     <div className="settings-group">
-      <p className="appearance-label" id={id}>
+      <p className="rs-label settings-label" id={id}>
         {label}
       </p>
-      <div className="appearance-cells" role="group" aria-labelledby={id}>
-        {options.map((item) => (
-          <button
-            key={item.value}
-            type="button"
-            className="appearance-cell"
-            aria-pressed={value === item.value}
-            onClick={() => onSelect(item.value)}
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
+      <ToggleGroup
+        className="settings-choice"
+        aria-labelledby={id}
+        options={options}
+        value={value}
+        onValueChange={(next) => onSelect(next as T)}
+      />
     </div>
   );
 }
@@ -197,22 +194,23 @@ function TextStepper({
   const scale = TEXT_STEPS[index] ?? 1;
   return (
     <div className="settings-group">
-      <p className="appearance-label" id="lbl-text-size">
+      <p className="rs-label settings-label" id="lbl-text-size">
         Text size
       </p>
       <div className="text-stepper" role="group" aria-labelledby="lbl-text-size">
-        <button type="button" aria-label="Decrease text size" disabled={index === 0} onClick={() => onStep(-1)}>
+        <Button variant="ghost" size="sm" aria-label="Decrease text size" disabled={index === 0} onClick={() => onStep(-1)}>
           −
-        </button>
+        </Button>
         <output suppressHydrationWarning>{Math.round(scale * 100)}%</output>
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="sm"
           aria-label="Increase text size"
           disabled={index === TEXT_STEPS.length - 1}
           onClick={() => onStep(1)}
         >
           +
-        </button>
+        </Button>
       </div>
     </div>
   );
@@ -235,9 +233,9 @@ function SettingsBody({
 }) {
   return (
     <>
-      <SegButtons label="Appearance" value={scheme} options={schemes} onSelect={onScheme} />
+      <Choice label="Appearance" value={scheme} options={schemes} onSelect={onScheme} />
       <TextStepper index={textIndex} onStep={onTextStep} />
-      <SegButtons
+      <Choice
         label="Grid"
         value={grid}
         options={[

@@ -199,95 +199,31 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   inset-inline-end: 0;
   z-index: var(--z-float);
   width: 232px;
+  /* A settings panel, not a list: it never scrolls. The rs-menu leaf caps lists at 240px. */
+  max-height: none;
+  overflow: visible;
   margin: 0;
   padding: 14px;
   border-radius: var(--radius-sm);
   box-shadow: none;
 }
-.appearance-label {
-  margin: 0 0 8px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: -.01em;
-  color: var(--text-secondary);
-  text-transform: none;
-}
+.settings-label { margin: 0 0 8px; }
 .settings-group + .settings-group {
   margin-top: 14px;
   padding-top: 14px;
   border-top: 1px solid var(--divider);
 }
-.appearance-cells {
-  display: flex;
-  gap: 2px;
-  padding: 2px;
-  background: var(--divider-subtle);
-  border: 1px solid var(--divider);
-  border-radius: 0;
-}
-.appearance-cell {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 6px 4px;
-  min-height: 32px;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  color: var(--text-secondary);
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: -.01em;
-  line-height: 1;
-  cursor: pointer;
-  outline: none;
-  text-transform: none;
-}
-.appearance-cell[aria-pressed="true"] {
-  background: var(--bg);
-  color: var(--text);
-}
-.appearance-cell:hover { color: var(--text); }
-.appearance-cell:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
-}
+/* Raster controls fill the panel width. */
+.settings-choice { display: flex; width: 100%; }
+.settings-choice .rs-toggle { flex: 1; justify-content: center; }
 .text-stepper {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: none;
-  border: 0;
+  gap: 8px;
 }
-.text-stepper button {
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  min-height: 32px;
-  flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  border: 1px solid var(--divider);
-  border-radius: 0;
-  background: none;
-  color: var(--text);
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: -.01em;
-  line-height: 1;
-  cursor: pointer;
-  outline: none;
-}
-.text-stepper button:hover:not(:disabled) { border-color: var(--text); }
-.text-stepper button:disabled { opacity: .35; cursor: default; }
-.text-stepper button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* The Button leaf goes full-width on phones (a StyleX conditional rule, so
+   only !important beats it from here); a stepper button stays square. */
+.text-stepper .rs-btn-ghost { flex: none; width: auto !important; min-width: 36px; padding-inline: 0; }
 .text-stepper output {
   flex: 1;
   min-width: 34px;
@@ -389,10 +325,6 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   .nav-panel-link {
     display: flex; align-items: center;
     min-height: 44px; padding: 12px 20px; font-size: 17px;
-  }
-  .appearance-cell { min-height: 44px; }
-  .text-stepper button {
-    width: 44px; height: 44px; min-width: 44px; min-height: 44px;
   }
   .nav-panel-appearance { padding: 12px 20px 16px; }
   .rs-crumb-bar {
