@@ -881,8 +881,8 @@ jobs:
               process.exit(1);
             }
             const spec = css.slice(css.indexOf(".if-specimen {"), css.indexOf("}", css.indexOf(".if-specimen {")));
-            if (!spec.includes("box-shadow:") || spec.includes("box-shadow: none")) {
-              console.error("Specimen may take a quiet shadow");
+            if (!/border-radius:\s*0/.test(spec) || !spec.includes("box-shadow: none")) {
+              console.error("Specimen chrome must stay square with no drop shadow");
               process.exit(1);
             }
           '

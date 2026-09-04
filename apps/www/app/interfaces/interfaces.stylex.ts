@@ -8,7 +8,7 @@ const reduce = "@media (prefers-reduced-motion: reduce)";
 
 /**
  * Interfaces posters. Landing tiles sit on the 204, ink --grid-line,
- * no shadow. Specimen may take a quiet shadow. Rail is transparent.
+ * no shadow. Specimen chrome is square, no drop shadow. Rail is transparent.
  * Crop stills and `body:has(.if-index)` stay in interfaces.css —
  * positional crops + document :has() are not StyleX-owned.
  */
