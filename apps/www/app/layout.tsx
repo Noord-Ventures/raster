@@ -22,7 +22,7 @@ const themeInit = `(function(){try{var r=document.documentElement,t=localStorage
 /* First paint: hide desktop crumb labels so “Raster” cannot sit on
    Components. The bar itself stays full-bleed (no width clip). Phone
    (≤640) keeps the trail. */
-const crumbPin = `@media(min-width:641px){.rs-crumb-bar a.rs-crumb-root,.rs-crumb-bar a.site-crumb-root,.rs-crumb-bar .rs-crumbs{display:none!important}}`;
+const crumbPin = `@media(min-width:641px){.rs-crumb-bar a.rs-crumb-root,.rs-crumb-bar a.site-crumb-root,.rs-crumb-bar .rs-crumbs{display:none!important}}@media(max-width:640px){.corner-nav{display:none!important}}`;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

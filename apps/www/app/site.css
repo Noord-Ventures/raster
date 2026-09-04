@@ -335,7 +335,9 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     position: relative;
     top: 1px;
   }
-  .corner-nav { display: none; }
+  /* StyleX atomics otherwise keep display:flex — hide the desktop
+     row so crumbs / appearance / hamburger are the only chrome. */
+  .corner-nav { display: none !important; }
   .settings {
     top: calc(8px + env(safe-area-inset-top, 0px));
     right: calc(56px + env(safe-area-inset-right, 0px));
@@ -435,7 +437,23 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   .site-footer { padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px)); }
   .site-content .rs-t-display { font-size: calc(32px * var(--text-scale, 1)); }
   .site-content .rs-t-sub { font-size: calc(18px * var(--text-scale, 1)); line-height: 1.45; }
-  .site-content .rs-t-body { font-size: calc(16px * var(--text-scale, 1)); line-height: 1.65; }
+  .site-content .rs-t-body {
+    display: block;
+    position: static;
+    float: none;
+    height: auto;
+    max-width: 100%;
+    font-size: calc(16px * var(--text-scale, 1));
+    line-height: 1.65;
+    /* pretty/balance stacks lines on WebKit phone. Live block flow. */
+    text-wrap: wrap;
+  }
+  .site-content > .section-label + .rs-t-body {
+    display: block;
+    position: static;
+    margin-top: 8px;
+    margin-bottom: 0;
+  }
   .section-label { font-size: 15px; margin-top: 48px; }
   .gallery { padding: 16px 0 32px; }
   .gallery-meta { padding: 18px 20px 22px; }

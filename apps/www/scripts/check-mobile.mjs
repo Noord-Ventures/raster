@@ -46,6 +46,18 @@ if (!phone.includes(".theme-toggle") || !phone.includes("display: flex")) {
 if (phone.includes(".theme-toggle { display: none") || /corner-nav,\s*\.theme-toggle/.test(phone)) {
   fail("Do not hide the theme toggle on phone");
 }
+if (!phone.includes(".corner-nav { display: none !important; }")) {
+  fail("Phone must hide corner-nav (StyleX otherwise keeps display:flex)");
+}
+if (!/cornerNav:\s*\{[\s\S]*?display:\s*\{[\s\S]*?\[phone\]:\s*"none"/.test(siteSx)) {
+  fail("StyleX cornerNav must be display none at ≤640");
+}
+if (!phone.includes("text-wrap: wrap") || !phone.includes(".site-content .rs-t-body")) {
+  fail("Phone Install / body copy must be wrap, not pretty — pretty stacks lines on WebKit");
+}
+if (!layout.includes(".corner-nav{display:none!important}") && !layout.includes(".corner-nav{display:none !important}")) {
+  fail("First paint must hide corner-nav on phone before StyleX");
+}
 if (!phone.includes("overflow: hidden") || !phone.includes("flex-wrap: nowrap")) {
   fail("Phone crumb bar must clip to one line; crumbs must not wrap out of the bar");
 }
