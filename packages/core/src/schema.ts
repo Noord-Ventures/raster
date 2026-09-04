@@ -37,6 +37,41 @@ export interface RasterComponent {
   snippet: string;
   /** Omit from the public catalog, docs rail, and home kit count. Keep CSS, Nest, and math. */
   hidden?: boolean;
+  /** React usage example: imports from "@noorddev/raster-react" plus the JSX. Shown on the docs page, by the CLI, and to agents. */
+  example?: string;
+  /** When to reach for it, and when not to. One short sentence per item. */
+  usage?: { use: string[]; avoid: string[] };
+  /** Keyboard interactions, in the order a user meets them. */
+  keyboard?: { keys: string; does: string }[];
+  /** Accessibility notes: roles, names, focus, what the platform provides. */
+  a11y?: string[];
+  /** Names other systems use for the same thing (shadcn/ui, Radix, Material), for search and agents. */
+  aliases?: string[];
+}
+
+/** One prop of an exported React component, extracted from its types. */
+export interface RasterProp {
+  name: string;
+  type: string;
+  required: boolean;
+  default?: string;
+  description?: string;
+}
+
+/** One exported React symbol of a registry component. */
+export interface RasterExport {
+  name: string;
+  kind: "component" | "hook" | "function" | "type";
+  description?: string;
+  /** Native element or attribute set the props extend, e.g. "ButtonHTMLAttributes<HTMLButtonElement>". */
+  extends?: string;
+  props: RasterProp[];
+}
+
+/** Shape of packages/core/props/props.json, generated from the React sources. */
+export interface RasterPropsJson {
+  version: string;
+  components: Record<string, { exports: RasterExport[] }>;
 }
 
 const KEBAB = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;

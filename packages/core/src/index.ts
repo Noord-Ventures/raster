@@ -7,4 +7,11 @@ export {
   type InnerRadiusOptions,
 } from "./radius";
 export { rasterComponents, catalogComponents, type RasterComponent } from "./registry";
-export { rasterCategories, validateRegistry, type RasterCategory } from "./schema";
+export {
+  rasterCategories,
+  validateRegistry,
+  type RasterCategory,
+  type RasterExport,
+  type RasterProp,
+  type RasterPropsJson,
+} from "./schema";

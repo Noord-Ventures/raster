@@ -37,13 +37,15 @@
     },
     "./css/*": "./css/*",
     "./tokens": "./tokens/raster.tokens.json",
+    "./props": "./props/props.json",
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
     "src",
     "css",
-    "tokens"
+    "tokens",
+    "props"
   ],
   "scripts": {
     "build:css": "node --experimental-strip-types scripts/build-components.mjs && node --experimental-strip-types scripts/build.mjs",
