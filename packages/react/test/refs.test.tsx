@@ -24,6 +24,8 @@ const NOT_COMPONENTS = [
   "ICON_STROKE",
   "ICON_VIEWBOX",
   "iconInk",
+  "filledCutouts",
+  "filledMarks",
   "iconGroups",
   "iconLabel",
   "iconNames",

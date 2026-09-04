@@ -2,7 +2,9 @@
  * Raster icon figures. 16×16 module, optical center 8,8.
  * Vera 28 Aug 2026; third polish 1 Sep 2026; R1 line/filled pairs 1 Sep 2026.
  * Stroke 1, currentColor, fill none on the line set, cap butt, join miter, no rx.
- * Filled kinship fills closed geometry of the same figures.
+ * Filled kinship fills closed geometry of the same figures. A small set of
+ * asymmetric marks has a hand-cut filled silhouette so it keeps the same
+ * optical weight as the rest of the family instead of looking half-filled.
  * The first five marks stay exactly as drawn unless a measured miss.
  * Chevron left/right: +0.25y optical nudge toward center 8,8. No filled set.
  */
@@ -12,6 +14,9 @@ export type MarkEl =
   | { t: "rect"; x: number; y: number; w: number; h: number }
   | { t: "circle"; cx: number; cy: number; r: number }
   | { t: "line"; x1: number; y1: number; x2: number; y2: number };
+
+/** Element indexes that become transparent detail cuts in the filled mark. */
+export type FilledCutouts = Partial<Record<DrawnName, readonly number[]>>;
 
 export type IconRotate = 90 | 180 | 270;
 
@@ -251,15 +256,15 @@ export const marks: Record<DrawnName, MarkEl[]> = {
   reply: [p("M8 3.5 L3.5 8 L8 12.5"), p("M3.5 8 H11.5 V5")],
 
   /* People */
-  user: [o(8, 5, 2), p("M4 13.5 V11.5 L8 9.5 L12 11.5 V13.5")],
+  user: [o(8, 5, 2), p("M4 13.5 V10.75 L8 8.75 L12 10.75 V13.5")],
   users: [
-    o(6, 5, 1.75),
-    p("M2.5 13.5 V11.5 L6 10 L9.5 11.5 V13.5"),
-    o(10.5, 5, 1.5),
-    p("M9 13.5 V12 L11.5 10.5 L14 12 V13.5"),
+    o(6, 4.75, 1.75),
+    p("M2.5 13.5 V10.75 L6 9.25 L9.5 10.75 V13.5"),
+    o(10.75, 4.75, 1.5),
+    p("M9.25 13.5 V11.25 L11.75 9.75 L14 11.25 V13.5"),
   ],
-  "user-plus": [o(6, 5, 1.75), p("M2.5 13.5 V11.5 L6 10 L9.5 11.5 V13.5"), p("M12 6 V12"), p("M9.5 9 H14.5")],
-  "user-minus": [o(6, 5, 1.75), p("M2.5 13.5 V11.5 L6 10 L9.5 11.5 V13.5"), p("M9.5 9 H14.5")],
+  "user-plus": [o(6, 4.75, 1.75), p("M2.5 13.5 V10.75 L6 9.25 L9.5 10.75 V13.5"), p("M12 6 V12"), p("M9.5 9 H14.5")],
+  "user-minus": [o(6, 4.75, 1.75), p("M2.5 13.5 V10.75 L6 9.25 L9.5 10.75 V13.5"), p("M9.5 9 H14.5")],
 
   /* Files */
   file: [p("M5 2.5 H9.5 L12.5 5.5 V13.5 H5 Z"), p("M9.5 2.5 V5.5 H12.5")],
@@ -271,7 +276,7 @@ export const marks: Record<DrawnName, MarkEl[]> = {
     p("M6.5 12 H9.5"),
   ],
   folder: [p("M2.5 5.5 H6 L7.5 4 H13.5 V12.5 H2.5 Z")],
-  "folder-open": [p("M2.5 6.5 H6 L7.5 5 H13.5 V7.5 L12 12.5 H3.5 Z"), p("M2.5 6.5 V12.5")],
+  "folder-open": [p("M2.5 6 V12.5 H12 L13.5 7.5 H6.5 L5 6 Z"), p("M3.5 5 H6 L7.5 3.5 H13 V7.5")],
   clipboard: [r(4, 3.5, 8, 10.5), r(6, 2.5, 4, 2)],
   archive: [r(2.5, 3.5, 11, 3), p("M3.5 6.5 V13 H12.5 V6.5"), p("M6.5 8.5 H9.5")],
   attachment: [p("M5.5 6.5 V12 H10.5 V4.5 H7 V10.5 H8.5 V6.5")],
@@ -393,9 +398,12 @@ export const marks: Record<DrawnName, MarkEl[]> = {
   ],
   unlink: [r(2.5, 6, 5, 4), r(8.5, 6, 5, 4), p("M4 12 L12 4")],
   crop: [p("M4.5 2.5 V11.5 H13.5"), p("M2.5 4.5 H11.5 V13.5")],
-  at: [o(8, 8, 5.5), o(8, 8, 2.5), p("M10.5 8 V11.5")],
-  hash: [p("M6 3.5 L5 12.5"), p("M11 3.5 L10 12.5"), p("M3.5 6.5 H13"), p("M3 9.5 H12.5")],
-  "user-check": [o(6, 5, 1.75), p("M2.5 13.5 V11.5 L6 10 L9.5 11.5 V13.5"), p("M10 8.5 L11.5 10 L14.5 6.5")],
+  at: [
+    o(8, 8, 2.5),
+    p("M10.5 8 V10.5 H11 A2.5 2.5 0 0 0 13.5 8 A5.5 5.5 0 1 0 11.5 12"),
+  ],
+  hash: [p("M6.5 3.5 L5.5 12.5"), p("M10.5 3.5 L9.5 12.5"), p("M4 6.5 H12"), p("M3.5 9.5 H11.5")],
+  "user-check": [o(6, 4.75, 1.75), p("M2.5 13.5 V10.75 L6 9.25 L9.5 10.75 V13.5"), p("M10 8.5 L11.5 10 L14.5 6.5")],
   "file-plus": [
     p("M5 2.5 H9.5 L12.5 5.5 V13.5 H5 Z"),
     p("M9.5 2.5 V5.5 H12.5"),
@@ -463,6 +471,148 @@ export const marks: Record<DrawnName, MarkEl[]> = {
   activity: [p("M2.5 8 H4.5 L6.5 4 L9.5 12 L11.5 8 H13.5")],
   crosshair: [o(8, 8, 3.5), p("M8 2.5 V4.5"), p("M8 11.5 V13.5"), p("M2.5 8 H4.5"), p("M11.5 8 H13.5")],
   pin: [o(8, 5.5, 2.5), p("M8 8 V13.5")],
+};
+
+/**
+ * Optical filled cuts for figures whose line construction is intentionally
+ * open. These are silhouettes of the same marks, not a second icon family.
+ * Every other mark continues to derive its fill directly from `marks`.
+ */
+export const filledMarks: Partial<Record<DrawnName, MarkEl[]>> = {
+  link: [r(2.25, 5.5, 6.5, 5), r(3.75, 7, 3.5, 2), r(7.25, 5.5, 6.5, 5), r(8.75, 7, 3.5, 2)],
+  unlink: [
+    r(2.25, 5.5, 6.5, 5),
+    r(3.75, 7, 3.5, 2),
+    r(7.25, 5.5, 6.5, 5),
+    r(8.75, 7, 3.5, 2),
+    p("M4 12 L12 4"),
+  ],
+  search: [o(6.5, 6.5, 4.25), o(6.5, 6.5, 2.25), p("M9.5 9.5 L13.5 13.5")],
+  "zoom-in": [
+    o(6.5, 6.5, 4.25),
+    o(6.5, 6.5, 2.25),
+    p("M9.5 9.5 L13.5 13.5"),
+    p("M6.5 4.75 V8.25"),
+    p("M4.75 6.5 H8.25"),
+  ],
+  "zoom-out": [
+    o(6.5, 6.5, 4.25),
+    o(6.5, 6.5, 2.25),
+    p("M9.5 9.5 L13.5 13.5"),
+    p("M4.75 6.5 H8.25"),
+  ],
+  home: [p("M3.5 8 L8 3.5 L12.5 8 V13 H9.5 V10 H6.5 V13 H3.5 Z")],
+  inbox: [p("M3.5 6.5 L6.5 10 H9.5 L12.5 6.5 V12.5 H3.5 Z")],
+  user: [o(8, 5, 2), p("M4 13.5 V10.75 L8 8.75 L12 10.75 V13.5 Z")],
+  users: [
+    o(6, 4.75, 1.75),
+    p("M2.5 13.5 V10.75 L6 9.25 L9.5 10.75 V13.5 Z"),
+    o(10.75, 4.75, 1.5),
+    p("M9.25 13.5 V11.25 L11.75 9.75 L14 11.25 V13.5 Z"),
+  ],
+  "user-plus": [
+    o(6, 4.75, 1.75),
+    p("M2.5 13.5 V10.75 L6 9.25 L9.5 10.75 V13.5 Z"),
+    p("M12 6 V12"),
+    p("M9.5 9 H14.5"),
+  ],
+  "user-minus": [
+    o(6, 4.75, 1.75),
+    p("M2.5 13.5 V10.75 L6 9.25 L9.5 10.75 V13.5 Z"),
+    p("M9.5 9 H14.5"),
+  ],
+  cart: [p("M3 4 H4.5 L6 11 H12 L13.5 6 H5.5 Z"), o(6.5, 13, 1), o(11.5, 13, 1)],
+  flag: [p("M4.5 2.5 V13.5"), p("M4.5 2.5 H12.5 L10.5 5.5 L12.5 8.5 H4.5 Z")],
+  "map-pin": [
+    p("M8 2.5 A3.5 3.5 0 0 1 11.5 6 C11.5 8.5 8 13.5 8 13.5 C8 13.5 4.5 8.5 4.5 6 A3.5 3.5 0 0 1 8 2.5 Z"),
+    o(8, 6, 1.25),
+  ],
+  cloud: [p("M4 10.5 H12.5 A2 2 0 0 0 12.5 7 A3 3 0 0 0 6.5 6.5 A2.5 2.5 0 0 0 4 10.5 Z")],
+  "folder-open": [p("M2.5 6 H5 L6.5 7.5 H13.5 L12 12.5 H2.5 Z"), p("M3.5 6 V5 H6 L7.5 3.5 H13 V7.5")],
+  clipboard: [r(4, 3.5, 8, 10.5), r(5, 5, 6, 7.5), r(6, 2.5, 4, 2)],
+  duplicate: [p("M3 5 H11 V13 H3 V5"), p("M5.5 2.5 H13.5 V10.5 H5.5 V2.5")],
+  files: [p("M3 4.5 H10.5 V13.5 H3 V4.5"), p("M5.5 2.5 H13 V11.5 H5.5 V2.5")],
+  key: [o(5.5, 10, 2.75), o(5.5, 10, 1), p("M7.5 8.5 L13.5 2.5"), p("M11 5 L13 7")],
+  database: [
+    p("M2.5 4.5 A5.5 1.8 0 0 1 13.5 4.5 V11.5 A5.5 1.8 0 0 1 2.5 11.5 Z"),
+    p("M3.5 7.75 A4.5 1.35 0 0 0 12.5 7.75"),
+    p("M3.5 10.5 A4.5 1.35 0 0 0 12.5 10.5"),
+  ],
+  monitor: [r(2.5, 3.5, 11, 7.5), r(3.75, 4.75, 8.5, 5), p("M8 11 V13"), p("M5.5 13 H10.5")],
+  building: [
+    p("M3.5 13.5 V5 L8 2.5 L12.5 5 V13.5 Z"),
+    r(5.5, 6.5, 2, 1.5),
+    r(8.5, 6.5, 2, 1.5),
+    r(5.5, 9.25, 2, 1.5),
+    r(8.5, 9.25, 2, 1.5),
+    r(7.25, 11.5, 1.5, 2),
+  ],
+  at: [
+    p("M8 5 A3 3 0 1 1 8 11 A3 3 0 1 1 8 5"),
+    p("M10.75 8 V10.5 H11.25 A2.25 2.25 0 0 0 13.5 8"),
+    p("M11.5 12 A5.5 5.5 0 1 1 13.5 8"),
+  ],
+  "user-check": [
+    o(6, 4.75, 1.75),
+    p("M2.5 13.5 V10.75 L6 9.25 L9.5 10.75 V13.5 Z"),
+    p("M10 8.5 L11.5 10 L14.5 6.5"),
+  ],
+};
+
+/**
+ * Negative-space details for the filled family. These are punched through the
+ * solid silhouette with an SVG mask, so the detail works on every background
+ * and does not depend on light or dark theme colors.
+ */
+export const filledCutouts: FilledCutouts = {
+  link: [1, 3],
+  unlink: [1, 3, 4],
+  search: [1],
+  "zoom-in": [1],
+  "zoom-out": [1],
+  save: [1, 2],
+  image: [1, 2],
+  mail: [1],
+  send: [1],
+  file: [1],
+  "file-text": [1, 2, 3, 4],
+  "file-plus": [1, 2, 3],
+  clipboard: [1],
+  camera: [2],
+  film: [1, 2, 3, 4, 5, 6],
+  info: [1, 2],
+  warning: [1, 2],
+  error: [1, 2],
+  help: [1, 2],
+  ban: [1],
+  calendar: [1, 2, 3],
+  clock: [1, 2],
+  timer: [3],
+  eye: [1],
+  "eye-off": [1, 2],
+  "credit-card": [1],
+  tag: [1],
+  package: [1, 2],
+  sidebar: [1],
+  "panel-right": [1],
+  table: [1, 2, 3],
+  layout: [1, 2],
+  window: [1],
+  "map-pin": [1],
+  globe: [1, 2, 3, 4],
+  phone: [1],
+  printer: [2],
+  terminal: [1, 2],
+  paste: [2],
+  receipt: [2, 3],
+  smartphone: [1],
+  compass: [1],
+  map: [1, 2],
+  "folder-plus": [1, 2],
+  database: [1, 2],
+  monitor: [1],
+  building: [1, 2, 3, 4, 5],
+  key: [1],
 };
 
 export const iconAliases = {

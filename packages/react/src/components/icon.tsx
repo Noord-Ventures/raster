@@ -3,6 +3,8 @@ import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
 import {
+  filledCutouts,
+  filledMarks,
   iconGroups,
   iconLabel,
   iconNames,
@@ -15,7 +17,7 @@ import {
 
 const at480 = "@media (max-width: 480px)" as const;
 
-export { iconGroups, iconLabel, iconNames, resolveIcon };
+export { filledCutouts, filledMarks, iconGroups, iconLabel, iconNames, resolveIcon };
 export type { IconName, IconRotate };
 export type { DrawnName, IconAlias, IconGroup } from "./icon-marks";
 
@@ -23,7 +25,8 @@ export type { DrawnName, IconAlias, IconGroup } from "./icon-marks";
  * Raster chrome marks. Vera 28 Aug 2026; optical recut 1 Sep 2026; R1 pairs 1 Sep 2026.
  *
  * 16×16 module, optical center 8,8. Line: stroke 1, fill none.
- * Filled: same figures, solid closed geometry, currentColor. Not a second library.
+ * Filled: same figures, solid closed geometry, currentColor. Select open
+ * figures use hand-cut silhouettes to keep the pair optically complete.
  * Cap butt, join miter, no rx. Hairline stays 1 CSS px at 12, 16, and 24.
  * Copied is check. Accordion down is chevron-right rotated 90°.
  * First five marks (copy, copied, chevron-left, chevron-right, close) stay as drawn,
@@ -44,6 +47,25 @@ export const iconInk = {
 export const iconFill = {
   fill: "currentColor",
   stroke: "none",
+} as const;
+
+const maskPositiveFill = { fill: "white", stroke: "none" } as const;
+const maskPositiveStroke = {
+  fill: "none",
+  stroke: "white",
+  strokeWidth: 2,
+  strokeLinecap: "butt",
+  strokeLinejoin: "miter",
+  vectorEffect: "non-scaling-stroke",
+} as const;
+const maskCutoutFill = { fill: "black", stroke: "none" } as const;
+const maskCutoutStroke = {
+  fill: "none",
+  stroke: "black",
+  strokeWidth: 1.25,
+  strokeLinecap: "butt",
+  strokeLinejoin: "miter",
+  vectorEffect: "non-scaling-stroke",
 } as const;
 
 export type IconSize = 12 | 16 | 24;
@@ -148,6 +170,22 @@ function renderEl(el: MarkEl, key: number, variant: IconVariant): React.ReactNod
   }
 }
 
+function renderMaskEl(el: MarkEl, key: number, cutout: boolean): React.ReactNode {
+  const ink = cutout
+    ? (isClosed(el) ? maskCutoutFill : maskCutoutStroke)
+    : (isClosed(el) ? maskPositiveFill : maskPositiveStroke);
+  switch (el.t) {
+    case "path":
+      return <path key={key} d={el.d} {...ink} />;
+    case "rect":
+      return <rect key={key} x={el.x} y={el.y} width={el.w} height={el.h} {...ink} />;
+    case "circle":
+      return <circle key={key} cx={el.cx} cy={el.cy} r={el.r} {...ink} />;
+    case "line":
+      return <line key={key} x1={el.x1} y1={el.y1} x2={el.x2} y2={el.y2} {...ink} />;
+  }
+}
+
 export interface IconProps extends Omit<React.SVGAttributes<SVGSVGElement>, "children" | "rotate"> {
   name: IconName;
   size?: IconSize;
@@ -164,7 +202,12 @@ export const Icon = React.forwardRef<SVGSVGElement, IconProps>(function Icon(
 ) {
   const resolved = resolveIcon(name);
   const turn = rotate ?? resolved.rotate;
-  const nodes = marks[resolved.mark].map((el, i) => renderEl(el, i, variant));
+  const figure =
+    variant === "filled" ? (filledMarks[resolved.mark] ?? marks[resolved.mark]) : marks[resolved.mark];
+  const maskId = `rs-icon-${React.useId().replace(/:/g, "")}`;
+  const cutouts = new Set(filledCutouts[resolved.mark] ?? []);
+  const nodes = figure.map((el, i) => renderEl(el, i, variant));
+  const filledNodes = figure.map((el, i) => renderMaskEl(el, i, cutouts.has(i)));
   const sx = rs(["rs-icon", variant === "filled" && "rs-icon-filled", className], styles.icon);
   return (
     <svg
@@ -179,7 +222,19 @@ export const Icon = React.forwardRef<SVGSVGElement, IconProps>(function Icon(
       /* rem, so the mark scales with the text-size setting; the attributes keep the px ratio for SVG. */
       style={{ ...sx.style, width: `${size / 16}rem`, height: `${size / 16}rem`, ...style }}
     >
-      {turn ? <g transform={`rotate(${turn} 8 8)`}>{nodes}</g> : nodes}
+      {variant === "filled" ? (
+        <>
+          <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+            <rect width="16" height="16" fill="black" stroke="none" />
+            {turn ? <g transform={`rotate(${turn} 8 8)`}>{filledNodes}</g> : filledNodes}
+          </mask>
+          <rect width="16" height="16" fill="currentColor" stroke="none" mask={`url(#${maskId})`} />
+        </>
+      ) : turn ? (
+        <g transform={`rotate(${turn} 8 8)`}>{nodes}</g>
+      ) : (
+        nodes
+      )}
     </svg>
   );
 });
