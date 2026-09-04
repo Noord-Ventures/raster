@@ -190,8 +190,8 @@ if (!ifPage.includes("interfaces.stylex") || !ifShell.includes("interfaces.style
 if (!ifSx.includes("borderRadius: 0") || !ifSx.includes("boxShadow: \"none\"")) {
   fail("Interface tiles must stay chrome-square with no shadow");
 }
-if (/specimen: \{[\s\S]*?borderRadius:\s*"var\(--radius-sm\)"/.test(ifSx) || /specimen: \{[\s\S]*?boxShadow:\s*"0 10px/.test(ifSx)) {
-  fail("Interface specimen chrome must stay square with no drop shadow");
+if (/specimen: \{[\s\S]*?borderRadius:\s*"var\(--radius-sm\)"/.test(ifSx)) {
+  fail("Interface specimen chrome must stay square");
 }
 
 const home = readFileSync(join(root, "apps/www/app/page.tsx"), "utf8");

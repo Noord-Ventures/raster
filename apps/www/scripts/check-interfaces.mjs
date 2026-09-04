@@ -134,8 +134,12 @@ if (/border:\s*1px/.test(specRule)) {
   console.error("Interfaces CSS must not double the StyleX specimen hairline");
   process.exit(1);
 }
-if (!/border-radius:\s*0/.test(specRule) || !/box-shadow:\s*none/.test(specRule)) {
-  console.error("Interfaces specimen chrome must be square with no drop shadow");
+if (!/border-radius:\s*0/.test(specRule)) {
+  console.error("Interfaces specimen chrome must stay square");
+  process.exit(1);
+}
+if (!specRule.includes("box-shadow:") || specRule.includes("box-shadow: none")) {
+  console.error("Specimen may take a quiet shadow");
   process.exit(1);
 }
 if (!ifSx.includes("borderWidth: 1") || !ifSx.includes('borderColor: "var(--grid-line)"') || !ifSx.includes('borderColor: "var(--divider)"')) {

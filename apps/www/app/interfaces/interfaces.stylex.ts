@@ -8,7 +8,7 @@ const reduce = "@media (prefers-reduced-motion: reduce)";
 
 /**
  * Interfaces posters. Landing tiles sit on the 204, ink --grid-line,
- * no shadow. Specimen chrome is square, no drop shadow. Rail is transparent.
+ * no shadow. Specimen is square with a quiet paper lift. Rail is transparent.
  * Crop stills and `body:has(.if-index)` stay in interfaces.css —
  * positional crops + document :has() are not StyleX-owned.
  */
@@ -164,7 +164,7 @@ export const interfaces = stylex.create({
     borderStyle: "solid",
     borderColor: "var(--divider)",
     borderRadius: 0,
-    boxShadow: "none",
+    boxShadow: "0 1px 0 rgba(0, 0, 0, 0.04), 0 10px 28px rgba(0, 0, 0, 0.05)",
     overflow: "hidden",
   },
   matter: {
