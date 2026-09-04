@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -26,12 +26,18 @@ const styles = stylex.create({
   },
 });
 
-export function Kbd({ className, style, ...props }: React.HTMLAttributes<HTMLElement>) {
+export const Kbd = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(function Kbd(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-kbd", className], styles.kbd);
-  return <kbd {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <kbd ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function KbdPair({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const KbdPair = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function KbdPair(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-kbd-pair", className], styles.pair);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

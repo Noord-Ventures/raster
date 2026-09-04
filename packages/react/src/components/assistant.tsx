@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -134,78 +134,114 @@ const styles = stylex.create({
 });
 
 /** Chat panel: user block, reply, suggestion card, input row. */
-export function Assistant({ className, style, ...props }: AssistantProps) {
+export const Assistant = React.forwardRef<HTMLDivElement, AssistantProps>(function Assistant(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ai", className], styles.ai);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function AssistantHead({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const AssistantHead = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function AssistantHead(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ai-head", className], styles.head);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function AssistantTitle({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const AssistantTitle = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function AssistantTitle(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ai-title", className], styles.title);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function AssistantStatus({ className, style, children, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const AssistantStatus = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function AssistantStatus(
+  { className, style, children, ...props },
+  ref,
+) {
   const sx = rs(["rs-ai-status", className], styles.status);
   const dot = rs(["rs-ai-status-dot"], styles.statusDot);
   return (
-    <span {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+    <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       <i className={dot.className} style={dot.style} />
       {children}
     </span>
   );
-}
+});
 
-export function AssistantMsg({
+export const AssistantMsg = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & { user?: boolean }>(function AssistantMsg({
   user,
   className,
   style,
   ...props
-}: React.HTMLAttributes<HTMLDivElement> & { user?: boolean }) {
+}, ref) {
   const sx = rs(["rs-ai-msg", user && "rs-ai-user", className], styles.msg, user && styles.user);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function AssistantUserBlock({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const AssistantUserBlock = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function AssistantUserBlock(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ai-user-block", className], styles.userBlock);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function AssistantReply({ className, style, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export const AssistantReply = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function AssistantReply(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ai-reply", className], styles.reply);
-  return <p {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <p ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function AssistantCard({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const AssistantCard = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function AssistantCard(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ai-card", className], styles.card);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function AssistantTag({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const AssistantTag = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function AssistantTag(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ai-tag", className], styles.tag);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function AssistantText({ className, style, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export const AssistantText = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function AssistantText(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ai-text", className], styles.text);
-  return <p {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <p ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function AssistantDone({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const AssistantDone = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function AssistantDone(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ai-done", className], styles.done);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function AssistantInput({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const AssistantInput = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function AssistantInput(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ai-input", className], styles.input);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function AssistantSend({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const AssistantSend = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function AssistantSend(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ai-send", className], styles.send);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

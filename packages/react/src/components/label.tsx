@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -19,7 +19,10 @@ const styles = stylex.create({
 });
 
 /** Label above a control. 12px, secondary ink. */
-export function Label({ className, style, ...props }: LabelProps) {
+export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(function Label(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-label", className], styles.label);
-  return <label {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <label ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

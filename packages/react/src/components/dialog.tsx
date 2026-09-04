@@ -5,6 +5,7 @@ import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs, type Leaves } from "../rs";
 import { cx } from "../cx";
+import { setRef } from "../merge-refs";
 import { Icon } from "./icon";
 
 export interface NativeDialogOptions {
@@ -186,11 +187,6 @@ export function useDialogPart(part: DialogPart, explicitId?: string): string | u
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-function setRef<T>(ref: React.Ref<T> | undefined, value: T | null) {
-  if (typeof ref === "function") ref(value);
-  else if (ref) (ref as React.MutableRefObject<T | null>).current = value;
-}
-
 interface NativeDialogProps {
   onCancel?: React.ReactEventHandler<HTMLDialogElement>;
   "aria-label"?: string;
@@ -337,19 +333,28 @@ export interface DialogTitleProps extends React.HTMLAttributes<HTMLHeadingElemen
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
 }
 
-export function DialogTitle({ as: Tag = "h2", className, style, id, ...props }: DialogTitleProps) {
+export const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(function DialogTitle(
+  { as: Tag = "h2", className, style, id, ...props },
+  ref,
+) {
   const titleId = useDialogPart("title", id);
   const sx = rs(["rs-dialog-title", className], dialogStyles.title);
-  return <Tag {...props} id={titleId} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <Tag ref={ref as React.Ref<never>} {...props} id={titleId} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function DialogBody({ className, style, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export const DialogBody = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function DialogBody(
+  { className, style, id, ...props },
+  ref,
+) {
   const bodyId = useDialogPart("body", id);
   const sx = rs(["rs-dialog-body", className], dialogStyles.body);
-  return <p {...props} id={bodyId} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <p ref={ref} {...props} id={bodyId} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function DialogActions({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const DialogActions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function DialogActions(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-dialog-actions", className], dialogStyles.actions);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

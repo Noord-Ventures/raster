@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -118,7 +118,10 @@ const styles = stylex.create({
 });
 
 /** A trail: ordered list in a nav, the current page marked. */
-export function Breadcrumbs({ items, className, style, ...props }: BreadcrumbsProps) {
+export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(function Breadcrumbs(
+  { items, className, style, ...props },
+  ref,
+) {
   const nav = rs(["rs-crumbs", className], styles.crumbs);
   const list = rs(["rs-crumbs-list"], styles.list);
   const item = rs(["rs-crumbs-item"], styles.item);
@@ -126,7 +129,7 @@ export function Breadcrumbs({ items, className, style, ...props }: BreadcrumbsPr
   const sep = rs(["rs-crumbs-sep"], styles.sep);
   const here = rs(["rs-crumbs-here"], styles.here);
   return (
-    <nav aria-label="Breadcrumb" {...props} className={nav.className} style={{ ...nav.style, ...style }}>
+    <nav ref={ref} aria-label="Breadcrumb" {...props} className={nav.className} style={{ ...nav.style, ...style }}>
       <ol className={list.className} style={list.style}>
         {items.map((crumb, index) => {
           const last = index === items.length - 1;
@@ -156,4 +159,4 @@ export function Breadcrumbs({ items, className, style, ...props }: BreadcrumbsPr
       </ol>
     </nav>
   );
-}
+});

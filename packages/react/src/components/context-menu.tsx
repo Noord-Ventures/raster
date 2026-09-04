@@ -43,7 +43,10 @@ export interface ContextMenuProps extends React.HTMLAttributes<HTMLDivElement> {
  * `tabIndex={-1}` when the child is focusable itself); focus returns to
  * whatever had it when the menu closes.
  */
-export function ContextMenu({ items, className, style, children, onContextMenu, onKeyDown, ...props }: ContextMenuProps) {
+export const ContextMenu = React.forwardRef<HTMLDivElement, ContextMenuProps>(function ContextMenu(
+  { items, className, style, children, onContextMenu, onKeyDown, ...props },
+  ref,
+) {
   const idBase = React.useId();
   const menuId = `${idBase}-menu`;
   const [at, setAt] = React.useState<{ x: number; y: number } | null>(null);
@@ -78,6 +81,7 @@ export function ContextMenu({ items, className, style, children, onContextMenu, 
   const menu = rs(["rs-menu", "rs-context-menu-pin"], menuStyles.menu, menuStyles.menuFixed, styles.pin);
   return (
     <div
+      ref={ref}
       tabIndex={0}
       aria-keyshortcuts="Shift+F10"
       className={trigger.className}
@@ -113,4 +117,4 @@ export function ContextMenu({ items, className, style, children, onContextMenu, 
       )}
     </div>
   );
-}
+});

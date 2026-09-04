@@ -151,7 +151,7 @@ const styles = stylex.create({
 });
 
 /** One field, one action; the action sits inside the field. */
-export function InlineForm({
+export const InlineForm = React.forwardRef<HTMLFormElement, InlineFormProps>(function InlineForm({
   placeholder = "Your e-mail",
   buttonLabel = "Subscribe",
   successLabel = "You're on the list",
@@ -161,7 +161,7 @@ export function InlineForm({
   style,
   inputProps,
   ...props
-}: InlineFormProps) {
+}: InlineFormProps, ref: React.ForwardedRef<HTMLFormElement>) {
   const [value, setValue] = React.useState("");
   const [done, setDone] = React.useState(false);
   const valid = validate(value);
@@ -183,6 +183,7 @@ export function InlineForm({
 
   return (
     <form
+      ref={ref}
       className={sx.className}
       style={{ ...sx.style, ...style }}
       onSubmit={(e) => {
@@ -208,4 +209,4 @@ export function InlineForm({
       </span>
     </form>
   );
-}
+});

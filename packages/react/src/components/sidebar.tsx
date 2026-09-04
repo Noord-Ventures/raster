@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -146,55 +146,75 @@ const styles = stylex.create({
 });
 
 /** One 204 module rail. Flush items, hairline edge. */
-export function Sidebar({ className, style, ...props }: SidebarProps) {
+export const Sidebar = React.forwardRef<HTMLElement, SidebarProps>(function Sidebar(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-sidebar", className], styles.sidebar);
-  return <aside {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <aside ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function SidebarHead({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const SidebarHead = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function SidebarHead(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-sidebar-head", className], styles.head);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
 export interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   /** Landmark name; pages carry several navs. */
   "aria-label"?: string;
 }
 
-export function SidebarNav({ className, style, "aria-label": ariaLabel = "Sidebar", ...props }: SidebarNavProps) {
+export const SidebarNav = React.forwardRef<HTMLElement, SidebarNavProps>(function SidebarNav(
+  { className, style, "aria-label": ariaLabel = "Sidebar", ...props },
+  ref,
+) {
   const sx = rs(["rs-sidebar-nav", className], styles.nav);
   return (
     <nav
+      ref={ref}
       aria-label={props["aria-labelledby"] ? undefined : ariaLabel}
       {...props}
       className={sx.className}
       style={{ ...sx.style, ...style }}
     />
   );
-}
+});
 
 export interface SidebarItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   current?: boolean;
 }
 
-export function SidebarItem({ current, className, style, ...props }: SidebarItemProps) {
+export const SidebarItem = React.forwardRef<HTMLAnchorElement, SidebarItemProps>(function SidebarItem(
+  { current, className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-sidebar-item", className], styles.item);
   return (
     <a
+      ref={ref}
       aria-current={current ? "page" : undefined}
       {...props}
       className={sx.className}
       style={{ ...sx.style, ...style }}
     />
   );
-}
+});
 
-export function SidebarLabel({ className, style, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export const SidebarLabel = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function SidebarLabel(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-sidebar-label", className], styles.label);
-  return <p {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <p ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function SidebarFoot({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const SidebarFoot = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function SidebarFoot(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-sidebar-foot", className], styles.foot);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

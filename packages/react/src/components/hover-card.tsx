@@ -86,7 +86,10 @@ const styles = stylex.create({
  * Preview panel on hover or keyboard focus. CSS shows it; the panel
  * describes the trigger, and Escape hides it until the pointer leaves.
  */
-export function HoverCard({ trigger, className, style, children, onKeyDown, onPointerLeave, onBlur, ...props }: HoverCardProps) {
+export const HoverCard = React.forwardRef<HTMLSpanElement, HoverCardProps>(function HoverCard(
+  { trigger, className, style, children, onKeyDown, onPointerLeave, onBlur, ...props },
+  ref,
+) {
   const id = React.useId();
   const [dismissed, setDismissed] = React.useState(false);
   const sx = rs(["rs-hover-card", className], styles.root, stylex.defaultMarker());
@@ -100,6 +103,7 @@ export function HoverCard({ trigger, className, style, children, onKeyDown, onPo
   );
   return (
     <span
+      ref={ref}
       {...props}
       className={sx.className}
       style={{ ...sx.style, ...style }}
@@ -122,4 +126,4 @@ export function HoverCard({ trigger, className, style, children, onKeyDown, onPo
       </span>
     </span>
   );
-}
+});

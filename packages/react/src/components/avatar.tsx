@@ -64,7 +64,10 @@ const styles = stylex.create({
   },
 });
 
-export function Avatar({ src, alt, name, initials, size = "md", className, style, ...props }: AvatarProps) {
+export const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
+  { src, alt, name, initials, size = "md", className, style, ...props },
+  ref,
+) {
   const [failed, setFailed] = React.useState(false);
   const inRow = React.useContext(AvatarRowContext);
   const showImage = src && !failed;
@@ -74,7 +77,7 @@ export function Avatar({ src, alt, name, initials, size = "md", className, style
   /* Initials stand in for a name only when one is given; otherwise they read as plain text. */
   const named = !showImage && name ? { role: "img" as const, "aria-label": name } : null;
   return (
-    <span {...named} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+    <span ref={ref} {...named} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       {showImage ? (
         <img className={img.className} style={img.style} src={src} alt={altText} onError={() => setFailed(true)} />
       ) : (
@@ -82,14 +85,17 @@ export function Avatar({ src, alt, name, initials, size = "md", className, style
       )}
     </span>
   );
-}
+});
 
 /** Overlapping row with paper seams. */
-export function AvatarRow({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const AvatarRow = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function AvatarRow(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-avatar-row", className], styles.row);
   return (
     <AvatarRowContext.Provider value={true}>
-      <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />
+      <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />
     </AvatarRowContext.Provider>
   );
-}
+});

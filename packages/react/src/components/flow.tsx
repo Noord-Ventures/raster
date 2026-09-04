@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -170,60 +170,90 @@ const styles = stylex.create({
 });
 
 /** Dashed 1px pipeline. */
-export function Flow({ className, style, ...props }: FlowProps) {
+export const Flow = React.forwardRef<HTMLDivElement, FlowProps>(function Flow(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-flow", className], styles.flow);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function FlowStep({ className, style, ...props }: FlowStepProps) {
+export const FlowStep = React.forwardRef<HTMLDivElement, FlowStepProps>(function FlowStep(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-flow-step", className], styles.step);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function FlowNum({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const FlowNum = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function FlowNum(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-flow-num", className], styles.num);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function FlowTitle({ className, style, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+export const FlowTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(function FlowTitle(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs([className, "rs-flow-title"], styles.title);
-  return <h3 {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <h3 ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function FlowBody({ className, style, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export const FlowBody = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function FlowBody(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs([className, "rs-flow-body"], styles.body);
-  return <p {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <p ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function FlowSubs({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const FlowSubs = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function FlowSubs(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-flow-subs", className], styles.subs);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function FlowSub({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const FlowSub = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function FlowSub(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs([className, "rs-flow-sub"], styles.sub);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function FlowSubAdd({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const FlowSubAdd = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function FlowSubAdd(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-flow-sub-add", className], styles.sub, styles.subAdd);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function FlowAdd({ className, style, children, ...props }: FlowAddProps) {
+export const FlowAdd = React.forwardRef<HTMLButtonElement, FlowAddProps>(function FlowAdd(
+  { className, style, children, ...props },
+  ref,
+) {
   const sx = rs(["rs-flow-add", className], styles.add);
   const plus = rs(["rs-flow-plus"], styles.plus);
   return (
-    <button type="button" {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+    <button ref={ref} type="button" {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       <span className={plus.className} style={plus.style}>
         +
       </span>
       {children}
     </button>
   );
-}
+});
 
-export function FlowPlus({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const FlowPlus = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function FlowPlus(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-flow-plus", className], styles.plus);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

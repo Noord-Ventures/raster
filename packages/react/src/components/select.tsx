@@ -4,6 +4,7 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
+import { useMergedRefs } from "../merge-refs";
 import { Icon } from "./icon";
 import { menuStyles, typeAheadIndex } from "./dropdown-menu";
 
@@ -49,7 +50,7 @@ const PAGE = 10;
  * Select-only combobox: the trigger holds focus and points at the active
  * option with aria-activedescendant; the listbox overlays.
  */
-export function Select({
+export const Select = React.forwardRef<HTMLDivElement, SelectProps>(function Select({
   options,
   value,
   defaultValue,
@@ -62,12 +63,13 @@ export function Select({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledby,
   ...props
-}: SelectProps) {
+}: SelectProps, ref: React.ForwardedRef<HTMLDivElement>) {
   const idBase = React.useId();
   const triggerId = `${idBase}-trigger`;
   const listboxId = `${idBase}-listbox`;
   const optionId = (index: number) => `${idBase}-opt-${index}`;
   const rootRef = React.useRef<HTMLDivElement>(null);
+  const setRootRef = useMergedRefs(rootRef, ref);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
   const activeRef = React.useRef<HTMLDivElement>(null);
   const [open, setOpen] = React.useState(false);
@@ -208,7 +210,7 @@ export function Select({
 
   return (
     <div
-      ref={rootRef}
+      ref={setRootRef}
       className={root.className}
       style={{ ...root.style, ...style }}
       onKeyDown={onRootKeyDown}
@@ -273,4 +275,4 @@ export function Select({
       )}
     </div>
   );
-}
+});

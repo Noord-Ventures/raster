@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -114,10 +114,13 @@ const styles = stylex.create({
   },
 });
 
-export function Stepper({ steps, current, className, style, ...props }: StepperProps) {
+export const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(function Stepper(
+  { steps, current, className, style, ...props },
+  ref,
+) {
   const root = rs(["rs-steps", className], styles.steps);
   return (
-    <div {...props} className={root.className} style={{ ...root.style, ...style }}>
+    <div ref={ref} {...props} className={root.className} style={{ ...root.style, ...style }}>
       {steps.map((step, index) => {
         const row = rs(["rs-step"], styles.step);
         const dot = rs(
@@ -148,4 +151,4 @@ export function Stepper({ steps, current, className, style, ...props }: StepperP
       })}
     </div>
   );
-}
+});

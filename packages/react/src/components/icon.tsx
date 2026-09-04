@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -158,13 +158,17 @@ export interface IconProps extends Omit<React.SVGAttributes<SVGSVGElement>, "chi
 }
 
 /** One mark. Size is the drawn square; the viewBox is always 16. */
-export function Icon({ name, size = 16, variant = "line", rotate, className, style, ...props }: IconProps) {
+export const Icon = React.forwardRef<SVGSVGElement, IconProps>(function Icon(
+  { name, size = 16, variant = "line", rotate, className, style, ...props },
+  ref,
+) {
   const resolved = resolveIcon(name);
   const turn = rotate ?? resolved.rotate;
   const nodes = marks[resolved.mark].map((el, i) => renderEl(el, i, variant));
   const sx = rs(["rs-icon", variant === "filled" && "rs-icon-filled", className], styles.icon);
   return (
     <svg
+      ref={ref}
       viewBox="0 0 16 16"
       width={size}
       height={size}
@@ -177,16 +181,22 @@ export function Icon({ name, size = 16, variant = "line", rotate, className, sty
       {turn ? <g transform={`rotate(${turn} 8 8)`}>{nodes}</g> : nodes}
     </svg>
   );
-}
+});
 
 /** Inline mark row. One family, current color. */
-export function Icons({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const Icons = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function Icons(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-icons", className], styles.row);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
 /** Full family at 12, 16, and 24, line | filled, grouped. Optical center 8,8. */
-export function IconCatalog({ className }: { className?: string }) {
+export const IconCatalog = React.forwardRef<HTMLDivElement, { className?: string }>(function IconCatalog(
+  { className },
+  ref,
+) {
   const catalog = rs(["rs-icon-catalog", className], styles.catalog);
   const group = rs(["rs-icon-group"], styles.group);
   const groupTitle = rs(["rs-icon-group-title"], styles.groupTitle);
@@ -196,7 +206,7 @@ export function IconCatalog({ className }: { className?: string }) {
   const kin = rs(["rs-icon-kin"], styles.kin);
   const label = rs(["rs-icon-label"], styles.label);
   return (
-    <div className={catalog.className} style={catalog.style}>
+    <div ref={ref} className={catalog.className} style={catalog.style}>
       {iconGroups.map((g) => (
         <section
           key={g.title}
@@ -232,4 +242,4 @@ export function IconCatalog({ className }: { className?: string }) {
       ))}
     </div>
   );
-}
+});

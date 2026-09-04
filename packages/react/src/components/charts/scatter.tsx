@@ -50,7 +50,7 @@ function extent(values: number[], pad = 0.08): [number, number] {
   return [lo - span * pad, hi + span * pad];
 }
 
-export function ScatterChart({
+export const ScatterChart = React.forwardRef<HTMLDivElement, ScatterChartProps>(function ScatterChart({
   points,
   height = 204,
   unit,
@@ -68,7 +68,7 @@ export function ScatterChart({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
   ...props
-}: ScatterChartProps) {
+}: ScatterChartProps, ref: React.ForwardedRef<HTMLDivElement>) {
   const format = valueFormat ?? ((v: number) => defaultFormat(v, undefined, locale));
   const [hover, setHover] = React.useState<number | null>(null);
   const [canvasRef, W] = useChartWidth<HTMLDivElement>();
@@ -113,7 +113,7 @@ export function ScatterChart({
   );
 
   return (
-    <ChartField spot={spot} className={className} {...props}>
+    <ChartField ref={ref} spot={spot} className={className} {...props}>
       {(yLabel || xLabel) && (
         <ChartHead>
           {yLabel ? <ChartTitle id={titleId}>{yLabel}</ChartTitle> : <span />}
@@ -196,4 +196,4 @@ export function ScatterChart({
       />
     </ChartField>
   );
-}
+});

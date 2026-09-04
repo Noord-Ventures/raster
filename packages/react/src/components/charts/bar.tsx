@@ -46,7 +46,7 @@ export interface BarChartProps extends React.HTMLAttributes<HTMLDivElement> {
   locale?: string;
 }
 
-export function BarChart({
+export const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>(function BarChart({
   data,
   series,
   labels,
@@ -65,7 +65,7 @@ export function BarChart({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
   ...props
-}: BarChartProps) {
+}: BarChartProps, ref: React.ForwardedRef<HTMLDivElement>) {
   const fromData: ChartSeries[] = data ? [{ name: "Value", values: data.map((d) => d.value) }] : [];
   const shown = (series ?? fromData).slice(0, 4);
   const tickLabels = labels ?? data?.map((d) => d.label) ?? shown[0]?.values.map((_, i) => `${i + 1}`) ?? [];
@@ -123,7 +123,7 @@ export function BarChart({
   });
 
   return (
-    <ChartField spot={spot} className={className} {...props}>
+    <ChartField ref={ref} spot={spot} className={className} {...props}>
       {yLabel && (
         <ChartHead>
           <ChartTitle id={titleId}>{yLabel}</ChartTitle>
@@ -268,4 +268,4 @@ export function BarChart({
       <SrTable caption={yLabel ?? describePlot("Chart data", shown.map((s) => s.name), unit)} labels={tickLabels} series={shown} />
     </ChartField>
   );
-}
+});

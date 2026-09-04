@@ -235,7 +235,10 @@ const styles = stylex.create({
  * hairline, and the breadcrumbs fade in. While hidden the trail is
  * inert and invisible, so nothing focuses into an unseen link.
  */
-export function CrumbBar({ trail, threshold = 110, root, rootShort, className, style, ...props }: CrumbBarProps) {
+export const CrumbBar = React.forwardRef<HTMLElement, CrumbBarProps>(function CrumbBar(
+  { trail, threshold = 110, root, rootShort, className, style, ...props },
+  ref,
+) {
   const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => {
@@ -270,7 +273,7 @@ export function CrumbBar({ trail, threshold = 110, root, rootShort, className, s
   );
 
   return (
-    <nav aria-label="Breadcrumb" {...props} className={bar.className} style={{ ...bar.style, ...style }}>
+    <nav ref={ref} aria-label="Breadcrumb" {...props} className={bar.className} style={{ ...bar.style, ...style }}>
       <div className={inner.className} style={inner.style}>
         {root &&
           (root.href ? (
@@ -312,4 +315,4 @@ export function CrumbBar({ trail, threshold = 110, root, rootShort, className, s
       </div>
     </nav>
   );
-}
+});

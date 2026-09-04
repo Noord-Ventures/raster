@@ -4,6 +4,7 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
+import { useMergedRefs } from "../merge-refs";
 import { Calendar } from "./calendar";
 import { Icon } from "./icon";
 import { menuStyles } from "./dropdown-menu";
@@ -38,7 +39,7 @@ const defaultDateFormat = (d: Date) =>
  * moves to the selected (or today's) day; Escape, Tab out, and a click
  * outside close it; focus returns to the trigger.
  */
-export function DatePicker({
+export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(function DatePicker({
   value,
   defaultValue,
   onValueChange,
@@ -52,10 +53,11 @@ export function DatePicker({
   onKeyDown,
   onBlur,
   ...props
-}: DatePickerProps) {
+}: DatePickerProps, ref: React.ForwardedRef<HTMLDivElement>) {
   const idBase = React.useId();
   const dialogId = `${idBase}-dialog`;
   const rootRef = React.useRef<HTMLDivElement>(null);
+  const setRootRef = useMergedRefs(rootRef, ref);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
   const [open, setOpen] = React.useState(false);
   const [inner, setInner] = React.useState(defaultValue);
@@ -89,7 +91,7 @@ export function DatePicker({
 
   return (
     <div
-      ref={rootRef}
+      ref={setRootRef}
       className={root.className}
       style={{ ...root.style, ...style }}
       onKeyDown={(e) => {
@@ -131,4 +133,4 @@ export function DatePicker({
       )}
     </div>
   );
-}
+});

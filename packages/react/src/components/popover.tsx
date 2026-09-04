@@ -161,12 +161,18 @@ export function Popover({ trigger, align = "start", className, style, children, 
   );
 }
 
-export function PopoverTitle({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const PopoverTitle = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function PopoverTitle(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-popover-title", className], styles.title);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function PopoverBody({ className, style, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export const PopoverBody = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function PopoverBody(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-popover-body", className], styles.body);
-  return <p {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <p ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

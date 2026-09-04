@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -68,13 +68,16 @@ const styles = stylex.create({
 });
 
 /** A flush row. Title occupies the cell; meta trails. */
-export function Item({ title, description, meta, className, style, ...props }: ItemProps) {
+export const Item = React.forwardRef<HTMLDivElement, ItemProps>(function Item(
+  { title, description, meta, className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-item", className], styles.item);
   const heading = rs(["rs-item-title"], styles.title);
   const note = rs(["rs-item-desc"], styles.desc);
   const trail = rs(["rs-item-meta"], styles.meta);
   return (
-    <div {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+    <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       <div>
         <p className={heading.className} style={heading.style}>
           {title}
@@ -92,4 +95,4 @@ export function Item({ title, description, meta, className, style, ...props }: I
       )}
     </div>
   );
-}
+});

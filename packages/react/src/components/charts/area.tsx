@@ -14,7 +14,7 @@ const styles = stylex.create({
 export type AreaChartProps = Omit<LineChartProps, "area">;
 
 /** Filled field. Same law as the line: hairlines, texture, one optional spot. */
-export function AreaChart(props: AreaChartProps) {
+export const AreaChart = React.forwardRef<HTMLDivElement, AreaChartProps>(function AreaChart(props, ref) {
   void styles.area;
-  return <LineChart {...props} area />;
-}
+  return <LineChart ref={ref} {...props} area />;
+});

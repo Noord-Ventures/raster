@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -27,7 +27,10 @@ const styles = stylex.create({
 });
 
 /** Native form. Fields stack. One primary action at the end. */
-export function Form({ className, style, ...props }: FormProps) {
+export const Form = React.forwardRef<HTMLFormElement, FormProps>(function Form(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-form", className], styles.form);
-  return <form {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <form ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

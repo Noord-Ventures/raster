@@ -170,7 +170,7 @@ const styles = stylex.create({
 const PAGE = 10;
 
 /** Filter, arrows, enter. The input keeps focus; the list is aria-activedescendant. */
-export function Command({
+export const Command = React.forwardRef<HTMLDivElement, CommandProps>(function Command({
   groups,
   placeholder = "Type a command or search…",
   emptyLabel = "Nothing found.",
@@ -178,7 +178,7 @@ export function Command({
   className,
   style,
   ...props
-}: CommandProps) {
+}, ref) {
   const idBase = React.useId();
   const inputId = `${idBase}-input`;
   const listboxId = `${idBase}-listbox`;
@@ -262,7 +262,7 @@ export function Command({
 
   let cursor = -1;
   return (
-    <div className={className} style={style} {...props}>
+    <div ref={ref} className={className} style={style} {...props}>
       <input
         id={inputId}
         className={input.className}
@@ -344,7 +344,7 @@ export function Command({
       </div>
     </div>
   );
-}
+});
 
 export interface CommandDialogProps extends CommandProps {
   open: boolean;
@@ -352,9 +352,13 @@ export interface CommandDialogProps extends CommandProps {
 }
 
 /** The palette in a native <dialog>. Wire ⌘K in your app to setOpen(true). */
-export function CommandDialog({ open, onClose, className, ...props }: CommandDialogProps) {
+export const CommandDialog = React.forwardRef<HTMLDialogElement, CommandDialogProps>(function CommandDialog(
+  { open, onClose, className, ...props },
+  ref,
+) {
   return (
     <Dialog
+      ref={ref}
       open={open}
       onClose={onClose}
       className={["rs-command", "rs-command-dialog", className].filter(Boolean).join(" ")}
@@ -363,4 +367,4 @@ export function CommandDialog({ open, onClose, className, ...props }: CommandDia
       {open && <Command onDone={onClose} {...props} />}
     </Dialog>
   );
-}
+});

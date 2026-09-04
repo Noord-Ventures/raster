@@ -70,7 +70,7 @@ export interface DonutProps extends React.HTMLAttributes<HTMLDivElement> {
   locale?: string;
 }
 
-export function Donut({
+export const Donut = React.forwardRef<HTMLDivElement, DonutProps>(function Donut({
   value,
   max = 100,
   size = 184,
@@ -83,7 +83,7 @@ export function Donut({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
   ...props
-}: DonutProps) {
+}: DonutProps, ref: React.ForwardedRef<HTMLDivElement>) {
   const format = valueFormat ?? ((v: number) => `${Math.round((v / max) * 100)}%`);
   const pct = Math.max(0, Math.min(1, max === 0 ? 0 : value / max));
   const caption = typeof label === "string" ? label : undefined;
@@ -108,7 +108,7 @@ export function Donut({
           "aria-labelledby": [caption ? captionId : label ? titleId : null, valueId].filter(Boolean).join(" "),
         };
   return (
-    <ChartField spot={spot} className={className ? `rs-chart-donut-wrap ${className}` : "rs-chart-donut-wrap"} {...props}>
+    <ChartField ref={ref} spot={spot} className={className ? `rs-chart-donut-wrap ${className}` : "rs-chart-donut-wrap"} {...props}>
       <svg
         className={svg.className}
         style={svg.style}
@@ -149,7 +149,7 @@ export function Donut({
       />
     </ChartField>
   );
-}
+});
 
 export type ShareSlice = { label: string; value: number };
 
@@ -162,7 +162,7 @@ export interface ShareProps extends React.HTMLAttributes<HTMLDivElement> {
   locale?: string;
 }
 
-export function Share({
+export const Share = React.forwardRef<HTMLDivElement, ShareProps>(function Share({
   slices,
   unit,
   valueFormat,
@@ -172,7 +172,7 @@ export function Share({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
   ...props
-}: ShareProps) {
+}: ShareProps, ref: React.ForwardedRef<HTMLDivElement>) {
   const format = valueFormat ?? ((v: number) => defaultFormat(v, unit, locale));
   const total = slices.reduce((s, x) => s + x.value, 0) || 1;
   const percent = (v: number) => `${defaultFormat((v / total) * 100, undefined, locale)}%`;
@@ -183,7 +183,7 @@ export function Share({
         "aria-label": ariaLabel ?? `Share: ${slices.map((s) => `${s.label} ${percent(s.value)}`).join(", ")}`,
       };
   return (
-    <ChartField spot={spot} className={className} {...props}>
+    <ChartField ref={ref} spot={spot} className={className} {...props}>
       <div className={share.className} style={share.style} role="img" {...name}>
         {slices.map((s, i) => {
           const seg = rs(
@@ -218,4 +218,4 @@ export function Share({
       />
     </ChartField>
   );
-}
+});

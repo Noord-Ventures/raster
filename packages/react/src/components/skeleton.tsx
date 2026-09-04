@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -29,14 +29,18 @@ const styles = stylex.create({
   },
 });
 
-export function Skeleton({ width, height = 14, style, className, ...props }: SkeletonProps) {
+export const Skeleton = React.forwardRef<HTMLSpanElement, SkeletonProps>(function Skeleton(
+  { width, height = 14, style, className, ...props },
+  ref,
+) {
   const sx = rs(["rs-skeleton", className], styles.skeleton);
   return (
     <span
+      ref={ref}
       aria-hidden="true"
       {...props}
       className={sx.className}
       style={{ width, height, ...sx.style, ...style }}
     />
   );
-}
+});

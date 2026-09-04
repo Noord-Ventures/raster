@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -34,11 +34,14 @@ const styles = stylex.create({
 });
 
 /** Hairline ring. Stops under prefers-reduced-motion. */
-export function Spinner({ label = "Loading", className, style, ...props }: SpinnerProps) {
+export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(function Spinner(
+  { label = "Loading", className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-spinner", className], styles.spinner);
   const ring = rs(["rs-spinner-ring"], styles.ring);
   return (
-    <span role="status" aria-label={label} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+    <span ref={ref} role="status" aria-label={label} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       <svg
         viewBox="0 0 16 16"
         width="16"
@@ -62,4 +65,4 @@ export function Spinner({ label = "Loading", className, style, ...props }: Spinn
       </svg>
     </span>
   );
-}
+});

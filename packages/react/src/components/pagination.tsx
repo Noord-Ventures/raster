@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -146,7 +146,7 @@ function pageItems(page: number, count: number, siblings: number): Array<number 
   return items;
 }
 
-export function Pagination({
+export const Pagination = React.forwardRef<HTMLElement, PaginationProps>(function Pagination({
   page,
   count,
   onPageChange,
@@ -154,11 +154,11 @@ export function Pagination({
   className,
   style,
   ...props
-}: PaginationProps) {
+}, ref) {
   const nav = rs(["rs-pages", className], styles.pages);
   const icon = rs(["rs-pages-icon"], styles.icon);
   return (
-    <nav aria-label="Pagination" {...props} className={nav.className} style={{ ...nav.style, ...style }}>
+    <nav ref={ref} aria-label="Pagination" {...props} className={nav.className} style={{ ...nav.style, ...style }}>
       <PageButton aria-label="Previous page" disabled={page <= 1} onClick={() => onPageChange?.(page - 1)}>
         <Icon name="chevron-left" size={12} className={icon.className} style={icon.style} />
       </PageButton>
@@ -187,7 +187,7 @@ export function Pagination({
       </PageButton>
     </nav>
   );
-}
+});
 
 function PageButton({
   current,

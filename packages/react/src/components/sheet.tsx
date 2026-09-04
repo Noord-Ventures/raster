@@ -112,14 +112,20 @@ export interface SheetTitleProps extends React.HTMLAttributes<HTMLHeadingElement
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
 }
 
-export function SheetTitle({ as: Tag = "h2", className, style, id, ...props }: SheetTitleProps) {
+export const SheetTitle = React.forwardRef<HTMLHeadingElement, SheetTitleProps>(function SheetTitle(
+  { as: Tag = "h2", className, style, id, ...props },
+  ref,
+) {
   const titleId = useDialogPart("title", id);
   const sx = rs(["rs-sheet-title", className], styles.title);
-  return <Tag {...props} id={titleId} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <Tag ref={ref as React.Ref<never>} {...props} id={titleId} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function SheetBody({ className, style, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export const SheetBody = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function SheetBody(
+  { className, style, id, ...props },
+  ref,
+) {
   const bodyId = useDialogPart("body", id);
   const sx = rs(["rs-sheet-body", className], styles.body);
-  return <p {...props} id={bodyId} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <p ref={ref} {...props} id={bodyId} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

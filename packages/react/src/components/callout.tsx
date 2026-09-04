@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -25,7 +25,10 @@ const styles = stylex.create({
 });
 
 /** Paper field, 1px hairline on all sides. Not rounded. No left bar. */
-export function Callout({ className, style, ...props }: CalloutProps) {
+export const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(function Callout(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-callout", className], styles.box);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

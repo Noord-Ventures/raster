@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -27,12 +27,16 @@ const styles = stylex.create({
   },
 });
 
-export function Separator({ orientation = "horizontal", className, style, ...props }: SeparatorProps) {
+export const Separator = React.forwardRef<HTMLElement, SeparatorProps>(function Separator(
+  { orientation = "horizontal", className, style, ...props },
+  ref,
+) {
   if (orientation === "vertical") {
     const sx = rs(["rs-sep-v", className], styles.vertical);
     return (
       // biome-ignore lint/a11y/useFocusableInteractive: a static separator is not a widget; it takes no focus
       <span
+        ref={ref as React.Ref<HTMLSpanElement>}
         // biome-ignore lint/a11y/useAriaPropsForRole: a non-focusable separator needs no aria-valuenow
         role="separator"
         aria-orientation="vertical"
@@ -43,5 +47,5 @@ export function Separator({ orientation = "horizontal", className, style, ...pro
     );
   }
   const sx = rs(["rs-sep", className], styles.horizontal);
-  return <hr {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <hr ref={ref as React.Ref<HTMLHRElement>} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

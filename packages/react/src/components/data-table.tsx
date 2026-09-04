@@ -183,7 +183,7 @@ const styles = stylex.create({
 });
 
 /** Sortable rows over the plain rs-table. */
-export function DataTable<Row extends Record<string, unknown>>({
+export const DataTable = React.forwardRef(function DataTable<Row extends Record<string, unknown>>({
   columns,
   rows,
   rowKey = (_, i) => i,
@@ -191,7 +191,7 @@ export function DataTable<Row extends Record<string, unknown>>({
   className,
   style,
   ...props
-}: DataTableProps<Row>) {
+}: DataTableProps<Row>, ref: React.ForwardedRef<HTMLDivElement>) {
   const [sort, setSort] = React.useState<{ key: string; dir: Dir } | null>(null);
 
   const sorted = React.useMemo(() => {
@@ -214,7 +214,7 @@ export function DataTable<Row extends Record<string, unknown>>({
   const empty = rs(["rs-datatable-empty"], styles.empty);
 
   return (
-    <div {...props} className={className} style={style}>
+    <div ref={ref} {...props} className={className} style={style}>
       <table className={table.className} style={table.style}>
         <thead>
           <tr>
@@ -275,4 +275,7 @@ export function DataTable<Row extends Record<string, unknown>>({
       )}
     </div>
   );
-}
+  /* forwardRef cannot carry the row type parameter, so the export restates it. */
+}) as <Row extends Record<string, unknown>>(
+  props: DataTableProps<Row> & React.RefAttributes<HTMLDivElement>,
+) => React.ReactElement;

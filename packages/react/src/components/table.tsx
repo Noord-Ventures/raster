@@ -135,25 +135,40 @@ export const Table = React.forwardRef<HTMLTableElement, TableProps>(function Tab
   return <table ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
 });
 
-export function TableHead({ className, style, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) {
-  return <thead className={className} style={style} {...props} />;
-}
+export const TableHead = React.forwardRef<HTMLTableSectionElement, React.HTMLAttributes<HTMLTableSectionElement>>(function TableHead(
+  { className, style, ...props },
+  ref,
+) {
+  return <thead ref={ref} className={className} style={style} {...props} />;
+});
 
-export function TableBody({ className, style, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) {
-  return <tbody className={className} style={style} {...props} />;
-}
+export const TableBody = React.forwardRef<HTMLTableSectionElement, React.HTMLAttributes<HTMLTableSectionElement>>(function TableBody(
+  { className, style, ...props },
+  ref,
+) {
+  return <tbody ref={ref} className={className} style={style} {...props} />;
+});
 
-export function TableRow({ total, className, style, ...props }: TableRowProps) {
+export const TableRow = React.forwardRef<HTMLTableRowElement, TableRowProps>(function TableRow(
+  { total, className, style, ...props },
+  ref,
+) {
   const sx = rs([total && "rs-total-row", className, "rs-table-row"], styles.row, total && styles.total);
-  return <tr {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <tr ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function TableTh({ className, style, ...props }: TableHeaderCellProps) {
+export const TableTh = React.forwardRef<HTMLTableCellElement, TableHeaderCellProps>(function TableTh(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs([className, "rs-table-th"], styles.th);
-  return <th {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <th ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function TableTd({ total, className, style, ...props }: TableCellProps) {
+export const TableTd = React.forwardRef<HTMLTableCellElement, TableCellProps>(function TableTd(
+  { total, className, style, ...props },
+  ref,
+) {
   const sx = rs([className, "rs-table-td", total && "rs-table-total-cell"], styles.td, total && styles.totalCell);
-  return <td {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <td ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

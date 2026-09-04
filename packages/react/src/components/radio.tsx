@@ -21,14 +21,14 @@ export interface RadioGroupProps extends Omit<React.HTMLAttributes<HTMLDivElemen
   onValueChange?: (value: string) => void;
 }
 
-export function RadioGroup({
+export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(function RadioGroup({
   name,
   value,
   defaultValue,
   onValueChange,
   children,
   ...props
-}: RadioGroupProps) {
+}, ref) {
   const autoName = React.useId();
   const [inner, setInner] = React.useState(defaultValue);
   const isControlled = value !== undefined;
@@ -38,13 +38,13 @@ export function RadioGroup({
     onValueChange?.(next);
   };
   return (
-    <div role="radiogroup" {...props}>
+    <div ref={ref} role="radiogroup" {...props}>
       <RadioGroupContext.Provider value={{ name: name ?? autoName, value: current, setValue }}>
         {children}
       </RadioGroupContext.Provider>
     </div>
   );
-}
+});
 
 export interface RadioProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "value"> {

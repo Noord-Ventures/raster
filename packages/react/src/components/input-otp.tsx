@@ -88,7 +88,7 @@ const styles = stylex.create({
 });
 
 /** One cell per character. Auto-advance, backspace, paste. */
-export function InputOTP({
+export const InputOTP = React.forwardRef<HTMLDivElement, InputOTPProps>(function InputOTP({
   length = 6,
   onChange,
   onComplete,
@@ -96,7 +96,7 @@ export function InputOTP({
   style,
   "aria-label": ariaLabel = "One-time code",
   ...props
-}: InputOTPProps) {
+}, ref) {
   const [chars, setChars] = React.useState<string[]>(() => Array(length).fill(""));
   const refs = React.useRef<Array<HTMLInputElement | null>>([]);
   const field = useFieldControl(props);
@@ -129,6 +129,7 @@ export function InputOTP({
 
   return (
     <div
+      ref={ref}
       className={sx.className}
       style={{ ...sx.style, ...style }}
       role="group"
@@ -175,4 +176,4 @@ export function InputOTP({
       ))}
     </div>
   );
-}
+});

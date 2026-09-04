@@ -93,17 +93,20 @@ const styles = stylex.create({
 });
 
 /** Native <details> rows on hairlines. */
-export function Accordion({ exclusive, className, style, children, ...props }: AccordionProps) {
+export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(function Accordion(
+  { exclusive, className, style, children, ...props },
+  ref,
+) {
   const group = React.useId();
   const sx = rs(["rs-acc", className], styles.acc);
   return (
-    <div {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+    <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       <AccordionContext.Provider value={exclusive ? group : undefined}>
         {children}
       </AccordionContext.Provider>
     </div>
   );
-}
+});
 
 export interface AccordionItemProps
   extends Omit<React.DetailsHTMLAttributes<HTMLDetailsElement>, "title"> {
@@ -111,7 +114,7 @@ export interface AccordionItemProps
   defaultOpen?: boolean;
 }
 
-export function AccordionItem({
+export const AccordionItem = React.forwardRef<HTMLDetailsElement, AccordionItemProps>(function AccordionItem({
   title,
   defaultOpen,
   className,
@@ -120,7 +123,7 @@ export function AccordionItem({
   onToggle,
   open,
   ...props
-}: AccordionItemProps) {
+}, ref) {
   const group = React.useContext(AccordionContext);
   const [innerOpen, setInnerOpen] = React.useState(!!defaultOpen);
   const isOpen = open ?? innerOpen;
@@ -130,6 +133,7 @@ export function AccordionItem({
   const body = rs(["rs-acc-body"], styles.body);
   return (
     <details
+      ref={ref}
       name={group}
       open={open ?? (defaultOpen || undefined)}
       onToggle={(e) => {
@@ -149,4 +153,4 @@ export function AccordionItem({
       </div>
     </details>
   );
-}
+});

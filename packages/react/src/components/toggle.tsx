@@ -188,7 +188,7 @@ export interface ToggleGroupProps extends Omit<React.HTMLAttributes<HTMLDivEleme
 }
 
 /** One pressed at a time. */
-export function ToggleGroup({
+export const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(function ToggleGroup({
   options,
   value,
   defaultValue,
@@ -196,7 +196,7 @@ export function ToggleGroup({
   className,
   style,
   ...props
-}: ToggleGroupProps) {
+}, ref) {
   const [inner, setInner] = React.useState(defaultValue);
   const isControlled = value !== undefined;
   const current = isControlled ? value : inner;
@@ -207,7 +207,7 @@ export function ToggleGroup({
     ["--rs-in" as string]: "max(0px, calc(var(--rs-out) - var(--rs-gap)))",
   };
   return (
-    <div role="group" {...props} className={group.className} style={{ ...group.style, ...nest, ...style }}>
+    <div ref={ref} role="group" {...props} className={group.className} style={{ ...group.style, ...nest, ...style }}>
       {options.map((option) => {
         const on = option.value === current;
         const btn = rs(["rs-toggle", on && "rs-toggle-pressed", on && "rs-toggle-grouped-on"], styles.toggle, styles.grouped, on && styles.pressed, on && styles.groupedOn);
@@ -229,4 +229,4 @@ export function ToggleGroup({
       })}
     </div>
   );
-}
+});

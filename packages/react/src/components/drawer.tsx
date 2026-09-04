@@ -93,14 +93,20 @@ export interface DrawerTitleProps extends React.HTMLAttributes<HTMLHeadingElemen
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
 }
 
-export function DrawerTitle({ as: Tag = "h2", className, style, id, ...props }: DrawerTitleProps) {
+export const DrawerTitle = React.forwardRef<HTMLHeadingElement, DrawerTitleProps>(function DrawerTitle(
+  { as: Tag = "h2", className, style, id, ...props },
+  ref,
+) {
   const titleId = useDialogPart("title", id);
   const sx = rs(["rs-drawer-title", className], styles.title);
-  return <Tag {...props} id={titleId} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <Tag ref={ref as React.Ref<never>} {...props} id={titleId} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function DrawerBody({ className, style, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export const DrawerBody = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function DrawerBody(
+  { className, style, id, ...props },
+  ref,
+) {
   const bodyId = useDialogPart("body", id);
   const sx = rs(["rs-drawer-body", className], styles.body);
-  return <p {...props} id={bodyId} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <p ref={ref} {...props} id={bodyId} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

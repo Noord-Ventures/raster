@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -58,17 +58,18 @@ const styles = stylex.create({
 });
 
 /** Links in a row; the current page is ink. */
-export function NavigationMenu({
+export const NavigationMenu = React.forwardRef<HTMLElement, NavigationMenuProps>(function NavigationMenu({
   items,
   className,
   style,
   "aria-label": ariaLabel = "Primary",
   ...props
-}: NavigationMenuProps) {
+}, ref) {
   const nav = rs(["rs-nav", className], styles.nav);
   const link = rs(["rs-nav-link"], styles.link);
   return (
     <nav
+      ref={ref}
       aria-label={props["aria-labelledby"] ? undefined : ariaLabel}
       {...props}
       className={nav.className}
@@ -87,4 +88,4 @@ export function NavigationMenu({
       ))}
     </nav>
   );
-}
+});

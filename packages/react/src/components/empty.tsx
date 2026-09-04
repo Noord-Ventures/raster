@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -46,13 +46,16 @@ const styles = stylex.create({
 });
 
 /** A vacant cell. Title, one sentence, optional action. */
-export function Empty({ title, action, className, style, children, ...props }: EmptyProps) {
+export const Empty = React.forwardRef<HTMLDivElement, EmptyProps>(function Empty(
+  { title, action, className, style, children, ...props },
+  ref,
+) {
   const sx = rs(["rs-empty", className], styles.empty);
   const heading = rs(["rs-empty-title"], styles.title);
   const body = rs(["rs-empty-body"], styles.body);
   const act = rs(["rs-empty-action"], styles.action);
   return (
-    <div {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+    <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       {title != null && (
         <p className={heading.className} style={heading.style}>
           {title}
@@ -70,4 +73,4 @@ export function Empty({ title, action, className, style, children, ...props }: E
       )}
     </div>
   );
-}
+});

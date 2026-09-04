@@ -217,7 +217,7 @@ const styles = stylex.create({
  * Home/End to the week's ends, PageUp/PageDown by month (Shift: year).
  * Selected is ink; today is a hairline.
  */
-export function Calendar({
+export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(function Calendar({
   value,
   defaultValue,
   onValueChange,
@@ -229,7 +229,7 @@ export function Calendar({
   style,
   onKeyDown,
   ...props
-}: CalendarProps) {
+}, ref) {
   const idBase = React.useId();
   const titleId = `${idBase}-title`;
   const isControlled = value !== undefined;
@@ -361,7 +361,7 @@ export function Calendar({
   const dow = rs(["rs-cal-dow"], styles.dow);
 
   return (
-    <div {...props} className={cal.className} style={{ ...cal.style, ...style }}>
+    <div ref={ref} {...props} className={cal.className} style={{ ...cal.style, ...style }}>
       <div className={head.className} style={head.style}>
         <span id={titleId} className={titleSx.className} style={titleSx.style} aria-live="polite">
           {title}
@@ -423,4 +423,4 @@ export function Calendar({
       </div>
     </div>
   );
-}
+});

@@ -77,7 +77,7 @@ const styles = stylex.create({
 });
 
 /** A bare native <details>. */
-export function Collapsible({
+export const Collapsible = React.forwardRef<HTMLDetailsElement, CollapsibleProps>(function Collapsible({
   title,
   defaultOpen,
   className,
@@ -86,7 +86,7 @@ export function Collapsible({
   onToggle,
   open,
   ...props
-}: CollapsibleProps) {
+}, ref) {
   const [innerOpen, setInnerOpen] = React.useState(!!defaultOpen);
   const isOpen = open ?? innerOpen;
   const root = rs(["rs-disclosure", className]);
@@ -95,6 +95,7 @@ export function Collapsible({
   const body = rs(["rs-disclosure-body"], styles.body);
   return (
     <details
+      ref={ref}
       open={open ?? (defaultOpen || undefined)}
       onToggle={(e) => {
         setInnerOpen(e.currentTarget.open);
@@ -113,4 +114,4 @@ export function Collapsible({
       </div>
     </details>
   );
-}
+});

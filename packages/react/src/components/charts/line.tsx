@@ -51,7 +51,7 @@ export interface LineChartProps extends React.HTMLAttributes<HTMLDivElement> {
   locale?: string;
 }
 
-export function LineChart({
+export const LineChart = React.forwardRef<HTMLDivElement, LineChartProps>(function LineChart({
   series,
   labels,
   height = 204,
@@ -72,7 +72,7 @@ export function LineChart({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
   ...props
-}: LineChartProps) {
+}: LineChartProps, ref: React.ForwardedRef<HTMLDivElement>) {
   const shown = series.slice(0, MAX_SERIES);
   const n = Math.max(1, ...shown.map((s) => s.values.length));
   const stacks = stacked ? stackedRows(shown) : null;
@@ -134,7 +134,7 @@ export function LineChart({
   );
 
   return (
-    <ChartField spot={spot} className={className} {...props}>
+    <ChartField ref={ref} spot={spot} className={className} {...props}>
       {(yLabel || xLabel) && (
         <ChartHead>
           {yLabel ? <ChartTitle id={titleId}>{yLabel}</ChartTitle> : <span />}
@@ -227,4 +227,4 @@ export function LineChart({
       <SrTable caption={yLabel ?? describePlot("Chart data", shown.map((s) => s.name), unit)} labels={tickLabels} series={shown} />
     </ChartField>
   );
-}
+});

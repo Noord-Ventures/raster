@@ -4,6 +4,7 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
+import { useMergedRefs } from "../merge-refs";
 import { Icon } from "./icon";
 import { MenuPanel, menuStyles, type DropdownMenuItem, type MenuCloseReason } from "./dropdown-menu";
 
@@ -40,9 +41,13 @@ const styles = stylex.create({
  * roving tab stop; ArrowLeft/ArrowRight move between them and an open
  * menu follows.
  */
-export function Menubar({ menus, className, style, onKeyDown, ...props }: MenubarProps) {
+export const Menubar = React.forwardRef<HTMLDivElement, MenubarProps>(function Menubar(
+  { menus, className, style, onKeyDown, ...props },
+  ref,
+) {
   const idBase = React.useId();
   const rootRef = React.useRef<HTMLDivElement>(null);
+  const setRootRef = useMergedRefs(rootRef, ref);
   const triggerRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
   const [focusIndex, setFocusIndex] = React.useState(0);
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
@@ -129,7 +134,7 @@ export function Menubar({ menus, className, style, onKeyDown, ...props }: Menuba
   const menu = rs(["rs-menu"], menuStyles.menu, menuStyles.menuOverlay);
   return (
     <div
-      ref={rootRef}
+      ref={setRootRef}
       role="menubar"
       {...props}
       className={bar.className}
@@ -181,4 +186,4 @@ export function Menubar({ menus, className, style, onKeyDown, ...props }: Menuba
       })}
     </div>
   );
-}
+});

@@ -39,7 +39,7 @@ export interface SmallMultiplesProps extends React.HTMLAttributes<HTMLDivElement
   locale?: string;
 }
 
-export function SmallMultiples({
+export const SmallMultiples = React.forwardRef<HTMLDivElement, SmallMultiplesProps>(function SmallMultiples({
   panels,
   height = 136,
   unit,
@@ -50,11 +50,11 @@ export function SmallMultiples({
   locale,
   style,
   ...props
-}: SmallMultiplesProps) {
+}, ref) {
   const sx = rs(["rs-chart-multi", className], styles.multi);
   const idBase = React.useId();
   return (
-    <div {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+    <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       {panels.map((p, i) => {
         const capId = `${idBase}-cap-${i}`;
         return (
@@ -78,4 +78,4 @@ export function SmallMultiples({
       })}
     </div>
   );
-}
+});

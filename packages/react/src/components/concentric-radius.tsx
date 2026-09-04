@@ -112,7 +112,10 @@ export interface NestProps extends React.HTMLAttributes<HTMLDivElement> {
   pad?: number;
 }
 
-export function Nest({ radius, pad, style, className, children, ...props }: NestProps) {
+export const Nest = React.forwardRef<HTMLDivElement, NestProps>(function Nest(
+  { radius, pad, style, className, children, ...props },
+  ref,
+) {
   const inherited = React.useContext(NestInnerRadius);
   const out = radius ?? inherited ?? undefined;
   const next = out != null && pad != null ? concentricInner(out, pad) : inherited;
@@ -120,14 +123,17 @@ export function Nest({ radius, pad, style, className, children, ...props }: Nest
   const sx = rs(["rs-nest", className], styles.nest);
   return (
     <NestInnerRadius.Provider value={next ?? null}>
-      <div {...props} className={sx.className} style={{ ...sx.style, ...nestVars(out, pad), ...style }}>
+      <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...nestVars(out, pad), ...style }}>
         {children}
       </div>
     </NestInnerRadius.Provider>
   );
-}
+});
 
-export function NestInner({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const NestInner = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function NestInner(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-nest-in", className], styles.inner);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

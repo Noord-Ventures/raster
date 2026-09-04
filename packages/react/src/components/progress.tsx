@@ -34,7 +34,7 @@ const styles = stylex.create({
   },
 });
 
-export function Progress({
+export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(function Progress({
   value,
   max = 100,
   label,
@@ -43,7 +43,7 @@ export function Progress({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
   ...props
-}: ProgressProps) {
+}, ref) {
   const labelId = React.useId();
   const now = Math.min(max, Math.max(0, value));
   const pct = Math.min(100, Math.max(0, max === 0 ? 0 : (value / max) * 100));
@@ -52,7 +52,7 @@ export function Progress({
   const fill = rs(["rs-progress-fill"], styles.fill);
   const labelledBy = ariaLabelledBy ?? (ariaLabel == null && label != null ? labelId : undefined);
   return (
-    <div {...props} className={className} style={style}>
+    <div ref={ref} {...props} className={className} style={style}>
       {label != null && (
         <div className={head.className} style={head.style}>
           <span id={labelId}>{label}</span>
@@ -74,4 +74,4 @@ export function Progress({
       </div>
     </div>
   );
-}
+});

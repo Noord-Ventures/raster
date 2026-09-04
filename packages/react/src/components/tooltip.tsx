@@ -128,7 +128,10 @@ export function describeTrigger(el: React.ReactElement, id: string): React.React
   return React.cloneElement(el, extra);
 }
 
-export function Tooltip({ tip, className, style, children, onKeyDown, onPointerLeave, onBlur, ...props }: TooltipProps) {
+export const Tooltip = React.forwardRef<HTMLSpanElement, TooltipProps>(function Tooltip(
+  { tip, className, style, children, onKeyDown, onPointerLeave, onBlur, ...props },
+  ref,
+) {
   const id = React.useId();
   const [dismissed, setDismissed] = React.useState(false);
   const sx = rs(["rs-tip", className], styles.tip, stylex.defaultMarker());
@@ -137,6 +140,7 @@ export function Tooltip({ tip, className, style, children, onKeyDown, onPointerL
   const triggerIsRoot = !React.isValidElement(children);
   return (
     <span
+      ref={ref}
       {...props}
       className={sx.className}
       style={{ ...sx.style, ...style }}
@@ -162,4 +166,4 @@ export function Tooltip({ tip, className, style, children, onKeyDown, onPointerL
       </span>
     </span>
   );
-}
+});

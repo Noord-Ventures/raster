@@ -4,6 +4,7 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
+import { useMergedRefs } from "../merge-refs";
 
 import { menuStyles } from "./dropdown-menu";
 import { optionText, type SelectOption } from "./select";
@@ -55,7 +56,7 @@ const PAGE = 10;
  * Editable combobox: the input holds focus, filters on typed text, and
  * points at the active option with aria-activedescendant.
  */
-export function Combobox({
+export const Combobox = React.forwardRef<HTMLDivElement, ComboboxProps>(function Combobox({
   options,
   value,
   defaultValue,
@@ -70,12 +71,13 @@ export function Combobox({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledby,
   ...props
-}: ComboboxProps) {
+}: ComboboxProps, ref: React.ForwardedRef<HTMLDivElement>) {
   const idBase = React.useId();
   const inputId = id ?? `${idBase}-input`;
   const listboxId = `${idBase}-listbox`;
   const optionId = (index: number) => `${idBase}-opt-${index}`;
   const rootRef = React.useRef<HTMLDivElement>(null);
+  const setRootRef = useMergedRefs(rootRef, ref);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const activeRef = React.useRef<HTMLDivElement>(null);
   const [open, setOpen] = React.useState(false);
@@ -188,7 +190,7 @@ export function Combobox({
 
   return (
     <div
-      ref={rootRef}
+      ref={setRootRef}
       className={root.className}
       style={{ ...root.style, ...style }}
       onBlur={(e) => {
@@ -267,4 +269,4 @@ export function Combobox({
       )}
     </div>
   );
-}
+});

@@ -4,6 +4,7 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
+import { useMergedRefs } from "../merge-refs";
 
 export interface SplitProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Starting share of the first pane, in percent. */
@@ -152,7 +153,7 @@ function useStacked(): boolean {
 }
 
 /** Two panes on a draggable hairline. Arrows step, Home/End jump; the axis follows the layout. */
-export function Split({
+export const Split = React.forwardRef<HTMLDivElement, SplitProps>(function Split({
   initial = 50,
   min = 20,
   max = 80,
@@ -161,9 +162,10 @@ export function Split({
   style,
   children,
   ...props
-}: SplitProps) {
+}: SplitProps, ref: React.ForwardedRef<HTMLDivElement>) {
   const [share, setShare] = React.useState(initial);
   const rootRef = React.useRef<HTMLDivElement>(null);
+  const setRootRef = useMergedRefs(rootRef, ref);
   const stacked = useStacked();
   const clamp = (v: number) => Math.min(max, Math.max(min, v));
 
@@ -207,7 +209,7 @@ export function Split({
     stacked ? { height: `${pct}%`, width: "auto" } : { width: `${pct}%` };
 
   return (
-    <div ref={rootRef} {...props} className={root.className} style={{ ...root.style, ...style }}>
+    <div ref={setRootRef} {...props} className={root.className} style={{ ...root.style, ...style }}>
       <div className={pane.className} style={{ ...pane.style, ...size(share) }}>
         {children[0]}
       </div>
@@ -229,4 +231,4 @@ export function Split({
       </div>
     </div>
   );
-}
+});

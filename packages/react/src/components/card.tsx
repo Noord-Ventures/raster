@@ -54,22 +54,34 @@ export const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDi
   },
 );
 
-export function CardInner({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const CardInner = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function CardInner(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-card-in", className], styles.inner);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function CardLabel({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const CardLabel = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function CardLabel(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-card-label", className], styles.label);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function CardTitle({ className, style, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+export const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(function CardTitle(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-card-title", className], styles.title);
-  return <h3 {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <h3 ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function CardBody({ className, style, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export const CardBody = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function CardBody(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-card-body", className], styles.body);
-  return <p {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <p ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

@@ -4,6 +4,7 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
+import { useMergedRefs } from "../merge-refs";
 
 import { Icon } from "./icon";
 
@@ -403,11 +404,15 @@ export function MenuPanel({
 }
 
 /** Action menu with menu semantics and keyboard navigation. */
-export function DropdownMenu({ label, items, className, style, ...props }: DropdownMenuProps) {
+export const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(function DropdownMenu(
+  { label, items, className, style, ...props },
+  ref,
+) {
   const idBase = React.useId();
   const triggerId = `${idBase}-trigger`;
   const menuId = `${idBase}-menu`;
   const rootRef = React.useRef<HTMLDivElement>(null);
+  const setRootRef = useMergedRefs(rootRef, ref);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
   const [open, setOpen] = React.useState(false);
   const [initial, setInitial] = React.useState<"first" | "last">("first");
@@ -452,7 +457,7 @@ export function DropdownMenu({ label, items, className, style, ...props }: Dropd
   const trigger = rs(["rs-dropdown"], menuStyles.dropdown);
   const menu = rs(["rs-menu"], menuStyles.menu, menuStyles.menuOverlay);
   return (
-    <div ref={rootRef} className={root.className} style={{ ...root.style, ...style }} {...props}>
+    <div ref={setRootRef} className={root.className} style={{ ...root.style, ...style }} {...props}>
       <button
         ref={triggerRef}
         id={triggerId}
@@ -481,4 +486,4 @@ export function DropdownMenu({ label, items, className, style, ...props }: Dropd
       )}
     </div>
   );
-}
+});

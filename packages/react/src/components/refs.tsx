@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -116,52 +116,79 @@ const styles = stylex.create({
 });
 
 /** Inline superscript citation. */
-export function Cite({ className, style, children, ...props }: CiteProps) {
+export const Cite = React.forwardRef<HTMLElement, CiteProps>(function Cite(
+  { className, style, children, ...props },
+  ref,
+) {
   const sx = rs(["rs-cite", className], styles.cite);
   return (
-    <sup {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+    <sup ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       {children}
     </sup>
   );
-}
+});
 
-export function CiteLink({ className, style, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+export const CiteLink = React.forwardRef<HTMLAnchorElement, React.AnchorHTMLAttributes<HTMLAnchorElement>>(function CiteLink(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs([className, "rs-cite-cite-a"], styles.citeA);
-  return <a {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <a ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
 /** Numbered 1px list. Numerals hang in the gutter. */
-export function Refs({ className, style, ...props }: RefsProps) {
+export const Refs = React.forwardRef<HTMLOListElement, RefsProps>(function Refs(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-refs", className], styles.refs);
-  return <ol {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <ol ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function RefItem({ className, style, ...props }: RefItemProps) {
+export const RefItem = React.forwardRef<HTMLLIElement, RefItemProps>(function RefItem(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs([className, "rs-cite-item"], styles.item);
-  return <li {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <li ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function RefAuthors({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const RefAuthors = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function RefAuthors(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ref-authors", className], styles.authors);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function RefDoi({ className, style, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+export const RefDoi = React.forwardRef<HTMLAnchorElement, React.AnchorHTMLAttributes<HTMLAnchorElement>>(function RefDoi(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-ref-doi", className], styles.doi);
-  return <a {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <a ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function CiteBox({ className, style, ...props }: CiteBoxProps) {
+export const CiteBox = React.forwardRef<HTMLDivElement, CiteBoxProps>(function CiteBox(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-cite-box", className], styles.box);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function CiteBoxLabel({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const CiteBoxLabel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function CiteBoxLabel(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-cite-box-label", className], styles.boxLabel);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function CiteBoxText({ className, style, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const CiteBoxText = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function CiteBoxText(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-cite-box-text", className], styles.boxText);
-  return <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

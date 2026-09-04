@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -40,16 +40,17 @@ const styles = stylex.create({
 });
 
 /** Hidden scrollbar; feathered top and bottom edges. A named, focusable region. */
-export function ScrollArea({
+export const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(function ScrollArea({
   maxHeight = 240,
   style,
   className,
   "aria-label": ariaLabel = "Scrollable content",
   ...props
-}: ScrollAreaProps) {
+}, ref) {
   const sx = rs(["rs-scroll", className], styles.scroll);
   return (
     <div
+      ref={ref}
       role="region"
       aria-label={props["aria-labelledby"] ? undefined : ariaLabel}
       className={sx.className}
@@ -58,4 +59,4 @@ export function ScrollArea({
       {...props}
     />
   );
-}
+});

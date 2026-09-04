@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster } from "../tokens.stylex";
 import { rs } from "../rs";
@@ -17,7 +17,10 @@ const styles = stylex.create({
   },
 });
 
-export function AspectRatio({ ratio = 16 / 9, style, className, ...props }: AspectRatioProps) {
+export const AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(function AspectRatio(
+  { ratio = 16 / 9, style, className, ...props },
+  ref,
+) {
   const sx = rs(["rs-ratio", className], styles.box);
-  return <div {...props} className={sx.className} style={{ ...sx.style, aspectRatio: ratio, ...style }} />;
-}
+  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, aspectRatio: ratio, ...style }} />;
+});

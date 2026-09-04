@@ -48,7 +48,7 @@ export interface HistogramProps extends React.HTMLAttributes<HTMLDivElement> {
   locale?: string;
 }
 
-export function Histogram({
+export const Histogram = React.forwardRef<HTMLDivElement, HistogramProps>(function Histogram({
   bins,
   height = 204,
   unit,
@@ -62,7 +62,7 @@ export function Histogram({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
   ...props
-}: HistogramProps) {
+}: HistogramProps, ref: React.ForwardedRef<HTMLDivElement>) {
   const format = valueFormat ?? ((v: number) => defaultFormat(v, undefined, locale));
   const tip = valueFormat ?? ((v: number) => defaultFormat(v, unit, locale));
   const [hover, setHover] = React.useState<number | null>(null);
@@ -101,7 +101,7 @@ export function Histogram({
   );
 
   return (
-    <ChartField spot={spot} className={className} {...props}>
+    <ChartField ref={ref} spot={spot} className={className} {...props}>
       {yLabel && (
         <ChartHead>
           <ChartTitle id={titleId}>{yLabel}</ChartTitle>
@@ -159,4 +159,4 @@ export function Histogram({
       />
     </ChartField>
   );
-}
+});

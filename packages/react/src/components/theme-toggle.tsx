@@ -94,14 +94,14 @@ const styles = stylex.create({
  * Apps pin it top-right; catalog and previews use the inline modifier.
  * The name states the action ("Switch to dark scheme"), so it changes with the state.
  */
-export function ThemeToggle({
+export const ThemeToggle = React.forwardRef<HTMLButtonElement, ThemeToggleProps>(function ThemeToggle({
   storageKey = "raster-theme",
   onThemeChange,
   className,
   style,
   onClick,
   ...props
-}: ThemeToggleProps) {
+}, ref) {
   const [dark, setDark] = React.useState<boolean | null>(null);
 
   React.useEffect(() => {
@@ -128,6 +128,7 @@ export function ThemeToggle({
 
   return (
     <button
+      ref={ref}
       type="button"
       aria-label={dark ? "Switch to light scheme" : "Switch to dark scheme"}
       onClick={toggle}
@@ -138,4 +139,4 @@ export function ThemeToggle({
       <Icon name={dark ? "sun" : "moon"} size={16} className={mark.className} style={mark.style} />
     </button>
   );
-}
+});

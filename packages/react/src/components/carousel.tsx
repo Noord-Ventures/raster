@@ -142,11 +142,15 @@ const styles = stylex.create({
 const SlideContext = React.createContext<{ index: number; count: number } | null>(null);
 
 /** One slide: a named group, "n of N" unless you name it yourself. */
-export function CarouselSlide({ className, style, "aria-label": ariaLabel, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const CarouselSlide = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function CarouselSlide(
+  { className, style, "aria-label": ariaLabel, ...props },
+  ref,
+) {
   const slot = React.useContext(SlideContext);
   const sx = rs(["rs-carousel-slide", className], styles.slide);
   return (
     <div
+      ref={ref}
       role="group"
       aria-roledescription="slide"
       aria-label={ariaLabel ?? (slot ? `${slot.index + 1} of ${slot.count}` : undefined)}
@@ -155,10 +159,13 @@ export function CarouselSlide({ className, style, "aria-label": ariaLabel, ...pr
       style={{ ...sx.style, ...style }}
     />
   );
-}
+});
 
 /** Native scroll snap; the buttons nudge. The track is the named, focusable carousel region. */
-export function Carousel({ className, style, children, "aria-label": ariaLabel = "Carousel", ...props }: CarouselProps) {
+export const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(function Carousel(
+  { className, style, children, "aria-label": ariaLabel = "Carousel", ...props },
+  ref,
+) {
   const trackRef = React.useRef<HTMLDivElement>(null);
   const nudge = (dir: 1 | -1) => {
     const track = trackRef.current;
@@ -171,7 +178,7 @@ export function Carousel({ className, style, children, "aria-label": ariaLabel =
   const icon = rs(["rs-carousel-icon"], styles.icon);
   const slides = React.Children.toArray(children);
   return (
-    <div {...props} className={root.className} style={{ ...root.style, ...style }}>
+    <div ref={ref} {...props} className={root.className} style={{ ...root.style, ...style }}>
       <div
         ref={trackRef}
         role="region"
@@ -197,4 +204,4 @@ export function Carousel({ className, style, children, "aria-label": ariaLabel =
       </div>
     </div>
   );
-}
+});

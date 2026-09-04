@@ -1,4 +1,4 @@
-import type * as React from "react";
+import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { rs } from "../../rs";
 import { CROUWEL_SPOT, SrTable, chartStyles, defaultFormat, lineMark } from "./frame";
@@ -26,7 +26,7 @@ export interface SparklineProps extends React.HTMLAttributes<HTMLSpanElement> {
   locale?: string;
 }
 
-export function Sparkline({
+export const Sparkline = React.forwardRef<HTMLSpanElement, SparklineProps>(function Sparkline({
   values,
   width = 120,
   height = 28,
@@ -39,7 +39,7 @@ export function Sparkline({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
   ...props
-}: SparklineProps) {
+}, ref) {
   const max = Math.max(...values);
   const min = Math.min(...values);
   const span = max - min || 1;
@@ -61,6 +61,7 @@ export function Sparkline({
       };
   return (
     <span
+      ref={ref}
       {...props}
       className={sx.className}
       style={{
@@ -88,4 +89,4 @@ export function Sparkline({
       />
     </span>
   );
-}
+});

@@ -175,7 +175,10 @@ export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "o
   onValueChange?: (value: string) => void;
 }
 
-export function Tabs({ value, defaultValue, onValueChange, children, ...props }: TabsProps) {
+export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(function Tabs(
+  { value, defaultValue, onValueChange, children, ...props },
+  ref,
+) {
   const idBase = React.useId();
   const [panels, setPanels] = React.useState<ReadonlySet<string>>(() => new Set());
   const registerPanel = React.useCallback((v: string) => {
@@ -195,13 +198,13 @@ export function Tabs({ value, defaultValue, onValueChange, children, ...props }:
     onValueChange?.(next);
   };
   return (
-    <div {...props}>
+    <div ref={ref} {...props}>
       <TabsContext.Provider value={{ value: current, setValue, idBase, panels, registerPanel }}>
         {children}
       </TabsContext.Provider>
     </div>
   );
-}
+});
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Stacked tabs answer Up/Down instead of Left/Right. */
@@ -209,7 +212,10 @@ export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /** Roving tabs: arrows step, Home/End jump, and selection follows focus. */
-export function TabList({ orientation = "horizontal", className, style, onKeyDown, ...props }: TabListProps) {
+export const TabList = React.forwardRef<HTMLDivElement, TabListProps>(function TabList(
+  { orientation = "horizontal", className, style, onKeyDown, ...props },
+  ref,
+) {
   const vertical = orientation === "vertical";
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     onKeyDown?.(e);
@@ -237,6 +243,7 @@ export function TabList({ orientation = "horizontal", className, style, onKeyDow
   const sx = rs(["rs-tabs", vertical && "rs-tabs-vertical", className], styles.list, vertical && styles.vertical);
   return (
     <div
+      ref={ref}
       role="tablist"
       aria-orientation={vertical ? "vertical" : undefined}
       onKeyDown={handleKeyDown}
@@ -245,18 +252,22 @@ export function TabList({ orientation = "horizontal", className, style, onKeyDow
       style={{ ...sx.style, ...style }}
     />
   );
-}
+});
 
 export interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string;
 }
 
-export function Tab({ value, className, style, onClick, ...props }: TabProps) {
+export const Tab = React.forwardRef<HTMLButtonElement, TabProps>(function Tab(
+  { value, className, style, onClick, ...props },
+  ref,
+) {
   const ctx = useTabsContext("Tab");
   const selected = ctx.value === value;
   const sx = rs(["rs-tab", selected && "rs-tab-active", className], styles.tab, selected && styles.active);
   return (
     <button
+      ref={ref}
       type="button"
       role="tab"
       id={`${ctx.idBase}-tab-${value}`}
@@ -272,19 +283,23 @@ export function Tab({ value, className, style, onClick, ...props }: TabProps) {
       style={{ ...sx.style, ...style }}
     />
   );
-}
+});
 
 export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
 }
 
-export function TabPanel({ value, ...props }: TabPanelProps) {
+export const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(function TabPanel(
+  { value, ...props },
+  ref,
+) {
   const ctx = useTabsContext("TabPanel");
   const selected = ctx.value === value;
   const register = ctx.registerPanel;
   React.useEffect(() => register(value), [register, value]);
   return (
     <div
+      ref={ref}
       role="tabpanel"
       id={`${ctx.idBase}-panel-${value}`}
       aria-labelledby={`${ctx.idBase}-tab-${value}`}
@@ -292,4 +307,4 @@ export function TabPanel({ value, ...props }: TabPanelProps) {
       {...props}
     />
   );
-}
+});

@@ -100,7 +100,10 @@ export function useFieldControl(props: FieldControlAria): FieldControlAria & { i
 }
 
 /** Stack: label, control, hint or error. The hint and error describe the control. */
-export function Field({ className, style, ...props }: FieldProps) {
+export const Field = React.forwardRef<HTMLDivElement, FieldProps>(function Field(
+  { className, style, ...props },
+  ref,
+) {
   const base = React.useId();
   const [parts, setParts] = React.useState<{ hint?: string; error?: string }>({});
   const register = React.useCallback((part: FieldPart, id: string) => {
@@ -116,24 +119,33 @@ export function Field({ className, style, ...props }: FieldProps) {
   const sx = rs(["rs-field", className], styles.field);
   return (
     <FieldContext.Provider value={value}>
-      <div {...props} className={sx.className} style={{ ...sx.style, ...style }} />
+      <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />
     </FieldContext.Provider>
   );
-}
+});
 
-export function FieldLabel({ className, style, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
+export const FieldLabel = React.forwardRef<HTMLLabelElement, React.LabelHTMLAttributes<HTMLLabelElement>>(function FieldLabel(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-field-label", className], styles.label);
-  return <label {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <label ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function FieldHint({ className, style, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export const FieldHint = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function FieldHint(
+  { className, style, id, ...props },
+  ref,
+) {
   const hintId = useFieldPart("hint", id);
   const sx = rs(["rs-field-hint", className], styles.hint);
-  return <p {...props} id={hintId} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <p ref={ref} {...props} id={hintId} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
 
-export function FieldError({ className, style, id, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export const FieldError = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function FieldError(
+  { className, style, id, ...props },
+  ref,
+) {
   const errorId = useFieldPart("error", id);
   const sx = rs(["rs-field-error", className], styles.error);
-  return <p role="alert" {...props} id={errorId} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <p ref={ref} role="alert" {...props} id={errorId} className={sx.className} style={{ ...sx.style, ...style }} />;
+});

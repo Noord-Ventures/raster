@@ -217,7 +217,10 @@ const styles = stylex.create({
   },
 });
 
-export function Toaster({ duration = 4000, closeLabel = "Dismiss", className, style, ...props }: ToasterProps) {
+export const Toaster = React.forwardRef<HTMLDivElement, ToasterProps>(function Toaster(
+  { duration = 4000, closeLabel = "Dismiss", className, style, ...props },
+  ref,
+) {
   const [items, setItems] = React.useState<ToastItem[]>([]);
   const timers = React.useRef(new Map<number, Timer>());
   const minRef = React.useRef(duration);
@@ -279,7 +282,7 @@ export function Toaster({ duration = 4000, closeLabel = "Dismiss", className, st
 
   const stack = rs(["rs-toasts", className], styles.stack);
   return (
-    <div {...props} className={stack.className} style={{ ...stack.style, ...style }} role="status" aria-live="polite">
+    <div ref={ref} {...props} className={stack.className} style={{ ...stack.style, ...style }} role="status" aria-live="polite">
       {items.map((item) => {
         const card = rs(["rs-toast"], styles.toast);
         const heading = rs(["rs-toast-title"], styles.title);
@@ -321,4 +324,4 @@ export function Toaster({ duration = 4000, closeLabel = "Dismiss", className, st
       })}
     </div>
   );
-}
+});

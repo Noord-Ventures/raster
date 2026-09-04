@@ -33,10 +33,13 @@ const styles = stylex.create({
 });
 
 /** Flush joined actions. One hairline between. Group owns the outer stroke. */
-export function ButtonGroup({ className, style, children, ...props }: ButtonGroupProps) {
+export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(function ButtonGroup(
+  { className, style, children, ...props },
+  ref,
+) {
   const sx = rs(["rs-btn-group", className], styles.group);
   return (
-    <div role="group" {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+    <div ref={ref} role="group" {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(child as React.ReactElement<ButtonProps>, { grouped: true })
@@ -44,4 +47,4 @@ export function ButtonGroup({ className, style, children, ...props }: ButtonGrou
       )}
     </div>
   );
-}
+});

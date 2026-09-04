@@ -456,11 +456,15 @@ export interface ChartFieldProps extends React.HTMLAttributes<HTMLDivElement> {
   spot?: boolean | string;
 }
 
-export function ChartField({ spot, className, style, children, ...props }: ChartFieldProps) {
+export const ChartField = React.forwardRef<HTMLDivElement, ChartFieldProps>(function ChartField(
+  { spot, className, style, children, ...props },
+  ref,
+) {
   const color = spot === true ? CROUWEL_SPOT : typeof spot === "string" ? spot : undefined;
   const sx = rs(["rs-chart", "rs-chart-field", className], styles.chart, styles.field);
   return (
     <div
+      ref={ref}
       {...props}
       className={sx.className}
       style={{
@@ -472,7 +476,7 @@ export function ChartField({ spot, className, style, children, ...props }: Chart
       {children}
     </div>
   );
-}
+});
 
 /** The canvas wraps a plot: measured for width, and the tooltip's positioning box. */
 export const ChartCanvas = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

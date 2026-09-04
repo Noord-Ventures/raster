@@ -71,10 +71,13 @@ const styles = stylex.create({
 });
 
 /** Addon and field share one control boundary. */
-export function InputGroup({ end, className, style, children, ...props }: InputGroupProps) {
+export const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(function InputGroup(
+  { end, className, style, children, ...props },
+  ref,
+) {
   const sx = rs(["rs-input-group", end && "rs-input-group-end", className], styles.group);
   return (
-    <div {...props} className={sx.className} style={{ ...sx.style, ...style }}>
+    <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }}>
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child) && child.type === Input) {
           const next = child.props as InputProps;
@@ -87,9 +90,12 @@ export function InputGroup({ end, className, style, children, ...props }: InputG
       })}
     </div>
   );
-}
+});
 
-export function InputAddon({ className, style, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
+export const InputAddon = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function InputAddon(
+  { className, style, ...props },
+  ref,
+) {
   const sx = rs(["rs-input-addon", className], styles.addon);
-  return <span {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
-}
+  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;
+});
