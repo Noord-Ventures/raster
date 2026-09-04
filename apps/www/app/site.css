@@ -320,6 +320,11 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
     min-height: 44px; padding: 12px 20px; font-size: 1.0625rem;
   }
   .nav-panel-appearance { padding: 12px 20px 16px; }
+  /* Controls keep Vlak's small component radius inside the otherwise flush sheet. */
+  .nav-panel-appearance .settings-choice,
+  .nav-panel-appearance .text-stepper .rs-btn-ghost {
+    border-radius: var(--radius-sm) !important;
+  }
   .site-crumb-bar {
     height: calc(60px + env(safe-area-inset-top, 0px)) !important;
     padding-top: env(safe-area-inset-top, 0px);
