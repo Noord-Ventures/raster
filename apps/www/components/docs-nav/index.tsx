@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 import { rasterCategories, catalogComponents, type RasterCategory } from "@noorddev/raster";
+import { iconGroups } from "@noorddev/raster-react";
 import { MobileToc } from "@/components/toc-mobile";
 import { sx } from "@/lib/sx";
 import { navStyles } from "./docs-nav.stylex";
@@ -27,6 +28,27 @@ const groups = rasterCategories.filter((category) =>
   catalogComponents.some((c) => c.category === category),
 );
 
+function iconGroupSlug(title: string) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+}
+
+function groupLinks(category: RasterCategory) {
+  if (category === "icons") {
+    return iconGroups.map((group) => ({
+      key: group.title,
+      title: group.title,
+      href: `/components/icons#${iconGroupSlug(group.title)}`,
+    }));
+  }
+  return catalogComponents
+    .filter((c) => c.category === category)
+    .map((c) => ({
+      key: c.name,
+      title: c.title,
+      href: `/components/${c.name}`,
+    }));
+}
+
 function docsLabel(pathname: string) {
   if (here(pathname, "/docs/tokens")) return "Tokens";
   if (here(pathname, "/docs")) return "Getting started";
@@ -42,7 +64,8 @@ function docsLabel(pathname: string) {
  * second. Hover (and focus) fills the second column. The page's own
  * group stays selected so the column is never empty on load.
  * Detail keeps the live one-module inset (--ml 204) at ≥1024.
- * Catalog index zeros --ml in site.css like live so 796 fits.
+ * Catalog index zeros --ml at 1024–1439 so 796 fits; ≥1440
+ * restores the airy first 204. Icons toc-sub lists iconGroups.
  * Under 900 the rail hides; a stacked 44pt picker takes its place.
  */
 export function DocsNav() {
@@ -82,7 +105,7 @@ export function DocsNav() {
   const catalogMobile = (
     <>
       {groups.map((category) => {
-        const items = catalogComponents.filter((c) => c.category === category);
+        const items = groupLinks(category);
         const expanded = openGroup === category;
         return (
           <div key={category} className="toc-mobile-group">
@@ -105,19 +128,16 @@ export function DocsNav() {
               </button>
             </div>
             {expanded
-              ? items.map((c) => {
-                  const href = `/components/${c.name}`;
-                  return (
-                    <Link
-                      key={c.name}
-                      href={href}
-                      className="toc-mobile-item toc-mobile-sub"
-                      aria-current={here(pathname, href) ? "page" : undefined}
-                    >
-                      {c.title}
-                    </Link>
-                  );
-                })
+              ? items.map((item) => (
+                  <Link
+                    key={item.key}
+                    href={item.href}
+                    className="toc-mobile-item toc-mobile-sub"
+                    aria-current={here(pathname, item.href) ? "page" : undefined}
+                  >
+                    {item.title}
+                  </Link>
+                ))
               : null}
           </div>
         );
@@ -147,7 +167,7 @@ export function DocsNav() {
     );
   }
 
-  const items = shown ? catalogComponents.filter((c) => c.category === shown) : [];
+  const items = shown ? groupLinks(shown) : [];
 
   return (
     <>
@@ -169,19 +189,16 @@ export function DocsNav() {
         </nav>
 
         <nav {...sx("toc toc-sub", navStyles.toc, navStyles.sub)} data-toc="items" aria-label={shown ? sentence(shown) : "Components"}>
-          {items.map((c) => {
-            const href = `/components/${c.name}`;
-            return (
-              <Link
-                key={c.name}
-                href={href}
-                {...sx("toc-item", navStyles.item)}
-                aria-current={here(pathname, href) ? "page" : undefined}
-              >
-                {c.title}
-              </Link>
-            );
-          })}
+          {items.map((item) => (
+            <Link
+              key={item.key}
+              href={item.href}
+              {...sx("toc-item", navStyles.item)}
+              aria-current={here(pathname, item.href) ? "page" : undefined}
+            >
+              {item.title}
+            </Link>
+          ))}
         </nav>
       </div>
       <MobileToc label={docsLabel(pathname)}>{catalogMobile}</MobileToc>

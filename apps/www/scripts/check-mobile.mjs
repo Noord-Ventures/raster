@@ -241,7 +241,13 @@ if (!/@media \(min-width: 1024px\) \{ \.site-layout \{ --ml: 204px; margin-left:
   fail("Desktop site-layout must keep the live --ml 204px / margin-left 204px");
 }
 if (!/@media \(min-width: 1024px\) \{\s*\.site-layout\.catalog-page \{\s*--ml:\s*0px;\s*margin-left:\s*0;/.test(site)) {
-  fail("Catalog index must zero --ml at ≥1024 like live so two 388 cards fit beside the rail");
+  fail("Catalog index must zero --ml at 1024–1439 so two 388 cards fit beside the rail");
+}
+if (!/@media \(min-width: 1440px\) \{\s*\.site-layout\.catalog-page \{[\s\S]*?--ml:\s*204px;[\s\S]*?margin-left:\s*204px;/.test(site)) {
+  fail("Wide catalog index must restore the airy first 204 module at ≥1440");
+}
+if (!/@media \(min-width: 1440px\) \{\s*\.site-layout\.catalog-page \{[\s\S]*?width:\s*calc\(100vw - 204px\)/.test(site)) {
+  fail("Wide catalog must size from the remaining viewport so 796 two-up still fits");
 }
 if (/data-rail="catalog"[\s\S]{0,160}--ml:\s*0px/.test(navCss)) {
   fail("Catalog rail must keep the live 204 inset; do not zero --ml for data-rail=catalog");
@@ -647,6 +653,9 @@ if (!catalogPage.includes("catalogComponents") || !nav.includes("catalogComponen
 }
 if (!catalogPage.includes("iconGroups") || !catalogPage.includes('category === "icons"')) {
   fail("Icons on /components must be iconGroups subcategory cards, like Charts");
+}
+if (!nav.includes("iconGroups") || !nav.includes("/components/icons#") || !nav.includes("iconGroupSlug")) {
+  fail("Icons toc-sub must list iconGroups (Navigation, Actions, …) like Charts");
 }
 if (!nestCss.includes("--rs-in") || !nestCss.includes("var(--rs-out) - var(--rs-gap)")) {
   fail("Nest must keep the inner-radius formula");

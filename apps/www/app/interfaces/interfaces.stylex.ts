@@ -163,8 +163,8 @@ export const interfaces = stylex.create({
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: "var(--divider)",
-    borderRadius: "var(--radius-sm)",
-    boxShadow: "0 1px 0 rgba(0, 0, 0, 0.04), 0 10px 28px rgba(0, 0, 0, 0.05)",
+    borderRadius: 0,
+    boxShadow: "none",
     overflow: "hidden",
   },
   matter: {
