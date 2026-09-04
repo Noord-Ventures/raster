@@ -117,7 +117,7 @@ const styles = stylex.create({
     letterSpacing: "-0.01em",
     textDecoration: "none",
     textAlign: {
-      default: "left",
+      default: "start",
       [mq.phone]: "center",
     },
     backgroundColor: "transparent",

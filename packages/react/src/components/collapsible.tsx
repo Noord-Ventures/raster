@@ -64,9 +64,9 @@ const styles = stylex.create({
       default: 10,
       [mq.phone]: 12,
     },
-    paddingRight: 0,
+    paddingInlineEnd: 0,
     paddingBottom: 0,
-    paddingLeft: 0,
+    paddingInlineStart: 0,
     fontSize: {
       default: 13.5,
       [mq.phone]: 16,

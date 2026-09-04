@@ -98,7 +98,7 @@ const styles = stylex.create({
       default: 8,
       [mq.phone]: 12,
     },
-    paddingRight: {
+    paddingInlineEnd: {
       default: 10,
       [mq.phone]: 14,
     },
@@ -106,7 +106,7 @@ const styles = stylex.create({
       default: 4,
       [mq.phone]: 6,
     },
-    paddingLeft: {
+    paddingInlineStart: {
       default: 10,
       [mq.phone]: 14,
     },
@@ -118,7 +118,7 @@ const styles = stylex.create({
     justifyContent: "space-between",
     gap: 12,
     width: "100%",
-    textAlign: "left",
+    textAlign: "start",
     borderWidth: 0,
     backgroundColor: "transparent",
     fontFamily: "inherit",

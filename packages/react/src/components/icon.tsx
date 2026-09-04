@@ -67,7 +67,7 @@ const styles = stylex.create({
     display: "flex",
     flexDirection: "column",
     gap: 28,
-    textAlign: "left",
+    textAlign: "start",
     alignSelf: "stretch",
   },
   group: {

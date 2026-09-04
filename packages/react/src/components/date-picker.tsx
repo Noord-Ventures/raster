@@ -10,7 +10,7 @@ import { menuStyles } from "./dropdown-menu";
 
 const styles = stylex.create({
   calMenu: {
-    right: "auto",
+    insetInlineEnd: "auto",
     padding: 12,
     backgroundColor: raster.paper,
   },

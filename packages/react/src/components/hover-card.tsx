@@ -19,7 +19,7 @@ const styles = stylex.create({
   panel: {
     position: "absolute",
     top: "calc(100% + 8px)",
-    left: 0,
+    insetInlineStart: 0,
     zIndex: raster.zFloat,
     width: {
       default: 260,
@@ -75,8 +75,8 @@ const styles = stylex.create({
       content: '""',
       position: "absolute",
       bottom: "100%",
-      left: 0,
-      right: 0,
+      insetInlineStart: 0,
+      insetInlineEnd: 0,
       height: 8,
     },
   },

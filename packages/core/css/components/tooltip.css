@@ -1,8 +1,8 @@
 /* ── tooltip: generated from packages/react/src/components/tooltip.tsx ── */
 .rs-tip{position:relative;display:inline-flex}
-.rs-tip-bubble{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);box-sizing:border-box;width:max-content;max-width:min(280px, calc(100vw - 16px));background-color:var(--text);color:var(--bg);font-size:11.5px;font-weight:500;letter-spacing:-0.01em;line-height:1.3;padding-block:5px;padding-inline:9px;border-radius:var(--radius-sm);z-index:var(--z-float);opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--duration-snap) var(--ease) var(--duration-snap), visibility var(--duration-snap) var(--ease) var(--duration-snap)}
+.rs-tip-bubble{position:absolute;bottom:calc(100% + 8px);inset-inline-start:50%;transform:translateX(-50%);box-sizing:border-box;width:max-content;max-width:min(280px, calc(100vw - 16px));background-color:var(--text);color:var(--bg);font-size:11.5px;font-weight:500;letter-spacing:-0.01em;line-height:1.3;padding-block:5px;padding-inline:9px;border-radius:var(--radius-sm);z-index:var(--z-float);opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--duration-snap) var(--ease) var(--duration-snap), visibility var(--duration-snap) var(--ease) var(--duration-snap)}
 .rs-tip:hover .rs-tip-bubble{opacity:1;visibility:visible;pointer-events:auto}
 .rs-tip:focus-within .rs-tip-bubble{opacity:1;visibility:visible;pointer-events:auto}
-.rs-tip-bubble::before{content:"";position:absolute;top:100%;left:0;right:0;height:8px}
+.rs-tip-bubble::before{content:"";position:absolute;top:100%;inset-inline-start:0;inset-inline-end:0;height:8px}
 @media (max-width: 640px){.rs-tip-bubble{font-size:13px;padding-block:8px;padding-inline:12px;border-radius:0}}
 @media (hover: none){.rs-tip:hover .rs-tip-bubble{opacity:0;visibility:hidden}.rs-tip:active .rs-tip-bubble{opacity:1;visibility:visible}}

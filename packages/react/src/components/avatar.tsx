@@ -57,7 +57,7 @@ const styles = stylex.create({
     borderWidth: 2,
     borderStyle: "solid",
     borderColor: raster.paper,
-    marginLeft: {
+    marginInlineStart: {
       default: -8,
       ":first-child": 0,
     },

@@ -31,8 +31,8 @@ const styles = stylex.create({
     counterReset: "ref",
     marginTop: 4,
     marginBottom: 8,
-    marginLeft: 0,
-    marginRight: 0,
+    marginInlineStart: 0,
+    marginInlineEnd: 0,
     padding: 0,
   },
   item: {
@@ -58,10 +58,10 @@ const styles = stylex.create({
     "::before": {
       content: "counter(ref)",
       position: "absolute",
-      left: -16,
+      insetInlineStart: -16,
       top: 11,
       width: 12,
-      textAlign: "right",
+      textAlign: "end",
       fontSize: 11,
       fontWeight: 600,
       color: "var(--accent)",

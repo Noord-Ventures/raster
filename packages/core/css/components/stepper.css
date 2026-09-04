@@ -10,5 +10,5 @@
 @media (max-width: 640px){.rs-step-name{font-size:var(--control-fs)}}
 .rs-step-sub{font-size:11px;font-weight:500;color:var(--text-secondary);letter-spacing:-0.01em}
 @media (max-width: 640px){.rs-step-sub{font-size:13px}}
-.rs-step-line{position:absolute;top:11.5px;left:24px;right:0;height:1px;background-color:var(--divider);margin:0;min-width:0;z-index:0}
-@media (max-width: 640px){.rs-step-line{top:calc(var(--hit) / 2);left:var(--hit)}}
+.rs-step-line{position:absolute;top:11.5px;inset-inline-start:24px;inset-inline-end:0;height:1px;background-color:var(--divider);margin:0;min-width:0;z-index:0}
+@media (max-width: 640px){.rs-step-line{top:calc(var(--hit) / 2);inset-inline-start:var(--hit)}}

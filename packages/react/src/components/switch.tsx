@@ -73,8 +73,8 @@ const styles = stylex.create({
       position: "absolute",
       top: -3,
       bottom: -3,
-      left: 0,
-      right: 0,
+      insetInlineStart: 0,
+      insetInlineEnd: 0,
     },
   },
   on: {
@@ -94,7 +94,7 @@ const styles = stylex.create({
       default: 1.5,
       [mq.phone]: 4,
     },
-    left: {
+    insetInlineStart: {
       default: 1.5,
       [mq.phone]: 4,
     },

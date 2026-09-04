@@ -113,6 +113,89 @@ ${darkBlock(':root:not([data-theme="light"])')}
 `;
 write("css/tokens.css", tokensCss);
 
+/* ── 2b. W3C Design Tokens (DTCG) ──
+   The same values in the community-group format ($type / $value), so
+   Style Dictionary, Figma Variables, and Tokens Studio can ingest them
+   without prose in the way. Light and dark are separate groups. */
+const dtcg = {
+  $schema: "https://tr.designtokens.org/format/",
+  $description: `Raster design tokens. ${rasterTokens.meta.url}`,
+  color: {
+    $description: "Monochrome. Paper, ink, gray. No accent hue.",
+    light: {
+      paper: { $type: "color", $value: color.light.paper, $description: "Page ground. --bg" },
+      ink: { $type: "color", $value: color.light.ink, $description: "Text and marks. --text" },
+      gray: { $type: "color", $value: color.light.gray, $description: "Secondary text. --text-secondary" },
+      divider: { $type: "color", $value: color.light.divider, $description: "Hairline. --divider" },
+      "divider-subtle": { $type: "color", $value: color.light.dividerSubtle, $description: "Fills only. --divider-subtle" },
+      "grid-line": { $type: "color", $value: color.light.gridLine, $description: "Module grid ink. --grid-line" },
+      "table-alt": { $type: "color", $value: color.light.tableAlt, $description: "Alternate row. --table-alt" },
+      "control-border": { $type: "color", $value: color.light.controlBorder, $description: "Form control boundary, 3:1. --control-border" },
+    },
+    dark: {
+      paper: { $type: "color", $value: color.dark.black, $description: "--bg" },
+      ink: { $type: "color", $value: color.dark.white, $description: "--text" },
+      gray: { $type: "color", $value: color.dark.gray, $description: "--text-secondary" },
+      divider: { $type: "color", $value: color.dark.divider, $description: "--divider" },
+      "divider-subtle": { $type: "color", $value: color.dark.dividerSubtle, $description: "--divider-subtle" },
+      "grid-line": { $type: "color", $value: color.dark.gridLine, $description: "--grid-line" },
+      "table-alt": { $type: "color", $value: color.dark.tableAlt, $description: "--table-alt" },
+      "control-border": { $type: "color", $value: color.dark.controlBorder, $description: "--control-border" },
+    },
+    neutral: Object.fromEntries(color.neutralScale.map((v, i) => [String(i), { $type: "color", $value: v }])),
+  },
+  grid: {
+    module: { $type: "dimension", $value: { value: grid.module, unit: "px" }, $description: "--grid-size" },
+    column: { $type: "dimension", $value: { value: grid.column, unit: "px" } },
+    gutter: { $type: "dimension", $value: { value: grid.gutter, unit: "px" }, $description: "--gutter" },
+    pad: { $type: "dimension", $value: { value: grid.pad, unit: "px" }, $description: "--pad" },
+  },
+  radius: {
+    small: { $type: "dimension", $value: { value: radius.small, unit: "px" }, $description: "--radius-sm, aliased by --radius" },
+    chrome: { $type: "dimension", $value: { value: radius.chrome, unit: "px" }, $description: "--radius-chrome" },
+  },
+  control: {
+    desktop: {
+      hit: { $type: "dimension", $value: { value: control.desktop.hit, unit: "px" }, $description: "--hit" },
+      height: { $type: "dimension", $value: { value: control.desktop.height, unit: "px" }, $description: "--control-h" },
+      font: { $type: "dimension", $value: { value: control.desktop.font, unit: "px" }, $description: "--control-fs" },
+      label: { $type: "dimension", $value: { value: control.desktop.label, unit: "px" }, $description: "--control-label" },
+    },
+    phone: {
+      hit: { $type: "dimension", $value: { value: control.phone.hit, unit: "px" } },
+      height: { $type: "dimension", $value: { value: control.phone.height, unit: "px" } },
+      font: { $type: "dimension", $value: { value: control.phone.font, unit: "px" } },
+      label: { $type: "dimension", $value: { value: control.phone.label, unit: "px" } },
+    },
+  },
+  breakpoint: Object.fromEntries(
+    Object.entries(rasterTokens.breakpoints).map(([k, v]) => [k, { $type: "dimension", $value: { value: v, unit: "px" } }]),
+  ),
+  z: Object.fromEntries(
+    Object.entries(z)
+      .filter(([, v]) => typeof v === "number")
+      .map(([k, v]) => [k, { $type: "number", $value: v, $description: `--z-${k}` }]),
+  ),
+  motion: {
+    snap: { $type: "duration", $value: { value: Number.parseFloat(motion.snap) * 1000, unit: "ms" }, $description: "--duration-snap" },
+    ease: { $type: "duration", $value: { value: Number.parseFloat(motion.ease) * 1000, unit: "ms" }, $description: "--duration" },
+    confirm: { $type: "duration", $value: { value: Number.parseFloat(motion.confirm) * 1000, unit: "ms" }, $description: "--duration-confirm" },
+    easing: {
+      $type: "cubicBezier",
+      $value: motion.easing.match(/-?[\d.]+/g).map(Number),
+      $description: "--ease",
+    },
+  },
+  font: {
+    family: { $type: "fontFamily", $value: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "system-ui", "sans-serif"] },
+    weight: {
+      body: { $type: "fontWeight", $value: 500 },
+      heading: { $type: "fontWeight", $value: 600 },
+    },
+  },
+};
+write("tokens/raster.tokens.dtcg.json", `${JSON.stringify(dtcg, null, 2)}\n`);
+
 /* ── 3. The whole system as one file ── */
 const componentFiles = [];
 for (const component of rasterComponents) {

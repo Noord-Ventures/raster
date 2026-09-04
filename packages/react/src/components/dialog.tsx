@@ -65,12 +65,12 @@ export const dialogStyles = stylex.create({
     letterSpacing: "-0.01em",
     color: raster.ink,
     marginTop: 0,
-    marginRight: 0,
+    marginInlineEnd: 0,
     marginBottom: {
       default: 6,
       [mq.phone]: 10,
     },
-    marginLeft: 0,
+    marginInlineStart: 0,
   },
   body: {
     fontSize: {
@@ -81,12 +81,12 @@ export const dialogStyles = stylex.create({
     letterSpacing: "-0.01em",
     lineHeight: 1.55,
     marginTop: 0,
-    marginRight: 0,
+    marginInlineEnd: 0,
     marginBottom: {
       default: 16,
       [mq.phone]: 20,
     },
-    marginLeft: 0,
+    marginInlineStart: 0,
   },
   actions: {
     display: "flex",

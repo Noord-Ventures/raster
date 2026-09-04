@@ -77,12 +77,12 @@ const styles = stylex.create({
   },
   body: {
     paddingTop: 0,
-    paddingRight: 0,
+    paddingInlineEnd: 0,
     paddingBottom: {
       default: 16,
       [mq.phone]: 20,
     },
-    paddingLeft: 0,
+    paddingInlineStart: 0,
     fontSize: {
       default: 13.5,
       [mq.phone]: 16,

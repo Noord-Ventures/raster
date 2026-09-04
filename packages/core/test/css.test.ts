@@ -113,6 +113,12 @@ describe("generated raster.css", () => {
     expect(hued, `hued colors: ${[...new Set(hued)].join(", ")}`).toEqual([]);
   });
 
+  it("paints inline axes with logical properties, so dir=\"rtl\" mirrors for free", () => {
+    const components = readFileSync(join(pkgDir, "css/components.css"), "utf8");
+    const physical = components.match(/(?:padding|margin|border)-(?:left|right)\b|[;{]\s*(?:left|right)\s*:|text-align\s*:\s*(?:left|right)/g) ?? [];
+    expect(physical, "physical inline properties in generated component CSS").toEqual([]);
+  });
+
   it("respects reduced motion and touch", () => {
     expect(rasterCss).toContain("@media(prefers-reduced-motion:reduce)");
     expect(rasterCss).toContain("@media(hover:none)");

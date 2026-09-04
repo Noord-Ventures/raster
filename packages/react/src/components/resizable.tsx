@@ -46,11 +46,11 @@ const styles = stylex.create({
       default: 0,
       [mq.phone]: -4,
     },
-    marginLeft: {
+    marginInlineStart: {
       default: -4,
       [mq.phone]: 0,
     },
-    marginRight: {
+    marginInlineEnd: {
       default: -4,
       [mq.phone]: 0,
     },
@@ -84,11 +84,11 @@ const styles = stylex.create({
     "::after": {
       content: '""',
       position: "absolute",
-      left: {
+      insetInlineStart: {
         default: 4,
         [mq.phone]: 0,
       },
-      right: {
+      insetInlineEnd: {
         default: null,
         [mq.phone]: 0,
       },

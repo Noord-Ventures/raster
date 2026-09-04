@@ -37,6 +37,7 @@
     },
     "./css/*": "./css/*",
     "./tokens": "./tokens/raster.tokens.json",
+    "./tokens.dtcg": "./tokens/raster.tokens.dtcg.json",
     "./props": "./props/props.json",
     "./package.json": "./package.json"
   },
@@ -48,8 +49,10 @@
     "props"
   ],
   "scripts": {
-    "build:css": "node --experimental-strip-types scripts/build-components.mjs && node --experimental-strip-types scripts/build.mjs",
-    "build:registry": "node --experimental-strip-types scripts/build-registry.mjs",
+    "build:css": "node --experimental-strip-types scripts/build-components.mjs && node --experimental-strip-types scripts/build.mjs && npm run build:props",
+    "build:props": "node --experimental-strip-types scripts/build-props.mjs",
+    "build:docs": "node --experimental-strip-types scripts/build-docs.mjs",
+    "build:registry": "npm run build:docs && node --experimental-strip-types scripts/build-registry.mjs",
     "build": "npm run build:css && tsup",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",

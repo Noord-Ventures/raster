@@ -1,10 +1,10 @@
 /* ── slider: generated from packages/react/src/components/slider.tsx ── */
 .rs-slider{position:relative;height:2px;background-color:var(--divider);border-radius:1px;margin-block:11px;margin-inline:0}
 @media (max-width: 640px){.rs-slider{height:4px;border-radius:0;margin-block:20px}}
-.rs-slider-fill{position:absolute;left:0;top:0;bottom:0;background-color:var(--text);border-radius:1px;pointer-events:none}
+.rs-slider-fill{position:absolute;inset-inline-start:0;top:0;bottom:0;background-color:var(--text);border-radius:1px;pointer-events:none}
 @media (max-width: 640px){.rs-slider-fill{border-radius:0}}
 .rs-slider-thumb{position:absolute;top:50%;transform:translate(-50%, -50%);width:14px;height:14px;border-radius:50%;background-color:var(--bg);border-width:1.5px;border-style:solid;border-color:var(--text);box-sizing:border-box;pointer-events:none}
 @media (max-width: 640px){.rs-slider-thumb{width:22px;height:22px;border-radius:0}}
 .rs-slider-thumb-focused{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
-.rs-slider-range{position:absolute;left:0;right:0;top:-11px;bottom:-11px;width:100%;height:auto;opacity:0;cursor:pointer;margin:0}
+.rs-slider-range{position:absolute;inset-inline-start:0;inset-inline-end:0;top:-11px;bottom:-11px;width:100%;height:auto;opacity:0;cursor:pointer;margin:0}
 @media (max-width: 640px){.rs-slider-range{top:-20px;bottom:-20px}}

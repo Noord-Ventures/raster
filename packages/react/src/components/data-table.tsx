@@ -34,11 +34,11 @@ const styles = stylex.create({
     borderCollapse: "collapse",
     marginTop: 16,
     marginBottom: 24,
-    marginLeft: {
+    marginInlineStart: {
       default: -20,
       [mq.phone]: `calc(-1 * ${raster.pad})`,
     },
-    marginRight: {
+    marginInlineEnd: {
       default: 0,
       [mq.phone]: `calc(-1 * ${raster.pad})`,
     },
@@ -49,8 +49,8 @@ const styles = stylex.create({
   },
   th: {
     textAlign: {
-      default: "left",
-      ":last-child": "right",
+      default: "start",
+      ":last-child": "end",
     },
     fontWeight: 600,
     color: raster.ink,
@@ -59,7 +59,7 @@ const styles = stylex.create({
       default: 10,
       [mq.phone]: 14,
     },
-    paddingRight: {
+    paddingInlineEnd: {
       default: 16,
       [mq.phone]: 12,
       ":last-child": {
@@ -71,7 +71,7 @@ const styles = stylex.create({
       default: 10,
       [mq.phone]: 14,
     },
-    paddingLeft: {
+    paddingInlineStart: {
       default: 12,
       [mq.phone]: 12,
       ":first-child": {
@@ -92,7 +92,7 @@ const styles = stylex.create({
       default: 10,
       [mq.phone]: 14,
     },
-    paddingRight: {
+    paddingInlineEnd: {
       default: 16,
       [mq.phone]: 12,
       ":last-child": {
@@ -104,7 +104,7 @@ const styles = stylex.create({
       default: 10,
       [mq.phone]: 14,
     },
-    paddingLeft: {
+    paddingInlineStart: {
       default: 12,
       [mq.phone]: 12,
       ":first-child": {
@@ -125,7 +125,7 @@ const styles = stylex.create({
     },
     textAlign: {
       default: null,
-      ":last-child": "right",
+      ":last-child": "end",
     },
   },
   tdAlt: {

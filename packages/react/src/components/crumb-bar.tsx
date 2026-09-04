@@ -24,8 +24,8 @@ const styles = stylex.create({
   bar: {
     position: "fixed",
     top: 0,
-    left: 0,
-    right: 0,
+    insetInlineStart: 0,
+    insetInlineEnd: 0,
     zIndex: raster.zSticky,
     display: "flex",
     alignItems: "center",
@@ -61,18 +61,18 @@ const styles = stylex.create({
     minWidth: 0,
     paddingTop: 0,
     paddingBottom: 0,
-    paddingRight: {
+    paddingInlineEnd: {
       default: 56,
       [mq.phone]: 50,
       [mq.mobileGrid]: 56,
     },
-    paddingLeft: {
+    paddingInlineStart: {
       default: 76,
       [mq.rail]: raster.pad,
       [mq.phone]: 62,
       [mq.mobileGrid]: 74,
     },
-    marginLeft: {
+    marginInlineStart: {
       default: null,
       [mq.rail]: 204,
     },

@@ -1,7 +1,7 @@
 /* ── toast: generated from packages/react/src/components/toast.tsx ── */
 @keyframes rs-anim-toast-in{from{opacity:0}to{opacity:1}}
-.rs-toasts{position:fixed;bottom:20px;right:20px;z-index:var(--z-toast);display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-@media (max-width: 640px){.rs-toasts{bottom:0;right:0;left:0;align-items:stretch;gap:0}}
+.rs-toasts{position:fixed;bottom:20px;inset-inline-end:20px;z-index:var(--z-toast);display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+@media (max-width: 640px){.rs-toasts{bottom:0;inset-inline-end:0;inset-inline-start:0;align-items:stretch;gap:0}}
 .rs-toast{display:flex;align-items:flex-start;gap:10px;background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding-top:10px;padding-inline:14px;padding-bottom:10px;max-width:340px;animation-name:rs-anim-toast-in;animation-duration:var(--duration-confirm);animation-timing-function:var(--ease)}
 @media (max-width: 640px){.rs-toast{border-radius:0;box-shadow:none;padding-top:16px;padding-inline:20px;padding-bottom:calc(16px + env(safe-area-inset-bottom, 0px));max-width:none;width:100%}}
 @media (prefers-reduced-motion: reduce){.rs-toast{animation-name:none}}

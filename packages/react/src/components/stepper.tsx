@@ -101,11 +101,11 @@ const styles = stylex.create({
       default: 11.5,
       [mq.phone]: `calc(${raster.hit} / 2)`,
     },
-    left: {
+    insetInlineStart: {
       default: 24,
       [mq.phone]: raster.hit,
     },
-    right: 0,
+    insetInlineEnd: 0,
     height: raster.hairline,
     backgroundColor: raster.divider,
     margin: 0,

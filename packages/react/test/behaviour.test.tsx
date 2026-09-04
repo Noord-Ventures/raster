@@ -129,8 +129,8 @@ describe("Charts without a pixel pipeline", () => {
     const { container } = render(
       <SmallMultiples
         panels={[
-          { title: "North", series: [{ name: "Sheets", values: [1, 3, 2] }] },
-          { title: "South", series: [{ name: "Sheets", values: [2, 2, 4] }] },
+          { title: "North", series: [{ name: "Sheets", values: [1, 3, 2] }], labels: ["Mon", "Tue", "Wed"] },
+          { title: "South", series: [{ name: "Sheets", values: [2, 2, 4] }], labels: ["Mon", "Tue", "Wed"] },
         ]}
       />,
     );

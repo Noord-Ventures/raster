@@ -78,11 +78,11 @@ const styles = stylex.create({
       default: 20,
       [mq.phone]: 0,
     },
-    right: {
+    insetInlineEnd: {
       default: 20,
       [mq.phone]: 0,
     },
-    left: {
+    insetInlineStart: {
       default: null,
       [mq.phone]: 0,
     },

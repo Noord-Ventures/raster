@@ -17,7 +17,7 @@ const styles = stylex.create({
   toggle: {
     position: "fixed",
     top: 24,
-    right: {
+    insetInlineEnd: {
       default: 20,
       [mq.mobileGrid]: 25,
     },
@@ -76,7 +76,7 @@ const styles = stylex.create({
   inline: {
     position: "relative",
     top: "auto",
-    right: "auto",
+    insetInlineEnd: "auto",
     zIndex: 1,
     filter: "none",
   },

@@ -12,9 +12,9 @@ const styles = stylex.create({
   },
   cap: {
     marginTop: 0,
-    marginRight: 0,
+    marginInlineEnd: 0,
     marginBottom: 8,
-    marginLeft: 0,
+    marginInlineStart: 0,
     fontSize: 12,
     fontWeight: 600,
     letterSpacing: "-0.01em",

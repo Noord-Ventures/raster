@@ -1,12 +1,12 @@
 /* ── crumb-bar: generated from packages/react/src/components/crumb-bar.tsx ── */
-.rs-crumb-bar{position:fixed;top:0;left:0;right:0;z-index:var(--z-sticky);display:flex;align-items:center;height:72px;font-size:13px;font-weight:500;letter-spacing:-0.01em;line-height:1.3;background-color:transparent;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:transparent;transition:var(--transition)}
+.rs-crumb-bar{position:fixed;top:0;inset-inline-start:0;inset-inline-end:0;z-index:var(--z-sticky);display:flex;align-items:center;height:72px;font-size:13px;font-weight:500;letter-spacing:-0.01em;line-height:1.3;background-color:transparent;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:transparent;transition:var(--transition)}
 @media (max-width: 640px){.rs-crumb-bar{height:64px;font-size:12px}}
 .rs-crumb-bar-scrolled{background-color:var(--bg);border-bottom-color:var(--divider)}
-.rs-crumb-bar-inner{display:flex;align-items:center;gap:20px;width:100%;min-width:0;padding-top:0;padding-bottom:0;padding-right:56px;padding-left:76px}
+.rs-crumb-bar-inner{display:flex;align-items:center;gap:20px;width:100%;min-width:0;padding-top:0;padding-bottom:0;padding-inline-end:56px;padding-inline-start:76px}
 @media (max-width: 899px){.rs-crumb-bar-inner{gap:6px}}
-@media (max-width: 640px){.rs-crumb-bar-inner{padding-right:50px;padding-left:62px}}
-@media (max-width: 480px){.rs-crumb-bar-inner{padding-right:56px;padding-left:74px}}
-@media (min-width: 1024px){.rs-crumb-bar-inner{padding-left:var(--pad);margin-left:204px}}
+@media (max-width: 640px){.rs-crumb-bar-inner{padding-inline-end:50px;padding-inline-start:62px}}
+@media (max-width: 480px){.rs-crumb-bar-inner{padding-inline-end:56px;padding-inline-start:74px}}
+@media (min-width: 1024px){.rs-crumb-bar-inner{padding-inline-start:var(--pad);margin-inline-start:204px}}
 .rs-crumbs.rs-crumb-crumbs{list-style:none;padding:0;margin:0;min-width:0;overflow:hidden;white-space:nowrap;opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--duration) var(--ease), visibility 0s var(--ease) var(--duration);font-size:13px;color:var(--text);letter-spacing:-0.01em;display:flex;align-items:baseline;gap:8px}
 @media (prefers-reduced-motion: reduce){.rs-crumbs.rs-crumb-crumbs{transition:none}}
 @media (max-width: 640px){.rs-crumbs.rs-crumb-crumbs{font-size:var(--control-fs);align-items:center;flex-wrap:wrap;gap:6px}}

@@ -8,5 +8,5 @@
 .rs-acc-chevron{flex-shrink:0;color:var(--text-secondary);transition:transform var(--duration) var(--ease)}
 @media (prefers-reduced-motion: reduce){.rs-acc-chevron{transition:none}}
 .rs-acc-chevron-open{transform:rotate(180deg)}
-.rs-acc-body{padding-top:0;padding-right:0;padding-bottom:16px;padding-left:0;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}
+.rs-acc-body{padding-top:0;padding-inline-end:0;padding-bottom:16px;padding-inline-start:0;font-size:13.5px;line-height:1.6;color:var(--text-secondary)}
 @media (max-width: 640px){.rs-acc-body{padding-bottom:20px;font-size:16px}}

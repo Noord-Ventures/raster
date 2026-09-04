@@ -36,7 +36,7 @@ const styles = stylex.create({
   },
   fill: {
     position: "absolute",
-    left: 0,
+    insetInlineStart: 0,
     top: 0,
     bottom: 0,
     backgroundColor: raster.ink,
@@ -78,8 +78,8 @@ const styles = stylex.create({
   },
   range: {
     position: "absolute",
-    left: 0,
-    right: 0,
+    insetInlineStart: 0,
+    insetInlineEnd: 0,
     // 24px tall on desktop, 44px on phones: the hit area, not the 2px track.
     top: {
       default: -11,

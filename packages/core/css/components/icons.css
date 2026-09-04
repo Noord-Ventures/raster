@@ -1,7 +1,7 @@
 /* ── icons: generated from packages/react/src/components/icon.tsx ── */
 .rs-icon{display:block;flex-shrink:0;overflow:visible;color:inherit}
 .rs-icons{display:flex;gap:18px;align-items:center;color:var(--text)}
-.rs-icon-catalog{width:100%;display:flex;flex-direction:column;gap:28px;text-align:left;align-self:stretch}
+.rs-icon-catalog{width:100%;display:flex;flex-direction:column;gap:28px;text-align:start;align-self:stretch}
 .rs-icon-group{display:flex;flex-direction:column;gap:12px}
 .rs-icon-group-title{margin:0;font-size:12px;font-weight:600;letter-spacing:0;color:var(--text-secondary);text-transform:none}
 .rs-icon-grid{display:grid;grid-template-columns:repeat(auto-fill, 184px);column-gap:var(--gutter);row-gap:20px;justify-content:start;width:100%}
