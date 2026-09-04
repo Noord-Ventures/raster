@@ -31,7 +31,7 @@ export const era = {
 
 export const lead = {
   kicker: "What it is",
-  what: "Vlak is a minimal design system for product interfaces. Its name is Dutch for plane or surface: the field where type, controls, and content take shape.",
+  what: "Vlak is a minimal design system for product exploration. Its name is Dutch for plane or surface: the field where type, controls, and content take shape.",
   who: "It is built for the dense, ordinary work of software: forms, tables, settings, navigation, and states. A 204px module sets the structure. Inter carries the hierarchy. Hairlines make relationships visible without turning every element into a box.",
 };
 

@@ -99,8 +99,8 @@ body {
 }
 .site-logo:hover { opacity: .6; }
 .site-logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-/* The rotated glyph carries 3px of air inside its 20px box; pull it so the ink sits on the grid line. */
-.site-logo-mark { width: 20px; height: 20px; transform: translateX(-3px) rotate(-45deg); }
+/* The source SVG is already vertically inverted; this is optical alignment only. */
+.site-logo-mark { width: 20px; height: 20px; transform: translateX(-3px); }
 
 .corner-nav {
   position: fixed; top: 24px; left: var(--nav-left); right: auto; z-index: 200;
@@ -292,7 +292,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   .site-logo {
     width: 44px; height: 44px; min-width: 44px; min-height: 44px;
   }
-  /* Rotated mark reads high vs 15px Vlak/crumbs; drop it onto that middle. */
+  /* Optical alignment against the 15px Vlak/crumb line. */
   .site-logo-mark {
     position: relative;
     top: 1px;
@@ -351,7 +351,8 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   }
   .rs-crumb-root,
   .site-crumb-root {
-    display: inline-flex; align-items: center;
+    display: none !important;
+    align-items: center;
     flex-shrink: 0; height: 44px; min-height: 0;
     line-height: 1;
     position: static;

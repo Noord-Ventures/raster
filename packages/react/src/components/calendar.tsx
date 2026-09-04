@@ -215,6 +215,7 @@ const styles = stylex.create({
       default: vlak.ink,
       ":hover": vlak.ink,
     },
+    borderRadius: vlak.radiusSm,
     color: vlak.paper,
     fontWeight: 600,
   },

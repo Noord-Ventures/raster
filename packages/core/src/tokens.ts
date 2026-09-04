@@ -7,7 +7,7 @@
 export const vlakTokens = {
   meta: {
     name: "Vlak",
-    description: "A minimal design system for product interfaces, built on a 204px module.",
+    description: "A minimal design system for product exploration, built on a 204px module.",
     url: "https://vlak.dev",
   },
   color: {
