@@ -70,7 +70,7 @@ Conventions an agent can rely on: `value` / `defaultValue` / `onValueChange` on 
 
 ## System principles
 
-Platform first · One source of paint · Accessible by default · Paper and ink · 204px module · Native elements · React or CSS · Stable classes · Agent-readable · MIT licensed
+Platform first · One source of paint · Accessible by default · Paper and ink · Grid system · Native elements · React or CSS · Stable classes · Agent-readable · MIT licensed
 
 ## Packages
 

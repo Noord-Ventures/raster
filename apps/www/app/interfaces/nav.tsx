@@ -14,7 +14,7 @@ function here(pathname: string, href: string) {
 function currentLabel(pathname: string) {
   if (here(pathname, "/interfaces")) return "Interfaces";
   const slug = pathname.split("/")[2];
-  return interfaces.find((item) => item.slug === slug)?.title ?? "Interfaces";
+  return interfaces.find((item) => item.slug === slug)?.what ?? "Interfaces";
 }
 
 export function InterfacesNav({ rail = true }: { rail?: boolean }) {
@@ -37,7 +37,7 @@ export function InterfacesNav({ rail = true }: { rail?: boolean }) {
             className="toc-mobile-item"
             aria-current={here(pathname, href) ? "page" : undefined}
           >
-            {item.title}
+            {item.what}
           </Link>
         );
       })}
@@ -55,7 +55,7 @@ export function InterfacesNav({ rail = true }: { rail?: boolean }) {
             const href = `/interfaces/${item.slug}`;
             return (
               <Link key={item.slug} href={href} {...sx("", ifx.railLink)} aria-current={here(pathname, href) ? "page" : undefined}>
-                {item.title}
+                {item.what}
               </Link>
             );
           })}

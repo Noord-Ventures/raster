@@ -99,8 +99,8 @@ body {
 }
 .site-logo:hover { opacity: .6; }
 .site-logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-/* The source SVG is already vertically inverted; this is optical alignment only. */
-.site-logo-mark { width: 20px; height: 20px; transform: translateX(-3px); }
+/* Exact 20px box: its left edge sits on the first 20px grid line. */
+.site-logo-mark { width: 20px; height: 20px; }
 
 .corner-nav {
   position: fixed; top: 24px; left: var(--nav-left); right: auto; z-index: 200;
@@ -115,7 +115,7 @@ body {
 /* Full-bleed fixed 72 layer — live crumb-bar.css. The site bar uses
    these classes (not the React StyleX leaf). Transparent at rest;
    scrolled paper + hairline. Logo / corner-nav keep the paper halo. */
-.rs-crumb-bar {
+.site-crumb-bar {
   position: fixed;
   top: 0;
   left: 0;
@@ -132,11 +132,11 @@ body {
   border-bottom: 1px solid transparent;
   transition: var(--transition);
 }
-.rs-crumb-bar-scrolled {
+.site-crumb-bar.rs-crumb-bar-scrolled {
   background: var(--bg);
   border-bottom-color: var(--divider);
 }
-body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
+body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
   opacity: 0;
   pointer-events: none;
 }
@@ -146,19 +146,19 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
    The bar stays full-bleed: transparent at rest, paper + hairline
    once scrolled. Nav stays on the 204; appearance stays right. */
 @media (min-width: 641px) {
-  html body .rs-crumb-bar {
+  html body .site-crumb-bar {
     left: 0;
     right: 0;
     width: auto;
     overflow: visible;
   }
-  html body .rs-crumb-bar-inner {
+  html body .site-crumb-bar .rs-crumb-bar-inner {
     margin-left: 0;
     padding-left: 76px;
   }
-  html body a.rs-crumb-root,
-  html body a.site-crumb-root,
-  html body .rs-crumb-bar .rs-crumbs {
+  html body .site-crumb-bar a.rs-crumb-root,
+  html body .site-crumb-bar a.site-crumb-root,
+  html body .site-crumb-bar .rs-crumbs {
     display: none;
   }
 }
@@ -327,7 +327,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     min-height: 44px; padding: 12px 20px; font-size: 1.0625rem;
   }
   .nav-panel-appearance { padding: 12px 20px 16px; }
-  .rs-crumb-bar {
+  .site-crumb-bar {
     height: calc(56px + env(safe-area-inset-top, 0px));
     padding-top: env(safe-area-inset-top, 0px);
     font-size: 0.9375rem;
@@ -337,7 +337,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     width: auto;
     right: 0;
   }
-  .rs-crumb-bar-inner {
+  .site-crumb-bar .rs-crumb-bar-inner {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -349,8 +349,8 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     overflow: hidden;
     padding: 0 calc(108px + env(safe-area-inset-right, 0px)) 0 calc(60px + env(safe-area-inset-left, 0px));
   }
-  .rs-crumb-root,
-  .site-crumb-root {
+  .site-crumb-bar .rs-crumb-root,
+  .site-crumb-bar .site-crumb-root {
     display: none !important;
     align-items: center;
     flex-shrink: 0; height: 44px; min-height: 0;
@@ -363,7 +363,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     overflow: visible;
     visibility: visible;
   }
-  .rs-crumb-bar .rs-crumbs {
+  .site-crumb-bar .rs-crumbs {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -373,13 +373,13 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     overflow: hidden;
     white-space: nowrap;
   }
-  .rs-crumbs-link,
-  .rs-crumb-bar a {
+  .site-crumb-bar .rs-crumbs-link,
+  .site-crumb-bar a {
     display: inline-flex; align-items: center;
     flex-shrink: 0; height: 44px; min-height: 0;
   }
-  .rs-crumb-bar .rs-crumbs-sep { flex-shrink: 0; }
-  .rs-crumb-bar .rs-crumbs-here {
+  .site-crumb-bar .rs-crumbs-sep { flex-shrink: 0; }
+  .site-crumb-bar .rs-crumbs-here {
     display: block;
     min-width: 0;
     min-height: 0;
@@ -449,11 +449,11 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   .settings { right: calc(56px + env(safe-area-inset-right, 0px)); }
   .nav-toggle { right: calc(8px + env(safe-area-inset-right, 0px)); }
   .nav-panel-link, .nav-panel-appearance { padding-left: 25px; padding-right: 25px; }
-  .rs-crumb-bar-inner {
+  .site-crumb-bar .rs-crumb-bar-inner {
     flex-wrap: nowrap;
     padding: 0 calc(108px + env(safe-area-inset-right, 0px)) 0 calc(60px + env(safe-area-inset-left, 0px));
   }
-  .rs-crumb-bar .rs-crumbs { flex-wrap: nowrap; }
+  .site-crumb-bar .rs-crumbs { flex-wrap: nowrap; }
 }
 
 /* ── Layout: one module in, width snapped to whole modules ── */

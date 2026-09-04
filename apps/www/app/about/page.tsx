@@ -153,7 +153,7 @@ export default function AboutPage() {
           </Copy>
         </section>
 
-        <section {...sx("field-cell field-cell-mod", about.cell)} aria-label="204 module">
+        <section {...sx("field-cell field-cell-mod", about.cell)} aria-label="Grid system">
           <Kicker>{program.module.kicker}</Kicker>
           <div
             {...sx("field-spec field-spec-module", about.spec, about.specModule)}

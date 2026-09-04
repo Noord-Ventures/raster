@@ -5,6 +5,7 @@ import { Button, Icon, Input, InputGroup } from "@noorddev/vlak-react";
 import { Brand } from "../mark";
 import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
+import { InspectorClose } from "../inspector-close";
 
 const WHAT = interfaceBySlug("line")!.what;
 
@@ -282,6 +283,7 @@ export function Board() {
       </nav>
 
       <aside className={`if-inspect${inspect ? " is-open" : ""}`} aria-label="Inspector">
+        {inspect ? <InspectorClose onClick={() => setInspect(null)} /> : null}
         <div className="sc-ai-inspect">
           {inspect?.kind === "settings" ? (
             <div key="settings" className="sc-fresh">

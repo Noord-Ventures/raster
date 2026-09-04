@@ -6,6 +6,7 @@ import { Brand } from "../mark";
 import dynamic from "next/dynamic";
 import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
+import { InspectorClose } from "../inspector-close";
 
 const WHAT = interfaceBySlug("night")!.what;
 
@@ -106,6 +107,7 @@ export function Board() {
       </nav>
 
       <aside className={`if-inspect${pane === "trip" ? " is-open" : ""}`} aria-label="Trip">
+        {pane === "trip" ? <InspectorClose onClick={() => setPane("none")} /> : null}
         {pane === "trip" ? (
           <div key={item.id} className="sc-night-inspect sc-fresh">
             <p className="sc-night-label if-ico-row">
@@ -143,10 +145,6 @@ export function Board() {
                 <dd>{item.where}</dd>
               </div>
             </dl>
-            <button type="button" className="sc-night-ghost" onClick={() => setPane("none")}>
-              <Icon name="close" size={12} />
-              Close
-            </button>
           </div>
         ) : null}
       </aside>

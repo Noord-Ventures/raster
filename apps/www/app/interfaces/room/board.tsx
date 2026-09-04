@@ -6,6 +6,7 @@ import { Brand } from "../mark";
 import { Face, type FaceId } from "../people";
 import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
+import { InspectorClose } from "../inspector-close";
 
 const WHAT = interfaceBySlug("room")!.what;
 
@@ -245,6 +246,7 @@ export function Board() {
       </nav>
 
       <aside className={`if-inspect${pane !== "none" ? " is-open" : ""}`} aria-label="Thread">
+        {pane !== "none" ? <InspectorClose onClick={() => setPane("none")} /> : null}
         {pane === "thread" ? (
           <div key={selected.id} className="sc-room-inspect sc-fresh">
             <p className="sc-room-label if-ico-row">
@@ -269,10 +271,6 @@ export function Board() {
                 </span>
               </button>
             ))}
-            <button type="button" className="sc-room-ghost" onClick={() => setPane("none")}>
-              <Icon name="close" size={12} />
-              Close
-            </button>
           </div>
         ) : null}
         {pane === "person" ? (
@@ -290,10 +288,6 @@ export function Board() {
               </i>
             </div>
             <p>People stay in the rail. A face opens the room around them.</p>
-            <button type="button" className="sc-room-ghost" onClick={() => setPane("none")}>
-              <Icon name="close" size={12} />
-              Close
-            </button>
           </div>
         ) : null}
       </aside>

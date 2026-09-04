@@ -66,7 +66,7 @@ export const specimen = {
 
 export const history = {
   kicker: "Design lineage",
-  body: "Vlak takes a method from modernism, not a period look. From Swiss International Typographic Style: the grid as an ordering system, sans serif type, asymmetric composition, and hierarchy built from scale, weight, and space.",
+  body: "Swiss International Typographic Style gives Vlak its grid, sans serif type, asymmetric composition, and hierarchy built from scale, weight, and space.",
   dutch: "From Dutch modernism: a more elastic field, type used as structure, direct construction, and tension between strict systems and lively composition. The result is neither a poster theme nor a historical reproduction.",
   now: "Vlak translates those principles into product constraints: tokens, native elements, stable classes, visible focus, predictable spacing, and components that can be inspected as data.",
 };
@@ -301,7 +301,7 @@ export const field = [
 
 export const program = {
   module: {
-    kicker: "204",
+    kicker: "Grid system",
     law: `${grid.column}px content + ${grid.gutter}px gutter. One repeatable field.`,
   },
   hairline: {
@@ -362,11 +362,11 @@ export const notes = [
   },
   {
     q: "What is Noord?",
-    a: "Noord is a frontier design lab in Alkmaar. Vlak was designed and built there.",
+    a: "Noord is a frontier design lab in Alkmaar, the Netherlands. Vlak was designed and built there.",
   },
   {
     q: "What are the ten principles?",
-    a: "Platform first, one source of paint, accessible by default, paper and ink, 204px module, native elements, React or CSS, stable classes, agent-readable, MIT licensed.",
+    a: "Platform first, one source of paint, accessible by default, paper and ink, a grid system, native elements, React or CSS, stable classes, agent-readable, MIT licensed.",
   },
   {
     q: "Where do I report a problem?",

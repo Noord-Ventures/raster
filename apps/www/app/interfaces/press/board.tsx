@@ -5,6 +5,7 @@ import { Icon, ToggleGroup } from "@noorddev/vlak-react";
 import { Brand } from "../mark";
 import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
+import { InspectorClose } from "../inspector-close";
 
 const WHAT = interfaceBySlug("press")!.what;
 
@@ -182,6 +183,7 @@ export function Board() {
       </nav>
 
       <aside className={`if-inspect${sheet ? " is-open" : ""}`} aria-label="Sheet">
+        {sheet ? <InspectorClose onClick={() => setSheet(false)} /> : null}
         <div className="sc-dash-inspect">
           {sheet ? (
             <div key={job} className="sc-fresh">

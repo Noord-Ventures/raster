@@ -4,7 +4,7 @@ What it is, how to get there, what done looks like.
 
 Writers: the six live in `app/interfaces/catalog.ts`. Each proto is its own folder and its own route. The section is a first-class nav sibling of Components, Docs, and About — not a page inside a component.
 
-Each interface is a fictional little app: an English catalog name, a mark, and a `what` string for the product chrome. Inside each demo, Brand/title/masthead is `what` (AI chat, Dashboard, Social feed, Fleet management, Order out, Team chat) — not the codename. Routes and the Interfaces index still use Line / Press / Wall / Night / Evening / Room.
+Each interface is a fictional little app: an English catalog name, a mark, and a `what` string for the product chrome. Inside each demo, Brand/title/masthead and the Interfaces side rail use `what` (AI chat, Dashboard, Social feed, Fleet management, Order out, Team chat) — not the codename. Routes and the Interfaces index still use Line / Press / Wall / Night / Evening / Room.
 
 Landing cards are poster crops — a clipped fragment of that UI, not a tiny full-page shrink, not a title-only frame. Type in a crop wraps on a word. A composer or photograph may run off the card; a letter may not. Captions follow the English names.
 

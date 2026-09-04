@@ -394,6 +394,7 @@ body:has(.if-index) {
   background: color-mix(in srgb, var(--text) 8%, var(--bg));
 }
 .if-inspect {
+  position: relative;
   width: 0;
   opacity: 0;
   overflow: hidden;
@@ -405,6 +406,18 @@ body:has(.if-index) {
     opacity var(--duration-snap) var(--ease),
     border-color var(--duration-snap) var(--ease);
 }
+.if-inspect-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+}
+.if-inspect > div > :first-child { padding-right: 36px; }
 .if-inspect.is-open {
   width: 204px;
   opacity: 1;

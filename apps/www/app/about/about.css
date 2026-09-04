@@ -251,17 +251,16 @@ html:has(.field-page) .site-footer {
 }
 
 .field-code-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  position: relative;
+  display: block;
   width: 100%;
 }
 
 .field-code {
-  flex: 1;
+  width: 100%;
   min-width: 0;
   margin: 0;
-  padding: 20px;
+  padding: 20px 64px 20px 20px;
   background: var(--table-alt);
   border-top: 1px solid var(--divider);
   border-bottom: 1px solid var(--divider);
@@ -276,12 +275,11 @@ html:has(.field-page) .site-footer {
 }
 
 .field-cell-use .code-copy {
-  position: static;
-  top: auto;
-  right: auto;
-  transform: none;
-  background: none;
-  flex-shrink: 0;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  background: var(--table-alt);
   width: 32px;
   height: 32px;
   min-width: 32px;

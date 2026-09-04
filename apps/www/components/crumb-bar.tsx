@@ -42,7 +42,7 @@ function trailFor(pathname: string): Crumb[] {
 
 /** Keep visible crumb boxes left of .corner-nav (gap ≥ 8px). Survives library CSS. */
 function pinRootClearOfNav(root: HTMLElement) {
-  const trail = document.querySelector<HTMLElement>(".rs-crumb-bar .rs-crumbs");
+  const trail = document.querySelector<HTMLElement>(".site-crumb-bar .rs-crumbs");
   if (window.matchMedia("(max-width: 640px)").matches) {
     root.style.removeProperty("position");
     root.style.removeProperty("top");
@@ -94,7 +94,7 @@ export function CrumbBar() {
   return (
     <nav
       {...sx(
-        `rs-crumb-bar${scrolled ? " rs-crumb-bar-scrolled" : ""}`,
+        `rs-crumb-bar site-crumb-bar${scrolled ? " rs-crumb-bar-scrolled" : ""}`,
         chrome.crumbBar,
         scrolled && chrome.crumbBarScrolled,
       )}

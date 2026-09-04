@@ -6,6 +6,7 @@ import { Brand } from "../mark";
 import { Face, type FaceId } from "../people";
 import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
+import { InspectorClose } from "../inspector-close";
 
 const WHAT = interfaceBySlug("wall")!.what;
 
@@ -29,7 +30,7 @@ const FEED: Post[] = [
     name: "Aziez",
     when: "09:14",
     text: "The west window is the one that holds.",
-    photo: "/interfaces/threads/press-sheet.webp",
+    photo: "/interfaces/threads/press-sheet-v2.jpg",
     ratio: "4 / 5",
     likes: 12,
   },
@@ -47,7 +48,7 @@ const FEED: Post[] = [
     name: "Jenny",
     when: "08:41",
     text: "I left a note on the third post.",
-    photo: "/interfaces/threads/posters.webp",
+    photo: "/interfaces/threads/posters-v2.jpg",
     ratio: "1 / 1",
     likes: 5,
   },
@@ -65,7 +66,7 @@ const FEED: Post[] = [
     name: "Gianpiero",
     when: "07:55",
     text: "On the rail before the street.",
-    photo: "/interfaces/threads/press-sheet.webp",
+    photo: "/interfaces/threads/press-sheet-v2.jpg",
     ratio: "5 / 4",
     likes: 7,
   },
@@ -83,7 +84,7 @@ const FEED: Post[] = [
     name: "Gianpiero",
     when: "07:11",
     text: "The rail stays 184.",
-    photo: "/interfaces/threads/posters.webp",
+    photo: "/interfaces/threads/posters-v2.jpg",
     ratio: "3 / 4",
     likes: 4,
   },
@@ -227,6 +228,7 @@ export function Board() {
       </section>
 
       <aside className={`if-inspect${inspect ? " is-open" : ""}`} aria-label={inspect?.kind === "profile" ? "Profile" : "Comments"}>
+        {inspect ? <InspectorClose onClick={() => setInspect(null)} /> : null}
         {inspect?.kind === "profile" ? (
           <div key={person.id} className="sc-wall-inspect sc-fresh">
             <p className="sc-wall-label if-ico-row">
@@ -239,10 +241,6 @@ export function Board() {
               <i>{person.line}</i>
             </div>
             <p>Posts on the wall stay in the street. A face is enough to find them again.</p>
-            <button type="button" className="sc-wall-ghost" onClick={() => setInspect(null)}>
-              <Icon name="close" size={12} />
-              Close
-            </button>
           </div>
         ) : inspect?.kind === "post" ? (
           <div key={item.id} className="sc-wall-inspect sc-fresh">
@@ -259,10 +257,6 @@ export function Board() {
                 </span>
               </button>
             ))}
-            <button type="button" className="sc-wall-ghost" onClick={() => setInspect(null)}>
-              <Icon name="close" size={12} />
-              Close
-            </button>
           </div>
         ) : null}
       </aside>

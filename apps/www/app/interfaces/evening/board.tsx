@@ -5,6 +5,7 @@ import { Icon, Input, InputGroup, ToggleGroup } from "@noorddev/vlak-react";
 import { Brand } from "../mark";
 import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
+import { InspectorClose } from "../inspector-close";
 
 const WHAT = interfaceBySlug("evening")!.what;
 
@@ -38,9 +39,9 @@ type Item = {
 type Line = { key: string; id: string; store: string; name: string; price: number };
 
 const STORES: Store[] = [
-  { id: "buren", name: "De Buren", area: "Alkmaar", photo: "/interfaces/food/de-buren.webp", rating: "4.8", fee: "€2.40", eta: "22 min", method: "delivery", diet: "any", price: 2, dish: "Roast chicken, tonight" },
+  { id: "buren", name: "De Buren", area: "Alkmaar", photo: "/interfaces/food/de-buren-v2.jpg", rating: "4.8", fee: "€2.40", eta: "22 min", method: "delivery", diet: "any", price: 2, dish: "Roast chicken, tonight" },
   { id: "kaas", name: "Kaasbar", area: "Kaasmarkt", photo: "/interfaces/food/kaasbar.webp", rating: "4.6", fee: "€1.80", eta: "18 min", method: "pickup", diet: "veg", price: 2, dish: "Aged cheese board" },
-  { id: "canal", name: "Canal kitchen", area: "Oudegracht", photo: "/interfaces/food/canal.webp", rating: "4.7", fee: "€2.90", eta: "27 min", method: "delivery", diet: "fish", price: 2, dish: "Saffron fish stew" },
+  { id: "canal", name: "Canal kitchen", area: "Oudegracht", photo: "/interfaces/food/canal-v2.jpg", rating: "4.7", fee: "€2.90", eta: "27 min", method: "delivery", diet: "fish", price: 2, dish: "Saffron fish stew" },
   { id: "lunch", name: "Press lunch", area: "Spoor", photo: "/interfaces/food/lunch.webp", rating: "4.5", fee: "€1.40", eta: "14 min", method: "pickup", diet: "veg", price: 1, dish: "Ricotta toast" },
   { id: "north", name: "North bakery", area: "Kennemerstraatweg", photo: "/interfaces/food/north.webp", rating: "4.9", fee: "€1.20", eta: "16 min", method: "delivery", diet: "veg", price: 1, dish: "Morning loaf" },
   { id: "folsom", name: "Folsom counter", area: "Mission", photo: "/interfaces/food/bakery.webp", rating: "4.4", fee: "€2.10", eta: "24 min", method: "delivery", diet: "any", price: 1, dish: "Almond pastry" },
@@ -48,7 +49,7 @@ const STORES: Store[] = [
 
 const MENUS: Record<string, Item[]> = {
   buren: [
-    { id: "chicken", name: "Roast chicken", note: "Held at the pass", photo: "/interfaces/food/de-buren.webp", price: 18, cat: "Plates" },
+    { id: "chicken", name: "Roast chicken", note: "Held at the pass", photo: "/interfaces/food/de-buren-v2.jpg", price: 18, cat: "Plates" },
     { id: "salad", name: "Beet salad", note: "Cold plate", photo: "/interfaces/food/dish-salad.webp", price: 9, cat: "Plates" },
     { id: "soup", name: "Leek soup", note: "Slow", photo: "/interfaces/food/dish-soup.webp", price: 8, cat: "Soup" },
   ],
@@ -57,7 +58,7 @@ const MENUS: Record<string, Item[]> = {
     { id: "rye", name: "Rye and honey", note: "Last loaf", photo: "/interfaces/food/dish-pastry.webp", price: 7, cat: "Bread" },
   ],
   canal: [
-    { id: "stew", name: "Fish stew", note: "On the fire", photo: "/interfaces/food/canal.webp", price: 21, cat: "Plates" },
+    { id: "stew", name: "Fish stew", note: "On the fire", photo: "/interfaces/food/canal-v2.jpg", price: 21, cat: "Plates" },
     { id: "greens", name: "Green salad", note: "Cold plate", photo: "/interfaces/food/dish-salad.webp", price: 8, cat: "Plates" },
   ],
   lunch: [
@@ -324,6 +325,7 @@ export function Board() {
       </nav>
 
       <aside className={`if-inspect${inspect ? " is-open" : ""}`} aria-label={inspect?.kind === "bag" ? "Bag" : "Plate"}>
+        {inspect ? <InspectorClose onClick={() => setInspect(null)} /> : null}
         {inspect?.kind === "bag" ? (
           <div key={`bag-${count}`} className="sc-evening-sheet sc-fresh">
             <p className="sc-evening-label if-ico-row">
@@ -355,10 +357,6 @@ export function Board() {
                 </p>
               </>
             )}
-            <button type="button" className="sc-evening-ghost" onClick={() => setInspect(null)}>
-              <Icon name="close" size={12} />
-              Close
-            </button>
           </div>
         ) : item ? (
           <div key={item.id} className="sc-evening-sheet sc-fresh">
@@ -374,10 +372,6 @@ export function Board() {
             <button type="button" className="sc-evening-ghost" onClick={() => addItem(item)}>
               <Icon name="plus" size={12} />
               Add to bag
-            </button>
-            <button type="button" className="sc-evening-ghost" onClick={() => setInspect(null)}>
-              <Icon name="close" size={12} />
-              Close
             </button>
           </div>
         ) : null}
