@@ -19,13 +19,13 @@
   "files": [
     {
       "path": "raster/aspect-ratio.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Width over height, e.g. 16 / 9. */\n  ratio?: number;\n}\n\nconst styles = stylex.create({\n  box: {\n    position: \"relative\",\n    width: \"100%\",\n    overflow: \"hidden\",\n    borderRadius: raster.radius,\n  },\n});\n\nexport const AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(function AspectRatio(\n  { ratio = 16 / 9, style, className, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-ratio\", className], styles.box);\n  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, aspectRatio: ratio, ...style }} />;\n});\n",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Width over height, e.g. 16 / 9. */\n  ratio?: number;\n}\n\nconst styles = stylex.create({\n  box: {\n    position: \"relative\",\n    /* Grid stretches the one child to the whole box, so media and captions fill and centre. */\n    display: \"grid\",\n    width: \"100%\",\n    overflow: \"hidden\",\n    borderRadius: raster.radius,\n  },\n});\n\nexport const AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(function AspectRatio(\n  { ratio = 16 / 9, style, className, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-ratio\", className], styles.box);\n  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, aspectRatio: ratio, ...style }} />;\n});\n",
       "type": "registry:component",
       "target": "components/raster/aspect-ratio.tsx"
     },
     {
       "path": "raster/styles/aspect-ratio.css",
-      "content": "/* ── aspect-ratio: generated from packages/react/src/components/aspect-ratio.tsx ── */\n.rs-ratio{position:relative;width:100%;overflow:hidden;border-radius:var(--radius)}\n",
+      "content": "/* ── aspect-ratio: generated from packages/react/src/components/aspect-ratio.tsx ── */\n.rs-ratio{position:relative;display:grid;width:100%;overflow:hidden;border-radius:var(--radius)}\n",
       "type": "registry:file",
       "target": "styles/raster/aspect-ratio.css"
     }

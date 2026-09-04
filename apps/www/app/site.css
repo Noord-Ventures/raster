@@ -99,7 +99,8 @@ body {
 }
 .site-logo:hover { opacity: .6; }
 .site-logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.site-logo-mark { width: 20px; height: 20px; transform: rotate(-45deg); }
+/* The rotated glyph carries 3px of air inside its 20px box; pull it so the ink sits on the grid line. */
+.site-logo-mark { width: 20px; height: 20px; transform: translateX(-3px) rotate(-45deg); }
 
 .corner-nav {
   position: fixed; top: 24px; left: var(--nav-left); right: auto; z-index: 200;
@@ -188,16 +189,19 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 
 /* Appearance: same three groups as renatovaldes.com.
    Raster chrome: hairline, radius 0, sentence case. Not the 10px sheet. */
+/* Anchored to the trigger's bottom-right corner and opening leftwards,
+   like every Raster menu: 8px gap, hairline, paper, radius-sm, no shadow.
+   The rs-menu leaf spans left:0/right:0 by default; free the start edge. */
 .appearance-menu {
-  --rs-out: 0px;
   position: absolute;
   top: calc(100% + 8px);
-  right: 0;
-  z-index: 220;
-  min-width: 232px;
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+  z-index: var(--z-float);
+  width: 232px;
   margin: 0;
   padding: 14px;
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   box-shadow: none;
 }
 .appearance-label {

@@ -117,7 +117,6 @@ const styles = stylex.create({
     },
     borderColor: {
       default: raster.divider,
-      ":hover": "transparent",
       ":disabled": raster.divider,
       [mq.forcedColors]: {
         default: "ButtonText",

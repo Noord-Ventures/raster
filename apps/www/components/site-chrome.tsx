@@ -293,13 +293,22 @@ export function SiteChrome() {
     };
   }, [open]);
 
+  /* Appearance panel: focus moves to the current scheme on open, Escape
+     and outside clicks close it, and focus returns to the toggle. */
   React.useEffect(() => {
     if (!menuOpen) return;
+    const panel = settingsRef.current?.querySelector<HTMLElement>("#appearanceMenu");
+    const first = panel?.querySelector<HTMLElement>('[aria-pressed="true"], button');
+    first?.focus();
     const onPointer = (event: PointerEvent) => {
       if (!settingsRef.current?.contains(event.target as Node)) setMenuOpen(false);
     };
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMenuOpen(false);
+        settingsRef.current?.querySelector<HTMLElement>(".theme-toggle")?.focus();
+      }
     };
     document.addEventListener("pointerdown", onPointer);
     document.addEventListener("keydown", onKey);
