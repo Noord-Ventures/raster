@@ -1,11 +1,11 @@
 # Progress
 
-4px bar. Percentage is set in the label.
+Shows completion for a known process. 4px bar; the label carries the percentage.
 
 Category: feedback  
 Name: `progress`  
 Also known as: Progress, Progress bar, Meter  
-Page: https://getraster.com/components/progress/
+Page: https://vlak.dev/components/progress/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/progress/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Progress } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Progress } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add progress
+npx @noorddev/vlak-cli add progress
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/progress.json
+npx shadcn add https://vlak.dev/r/progress.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-progress-head"><span id="upload-label">Uploading</span><span>40%</span></div><div class="rs-progress" role="progressbar" aria-labelledby="upload-label" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40"><span class="rs-progress-fill" style="width:40%"></span></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/progress.json
 ## Example
 
 ```tsx
-import { Progress } from "@noorddev/raster-react";
+import { Progress } from "@noorddev/vlak-react";
 
 <Progress label="Uploading" value={40} />
 <Progress value={3} max={5} aria-label="Steps done" />

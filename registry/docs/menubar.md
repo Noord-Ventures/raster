@@ -1,11 +1,11 @@
 # Menubar
 
-Row of dropdowns in a 1px strip.
+Groups application menus in one row of dropdowns with a 1px frame.
 
 Category: actions  
 Name: `menubar`  
 Also known as: Menubar, Menu bar, Application menu  
-Page: https://getraster.com/components/menubar/
+Page: https://vlak.dev/components/menubar/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/menubar/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Menubar } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Menubar } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add menubar
+npx @noorddev/vlak-cli add menubar
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/menubar.json
+npx shadcn add https://vlak.dev/r/menubar.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-menubar" role="menubar"><button class="rs-dropdown" role="menuitem" aria-haspopup="menu"><span>File</span></button><button class="rs-dropdown" role="menuitem" aria-haspopup="menu"><span>Edit</span></button><button class="rs-dropdown" role="menuitem" aria-haspopup="menu"><span>View</span></button></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/menubar.json
 ## Example
 
 ```tsx
-import { Menubar } from "@noorddev/raster-react";
+import { Menubar } from "@noorddev/vlak-react";
 
 <Menubar
   menus={[

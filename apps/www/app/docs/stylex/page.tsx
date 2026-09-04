@@ -5,21 +5,21 @@ import { DOOR } from "../../specimen";
 
 export const metadata: Metadata = {
   title: "StyleX",
-  description: "Write your own leaves against Raster tokens, compile them with Vite or Next, or skip the compiler.",
+  description: "Write your own leaves against Vlak tokens, compile them with Vite or Next, or skip the compiler.",
   alternates: { canonical: `${DOOR}/docs/stylex/` },
 };
 
 const leaf = `import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "@noorddev/raster-react/tokens.stylex";
+import { vlak, mq } from "@noorddev/vlak-react/tokens.stylex";
 
 const styles = stylex.create({
   panel: {
-    borderTopWidth: raster.hairline,
+    borderTopWidth: vlak.hairline,
     borderTopStyle: "solid",
-    borderTopColor: raster.divider,
-    padding: raster.pad,
-    color: raster.ink,
-    backgroundColor: raster.paper,
+    borderTopColor: vlak.divider,
+    padding: vlak.pad,
+    color: vlak.ink,
+    backgroundColor: vlak.paper,
     [mq.phone]: { padding: 12 },
     [mq.reduce]: { transition: "none" },
   },
@@ -58,16 +58,16 @@ import stylex from "@stylexjs/unplugin";
 
 export default defineConfig({
   plugins: [
-    // Finds packages that depend on @stylexjs/stylex, @noorddev/raster-react
+    // Finds packages that depend on @stylexjs/stylex, @noorddev/vlak-react
     // included, and compiles their StyleX along with yours.
     stylex.vite({ useCSSLayers: true }),
     react(),
   ],
 });`;
 
-const nextConfig = `// next.config.mjs (what getraster.com does)
+const nextConfig = `// next.config.mjs (what vlak.dev does)
 // A Babel pre-loader runs @stylexjs/babel-plugin on app/ and components/
-// only. SWC keeps everything else. Raster arrives precompiled from
+// only. SWC keeps everything else. Vlak arrives precompiled from
 // node_modules, so it is not in the include list.
 const stylexBabelOptions = {
   dev: false,
@@ -120,14 +120,14 @@ module.exports = {
 /* app/stylex.css */
 @stylex;`;
 
-const vendor = `npx @noorddev/raster-cli add button dialog
+const vendor = `npx @noorddev/vlak-cli add button dialog
 
-components/raster/
+components/vlak/
   button.tsx          the leaf: stylex.create + rs-* classes
   dialog.tsx
   cx.ts, rs.ts        shared helpers, installed once
   tokens.stylex.ts    the same vars, local to your compile
-styles/raster/
+styles/vlak/
   button.css          the CSS projection, if you would rather not compile`;
 
 export default function StylexPage() {
@@ -139,7 +139,7 @@ export default function StylexPage() {
       <h2 className="section-label">Writing a leaf</h2>
       <CodeBlock code={leaf} />
       <p className="rs-t-body">
-        <code className="rs-code">raster</code> is a <code className="rs-code">defineVars</code> set
+        <code className="rs-code">vlak</code> is a <code className="rs-code">defineVars</code> set
         that aliases the CSS custom properties; it is not a second scale. Change a token in CSS and
         the leaf follows. <code className="rs-code">mq</code> is a{" "}
         <code className="rs-code">defineConsts</code> set of media queries, so the compiler folds
@@ -149,7 +149,7 @@ export default function StylexPage() {
         <table className="rs-table">
           <thead>
             <tr className="rs-table-row">
-              <th className="rs-table-th">raster.*</th>
+              <th className="rs-table-th">vlak.*</th>
               <th className="rs-table-th">Aliases</th>
             </tr>
           </thead>
@@ -188,7 +188,7 @@ export default function StylexPage() {
         </table>
       </div>
       <p className="rs-t-body">
-        <code className="rs-code">rasterFont</code> and <code className="rs-code">rasterMono</code>{" "}
+        <code className="rs-code">vlakFont</code> and <code className="rs-code">vlakMono</code>{" "}
         export the two font stacks as strings.
       </p>
 
@@ -196,7 +196,7 @@ export default function StylexPage() {
       <p className="rs-t-body">
         StyleX resolves <code className="rs-code">defineVars</code> at compile time, so the file that
         defines them must pass through your compiler. <code className="rs-code">
-          @noorddev/raster-react/tokens.stylex
+          @noorddev/vlak-react/tokens.stylex
         </code>{" "}
         ships uncompiled for that reason; its hashes match the package&apos;s own compiled leaves. The
         rest of the package is already compiled and needs nothing.
@@ -217,13 +217,13 @@ export default function StylexPage() {
       <p className="rs-t-body">
         Two halves: a Babel pass that rewrites <code className="rs-code">stylex.*</code> calls, and
         the PostCSS plugin that collects the CSS. Both read the same options so class hashes match.
-        This site compiles its own leaves this way and consumes Raster precompiled. The{" "}
+        This site compiles its own leaves this way and consumes Vlak precompiled. The{" "}
         <code className="rs-code">@stylexjs/nextjs-plugin</code> package is the shorter road if you
         are not on a static export.
       </p>
 
       <h2 className="section-label">No compiler</h2>
-      <CodeBlock code={`import "@noorddev/raster-react/css";\nimport { Button } from "@noorddev/raster-react";`} />
+      <CodeBlock code={`import "@noorddev/vlak-react/css";\nimport { Button } from "@noorddev/vlak-react";`} />
       <p className="rs-t-body">
         The package works with no StyleX toolchain at all: the leaves are compiled at publish time
         and the stylesheet carries the result. Add a compiler only when you write leaves of your

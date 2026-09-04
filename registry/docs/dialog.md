@@ -1,11 +1,11 @@
 # Dialog
 
-Modal with a title, body, and two equal actions.
+Focuses attention on a modal task. Title, body, and two equal actions.
 
 Category: surfaces  
 Name: `dialog`  
 Also known as: Dialog, Modal, Modal dialog  
-Page: https://getraster.com/components/dialog/
+Page: https://vlak.dev/components/dialog/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/dialog/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add dialog
+npx @noorddev/vlak-cli add dialog
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/dialog.json
+npx shadcn add https://vlak.dev/r/dialog.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-dialog" role="dialog" aria-labelledby="remove-title" aria-describedby="remove-body"><h2 class="rs-dialog-title" id="remove-title">Remove this item?</h2><p class="rs-dialog-body" id="remove-body">This can't be undone.</p><div class="rs-dialog-actions"><button class="rs-btn-ghost rs-btn-sm">Cancel</button><button class="rs-btn-primary rs-btn-sm">Remove</button></div></div>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/dialog.json
 
 ```tsx
 import { useState } from "react";
-import { Button, Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/raster-react";
+import { Button, Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 

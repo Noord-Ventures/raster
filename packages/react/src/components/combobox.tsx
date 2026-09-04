@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { useMergedRefs } from "../merge-refs";
 
@@ -46,7 +46,7 @@ const styles = stylex.create({
       [mq.phone]: "0.9375rem",
     },
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
   },
 });
 

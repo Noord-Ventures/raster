@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import { rasterCategories, catalogComponents, type RasterCategory } from "@noorddev/raster";
-import { iconGroups } from "@noorddev/raster-react";
+import { vlakCategories, catalogComponents, type VlakCategory } from "@noorddev/vlak";
+import { iconGroups } from "@noorddev/vlak-react";
 import { MobileToc } from "@/components/toc-mobile";
 import { sx } from "@/lib/sx";
 import { navStyles } from "./docs-nav.stylex";
@@ -18,13 +18,13 @@ function here(pathname: string, href: string) {
   return pathname === href || pathname === `${href}/`;
 }
 
-function pageGroup(pathname: string): RasterCategory | null {
+function pageGroup(pathname: string): VlakCategory | null {
   const match = pathname.match(/^\/components\/([^/]+)\/?$/);
-  if (!match) return pathname.startsWith("/components") ? rasterCategories[0]! : null;
-  return catalogComponents.find((c) => c.name === match[1])?.category ?? rasterCategories[0]!;
+  if (!match) return pathname.startsWith("/components") ? vlakCategories[0]! : null;
+  return catalogComponents.find((c) => c.name === match[1])?.category ?? vlakCategories[0]!;
 }
 
-const groups = rasterCategories.filter((category) =>
+const groups = vlakCategories.filter((category) =>
   catalogComponents.some((c) => c.category === category),
 );
 
@@ -32,7 +32,7 @@ function iconGroupSlug(title: string) {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 }
 
-function groupLinks(category: RasterCategory) {
+function groupLinks(category: VlakCategory) {
   if (category === "icons") {
     return iconGroups.map((group) => ({
       key: group.title,
@@ -83,8 +83,8 @@ function docsLabel(pathname: string) {
 export function DocsNav() {
   const pathname = usePathname();
   const selected = pageGroup(pathname);
-  const [preview, setPreview] = React.useState<RasterCategory | null>(null);
-  const [openGroup, setOpenGroup] = React.useState<RasterCategory | null>(selected);
+  const [preview, setPreview] = React.useState<VlakCategory | null>(null);
+  const [openGroup, setOpenGroup] = React.useState<VlakCategory | null>(selected);
   const shown = preview ?? selected;
   const catalog = pathname.startsWith("/components");
 

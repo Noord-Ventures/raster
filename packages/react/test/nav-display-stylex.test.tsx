@@ -42,16 +42,16 @@ describe("StyleX nav/data/display leaves", () => {
   });
 
   it("keeps breadcrumb trail classes", () => {
-    render(<Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Raster" }]} />);
+    render(<Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Vlak" }]} />);
     expect(screen.getByRole("navigation").className).toContain("rs-crumbs");
     expect(screen.getByRole("link", { name: "Studio" }).className).toContain("rs-crumbs-link");
-    expect(screen.getByText("Raster").className).toContain("rs-crumbs-here");
+    expect(screen.getByText("Vlak").className).toContain("rs-crumbs-here");
     expect(screen.getByText("/").className).toContain("rs-crumbs-sep");
   });
 
   it("solidifies the crumb bar on scroll", () => {
     const { container } = render(
-      <CrumbBar trail={[{ label: "Raster", href: "/" }, { label: "Components" }]} />,
+      <CrumbBar trail={[{ label: "Vlak", href: "/" }, { label: "Components" }]} />,
     );
     const bar = container.querySelector(".rs-crumb-bar")!;
     expect(bar.className).toContain("rs-crumb-bar");
@@ -158,7 +158,7 @@ describe("StyleX nav/data/display leaves", () => {
     render(
       <DataTable
         columns={[{ key: "name", header: "Name", sortable: true }]}
-        rows={[{ name: "Raster" }, { name: "Studio" }]}
+        rows={[{ name: "Vlak" }, { name: "Studio" }]}
       />,
     );
     expect(document.querySelector(".rs-table")?.className).toContain("rs-table");

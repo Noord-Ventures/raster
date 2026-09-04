@@ -3,11 +3,11 @@
   "name": "callout",
   "type": "registry:component",
   "title": "Callout",
-  "description": "Note in running copy. 1px hairline, radius 0. No left bar.",
+  "description": "Adds a contextual note to running copy. 1px frame, square corners, no accent bar.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -15,23 +15,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/callout.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface CalloutProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst styles = stylex.create({\n  box: {\n    backgroundColor: raster.paper,\n    borderWidth: raster.hairline,\n    borderStyle: \"solid\",\n    borderColor: raster.divider,\n    borderRadius: 0,\n    boxShadow: \"none\",\n    paddingBlock: {\n      default: \"1rem\",\n      [mq.phone]: \"0.875rem\",\n    },\n    paddingInline: {\n      default: \"1.25rem\",\n      [mq.phone]: \"1rem\",\n    },\n  },\n});\n\n/** Paper field, 1px hairline on all sides. Not rounded. No left bar. */\nexport const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(function Callout(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-callout\", className], styles.box);\n  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
+      "path": "vlak/callout.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface CalloutProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst styles = stylex.create({\n  box: {\n    backgroundColor: vlak.paper,\n    borderWidth: vlak.hairline,\n    borderStyle: \"solid\",\n    borderColor: vlak.divider,\n    borderRadius: 0,\n    boxShadow: \"none\",\n    paddingBlock: {\n      default: \"1rem\",\n      [mq.phone]: \"0.875rem\",\n    },\n    paddingInline: {\n      default: \"1.25rem\",\n      [mq.phone]: \"1rem\",\n    },\n  },\n});\n\n/** Paper field, 1px hairline on all sides. Not rounded. No left bar. */\nexport const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(function Callout(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-callout\", className], styles.box);\n  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
-      "target": "components/raster/callout.tsx"
+      "target": "components/vlak/callout.tsx"
     },
     {
-      "path": "raster/styles/callout.css",
+      "path": "vlak/styles/callout.css",
       "content": "/* ── callout: generated from packages/react/src/components/callout.tsx ── */\n.rs-callout{background-color:var(--bg);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:0;box-shadow:none;padding-block:1rem;padding-inline:1.25rem}\n@media (max-width: 640px){.rs-callout{padding-block:0.875rem;padding-inline:1rem}}\n",
       "type": "registry:file",
-      "target": "styles/raster/callout.css"
+      "target": "styles/vlak/callout.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "feedback",
       "classes": [
         "rs-callout"
@@ -39,7 +39,7 @@
       "snippet": "<div class=\"rs-callout\"><p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p></div>",
       "cssOnly": false,
       "registryDependencies": [
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Callout",
@@ -47,7 +47,7 @@
         "Aside",
         "Admonition"
       ],
-      "example": "import { Callout } from \"@noorddev/raster-react\";\n\n<Callout>\n  <p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p>\n</Callout>",
+      "example": "import { Callout } from \"@noorddev/vlak-react\";\n\n<Callout>\n  <p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p>\n</Callout>",
       "usage": {
         "use": [
           "A note inside running copy that deserves a frame: a term, a caveat, a definition.",

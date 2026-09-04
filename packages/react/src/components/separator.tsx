@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface SeparatorProps extends React.HTMLAttributes<HTMLElement> {
@@ -11,17 +11,17 @@ const styles = stylex.create({
   horizontal: {
     borderWidth: 0,
     borderStyle: "none",
-    borderTopWidth: raster.hairline,
+    borderTopWidth: vlak.hairline,
     borderTopStyle: "solid",
-    borderTopColor: raster.divider,
+    borderTopColor: vlak.divider,
     marginBlock: "1.25rem",
     marginInline: 0,
   },
   vertical: {
     display: "inline-block",
-    width: raster.hairline,
+    width: vlak.hairline,
     alignSelf: "stretch",
-    backgroundColor: raster.divider,
+    backgroundColor: vlak.divider,
     marginBlock: 0,
     marginInline: "0.75rem",
   },

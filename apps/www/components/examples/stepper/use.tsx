@@ -1,4 +1,4 @@
-import { Stepper } from "@noorddev/raster-react";
+import { Stepper } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

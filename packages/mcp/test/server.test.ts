@@ -23,7 +23,7 @@ afterAll(async () => {
   await server.close();
 });
 
-describe("raster-mcp", () => {
+describe("vlak-mcp", () => {
   it("exposes the six tools", async () => {
     const { tools } = await client.listTools();
     expect(tools.map((t) => t.name).sort()).toEqual(["get_component", "get_guide", "get_install", "get_tokens", "list_components", "search_components"]);
@@ -41,7 +41,7 @@ describe("raster-mcp", () => {
   it("gets a component with docs, props, example, snippet, and classes", async () => {
     const button = JSON.parse(textOf(await client.callTool({ name: "get_component", arguments: { name: "button" } })));
     expect(button.docs).toContain("# Button");
-    expect(button.import).toBe('import { Button } from "@noorddev/raster-react";');
+    expect(button.import).toBe('import { Button } from "@noorddev/vlak-react";');
     expect(button.example).toContain("<Button");
     expect(button.snippet).toContain("rs-btn-primary");
     expect(button.classes).toContain("rs-btn-primary");
@@ -66,22 +66,22 @@ describe("raster-mcp", () => {
 
   it("gives install commands and the guide and tokens pages", async () => {
     const install = JSON.parse(textOf(await client.callTool({ name: "get_install", arguments: { name: "dialog" } })));
-    expect(install.cli).toBe("npx @noorddev/raster-cli add dialog");
-    expect(install.shadcn).toBe("npx shadcn add https://getraster.com/r/dialog.json");
+    expect(install.cli).toBe("npx @noorddev/vlak-cli add dialog");
+    expect(install.shadcn).toBe("npx shadcn add https://vlak.dev/r/dialog.json");
     expect(install.package.import).toContain("DialogTitle");
     expect(install.registryDependencies).toContain("button");
-    expect(textOf(await client.callTool({ name: "get_guide", arguments: {} }))).toContain("# Raster guide");
+    expect(textOf(await client.callTool({ name: "get_guide", arguments: {} }))).toContain("# Vlak guide");
     expect(textOf(await client.callTool({ name: "get_tokens", arguments: {} }))).toContain("--bg");
   });
 
   it("serves resources for the guide, tokens, and every component", async () => {
-    const guide = await client.readResource({ uri: "raster://docs/guide" });
-    expect(resourceText(guide)).toContain("# Raster guide");
-    const tokens = await client.readResource({ uri: "raster://tokens" });
+    const guide = await client.readResource({ uri: "vlak://docs/guide" });
+    expect(resourceText(guide)).toContain("# Vlak guide");
+    const tokens = await client.readResource({ uri: "vlak://tokens" });
     expect(resourceText(tokens)).toContain("--text");
-    const select = await client.readResource({ uri: "raster://docs/select" });
+    const select = await client.readResource({ uri: "vlak://docs/select" });
     expect(resourceText(select)).toContain("# Select");
     const { resources } = await client.listResources();
-    expect(resources.map((r) => r.uri)).toContain("raster://docs/button");
+    expect(resources.map((r) => r.uri)).toContain("vlak://docs/button");
   });
 });

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 import { useMergedRefs } from "../merge-refs";
 import { Calendar } from "./calendar";
@@ -13,7 +13,7 @@ const styles = stylex.create({
   calMenu: {
     insetInlineEnd: "auto",
     padding: "0.75rem",
-    backgroundColor: raster.paper,
+    backgroundColor: vlak.paper,
   },
 });
 

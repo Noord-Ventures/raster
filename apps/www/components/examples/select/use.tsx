@@ -1,4 +1,4 @@
-import { Select } from "@noorddev/raster-react";
+import { Select } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Icon } from "@noorddev/raster-react";
+import { Icon } from "@noorddev/vlak-react";
 
 async function writeClipboard(text: string) {
   if (navigator.clipboard?.writeText) {

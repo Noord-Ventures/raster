@@ -6,7 +6,7 @@ body:
     id: package
     attributes:
       label: Package and version
-      placeholder: "@noorddev/raster-react 0.3.0"
+      placeholder: "@noorddev/vlak-react 0.3.0"
     validations:
       required: true
   - type: dropdown
@@ -15,9 +15,9 @@ body:
       label: Install path
       options:
         - Imported the package and its stylesheet
-        - Vendored with the Raster CLI
+        - Vendored with the Vlak CLI
         - Vendored with shadcn add
-        - CSS only (raster.css and rs- classes)
+        - CSS only (vlak.css and rs- classes)
     validations:
       required: true
   - type: textarea

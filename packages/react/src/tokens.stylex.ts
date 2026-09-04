@@ -1,10 +1,10 @@
 import * as stylex from "@stylexjs/stylex";
 
 /**
- * StyleX vars alias Raster CSS custom properties. Not a second scale.
+ * StyleX vars alias Vlak CSS custom properties. Not a second scale.
  * Values live in packages/core/css/tokens.css (generated from src/tokens.ts).
  */
-export const raster = stylex.defineVars({
+export const vlak = stylex.defineVars({
   paper: "var(--bg)",
   ink: "var(--text)",
   gray: "var(--text-secondary)",
@@ -46,10 +46,10 @@ export const raster = stylex.defineVars({
 });
 
 /** Inter stack. Same as body in base.css. Not a token var — @font-face stays CSS. */
-export const rasterFont =
+export const vlakFont =
   "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif";
 
-export const rasterMono = "ui-monospace, SFMono-Regular, Menlo, monospace";
+export const vlakMono = "ui-monospace, SFMono-Regular, Menlo, monospace";
 
 /** Compile-time media keys. StyleX only folds defineConsts, not plain strings. */
 export const mq = stylex.defineConsts({

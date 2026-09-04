@@ -1,11 +1,11 @@
 # Text link
 
-Text link with a hairline underline. In-copy variant is inset 1px.
+Navigates to a page or resource. Hairline underline; in-copy variant is inset 1px.
 
 Category: actions  
 Name: `link`  
 Also known as: Link, Anchor, Text link, Inline link  
-Page: https://getraster.com/components/link/
+Page: https://vlak.dev/components/link/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/link/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Link } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Link } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add link
+npx @noorddev/vlak-cli add link
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/link.json
+npx shadcn add https://vlak.dev/r/link.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div><a class="rs-link" href="#">A text link</a></div>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/link.json
 ## Example
 
 ```tsx
-import { Link } from "@noorddev/raster-react";
+import { Link } from "@noorddev/vlak-react";
 
 <Link href="/docs">A text link</Link>
 <p>Read the <Link underline href="/docs">guide</Link> first.</p>

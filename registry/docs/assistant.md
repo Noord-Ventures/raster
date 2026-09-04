@@ -1,11 +1,11 @@
 # Assistant panel
 
-Chat panel: user block, reply, suggestion card, input row.
+Frames an assistant exchange with a user message, reply, suggestion, and input row.
 
 Category: patterns  
 Name: `assistant`  
 Also known as: Assistant, Chat panel, AI chat, Conversation, Copilot panel  
-Page: https://getraster.com/components/assistant/
+Page: https://vlak.dev/components/assistant/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/assistant/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Assistant, AssistantCard, AssistantDone, AssistantHead, AssistantInput, AssistantMsg, AssistantReply, AssistantSend, AssistantStatus, AssistantTag, AssistantText, AssistantTitle, AssistantUserBlock } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Assistant, AssistantCard, AssistantDone, AssistantHead, AssistantInput, AssistantMsg, AssistantReply, AssistantSend, AssistantStatus, AssistantTag, AssistantText, AssistantTitle, AssistantUserBlock } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add assistant
+npx @noorddev/vlak-cli add assistant
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/assistant.json
+npx shadcn add https://vlak.dev/r/assistant.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-ai"><div class="rs-ai-msg rs-ai-user"><div class="rs-ai-user-block">Make the intro tighter.</div></div><p class="rs-ai-reply">Done. Two sentences, same claim.</p></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/assistant.json
 ## Example
 
 ```tsx
-import { Assistant, AssistantHead, AssistantInput, AssistantMsg, AssistantReply, AssistantSend, AssistantStatus, AssistantTitle, AssistantUserBlock } from "@noorddev/raster-react";
+import { Assistant, AssistantHead, AssistantInput, AssistantMsg, AssistantReply, AssistantSend, AssistantStatus, AssistantTitle, AssistantUserBlock } from "@noorddev/vlak-react";
 
 <Assistant>
   <AssistantHead>

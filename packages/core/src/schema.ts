@@ -1,10 +1,10 @@
 /**
- * Raster registry schema: the typed contract every component entry
+ * Vlak registry schema: the typed contract every component entry
  * satisfies. The registry drives everything downstream: the docs site,
  * the CLI, the generated registry JSON, and the integrity tests.
  */
 
-export const rasterCategories = [
+export const vlakCategories = [
   "actions",
   "forms",
   "navigation",
@@ -16,15 +16,15 @@ export const rasterCategories = [
   "patterns",
 ] as const;
 
-export type RasterCategory = (typeof rasterCategories)[number];
+export type VlakCategory = (typeof vlakCategories)[number];
 
-export interface RasterComponent {
+export interface VlakComponent {
   /** Kebab-case identifier, unique across the registry. */
   name: string;
   /** Sentence-case display name. */
   title: string;
   description: string;
-  category: RasterCategory;
+  category: VlakCategory;
   /** Every CSS class this component introduces (canonical rs- names). */
   classes: string[];
   /** CSS source files, relative to packages/core/css/. Empty when StyleX owns the leaf. */
@@ -37,7 +37,7 @@ export interface RasterComponent {
   snippet: string;
   /** Omit from the public catalog, docs rail, and home kit count. Keep CSS, Nest, and math. */
   hidden?: boolean;
-  /** React usage example: imports from "@noorddev/raster-react" plus the JSX. Shown on the docs page, by the CLI, and to agents. */
+  /** React usage example: imports from "@noorddev/vlak-react" plus the JSX. Shown on the docs page, by the CLI, and to agents. */
   example?: string;
   /** When to reach for it, and when not to. One short sentence per item. */
   usage?: { use: string[]; avoid: string[] };
@@ -50,7 +50,7 @@ export interface RasterComponent {
 }
 
 /** One prop of an exported React component, extracted from its types. */
-export interface RasterProp {
+export interface VlakProp {
   name: string;
   type: string;
   required: boolean;
@@ -59,7 +59,7 @@ export interface RasterProp {
 }
 
 /** One exported React symbol of a registry component. */
-export interface RasterExport {
+export interface VlakExport {
   name: string;
   kind: "component" | "hook" | "function" | "type";
   description?: string;
@@ -67,13 +67,13 @@ export interface RasterExport {
   extends?: string;
   /** Element a forwarded ref resolves to, e.g. "HTMLButtonElement". Absent when the component forwards no ref. */
   ref?: string;
-  props: RasterProp[];
+  props: VlakProp[];
 }
 
 /** Shape of packages/core/props/props.json, generated from the React sources. */
-export interface RasterPropsJson {
+export interface VlakPropsJson {
   version: string;
-  components: Record<string, { exports: RasterExport[] }>;
+  components: Record<string, { exports: VlakExport[] }>;
 }
 
 const KEBAB = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
@@ -83,7 +83,7 @@ const KEBAB = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
  * an empty list means the registry is well-formed. File-existence and
  * CSS-parity checks live in the core test suite, which can touch disk.
  */
-export function validateRegistry(components: readonly RasterComponent[]): string[] {
+export function validateRegistry(components: readonly VlakComponent[]): string[] {
   const problems: string[] = [];
   const names = new Set<string>();
 
@@ -95,7 +95,7 @@ export function validateRegistry(components: readonly RasterComponent[]): string
     if (c.title !== c.title.charAt(0).toUpperCase() + c.title.slice(1) || /[A-Z]{2,}/.test(c.title))
       problems.push(`${c.name}: title must be sentence case`);
     if (!c.description) problems.push(`${c.name}: missing description`);
-    if (!(rasterCategories as readonly string[]).includes(c.category))
+    if (!(vlakCategories as readonly string[]).includes(c.category))
       problems.push(`${c.name}: unknown category "${c.category}"`);
     if (c.classes.length === 0) problems.push(`${c.name}: no classes listed`);
     if (c.css.length === 0 && !c.react) problems.push(`${c.name}: no css files listed`);

@@ -1,11 +1,11 @@
 # Checkbox
 
-Multi-choice. 16px box, 3px radius, ink fill when checked.
+Selects any number of options. 16px box, 3px radius, ink fill when checked.
 
 Category: forms  
 Name: `checkbox`  
 Also known as: Checkbox, Check box, Tick box  
-Page: https://getraster.com/components/checkbox/
+Page: https://vlak.dev/components/checkbox/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/checkbox/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Checkbox } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Checkbox } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add checkbox
+npx @noorddev/vlak-cli add checkbox
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/checkbox.json
+npx shadcn add https://vlak.dev/r/checkbox.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <label class="rs-choice"><span class="rs-check rs-check-on"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M3.5 8.5 L6.5 11.5 L12.5 4.5" vector-effect="non-scaling-stroke"/></svg></span>Brand</label>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/checkbox.json
 
 ```tsx
 import { useState } from "react";
-import { Checkbox } from "@noorddev/raster-react";
+import { Checkbox } from "@noorddev/vlak-react";
 
 const [opted, setOpted] = useState(false);
 

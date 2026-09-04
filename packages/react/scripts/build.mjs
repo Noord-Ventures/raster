@@ -1,22 +1,22 @@
-// Builds @noorddev/raster-react as precompiled StyleX.
+// Builds @noorddev/vlak-react as precompiled StyleX.
 //
 //   src/**/*.ts(x)  →  dist/**/*.js        one ESM module per source file, StyleX
 //                                           already compiled, "use client" kept
-//                   →  dist/raster-react.css
-//                                           Raster base (tokens, page, type, touch,
+//                   →  dist/vlak-react.css
+//                                           Vlak base (tokens, page, type, touch,
 //                                           motion) + every compiled leaf, in layers
 //                   →  dist/tokens.stylex.js
 //                                           the token file, NOT compiled, for
 //                                           consumers who write StyleX leaves
-//                                           against Raster tokens
+//                                           against Vlak tokens
 //                   →  dist/tokens.js       the same tokens compiled: plain strings,
 //                                           what the components import at runtime
 //                   →  dist/**/*.d.ts       via tsc
 //
 // Two passes. Pass 1 strips types and JSX and gives relative imports .js
 // extensions. Pass 2 runs the StyleX compiler over the dist files, so var
-// hashes derive from `@noorddev/raster-react:dist/tokens.stylex.js`, the
-// exact path a consumer's compiler resolves `@noorddev/raster-react/tokens.stylex`
+// hashes derive from `@noorddev/vlak-react:dist/tokens.stylex.js`, the
+// exact path a consumer's compiler resolves `@noorddev/vlak-react/tokens.stylex`
 // to. Compiled components then import ./tokens.js instead, because the
 // StyleX runtime throws on an uncompiled defineVars call and the
 // import-the-package path must work with no compiler at all.
@@ -146,27 +146,27 @@ for (const { dest, code, map } of staged) {
   }
 }
 
-/* One stylesheet: Raster base layers + the compiled leaves. */
+/* One stylesheet: Vlak base layers + the compiled leaves. */
 const compiled = stylexPlugin.processStylexRules(rules, true);
 const read = (f) => readFileSync(join(coreCss, f), "utf8");
 const base = [
-  ["raster.tokens", "tokens.css"],
-  ["raster.base", "base.css"],
-  ["raster.type", "type.css"],
+  ["vlak.tokens", "tokens.css"],
+  ["vlak.base", "base.css"],
+  ["vlak.type", "type.css"],
 ];
 const tail = [
-  ["raster.touch", "touch.css"],
-  ["raster.motion", "motion.css"],
+  ["vlak.touch", "touch.css"],
+  ["vlak.motion", "motion.css"],
 ];
 const css =
-  `/* @noorddev/raster-react. Raster base + compiled StyleX leaves. Generated. */\n` +
+  `/* @noorddev/vlak-react. Vlak base + compiled StyleX leaves. Generated. */\n` +
   read("fonts.css") +
-  `\n@layer raster.tokens, raster.base, raster.type, raster.components, raster.touch, raster.motion;\n\n` +
+  `\n@layer vlak.tokens, vlak.base, vlak.type, vlak.components, vlak.touch, vlak.motion;\n\n` +
   base.map(([name, f]) => `@layer ${name} {\n${read(f)}\n}\n`).join("\n") +
-  `@layer raster.components {\n${compiled}\n}\n` +
+  `@layer vlak.components {\n${compiled}\n}\n` +
   tail.map(([name, f]) => `@layer ${name} {\n${read(f)}\n}\n`).join("\n");
-writeFileSync(join(distDir, "raster-react.css"), css);
-writeFileSync(join(distDir, "raster-react.css.d.ts"), "export {};\n");
+writeFileSync(join(distDir, "vlak-react.css"), css);
+writeFileSync(join(distDir, "vlak-react.css.d.ts"), "export {};\n");
 cpSync(join(coreCss, "fonts"), join(distDir, "fonts"), { recursive: true });
 
 /* Types. tokens.js shares the token file's declarations. */
@@ -188,4 +188,4 @@ for (const file of walk(distDir, /\.d\.ts$/)) {
   });
   writeFileSync(file, fixed);
 }
-console.log(`built dist: ${rules.length} StyleX rules → raster-react.css (${css.length} bytes)`);
+console.log(`built dist: ${rules.length} StyleX rules → vlak-react.css (${css.length} bytes)`);

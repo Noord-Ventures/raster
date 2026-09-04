@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface AvatarProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -23,8 +23,8 @@ const styles = stylex.create({
     width: "2rem",
     height: "2rem",
     borderRadius: "50%",
-    backgroundColor: raster.dividerSubtle,
-    color: raster.ink,
+    backgroundColor: vlak.dividerSubtle,
+    color: vlak.ink,
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
@@ -56,7 +56,7 @@ const styles = stylex.create({
   inRow: {
     borderWidth: 2,
     borderStyle: "solid",
-    borderColor: raster.paper,
+    borderColor: vlak.paper,
     marginInlineStart: {
       default: "-0.5rem",
       ":first-child": 0,

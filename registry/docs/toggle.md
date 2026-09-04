@@ -1,11 +1,11 @@
 # Toggle
 
-Pressable control. Pressed fills ink. State is aria-pressed.
+Turns one persistent option on or off. Pressed fills with ink and exposes aria-pressed.
 
 Category: actions  
 Name: `toggle`  
 Also known as: Toggle, Toggle button, Press button  
-Page: https://getraster.com/components/toggle/
+Page: https://vlak.dev/components/toggle/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/toggle/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Toggle, ToggleGroup } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Toggle, ToggleGroup } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add toggle
+npx @noorddev/vlak-cli add toggle
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/toggle.json
+npx shadcn add https://vlak.dev/r/toggle.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-toggle-group"><button class="rs-toggle" aria-pressed="true">Left</button><button class="rs-toggle" aria-pressed="false">Center</button><button class="rs-toggle" aria-pressed="false">Right</button></div>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/toggle.json
 
 ```tsx
 import { useState } from "react";
-import { Toggle } from "@noorddev/raster-react";
+import { Toggle } from "@noorddev/vlak-react";
 
 const [bold, setBold] = useState(false);
 

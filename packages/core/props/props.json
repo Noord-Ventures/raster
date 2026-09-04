@@ -195,7 +195,7 @@
         {
           "name": "NativeSelect",
           "kind": "component",
-          "description": "The platform list. Raster chrome.",
+          "description": "The platform list. Vlak chrome.",
           "extends": "SelectHTMLAttributes<HTMLSelectElement>",
           "ref": "HTMLSelectElement",
           "props": [
@@ -3011,7 +3011,7 @@
               "name": "storageKey",
               "type": "string",
               "required": false,
-              "default": "\"raster-theme\"",
+              "default": "\"vlak-theme\"",
               "description": "localStorage key the choice persists under."
             },
             {

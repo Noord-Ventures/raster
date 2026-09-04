@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -15,7 +15,7 @@ const styles = stylex.create({
     display: "grid",
     width: "100%",
     overflow: "hidden",
-    borderRadius: raster.radius,
+    borderRadius: vlak.radius,
   },
 });
 

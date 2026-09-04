@@ -1,11 +1,11 @@
 # Concentric radius
 
-Nested corners share a position. Inner radius = outer − inset, clamped at 0.
+Calculates aligned nested corners. Inner radius = outer − inset, clamped at 0.
 
 Category: surfaces  
 Name: `concentric-radius`  
 Also known as: Nested radius, Concentric corners, Inner radius  
-Page: https://getraster.com/components/concentric-radius/
+Page: https://vlak.dev/components/concentric-radius/
 
 ## When to use
 
@@ -14,34 +14,34 @@ Page: https://getraster.com/components/concentric-radius/
 
 ## When not to
 
-- Square chrome; Raster surfaces are 0 or 4px and rarely nest.
+- Square chrome; surfaces are 0 or 4px and rarely nest.
 
 ## Install
 
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { concentricInner, concentricOuter, innerRadius, Nest, NestInner } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { concentricInner, concentricOuter, innerRadius, Nest, NestInner } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add concentric-radius
+npx @noorddev/vlak-cli add concentric-radius
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/concentric-radius.json
+npx shadcn add https://vlak.dev/r/concentric-radius.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-nest" style="--rs-out:28px;--rs-gap:16px;width:184px"><div class="rs-nest-in"><button class="rs-btn-primary rs-btn-sm">Save</button></div></div>
@@ -50,7 +50,7 @@ npx shadcn add https://getraster.com/r/concentric-radius.json
 ## Example
 
 ```tsx
-import { Button, Nest, NestInner, innerRadius } from "@noorddev/raster-react";
+import { Button, Nest, NestInner, innerRadius } from "@noorddev/vlak-react";
 
 <Nest radius={28} pad={16}>
   <NestInner>

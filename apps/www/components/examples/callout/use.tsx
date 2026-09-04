@@ -1,4 +1,4 @@
-import { Callout } from "@noorddev/raster-react";
+import { Callout } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 /** Press ticket: a note on the sheet. Hairline all sides, no left bar. */

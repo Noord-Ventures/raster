@@ -1,11 +1,11 @@
 # Navigation menu
 
-Horizontal links. The current page is full ink.
+Moves between primary destinations. Horizontal links; the current page is full ink.
 
 Category: navigation  
 Name: `navigation-menu`  
 Also known as: Navigation menu, Nav, Top navigation, Navbar, Header links  
-Page: https://getraster.com/components/navigation-menu/
+Page: https://vlak.dev/components/navigation-menu/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/navigation-menu/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { NavigationMenu } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { NavigationMenu } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add navigation-menu
+npx @noorddev/vlak-cli add navigation-menu
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/navigation-menu.json
+npx shadcn add https://vlak.dev/r/navigation-menu.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <nav class="rs-nav"><a href="#" aria-current="page">Overview</a><a href="#">Docs</a><a href="#">Changelog</a></nav>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/navigation-menu.json
 ## Example
 
 ```tsx
-import { NavigationMenu } from "@noorddev/raster-react";
+import { NavigationMenu } from "@noorddev/vlak-react";
 
 <NavigationMenu
   aria-label="Primary"

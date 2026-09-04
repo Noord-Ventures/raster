@@ -1,11 +1,11 @@
 # Kbd
 
-Mono key cap with a 1px frame and a heavier bottom edge.
+Labels a keyboard key. Monospace cap with a 1px frame and heavier bottom edge.
 
 Category: content  
 Name: `kbd`  
 Also known as: Kbd, Keyboard key, Key cap, Shortcut  
-Page: https://getraster.com/components/kbd/
+Page: https://vlak.dev/components/kbd/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/kbd/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Kbd, KbdPair } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Kbd, KbdPair } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add kbd
+npx @noorddev/vlak-cli add kbd
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/kbd.json
+npx shadcn add https://vlak.dev/r/kbd.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <kbd class="rs-kbd">⌘</kbd> <kbd class="rs-kbd">K</kbd>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/kbd.json
 ## Example
 
 ```tsx
-import { Kbd, KbdPair } from "@noorddev/raster-react";
+import { Kbd, KbdPair } from "@noorddev/vlak-react";
 
 <KbdPair><Kbd>⌘</Kbd><Kbd>K</Kbd></KbdPair>
 ```

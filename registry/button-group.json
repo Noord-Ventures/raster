@@ -3,12 +3,12 @@
   "name": "button-group",
   "type": "registry:component",
   "title": "Button group",
-  "description": "Joined ghost buttons with a 1px rule between.",
+  "description": "Keeps related actions together as joined ghost buttons with 1px dividers.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/button.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/button.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -16,23 +16,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/button-group.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\nimport type { ButtonProps } from \"./button\";\n\nexport interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst styles = stylex.create({\n  group: {\n    boxSizing: \"border-box\",\n    display: {\n      default: \"inline-flex\",\n      [mq.phone]: \"flex\",\n    },\n    alignItems: \"stretch\",\n    height: raster.controlH,\n    width: {\n      default: null,\n      [mq.phone]: \"100%\",\n    },\n    borderWidth: raster.hairline,\n    borderStyle: \"solid\",\n    borderColor: raster.divider,\n    borderRadius: {\n      default: raster.radiusSm,\n      [mq.phone]: 0,\n    },\n    backgroundColor: raster.divider,\n    gap: raster.hairline,\n    overflow: \"hidden\",\n  },\n});\n\n/** Flush joined actions. One hairline between. Group owns the outer stroke. */\nexport const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(function ButtonGroup(\n  { className, style, children, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-btn-group\", className], styles.group);\n  return (\n    <div ref={ref} role=\"group\" {...props} className={sx.className} style={{ ...sx.style, ...style }}>\n      {React.Children.map(children, (child) =>\n        React.isValidElement(child)\n          ? React.cloneElement(child as React.ReactElement<ButtonProps>, { grouped: true })\n          : child,\n      )}\n    </div>\n  );\n});\n",
+      "path": "vlak/button-group.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\nimport type { ButtonProps } from \"./button\";\n\nexport interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nconst styles = stylex.create({\n  group: {\n    boxSizing: \"border-box\",\n    display: {\n      default: \"inline-flex\",\n      [mq.phone]: \"flex\",\n    },\n    alignItems: \"stretch\",\n    height: vlak.controlH,\n    width: {\n      default: null,\n      [mq.phone]: \"100%\",\n    },\n    borderWidth: vlak.hairline,\n    borderStyle: \"solid\",\n    borderColor: vlak.divider,\n    borderRadius: {\n      default: vlak.radiusSm,\n      [mq.phone]: 0,\n    },\n    backgroundColor: vlak.divider,\n    gap: vlak.hairline,\n    overflow: \"hidden\",\n  },\n});\n\n/** Flush joined actions. One hairline between. Group owns the outer stroke. */\nexport const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(function ButtonGroup(\n  { className, style, children, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-btn-group\", className], styles.group);\n  return (\n    <div ref={ref} role=\"group\" {...props} className={sx.className} style={{ ...sx.style, ...style }}>\n      {React.Children.map(children, (child) =>\n        React.isValidElement(child)\n          ? React.cloneElement(child as React.ReactElement<ButtonProps>, { grouped: true })\n          : child,\n      )}\n    </div>\n  );\n});\n",
       "type": "registry:component",
-      "target": "components/raster/button-group.tsx"
+      "target": "components/vlak/button-group.tsx"
     },
     {
-      "path": "raster/styles/button-group.css",
+      "path": "vlak/styles/button-group.css",
       "content": "/* ── button-group: generated from packages/react/src/components/button-group.tsx ── */\n.rs-btn-group{box-sizing:border-box;display:inline-flex;align-items:stretch;height:var(--control-h);border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius-sm);background-color:var(--divider);gap:1px;overflow:hidden}\n@media (max-width: 640px){.rs-btn-group{display:flex;width:100%;border-radius:0}}\n",
       "type": "registry:file",
-      "target": "styles/raster/button-group.css"
+      "target": "styles/vlak/button-group.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "actions",
       "classes": [
         "rs-btn-group"
@@ -41,14 +41,14 @@
       "cssOnly": false,
       "registryDependencies": [
         "button",
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Button group",
         "Segmented buttons",
         "Joined buttons"
       ],
-      "example": "import { Button, ButtonGroup } from \"@noorddev/raster-react\";\n\n<ButtonGroup aria-label=\"Alignment\">\n  <Button variant=\"ghost\">Left</Button>\n  <Button variant=\"ghost\">Center</Button>\n  <Button variant=\"ghost\">Right</Button>\n</ButtonGroup>",
+      "example": "import { Button, ButtonGroup } from \"@noorddev/vlak-react\";\n\n<ButtonGroup aria-label=\"Alignment\">\n  <Button variant=\"ghost\">Left</Button>\n  <Button variant=\"ghost\">Center</Button>\n  <Button variant=\"ghost\">Right</Button>\n</ButtonGroup>",
       "usage": {
         "use": [
           "Two to four related actions that read as one control.",

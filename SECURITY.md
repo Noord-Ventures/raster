@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-The latest minor release of each package (`@noorddev/raster`, `@noorddev/raster-react`, `@noorddev/raster-cli`) receives security fixes.
+The latest minor release of each package (`@noorddev/vlak`, `@noorddev/vlak-react`, `@noorddev/vlak-cli`) receives security fixes.
 
 ## Reporting a vulnerability
 
@@ -12,7 +12,7 @@ Include the package and version, a description of the issue, and steps to reprod
 
 ## Scope
 
-Raster ships CSS, React components, a CLI that writes files into the current project, and static registry JSON. Reports most likely to matter:
+Vlak ships CSS, React components, a CLI that writes files into the current project, and static registry JSON. Reports most likely to matter:
 
 - The CLI writing outside the project directory or following a hostile `--registry`.
 - Registry items that execute code at install time (they must not; items are data).

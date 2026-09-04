@@ -3,11 +3,11 @@
   "name": "label",
   "type": "registry:component",
   "title": "Label",
-  "description": "12px secondary label, set above the control.",
+  "description": "Names a form control. 12px secondary text, set above the control.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -15,23 +15,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/label.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}\n\nconst styles = stylex.create({\n  label: {\n    fontSize: {\n      default: \"0.75rem\",\n      [mq.phone]: raster.controlLabel,\n    },\n    fontWeight: 600,\n    color: raster.gray,\n    letterSpacing: \"-0.01em\",\n    lineHeight: \"16px\",\n  },\n});\n\n/** Label above a control. 12px, secondary ink. */\nexport const Label = React.forwardRef<HTMLLabelElement, LabelProps>(function Label(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-label\", className], styles.label);\n  return <label ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
+      "path": "vlak/label.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}\n\nconst styles = stylex.create({\n  label: {\n    fontSize: {\n      default: \"0.75rem\",\n      [mq.phone]: vlak.controlLabel,\n    },\n    fontWeight: 600,\n    color: vlak.gray,\n    letterSpacing: \"-0.01em\",\n    lineHeight: \"16px\",\n  },\n});\n\n/** Label above a control. 12px, secondary ink. */\nexport const Label = React.forwardRef<HTMLLabelElement, LabelProps>(function Label(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-label\", className], styles.label);\n  return <label ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
-      "target": "components/raster/label.tsx"
+      "target": "components/vlak/label.tsx"
     },
     {
-      "path": "raster/styles/label.css",
+      "path": "vlak/styles/label.css",
       "content": "/* ── label: generated from packages/react/src/components/label.tsx ── */\n.rs-label{font-size:0.75rem;font-weight:600;color:var(--text-secondary);letter-spacing:-0.01em;line-height:16px}\n@media (max-width: 640px){.rs-label{font-size:var(--control-label)}}\n",
       "type": "registry:file",
-      "target": "styles/raster/label.css"
+      "target": "styles/vlak/label.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "forms",
       "classes": [
         "rs-label"
@@ -39,14 +39,14 @@
       "snippet": "<label class=\"rs-label\" for=\"name\">Name</label>",
       "cssOnly": false,
       "registryDependencies": [
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Label",
         "Form label",
         "Field label"
       ],
-      "example": "import { Label } from \"@noorddev/raster-react\";\n\n<Label htmlFor=\"name\">Name</Label>\n<input id=\"name\" className=\"rs-input rs-input-full\" />",
+      "example": "import { Label } from \"@noorddev/vlak-react\";\n\n<Label htmlFor=\"name\">Name</Label>\n<input id=\"name\" className=\"rs-input rs-input-full\" />",
       "usage": {
         "use": [
           "Naming a control that does not take a label prop.",

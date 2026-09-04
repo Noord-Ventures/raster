@@ -23,11 +23,11 @@ const kb = (n) => `${(n / 1024).toFixed(1)} KB`;
 
 /* [label, path or directory + filter, gzipped budget in bytes] */
 const budgets = [
-  ["@noorddev/raster css/raster.css", "packages/core/css/raster.css", 18 * 1024],
-  ["@noorddev/raster-react dist/raster-react.css", "packages/react/dist/raster-react.css", 16 * 1024],
-  ["@noorddev/raster-react dist/**/*.js (every component, bundled)", ["packages/react/dist", /\.js$/], 72 * 1024],
-  ["@noorddev/raster-react components/button.js", "packages/react/dist/components/button.js", 4 * 1024],
-  ["@noorddev/raster-cli dist/index.js (bundles the typed registry for list/search)", "packages/cli/dist/index.js", 48 * 1024],
+  ["@noorddev/vlak css/vlak.css", "packages/core/css/vlak.css", 18 * 1024],
+  ["@noorddev/vlak-react dist/vlak-react.css", "packages/react/dist/vlak-react.css", 16 * 1024],
+  ["@noorddev/vlak-react dist/**/*.js (every component, bundled)", ["packages/react/dist", /\.js$/], 72 * 1024],
+  ["@noorddev/vlak-react components/button.js", "packages/react/dist/components/button.js", 4 * 1024],
+  ["@noorddev/vlak-cli dist/index.js (bundles the typed registry for list/search)", "packages/cli/dist/index.js", 48 * 1024],
 ];
 
 let failed = false;

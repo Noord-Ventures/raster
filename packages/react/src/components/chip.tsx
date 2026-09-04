@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface ChipProps extends React.HTMLAttributes<HTMLSpanElement> {}
@@ -14,8 +14,8 @@ const styles = stylex.create({
       [mq.phone]: "0.8125rem",
     },
     fontWeight: 500,
-    color: raster.gray,
-    borderWidth: raster.hairline,
+    color: vlak.gray,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
     borderColor: "color-mix(in srgb, currentColor 35%, transparent)",
     paddingBlock: {
@@ -28,7 +28,7 @@ const styles = stylex.create({
     },
     lineHeight: 1,
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     display: {
@@ -41,7 +41,7 @@ const styles = stylex.create({
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
   },
 });

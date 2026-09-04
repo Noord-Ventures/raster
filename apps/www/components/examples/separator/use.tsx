@@ -1,4 +1,4 @@
-import { Separator } from "@noorddev/raster-react";
+import { Separator } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

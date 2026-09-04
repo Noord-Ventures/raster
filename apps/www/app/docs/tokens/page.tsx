@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { concentricInner, rasterTokens } from "@noorddev/raster";
+import { concentricInner, vlakTokens } from "@noorddev/vlak";
 import { CodeBlock } from "@/components/code-block";
 import { DocsShell } from "@/components/docs-shell";
 import { DOOR } from "../../specimen";
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function TokensPage() {
-  const { color, type, grid, radius, motion, control, breakpoints } = rasterTokens;
+  const { color, type, grid, radius, motion, control, breakpoints } = vlakTokens;
   return (
     <DocsShell
       title="Tokens"
@@ -160,7 +160,7 @@ export default function TokensPage() {
         . The rule lives in the kit; it is not a catalogue card.
       </p>
       <CodeBlock
-        code={`import { innerRadius, concentricInner, concentricOuter } from "@noorddev/raster";
+        code={`import { innerRadius, concentricInner, concentricOuter } from "@noorddev/vlak";
 
 innerRadius(28, 16);      // ${concentricInner(28, 16)}
 concentricInner(28, 16);  // ${concentricInner(28, 16)}
@@ -186,26 +186,26 @@ concentricOuter(12, 16);  // 28
 
       <h2 className="section-label">Icons</h2>
       <p className="rs-t-body">
-        {rasterTokens.icons.viewBox} viewBox, {rasterTokens.icons.stroke}px currentColor, drawn at{" "}
-        {rasterTokens.icons.sizes.join(" or ")}. {rasterTokens.icons.rule}.
+        {vlakTokens.icons.viewBox} viewBox, {vlakTokens.icons.stroke}px currentColor, drawn at{" "}
+        {vlakTokens.icons.sizes.join(" or ")}. {vlakTokens.icons.rule}.
       </p>
 
       <h2 className="section-label">Programmatic access</h2>
       <CodeBlock
-        code={`import { rasterTokens } from "@noorddev/raster";
+        code={`import { vlakTokens } from "@noorddev/vlak";
 
-rasterTokens.color.light.paper;         // "${color.light.paper}"
-rasterTokens.color.light.controlBorder; // "${color.light.controlBorder}"
-rasterTokens.grid.module;               // ${grid.module}
+vlakTokens.color.light.paper;         // "${color.light.paper}"
+vlakTokens.color.light.controlBorder; // "${color.light.controlBorder}"
+vlakTokens.grid.module;               // ${grid.module}
 
 // as JSON
-import tokens from "@noorddev/raster/tokens";
+import tokens from "@noorddev/vlak/tokens";
 
 // in StyleX
-import { raster } from "@noorddev/raster-react/tokens.stylex";
+import { vlak } from "@noorddev/vlak-react/tokens.stylex";
 
 // in the terminal
-// npx @noorddev/raster-cli tokens`}
+// npx @noorddev/vlak-cli tokens`}
       />
     </DocsShell>
   );

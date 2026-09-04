@@ -1,18 +1,18 @@
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { catalogComponents, rasterComponents } from "../src/registry";
-import { rasterCategories, validateRegistry } from "../src/schema";
+import { catalogComponents, vlakComponents } from "../src/registry";
+import { vlakCategories, validateRegistry } from "../src/schema";
 
 const cssDir = join(import.meta.dirname, "../css");
 const reactSrcDir = join(import.meta.dirname, "../../react/src");
 
-const allCss = rasterComponents
+const allCss = vlakComponents
   .flatMap((c) => c.css)
   .map((f) => readFileSync(join(cssDir, f), "utf8"))
   .join("\n");
 
-const allClasses = new Set(rasterComponents.flatMap((c) => c.classes));
+const allClasses = new Set(vlakComponents.flatMap((c) => c.classes));
 
 function readTree(file: string, seen = new Set<string>()): string {
   const abs = join(reactSrcDir, file);
@@ -40,22 +40,22 @@ function readTree(file: string, seen = new Set<string>()): string {
 
 describe("registry structure", () => {
   it("is well-formed", () => {
-    expect(validateRegistry(rasterComponents)).toEqual([]);
+    expect(validateRegistry(vlakComponents)).toEqual([]);
   });
 
   it("hides concentric-radius from the public catalog and keeps the nest rule", () => {
-    const nest = rasterComponents.find((c) => c.name === "concentric-radius");
+    const nest = vlakComponents.find((c) => c.name === "concentric-radius");
     expect(nest?.hidden).toBe(true);
     expect(catalogComponents.some((c) => c.name === "concentric-radius")).toBe(false);
-    expect(catalogComponents).toHaveLength(rasterComponents.filter((c) => !c.hidden).length);
+    expect(catalogComponents).toHaveLength(vlakComponents.filter((c) => !c.hidden).length);
   });
 
   it("lifts icons and charts into their own catalog sections", () => {
-    expect(rasterCategories).toContain("icons");
-    expect(rasterCategories).toContain("charts");
-    expect(rasterComponents.find((c) => c.name === "icons")?.category).toBe("icons");
+    expect(vlakCategories).toContain("icons");
+    expect(vlakCategories).toContain("charts");
+    expect(vlakComponents.find((c) => c.name === "icons")?.category).toBe("icons");
     for (const name of ["chart", "bar-chart", "area-chart", "scatter-chart", "donut", "histogram", "small-multiples"]) {
-      expect(rasterComponents.find((c) => c.name === name)?.category, name).toBe("charts");
+      expect(vlakComponents.find((c) => c.name === name)?.category, name).toBe("charts");
     }
   });
 
@@ -66,7 +66,7 @@ describe("registry structure", () => {
   });
 
   it("lists every CSS file that exists on disk", () => {
-    for (const c of rasterComponents) {
+    for (const c of vlakComponents) {
       for (const f of c.css) {
         expect(existsSync(join(cssDir, f)), `${c.name}: css/${f} missing`).toBe(true);
       }
@@ -74,7 +74,7 @@ describe("registry structure", () => {
   });
 
   it("references React sources that exist", () => {
-    for (const c of rasterComponents) {
+    for (const c of vlakComponents) {
       if (!c.react) continue;
       expect(existsSync(join(reactSrcDir, c.react)), `${c.name}: react src/${c.react} missing`).toBe(true);
     }
@@ -83,11 +83,11 @@ describe("registry structure", () => {
 
 describe("registry ↔ CSS parity", () => {
   it("every declared class is styled by that component's CSS or a declared dependency's", () => {
-    const cssFor = (c: (typeof rasterComponents)[number]): string[] => [
+    const cssFor = (c: (typeof vlakComponents)[number]): string[] => [
       ...c.css,
-      ...(c.registryDependencies ?? []).flatMap((d) => rasterComponents.find((o) => o.name === d)?.css ?? []),
+      ...(c.registryDependencies ?? []).flatMap((d) => vlakComponents.find((o) => o.name === d)?.css ?? []),
     ];
-    for (const c of rasterComponents) {
+    for (const c of vlakComponents) {
       const css = cssFor(c).map((f) => readFileSync(join(cssDir, f), "utf8")).join("\n");
       for (const cls of c.classes) {
         expect(css.includes(`.${cls}`), `${c.name}: .${cls} not styled in ${c.css.join(", ")}`).toBe(true);
@@ -96,7 +96,7 @@ describe("registry ↔ CSS parity", () => {
   });
 
   it("every declared class is applied by that component's React source", () => {
-    for (const c of rasterComponents) {
+    for (const c of vlakComponents) {
       if (!c.react) continue;
       const src = readTree(c.react);
       for (const cls of c.classes) {
@@ -106,7 +106,7 @@ describe("registry ↔ CSS parity", () => {
   });
 
   it("every class used in a snippet is declared by some component", () => {
-    for (const c of rasterComponents) {
+    for (const c of vlakComponents) {
       const used = [...c.snippet.matchAll(/class="([^"]+)"/g)].flatMap((m) => m[1]!.split(/\s+/));
       for (const cls of used) {
         expect(allClasses.has(cls), `${c.name}: snippet uses undeclared class "${cls}"`).toBe(true);
@@ -115,12 +115,12 @@ describe("registry ↔ CSS parity", () => {
   });
 
   it("snippets that borrow classes from other components declare the dependency", () => {
-    for (const c of rasterComponents) {
+    for (const c of vlakComponents) {
       const used = [...c.snippet.matchAll(/class="([^"]+)"/g)].flatMap((m) => m[1]!.split(/\s+/));
       const own = new Set(c.classes);
       for (const cls of used) {
         if (own.has(cls)) continue;
-        const provider = rasterComponents.find((o) => o.classes.includes(cls));
+        const provider = vlakComponents.find((o) => o.classes.includes(cls));
         expect(provider, `${c.name}: no provider for "${cls}"`).toBeTruthy();
         expect(
           c.registryDependencies ?? [],
@@ -149,7 +149,7 @@ describe("registry copy for agents", () => {
   const exported = new Set([...reactIndex.matchAll(/\b([A-Za-z_$][\w$]*)\b/g)].map((m) => m[1]!));
 
   it("every entry carries an example, usage, accessibility notes, and aliases", () => {
-    for (const c of rasterComponents) {
+    for (const c of vlakComponents) {
       expect(c.example, `${c.name}: example`).toBeTruthy();
       expect(c.usage?.use.length, `${c.name}: usage.use`).toBeGreaterThan(0);
       expect(c.usage?.avoid.length, `${c.name}: usage.avoid`).toBeGreaterThan(0);
@@ -159,10 +159,10 @@ describe("registry copy for agents", () => {
   });
 
   it("examples import from the React package and name real exports", () => {
-    for (const c of rasterComponents) {
-      const imports = [...c.example!.matchAll(/import \{([^}]+)\} from "@noorddev\/raster-react"/g)];
-      expect(imports.length, `${c.name}: example imports from @noorddev/raster-react`).toBeGreaterThan(0);
-      expect(c.example, `${c.name}: example uses the site alias`).not.toContain("@/components/raster");
+    for (const c of vlakComponents) {
+      const imports = [...c.example!.matchAll(/import \{([^}]+)\} from "@noorddev\/vlak-react"/g)];
+      expect(imports.length, `${c.name}: example imports from @noorddev/vlak-react`).toBeGreaterThan(0);
+      expect(c.example, `${c.name}: example uses the site alias`).not.toContain("@/components/vlak");
       for (const m of imports) {
         for (const name of m[1]!.split(",").map((s) => s.trim()).filter(Boolean)) {
           expect(exported.has(name), `${c.name}: example imports "${name}", not exported from packages/react/src/index.ts`).toBe(true);
@@ -172,7 +172,7 @@ describe("registry copy for agents", () => {
   });
 
   it("keyboard rows and copy stay in the house voice", () => {
-    for (const c of rasterComponents) {
+    for (const c of vlakComponents) {
       for (const row of c.keyboard ?? []) {
         expect(row.keys.trim(), `${c.name}: keys`).toBeTruthy();
         expect(row.does.trim(), `${c.name}: does`).toBeTruthy();

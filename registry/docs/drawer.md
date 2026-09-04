@@ -1,11 +1,11 @@
 # Drawer
 
-Native dialog from the bottom edge, with the platform focus trap and backdrop.
+Opens a focused task from the bottom edge. Native dialog with platform focus handling and backdrop.
 
 Category: surfaces  
 Name: `drawer`  
 Also known as: Drawer, Bottom sheet, Vaul, Bottom panel  
-Page: https://getraster.com/components/drawer/
+Page: https://vlak.dev/components/drawer/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/drawer/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Drawer, DrawerBody, DrawerTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Drawer, DrawerBody, DrawerTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add drawer
+npx @noorddev/vlak-cli add drawer
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/drawer.json
+npx shadcn add https://vlak.dev/r/drawer.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <dialog class="rs-drawer" aria-labelledby="notes-title" open><button class="rs-drawer-close" type="button" aria-label="Close">&times;</button><h2 class="rs-drawer-title" id="notes-title">Notes</h2><p class="rs-drawer-body">A bottom panel. Escape closes it.</p></dialog>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/drawer.json
 
 ```tsx
 import { useState } from "react";
-import { Button, Drawer, DrawerBody, DrawerTitle } from "@noorddev/raster-react";
+import { Button, Drawer, DrawerBody, DrawerTitle } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 

@@ -1,5 +1,5 @@
 /**
- * The Raster MCP server: tools and resources over the registry bundle,
+ * The Vlak MCP server: tools and resources over the registry bundle,
  * the generated docs, and props.json. `createServer` builds it without
  * a transport so the entry point and the tests can attach their own.
  */
@@ -8,15 +8,15 @@ import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mc
 import { z } from "zod";
 import { type RegistryItem, components, docsFor, findComponent, loadBundle, loadProps } from "./data.js";
 
-const HOST = "https://getraster.com";
-const REACT = "@noorddev/raster-react";
-const CLI = "@noorddev/raster-cli";
+const HOST = "https://vlak.dev";
+const REACT = "@noorddev/vlak-react";
+const CLI = "@noorddev/vlak-cli";
 
 const text = (value: string) => ({ content: [{ type: "text" as const, text: value }] });
 const json = (value: unknown) => text(JSON.stringify(value, null, 2));
 
 function summary(item: RegistryItem) {
-  const meta = item.meta?.raster ?? {};
+  const meta = item.meta?.vlak ?? {};
   return {
     name: item.name,
     title: item.title,
@@ -46,10 +46,10 @@ export function installFor(name: string) {
     cli: `npx ${CLI} add ${name}`,
     shadcn: `npx shadcn add ${HOST}/r/${name}.json`,
     cssOnly: {
-      stylesheet: `import "@noorddev/raster/css";`,
-      markup: item.meta?.raster?.snippet ?? "",
+      stylesheet: `import "@noorddev/vlak/css";`,
+      markup: item.meta?.vlak?.snippet ?? "",
     },
-    registryDependencies: item.meta?.raster?.registryDependencies ?? [],
+    registryDependencies: item.meta?.vlak?.registryDependencies ?? [],
   };
 }
 
@@ -58,7 +58,7 @@ export function searchComponents(term: string) {
   if (!q) return [];
   const hits: Array<ReturnType<typeof summary> & { matched: string[]; score: number }> = [];
   for (const item of components()) {
-    const meta = item.meta?.raster ?? {};
+    const meta = item.meta?.vlak ?? {};
     const matched: string[] = [];
     let score = 0;
     if (item.name.includes(q)) {
@@ -89,17 +89,17 @@ export function searchComponents(term: string) {
 export function createServer(): McpServer {
   const version = loadBundle().version;
   const server = new McpServer(
-    { name: "raster", version },
+    { name: "vlak", version },
     {
       instructions:
-        "Raster is a monochrome design system: React components (precompiled StyleX, one stylesheet), rs-* CSS, and a shadcn-compatible registry. Start with get_guide for install paths and conventions, list_components or search_components to find a component, get_component for its docs, props, and example, get_install for the exact commands, get_tokens for the design tokens.",
+        "Vlak is a monochrome design system: React components (precompiled StyleX, one stylesheet), rs-* CSS, and a shadcn-compatible registry. Start with get_guide for install paths and conventions, list_components or search_components to find a component, get_component for its docs, props, and example, get_install for the exact commands, get_tokens for the design tokens.",
     },
   );
 
   server.registerTool(
     "list_components",
     {
-      title: "List Raster components",
+      title: "List Vlak components",
       description: "Every component in the catalogue with name, title, description, category, and aliases. Filter by category: actions, forms, navigation, feedback, surfaces, content, icons, charts, patterns.",
       inputSchema: { category: z.string().optional().describe("Only this category") },
     },
@@ -113,7 +113,7 @@ export function createServer(): McpServer {
   server.registerTool(
     "get_component",
     {
-      title: "Get a Raster component",
+      title: "Get a Vlak component",
       description: "The markdown docs page for a component (install paths, example, props tables, keyboard, accessibility), plus its props as JSON, the CSS-only snippet, the React example, its classes, and aliases. Pass the kebab-case name from list_components or search_components.",
       inputSchema: { name: z.string().describe("Component name, e.g. \"button\" or \"dropdown-menu\"") },
     },
@@ -124,7 +124,7 @@ export function createServer(): McpServer {
         const near = searchComponents(key).slice(0, 5).map((h) => h.name);
         return { ...text(`No component named "${name}".${near.length ? ` Did you mean: ${near.join(", ")}?` : ""} Use list_components or search_components.`), isError: true };
       }
-      const meta = item.meta?.raster ?? {};
+      const meta = item.meta?.vlak ?? {};
       return json({
         ...summary(item),
         docs: docsFor(key) ?? null,
@@ -146,7 +146,7 @@ export function createServer(): McpServer {
   server.registerTool(
     "search_components",
     {
-      title: "Search Raster components",
+      title: "Search Vlak components",
       description: "Find components by name, title, description, alias (shadcn/ui, Radix, and common names such as Sonner, Drawer, Combobox), or rs-* class. Returns matches ranked by field.",
       inputSchema: { term: z.string().describe("Search term, e.g. \"menu\", \"snackbar\", \"rs-input\"") },
     },
@@ -156,7 +156,7 @@ export function createServer(): McpServer {
   server.registerTool(
     "get_tokens",
     {
-      title: "Get Raster tokens",
+      title: "Get Vlak tokens",
       description: "The design tokens page: every CSS custom property with its light and dark value and StyleX alias, plus the raw token groups (type scale, grid, radius, motion, breakpoints, control sizes).",
     },
     () => text(docsFor("tokens") ?? "Tokens page not bundled."),
@@ -166,7 +166,7 @@ export function createServer(): McpServer {
     "get_install",
     {
       title: "Get install commands",
-      description: "The three ways to install one component (npm package plus import line, Raster CLI, shadcn CLI) and the CSS-only markup, with its registry dependencies.",
+      description: "The three ways to install one component (npm package plus import line, Vlak CLI, shadcn CLI) and the CSS-only markup, with its registry dependencies.",
       inputSchema: { name: z.string().describe("Component name") },
     },
     ({ name }) => {
@@ -179,7 +179,7 @@ export function createServer(): McpServer {
   server.registerTool(
     "get_guide",
     {
-      title: "Get the Raster guide",
+      title: "Get the Vlak guide",
       description: "Install paths, theming (data-theme, color-scheme), cascade layers and overriding, StyleX usage, the rs-* CSS path, the CLI, the registry, and the conventions every component follows (controlled/uncontrolled props, className merging, forwarded refs, naming). Read this first.",
     },
     () => text(docsFor("guide") ?? "Guide not bundled."),
@@ -187,24 +187,24 @@ export function createServer(): McpServer {
 
   server.registerResource(
     "guide",
-    "raster://docs/guide",
-    { title: "Raster guide", description: "Install, theming, layers, StyleX, CLI, registry, conventions", mimeType: "text/markdown" },
+    "vlak://docs/guide",
+    { title: "Vlak guide", description: "Install, theming, layers, StyleX, CLI, registry, conventions", mimeType: "text/markdown" },
     (uri) => ({ contents: [{ uri: uri.href, mimeType: "text/markdown", text: docsFor("guide") ?? "" }] }),
   );
 
   server.registerResource(
     "tokens",
-    "raster://tokens",
-    { title: "Raster tokens", description: "Every custom property, light and dark, with StyleX aliases", mimeType: "text/markdown" },
+    "vlak://tokens",
+    { title: "Vlak tokens", description: "Every custom property, light and dark, with StyleX aliases", mimeType: "text/markdown" },
     (uri) => ({ contents: [{ uri: uri.href, mimeType: "text/markdown", text: docsFor("tokens") ?? "" }] }),
   );
 
   server.registerResource(
     "component-docs",
-    new ResourceTemplate("raster://docs/{name}", {
+    new ResourceTemplate("vlak://docs/{name}", {
       list: () => ({
         resources: components().map((item) => ({
-          uri: `raster://docs/${item.name}`,
+          uri: `vlak://docs/${item.name}`,
           name: item.name,
           title: item.title,
           description: item.description,
@@ -215,7 +215,7 @@ export function createServer(): McpServer {
         name: (value) => components().map((item) => item.name).filter((n) => n.startsWith(value.toLowerCase())),
       },
     }),
-    { title: "Raster component docs", description: "One markdown page per component", mimeType: "text/markdown" },
+    { title: "Vlak component docs", description: "One markdown page per component", mimeType: "text/markdown" },
     (uri, { name }) => {
       const key = String(name).toLowerCase();
       const page = docsFor(key);

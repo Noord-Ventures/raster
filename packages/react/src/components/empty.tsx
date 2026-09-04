@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 
@@ -17,9 +17,9 @@ const styles = stylex.create({
     gap: "0.5rem",
     minHeight: 204,
     padding: "1.25rem",
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderRadius: 0,
   },
   title: {
@@ -27,14 +27,14 @@ const styles = stylex.create({
     fontSize: "0.9375rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
   },
   body: {
     margin: 0,
     fontSize: "0.84375rem",
     lineHeight: 1.55,
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
   },
   action: {
     marginTop: "0.5rem",

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../../tokens.stylex";
+import { vlak } from "../../tokens.stylex";
 import { rs } from "../../rs";
 import { LineChart, type LineChartProps } from "./line";
 
@@ -18,7 +18,7 @@ const styles = stylex.create({
     fontSize: "0.75rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
   },
 });
 

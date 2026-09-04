@@ -1,4 +1,4 @@
-import { Skeleton } from "@noorddev/raster-react";
+import { Skeleton } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

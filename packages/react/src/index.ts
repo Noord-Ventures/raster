@@ -1,6 +1,6 @@
 export { cx } from "./cx";
 export { rs } from "./rs";
-export { raster, phone, mobileGrid, rail, wide, rasterFont, rasterMono } from "./tokens.stylex";
+export { vlak, phone, mobileGrid, rail, wide, vlakFont, vlakMono } from "./tokens.stylex";
 export {
   Icon,
   Icons,

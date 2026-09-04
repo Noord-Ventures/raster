@@ -1,27 +1,27 @@
 import Link from "next/link";
 import { person } from "@/app/about/facts";
 import { DOOR, WORD } from "@/app/specimen";
-import { RasterMark } from "./raster-mark";
+import { VlakMark } from "./vlak-mark";
 
 export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="site-footer-inner">
         <div className="site-footer-brand" aria-hidden="true">
-          <RasterMark />
+          <VlakMark />
         </div>
         <nav className="site-footer-nav" aria-label="Footer">
           <Link href="/">{WORD}</Link>
           <Link href="/about/">About</Link>
           <Link href="/docs/">Docs</Link>
           <a href={person.repo}>GitHub</a>
-          <a href={DOOR}>getraster.com</a>
+          <a href={DOOR}>vlak.dev</a>
         </nav>
         <div className="site-footer-about">
           <p>
-            Raster is designed and built <a href="https://noord.dev">in the north</a> by <a href="https://renatovaldes.com">Renn</a>.
+            Vlak was designed and built at <a href="https://noord.dev">Noord</a> in Alkmaar by <a href="https://renatovaldes.com">Renn</a>.
           </p>
-          <p>Inspired by the International Typographic Style.</p>
+          <p>Dutch and Swiss modernism, translated for product interfaces.</p>
           <p>Free and open source under the MIT license.</p>
         </div>
       </div>

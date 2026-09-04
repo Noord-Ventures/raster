@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -15,14 +15,14 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const styles = stylex.create({
   acc: {
-    borderTopWidth: raster.hairline,
+    borderTopWidth: vlak.hairline,
     borderTopStyle: "solid",
-    borderTopColor: raster.divider,
+    borderTopColor: vlak.divider,
   },
   item: {
-    borderBottomWidth: raster.hairline,
+    borderBottomWidth: vlak.hairline,
     borderBottomStyle: "solid",
-    borderBottomColor: raster.divider,
+    borderBottomColor: vlak.divider,
   },
   summary: {
     listStyle: "none",
@@ -35,7 +35,7 @@ const styles = stylex.create({
     paddingInline: 0,
     minHeight: {
       default: "1.5rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     fontSize: {
       default: "0.90625rem",
@@ -43,7 +43,7 @@ const styles = stylex.create({
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
     "::-webkit-details-marker": {
       display: "none",
     },
@@ -57,7 +57,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -66,9 +66,9 @@ const styles = stylex.create({
   },
   chevron: {
     flexShrink: 0,
-    color: raster.gray,
+    color: vlak.gray,
     transition: {
-      default: `transform ${raster.duration} ${raster.ease}`,
+      default: `transform ${vlak.duration} ${vlak.ease}`,
       [mq.reduce]: "none",
     },
   },
@@ -88,7 +88,7 @@ const styles = stylex.create({
       [mq.phone]: "1rem",
     },
     lineHeight: 1.6,
-    color: raster.gray,
+    color: vlak.gray,
   },
 });
 

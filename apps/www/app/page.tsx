@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main id="main" {...sx("specimen-page", specimen.page)} aria-label="Raster specimen">
+    <main id="main" {...sx("specimen-page", specimen.page)} aria-label="Vlak specimen">
       <div {...sx("specimen", specimen.field)}>
         <section
           {...sx("specimen-cell specimen-cell-face", specimen.cell, specimen.cellTall)}

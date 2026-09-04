@@ -9,7 +9,7 @@ export function Use() {
             <p className="rs-crumbs">
               <span>Studio</span>
               <span className="rs-crumbs-sep">/</span>
-              <span className="rs-crumbs-here">Raster</span>
+              <span className="rs-crumbs-here">Vlak</span>
             </p>
           </div>
         </nav>

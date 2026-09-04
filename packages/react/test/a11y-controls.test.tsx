@@ -156,7 +156,7 @@ describe("Split keyboard", () => {
 describe("Breadcrumbs", () => {
   it("is an ordered list in a labelled nav with the page marked current", async () => {
     const { container } = render(
-      <Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Raster", href: "/r" }, { label: "Issue 03" }]} />,
+      <Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Vlak", href: "/r" }, { label: "Issue 03" }]} />,
     );
     const nav = screen.getByRole("navigation", { name: "Breadcrumb" });
     const list = within(nav).getByRole("list");
@@ -169,7 +169,7 @@ describe("Breadcrumbs", () => {
   });
 
   it("keeps the crumb-bar trail inert until it shows", async () => {
-    const { container } = render(<CrumbBar trail={[{ label: "Raster", href: "/" }, { label: "Components" }]} />);
+    const { container } = render(<CrumbBar trail={[{ label: "Vlak", href: "/" }, { label: "Components" }]} />);
     const trail = container.querySelector("ol.rs-crumb-crumbs")!;
     expect(trail.hasAttribute("inert")).toBe(true);
     Object.defineProperty(window, "scrollY", { value: 300, configurable: true });
@@ -310,7 +310,7 @@ describe("Landmarks and tables", () => {
           { key: "n", header: "Count", sortable: true },
         ]}
         rows={[
-          { name: "Raster", n: 2 },
+          { name: "Vlak", n: 2 },
           { name: "Studio", n: 1 },
         ]}
       />,

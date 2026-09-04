@@ -3,14 +3,14 @@
   "name": "date-picker",
   "type": "registry:component",
   "title": "Date picker",
-  "description": "1px trigger that opens a calendar overlay.",
+  "description": "Selects a date from a calendar overlay opened by a 1px trigger.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/dropdown-menu.json",
-    "https://getraster.com/r/calendar.json",
-    "https://getraster.com/r/raster-lib.json",
-    "https://getraster.com/r/icons.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/dropdown-menu.json",
+    "https://vlak.dev/r/calendar.json",
+    "https://vlak.dev/r/vlak-lib.json",
+    "https://vlak.dev/r/icons.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -18,23 +18,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/date-picker.tsx",
-      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\nimport { useMergedRefs } from \"./merge-refs\";\nimport { Calendar } from \"./calendar\";\nimport { Icon } from \"./icons\";\nimport { menuStyles } from \"./dropdown-menu\";\n\nconst styles = stylex.create({\n  calMenu: {\n    insetInlineEnd: \"auto\",\n    padding: \"0.75rem\",\n    backgroundColor: raster.paper,\n  },\n});\n\nexport interface DatePickerProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\" | \"defaultValue\"> {\n  value?: Date;\n  defaultValue?: Date;\n  onValueChange?: (date: Date) => void;\n  /** @deprecated Use `onValueChange`. */\n  onChange?: (date: Date) => void;\n  placeholder?: string;\n  format?: (date: Date) => string;\n  disabled?: boolean;\n  /** Accessible name of the calendar dialog. */\n  dialogLabel?: string;\n}\n\nconst defaultDateFormat = (d: Date) =>\n  d.toLocaleDateString(\"en\", { day: \"numeric\", month: \"long\", year: \"numeric\" });\n\n/**\n * Hairline trigger that opens a calendar in a non-modal dialog. Focus\n * moves to the selected (or today's) day; Escape, Tab out, and a click\n * outside close it; focus returns to the trigger.\n */\nexport const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(function DatePicker({\n  value,\n  defaultValue,\n  onValueChange,\n  onChange,\n  placeholder = \"Pick a date\",\n  format = defaultDateFormat,\n  disabled,\n  dialogLabel = \"Choose a date\",\n  className,\n  style,\n  onKeyDown,\n  onBlur,\n  ...props\n}: DatePickerProps, ref: React.ForwardedRef<HTMLDivElement>) {\n  const idBase = React.useId();\n  const dialogId = `${idBase}-dialog`;\n  const rootRef = React.useRef<HTMLDivElement>(null);\n  const setRootRef = useMergedRefs(rootRef, ref);\n  const triggerRef = React.useRef<HTMLButtonElement>(null);\n  const [open, setOpen] = React.useState(false);\n  const [inner, setInner] = React.useState(defaultValue);\n  const isControlled = value !== undefined;\n  const current = isControlled ? value : inner;\n\n  React.useEffect(() => {\n    if (!open) return;\n    const onPointerDown = (e: PointerEvent) => {\n      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);\n    };\n    document.addEventListener(\"pointerdown\", onPointerDown);\n    return () => document.removeEventListener(\"pointerdown\", onPointerDown);\n  }, [open]);\n\n  const close = (restoreFocus: boolean) => {\n    setOpen(false);\n    if (restoreFocus) triggerRef.current?.focus();\n  };\n\n  const choose = (d: Date) => {\n    if (!isControlled) setInner(d);\n    onValueChange?.(d);\n    onChange?.(d);\n    close(true);\n  };\n\n  const root = rs([\"rs-select\", className], menuStyles.select);\n  const trigger = rs([\"rs-dropdown\"], menuStyles.dropdown);\n  const menu = rs([\"rs-menu\", \"rs-date-picker-cal-menu\"], menuStyles.menu, menuStyles.menuOverlay, menuStyles.menuCal, styles.calMenu);\n\n  return (\n    <div\n      ref={setRootRef}\n      className={root.className}\n      style={{ ...root.style, ...style }}\n      onKeyDown={(e) => {\n        onKeyDown?.(e);\n        if (e.defaultPrevented) return;\n        if (e.key === \"Escape\" && open) {\n          e.preventDefault();\n          close(true);\n        } else if (e.key === \"ArrowDown\" && !open && e.target === triggerRef.current) {\n          e.preventDefault();\n          setOpen(true);\n        }\n      }}\n      onBlur={(e) => {\n        onBlur?.(e);\n        const to = e.relatedTarget as Node | null;\n        if (open && to && !rootRef.current?.contains(to)) setOpen(false);\n      }}\n      {...props}\n    >\n      <button\n        ref={triggerRef}\n        type=\"button\"\n        className={trigger.className}\n        style={trigger.style}\n        aria-haspopup=\"dialog\"\n        aria-expanded={open}\n        aria-controls={open ? dialogId : undefined}\n        disabled={disabled}\n        onClick={() => (open ? close(true) : setOpen(true))}\n      >\n        <span>{current ? format(current) : placeholder}</span>\n        <Icon name=\"calendar\" size={16} />\n      </button>\n      {open && (\n        <div id={dialogId} role=\"dialog\" aria-label={dialogLabel} className={menu.className} style={menu.style}>\n          <Calendar autoFocus value={current} onValueChange={choose} />\n        </div>\n      )}\n    </div>\n  );\n});\n",
+      "path": "vlak/date-picker.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\nimport { useMergedRefs } from \"./merge-refs\";\nimport { Calendar } from \"./calendar\";\nimport { Icon } from \"./icons\";\nimport { menuStyles } from \"./dropdown-menu\";\n\nconst styles = stylex.create({\n  calMenu: {\n    insetInlineEnd: \"auto\",\n    padding: \"0.75rem\",\n    backgroundColor: vlak.paper,\n  },\n});\n\nexport interface DatePickerProps\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\" | \"defaultValue\"> {\n  value?: Date;\n  defaultValue?: Date;\n  onValueChange?: (date: Date) => void;\n  /** @deprecated Use `onValueChange`. */\n  onChange?: (date: Date) => void;\n  placeholder?: string;\n  format?: (date: Date) => string;\n  disabled?: boolean;\n  /** Accessible name of the calendar dialog. */\n  dialogLabel?: string;\n}\n\nconst defaultDateFormat = (d: Date) =>\n  d.toLocaleDateString(\"en\", { day: \"numeric\", month: \"long\", year: \"numeric\" });\n\n/**\n * Hairline trigger that opens a calendar in a non-modal dialog. Focus\n * moves to the selected (or today's) day; Escape, Tab out, and a click\n * outside close it; focus returns to the trigger.\n */\nexport const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(function DatePicker({\n  value,\n  defaultValue,\n  onValueChange,\n  onChange,\n  placeholder = \"Pick a date\",\n  format = defaultDateFormat,\n  disabled,\n  dialogLabel = \"Choose a date\",\n  className,\n  style,\n  onKeyDown,\n  onBlur,\n  ...props\n}: DatePickerProps, ref: React.ForwardedRef<HTMLDivElement>) {\n  const idBase = React.useId();\n  const dialogId = `${idBase}-dialog`;\n  const rootRef = React.useRef<HTMLDivElement>(null);\n  const setRootRef = useMergedRefs(rootRef, ref);\n  const triggerRef = React.useRef<HTMLButtonElement>(null);\n  const [open, setOpen] = React.useState(false);\n  const [inner, setInner] = React.useState(defaultValue);\n  const isControlled = value !== undefined;\n  const current = isControlled ? value : inner;\n\n  React.useEffect(() => {\n    if (!open) return;\n    const onPointerDown = (e: PointerEvent) => {\n      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);\n    };\n    document.addEventListener(\"pointerdown\", onPointerDown);\n    return () => document.removeEventListener(\"pointerdown\", onPointerDown);\n  }, [open]);\n\n  const close = (restoreFocus: boolean) => {\n    setOpen(false);\n    if (restoreFocus) triggerRef.current?.focus();\n  };\n\n  const choose = (d: Date) => {\n    if (!isControlled) setInner(d);\n    onValueChange?.(d);\n    onChange?.(d);\n    close(true);\n  };\n\n  const root = rs([\"rs-select\", className], menuStyles.select);\n  const trigger = rs([\"rs-dropdown\"], menuStyles.dropdown);\n  const menu = rs([\"rs-menu\", \"rs-date-picker-cal-menu\"], menuStyles.menu, menuStyles.menuOverlay, menuStyles.menuCal, styles.calMenu);\n\n  return (\n    <div\n      ref={setRootRef}\n      className={root.className}\n      style={{ ...root.style, ...style }}\n      onKeyDown={(e) => {\n        onKeyDown?.(e);\n        if (e.defaultPrevented) return;\n        if (e.key === \"Escape\" && open) {\n          e.preventDefault();\n          close(true);\n        } else if (e.key === \"ArrowDown\" && !open && e.target === triggerRef.current) {\n          e.preventDefault();\n          setOpen(true);\n        }\n      }}\n      onBlur={(e) => {\n        onBlur?.(e);\n        const to = e.relatedTarget as Node | null;\n        if (open && to && !rootRef.current?.contains(to)) setOpen(false);\n      }}\n      {...props}\n    >\n      <button\n        ref={triggerRef}\n        type=\"button\"\n        className={trigger.className}\n        style={trigger.style}\n        aria-haspopup=\"dialog\"\n        aria-expanded={open}\n        aria-controls={open ? dialogId : undefined}\n        disabled={disabled}\n        onClick={() => (open ? close(true) : setOpen(true))}\n      >\n        <span>{current ? format(current) : placeholder}</span>\n        <Icon name=\"calendar\" size={16} />\n      </button>\n      {open && (\n        <div id={dialogId} role=\"dialog\" aria-label={dialogLabel} className={menu.className} style={menu.style}>\n          <Calendar autoFocus value={current} onValueChange={choose} />\n        </div>\n      )}\n    </div>\n  );\n});\n",
       "type": "registry:component",
-      "target": "components/raster/date-picker.tsx"
+      "target": "components/vlak/date-picker.tsx"
     },
     {
-      "path": "raster/styles/date-picker.css",
+      "path": "vlak/styles/date-picker.css",
       "content": "/* ── date-picker: generated from packages/react/src/components/date-picker.tsx ── */\n.rs-menu.rs-date-picker-cal-menu{inset-inline-end:auto;padding:0.75rem;background-color:var(--bg)}\n",
       "type": "registry:file",
-      "target": "styles/raster/date-picker.css"
+      "target": "styles/vlak/date-picker.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "forms",
       "classes": [
         "rs-date-picker-cal-menu"
@@ -44,7 +44,7 @@
       "registryDependencies": [
         "dropdown-menu",
         "calendar",
-        "raster-lib",
+        "vlak-lib",
         "icons"
       ],
       "aliases": [
@@ -53,7 +53,7 @@
         "Date input",
         "Date field"
       ],
-      "example": "import { useState } from \"react\";\nimport { DatePicker } from \"@noorddev/raster-react\";\n\nconst [date, setDate] = useState<Date>();\n\n<DatePicker value={date} onValueChange={setDate} placeholder=\"Pick a date\" dialogLabel=\"Choose a date\" />",
+      "example": "import { useState } from \"react\";\nimport { DatePicker } from \"@noorddev/vlak-react\";\n\nconst [date, setDate] = useState<Date>();\n\n<DatePicker value={date} onValueChange={setDate} placeholder=\"Pick a date\" dialogLabel=\"Choose a date\" />",
       "usage": {
         "use": [
           "A date field in a form where the calendar should stay out of the way until asked.",

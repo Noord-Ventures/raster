@@ -1,11 +1,11 @@
 # Input
 
-Text field. 1px control border, 2px focus ring, 12px label above.
+Collects one line of text. 1px border, 2px focus ring, 12px label above.
 
 Category: forms  
 Name: `input`  
 Also known as: Input, Text field, TextField, Text input  
-Page: https://getraster.com/components/input/
+Page: https://vlak.dev/components/input/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/input/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Input } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Input } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add input
+npx @noorddev/vlak-cli add input
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/input.json
+npx shadcn add https://vlak.dev/r/input.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-field"><span class="rs-field-label">E-mail</span><input class="rs-input rs-input-full" /></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/input.json
 ## Example
 
 ```tsx
-import { Input } from "@noorddev/raster-react";
+import { Input } from "@noorddev/vlak-react";
 
 <Input label="E-mail" type="email" placeholder="you@example.com" hint="We never share it." />
 <Input label="Name" error="Name is required." />

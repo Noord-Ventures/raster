@@ -1,11 +1,11 @@
 # Empty
 
-Placeholder cell with a title, a sentence, and an optional action.
+Explains an empty state with a title, one sentence, and an optional action.
 
 Category: feedback  
 Name: `empty`  
 Also known as: Empty, Empty state, Zero state, No results  
-Page: https://getraster.com/components/empty/
+Page: https://vlak.dev/components/empty/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/empty/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Empty } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Empty } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add empty
+npx @noorddev/vlak-cli add empty
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/empty.json
+npx shadcn add https://vlak.dev/r/empty.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-empty"><p class="rs-empty-title">No projects yet</p><p class="rs-empty-body">Start one. The grid is empty on purpose.</p><div class="rs-empty-action"><button class="rs-btn-ghost rs-btn-sm">New project</button></div></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/empty.json
 ## Example
 
 ```tsx
-import { Button, Empty } from "@noorddev/raster-react";
+import { Button, Empty } from "@noorddev/vlak-react";
 
 <Empty title="No projects yet" action={<Button variant="ghost" size="sm">New project</Button>}>
   Start one. The grid is empty on purpose.

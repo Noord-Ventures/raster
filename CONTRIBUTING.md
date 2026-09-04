@@ -1,6 +1,6 @@
-# Contributing to Raster
+# Contributing to Vlak
 
-Raster is a monochrome design system: tokens, CSS, React components, a registry, and a CLI. Contributions that keep it small, legible, and accessible are welcome.
+Vlak is a monochrome design system: tokens, CSS, React components, a registry, and a CLI. Contributions that keep it small, legible, and accessible are welcome.
 
 ## Setup
 
@@ -8,7 +8,7 @@ Node 22.6 or newer and pnpm 10.
 
 ```sh
 pnpm install
-pnpm build        # core (components → raster.css → registry → dist), react, cli
+pnpm build        # core (components → vlak.css → registry → dist), react, cli
 pnpm test         # core integrity tests, react jsdom + axe tests, cli tests
 pnpm typecheck
 pnpm dev          # docs site at localhost:3000
@@ -18,7 +18,7 @@ pnpm dev          # docs site at localhost:3000
 
 - `packages/react/src/components/*.tsx` are the single source of paint. Each component is StyleX leaves plus `rs-*` class names applied through `rs()`.
 - `packages/core/scripts/build-components.mjs` executes those leaves and writes `packages/core/css/components/<name>.css`. Never edit the generated files; edit the leaf and rebuild.
-- `packages/core/scripts/build.mjs` assembles `raster.css` from tokens, base, type, the generated component files, touch, and motion, each in its own cascade layer.
+- `packages/core/scripts/build.mjs` assembles `vlak.css` from tokens, base, type, the generated component files, touch, and motion, each in its own cascade layer.
 - `packages/core/src/registry.ts` is the catalogue: name, classes, CSS file, React entry, snippet, dependencies. Docs, CLI, tests, and the shadcn registry all read from it.
 - `packages/react/scripts/build.mjs` compiles the React package with the StyleX Babel plugin and emits one stylesheet.
 
@@ -29,8 +29,8 @@ pnpm dev          # docs site at localhost:3000
 3. Export it from `packages/react/src/index.ts`.
 4. Rebuild and test:
    ```sh
-   pnpm --filter @noorddev/raster build:css
-   pnpm --filter @noorddev/raster build:registry
+   pnpm --filter @noorddev/vlak build:css
+   pnpm --filter @noorddev/vlak build:registry
    pnpm test
    ```
 5. Add a test in `packages/react/test/`. Every interactive component needs an axe pass and a keyboard test.

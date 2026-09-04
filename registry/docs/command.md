@@ -1,11 +1,11 @@
 # Command
 
-Command palette in a native dialog. Filter, arrows, enter.
+Finds and runs commands in a native dialog. Filter by typing; navigate with arrows and Enter.
 
 Category: actions  
 Name: `command`  
 Also known as: Command, Command palette, cmdk, Command menu, Spotlight  
-Page: https://getraster.com/components/command/
+Page: https://vlak.dev/components/command/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/command/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Command, CommandDialog } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Command, CommandDialog } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add command
+npx @noorddev/vlak-cli add command
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/command.json
+npx shadcn add https://vlak.dev/r/command.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-command" style="border:1px solid var(--divider);border-radius:var(--radius)"><input class="rs-command-input" placeholder="Type a command or search…" /><div class="rs-command-list" role="listbox"><div class="rs-command-group">Go to</div><div class="rs-command-item rs-command-item-active" role="option" aria-selected="true"><span>Components</span><span class="rs-command-hint">⌘1</span></div><div class="rs-command-item" role="option" aria-selected="false"><span>Tokens</span><span class="rs-command-hint">⌘2</span></div></div></div>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/command.json
 
 ```tsx
 import { useEffect, useState } from "react";
-import { CommandDialog } from "@noorddev/raster-react";
+import { CommandDialog } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs, type Leaves } from "../rs";
 import { cx } from "../cx";
 import { setRef } from "../merge-refs";
@@ -40,20 +40,20 @@ export const dialogStyles = stylex.create({
       default: null,
       [mq.phone]: "calc(100vw - 32px)",
     },
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
-    borderRadius: raster.radiusSm,
+    borderColor: vlak.divider,
+    borderRadius: vlak.radiusSm,
     padding: {
       default: "1.25rem",
       [mq.phone]: "24px 20px",
     },
-    backgroundColor: raster.paper,
-    color: raster.ink,
+    backgroundColor: vlak.paper,
+    color: vlak.ink,
     boxShadow: "none",
     "::backdrop": {
       // The page fades toward its own ground: paper in light, near-black in dark.
-      backgroundColor: ["rgba(0,0,0,0.25)", `color-mix(in srgb, ${raster.paper} 55%, transparent)`],
+      backgroundColor: ["rgba(0,0,0,0.25)", `color-mix(in srgb, ${vlak.paper} 55%, transparent)`],
     },
   },
   title: {
@@ -64,7 +64,7 @@ export const dialogStyles = stylex.create({
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
     marginTop: 0,
     marginInlineEnd: 0,
     marginBottom: {
@@ -78,7 +78,7 @@ export const dialogStyles = stylex.create({
       default: "0.84375rem",
       [mq.phone]: "1rem",
     },
-    color: raster.gray,
+    color: vlak.gray,
     letterSpacing: "-0.01em",
     lineHeight: 1.55,
     marginTop: 0,
@@ -108,7 +108,7 @@ export const dialogStyles = stylex.create({
   /** Corner close button. Floats so the title wraps around it. */
   close: {
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     float: "inline-end",
@@ -118,11 +118,11 @@ export const dialogStyles = stylex.create({
     justifyContent: "center",
     width: {
       default: "2rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     height: {
       default: "2rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     marginTop: {
       default: "-0.5rem",
@@ -135,12 +135,12 @@ export const dialogStyles = stylex.create({
     marginInlineStart: "0.5rem",
     padding: 0,
     borderWidth: 0,
-    borderRadius: raster.radiusSm,
+    borderRadius: vlak.radiusSm,
     backgroundColor: {
       default: "transparent",
-      ":hover": raster.controlFill,
+      ":hover": vlak.controlFill,
     },
-    color: raster.ink,
+    color: vlak.ink,
     cursor: "pointer",
     outlineWidth: {
       default: null,
@@ -152,7 +152,7 @@ export const dialogStyles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,

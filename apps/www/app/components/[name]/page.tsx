@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { catalogComponents, type RasterComponent, type RasterExport, type RasterPropsJson } from "@noorddev/raster";
-import propsJson from "@noorddev/raster/props";
+import { catalogComponents, type VlakComponent, type VlakExport, type VlakPropsJson } from "@noorddev/vlak";
+import propsJson from "@noorddev/vlak/props";
 import { chrome } from "@/app/site.stylex";
 import { CodeBlock } from "@/components/code-block";
 import { DocsNav } from "@/components/docs-nav";
@@ -11,7 +11,7 @@ import { reactUsage } from "@/lib/react-usage";
 import { sx } from "@/lib/sx";
 import { COMMAND, HOST, INSTALL } from "../../specimen";
 
-const props = propsJson as RasterPropsJson;
+const props = propsJson as VlakPropsJson;
 
 export function generateStaticParams() {
   return catalogComponents.map((c) => ({ name: c.name }));
@@ -35,8 +35,8 @@ function pascal(name: string) {
 }
 
 /** The named imports a consumer needs: from the example's import line, else the props exports, else the title. */
-function importedNames(component: RasterComponent, example: string | undefined, exports: RasterExport[]) {
-  const match = example?.match(/import\s*\{([^}]*)\}\s*from\s*"@noorddev\/raster-react"/);
+function importedNames(component: VlakComponent, example: string | undefined, exports: VlakExport[]) {
+  const match = example?.match(/import\s*\{([^}]*)\}\s*from\s*"@noorddev\/vlak-react"/);
   if (match?.[1]) {
     return match[1]
       .split(",")
@@ -48,7 +48,7 @@ function importedNames(component: RasterComponent, example: string | undefined, 
   return [pascal(component.name)];
 }
 
-function PropsTable({ entry }: { entry: RasterExport }) {
+function PropsTable({ entry }: { entry: VlakExport }) {
   return (
     <>
       <h3 className="docs-sub">
@@ -111,10 +111,10 @@ export default async function ComponentPage({
   const a11y = component.a11y ?? [];
   const deps = component.registryDependencies ?? [];
 
-  const packageInstall = `${INSTALL}\n\n// once, next to your app's root\nimport "@noorddev/raster-react/css";\n\nimport { ${names.join(", ")} } from "@noorddev/raster-react";`;
+  const packageInstall = `${INSTALL}\n\n// once, next to your app's root\nimport "@noorddev/vlak-react/css";\n\nimport { ${names.join(", ")} } from "@noorddev/vlak-react";`;
   const cliInstall = `${COMMAND.replace("init", `add ${component.name}`)}`;
   const shadcnInstall = `npx shadcn add ${HOST}/r/${component.name}.json`;
-  const cssInstall = `<link rel="stylesheet" href="node_modules/@noorddev/raster/css/raster.css" />`;
+  const cssInstall = `<link rel="stylesheet" href="node_modules/@noorddev/vlak/css/vlak.css" />`;
 
   return (
     <div className="site-layout">
@@ -169,12 +169,12 @@ export default async function ComponentPage({
         <CodeBlock code={packageInstall} />
         <p className="rs-t-body">
           Precompiled React and one stylesheet. No compiler to configure. Per-component imports work
-          too: <code className="rs-code">@noorddev/raster-react/components/{component.name}</code>.
+          too: <code className="rs-code">@noorddev/vlak-react/components/{component.name}</code>.
         </p>
         <h3 className="docs-sub">2. Vendor the source</h3>
         <CodeBlock code={cliInstall} />
         <p className="rs-t-body">
-          The StyleX leaf lands in <code className="rs-code">components/raster/</code>
+          The StyleX leaf lands in <code className="rs-code">components/vlak/</code>
           {deps.length > 0 ? " with its dependencies" : ""}, for your own compiler to own. See{" "}
           <a className="rs-link" href="/docs/stylex">
             StyleX
@@ -187,7 +187,7 @@ export default async function ComponentPage({
         <h3 className="docs-sub">CSS only</h3>
         <CodeBlock code={cssInstall} />
         <p className="rs-t-body">
-          No React. Link <code className="rs-code">raster.css</code> and use the markup and classes
+          No React. Link <code className="rs-code">vlak.css</code> and use the markup and classes
           below.
         </p>
 

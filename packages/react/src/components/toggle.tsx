@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface ToggleProps
@@ -21,15 +21,15 @@ const styles = stylex.create({
     gap: "0.375rem",
     height: {
       default: "2rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minWidth: {
       default: "2rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     paddingBlock: 0,
     paddingInline: {
@@ -38,35 +38,35 @@ const styles = stylex.create({
     },
     fontSize: {
       default: "0.8125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
     backgroundColor: {
       default: "transparent",
-      ":hover": raster.controlFill,
+      ":hover": vlak.controlFill,
       [mq.forcedColors]: "ButtonFace",
     },
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
     borderColor: {
-      default: raster.controlBorder,
-      ":hover": raster.controlFill,
+      default: vlak.controlBorder,
+      ":hover": vlak.controlFill,
       [mq.forcedColors]: "ButtonText",
     },
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     color: {
-      default: raster.gray,
-      ":hover": raster.ink,
+      default: vlak.gray,
+      ":hover": vlak.ink,
       [mq.forcedColors]: "ButtonText",
     },
     cursor: "pointer",
     fontFamily: "inherit",
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     outlineWidth: {
@@ -79,7 +79,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -88,15 +88,15 @@ const styles = stylex.create({
   },
   pressed: {
     backgroundColor: {
-      default: raster.ink,
+      default: vlak.ink,
       [mq.forcedColors]: "Highlight",
     },
     borderColor: {
-      default: raster.ink,
+      default: vlak.ink,
       [mq.forcedColors]: "Highlight",
     },
     color: {
-      default: raster.paper,
+      default: vlak.paper,
       [mq.forcedColors]: "HighlightText",
     },
     forcedColorAdjust: "none",
@@ -110,21 +110,21 @@ const styles = stylex.create({
     boxSizing: "border-box",
     height: {
       default: "2rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     width: {
       default: null,
       [mq.phone]: "100%",
     },
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
     /* The frame is the ink of the pressed toggle: one object, one colour. */
     borderColor: {
-      default: raster.ink,
+      default: vlak.ink,
       [mq.forcedColors]: "ButtonText",
     },
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     overflow: "hidden",
@@ -144,7 +144,7 @@ const styles = stylex.create({
     },
     borderInlineStartWidth: {
       default: 0,
-      ":not(:first-child)": raster.hairline,
+      ":not(:first-child)": vlak.hairline,
     },
     borderInlineStartStyle: {
       default: "none",
@@ -152,7 +152,7 @@ const styles = stylex.create({
     },
     borderInlineStartColor: {
       default: "transparent",
-      ":not(:first-child)": raster.controlBorder,
+      ":not(:first-child)": vlak.controlBorder,
     },
   },
   groupedOn: {

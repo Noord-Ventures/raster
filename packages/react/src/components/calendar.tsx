@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -52,19 +52,19 @@ const styles = stylex.create({
     alignItems: "center",
     minHeight: {
       default: "1.625rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     marginBottom: "0.5rem",
   },
   title: {
     fontSize: {
       default: "0.8125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
     lineHeight: "26px",
-    color: raster.ink,
+    color: vlak.ink,
   },
   nav: {
     display: "flex",
@@ -78,22 +78,22 @@ const styles = stylex.create({
     boxSizing: "border-box",
     width: {
       default: "1.625rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     height: {
       default: "1.625rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minWidth: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     display: "flex",
@@ -101,12 +101,12 @@ const styles = stylex.create({
     justifyContent: "center",
     fontSize: {
       default: "0.8125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
-    color: raster.gray,
-    borderWidth: raster.hairline,
+    color: vlak.gray,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     padding: 0,
     backgroundColor: "transparent",
     fontFamily: "inherit",
@@ -122,7 +122,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -146,7 +146,7 @@ const styles = stylex.create({
       [mq.phone]: "0.8125rem",
     },
     fontWeight: 500,
-    color: raster.gray,
+    color: vlak.gray,
     textAlign: "center",
     paddingTop: "0.25rem",
     paddingBottom: "0.25rem",
@@ -154,7 +154,7 @@ const styles = stylex.create({
   },
   day: {
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     boxSizing: "border-box",
@@ -167,13 +167,13 @@ const styles = stylex.create({
     justifyContent: "center",
     fontSize: "0.8125rem",
     fontVariantNumeric: "tabular-nums",
-    color: raster.ink,
+    color: vlak.ink,
     backgroundColor: {
       default: "transparent",
-      ":hover": raster.controlFill,
+      ":hover": vlak.controlFill,
       [mq.touch]: {
         ":hover": "transparent",
-        ":active": raster.controlFill,
+        ":active": vlak.controlFill,
       },
     },
     borderWidth: 0,
@@ -192,7 +192,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -201,21 +201,21 @@ const styles = stylex.create({
   },
   /* Gray at full opacity stays above 4.5:1 on paper and on the dark ground. */
   out: {
-    color: raster.gray,
+    color: vlak.gray,
   },
   today: {
-    boxShadow: `inset 0 0 0 1px ${raster.divider}`,
+    boxShadow: `inset 0 0 0 1px ${vlak.divider}`,
   },
   selected: {
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     backgroundColor: {
-      default: raster.ink,
-      ":hover": raster.ink,
+      default: vlak.ink,
+      ":hover": vlak.ink,
     },
-    color: raster.paper,
+    color: vlak.paper,
     fontWeight: 600,
   },
 });

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 import { Button } from "./button";
@@ -24,15 +24,15 @@ const styles = stylex.create({
     position: "fixed",
     inset: "auto",
     margin: 0,
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderRadius: {
-      default: raster.radius,
+      default: vlak.radius,
       [mq.phone]: 0,
     },
-    backgroundColor: raster.paper,
-    color: raster.ink,
+    backgroundColor: vlak.paper,
+    color: vlak.ink,
     boxShadow: {
       default: "0 8px 24px rgba(0,0,0,0.06)",
       [mq.phone]: "none",
@@ -60,11 +60,11 @@ const styles = stylex.create({
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
     marginBottom: "0.25rem",
   },
   body: {
-    color: raster.gray,
+    color: vlak.gray,
     margin: 0,
   },
 });

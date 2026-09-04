@@ -1,4 +1,4 @@
-import { Pagination } from "@noorddev/raster-react";
+import { Pagination } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

@@ -1,11 +1,11 @@
 # Select
 
-Closed trigger with a chevron. The menu overlays the page.
+Selects one option from an overlay. The closed trigger carries a chevron.
 
 Category: forms  
 Name: `select`  
 Also known as: Select, Listbox, Dropdown select, Picker  
-Page: https://getraster.com/components/select/
+Page: https://vlak.dev/components/select/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/select/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Select } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Select } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add select
+npx @noorddev/vlak-cli add select
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/select.json
+npx shadcn add https://vlak.dev/r/select.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <button class="rs-dropdown" role="combobox" aria-haspopup="listbox" aria-expanded="true"><span>Alkmaar</span></button>
@@ -53,7 +53,7 @@ npx shadcn add https://getraster.com/r/select.json
 
 ```tsx
 import { useState } from "react";
-import { Select } from "@noorddev/raster-react";
+import { Select } from "@noorddev/vlak-react";
 
 const [city, setCity] = useState("alkmaar");
 

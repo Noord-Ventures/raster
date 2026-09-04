@@ -1,14 +1,14 @@
 {
-  "name": "@noorddev/raster",
+  "name": "@noorddev/vlak",
   "version": "0.4.0",
-  "description": "Raster core — design tokens, component registry, and CSS. Monochrome, CSS-first, zero dependencies.",
+  "description": "Vlak core — design tokens, component registry, and CSS. Monochrome, CSS-first, zero dependencies.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Noord-Ventures/raster.git",
+    "url": "git+https://github.com/Noord-Ventures/vlak.git",
     "directory": "packages/core"
   },
-  "homepage": "https://getraster.com",
+  "homepage": "https://vlak.dev",
   "publishConfig": {
     "access": "public"
   },
@@ -24,20 +24,20 @@
       "default": "./dist/index.js"
     },
     "./css": {
-      "types": "./css/raster.css.d.ts",
-      "default": "./css/raster.css"
+      "types": "./css/vlak.css.d.ts",
+      "default": "./css/vlak.css"
     },
-    "./raster.css": {
-      "types": "./css/raster.css.d.ts",
-      "default": "./css/raster.css"
+    "./vlak.css": {
+      "types": "./css/vlak.css.d.ts",
+      "default": "./css/vlak.css"
     },
     "./css/components.css": {
-      "types": "./css/raster.css.d.ts",
+      "types": "./css/vlak.css.d.ts",
       "default": "./css/components.css"
     },
     "./css/*": "./css/*",
-    "./tokens": "./tokens/raster.tokens.json",
-    "./tokens.dtcg": "./tokens/raster.tokens.dtcg.json",
+    "./tokens": "./tokens/vlak.tokens.json",
+    "./tokens.dtcg": "./tokens/vlak.tokens.dtcg.json",
     "./props": "./props/props.json",
     "./package.json": "./package.json"
   },

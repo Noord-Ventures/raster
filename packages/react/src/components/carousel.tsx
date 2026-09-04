@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -22,7 +22,7 @@ const styles = stylex.create({
   },
   track: {
     display: "flex",
-    gap: raster.gutter,
+    gap: vlak.gutter,
     overflowX: "auto",
     scrollSnapType: "x mandatory",
     scrollBehavior: {
@@ -47,7 +47,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -69,22 +69,22 @@ const styles = stylex.create({
     boxSizing: "border-box",
     width: {
       default: "1.625rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     height: {
       default: "1.625rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minWidth: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     display: "flex",
@@ -92,16 +92,16 @@ const styles = stylex.create({
     justifyContent: "center",
     fontSize: {
       default: "0.8125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     color: {
-      default: raster.gray,
+      default: vlak.gray,
       [mq.forcedColors]: "ButtonText",
     },
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
     borderColor: {
-      default: raster.controlBorder,
+      default: vlak.controlBorder,
       [mq.forcedColors]: "ButtonText",
     },
     padding: 0,
@@ -118,7 +118,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -133,7 +133,7 @@ const styles = stylex.create({
     flexShrink: 0,
     scrollSnapAlign: "start",
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
   },

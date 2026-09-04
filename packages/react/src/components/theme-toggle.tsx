@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -16,7 +16,7 @@ export interface ThemeToggleProps
 const styles = stylex.create({
   toggle: {
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     position: "fixed",
@@ -25,22 +25,22 @@ const styles = stylex.create({
       default: "1.25rem",
       [mq.mobileGrid]: "1.5625rem",
     },
-    zIndex: raster.zSticky,
+    zIndex: vlak.zSticky,
     width: {
       default: "1.5rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     height: {
       default: "1.5rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minWidth: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     padding: {
       default: "0.25rem",
@@ -56,8 +56,8 @@ const styles = stylex.create({
     borderRadius: 0,
     cursor: "pointer",
     color: {
-      default: raster.gray,
-      ":hover": raster.ink,
+      default: vlak.gray,
+      ":hover": vlak.ink,
     },
     outlineWidth: {
       default: 0,
@@ -69,13 +69,13 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: "transparent",
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: 0,
       ":focus-visible": 2,
     },
-    filter: `drop-shadow(0 0 12px ${raster.paper}) drop-shadow(0 0 20px ${raster.paper})`,
+    filter: `drop-shadow(0 0 12px ${vlak.paper}) drop-shadow(0 0 20px ${vlak.paper})`,
   },
   inline: {
     position: "relative",
@@ -99,7 +99,7 @@ const styles = stylex.create({
  * The name states the action ("Switch to dark scheme"), so it changes with the state.
  */
 export const ThemeToggle = React.forwardRef<HTMLButtonElement, ThemeToggleProps>(function ThemeToggle({
-  storageKey = "raster-theme",
+  storageKey = "vlak-theme",
   onThemeChange,
   className,
   style,

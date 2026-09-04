@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { useFieldControl } from "./field";
 
@@ -38,11 +38,11 @@ const styles = stylex.create({
     },
     height: {
       default: "3rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     textAlign: "center",
     fontSize: "1.125rem",
@@ -53,14 +53,14 @@ const styles = stylex.create({
     color: "var(--text)",
     caretColor: "var(--text)",
     backgroundColor: "var(--bg)",
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
     borderColor: {
-      default: raster.controlBorder,
-      ":focus": raster.accent,
+      default: vlak.controlBorder,
+      ":focus": vlak.accent,
     },
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     outlineWidth: {
@@ -71,7 +71,7 @@ const styles = stylex.create({
       default: "none",
       ":focus-visible": "solid",
     },
-    outlineColor: raster.ink,
+    outlineColor: vlak.ink,
     outlineOffset: 2,
     fontFamily: "inherit",
     padding: 0,
@@ -83,7 +83,7 @@ const styles = stylex.create({
     },
   },
   invalid: {
-    borderColor: raster.ink,
+    borderColor: vlak.ink,
   },
 });
 

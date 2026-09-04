@@ -3,11 +3,11 @@
   "name": "aspect-ratio",
   "type": "registry:component",
   "title": "Aspect ratio",
-  "description": "Box that holds a ratio. Media fills it.",
+  "description": "Keeps media at a defined aspect ratio while it fills the available box.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -15,23 +15,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/aspect-ratio.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Width over height, e.g. 16 / 9. */\n  ratio?: number;\n}\n\nconst styles = stylex.create({\n  box: {\n    position: \"relative\",\n    /* Grid stretches the one child to the whole box, so media and captions fill and centre. */\n    display: \"grid\",\n    width: \"100%\",\n    overflow: \"hidden\",\n    borderRadius: raster.radius,\n  },\n});\n\nexport const AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(function AspectRatio(\n  { ratio = 16 / 9, style, className, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-ratio\", className], styles.box);\n  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, aspectRatio: ratio, ...style }} />;\n});\n",
+      "path": "vlak/aspect-ratio.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Width over height, e.g. 16 / 9. */\n  ratio?: number;\n}\n\nconst styles = stylex.create({\n  box: {\n    position: \"relative\",\n    /* Grid stretches the one child to the whole box, so media and captions fill and centre. */\n    display: \"grid\",\n    width: \"100%\",\n    overflow: \"hidden\",\n    borderRadius: vlak.radius,\n  },\n});\n\nexport const AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(function AspectRatio(\n  { ratio = 16 / 9, style, className, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-ratio\", className], styles.box);\n  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, aspectRatio: ratio, ...style }} />;\n});\n",
       "type": "registry:component",
-      "target": "components/raster/aspect-ratio.tsx"
+      "target": "components/vlak/aspect-ratio.tsx"
     },
     {
-      "path": "raster/styles/aspect-ratio.css",
+      "path": "vlak/styles/aspect-ratio.css",
       "content": "/* ── aspect-ratio: generated from packages/react/src/components/aspect-ratio.tsx ── */\n.rs-ratio{position:relative;display:grid;width:100%;overflow:hidden;border-radius:var(--radius)}\n",
       "type": "registry:file",
-      "target": "styles/raster/aspect-ratio.css"
+      "target": "styles/vlak/aspect-ratio.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "content",
       "classes": [
         "rs-ratio"
@@ -39,14 +39,14 @@
       "snippet": "<div class=\"rs-ratio\" style=\"aspect-ratio:16/9;max-width:280px;background:var(--divider-subtle)\"></div>",
       "cssOnly": false,
       "registryDependencies": [
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Aspect ratio",
         "Ratio box",
         "Media frame"
       ],
-      "example": "import { AspectRatio } from \"@noorddev/raster-react\";\n\n<AspectRatio ratio={16 / 9}>\n  <img src=\"/cover.jpg\" alt=\"Press hall\" />\n</AspectRatio>",
+      "example": "import { AspectRatio } from \"@noorddev/vlak-react\";\n\n<AspectRatio ratio={16 / 9}>\n  <img src=\"/cover.jpg\" alt=\"Press hall\" />\n</AspectRatio>",
       "usage": {
         "use": [
           "Images, video, and embeds that must hold a ratio before they load.",

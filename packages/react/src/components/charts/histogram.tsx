@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../../tokens.stylex";
+import { vlak } from "../../tokens.stylex";
 import { rs } from "../../rs";
 import {
   ChartCanvas,
@@ -27,7 +27,7 @@ import {
 
 const styles = stylex.create({
   hist: {
-    fill: raster.divider,
+    fill: vlak.divider,
     stroke: "none",
     borderRadius: 0,
   },

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { BarChart, ToggleGroup } from "@noorddev/raster-react";
+import { BarChart, ToggleGroup } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 const CITIES = [

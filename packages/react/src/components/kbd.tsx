@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 
 const styles = stylex.create({
@@ -8,13 +8,13 @@ const styles = stylex.create({
     fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
     fontSize: "0.6875rem",
     fontWeight: 500,
-    color: raster.gray,
-    backgroundColor: raster.paper,
-    borderWidth: raster.hairline,
+    color: vlak.gray,
+    backgroundColor: vlak.paper,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderBottomWidth: 2,
-    borderRadius: raster.radiusSm,
+    borderRadius: vlak.radiusSm,
     paddingBlock: 2,
     paddingInline: "0.375rem",
     lineHeight: 1.2,

@@ -1,11 +1,11 @@
 # Skeleton
 
-Divider-tone pulse. Animation stops when prefers-reduced-motion is on.
+Reserves space while content loads. Divider-tone pulse that respects reduced motion.
 
 Category: feedback  
 Name: `skeleton`  
 Also known as: Skeleton, Placeholder, Loading placeholder, Shimmer  
-Page: https://getraster.com/components/skeleton/
+Page: https://vlak.dev/components/skeleton/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/skeleton/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Skeleton } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Skeleton } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add skeleton
+npx @noorddev/vlak-cli add skeleton
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/skeleton.json
+npx shadcn add https://vlak.dev/r/skeleton.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-skeleton" style="width:180px;height:14px"></span>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/skeleton.json
 ## Example
 
 ```tsx
-import { Skeleton } from "@noorddev/raster-react";
+import { Skeleton } from "@noorddev/vlak-react";
 
 <Skeleton width="60%" />
 <Skeleton width={240} height={14} />

@@ -1,4 +1,4 @@
-import { Spinner } from "@noorddev/raster-react";
+import { Spinner } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

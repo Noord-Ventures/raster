@@ -1,11 +1,11 @@
 # Textarea
 
-Multiline field, vertical resize only.
+Collects multiple lines of text. Resizes vertically only.
 
 Category: forms  
 Name: `textarea`  
 Also known as: Textarea, Text area, Multiline input  
-Page: https://getraster.com/components/textarea/
+Page: https://vlak.dev/components/textarea/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/textarea/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Textarea } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Textarea } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add textarea
+npx @noorddev/vlak-cli add textarea
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/textarea.json
+npx shadcn add https://vlak.dev/r/textarea.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-field"><span class="rs-field-label">Notes</span><textarea class="rs-textarea" placeholder="What should we know?"></textarea></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/textarea.json
 ## Example
 
 ```tsx
-import { Textarea } from "@noorddev/raster-react";
+import { Textarea } from "@noorddev/vlak-react";
 
 <Textarea label="Notes" placeholder="What should we know?" rows={4} />
 ```

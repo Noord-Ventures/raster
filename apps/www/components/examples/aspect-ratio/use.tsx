@@ -1,4 +1,4 @@
-import { AspectRatio } from "@noorddev/raster-react";
+import { AspectRatio } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

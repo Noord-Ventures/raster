@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../../tokens.stylex";
+import { vlak } from "../../tokens.stylex";
 import { LineChart, type LineChartProps } from "./line";
 
 const styles = stylex.create({
   area: {
     borderRadius: 0,
     boxShadow: "none",
-    backgroundColor: raster.paper,
+    backgroundColor: vlak.paper,
   },
 });
 

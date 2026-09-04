@@ -1,11 +1,11 @@
 # Scroll area
 
-Overflow box with the scrollbar hidden and 20px feathers at the ends.
+Contains overflow without visible scrollbars. 20px edge feathers signal more content.
 
 Category: content  
 Name: `scroll-area`  
 Also known as: Scroll area, Scroll view, Scrollable region, Overflow box  
-Page: https://getraster.com/components/scroll-area/
+Page: https://vlak.dev/components/scroll-area/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/scroll-area/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { ScrollArea } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { ScrollArea } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add scroll-area
+npx @noorddev/vlak-cli add scroll-area
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/scroll-area.json
+npx shadcn add https://vlak.dev/r/scroll-area.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-scroll" style="max-height:140px" tabindex="0"><p>Alkmaar</p><p>Amsterdam</p><p>Delft</p><p>Eindhoven</p><p>Groningen</p><p>Haarlem</p><p>Rotterdam</p><p>Utrecht</p></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/scroll-area.json
 ## Example
 
 ```tsx
-import { ScrollArea } from "@noorddev/raster-react";
+import { ScrollArea } from "@noorddev/vlak-react";
 
 <ScrollArea maxHeight={240} aria-label="Cities">
   {cities.map((city) => <p key={city}>{city}</p>)}

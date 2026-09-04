@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../../tokens.stylex";
+import { vlak, mq } from "../../tokens.stylex";
 import { rs } from "../../rs";
 import { hidden } from "../../hidden.stylex";
 
@@ -33,10 +33,10 @@ const styles = stylex.create({
   },
   field: {
     isolation: "isolate",
-    backgroundColor: raster.paper,
-    borderWidth: raster.hairline,
+    backgroundColor: vlak.paper,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderRadius: 0,
     boxShadow: "none",
     padding: "1rem",
@@ -62,7 +62,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -83,18 +83,18 @@ const styles = stylex.create({
     fontSize: "0.8125rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
   },
   grid: {
-    stroke: raster.divider,
+    stroke: vlak.divider,
     strokeWidth: 1,
   },
   baseline: {
-    stroke: raster.divider,
+    stroke: vlak.divider,
     strokeWidth: 1,
   },
   axis: {
-    fill: raster.gray,
+    fill: vlak.gray,
     fontSize: "0.6875rem",
     fontWeight: 500,
     letterSpacing: 0,
@@ -102,7 +102,7 @@ const styles = stylex.create({
   },
   line: {
     fill: "none",
-    stroke: raster.ink,
+    stroke: vlak.ink,
     strokeWidth: 1,
     strokeLinecap: "butt",
     strokeLinejoin: "miter",
@@ -111,10 +111,10 @@ const styles = stylex.create({
     strokeDasharray: "4 4",
   },
   lineMuted: {
-    stroke: raster.gray,
+    stroke: vlak.gray,
   },
   lineDotted: {
-    stroke: raster.gray,
+    stroke: vlak.gray,
     strokeDasharray: "0.1 5",
     strokeWidth: 1.5,
     strokeLinecap: "butt",
@@ -123,7 +123,7 @@ const styles = stylex.create({
     stroke: "var(--rs-chart-spot)",
   },
   area: {
-    fill: raster.ink,
+    fill: vlak.ink,
     opacity: 0.08,
     stroke: "none",
   },
@@ -133,7 +133,7 @@ const styles = stylex.create({
     stroke: "none",
   },
   bar: {
-    fill: raster.ink,
+    fill: vlak.ink,
     borderRadius: 0,
     transition: {
       default: "fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)",
@@ -141,22 +141,22 @@ const styles = stylex.create({
     },
   },
   barMuted: {
-    fill: raster.divider,
+    fill: vlak.divider,
   },
   barSpot: {
     fill: "var(--rs-chart-spot)",
   },
   cursor: {
-    stroke: raster.divider,
+    stroke: vlak.divider,
     strokeWidth: 1,
   },
   dot: {
-    fill: raster.paper,
-    stroke: raster.ink,
+    fill: vlak.paper,
+    stroke: vlak.ink,
     strokeWidth: 1,
   },
   mark: {
-    fill: raster.ink,
+    fill: vlak.ink,
     borderRadius: 0,
     transition: {
       default: "fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)",
@@ -167,7 +167,7 @@ const styles = stylex.create({
     fill: "var(--rs-chart-spot)",
   },
   ann: {
-    fill: raster.gray,
+    fill: vlak.gray,
     fontSize: "0.6875rem",
     fontWeight: 500,
     letterSpacing: "-0.01em",
@@ -175,25 +175,25 @@ const styles = stylex.create({
   tip: {
     position: "absolute",
     pointerEvents: "none",
-    backgroundColor: raster.paper,
-    borderWidth: raster.hairline,
+    backgroundColor: vlak.paper,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderRadius: 0,
     boxShadow: "none",
     paddingBlock: "0.375rem",
     paddingInline: "0.5rem",
     fontSize: "0.75rem",
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
     whiteSpace: "nowrap",
-    zIndex: raster.zFloat,
+    zIndex: vlak.zFloat,
     transform: "translate(-50%, calc(-100% - 8px))",
   },
   tipLabel: {
     display: "block",
     fontSize: "0.6875rem",
-    color: raster.gray,
+    color: vlak.gray,
     marginBottom: 2,
   },
   tipRow: {
@@ -203,7 +203,7 @@ const styles = stylex.create({
     gap: "0.625rem",
   },
   tipName: {
-    color: raster.gray,
+    color: vlak.gray,
   },
   tipVal: {
     fontWeight: 600,
@@ -222,7 +222,7 @@ const styles = stylex.create({
     fontSize: "0.75rem",
     fontWeight: 500,
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
   },
   legendSvg: {
     display: "block",

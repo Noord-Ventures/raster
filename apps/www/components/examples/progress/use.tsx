@@ -1,4 +1,4 @@
-import { Progress } from "@noorddev/raster-react";
+import { Progress } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

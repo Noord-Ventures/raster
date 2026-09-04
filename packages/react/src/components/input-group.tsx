@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Input, type InputProps } from "./input";
 
@@ -15,15 +15,15 @@ const styles = stylex.create({
     alignItems: "stretch",
     boxSizing: "border-box",
     width: "100%",
-    height: raster.controlH,
-    borderWidth: raster.hairline,
+    height: vlak.controlH,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
     borderColor: {
-      default: raster.controlBorder,
-      ":focus-within": raster.accent,
+      default: vlak.controlBorder,
+      ":focus-within": vlak.accent,
     },
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     backgroundColor: "var(--bg)",
@@ -37,7 +37,7 @@ const styles = stylex.create({
       default: "none",
       ":focus-within": "solid",
     },
-    outlineColor: raster.ink,
+    outlineColor: vlak.ink,
     outlineOffset: 2,
   },
   addon: {
@@ -50,20 +50,20 @@ const styles = stylex.create({
     paddingBlock: 0,
     fontSize: {
       default: "0.8125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
-    color: raster.gray,
-    backgroundColor: raster.tableAlt,
+    color: vlak.gray,
+    backgroundColor: vlak.tableAlt,
     whiteSpace: "nowrap",
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
-    borderInlineStartWidth: raster.hairline,
+    borderInlineStartWidth: vlak.hairline,
     borderInlineStartStyle: "solid",
-    borderInlineStartColor: raster.divider,
+    borderInlineStartColor: vlak.divider,
   },
   firstAddon: {
     borderInlineStartWidth: 0,

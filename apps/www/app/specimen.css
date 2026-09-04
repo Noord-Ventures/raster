@@ -5,7 +5,7 @@
    Two grids, two inks. Boxed pages (home, About) use a --divider
    cell-edge cage. L/R box margins are the quieter --grid-line.
    The site gutter overlay on html::before is the main 204 for docs /
-   components / interfaces. Kill it here so it does not cut Raster,
+   components / interfaces. Kill it here so it does not cut Vlak,
    the tagline, or the install line. */
 html:has(.specimen-page)::before {
   display: none;
@@ -215,7 +215,7 @@ html:has(.specimen-page) .site-footer {
   /* Optical left, command display (~2–5rem). Own fraction, not the hero -0.08em. */
   margin-left: calc(1px - 0.07em);
   font-family: inherit;
-  /* Fits "npm install @noorddev/raster-react" on one line from the 1024 rail up. */
+  /* Fits "npm install @noorddev/vlak-react" on one line from the 1024 rail up. */
   font-size: clamp(2rem, 5.9cqw, 4.5rem);
   font-weight: 600;
   letter-spacing: -.045em;

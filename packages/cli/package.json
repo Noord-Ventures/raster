@@ -1,31 +1,31 @@
 {
-  "name": "@noorddev/raster-cli",
+  "name": "@noorddev/vlak-cli",
   "version": "0.4.0",
-  "description": "The Raster CLI — install the monochrome design system into any project: npx @noorddev/raster-cli init, npx @noorddev/raster-cli add <component>.",
+  "description": "The Vlak CLI — install the monochrome design system into any project: npx @noorddev/vlak-cli init, npx @noorddev/vlak-cli add <component>.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Noord-Ventures/raster.git",
+    "url": "git+https://github.com/Noord-Ventures/vlak.git",
     "directory": "packages/cli"
   },
-  "homepage": "https://getraster.com",
+  "homepage": "https://vlak.dev",
   "publishConfig": {
     "access": "public"
   },
   "type": "module",
   "bin": {
-    "raster": "dist/index.js"
+    "vlak": "./dist/index.js"
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "pnpm --filter @noorddev/raster build:css && pnpm --filter @noorddev/raster build:registry && tsup && node scripts/copy-fonts.mjs",
+    "build": "pnpm --filter @noorddev/vlak build:css && pnpm --filter @noorddev/vlak build:registry && tsup && node scripts/copy-fonts.mjs",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@noorddev/raster": "workspace:*",
+    "@noorddev/vlak": "workspace:*",
     "@types/node": "^26.4.1",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",

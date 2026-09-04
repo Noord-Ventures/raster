@@ -1,15 +1,15 @@
 // Generates every derived artifact from the sources of truth:
 //
-//   src/tokens.ts     →  tokens/raster.tokens.json   (tokens as JSON)
+//   src/tokens.ts     →  tokens/vlak.tokens.json   (tokens as JSON)
 //                     →  css/tokens.css              (custom properties)
-//   css/* sources     →  css/raster.css              (the whole system, one file)
+//   css/* sources     →  css/vlak.css              (the whole system, one file)
 //
 // Run with: npm run build:css  (Node ≥ 22.6)
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { rasterTokens } from "../src/tokens.ts";
-import { rasterComponents } from "../src/registry.ts";
+import { vlakTokens } from "../src/tokens.ts";
+import { vlakComponents } from "../src/registry.ts";
 
 const root = (p) => fileURLToPath(new URL(`../${p}`, import.meta.url));
 const read = (p) => readFileSync(root(p), "utf8");
@@ -19,10 +19,10 @@ const write = (p, text) => {
 };
 
 /* ── 1. Tokens as JSON ── */
-write("tokens/raster.tokens.json", JSON.stringify(rasterTokens, null, 2) + "\n");
+write("tokens/vlak.tokens.json", JSON.stringify(vlakTokens, null, 2) + "\n");
 
 /* ── 2. Tokens as CSS custom properties ── */
-const { color, grid, radius, control, motion, type, z } = rasterTokens;
+const { color, grid, radius, control, motion, type, z } = vlakTokens;
 const c1 = grid.column;
 const gridImage = `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent ${c1}px,var(--grid-line) ${c1}px,var(--grid-line) ${c1 + 1}px,transparent ${c1 + 1}px,transparent ${grid.module}px)`;
 
@@ -53,7 +53,7 @@ const tokensCss = `/* ── Tokens ── GENERATED from src/tokens.ts. Do not 
   --control-border: ${color.light.controlBorder};
   --control-fill: ${color.light.controlFill};
   color-scheme: light;
-  --radius-sm: ${radius.small}px;           /* slight Raster radius; standalone buttons */
+  --radius-sm: ${radius.small}px;           /* slight Vlak radius; standalone buttons */
   --radius: var(--radius-sm);              /* alias — buttons, boxes, dialogs share it; cards stay 0 */
   --radius-chrome: ${radius.chrome}px;
   --gutter: ${grid.gutter}px;
@@ -122,7 +122,7 @@ write("css/tokens.css", tokensCss);
    without prose in the way. Light and dark are separate groups. */
 const dtcg = {
   $schema: "https://tr.designtokens.org/format/",
-  $description: `Raster design tokens. ${rasterTokens.meta.url}`,
+  $description: `Vlak design tokens. ${vlakTokens.meta.url}`,
   color: {
     $description: "Monochrome. Paper, ink, gray. No accent hue.",
     light: {
@@ -174,7 +174,7 @@ const dtcg = {
     },
   },
   breakpoint: Object.fromEntries(
-    Object.entries(rasterTokens.breakpoints).map(([k, v]) => [k, { $type: "dimension", $value: { value: v, unit: "px" } }]),
+    Object.entries(vlakTokens.breakpoints).map(([k, v]) => [k, { $type: "dimension", $value: { value: v, unit: "px" } }]),
   ),
   z: Object.fromEntries(
     Object.entries(z)
@@ -199,29 +199,29 @@ const dtcg = {
     },
   },
 };
-write("tokens/raster.tokens.dtcg.json", `${JSON.stringify(dtcg, null, 2)}\n`);
+write("tokens/vlak.tokens.dtcg.json", `${JSON.stringify(dtcg, null, 2)}\n`);
 
 /* ── 3. The whole system as one file ── */
 const componentFiles = [];
-for (const component of rasterComponents) {
+for (const component of vlakComponents) {
   for (const file of component.css) {
     if (!componentFiles.includes(file)) componentFiles.push(file);
   }
 }
-/* Cascade layers: every Raster rule sits in a named layer, so unlayered
+/* Cascade layers: every Vlak rule sits in a named layer, so unlayered
    consumer CSS wins without specificity games. @font-face stays outside. */
 const layered = [
-  ["raster.tokens", ["tokens.css"]],
-  ["raster.base", ["base.css"]],
-  ["raster.type", ["type.css"]],
-  ["raster.components", componentFiles],
-  ["raster.touch", ["touch.css"]],
-  ["raster.motion", ["motion.css"]],
+  ["vlak.tokens", ["tokens.css"]],
+  ["vlak.base", ["base.css"]],
+  ["vlak.type", ["type.css"]],
+  ["vlak.components", componentFiles],
+  ["vlak.touch", ["touch.css"]],
+  ["vlak.motion", ["motion.css"]],
 ];
 
 const banner = `/* ═══════════════════════════════════════════════════════════════════
-   RASTER, a monochrome, CSS-first design system.
-   ${rasterTokens.meta.url}
+   VLAK, a monochrome, CSS-first design system.
+   ${vlakTokens.meta.url}
 
    One ink, no accent hue: emphasis comes from weight, size, and
    spacing. Hairline borders, a ${grid.module}px module grid (${grid.column}px column +
@@ -239,23 +239,23 @@ const banner = `/* ════════════════════�
 
 `;
 
-const rasterCss =
+const vlakCss =
   banner +
   read("css/fonts.css") +
   `\n@layer ${layered.map(([name]) => name).join(", ")};\n\n` +
   layered
     .map(([name, files]) => `@layer ${name} {\n${files.map((f) => read(`css/${f}`)).join("\n")}\n}\n`)
     .join("\n");
-write("css/raster.css", rasterCss);
+write("css/vlak.css", vlakCss);
 
 /* ── 4. Components only ──
-   For pages that already load @noorddev/raster-react/css (tokens, base,
+   For pages that already load @noorddev/vlak-react/css (tokens, base,
    type, and the compiled leaves) but also render plain rs-* markup. */
 write(
   "css/components.css",
-  `/* Raster component classes only (layer raster.components). Load after tokens, base, and type:
-   @noorddev/raster/css carries all of it; @noorddev/raster-react/css carries the React side. Generated. */
-@layer raster.components {
+  `/* Vlak component classes only (layer vlak.components). Load after tokens, base, and type:
+   @noorddev/vlak/css carries all of it; @noorddev/vlak-react/css carries the React side. Generated. */
+@layer vlak.components {
 ${componentFiles.map((f) => read(`css/${f}`)).join("\n")}
 }
 `,

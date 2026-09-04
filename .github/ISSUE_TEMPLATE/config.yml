@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Documentation
-    url: https://getraster.com
+    url: https://vlak.dev
     about: Getting started, component pages, tokens, and the registry.
   - name: Security report
-    url: https://github.com/Noord-Ventures/raster/security/advisories/new
+    url: https://github.com/Noord-Ventures/vlak/security/advisories/new
     about: Report a vulnerability privately.

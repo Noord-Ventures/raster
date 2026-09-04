@@ -1,18 +1,18 @@
 import { VERSION, add, docsFor, init, list, search, snippetFor, tokensJson } from "./lib";
 
-const HELP = `@noorddev/raster-cli ${VERSION}, the monochrome design system
+const HELP = `@noorddev/vlak-cli ${VERSION}, the monochrome design system
 
 Usage
-  npx @noorddev/raster-cli init [--css-dir <dir>] [--components-dir <dir>] [--registry <url>] [--overwrite]
-  npx @noorddev/raster-cli add <component...> [--overwrite] [--registry <url>]
-  npx @noorddev/raster-cli list [--json]
-  npx @noorddev/raster-cli search <term> [--json]
-  npx @noorddev/raster-cli docs <component | guide | index | tokens>
-  npx @noorddev/raster-cli tokens [--json]
-  npx @noorddev/raster-cli help
+  npx @noorddev/vlak-cli init [--css-dir <dir>] [--components-dir <dir>] [--registry <url>] [--overwrite]
+  npx @noorddev/vlak-cli add <component...> [--overwrite] [--registry <url>]
+  npx @noorddev/vlak-cli list [--json]
+  npx @noorddev/vlak-cli search <term> [--json]
+  npx @noorddev/vlak-cli docs <component | guide | index | tokens>
+  npx @noorddev/vlak-cli tokens [--json]
+  npx @noorddev/vlak-cli help
 
 Commands
-  init      Write raster.css, Inter (SIL OFL 1.1), index.html (specimen), and raster.json.
+  init      Write vlak.css, Inter (SIL OFL 1.1), index.html (specimen), and vlak.json.
             --registry <url> stores a remote registry for add (HTTP(S) or a local directory).
   add       Copy a component's React source into your project.
             CSS-only components need no code; add prints the snippet.
@@ -72,9 +72,9 @@ async function main(): Promise<void> {
         overwrite: Boolean(flags.overwrite),
         registry: registryFlag(flags),
       });
-      console.log("Raster initialized.\n");
+      console.log("Vlak initialized.\n");
       reportWrites(results);
-      const cssPath = results.find((r) => r.path.endsWith("raster.css"))?.path ?? "styles/raster.css";
+      const cssPath = results.find((r) => r.path.endsWith("vlak.css"))?.path ?? "styles/vlak.css";
       console.log(`
 Next steps
   1. Open index.html — the specimen page init writes.
@@ -82,24 +82,24 @@ Next steps
        <link rel="stylesheet" href="${cssPath}" />
   3. Dark scheme: set data-theme="dark" on <html>, or use the control on the specimen.
   4. Inter is bundled (SIL OFL 1.1). System sans is fallback only.
-  5. Add components:  npx @noorddev/raster-cli add button dialog
+  5. Add components:  npx @noorddev/vlak-cli add button dialog
 `);
       break;
     }
 
     case "add": {
       if (positional.length === 0) {
-        console.error("Nothing to add. Usage: npx @noorddev/raster-cli add <component...>   (see: npx @noorddev/raster-cli list)");
+        console.error("Nothing to add. Usage: npx @noorddev/vlak-cli add <component...>   (see: npx @noorddev/vlak-cli list)");
         process.exit(1);
       }
       const { outcomes, unknown } = await add(cwd, positional, {
         overwrite: Boolean(flags.overwrite),
         registry: registryFlag(flags),
       });
-      for (const name of unknown) console.error(`✗ unknown component "${name}". See: npx @noorddev/raster-cli list`);
+      for (const name of unknown) console.error(`✗ unknown component "${name}". See: npx @noorddev/vlak-cli list`);
       for (const outcome of outcomes) {
         if (outcome.cssOnly) {
-          console.log(`${outcome.item.title} (${outcome.item.name}) is CSS-only; already styled by raster.css.`);
+          console.log(`${outcome.item.title} (${outcome.item.name}) is CSS-only; already styled by vlak.css.`);
           const snippet = snippetFor(outcome.item.name);
           if (snippet) console.log(`  Markup:\n${snippet.split("\n").map((l) => `    ${l}`).join("\n")}`);
         } else {
@@ -140,7 +140,7 @@ Next steps
     case "search": {
       const term = positional.join(" ");
       if (!term) {
-        console.error("Nothing to search for. Usage: npx @noorddev/raster-cli search <term>");
+        console.error("Nothing to search for. Usage: npx @noorddev/vlak-cli search <term>");
         process.exit(1);
       }
       const hits = search(term);
@@ -149,7 +149,7 @@ Next steps
         break;
       }
       if (hits.length === 0) {
-        console.log(`No component matches "${term}". See: npx @noorddev/raster-cli list`);
+        console.log(`No component matches "${term}". See: npx @noorddev/vlak-cli list`);
         break;
       }
       for (const hit of hits) {
@@ -162,12 +162,12 @@ Next steps
     case "docs": {
       const name = positional[0];
       if (!name) {
-        console.error("Which page? Usage: npx @noorddev/raster-cli docs <component | guide | index | tokens>");
+        console.error("Which page? Usage: npx @noorddev/vlak-cli docs <component | guide | index | tokens>");
         process.exit(1);
       }
       const page = docsFor(name);
       if (!page) {
-        console.error(`No docs for "${name}". See: npx @noorddev/raster-cli list`);
+        console.error(`No docs for "${name}". See: npx @noorddev/vlak-cli list`);
         process.exit(1);
       }
       process.stdout.write(page);

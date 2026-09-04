@@ -1,11 +1,11 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { catalogComponents, rasterComponents } from "../src/registry";
-import type { RasterPropsJson } from "../src/schema";
+import { catalogComponents, vlakComponents } from "../src/registry";
+import type { VlakPropsJson } from "../src/schema";
 
 const pkgDir = join(import.meta.dirname, "..");
-const props = JSON.parse(readFileSync(join(pkgDir, "props/props.json"), "utf8")) as RasterPropsJson;
+const props = JSON.parse(readFileSync(join(pkgDir, "props/props.json"), "utf8")) as VlakPropsJson;
 const version = (JSON.parse(readFileSync(join(pkgDir, "package.json"), "utf8")) as { version: string }).version;
 const reactIndex = readFileSync(join(pkgDir, "../react/src/index.ts"), "utf8");
 
@@ -26,11 +26,11 @@ describe("props.json", () => {
   });
 
   it("names only registry components", () => {
-    const names = new Set(rasterComponents.map((c) => c.name));
+    const names = new Set(vlakComponents.map((c) => c.name));
     for (const name of Object.keys(props.components)) expect(names.has(name), `${name} is not in the registry`).toBe(true);
   });
 
-  it("validates against the RasterPropsJson shape", () => {
+  it("validates against the VlakPropsJson shape", () => {
     for (const [name, entry] of Object.entries(props.components)) {
       expect(Array.isArray(entry.exports), `${name}.exports`).toBe(true);
       for (const e of entry.exports) {

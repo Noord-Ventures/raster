@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cleanup, render } from "@testing-library/react";
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
-import * as Raster from "../src";
+import * as Vlak from "../src";
 
 /**
  * Every component reaches its root element through `ref`, on React 18
@@ -14,13 +14,13 @@ import * as Raster from "../src";
 const NOT_COMPONENTS = [
   "cx",
   "rs",
-  "raster",
+  "vlak",
   "phone",
   "mobileGrid",
   "rail",
   "wide",
-  "rasterFont",
-  "rasterMono",
+  "vlakFont",
+  "vlakMono",
   "ICON_STROKE",
   "ICON_VIEWBOX",
   "iconInk",
@@ -58,19 +58,19 @@ const series = [{ name: "A", values: [1, 2, 3] }];
 const noop = () => {};
 const dialog = { open: false, onClose: noop };
 
-const inTabs = (el: React.ReactElement) => <Raster.Tabs defaultValue="a">{el}</Raster.Tabs>;
-const inTable = (el: React.ReactElement) => <Raster.Table>{el}</Raster.Table>;
+const inTabs = (el: React.ReactElement) => <Vlak.Tabs defaultValue="a">{el}</Vlak.Tabs>;
+const inTable = (el: React.ReactElement) => <Vlak.Table>{el}</Vlak.Table>;
 const inTbody = (el: React.ReactElement) => (
-  <Raster.Table>
+  <Vlak.Table>
     <tbody>{el}</tbody>
-  </Raster.Table>
+  </Vlak.Table>
 );
 const inRow = (el: React.ReactElement) => (
-  <Raster.Table>
+  <Vlak.Table>
     <tbody>
       <tr>{el}</tr>
     </tbody>
-  </Raster.Table>
+  </Vlak.Table>
 );
 
 const cases: Record<string, Case> = {
@@ -224,7 +224,7 @@ const cases: Record<string, Case> = {
   CiteBoxText: { tag: "div" },
 };
 
-const exportsByName = Raster as unknown as Record<string, unknown>;
+const exportsByName = Vlak as unknown as Record<string, unknown>;
 
 beforeAll(() => {
   // jsdom has no modal dialogs: mirror the open state and the close event.

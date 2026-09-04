@@ -1,6 +1,6 @@
 "use client";
 
-import { Accordion, AccordionItem } from "@noorddev/raster-react";
+import { Accordion, AccordionItem } from "@noorddev/vlak-react";
 import { notes } from "./facts";
 
 export function AboutNotes() {

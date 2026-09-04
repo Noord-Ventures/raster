@@ -3,11 +3,11 @@
   "name": "card",
   "type": "registry:component",
   "title": "Card",
-  "description": "Typography stack: label, title, and body. No outline.",
+  "description": "Groups related content as a label, title, and body. No outline.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -15,23 +15,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/card.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nconst styles = stylex.create({\n  card: {\n    borderWidth: 0,\n    borderStyle: \"none\",\n    borderRadius: 0,\n    padding: 0,\n    maxWidth: \"22.5rem\",\n    backgroundColor: \"transparent\",\n    boxShadow: \"none\",\n  },\n  inner: {\n    boxSizing: \"border-box\",\n    borderWidth: 0,\n    borderRadius: 0,\n    minHeight: 0,\n    padding: 0,\n    backgroundColor: \"transparent\",\n  },\n  label: {\n    fontSize: \"0.75rem\",\n    fontWeight: 600,\n    color: raster.ink,\n    letterSpacing: \"-0.01em\",\n    display: \"block\",\n    marginBottom: \"0.375rem\",\n  },\n  title: {\n    fontSize: \"1.0625rem\",\n    fontWeight: 600,\n    color: raster.ink,\n    letterSpacing: \"-0.02em\",\n    marginTop: 0,\n    marginBottom: \"0.5rem\",\n  },\n  body: {\n    fontSize: \"0.875rem\",\n    color: raster.gray,\n    fontWeight: 500,\n    letterSpacing: \"-0.01em\",\n    lineHeight: 1.6,\n    margin: 0,\n  },\n});\n\nexport const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  function Card({ className, style, ...props }, ref) {\n    const sx = rs([\"rs-card\", className], styles.card);\n    return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n  },\n);\n\nexport const CardInner = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function CardInner(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-card-in\", className], styles.inner);\n  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n\nexport const CardLabel = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function CardLabel(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-card-label\", className], styles.label);\n  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n\nexport const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(function CardTitle(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-card-title\", className], styles.title);\n  return <h3 ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n\nexport const CardBody = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function CardBody(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-card-body\", className], styles.body);\n  return <p ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
+      "path": "vlak/card.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nconst styles = stylex.create({\n  card: {\n    borderWidth: 0,\n    borderStyle: \"none\",\n    borderRadius: 0,\n    padding: 0,\n    maxWidth: \"22.5rem\",\n    backgroundColor: \"transparent\",\n    boxShadow: \"none\",\n  },\n  inner: {\n    boxSizing: \"border-box\",\n    borderWidth: 0,\n    borderRadius: 0,\n    minHeight: 0,\n    padding: 0,\n    backgroundColor: \"transparent\",\n  },\n  label: {\n    fontSize: \"0.75rem\",\n    fontWeight: 600,\n    color: vlak.ink,\n    letterSpacing: \"-0.01em\",\n    display: \"block\",\n    marginBottom: \"0.375rem\",\n  },\n  title: {\n    fontSize: \"1.0625rem\",\n    fontWeight: 600,\n    color: vlak.ink,\n    letterSpacing: \"-0.02em\",\n    marginTop: 0,\n    marginBottom: \"0.5rem\",\n  },\n  body: {\n    fontSize: \"0.875rem\",\n    color: vlak.gray,\n    fontWeight: 500,\n    letterSpacing: \"-0.01em\",\n    lineHeight: 1.6,\n    margin: 0,\n  },\n});\n\nexport const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  function Card({ className, style, ...props }, ref) {\n    const sx = rs([\"rs-card\", className], styles.card);\n    return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n  },\n);\n\nexport const CardInner = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function CardInner(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-card-in\", className], styles.inner);\n  return <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n\nexport const CardLabel = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function CardLabel(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-card-label\", className], styles.label);\n  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n\nexport const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(function CardTitle(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-card-title\", className], styles.title);\n  return <h3 ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n\nexport const CardBody = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(function CardBody(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-card-body\", className], styles.body);\n  return <p ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
-      "target": "components/raster/card.tsx"
+      "target": "components/vlak/card.tsx"
     },
     {
-      "path": "raster/styles/card.css",
+      "path": "vlak/styles/card.css",
       "content": "/* ── card: generated from packages/react/src/components/card.tsx ── */\n.rs-card{border-width:0;border-style:none;border-radius:0;padding:0;max-width:22.5rem;background-color:transparent;box-shadow:none}\n.rs-card-in{box-sizing:border-box;border-width:0;border-radius:0;min-height:0;padding:0;background-color:transparent}\n.rs-card-label{font-size:0.75rem;font-weight:600;color:var(--text);letter-spacing:-0.01em;display:block;margin-bottom:0.375rem}\n.rs-card-title{font-size:1.0625rem;font-weight:600;color:var(--text);letter-spacing:-0.02em;margin-top:0;margin-bottom:0.5rem}\n.rs-card-body{font-size:0.875rem;color:var(--text-secondary);font-weight:500;letter-spacing:-0.01em;line-height:1.6;margin:0}\n",
       "type": "registry:file",
-      "target": "styles/raster/card.css"
+      "target": "styles/vlak/card.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "surfaces",
       "classes": [
         "rs-card",
@@ -43,21 +43,21 @@
       "snippet": "<div class=\"rs-card\"><span class=\"rs-card-label\">Case study</span><h3 class=\"rs-card-title\">A quieter interface</h3><p class=\"rs-card-body\">Emphasis from weight and spacing, never from a hue.</p></div>",
       "cssOnly": false,
       "registryDependencies": [
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Card",
         "Panel",
         "Tile"
       ],
-      "example": "import { Card, CardBody, CardLabel, CardTitle } from \"@noorddev/raster-react\";\n\n<Card>\n  <CardLabel>Case study</CardLabel>\n  <CardTitle>A quieter interface</CardTitle>\n  <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>\n</Card>",
+      "example": "import { Card, CardBody, CardLabel, CardTitle } from \"@noorddev/vlak-react\";\n\n<Card>\n  <CardLabel>Case study</CardLabel>\n  <CardTitle>A quieter interface</CardTitle>\n  <CardBody>Emphasis from weight and spacing, never from a hue.</CardBody>\n</Card>",
       "usage": {
         "use": [
           "A titled block of copy on the grid: label, title, body.",
           "CardInner for a padded field inside a Nest."
         ],
         "avoid": [
-          "Framed boxes with shadows; Raster cards have no outline.",
+          "Framed boxes with shadows; cards have no outline.",
           "Interactive tiles; wrap the title in a Link instead of making the card clickable."
         ]
       },

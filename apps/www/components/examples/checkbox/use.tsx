@@ -1,4 +1,4 @@
-import { Checkbox } from "@noorddev/raster-react";
+import { Checkbox } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

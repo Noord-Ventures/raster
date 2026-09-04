@@ -1,11 +1,11 @@
 # Collapsible
 
-Native details disclosure.
+Shows or hides one section with a native details disclosure.
 
 Category: content  
 Name: `collapsible`  
 Also known as: Collapsible, Disclosure, Details, Expander  
-Page: https://getraster.com/components/collapsible/
+Page: https://vlak.dev/components/collapsible/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/collapsible/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Collapsible } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Collapsible } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add collapsible
+npx @noorddev/vlak-cli add collapsible
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/collapsible.json
+npx shadcn add https://vlak.dev/r/collapsible.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <details class="rs-disclosure"><summary>Show the details<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-disclosure-body">Here they are.</div></details>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/collapsible.json
 ## Example
 
 ```tsx
-import { Collapsible } from "@noorddev/raster-react";
+import { Collapsible } from "@noorddev/vlak-react";
 
 <Collapsible title="Show the details">Here they are.</Collapsible>
 <Collapsible title="Advanced" open={open} onToggle={(e) => setOpen(e.currentTarget.open)}>…</Collapsible>

@@ -1,11 +1,11 @@
 # Form
 
-Stacked fields with one primary action at the end.
+Collects related inputs as stacked fields with one primary action at the end.
 
 Category: forms  
 Name: `form`  
 Also known as: Form, Form layout, Stacked form  
-Page: https://getraster.com/components/form/
+Page: https://vlak.dev/components/form/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/form/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Form } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Form } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add form
+npx @noorddev/vlak-cli add form
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/form.json
+npx shadcn add https://vlak.dev/r/form.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <form class="rs-form"><div class="rs-field"><span class="rs-field-label">Name</span><input class="rs-input rs-input-full" /></div><div class="rs-field"><span class="rs-field-label">E-mail</span><input class="rs-input rs-input-full" /></div><button class="rs-btn-primary">Send</button></form>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/form.json
 ## Example
 
 ```tsx
-import { Button, Field, FieldLabel, Form, Input } from "@noorddev/raster-react";
+import { Button, Field, FieldLabel, Form, Input } from "@noorddev/vlak-react";
 
 <Form onSubmit={(e) => { e.preventDefault(); save(); }}>
   <Field>

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 import { useMergedRefs } from "../merge-refs";
 import { Icon } from "./icon";
@@ -13,7 +13,7 @@ const styles = stylex.create({
     position: "relative",
     display: "inline-block",
     minWidth: "11.25rem",
-    backgroundColor: raster.paper,
+    backgroundColor: vlak.paper,
   },
   list: {
     maxHeight: "17.5rem",

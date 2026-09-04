@@ -1,4 +1,4 @@
-export { rasterTokens, type RasterTokens } from "./tokens";
+export { vlakTokens, type VlakTokens } from "./tokens";
 export {
   concentricInner,
   concentricInnerCss,
@@ -6,12 +6,12 @@ export {
   innerRadius,
   type InnerRadiusOptions,
 } from "./radius";
-export { rasterComponents, catalogComponents, type RasterComponent } from "./registry";
+export { vlakComponents, catalogComponents, type VlakComponent } from "./registry";
 export {
-  rasterCategories,
+  vlakCategories,
   validateRegistry,
-  type RasterCategory,
-  type RasterExport,
-  type RasterProp,
-  type RasterPropsJson,
+  type VlakCategory,
+  type VlakExport,
+  type VlakProp,
+  type VlakPropsJson,
 } from "./schema";

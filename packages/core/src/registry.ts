@@ -1,26 +1,26 @@
 /**
- * Raster component registry: the interface kit as data. This is the
+ * Vlak component registry: the interface kit as data. This is the
  * single source the docs site, the CLI, the generated registry JSON,
  * and the integrity tests all read from. Each entry names the CSS
  * classes involved, the source files that implement it, and carries a
  * minimal markup snippet in the house style.
  */
 
-import type { RasterComponent } from "./schema";
+import type { VlakComponent } from "./schema";
 
-export type { RasterComponent } from "./schema";
+export type { VlakComponent } from "./schema";
 
-export const rasterComponents: RasterComponent[] = [
+export const vlakComponents: VlakComponent[] = [
   {
     name: "button",
     title: "Button",
-    description: "Solid ink primary and 1px ghost. 40px tall; 36px small.",
+    description: "Triggers an action. Solid primary or 1px ghost; 40px tall, 36px small.",
     category: "actions",
     classes: ["rs-btn-primary", "rs-btn-ghost", "rs-btn-sm", "rs-btn-grouped", "rs-btn-grouped-ghost"],
     css: ["components/button.css"],
     react: "components/button.tsx",
     snippet: `<button class="rs-btn-primary">Primary action</button>\n<button class="rs-btn-ghost">Secondary</button>`,
-    example: `import { Button } from "@noorddev/raster-react";
+    example: `import { Button } from "@noorddev/vlak-react";
 
 <Button>Primary action</Button>
 <Button variant="ghost" size="sm">Secondary</Button>
@@ -43,14 +43,14 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "button-group",
     title: "Button group",
-    description: "Joined ghost buttons with a 1px rule between.",
+    description: "Keeps related actions together as joined ghost buttons with 1px dividers.",
     category: "actions",
     classes: ["rs-btn-group"],
     css: ["components/button-group.css"],
     react: "components/button-group.tsx",
     registryDependencies: ["button"],
     snippet: `<div class="rs-btn-group"><button class="rs-btn-ghost">Left</button><button class="rs-btn-ghost">Center</button><button class="rs-btn-ghost">Right</button></div>`,
-    example: `import { Button, ButtonGroup } from "@noorddev/raster-react";
+    example: `import { Button, ButtonGroup } from "@noorddev/vlak-react";
 
 <ButtonGroup aria-label="Alignment">
   <Button variant="ghost">Left</Button>
@@ -74,13 +74,13 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "link",
     title: "Text link",
-    description: "Text link with a hairline underline. In-copy variant is inset 1px.",
+    description: "Navigates to a page or resource. Hairline underline; in-copy variant is inset 1px.",
     category: "actions",
     classes: ["rs-link", "rs-link-underline"],
     css: ["components/link.css"],
     react: "components/link.tsx",
     snippet: `<div><a class="rs-link" href="#">A text link</a></div>\n<div><a class="rs-link-underline" href="#">An in-copy link</a></div>`,
-    example: `import { Link } from "@noorddev/raster-react";
+    example: `import { Link } from "@noorddev/vlak-react";
 
 <Link href="/docs">A text link</Link>
 <p>Read the <Link underline href="/docs">guide</Link> first.</p>`,
@@ -101,13 +101,13 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "input",
     title: "Input",
-    description: "Text field. 1px control border, 2px focus ring, 12px label above.",
+    description: "Collects one line of text. 1px border, 2px focus ring, 12px label above.",
     category: "forms",
     classes: ["rs-field", "rs-field-label", "rs-input", "rs-input-full", "rs-input-ok", "rs-input-invalid", "rs-feedback", "rs-feedback-ok", "rs-feedback-error", "rs-input-field", "rs-input-grouped", "rs-input-label"],
     css: ["components/input.css"],
     react: "components/input.tsx",
     snippet: `<div class="rs-field"><span class="rs-field-label">E-mail</span><input class="rs-input rs-input-full" /></div>`,
-    example: `import { Input } from "@noorddev/raster-react";
+    example: `import { Input } from "@noorddev/vlak-react";
 
 <Input label="E-mail" type="email" placeholder="you@example.com" hint="We never share it." />
 <Input label="Name" error="Name is required." />
@@ -130,13 +130,13 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "label",
     title: "Label",
-    description: "12px secondary label, set above the control.",
+    description: "Names a form control. 12px secondary text, set above the control.",
     category: "forms",
     classes: ["rs-label"],
     css: ["components/label.css"],
     react: "components/label.tsx",
     snippet: `<label class="rs-label" for="name">Name</label>`,
-    example: `import { Label } from "@noorddev/raster-react";
+    example: `import { Label } from "@noorddev/vlak-react";
 
 <Label htmlFor="name">Name</Label>
 <input id="name" className="rs-input rs-input-full" />`,
@@ -152,14 +152,14 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "field",
     title: "Field",
-    description: "Label, control, and a hint or error stacked in one cell.",
+    description: "Groups a label, control, and hint or error in one vertical field.",
     category: "forms",
     classes: ["rs-field", "rs-field-label", "rs-field-hint", "rs-field-error"],
     css: ["components/field.css"],
     react: "components/field.tsx",
     registryDependencies: ["input"],
     snippet: `<div class="rs-field"><label class="rs-field-label" for="invoice-name">Name</label><input class="rs-input rs-input-full" id="invoice-name" aria-describedby="invoice-name-hint" /><p class="rs-field-hint" id="invoice-name-hint">As it appears on the invoice.</p></div>`,
-    example: `import { Field, FieldError, FieldHint, FieldLabel, Input } from "@noorddev/raster-react";
+    example: `import { Field, FieldError, FieldHint, FieldLabel, Input } from "@noorddev/vlak-react";
 
 <Field>
   <FieldLabel htmlFor="name">Name</FieldLabel>
@@ -186,18 +186,18 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "input-group",
     title: "Input group",
-    description: "Addon and field share a 1px border.",
+    description: "Joins a text field with a prefix or suffix inside one 1px border.",
     category: "forms",
     classes: ["rs-input-group", "rs-input-addon", "rs-input-group-end"],
     css: ["components/input-group.css"],
     react: "components/input-group.tsx",
     registryDependencies: ["input"],
-    snippet: `<div class="rs-input-group"><span class="rs-input-addon">https://</span><input class="rs-input" placeholder="getraster.com" /></div>`,
-    example: `import { Input, InputAddon, InputGroup } from "@noorddev/raster-react";
+    snippet: `<div class="rs-input-group"><span class="rs-input-addon">https://</span><input class="rs-input" placeholder="vlak.dev" /></div>`,
+    example: `import { Input, InputAddon, InputGroup } from "@noorddev/vlak-react";
 
 <InputGroup>
   <InputAddon>https://</InputAddon>
-  <Input placeholder="getraster.com" aria-label="Site" />
+  <Input placeholder="vlak.dev" aria-label="Site" />
 </InputGroup>
 
 <InputGroup end>
@@ -217,13 +217,13 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "native-select",
     title: "Native select",
-    description: "Native select with Raster 1px chrome.",
+    description: "Presents browser-native options inside a 1px control border.",
     category: "forms",
     classes: ["rs-native-select", "rs-native-select-invalid", "rs-native-select-field", "rs-native-select-label"],
     css: ["components/native-select.css"],
     react: "components/native-select.tsx",
     snippet: `<select class="rs-native-select"><option>Alkmaar</option><option>Amsterdam</option><option>Rotterdam</option></select>`,
-    example: `import { NativeSelect } from "@noorddev/raster-react";
+    example: `import { NativeSelect } from "@noorddev/vlak-react";
 
 <NativeSelect label="City" defaultValue="alkmaar">
   <option value="alkmaar">Alkmaar</option>
@@ -248,14 +248,14 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "inline-form",
     title: "Inline form",
-    description: "One field with the submit action inside. The button appears after the input validates.",
+    description: "Pairs one field with an embedded submit action. The button appears after validation.",
     category: "patterns",
     classes: ["rs-inline-field", "rs-inline-input", "rs-inline-btn", "rs-reveal", "rs-reveal-in", "rs-subscribed", "rs-inline-field-btn"],
     css: ["components/inline-form.css"],
     react: "components/inline-form.tsx",
     registryDependencies: ["button"],
     snippet: `<div class="rs-inline-field"><input class="rs-inline-input" placeholder="Your e-mail" /><span class="rs-reveal rs-reveal-in"><button class="rs-btn-primary rs-inline-btn">Subscribe</button></span></div>`,
-    example: `import { InlineForm } from "@noorddev/raster-react";
+    example: `import { InlineForm } from "@noorddev/vlak-react";
 
 <InlineForm
   placeholder="Your e-mail"
@@ -281,14 +281,14 @@ export const rasterComponents: RasterComponent[] = [
   {
     name: "radio",
     title: "Radio",
-    description: "Single-choice control. Selected dot is ink.",
+    description: "Selects one option from a group. The selected dot fills with ink.",
     category: "forms",
     classes: ["rs-radio", "rs-radio-dot", "rs-radio-on", "rs-radio-fill"],
     css: ["components/radio.css"],
     react: "components/radio.tsx",
     snippet: `<label class="rs-radio"><span class="rs-radio-dot rs-radio-on"></span>Monthly</label>`,
     example: `import { useState } from "react";
-import { Radio, RadioGroup } from "@noorddev/raster-react";
+import { Radio, RadioGroup } from "@noorddev/vlak-react";
 
 const [plan, setPlan] = useState("monthly");
 
@@ -315,14 +315,14 @@ const [plan, setPlan] = useState("monthly");
   {
     name: "checkbox",
     title: "Checkbox",
-    description: "Multi-choice. 16px box, 3px radius, ink fill when checked.",
+    description: "Selects any number of options. 16px box, 3px radius, ink fill when checked.",
     category: "forms",
     classes: ["rs-choice", "rs-check", "rs-check-on"],
     css: ["components/checkbox.css"],
     react: "components/checkbox.tsx",
     snippet: `<label class="rs-choice"><span class="rs-check rs-check-on"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M3.5 8.5 L6.5 11.5 L12.5 4.5" vector-effect="non-scaling-stroke"/></svg></span>Brand</label>`,
     example: `import { useState } from "react";
-import { Checkbox } from "@noorddev/raster-react";
+import { Checkbox } from "@noorddev/vlak-react";
 
 const [opted, setOpted] = useState(false);
 
@@ -346,14 +346,14 @@ const [opted, setOpted] = useState(false);
   {
     name: "switch",
     title: "Switch",
-    description: "32×18 control. On fills ink; off is a 1px track. The thumb moves; the box stays 32px.",
+    description: "Turns one setting on or off. 32×18px; on fills with ink, off uses a 1px track.",
     category: "forms",
     classes: ["rs-switch", "rs-switch-on", "rs-switch-thumb", "rs-switch-thumb-on"],
     css: ["components/switch.css"],
     react: "components/switch.tsx",
     snippet: `<span class="rs-switch rs-switch-on"><i></i></span>`,
     example: `import { useState } from "react";
-import { Switch } from "@noorddev/raster-react";
+import { Switch } from "@noorddev/vlak-react";
 
 const [enabled, setEnabled] = useState(false);
 
@@ -376,14 +376,14 @@ const [enabled, setEnabled] = useState(false);
   {
     name: "slider",
     title: "Slider",
-    description: "2px track, ink fill, 14px thumb on a 24px hit area.",
+    description: "Selects one value from a range. 2px track, 14px thumb, 24px hit area.",
     category: "forms",
     classes: ["rs-slider", "rs-slider-fill", "rs-slider-thumb", "rs-slider-thumb-focused", "rs-slider-range"],
     css: ["components/slider.css"],
     react: "components/slider.tsx",
     snippet: `<div class="rs-slider"><span class="rs-slider-fill" style="width:62%"></span><span class="rs-slider-thumb" style="left:62%"></span></div>`,
     example: `import { useState } from "react";
-import { Slider } from "@noorddev/raster-react";
+import { Slider } from "@noorddev/vlak-react";
 
 const [volume, setVolume] = useState(62);
 
@@ -408,13 +408,13 @@ const [volume, setVolume] = useState(62);
   {
     name: "progress",
     title: "Progress",
-    description: "4px bar. Percentage is set in the label.",
+    description: "Shows completion for a known process. 4px bar; the label carries the percentage.",
     category: "feedback",
     classes: ["rs-progress", "rs-progress-head", "rs-progress-fill"],
     css: ["components/progress.css"],
     react: "components/progress.tsx",
     snippet: `<div class="rs-progress-head"><span id="upload-label">Uploading</span><span>40%</span></div><div class="rs-progress" role="progressbar" aria-labelledby="upload-label" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40"><span class="rs-progress-fill" style="width:40%"></span></div>`,
-    example: `import { Progress } from "@noorddev/raster-react";
+    example: `import { Progress } from "@noorddev/vlak-react";
 
 <Progress label="Uploading" value={40} />
 <Progress value={3} max={5} aria-label="Steps done" />`,
@@ -431,13 +431,13 @@ const [volume, setVolume] = useState(62);
   {
     name: "tabs",
     title: "Tabs",
-    description: "Text tabs in one row. Active tab has a 1px underline.",
+    description: "Switches between related panels. Text labels in one row; active tab has a 1px underline.",
     category: "navigation",
     classes: ["rs-tabs", "rs-tabs-vertical", "rs-tab", "rs-tab-active"],
     css: ["components/tabs.css"],
     react: "components/tabs.tsx",
     snippet: `<div class="rs-tabs"><span class="rs-tab rs-tab-active">Overview</span><span class="rs-tab">Activity</span><span class="rs-tab">Settings</span></div>`,
-    example: `import { Tab, TabList, TabPanel, Tabs } from "@noorddev/raster-react";
+    example: `import { Tab, TabList, TabPanel, Tabs } from "@noorddev/vlak-react";
 
 <Tabs defaultValue="overview">
   <TabList aria-label="Project">
@@ -470,15 +470,15 @@ const [volume, setVolume] = useState(62);
   {
     name: "breadcrumbs",
     title: "Breadcrumbs",
-    description: "Ancestor links, 40% slashes, current page at full ink.",
+    description: "Shows a page's place in a hierarchy. Ancestors are links; the current page is full ink.",
     category: "navigation",
     classes: ["rs-crumbs", "rs-crumbs-list", "rs-crumbs-item", "rs-crumbs-link", "rs-crumbs-sep", "rs-crumbs-here"],
     css: ["components/breadcrumbs.css"],
     react: "components/breadcrumbs.tsx",
-    snippet: `<p class="rs-crumbs"><a class="rs-crumbs-link" href="/">Studio</a><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Raster</span></p>`,
-    example: `import { Breadcrumbs } from "@noorddev/raster-react";
+    snippet: `<p class="rs-crumbs"><a class="rs-crumbs-link" href="/">Studio</a><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Vlak</span></p>`,
+    example: `import { Breadcrumbs } from "@noorddev/vlak-react";
 
-<Breadcrumbs items={[{ label: "Studio", href: "/studio" }, { label: "Raster", href: "/studio/raster" }, { label: "Components" }]} />`,
+<Breadcrumbs items={[{ label: "Studio", href: "/studio" }, { label: "Vlak", href: "/studio/vlak" }, { label: "Components" }]} />`,
     usage: {
       use: ["Showing where a page sits in a hierarchy three or more levels deep.", "The last item is the current page and carries no href."],
       avoid: ["Flat sites with one level.", "As the primary navigation; pair it with a nav."],
@@ -496,14 +496,14 @@ const [volume, setVolume] = useState(62);
   {
     name: "crumb-bar",
     title: "Crumb bar",
-    description: "Fixed 72px bar. Transparent at rest; scrolled state adds paper, a bottom 1px, and the trail.",
+    description: "Keeps the current path visible while scrolling. Fixed at 72px with a 1px bottom rule when active.",
     category: "navigation",
     classes: ["rs-crumb-bar", "rs-crumb-bar-scrolled", "rs-crumb-bar-inner", "rs-crumb-root", "rs-crumb-root-full", "rs-crumb-root-short", "rs-crumb-crumbs", "rs-crumb-crumbs-on", "rs-crumb-item", "rs-crumb-here", "rs-crumb-link", "rs-crumb-sep"],
     css: ["components/crumb-bar.css"],
     react: "components/crumb-bar.tsx",
     registryDependencies: ["breadcrumbs"],
-    snippet: `<nav class="rs-crumb-bar rs-crumb-bar-scrolled"><div class="rs-crumb-bar-inner"><a class="rs-crumb-root" href="/"><span class="rs-crumb-root-full">Raster</span><span class="rs-crumb-root-short">rs</span></a><p class="rs-crumbs"><span>Docs</span><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Components</span></p></div></nav>`,
-    example: `import { CrumbBar } from "@noorddev/raster-react";
+    snippet: `<nav class="rs-crumb-bar rs-crumb-bar-scrolled"><div class="rs-crumb-bar-inner"><a class="rs-crumb-root" href="/"><span class="rs-crumb-root-full">Vlak</span><span class="rs-crumb-root-short">rs</span></a><p class="rs-crumbs"><span>Docs</span><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Components</span></p></div></nav>`,
+    example: `import { CrumbBar } from "@noorddev/vlak-react";
 
 <CrumbBar
   root={{ label: "Renato Valdés Olmos", href: "/" }}
@@ -528,14 +528,14 @@ const [volume, setVolume] = useState(62);
   {
     name: "pagination",
     title: "Pagination",
-    description: "Square page controls. Current page is solid ink.",
+    description: "Moves through paginated content. Square controls; the current page fills with ink.",
     category: "navigation",
     classes: ["rs-pages", "rs-page", "rs-page-on", "rs-page-gap", "rs-pages-icon"],
     css: ["components/pagination.css"],
     react: "components/pagination.tsx",
     snippet: `<div class="rs-pages"><span class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.75 L5.5 8.25 L10.5 12.75" vector-effect="non-scaling-stroke"/></svg></span><span class="rs-page rs-page-on">1</span><span class="rs-page">2</span><span class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.75 L10.5 8.25 L5.5 12.75" vector-effect="non-scaling-stroke"/></svg></span></div>`,
     example: `import { useState } from "react";
-import { Pagination } from "@noorddev/raster-react";
+import { Pagination } from "@noorddev/vlak-react";
 
 const [page, setPage] = useState(1);
 
@@ -557,7 +557,7 @@ const [page, setPage] = useState(1);
   {
     name: "select",
     title: "Select",
-    description: "Closed trigger with a chevron. The menu overlays the page.",
+    description: "Selects one option from an overlay. The closed trigger carries a chevron.",
     category: "forms",
     classes: ["rs-select", "rs-select-list"],
     css: ["components/select.css"],
@@ -565,7 +565,7 @@ const [page, setPage] = useState(1);
         registryDependencies: ["dropdown-menu"],
     snippet: `<button class="rs-dropdown" role="combobox" aria-haspopup="listbox" aria-expanded="true"><span>Alkmaar</span></button>\n<div class="rs-menu rs-select-list" role="listbox"><div class="rs-menu-item rs-menu-item-active" role="option" aria-selected="true">Alkmaar</div><div class="rs-menu-item" role="option" aria-selected="false">Amsterdam</div></div>`,
     example: `import { useState } from "react";
-import { Select } from "@noorddev/raster-react";
+import { Select } from "@noorddev/vlak-react";
 
 const [city, setCity] = useState("alkmaar");
 
@@ -604,7 +604,7 @@ const [city, setCity] = useState("alkmaar");
   {
     name: "dialog",
     title: "Dialog",
-    description: "Modal with a title, body, and two equal actions.",
+    description: "Focuses attention on a modal task. Title, body, and two equal actions.",
     category: "surfaces",
     classes: ["rs-dialog", "rs-dialog-title", "rs-dialog-body", "rs-dialog-actions", "rs-dialog-close"],
     css: ["components/dialog.css"],
@@ -612,7 +612,7 @@ const [city, setCity] = useState("alkmaar");
     registryDependencies: ["button"],
     snippet: `<div class="rs-dialog" role="dialog" aria-labelledby="remove-title" aria-describedby="remove-body"><h2 class="rs-dialog-title" id="remove-title">Remove this item?</h2><p class="rs-dialog-body" id="remove-body">This can't be undone.</p><div class="rs-dialog-actions"><button class="rs-btn-ghost rs-btn-sm">Cancel</button><button class="rs-btn-primary rs-btn-sm">Remove</button></div></div>`,
     example: `import { useState } from "react";
-import { Button, Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/raster-react";
+import { Button, Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 
@@ -645,13 +645,13 @@ const [open, setOpen] = useState(false);
   {
     name: "badge",
     title: "Badge",
-    description: "11px badge. Outline, solid, and muted fills.",
+    description: "Labels status or category. 11px text with outline, solid, and muted variants.",
     category: "feedback",
     classes: ["rs-badge", "rs-badge-solid", "rs-badge-muted"],
     css: ["components/badge.css"],
     react: "components/badge.tsx",
     snippet: `<span class="rs-badge">Recommended</span><span class="rs-badge-solid">Delivered</span><span class="rs-badge-muted">In progress</span>`,
-    example: `import { Badge } from "@noorddev/raster-react";
+    example: `import { Badge } from "@noorddev/vlak-react";
 
 <Badge>Recommended</Badge>
 <Badge variant="solid">Delivered</Badge>
@@ -668,13 +668,13 @@ const [open, setOpen] = useState(false);
   {
     name: "chip",
     title: "Mono chip",
-    description: "Mono identifier with a 1px mixed border.",
+    description: "Marks a short technical identifier. Monospace text with a 1px mixed border.",
     category: "content",
     classes: ["rs-chip"],
     css: ["components/chip.css"],
     react: "components/chip.tsx",
     snippet: `<span class="rs-chip">/noord-brand</span>`,
-    example: `import { Chip } from "@noorddev/raster-react";
+    example: `import { Chip } from "@noorddev/vlak-react";
 
 <Chip>/noord-brand</Chip>`,
     usage: {
@@ -689,13 +689,13 @@ const [open, setOpen] = useState(false);
   {
     name: "card",
     title: "Card",
-    description: "Typography stack: label, title, and body. No outline.",
+    description: "Groups related content as a label, title, and body. No outline.",
     category: "surfaces",
     classes: ["rs-card", "rs-card-label", "rs-card-title", "rs-card-body", "rs-card-in"],
     css: ["components/card.css"],
     react: "components/card.tsx",
     snippet: `<div class="rs-card"><span class="rs-card-label">Case study</span><h3 class="rs-card-title">A quieter interface</h3><p class="rs-card-body">Emphasis from weight and spacing, never from a hue.</p></div>`,
-    example: `import { Card, CardBody, CardLabel, CardTitle } from "@noorddev/raster-react";
+    example: `import { Card, CardBody, CardLabel, CardTitle } from "@noorddev/vlak-react";
 
 <Card>
   <CardLabel>Case study</CardLabel>
@@ -704,7 +704,7 @@ const [open, setOpen] = useState(false);
 </Card>`,
     usage: {
       use: ["A titled block of copy on the grid: label, title, body.", "CardInner for a padded field inside a Nest."],
-      avoid: ["Framed boxes with shadows; Raster cards have no outline.", "Interactive tiles; wrap the title in a Link instead of making the card clickable."],
+      avoid: ["Framed boxes with shadows; cards have no outline.", "Interactive tiles; wrap the title in a Link instead of making the card clickable."],
     },
     a11y: [
       "CardTitle renders an <h3>; adjust the heading level with a wrapper when it breaks the outline.",
@@ -715,7 +715,7 @@ const [open, setOpen] = useState(false);
   {
     name: "concentric-radius",
     title: "Concentric radius",
-    description: "Nested corners share a position. Inner radius = outer − inset, clamped at 0.",
+    description: "Calculates aligned nested corners. Inner radius = outer − inset, clamped at 0.",
     category: "surfaces",
     classes: ["rs-nest", "rs-nest-in"],
     css: ["components/concentric-radius.css"],
@@ -723,7 +723,7 @@ const [open, setOpen] = useState(false);
     registryDependencies: ["button"],
     hidden: true,
     snippet: `<div class="rs-nest" style="--rs-out:28px;--rs-gap:16px;width:184px"><div class="rs-nest-in"><button class="rs-btn-primary rs-btn-sm">Save</button></div></div>`,
-    example: `import { Button, Nest, NestInner, innerRadius } from "@noorddev/raster-react";
+    example: `import { Button, Nest, NestInner, innerRadius } from "@noorddev/vlak-react";
 
 <Nest radius={28} pad={16}>
   <NestInner>
@@ -734,7 +734,7 @@ const [open, setOpen] = useState(false);
 innerRadius(28, 16); // 12`,
     usage: {
       use: ["Nested rounded boxes whose corners must share a centre.", "innerRadius(outer, pad) when you set radii by hand."],
-      avoid: ["Square chrome; Raster surfaces are 0 or 4px and rarely nest."],
+      avoid: ["Square chrome; surfaces are 0 or 4px and rarely nest."],
     },
     a11y: [
       "Layout only. Nest sets --rs-out, --rs-gap, and --rs-in on a <div>.",
@@ -744,13 +744,13 @@ innerRadius(28, 16); // 12`,
   {
     name: "stepper",
     title: "Stepper",
-    description: "Numbered dots joined by 1px lines. Done fills ink; active is outlined.",
+    description: "Shows progress through ordered steps. 1px connectors; done fills with ink, active is outlined.",
     category: "navigation",
     classes: ["rs-steps", "rs-step", "rs-step-dot", "rs-step-done", "rs-step-active", "rs-step-name", "rs-step-sub", "rs-step-line"],
     css: ["components/stepper.css"],
     react: "components/stepper.tsx",
     snippet: `<div class="rs-steps"><div class="rs-step"><span class="rs-step-dot rs-step-done">1</span><span class="rs-step-line"></span><span class="rs-step-name">Brief</span></div><div class="rs-step"><span class="rs-step-dot rs-step-active">2</span><span class="rs-step-name">Design</span></div></div>`,
-    example: `import { Stepper } from "@noorddev/raster-react";
+    example: `import { Stepper } from "@noorddev/vlak-react";
 
 <Stepper steps={[{ name: "Brief" }, { name: "Design", sub: "In review" }, { name: "Build" }]} current={1} />`,
     usage: {
@@ -766,13 +766,13 @@ innerRadius(28, 16); // 12`,
   {
     name: "table",
     title: "Table",
-    description: "Open grid, 1px row rules, last column right-aligned. Total rows use 2px rules.",
+    description: "Presents structured values in rows and columns. 1px row rules; total rows use 2px rules.",
     category: "content",
     classes: ["rs-table", "rs-total-row", "rs-table-row", "rs-table-td", "rs-table-th", "rs-table-total-cell"],
     css: ["components/table.css"],
     react: "components/table.tsx",
     snippet: `<table class="rs-table"><thead><tr><th>Phase</th><th>Weeks</th></tr></thead><tbody><tr><td>Strategy</td><td>2</td></tr><tr><td>Identity</td><td>4</td></tr></tbody></table>`,
-    example: `import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/raster-react";
+    example: `import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/vlak-react";
 
 <Table>
   <TableHead>
@@ -805,7 +805,7 @@ innerRadius(28, 16); // 12`,
   {
     name: "icons",
     title: "Icons",
-    description: "16 viewBox marks, 1px currentColor, butt/miter. Shipped in the React package.",
+    description: "Provides interface marks on a 16px viewBox. 1px currentColor strokes with butt caps and miter joins.",
     category: "icons",
     classes: [
       "rs-icons",
@@ -821,8 +821,8 @@ innerRadius(28, 16); // 12`,
     ],
     css: ["components/icons.css"],
     react: "components/icon.tsx",
-    snippet: `<div class="rs-icons"><svg class="rs-icon" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M6.5 2.5 H13.5 V9.5" vector-effect="non-scaling-stroke"/><rect x="2.5" y="6.5" width="7" height="7" vector-effect="non-scaling-stroke"/></svg><svg class="rs-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M6.5 2.5 H13.5 V9.5" vector-effect="non-scaling-stroke"/><rect x="2.5" y="6.5" width="7" height="7" vector-effect="non-scaling-stroke"/></svg></div>`,
-    example: `import { Icon, IconCatalog, iconNames } from "@noorddev/raster-react";
+    snippet: `<div class="rs-icons"><svg class="rs-icon" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3 H13 V10.5" vector-effect="non-scaling-stroke"/><rect x="3" y="5.5" width="7.5" height="7.5" vector-effect="non-scaling-stroke"/></svg><svg class="rs-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3 H13 V10.5" vector-effect="non-scaling-stroke"/><rect x="3" y="5.5" width="7.5" height="7.5" vector-effect="non-scaling-stroke"/></svg></div>`,
+    example: `import { Icon, IconCatalog, iconNames } from "@noorddev/vlak-react";
 
 <Icon name="search" size={12} />
 <Icon name="search" size={16} />
@@ -845,16 +845,16 @@ iconNames; // every drawn mark
   {
     name: "accordion",
     title: "Accordion",
-    description: "Native details rows on 1px rules. Shared name keeps one item open.",
+    description: "Reveals related sections on demand. Native details rows with 1px rules.",
     category: "content",
     classes: ["rs-acc", "rs-acc-item", "rs-acc-chevron", "rs-acc-body", "rs-acc-chevron-open", "rs-acc-summary"],
     css: ["components/accordion.css"],
     react: "components/accordion.tsx",
-    snippet: `<div class="rs-acc"><details class="rs-acc-item" name="faq" open><summary>What is Raster?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">A monochrome, CSS-first design system.</div></details><details class="rs-acc-item" name="faq"><summary>Is it dependency-free?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">Yes. Native elements do the work.</div></details></div>`,
-    example: `import { Accordion, AccordionItem } from "@noorddev/raster-react";
+    snippet: `<div class="rs-acc"><details class="rs-acc-item" name="faq" open><summary>What is Vlak?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">A monochrome, CSS-first design system.</div></details><details class="rs-acc-item" name="faq"><summary>Is it dependency-free?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">Yes. Native elements do the work.</div></details></div>`,
+    example: `import { Accordion, AccordionItem } from "@noorddev/vlak-react";
 
 <Accordion exclusive>
-  <AccordionItem title="What is Raster?" defaultOpen>
+  <AccordionItem title="What is Vlak?" defaultOpen>
     A monochrome, CSS-first design system.
   </AccordionItem>
   <AccordionItem title="Is it dependency-free?">
@@ -878,13 +878,13 @@ iconNames; // every drawn mark
   {
     name: "alert",
     title: "Alert",
-    description: "1px frame with an icon. Solid ink variant for critical.",
+    description: "Calls attention to contextual information. 1px frame and icon; critical variant fills with ink.",
     category: "feedback",
     classes: ["rs-alert", "rs-alert-title", "rs-alert-body", "rs-alert-solid", "rs-alert-body-solid", "rs-alert-icon", "rs-alert-icon-solid", "rs-alert-title-solid"],
     css: ["components/alert.css"],
     react: "components/alert.tsx",
     snippet: `<div class="rs-alert" role="status"><div><span class="rs-alert-title">Heads up</span><p class="rs-alert-body">Your workspace syncs every hour.</p></div></div>`,
-    example: `import { Alert } from "@noorddev/raster-react";
+    example: `import { Alert } from "@noorddev/vlak-react";
 
 <Alert title="Heads up">Your workspace syncs every hour.</Alert>
 <Alert variant="solid" title="Payment failed" live="assertive">Update your card to keep publishing.</Alert>`,
@@ -901,7 +901,7 @@ iconNames; // every drawn mark
   {
     name: "alert-dialog",
     title: "Alert dialog",
-    description: "Native dialog that must be answered. Escape and light dismiss are off.",
+    description: "Requires a decision before work continues. Native dialog with Escape and light dismiss disabled.",
     category: "surfaces",
     classes: ["rs-alert-dialog"],
     css: ["components/alert-dialog.css"],
@@ -909,7 +909,7 @@ iconNames; // every drawn mark
     registryDependencies: ["dialog", "button"],
     snippet: `<dialog class="rs-dialog" role="alertdialog" closedby="none" aria-labelledby="delete-title" aria-describedby="delete-body" open><h2 class="rs-dialog-title" id="delete-title">Delete this workspace?</h2><p class="rs-dialog-body" id="delete-body">All projects go with it.</p><div class="rs-dialog-actions"><button class="rs-btn-ghost rs-btn-sm">Cancel</button><button class="rs-btn-primary rs-btn-sm">Delete</button></div></dialog>`,
     example: `import { useState } from "react";
-import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from "@noorddev/raster-react";
+import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 
@@ -939,13 +939,13 @@ const [open, setOpen] = useState(false);
   {
     name: "avatar",
     title: "Avatar",
-    description: "32px circle of initials, or a covering image. Broken images fall back. Rows overlap 8px.",
+    description: "Identifies a person or group. 32px image or initials; broken images fall back automatically.",
     category: "content",
     classes: ["rs-avatar", "rs-avatar-sm", "rs-avatar-lg", "rs-avatar-row", "rs-avatar-image", "rs-avatar-in-row"],
     css: ["components/avatar.css"],
     react: "components/avatar.tsx",
     snippet: `<div class="rs-avatar-row"><span class="rs-avatar">RV</span><span class="rs-avatar">NO</span><span class="rs-avatar">+3</span></div>`,
-    example: `import { Avatar, AvatarRow } from "@noorddev/raster-react";
+    example: `import { Avatar, AvatarRow } from "@noorddev/vlak-react";
 
 <Avatar src="/renn.jpg" name="Renn" initials="RV" size="lg" />
 <AvatarRow>
@@ -967,13 +967,13 @@ const [open, setOpen] = useState(false);
   {
     name: "item",
     title: "Item",
-    description: "Flush row: title and description on the left, meta on the right.",
+    description: "Presents one list entry. Title and description sit left; metadata sits right.",
     category: "content",
     classes: ["rs-item", "rs-item-title", "rs-item-desc", "rs-item-meta"],
     css: ["components/item.css"],
     react: "components/item.tsx",
     snippet: `<div class="rs-item"><div><p class="rs-item-title">Alkmaar</p><p class="rs-item-desc">The studio city.</p></div><span class="rs-item-meta">NL</span></div>`,
-    example: `import { Item } from "@noorddev/raster-react";
+    example: `import { Item } from "@noorddev/vlak-react";
 
 <Item title="Alkmaar" description="The studio city." meta="NL" />`,
     usage: {
@@ -988,14 +988,14 @@ const [open, setOpen] = useState(false);
   {
     name: "textarea",
     title: "Textarea",
-    description: "Multiline field, vertical resize only.",
+    description: "Collects multiple lines of text. Resizes vertically only.",
     category: "forms",
     classes: ["rs-textarea", "rs-textarea-invalid", "rs-textarea-feedback", "rs-textarea-field", "rs-textarea-label"],
     css: ["components/textarea.css"],
     react: "components/textarea.tsx",
     registryDependencies: ["input"],
     snippet: `<div class="rs-field"><span class="rs-field-label">Notes</span><textarea class="rs-textarea" placeholder="What should we know?"></textarea></div>`,
-    example: `import { Textarea } from "@noorddev/raster-react";
+    example: `import { Textarea } from "@noorddev/vlak-react";
 
 <Textarea label="Notes" placeholder="What should we know?" rows={4} />`,
     usage: {
@@ -1014,13 +1014,13 @@ const [open, setOpen] = useState(false);
   {
     name: "separator",
     title: "Separator",
-    description: "1px rule, horizontal or vertical.",
+    description: "Separates related regions with a 1px horizontal or vertical rule.",
     category: "content",
     classes: ["rs-sep", "rs-sep-v"],
     css: ["components/separator.css"],
     react: "components/separator.tsx",
     snippet: `<hr class="rs-sep" />`,
-    example: `import { Separator } from "@noorddev/raster-react";
+    example: `import { Separator } from "@noorddev/vlak-react";
 
 <Separator />
 <Separator orientation="vertical" style={{ height: 16 }} />`,
@@ -1036,13 +1036,13 @@ const [open, setOpen] = useState(false);
   {
     name: "skeleton",
     title: "Skeleton",
-    description: "Divider-tone pulse. Animation stops when prefers-reduced-motion is on.",
+    description: "Reserves space while content loads. Divider-tone pulse that respects reduced motion.",
     category: "feedback",
     classes: ["rs-skeleton"],
     css: ["components/skeleton.css"],
     react: "components/skeleton.tsx",
     snippet: `<span class="rs-skeleton" style="width:180px;height:14px"></span>`,
-    example: `import { Skeleton } from "@noorddev/raster-react";
+    example: `import { Skeleton } from "@noorddev/vlak-react";
 
 <Skeleton width="60%" />
 <Skeleton width={240} height={14} />`,
@@ -1059,14 +1059,14 @@ const [open, setOpen] = useState(false);
   {
     name: "empty",
     title: "Empty",
-    description: "Placeholder cell with a title, a sentence, and an optional action.",
+    description: "Explains an empty state with a title, one sentence, and an optional action.",
     category: "feedback",
     classes: ["rs-empty", "rs-empty-title", "rs-empty-body", "rs-empty-action"],
     css: ["components/empty.css"],
     react: "components/empty.tsx",
     registryDependencies: ["button"],
     snippet: `<div class="rs-empty"><p class="rs-empty-title">No projects yet</p><p class="rs-empty-body">Start one. The grid is empty on purpose.</p><div class="rs-empty-action"><button class="rs-btn-ghost rs-btn-sm">New project</button></div></div>`,
-    example: `import { Button, Empty } from "@noorddev/raster-react";
+    example: `import { Button, Empty } from "@noorddev/vlak-react";
 
 <Empty title="No projects yet" action={<Button variant="ghost" size="sm">New project</Button>}>
   Start one. The grid is empty on purpose.
@@ -1083,13 +1083,13 @@ const [open, setOpen] = useState(false);
   {
     name: "spinner",
     title: "Spinner",
-    description: "16px 1px ring. Animation stops when prefers-reduced-motion is on.",
+    description: "Signals indeterminate progress. 16px ring with a 1px stroke; respects reduced motion.",
     category: "feedback",
     classes: ["rs-spinner", "rs-spinner-ring"],
     css: ["components/spinner.css"],
     react: "components/spinner.tsx",
     snippet: `<span class="rs-spinner" role="status" aria-label="Loading"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="28 13" vector-effect="non-scaling-stroke"/></svg></span>`,
-    example: `import { Spinner } from "@noorddev/raster-react";
+    example: `import { Spinner } from "@noorddev/vlak-react";
 
 <Spinner label="Loading" />`,
     usage: {
@@ -1105,14 +1105,14 @@ const [open, setOpen] = useState(false);
   {
     name: "tooltip",
     title: "Tooltip",
-    description: "Label on hover and keyboard focus; a real element that describes its trigger.",
+    description: "Explains a control on hover or keyboard focus. A real element describes its trigger.",
     category: "feedback",
     classes: ["rs-tip", "rs-tip-bubble"],
     css: ["components/tooltip.css"],
     react: "components/tooltip.tsx",
     registryDependencies: ["button"],
     snippet: `<span class="rs-tip"><button class="rs-btn-ghost rs-btn-sm" aria-describedby="copy-tip">Copy</button><span class="rs-tip-bubble" role="tooltip" id="copy-tip">Copy to clipboard</span></span>`,
-    example: `import { Button, Tooltip } from "@noorddev/raster-react";
+    example: `import { Button, Tooltip } from "@noorddev/vlak-react";
 
 <Tooltip tip="Copy to clipboard">
   <Button variant="ghost" size="sm" aria-label="Copy">Copy</Button>
@@ -1135,13 +1135,13 @@ const [open, setOpen] = useState(false);
   {
     name: "toast",
     title: "Toast",
-    description: "Bottom-right status, aria-live polite. Stays four seconds or longer for longer text; pauses on hover; closes on demand.",
+    description: "Reports a brief status in the bottom-right corner. Polite live region; pauses on hover and closes on demand.",
     category: "feedback",
     classes: ["rs-toasts", "rs-toast", "rs-toast-title", "rs-toast-body", "rs-toast-close"],
     css: ["components/toast.css"],
     react: "components/toast.tsx",
     snippet: `<div class="rs-toasts" role="status" aria-live="polite"><div class="rs-toast"><div><span class="rs-toast-title">Saved</span><p class="rs-toast-body">Your changes are live.</p></div><button class="rs-toast-close" type="button" aria-label="Dismiss">&times;</button></div></div>`,
-    example: `import { Toaster, toast } from "@noorddev/raster-react";
+    example: `import { Toaster, toast } from "@noorddev/vlak-react";
 
 // once, in your layout
 <Toaster duration={4000} closeLabel="Dismiss" />
@@ -1166,14 +1166,14 @@ toast("Saved", { description: "Your changes are live." });`,
   {
     name: "dropdown-menu",
     title: "Dropdown menu",
-    description: "Action menu with menuitem roles and arrow-key movement.",
+    description: "Presents a compact list of actions. Menu roles and arrow-key navigation are built in.",
     category: "actions",
     classes: ["rs-menu", "rs-dropdown", "rs-menu-item", "rs-menu-item-active", "rs-menu-item-disabled", "rs-menu-sep"],
     css: ["components/dropdown-menu.css"],
     react: "components/dropdown-menu.tsx",
     registryDependencies: ["button"],
     snippet: `<div class="rs-menu" role="menu"><button class="rs-menu-item" role="menuitem">Rename</button><button class="rs-menu-item" role="menuitem">Duplicate</button><hr class="rs-menu-sep" /><button class="rs-menu-item" role="menuitem">Delete</button></div>`,
-    example: `import { DropdownMenu } from "@noorddev/raster-react";
+    example: `import { DropdownMenu } from "@noorddev/vlak-react";
 
 <DropdownMenu
   label="Actions"
@@ -1209,14 +1209,14 @@ toast("Saved", { description: "Your changes are live." });`,
   {
     name: "toggle",
     title: "Toggle",
-    description: "Pressable control. Pressed fills ink. State is aria-pressed.",
+    description: "Turns one persistent option on or off. Pressed fills with ink and exposes aria-pressed.",
     category: "actions",
     classes: ["rs-toggle", "rs-toggle-group", "rs-toggle-grouped-on", "rs-toggle-pressed"],
     css: ["components/toggle.css"],
     react: "components/toggle.tsx",
     snippet: `<div class="rs-toggle-group"><button class="rs-toggle" aria-pressed="true">Left</button><button class="rs-toggle" aria-pressed="false">Center</button><button class="rs-toggle" aria-pressed="false">Right</button></div>`,
     example: `import { useState } from "react";
-import { Toggle } from "@noorddev/raster-react";
+import { Toggle } from "@noorddev/vlak-react";
 
 const [bold, setBold] = useState(false);
 
@@ -1238,7 +1238,7 @@ const [bold, setBold] = useState(false);
   {
     name: "toggle-group",
     title: "Toggle group",
-    description: "Joined toggles, one pressed, 1px between.",
+    description: "Selects one option from joined toggles. The active option fills with ink.",
     category: "actions",
     classes: ["rs-toggle-group"],
     css: ["components/toggle.css"],
@@ -1246,7 +1246,7 @@ const [bold, setBold] = useState(false);
     registryDependencies: ["toggle"],
     snippet: `<div class="rs-toggle-group"><button class="rs-toggle" aria-pressed="true">Left</button><button class="rs-toggle" aria-pressed="false">Center</button><button class="rs-toggle" aria-pressed="false">Right</button></div>`,
     example: `import { useState } from "react";
-import { ToggleGroup } from "@noorddev/raster-react";
+import { ToggleGroup } from "@noorddev/vlak-react";
 
 const [align, setAlign] = useState("left");
 
@@ -1277,14 +1277,14 @@ const [align, setAlign] = useState("left");
   {
     name: "popover",
     title: "Popover",
-    description: "Native Popover API. Top layer, light dismiss.",
+    description: "Places non-modal content above the page with the native Popover API and light dismiss.",
     category: "surfaces",
     classes: ["rs-popover", "rs-popover-title", "rs-popover-body"],
     css: ["components/popover.css"],
     react: "components/popover.tsx",
     registryDependencies: ["button"],
     snippet: `<button class="rs-btn-ghost rs-btn-sm" popovertarget="info">Details</button>\n<div id="info" popover="auto" class="rs-popover"><span class="rs-popover-title">Module grid</span><p class="rs-popover-body">204px modules: a 184px column and a 20px gutter.</p></div>`,
-    example: `import { Popover, PopoverBody, PopoverTitle } from "@noorddev/raster-react";
+    example: `import { Popover, PopoverBody, PopoverTitle } from "@noorddev/vlak-react";
 
 <Popover trigger="Details" align="start" aria-label="Module grid">
   <PopoverTitle>Module grid</PopoverTitle>
@@ -1309,7 +1309,7 @@ const [align, setAlign] = useState("left");
   {
     name: "sheet",
     title: "Sheet",
-    description: "Native dialog docked to a screen edge, with the platform focus trap and backdrop.",
+    description: "Opens a focused task from a screen edge. Native dialog with platform focus handling and backdrop.",
     category: "surfaces",
     classes: ["rs-sheet", "rs-sheet-left", "rs-sheet-title", "rs-sheet-body", "rs-sheet-close"],
     css: ["components/sheet.css"],
@@ -1317,7 +1317,7 @@ const [align, setAlign] = useState("left");
     registryDependencies: ["dialog"],
     snippet: `<dialog class="rs-sheet" aria-labelledby="filters-title" open><button class="rs-sheet-close" type="button" aria-label="Close">&times;</button><h2 class="rs-sheet-title" id="filters-title">Filters</h2><p class="rs-sheet-body">Everything narrows from here.</p></dialog>`,
     example: `import { useState } from "react";
-import { Button, Sheet, SheetBody, SheetTitle } from "@noorddev/raster-react";
+import { Button, Sheet, SheetBody, SheetTitle } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 
@@ -1344,7 +1344,7 @@ const [open, setOpen] = useState(false);
   {
     name: "drawer",
     title: "Drawer",
-    description: "Native dialog from the bottom edge, with the platform focus trap and backdrop.",
+    description: "Opens a focused task from the bottom edge. Native dialog with platform focus handling and backdrop.",
     category: "surfaces",
     classes: ["rs-drawer", "rs-drawer-title", "rs-drawer-body", "rs-drawer-close"],
     css: ["components/drawer.css"],
@@ -1352,7 +1352,7 @@ const [open, setOpen] = useState(false);
     registryDependencies: ["dialog"],
     snippet: `<dialog class="rs-drawer" aria-labelledby="notes-title" open><button class="rs-drawer-close" type="button" aria-label="Close">&times;</button><h2 class="rs-drawer-title" id="notes-title">Notes</h2><p class="rs-drawer-body">A bottom panel. Escape closes it.</p></dialog>`,
     example: `import { useState } from "react";
-import { Button, Drawer, DrawerBody, DrawerTitle } from "@noorddev/raster-react";
+import { Button, Drawer, DrawerBody, DrawerTitle } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 
@@ -1379,13 +1379,13 @@ const [open, setOpen] = useState(false);
   {
     name: "scroll-area",
     title: "Scroll area",
-    description: "Overflow box with the scrollbar hidden and 20px feathers at the ends.",
+    description: "Contains overflow without visible scrollbars. 20px edge feathers signal more content.",
     category: "content",
     classes: ["rs-scroll"],
     css: ["components/scroll-area.css"],
     react: "components/scroll-area.tsx",
     snippet: `<div class="rs-scroll" style="max-height:140px" tabindex="0"><p>Alkmaar</p><p>Amsterdam</p><p>Delft</p><p>Eindhoven</p><p>Groningen</p><p>Haarlem</p><p>Rotterdam</p><p>Utrecht</p></div>`,
-    example: `import { ScrollArea } from "@noorddev/raster-react";
+    example: `import { ScrollArea } from "@noorddev/vlak-react";
 
 <ScrollArea maxHeight={240} aria-label="Cities">
   {cities.map((city) => <p key={city}>{city}</p>)}
@@ -1406,13 +1406,13 @@ const [open, setOpen] = useState(false);
   {
     name: "chart",
     title: "Charts",
-    description: "Line on a 204 field. 1px grid, ink marks. Series use solid, dashed, gray, or dotted. One optional spot color.",
+    description: "Plots one or more lines on a 204px field. 1px grid, textured series, and one optional spot color.",
     category: "charts",
     classes: ["rs-chart", "rs-chart-canvas", "rs-chart-line", "rs-chart-grid", "rs-chart-axis", "rs-chart-bar", "rs-spark", "rs-chart-legend-svg", "rs-chart-svg"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
     snippet: `<div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><line class="rs-chart-grid" x1="0" x2="240" y1="56" y2="56"/><path class="rs-chart-line" d="M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16"/></svg></div>`,
-    example: `import { LineChart, Sparkline } from "@noorddev/raster-react";
+    example: `import { LineChart, Sparkline } from "@noorddev/vlak-react";
 
 <LineChart
   height={204}
@@ -1449,14 +1449,14 @@ const [open, setOpen] = useState(false);
   {
     name: "bar-chart",
     title: "Bar chart",
-    description: "Vertical or horizontal. Thin ink bars, square ends. Stacks when series share a field.",
+    description: "Compares values with vertical or horizontal bars. Thin ink marks, square ends, optional stacks.",
     category: "charts",
     classes: ["rs-chart-bar"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
     registryDependencies: ["chart"],
     snippet: `<div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><line class="rs-chart-grid" x1="0" x2="240" y1="56" y2="56"/><rect class="rs-chart-bar" x="20" y="18" width="8" height="38"/><rect class="rs-chart-bar" x="48" y="10" width="8" height="46"/><rect class="rs-chart-bar" x="76" y="24" width="8" height="32"/></svg></div>`,
-    example: `import { BarChart } from "@noorddev/raster-react";
+    example: `import { BarChart } from "@noorddev/vlak-react";
 
 <BarChart
   height={204}
@@ -1495,14 +1495,14 @@ const [open, setOpen] = useState(false);
   {
     name: "area-chart",
     title: "Area chart",
-    description: "Filled field under the first series. 1px grid, textured series, one optional spot color.",
+    description: "Shows change and magnitude with a filled first series. 1px grid and one optional spot color.",
     category: "charts",
     classes: ["rs-chart-area"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
     registryDependencies: ["chart"],
     snippet: `<div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><path class="rs-chart-area" d="M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16 L240 56 L0 56 Z"/><path class="rs-chart-line" d="M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16"/></svg></div>`,
-    example: `import { AreaChart } from "@noorddev/raster-react";
+    example: `import { AreaChart } from "@noorddev/vlak-react";
 
 <AreaChart
   height={204}
@@ -1529,14 +1529,14 @@ const [open, setOpen] = useState(false);
   {
     name: "scatter-chart",
     title: "Scatter chart",
-    description: "Marks on a 1px grid. Ink, or one optional spot color.",
+    description: "Shows the relationship between two measures. Marks sit on a 1px grid in ink or one spot color.",
     category: "charts",
     classes: ["rs-chart-mark"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
     registryDependencies: ["chart"],
     snippet: `<div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><line class="rs-chart-grid" x1="0" x2="240" y1="56" y2="56"/><circle class="rs-chart-mark" cx="36" cy="40" r="2"/><circle class="rs-chart-mark" cx="88" cy="22" r="2"/><circle class="rs-chart-mark" cx="140" cy="30" r="2"/><circle class="rs-chart-mark" cx="196" cy="14" r="2"/></svg></div>`,
-    example: `import { ScatterChart } from "@noorddev/raster-react";
+    example: `import { ScatterChart } from "@noorddev/vlak-react";
 
 <ScatterChart
   height={204}
@@ -1563,14 +1563,14 @@ const [open, setOpen] = useState(false);
   {
     name: "donut",
     title: "Donut or share",
-    description: "Ring against its total, or a flush share strip. 1px stroke.",
+    description: "Shows one part of a whole as a ring or flush share strip. 1px stroke.",
     category: "charts",
     classes: ["rs-chart-donut"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
     registryDependencies: ["chart"],
     snippet: `<div class="rs-chart"><svg class="rs-chart-donut" viewBox="0 0 96 96" width="96" height="96"><circle cx="48" cy="48" r="36" fill="none" stroke="currentColor" stroke-width="1"/></svg></div>`,
-    example: `import { Donut, Share } from "@noorddev/raster-react";
+    example: `import { Donut, Share } from "@noorddev/vlak-react";
 
 <Donut value={72} max={100} size={184} label="printed" />
 <Share slices={[{ label: "Sheet", value: 72 }, { label: "Proof", value: 18 }, { label: "Waste", value: 10 }]} unit="%" />`,
@@ -1587,14 +1587,14 @@ const [open, setOpen] = useState(false);
   {
     name: "histogram",
     title: "Histogram",
-    description: "Histogram. Adjacent bins, 1px between.",
+    description: "Shows a distribution in adjacent bins with 1px gaps.",
     category: "charts",
     classes: ["rs-chart-hist"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
     registryDependencies: ["chart"],
     snippet: `<div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><rect class="rs-chart-hist" x="8" y="36" width="36" height="20"/><rect class="rs-chart-hist" x="45" y="20" width="36" height="36"/><rect class="rs-chart-hist" x="82" y="8" width="36" height="48"/><rect class="rs-chart-hist" x="119" y="24" width="36" height="32"/></svg></div>`,
-    example: `import { Histogram } from "@noorddev/raster-react";
+    example: `import { Histogram } from "@noorddev/vlak-react";
 
 <Histogram
   height={204}
@@ -1623,14 +1623,14 @@ const [open, setOpen] = useState(false);
   {
     name: "small-multiples",
     title: "Small multiples",
-    description: "Repeated charts on the same axes. One 184 column per panel.",
+    description: "Compares repeated charts on shared axes. Each panel occupies one 184px column.",
     category: "charts",
     classes: ["rs-chart-multi"],
     css: ["components/chart.css"],
     react: "components/chart.tsx",
     registryDependencies: ["chart"],
     snippet: `<div class="rs-chart-multi"><div class="rs-chart"><svg viewBox="0 0 184 64" width="184" height="64"><path class="rs-chart-line" d="M0 40 L46 28 L92 34 L138 16 L184 22"/></svg></div><div class="rs-chart"><svg viewBox="0 0 184 64" width="184" height="64"><path class="rs-chart-line" d="M0 30 L46 36 L92 22 L138 28 L184 18"/></svg></div></div>`,
-    example: `import { SmallMultiples } from "@noorddev/raster-react";
+    example: `import { SmallMultiples } from "@noorddev/vlak-react";
 
 <SmallMultiples
   height={136}
@@ -1656,14 +1656,14 @@ const [open, setOpen] = useState(false);
   {
     name: "collapsible",
     title: "Collapsible",
-    description: "Native details disclosure.",
+    description: "Shows or hides one section with a native details disclosure.",
     category: "content",
     classes: ["rs-disclosure", "rs-disclosure-body", "rs-disclosure-chevron", "rs-disclosure-chevron-open", "rs-disclosure-summary"],
     css: ["components/collapsible.css"],
     react: "components/collapsible.tsx",
     registryDependencies: ["accordion"],
     snippet: `<details class="rs-disclosure"><summary>Show the details<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-disclosure-body">Here they are.</div></details>`,
-    example: `import { Collapsible } from "@noorddev/raster-react";
+    example: `import { Collapsible } from "@noorddev/vlak-react";
 
 <Collapsible title="Show the details">Here they are.</Collapsible>
 <Collapsible title="Advanced" open={open} onToggle={(e) => setOpen(e.currentTarget.open)}>…</Collapsible>`,
@@ -1683,13 +1683,13 @@ const [open, setOpen] = useState(false);
   {
     name: "hover-card",
     title: "Hover card",
-    description: "Preview panel on hover and keyboard focus.",
+    description: "Previews linked context on hover or keyboard focus.",
     category: "surfaces",
     classes: ["rs-hover-card", "rs-hover-card-panel", "rs-hover-card-open"],
     css: ["components/hover-card.css"],
     react: "components/hover-card.tsx",
     snippet: `<span class="rs-hover-card"><span tabindex="0" aria-describedby="noord-card">@noord</span><span class="rs-hover-card-panel" role="tooltip" id="noord-card">Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>`,
-    example: `import { HoverCard, Link } from "@noorddev/raster-react";
+    example: `import { HoverCard, Link } from "@noorddev/vlak-react";
 
 <HoverCard trigger={<Link href="/noord">@noord</Link>}>
   Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.
@@ -1711,13 +1711,13 @@ const [open, setOpen] = useState(false);
   {
     name: "kbd",
     title: "Kbd",
-    description: "Mono key cap with a 1px frame and a heavier bottom edge.",
+    description: "Labels a keyboard key. Monospace cap with a 1px frame and heavier bottom edge.",
     category: "content",
     classes: ["rs-kbd", "rs-kbd-pair"],
     css: ["components/kbd.css"],
     react: "components/kbd.tsx",
     snippet: `<kbd class="rs-kbd">⌘</kbd> <kbd class="rs-kbd">K</kbd>`,
-    example: `import { Kbd, KbdPair } from "@noorddev/raster-react";
+    example: `import { Kbd, KbdPair } from "@noorddev/vlak-react";
 
 <KbdPair><Kbd>⌘</Kbd><Kbd>K</Kbd></KbdPair>`,
     usage: {
@@ -1732,13 +1732,13 @@ const [open, setOpen] = useState(false);
   {
     name: "input-otp",
     title: "One-time code",
-    description: "One cell per character. Auto-advance, backspace, and paste.",
+    description: "Collects a one-time code in one cell per character. Supports auto-advance, backspace, and paste.",
     category: "forms",
     classes: ["rs-otp", "rs-otp-cell", "rs-otp-cell-invalid"],
     css: ["components/input-otp.css"],
     react: "components/input-otp.tsx",
     snippet: `<div class="rs-otp" role="group" aria-label="One-time code"><input class="rs-otp-cell" maxlength="1" value="8" aria-label="Digit 1" /><input class="rs-otp-cell" maxlength="1" value="2" aria-label="Digit 2" /><input class="rs-otp-cell" maxlength="1" aria-label="Digit 3" /><input class="rs-otp-cell" maxlength="1" aria-label="Digit 4" /></div>`,
-    example: `import { InputOTP } from "@noorddev/raster-react";
+    example: `import { InputOTP } from "@noorddev/vlak-react";
 
 <InputOTP length={6} aria-label="One-time code" onComplete={(code) => verify(code)} />`,
     usage: {
@@ -1761,14 +1761,14 @@ const [open, setOpen] = useState(false);
   {
     name: "context-menu",
     title: "Context menu",
-    description: "Menu at the pointer on right-click, or on Shift+F10 from the keyboard. Escape and outside click close it.",
+    description: "Opens actions at the pointer or with Shift+F10. Escape and outside click close the menu.",
     category: "actions",
     classes: ["rs-context-menu-trigger", "rs-context-menu-pin"],
     css: ["components/context-menu.css"],
     react: "components/context-menu.tsx",
     registryDependencies: ["dropdown-menu"],
     snippet: `<div class="rs-menu" role="menu"><button class="rs-menu-item" role="menuitem">Copy</button><button class="rs-menu-item" role="menuitem">Paste</button><hr class="rs-menu-sep" /><button class="rs-menu-item" role="menuitem">Inspect</button></div>`,
-    example: `import { ContextMenu } from "@noorddev/raster-react";
+    example: `import { ContextMenu } from "@noorddev/vlak-react";
 
 <ContextMenu items={[{ label: "Copy", onSelect: copy }, { label: "Paste", onSelect: paste }, { separator: true }, { label: "Inspect" }]}>
   <Canvas />
@@ -1793,14 +1793,14 @@ const [open, setOpen] = useState(false);
   {
     name: "menubar",
     title: "Menubar",
-    description: "Row of dropdowns in a 1px strip.",
+    description: "Groups application menus in one row of dropdowns with a 1px frame.",
     category: "actions",
     classes: ["rs-menubar"],
     css: ["components/menubar.css"],
     react: "components/menubar.tsx",
     registryDependencies: ["dropdown-menu"],
     snippet: `<div class="rs-menubar" role="menubar"><button class="rs-dropdown" role="menuitem" aria-haspopup="menu"><span>File</span></button><button class="rs-dropdown" role="menuitem" aria-haspopup="menu"><span>Edit</span></button><button class="rs-dropdown" role="menuitem" aria-haspopup="menu"><span>View</span></button></div>`,
-    example: `import { Menubar } from "@noorddev/raster-react";
+    example: `import { Menubar } from "@noorddev/vlak-react";
 
 <Menubar
   menus={[
@@ -1829,13 +1829,13 @@ const [open, setOpen] = useState(false);
   {
     name: "navigation-menu",
     title: "Navigation menu",
-    description: "Horizontal links. The current page is full ink.",
+    description: "Moves between primary destinations. Horizontal links; the current page is full ink.",
     category: "navigation",
     classes: ["rs-nav", "rs-nav-link"],
     css: ["components/navigation-menu.css"],
     react: "components/navigation-menu.tsx",
     snippet: `<nav class="rs-nav"><a href="#" aria-current="page">Overview</a><a href="#">Docs</a><a href="#">Changelog</a></nav>`,
-    example: `import { NavigationMenu } from "@noorddev/raster-react";
+    example: `import { NavigationMenu } from "@noorddev/vlak-react";
 
 <NavigationMenu
   aria-label="Primary"
@@ -1861,16 +1861,16 @@ const [open, setOpen] = useState(false);
   {
     name: "sidebar",
     title: "Sidebar",
-    description: "204-wide rail with a head, nav, and foot. 1px on all four sides.",
+    description: "Holds persistent navigation in a 204px rail with a head, body, and foot.",
     category: "navigation",
     classes: ["rs-sidebar", "rs-sidebar-head", "rs-sidebar-nav", "rs-sidebar-item", "rs-sidebar-label", "rs-sidebar-foot"],
     css: ["components/sidebar.css"],
     react: "components/sidebar.tsx",
-    snippet: `<aside class="rs-sidebar"><div class="rs-sidebar-head">Raster</div><nav class="rs-sidebar-nav"><p class="rs-sidebar-label">Go to</p><a class="rs-sidebar-item" aria-current="page">Overview</a><a class="rs-sidebar-item" href="#">Docs</a><a class="rs-sidebar-item" href="#">Components</a></nav><div class="rs-sidebar-foot">0.3</div></aside>`,
-    example: `import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/raster-react";
+    snippet: `<aside class="rs-sidebar"><div class="rs-sidebar-head">Vlak</div><nav class="rs-sidebar-nav"><p class="rs-sidebar-label">Go to</p><a class="rs-sidebar-item" aria-current="page">Overview</a><a class="rs-sidebar-item" href="#">Docs</a><a class="rs-sidebar-item" href="#">Components</a></nav><div class="rs-sidebar-foot">0.3</div></aside>`,
+    example: `import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/vlak-react";
 
 <Sidebar>
-  <SidebarHead>Raster</SidebarHead>
+  <SidebarHead>Vlak</SidebarHead>
   <SidebarNav aria-label="Sidebar">
     <SidebarLabel>Go to</SidebarLabel>
     <SidebarItem href="/" current>Overview</SidebarItem>
@@ -1896,14 +1896,14 @@ const [open, setOpen] = useState(false);
   {
     name: "carousel",
     title: "Carousel",
-    description: "Scroll-snap track. Buttons nudge one slide; ends feather.",
+    description: "Browses a sequence on a scroll-snap track. Buttons move one slide; the ends feather.",
     category: "content",
     classes: ["rs-carousel", "rs-carousel-track", "rs-carousel-slide", "rs-carousel-nav", "rs-carousel-icon", "rs-carousel-page"],
     css: ["components/carousel.css"],
     react: "components/carousel.tsx",
     registryDependencies: ["pagination"],
     snippet: `<div class="rs-carousel"><div class="rs-carousel-track"><div class="rs-carousel-slide">One</div><div class="rs-carousel-slide">Two</div><div class="rs-carousel-slide">Three</div></div><div class="rs-carousel-nav"><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.75 L5.5 8.25 L10.5 12.75" vector-effect="non-scaling-stroke"/></svg></button><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.75 L10.5 8.25 L5.5 12.75" vector-effect="non-scaling-stroke"/></svg></button></div></div>`,
-    example: `import { Carousel, CarouselSlide } from "@noorddev/raster-react";
+    example: `import { Carousel, CarouselSlide } from "@noorddev/vlak-react";
 
 <Carousel aria-label="Case studies">
   {cases.map((c) => (
@@ -1931,13 +1931,13 @@ const [open, setOpen] = useState(false);
   {
     name: "resizable",
     title: "Resizable",
-    description: "Two panes split by a draggable 1px handle. Arrows move it; value is in ARIA.",
+    description: "Resizes two adjacent panes with a draggable 1px handle. Arrow keys adjust the split.",
     category: "surfaces",
     classes: ["rs-split", "rs-split-pane", "rs-split-handle"],
     css: ["components/resizable.css"],
     react: "components/resizable.tsx",
     snippet: `<div class="rs-split"><div class="rs-split-pane" style="width:50%">Left</div><button class="rs-split-handle" role="separator" aria-valuenow="50"></button><div class="rs-split-pane" style="width:50%">Right</div></div>`,
-    example: `import { Split } from "@noorddev/raster-react";
+    example: `import { Split } from "@noorddev/vlak-react";
 
 <Split initial={60} min={30} max={80} handleLabel="Resize editor and preview">
   <Editor />
@@ -1963,7 +1963,7 @@ const [open, setOpen] = useState(false);
   {
     name: "combobox",
     title: "Combobox",
-    description: "Text field with a filtered listbox.",
+    description: "Filters and selects an option from a listbox through one text field.",
     category: "forms",
     classes: ["rs-combobox", "rs-combobox-empty"],
     css: ["components/combobox.css"],
@@ -1971,7 +1971,7 @@ const [open, setOpen] = useState(false);
     registryDependencies: ["input", "dropdown-menu"],
     snippet: `<div class="rs-combobox"><input class="rs-input rs-input-full" role="combobox" placeholder="Search…" /><div class="rs-menu" role="listbox"><div class="rs-menu-item rs-menu-item-active" role="option" aria-selected="false">Alkmaar</div><div class="rs-menu-item" role="option" aria-selected="false">Amsterdam</div></div></div>`,
     example: `import { useState } from "react";
-import { Combobox } from "@noorddev/raster-react";
+import { Combobox } from "@noorddev/vlak-react";
 
 const [city, setCity] = useState("");
 
@@ -2007,7 +2007,7 @@ const [city, setCity] = useState("");
   {
     name: "command",
     title: "Command",
-    description: "Command palette in a native dialog. Filter, arrows, enter.",
+    description: "Finds and runs commands in a native dialog. Filter by typing; navigate with arrows and Enter.",
     category: "actions",
     classes: ["rs-command", "rs-command-input", "rs-command-list", "rs-command-group", "rs-command-item", "rs-command-item-active", "rs-command-hint", "rs-command-empty"],
     css: ["components/command.css"],
@@ -2015,7 +2015,7 @@ const [city, setCity] = useState("");
     registryDependencies: ["dialog"],
     snippet: `<div class="rs-command" style="border:1px solid var(--divider);border-radius:var(--radius)"><input class="rs-command-input" placeholder="Type a command or search…" /><div class="rs-command-list" role="listbox"><div class="rs-command-group">Go to</div><div class="rs-command-item rs-command-item-active" role="option" aria-selected="true"><span>Components</span><span class="rs-command-hint">⌘1</span></div><div class="rs-command-item" role="option" aria-selected="false"><span>Tokens</span><span class="rs-command-hint">⌘2</span></div></div></div>`,
     example: `import { useEffect, useState } from "react";
-import { CommandDialog } from "@noorddev/raster-react";
+import { CommandDialog } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 
@@ -2060,7 +2060,7 @@ useEffect(() => {
   {
     name: "calendar",
     title: "Calendar",
-    description: "Month grid. Selected day is ink; today is a 1px outline. Weeks start Monday.",
+    description: "Selects a date from a month grid. Selected day fills with ink; today has a 1px outline.",
     category: "forms",
     classes: ["rs-cal", "rs-cal-head", "rs-cal-title", "rs-cal-nav", "rs-cal-grid", "rs-cal-row", "rs-cal-dow", "rs-cal-day", "rs-cal-day-out", "rs-cal-day-today", "rs-cal-day-selected", "rs-cal-icon", "rs-cal-page"],
     css: ["components/calendar.css"],
@@ -2068,7 +2068,7 @@ useEffect(() => {
     registryDependencies: ["pagination"],
     snippet: `<div class="rs-cal"><div class="rs-cal-head"><span class="rs-cal-title">July 2026</span><span class="rs-cal-nav"><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.75 L5.5 8.25 L10.5 12.75" vector-effect="non-scaling-stroke"/></svg></button><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.75 L10.5 8.25 L5.5 12.75" vector-effect="non-scaling-stroke"/></svg></button></span></div><div class="rs-cal-grid" role="grid"><div class="rs-cal-row" role="row"><span class="rs-cal-dow" role="columnheader">Mo</span><span class="rs-cal-dow" role="columnheader">Tu</span><span class="rs-cal-dow" role="columnheader">We</span><span class="rs-cal-dow" role="columnheader">Th</span><span class="rs-cal-dow" role="columnheader">Fr</span><span class="rs-cal-dow" role="columnheader">Sa</span><span class="rs-cal-dow" role="columnheader">Su</span></div><div class="rs-cal-row" role="row"><button class="rs-cal-day" role="gridcell" tabindex="-1">20</button><button class="rs-cal-day" role="gridcell" tabindex="-1">21</button><button class="rs-cal-day" role="gridcell" tabindex="-1">22</button><button class="rs-cal-day" role="gridcell" tabindex="-1">23</button><button class="rs-cal-day rs-cal-day-selected" role="gridcell" tabindex="0" aria-selected="true">24</button><button class="rs-cal-day rs-cal-day-today" role="gridcell" tabindex="-1" aria-current="date">25</button><button class="rs-cal-day" role="gridcell" tabindex="-1">26</button></div></div></div>`,
     example: `import { useState } from "react";
-import { Calendar } from "@noorddev/raster-react";
+import { Calendar } from "@noorddev/vlak-react";
 
 const [date, setDate] = useState<Date>();
 
@@ -2096,7 +2096,7 @@ const [date, setDate] = useState<Date>();
   {
     name: "date-picker",
     title: "Date picker",
-    description: "1px trigger that opens a calendar overlay.",
+    description: "Selects a date from a calendar overlay opened by a 1px trigger.",
     category: "forms",
     classes: ["rs-date-picker-cal-menu"],
     css: ["components/date-picker.css"],
@@ -2104,7 +2104,7 @@ const [date, setDate] = useState<Date>();
     registryDependencies: ["dropdown-menu", "calendar"],
     snippet: `<button class="rs-dropdown"><span>24 July 2026</span></button>`,
     example: `import { useState } from "react";
-import { DatePicker } from "@noorddev/raster-react";
+import { DatePicker } from "@noorddev/vlak-react";
 
 const [date, setDate] = useState<Date>();
 
@@ -2130,14 +2130,14 @@ const [date, setDate] = useState<Date>();
   {
     name: "data-table",
     title: "Data table",
-    description: "Sortable table. Headers expose aria-sort.",
+    description: "Sorts and presents structured records. Column headers expose aria-sort.",
     category: "content",
     classes: ["rs-datatable-sort", "rs-datatable-empty", "rs-datatable-sort-icon", "rs-datatable-sort-icon-on", "rs-datatable-table", "rs-datatable-td", "rs-datatable-td-alt", "rs-datatable-th"],
     css: ["components/data-table.css"],
     react: "components/data-table.tsx",
     registryDependencies: ["table"],
     snippet: `<table class="rs-table"><thead><tr><th><button class="rs-datatable-sort">Phase</button></th><th>Weeks</th></tr></thead><tbody><tr><td>Identity</td><td>4</td></tr><tr><td>Strategy</td><td>2</td></tr></tbody></table>`,
-    example: `import { DataTable } from "@noorddev/raster-react";
+    example: `import { DataTable } from "@noorddev/vlak-react";
 
 <DataTable
   columns={[
@@ -2166,13 +2166,13 @@ const [date, setDate] = useState<Date>();
   {
     name: "aspect-ratio",
     title: "Aspect ratio",
-    description: "Box that holds a ratio. Media fills it.",
+    description: "Keeps media at a defined aspect ratio while it fills the available box.",
     category: "content",
     classes: ["rs-ratio"],
     css: ["components/aspect-ratio.css"],
     react: "components/aspect-ratio.tsx",
     snippet: `<div class="rs-ratio" style="aspect-ratio:16/9;max-width:280px;background:var(--divider-subtle)"></div>`,
-    example: `import { AspectRatio } from "@noorddev/raster-react";
+    example: `import { AspectRatio } from "@noorddev/vlak-react";
 
 <AspectRatio ratio={16 / 9}>
   <img src="/cover.jpg" alt="Press hall" />
@@ -2189,14 +2189,14 @@ const [date, setDate] = useState<Date>();
   {
     name: "form",
     title: "Form",
-    description: "Stacked fields with one primary action at the end.",
+    description: "Collects related inputs as stacked fields with one primary action at the end.",
     category: "forms",
     classes: ["rs-form"],
     css: ["components/form.css"],
     react: "components/form.tsx",
     registryDependencies: ["field", "input", "button"],
     snippet: `<form class="rs-form"><div class="rs-field"><span class="rs-field-label">Name</span><input class="rs-input rs-input-full" /></div><div class="rs-field"><span class="rs-field-label">E-mail</span><input class="rs-input rs-input-full" /></div><button class="rs-btn-primary">Send</button></form>`,
-    example: `import { Button, Field, FieldLabel, Form, Input } from "@noorddev/raster-react";
+    example: `import { Button, Field, FieldLabel, Form, Input } from "@noorddev/vlak-react";
 
 <Form onSubmit={(e) => { e.preventDefault(); save(); }}>
   <Field>
@@ -2225,13 +2225,13 @@ const [date, setDate] = useState<Date>();
   {
     name: "workflow",
     title: "Workflow card",
-    description: "Dashed 1px pipeline step. Drag handle, dashed chips, ghost add-step.",
+    description: "Builds an ordered pipeline from draggable steps. 1px dashed frame, chips, and ghost add action.",
     category: "patterns",
     classes: ["rs-flow", "rs-flow-step", "rs-flow-num", "rs-flow-subs", "rs-flow-sub-add", "rs-flow-add", "rs-flow-plus", "rs-flow-body", "rs-flow-sub", "rs-flow-title"],
     css: ["components/workflow.css"],
     react: "components/flow.tsx",
     snippet: `<div class="rs-flow" style="grid-template-columns:184px;width:184px"><div class="rs-flow-step"><span class="rs-flow-num">1</span><h4>Proposal</h4><p>Scope, timeline, and fee on one page.</p><div class="rs-flow-subs"><span>Brief</span><span>Fee</span><span class="rs-flow-sub-add">+</span></div></div><button type="button" class="rs-flow-add"><span class="rs-flow-plus">+</span> Add a step</button></div>`,
-    example: `import { Flow, FlowAdd, FlowBody, FlowNum, FlowStep, FlowSub, FlowSubAdd, FlowSubs, FlowTitle } from "@noorddev/raster-react";
+    example: `import { Flow, FlowAdd, FlowBody, FlowNum, FlowStep, FlowSub, FlowSubAdd, FlowSubs, FlowTitle } from "@noorddev/vlak-react";
 
 <Flow>
   <FlowStep>
@@ -2262,13 +2262,13 @@ const [date, setDate] = useState<Date>();
   {
     name: "assistant",
     title: "Assistant panel",
-    description: "Chat panel: user block, reply, suggestion card, input row.",
+    description: "Frames an assistant exchange with a user message, reply, suggestion, and input row.",
     category: "patterns",
     classes: ["rs-ai", "rs-ai-head", "rs-ai-title", "rs-ai-status", "rs-ai-msg", "rs-ai-user", "rs-ai-user-block", "rs-ai-reply", "rs-ai-card", "rs-ai-tag", "rs-ai-text", "rs-ai-done", "rs-ai-input", "rs-ai-send", "rs-ai-status-dot"],
     css: ["components/assistant.css"],
     react: "components/assistant.tsx",
     snippet: `<div class="rs-ai"><div class="rs-ai-msg rs-ai-user"><div class="rs-ai-user-block">Make the intro tighter.</div></div><p class="rs-ai-reply">Done. Two sentences, same claim.</p></div>`,
-    example: `import { Assistant, AssistantHead, AssistantInput, AssistantMsg, AssistantReply, AssistantSend, AssistantStatus, AssistantTitle, AssistantUserBlock } from "@noorddev/raster-react";
+    example: `import { Assistant, AssistantHead, AssistantInput, AssistantMsg, AssistantReply, AssistantSend, AssistantStatus, AssistantTitle, AssistantUserBlock } from "@noorddev/vlak-react";
 
 <Assistant>
   <AssistantHead>
@@ -2296,15 +2296,15 @@ const [date, setDate] = useState<Date>();
   {
     name: "theme-toggle",
     title: "Theme toggle",
-    description: "Icon that swaps moon and sun with the color scheme. Saved in localStorage.",
+    description: "Switches between light and dark schemes. The icon changes and the choice persists locally.",
     category: "actions",
     classes: ["rs-theme-toggle", "rs-theme-toggle-inline", "rs-theme-sun", "rs-theme-moon"],
     css: ["components/theme-toggle.css"],
     react: "components/theme-toggle.tsx",
     snippet: `<button class="rs-theme-toggle rs-theme-toggle-inline" aria-label="Toggle color scheme"><svg class="rs-theme-moon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5" vector-effect="non-scaling-stroke"/></svg></button>`,
-    example: `import { ThemeToggle } from "@noorddev/raster-react";
+    example: `import { ThemeToggle } from "@noorddev/vlak-react";
 
-<ThemeToggle storageKey="raster-theme" onThemeChange={(dark) => track(dark)} />`,
+<ThemeToggle storageKey="vlak-theme" onThemeChange={(dark) => track(dark)} />`,
     usage: {
       use: ["Letting the reader pick light or dark and remembering it.", "Top-right of the page chrome; rs-theme-toggle-inline for a spot in the flow."],
       avoid: ["Pages that should follow the system only; leave it out and the system preference applies."],
@@ -2322,13 +2322,13 @@ const [date, setDate] = useState<Date>();
   {
     name: "callout",
     title: "Callout",
-    description: "Note in running copy. 1px hairline, radius 0. No left bar.",
+    description: "Adds a contextual note to running copy. 1px frame, square corners, no accent bar.",
     category: "feedback",
     classes: ["rs-callout"],
     css: ["components/callout.css"],
     react: "components/callout.tsx",
     snippet: `<div class="rs-callout"><p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p></div>`,
-    example: `import { Callout } from "@noorddev/raster-react";
+    example: `import { Callout } from "@noorddev/vlak-react";
 
 <Callout>
   <p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p>
@@ -2345,13 +2345,13 @@ const [date, setDate] = useState<Date>();
   {
     name: "references",
     title: "References",
-    description: "Inline citations, a numbered 1px list, and a cite box. Numerals hang in the gutter.",
+    description: "Connects inline citations to a numbered source list and cite box. Numerals hang in the gutter.",
     category: "content",
     classes: ["rs-cite", "rs-refs", "rs-ref-authors", "rs-ref-doi", "rs-cite-box", "rs-cite-box-label", "rs-cite-box-text", "rs-cite-cite-a", "rs-cite-item"],
     css: ["components/references.css"],
     react: "components/refs.tsx",
     snippet: `<p>Set in a single ink.<sup class="rs-cite"><a href="#ref-1">1</a></sup></p><ol class="rs-refs"><li id="ref-1"><span class="rs-ref-authors">Müller-Brockmann, J.</span> Grid systems in graphic design. <a class="rs-ref-doi" href="#">niggli.ch/grid</a></li></ol>`,
-    example: `import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi, RefItem, Refs } from "@noorddev/raster-react";
+    example: `import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi, RefItem, Refs } from "@noorddev/vlak-react";
 
 <p>Set in a single ink.<Cite><CiteLink href="#ref-1">1</CiteLink></Cite></p>
 
@@ -2363,7 +2363,7 @@ const [date, setDate] = useState<Date>();
 
 <CiteBox>
   <CiteBoxLabel>Cite this</CiteBoxLabel>
-  <CiteBoxText>Valdés-Olmos, R. (2026). Raster. Noord.</CiteBoxText>
+  <CiteBoxText>Valdés-Olmos, R. (2026). Vlak. Noord.</CiteBoxText>
 </CiteBox>`,
     usage: {
       use: ["Articles and papers with numbered citations and a reference list.", "CiteBox for the how-to-cite block at the end."],
@@ -2380,5 +2380,5 @@ const [date, setDate] = useState<Date>();
   },
 ];
 
-/** Public catalog. Hidden entries stay in `rasterComponents` for CSS, Nest, and math. */
-export const catalogComponents: RasterComponent[] = rasterComponents.filter((c) => !c.hidden);
+/** Public catalog. Hidden entries stay in `vlakComponents` for CSS, Nest, and math. */
+export const catalogComponents: VlakComponent[] = vlakComponents.filter((c) => !c.hidden);

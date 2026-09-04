@@ -1,11 +1,11 @@
 # Field
 
-Label, control, and a hint or error stacked in one cell.
+Groups a label, control, and hint or error in one vertical field.
 
 Category: forms  
 Name: `field`  
 Also known as: Field, Form field, Form item, FormField, Form control  
-Page: https://getraster.com/components/field/
+Page: https://vlak.dev/components/field/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/field/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Field, FieldError, FieldHint, FieldLabel } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Field, FieldError, FieldHint, FieldLabel } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add field
+npx @noorddev/vlak-cli add field
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/field.json
+npx shadcn add https://vlak.dev/r/field.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-field"><label class="rs-field-label" for="invoice-name">Name</label><input class="rs-input rs-input-full" id="invoice-name" aria-describedby="invoice-name-hint" /><p class="rs-field-hint" id="invoice-name-hint">As it appears on the invoice.</p></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/field.json
 ## Example
 
 ```tsx
-import { Field, FieldError, FieldHint, FieldLabel, Input } from "@noorddev/raster-react";
+import { Field, FieldError, FieldHint, FieldLabel, Input } from "@noorddev/vlak-react";
 
 <Field>
   <FieldLabel htmlFor="name">Name</FieldLabel>

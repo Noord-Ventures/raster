@@ -1,11 +1,11 @@
 # Calendar
 
-Month grid. Selected day is ink; today is a 1px outline. Weeks start Monday.
+Selects a date from a month grid. Selected day fills with ink; today has a 1px outline.
 
 Category: forms  
 Name: `calendar`  
 Also known as: Calendar, Date grid, Month view, Day picker  
-Page: https://getraster.com/components/calendar/
+Page: https://vlak.dev/components/calendar/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/calendar/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Calendar } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Calendar } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add calendar
+npx @noorddev/vlak-cli add calendar
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/calendar.json
+npx shadcn add https://vlak.dev/r/calendar.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-cal"><div class="rs-cal-head"><span class="rs-cal-title">July 2026</span><span class="rs-cal-nav"><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.75 L5.5 8.25 L10.5 12.75" vector-effect="non-scaling-stroke"/></svg></button><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.75 L10.5 8.25 L5.5 12.75" vector-effect="non-scaling-stroke"/></svg></button></span></div><div class="rs-cal-grid" role="grid"><div class="rs-cal-row" role="row"><span class="rs-cal-dow" role="columnheader">Mo</span><span class="rs-cal-dow" role="columnheader">Tu</span><span class="rs-cal-dow" role="columnheader">We</span><span class="rs-cal-dow" role="columnheader">Th</span><span class="rs-cal-dow" role="columnheader">Fr</span><span class="rs-cal-dow" role="columnheader">Sa</span><span class="rs-cal-dow" role="columnheader">Su</span></div><div class="rs-cal-row" role="row"><button class="rs-cal-day" role="gridcell" tabindex="-1">20</button><button class="rs-cal-day" role="gridcell" tabindex="-1">21</button><button class="rs-cal-day" role="gridcell" tabindex="-1">22</button><button class="rs-cal-day" role="gridcell" tabindex="-1">23</button><button class="rs-cal-day rs-cal-day-selected" role="gridcell" tabindex="0" aria-selected="true">24</button><button class="rs-cal-day rs-cal-day-today" role="gridcell" tabindex="-1" aria-current="date">25</button><button class="rs-cal-day" role="gridcell" tabindex="-1">26</button></div></div></div>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/calendar.json
 
 ```tsx
 import { useState } from "react";
-import { Calendar } from "@noorddev/raster-react";
+import { Calendar } from "@noorddev/vlak-react";
 
 const [date, setDate] = useState<Date>();
 

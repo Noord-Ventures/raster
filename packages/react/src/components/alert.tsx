@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -20,47 +20,47 @@ const styles = stylex.create({
   alert: {
     display: "flex",
     gap: "0.625rem",
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
-    borderRadius: raster.radius,
+    borderColor: vlak.divider,
+    borderRadius: vlak.radius,
     paddingBlock: "0.75rem",
     paddingInline: "0.875rem",
     alignItems: "flex-start",
   },
   solid: {
-    backgroundColor: raster.ink,
-    borderColor: raster.ink,
+    backgroundColor: vlak.ink,
+    borderColor: vlak.ink,
   },
   icon: {
     flexShrink: 0,
     marginTop: 1,
-    color: raster.ink,
+    color: vlak.ink,
   },
   iconSolid: {
-    color: raster.paper,
+    color: vlak.paper,
   },
   title: {
     display: "block",
     fontSize: "0.84375rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
   },
   titleSolid: {
-    color: raster.paper,
+    color: vlak.paper,
   },
   body: {
     fontSize: "0.8125rem",
     lineHeight: 1.55,
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
     marginTop: 2,
     marginBottom: 0,
     marginInline: 0,
   },
   bodySolid: {
-    color: raster.paper,
+    color: vlak.paper,
   },
 });
 

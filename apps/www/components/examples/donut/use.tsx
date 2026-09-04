@@ -1,4 +1,4 @@
-import { Donut, Share } from "@noorddev/raster-react";
+import { Donut, Share } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

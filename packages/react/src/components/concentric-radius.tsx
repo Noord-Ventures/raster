@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 
 /**
@@ -85,21 +85,21 @@ function nestVars(out?: number, gap?: number): React.CSSProperties {
 const styles = stylex.create({
   nest: {
     boxSizing: "border-box",
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderRadius: "var(--rs-out, var(--radius-sm))",
     padding: "var(--rs-gap, var(--pad))",
-    backgroundColor: raster.paper,
+    backgroundColor: vlak.paper,
   },
   inner: {
     boxSizing: "border-box",
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderRadius: "var(--rs-in)",
     minHeight: "4.5rem",
-    backgroundColor: raster.paper,
+    backgroundColor: vlak.paper,
     display: "flex",
     alignItems: "flex-end",
   },

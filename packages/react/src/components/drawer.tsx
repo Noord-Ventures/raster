@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { DialogCloseButton, DialogContext, dialogStyles, useDialogPart, useNativeDialog, type NativeDialogOptions } from "./dialog";
 
@@ -25,19 +25,19 @@ const styles = stylex.create({
     maxHeight: "85dvh",
     borderWidth: 0,
     borderStyle: "solid",
-    borderTopWidth: raster.hairline,
-    borderColor: raster.divider,
-    borderStartStartRadius: raster.radiusSm,
-    borderStartEndRadius: raster.radiusSm,
+    borderTopWidth: vlak.hairline,
+    borderColor: vlak.divider,
+    borderStartStartRadius: vlak.radiusSm,
+    borderStartEndRadius: vlak.radiusSm,
     borderEndEndRadius: 0,
     borderEndStartRadius: 0,
     paddingBlock: "1.5rem",
     paddingInline: "1.25rem",
-    backgroundColor: raster.paper,
-    color: raster.ink,
+    backgroundColor: vlak.paper,
+    color: vlak.ink,
     boxShadow: "none",
     "::backdrop": {
-      backgroundColor: ["rgba(0,0,0,0.25)", `color-mix(in srgb, ${raster.paper} 55%, transparent)`],
+      backgroundColor: ["rgba(0,0,0,0.25)", `color-mix(in srgb, ${vlak.paper} 55%, transparent)`],
     },
   },
   title: {
@@ -48,7 +48,7 @@ const styles = stylex.create({
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
     marginTop: 0,
     marginInlineEnd: 0,
     marginBottom: "0.375rem",
@@ -61,7 +61,7 @@ const styles = stylex.create({
     },
     lineHeight: 1.6,
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
     margin: 0,
   },
 });

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}
@@ -9,10 +9,10 @@ const styles = stylex.create({
   label: {
     fontSize: {
       default: "0.75rem",
-      [mq.phone]: raster.controlLabel,
+      [mq.phone]: vlak.controlLabel,
     },
     fontWeight: 600,
-    color: raster.gray,
+    color: vlak.gray,
     letterSpacing: "-0.01em",
     lineHeight: "16px",
   },

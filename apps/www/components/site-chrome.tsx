@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import { Button, ToggleGroup } from "@noorddev/raster-react";
+import { Button, ToggleGroup } from "@noorddev/vlak-react";
 import { chrome } from "@/app/site.stylex";
 import { sx } from "@/lib/sx";
-import { RasterMark } from "./raster-mark";
+import { VlakMark } from "./vlak-mark";
 
 type Scheme = "light" | "dark" | "auto";
 type GridPref = "on" | "off";
@@ -37,7 +37,7 @@ function persistTextScale(scale: number) {
   root.style.setProperty("--text-scale", String(scale));
   root.setAttribute("data-text-scale", pct);
   try {
-    localStorage.setItem("raster-text-scale", pct);
+    localStorage.setItem("vlak-text-scale", pct);
   } catch {
     /* private mode */
   }
@@ -45,7 +45,7 @@ function persistTextScale(scale: number) {
 
 function readScheme(): Scheme {
   try {
-    const stored = localStorage.getItem("raster-theme");
+    const stored = localStorage.getItem("vlak-theme");
     if (stored === "light" || stored === "dark" || stored === "auto") return stored;
   } catch {
     /* private mode */
@@ -55,7 +55,7 @@ function readScheme(): Scheme {
 
 function readGrid(): GridPref {
   try {
-    return localStorage.getItem("raster-grid") === "off" ? "off" : "on";
+    return localStorage.getItem("vlak-grid") === "off" ? "off" : "on";
   } catch {
     return "on";
   }
@@ -63,7 +63,7 @@ function readGrid(): GridPref {
 
 function readTextIndex(): number {
   try {
-    const raw = localStorage.getItem("raster-text-scale");
+    const raw = localStorage.getItem("vlak-text-scale");
     if (raw == null || raw === "") return 1;
     const n = parseFloat(raw);
     if (!Number.isFinite(n)) return 1;
@@ -106,7 +106,7 @@ function useSettings() {
   const selectScheme = (next: Scheme) => {
     setScheme(next);
     try {
-      localStorage.setItem("raster-theme", next);
+      localStorage.setItem("vlak-theme", next);
     } catch {
       /* private mode */
     }
@@ -116,8 +116,8 @@ function useSettings() {
   const selectGrid = (next: GridPref) => {
     setGrid(next);
     try {
-      if (next === "off") localStorage.setItem("raster-grid", "off");
-      else localStorage.removeItem("raster-grid");
+      if (next === "off") localStorage.setItem("vlak-grid", "off");
+      else localStorage.removeItem("vlak-grid");
     } catch {
       /* private mode */
     }
@@ -154,7 +154,7 @@ function SettingsMark() {
   );
 }
 
-/* Settings are Raster controls: a label, a ToggleGroup for each choice,
+/* Settings are Vlak controls: a label, a ToggleGroup for each choice,
    ghost buttons for the text-size stepper. */
 function Choice<T extends string>({
   label,
@@ -331,8 +331,8 @@ export function SiteChrome() {
   return (
     <>
       <div {...sx("logo-wrap", chrome.logoWrap)}>
-        <Link href="/" {...sx("site-logo", chrome.logo)} aria-label="Raster">
-          <RasterMark />
+        <Link href="/" {...sx("site-logo", chrome.logo)} aria-label="Vlak">
+          <VlakMark />
         </Link>
       </div>
 
@@ -342,7 +342,7 @@ export function SiteChrome() {
             {l.label}
           </Link>
         ))}
-        <a href="https://github.com/Noord-Ventures/raster">GitHub</a>
+        <a href="https://github.com/Noord-Ventures/vlak">GitHub</a>
       </nav>
 
       <div className="settings" ref={settingsRef}>
@@ -398,7 +398,7 @@ export function SiteChrome() {
               {l.label}
             </Link>
           ))}
-          <a href="https://github.com/Noord-Ventures/raster" {...sx("nav-panel-link", chrome.navPanelLink)}>
+          <a href="https://github.com/Noord-Ventures/vlak" {...sx("nav-panel-link", chrome.navPanelLink)}>
             GitHub
           </a>
         </div>

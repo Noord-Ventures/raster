@@ -1,4 +1,4 @@
-import { Radio, RadioGroup } from "@noorddev/raster-react";
+import { Radio, RadioGroup } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

@@ -1,119 +1,119 @@
-# Raster
+# Vlak
 
 > A monochrome design system: paper, ink, gray, hairlines, and a 204px module. 74 React components as precompiled StyleX with one stylesheet, the same components as rs-* CSS, and a shadcn-compatible registry. Version 0.4.0.
 
-Install with `npm install @noorddev/raster-react` and `import "@noorddev/raster-react/css"`, vendor the source with `npx @noorddev/raster-cli add <name>`, or use `npx shadcn add https://getraster.com/r/<name>.json`. Every component page below has install paths, a React example, a props table generated from the types, keyboard interactions, and accessibility notes.
+Install with `npm install @noorddev/vlak-react` and `import "@noorddev/vlak-react/css"`, vendor the source with `npx @noorddev/vlak-cli add <name>`, or use `npx shadcn add https://vlak.dev/r/<name>.json`. Every component page below has install paths, a React example, a props table generated from the types, keyboard interactions, and accessibility notes.
 
 ## Docs
 
-- [Guide](https://getraster.com/docs/guide.md): install, theming, cascade layers, StyleX, CSS, CLI, registry, and conventions for agents
-- [Component index](https://getraster.com/docs/index.md): the catalogue by category
-- [Tokens](https://getraster.com/docs/tokens.md): every custom property with light and dark values
-- [Props JSON](https://getraster.com/docs/props.json): every export and its props as data
-- [Registry index](https://getraster.com/r/index.json): the shadcn-compatible registry; items at https://getraster.com/r/<name>.json
+- [Guide](https://vlak.dev/docs/guide.md): install, theming, cascade layers, StyleX, CSS, CLI, registry, and conventions for agents
+- [Component index](https://vlak.dev/docs/index.md): the catalogue by category
+- [Tokens](https://vlak.dev/docs/tokens.md): every custom property with light and dark values
+- [Props JSON](https://vlak.dev/docs/props.json): every export and its props as data
+- [Registry index](https://vlak.dev/r/index.json): the shadcn-compatible registry; items at https://vlak.dev/r/<name>.json
 
 ## Actions
 
-- [Button](https://getraster.com/docs/button.md): Solid ink primary and 1px ghost. 40px tall; 36px small.
-- [Button group](https://getraster.com/docs/button-group.md): Joined ghost buttons with a 1px rule between.
-- [Text link](https://getraster.com/docs/link.md): Text link with a hairline underline. In-copy variant is inset 1px.
-- [Dropdown menu](https://getraster.com/docs/dropdown-menu.md): Action menu with menuitem roles and arrow-key movement.
-- [Toggle](https://getraster.com/docs/toggle.md): Pressable control. Pressed fills ink. State is aria-pressed.
-- [Toggle group](https://getraster.com/docs/toggle-group.md): Joined toggles, one pressed, 1px between.
-- [Context menu](https://getraster.com/docs/context-menu.md): Menu at the pointer on right-click, or on Shift+F10 from the keyboard. Escape and outside click close it.
-- [Menubar](https://getraster.com/docs/menubar.md): Row of dropdowns in a 1px strip.
-- [Command](https://getraster.com/docs/command.md): Command palette in a native dialog. Filter, arrows, enter.
-- [Theme toggle](https://getraster.com/docs/theme-toggle.md): Icon that swaps moon and sun with the color scheme. Saved in localStorage.
+- [Button](https://vlak.dev/docs/button.md): Triggers an action. Solid primary or 1px ghost; 40px tall, 36px small.
+- [Button group](https://vlak.dev/docs/button-group.md): Keeps related actions together as joined ghost buttons with 1px dividers.
+- [Text link](https://vlak.dev/docs/link.md): Navigates to a page or resource. Hairline underline; in-copy variant is inset 1px.
+- [Dropdown menu](https://vlak.dev/docs/dropdown-menu.md): Presents a compact list of actions. Menu roles and arrow-key navigation are built in.
+- [Toggle](https://vlak.dev/docs/toggle.md): Turns one persistent option on or off. Pressed fills with ink and exposes aria-pressed.
+- [Toggle group](https://vlak.dev/docs/toggle-group.md): Selects one option from joined toggles. The active option fills with ink.
+- [Context menu](https://vlak.dev/docs/context-menu.md): Opens actions at the pointer or with Shift+F10. Escape and outside click close the menu.
+- [Menubar](https://vlak.dev/docs/menubar.md): Groups application menus in one row of dropdowns with a 1px frame.
+- [Command](https://vlak.dev/docs/command.md): Finds and runs commands in a native dialog. Filter by typing; navigate with arrows and Enter.
+- [Theme toggle](https://vlak.dev/docs/theme-toggle.md): Switches between light and dark schemes. The icon changes and the choice persists locally.
 
 ## Forms
 
-- [Input](https://getraster.com/docs/input.md): Text field. 1px control border, 2px focus ring, 12px label above.
-- [Label](https://getraster.com/docs/label.md): 12px secondary label, set above the control.
-- [Field](https://getraster.com/docs/field.md): Label, control, and a hint or error stacked in one cell.
-- [Input group](https://getraster.com/docs/input-group.md): Addon and field share a 1px border.
-- [Native select](https://getraster.com/docs/native-select.md): Native select with Raster 1px chrome.
-- [Radio](https://getraster.com/docs/radio.md): Single-choice control. Selected dot is ink.
-- [Checkbox](https://getraster.com/docs/checkbox.md): Multi-choice. 16px box, 3px radius, ink fill when checked.
-- [Switch](https://getraster.com/docs/switch.md): 32×18 control. On fills ink; off is a 1px track. The thumb moves; the box stays 32px.
-- [Slider](https://getraster.com/docs/slider.md): 2px track, ink fill, 14px thumb on a 24px hit area.
-- [Select](https://getraster.com/docs/select.md): Closed trigger with a chevron. The menu overlays the page.
-- [Textarea](https://getraster.com/docs/textarea.md): Multiline field, vertical resize only.
-- [One-time code](https://getraster.com/docs/input-otp.md): One cell per character. Auto-advance, backspace, and paste.
-- [Combobox](https://getraster.com/docs/combobox.md): Text field with a filtered listbox.
-- [Calendar](https://getraster.com/docs/calendar.md): Month grid. Selected day is ink; today is a 1px outline. Weeks start Monday.
-- [Date picker](https://getraster.com/docs/date-picker.md): 1px trigger that opens a calendar overlay.
-- [Form](https://getraster.com/docs/form.md): Stacked fields with one primary action at the end.
+- [Input](https://vlak.dev/docs/input.md): Collects one line of text. 1px border, 2px focus ring, 12px label above.
+- [Label](https://vlak.dev/docs/label.md): Names a form control. 12px secondary text, set above the control.
+- [Field](https://vlak.dev/docs/field.md): Groups a label, control, and hint or error in one vertical field.
+- [Input group](https://vlak.dev/docs/input-group.md): Joins a text field with a prefix or suffix inside one 1px border.
+- [Native select](https://vlak.dev/docs/native-select.md): Presents browser-native options inside a 1px control border.
+- [Radio](https://vlak.dev/docs/radio.md): Selects one option from a group. The selected dot fills with ink.
+- [Checkbox](https://vlak.dev/docs/checkbox.md): Selects any number of options. 16px box, 3px radius, ink fill when checked.
+- [Switch](https://vlak.dev/docs/switch.md): Turns one setting on or off. 32×18px; on fills with ink, off uses a 1px track.
+- [Slider](https://vlak.dev/docs/slider.md): Selects one value from a range. 2px track, 14px thumb, 24px hit area.
+- [Select](https://vlak.dev/docs/select.md): Selects one option from an overlay. The closed trigger carries a chevron.
+- [Textarea](https://vlak.dev/docs/textarea.md): Collects multiple lines of text. Resizes vertically only.
+- [One-time code](https://vlak.dev/docs/input-otp.md): Collects a one-time code in one cell per character. Supports auto-advance, backspace, and paste.
+- [Combobox](https://vlak.dev/docs/combobox.md): Filters and selects an option from a listbox through one text field.
+- [Calendar](https://vlak.dev/docs/calendar.md): Selects a date from a month grid. Selected day fills with ink; today has a 1px outline.
+- [Date picker](https://vlak.dev/docs/date-picker.md): Selects a date from a calendar overlay opened by a 1px trigger.
+- [Form](https://vlak.dev/docs/form.md): Collects related inputs as stacked fields with one primary action at the end.
 
 ## Navigation
 
-- [Tabs](https://getraster.com/docs/tabs.md): Text tabs in one row. Active tab has a 1px underline.
-- [Breadcrumbs](https://getraster.com/docs/breadcrumbs.md): Ancestor links, 40% slashes, current page at full ink.
-- [Crumb bar](https://getraster.com/docs/crumb-bar.md): Fixed 72px bar. Transparent at rest; scrolled state adds paper, a bottom 1px, and the trail.
-- [Pagination](https://getraster.com/docs/pagination.md): Square page controls. Current page is solid ink.
-- [Stepper](https://getraster.com/docs/stepper.md): Numbered dots joined by 1px lines. Done fills ink; active is outlined.
-- [Navigation menu](https://getraster.com/docs/navigation-menu.md): Horizontal links. The current page is full ink.
-- [Sidebar](https://getraster.com/docs/sidebar.md): 204-wide rail with a head, nav, and foot. 1px on all four sides.
+- [Tabs](https://vlak.dev/docs/tabs.md): Switches between related panels. Text labels in one row; active tab has a 1px underline.
+- [Breadcrumbs](https://vlak.dev/docs/breadcrumbs.md): Shows a page's place in a hierarchy. Ancestors are links; the current page is full ink.
+- [Crumb bar](https://vlak.dev/docs/crumb-bar.md): Keeps the current path visible while scrolling. Fixed at 72px with a 1px bottom rule when active.
+- [Pagination](https://vlak.dev/docs/pagination.md): Moves through paginated content. Square controls; the current page fills with ink.
+- [Stepper](https://vlak.dev/docs/stepper.md): Shows progress through ordered steps. 1px connectors; done fills with ink, active is outlined.
+- [Navigation menu](https://vlak.dev/docs/navigation-menu.md): Moves between primary destinations. Horizontal links; the current page is full ink.
+- [Sidebar](https://vlak.dev/docs/sidebar.md): Holds persistent navigation in a 204px rail with a head, body, and foot.
 
 ## Feedback
 
-- [Progress](https://getraster.com/docs/progress.md): 4px bar. Percentage is set in the label.
-- [Badge](https://getraster.com/docs/badge.md): 11px badge. Outline, solid, and muted fills.
-- [Alert](https://getraster.com/docs/alert.md): 1px frame with an icon. Solid ink variant for critical.
-- [Skeleton](https://getraster.com/docs/skeleton.md): Divider-tone pulse. Animation stops when prefers-reduced-motion is on.
-- [Empty](https://getraster.com/docs/empty.md): Placeholder cell with a title, a sentence, and an optional action.
-- [Spinner](https://getraster.com/docs/spinner.md): 16px 1px ring. Animation stops when prefers-reduced-motion is on.
-- [Tooltip](https://getraster.com/docs/tooltip.md): Label on hover and keyboard focus; a real element that describes its trigger.
-- [Toast](https://getraster.com/docs/toast.md): Bottom-right status, aria-live polite. Stays four seconds or longer for longer text; pauses on hover; closes on demand.
-- [Callout](https://getraster.com/docs/callout.md): Note in running copy. 1px hairline, radius 0. No left bar.
+- [Progress](https://vlak.dev/docs/progress.md): Shows completion for a known process. 4px bar; the label carries the percentage.
+- [Badge](https://vlak.dev/docs/badge.md): Labels status or category. 11px text with outline, solid, and muted variants.
+- [Alert](https://vlak.dev/docs/alert.md): Calls attention to contextual information. 1px frame and icon; critical variant fills with ink.
+- [Skeleton](https://vlak.dev/docs/skeleton.md): Reserves space while content loads. Divider-tone pulse that respects reduced motion.
+- [Empty](https://vlak.dev/docs/empty.md): Explains an empty state with a title, one sentence, and an optional action.
+- [Spinner](https://vlak.dev/docs/spinner.md): Signals indeterminate progress. 16px ring with a 1px stroke; respects reduced motion.
+- [Tooltip](https://vlak.dev/docs/tooltip.md): Explains a control on hover or keyboard focus. A real element describes its trigger.
+- [Toast](https://vlak.dev/docs/toast.md): Reports a brief status in the bottom-right corner. Polite live region; pauses on hover and closes on demand.
+- [Callout](https://vlak.dev/docs/callout.md): Adds a contextual note to running copy. 1px frame, square corners, no accent bar.
 
 ## Surfaces
 
-- [Dialog](https://getraster.com/docs/dialog.md): Modal with a title, body, and two equal actions.
-- [Card](https://getraster.com/docs/card.md): Typography stack: label, title, and body. No outline.
-- [Alert dialog](https://getraster.com/docs/alert-dialog.md): Native dialog that must be answered. Escape and light dismiss are off.
-- [Popover](https://getraster.com/docs/popover.md): Native Popover API. Top layer, light dismiss.
-- [Sheet](https://getraster.com/docs/sheet.md): Native dialog docked to a screen edge, with the platform focus trap and backdrop.
-- [Drawer](https://getraster.com/docs/drawer.md): Native dialog from the bottom edge, with the platform focus trap and backdrop.
-- [Hover card](https://getraster.com/docs/hover-card.md): Preview panel on hover and keyboard focus.
-- [Resizable](https://getraster.com/docs/resizable.md): Two panes split by a draggable 1px handle. Arrows move it; value is in ARIA.
+- [Dialog](https://vlak.dev/docs/dialog.md): Focuses attention on a modal task. Title, body, and two equal actions.
+- [Card](https://vlak.dev/docs/card.md): Groups related content as a label, title, and body. No outline.
+- [Alert dialog](https://vlak.dev/docs/alert-dialog.md): Requires a decision before work continues. Native dialog with Escape and light dismiss disabled.
+- [Popover](https://vlak.dev/docs/popover.md): Places non-modal content above the page with the native Popover API and light dismiss.
+- [Sheet](https://vlak.dev/docs/sheet.md): Opens a focused task from a screen edge. Native dialog with platform focus handling and backdrop.
+- [Drawer](https://vlak.dev/docs/drawer.md): Opens a focused task from the bottom edge. Native dialog with platform focus handling and backdrop.
+- [Hover card](https://vlak.dev/docs/hover-card.md): Previews linked context on hover or keyboard focus.
+- [Resizable](https://vlak.dev/docs/resizable.md): Resizes two adjacent panes with a draggable 1px handle. Arrow keys adjust the split.
 
 ## Content
 
-- [Mono chip](https://getraster.com/docs/chip.md): Mono identifier with a 1px mixed border.
-- [Table](https://getraster.com/docs/table.md): Open grid, 1px row rules, last column right-aligned. Total rows use 2px rules.
-- [Accordion](https://getraster.com/docs/accordion.md): Native details rows on 1px rules. Shared name keeps one item open.
-- [Avatar](https://getraster.com/docs/avatar.md): 32px circle of initials, or a covering image. Broken images fall back. Rows overlap 8px.
-- [Item](https://getraster.com/docs/item.md): Flush row: title and description on the left, meta on the right.
-- [Separator](https://getraster.com/docs/separator.md): 1px rule, horizontal or vertical.
-- [Scroll area](https://getraster.com/docs/scroll-area.md): Overflow box with the scrollbar hidden and 20px feathers at the ends.
-- [Collapsible](https://getraster.com/docs/collapsible.md): Native details disclosure.
-- [Kbd](https://getraster.com/docs/kbd.md): Mono key cap with a 1px frame and a heavier bottom edge.
-- [Carousel](https://getraster.com/docs/carousel.md): Scroll-snap track. Buttons nudge one slide; ends feather.
-- [Data table](https://getraster.com/docs/data-table.md): Sortable table. Headers expose aria-sort.
-- [Aspect ratio](https://getraster.com/docs/aspect-ratio.md): Box that holds a ratio. Media fills it.
-- [References](https://getraster.com/docs/references.md): Inline citations, a numbered 1px list, and a cite box. Numerals hang in the gutter.
+- [Mono chip](https://vlak.dev/docs/chip.md): Marks a short technical identifier. Monospace text with a 1px mixed border.
+- [Table](https://vlak.dev/docs/table.md): Presents structured values in rows and columns. 1px row rules; total rows use 2px rules.
+- [Accordion](https://vlak.dev/docs/accordion.md): Reveals related sections on demand. Native details rows with 1px rules.
+- [Avatar](https://vlak.dev/docs/avatar.md): Identifies a person or group. 32px image or initials; broken images fall back automatically.
+- [Item](https://vlak.dev/docs/item.md): Presents one list entry. Title and description sit left; metadata sits right.
+- [Separator](https://vlak.dev/docs/separator.md): Separates related regions with a 1px horizontal or vertical rule.
+- [Scroll area](https://vlak.dev/docs/scroll-area.md): Contains overflow without visible scrollbars. 20px edge feathers signal more content.
+- [Collapsible](https://vlak.dev/docs/collapsible.md): Shows or hides one section with a native details disclosure.
+- [Kbd](https://vlak.dev/docs/kbd.md): Labels a keyboard key. Monospace cap with a 1px frame and heavier bottom edge.
+- [Carousel](https://vlak.dev/docs/carousel.md): Browses a sequence on a scroll-snap track. Buttons move one slide; the ends feather.
+- [Data table](https://vlak.dev/docs/data-table.md): Sorts and presents structured records. Column headers expose aria-sort.
+- [Aspect ratio](https://vlak.dev/docs/aspect-ratio.md): Keeps media at a defined aspect ratio while it fills the available box.
+- [References](https://vlak.dev/docs/references.md): Connects inline citations to a numbered source list and cite box. Numerals hang in the gutter.
 
 ## Icons
 
-- [Icons](https://getraster.com/docs/icons.md): 16 viewBox marks, 1px currentColor, butt/miter. Shipped in the React package.
+- [Icons](https://vlak.dev/docs/icons.md): Provides interface marks on a 16px viewBox. 1px currentColor strokes with butt caps and miter joins.
 
 ## Charts
 
-- [Charts](https://getraster.com/docs/chart.md): Line on a 204 field. 1px grid, ink marks. Series use solid, dashed, gray, or dotted. One optional spot color.
-- [Bar chart](https://getraster.com/docs/bar-chart.md): Vertical or horizontal. Thin ink bars, square ends. Stacks when series share a field.
-- [Area chart](https://getraster.com/docs/area-chart.md): Filled field under the first series. 1px grid, textured series, one optional spot color.
-- [Scatter chart](https://getraster.com/docs/scatter-chart.md): Marks on a 1px grid. Ink, or one optional spot color.
-- [Donut or share](https://getraster.com/docs/donut.md): Ring against its total, or a flush share strip. 1px stroke.
-- [Histogram](https://getraster.com/docs/histogram.md): Histogram. Adjacent bins, 1px between.
-- [Small multiples](https://getraster.com/docs/small-multiples.md): Repeated charts on the same axes. One 184 column per panel.
+- [Charts](https://vlak.dev/docs/chart.md): Plots one or more lines on a 204px field. 1px grid, textured series, and one optional spot color.
+- [Bar chart](https://vlak.dev/docs/bar-chart.md): Compares values with vertical or horizontal bars. Thin ink marks, square ends, optional stacks.
+- [Area chart](https://vlak.dev/docs/area-chart.md): Shows change and magnitude with a filled first series. 1px grid and one optional spot color.
+- [Scatter chart](https://vlak.dev/docs/scatter-chart.md): Shows the relationship between two measures. Marks sit on a 1px grid in ink or one spot color.
+- [Donut or share](https://vlak.dev/docs/donut.md): Shows one part of a whole as a ring or flush share strip. 1px stroke.
+- [Histogram](https://vlak.dev/docs/histogram.md): Shows a distribution in adjacent bins with 1px gaps.
+- [Small multiples](https://vlak.dev/docs/small-multiples.md): Compares repeated charts on shared axes. Each panel occupies one 184px column.
 
 ## Patterns
 
-- [Inline form](https://getraster.com/docs/inline-form.md): One field with the submit action inside. The button appears after the input validates.
-- [Workflow card](https://getraster.com/docs/workflow.md): Dashed 1px pipeline step. Drag handle, dashed chips, ghost add-step.
-- [Assistant panel](https://getraster.com/docs/assistant.md): Chat panel: user block, reply, suggestion card, input row.
+- [Inline form](https://vlak.dev/docs/inline-form.md): Pairs one field with an embedded submit action. The button appears after validation.
+- [Workflow card](https://vlak.dev/docs/workflow.md): Builds an ordered pipeline from draggable steps. 1px dashed frame, chips, and ghost add action.
+- [Assistant panel](https://vlak.dev/docs/assistant.md): Frames an assistant exchange with a user message, reply, suggestion, and input row.
 
 ## Optional
 
-- [Full documentation](https://getraster.com/llms-full.txt): guide, tokens, and every component page in one file
-- [Site](https://getraster.com): the human documentation and gallery
+- [Full documentation](https://vlak.dev/llms-full.txt): guide, tokens, and every component page in one file
+- [Site](https://vlak.dev): the human documentation and gallery

@@ -8,7 +8,7 @@ function starterTemplate(): string {
   const candidates = [join(here, "starter.html"), join(here, "../src/starter.html")];
   const file = candidates.find((path) => existsSync(path));
   if (!file) {
-    throw new Error("Raster starter page not found. Rebuild @noorddev/raster-cli.");
+    throw new Error("Vlak starter page not found. Rebuild @noorddev/vlak-cli.");
   }
   return readFileSync(file, "utf8");
 }

@@ -1,23 +1,23 @@
 /**
- * The raster CLI as a library: every command is a pure-ish function
+ * The vlak CLI as a library: every command is a pure-ish function
  * over an explicit cwd so the whole thing is testable without a shell.
  *
  * The CLI carries the entire system with it (CSS + registry + Inter
  * files bundled at build time), so init and add work offline. A remote
- * registry can override the bundle via --registry or raster.json for
+ * registry can override the bundle via --registry or vlak.json for
  * out-of-band updates.
  */
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { catalogComponents, rasterComponents, rasterTokens } from "@noorddev/raster";
+import { catalogComponents, vlakComponents, vlakTokens } from "@noorddev/vlak";
 import { starterPage } from "./starter";
 
 interface Bundle {
   name: string;
   version: string;
-  css: { raster: string };
+  css: { vlak: string };
   items: RegistryItem[];
   /** Generated markdown docs (registry/docs): guide, index, tokens, and one page per component. */
   docs?: { guide: string; index: string; tokens: string; components: Record<string, string> };
@@ -28,7 +28,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 /** First existing path among candidates relative to this module. */
 function locate(candidates: string[], what: string): string {
   const found = candidates.map((c) => join(here, c)).find((p) => existsSync(p));
-  if (!found) throw new Error(`Raster ${what} not found. Rebuild @noorddev/raster-cli (pnpm build) or run from the repo.`);
+  if (!found) throw new Error(`Vlak ${what} not found. Rebuild @noorddev/vlak-cli (pnpm build) or run from the repo.`);
   return found;
 }
 
@@ -36,7 +36,7 @@ let cachedBundle: Bundle | undefined;
 
 /**
  * The registry snapshot the CLI was built with. Read at first use, not
- * bundled into the executable: dist/index.js stays small and `raster --help`
+ * bundled into the executable: dist/index.js stays small and `vlak --help`
  * never parses a registry. Published: dist/registry/bundle.json. In-repo:
  * <repo>/registry/bundle.json.
  */
@@ -60,7 +60,7 @@ export interface RegistryItem {
   description: string;
   files: RegistryFile[];
   meta?: {
-    raster?: {
+    vlak?: {
       category?: string;
       snippet?: string;
       cssOnly?: boolean;
@@ -69,15 +69,15 @@ export interface RegistryItem {
   };
 }
 
-export interface RasterConfig {
+export interface VlakConfig {
   cssDir: string;
   componentsDir: string;
   registry?: string;
 }
 
-export const defaultConfig: RasterConfig = {
+export const defaultConfig: VlakConfig = {
   cssDir: "styles",
-  componentsDir: "components/raster",
+  componentsDir: "components/vlak",
 };
 
 export interface WriteResult {
@@ -85,13 +85,13 @@ export interface WriteResult {
   status: "written" | "skipped" | "unchanged";
 }
 
-const CONFIG_FILE = "raster.json";
+const CONFIG_FILE = "vlak.json";
 const FONT_FILES = ["InterVariable-latin.woff2", "InterVariable-latin-ext.woff2", "OFL.txt"];
 
-export function loadConfig(cwd: string): RasterConfig {
+export function loadConfig(cwd: string): VlakConfig {
   const file = join(cwd, CONFIG_FILE);
   if (!existsSync(file)) return { ...defaultConfig };
-  return { ...defaultConfig, ...(JSON.parse(readFileSync(file, "utf8")) as Partial<RasterConfig>) };
+  return { ...defaultConfig, ...(JSON.parse(readFileSync(file, "utf8")) as Partial<VlakConfig>) };
 }
 
 function writeFileSafe(cwd: string, relPath: string, content: string | Buffer, overwrite: boolean): WriteResult {
@@ -130,16 +130,16 @@ export interface InitOptions {
   registry?: string;
 }
 
-/** Write raster.css, Inter files, a specimen page, and raster.json. */
+/** Write vlak.css, Inter files, a specimen page, and vlak.json. */
 export function init(cwd: string, options: InitOptions = {}): WriteResult[] {
-  const config: RasterConfig = {
+  const config: VlakConfig = {
     cssDir: options.cssDir ?? defaultConfig.cssDir,
     componentsDir: options.componentsDir ?? defaultConfig.componentsDir,
   };
   if (options.registry) config.registry = options.registry;
   const results: WriteResult[] = [];
-  const cssHref = `${config.cssDir.replace(/\\/g, "/")}/raster.css`;
-  results.push(writeFileSafe(cwd, join(config.cssDir, "raster.css"), loadBundle().css.raster, options.overwrite ?? false));
+  const cssHref = `${config.cssDir.replace(/\\/g, "/")}/vlak.css`;
+  results.push(writeFileSafe(cwd, join(config.cssDir, "vlak.css"), loadBundle().css.vlak, options.overwrite ?? false));
   results.push(...copyFonts(cwd, config.cssDir, options.overwrite ?? false));
   results.push(writeFileSafe(cwd, "index.html", starterPage(cssHref), options.overwrite ?? false));
   results.push(
@@ -156,7 +156,7 @@ export function findItem(name: string): RegistryItem | undefined {
   return getItems().find((item) => item.name === name);
 }
 
-/** Expand names to include registry dependencies (by raster name), deduped, in install order. */
+/** Expand names to include registry dependencies (by vlak name), deduped, in install order. */
 export function resolveWithDependencies(names: string[]): { resolved: RegistryItem[]; unknown: string[] } {
   const unknown: string[] = [];
   const seen = new Set<string>();
@@ -169,7 +169,7 @@ export function resolveWithDependencies(names: string[]): { resolved: RegistryIt
       unknown.push(name);
       return;
     }
-    for (const dep of item.meta?.raster?.registryDependencies ?? []) visit(dep);
+    for (const dep of item.meta?.vlak?.registryDependencies ?? []) visit(dep);
     resolved.push(item);
   };
   for (const name of names) visit(name);
@@ -233,7 +233,7 @@ async function resolveFromRegistry(
       unknown.push(name);
       return;
     }
-    for (const dep of item.meta?.raster?.registryDependencies ?? []) await visit(dep);
+    for (const dep of item.meta?.vlak?.registryDependencies ?? []) await visit(dep);
     resolved.push(item);
   };
   for (const name of names) await visit(name);
@@ -244,9 +244,9 @@ function writeItemFiles(cwd: string, item: RegistryItem, componentsDir: string, 
   const results: WriteResult[] = [];
   for (const file of item.files) {
     if (!file.path.endsWith(".tsx") && !file.path.endsWith(".ts")) continue;
-    // Registry targets are `components/raster/<tree>`; keep the tree so nested
+    // Registry targets are `components/vlak/<tree>`; keep the tree so nested
     // imports (charts/, shared helpers) resolve exactly as they do in the source.
-    const rel = file.target.replace(/^components\/raster\//, "").replace(/^raster\//, "");
+    const rel = file.target.replace(/^components\/vlak\//, "").replace(/^vlak\//, "");
     results.push(writeFileSafe(cwd, join(componentsDir, rel), file.content, overwrite));
   }
   return results;
@@ -254,10 +254,10 @@ function writeItemFiles(cwd: string, item: RegistryItem, componentsDir: string, 
 
 /**
  * Vendor a component's React source (plus the shared cx helper) into
- * the project. CSS is not written per-component: init's raster.css
+ * the project. CSS is not written per-component: init's vlak.css
  * already styles every component. That is the CSS-first model.
  *
- * When --registry or raster.json.registry is set, items are loaded
+ * When --registry or vlak.json.registry is set, items are loaded
  * from that registry (HTTP(S) URL or a local directory of JSON files)
  * instead of the bundled snapshot.
  */
@@ -276,7 +276,7 @@ export async function add(
     : resolveWithDependencies(names);
   const outcomes: AddOutcome[] = [];
   for (const item of resolved) {
-    const cssOnly = item.meta?.raster?.cssOnly ?? false;
+    const cssOnly = item.meta?.vlak?.cssOnly ?? false;
     const results = cssOnly ? [] : writeItemFiles(cwd, item, config.componentsDir, options.overwrite ?? false);
     outcomes.push({ item, cssOnly, results });
   }
@@ -302,11 +302,11 @@ export function list(): ListEntry[] {
 }
 
 export function tokensJson(): string {
-  return JSON.stringify(rasterTokens, null, 2);
+  return JSON.stringify(vlakTokens, null, 2);
 }
 
 export function snippetFor(name: string): string | undefined {
-  return rasterComponents.find((c) => c.name === name)?.snippet;
+  return vlakComponents.find((c) => c.name === name)?.snippet;
 }
 
 /**

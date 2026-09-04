@@ -1,11 +1,11 @@
 # Accordion
 
-Native details rows on 1px rules. Shared name keeps one item open.
+Reveals related sections on demand. Native details rows with 1px rules.
 
 Category: content  
 Name: `accordion`  
 Also known as: Accordion, Disclosure group, Expansion panel, FAQ  
-Page: https://getraster.com/components/accordion/
+Page: https://vlak.dev/components/accordion/
 
 ## When to use
 
@@ -22,39 +22,39 @@ Page: https://getraster.com/components/accordion/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Accordion, AccordionItem } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Accordion, AccordionItem } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add accordion
+npx @noorddev/vlak-cli add accordion
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/accordion.json
+npx shadcn add https://vlak.dev/r/accordion.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
-<div class="rs-acc"><details class="rs-acc-item" name="faq" open><summary>What is Raster?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">A monochrome, CSS-first design system.</div></details><details class="rs-acc-item" name="faq"><summary>Is it dependency-free?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">Yes. Native elements do the work.</div></details></div>
+<div class="rs-acc"><details class="rs-acc-item" name="faq" open><summary>What is Vlak?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">A monochrome, CSS-first design system.</div></details><details class="rs-acc-item" name="faq"><summary>Is it dependency-free?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">Yes. Native elements do the work.</div></details></div>
 ```
 
 ## Example
 
 ```tsx
-import { Accordion, AccordionItem } from "@noorddev/raster-react";
+import { Accordion, AccordionItem } from "@noorddev/vlak-react";
 
 <Accordion exclusive>
-  <AccordionItem title="What is Raster?" defaultOpen>
+  <AccordionItem title="What is Vlak?" defaultOpen>
     A monochrome, CSS-first design system.
   </AccordionItem>
   <AccordionItem title="Is it dependency-free?">

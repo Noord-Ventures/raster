@@ -1,14 +1,14 @@
 /**
- * Raster design tokens: the single source of truth for the design system.
+ * Vlak design tokens: the single source of truth for the design system.
  * CSS custom properties, the token JSON, and the docs site all generate
- * from this file. Tokens ship in @noorddev/raster and `npx @noorddev/raster-cli tokens`.
+ * from this file. Tokens ship in @noorddev/vlak and `npx @noorddev/vlak-cli tokens`.
  */
 
-export const rasterTokens = {
+export const vlakTokens = {
   meta: {
-    name: "Raster",
-    description: "A monochrome, CSS-first design system.",
-    url: "https://getraster.com",
+    name: "Vlak",
+    description: "A monochrome design system for product interfaces, built on a 204px module.",
+    url: "https://vlak.dev",
   },
   color: {
     light: {
@@ -97,7 +97,7 @@ export const rasterTokens = {
   },
   radius: {
     /**
-     * Slight Raster radius. Same token as the standalone button (`--radius-sm`).
+     * Slight Vlak radius. Same token as the standalone button (`--radius-sm`).
      * Buttons, toggles, boxes, dialogs, sheets, and drawers share this 4px.
      * Not 8–12. Cards are a typography stack (no frame, radius 0). Callouts are
      * hairline, radius 0. `--radius` aliases the button token.
@@ -137,7 +137,7 @@ export const rasterTokens = {
     toast: 400,
     rule: "raised: a handle or thumb over its track. sticky: pinned chrome. float: menus, tooltips, hover cards, chart tooltips. overlay: the fixed fallback of a panel that has no top layer. toast: above everything.",
   },
-  /** Desktop stays the Raster poster. Phone (≤640) is a 44pt control scale. */
+  /** Desktop stays the Vlak poster. Phone (≤640) is a 44pt control scale. */
   control: {
     desktop: { hit: 40, height: 40, font: 14, label: 12 },
     phone: { hit: 44, height: 44, font: 16, label: 15 },
@@ -145,4 +145,4 @@ export const rasterTokens = {
   },
 } as const;
 
-export type RasterTokens = typeof rasterTokens;
+export type VlakTokens = typeof vlakTokens;

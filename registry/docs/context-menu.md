@@ -1,11 +1,11 @@
 # Context menu
 
-Menu at the pointer on right-click, or on Shift+F10 from the keyboard. Escape and outside click close it.
+Opens actions at the pointer or with Shift+F10. Escape and outside click close the menu.
 
 Category: actions  
 Name: `context-menu`  
 Also known as: Context menu, Right-click menu, Contextual menu  
-Page: https://getraster.com/components/context-menu/
+Page: https://vlak.dev/components/context-menu/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/context-menu/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { ContextMenu } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { ContextMenu } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add context-menu
+npx @noorddev/vlak-cli add context-menu
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/context-menu.json
+npx shadcn add https://vlak.dev/r/context-menu.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-menu" role="menu"><button class="rs-menu-item" role="menuitem">Copy</button><button class="rs-menu-item" role="menuitem">Paste</button><hr class="rs-menu-sep" /><button class="rs-menu-item" role="menuitem">Inspect</button></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/context-menu.json
 ## Example
 
 ```tsx
-import { ContextMenu } from "@noorddev/raster-react";
+import { ContextMenu } from "@noorddev/vlak-react";
 
 <ContextMenu items={[{ label: "Copy", onSelect: copy }, { label: "Paste", onSelect: paste }, { separator: true }, { label: "Inspect" }]}>
   <Canvas />

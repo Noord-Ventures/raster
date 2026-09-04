@@ -1,11 +1,11 @@
 # References
 
-Inline citations, a numbered 1px list, and a cite box. Numerals hang in the gutter.
+Connects inline citations to a numbered source list and cite box. Numerals hang in the gutter.
 
 Category: content  
 Name: `references`  
 Also known as: References, Citations, Footnotes, Bibliography  
-Page: https://getraster.com/components/references/
+Page: https://vlak.dev/components/references/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/references/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi, RefItem, Refs } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi, RefItem, Refs } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add references
+npx @noorddev/vlak-cli add references
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/references.json
+npx shadcn add https://vlak.dev/r/references.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <p>Set in a single ink.<sup class="rs-cite"><a href="#ref-1">1</a></sup></p><ol class="rs-refs"><li id="ref-1"><span class="rs-ref-authors">Müller-Brockmann, J.</span> Grid systems in graphic design. <a class="rs-ref-doi" href="#">niggli.ch/grid</a></li></ol>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/references.json
 ## Example
 
 ```tsx
-import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi, RefItem, Refs } from "@noorddev/raster-react";
+import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi, RefItem, Refs } from "@noorddev/vlak-react";
 
 <p>Set in a single ink.<Cite><CiteLink href="#ref-1">1</CiteLink></Cite></p>
 
@@ -63,7 +63,7 @@ import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi,
 
 <CiteBox>
   <CiteBoxLabel>Cite this</CiteBoxLabel>
-  <CiteBoxText>Valdés-Olmos, R. (2026). Raster. Noord.</CiteBoxText>
+  <CiteBoxText>Valdés-Olmos, R. (2026). Vlak. Noord.</CiteBoxText>
 </CiteBox>
 ```
 

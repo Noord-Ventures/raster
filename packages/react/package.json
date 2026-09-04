@@ -1,14 +1,14 @@
 {
-  "name": "@noorddev/raster-react",
+  "name": "@noorddev/vlak-react",
   "version": "0.4.0",
-  "description": "Raster React components: precompiled StyleX on Raster tokens. Import the package and one stylesheet; no compiler to configure.",
+  "description": "Vlak React components: precompiled StyleX on Vlak tokens. Import the package and one stylesheet; no compiler to configure.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Noord-Ventures/raster.git",
+    "url": "git+https://github.com/Noord-Ventures/vlak.git",
     "directory": "packages/react"
   },
-  "homepage": "https://getraster.com",
+  "homepage": "https://vlak.dev",
   "publishConfig": {
     "access": "public"
   },
@@ -24,8 +24,8 @@
       "default": "./dist/index.js"
     },
     "./css": {
-      "types": "./dist/raster-react.css.d.ts",
-      "default": "./dist/raster-react.css"
+      "types": "./dist/vlak-react.css.d.ts",
+      "default": "./dist/vlak-react.css"
     },
     "./tokens.stylex": {
       "types": "./dist/tokens.stylex.d.ts",
@@ -46,7 +46,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@noorddev/raster": "workspace:^",
+    "@noorddev/vlak": "workspace:^",
     "@stylexjs/stylex": "^0.19.0"
   },
   "peerDependencies": {

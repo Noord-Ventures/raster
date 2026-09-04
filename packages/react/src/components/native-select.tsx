@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { useFieldControl } from "./field";
 
@@ -25,10 +25,10 @@ const styles = stylex.create({
   label: {
     fontSize: {
       default: "0.75rem",
-      [mq.phone]: raster.controlLabel,
+      [mq.phone]: vlak.controlLabel,
     },
     fontWeight: 600,
-    color: raster.gray,
+    color: vlak.gray,
     letterSpacing: "-0.01em",
     lineHeight: "16px",
   },
@@ -36,10 +36,10 @@ const styles = stylex.create({
     appearance: "none",
     WebkitAppearance: "none",
     boxSizing: "border-box",
-    height: raster.controlH,
+    height: vlak.controlH,
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     fontFamily: "inherit",
     fontSize: {
@@ -48,7 +48,7 @@ const styles = stylex.create({
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
-    lineHeight: `calc(${raster.controlH} - 2px)`,
+    lineHeight: `calc(${vlak.controlH} - 2px)`,
     color: "var(--text)",
     caretColor: "var(--text)",
     backgroundColor: "var(--bg)",
@@ -58,14 +58,14 @@ const styles = stylex.create({
     },
     backgroundRepeat: "no-repeat",
     backgroundPosition: "right 10px center",
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
     borderColor: {
-      default: raster.controlBorder,
-      ":focus": raster.accent,
+      default: vlak.controlBorder,
+      ":focus": vlak.accent,
     },
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     paddingBlock: 0,
@@ -85,16 +85,16 @@ const styles = stylex.create({
       default: "none",
       ":focus-visible": "solid",
     },
-    outlineColor: raster.ink,
+    outlineColor: vlak.ink,
     outlineOffset: 2,
     width: "100%",
   },
   invalid: {
-    borderColor: raster.ink,
+    borderColor: vlak.ink,
   },
 });
 
-/** The platform list. Raster chrome. */
+/** The platform list. Vlak chrome. */
 export const NativeSelect = React.forwardRef<HTMLSelectElement, NativeSelectProps>(
   function NativeSelect({ label, className, style, id, children, ...props }, ref) {
     const autoId = React.useId();

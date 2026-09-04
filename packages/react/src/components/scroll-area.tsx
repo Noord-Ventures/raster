@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -16,7 +16,7 @@ const styles = stylex.create({
     maskImage: "linear-gradient(to bottom, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%)",
     paddingBlock: "0.75rem",
     paddingInline: 0,
-    color: raster.ink,
+    color: vlak.ink,
     "::-webkit-scrollbar": {
       display: "none",
     },
@@ -30,7 +30,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,

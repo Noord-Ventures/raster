@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 interface TabsContextValue {
@@ -45,7 +45,7 @@ const styles = stylex.create({
     borderStyle: "none",
     borderBottomWidth: {
       default: 0,
-      [mq.phone]: raster.hairline,
+      [mq.phone]: vlak.hairline,
     },
     borderBottomStyle: {
       default: "none",
@@ -53,7 +53,7 @@ const styles = stylex.create({
     },
     borderBottomColor: {
       default: "transparent",
-      [mq.phone]: raster.divider,
+      [mq.phone]: vlak.divider,
     },
     boxShadow: "none",
     backgroundColor: "transparent",
@@ -94,7 +94,7 @@ const styles = stylex.create({
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     paddingBlock: {
       default: "0.5rem",
@@ -106,12 +106,12 @@ const styles = stylex.create({
     },
     fontSize: {
       default: "0.875rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     fontFamily: "inherit",
     fontWeight: 400,
     color: {
-      default: raster.gray,
+      default: vlak.gray,
       [mq.forcedColors]: "ButtonText",
     },
     letterSpacing: "-0.01em",
@@ -137,7 +137,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -146,7 +146,7 @@ const styles = stylex.create({
   },
   active: {
     color: {
-      default: raster.ink,
+      default: vlak.ink,
       [mq.forcedColors]: "Highlight",
     },
     fontWeight: 600,

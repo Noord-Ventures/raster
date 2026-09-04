@@ -1,11 +1,11 @@
 # Tabs
 
-Text tabs in one row. Active tab has a 1px underline.
+Switches between related panels. Text labels in one row; active tab has a 1px underline.
 
 Category: navigation  
 Name: `tabs`  
 Also known as: Tabs, Tab list, Tab bar  
-Page: https://getraster.com/components/tabs/
+Page: https://vlak.dev/components/tabs/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/tabs/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Tab, TabList, TabPanel, Tabs } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Tab, TabList, TabPanel, Tabs } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add tabs
+npx @noorddev/vlak-cli add tabs
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/tabs.json
+npx shadcn add https://vlak.dev/r/tabs.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-tabs"><span class="rs-tab rs-tab-active">Overview</span><span class="rs-tab">Activity</span><span class="rs-tab">Settings</span></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/tabs.json
 ## Example
 
 ```tsx
-import { Tab, TabList, TabPanel, Tabs } from "@noorddev/raster-react";
+import { Tab, TabList, TabPanel, Tabs } from "@noorddev/vlak-react";
 
 <Tabs defaultValue="overview">
   <TabList aria-label="Project">

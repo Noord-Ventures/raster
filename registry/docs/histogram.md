@@ -1,11 +1,11 @@
 # Histogram
 
-Histogram. Adjacent bins, 1px between.
+Shows a distribution in adjacent bins with 1px gaps.
 
 Category: charts  
 Name: `histogram`  
 Also known as: Histogram, Distribution chart, Frequency chart  
-Page: https://getraster.com/components/histogram/
+Page: https://vlak.dev/components/histogram/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/histogram/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Histogram } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Histogram } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add histogram
+npx @noorddev/vlak-cli add histogram
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/histogram.json
+npx shadcn add https://vlak.dev/r/histogram.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><rect class="rs-chart-hist" x="8" y="36" width="36" height="20"/><rect class="rs-chart-hist" x="45" y="20" width="36" height="36"/><rect class="rs-chart-hist" x="82" y="8" width="36" height="48"/><rect class="rs-chart-hist" x="119" y="24" width="36" height="32"/></svg></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/histogram.json
 ## Example
 
 ```tsx
-import { Histogram } from "@noorddev/raster-react";
+import { Histogram } from "@noorddev/vlak-react";
 
 <Histogram
   height={204}

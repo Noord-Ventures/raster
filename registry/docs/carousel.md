@@ -1,11 +1,11 @@
 # Carousel
 
-Scroll-snap track. Buttons nudge one slide; ends feather.
+Browses a sequence on a scroll-snap track. Buttons move one slide; the ends feather.
 
 Category: content  
 Name: `carousel`  
 Also known as: Carousel, Slideshow, Embla, Swiper  
-Page: https://getraster.com/components/carousel/
+Page: https://vlak.dev/components/carousel/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/carousel/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Carousel, CarouselSlide } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Carousel, CarouselSlide } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add carousel
+npx @noorddev/vlak-cli add carousel
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/carousel.json
+npx shadcn add https://vlak.dev/r/carousel.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-carousel"><div class="rs-carousel-track"><div class="rs-carousel-slide">One</div><div class="rs-carousel-slide">Two</div><div class="rs-carousel-slide">Three</div></div><div class="rs-carousel-nav"><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.75 L5.5 8.25 L10.5 12.75" vector-effect="non-scaling-stroke"/></svg></button><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.75 L10.5 8.25 L5.5 12.75" vector-effect="non-scaling-stroke"/></svg></button></div></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/carousel.json
 ## Example
 
 ```tsx
-import { Carousel, CarouselSlide } from "@noorddev/raster-react";
+import { Carousel, CarouselSlide } from "@noorddev/vlak-react";
 
 <Carousel aria-label="Case studies">
   {cases.map((c) => (

@@ -1,11 +1,11 @@
 # Tooltip
 
-Label on hover and keyboard focus; a real element that describes its trigger.
+Explains a control on hover or keyboard focus. A real element describes its trigger.
 
 Category: feedback  
 Name: `tooltip`  
 Also known as: Tooltip, Tip, Hint  
-Page: https://getraster.com/components/tooltip/
+Page: https://vlak.dev/components/tooltip/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/tooltip/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Tooltip } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Tooltip } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add tooltip
+npx @noorddev/vlak-cli add tooltip
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/tooltip.json
+npx shadcn add https://vlak.dev/r/tooltip.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-tip"><button class="rs-btn-ghost rs-btn-sm" aria-describedby="copy-tip">Copy</button><span class="rs-tip-bubble" role="tooltip" id="copy-tip">Copy to clipboard</span></span>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/tooltip.json
 ## Example
 
 ```tsx
-import { Button, Tooltip } from "@noorddev/raster-react";
+import { Button, Tooltip } from "@noorddev/vlak-react";
 
 <Tooltip tip="Copy to clipboard">
   <Button variant="ghost" size="sm" aria-label="Copy">Copy</Button>

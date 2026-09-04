@@ -1,4 +1,4 @@
-import { NativeSelect } from "@noorddev/raster-react";
+import { NativeSelect } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {
@@ -8,7 +8,7 @@ export function Use() {
       <div className="rs-use-body">
         <div className="rs-use-stack">
           <p className="rs-use-kicker">Where the desk is</p>
-          <p className="rs-use-copy">The platform list. Raster chrome.</p>
+          <p className="rs-use-copy">The platform list. Vlak chrome.</p>
         </div>
         <NativeSelect label="Studio city" defaultValue="alkmaar">
           <option value="alkmaar">Alkmaar</option>

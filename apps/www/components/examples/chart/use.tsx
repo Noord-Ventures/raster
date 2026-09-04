@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { LineChart, ToggleGroup } from "@noorddev/raster-react";
+import { LineChart, ToggleGroup } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];

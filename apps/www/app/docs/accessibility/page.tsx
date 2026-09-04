@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { catalogComponents } from "@noorddev/raster";
+import { catalogComponents } from "@noorddev/vlak";
 import { CodeBlock } from "@/components/code-block";
 import { DocsShell } from "@/components/docs-shell";
 import { DOOR } from "../../specimen";
 
 export const metadata: Metadata = {
   title: "Accessibility",
-  description: "What every Raster component commits to, how to name things, how to test, and the pattern behind each control.",
+  description: "What every Vlak component commits to, how to name things, how to test, and the pattern behind each control.",
   alternates: { canonical: `${DOOR}/docs/accessibility/` },
 };
 
@@ -98,7 +98,7 @@ const naming = `// Controls without visible text take a name
 const testing = `// vitest, jsdom
 import { render } from "@testing-library/react";
 import { axe } from "vitest-axe";
-import { Select } from "@noorddev/raster-react";
+import { Select } from "@noorddev/vlak-react";
 
 it("has no axe violations", async () => {
   const { container } = render(<Select options={cities} aria-label="City" />);

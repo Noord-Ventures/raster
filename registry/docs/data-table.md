@@ -1,11 +1,11 @@
 # Data table
 
-Sortable table. Headers expose aria-sort.
+Sorts and presents structured records. Column headers expose aria-sort.
 
 Category: content  
 Name: `data-table`  
 Also known as: Data table, Sortable table, Grid  
-Page: https://getraster.com/components/data-table/
+Page: https://vlak.dev/components/data-table/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/data-table/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { DataTable } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { DataTable } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add data-table
+npx @noorddev/vlak-cli add data-table
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/data-table.json
+npx shadcn add https://vlak.dev/r/data-table.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <table class="rs-table"><thead><tr><th><button class="rs-datatable-sort">Phase</button></th><th>Weeks</th></tr></thead><tbody><tr><td>Identity</td><td>4</td></tr><tr><td>Strategy</td><td>2</td></tr></tbody></table>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/data-table.json
 ## Example
 
 ```tsx
-import { DataTable } from "@noorddev/raster-react";
+import { DataTable } from "@noorddev/vlak-react";
 
 <DataTable
   columns={[

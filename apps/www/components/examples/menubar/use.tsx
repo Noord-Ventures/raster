@@ -1,4 +1,4 @@
-import { Menubar } from "@noorddev/raster-react";
+import { Menubar } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

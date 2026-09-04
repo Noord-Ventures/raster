@@ -1,11 +1,11 @@
 # Avatar
 
-32px circle of initials, or a covering image. Broken images fall back. Rows overlap 8px.
+Identifies a person or group. 32px image or initials; broken images fall back automatically.
 
 Category: content  
 Name: `avatar`  
 Also known as: Avatar, Profile picture, User image, Avatar group  
-Page: https://getraster.com/components/avatar/
+Page: https://vlak.dev/components/avatar/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/avatar/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Avatar, AvatarRow } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Avatar, AvatarRow } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add avatar
+npx @noorddev/vlak-cli add avatar
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/avatar.json
+npx shadcn add https://vlak.dev/r/avatar.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-avatar-row"><span class="rs-avatar">RV</span><span class="rs-avatar">NO</span><span class="rs-avatar">+3</span></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/avatar.json
 ## Example
 
 ```tsx
-import { Avatar, AvatarRow } from "@noorddev/raster-react";
+import { Avatar, AvatarRow } from "@noorddev/vlak-react";
 
 <Avatar src="/renn.jpg" name="Renn" initials="RV" size="lg" />
 <AvatarRow>

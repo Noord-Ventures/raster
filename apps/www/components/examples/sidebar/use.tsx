@@ -1,4 +1,4 @@
-import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/raster-react";
+import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {
@@ -7,7 +7,7 @@ export function Use() {
       <h3 className="rs-use-type">Rail</h3>
       <div className="rs-use-body">
         <Sidebar aria-label="Studio rail">
-          <SidebarHead>Raster</SidebarHead>
+          <SidebarHead>Vlak</SidebarHead>
           <SidebarNav aria-label="Studio links">
             <SidebarLabel>Go to</SidebarLabel>
             <SidebarItem href="/" current>Overview</SidebarItem>

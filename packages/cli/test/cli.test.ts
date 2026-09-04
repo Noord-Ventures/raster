@@ -7,7 +7,7 @@ import { add, docsFor, init, list, loadConfig, resolveWithDependencies, search }
 let cwd: string;
 
 beforeEach(() => {
-  cwd = mkdtempSync(join(tmpdir(), "raster-cli-"));
+  cwd = mkdtempSync(join(tmpdir(), "vlak-cli-"));
 });
 
 afterEach(() => {
@@ -15,11 +15,11 @@ afterEach(() => {
 });
 
 describe("init", () => {
-  it("writes raster.css, Inter files, a specimen page, and raster.json", () => {
+  it("writes vlak.css, Inter files, a specimen page, and vlak.json", () => {
     const results = init(cwd);
     expect(results.map((r) => r.status).every((s) => s === "written")).toBe(true);
-    const css = readFileSync(join(cwd, "styles/raster.css"), "utf8");
-    expect(css).toContain("RASTER");
+    const css = readFileSync(join(cwd, "styles/vlak.css"), "utf8");
+    expect(css).toContain("VLAK");
     expect(css).toContain(".rs-btn-primary");
     expect(css).toContain("font-family:Inter");
     expect(css).not.toContain("Messina");
@@ -27,7 +27,7 @@ describe("init", () => {
     expect(existsSync(join(cwd, "styles/fonts/inter/InterVariable-latin-ext.woff2"))).toBe(true);
     expect(readFileSync(join(cwd, "styles/fonts/inter/OFL.txt"), "utf8")).toContain("SIL Open Font License");
     const page = readFileSync(join(cwd, "index.html"), "utf8");
-    expect(page).toContain('href="styles/raster.css"');
+    expect(page).toContain('href="styles/vlak.css"');
     expect(page).toContain("workhorse of a design system");
     expect(page).toContain("rs-btn-primary");
     expect(page).toContain("184 column + 20 gutter");
@@ -44,22 +44,22 @@ describe("init", () => {
     expect(page).not.toContain("Messina");
     expect(page).not.toContain("tailwind");
     expect(page).not.toContain("radix");
-    expect(loadConfig(cwd)).toMatchObject({ cssDir: "styles", componentsDir: "components/raster" });
+    expect(loadConfig(cwd)).toMatchObject({ cssDir: "styles", componentsDir: "components/vlak" });
   });
 
   it("honors --registry and custom dirs", () => {
-    init(cwd, { cssDir: "app/styles", registry: "https://getraster.com/r" });
-    expect(existsSync(join(cwd, "app/styles/raster.css"))).toBe(true);
+    init(cwd, { cssDir: "app/styles", registry: "https://vlak.dev/r" });
+    expect(existsSync(join(cwd, "app/styles/vlak.css"))).toBe(true);
     expect(existsSync(join(cwd, "app/styles/fonts/inter/OFL.txt"))).toBe(true);
-    expect(loadConfig(cwd).registry).toBe("https://getraster.com/r");
+    expect(loadConfig(cwd).registry).toBe("https://vlak.dev/r");
   });
 
   it("never clobbers an existing file without overwrite", () => {
     init(cwd);
-    writeFileSync(join(cwd, "styles/raster.css"), "/* mine */");
+    writeFileSync(join(cwd, "styles/vlak.css"), "/* mine */");
     const results = init(cwd);
     expect(results[0]!.status).toBe("skipped");
-    expect(readFileSync(join(cwd, "styles/raster.css"), "utf8")).toBe("/* mine */");
+    expect(readFileSync(join(cwd, "styles/vlak.css"), "utf8")).toBe("/* mine */");
     const overwritten = init(cwd, { overwrite: true });
     expect(overwritten[0]!.status).toBe("written");
   });
@@ -70,22 +70,22 @@ describe("add", () => {
     init(cwd);
     const { outcomes, unknown } = await add(cwd, ["button"]);
     expect(unknown).toEqual([]);
-    expect(outcomes.map((o) => o.item.name)).toEqual(["raster-lib", "button"]);
-    const source = readFileSync(join(cwd, "components/raster/button.tsx"), "utf8");
+    expect(outcomes.map((o) => o.item.name)).toEqual(["vlak-lib", "button"]);
+    const source = readFileSync(join(cwd, "components/vlak/button.tsx"), "utf8");
     expect(source).toContain("rs-btn-primary");
     expect(source).toContain("@stylexjs/stylex");
-    expect(existsSync(join(cwd, "components/raster/cx.ts"))).toBe(true);
-    expect(existsSync(join(cwd, "components/raster/rs.ts"))).toBe(true);
-    expect(readFileSync(join(cwd, "components/raster/rs.ts"), "utf8")).toContain('from "./cx"');
-    expect(existsSync(join(cwd, "components/raster/tokens.stylex.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "components/vlak/cx.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "components/vlak/rs.ts"))).toBe(true);
+    expect(readFileSync(join(cwd, "components/vlak/rs.ts"), "utf8")).toContain('from "./cx"');
+    expect(existsSync(join(cwd, "components/vlak/tokens.stylex.ts"))).toBe(true);
   });
 
   it("pulls registry dependencies in install order", async () => {
     init(cwd);
     const { outcomes } = await add(cwd, ["dialog"]);
-    expect(outcomes.map((o) => o.item.name)).toEqual(["raster-lib", "button", "icons", "dialog"]);
-    expect(existsSync(join(cwd, "components/raster/dialog.tsx"))).toBe(true);
-    expect(existsSync(join(cwd, "components/raster/button.tsx"))).toBe(true);
+    expect(outcomes.map((o) => o.item.name)).toEqual(["vlak-lib", "button", "icons", "dialog"]);
+    expect(existsSync(join(cwd, "components/vlak/dialog.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "components/vlak/button.tsx"))).toBe(true);
   });
 
   it("reports unknown names", async () => {
@@ -100,7 +100,7 @@ describe("add", () => {
     const written = outcomes.flatMap((o) => o.results.map((r) => r.path));
     expect(new Set(written).size).toBe(written.length);
     expect(outcomes.filter((o) => o.item.name === "dropdown-menu")).toHaveLength(1);
-    expect(existsSync(join(cwd, "components/raster/charts/frame.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "components/vlak/charts/frame.tsx"))).toBe(true);
   });
 
   it("every vendored import resolves inside the project", async () => {
@@ -122,12 +122,12 @@ describe("add", () => {
   it("keeps nested trees intact so chart imports resolve", async () => {
     init(cwd);
     await add(cwd, ["chart"]);
-    expect(existsSync(join(cwd, "components/raster/chart.tsx"))).toBe(true);
-    expect(existsSync(join(cwd, "components/raster/charts/index.ts"))).toBe(true);
-    expect(existsSync(join(cwd, "components/raster/charts/line.tsx"))).toBe(true);
-    const line = readFileSync(join(cwd, "components/raster/charts/line.tsx"), "utf8");
+    expect(existsSync(join(cwd, "components/vlak/chart.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "components/vlak/charts/index.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "components/vlak/charts/line.tsx"))).toBe(true);
+    const line = readFileSync(join(cwd, "components/vlak/charts/line.tsx"), "utf8");
     for (const spec of [...line.matchAll(/from "(\.[^"]+)"/g)].map((m) => m[1]!)) {
-      const base = join(cwd, "components/raster/charts", spec);
+      const base = join(cwd, "components/vlak/charts", spec);
       expect(
         existsSync(`${base}.ts`) || existsSync(`${base}.tsx`) || existsSync(join(base, "index.ts")),
         `${spec} resolves`,
@@ -139,10 +139,10 @@ describe("add", () => {
     init(cwd);
     const { outcomes } = await add(cwd, ["table"]);
     expect(outcomes[0]!.cssOnly).toBe(false);
-    expect(existsSync(join(cwd, "components/raster/table.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "components/vlak/table.tsx"))).toBe(true);
   });
 
-  it("respects a custom componentsDir from raster.json", async () => {
+  it("respects a custom componentsDir from vlak.json", async () => {
     init(cwd, { componentsDir: "src/ui" });
     await add(cwd, ["switch"]);
     expect(existsSync(join(cwd, "src/ui/switch.tsx"))).toBe(true);
@@ -160,18 +160,18 @@ describe("add", () => {
         description: "from remote",
         files: [
           {
-            path: "raster/button.tsx",
+            path: "vlak/button.tsx",
             content: "export const Button = () => null; // remote\n",
             type: "registry:component",
-            target: "components/raster/button.tsx",
+            target: "components/vlak/button.tsx",
           },
         ],
-        meta: { raster: { cssOnly: false, registryDependencies: [] } },
+        meta: { vlak: { cssOnly: false, registryDependencies: [] } },
       }),
     );
     const { outcomes, unknown } = await add(cwd, ["button"], { registry, overwrite: true });
     expect(unknown).toEqual([]);
-    expect(readFileSync(join(cwd, "components/raster/button.tsx"), "utf8")).toContain("remote");
+    expect(readFileSync(join(cwd, "components/vlak/button.tsx"), "utf8")).toContain("remote");
     expect(outcomes[0]!.item.description).toBe("from remote");
   });
 });
@@ -190,15 +190,15 @@ describe("docs", () => {
   it("prints the bundled markdown page for a component", () => {
     const page = docsFor("button")!;
     expect(page).toContain("# Button");
-    expect(page).toContain("npx @noorddev/raster-cli add button");
-    expect(page).toContain('import { Button } from "@noorddev/raster-react"');
+    expect(page).toContain("npx @noorddev/vlak-cli add button");
+    expect(page).toContain('import { Button } from "@noorddev/vlak-react"');
     expect(page).toContain("## Props");
     expect(page).toContain("## Keyboard");
   });
 
   it("serves the guide, the index, and the tokens page", () => {
-    expect(docsFor("guide")).toContain("# Raster guide");
-    expect(docsFor("index")).toContain("# Raster components");
+    expect(docsFor("guide")).toContain("# Vlak guide");
+    expect(docsFor("index")).toContain("# Vlak components");
     expect(docsFor("tokens")).toContain("--bg");
   });
 

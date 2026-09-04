@@ -1,11 +1,11 @@
 # Mono chip
 
-Mono identifier with a 1px mixed border.
+Marks a short technical identifier. Monospace text with a 1px mixed border.
 
 Category: content  
 Name: `chip`  
 Also known as: Chip, Mono chip, Code chip, Token  
-Page: https://getraster.com/components/chip/
+Page: https://vlak.dev/components/chip/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/chip/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Chip } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Chip } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add chip
+npx @noorddev/vlak-cli add chip
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/chip.json
+npx shadcn add https://vlak.dev/r/chip.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-chip">/noord-brand</span>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/chip.json
 ## Example
 
 ```tsx
-import { Chip } from "@noorddev/raster-react";
+import { Chip } from "@noorddev/vlak-react";
 
 <Chip>/noord-brand</Chip>
 ```

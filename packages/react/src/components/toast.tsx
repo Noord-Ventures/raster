@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -86,7 +86,7 @@ const styles = stylex.create({
       default: null,
       [mq.phone]: 0,
     },
-    zIndex: raster.zToast,
+    zIndex: vlak.zToast,
     display: "flex",
     flexDirection: "column",
     alignItems: {
@@ -102,12 +102,12 @@ const styles = stylex.create({
     display: "flex",
     alignItems: "flex-start",
     gap: "0.625rem",
-    backgroundColor: raster.paper,
-    borderWidth: raster.hairline,
+    backgroundColor: vlak.paper,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderRadius: {
-      default: raster.radius,
+      default: vlak.radius,
       [mq.phone]: 0,
     },
     boxShadow: {
@@ -138,8 +138,8 @@ const styles = stylex.create({
       default: toastIn,
       [mq.reduce]: "none",
     },
-    animationDuration: raster.durationConfirm,
-    animationTimingFunction: raster.ease,
+    animationDuration: vlak.durationConfirm,
+    animationTimingFunction: vlak.ease,
   },
   title: {
     display: "block",
@@ -149,7 +149,7 @@ const styles = stylex.create({
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
   },
   body: {
     fontSize: {
@@ -158,7 +158,7 @@ const styles = stylex.create({
     },
     lineHeight: 1.5,
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
     marginTop: {
       default: 1,
       [mq.phone]: "0.25rem",
@@ -168,7 +168,7 @@ const styles = stylex.create({
   },
   close: {
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     boxSizing: "border-box",
@@ -187,20 +187,20 @@ const styles = stylex.create({
     },
     width: {
       default: "1.75rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     height: {
       default: "1.75rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     padding: 0,
     borderWidth: 0,
-    borderRadius: raster.radiusSm,
+    borderRadius: vlak.radiusSm,
     backgroundColor: {
       default: "transparent",
-      ":hover": raster.controlFill,
+      ":hover": vlak.controlFill,
     },
-    color: raster.ink,
+    color: vlak.ink,
     cursor: "pointer",
     outlineWidth: {
       default: null,
@@ -212,7 +212,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,

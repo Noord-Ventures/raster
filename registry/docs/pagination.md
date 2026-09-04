@@ -1,11 +1,11 @@
 # Pagination
 
-Square page controls. Current page is solid ink.
+Moves through paginated content. Square controls; the current page fills with ink.
 
 Category: navigation  
 Name: `pagination`  
 Also known as: Pagination, Pager, Page navigation  
-Page: https://getraster.com/components/pagination/
+Page: https://vlak.dev/components/pagination/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/pagination/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Pagination } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Pagination } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add pagination
+npx @noorddev/vlak-cli add pagination
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/pagination.json
+npx shadcn add https://vlak.dev/r/pagination.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-pages"><span class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.75 L5.5 8.25 L10.5 12.75" vector-effect="non-scaling-stroke"/></svg></span><span class="rs-page rs-page-on">1</span><span class="rs-page">2</span><span class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.75 L10.5 8.25 L5.5 12.75" vector-effect="non-scaling-stroke"/></svg></span></div>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/pagination.json
 
 ```tsx
 import { useState } from "react";
-import { Pagination } from "@noorddev/raster-react";
+import { Pagination } from "@noorddev/vlak-react";
 
 const [page, setPage] = useState(1);
 

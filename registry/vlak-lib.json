@@ -1,0 +1,49 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "vlak-lib",
+  "type": "registry:lib",
+  "title": "Vlak lib",
+  "description": "Shared helpers every Vlak React component imports: the rs() class seam, cx, StyleX tokens, and the hidden-element leaf.",
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "files": [
+    {
+      "path": "vlak/cx.ts",
+      "content": "/** Join class names, dropping falsy parts. */\nexport function cx(...parts: Array<string | false | null | undefined>): string {\n  return parts.filter(Boolean).join(\" \");\n}\n",
+      "type": "registry:lib",
+      "target": "components/vlak/cx.ts"
+    },
+    {
+      "path": "vlak/rs.ts",
+      "content": "import type { CSSProperties } from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport type { CompiledStyles, InlineStyles } from \"@stylexjs/stylex\";\nimport { cx } from \"./cx\";\n\ntype Nested<T> = T | ReadonlyArray<Nested<T>>;\n\n/** Exactly what stylex.props accepts: compiled leaves, falsy, nested arrays, or a leaf with inline styles. */\nexport type Leaves = ReadonlyArray<Nested<null | undefined | CompiledStyles | boolean | Readonly<[CompiledStyles, InlineStyles]>>>;\n\ntype StyleXProps = { className?: string; style?: CSSProperties };\n\n/**\n * The one seam every component styles through: semantic rs-* class names\n * (the CSS-first contract, and what packages/core generates CSS for) merged\n * with the compiled StyleX leaves that paint the React tree.\n */\nexport function rs(classNames: Array<string | false | null | undefined>, ...styles: Leaves): StyleXProps {\n  const sx = stylex.props(...styles) as StyleXProps;\n  return {\n    className: cx(...classNames, sx.className),\n    style: sx.style,\n  };\n}\n",
+      "type": "registry:lib",
+      "target": "components/vlak/rs.ts"
+    },
+    {
+      "path": "vlak/tokens.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\n/**\n * StyleX vars alias Vlak CSS custom properties. Not a second scale.\n * Values live in packages/core/css/tokens.css (generated from src/tokens.ts).\n */\nexport const vlak = stylex.defineVars({\n  paper: \"var(--bg)\",\n  ink: \"var(--text)\",\n  gray: \"var(--text-secondary)\",\n  accent: \"var(--accent)\",\n  divider: \"var(--divider)\",\n  dividerSubtle: \"var(--divider-subtle)\",\n  tableAlt: \"var(--table-alt)\",\n  gridLine: \"var(--grid-line)\",\n  /** Boundary of a form control: 3:1 against the ground. Hairlines stay decorative. */\n  controlBorder: \"var(--control-border)\",\n  /** Hover fill of a ghost control; its edge takes the same colour. */\n  controlFill: \"var(--control-fill)\",\n  radiusSm: \"var(--radius-sm)\",\n  radius: \"var(--radius)\",\n  radiusChrome: \"var(--radius-chrome)\",\n  radiusIn: \"var(--radius-in)\",\n  pad: \"var(--pad)\",\n  gutter: \"var(--gutter)\",\n  module: \"var(--grid-size)\",\n  gridImage: \"var(--grid-image)\",\n  gridPos: \"var(--grid-pos)\",\n  hit: \"var(--hit)\",\n  controlH: \"var(--control-h)\",\n  controlFs: \"var(--control-fs)\",\n  controlLabel: \"var(--control-label)\",\n  durationSnap: \"var(--duration-snap)\",\n  duration: \"var(--duration)\",\n  durationConfirm: \"var(--duration-confirm)\",\n  ease: \"var(--ease)\",\n  transition: \"var(--transition)\",\n  textScale: \"var(--text-scale)\",\n  hairline: \"1px\",\n  /** Stacking scale. Native dialog and popover use the top layer instead. */\n  zRaised: \"var(--z-raised)\",\n  zSticky: \"var(--z-sticky)\",\n  zFloat: \"var(--z-float)\",\n  zOverlay: \"var(--z-overlay)\",\n  zToast: \"var(--z-toast)\",\n});\n\n/** Inter stack. Same as body in base.css. Not a token var — @font-face stays CSS. */\nexport const vlakFont =\n  \"Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif\";\n\nexport const vlakMono = \"ui-monospace, SFMono-Regular, Menlo, monospace\";\n\n/** Compile-time media keys. StyleX only folds defineConsts, not plain strings. */\nexport const mq = stylex.defineConsts({\n  phone: \"@media (max-width: 640px)\",\n  mobileGrid: \"@media (max-width: 480px)\",\n  at900: \"@media (min-width: 900px)\",\n  at899: \"@media (max-width: 899px)\",\n  rail: \"@media (min-width: 1024px)\",\n  wide: \"@media (min-width: 1440px)\",\n  reduce: \"@media (prefers-reduced-motion: reduce)\",\n  touch: \"@media (hover: none)\",\n  forcedColors: \"@media (forced-colors: active)\",\n});\n\n/** Phone recut (≤640). Desktop stays the poster. */\nexport const phone = mq.phone;\n\n/** Mobile grid (≤480). */\nexport const mobileGrid = mq.mobileGrid;\n\n/** Catalog rail. */\nexport const rail = mq.rail;\n\n/** Wide catalog. */\nexport const wide = mq.wide;\n",
+      "type": "registry:lib",
+      "target": "components/vlak/tokens.stylex.ts"
+    },
+    {
+      "path": "vlak/hidden.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport { vlak } from \"./tokens.stylex\";\n\n/** Screen-reader only. Matches .rs-sr */\nexport const hidden = stylex.create({\n  sr: {\n    position: \"absolute\",\n    width: 1,\n    height: 1,\n    padding: 0,\n    margin: -1,\n    overflow: \"hidden\",\n    clip: \"rect(0, 0, 0, 0)\",\n    whiteSpace: \"nowrap\",\n    borderWidth: 0,\n  },\n  srFocusMark: {\n    outlineWidth: {\n      default: null,\n      \":focus-visible + *\": 1.5,\n    },\n    outlineStyle: {\n      default: null,\n      \":focus-visible + *\": \"solid\",\n    },\n    outlineColor: {\n      default: null,\n      \":focus-visible + *\": vlak.ink,\n    },\n    outlineOffset: {\n      default: null,\n      \":focus-visible + *\": 2,\n    },\n  },\n});\n",
+      "type": "registry:lib",
+      "target": "components/vlak/hidden.stylex.ts"
+    },
+    {
+      "path": "vlak/merge-refs.ts",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\n/** Writes a node into a ref of either shape; a missing ref is a no-op. */\nexport function setRef<T>(ref: React.Ref<T> | undefined, value: T | null): void {\n  if (typeof ref === \"function\") ref(value);\n  else if (ref) (ref as React.MutableRefObject<T | null>).current = value;\n}\n\n/**\n * One callback ref that feeds every ref given: a component's own ref on\n * its root and the ref forwarded from the parent. Stable while the refs\n * are, so React attaches it once.\n */\nexport function useMergedRefs<T>(...refs: Array<React.Ref<T> | undefined>): React.RefCallback<T> {\n  return React.useCallback(\n    (node: T | null) => {\n      for (const ref of refs) setRef(ref, node);\n    },\n    // biome-ignore lint/correctness/useExhaustiveDependencies: the refs are the dependency list\n    refs,\n  );\n}\n",
+      "type": "registry:lib",
+      "target": "components/vlak/merge-refs.ts"
+    }
+  ],
+  "meta": {
+    "vlak": {
+      "category": "foundation",
+      "cssOnly": false,
+      "registryDependencies": []
+    }
+  }
+}

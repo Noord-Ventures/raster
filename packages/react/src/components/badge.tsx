@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -20,25 +20,25 @@ const styles = stylex.create({
     fontWeight: 600,
     letterSpacing: "0.02em",
     lineHeight: 1.4,
-    borderRadius: raster.radiusSm,
+    borderRadius: vlak.radiusSm,
   },
   outline: {
-    color: raster.accent,
-    borderWidth: raster.hairline,
+    color: vlak.accent,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.accent,
+    borderColor: vlak.accent,
     paddingBlock: "0.1875rem",
     paddingInline: "0.625rem",
   },
   solid: {
-    color: raster.paper,
-    backgroundColor: raster.ink,
+    color: vlak.paper,
+    backgroundColor: vlak.ink,
     paddingBlock: "0.25rem",
     paddingInline: "0.6875rem",
   },
   muted: {
-    color: raster.ink,
-    backgroundColor: raster.dividerSubtle,
+    color: vlak.ink,
+    backgroundColor: vlak.dividerSubtle,
     paddingBlock: "0.25rem",
     paddingInline: "0.6875rem",
   },

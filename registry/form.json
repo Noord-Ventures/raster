@@ -3,14 +3,14 @@
   "name": "form",
   "type": "registry:component",
   "title": "Form",
-  "description": "Stacked fields with one primary action at the end.",
+  "description": "Collects related inputs as stacked fields with one primary action at the end.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/field.json",
-    "https://getraster.com/r/input.json",
-    "https://getraster.com/r/button.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/field.json",
+    "https://vlak.dev/r/input.json",
+    "https://vlak.dev/r/button.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -18,23 +18,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/form.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {}\n\nconst styles = stylex.create({\n  form: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    gap: {\n      default: \"1rem\",\n      [mq.phone]: \"1.25rem\",\n    },\n    maxWidth: {\n      default: 388,\n      [mq.phone]: \"none\",\n    },\n    width: {\n      default: null,\n      [mq.phone]: \"100%\",\n    },\n    margin: 0,\n    color: raster.ink,\n  },\n});\n\n/** Native form. Fields stack. One primary action at the end. */\nexport const Form = React.forwardRef<HTMLFormElement, FormProps>(function Form(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-form\", className], styles.form);\n  return <form ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
+      "path": "vlak/form.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {}\n\nconst styles = stylex.create({\n  form: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    gap: {\n      default: \"1rem\",\n      [mq.phone]: \"1.25rem\",\n    },\n    maxWidth: {\n      default: 388,\n      [mq.phone]: \"none\",\n    },\n    width: {\n      default: null,\n      [mq.phone]: \"100%\",\n    },\n    margin: 0,\n    color: vlak.ink,\n  },\n});\n\n/** Native form. Fields stack. One primary action at the end. */\nexport const Form = React.forwardRef<HTMLFormElement, FormProps>(function Form(\n  { className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-form\", className], styles.form);\n  return <form ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
-      "target": "components/raster/form.tsx"
+      "target": "components/vlak/form.tsx"
     },
     {
-      "path": "raster/styles/form.css",
+      "path": "vlak/styles/form.css",
       "content": "/* ── form: generated from packages/react/src/components/form.tsx ── */\n.rs-form{display:flex;flex-direction:column;gap:1rem;max-width:388px;margin:0;color:var(--text)}\n@media (max-width: 640px){.rs-form{gap:1.25rem;max-width:none;width:100%}}\n",
       "type": "registry:file",
-      "target": "styles/raster/form.css"
+      "target": "styles/vlak/form.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "forms",
       "classes": [
         "rs-form"
@@ -45,14 +45,14 @@
         "field",
         "input",
         "button",
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Form",
         "Form layout",
         "Stacked form"
       ],
-      "example": "import { Button, Field, FieldLabel, Form, Input } from \"@noorddev/raster-react\";\n\n<Form onSubmit={(e) => { e.preventDefault(); save(); }}>\n  <Field>\n    <FieldLabel htmlFor=\"name\">Name</FieldLabel>\n    <Input plain id=\"name\" required />\n  </Field>\n  <Field>\n    <FieldLabel htmlFor=\"email\">E-mail</FieldLabel>\n    <Input plain id=\"email\" type=\"email\" required />\n  </Field>\n  <Button type=\"submit\">Send</Button>\n</Form>",
+      "example": "import { Button, Field, FieldLabel, Form, Input } from \"@noorddev/vlak-react\";\n\n<Form onSubmit={(e) => { e.preventDefault(); save(); }}>\n  <Field>\n    <FieldLabel htmlFor=\"name\">Name</FieldLabel>\n    <Input plain id=\"name\" required />\n  </Field>\n  <Field>\n    <FieldLabel htmlFor=\"email\">E-mail</FieldLabel>\n    <Input plain id=\"email\" type=\"email\" required />\n  </Field>\n  <Button type=\"submit\">Send</Button>\n</Form>",
       "usage": {
         "use": [
           "Any form: fields stack, one primary action at the end.",

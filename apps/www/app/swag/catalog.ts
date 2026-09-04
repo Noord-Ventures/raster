@@ -6,7 +6,7 @@ export type SwagItem = {
 };
 
 /**
- * Raster swag blanks. Stills live in /public/swag and can be swapped
+ * Vlak swag blanks. Stills live in /public/swag and can be swapped
  * for Noord green-screen templates — keep slugs and print areas; only
  * replace the JPEG. Do not DOM-stamp a second mark on the still.
  */

@@ -126,7 +126,7 @@ import {
   Tab,
   TabList,
   Tabs,
-} from "@noorddev/raster-react";
+} from "@noorddev/vlak-react";
 
 function DialogDemo() {
   const [open, setOpen] = React.useState(false);
@@ -391,7 +391,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     <div style={{ width: 260 }}>
       <Field>
         <FieldLabel htmlFor="demo-field">Name</FieldLabel>
-        <Input plain id="demo-field" placeholder="Raster" />
+        <Input plain id="demo-field" placeholder="Vlak" />
         <FieldHint>As it appears on the invoice.</FieldHint>
       </Field>
     </div>
@@ -414,7 +414,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     <div style={{ width: 260 }}>
       <InputGroup>
         <InputAddon>https://</InputAddon>
-        <Input placeholder="getraster.com" />
+        <Input placeholder="vlak.dev" />
       </InputGroup>
     </div>
   ),
@@ -444,7 +444,7 @@ export const demos: Record<string, () => React.ReactNode> = {
   drawer: DrawerDemo,
   sidebar: () => (
     <Sidebar aria-label="Example sidebar">
-      <SidebarHead>Raster</SidebarHead>
+      <SidebarHead>Vlak</SidebarHead>
       <SidebarNav aria-label="Example links">
         <SidebarLabel>Go to</SidebarLabel>
         <SidebarItem href="#" current>
@@ -712,7 +712,7 @@ export const demos: Record<string, () => React.ReactNode> = {
   accordion: () => (
     <div style={{ width: 300 }}>
       <Accordion exclusive>
-        <AccordionItem title="What is Raster?" defaultOpen>
+        <AccordionItem title="What is Vlak?" defaultOpen>
           A monochrome design system on a 204px module.
         </AccordionItem>
         <AccordionItem title="Is it dependency-free?">Yes. Native elements do the work.</AccordionItem>
@@ -800,7 +800,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     <nav className="rs-crumb-bar rs-crumb-bar-scrolled" style={{ position: "relative", width: 340 }} aria-label="Example crumb bar">
       <div className="rs-crumb-bar-inner" style={{ margin: 0, paddingLeft: 16 }}>
         <p className="rs-crumbs">
-          <span>Raster</span>
+          <span>Vlak</span>
           <span className="rs-crumbs-sep">/</span>
           <span className="rs-crumbs-here">Components</span>
         </p>
@@ -808,7 +808,7 @@ export const demos: Record<string, () => React.ReactNode> = {
     </nav>
   ),
   breadcrumbs: () => (
-    <Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Raster" }]} aria-label="Example breadcrumbs" />
+    <Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Vlak" }]} aria-label="Example breadcrumbs" />
   ),
   pagination: PaginationDemo,
   select: () => (

@@ -3,12 +3,12 @@
   "name": "context-menu",
   "type": "registry:component",
   "title": "Context menu",
-  "description": "Menu at the pointer on right-click, or on Shift+F10 from the keyboard. Escape and outside click close it.",
+  "description": "Opens actions at the pointer or with Shift+F10. Escape and outside click close the menu.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/dropdown-menu.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/dropdown-menu.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -16,23 +16,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/context-menu.tsx",
-      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\nimport type { DropdownMenuItem, MenuCloseReason } from \"./dropdown-menu\";\nimport { MenuPanel, menuStyles } from \"./dropdown-menu\";\n\nconst styles = stylex.create({\n  trigger: {\n    outlineWidth: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n    outlineStyle: {\n      default: null,\n      \":focus-visible\": \"solid\",\n    },\n    outlineColor: {\n      default: null,\n      \":focus-visible\": raster.ink,\n    },\n    outlineOffset: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n  },\n  pin: {\n    position: \"fixed\",\n    zIndex: raster.zFloat,\n    backgroundColor: raster.paper,\n  },\n});\n\nexport interface ContextMenuProps extends React.HTMLAttributes<HTMLDivElement> {\n  items: DropdownMenuItem[];\n}\n\n/**\n * Menu at the pointer on right-click, or anchored to the trigger on\n * Shift+F10 / the ContextMenu key. The wrapper is tabbable (pass\n * `tabIndex={-1}` when the child is focusable itself); focus returns to\n * whatever had it when the menu closes.\n */\nexport const ContextMenu = React.forwardRef<HTMLDivElement, ContextMenuProps>(function ContextMenu(\n  { items, className, style, children, onContextMenu, onKeyDown, ...props },\n  ref,\n) {\n  const idBase = React.useId();\n  const menuId = `${idBase}-menu`;\n  const [at, setAt] = React.useState<{ x: number; y: number } | null>(null);\n  const menuRef = React.useRef<HTMLDivElement>(null);\n  const restoreTo = React.useRef<HTMLElement | null>(null);\n\n  React.useEffect(() => {\n    if (!at) return;\n    const onPointerDown = (e: PointerEvent) => {\n      if (!menuRef.current?.contains(e.target as Node)) setAt(null);\n    };\n    document.addEventListener(\"pointerdown\", onPointerDown);\n    return () => document.removeEventListener(\"pointerdown\", onPointerDown);\n  }, [at]);\n\n  const openAt = (x: number, y: number) => {\n    restoreTo.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;\n    setAt({ x, y });\n  };\n\n  const openFromRect = (el: HTMLElement) => {\n    const r = el.getBoundingClientRect();\n    openAt(r.left, r.bottom);\n  };\n\n  const close = (reason: MenuCloseReason) => {\n    setAt(null);\n    if (reason !== \"outside\") restoreTo.current?.focus();\n  };\n\n  const trigger = rs([\"rs-context-menu-trigger\", className], styles.trigger);\n  const menu = rs([\"rs-menu\", \"rs-context-menu-pin\"], menuStyles.menu, menuStyles.menuFixed, styles.pin);\n  return (\n    <div\n      ref={ref}\n      tabIndex={0}\n      aria-keyshortcuts=\"Shift+F10\"\n      className={trigger.className}\n      style={{ ...trigger.style, ...style }}\n      onContextMenu={(e) => {\n        onContextMenu?.(e);\n        if (e.defaultPrevented) return;\n        e.preventDefault();\n        /* A keyboard-synthesised contextmenu event carries no pointer position. */\n        if (e.clientX === 0 && e.clientY === 0) openFromRect(e.currentTarget);\n        else openAt(e.clientX, e.clientY);\n      }}\n      onKeyDown={(e) => {\n        onKeyDown?.(e);\n        if (e.defaultPrevented || at) return;\n        if ((e.key === \"F10\" && e.shiftKey) || e.key === \"ContextMenu\") {\n          e.preventDefault();\n          openFromRect(e.currentTarget);\n        }\n      }}\n      {...props}\n    >\n      {children}\n      {at && (\n        <MenuPanel\n          panelRef={menuRef}\n          id={menuId}\n          items={items}\n          className={menu.className}\n          style={{ ...menu.style, left: at.x, top: at.y }}\n          onClose={close}\n        />\n      )}\n    </div>\n  );\n});\n",
+      "path": "vlak/context-menu.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\nimport type { DropdownMenuItem, MenuCloseReason } from \"./dropdown-menu\";\nimport { MenuPanel, menuStyles } from \"./dropdown-menu\";\n\nconst styles = stylex.create({\n  trigger: {\n    outlineWidth: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n    outlineStyle: {\n      default: null,\n      \":focus-visible\": \"solid\",\n    },\n    outlineColor: {\n      default: null,\n      \":focus-visible\": vlak.ink,\n    },\n    outlineOffset: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n  },\n  pin: {\n    position: \"fixed\",\n    zIndex: vlak.zFloat,\n    backgroundColor: vlak.paper,\n  },\n});\n\nexport interface ContextMenuProps extends React.HTMLAttributes<HTMLDivElement> {\n  items: DropdownMenuItem[];\n}\n\n/**\n * Menu at the pointer on right-click, or anchored to the trigger on\n * Shift+F10 / the ContextMenu key. The wrapper is tabbable (pass\n * `tabIndex={-1}` when the child is focusable itself); focus returns to\n * whatever had it when the menu closes.\n */\nexport const ContextMenu = React.forwardRef<HTMLDivElement, ContextMenuProps>(function ContextMenu(\n  { items, className, style, children, onContextMenu, onKeyDown, ...props },\n  ref,\n) {\n  const idBase = React.useId();\n  const menuId = `${idBase}-menu`;\n  const [at, setAt] = React.useState<{ x: number; y: number } | null>(null);\n  const menuRef = React.useRef<HTMLDivElement>(null);\n  const restoreTo = React.useRef<HTMLElement | null>(null);\n\n  React.useEffect(() => {\n    if (!at) return;\n    const onPointerDown = (e: PointerEvent) => {\n      if (!menuRef.current?.contains(e.target as Node)) setAt(null);\n    };\n    document.addEventListener(\"pointerdown\", onPointerDown);\n    return () => document.removeEventListener(\"pointerdown\", onPointerDown);\n  }, [at]);\n\n  const openAt = (x: number, y: number) => {\n    restoreTo.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;\n    setAt({ x, y });\n  };\n\n  const openFromRect = (el: HTMLElement) => {\n    const r = el.getBoundingClientRect();\n    openAt(r.left, r.bottom);\n  };\n\n  const close = (reason: MenuCloseReason) => {\n    setAt(null);\n    if (reason !== \"outside\") restoreTo.current?.focus();\n  };\n\n  const trigger = rs([\"rs-context-menu-trigger\", className], styles.trigger);\n  const menu = rs([\"rs-menu\", \"rs-context-menu-pin\"], menuStyles.menu, menuStyles.menuFixed, styles.pin);\n  return (\n    <div\n      ref={ref}\n      tabIndex={0}\n      aria-keyshortcuts=\"Shift+F10\"\n      className={trigger.className}\n      style={{ ...trigger.style, ...style }}\n      onContextMenu={(e) => {\n        onContextMenu?.(e);\n        if (e.defaultPrevented) return;\n        e.preventDefault();\n        /* A keyboard-synthesised contextmenu event carries no pointer position. */\n        if (e.clientX === 0 && e.clientY === 0) openFromRect(e.currentTarget);\n        else openAt(e.clientX, e.clientY);\n      }}\n      onKeyDown={(e) => {\n        onKeyDown?.(e);\n        if (e.defaultPrevented || at) return;\n        if ((e.key === \"F10\" && e.shiftKey) || e.key === \"ContextMenu\") {\n          e.preventDefault();\n          openFromRect(e.currentTarget);\n        }\n      }}\n      {...props}\n    >\n      {children}\n      {at && (\n        <MenuPanel\n          panelRef={menuRef}\n          id={menuId}\n          items={items}\n          className={menu.className}\n          style={{ ...menu.style, left: at.x, top: at.y }}\n          onClose={close}\n        />\n      )}\n    </div>\n  );\n});\n",
       "type": "registry:component",
-      "target": "components/raster/context-menu.tsx"
+      "target": "components/vlak/context-menu.tsx"
     },
     {
-      "path": "raster/styles/context-menu.css",
+      "path": "vlak/styles/context-menu.css",
       "content": "/* ── context-menu: generated from packages/react/src/components/context-menu.tsx ── */\n.rs-context-menu-trigger:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}\n.rs-menu.rs-context-menu-pin{position:fixed;z-index:var(--z-float);background-color:var(--bg)}\n",
       "type": "registry:file",
-      "target": "styles/raster/context-menu.css"
+      "target": "styles/vlak/context-menu.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "actions",
       "classes": [
         "rs-context-menu-trigger",
@@ -42,14 +42,14 @@
       "cssOnly": false,
       "registryDependencies": [
         "dropdown-menu",
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Context menu",
         "Right-click menu",
         "Contextual menu"
       ],
-      "example": "import { ContextMenu } from \"@noorddev/raster-react\";\n\n<ContextMenu items={[{ label: \"Copy\", onSelect: copy }, { label: \"Paste\", onSelect: paste }, { separator: true }, { label: \"Inspect\" }]}>\n  <Canvas />\n</ContextMenu>",
+      "example": "import { ContextMenu } from \"@noorddev/vlak-react\";\n\n<ContextMenu items={[{ label: \"Copy\", onSelect: copy }, { label: \"Paste\", onSelect: paste }, { separator: true }, { label: \"Inspect\" }]}>\n  <Canvas />\n</ContextMenu>",
       "usage": {
         "use": [
           "Actions on a region or object that already has a primary interaction: a canvas, a row, a file.",

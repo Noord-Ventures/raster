@@ -1,4 +1,4 @@
-import { InputOTP } from "@noorddev/raster-react";
+import { InputOTP } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

@@ -1,4 +1,4 @@
-import { InlineForm } from "@noorddev/raster-react";
+import { InlineForm } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

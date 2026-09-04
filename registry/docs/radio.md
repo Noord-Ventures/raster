@@ -1,11 +1,11 @@
 # Radio
 
-Single-choice control. Selected dot is ink.
+Selects one option from a group. The selected dot fills with ink.
 
 Category: forms  
 Name: `radio`  
 Also known as: Radio, Radio group, RadioGroup, Radio button  
-Page: https://getraster.com/components/radio/
+Page: https://vlak.dev/components/radio/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/radio/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Radio, RadioGroup } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Radio, RadioGroup } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add radio
+npx @noorddev/vlak-cli add radio
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/radio.json
+npx shadcn add https://vlak.dev/r/radio.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <label class="rs-radio"><span class="rs-radio-dot rs-radio-on"></span>Monthly</label>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/radio.json
 
 ```tsx
 import { useState } from "react";
-import { Radio, RadioGroup } from "@noorddev/raster-react";
+import { Radio, RadioGroup } from "@noorddev/vlak-react";
 
 const [plan, setPlan] = useState("monthly");
 

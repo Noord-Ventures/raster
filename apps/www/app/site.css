@@ -1,4 +1,4 @@
-/* Site chrome for the Raster docs site.
+/* Site chrome for the Vlak docs site.
    StyleX owns logo / corner nav / cover / gallery / content (site.stylex.ts).
    This sheet stays for html::before, body:has() layout, appearance panel.
 
@@ -89,7 +89,7 @@ body {
   display: flex; align-items: center; justify-content: center; gap: 12px;
   height: 24px;
 }
-/* The Raster glyph, bare: ink on the page, no tile (house spec: 20px). */
+/* The Vlak glyph, bare: ink on the page, no tile (house spec: 20px). */
 .site-logo {
   display: flex; align-items: center; justify-content: center;
   width: 20px; height: 20px;
@@ -140,7 +140,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   opacity: 0;
   pointer-events: none;
 }
-/* Hide desktop crumb *labels* so “Raster” cannot sit on Components
+/* Hide desktop crumb *labels* so “Vlak” cannot sit on Components
    (Rastenents). Do not clip the bar’s width — that paints a gray
    stump and lets page cells (home tagline) show through the hole.
    The bar stays full-bleed: transparent at rest, paper + hairline
@@ -188,9 +188,9 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 }
 
 /* Appearance: same three groups as renatovaldes.com.
-   Raster chrome: hairline, radius 0, sentence case. Not the 10px sheet. */
+   Vlak chrome: hairline, radius 0, sentence case. Not the 10px sheet. */
 /* Anchored to the trigger's bottom-right corner and opening leftwards,
-   like every Raster menu: 8px gap, hairline, paper, radius-sm, no shadow.
+   like every Vlak menu: 8px gap, hairline, paper, radius-sm, no shadow.
    The rs-menu leaf spans left:0/right:0 by default; free the start edge. */
 .appearance-menu {
   position: absolute;
@@ -213,7 +213,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   padding-top: 14px;
   border-top: 1px solid var(--divider);
 }
-/* Raster controls fill the panel width. */
+/* Vlak controls fill the panel width. */
 .settings-choice { display: flex; width: 100%; }
 .settings-choice .rs-toggle { flex: 1; justify-content: center; }
 .text-stepper {
@@ -292,7 +292,7 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
   .site-logo {
     width: 44px; height: 44px; min-width: 44px; min-height: 44px;
   }
-  /* Rotated mark reads high vs 15px Raster/crumbs; drop it onto that middle. */
+  /* Rotated mark reads high vs 15px Vlak/crumbs; drop it onto that middle. */
   .site-logo-mark {
     position: relative;
     top: 1px;
@@ -892,7 +892,7 @@ html[data-grid="off"] .swag-field {
 }
 
 /* ── Docs prose: sub-labels, lists, two columns, and tables inside the 592 measure.
-   Tables use the Raster table classes and sit in a scroll container so a
+   Tables use the Vlak table classes and sit in a scroll container so a
    390px phone never scrolls the page sideways. ── */
 /* Docs prose: 14px at 400. The 15px / 500 body of the type scale is for the poster, not for paragraphs. */
 .site-content .rs-t-body,

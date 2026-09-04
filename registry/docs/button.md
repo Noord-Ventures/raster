@@ -1,11 +1,11 @@
 # Button
 
-Solid ink primary and 1px ghost. 40px tall; 36px small.
+Triggers an action. Solid primary or 1px ghost; 40px tall, 36px small.
 
 Category: actions  
 Name: `button`  
 Also known as: Button, Primary button, Ghost button, Secondary button  
-Page: https://getraster.com/components/button/
+Page: https://vlak.dev/components/button/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/button/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Button } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Button } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add button
+npx @noorddev/vlak-cli add button
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/button.json
+npx shadcn add https://vlak.dev/r/button.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <button class="rs-btn-primary">Primary action</button>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/button.json
 ## Example
 
 ```tsx
-import { Button } from "@noorddev/raster-react";
+import { Button } from "@noorddev/vlak-react";
 
 <Button>Primary action</Button>
 <Button variant="ghost" size="sm">Secondary</Button>

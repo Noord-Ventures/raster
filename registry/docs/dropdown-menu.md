@@ -1,11 +1,11 @@
 # Dropdown menu
 
-Action menu with menuitem roles and arrow-key movement.
+Presents a compact list of actions. Menu roles and arrow-key navigation are built in.
 
 Category: actions  
 Name: `dropdown-menu`  
 Also known as: Dropdown menu, Menu, Action menu, Overflow menu  
-Page: https://getraster.com/components/dropdown-menu/
+Page: https://vlak.dev/components/dropdown-menu/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/dropdown-menu/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { DropdownMenu } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { DropdownMenu } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add dropdown-menu
+npx @noorddev/vlak-cli add dropdown-menu
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/dropdown-menu.json
+npx shadcn add https://vlak.dev/r/dropdown-menu.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-menu" role="menu"><button class="rs-menu-item" role="menuitem">Rename</button><button class="rs-menu-item" role="menuitem">Duplicate</button><hr class="rs-menu-sep" /><button class="rs-menu-item" role="menuitem">Delete</button></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/dropdown-menu.json
 ## Example
 
 ```tsx
-import { DropdownMenu } from "@noorddev/raster-react";
+import { DropdownMenu } from "@noorddev/vlak-react";
 
 <DropdownMenu
   label="Actions"

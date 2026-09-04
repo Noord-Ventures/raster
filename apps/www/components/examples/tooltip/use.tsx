@@ -1,4 +1,4 @@
-import { Tooltip } from "@noorddev/raster-react";
+import { Tooltip } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

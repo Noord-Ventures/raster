@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -29,18 +29,18 @@ const styles = stylex.create({
   table: {
     width: {
       default: "calc(100% + 40px)",
-      [mq.phone]: `calc(100% + 2 * ${raster.pad})`,
+      [mq.phone]: `calc(100% + 2 * ${vlak.pad})`,
     },
     borderCollapse: "collapse",
     marginTop: "1rem",
     marginBottom: "1.5rem",
     marginInlineStart: {
       default: "-1.25rem",
-      [mq.phone]: `calc(-1 * ${raster.pad})`,
+      [mq.phone]: `calc(-1 * ${vlak.pad})`,
     },
     marginInlineEnd: {
       default: 0,
-      [mq.phone]: `calc(-1 * ${raster.pad})`,
+      [mq.phone]: `calc(-1 * ${vlak.pad})`,
     },
     fontSize: {
       default: "0.875rem",
@@ -53,7 +53,7 @@ const styles = stylex.create({
       ":last-child": "end",
     },
     fontWeight: 600,
-    color: raster.ink,
+    color: vlak.ink,
     letterSpacing: "-0.01em",
     paddingTop: {
       default: "0.625rem",
@@ -64,7 +64,7 @@ const styles = stylex.create({
       [mq.phone]: "0.75rem",
       ":last-child": {
         default: 20,
-        [mq.phone]: raster.pad,
+        [mq.phone]: vlak.pad,
       },
     },
     paddingBottom: {
@@ -76,12 +76,12 @@ const styles = stylex.create({
       [mq.phone]: "0.75rem",
       ":first-child": {
         default: 20,
-        [mq.phone]: raster.pad,
+        [mq.phone]: vlak.pad,
       },
     },
     borderBottomWidth: 2,
     borderBottomStyle: "solid",
-    borderBottomColor: raster.divider,
+    borderBottomColor: vlak.divider,
     fontSize: {
       default: "0.8125rem",
       [mq.phone]: "0.9375rem",
@@ -97,7 +97,7 @@ const styles = stylex.create({
       [mq.phone]: "0.75rem",
       ":last-child": {
         default: 20,
-        [mq.phone]: raster.pad,
+        [mq.phone]: vlak.pad,
       },
     },
     paddingBottom: {
@@ -109,15 +109,15 @@ const styles = stylex.create({
       [mq.phone]: "0.75rem",
       ":first-child": {
         default: 20,
-        [mq.phone]: raster.pad,
+        [mq.phone]: vlak.pad,
       },
     },
-    color: raster.gray,
+    color: vlak.gray,
     fontWeight: 500,
     letterSpacing: "-0.01em",
-    borderBottomWidth: raster.hairline,
+    borderBottomWidth: vlak.hairline,
     borderBottomStyle: "solid",
-    borderBottomColor: raster.divider,
+    borderBottomColor: vlak.divider,
     verticalAlign: "top",
     fontSize: {
       default: null,
@@ -129,7 +129,7 @@ const styles = stylex.create({
     },
   },
   tdAlt: {
-    backgroundColor: raster.tableAlt,
+    backgroundColor: vlak.tableAlt,
   },
   sort: {
     backgroundColor: "transparent",
@@ -156,7 +156,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -165,11 +165,11 @@ const styles = stylex.create({
   },
   /* Unsorted columns show a neutral sort mark in gray; the active one is an ink arrow. */
   sortIcon: {
-    color: raster.gray,
+    color: vlak.gray,
     opacity: 1,
   },
   sortIconOn: {
-    color: raster.ink,
+    color: vlak.ink,
   },
   empty: {
     paddingTop: "1.5rem",
@@ -178,7 +178,7 @@ const styles = stylex.create({
     textAlign: "center",
     fontSize: "0.8125rem",
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
   },
 });
 

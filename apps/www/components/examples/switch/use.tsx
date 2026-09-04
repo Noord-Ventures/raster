@@ -1,4 +1,4 @@
-import { Switch } from "@noorddev/raster-react";
+import { Switch } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

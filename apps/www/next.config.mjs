@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
-/* StyleX for the site's own leaves (app/, components/). The Raster
+/* StyleX for the site's own leaves (app/, components/). The Vlak
    packages arrive precompiled from node_modules, exactly as they do for
    any consumer. SWC stays in charge of everything else: this Babel pass
    runs first, only here, and only rewrites stylex.* calls. The matching

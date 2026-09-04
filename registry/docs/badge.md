@@ -1,11 +1,11 @@
 # Badge
 
-11px badge. Outline, solid, and muted fills.
+Labels status or category. 11px text with outline, solid, and muted variants.
 
 Category: feedback  
 Name: `badge`  
 Also known as: Badge, Tag, Pill, Status  
-Page: https://getraster.com/components/badge/
+Page: https://vlak.dev/components/badge/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/badge/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Badge } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Badge } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add badge
+npx @noorddev/vlak-cli add badge
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/badge.json
+npx shadcn add https://vlak.dev/r/badge.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-badge">Recommended</span><span class="rs-badge-solid">Delivered</span><span class="rs-badge-muted">In progress</span>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/badge.json
 ## Example
 
 ```tsx
-import { Badge } from "@noorddev/raster-react";
+import { Badge } from "@noorddev/vlak-react";
 
 <Badge>Recommended</Badge>
 <Badge variant="solid">Delivered</Badge>

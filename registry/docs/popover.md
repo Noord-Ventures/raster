@@ -1,11 +1,11 @@
 # Popover
 
-Native Popover API. Top layer, light dismiss.
+Places non-modal content above the page with the native Popover API and light dismiss.
 
 Category: surfaces  
 Name: `popover`  
 Also known as: Popover, Popup, Flyout  
-Page: https://getraster.com/components/popover/
+Page: https://vlak.dev/components/popover/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/popover/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Popover, PopoverBody, PopoverTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Popover, PopoverBody, PopoverTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add popover
+npx @noorddev/vlak-cli add popover
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/popover.json
+npx shadcn add https://vlak.dev/r/popover.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <button class="rs-btn-ghost rs-btn-sm" popovertarget="info">Details</button>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/popover.json
 ## Example
 
 ```tsx
-import { Popover, PopoverBody, PopoverTitle } from "@noorddev/raster-react";
+import { Popover, PopoverBody, PopoverTitle } from "@noorddev/vlak-react";
 
 <Popover trigger="Details" align="start" aria-label="Module grid">
   <PopoverTitle>Module grid</PopoverTitle>

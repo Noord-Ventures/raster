@@ -5,7 +5,7 @@ export const interfaces = [
     voice: "The next line",
     law: "An AI chat. Chats in a rail, the line in the middle.",
     story:
-      "Line is a small invented AI chat. Open a chat, send a line, then open that line to rewrite it. Replies are local. No live model. The chrome is Raster. The product is the name.",
+      "Line is a small invented AI chat. Open a chat, send a line, then open that line to rewrite it. Replies are local. No live model. The chrome is Vlak. The product is the name.",
     what: "AI chat",
     type: "Chat list, thread, line inspector",
     module: "204",
@@ -50,7 +50,7 @@ export const interfaces = [
     voice: "On the street",
     law: "Fleet management. Units, a city field, a trip.",
     story:
-      "Night is fleet management for a city yard. The map is San Francisco at city scale: many blocks, a readable street grid, small units. Select a unit, then open its trip. The field is readable on paper. Chrome stays Raster. Not a branded robotaxi.",
+      "Night is fleet management for a city yard. The map is San Francisco at city scale: many blocks, a readable street grid, small units. Select a unit, then open its trip. The field is readable on paper. Chrome stays Vlak. Not a branded robotaxi.",
     what: "Fleet management",
     type: "City field, units, trip",
     module: "204",

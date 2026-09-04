@@ -51,7 +51,7 @@ import {
 afterEach(cleanup);
 
 describe("Button", () => {
-  it("maps variants and sizes to Raster classes", () => {
+  it("maps variants and sizes to Vlak classes", () => {
     render(
       <>
         <Button>Go</Button>
@@ -257,14 +257,14 @@ describe("Icon", () => {
     expect(svg?.getAttribute("viewBox")).toBe("0 0 16 16");
   });
 
-  it("draws Vera's copy: front 7×7, exposed L, no overlap", () => {
+  it("draws the tightened copy pair with a 2.5-unit offset", () => {
     const { container } = render(<Icon name="copy" />);
-    expect(container.querySelector('path[d="M6.5 2.5 H13.5 V9.5"]')).toBeTruthy();
+    expect(container.querySelector('path[d="M5.5 3 H13 V10.5"]')).toBeTruthy();
     const rect = container.querySelector("rect");
-    expect(rect?.getAttribute("x")).toBe("2.5");
-    expect(rect?.getAttribute("y")).toBe("6.5");
-    expect(rect?.getAttribute("width")).toBe("7");
-    expect(rect?.getAttribute("height")).toBe("7");
+    expect(rect?.getAttribute("x")).toBe("3");
+    expect(rect?.getAttribute("y")).toBe("5.5");
+    expect(rect?.getAttribute("width")).toBe("7.5");
+    expect(rect?.getAttribute("height")).toBe("7.5");
     expect(container.querySelectorAll("rect")).toHaveLength(1);
   });
 
@@ -276,7 +276,7 @@ describe("Icon", () => {
     expect(container.querySelector("svg")?.getAttribute("viewBox")).toBe("0 0 16 16");
   });
 
-  it("keeps Vera's five paths exact", () => {
+  it("keeps the core chevrons and close paths exact", () => {
     expect(iconNames.slice(0, 5)).toEqual(["copy", "copied", "chevron-left", "chevron-right", "close"]);
     const { container } = render(
       <>
@@ -320,9 +320,9 @@ describe("Icon", () => {
     expect(container.querySelector('g[transform="rotate(270 8 8)"]')).toBeTruthy();
   });
 
-  it("inks every shape so live DOM matches Vera's lock", () => {
+  it("inks every shape so live DOM matches the source geometry", () => {
     const { container } = render(<Icon name="copy" />);
-    const path = container.querySelector('path[d="M6.5 2.5 H13.5 V9.5"]');
+    const path = container.querySelector('path[d="M5.5 3 H13 V10.5"]');
     const rect = container.querySelector("rect");
     expect(path?.getAttribute("vector-effect")).toBe("non-scaling-stroke");
     expect(path?.getAttribute("stroke-width")).toBe("1");
@@ -345,7 +345,7 @@ describe("Icon", () => {
     const moon = container.querySelector("svg");
     expect(moon?.classList.contains("rs-icon")).toBe(true);
     const crescent = container.querySelector("path");
-    expect(crescent?.getAttribute("d")).toBe("M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5");
+    expect(crescent?.getAttribute("d")).toBe("M10.75 3 A5.5 5.5 0 1 0 10.75 13 A4.25 4.25 0 1 1 10.75 3 Z");
     expect(crescent?.getAttribute("d")).not.toMatch(/M13\.5 9\.5A5\.5/);
     expect(crescent?.getAttribute("stroke-width")).toBe("1");
     expect(crescent?.getAttribute("stroke-linecap")).toBe("butt");
@@ -391,26 +391,39 @@ describe("Icon", () => {
       "search",
       "zoom-in",
       "zoom-out",
+      "chevrons-left",
+      "chevrons-right",
       "home",
       "inbox",
       "user",
       "users",
       "user-plus",
       "user-minus",
+      "trash",
+      "download",
+      "upload",
       "cart",
       "flag",
       "map-pin",
       "cloud",
       "folder-open",
       "clipboard",
+      "archive",
       "duplicate",
       "files",
       "key",
       "database",
       "monitor",
+      "sun",
+      "moon",
+      "receipt",
+      "wallet",
+      "compass",
       "building",
       "at",
       "user-check",
+      "thumbs-up",
+      "crosshair",
     ]);
 
     const { container, rerender } = render(<Icon name="home" variant="filled" />);
@@ -424,6 +437,15 @@ describe("Icon", () => {
     expect(container.querySelector("mask circle")?.getAttribute("fill")).toBe("black");
     expect(container.querySelector('rect[mask^="url(#rs-icon-"]')?.getAttribute("fill")).toBe("currentColor");
     expect(filledCutouts["map-pin"]).toEqual([1]);
+  });
+
+  it("keeps object detail legible in filled utility marks", () => {
+    expect(filledCutouts.trash).toEqual([3, 4, 5]);
+    expect(filledCutouts.archive).toEqual([2]);
+    expect(filledCutouts.paste).toEqual([2, 3, 4]);
+    expect(filledCutouts.globe).toEqual([1, 2, 3]);
+    expect(filledCutouts.receipt).toEqual([1, 2]);
+    expect(filledCutouts.wallet).toEqual([1]);
   });
 
   it("punches transparent detail through filled icons", () => {
@@ -510,9 +532,9 @@ describe("Stepper", () => {
 
 describe("Breadcrumbs", () => {
   it("keeps ancestors as trail links, not a second color", () => {
-    render(<Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Raster" }]} />);
+    render(<Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Vlak" }]} />);
     expect(screen.getByRole("link", { name: "Studio" }).className).toContain("rs-crumbs-link");
-    expect(screen.getByText("Raster").className).toContain("rs-crumbs-here");
+    expect(screen.getByText("Vlak").className).toContain("rs-crumbs-here");
     expect(screen.getByText("/").className).toContain("rs-crumbs-sep");
   });
 });
@@ -520,7 +542,7 @@ describe("Breadcrumbs", () => {
 describe("CrumbBar", () => {
   it("solidifies and reveals the crumbs on scroll", () => {
     const { container } = render(
-      <CrumbBar trail={[{ label: "Raster", href: "/" }, { label: "Components" }]} />,
+      <CrumbBar trail={[{ label: "Vlak", href: "/" }, { label: "Components" }]} />,
     );
     const bar = container.querySelector(".rs-crumb-bar")!;
     expect(bar.className).not.toContain("rs-crumb-bar-scrolled");
@@ -562,7 +584,7 @@ describe("Form and Field", () => {
 });
 
 describe("NativeSelect", () => {
-  it("is a real select with Raster chrome", () => {
+  it("is a real select with Vlak chrome", () => {
     render(
       <NativeSelect aria-label="City" defaultValue="alkmaar">
         <option value="alkmaar">Alkmaar</option>

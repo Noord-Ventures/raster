@@ -1,11 +1,11 @@
 # Scatter chart
 
-Marks on a 1px grid. Ink, or one optional spot color.
+Shows the relationship between two measures. Marks sit on a 1px grid in ink or one spot color.
 
 Category: charts  
 Name: `scatter-chart`  
 Also known as: Scatter chart, Scatter plot, Dot plot, XY chart  
-Page: https://getraster.com/components/scatter-chart/
+Page: https://vlak.dev/components/scatter-chart/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/scatter-chart/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { ScatterChart } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { ScatterChart } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add scatter-chart
+npx @noorddev/vlak-cli add scatter-chart
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/scatter-chart.json
+npx shadcn add https://vlak.dev/r/scatter-chart.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><line class="rs-chart-grid" x1="0" x2="240" y1="56" y2="56"/><circle class="rs-chart-mark" cx="36" cy="40" r="2"/><circle class="rs-chart-mark" cx="88" cy="22" r="2"/><circle class="rs-chart-mark" cx="140" cy="30" r="2"/><circle class="rs-chart-mark" cx="196" cy="14" r="2"/></svg></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/scatter-chart.json
 ## Example
 
 ```tsx
-import { ScatterChart } from "@noorddev/raster-react";
+import { ScatterChart } from "@noorddev/vlak-react";
 
 <ScatterChart
   height={204}

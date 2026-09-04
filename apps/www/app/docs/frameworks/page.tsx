@@ -5,12 +5,12 @@ import { DOOR } from "../../specimen";
 
 export const metadata: Metadata = {
   title: "Frameworks",
-  description: "Raster in Next.js, Vite, Remix and React Router, Astro, and plain HTML.",
+  description: "Vlak in Next.js, Vite, Remix and React Router, Astro, and plain HTML.",
   alternates: { canonical: `${DOOR}/docs/frameworks/` },
 };
 
 const next = `// app/layout.tsx
-import "@noorddev/raster-react/css";
+import "@noorddev/vlak-react/css";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -21,30 +21,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 
 // app/page.tsx: a Server Component. Dialog is "use client" already.
-import { Button, Dialog } from "@noorddev/raster-react";`;
+import { Button, Dialog } from "@noorddev/vlak-react";`;
 
 const nextExport = `// next.config.mjs
 export default { output: "export", trailingSlash: true };`;
 
 const vite = `// src/main.tsx
-import "@noorddev/raster-react/css";
+import "@noorddev/vlak-react/css";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
 
 createRoot(document.getElementById("root")!).render(<App />);`;
 
 const remix = `// app/root.tsx (React Router 7 framework mode, Remix)
-import "@noorddev/raster-react/css";
+import "@noorddev/vlak-react/css";
 
 // or, with the links() convention:
-import rasterStyles from "@noorddev/raster-react/css?url";
-export const links = () => [{ rel: "stylesheet", href: rasterStyles }];`;
+import vlakStyles from "@noorddev/vlak-react/css?url";
+export const links = () => [{ rel: "stylesheet", href: vlakStyles }];`;
 
 const astro = `---
 // src/layouts/Base.astro
-import "@noorddev/raster-react/css";
-import { Button } from "@noorddev/raster-react";
-import { Dialog } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Button } from "@noorddev/vlak-react";
+import { Dialog } from "@noorddev/vlak-react";
 ---
 <html lang="en">
   <body>
@@ -57,7 +57,7 @@ import { Dialog } from "@noorddev/raster-react";
 const html = `<!doctype html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="node_modules/@noorddev/raster/css/raster.css" />
+    <link rel="stylesheet" href="node_modules/@noorddev/vlak/css/vlak.css" />
   </head>
   <body>
     <div class="rs-field">
@@ -125,9 +125,9 @@ export default function FrameworksPage() {
       <h2 className="section-label">Plain HTML</h2>
       <CodeBlock code={html} />
       <p className="rs-t-body">
-        Install <code className="rs-code">@noorddev/raster</code>, or copy{" "}
-        <code className="rs-code">raster.css</code> and the Inter files with{" "}
-        <code className="rs-code">npx @noorddev/raster-cli init</code>. Every component page lists
+        Install <code className="rs-code">@noorddev/vlak</code>, or copy{" "}
+        <code className="rs-code">vlak.css</code> and the Inter files with{" "}
+        <code className="rs-code">npx @noorddev/vlak-cli init</code>. Every component page lists
         its markup and classes; the behaviour that needs no script (details, dialog, popover, scroll
         snap) comes from the browser. Set <code className="rs-code">data-theme=&quot;dark&quot;</code>{" "}
         on <code className="rs-code">&lt;html&gt;</code> for the dark scheme.
@@ -144,17 +144,17 @@ export default function FrameworksPage() {
           </thead>
           <tbody>
             {[
-              ["@noorddev/raster-react", "Every component, cx, rs, the icon set, the token vars"],
-              ["@noorddev/raster-react/css", "The precompiled stylesheet, 42 KB, layered"],
-              ["@noorddev/raster-react/components/<name>", "One component module"],
-              ["@noorddev/raster-react/tokens.stylex", "raster and mq for your own StyleX leaves"],
-              ["@noorddev/raster", "rasterTokens, the registry, the radius helpers"],
-              ["@noorddev/raster/css", "raster.css, 84 KB, every rs-* class"],
-              ["@noorddev/raster/css/components.css", "Components only, for pages that already load the React stylesheet"],
-              ["@noorddev/raster/css/tokens.css", "The custom properties alone"],
-              ["@noorddev/raster/css/components/<name>.css", "One component's CSS"],
-              ["@noorddev/raster/tokens", "The tokens as JSON"],
-              ["@noorddev/raster/props", "Every export's props as JSON"],
+              ["@noorddev/vlak-react", "Every component, cx, rs, the icon set, the token vars"],
+              ["@noorddev/vlak-react/css", "The precompiled stylesheet, 42 KB, layered"],
+              ["@noorddev/vlak-react/components/<name>", "One component module"],
+              ["@noorddev/vlak-react/tokens.stylex", "vlak and mq for your own StyleX leaves"],
+              ["@noorddev/vlak", "vlakTokens, the registry, the radius helpers"],
+              ["@noorddev/vlak/css", "vlak.css, 84 KB, every rs-* class"],
+              ["@noorddev/vlak/css/components.css", "Components only, for pages that already load the React stylesheet"],
+              ["@noorddev/vlak/css/tokens.css", "The custom properties alone"],
+              ["@noorddev/vlak/css/components/<name>.css", "One component's CSS"],
+              ["@noorddev/vlak/tokens", "The tokens as JSON"],
+              ["@noorddev/vlak/props", "Every export's props as JSON"],
             ].map(([spec, holds]) => (
               <tr key={spec} className="rs-table-row">
                 <td className="rs-table-td">

@@ -1,7 +1,7 @@
 /* Extracts the site's StyleX leaves into app/stylex.css (the `@stylex;`
    marker). Same plugin options as next.config.mjs so class hashes match.
-   Raster's own leaves are not scanned: they ship precompiled inside
-   @noorddev/raster-react/css. */
+   Vlak's own leaves are not scanned: they ship precompiled inside
+   @noorddev/vlak-react/css. */
 const stylexBabelOptions = {
   dev: false,
   runtimeInjection: false,

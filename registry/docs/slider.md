@@ -1,11 +1,11 @@
 # Slider
 
-2px track, ink fill, 14px thumb on a 24px hit area.
+Selects one value from a range. 2px track, 14px thumb, 24px hit area.
 
 Category: forms  
 Name: `slider`  
 Also known as: Slider, Range, Range input  
-Page: https://getraster.com/components/slider/
+Page: https://vlak.dev/components/slider/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/slider/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Slider } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Slider } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add slider
+npx @noorddev/vlak-cli add slider
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/slider.json
+npx shadcn add https://vlak.dev/r/slider.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-slider"><span class="rs-slider-fill" style="width:62%"></span><span class="rs-slider-thumb" style="left:62%"></span></div>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/slider.json
 
 ```tsx
 import { useState } from "react";
-import { Slider } from "@noorddev/raster-react";
+import { Slider } from "@noorddev/vlak-react";
 
 const [volume, setVolume] = useState(62);
 

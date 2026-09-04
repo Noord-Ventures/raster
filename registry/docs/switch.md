@@ -1,11 +1,11 @@
 # Switch
 
-32×18 control. On fills ink; off is a 1px track. The thumb moves; the box stays 32px.
+Turns one setting on or off. 32×18px; on fills with ink, off uses a 1px track.
 
 Category: forms  
 Name: `switch`  
 Also known as: Switch, Toggle switch  
-Page: https://getraster.com/components/switch/
+Page: https://vlak.dev/components/switch/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/switch/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Switch } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Switch } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add switch
+npx @noorddev/vlak-cli add switch
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/switch.json
+npx shadcn add https://vlak.dev/r/switch.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-switch rs-switch-on"><i></i></span>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/switch.json
 
 ```tsx
 import { useState } from "react";
-import { Switch } from "@noorddev/raster-react";
+import { Switch } from "@noorddev/vlak-react";
 
 const [enabled, setEnabled] = useState(false);
 

@@ -1,13 +1,13 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
-import { rasterTokens } from "../src/tokens";
-import { rasterComponents } from "../src/registry";
+import { vlakTokens } from "../src/tokens";
+import { vlakComponents } from "../src/registry";
 
 const pkgDir = join(import.meta.dirname, "..");
-let rasterCss: string;
+let vlakCss: string;
 
-/** raster.css with every @media block removed: what applies at desktop, unconditionally. */
+/** vlak.css with every @media block removed: what applies at desktop, unconditionally. */
 function withoutMedia(css: string): string {
   let out = "";
   let i = 0;
@@ -43,64 +43,64 @@ function luminanceSpread(hex: string): number {
 beforeAll(() => {
   // The generated CSS is committed; CI checks it is in sync with the sources
   // (build, then git diff --exit-code). Tests never write into the tree.
-  rasterCss = readFileSync(join(pkgDir, "css/raster.css"), "utf8");
+  vlakCss = readFileSync(join(pkgDir, "css/vlak.css"), "utf8");
 });
 
-describe("generated raster.css", () => {
+describe("generated vlak.css", () => {
   it("defines every custom property it uses", () => {
-    const used = new Set([...rasterCss.matchAll(/var\((--[a-z-]+)[,)]/g)].map((m) => m[1]!));
-    const defined = new Set([...rasterCss.matchAll(/(--[a-z-]+)\s*:/g)].map((m) => m[1]!));
+    const used = new Set([...vlakCss.matchAll(/var\((--[a-z-]+)[,)]/g)].map((m) => m[1]!));
+    const defined = new Set([...vlakCss.matchAll(/(--[a-z-]+)\s*:/g)].map((m) => m[1]!));
     const missing = [...used].filter((v) => !defined.has(v));
     expect(missing, `var() without definition: ${missing.join(", ")}`).toEqual([]);
   });
 
   it("mirrors the token values", () => {
-    expect(rasterCss).toContain(`--bg: ${rasterTokens.color.light.paper}`);
-    expect(rasterCss).toContain(`--text: ${rasterTokens.color.light.ink}`);
-    expect(rasterCss).toContain(`--bg: ${rasterTokens.color.dark.black}`);
-    expect(rasterCss).toContain(`--radius-sm: ${rasterTokens.radius.small}px`);
-    expect(rasterCss).toContain(`--grid-size: ${rasterTokens.grid.module}px`);
+    expect(vlakCss).toContain(`--bg: ${vlakTokens.color.light.paper}`);
+    expect(vlakCss).toContain(`--text: ${vlakTokens.color.light.ink}`);
+    expect(vlakCss).toContain(`--bg: ${vlakTokens.color.dark.black}`);
+    expect(vlakCss).toContain(`--radius-sm: ${vlakTokens.radius.small}px`);
+    expect(vlakCss).toContain(`--grid-size: ${vlakTokens.grid.module}px`);
   });
 
   it("defaults to bundled Inter, with system sans as fallback only", () => {
-    expect(rasterCss).toContain("@font-face");
-    expect(rasterCss).toContain("font-family:Inter");
-    expect(rasterCss).toContain("./fonts/inter/InterVariable-latin.woff2");
-    expect(rasterTokens.type.foundry.typeface).toBe("Inter");
-    expect(rasterTokens.type.foundry.license).toBe("SIL OFL 1.1");
+    expect(vlakCss).toContain("@font-face");
+    expect(vlakCss).toContain("font-family:Inter");
+    expect(vlakCss).toContain("./fonts/inter/InterVariable-latin.woff2");
+    expect(vlakTokens.type.foundry.typeface).toBe("Inter");
+    expect(vlakTokens.type.foundry.license).toBe("SIL OFL 1.1");
   });
 
   it("has balanced braces", () => {
-    const open = (rasterCss.match(/\{/g) ?? []).length;
-    const close = (rasterCss.match(/\}/g) ?? []).length;
+    const open = (vlakCss.match(/\{/g) ?? []).length;
+    const close = (vlakCss.match(/\}/g) ?? []).length;
     expect(open).toBe(close);
   });
 
   it("declares its cascade layers up front, in order", () => {
-    const order = rasterCss.match(/@layer ([^;{]+);/)?.[1]?.split(",").map((s) => s.trim());
+    const order = vlakCss.match(/@layer ([^;{]+);/)?.[1]?.split(",").map((s) => s.trim());
     expect(order).toEqual([
-      "raster.tokens",
-      "raster.base",
-      "raster.type",
-      "raster.components",
-      "raster.touch",
-      "raster.motion",
+      "vlak.tokens",
+      "vlak.base",
+      "vlak.type",
+      "vlak.components",
+      "vlak.touch",
+      "vlak.motion",
     ]);
-    for (const name of order ?? []) expect(rasterCss).toContain(`@layer ${name} {`);
+    for (const name of order ?? []) expect(vlakCss).toContain(`@layer ${name} {`);
     // @font-face must sit outside the layers.
-    expect(rasterCss.indexOf("@font-face")).toBeLessThan(rasterCss.indexOf("@layer "));
+    expect(vlakCss.indexOf("@font-face")).toBeLessThan(vlakCss.indexOf("@layer "));
   });
 
   it("never uses !important", () => {
-    expect(rasterCss).not.toContain("!important");
+    expect(vlakCss).not.toContain("!important");
   });
 
   it("paints every component at desktop, not only inside a media query", () => {
     // The CSS-first guarantee: a component's primary class has rules that apply
     // unconditionally. Modifier classes may legitimately exist only for phones.
-    const desktop = withoutMedia(rasterCss);
+    const desktop = withoutMedia(vlakCss);
     const missing: string[] = [];
-    for (const c of rasterComponents) {
+    for (const c of vlakComponents) {
       const primary = c.classes[0]!;
       if (!new RegExp(`\\.${primary}(?![\\w-])`).test(desktop)) missing.push(`${c.name}: .${primary}`);
     }
@@ -108,7 +108,7 @@ describe("generated raster.css", () => {
   });
 
   it("stays monochrome: every hex color is a neutral", () => {
-    const hexes = [...rasterCss.matchAll(/#[0-9a-f]{3,6}\b/gi)].map((m) => m[0]);
+    const hexes = [...vlakCss.matchAll(/#[0-9a-f]{3,6}\b/gi)].map((m) => m[0]);
     const hued = hexes.filter((h) => luminanceSpread(h) > 12);
     expect(hued, `hued colors: ${[...new Set(hued)].join(", ")}`).toEqual([]);
   });
@@ -120,7 +120,7 @@ describe("generated raster.css", () => {
   });
 
   it("respects reduced motion and touch", () => {
-    expect(rasterCss).toContain("@media(prefers-reduced-motion:reduce)");
-    expect(rasterCss).toContain("@media(hover:none)");
+    expect(vlakCss).toContain("@media(prefers-reduced-motion:reduce)");
+    expect(vlakCss).toContain("@media(hover:none)");
   });
 });

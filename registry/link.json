@@ -3,11 +3,11 @@
   "name": "link",
   "type": "registry:component",
   "title": "Text link",
-  "description": "Text link with a hairline underline. In-copy variant is inset 1px.",
+  "description": "Navigates to a page or resource. Hairline underline; in-copy variant is inset 1px.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -15,23 +15,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/link.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {\n  /** In-copy gradient underline, inset 1px. */\n  underline?: boolean;\n}\n\nconst styles = stylex.create({\n  hairline: {\n    fontSize: \"0.875rem\",\n    color: \"var(--accent)\",\n    textDecoration: \"none\",\n    fontWeight: 500,\n    letterSpacing: \"-0.01em\",\n    borderBottomWidth: raster.hairline,\n    borderBottomStyle: \"solid\",\n    borderBottomColor: {\n      default: raster.divider,\n      \":hover\": raster.accent,\n      \":active\": raster.accent,\n    },\n    transition: {\n      default: raster.transition,\n      [mq.reduce]: \"none\",\n    },\n    outlineWidth: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n    outlineStyle: {\n      default: null,\n      \":focus-visible\": \"solid\",\n    },\n    outlineColor: {\n      default: null,\n      \":focus-visible\": raster.accent,\n    },\n    outlineOffset: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n  },\n  underline: {\n    color: \"var(--text)\",\n    textDecoration: \"none\",\n    borderBottomWidth: 0,\n    borderBottomStyle: \"none\",\n    backgroundImage: {\n      default: \"linear-gradient(var(--divider), var(--divider))\",\n      \":hover\": \"linear-gradient(var(--accent), var(--accent))\",\n      \":active\": \"linear-gradient(var(--accent), var(--accent))\",\n    },\n    backgroundSize: \"calc(100% - 1px) 1px\",\n    backgroundPosition: \"1px 100%\",\n    backgroundRepeat: \"no-repeat\",\n    transition: {\n      default: raster.transition,\n      [mq.reduce]: \"none\",\n    },\n  },\n});\n\n/** Text link with a hairline underline. In-copy variant is inset 1px. */\nexport const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(\n  { underline = false, className, style, ...props },\n  ref,\n) {\n  const sx = rs(\n    [underline ? \"rs-link-underline\" : \"rs-link\", className],\n    underline ? styles.underline : styles.hairline,\n  );\n  return <a ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
+      "path": "vlak/link.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {\n  /** In-copy gradient underline, inset 1px. */\n  underline?: boolean;\n}\n\nconst styles = stylex.create({\n  hairline: {\n    fontSize: \"0.875rem\",\n    color: \"var(--accent)\",\n    textDecoration: \"none\",\n    fontWeight: 500,\n    letterSpacing: \"-0.01em\",\n    borderBottomWidth: vlak.hairline,\n    borderBottomStyle: \"solid\",\n    borderBottomColor: {\n      default: vlak.divider,\n      \":hover\": vlak.accent,\n      \":active\": vlak.accent,\n    },\n    transition: {\n      default: vlak.transition,\n      [mq.reduce]: \"none\",\n    },\n    outlineWidth: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n    outlineStyle: {\n      default: null,\n      \":focus-visible\": \"solid\",\n    },\n    outlineColor: {\n      default: null,\n      \":focus-visible\": vlak.accent,\n    },\n    outlineOffset: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n  },\n  underline: {\n    color: \"var(--text)\",\n    textDecoration: \"none\",\n    borderBottomWidth: 0,\n    borderBottomStyle: \"none\",\n    backgroundImage: {\n      default: \"linear-gradient(var(--divider), var(--divider))\",\n      \":hover\": \"linear-gradient(var(--accent), var(--accent))\",\n      \":active\": \"linear-gradient(var(--accent), var(--accent))\",\n    },\n    backgroundSize: \"calc(100% - 1px) 1px\",\n    backgroundPosition: \"1px 100%\",\n    backgroundRepeat: \"no-repeat\",\n    transition: {\n      default: vlak.transition,\n      [mq.reduce]: \"none\",\n    },\n  },\n});\n\n/** Text link with a hairline underline. In-copy variant is inset 1px. */\nexport const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(\n  { underline = false, className, style, ...props },\n  ref,\n) {\n  const sx = rs(\n    [underline ? \"rs-link-underline\" : \"rs-link\", className],\n    underline ? styles.underline : styles.hairline,\n  );\n  return <a ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
-      "target": "components/raster/link.tsx"
+      "target": "components/vlak/link.tsx"
     },
     {
-      "path": "raster/styles/link.css",
+      "path": "vlak/styles/link.css",
       "content": "/* ── link: generated from packages/react/src/components/link.tsx ── */\n.rs-link{font-size:0.875rem;color:var(--accent);text-decoration:none;font-weight:500;letter-spacing:-0.01em;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider);transition:var(--transition)}\n.rs-link:hover{border-bottom-color:var(--accent)}\n.rs-link:active{border-bottom-color:var(--accent)}\n.rs-link:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--accent);outline-offset:2px}\n@media (prefers-reduced-motion: reduce){.rs-link{transition:none}}\n.rs-link-underline{color:var(--text);text-decoration:none;border-bottom-width:0;border-bottom-style:none;background-image:linear-gradient(var(--divider), var(--divider));background-size:calc(100% - 1px) 1px;background-position:1px 100%;background-repeat:no-repeat;transition:var(--transition)}\n.rs-link-underline:hover{background-image:linear-gradient(var(--accent), var(--accent))}\n.rs-link-underline:active{background-image:linear-gradient(var(--accent), var(--accent))}\n@media (prefers-reduced-motion: reduce){.rs-link-underline{transition:none}}\n",
       "type": "registry:file",
-      "target": "styles/raster/link.css"
+      "target": "styles/vlak/link.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "actions",
       "classes": [
         "rs-link",
@@ -40,7 +40,7 @@
       "snippet": "<div><a class=\"rs-link\" href=\"#\">A text link</a></div>\n<div><a class=\"rs-link-underline\" href=\"#\">An in-copy link</a></div>",
       "cssOnly": false,
       "registryDependencies": [
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Link",
@@ -48,7 +48,7 @@
         "Text link",
         "Inline link"
       ],
-      "example": "import { Link } from \"@noorddev/raster-react\";\n\n<Link href=\"/docs\">A text link</Link>\n<p>Read the <Link underline href=\"/docs\">guide</Link> first.</p>",
+      "example": "import { Link } from \"@noorddev/vlak-react\";\n\n<Link href=\"/docs\">A text link</Link>\n<p>Read the <Link underline href=\"/docs\">guide</Link> first.</p>",
       "usage": {
         "use": [
           "Navigation to another page or anchor.",

@@ -1,11 +1,11 @@
 # Donut or share
 
-Ring against its total, or a flush share strip. 1px stroke.
+Shows one part of a whole as a ring or flush share strip. 1px stroke.
 
 Category: charts  
 Name: `donut`  
 Also known as: Donut, Donut chart, Ring chart, Pie chart, Share strip  
-Page: https://getraster.com/components/donut/
+Page: https://vlak.dev/components/donut/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/donut/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Donut, Share } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Donut, Share } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add donut
+npx @noorddev/vlak-cli add donut
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/donut.json
+npx shadcn add https://vlak.dev/r/donut.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart"><svg class="rs-chart-donut" viewBox="0 0 96 96" width="96" height="96"><circle cx="48" cy="48" r="36" fill="none" stroke="currentColor" stroke-width="1"/></svg></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/donut.json
 ## Example
 
 ```tsx
-import { Donut, Share } from "@noorddev/raster-react";
+import { Donut, Share } from "@noorddev/vlak-react";
 
 <Donut value={72} max={100} size={184} label="printed" />
 <Share slices={[{ label: "Sheet", value: 72 }, { label: "Proof", value: 18 }, { label: "Waste", value: 10 }]} unit="%" />

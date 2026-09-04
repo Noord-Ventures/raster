@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { cx } from "../cx";
 import { useFieldControl } from "./field";
@@ -34,28 +34,28 @@ const styles = stylex.create({
   label: {
     fontSize: {
       default: "0.75rem",
-      [mq.phone]: raster.controlLabel,
+      [mq.phone]: vlak.controlLabel,
     },
     fontWeight: 600,
-    color: raster.gray,
+    color: vlak.gray,
     letterSpacing: "-0.01em",
     lineHeight: "16px",
   },
   input: {
     boxSizing: "border-box",
-    height: raster.controlH,
+    height: vlak.controlH,
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
     borderColor: {
-      default: raster.controlBorder,
-      ":focus": raster.accent,
+      default: vlak.controlBorder,
+      ":focus": vlak.accent,
     },
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     appearance: "none",
@@ -67,7 +67,7 @@ const styles = stylex.create({
       default: "0.875rem",
       [mq.phone]: "1rem",
     },
-    lineHeight: `calc(${raster.controlH} - 2px)`,
+    lineHeight: `calc(${vlak.controlH} - 2px)`,
     paddingInline: {
       default: "0.75rem",
       [mq.phone]: "0.875rem",
@@ -81,7 +81,7 @@ const styles = stylex.create({
       default: "none",
       ":focus-visible": "solid",
     },
-    outlineColor: raster.ink,
+    outlineColor: vlak.ink,
     outlineOffset: 2,
     fontFamily: "inherit",
     ":-webkit-autofill": {
@@ -97,7 +97,7 @@ const styles = stylex.create({
     height: "100%",
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     flexGrow: 1,
     minWidth: 0,
@@ -117,10 +117,10 @@ const styles = stylex.create({
     width: "100%",
   },
   ok: {
-    borderColor: raster.ink,
+    borderColor: vlak.ink,
   },
   invalid: {
-    borderColor: raster.ink,
+    borderColor: vlak.ink,
   },
   feedback: {
     display: "flex",
@@ -131,17 +131,17 @@ const styles = stylex.create({
       [mq.phone]: "0.875rem",
     },
     fontWeight: 500,
-    color: raster.gray,
+    color: vlak.gray,
     letterSpacing: "-0.01em",
     lineHeight: "16px",
     margin: 0,
     minHeight: "1rem",
   },
   feedbackOk: {
-    color: raster.ink,
+    color: vlak.ink,
   },
   feedbackError: {
-    color: raster.ink,
+    color: vlak.ink,
   },
 });
 

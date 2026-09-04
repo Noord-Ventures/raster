@@ -1,4 +1,4 @@
-import { Avatar, AvatarRow } from "@noorddev/raster-react";
+import { Avatar, AvatarRow } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {
@@ -13,7 +13,7 @@ export function Use() {
         <AvatarRow>
           <Avatar name="Renato Valdés Olmos" initials="RV" />
           <Avatar name="Noord" initials="N" />
-          <Avatar name="Raster" initials="R" />
+          <Avatar name="Vlak" initials="R" />
         </AvatarRow>
       </div>
     </UseField>

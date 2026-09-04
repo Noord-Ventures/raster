@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface SidebarProps extends React.HTMLAttributes<HTMLElement> {}
@@ -15,10 +15,10 @@ const styles = stylex.create({
     minHeight: 204,
     display: "flex",
     flexDirection: "column",
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
-    backgroundColor: raster.paper,
+    borderColor: vlak.divider,
+    backgroundColor: vlak.paper,
     borderRadius: 0,
   },
   head: {
@@ -27,17 +27,17 @@ const styles = stylex.create({
     paddingInline: "1.25rem",
     fontSize: {
       default: "0.8125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
-    borderBottomWidth: raster.hairline,
+    color: vlak.ink,
+    borderBottomWidth: vlak.hairline,
     borderBottomStyle: "solid",
-    borderBottomColor: raster.divider,
+    borderBottomColor: vlak.divider,
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     display: {
       default: null,
@@ -61,7 +61,7 @@ const styles = stylex.create({
   },
   item: {
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     display: {
@@ -74,7 +74,7 @@ const styles = stylex.create({
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     paddingTop: {
       default: "0.5rem",
@@ -89,16 +89,16 @@ const styles = stylex.create({
     paddingInlineStart: "1.25rem",
     fontSize: {
       default: "0.8125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
     color: {
-      default: raster.gray,
-      ":link": raster.gray,
-      ":visited": raster.gray,
-      ":hover": raster.ink,
-      '[aria-current="page"]': raster.ink,
+      default: vlak.gray,
+      ":link": vlak.gray,
+      ":visited": vlak.gray,
+      ":hover": vlak.ink,
+      '[aria-current="page"]': vlak.ink,
     },
     textDecoration: "none",
   },
@@ -112,11 +112,11 @@ const styles = stylex.create({
     paddingInlineStart: "1.25rem",
     fontSize: {
       default: "0.75rem",
-      [mq.phone]: raster.controlLabel,
+      [mq.phone]: vlak.controlLabel,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
   },
   foot: {
     boxSizing: "border-box",
@@ -124,19 +124,19 @@ const styles = stylex.create({
     paddingInlineEnd: "1.25rem",
     paddingBottom: "0.75rem",
     paddingInlineStart: "1.25rem",
-    borderTopWidth: raster.hairline,
+    borderTopWidth: vlak.hairline,
     borderTopStyle: "solid",
-    borderTopColor: raster.divider,
+    borderTopColor: vlak.divider,
     fontSize: {
       default: "0.75rem",
       [mq.phone]: "0.875rem",
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     display: {
       default: null,

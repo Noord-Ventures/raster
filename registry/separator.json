@@ -3,11 +3,11 @@
   "name": "separator",
   "type": "registry:component",
   "title": "Separator",
-  "description": "1px rule, horizontal or vertical.",
+  "description": "Separates related regions with a 1px horizontal or vertical rule.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -15,23 +15,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/separator.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface SeparatorProps extends React.HTMLAttributes<HTMLElement> {\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nconst styles = stylex.create({\n  horizontal: {\n    borderWidth: 0,\n    borderStyle: \"none\",\n    borderTopWidth: raster.hairline,\n    borderTopStyle: \"solid\",\n    borderTopColor: raster.divider,\n    marginBlock: \"1.25rem\",\n    marginInline: 0,\n  },\n  vertical: {\n    display: \"inline-block\",\n    width: raster.hairline,\n    alignSelf: \"stretch\",\n    backgroundColor: raster.divider,\n    marginBlock: 0,\n    marginInline: \"0.75rem\",\n  },\n});\n\nexport const Separator = React.forwardRef<HTMLElement, SeparatorProps>(function Separator(\n  { orientation = \"horizontal\", className, style, ...props },\n  ref,\n) {\n  if (orientation === \"vertical\") {\n    const sx = rs([\"rs-sep-v\", className], styles.vertical);\n    return (\n      // biome-ignore lint/a11y/useFocusableInteractive: a static separator is not a widget; it takes no focus\n      <span\n        ref={ref as React.Ref<HTMLSpanElement>}\n        // biome-ignore lint/a11y/useAriaPropsForRole: a non-focusable separator needs no aria-valuenow\n        role=\"separator\"\n        aria-orientation=\"vertical\"\n        {...props}\n        className={sx.className}\n        style={{ ...sx.style, ...style }}\n      />\n    );\n  }\n  const sx = rs([\"rs-sep\", className], styles.horizontal);\n  return <hr ref={ref as React.Ref<HTMLHRElement>} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
+      "path": "vlak/separator.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface SeparatorProps extends React.HTMLAttributes<HTMLElement> {\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nconst styles = stylex.create({\n  horizontal: {\n    borderWidth: 0,\n    borderStyle: \"none\",\n    borderTopWidth: vlak.hairline,\n    borderTopStyle: \"solid\",\n    borderTopColor: vlak.divider,\n    marginBlock: \"1.25rem\",\n    marginInline: 0,\n  },\n  vertical: {\n    display: \"inline-block\",\n    width: vlak.hairline,\n    alignSelf: \"stretch\",\n    backgroundColor: vlak.divider,\n    marginBlock: 0,\n    marginInline: \"0.75rem\",\n  },\n});\n\nexport const Separator = React.forwardRef<HTMLElement, SeparatorProps>(function Separator(\n  { orientation = \"horizontal\", className, style, ...props },\n  ref,\n) {\n  if (orientation === \"vertical\") {\n    const sx = rs([\"rs-sep-v\", className], styles.vertical);\n    return (\n      // biome-ignore lint/a11y/useFocusableInteractive: a static separator is not a widget; it takes no focus\n      <span\n        ref={ref as React.Ref<HTMLSpanElement>}\n        // biome-ignore lint/a11y/useAriaPropsForRole: a non-focusable separator needs no aria-valuenow\n        role=\"separator\"\n        aria-orientation=\"vertical\"\n        {...props}\n        className={sx.className}\n        style={{ ...sx.style, ...style }}\n      />\n    );\n  }\n  const sx = rs([\"rs-sep\", className], styles.horizontal);\n  return <hr ref={ref as React.Ref<HTMLHRElement>} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
-      "target": "components/raster/separator.tsx"
+      "target": "components/vlak/separator.tsx"
     },
     {
-      "path": "raster/styles/separator.css",
+      "path": "vlak/styles/separator.css",
       "content": "/* ── separator: generated from packages/react/src/components/separator.tsx ── */\n.rs-sep{border-width:0;border-style:none;border-top-width:1px;border-top-style:solid;border-top-color:var(--divider);margin-block:1.25rem;margin-inline:0}\n.rs-sep-v{display:inline-block;width:1px;align-self:stretch;background-color:var(--divider);margin-block:0;margin-inline:0.75rem}\n",
       "type": "registry:file",
-      "target": "styles/raster/separator.css"
+      "target": "styles/vlak/separator.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "content",
       "classes": [
         "rs-sep",
@@ -40,7 +40,7 @@
       "snippet": "<hr class=\"rs-sep\" />",
       "cssOnly": false,
       "registryDependencies": [
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Separator",
@@ -48,7 +48,7 @@
         "Rule",
         "hr"
       ],
-      "example": "import { Separator } from \"@noorddev/raster-react\";\n\n<Separator />\n<Separator orientation=\"vertical\" style={{ height: 16 }} />",
+      "example": "import { Separator } from \"@noorddev/vlak-react\";\n\n<Separator />\n<Separator orientation=\"vertical\" style={{ height: 16 }} />",
       "usage": {
         "use": [
           "A hairline between groups in a stack or a row.",

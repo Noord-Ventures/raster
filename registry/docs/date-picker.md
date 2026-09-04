@@ -1,11 +1,11 @@
 # Date picker
 
-1px trigger that opens a calendar overlay.
+Selects a date from a calendar overlay opened by a 1px trigger.
 
 Category: forms  
 Name: `date-picker`  
 Also known as: Date picker, DatePicker, Date input, Date field  
-Page: https://getraster.com/components/date-picker/
+Page: https://vlak.dev/components/date-picker/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/date-picker/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { DatePicker } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { DatePicker } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add date-picker
+npx @noorddev/vlak-cli add date-picker
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/date-picker.json
+npx shadcn add https://vlak.dev/r/date-picker.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <button class="rs-dropdown"><span>24 July 2026</span></button>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/date-picker.json
 
 ```tsx
 import { useState } from "react";
-import { DatePicker } from "@noorddev/raster-react";
+import { DatePicker } from "@noorddev/vlak-react";
 
 const [date, setDate] = useState<Date>();
 

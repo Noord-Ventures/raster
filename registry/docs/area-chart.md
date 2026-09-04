@@ -1,11 +1,11 @@
 # Area chart
 
-Filled field under the first series. 1px grid, textured series, one optional spot color.
+Shows change and magnitude with a filled first series. 1px grid and one optional spot color.
 
 Category: charts  
 Name: `area-chart`  
 Also known as: Area chart, Filled line chart  
-Page: https://getraster.com/components/area-chart/
+Page: https://vlak.dev/components/area-chart/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/area-chart/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { AreaChart } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { AreaChart } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add area-chart
+npx @noorddev/vlak-cli add area-chart
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/area-chart.json
+npx shadcn add https://vlak.dev/r/area-chart.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><path class="rs-chart-area" d="M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16 L240 56 L0 56 Z"/><path class="rs-chart-line" d="M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16"/></svg></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/area-chart.json
 ## Example
 
 ```tsx
-import { AreaChart } from "@noorddev/raster-react";
+import { AreaChart } from "@noorddev/vlak-react";
 
 <AreaChart
   height={204}

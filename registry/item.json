@@ -3,11 +3,11 @@
   "name": "item",
   "type": "registry:component",
   "title": "Item",
-  "description": "Flush row: title and description on the left, meta on the right.",
+  "description": "Presents one list entry. Title and description sit left; metadata sits right.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -15,23 +15,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/item.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\n\nexport interface ItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  meta?: React.ReactNode;\n}\n\nconst styles = stylex.create({\n  item: {\n    display: \"flex\",\n    alignItems: \"center\",\n    justifyContent: \"space-between\",\n    gap: \"1rem\",\n    minHeight: {\n      default: \"3rem\",\n      [mq.phone]: raster.hit,\n    },\n    paddingBlock: {\n      default: \"0.625rem\",\n      [mq.phone]: \"0.875rem\",\n    },\n    paddingInline: 0,\n    borderBottomWidth: {\n      default: raster.hairline,\n      \":last-child\": 0,\n    },\n    borderBottomStyle: \"solid\",\n    borderBottomColor: raster.divider,\n    borderRadius: 0,\n  },\n  title: {\n    margin: 0,\n    fontSize: {\n      default: \"0.875rem\",\n      [mq.phone]: raster.controlFs,\n    },\n    fontWeight: 600,\n    letterSpacing: \"-0.01em\",\n    color: raster.ink,\n  },\n  desc: {\n    marginTop: 2,\n    marginBottom: 0,\n    marginInline: 0,\n    fontSize: {\n      default: \"0.78125rem\",\n      [mq.phone]: \"0.875rem\",\n    },\n    fontWeight: 500,\n    letterSpacing: \"-0.01em\",\n    color: raster.gray,\n  },\n  meta: {\n    fontSize: {\n      default: \"0.75rem\",\n      [mq.phone]: \"0.875rem\",\n    },\n    fontWeight: 500,\n    letterSpacing: \"-0.01em\",\n    color: raster.gray,\n    flexShrink: 0,\n  },\n});\n\n/** A flush row. Title occupies the cell; meta trails. */\nexport const Item = React.forwardRef<HTMLDivElement, ItemProps>(function Item(\n  { title, description, meta, className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-item\", className], styles.item);\n  const heading = rs([\"rs-item-title\"], styles.title);\n  const note = rs([\"rs-item-desc\"], styles.desc);\n  const trail = rs([\"rs-item-meta\"], styles.meta);\n  return (\n    <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }}>\n      <div>\n        <p className={heading.className} style={heading.style}>\n          {title}\n        </p>\n        {description != null && (\n          <p className={note.className} style={note.style}>\n            {description}\n          </p>\n        )}\n      </div>\n      {meta != null && (\n        <span className={trail.className} style={trail.style}>\n          {meta}\n        </span>\n      )}\n    </div>\n  );\n});\n",
+      "path": "vlak/item.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\n\nexport interface ItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  meta?: React.ReactNode;\n}\n\nconst styles = stylex.create({\n  item: {\n    display: \"flex\",\n    alignItems: \"center\",\n    justifyContent: \"space-between\",\n    gap: \"1rem\",\n    minHeight: {\n      default: \"3rem\",\n      [mq.phone]: vlak.hit,\n    },\n    paddingBlock: {\n      default: \"0.625rem\",\n      [mq.phone]: \"0.875rem\",\n    },\n    paddingInline: 0,\n    borderBottomWidth: {\n      default: vlak.hairline,\n      \":last-child\": 0,\n    },\n    borderBottomStyle: \"solid\",\n    borderBottomColor: vlak.divider,\n    borderRadius: 0,\n  },\n  title: {\n    margin: 0,\n    fontSize: {\n      default: \"0.875rem\",\n      [mq.phone]: vlak.controlFs,\n    },\n    fontWeight: 600,\n    letterSpacing: \"-0.01em\",\n    color: vlak.ink,\n  },\n  desc: {\n    marginTop: 2,\n    marginBottom: 0,\n    marginInline: 0,\n    fontSize: {\n      default: \"0.78125rem\",\n      [mq.phone]: \"0.875rem\",\n    },\n    fontWeight: 500,\n    letterSpacing: \"-0.01em\",\n    color: vlak.gray,\n  },\n  meta: {\n    fontSize: {\n      default: \"0.75rem\",\n      [mq.phone]: \"0.875rem\",\n    },\n    fontWeight: 500,\n    letterSpacing: \"-0.01em\",\n    color: vlak.gray,\n    flexShrink: 0,\n  },\n});\n\n/** A flush row. Title occupies the cell; meta trails. */\nexport const Item = React.forwardRef<HTMLDivElement, ItemProps>(function Item(\n  { title, description, meta, className, style, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-item\", className], styles.item);\n  const heading = rs([\"rs-item-title\"], styles.title);\n  const note = rs([\"rs-item-desc\"], styles.desc);\n  const trail = rs([\"rs-item-meta\"], styles.meta);\n  return (\n    <div ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }}>\n      <div>\n        <p className={heading.className} style={heading.style}>\n          {title}\n        </p>\n        {description != null && (\n          <p className={note.className} style={note.style}>\n            {description}\n          </p>\n        )}\n      </div>\n      {meta != null && (\n        <span className={trail.className} style={trail.style}>\n          {meta}\n        </span>\n      )}\n    </div>\n  );\n});\n",
       "type": "registry:component",
-      "target": "components/raster/item.tsx"
+      "target": "components/vlak/item.tsx"
     },
     {
-      "path": "raster/styles/item.css",
+      "path": "vlak/styles/item.css",
       "content": "/* ── item: generated from packages/react/src/components/item.tsx ── */\n.rs-item{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:3rem;padding-block:0.625rem;padding-inline:0;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:var(--divider);border-radius:0}\n.rs-item:last-child{border-bottom-width:0}\n@media (max-width: 640px){.rs-item{min-height:var(--hit);padding-block:0.875rem}}\n.rs-item-title{margin:0;font-size:0.875rem;font-weight:600;letter-spacing:-0.01em;color:var(--text)}\n@media (max-width: 640px){.rs-item-title{font-size:var(--control-fs)}}\n.rs-item-desc{margin-top:2px;margin-bottom:0;margin-inline:0;font-size:0.78125rem;font-weight:500;letter-spacing:-0.01em;color:var(--text-secondary)}\n@media (max-width: 640px){.rs-item-desc{font-size:0.875rem}}\n.rs-item-meta{font-size:0.75rem;font-weight:500;letter-spacing:-0.01em;color:var(--text-secondary);flex-shrink:0}\n@media (max-width: 640px){.rs-item-meta{font-size:0.875rem}}\n",
       "type": "registry:file",
-      "target": "styles/raster/item.css"
+      "target": "styles/vlak/item.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "content",
       "classes": [
         "rs-item",
@@ -42,7 +42,7 @@
       "snippet": "<div class=\"rs-item\"><div><p class=\"rs-item-title\">Alkmaar</p><p class=\"rs-item-desc\">The studio city.</p></div><span class=\"rs-item-meta\">NL</span></div>",
       "cssOnly": false,
       "registryDependencies": [
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Item",
@@ -50,7 +50,7 @@
         "Row",
         "Cell"
       ],
-      "example": "import { Item } from \"@noorddev/raster-react\";\n\n<Item title=\"Alkmaar\" description=\"The studio city.\" meta=\"NL\" />",
+      "example": "import { Item } from \"@noorddev/vlak-react\";\n\n<Item title=\"Alkmaar\" description=\"The studio city.\" meta=\"NL\" />",
       "usage": {
         "use": [
           "Rows in a flush list: a title, a line of description, a trailing meta value.",

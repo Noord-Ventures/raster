@@ -1,4 +1,4 @@
-import { Textarea } from "@noorddev/raster-react";
+import { Textarea } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface Step {
@@ -40,16 +40,16 @@ const styles = stylex.create({
     boxSizing: "border-box",
     width: {
       default: "1.5rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     height: {
       default: "1.5rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     borderRadius: "50%",
     borderWidth: 1.5,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -58,32 +58,32 @@ const styles = stylex.create({
       [mq.phone]: "0.9375rem",
     },
     fontWeight: 600,
-    color: raster.gray,
+    color: vlak.gray,
     marginBottom: {
       default: "0.375rem",
       [mq.phone]: "0.5rem",
     },
-    backgroundColor: raster.paper,
+    backgroundColor: vlak.paper,
     position: "relative",
     zIndex: 1,
   },
   done: {
-    backgroundColor: raster.ink,
-    borderColor: raster.ink,
-    color: raster.paper,
+    backgroundColor: vlak.ink,
+    borderColor: vlak.ink,
+    color: vlak.paper,
   },
   active: {
-    borderColor: raster.ink,
-    color: raster.ink,
+    borderColor: vlak.ink,
+    color: vlak.ink,
   },
   name: {
     fontSize: {
       default: "0.8125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
     lineHeight: 1.2,
   },
   sub: {
@@ -92,22 +92,22 @@ const styles = stylex.create({
       [mq.phone]: "0.8125rem",
     },
     fontWeight: 500,
-    color: raster.gray,
+    color: vlak.gray,
     letterSpacing: "-0.01em",
   },
   line: {
     position: "absolute",
     top: {
       default: "0.71875rem",
-      [mq.phone]: `calc(${raster.hit} / 2)`,
+      [mq.phone]: `calc(${vlak.hit} / 2)`,
     },
     insetInlineStart: {
       default: "1.5rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     insetInlineEnd: 0,
-    height: raster.hairline,
-    backgroundColor: raster.divider,
+    height: vlak.hairline,
+    backgroundColor: vlak.divider,
     margin: 0,
     minWidth: 0,
     zIndex: 0,

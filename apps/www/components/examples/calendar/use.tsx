@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Calendar } from "@noorddev/raster-react";
+import { Calendar } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

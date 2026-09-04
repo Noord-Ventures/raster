@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -28,28 +28,28 @@ const styles = stylex.create({
   },
   page: {
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     boxSizing: "border-box",
     width: {
       default: "1.625rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     height: {
       default: "1.625rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minWidth: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     display: "flex",
@@ -57,20 +57,20 @@ const styles = stylex.create({
     justifyContent: "center",
     fontSize: {
       default: "0.8125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     color: {
-      default: raster.gray,
+      default: vlak.gray,
       [mq.forcedColors]: {
         default: "ButtonText",
         ":disabled": "GrayText",
       },
     },
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
     borderColor: {
-      default: raster.controlBorder,
-      ":hover": raster.controlFill,
+      default: vlak.controlBorder,
+      ":hover": vlak.controlFill,
       [mq.forcedColors]: {
         default: "ButtonText",
         ":disabled": "GrayText",
@@ -79,7 +79,7 @@ const styles = stylex.create({
     padding: 0,
     backgroundColor: {
       default: "transparent",
-      ":hover": raster.controlFill,
+      ":hover": vlak.controlFill,
       [mq.forcedColors]: "ButtonFace",
     },
     fontFamily: "inherit",
@@ -105,7 +105,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -114,11 +114,11 @@ const styles = stylex.create({
   },
   on: {
     backgroundColor: {
-      default: raster.ink,
+      default: vlak.ink,
       [mq.forcedColors]: "Highlight",
     },
     color: {
-      default: raster.paper,
+      default: vlak.paper,
       [mq.forcedColors]: "HighlightText",
     },
     fontWeight: 600,

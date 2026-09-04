@@ -178,7 +178,7 @@ body:has(.if-index) {
   width: 420px;
 }
 .if-crop-dock span { font-size: 0.8125rem; color: var(--text-secondary); }
-.if-crop-send {
+.if-crop-dock .if-crop-send {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -334,7 +334,7 @@ body:has(.if-index) {
   .if-tile-matter p { font-size: 0.9375rem; line-height: 1.45; }
 }
 
-/* Detail: Raster chrome around a boxed product UI. Not almost-fullscreen. */
+/* Detail: Vlak chrome around a boxed product UI. Not almost-fullscreen. */
 .if-specimen {
   margin-top: 204px;
   height: 612px;

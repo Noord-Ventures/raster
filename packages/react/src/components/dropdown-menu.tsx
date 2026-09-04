@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { useMergedRefs } from "../merge-refs";
 
@@ -52,18 +52,18 @@ export const menuStyles = stylex.create({
       default: "0.75rem",
       [mq.phone]: "0.875rem",
     },
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     fontSize: {
       default: "0.875rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
-    color: raster.ink,
+    color: vlak.ink,
     letterSpacing: "-0.01em",
     cursor: "pointer",
     fontFamily: "inherit",
@@ -71,7 +71,7 @@ export const menuStyles = stylex.create({
     width: "100%",
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     outlineWidth: {
       default: null,
@@ -83,7 +83,7 @@ export const menuStyles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -92,11 +92,11 @@ export const menuStyles = stylex.create({
   },
   menu: {
     boxSizing: "border-box",
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     marginTop: {
@@ -104,7 +104,7 @@ export const menuStyles = stylex.create({
       [mq.phone]: 0,
     },
     overflow: "hidden",
-    backgroundColor: raster.paper,
+    backgroundColor: vlak.paper,
     boxShadow: {
       default: "0 8px 24px rgba(0,0,0,0.06)",
       [mq.phone]: "none",
@@ -115,11 +115,11 @@ export const menuStyles = stylex.create({
     top: "100%",
     insetInlineStart: 0,
     insetInlineEnd: 0,
-    zIndex: raster.zFloat,
+    zIndex: vlak.zFloat,
   },
   menuFixed: {
     position: "fixed",
-    zIndex: raster.zFloat,
+    zIndex: vlak.zFloat,
     marginTop: 0,
     minWidth: "10rem",
   },
@@ -132,7 +132,7 @@ export const menuStyles = stylex.create({
     top: "100%",
     insetInlineStart: 0,
     insetInlineEnd: 0,
-    zIndex: raster.zFloat,
+    zIndex: vlak.zFloat,
     maxHeight: "15rem",
     overflowY: "auto",
   },
@@ -156,16 +156,16 @@ export const menuStyles = stylex.create({
     },
     fontSize: {
       default: "0.875rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
-    color: raster.ink,
+    color: vlak.ink,
     letterSpacing: "-0.01em",
     borderBottomWidth: {
-      default: raster.hairline,
+      default: vlak.hairline,
       ":last-child": 0,
     },
     borderBottomStyle: "solid",
-    borderBottomColor: raster.divider,
+    borderBottomColor: vlak.divider,
     borderInlineStartWidth: 0,
     borderInlineEndWidth: 0,
     borderTopWidth: 0,
@@ -176,7 +176,7 @@ export const menuStyles = stylex.create({
     fontFamily: "inherit",
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     /* The menu clips at its edge, so the ring sits inside the row. */
     outlineWidth: {
@@ -189,7 +189,7 @@ export const menuStyles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -197,17 +197,17 @@ export const menuStyles = stylex.create({
     },
   },
   itemActive: {
-    backgroundColor: raster.dividerSubtle,
+    backgroundColor: vlak.dividerSubtle,
   },
   itemDisabled: {
-    color: raster.gray,
+    color: vlak.gray,
     cursor: "default",
   },
   sep: {
     borderWidth: 0,
-    borderTopWidth: raster.hairline,
+    borderTopWidth: vlak.hairline,
     borderTopStyle: "solid",
-    borderTopColor: raster.divider,
+    borderTopColor: vlak.divider,
     marginBlock: "0.25rem",
     marginInline: 0,
   },

@@ -1,7 +1,7 @@
 // Generates css/components/<name>.css from the StyleX leaves in
 // packages/react/src. The leaves are the single source of component
 // paint; this script projects them onto the semantic rs-* classes so
-// raster.css paints plain HTML with no compiler.
+// vlak.css paints plain HTML with no compiler.
 //
 // How a leaf key finds its class: every component applies its styles
 // through `rs([classes], styles.key, …)`. A key paired with one fixed
@@ -18,7 +18,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, wri
 import { createRequire } from "node:module";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { rasterComponents } from "../src/registry.ts";
+import { vlakComponents } from "../src/registry.ts";
 
 const require = createRequire(import.meta.url);
 const esbuild = require("esbuild");
@@ -60,7 +60,7 @@ const stubPath = join(mirror, "__stylex.mjs");
 writeFileSync(
   stubPath,
   `const recs = [];
-globalThis.__rasterLeaves = recs;
+globalThis.__vlakLeaves = recs;
 function caller() {
   for (const l of new Error().stack.split("\\n").slice(1)) {
     const m = l.match(/\\((file:[^)]+):\\d+:\\d+\\)|at (file:[^ ]+):\\d+:\\d+/);
@@ -113,7 +113,7 @@ const srcOf = (fileUrl) => {
   const base = join(reactSrc, relative(mirror, decodeURIComponent(fileUrl.replace(/^file:\/\//, "")))).replace(/\.js$/, "");
   return existsSync(`${base}.tsx`) ? `${base}.tsx` : `${base}.ts`;
 };
-const recs = globalThis.__rasterLeaves.map((r) => ({ ...r, src: srcOf(r.file) }));
+const recs = globalThis.__vlakLeaves.map((r) => ({ ...r, src: srcOf(r.file) }));
 rmSync(mirror, { recursive: true, force: true });
 
 /* ── 3. Name every table and keyframes by its const ── */
@@ -215,16 +215,16 @@ function classifyStyle(item) {
   return { kind: "other", text: item };
 }
 
-const byReact = new Map(rasterComponents.filter((c) => c.react).map((c) => [join(reactSrc, c.react), c]));
+const byReact = new Map(vlakComponents.filter((c) => c.react).map((c) => [join(reactSrc, c.react), c]));
 function componentFor(src) {
   if (byReact.has(src)) return byReact.get(src);
   const rel = relative(reactSrc, src);
-  if (rel.startsWith("components/charts/")) return rasterComponents.find((c) => c.name === "chart");
+  if (rel.startsWith("components/charts/")) return vlakComponents.find((c) => c.name === "chart");
   return null;
 }
 /* Class ownership: the component whose name is the class stem wins; otherwise the first declarer. */
 const ownedBy = new Map();
-for (const c of rasterComponents) {
+for (const c of vlakComponents) {
   for (const cls of c.classes) {
     const natural = cls === `rs-${c.name}` || cls.startsWith(`rs-${c.name}-`);
     if (!ownedBy.has(cls) || natural) ownedBy.set(cls, c.name);
@@ -248,7 +248,7 @@ function addSel(src, ref, cls, where = "") {
     const parts = cls.split(".");
     const owners = parts.map((p) => ownedBy.get(p));
     const hasLeaf = (name) => {
-      const e = rasterComponents.find((x) => x.name === name);
+      const e = vlakComponents.find((x) => x.name === name);
       return Boolean(e?.react && perFile.has(join(reactSrc, e.react)));
     };
     if (comp && owners.some((o) => o && o !== comp.name && hasLeaf(o)) && !owners.some((o) => o === comp.name || !o)) {

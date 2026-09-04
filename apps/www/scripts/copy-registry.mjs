@@ -9,7 +9,7 @@ const src = fileURLToPath(new URL("../../../registry", import.meta.url));
 const dest = fileURLToPath(new URL("../public/r", import.meta.url));
 
 if (!existsSync(src)) {
-  console.error("registry/ not found — run: pnpm --filter @noorddev/raster build:registry");
+  console.error("registry/ not found — run: pnpm --filter @noorddev/vlak build:registry");
   process.exit(1);
 }
 rmSync(dest, { recursive: true, force: true });
@@ -21,7 +21,7 @@ const docsSrc = fileURLToPath(new URL("../../../registry/docs", import.meta.url)
 const docsDest = fileURLToPath(new URL("../public/docs", import.meta.url));
 const publicDir = fileURLToPath(new URL("../public", import.meta.url));
 if (!existsSync(docsSrc)) {
-  console.error("registry/docs not found — run: pnpm --filter @noorddev/raster build:registry");
+  console.error("registry/docs not found — run: pnpm --filter @noorddev/vlak build:registry");
   process.exit(1);
 }
 rmSync(docsDest, { recursive: true, force: true });
@@ -33,7 +33,7 @@ for (const file of readdirSync(docsSrc)) {
 }
 const propsSrc = fileURLToPath(new URL("../../../packages/core/props/props.json", import.meta.url));
 if (!existsSync(propsSrc)) {
-  console.error("props.json not found — run: pnpm --filter @noorddev/raster build:props");
+  console.error("props.json not found — run: pnpm --filter @noorddev/vlak build:props");
   process.exit(1);
 }
 writeFileSync(`${docsDest}/props.json`, readFileSync(propsSrc));
@@ -49,14 +49,14 @@ mkdirSync(fontDest, { recursive: true });
 cpSync(fontSrc, fontDest, { recursive: true });
 console.log("copied Inter fonts → public/fonts/inter");
 
-const cssSrc = fileURLToPath(new URL("../../../packages/core/css/raster.css", import.meta.url));
-const cssDest = fileURLToPath(new URL("../public/raster.css", import.meta.url));
+const cssSrc = fileURLToPath(new URL("../../../packages/core/css/vlak.css", import.meta.url));
+const cssDest = fileURLToPath(new URL("../public/vlak.css", import.meta.url));
 if (!existsSync(cssSrc)) {
-  console.error("raster.css not found — run the core CSS build");
+  console.error("vlak.css not found — run the core CSS build");
   process.exit(1);
 }
 writeFileSync(cssDest, readFileSync(cssSrc));
-console.log("copied raster.css → public/raster.css");
+console.log("copied vlak.css → public/vlak.css");
 
 const starterSrc = fileURLToPath(new URL("../../../packages/cli/src/starter.html", import.meta.url));
 const starterDest = fileURLToPath(new URL("../public/starter/index.html", import.meta.url));
@@ -65,5 +65,5 @@ if (!existsSync(starterSrc)) {
   process.exit(1);
 }
 mkdirSync(fileURLToPath(new URL("../public/starter", import.meta.url)), { recursive: true });
-writeFileSync(starterDest, readFileSync(starterSrc, "utf8").replaceAll("{{CSS_HREF}}", "/raster.css"));
+writeFileSync(starterDest, readFileSync(starterSrc, "utf8").replaceAll("{{CSS_HREF}}", "/vlak.css"));
 console.log("wrote starter specimen → public/starter/index.html");

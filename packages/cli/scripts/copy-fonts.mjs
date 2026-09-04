@@ -1,6 +1,6 @@
 // Copy what the CLI reads at runtime next to dist/index.js: the vendored
 // Inter files, the starter specimen, and the registry snapshot. The
-// executable itself stays small; nothing reaches back into @noorddev/raster.
+// executable itself stays small; nothing reaches back into @noorddev/vlak.
 import { cpSync, mkdirSync, copyFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 

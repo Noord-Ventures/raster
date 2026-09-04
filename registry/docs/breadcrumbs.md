@@ -1,11 +1,11 @@
 # Breadcrumbs
 
-Ancestor links, 40% slashes, current page at full ink.
+Shows a page's place in a hierarchy. Ancestors are links; the current page is full ink.
 
 Category: navigation  
 Name: `breadcrumbs`  
 Also known as: Breadcrumb, Breadcrumbs, Trail  
-Page: https://getraster.com/components/breadcrumbs/
+Page: https://vlak.dev/components/breadcrumbs/
 
 ## When to use
 
@@ -22,38 +22,38 @@ Page: https://getraster.com/components/breadcrumbs/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Breadcrumbs } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Breadcrumbs } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add breadcrumbs
+npx @noorddev/vlak-cli add breadcrumbs
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/breadcrumbs.json
+npx shadcn add https://vlak.dev/r/breadcrumbs.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
-<p class="rs-crumbs"><a class="rs-crumbs-link" href="/">Studio</a><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Raster</span></p>
+<p class="rs-crumbs"><a class="rs-crumbs-link" href="/">Studio</a><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Vlak</span></p>
 ```
 
 ## Example
 
 ```tsx
-import { Breadcrumbs } from "@noorddev/raster-react";
+import { Breadcrumbs } from "@noorddev/vlak-react";
 
-<Breadcrumbs items={[{ label: "Studio", href: "/studio" }, { label: "Raster", href: "/studio/raster" }, { label: "Components" }]} />
+<Breadcrumbs items={[{ label: "Studio", href: "/studio" }, { label: "Vlak", href: "/studio/vlak" }, { label: "Components" }]} />
 ```
 
 ## Props

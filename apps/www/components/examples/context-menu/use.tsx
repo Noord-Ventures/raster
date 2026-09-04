@@ -1,4 +1,4 @@
-import { ContextMenu } from "@noorddev/raster-react";
+import { ContextMenu } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

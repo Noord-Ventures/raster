@@ -1,4 +1,4 @@
-import { Icon, Icons } from "@noorddev/raster-react";
+import { Icon, Icons } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

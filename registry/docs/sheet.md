@@ -1,11 +1,11 @@
 # Sheet
 
-Native dialog docked to a screen edge, with the platform focus trap and backdrop.
+Opens a focused task from a screen edge. Native dialog with platform focus handling and backdrop.
 
 Category: surfaces  
 Name: `sheet`  
 Also known as: Sheet, Side panel, Drawer, Slide-over, Off-canvas  
-Page: https://getraster.com/components/sheet/
+Page: https://vlak.dev/components/sheet/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/sheet/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Sheet, SheetBody, SheetTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Sheet, SheetBody, SheetTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add sheet
+npx @noorddev/vlak-cli add sheet
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/sheet.json
+npx shadcn add https://vlak.dev/r/sheet.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <dialog class="rs-sheet" aria-labelledby="filters-title" open><button class="rs-sheet-close" type="button" aria-label="Close">&times;</button><h2 class="rs-sheet-title" id="filters-title">Filters</h2><p class="rs-sheet-body">Everything narrows from here.</p></dialog>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/sheet.json
 
 ```tsx
 import { useState } from "react";
-import { Button, Sheet, SheetBody, SheetTitle } from "@noorddev/raster-react";
+import { Button, Sheet, SheetBody, SheetTitle } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 

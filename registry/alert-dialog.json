@@ -3,13 +3,13 @@
   "name": "alert-dialog",
   "type": "registry:component",
   "title": "Alert dialog",
-  "description": "Native dialog that must be answered. Escape and light dismiss are off.",
+  "description": "Requires a decision before work continues. Native dialog with Escape and light dismiss disabled.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/dialog.json",
-    "https://getraster.com/r/button.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/dialog.json",
+    "https://vlak.dev/r/button.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -17,23 +17,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/alert-dialog.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { Dialog, type DialogProps } from \"./dialog\";\n\nconst styles = stylex.create({\n  lock: {\n    borderRadius: raster.radiusSm,\n    boxShadow: \"none\",\n  },\n});\n\nexport interface AlertDialogProps extends Omit<DialogProps, \"dismissable\" | \"lightDismiss\" | \"closeLabel\"> {}\n\n/**\n * A native <dialog> that requires an explicit answer. Escape and\n * light dismiss are off (closedby=\"none\"); the actions close it.\n */\nexport const AlertDialog = React.forwardRef<HTMLDialogElement, AlertDialogProps>(function AlertDialog(\n  { className, extraStyles, ...props },\n  ref,\n) {\n  return (\n    <Dialog\n      ref={ref}\n      role=\"alertdialog\"\n      dismissable={false}\n      className={className ? `rs-alert-dialog ${className}` : \"rs-alert-dialog\"}\n      extraStyles={[styles.lock, ...(extraStyles ?? [])]}\n      {...props}\n    />\n  );\n});\n\nexport {\n  DialogTitle as AlertDialogTitle,\n  DialogBody as AlertDialogBody,\n  DialogActions as AlertDialogActions,\n} from \"./dialog\";\n",
+      "path": "vlak/alert-dialog.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak } from \"./tokens.stylex\";\nimport { Dialog, type DialogProps } from \"./dialog\";\n\nconst styles = stylex.create({\n  lock: {\n    borderRadius: vlak.radiusSm,\n    boxShadow: \"none\",\n  },\n});\n\nexport interface AlertDialogProps extends Omit<DialogProps, \"dismissable\" | \"lightDismiss\" | \"closeLabel\"> {}\n\n/**\n * A native <dialog> that requires an explicit answer. Escape and\n * light dismiss are off (closedby=\"none\"); the actions close it.\n */\nexport const AlertDialog = React.forwardRef<HTMLDialogElement, AlertDialogProps>(function AlertDialog(\n  { className, extraStyles, ...props },\n  ref,\n) {\n  return (\n    <Dialog\n      ref={ref}\n      role=\"alertdialog\"\n      dismissable={false}\n      className={className ? `rs-alert-dialog ${className}` : \"rs-alert-dialog\"}\n      extraStyles={[styles.lock, ...(extraStyles ?? [])]}\n      {...props}\n    />\n  );\n});\n\nexport {\n  DialogTitle as AlertDialogTitle,\n  DialogBody as AlertDialogBody,\n  DialogActions as AlertDialogActions,\n} from \"./dialog\";\n",
       "type": "registry:component",
-      "target": "components/raster/alert-dialog.tsx"
+      "target": "components/vlak/alert-dialog.tsx"
     },
     {
-      "path": "raster/styles/alert-dialog.css",
+      "path": "vlak/styles/alert-dialog.css",
       "content": "/* ── alert-dialog: generated from packages/react/src/components/alert-dialog.tsx ── */\n.rs-alert-dialog{border-radius:var(--radius-sm);box-shadow:none}\n",
       "type": "registry:file",
-      "target": "styles/raster/alert-dialog.css"
+      "target": "styles/vlak/alert-dialog.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "surfaces",
       "classes": [
         "rs-alert-dialog"
@@ -43,7 +43,7 @@
       "registryDependencies": [
         "dialog",
         "button",
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Alert dialog",
@@ -51,7 +51,7 @@
         "Confirmation",
         "Destructive confirm"
       ],
-      "example": "import { useState } from \"react\";\nimport { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from \"@noorddev/raster-react\";\n\nconst [open, setOpen] = useState(false);\n\n<AlertDialog open={open} onClose={() => setOpen(false)}>\n  <AlertDialogTitle>Delete this workspace?</AlertDialogTitle>\n  <AlertDialogBody>All projects go with it.</AlertDialogBody>\n  <AlertDialogActions>\n    <Button variant=\"ghost\" size=\"sm\" onClick={() => setOpen(false)}>Keep it</Button>\n    <Button size=\"sm\" onClick={remove}>Delete</Button>\n  </AlertDialogActions>\n</AlertDialog>",
+      "example": "import { useState } from \"react\";\nimport { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from \"@noorddev/vlak-react\";\n\nconst [open, setOpen] = useState(false);\n\n<AlertDialog open={open} onClose={() => setOpen(false)}>\n  <AlertDialogTitle>Delete this workspace?</AlertDialogTitle>\n  <AlertDialogBody>All projects go with it.</AlertDialogBody>\n  <AlertDialogActions>\n    <Button variant=\"ghost\" size=\"sm\" onClick={() => setOpen(false)}>Keep it</Button>\n    <Button size=\"sm\" onClick={remove}>Delete</Button>\n  </AlertDialogActions>\n</AlertDialog>",
       "usage": {
         "use": [
           "Destructive or irreversible actions that need an explicit answer.",

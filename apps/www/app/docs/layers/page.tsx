@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 };
 
 const layers = [
-  { name: "raster.tokens", holds: "Custom properties on :root, the dark block, color-scheme." },
-  { name: "raster.base", holds: "Reset, body, the module background, focus ring defaults, Inter." },
-  { name: "raster.type", holds: "The type scale: rs-t-display, rs-t-title, rs-t-body, rs-t-label." },
-  { name: "raster.components", holds: "Every component, projected from its StyleX leaf." },
-  { name: "raster.touch", holds: "The phone recut at or under 640px: 44pt hits, 16px control type." },
-  { name: "raster.motion", holds: "Transitions and the prefers-reduced-motion branch." },
+  { name: "vlak.tokens", holds: "Custom properties on :root, the dark block, color-scheme." },
+  { name: "vlak.base", holds: "Reset, body, the module background, focus ring defaults, Inter." },
+  { name: "vlak.type", holds: "The type scale: rs-t-display, rs-t-title, rs-t-body, rs-t-label." },
+  { name: "vlak.components", holds: "Every component, projected from its StyleX leaf." },
+  { name: "vlak.touch", holds: "The phone recut at or under 640px: 44pt hits, 16px control type." },
+  { name: "vlak.motion", holds: "Transitions and the prefers-reduced-motion branch." },
 ];
 
 const override = `/* your.css. No layer, no !important. */
@@ -23,10 +23,10 @@ const override = `/* your.css. No layer, no !important. */
 .rs-dialog { max-width: 592px; }
 .rs-table-td { padding-block: 14px; }`;
 
-const layered = `/* If you keep your own layers, declare Raster's first and yours last. */
-@layer raster.tokens, raster.base, raster.type, raster.components, raster.touch, raster.motion, app;
+const layered = `/* If you keep your own layers, declare Vlak's first and yours last. */
+@layer vlak.tokens, vlak.base, vlak.type, vlak.components, vlak.touch, vlak.motion, app;
 
-@import "@noorddev/raster-react/css";
+@import "@noorddev/vlak-react/css";
 
 @layer app {
   .rs-btn-primary { border-radius: 8px; }
@@ -43,7 +43,7 @@ export default function LayersPage() {
   return (
     <DocsShell
       title="Layers"
-      summary="All of Raster's CSS sits in cascade layers. Unlayered author CSS wins by definition."
+      summary="All of Vlak's CSS sits in cascade layers. Unlayered author CSS wins by definition."
     >
       <h2 className="section-label">The six layers</h2>
       <div className="docs-table" tabIndex={0}>
@@ -68,23 +68,23 @@ export default function LayersPage() {
       </div>
       <p className="rs-t-body">
         Declared in that order at the top of both stylesheets, so a later layer beats an earlier one:
-        touch beats components, motion beats everything Raster paints. The React stylesheet and
-        raster.css use the same names, so a page can load both without a fight.
+        touch beats components, motion beats everything Vlak paints. The React stylesheet and
+        vlak.css use the same names, so a page can load both without a fight.
       </p>
 
       <h2 className="section-label">Why unlayered CSS wins</h2>
       <CodeBlock code={override} />
       <p className="rs-t-body">
         The cascade sorts by layer before specificity. Styles outside any layer beat styles inside
-        one, whatever the selector. A single class in your stylesheet outranks a Raster rule with
-        pseudo-classes and media queries behind it. Nothing in Raster uses{" "}
+        one, whatever the selector. A single class in your stylesheet outranks a Vlak rule with
+        pseudo-classes and media queries behind it. Nothing in Vlak uses{" "}
         <code className="rs-code">!important</code>; a test fails the build if it does.
       </p>
 
       <h2 className="section-label">Keeping your own layers</h2>
       <CodeBlock code={layered} />
       <p className="rs-t-body">
-        If your project layers everything, name Raster&apos;s layers before yours in one{" "}
+        If your project layers everything, name Vlak&apos;s layers before yours in one{" "}
         <code className="rs-code">@layer</code> statement that appears before the import. Order of
         first mention decides.
       </p>

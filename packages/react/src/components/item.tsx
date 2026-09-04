@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 
@@ -18,7 +18,7 @@ const styles = stylex.create({
     gap: "1rem",
     minHeight: {
       default: "3rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     paddingBlock: {
       default: "0.625rem",
@@ -26,22 +26,22 @@ const styles = stylex.create({
     },
     paddingInline: 0,
     borderBottomWidth: {
-      default: raster.hairline,
+      default: vlak.hairline,
       ":last-child": 0,
     },
     borderBottomStyle: "solid",
-    borderBottomColor: raster.divider,
+    borderBottomColor: vlak.divider,
     borderRadius: 0,
   },
   title: {
     margin: 0,
     fontSize: {
       default: "0.875rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
   },
   desc: {
     marginTop: 2,
@@ -53,7 +53,7 @@ const styles = stylex.create({
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
   },
   meta: {
     fontSize: {
@@ -62,7 +62,7 @@ const styles = stylex.create({
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
     flexShrink: 0,
   },
 });

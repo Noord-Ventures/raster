@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { Dialog, type DialogProps } from "./dialog";
 
 const styles = stylex.create({
   lock: {
-    borderRadius: raster.radiusSm,
+    borderRadius: vlak.radiusSm,
     boxShadow: "none",
   },
 });

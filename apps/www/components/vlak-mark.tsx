@@ -1,9 +1,9 @@
 /**
- * The Raster mark from the noord library page, bare.
+ * The Vlak mark from the noord library page, bare.
  * Rotation lives on .site-logo-mark (chrome).
  * Do not invent a second path set.
  */
-export function RasterMark({ className = "site-logo-mark" }: { className?: string }) {
+export function VlakMark({ className = "site-logo-mark" }: { className?: string }) {
   return (
     <svg viewBox="0 0 822 822" fill="currentColor" aria-hidden="true" className={className}>
       <path d="m411.128.67 128.714 128.713L334.5 334.726 129.158 540.068.405 411.315 411.128.669Z" />

@@ -1,11 +1,11 @@
 # Charts
 
-Line on a 204 field. 1px grid, ink marks. Series use solid, dashed, gray, or dotted. One optional spot color.
+Plots one or more lines on a 204px field. 1px grid, textured series, and one optional spot color.
 
 Category: charts  
 Name: `chart`  
 Also known as: Chart, Line chart, Sparkline, Trend line  
-Page: https://getraster.com/components/chart/
+Page: https://vlak.dev/components/chart/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/chart/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { LineChart, Sparkline } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { LineChart, Sparkline } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add chart
+npx @noorddev/vlak-cli add chart
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/chart.json
+npx shadcn add https://vlak.dev/r/chart.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><line class="rs-chart-grid" x1="0" x2="240" y1="56" y2="56"/><path class="rs-chart-line" d="M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16"/></svg></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/chart.json
 ## Example
 
 ```tsx
-import { LineChart, Sparkline } from "@noorddev/raster-react";
+import { LineChart, Sparkline } from "@noorddev/vlak-react";
 
 <LineChart
   height={204}

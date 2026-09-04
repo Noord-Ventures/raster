@@ -1,6 +1,6 @@
-/* Raster component classes only (layer raster.components). Load after tokens, base, and type:
-   @noorddev/raster/css carries all of it; @noorddev/raster-react/css carries the React side. Generated. */
-@layer raster.components {
+/* Vlak component classes only (layer vlak.components). Load after tokens, base, and type:
+   @noorddev/vlak/css carries all of it; @noorddev/vlak-react/css carries the React side. Generated. */
+@layer vlak.components {
 /* ── button: generated from packages/react/src/components/button.tsx ── */
 .rs-btn-ghost,.rs-btn-primary{box-sizing:border-box;font-family:inherit;letter-spacing:-0.01em;display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;cursor:pointer;height:var(--control-h);font-size:var(--control-fs);padding-inline:1.375rem;border-width:1px;border-style:solid;border-radius:var(--radius-sm);transition:var(--transition);opacity:1}
 .rs-btn-ghost:disabled,.rs-btn-primary:disabled{cursor:not-allowed;opacity:0.4}

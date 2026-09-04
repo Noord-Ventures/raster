@@ -25,9 +25,9 @@ describe("generated docs", () => {
   it("every page carries the install paths and the example", () => {
     for (const c of catalogComponents) {
       const page = readFileSync(join(docsDir, `${c.name}.md`), "utf8");
-      expect(page).toContain(`npx @noorddev/raster-cli add ${c.name}`);
-      expect(page).toContain(`npx shadcn add https://getraster.com/r/${c.name}.json`);
-      expect(page).toContain("npm install @noorddev/raster-react");
+      expect(page).toContain(`npx @noorddev/vlak-cli add ${c.name}`);
+      expect(page).toContain(`npx shadcn add https://vlak.dev/r/${c.name}.json`);
+      expect(page).toContain("npm install @noorddev/vlak-react");
       expect(page).toContain("## Example");
       expect(page).toContain("## Accessibility");
     }

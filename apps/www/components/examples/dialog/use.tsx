@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Button, Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/raster-react";
+import { Button, Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

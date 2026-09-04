@@ -1,6 +1,6 @@
 {
   "$schema": "https://tr.designtokens.org/format/",
-  "$description": "Raster design tokens. https://getraster.com",
+  "$description": "Vlak design tokens. https://vlak.dev",
   "color": {
     "$description": "Monochrome. Paper, ink, gray. No accent hue.",
     "light": {

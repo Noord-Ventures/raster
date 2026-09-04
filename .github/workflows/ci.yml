@@ -48,7 +48,7 @@ jobs:
           name: dist
           path: |
             packages/core/dist
-            packages/core/css/raster.css
+            packages/core/css/vlak.css
             packages/react/dist
             packages/cli/dist
           retention-days: 7

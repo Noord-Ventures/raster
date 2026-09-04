@@ -1,11 +1,11 @@
 # One-time code
 
-One cell per character. Auto-advance, backspace, and paste.
+Collects a one-time code in one cell per character. Supports auto-advance, backspace, and paste.
 
 Category: forms  
 Name: `input-otp`  
 Also known as: One-time code, OTP input, InputOTP, PIN input, Verification code  
-Page: https://getraster.com/components/input-otp/
+Page: https://vlak.dev/components/input-otp/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/input-otp/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { InputOTP } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { InputOTP } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add input-otp
+npx @noorddev/vlak-cli add input-otp
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/input-otp.json
+npx shadcn add https://vlak.dev/r/input-otp.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-otp" role="group" aria-label="One-time code"><input class="rs-otp-cell" maxlength="1" value="8" aria-label="Digit 1" /><input class="rs-otp-cell" maxlength="1" value="2" aria-label="Digit 2" /><input class="rs-otp-cell" maxlength="1" aria-label="Digit 3" /><input class="rs-otp-cell" maxlength="1" aria-label="Digit 4" /></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/input-otp.json
 ## Example
 
 ```tsx
-import { InputOTP } from "@noorddev/raster-react";
+import { InputOTP } from "@noorddev/vlak-react";
 
 <InputOTP length={6} aria-label="One-time code" onComplete={(code) => verify(code)} />
 ```

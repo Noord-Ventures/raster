@@ -1,11 +1,11 @@
 # Input group
 
-Addon and field share a 1px border.
+Joins a text field with a prefix or suffix inside one 1px border.
 
 Category: forms  
 Name: `input-group`  
 Also known as: Input group, Input addon, Prefix input, Suffix input  
-Page: https://getraster.com/components/input-group/
+Page: https://vlak.dev/components/input-group/
 
 ## When to use
 
@@ -22,40 +22,40 @@ Page: https://getraster.com/components/input-group/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { InputAddon, InputGroup } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { InputAddon, InputGroup } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add input-group
+npx @noorddev/vlak-cli add input-group
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/input-group.json
+npx shadcn add https://vlak.dev/r/input-group.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
-<div class="rs-input-group"><span class="rs-input-addon">https://</span><input class="rs-input" placeholder="getraster.com" /></div>
+<div class="rs-input-group"><span class="rs-input-addon">https://</span><input class="rs-input" placeholder="vlak.dev" /></div>
 ```
 
 ## Example
 
 ```tsx
-import { Input, InputAddon, InputGroup } from "@noorddev/raster-react";
+import { Input, InputAddon, InputGroup } from "@noorddev/vlak-react";
 
 <InputGroup>
   <InputAddon>https://</InputAddon>
-  <Input placeholder="getraster.com" aria-label="Site" />
+  <Input placeholder="vlak.dev" aria-label="Site" />
 </InputGroup>
 
 <InputGroup end>

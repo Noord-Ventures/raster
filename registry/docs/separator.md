@@ -1,11 +1,11 @@
 # Separator
 
-1px rule, horizontal or vertical.
+Separates related regions with a 1px horizontal or vertical rule.
 
 Category: content  
 Name: `separator`  
 Also known as: Separator, Divider, Rule, hr  
-Page: https://getraster.com/components/separator/
+Page: https://vlak.dev/components/separator/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/separator/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Separator } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Separator } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add separator
+npx @noorddev/vlak-cli add separator
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/separator.json
+npx shadcn add https://vlak.dev/r/separator.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <hr class="rs-sep" />
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/separator.json
 ## Example
 
 ```tsx
-import { Separator } from "@noorddev/raster-react";
+import { Separator } from "@noorddev/vlak-react";
 
 <Separator />
 <Separator orientation="vertical" style={{ height: 16 }} />

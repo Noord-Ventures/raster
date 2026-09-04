@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { rasterComponents } from "../src/registry";
+import { vlakComponents } from "../src/registry";
 
 /**
  * Official shadcn/ui registry:ui names from
  * https://github.com/shadcn-ui/ui/blob/main/apps/v4/registry/new-york-v4/ui/_registry.ts
  * checked 2026-08-26. Completeness means the catalog, not a clone.
  *
- * Raster names that cover a shadcn item (same job, Raster law):
+ * Vlak names that cover a shadcn item (same job, Vlak law):
  *   breadcrumb → breadcrumbs
  *   radio-group → radio
  */
@@ -80,7 +80,7 @@ const ALIASES: Record<string, string> = {
   "radio-group": "radio",
 };
 
-/** Cannot be Raster without a JS widget library, Radix, or a chat SDK. */
+/** Cannot be Vlak without a JS widget library, Radix, or a chat SDK. */
 const DEFERRED = new Set([
   "sonner",
   "direction",
@@ -92,7 +92,7 @@ const DEFERRED = new Set([
 ]);
 
 describe("shadcn everyday catalog parity", () => {
-  const names = new Set(rasterComponents.map((c) => c.name));
+  const names = new Set(vlakComponents.map((c) => c.name));
 
   it("ships every everyday official ui item, or names it deferred", () => {
     const missing = SHADCN_UI.filter((name) => {

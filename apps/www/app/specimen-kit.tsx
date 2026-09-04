@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { catalogComponents } from "@noorddev/raster";
+import { catalogComponents } from "@noorddev/vlak";
 import { Preview } from "@/components/preview";
 import { sx } from "@/lib/sx";
 import { KIT } from "./specimen";

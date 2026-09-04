@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface NavigationMenuProps extends React.HTMLAttributes<HTMLElement> {
@@ -33,7 +33,7 @@ const styles = stylex.create({
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     paddingInline: {
       default: null,
@@ -41,20 +41,20 @@ const styles = stylex.create({
     },
     fontSize: {
       default: "0.875rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     fontWeight: 500,
     letterSpacing: "-0.01em",
     color: {
-      default: raster.gray,
-      ":link": raster.gray,
-      ":visited": raster.gray,
-      ":hover": raster.ink,
-      '[aria-current="page"]': raster.ink,
+      default: vlak.gray,
+      ":link": vlak.gray,
+      ":visited": vlak.gray,
+      ":hover": vlak.ink,
+      '[aria-current="page"]': vlak.ink,
     },
     textDecoration: "none",
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
   },

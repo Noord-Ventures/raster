@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Callout } from "@noorddev/raster-react";
+import { Callout } from "@noorddev/vlak-react";
 import { CodeBlock } from "@/components/code-block";
 import { DocsShell } from "@/components/docs-shell";
 import { COMMAND, DOOR, HOST, INSTALL, LAW } from "../specimen";
@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 };
 
 const packageUsage = `// app/layout.tsx, main.tsx, or wherever your app starts
-import "@noorddev/raster-react/css";
+import "@noorddev/vlak-react/css";
 
 // anywhere
-import { Button, Field, FieldLabel, Input } from "@noorddev/raster-react";
+import { Button, Field, FieldLabel, Input } from "@noorddev/vlak-react";
 
 export function Invoice() {
   return (
@@ -28,7 +28,7 @@ export function Invoice() {
   );
 }`;
 
-const cssUsage = `<link rel="stylesheet" href="node_modules/@noorddev/raster/css/raster.css" />
+const cssUsage = `<link rel="stylesheet" href="node_modules/@noorddev/vlak/css/vlak.css" />
 
 <button class="rs-btn-primary">Primary action</button>
 <button class="rs-btn-ghost">Secondary</button>`;
@@ -37,33 +37,32 @@ export default function DocsPage() {
   return (
     <DocsShell
       title="Getting started"
-      summary="Precompiled React, generated CSS, one source of paint. Pick a way in; the pixels are the same."
+      summary="Choose React, vendored source, or CSS. Every path comes from the same component source and produces the same pixels."
     >
-      <h2 className="section-label">1. Import the package</h2>
+      <h2 className="section-label">1. Install the React package</h2>
       <CodeBlock code={INSTALL} />
       <CodeBlock code={packageUsage} />
       <p className="rs-t-body">
-        One import for the stylesheet, then components where you use them. The stylesheet is 42 KB
+        Import the stylesheet once, then import components where you use them. The stylesheet is 42 KB
         (12 KB gzipped) and carries the tokens, the page base, the type scale, and every component.
         Inter (SIL OFL 1.1) loads from the package; there is no Google Fonts request and no compiler
         to configure.
       </p>
       <p className="rs-t-body">
-        Every component is also its own module, so bundlers drop what you do not use even without
-        tree shaking: <code className="rs-code">import {"{ Button }"} from
-        &quot;@noorddev/raster-react/components/button&quot;</code>. Stateful components already
+        Every component also has a direct export, so you can import only the module you need: <code className="rs-code">import {"{ Button }"} from
+        &quot;@noorddev/vlak-react/components/button&quot;</code>. Stateful components already
         carry <code className="rs-code">&quot;use client&quot;</code>; import them from a React
         Server Components tree without a wrapper. Requirements: React 18 or 19.
       </p>
 
-      <h2 className="section-label">2. Vendor the source</h2>
+      <h2 className="section-label">2. Vendor with the CLI</h2>
       <CodeBlock code={`${COMMAND}\n${COMMAND.replace("init", "add button dialog")}`} />
       <p className="rs-t-body">
-        The shadcn model. <code className="rs-code">init</code> writes{" "}
-        <code className="rs-code">styles/raster.css</code>, Inter, a specimen{" "}
-        <code className="rs-code">index.html</code>, and <code className="rs-code">raster.json</code>.{" "}
-        <code className="rs-code">add</code> copies a component&apos;s StyleX leaf and its
-        dependencies into <code className="rs-code">components/raster/</code> for your own compiler
+        <code className="rs-code">init</code> writes{" "}
+        <code className="rs-code">styles/vlak.css</code>, Inter, a specimen{" "}
+        <code className="rs-code">index.html</code>, and <code className="rs-code">vlak.json</code>.{" "}
+        Then <code className="rs-code">add</code> copies a component&apos;s StyleX leaf and its
+        dependencies into <code className="rs-code">components/vlak/</code> for your own compiler
         to own. Works offline; the registry ships inside the CLI.
       </p>
       <CodeBlock code={`npx shadcn add ${HOST}/r/button.json`} />
@@ -77,24 +76,24 @@ export default function DocsPage() {
         .
       </p>
 
-      <h2 className="section-label">3. CSS only</h2>
-      <CodeBlock code="npm install @noorddev/raster" />
+      <h2 className="section-label">3. Use CSS only</h2>
+      <CodeBlock code="npm install @noorddev/vlak" />
       <CodeBlock code={cssUsage} />
       <p className="rs-t-body">
-        No React. <code className="rs-code">raster.css</code> is 84 KB (14 KB gzipped) and paints
+        No React. <code className="rs-code">vlak.css</code> is 84 KB (14 KB gzipped) and paints
         every component through <code className="rs-code">rs-*</code> classes on plain markup. It is
         generated from the same StyleX leaves as the React package, so the two never drift. Each
         component page shows its markup and classes. Individual files are exported too:{" "}
-        <code className="rs-code">@noorddev/raster/css/tokens.css</code>,{" "}
-        <code className="rs-code">@noorddev/raster/css/components/button.css</code>.
+        <code className="rs-code">@noorddev/vlak/css/tokens.css</code>,{" "}
+        <code className="rs-code">@noorddev/vlak/css/components/button.css</code>.
       </p>
 
       <Callout>
         <p className="rs-t-label">One source of paint</p>
         <p className="rs-t-body">
           Every component is a StyleX leaf. The React package ships it compiled with one stylesheet;
-          raster.css is projected from the same leaf onto rs-* classes; vendoring hands you the leaf
-          itself. Import it, link it, or own it: identical pixels.
+          vlak.css is projected from the same leaf onto rs-* classes; vendoring gives you the leaf
+          itself. Import it, link it, or own it. The pixels are identical.
         </p>
       </Callout>
 
@@ -113,10 +112,10 @@ export default function DocsPage() {
 
       <h2 className="section-label">What the stylesheet contains</h2>
       <p className="rs-t-body">
-        Six cascade layers, in order: <code className="rs-code">raster.tokens</code>,{" "}
-        <code className="rs-code">raster.base</code>, <code className="rs-code">raster.type</code>,{" "}
-        <code className="rs-code">raster.components</code>, <code className="rs-code">raster.touch</code>,{" "}
-        <code className="rs-code">raster.motion</code>. Your own CSS is unlayered, so it wins without{" "}
+        Six cascade layers, in order: <code className="rs-code">vlak.tokens</code>,{" "}
+        <code className="rs-code">vlak.base</code>, <code className="rs-code">vlak.type</code>,{" "}
+        <code className="rs-code">vlak.components</code>, <code className="rs-code">vlak.touch</code>,{" "}
+        <code className="rs-code">vlak.motion</code>. Your own CSS is unlayered, so it wins without{" "}
         <code className="rs-code">!important</code>. See{" "}
         <a className="rs-link" href="/docs/layers">
           Layers
@@ -152,7 +151,7 @@ export default function DocsPage() {
           <a className="rs-link" href="/docs/stylex">
             StyleX
           </a>
-          : write your own leaves against Raster tokens.
+          : write your own leaves against Vlak tokens.
         </li>
         <li>
           <a className="rs-link" href="/docs/accessibility">

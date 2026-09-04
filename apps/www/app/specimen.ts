@@ -1,20 +1,20 @@
 /** The homepage specimen. One writer for the face, the word, the law, and the command. */
 
 export const FACE = "Inter";
-export const WORD = "Raster";
-export const LAW = "A design system on a modular grid.";
-export const POSTER = "Inspired by Dutch and Swiss modernism.";
+export const WORD = "Vlak";
+export const LAW = "A monochrome design system for product interfaces.";
+export const POSTER = "Built on a 204px module. Drawn from Dutch and Swiss modernism.";
 /** The package path: precompiled React and one stylesheet. The homepage command. */
-export const INSTALL = "npm install @noorddev/raster-react";
+export const INSTALL = "npm install @noorddev/vlak-react";
 /** The vendoring path: the CLI writes the CSS, Inter, and a specimen, then copies leaves. */
-export const COMMAND = "npx @noorddev/raster-cli init";
+export const COMMAND = "npx @noorddev/vlak-cli init";
 /** The shadcn path: the same registry, through shadcn's CLI. */
-export const SHADCN = "npx shadcn add https://getraster.com/r/button.json";
+export const SHADCN = "npx shadcn add https://vlak.dev/r/button.json";
 
 /** Public door. Do not attach DNS from this repo. */
-export const DOOR = "https://getraster.com";
+export const DOOR = "https://vlak.dev";
 /** Public host for registry, fonts, OG, and canonical. Same as the door. */
-export const HOST = "https://getraster.com";
+export const HOST = "https://vlak.dev";
 
 /**
  * Object cells on the poster. Names from the catalog on this branch —

@@ -1,11 +1,11 @@
 # Small multiples
 
-Repeated charts on the same axes. One 184 column per panel.
+Compares repeated charts on shared axes. Each panel occupies one 184px column.
 
 Category: charts  
 Name: `small-multiples`  
 Also known as: Small multiples, Trellis chart, Facet grid, Panel charts  
-Page: https://getraster.com/components/small-multiples/
+Page: https://vlak.dev/components/small-multiples/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/small-multiples/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { SmallMultiples } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { SmallMultiples } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add small-multiples
+npx @noorddev/vlak-cli add small-multiples
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/small-multiples.json
+npx shadcn add https://vlak.dev/r/small-multiples.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart-multi"><div class="rs-chart"><svg viewBox="0 0 184 64" width="184" height="64"><path class="rs-chart-line" d="M0 40 L46 28 L92 34 L138 16 L184 22"/></svg></div><div class="rs-chart"><svg viewBox="0 0 184 64" width="184" height="64"><path class="rs-chart-line" d="M0 30 L46 36 L92 22 L138 28 L184 18"/></svg></div></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/small-multiples.json
 ## Example
 
 ```tsx
-import { SmallMultiples } from "@noorddev/raster-react";
+import { SmallMultiples } from "@noorddev/vlak-react";
 
 <SmallMultiples
   height={136}

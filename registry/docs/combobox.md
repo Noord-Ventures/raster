@@ -1,11 +1,11 @@
 # Combobox
 
-Text field with a filtered listbox.
+Filters and selects an option from a listbox through one text field.
 
 Category: forms  
 Name: `combobox`  
 Also known as: Combobox, Autocomplete, Typeahead, Searchable select  
-Page: https://getraster.com/components/combobox/
+Page: https://vlak.dev/components/combobox/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/combobox/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Combobox } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Combobox } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add combobox
+npx @noorddev/vlak-cli add combobox
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/combobox.json
+npx shadcn add https://vlak.dev/r/combobox.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-combobox"><input class="rs-input rs-input-full" role="combobox" placeholder="Search…" /><div class="rs-menu" role="listbox"><div class="rs-menu-item rs-menu-item-active" role="option" aria-selected="false">Alkmaar</div><div class="rs-menu-item" role="option" aria-selected="false">Amsterdam</div></div></div>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/combobox.json
 
 ```tsx
 import { useState } from "react";
-import { Combobox } from "@noorddev/raster-react";
+import { Combobox } from "@noorddev/vlak-react";
 
 const [city, setCity] = useState("");
 

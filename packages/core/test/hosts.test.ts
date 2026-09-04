@@ -5,7 +5,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 const repoRoot = join(import.meta.dirname, "../../..");
 const pkgDir = join(import.meta.dirname, "..");
 const registryDir = join(repoRoot, "registry");
-const DEAD = /raster\.design|raster-pied|vercel\.app|raster\.noord\.dev/;
+const DEAD = /vlak\.design|vlak-pied|vercel\.app|vlak\.noord\.dev/;
 
 let files: string[];
 
@@ -15,7 +15,7 @@ beforeAll(() => {
 });
 
 describe("generated registry hosts", () => {
-  it("never mentions raster.design, raster-pied, or vercel.app", () => {
+  it("never mentions vlak.design, vlak-pied, or vercel.app", () => {
     const hits: string[] = [];
     for (const name of files) {
       const text = readFileSync(join(registryDir, name), "utf8");
@@ -25,7 +25,7 @@ describe("generated registry hosts", () => {
   });
 
   it("never names a leftover scoped package", () => {
-    const leftovers = [new RegExp(`@${"raster"}/`), new RegExp(`@${"noord"}/raster`), new RegExp(`@${"rennvaldes"}/`)];
+    const leftovers = [new RegExp(`@${"vlak"}/`), new RegExp(`@${"noord"}/vlak`), new RegExp(`@${"rennvaldes"}/`)];
     const hits: string[] = [];
     for (const name of files) {
       const text = readFileSync(join(registryDir, name), "utf8");
@@ -34,24 +34,24 @@ describe("generated registry hosts", () => {
     expect(hits, `leftover package scope in registry/${hits.join(", ")}`).toEqual([]);
   });
 
-  it("uses https://getraster.com for homepage, raster-base, and inter", () => {
+  it("uses https://vlak.dev for homepage, vlak-base, and inter", () => {
     const index = JSON.parse(readFileSync(join(registryDir, "index.json"), "utf8")) as {
       homepage: string;
       items: Array<{ name: string; registryDependencies?: string[] }>;
     };
-    expect(index.homepage).toBe("https://getraster.com");
+    expect(index.homepage).toBe("https://vlak.dev");
 
     const inter = index.items.find((item) => item.name === "inter");
-    const base = index.items.find((item) => item.name === "raster-base");
+    const base = index.items.find((item) => item.name === "vlak-base");
     expect(inter).toBeTruthy();
-    expect(base?.registryDependencies).toContain("https://getraster.com/r/inter.json");
+    expect(base?.registryDependencies).toContain("https://vlak.dev/r/inter.json");
 
     for (const item of index.items) {
-      if (item.name === "inter" || item.name === "raster-base" || item.name === "raster-lib") continue;
-      expect(item.registryDependencies, item.name).toContain("https://getraster.com/r/raster-base.json");
-      expect(item.registryDependencies, item.name).toContain("https://getraster.com/r/inter.json");
+      if (item.name === "inter" || item.name === "vlak-base" || item.name === "vlak-lib") continue;
+      expect(item.registryDependencies, item.name).toContain("https://vlak.dev/r/vlak-base.json");
+      expect(item.registryDependencies, item.name).toContain("https://vlak.dev/r/inter.json");
       for (const dep of item.registryDependencies ?? []) {
-        expect(dep.startsWith("https://getraster.com/"), `${item.name} dep ${dep}`).toBe(true);
+        expect(dep.startsWith("https://vlak.dev/"), `${item.name} dep ${dep}`).toBe(true);
       }
     }
   });

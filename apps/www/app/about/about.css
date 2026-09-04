@@ -196,7 +196,7 @@ html:has(.field-page) .site-footer {
 .field-spec-type {
   margin: 0;
   /* Optical left, specimen display (~3–8rem). Shallower than the hero
-     -0.08em: that fraction pulled Raster past the 15px body. 15px B
+     -0.08em: that fraction pulled Vlak past the 15px body. 15px B
      first-ink is ~1px; hang the rest in this face's em. */
   margin-left: calc(1px - 0.045em);
   font-size: clamp(3rem, 12vw, 8rem);

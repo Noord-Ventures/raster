@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 import type { DropdownMenuItem, MenuCloseReason } from "./dropdown-menu";
 import { MenuPanel, menuStyles } from "./dropdown-menu";
@@ -19,7 +19,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -28,8 +28,8 @@ const styles = stylex.create({
   },
   pin: {
     position: "fixed",
-    zIndex: raster.zFloat,
-    backgroundColor: raster.paper,
+    zIndex: vlak.zFloat,
+    backgroundColor: vlak.paper,
   },
 });
 

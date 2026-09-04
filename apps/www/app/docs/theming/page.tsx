@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { rasterTokens } from "@noorddev/raster";
+import { vlakTokens } from "@noorddev/vlak";
 import { CodeBlock } from "@/components/code-block";
 import { DocsShell } from "@/components/docs-shell";
 import { DOOR } from "../../specimen";
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: `${DOOR}/docs/theming/` },
 };
 
-const { color, grid, radius, motion, control } = rasterTokens;
+const { color, grid, radius, motion, control } = vlakTokens;
 
 const properties: { name: string; light: string; dark?: string; does: string }[] = [
   { name: "--bg", light: color.light.paper, dark: color.dark.black, does: "Paper. The page and every surface." },
@@ -43,7 +43,7 @@ const properties: { name: string; light: string; dark?: string; does: string }[]
   { name: "--text-scale", light: "1", does: "Multiplier on reading type. Chrome stays put." },
 ];
 
-const override = `/* your.css, unlayered: it wins over raster.tokens */
+const override = `/* your.css, unlayered: it wins over vlak.tokens */
 :root {
   --bg: #FFFFFF;
   --radius-sm: 8px;
@@ -57,7 +57,7 @@ const override = `/* your.css, unlayered: it wins over raster.tokens */
 
 const themeScript = `<script>
   (function () {
-    var t = localStorage.getItem("raster-theme");
+    var t = localStorage.getItem("vlak-theme");
     var dark = t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches);
     if (dark) document.documentElement.dataset.theme = "dark";
   })();
@@ -83,7 +83,7 @@ export default function ThemingPage() {
       <p className="rs-t-body">
         Defined once in TypeScript, generated into <code className="rs-code">tokens.css</code>, and
         read by every leaf through <code className="rs-code">var()</code>. The React stylesheet and
-        raster.css carry the same block. Light values below; dark where they differ.
+        vlak.css carry the same block. Light values below; dark where they differ.
       </p>
       <div className="docs-table" tabIndex={0}>
         <table className="rs-table">
@@ -115,7 +115,7 @@ export default function ThemingPage() {
       <h2 className="section-label">Overriding tokens</h2>
       <CodeBlock code={override} />
       <p className="rs-t-body">
-        Raster&apos;s tokens sit in the <code className="rs-code">raster.tokens</code> cascade layer.
+        Vlak&apos;s tokens sit in the <code className="rs-code">vlak.tokens</code> cascade layer.
         Author CSS outside any layer beats it, so a plain <code className="rs-code">:root</code> rule
         is the whole override. Set the dark value under{" "}
         <code className="rs-code">[data-theme=&quot;dark&quot;]</code> and, if you rely on the system
@@ -138,7 +138,7 @@ export default function ThemingPage() {
         <a className="rs-link" href="/components/theme-toggle">
           ThemeToggle
         </a>{" "}
-        component stores its choice under <code className="rs-code">raster-theme</code> in
+        component stores its choice under <code className="rs-code">vlak-theme</code> in
         localStorage and sets the same attribute; the script above reads it back.
       </p>
 
@@ -153,7 +153,7 @@ export default function ThemingPage() {
       </p>
 
       <h2 className="section-label">Text scale</h2>
-      <CodeBlock code={`html { --text-scale: 1.1; }  /* steps: ${rasterTokens.type.textScale.steps.join(", ")} */`} />
+      <CodeBlock code={`html { --text-scale: 1.1; }  /* steps: ${vlakTokens.type.textScale.steps.join(", ")} */`} />
       <p className="rs-t-body">
         Reading type (<code className="rs-code">rs-t-*</code>) multiplies by{" "}
         <code className="rs-code">--text-scale</code>; controls, labels, and chrome stay put. The type

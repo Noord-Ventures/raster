@@ -1,11 +1,11 @@
 # Aspect ratio
 
-Box that holds a ratio. Media fills it.
+Keeps media at a defined aspect ratio while it fills the available box.
 
 Category: content  
 Name: `aspect-ratio`  
 Also known as: Aspect ratio, Ratio box, Media frame  
-Page: https://getraster.com/components/aspect-ratio/
+Page: https://vlak.dev/components/aspect-ratio/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/aspect-ratio/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { AspectRatio } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { AspectRatio } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add aspect-ratio
+npx @noorddev/vlak-cli add aspect-ratio
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/aspect-ratio.json
+npx shadcn add https://vlak.dev/r/aspect-ratio.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-ratio" style="aspect-ratio:16/9;max-width:280px;background:var(--divider-subtle)"></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/aspect-ratio.json
 ## Example
 
 ```tsx
-import { AspectRatio } from "@noorddev/raster-react";
+import { AspectRatio } from "@noorddev/vlak-react";
 
 <AspectRatio ratio={16 / 9}>
   <img src="/cover.jpg" alt="Press hall" />

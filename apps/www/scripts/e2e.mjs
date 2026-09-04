@@ -14,7 +14,7 @@ import { chromium } from "playwright";
 const require = createRequire(import.meta.url);
 const axeSource = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 const out = fileURLToPath(new URL("../out", import.meta.url));
-const { catalogComponents } = await import("@noorddev/raster");
+const { catalogComponents } = await import("@noorddev/vlak");
 
 const types = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".json": "application/json", ".woff2": "font/woff2", ".webp": "image/webp", ".png": "image/png", ".svg": "image/svg+xml", ".txt": "text/plain", ".md": "text/markdown" };
 const server = createServer((req, res) => {
@@ -31,7 +31,11 @@ const base = `http://localhost:${server.address().port}`;
 
 const failures = [];
 const fail = (msg) => failures.push(msg);
-const browser = await chromium.launch();
+const browser = await chromium.launch(
+  process.env.PLAYWRIGHT_EXECUTABLE_PATH
+    ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH }
+    : undefined,
+);
 
 /* axe on every page, desktop. */
 const docs = ["", "frameworks/", "theming/", "tokens/", "layers/", "stylex/", "accessibility/", "agents/"].map((d) => `/docs/${d}`);

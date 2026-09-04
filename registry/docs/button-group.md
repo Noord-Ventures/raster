@@ -1,11 +1,11 @@
 # Button group
 
-Joined ghost buttons with a 1px rule between.
+Keeps related actions together as joined ghost buttons with 1px dividers.
 
 Category: actions  
 Name: `button-group`  
 Also known as: Button group, Segmented buttons, Joined buttons  
-Page: https://getraster.com/components/button-group/
+Page: https://vlak.dev/components/button-group/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/button-group/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { ButtonGroup } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { ButtonGroup } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add button-group
+npx @noorddev/vlak-cli add button-group
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/button-group.json
+npx shadcn add https://vlak.dev/r/button-group.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-btn-group"><button class="rs-btn-ghost">Left</button><button class="rs-btn-ghost">Center</button><button class="rs-btn-ghost">Right</button></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/button-group.json
 ## Example
 
 ```tsx
-import { Button, ButtonGroup } from "@noorddev/raster-react";
+import { Button, ButtonGroup } from "@noorddev/vlak-react";
 
 <ButtonGroup aria-label="Alignment">
   <Button variant="ghost">Left</Button>

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { cx } from "../cx";
 
@@ -24,8 +24,8 @@ const styles = stylex.create({
     boxSizing: "border-box",
     width: "max-content",
     maxWidth: "min(280px, calc(100vw - 16px))",
-    backgroundColor: raster.ink,
-    color: raster.paper,
+    backgroundColor: vlak.ink,
+    color: vlak.paper,
     fontSize: {
       default: "0.71875rem",
       [mq.phone]: "0.8125rem",
@@ -42,10 +42,10 @@ const styles = stylex.create({
       [mq.phone]: "0.75rem",
     },
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
-    zIndex: raster.zFloat,
+    zIndex: vlak.zFloat,
     opacity: {
       default: 0,
       [stylex.when.ancestor(":hover")]: {
@@ -78,7 +78,7 @@ const styles = stylex.create({
     },
     // The delay is the leave grace: the pointer can cross onto the tip.
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     "::before": {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../../tokens.stylex";
+import { vlak } from "../../tokens.stylex";
 import { rs } from "../../rs";
 import { ChartField, ChartLegend, ChartLegendItem, ChartTitle, SrTable, chartStyles, defaultFormat } from "./frame";
 
@@ -10,7 +10,7 @@ const styles = stylex.create({
   },
   track: {
     fill: "none",
-    stroke: raster.divider,
+    stroke: vlak.divider,
     strokeWidth: 1,
   },
   value: {
@@ -21,14 +21,14 @@ const styles = stylex.create({
   },
   /* Laid out in CSS px: the viewBox equals the rendered size, so type does not scale. */
   label: {
-    fill: raster.ink,
+    fill: vlak.ink,
     fontSize: "1.25rem",
     fontWeight: 500,
     letterSpacing: "-0.03em",
     fontVariantNumeric: "tabular-nums",
   },
   caption: {
-    fill: raster.gray,
+    fill: vlak.gray,
     fontSize: "0.6875rem",
     fontWeight: 500,
     letterSpacing: "0.06em",
@@ -37,9 +37,9 @@ const styles = stylex.create({
     display: "flex",
     height: "0.5rem",
     width: "100%",
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderRadius: 0,
     boxShadow: "none",
   },
@@ -47,9 +47,9 @@ const styles = stylex.create({
     height: "100%",
     borderRadius: 0,
     backgroundColor: {
-      default: raster.ink,
-      ":nth-child(2)": raster.gray,
-      ":nth-child(3)": raster.divider,
+      default: vlak.ink,
+      ":nth-child(2)": vlak.gray,
+      ":nth-child(3)": vlak.divider,
     },
     transition: "fill var(--duration-snap) var(--ease), opacity var(--duration-snap) var(--ease)",
   },

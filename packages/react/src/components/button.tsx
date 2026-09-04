@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -25,30 +25,30 @@ const styles = stylex.create({
       ":disabled": "not-allowed",
     },
     height: {
-      default: raster.controlH,
-      [mq.phone]: raster.controlH,
+      default: vlak.controlH,
+      [mq.phone]: vlak.controlH,
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     width: {
       default: null,
       [mq.phone]: "100%",
     },
-    fontSize: raster.controlFs,
+    fontSize: vlak.controlFs,
     paddingInline: {
       default: "1.375rem",
       [mq.phone]: "1.25rem",
     },
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     /* Hover and disabled are opacity on paper; in forced colors they become system colors instead. */
@@ -72,7 +72,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -82,11 +82,11 @@ const styles = stylex.create({
   primary: {
     fontWeight: 600,
     backgroundColor: {
-      default: raster.ink,
+      default: vlak.ink,
       [mq.forcedColors]: "ButtonFace",
     },
     color: {
-      default: raster.paper,
+      default: vlak.paper,
       [mq.forcedColors]: {
         default: "ButtonText",
         ":disabled": "GrayText",
@@ -102,27 +102,27 @@ const styles = stylex.create({
   },
   ghost: {
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     fontWeight: 500,
     backgroundColor: {
       default: "transparent",
-      ":hover": raster.controlFill,
+      ":hover": vlak.controlFill,
       ":disabled": "transparent",
       [mq.forcedColors]: "ButtonFace",
     },
     color: {
-      default: raster.ink,
+      default: vlak.ink,
       [mq.forcedColors]: {
         default: "ButtonText",
         ":disabled": "GrayText",
       },
     },
     borderColor: {
-      default: raster.divider,
-      ":hover": raster.controlFill,
-      ":disabled": raster.divider,
+      default: vlak.divider,
+      ":hover": vlak.controlFill,
+      ":disabled": vlak.divider,
       [mq.forcedColors]: {
         default: "ButtonText",
         ":hover": "Highlight",
@@ -133,11 +133,11 @@ const styles = stylex.create({
   sm: {
     height: {
       default: "2.25rem",
-      [mq.phone]: raster.controlH,
+      [mq.phone]: vlak.controlH,
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     paddingInline: {
       default: "0.875rem",
@@ -145,7 +145,7 @@ const styles = stylex.create({
     },
     fontSize: {
       default: "0.8125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     minWidth: {
       default: "6.5rem",
@@ -177,13 +177,13 @@ const styles = stylex.create({
   },
   groupedGhost: {
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     backgroundColor: {
-      default: raster.paper,
-      ":hover": raster.controlFill,
-      ":disabled": raster.paper,
+      default: vlak.paper,
+      ":hover": vlak.controlFill,
+      ":disabled": vlak.paper,
       [mq.forcedColors]: "ButtonFace",
     },
   },

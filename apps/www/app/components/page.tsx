@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { rasterCategories, catalogComponents } from "@noorddev/raster";
-import { Icon, iconGroups } from "@noorddev/raster-react";
+import { vlakCategories, catalogComponents } from "@noorddev/vlak";
+import { Icon, iconGroups } from "@noorddev/vlak-react";
 import { chrome } from "@/app/site.stylex";
 import { DocsNav } from "@/components/docs-nav";
 import { Preview } from "@/components/preview";
@@ -24,9 +24,11 @@ export default function ComponentsPage() {
       <main id="main" {...sx("site-content", chrome.catalogContent)}>
         <header {...sx("cover", chrome.cover)}>
           <h1 className="rs-t-display">Components</h1>
-          <p className="rs-t-sub">The control, the name, a short law.</p>
+          <p className="rs-t-sub">
+            {catalogComponents.length} components. Live previews, usage guidance, accessibility notes, and install paths.
+          </p>
         </header>
-        {rasterCategories.map((category) => {
+        {vlakCategories.map((category) => {
           if (category === "icons") {
             return (
               <section key={category} id={category}>

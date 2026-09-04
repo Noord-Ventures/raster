@@ -1,11 +1,11 @@
 # Resizable
 
-Two panes split by a draggable 1px handle. Arrows move it; value is in ARIA.
+Resizes two adjacent panes with a draggable 1px handle. Arrow keys adjust the split.
 
 Category: surfaces  
 Name: `resizable`  
 Also known as: Resizable, Split pane, Resizable panels, Splitter, Panel group  
-Page: https://getraster.com/components/resizable/
+Page: https://vlak.dev/components/resizable/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/resizable/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Split } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Split } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add resizable
+npx @noorddev/vlak-cli add resizable
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/resizable.json
+npx shadcn add https://vlak.dev/r/resizable.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-split"><div class="rs-split-pane" style="width:50%">Left</div><button class="rs-split-handle" role="separator" aria-valuenow="50"></button><div class="rs-split-pane" style="width:50%">Right</div></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/resizable.json
 ## Example
 
 ```tsx
-import { Split } from "@noorddev/raster-react";
+import { Split } from "@noorddev/vlak-react";
 
 <Split initial={60} min={30} max={80} handleLabel="Resize editor and preview">
   <Editor />

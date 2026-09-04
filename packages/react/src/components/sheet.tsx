@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { DialogCloseButton, DialogContext, dialogStyles, useDialogPart, useNativeDialog, type NativeDialogOptions } from "./dialog";
 
@@ -33,29 +33,29 @@ const styles = stylex.create({
     },
     borderWidth: 0,
     borderStyle: "solid",
-    borderInlineStartWidth: raster.hairline,
-    borderColor: raster.divider,
-    borderStartStartRadius: raster.radiusSm,
+    borderInlineStartWidth: vlak.hairline,
+    borderColor: vlak.divider,
+    borderStartStartRadius: vlak.radiusSm,
     borderStartEndRadius: 0,
     borderEndEndRadius: 0,
-    borderEndStartRadius: raster.radiusSm,
+    borderEndStartRadius: vlak.radiusSm,
     paddingBlock: "1.5rem",
     paddingInline: "1.25rem",
-    backgroundColor: raster.paper,
-    color: raster.ink,
+    backgroundColor: vlak.paper,
+    color: vlak.ink,
     boxShadow: "none",
     "::backdrop": {
-      backgroundColor: ["rgba(0,0,0,0.25)", `color-mix(in srgb, ${raster.paper} 55%, transparent)`],
+      backgroundColor: ["rgba(0,0,0,0.25)", `color-mix(in srgb, ${vlak.paper} 55%, transparent)`],
     },
   },
   left: {
     insetInlineEnd: "auto",
     insetInlineStart: 0,
     borderInlineStartWidth: 0,
-    borderInlineEndWidth: raster.hairline,
+    borderInlineEndWidth: vlak.hairline,
     borderStartStartRadius: 0,
-    borderStartEndRadius: raster.radiusSm,
-    borderEndEndRadius: raster.radiusSm,
+    borderStartEndRadius: vlak.radiusSm,
+    borderEndEndRadius: vlak.radiusSm,
     borderEndStartRadius: 0,
     boxShadow: "none",
   },
@@ -67,7 +67,7 @@ const styles = stylex.create({
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
     marginTop: 0,
     marginInlineEnd: 0,
     marginBottom: "0.375rem",
@@ -80,7 +80,7 @@ const styles = stylex.create({
     },
     lineHeight: 1.6,
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
     margin: 0,
   },
 });

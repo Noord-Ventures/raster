@@ -1,11 +1,11 @@
 # Native select
 
-Native select with Raster 1px chrome.
+Presents browser-native options inside a 1px control border.
 
 Category: forms  
 Name: `native-select`  
 Also known as: Native select, Select element, Dropdown, HTML select  
-Page: https://getraster.com/components/native-select/
+Page: https://vlak.dev/components/native-select/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/native-select/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { NativeSelect } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { NativeSelect } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add native-select
+npx @noorddev/vlak-cli add native-select
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/native-select.json
+npx shadcn add https://vlak.dev/r/native-select.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <select class="rs-native-select"><option>Alkmaar</option><option>Amsterdam</option><option>Rotterdam</option></select>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/native-select.json
 ## Example
 
 ```tsx
-import { NativeSelect } from "@noorddev/raster-react";
+import { NativeSelect } from "@noorddev/vlak-react";
 
 <NativeSelect label="City" defaultValue="alkmaar">
   <option value="alkmaar">Alkmaar</option>
@@ -64,7 +64,7 @@ import { NativeSelect } from "@noorddev/raster-react";
 
 ### NativeSelect
 
-The platform list. Raster chrome.
+The platform list. Vlak chrome.
 
 Extends `SelectHTMLAttributes<HTMLSelectElement>`: every native attribute, `className`, `style`, and event handler passes through.
 

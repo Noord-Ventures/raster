@@ -1,7 +1,7 @@
 name: Release
 
-# Publishes @noorddev/raster, @noorddev/raster-react, @noorddev/raster-cli,
-# and @noorddev/raster-mcp with npm provenance. Runs as a dry run on every
+# Publishes @noorddev/vlak, @noorddev/vlak-react, @noorddev/vlak-cli,
+# and @noorddev/vlak-mcp with npm provenance. Runs as a dry run on every
 # manual trigger unless `publish` is set; a pushed tag v* publishes for real.
 
 on:

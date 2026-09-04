@@ -10,7 +10,7 @@ apps/www/public/docs/
 apps/www/public/llms.txt
 apps/www/public/llms-full.txt
 apps/www/public/fonts/
-apps/www/public/raster.css
+apps/www/public/vlak.css
 apps/www/public/starter/
 packages/react/.build-components/
 
@@ -20,3 +20,5 @@ packages/react/.build-components/
 !.env.example
 *.log
 coverage/
+.vercel
+.env*.local

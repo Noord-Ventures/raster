@@ -1,4 +1,4 @@
-import { Carousel } from "@noorddev/raster-react";
+import { Carousel } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

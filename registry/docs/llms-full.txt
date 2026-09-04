@@ -1,82 +1,82 @@
-# Raster guide
+# Vlak guide
 
-Raster is a monochrome design system: paper, ink, gray, hairlines, and a 204px module. 74 components in 9 categories: actions (10), forms (16), navigation (7), feedback (9), surfaces (8), content (13), icons (1), charts (7), patterns (3). Version 0.4.0. Site: https://getraster.com. Source: https://github.com/Noord-Ventures/raster.
+Vlak is a monochrome design system: paper, ink, gray, hairlines, and a 204px module. 74 components in 9 categories: actions (10), forms (16), navigation (7), feedback (9), surfaces (8), content (13), icons (1), charts (7), patterns (3). Version 0.4.0. Site: https://vlak.dev. Source: https://github.com/Noord-Ventures/vlak.
 
-Three install paths share one source, so nothing drifts: the React package (precompiled StyleX plus one stylesheet), the vendored source (the shadcn model, through the Raster CLI or the shadcn CLI), and CSS only (`rs-*` classes on plain markup).
+Three install paths share one source, so nothing drifts: the React package (precompiled StyleX plus one stylesheet), the vendored source (the shadcn model, through the Vlak CLI or the shadcn CLI), and CSS only (`rs-*` classes on plain markup).
 
 ## Install
 
 ### React package
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Button, Dialog, Field, Input } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Button, Dialog, Field, Input } from "@noorddev/vlak-react";
 ```
 
-React 18 or 19. Every component is also its own module: `import { Button } from "@noorddev/raster-react/components/button"`. Stateful components carry `"use client"` already, so they work inside React Server Components trees without a wrapper.
+React 18 or 19. Every component is also its own module: `import { Button } from "@noorddev/vlak-react/components/button"`. Stateful components carry `"use client"` already, so they work inside React Server Components trees without a wrapper.
 
 ### Vendor the source
 
 ```sh
-npx @noorddev/raster-cli init
-npx @noorddev/raster-cli add button dialog
+npx @noorddev/vlak-cli init
+npx @noorddev/vlak-cli add button dialog
 ```
 
-`init` writes `styles/raster.css`, the Inter files, a specimen `index.html`, and `raster.json`. `add` copies the component's StyleX leaf and its dependencies into `components/raster/`; shared helpers (`rs.ts`, `cx.ts`, `tokens.stylex.ts`) install once. Vendored leaves need a StyleX compiler (see StyleX below).
+`init` writes `styles/vlak.css`, the Inter files, a specimen `index.html`, and `vlak.json`. `add` copies the component's StyleX leaf and its dependencies into `components/vlak/`; shared helpers (`rs.ts`, `cx.ts`, `tokens.stylex.ts`) install once. Vendored leaves need a StyleX compiler (see StyleX below).
 
 ### shadcn registry
 
 ```sh
-npx shadcn add https://getraster.com/r/button.json
+npx shadcn add https://vlak.dev/r/button.json
 ```
 
-The registry at `https://getraster.com/r/` follows the shadcn registry-item schema. `https://getraster.com/r/index.json` lists every item; each item's `meta.raster` carries the category, classes, snippet, example, usage, keyboard, accessibility notes, and aliases.
+The registry at `https://vlak.dev/r/` follows the shadcn registry-item schema. `https://vlak.dev/r/index.json` lists every item; each item's `meta.vlak` carries the category, classes, snippet, example, usage, keyboard, accessibility notes, and aliases.
 
 ### CSS only
 
 ```html
-<link rel="stylesheet" href="node_modules/@noorddev/raster/css/raster.css" />
+<link rel="stylesheet" href="node_modules/@noorddev/vlak/css/vlak.css" />
 <button class="rs-btn-primary">Primary action</button>
 ```
 
-`@noorddev/raster/css` paints every component through `rs-*` classes and needs no JavaScript. Individual files are exported too: `@noorddev/raster/css/tokens.css`, `@noorddev/raster/css/components/button.css`. The class names per component are listed on each component page and in `/r/<name>.json` under `meta.raster.classes`.
+`@noorddev/vlak/css` paints every component through `rs-*` classes and needs no JavaScript. Individual files are exported too: `@noorddev/vlak/css/tokens.css`, `@noorddev/vlak/css/components/button.css`. The class names per component are listed on each component page and in `/r/<name>.json` under `meta.vlak.classes`.
 
 ## Theming
 
-Set `data-theme="dark"` on the root element for the dark scheme, `data-theme="light"` to pin light. Without either, `prefers-color-scheme` applies. `color-scheme` is set with the tokens, so native controls follow. `ThemeToggle` flips the attribute and stores the choice in `localStorage` under `raster-theme`.
+Set `data-theme="dark"` on the root element for the dark scheme, `data-theme="light"` to pin light. Without either, `prefers-color-scheme` applies. `color-scheme` is set with the tokens, so native controls follow. `ThemeToggle` flips the attribute and stores the choice in `localStorage` under `vlak-theme`.
 
 There is no accent hue. Emphasis comes from weight, size, and spacing. Charts may carry one spot color through the `spot` prop, which sets `--rs-chart-spot`.
 
-Every token is a custom property on `:root`; override them in your own stylesheet. See tokens.md for the full list with light and dark values. The tokens also ship as JSON (`@noorddev/raster/tokens`) and as a W3C Design Tokens (DTCG) file (`@noorddev/raster/tokens.dtcg`).
+Every token is a custom property on `:root`; override them in your own stylesheet. See tokens.md for the full list with light and dark values. The tokens also ship as JSON (`@noorddev/vlak/tokens`) and as a W3C Design Tokens (DTCG) file (`@noorddev/vlak/tokens.dtcg`).
 
 ## Cascade layers and overriding
 
-All Raster CSS sits in cascade layers, in this order: `raster.tokens`, `raster.base`, `raster.type`, `raster.components`, `raster.touch`, `raster.motion`. Unlayered author CSS wins over any of it, so overrides never need `!important`:
+All Vlak CSS sits in cascade layers, in this order: `vlak.tokens`, `vlak.base`, `vlak.type`, `vlak.components`, `vlak.touch`, `vlak.motion`. Unlayered author CSS wins over any of it, so overrides never need `!important`:
 
 ```css
 .rs-btn-primary { border-radius: 8px; }
 ```
 
-To override from inside a layer, declare yours after Raster's: `@layer raster.motion, app;`.
+To override from inside a layer, declare yours after Vlak's: `@layer vlak.motion, app;`.
 
 ## StyleX
 
-The leaves are StyleX. Consumers of `@noorddev/raster-react` need no compiler: the package is precompiled and `@noorddev/raster-react/css` carries the output. To write your own leaves against Raster tokens, or to compile vendored leaves, use the token file:
+The leaves are StyleX. Consumers of `@noorddev/vlak-react` need no compiler: the package is precompiled and `@noorddev/vlak-react/css` carries the output. To write your own leaves against Vlak tokens, or to compile vendored leaves, use the token file:
 
 ```tsx
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "@noorddev/raster-react/tokens.stylex";
+import { vlak, mq } from "@noorddev/vlak-react/tokens.stylex";
 
 const styles = stylex.create({
-  panel: { borderTop: `1px solid ${raster.divider}`, padding: raster.pad, [mq.phone]: { padding: 12 } },
+  panel: { borderTop: `1px solid ${vlak.divider}`, padding: vlak.pad, [mq.phone]: { padding: 12 } },
 });
 ```
 
-`raster` aliases the CSS custom properties (`raster.ink` is `var(--text)`), so compiled leaves and `rs-*` CSS read the same values. A StyleX compiler must include `@noorddev/raster-react/tokens.stylex` in its compile so the variable hashes match: Vite uses `@stylexjs/unplugin`; Next.js uses `@stylexjs/postcss-plugin` plus a Babel pass with `@stylexjs/babel-plugin`. Without a compiler, import the package and its stylesheet and skip StyleX entirely.
+`vlak` aliases the CSS custom properties (`vlak.ink` is `var(--text)`), so compiled leaves and `rs-*` CSS read the same values. A StyleX compiler must include `@noorddev/vlak-react/tokens.stylex` in its compile so the variable hashes match: Vite uses `@stylexjs/unplugin`; Next.js uses `@stylexjs/postcss-plugin` plus a Babel pass with `@stylexjs/babel-plugin`. Without a compiler, import the package and its stylesheet and skip StyleX entirely.
 
 ## Components
 
@@ -94,85 +94,85 @@ Conventions that hold across the catalogue:
 ## CLI
 
 ```sh
-npx @noorddev/raster-cli init [--css-dir <dir>] [--components-dir <dir>] [--registry <url>] [--overwrite]
-npx @noorddev/raster-cli add <component...> [--overwrite] [--registry <url>]
-npx @noorddev/raster-cli list [--json]
-npx @noorddev/raster-cli search <term> [--json]
-npx @noorddev/raster-cli docs <component>
-npx @noorddev/raster-cli tokens [--json]
+npx @noorddev/vlak-cli init [--css-dir <dir>] [--components-dir <dir>] [--registry <url>] [--overwrite]
+npx @noorddev/vlak-cli add <component...> [--overwrite] [--registry <url>]
+npx @noorddev/vlak-cli list [--json]
+npx @noorddev/vlak-cli search <term> [--json]
+npx @noorddev/vlak-cli docs <component>
+npx @noorddev/vlak-cli tokens [--json]
 ```
 
 The CLI works offline: the registry snapshot, the CSS, the docs, and Inter ship with it. `--json` prints machine output with no prose.
 
 ## Registry
 
-- `https://getraster.com/r/index.json`: every item without file contents.
-- `https://getraster.com/r/<name>.json`: one item with its files inlined, in the shadcn registry-item schema. `raster-base` (tokens, base, type), `inter` (the font), and `raster-lib` (shared helpers) are the foundation items every component depends on.
-- `https://getraster.com/docs/props.json`: every export of every component with its props (name, type, required, default, description) and the DOM attribute type it extends.
+- `https://vlak.dev/r/index.json`: every item without file contents.
+- `https://vlak.dev/r/<name>.json`: one item with its files inlined, in the shadcn registry-item schema. `vlak-base` (tokens, base, type), `inter` (the font), and `vlak-lib` (shared helpers) are the foundation items every component depends on.
+- `https://vlak.dev/docs/props.json`: every export of every component with its props (name, type, required, default, description) and the DOM attribute type it extends.
 
 ## For agents
 
-Raster is published as data so tools can install and compose it without guessing:
+Vlak is published as data so tools can install and compose it without guessing:
 
-- `https://getraster.com/llms.txt`: the index of everything below, in the llmstxt.org format. `https://getraster.com/llms-full.txt` is the whole documentation in one file.
-- `https://getraster.com/docs/index.md`, `https://getraster.com/docs/guide.md` (this file), `https://getraster.com/docs/tokens.md`, and `https://getraster.com/docs/<name>.md` for each component.
-- `https://getraster.com/r/index.json` and `https://getraster.com/r/<name>.json`: the registry, with `meta.raster` holding the example, usage, keyboard table, accessibility notes, classes, and aliases.
-- `https://getraster.com/docs/props.json`: the props contract, also shipped as `@noorddev/raster/props`.
-- `npx @noorddev/raster-cli list --json`, `search <term> --json`, `docs <name>`, `tokens --json`: the same data from the terminal, offline.
-- `@noorddev/raster-mcp`: an MCP server over stdio with `list_components`, `get_component`, `search_components`, `get_tokens`, `get_install`, and `get_guide`, plus `raster://docs/<name>` resources. Configure it as `{"mcpServers": {"raster": {"command": "npx", "args": ["-y", "@noorddev/raster-mcp"]}}}`.
-- In code, `import { rasterComponents, rasterTokens } from "@noorddev/raster"` gives the typed registry and tokens.
+- `https://vlak.dev/llms.txt`: the index of everything below, in the llmstxt.org format. `https://vlak.dev/llms-full.txt` is the whole documentation in one file.
+- `https://vlak.dev/docs/index.md`, `https://vlak.dev/docs/guide.md` (this file), `https://vlak.dev/docs/tokens.md`, and `https://vlak.dev/docs/<name>.md` for each component.
+- `https://vlak.dev/r/index.json` and `https://vlak.dev/r/<name>.json`: the registry, with `meta.vlak` holding the example, usage, keyboard table, accessibility notes, classes, and aliases.
+- `https://vlak.dev/docs/props.json`: the props contract, also shipped as `@noorddev/vlak/props`.
+- `npx @noorddev/vlak-cli list --json`, `search <term> --json`, `docs <name>`, `tokens --json`: the same data from the terminal, offline.
+- `@noorddev/vlak-mcp`: an MCP server over stdio with `list_components`, `get_component`, `search_components`, `get_tokens`, `get_install`, and `get_guide`, plus `vlak://docs/<name>` resources. Configure it as `{"mcpServers": {"vlak": {"command": "npx", "args": ["-y", "@noorddev/vlak-mcp"]}}}`.
+- In code, `import { vlakComponents, vlakTokens } from "@noorddev/vlak"` gives the typed registry and tokens.
 
-When composing an interface: pick components by name or alias from index.md, read the page for the example and the props table, import from `@noorddev/raster-react`, and keep to the conventions above. Do not invent props; the props tables are generated from the TypeScript sources. Keep the copy in sentence case.
+When composing an interface: pick components by name or alias from index.md, read the page for the example and the props table, import from `@noorddev/vlak-react`, and keep to the conventions above. Do not invent props; the props tables are generated from the TypeScript sources. Keep the copy in sentence case.
 
 
 ---
 
-# Raster tokens
+# Vlak tokens
 
-Every custom property `@noorddev/raster/css/tokens.css` defines, generated from `packages/core/src/tokens.ts`. The dark column applies under `data-theme="dark"` on the root element, or under the system dark scheme until the page decides. The StyleX alias is the key on `raster` from `@noorddev/raster-react/tokens.stylex`. The same tokens ship as JSON (`@noorddev/raster/tokens`) and in the W3C Design Tokens format (`@noorddev/raster/tokens.dtcg`) for Style Dictionary, Figma Variables, and Tokens Studio.
+Every custom property `@noorddev/vlak/css/tokens.css` defines, generated from `packages/core/src/tokens.ts`. The dark column applies under `data-theme="dark"` on the root element, or under the system dark scheme until the page decides. The StyleX alias is the key on `vlak` from `@noorddev/vlak-react/tokens.stylex`. The same tokens ship as JSON (`@noorddev/vlak/tokens`) and in the W3C Design Tokens format (`@noorddev/vlak/tokens.dtcg`) for Style Dictionary, Figma Variables, and Tokens Studio.
 
 ## Custom properties
 
 | Property | Light | Dark | StyleX | Note |
 | --- | --- | --- | --- | --- |
-| `--bg` | `#FAF8F2` | `#0E0C0A` | `raster.paper` | paper |
-| `--text` | `#1A1A1A` | `#E8E8E8` | `raster.ink` | ink |
-| `--text-secondary` | `#6B6B6B` | `#949494` | `raster.gray` | gray |
-| `--accent` | `#1A1A1A` | `#E8E8E8` | `raster.accent` | the "accent" is ink; monochrome |
-| `--divider` | `rgba(0,0,0,0.08)` | `rgba(255,255,255,0.10)` | `raster.divider` |  |
-| `--divider-subtle` | `rgba(0,0,0,0.06)` | `rgba(255,255,255,0.07)` | `raster.dividerSubtle` |  |
-| `--table-alt` | `rgba(0,0,0,0.02)` | `rgba(255,255,255,0.03)` | `raster.tableAlt` |  |
-| `--grid-line` | `rgba(0,0,0,0.04)` | `rgba(255,255,255,0.05)` | `raster.gridLine` |  |
-| `--control-border` | `rgba(0,0,0,0.42)` | `rgba(255,255,255,0.38)` | `raster.controlBorder` |  |
-| `--control-fill` | `#E4E2DC` | `#242220` | `raster.controlFill` |  |
-| `--radius-sm` | `4px` |  | `raster.radiusSm` | slight Raster radius; standalone buttons |
-| `--radius` | `var(--radius-sm)` |  | `raster.radius` | alias — buttons, boxes, dialogs share it; cards stay 0 |
-| `--radius-chrome` | `0px` |  | `raster.radiusChrome` |  |
-| `--gutter` | `20px` |  | `raster.gutter` |  |
-| `--pad` | `20px` |  | `raster.pad` |  |
-| `--radius-in` | `max(0px, calc(var(--radius) - var(--pad)))` |  | `raster.radiusIn` |  |
-| `--ease` | `cubic-bezier(0.3, 0, 0.2, 1)` |  | `raster.ease` |  |
-| `--duration-snap` | `0.12s` |  | `raster.durationSnap` |  |
-| `--duration` | `0.2s` |  | `raster.duration` |  |
-| `--duration-confirm` | `0.16s` |  | `raster.durationConfirm` |  |
-| `--transition` | `background-color var(--duration) var(--ease), border-color var(--duration) var(--ease), color var(--duration) var(--ease), opacity var(--duration) var(--ease)` |  | `raster.transition` |  |
-| `--grid-image` | `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px)` |  | `raster.gridImage` |  |
-| `--grid-size` | `204px` |  | `raster.module` |  |
-| `--grid-pos` | `20px 0` |  | `raster.gridPos` |  |
-| `--text-scale` | `1` |  | `raster.textScale` |  |
-| `--z-raised` | `10` |  | `raster.zRaised` |  |
-| `--z-sticky` | `100` |  | `raster.zSticky` |  |
-| `--z-float` | `200` |  | `raster.zFloat` |  |
-| `--z-overlay` | `300` |  | `raster.zOverlay` |  |
-| `--z-toast` | `400` |  | `raster.zToast` |  |
+| `--bg` | `#FAF8F2` | `#0E0C0A` | `vlak.paper` | paper |
+| `--text` | `#1A1A1A` | `#E8E8E8` | `vlak.ink` | ink |
+| `--text-secondary` | `#6B6B6B` | `#949494` | `vlak.gray` | gray |
+| `--accent` | `#1A1A1A` | `#E8E8E8` | `vlak.accent` | the "accent" is ink; monochrome |
+| `--divider` | `rgba(0,0,0,0.08)` | `rgba(255,255,255,0.10)` | `vlak.divider` |  |
+| `--divider-subtle` | `rgba(0,0,0,0.06)` | `rgba(255,255,255,0.07)` | `vlak.dividerSubtle` |  |
+| `--table-alt` | `rgba(0,0,0,0.02)` | `rgba(255,255,255,0.03)` | `vlak.tableAlt` |  |
+| `--grid-line` | `rgba(0,0,0,0.04)` | `rgba(255,255,255,0.05)` | `vlak.gridLine` |  |
+| `--control-border` | `rgba(0,0,0,0.42)` | `rgba(255,255,255,0.38)` | `vlak.controlBorder` |  |
+| `--control-fill` | `#E4E2DC` | `#242220` | `vlak.controlFill` |  |
+| `--radius-sm` | `4px` |  | `vlak.radiusSm` | slight Vlak radius; standalone buttons |
+| `--radius` | `var(--radius-sm)` |  | `vlak.radius` | alias — buttons, boxes, dialogs share it; cards stay 0 |
+| `--radius-chrome` | `0px` |  | `vlak.radiusChrome` |  |
+| `--gutter` | `20px` |  | `vlak.gutter` |  |
+| `--pad` | `20px` |  | `vlak.pad` |  |
+| `--radius-in` | `max(0px, calc(var(--radius) - var(--pad)))` |  | `vlak.radiusIn` |  |
+| `--ease` | `cubic-bezier(0.3, 0, 0.2, 1)` |  | `vlak.ease` |  |
+| `--duration-snap` | `0.12s` |  | `vlak.durationSnap` |  |
+| `--duration` | `0.2s` |  | `vlak.duration` |  |
+| `--duration-confirm` | `0.16s` |  | `vlak.durationConfirm` |  |
+| `--transition` | `background-color var(--duration) var(--ease), border-color var(--duration) var(--ease), color var(--duration) var(--ease), opacity var(--duration) var(--ease)` |  | `vlak.transition` |  |
+| `--grid-image` | `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px)` |  | `vlak.gridImage` |  |
+| `--grid-size` | `204px` |  | `vlak.module` |  |
+| `--grid-pos` | `20px 0` |  | `vlak.gridPos` |  |
+| `--text-scale` | `1` |  | `vlak.textScale` |  |
+| `--z-raised` | `10` |  | `vlak.zRaised` |  |
+| `--z-sticky` | `100` |  | `vlak.zSticky` |  |
+| `--z-float` | `200` |  | `vlak.zFloat` |  |
+| `--z-overlay` | `300` |  | `vlak.zOverlay` |  |
+| `--z-toast` | `400` |  | `vlak.zToast` |  |
 | `--rs-out` | `var(--radius)` |  |  |  |
 | `--rs-gap` | `var(--pad)` |  |  |  |
 | `--rs-in` | `var(--radius-in)` |  |  |  |
 | `--rs-chart-spot` | `var(--text)` |  |  |  |
-| `--hit` | `2.5rem` |  | `raster.hit` |  |
-| `--control-h` | `2.5rem` |  | `raster.controlH` |  |
-| `--control-fs` | `0.875rem` |  | `raster.controlFs` |  |
-| `--control-label` | `0.75rem` |  | `raster.controlLabel` |  |
+| `--hit` | `2.5rem` |  | `vlak.hit` |  |
+| `--control-h` | `2.5rem` |  | `vlak.controlH` |  |
+| `--control-fs` | `0.875rem` |  | `vlak.controlFs` |  |
+| `--control-label` | `0.75rem` |  | `vlak.controlLabel` |  |
 
 ## Responsive overrides
 
@@ -196,7 +196,7 @@ Under `@media (max-width:640px)`:
 
 ## Token groups
 
-The raw values from `rasterTokens` (`import { rasterTokens } from "@noorddev/raster"`, or `@noorddev/raster/tokens` as JSON).
+The raw values from `vlakTokens` (`import { vlakTokens } from "@noorddev/vlak"`, or `@noorddev/vlak/tokens` as JSON).
 
 ### color
 
@@ -336,12 +336,12 @@ The raw values from `rasterTokens` (`import { rasterTokens } from "@noorddev/ras
 
 # Button
 
-Solid ink primary and 1px ghost. 40px tall; 36px small.
+Triggers an action. Solid primary or 1px ghost; 40px tall, 36px small.
 
 Category: actions  
 Name: `button`  
 Also known as: Button, Primary button, Ghost button, Secondary button  
-Page: https://getraster.com/components/button/
+Page: https://vlak.dev/components/button/
 
 ## When to use
 
@@ -358,27 +358,27 @@ Page: https://getraster.com/components/button/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Button } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Button } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add button
+npx @noorddev/vlak-cli add button
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/button.json
+npx shadcn add https://vlak.dev/r/button.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <button class="rs-btn-primary">Primary action</button>
@@ -388,7 +388,7 @@ npx shadcn add https://getraster.com/r/button.json
 ## Example
 
 ```tsx
-import { Button } from "@noorddev/raster-react";
+import { Button } from "@noorddev/vlak-react";
 
 <Button>Primary action</Button>
 <Button variant="ghost" size="sm">Secondary</Button>
@@ -437,12 +437,12 @@ CSS: `packages/core/css/components/button.css`
 
 # Button group
 
-Joined ghost buttons with a 1px rule between.
+Keeps related actions together as joined ghost buttons with 1px dividers.
 
 Category: actions  
 Name: `button-group`  
 Also known as: Button group, Segmented buttons, Joined buttons  
-Page: https://getraster.com/components/button-group/
+Page: https://vlak.dev/components/button-group/
 
 ## When to use
 
@@ -459,27 +459,27 @@ Page: https://getraster.com/components/button-group/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { ButtonGroup } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { ButtonGroup } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add button-group
+npx @noorddev/vlak-cli add button-group
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/button-group.json
+npx shadcn add https://vlak.dev/r/button-group.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-btn-group"><button class="rs-btn-ghost">Left</button><button class="rs-btn-ghost">Center</button><button class="rs-btn-ghost">Right</button></div>
@@ -488,7 +488,7 @@ npx shadcn add https://getraster.com/r/button-group.json
 ## Example
 
 ```tsx
-import { Button, ButtonGroup } from "@noorddev/raster-react";
+import { Button, ButtonGroup } from "@noorddev/vlak-react";
 
 <ButtonGroup aria-label="Alignment">
   <Button variant="ghost">Left</Button>
@@ -536,12 +536,12 @@ CSS: `packages/core/css/components/button-group.css`
 
 # Text link
 
-Text link with a hairline underline. In-copy variant is inset 1px.
+Navigates to a page or resource. Hairline underline; in-copy variant is inset 1px.
 
 Category: actions  
 Name: `link`  
 Also known as: Link, Anchor, Text link, Inline link  
-Page: https://getraster.com/components/link/
+Page: https://vlak.dev/components/link/
 
 ## When to use
 
@@ -558,27 +558,27 @@ Page: https://getraster.com/components/link/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Link } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Link } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add link
+npx @noorddev/vlak-cli add link
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/link.json
+npx shadcn add https://vlak.dev/r/link.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div><a class="rs-link" href="#">A text link</a></div>
@@ -588,7 +588,7 @@ npx shadcn add https://getraster.com/r/link.json
 ## Example
 
 ```tsx
-import { Link } from "@noorddev/raster-react";
+import { Link } from "@noorddev/vlak-react";
 
 <Link href="/docs">A text link</Link>
 <p>Read the <Link underline href="/docs">guide</Link> first.</p>
@@ -635,12 +635,12 @@ CSS: `packages/core/css/components/link.css`
 
 # Input
 
-Text field. 1px control border, 2px focus ring, 12px label above.
+Collects one line of text. 1px border, 2px focus ring, 12px label above.
 
 Category: forms  
 Name: `input`  
 Also known as: Input, Text field, TextField, Text input  
-Page: https://getraster.com/components/input/
+Page: https://vlak.dev/components/input/
 
 ## When to use
 
@@ -657,27 +657,27 @@ Page: https://getraster.com/components/input/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Input } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Input } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add input
+npx @noorddev/vlak-cli add input
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/input.json
+npx shadcn add https://vlak.dev/r/input.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-field"><span class="rs-field-label">E-mail</span><input class="rs-input rs-input-full" /></div>
@@ -686,7 +686,7 @@ npx shadcn add https://getraster.com/r/input.json
 ## Example
 
 ```tsx
-import { Input } from "@noorddev/raster-react";
+import { Input } from "@noorddev/vlak-react";
 
 <Input label="E-mail" type="email" placeholder="you@example.com" hint="We never share it." />
 <Input label="Name" error="Name is required." />
@@ -739,12 +739,12 @@ CSS: `packages/core/css/components/input.css`
 
 # Label
 
-12px secondary label, set above the control.
+Names a form control. 12px secondary text, set above the control.
 
 Category: forms  
 Name: `label`  
 Also known as: Label, Form label, Field label  
-Page: https://getraster.com/components/label/
+Page: https://vlak.dev/components/label/
 
 ## When to use
 
@@ -761,27 +761,27 @@ Page: https://getraster.com/components/label/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Label } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Label } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add label
+npx @noorddev/vlak-cli add label
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/label.json
+npx shadcn add https://vlak.dev/r/label.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <label class="rs-label" for="name">Name</label>
@@ -790,7 +790,7 @@ npx shadcn add https://getraster.com/r/label.json
 ## Example
 
 ```tsx
-import { Label } from "@noorddev/raster-react";
+import { Label } from "@noorddev/vlak-react";
 
 <Label htmlFor="name">Name</Label>
 <input id="name" className="rs-input rs-input-full" />
@@ -827,12 +827,12 @@ CSS: `packages/core/css/components/label.css`
 
 # Field
 
-Label, control, and a hint or error stacked in one cell.
+Groups a label, control, and hint or error in one vertical field.
 
 Category: forms  
 Name: `field`  
 Also known as: Field, Form field, Form item, FormField, Form control  
-Page: https://getraster.com/components/field/
+Page: https://vlak.dev/components/field/
 
 ## When to use
 
@@ -849,27 +849,27 @@ Page: https://getraster.com/components/field/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Field, FieldError, FieldHint, FieldLabel } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Field, FieldError, FieldHint, FieldLabel } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add field
+npx @noorddev/vlak-cli add field
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/field.json
+npx shadcn add https://vlak.dev/r/field.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-field"><label class="rs-field-label" for="invoice-name">Name</label><input class="rs-input rs-input-full" id="invoice-name" aria-describedby="invoice-name-hint" /><p class="rs-field-hint" id="invoice-name-hint">As it appears on the invoice.</p></div>
@@ -878,7 +878,7 @@ npx shadcn add https://getraster.com/r/field.json
 ## Example
 
 ```tsx
-import { Field, FieldError, FieldHint, FieldLabel, Input } from "@noorddev/raster-react";
+import { Field, FieldError, FieldHint, FieldLabel, Input } from "@noorddev/vlak-react";
 
 <Field>
   <FieldLabel htmlFor="name">Name</FieldLabel>
@@ -950,12 +950,12 @@ CSS: `packages/core/css/components/field.css`
 
 # Input group
 
-Addon and field share a 1px border.
+Joins a text field with a prefix or suffix inside one 1px border.
 
 Category: forms  
 Name: `input-group`  
 Also known as: Input group, Input addon, Prefix input, Suffix input  
-Page: https://getraster.com/components/input-group/
+Page: https://vlak.dev/components/input-group/
 
 ## When to use
 
@@ -972,40 +972,40 @@ Page: https://getraster.com/components/input-group/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { InputAddon, InputGroup } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { InputAddon, InputGroup } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add input-group
+npx @noorddev/vlak-cli add input-group
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/input-group.json
+npx shadcn add https://vlak.dev/r/input-group.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
-<div class="rs-input-group"><span class="rs-input-addon">https://</span><input class="rs-input" placeholder="getraster.com" /></div>
+<div class="rs-input-group"><span class="rs-input-addon">https://</span><input class="rs-input" placeholder="vlak.dev" /></div>
 ```
 
 ## Example
 
 ```tsx
-import { Input, InputAddon, InputGroup } from "@noorddev/raster-react";
+import { Input, InputAddon, InputGroup } from "@noorddev/vlak-react";
 
 <InputGroup>
   <InputAddon>https://</InputAddon>
-  <Input placeholder="getraster.com" aria-label="Site" />
+  <Input placeholder="vlak.dev" aria-label="Site" />
 </InputGroup>
 
 <InputGroup end>
@@ -1056,12 +1056,12 @@ CSS: `packages/core/css/components/input-group.css`
 
 # Native select
 
-Native select with Raster 1px chrome.
+Presents browser-native options inside a 1px control border.
 
 Category: forms  
 Name: `native-select`  
 Also known as: Native select, Select element, Dropdown, HTML select  
-Page: https://getraster.com/components/native-select/
+Page: https://vlak.dev/components/native-select/
 
 ## When to use
 
@@ -1078,27 +1078,27 @@ Page: https://getraster.com/components/native-select/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { NativeSelect } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { NativeSelect } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add native-select
+npx @noorddev/vlak-cli add native-select
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/native-select.json
+npx shadcn add https://vlak.dev/r/native-select.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <select class="rs-native-select"><option>Alkmaar</option><option>Amsterdam</option><option>Rotterdam</option></select>
@@ -1107,7 +1107,7 @@ npx shadcn add https://getraster.com/r/native-select.json
 ## Example
 
 ```tsx
-import { NativeSelect } from "@noorddev/raster-react";
+import { NativeSelect } from "@noorddev/vlak-react";
 
 <NativeSelect label="City" defaultValue="alkmaar">
   <option value="alkmaar">Alkmaar</option>
@@ -1120,7 +1120,7 @@ import { NativeSelect } from "@noorddev/raster-react";
 
 ### NativeSelect
 
-The platform list. Raster chrome.
+The platform list. Vlak chrome.
 
 Extends `SelectHTMLAttributes<HTMLSelectElement>`: every native attribute, `className`, `style`, and event handler passes through.
 
@@ -1158,12 +1158,12 @@ CSS: `packages/core/css/components/native-select.css`
 
 # Inline form
 
-One field with the submit action inside. The button appears after the input validates.
+Pairs one field with an embedded submit action. The button appears after validation.
 
 Category: patterns  
 Name: `inline-form`  
 Also known as: Inline form, Newsletter form, Subscribe form, Single-field form  
-Page: https://getraster.com/components/inline-form/
+Page: https://vlak.dev/components/inline-form/
 
 ## When to use
 
@@ -1180,27 +1180,27 @@ Page: https://getraster.com/components/inline-form/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { InlineForm } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { InlineForm } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add inline-form
+npx @noorddev/vlak-cli add inline-form
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/inline-form.json
+npx shadcn add https://vlak.dev/r/inline-form.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-inline-field"><input class="rs-inline-input" placeholder="Your e-mail" /><span class="rs-reveal rs-reveal-in"><button class="rs-btn-primary rs-inline-btn">Subscribe</button></span></div>
@@ -1209,7 +1209,7 @@ npx shadcn add https://getraster.com/r/inline-form.json
 ## Example
 
 ```tsx
-import { InlineForm } from "@noorddev/raster-react";
+import { InlineForm } from "@noorddev/vlak-react";
 
 <InlineForm
   placeholder="Your e-mail"
@@ -1266,12 +1266,12 @@ CSS: `packages/core/css/components/inline-form.css`
 
 # Radio
 
-Single-choice control. Selected dot is ink.
+Selects one option from a group. The selected dot fills with ink.
 
 Category: forms  
 Name: `radio`  
 Also known as: Radio, Radio group, RadioGroup, Radio button  
-Page: https://getraster.com/components/radio/
+Page: https://vlak.dev/components/radio/
 
 ## When to use
 
@@ -1288,27 +1288,27 @@ Page: https://getraster.com/components/radio/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Radio, RadioGroup } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Radio, RadioGroup } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add radio
+npx @noorddev/vlak-cli add radio
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/radio.json
+npx shadcn add https://vlak.dev/r/radio.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <label class="rs-radio"><span class="rs-radio-dot rs-radio-on"></span>Monthly</label>
@@ -1318,7 +1318,7 @@ npx shadcn add https://getraster.com/r/radio.json
 
 ```tsx
 import { useState } from "react";
-import { Radio, RadioGroup } from "@noorddev/raster-react";
+import { Radio, RadioGroup } from "@noorddev/vlak-react";
 
 const [plan, setPlan] = useState("monthly");
 
@@ -1385,12 +1385,12 @@ CSS: `packages/core/css/components/radio.css`
 
 # Checkbox
 
-Multi-choice. 16px box, 3px radius, ink fill when checked.
+Selects any number of options. 16px box, 3px radius, ink fill when checked.
 
 Category: forms  
 Name: `checkbox`  
 Also known as: Checkbox, Check box, Tick box  
-Page: https://getraster.com/components/checkbox/
+Page: https://vlak.dev/components/checkbox/
 
 ## When to use
 
@@ -1407,27 +1407,27 @@ Page: https://getraster.com/components/checkbox/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Checkbox } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Checkbox } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add checkbox
+npx @noorddev/vlak-cli add checkbox
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/checkbox.json
+npx shadcn add https://vlak.dev/r/checkbox.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <label class="rs-choice"><span class="rs-check rs-check-on"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M3.5 8.5 L6.5 11.5 L12.5 4.5" vector-effect="non-scaling-stroke"/></svg></span>Brand</label>
@@ -1437,7 +1437,7 @@ npx shadcn add https://getraster.com/r/checkbox.json
 
 ```tsx
 import { useState } from "react";
-import { Checkbox } from "@noorddev/raster-react";
+import { Checkbox } from "@noorddev/vlak-react";
 
 const [opted, setOpted] = useState(false);
 
@@ -1487,12 +1487,12 @@ CSS: `packages/core/css/components/checkbox.css`
 
 # Switch
 
-32×18 control. On fills ink; off is a 1px track. The thumb moves; the box stays 32px.
+Turns one setting on or off. 32×18px; on fills with ink, off uses a 1px track.
 
 Category: forms  
 Name: `switch`  
 Also known as: Switch, Toggle switch  
-Page: https://getraster.com/components/switch/
+Page: https://vlak.dev/components/switch/
 
 ## When to use
 
@@ -1509,27 +1509,27 @@ Page: https://getraster.com/components/switch/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Switch } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Switch } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add switch
+npx @noorddev/vlak-cli add switch
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/switch.json
+npx shadcn add https://vlak.dev/r/switch.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-switch rs-switch-on"><i></i></span>
@@ -1539,7 +1539,7 @@ npx shadcn add https://getraster.com/r/switch.json
 
 ```tsx
 import { useState } from "react";
-import { Switch } from "@noorddev/raster-react";
+import { Switch } from "@noorddev/vlak-react";
 
 const [enabled, setEnabled] = useState(false);
 
@@ -1590,12 +1590,12 @@ CSS: `packages/core/css/components/switch.css`
 
 # Slider
 
-2px track, ink fill, 14px thumb on a 24px hit area.
+Selects one value from a range. 2px track, 14px thumb, 24px hit area.
 
 Category: forms  
 Name: `slider`  
 Also known as: Slider, Range, Range input  
-Page: https://getraster.com/components/slider/
+Page: https://vlak.dev/components/slider/
 
 ## When to use
 
@@ -1612,27 +1612,27 @@ Page: https://getraster.com/components/slider/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Slider } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Slider } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add slider
+npx @noorddev/vlak-cli add slider
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/slider.json
+npx shadcn add https://vlak.dev/r/slider.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-slider"><span class="rs-slider-fill" style="width:62%"></span><span class="rs-slider-thumb" style="left:62%"></span></div>
@@ -1642,7 +1642,7 @@ npx shadcn add https://getraster.com/r/slider.json
 
 ```tsx
 import { useState } from "react";
-import { Slider } from "@noorddev/raster-react";
+import { Slider } from "@noorddev/vlak-react";
 
 const [volume, setVolume] = useState(62);
 
@@ -1698,12 +1698,12 @@ CSS: `packages/core/css/components/slider.css`
 
 # Progress
 
-4px bar. Percentage is set in the label.
+Shows completion for a known process. 4px bar; the label carries the percentage.
 
 Category: feedback  
 Name: `progress`  
 Also known as: Progress, Progress bar, Meter  
-Page: https://getraster.com/components/progress/
+Page: https://vlak.dev/components/progress/
 
 ## When to use
 
@@ -1720,27 +1720,27 @@ Page: https://getraster.com/components/progress/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Progress } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Progress } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add progress
+npx @noorddev/vlak-cli add progress
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/progress.json
+npx shadcn add https://vlak.dev/r/progress.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-progress-head"><span id="upload-label">Uploading</span><span>40%</span></div><div class="rs-progress" role="progressbar" aria-labelledby="upload-label" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40"><span class="rs-progress-fill" style="width:40%"></span></div>
@@ -1749,7 +1749,7 @@ npx shadcn add https://getraster.com/r/progress.json
 ## Example
 
 ```tsx
-import { Progress } from "@noorddev/raster-react";
+import { Progress } from "@noorddev/vlak-react";
 
 <Progress label="Uploading" value={40} />
 <Progress value={3} max={5} aria-label="Steps done" />
@@ -1789,12 +1789,12 @@ CSS: `packages/core/css/components/progress.css`
 
 # Tabs
 
-Text tabs in one row. Active tab has a 1px underline.
+Switches between related panels. Text labels in one row; active tab has a 1px underline.
 
 Category: navigation  
 Name: `tabs`  
 Also known as: Tabs, Tab list, Tab bar  
-Page: https://getraster.com/components/tabs/
+Page: https://vlak.dev/components/tabs/
 
 ## When to use
 
@@ -1811,27 +1811,27 @@ Page: https://getraster.com/components/tabs/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Tab, TabList, TabPanel, Tabs } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Tab, TabList, TabPanel, Tabs } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add tabs
+npx @noorddev/vlak-cli add tabs
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/tabs.json
+npx shadcn add https://vlak.dev/r/tabs.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-tabs"><span class="rs-tab rs-tab-active">Overview</span><span class="rs-tab">Activity</span><span class="rs-tab">Settings</span></div>
@@ -1840,7 +1840,7 @@ npx shadcn add https://getraster.com/r/tabs.json
 ## Example
 
 ```tsx
-import { Tab, TabList, TabPanel, Tabs } from "@noorddev/raster-react";
+import { Tab, TabList, TabPanel, Tabs } from "@noorddev/vlak-react";
 
 <Tabs defaultValue="overview">
   <TabList aria-label="Project">
@@ -1931,12 +1931,12 @@ CSS: `packages/core/css/components/tabs.css`
 
 # Breadcrumbs
 
-Ancestor links, 40% slashes, current page at full ink.
+Shows a page's place in a hierarchy. Ancestors are links; the current page is full ink.
 
 Category: navigation  
 Name: `breadcrumbs`  
 Also known as: Breadcrumb, Breadcrumbs, Trail  
-Page: https://getraster.com/components/breadcrumbs/
+Page: https://vlak.dev/components/breadcrumbs/
 
 ## When to use
 
@@ -1953,38 +1953,38 @@ Page: https://getraster.com/components/breadcrumbs/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Breadcrumbs } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Breadcrumbs } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add breadcrumbs
+npx @noorddev/vlak-cli add breadcrumbs
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/breadcrumbs.json
+npx shadcn add https://vlak.dev/r/breadcrumbs.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
-<p class="rs-crumbs"><a class="rs-crumbs-link" href="/">Studio</a><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Raster</span></p>
+<p class="rs-crumbs"><a class="rs-crumbs-link" href="/">Studio</a><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Vlak</span></p>
 ```
 
 ## Example
 
 ```tsx
-import { Breadcrumbs } from "@noorddev/raster-react";
+import { Breadcrumbs } from "@noorddev/vlak-react";
 
-<Breadcrumbs items={[{ label: "Studio", href: "/studio" }, { label: "Raster", href: "/studio/raster" }, { label: "Components" }]} />
+<Breadcrumbs items={[{ label: "Studio", href: "/studio" }, { label: "Vlak", href: "/studio/vlak" }, { label: "Components" }]} />
 ```
 
 ## Props
@@ -2028,12 +2028,12 @@ CSS: `packages/core/css/components/breadcrumbs.css`
 
 # Crumb bar
 
-Fixed 72px bar. Transparent at rest; scrolled state adds paper, a bottom 1px, and the trail.
+Keeps the current path visible while scrolling. Fixed at 72px with a 1px bottom rule when active.
 
 Category: navigation  
 Name: `crumb-bar`  
 Also known as: Crumb bar, Sticky header, Top bar, App bar  
-Page: https://getraster.com/components/crumb-bar/
+Page: https://vlak.dev/components/crumb-bar/
 
 ## When to use
 
@@ -2050,36 +2050,36 @@ Page: https://getraster.com/components/crumb-bar/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { CrumbBar } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { CrumbBar } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add crumb-bar
+npx @noorddev/vlak-cli add crumb-bar
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/crumb-bar.json
+npx shadcn add https://vlak.dev/r/crumb-bar.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
-<nav class="rs-crumb-bar rs-crumb-bar-scrolled"><div class="rs-crumb-bar-inner"><a class="rs-crumb-root" href="/"><span class="rs-crumb-root-full">Raster</span><span class="rs-crumb-root-short">rs</span></a><p class="rs-crumbs"><span>Docs</span><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Components</span></p></div></nav>
+<nav class="rs-crumb-bar rs-crumb-bar-scrolled"><div class="rs-crumb-bar-inner"><a class="rs-crumb-root" href="/"><span class="rs-crumb-root-full">Vlak</span><span class="rs-crumb-root-short">rs</span></a><p class="rs-crumbs"><span>Docs</span><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Components</span></p></div></nav>
 ```
 
 ## Example
 
 ```tsx
-import { CrumbBar } from "@noorddev/raster-react";
+import { CrumbBar } from "@noorddev/vlak-react";
 
 <CrumbBar
   root={{ label: "Renato Valdés Olmos", href: "/" }}
@@ -2133,12 +2133,12 @@ CSS: `packages/core/css/components/crumb-bar.css`
 
 # Pagination
 
-Square page controls. Current page is solid ink.
+Moves through paginated content. Square controls; the current page fills with ink.
 
 Category: navigation  
 Name: `pagination`  
 Also known as: Pagination, Pager, Page navigation  
-Page: https://getraster.com/components/pagination/
+Page: https://vlak.dev/components/pagination/
 
 ## When to use
 
@@ -2155,27 +2155,27 @@ Page: https://getraster.com/components/pagination/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Pagination } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Pagination } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add pagination
+npx @noorddev/vlak-cli add pagination
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/pagination.json
+npx shadcn add https://vlak.dev/r/pagination.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-pages"><span class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.75 L5.5 8.25 L10.5 12.75" vector-effect="non-scaling-stroke"/></svg></span><span class="rs-page rs-page-on">1</span><span class="rs-page">2</span><span class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.75 L10.5 8.25 L5.5 12.75" vector-effect="non-scaling-stroke"/></svg></span></div>
@@ -2185,7 +2185,7 @@ npx shadcn add https://getraster.com/r/pagination.json
 
 ```tsx
 import { useState } from "react";
-import { Pagination } from "@noorddev/raster-react";
+import { Pagination } from "@noorddev/vlak-react";
 
 const [page, setPage] = useState(1);
 
@@ -2234,12 +2234,12 @@ CSS: `packages/core/css/components/pagination.css`
 
 # Select
 
-Closed trigger with a chevron. The menu overlays the page.
+Selects one option from an overlay. The closed trigger carries a chevron.
 
 Category: forms  
 Name: `select`  
 Also known as: Select, Listbox, Dropdown select, Picker  
-Page: https://getraster.com/components/select/
+Page: https://vlak.dev/components/select/
 
 ## When to use
 
@@ -2256,27 +2256,27 @@ Page: https://getraster.com/components/select/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Select } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Select } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add select
+npx @noorddev/vlak-cli add select
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/select.json
+npx shadcn add https://vlak.dev/r/select.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <button class="rs-dropdown" role="combobox" aria-haspopup="listbox" aria-expanded="true"><span>Alkmaar</span></button>
@@ -2287,7 +2287,7 @@ npx shadcn add https://getraster.com/r/select.json
 
 ```tsx
 import { useState } from "react";
-import { Select } from "@noorddev/raster-react";
+import { Select } from "@noorddev/vlak-react";
 
 const [city, setCity] = useState("alkmaar");
 
@@ -2357,12 +2357,12 @@ CSS: `packages/core/css/components/select.css`
 
 # Dialog
 
-Modal with a title, body, and two equal actions.
+Focuses attention on a modal task. Title, body, and two equal actions.
 
 Category: surfaces  
 Name: `dialog`  
 Also known as: Dialog, Modal, Modal dialog  
-Page: https://getraster.com/components/dialog/
+Page: https://vlak.dev/components/dialog/
 
 ## When to use
 
@@ -2379,27 +2379,27 @@ Page: https://getraster.com/components/dialog/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add dialog
+npx @noorddev/vlak-cli add dialog
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/dialog.json
+npx shadcn add https://vlak.dev/r/dialog.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-dialog" role="dialog" aria-labelledby="remove-title" aria-describedby="remove-body"><h2 class="rs-dialog-title" id="remove-title">Remove this item?</h2><p class="rs-dialog-body" id="remove-body">This can't be undone.</p><div class="rs-dialog-actions"><button class="rs-btn-ghost rs-btn-sm">Cancel</button><button class="rs-btn-primary rs-btn-sm">Remove</button></div></div>
@@ -2409,7 +2409,7 @@ npx shadcn add https://getraster.com/r/dialog.json
 
 ```tsx
 import { useState } from "react";
-import { Button, Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/raster-react";
+import { Button, Dialog, DialogActions, DialogBody, DialogTitle } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 
@@ -2499,12 +2499,12 @@ CSS: `packages/core/css/components/dialog.css`
 
 # Badge
 
-11px badge. Outline, solid, and muted fills.
+Labels status or category. 11px text with outline, solid, and muted variants.
 
 Category: feedback  
 Name: `badge`  
 Also known as: Badge, Tag, Pill, Status  
-Page: https://getraster.com/components/badge/
+Page: https://vlak.dev/components/badge/
 
 ## When to use
 
@@ -2521,27 +2521,27 @@ Page: https://getraster.com/components/badge/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Badge } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Badge } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add badge
+npx @noorddev/vlak-cli add badge
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/badge.json
+npx shadcn add https://vlak.dev/r/badge.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-badge">Recommended</span><span class="rs-badge-solid">Delivered</span><span class="rs-badge-muted">In progress</span>
@@ -2550,7 +2550,7 @@ npx shadcn add https://getraster.com/r/badge.json
 ## Example
 
 ```tsx
-import { Badge } from "@noorddev/raster-react";
+import { Badge } from "@noorddev/vlak-react";
 
 <Badge>Recommended</Badge>
 <Badge variant="solid">Delivered</Badge>
@@ -2588,12 +2588,12 @@ CSS: `packages/core/css/components/badge.css`
 
 # Mono chip
 
-Mono identifier with a 1px mixed border.
+Marks a short technical identifier. Monospace text with a 1px mixed border.
 
 Category: content  
 Name: `chip`  
 Also known as: Chip, Mono chip, Code chip, Token  
-Page: https://getraster.com/components/chip/
+Page: https://vlak.dev/components/chip/
 
 ## When to use
 
@@ -2610,27 +2610,27 @@ Page: https://getraster.com/components/chip/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Chip } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Chip } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add chip
+npx @noorddev/vlak-cli add chip
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/chip.json
+npx shadcn add https://vlak.dev/r/chip.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-chip">/noord-brand</span>
@@ -2639,7 +2639,7 @@ npx shadcn add https://getraster.com/r/chip.json
 ## Example
 
 ```tsx
-import { Chip } from "@noorddev/raster-react";
+import { Chip } from "@noorddev/vlak-react";
 
 <Chip>/noord-brand</Chip>
 ```
@@ -2675,12 +2675,12 @@ CSS: `packages/core/css/components/chip.css`
 
 # Card
 
-Typography stack: label, title, and body. No outline.
+Groups related content as a label, title, and body. No outline.
 
 Category: surfaces  
 Name: `card`  
 Also known as: Card, Panel, Tile  
-Page: https://getraster.com/components/card/
+Page: https://vlak.dev/components/card/
 
 ## When to use
 
@@ -2689,7 +2689,7 @@ Page: https://getraster.com/components/card/
 
 ## When not to
 
-- Framed boxes with shadows; Raster cards have no outline.
+- Framed boxes with shadows; cards have no outline.
 - Interactive tiles; wrap the title in a Link instead of making the card clickable.
 
 ## Install
@@ -2697,27 +2697,27 @@ Page: https://getraster.com/components/card/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Card, CardBody, CardInner, CardLabel, CardTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Card, CardBody, CardInner, CardLabel, CardTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add card
+npx @noorddev/vlak-cli add card
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/card.json
+npx shadcn add https://vlak.dev/r/card.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-card"><span class="rs-card-label">Case study</span><h3 class="rs-card-title">A quieter interface</h3><p class="rs-card-body">Emphasis from weight and spacing, never from a hue.</p></div>
@@ -2726,7 +2726,7 @@ npx shadcn add https://getraster.com/r/card.json
 ## Example
 
 ```tsx
-import { Card, CardBody, CardLabel, CardTitle } from "@noorddev/raster-react";
+import { Card, CardBody, CardLabel, CardTitle } from "@noorddev/vlak-react";
 
 <Card>
   <CardLabel>Case study</CardLabel>
@@ -2797,12 +2797,12 @@ CSS: `packages/core/css/components/card.css`
 
 # Stepper
 
-Numbered dots joined by 1px lines. Done fills ink; active is outlined.
+Shows progress through ordered steps. 1px connectors; done fills with ink, active is outlined.
 
 Category: navigation  
 Name: `stepper`  
 Also known as: Stepper, Steps, Progress steps, Wizard  
-Page: https://getraster.com/components/stepper/
+Page: https://vlak.dev/components/stepper/
 
 ## When to use
 
@@ -2819,27 +2819,27 @@ Page: https://getraster.com/components/stepper/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Stepper } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Stepper } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add stepper
+npx @noorddev/vlak-cli add stepper
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/stepper.json
+npx shadcn add https://vlak.dev/r/stepper.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-steps"><div class="rs-step"><span class="rs-step-dot rs-step-done">1</span><span class="rs-step-line"></span><span class="rs-step-name">Brief</span></div><div class="rs-step"><span class="rs-step-dot rs-step-active">2</span><span class="rs-step-name">Design</span></div></div>
@@ -2848,7 +2848,7 @@ npx shadcn add https://getraster.com/r/stepper.json
 ## Example
 
 ```tsx
-import { Stepper } from "@noorddev/raster-react";
+import { Stepper } from "@noorddev/vlak-react";
 
 <Stepper steps={[{ name: "Brief" }, { name: "Design", sub: "In review" }, { name: "Build" }]} current={1} />
 ```
@@ -2886,12 +2886,12 @@ CSS: `packages/core/css/components/stepper.css`
 
 # Table
 
-Open grid, 1px row rules, last column right-aligned. Total rows use 2px rules.
+Presents structured values in rows and columns. 1px row rules; total rows use 2px rules.
 
 Category: content  
 Name: `table`  
 Also known as: Table, Static table, Grid  
-Page: https://getraster.com/components/table/
+Page: https://vlak.dev/components/table/
 
 ## When to use
 
@@ -2908,27 +2908,27 @@ Page: https://getraster.com/components/table/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add table
+npx @noorddev/vlak-cli add table
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/table.json
+npx shadcn add https://vlak.dev/r/table.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <table class="rs-table"><thead><tr><th>Phase</th><th>Weeks</th></tr></thead><tbody><tr><td>Strategy</td><td>2</td></tr><tr><td>Identity</td><td>4</td></tr></tbody></table>
@@ -2937,7 +2937,7 @@ npx shadcn add https://getraster.com/r/table.json
 ## Example
 
 ```tsx
-import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/raster-react";
+import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/vlak-react";
 
 <Table>
   <TableHead>
@@ -3035,12 +3035,12 @@ CSS: `packages/core/css/components/table.css`
 
 # Icons
 
-16 viewBox marks, 1px currentColor, butt/miter. Shipped in the React package.
+Provides interface marks on a 16px viewBox. 1px currentColor strokes with butt caps and miter joins.
 
 Category: icons  
 Name: `icons`  
 Also known as: Icon, Icons, Icon set, Glyphs  
-Page: https://getraster.com/components/icons/
+Page: https://vlak.dev/components/icons/
 
 ## When to use
 
@@ -3057,36 +3057,36 @@ Page: https://getraster.com/components/icons/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Icon, IconCatalog, iconLabel, Icons, resolveIcon } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Icon, IconCatalog, iconLabel, Icons, resolveIcon } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add icons
+npx @noorddev/vlak-cli add icons
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/icons.json
+npx shadcn add https://vlak.dev/r/icons.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
-<div class="rs-icons"><svg class="rs-icon" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M6.5 2.5 H13.5 V9.5" vector-effect="non-scaling-stroke"/><rect x="2.5" y="6.5" width="7" height="7" vector-effect="non-scaling-stroke"/></svg><svg class="rs-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M6.5 2.5 H13.5 V9.5" vector-effect="non-scaling-stroke"/><rect x="2.5" y="6.5" width="7" height="7" vector-effect="non-scaling-stroke"/></svg></div>
+<div class="rs-icons"><svg class="rs-icon" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3 H13 V10.5" vector-effect="non-scaling-stroke"/><rect x="3" y="5.5" width="7.5" height="7.5" vector-effect="non-scaling-stroke"/></svg><svg class="rs-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3 H13 V10.5" vector-effect="non-scaling-stroke"/><rect x="3" y="5.5" width="7.5" height="7.5" vector-effect="non-scaling-stroke"/></svg></div>
 ```
 
 ## Example
 
 ```tsx
-import { Icon, IconCatalog, iconNames } from "@noorddev/raster-react";
+import { Icon, IconCatalog, iconNames } from "@noorddev/vlak-react";
 
 <Icon name="search" size={12} />
 <Icon name="search" size={16} />
@@ -3160,12 +3160,12 @@ CSS: `packages/core/css/components/icons.css`
 
 # Accordion
 
-Native details rows on 1px rules. Shared name keeps one item open.
+Reveals related sections on demand. Native details rows with 1px rules.
 
 Category: content  
 Name: `accordion`  
 Also known as: Accordion, Disclosure group, Expansion panel, FAQ  
-Page: https://getraster.com/components/accordion/
+Page: https://vlak.dev/components/accordion/
 
 ## When to use
 
@@ -3182,39 +3182,39 @@ Page: https://getraster.com/components/accordion/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Accordion, AccordionItem } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Accordion, AccordionItem } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add accordion
+npx @noorddev/vlak-cli add accordion
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/accordion.json
+npx shadcn add https://vlak.dev/r/accordion.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
-<div class="rs-acc"><details class="rs-acc-item" name="faq" open><summary>What is Raster?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">A monochrome, CSS-first design system.</div></details><details class="rs-acc-item" name="faq"><summary>Is it dependency-free?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">Yes. Native elements do the work.</div></details></div>
+<div class="rs-acc"><details class="rs-acc-item" name="faq" open><summary>What is Vlak?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">A monochrome, CSS-first design system.</div></details><details class="rs-acc-item" name="faq"><summary>Is it dependency-free?<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-acc-body">Yes. Native elements do the work.</div></details></div>
 ```
 
 ## Example
 
 ```tsx
-import { Accordion, AccordionItem } from "@noorddev/raster-react";
+import { Accordion, AccordionItem } from "@noorddev/vlak-react";
 
 <Accordion exclusive>
-  <AccordionItem title="What is Raster?" defaultOpen>
+  <AccordionItem title="What is Vlak?" defaultOpen>
     A monochrome, CSS-first design system.
   </AccordionItem>
   <AccordionItem title="Is it dependency-free?">
@@ -3275,12 +3275,12 @@ CSS: `packages/core/css/components/accordion.css`
 
 # Alert
 
-1px frame with an icon. Solid ink variant for critical.
+Calls attention to contextual information. 1px frame and icon; critical variant fills with ink.
 
 Category: feedback  
 Name: `alert`  
 Also known as: Alert, Banner, Notice, Inline message  
-Page: https://getraster.com/components/alert/
+Page: https://vlak.dev/components/alert/
 
 ## When to use
 
@@ -3297,27 +3297,27 @@ Page: https://getraster.com/components/alert/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Alert } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Alert } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add alert
+npx @noorddev/vlak-cli add alert
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/alert.json
+npx shadcn add https://vlak.dev/r/alert.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-alert" role="status"><div><span class="rs-alert-title">Heads up</span><p class="rs-alert-body">Your workspace syncs every hour.</p></div></div>
@@ -3326,7 +3326,7 @@ npx shadcn add https://getraster.com/r/alert.json
 ## Example
 
 ```tsx
-import { Alert } from "@noorddev/raster-react";
+import { Alert } from "@noorddev/vlak-react";
 
 <Alert title="Heads up">Your workspace syncs every hour.</Alert>
 <Alert variant="solid" title="Payment failed" live="assertive">Update your card to keep publishing.</Alert>
@@ -3367,12 +3367,12 @@ CSS: `packages/core/css/components/alert.css`
 
 # Alert dialog
 
-Native dialog that must be answered. Escape and light dismiss are off.
+Requires a decision before work continues. Native dialog with Escape and light dismiss disabled.
 
 Category: surfaces  
 Name: `alert-dialog`  
 Also known as: Alert dialog, Confirm dialog, Confirmation, Destructive confirm  
-Page: https://getraster.com/components/alert-dialog/
+Page: https://vlak.dev/components/alert-dialog/
 
 ## When to use
 
@@ -3389,27 +3389,27 @@ Page: https://getraster.com/components/alert-dialog/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add alert-dialog
+npx @noorddev/vlak-cli add alert-dialog
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/alert-dialog.json
+npx shadcn add https://vlak.dev/r/alert-dialog.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <dialog class="rs-dialog" role="alertdialog" closedby="none" aria-labelledby="delete-title" aria-describedby="delete-body" open><h2 class="rs-dialog-title" id="delete-title">Delete this workspace?</h2><p class="rs-dialog-body" id="delete-body">All projects go with it.</p><div class="rs-dialog-actions"><button class="rs-btn-ghost rs-btn-sm">Cancel</button><button class="rs-btn-primary rs-btn-sm">Delete</button></div></dialog>
@@ -3419,7 +3419,7 @@ npx shadcn add https://getraster.com/r/alert-dialog.json
 
 ```tsx
 import { useState } from "react";
-import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from "@noorddev/raster-react";
+import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 
@@ -3503,12 +3503,12 @@ CSS: `packages/core/css/components/alert-dialog.css`
 
 # Avatar
 
-32px circle of initials, or a covering image. Broken images fall back. Rows overlap 8px.
+Identifies a person or group. 32px image or initials; broken images fall back automatically.
 
 Category: content  
 Name: `avatar`  
 Also known as: Avatar, Profile picture, User image, Avatar group  
-Page: https://getraster.com/components/avatar/
+Page: https://vlak.dev/components/avatar/
 
 ## When to use
 
@@ -3525,27 +3525,27 @@ Page: https://getraster.com/components/avatar/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Avatar, AvatarRow } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Avatar, AvatarRow } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add avatar
+npx @noorddev/vlak-cli add avatar
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/avatar.json
+npx shadcn add https://vlak.dev/r/avatar.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-avatar-row"><span class="rs-avatar">RV</span><span class="rs-avatar">NO</span><span class="rs-avatar">+3</span></div>
@@ -3554,7 +3554,7 @@ npx shadcn add https://getraster.com/r/avatar.json
 ## Example
 
 ```tsx
-import { Avatar, AvatarRow } from "@noorddev/raster-react";
+import { Avatar, AvatarRow } from "@noorddev/vlak-react";
 
 <Avatar src="/renn.jpg" name="Renn" initials="RV" size="lg" />
 <AvatarRow>
@@ -3611,12 +3611,12 @@ CSS: `packages/core/css/components/avatar.css`
 
 # Item
 
-Flush row: title and description on the left, meta on the right.
+Presents one list entry. Title and description sit left; metadata sits right.
 
 Category: content  
 Name: `item`  
 Also known as: Item, List item, Row, Cell  
-Page: https://getraster.com/components/item/
+Page: https://vlak.dev/components/item/
 
 ## When to use
 
@@ -3633,27 +3633,27 @@ Page: https://getraster.com/components/item/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Item } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Item } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add item
+npx @noorddev/vlak-cli add item
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/item.json
+npx shadcn add https://vlak.dev/r/item.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-item"><div><p class="rs-item-title">Alkmaar</p><p class="rs-item-desc">The studio city.</p></div><span class="rs-item-meta">NL</span></div>
@@ -3662,7 +3662,7 @@ npx shadcn add https://getraster.com/r/item.json
 ## Example
 
 ```tsx
-import { Item } from "@noorddev/raster-react";
+import { Item } from "@noorddev/vlak-react";
 
 <Item title="Alkmaar" description="The studio city." meta="NL" />
 ```
@@ -3702,12 +3702,12 @@ CSS: `packages/core/css/components/item.css`
 
 # Textarea
 
-Multiline field, vertical resize only.
+Collects multiple lines of text. Resizes vertically only.
 
 Category: forms  
 Name: `textarea`  
 Also known as: Textarea, Text area, Multiline input  
-Page: https://getraster.com/components/textarea/
+Page: https://vlak.dev/components/textarea/
 
 ## When to use
 
@@ -3724,27 +3724,27 @@ Page: https://getraster.com/components/textarea/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Textarea } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Textarea } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add textarea
+npx @noorddev/vlak-cli add textarea
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/textarea.json
+npx shadcn add https://vlak.dev/r/textarea.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-field"><span class="rs-field-label">Notes</span><textarea class="rs-textarea" placeholder="What should we know?"></textarea></div>
@@ -3753,7 +3753,7 @@ npx shadcn add https://getraster.com/r/textarea.json
 ## Example
 
 ```tsx
-import { Textarea } from "@noorddev/raster-react";
+import { Textarea } from "@noorddev/vlak-react";
 
 <Textarea label="Notes" placeholder="What should we know?" rows={4} />
 ```
@@ -3797,12 +3797,12 @@ CSS: `packages/core/css/components/textarea.css`
 
 # Separator
 
-1px rule, horizontal or vertical.
+Separates related regions with a 1px horizontal or vertical rule.
 
 Category: content  
 Name: `separator`  
 Also known as: Separator, Divider, Rule, hr  
-Page: https://getraster.com/components/separator/
+Page: https://vlak.dev/components/separator/
 
 ## When to use
 
@@ -3819,27 +3819,27 @@ Page: https://getraster.com/components/separator/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Separator } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Separator } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add separator
+npx @noorddev/vlak-cli add separator
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/separator.json
+npx shadcn add https://vlak.dev/r/separator.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <hr class="rs-sep" />
@@ -3848,7 +3848,7 @@ npx shadcn add https://getraster.com/r/separator.json
 ## Example
 
 ```tsx
-import { Separator } from "@noorddev/raster-react";
+import { Separator } from "@noorddev/vlak-react";
 
 <Separator />
 <Separator orientation="vertical" style={{ height: 16 }} />
@@ -3885,12 +3885,12 @@ CSS: `packages/core/css/components/separator.css`
 
 # Skeleton
 
-Divider-tone pulse. Animation stops when prefers-reduced-motion is on.
+Reserves space while content loads. Divider-tone pulse that respects reduced motion.
 
 Category: feedback  
 Name: `skeleton`  
 Also known as: Skeleton, Placeholder, Loading placeholder, Shimmer  
-Page: https://getraster.com/components/skeleton/
+Page: https://vlak.dev/components/skeleton/
 
 ## When to use
 
@@ -3907,27 +3907,27 @@ Page: https://getraster.com/components/skeleton/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Skeleton } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Skeleton } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add skeleton
+npx @noorddev/vlak-cli add skeleton
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/skeleton.json
+npx shadcn add https://vlak.dev/r/skeleton.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-skeleton" style="width:180px;height:14px"></span>
@@ -3936,7 +3936,7 @@ npx shadcn add https://getraster.com/r/skeleton.json
 ## Example
 
 ```tsx
-import { Skeleton } from "@noorddev/raster-react";
+import { Skeleton } from "@noorddev/vlak-react";
 
 <Skeleton width="60%" />
 <Skeleton width={240} height={14} />
@@ -3975,12 +3975,12 @@ CSS: `packages/core/css/components/skeleton.css`
 
 # Empty
 
-Placeholder cell with a title, a sentence, and an optional action.
+Explains an empty state with a title, one sentence, and an optional action.
 
 Category: feedback  
 Name: `empty`  
 Also known as: Empty, Empty state, Zero state, No results  
-Page: https://getraster.com/components/empty/
+Page: https://vlak.dev/components/empty/
 
 ## When to use
 
@@ -3997,27 +3997,27 @@ Page: https://getraster.com/components/empty/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Empty } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Empty } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add empty
+npx @noorddev/vlak-cli add empty
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/empty.json
+npx shadcn add https://vlak.dev/r/empty.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-empty"><p class="rs-empty-title">No projects yet</p><p class="rs-empty-body">Start one. The grid is empty on purpose.</p><div class="rs-empty-action"><button class="rs-btn-ghost rs-btn-sm">New project</button></div></div>
@@ -4026,7 +4026,7 @@ npx shadcn add https://getraster.com/r/empty.json
 ## Example
 
 ```tsx
-import { Button, Empty } from "@noorddev/raster-react";
+import { Button, Empty } from "@noorddev/vlak-react";
 
 <Empty title="No projects yet" action={<Button variant="ghost" size="sm">New project</Button>}>
   Start one. The grid is empty on purpose.
@@ -4067,12 +4067,12 @@ CSS: `packages/core/css/components/empty.css`
 
 # Spinner
 
-16px 1px ring. Animation stops when prefers-reduced-motion is on.
+Signals indeterminate progress. 16px ring with a 1px stroke; respects reduced motion.
 
 Category: feedback  
 Name: `spinner`  
 Also known as: Spinner, Loader, Loading indicator, Activity indicator  
-Page: https://getraster.com/components/spinner/
+Page: https://vlak.dev/components/spinner/
 
 ## When to use
 
@@ -4089,27 +4089,27 @@ Page: https://getraster.com/components/spinner/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Spinner } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Spinner } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add spinner
+npx @noorddev/vlak-cli add spinner
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/spinner.json
+npx shadcn add https://vlak.dev/r/spinner.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-spinner" role="status" aria-label="Loading"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="28 13" vector-effect="non-scaling-stroke"/></svg></span>
@@ -4118,7 +4118,7 @@ npx shadcn add https://getraster.com/r/spinner.json
 ## Example
 
 ```tsx
-import { Spinner } from "@noorddev/raster-react";
+import { Spinner } from "@noorddev/vlak-react";
 
 <Spinner label="Loading" />
 ```
@@ -4157,12 +4157,12 @@ CSS: `packages/core/css/components/spinner.css`
 
 # Tooltip
 
-Label on hover and keyboard focus; a real element that describes its trigger.
+Explains a control on hover or keyboard focus. A real element describes its trigger.
 
 Category: feedback  
 Name: `tooltip`  
 Also known as: Tooltip, Tip, Hint  
-Page: https://getraster.com/components/tooltip/
+Page: https://vlak.dev/components/tooltip/
 
 ## When to use
 
@@ -4179,27 +4179,27 @@ Page: https://getraster.com/components/tooltip/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Tooltip } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Tooltip } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add tooltip
+npx @noorddev/vlak-cli add tooltip
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/tooltip.json
+npx shadcn add https://vlak.dev/r/tooltip.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-tip"><button class="rs-btn-ghost rs-btn-sm" aria-describedby="copy-tip">Copy</button><span class="rs-tip-bubble" role="tooltip" id="copy-tip">Copy to clipboard</span></span>
@@ -4208,7 +4208,7 @@ npx shadcn add https://getraster.com/r/tooltip.json
 ## Example
 
 ```tsx
-import { Button, Tooltip } from "@noorddev/raster-react";
+import { Button, Tooltip } from "@noorddev/vlak-react";
 
 <Tooltip tip="Copy to clipboard">
   <Button variant="ghost" size="sm" aria-label="Copy">Copy</Button>
@@ -4255,12 +4255,12 @@ CSS: `packages/core/css/components/tooltip.css`
 
 # Toast
 
-Bottom-right status, aria-live polite. Stays four seconds or longer for longer text; pauses on hover; closes on demand.
+Reports a brief status in the bottom-right corner. Polite live region; pauses on hover and closes on demand.
 
 Category: feedback  
 Name: `toast`  
 Also known as: Toast, Sonner, Snackbar, Notification  
-Page: https://getraster.com/components/toast/
+Page: https://vlak.dev/components/toast/
 
 ## When to use
 
@@ -4277,27 +4277,27 @@ Page: https://getraster.com/components/toast/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { toast, Toaster } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { toast, Toaster } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add toast
+npx @noorddev/vlak-cli add toast
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/toast.json
+npx shadcn add https://vlak.dev/r/toast.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-toasts" role="status" aria-live="polite"><div class="rs-toast"><div><span class="rs-toast-title">Saved</span><p class="rs-toast-body">Your changes are live.</p></div><button class="rs-toast-close" type="button" aria-label="Dismiss">&times;</button></div></div>
@@ -4306,7 +4306,7 @@ npx shadcn add https://getraster.com/r/toast.json
 ## Example
 
 ```tsx
-import { Toaster, toast } from "@noorddev/raster-react";
+import { Toaster, toast } from "@noorddev/vlak-react";
 
 // once, in your layout
 <Toaster duration={4000} closeLabel="Dismiss" />
@@ -4360,12 +4360,12 @@ CSS: `packages/core/css/components/toast.css`
 
 # Dropdown menu
 
-Action menu with menuitem roles and arrow-key movement.
+Presents a compact list of actions. Menu roles and arrow-key navigation are built in.
 
 Category: actions  
 Name: `dropdown-menu`  
 Also known as: Dropdown menu, Menu, Action menu, Overflow menu  
-Page: https://getraster.com/components/dropdown-menu/
+Page: https://vlak.dev/components/dropdown-menu/
 
 ## When to use
 
@@ -4382,27 +4382,27 @@ Page: https://getraster.com/components/dropdown-menu/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { DropdownMenu } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { DropdownMenu } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add dropdown-menu
+npx @noorddev/vlak-cli add dropdown-menu
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/dropdown-menu.json
+npx shadcn add https://vlak.dev/r/dropdown-menu.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-menu" role="menu"><button class="rs-menu-item" role="menuitem">Rename</button><button class="rs-menu-item" role="menuitem">Duplicate</button><hr class="rs-menu-sep" /><button class="rs-menu-item" role="menuitem">Delete</button></div>
@@ -4411,7 +4411,7 @@ npx shadcn add https://getraster.com/r/dropdown-menu.json
 ## Example
 
 ```tsx
-import { DropdownMenu } from "@noorddev/raster-react";
+import { DropdownMenu } from "@noorddev/vlak-react";
 
 <DropdownMenu
   label="Actions"
@@ -4474,12 +4474,12 @@ CSS: `packages/core/css/components/dropdown-menu.css`
 
 # Toggle
 
-Pressable control. Pressed fills ink. State is aria-pressed.
+Turns one persistent option on or off. Pressed fills with ink and exposes aria-pressed.
 
 Category: actions  
 Name: `toggle`  
 Also known as: Toggle, Toggle button, Press button  
-Page: https://getraster.com/components/toggle/
+Page: https://vlak.dev/components/toggle/
 
 ## When to use
 
@@ -4496,27 +4496,27 @@ Page: https://getraster.com/components/toggle/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Toggle, ToggleGroup } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Toggle, ToggleGroup } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add toggle
+npx @noorddev/vlak-cli add toggle
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/toggle.json
+npx shadcn add https://vlak.dev/r/toggle.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-toggle-group"><button class="rs-toggle" aria-pressed="true">Left</button><button class="rs-toggle" aria-pressed="false">Center</button><button class="rs-toggle" aria-pressed="false">Right</button></div>
@@ -4526,7 +4526,7 @@ npx shadcn add https://getraster.com/r/toggle.json
 
 ```tsx
 import { useState } from "react";
-import { Toggle } from "@noorddev/raster-react";
+import { Toggle } from "@noorddev/vlak-react";
 
 const [bold, setBold] = useState(false);
 
@@ -4591,12 +4591,12 @@ CSS: `packages/core/css/components/toggle.css`
 
 # Toggle group
 
-Joined toggles, one pressed, 1px between.
+Selects one option from joined toggles. The active option fills with ink.
 
 Category: actions  
 Name: `toggle-group`  
 Also known as: Toggle group, Segmented control, Exclusive toggles  
-Page: https://getraster.com/components/toggle-group/
+Page: https://vlak.dev/components/toggle-group/
 
 ## When to use
 
@@ -4613,27 +4613,27 @@ Page: https://getraster.com/components/toggle-group/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { ToggleGroup } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { ToggleGroup } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add toggle-group
+npx @noorddev/vlak-cli add toggle-group
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/toggle-group.json
+npx shadcn add https://vlak.dev/r/toggle-group.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-toggle-group"><button class="rs-toggle" aria-pressed="true">Left</button><button class="rs-toggle" aria-pressed="false">Center</button><button class="rs-toggle" aria-pressed="false">Right</button></div>
@@ -4643,7 +4643,7 @@ npx shadcn add https://getraster.com/r/toggle-group.json
 
 ```tsx
 import { useState } from "react";
-import { ToggleGroup } from "@noorddev/raster-react";
+import { ToggleGroup } from "@noorddev/vlak-react";
 
 const [align, setAlign] = useState("left");
 
@@ -4703,12 +4703,12 @@ CSS: `packages/core/css/components/toggle.css`
 
 # Popover
 
-Native Popover API. Top layer, light dismiss.
+Places non-modal content above the page with the native Popover API and light dismiss.
 
 Category: surfaces  
 Name: `popover`  
 Also known as: Popover, Popup, Flyout  
-Page: https://getraster.com/components/popover/
+Page: https://vlak.dev/components/popover/
 
 ## When to use
 
@@ -4725,27 +4725,27 @@ Page: https://getraster.com/components/popover/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Popover, PopoverBody, PopoverTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Popover, PopoverBody, PopoverTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add popover
+npx @noorddev/vlak-cli add popover
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/popover.json
+npx shadcn add https://vlak.dev/r/popover.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <button class="rs-btn-ghost rs-btn-sm" popovertarget="info">Details</button>
@@ -4755,7 +4755,7 @@ npx shadcn add https://getraster.com/r/popover.json
 ## Example
 
 ```tsx
-import { Popover, PopoverBody, PopoverTitle } from "@noorddev/raster-react";
+import { Popover, PopoverBody, PopoverTitle } from "@noorddev/vlak-react";
 
 <Popover trigger="Details" align="start" aria-label="Module grid">
   <PopoverTitle>Module grid</PopoverTitle>
@@ -4821,12 +4821,12 @@ CSS: `packages/core/css/components/popover.css`
 
 # Sheet
 
-Native dialog docked to a screen edge, with the platform focus trap and backdrop.
+Opens a focused task from a screen edge. Native dialog with platform focus handling and backdrop.
 
 Category: surfaces  
 Name: `sheet`  
 Also known as: Sheet, Side panel, Drawer, Slide-over, Off-canvas  
-Page: https://getraster.com/components/sheet/
+Page: https://vlak.dev/components/sheet/
 
 ## When to use
 
@@ -4843,27 +4843,27 @@ Page: https://getraster.com/components/sheet/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Sheet, SheetBody, SheetTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Sheet, SheetBody, SheetTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add sheet
+npx @noorddev/vlak-cli add sheet
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/sheet.json
+npx shadcn add https://vlak.dev/r/sheet.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <dialog class="rs-sheet" aria-labelledby="filters-title" open><button class="rs-sheet-close" type="button" aria-label="Close">&times;</button><h2 class="rs-sheet-title" id="filters-title">Filters</h2><p class="rs-sheet-body">Everything narrows from here.</p></dialog>
@@ -4873,7 +4873,7 @@ npx shadcn add https://getraster.com/r/sheet.json
 
 ```tsx
 import { useState } from "react";
-import { Button, Sheet, SheetBody, SheetTitle } from "@noorddev/raster-react";
+import { Button, Sheet, SheetBody, SheetTitle } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 
@@ -4949,12 +4949,12 @@ CSS: `packages/core/css/components/sheet.css`
 
 # Drawer
 
-Native dialog from the bottom edge, with the platform focus trap and backdrop.
+Opens a focused task from the bottom edge. Native dialog with platform focus handling and backdrop.
 
 Category: surfaces  
 Name: `drawer`  
 Also known as: Drawer, Bottom sheet, Vaul, Bottom panel  
-Page: https://getraster.com/components/drawer/
+Page: https://vlak.dev/components/drawer/
 
 ## When to use
 
@@ -4971,27 +4971,27 @@ Page: https://getraster.com/components/drawer/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Drawer, DrawerBody, DrawerTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Drawer, DrawerBody, DrawerTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add drawer
+npx @noorddev/vlak-cli add drawer
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/drawer.json
+npx shadcn add https://vlak.dev/r/drawer.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <dialog class="rs-drawer" aria-labelledby="notes-title" open><button class="rs-drawer-close" type="button" aria-label="Close">&times;</button><h2 class="rs-drawer-title" id="notes-title">Notes</h2><p class="rs-drawer-body">A bottom panel. Escape closes it.</p></dialog>
@@ -5001,7 +5001,7 @@ npx shadcn add https://getraster.com/r/drawer.json
 
 ```tsx
 import { useState } from "react";
-import { Button, Drawer, DrawerBody, DrawerTitle } from "@noorddev/raster-react";
+import { Button, Drawer, DrawerBody, DrawerTitle } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 
@@ -5076,12 +5076,12 @@ CSS: `packages/core/css/components/drawer.css`
 
 # Scroll area
 
-Overflow box with the scrollbar hidden and 20px feathers at the ends.
+Contains overflow without visible scrollbars. 20px edge feathers signal more content.
 
 Category: content  
 Name: `scroll-area`  
 Also known as: Scroll area, Scroll view, Scrollable region, Overflow box  
-Page: https://getraster.com/components/scroll-area/
+Page: https://vlak.dev/components/scroll-area/
 
 ## When to use
 
@@ -5098,27 +5098,27 @@ Page: https://getraster.com/components/scroll-area/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { ScrollArea } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { ScrollArea } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add scroll-area
+npx @noorddev/vlak-cli add scroll-area
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/scroll-area.json
+npx shadcn add https://vlak.dev/r/scroll-area.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-scroll" style="max-height:140px" tabindex="0"><p>Alkmaar</p><p>Amsterdam</p><p>Delft</p><p>Eindhoven</p><p>Groningen</p><p>Haarlem</p><p>Rotterdam</p><p>Utrecht</p></div>
@@ -5127,7 +5127,7 @@ npx shadcn add https://getraster.com/r/scroll-area.json
 ## Example
 
 ```tsx
-import { ScrollArea } from "@noorddev/raster-react";
+import { ScrollArea } from "@noorddev/vlak-react";
 
 <ScrollArea maxHeight={240} aria-label="Cities">
   {cities.map((city) => <p key={city}>{city}</p>)}
@@ -5175,12 +5175,12 @@ CSS: `packages/core/css/components/scroll-area.css`
 
 # Charts
 
-Line on a 204 field. 1px grid, ink marks. Series use solid, dashed, gray, or dotted. One optional spot color.
+Plots one or more lines on a 204px field. 1px grid, textured series, and one optional spot color.
 
 Category: charts  
 Name: `chart`  
 Also known as: Chart, Line chart, Sparkline, Trend line  
-Page: https://getraster.com/components/chart/
+Page: https://vlak.dev/components/chart/
 
 ## When to use
 
@@ -5197,27 +5197,27 @@ Page: https://getraster.com/components/chart/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { LineChart, Sparkline } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { LineChart, Sparkline } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add chart
+npx @noorddev/vlak-cli add chart
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/chart.json
+npx shadcn add https://vlak.dev/r/chart.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><line class="rs-chart-grid" x1="0" x2="240" y1="56" y2="56"/><path class="rs-chart-line" d="M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16"/></svg></div>
@@ -5226,7 +5226,7 @@ npx shadcn add https://getraster.com/r/chart.json
 ## Example
 
 ```tsx
-import { LineChart, Sparkline } from "@noorddev/raster-react";
+import { LineChart, Sparkline } from "@noorddev/vlak-react";
 
 <LineChart
   height={204}
@@ -5318,12 +5318,12 @@ CSS: `packages/core/css/components/chart.css`
 
 # Bar chart
 
-Vertical or horizontal. Thin ink bars, square ends. Stacks when series share a field.
+Compares values with vertical or horizontal bars. Thin ink marks, square ends, optional stacks.
 
 Category: charts  
 Name: `bar-chart`  
 Also known as: Bar chart, Column chart, Stacked bar chart, Horizontal bar chart  
-Page: https://getraster.com/components/bar-chart/
+Page: https://vlak.dev/components/bar-chart/
 
 ## When to use
 
@@ -5340,27 +5340,27 @@ Page: https://getraster.com/components/bar-chart/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { BarChart } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { BarChart } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add bar-chart
+npx @noorddev/vlak-cli add bar-chart
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/bar-chart.json
+npx shadcn add https://vlak.dev/r/bar-chart.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><line class="rs-chart-grid" x1="0" x2="240" y1="56" y2="56"/><rect class="rs-chart-bar" x="20" y="18" width="8" height="38"/><rect class="rs-chart-bar" x="48" y="10" width="8" height="46"/><rect class="rs-chart-bar" x="76" y="24" width="8" height="32"/></svg></div>
@@ -5369,7 +5369,7 @@ npx shadcn add https://getraster.com/r/bar-chart.json
 ## Example
 
 ```tsx
-import { BarChart } from "@noorddev/raster-react";
+import { BarChart } from "@noorddev/vlak-react";
 
 <BarChart
   height={204}
@@ -5445,12 +5445,12 @@ CSS: `packages/core/css/components/chart.css`
 
 # Area chart
 
-Filled field under the first series. 1px grid, textured series, one optional spot color.
+Shows change and magnitude with a filled first series. 1px grid and one optional spot color.
 
 Category: charts  
 Name: `area-chart`  
 Also known as: Area chart, Filled line chart  
-Page: https://getraster.com/components/area-chart/
+Page: https://vlak.dev/components/area-chart/
 
 ## When to use
 
@@ -5467,27 +5467,27 @@ Page: https://getraster.com/components/area-chart/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { AreaChart } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { AreaChart } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add area-chart
+npx @noorddev/vlak-cli add area-chart
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/area-chart.json
+npx shadcn add https://vlak.dev/r/area-chart.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><path class="rs-chart-area" d="M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16 L240 56 L0 56 Z"/><path class="rs-chart-line" d="M0 44 L40 36 L80 40 L120 22 L160 26 L200 12 L240 16"/></svg></div>
@@ -5496,7 +5496,7 @@ npx shadcn add https://getraster.com/r/area-chart.json
 ## Example
 
 ```tsx
-import { AreaChart } from "@noorddev/raster-react";
+import { AreaChart } from "@noorddev/vlak-react";
 
 <AreaChart
   height={204}
@@ -5563,12 +5563,12 @@ CSS: `packages/core/css/components/chart.css`
 
 # Scatter chart
 
-Marks on a 1px grid. Ink, or one optional spot color.
+Shows the relationship between two measures. Marks sit on a 1px grid in ink or one spot color.
 
 Category: charts  
 Name: `scatter-chart`  
 Also known as: Scatter chart, Scatter plot, Dot plot, XY chart  
-Page: https://getraster.com/components/scatter-chart/
+Page: https://vlak.dev/components/scatter-chart/
 
 ## When to use
 
@@ -5585,27 +5585,27 @@ Page: https://getraster.com/components/scatter-chart/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { ScatterChart } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { ScatterChart } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add scatter-chart
+npx @noorddev/vlak-cli add scatter-chart
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/scatter-chart.json
+npx shadcn add https://vlak.dev/r/scatter-chart.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><line class="rs-chart-grid" x1="0" x2="240" y1="56" y2="56"/><circle class="rs-chart-mark" cx="36" cy="40" r="2"/><circle class="rs-chart-mark" cx="88" cy="22" r="2"/><circle class="rs-chart-mark" cx="140" cy="30" r="2"/><circle class="rs-chart-mark" cx="196" cy="14" r="2"/></svg></div>
@@ -5614,7 +5614,7 @@ npx shadcn add https://getraster.com/r/scatter-chart.json
 ## Example
 
 ```tsx
-import { ScatterChart } from "@noorddev/raster-react";
+import { ScatterChart } from "@noorddev/vlak-react";
 
 <ScatterChart
   height={204}
@@ -5677,12 +5677,12 @@ CSS: `packages/core/css/components/chart.css`
 
 # Donut or share
 
-Ring against its total, or a flush share strip. 1px stroke.
+Shows one part of a whole as a ring or flush share strip. 1px stroke.
 
 Category: charts  
 Name: `donut`  
 Also known as: Donut, Donut chart, Ring chart, Pie chart, Share strip  
-Page: https://getraster.com/components/donut/
+Page: https://vlak.dev/components/donut/
 
 ## When to use
 
@@ -5699,27 +5699,27 @@ Page: https://getraster.com/components/donut/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Donut, Share } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Donut, Share } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add donut
+npx @noorddev/vlak-cli add donut
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/donut.json
+npx shadcn add https://vlak.dev/r/donut.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart"><svg class="rs-chart-donut" viewBox="0 0 96 96" width="96" height="96"><circle cx="48" cy="48" r="36" fill="none" stroke="currentColor" stroke-width="1"/></svg></div>
@@ -5728,7 +5728,7 @@ npx shadcn add https://getraster.com/r/donut.json
 ## Example
 
 ```tsx
-import { Donut, Share } from "@noorddev/raster-react";
+import { Donut, Share } from "@noorddev/vlak-react";
 
 <Donut value={72} max={100} size={184} label="printed" />
 <Share slices={[{ label: "Sheet", value: 72 }, { label: "Proof", value: 18 }, { label: "Waste", value: 10 }]} unit="%" />
@@ -5787,12 +5787,12 @@ CSS: `packages/core/css/components/chart.css`
 
 # Histogram
 
-Histogram. Adjacent bins, 1px between.
+Shows a distribution in adjacent bins with 1px gaps.
 
 Category: charts  
 Name: `histogram`  
 Also known as: Histogram, Distribution chart, Frequency chart  
-Page: https://getraster.com/components/histogram/
+Page: https://vlak.dev/components/histogram/
 
 ## When to use
 
@@ -5809,27 +5809,27 @@ Page: https://getraster.com/components/histogram/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Histogram } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Histogram } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add histogram
+npx @noorddev/vlak-cli add histogram
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/histogram.json
+npx shadcn add https://vlak.dev/r/histogram.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><rect class="rs-chart-hist" x="8" y="36" width="36" height="20"/><rect class="rs-chart-hist" x="45" y="20" width="36" height="36"/><rect class="rs-chart-hist" x="82" y="8" width="36" height="48"/><rect class="rs-chart-hist" x="119" y="24" width="36" height="32"/></svg></div>
@@ -5838,7 +5838,7 @@ npx shadcn add https://getraster.com/r/histogram.json
 ## Example
 
 ```tsx
-import { Histogram } from "@noorddev/raster-react";
+import { Histogram } from "@noorddev/vlak-react";
 
 <Histogram
   height={204}
@@ -5899,12 +5899,12 @@ CSS: `packages/core/css/components/chart.css`
 
 # Small multiples
 
-Repeated charts on the same axes. One 184 column per panel.
+Compares repeated charts on shared axes. Each panel occupies one 184px column.
 
 Category: charts  
 Name: `small-multiples`  
 Also known as: Small multiples, Trellis chart, Facet grid, Panel charts  
-Page: https://getraster.com/components/small-multiples/
+Page: https://vlak.dev/components/small-multiples/
 
 ## When to use
 
@@ -5921,27 +5921,27 @@ Page: https://getraster.com/components/small-multiples/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { SmallMultiples } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { SmallMultiples } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add small-multiples
+npx @noorddev/vlak-cli add small-multiples
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/small-multiples.json
+npx shadcn add https://vlak.dev/r/small-multiples.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart-multi"><div class="rs-chart"><svg viewBox="0 0 184 64" width="184" height="64"><path class="rs-chart-line" d="M0 40 L46 28 L92 34 L138 16 L184 22"/></svg></div><div class="rs-chart"><svg viewBox="0 0 184 64" width="184" height="64"><path class="rs-chart-line" d="M0 30 L46 36 L92 22 L138 28 L184 18"/></svg></div></div>
@@ -5950,7 +5950,7 @@ npx shadcn add https://getraster.com/r/small-multiples.json
 ## Example
 
 ```tsx
-import { SmallMultiples } from "@noorddev/raster-react";
+import { SmallMultiples } from "@noorddev/vlak-react";
 
 <SmallMultiples
   height={136}
@@ -6006,12 +6006,12 @@ CSS: `packages/core/css/components/chart.css`
 
 # Collapsible
 
-Native details disclosure.
+Shows or hides one section with a native details disclosure.
 
 Category: content  
 Name: `collapsible`  
 Also known as: Collapsible, Disclosure, Details, Expander  
-Page: https://getraster.com/components/collapsible/
+Page: https://vlak.dev/components/collapsible/
 
 ## When to use
 
@@ -6028,27 +6028,27 @@ Page: https://getraster.com/components/collapsible/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Collapsible } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Collapsible } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add collapsible
+npx @noorddev/vlak-cli add collapsible
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/collapsible.json
+npx shadcn add https://vlak.dev/r/collapsible.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <details class="rs-disclosure"><summary>Show the details<svg class="rs-acc-chevron" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><g transform="rotate(90 8 8)"><path d="M5.5 3.5 L10.5 8 L5.5 12.5" vector-effect="non-scaling-stroke"/></g></svg></summary><div class="rs-disclosure-body">Here they are.</div></details>
@@ -6057,7 +6057,7 @@ npx shadcn add https://getraster.com/r/collapsible.json
 ## Example
 
 ```tsx
-import { Collapsible } from "@noorddev/raster-react";
+import { Collapsible } from "@noorddev/vlak-react";
 
 <Collapsible title="Show the details">Here they are.</Collapsible>
 <Collapsible title="Advanced" open={open} onToggle={(e) => setOpen(e.currentTarget.open)}>…</Collapsible>
@@ -6104,12 +6104,12 @@ CSS: `packages/core/css/components/collapsible.css`
 
 # Hover card
 
-Preview panel on hover and keyboard focus.
+Previews linked context on hover or keyboard focus.
 
 Category: surfaces  
 Name: `hover-card`  
 Also known as: Hover card, Preview card, Profile card, Rich tooltip  
-Page: https://getraster.com/components/hover-card/
+Page: https://vlak.dev/components/hover-card/
 
 ## When to use
 
@@ -6126,27 +6126,27 @@ Page: https://getraster.com/components/hover-card/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { HoverCard } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { HoverCard } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add hover-card
+npx @noorddev/vlak-cli add hover-card
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/hover-card.json
+npx shadcn add https://vlak.dev/r/hover-card.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-hover-card"><span tabindex="0" aria-describedby="noord-card">@noord</span><span class="rs-hover-card-panel" role="tooltip" id="noord-card">Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>
@@ -6155,7 +6155,7 @@ npx shadcn add https://getraster.com/r/hover-card.json
 ## Example
 
 ```tsx
-import { HoverCard, Link } from "@noorddev/raster-react";
+import { HoverCard, Link } from "@noorddev/vlak-react";
 
 <HoverCard trigger={<Link href="/noord">@noord</Link>}>
   Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.
@@ -6204,12 +6204,12 @@ CSS: `packages/core/css/components/hover-card.css`
 
 # Kbd
 
-Mono key cap with a 1px frame and a heavier bottom edge.
+Labels a keyboard key. Monospace cap with a 1px frame and heavier bottom edge.
 
 Category: content  
 Name: `kbd`  
 Also known as: Kbd, Keyboard key, Key cap, Shortcut  
-Page: https://getraster.com/components/kbd/
+Page: https://vlak.dev/components/kbd/
 
 ## When to use
 
@@ -6226,27 +6226,27 @@ Page: https://getraster.com/components/kbd/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Kbd, KbdPair } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Kbd, KbdPair } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add kbd
+npx @noorddev/vlak-cli add kbd
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/kbd.json
+npx shadcn add https://vlak.dev/r/kbd.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <kbd class="rs-kbd">⌘</kbd> <kbd class="rs-kbd">K</kbd>
@@ -6255,7 +6255,7 @@ npx shadcn add https://getraster.com/r/kbd.json
 ## Example
 
 ```tsx
-import { Kbd, KbdPair } from "@noorddev/raster-react";
+import { Kbd, KbdPair } from "@noorddev/vlak-react";
 
 <KbdPair><Kbd>⌘</Kbd><Kbd>K</Kbd></KbdPair>
 ```
@@ -6297,12 +6297,12 @@ CSS: `packages/core/css/components/kbd.css`
 
 # One-time code
 
-One cell per character. Auto-advance, backspace, and paste.
+Collects a one-time code in one cell per character. Supports auto-advance, backspace, and paste.
 
 Category: forms  
 Name: `input-otp`  
 Also known as: One-time code, OTP input, InputOTP, PIN input, Verification code  
-Page: https://getraster.com/components/input-otp/
+Page: https://vlak.dev/components/input-otp/
 
 ## When to use
 
@@ -6319,27 +6319,27 @@ Page: https://getraster.com/components/input-otp/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { InputOTP } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { InputOTP } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add input-otp
+npx @noorddev/vlak-cli add input-otp
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/input-otp.json
+npx shadcn add https://vlak.dev/r/input-otp.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-otp" role="group" aria-label="One-time code"><input class="rs-otp-cell" maxlength="1" value="8" aria-label="Digit 1" /><input class="rs-otp-cell" maxlength="1" value="2" aria-label="Digit 2" /><input class="rs-otp-cell" maxlength="1" aria-label="Digit 3" /><input class="rs-otp-cell" maxlength="1" aria-label="Digit 4" /></div>
@@ -6348,7 +6348,7 @@ npx shadcn add https://getraster.com/r/input-otp.json
 ## Example
 
 ```tsx
-import { InputOTP } from "@noorddev/raster-react";
+import { InputOTP } from "@noorddev/vlak-react";
 
 <InputOTP length={6} aria-label="One-time code" onComplete={(code) => verify(code)} />
 ```
@@ -6400,12 +6400,12 @@ CSS: `packages/core/css/components/input-otp.css`
 
 # Context menu
 
-Menu at the pointer on right-click, or on Shift+F10 from the keyboard. Escape and outside click close it.
+Opens actions at the pointer or with Shift+F10. Escape and outside click close the menu.
 
 Category: actions  
 Name: `context-menu`  
 Also known as: Context menu, Right-click menu, Contextual menu  
-Page: https://getraster.com/components/context-menu/
+Page: https://vlak.dev/components/context-menu/
 
 ## When to use
 
@@ -6422,27 +6422,27 @@ Page: https://getraster.com/components/context-menu/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { ContextMenu } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { ContextMenu } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add context-menu
+npx @noorddev/vlak-cli add context-menu
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/context-menu.json
+npx shadcn add https://vlak.dev/r/context-menu.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-menu" role="menu"><button class="rs-menu-item" role="menuitem">Copy</button><button class="rs-menu-item" role="menuitem">Paste</button><hr class="rs-menu-sep" /><button class="rs-menu-item" role="menuitem">Inspect</button></div>
@@ -6451,7 +6451,7 @@ npx shadcn add https://getraster.com/r/context-menu.json
 ## Example
 
 ```tsx
-import { ContextMenu } from "@noorddev/raster-react";
+import { ContextMenu } from "@noorddev/vlak-react";
 
 <ContextMenu items={[{ label: "Copy", onSelect: copy }, { label: "Paste", onSelect: paste }, { separator: true }, { label: "Inspect" }]}>
   <Canvas />
@@ -6502,12 +6502,12 @@ CSS: `packages/core/css/components/context-menu.css`
 
 # Menubar
 
-Row of dropdowns in a 1px strip.
+Groups application menus in one row of dropdowns with a 1px frame.
 
 Category: actions  
 Name: `menubar`  
 Also known as: Menubar, Menu bar, Application menu  
-Page: https://getraster.com/components/menubar/
+Page: https://vlak.dev/components/menubar/
 
 ## When to use
 
@@ -6524,27 +6524,27 @@ Page: https://getraster.com/components/menubar/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Menubar } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Menubar } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add menubar
+npx @noorddev/vlak-cli add menubar
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/menubar.json
+npx shadcn add https://vlak.dev/r/menubar.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-menubar" role="menubar"><button class="rs-dropdown" role="menuitem" aria-haspopup="menu"><span>File</span></button><button class="rs-dropdown" role="menuitem" aria-haspopup="menu"><span>Edit</span></button><button class="rs-dropdown" role="menuitem" aria-haspopup="menu"><span>View</span></button></div>
@@ -6553,7 +6553,7 @@ npx shadcn add https://getraster.com/r/menubar.json
 ## Example
 
 ```tsx
-import { Menubar } from "@noorddev/raster-react";
+import { Menubar } from "@noorddev/vlak-react";
 
 <Menubar
   menus={[
@@ -6608,12 +6608,12 @@ CSS: `packages/core/css/components/menubar.css`
 
 # Navigation menu
 
-Horizontal links. The current page is full ink.
+Moves between primary destinations. Horizontal links; the current page is full ink.
 
 Category: navigation  
 Name: `navigation-menu`  
 Also known as: Navigation menu, Nav, Top navigation, Navbar, Header links  
-Page: https://getraster.com/components/navigation-menu/
+Page: https://vlak.dev/components/navigation-menu/
 
 ## When to use
 
@@ -6630,27 +6630,27 @@ Page: https://getraster.com/components/navigation-menu/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { NavigationMenu } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { NavigationMenu } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add navigation-menu
+npx @noorddev/vlak-cli add navigation-menu
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/navigation-menu.json
+npx shadcn add https://vlak.dev/r/navigation-menu.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <nav class="rs-nav"><a href="#" aria-current="page">Overview</a><a href="#">Docs</a><a href="#">Changelog</a></nav>
@@ -6659,7 +6659,7 @@ npx shadcn add https://getraster.com/r/navigation-menu.json
 ## Example
 
 ```tsx
-import { NavigationMenu } from "@noorddev/raster-react";
+import { NavigationMenu } from "@noorddev/vlak-react";
 
 <NavigationMenu
   aria-label="Primary"
@@ -6712,12 +6712,12 @@ CSS: `packages/core/css/components/navigation-menu.css`
 
 # Sidebar
 
-204-wide rail with a head, nav, and foot. 1px on all four sides.
+Holds persistent navigation in a 204px rail with a head, body, and foot.
 
 Category: navigation  
 Name: `sidebar`  
 Also known as: Sidebar, Side nav, Rail, Navigation drawer  
-Page: https://getraster.com/components/sidebar/
+Page: https://vlak.dev/components/sidebar/
 
 ## When to use
 
@@ -6734,39 +6734,39 @@ Page: https://getraster.com/components/sidebar/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add sidebar
+npx @noorddev/vlak-cli add sidebar
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/sidebar.json
+npx shadcn add https://vlak.dev/r/sidebar.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
-<aside class="rs-sidebar"><div class="rs-sidebar-head">Raster</div><nav class="rs-sidebar-nav"><p class="rs-sidebar-label">Go to</p><a class="rs-sidebar-item" aria-current="page">Overview</a><a class="rs-sidebar-item" href="#">Docs</a><a class="rs-sidebar-item" href="#">Components</a></nav><div class="rs-sidebar-foot">0.3</div></aside>
+<aside class="rs-sidebar"><div class="rs-sidebar-head">Vlak</div><nav class="rs-sidebar-nav"><p class="rs-sidebar-label">Go to</p><a class="rs-sidebar-item" aria-current="page">Overview</a><a class="rs-sidebar-item" href="#">Docs</a><a class="rs-sidebar-item" href="#">Components</a></nav><div class="rs-sidebar-foot">0.3</div></aside>
 ```
 
 ## Example
 
 ```tsx
-import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/raster-react";
+import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/vlak-react";
 
 <Sidebar>
-  <SidebarHead>Raster</SidebarHead>
+  <SidebarHead>Vlak</SidebarHead>
   <SidebarNav aria-label="Sidebar">
     <SidebarLabel>Go to</SidebarLabel>
     <SidebarItem href="/" current>Overview</SidebarItem>
@@ -6860,12 +6860,12 @@ CSS: `packages/core/css/components/sidebar.css`
 
 # Carousel
 
-Scroll-snap track. Buttons nudge one slide; ends feather.
+Browses a sequence on a scroll-snap track. Buttons move one slide; the ends feather.
 
 Category: content  
 Name: `carousel`  
 Also known as: Carousel, Slideshow, Embla, Swiper  
-Page: https://getraster.com/components/carousel/
+Page: https://vlak.dev/components/carousel/
 
 ## When to use
 
@@ -6882,27 +6882,27 @@ Page: https://getraster.com/components/carousel/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Carousel, CarouselSlide } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Carousel, CarouselSlide } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add carousel
+npx @noorddev/vlak-cli add carousel
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/carousel.json
+npx shadcn add https://vlak.dev/r/carousel.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-carousel"><div class="rs-carousel-track"><div class="rs-carousel-slide">One</div><div class="rs-carousel-slide">Two</div><div class="rs-carousel-slide">Three</div></div><div class="rs-carousel-nav"><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.75 L5.5 8.25 L10.5 12.75" vector-effect="non-scaling-stroke"/></svg></button><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.75 L10.5 8.25 L5.5 12.75" vector-effect="non-scaling-stroke"/></svg></button></div></div>
@@ -6911,7 +6911,7 @@ npx shadcn add https://getraster.com/r/carousel.json
 ## Example
 
 ```tsx
-import { Carousel, CarouselSlide } from "@noorddev/raster-react";
+import { Carousel, CarouselSlide } from "@noorddev/vlak-react";
 
 <Carousel aria-label="Case studies">
   {cases.map((c) => (
@@ -6975,12 +6975,12 @@ CSS: `packages/core/css/components/carousel.css`
 
 # Resizable
 
-Two panes split by a draggable 1px handle. Arrows move it; value is in ARIA.
+Resizes two adjacent panes with a draggable 1px handle. Arrow keys adjust the split.
 
 Category: surfaces  
 Name: `resizable`  
 Also known as: Resizable, Split pane, Resizable panels, Splitter, Panel group  
-Page: https://getraster.com/components/resizable/
+Page: https://vlak.dev/components/resizable/
 
 ## When to use
 
@@ -6997,27 +6997,27 @@ Page: https://getraster.com/components/resizable/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Split } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Split } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add resizable
+npx @noorddev/vlak-cli add resizable
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/resizable.json
+npx shadcn add https://vlak.dev/r/resizable.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-split"><div class="rs-split-pane" style="width:50%">Left</div><button class="rs-split-handle" role="separator" aria-valuenow="50"></button><div class="rs-split-pane" style="width:50%">Right</div></div>
@@ -7026,7 +7026,7 @@ npx shadcn add https://getraster.com/r/resizable.json
 ## Example
 
 ```tsx
-import { Split } from "@noorddev/raster-react";
+import { Split } from "@noorddev/vlak-react";
 
 <Split initial={60} min={30} max={80} handleLabel="Resize editor and preview">
   <Editor />
@@ -7082,12 +7082,12 @@ CSS: `packages/core/css/components/resizable.css`
 
 # Combobox
 
-Text field with a filtered listbox.
+Filters and selects an option from a listbox through one text field.
 
 Category: forms  
 Name: `combobox`  
 Also known as: Combobox, Autocomplete, Typeahead, Searchable select  
-Page: https://getraster.com/components/combobox/
+Page: https://vlak.dev/components/combobox/
 
 ## When to use
 
@@ -7104,27 +7104,27 @@ Page: https://getraster.com/components/combobox/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Combobox } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Combobox } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add combobox
+npx @noorddev/vlak-cli add combobox
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/combobox.json
+npx shadcn add https://vlak.dev/r/combobox.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-combobox"><input class="rs-input rs-input-full" role="combobox" placeholder="Search…" /><div class="rs-menu" role="listbox"><div class="rs-menu-item rs-menu-item-active" role="option" aria-selected="false">Alkmaar</div><div class="rs-menu-item" role="option" aria-selected="false">Amsterdam</div></div></div>
@@ -7134,7 +7134,7 @@ npx shadcn add https://getraster.com/r/combobox.json
 
 ```tsx
 import { useState } from "react";
-import { Combobox } from "@noorddev/raster-react";
+import { Combobox } from "@noorddev/vlak-react";
 
 const [city, setCity] = useState("");
 
@@ -7202,12 +7202,12 @@ CSS: `packages/core/css/components/combobox.css`
 
 # Command
 
-Command palette in a native dialog. Filter, arrows, enter.
+Finds and runs commands in a native dialog. Filter by typing; navigate with arrows and Enter.
 
 Category: actions  
 Name: `command`  
 Also known as: Command, Command palette, cmdk, Command menu, Spotlight  
-Page: https://getraster.com/components/command/
+Page: https://vlak.dev/components/command/
 
 ## When to use
 
@@ -7224,27 +7224,27 @@ Page: https://getraster.com/components/command/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Command, CommandDialog } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Command, CommandDialog } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add command
+npx @noorddev/vlak-cli add command
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/command.json
+npx shadcn add https://vlak.dev/r/command.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-command" style="border:1px solid var(--divider);border-radius:var(--radius)"><input class="rs-command-input" placeholder="Type a command or search…" /><div class="rs-command-list" role="listbox"><div class="rs-command-group">Go to</div><div class="rs-command-item rs-command-item-active" role="option" aria-selected="true"><span>Components</span><span class="rs-command-hint">⌘1</span></div><div class="rs-command-item" role="option" aria-selected="false"><span>Tokens</span><span class="rs-command-hint">⌘2</span></div></div></div>
@@ -7254,7 +7254,7 @@ npx shadcn add https://getraster.com/r/command.json
 
 ```tsx
 import { useEffect, useState } from "react";
-import { CommandDialog } from "@noorddev/raster-react";
+import { CommandDialog } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 
@@ -7345,12 +7345,12 @@ CSS: `packages/core/css/components/command.css`
 
 # Calendar
 
-Month grid. Selected day is ink; today is a 1px outline. Weeks start Monday.
+Selects a date from a month grid. Selected day fills with ink; today has a 1px outline.
 
 Category: forms  
 Name: `calendar`  
 Also known as: Calendar, Date grid, Month view, Day picker  
-Page: https://getraster.com/components/calendar/
+Page: https://vlak.dev/components/calendar/
 
 ## When to use
 
@@ -7367,27 +7367,27 @@ Page: https://getraster.com/components/calendar/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Calendar } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Calendar } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add calendar
+npx @noorddev/vlak-cli add calendar
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/calendar.json
+npx shadcn add https://vlak.dev/r/calendar.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-cal"><div class="rs-cal-head"><span class="rs-cal-title">July 2026</span><span class="rs-cal-nav"><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.75 L5.5 8.25 L10.5 12.75" vector-effect="non-scaling-stroke"/></svg></button><button class="rs-page"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3.75 L10.5 8.25 L5.5 12.75" vector-effect="non-scaling-stroke"/></svg></button></span></div><div class="rs-cal-grid" role="grid"><div class="rs-cal-row" role="row"><span class="rs-cal-dow" role="columnheader">Mo</span><span class="rs-cal-dow" role="columnheader">Tu</span><span class="rs-cal-dow" role="columnheader">We</span><span class="rs-cal-dow" role="columnheader">Th</span><span class="rs-cal-dow" role="columnheader">Fr</span><span class="rs-cal-dow" role="columnheader">Sa</span><span class="rs-cal-dow" role="columnheader">Su</span></div><div class="rs-cal-row" role="row"><button class="rs-cal-day" role="gridcell" tabindex="-1">20</button><button class="rs-cal-day" role="gridcell" tabindex="-1">21</button><button class="rs-cal-day" role="gridcell" tabindex="-1">22</button><button class="rs-cal-day" role="gridcell" tabindex="-1">23</button><button class="rs-cal-day rs-cal-day-selected" role="gridcell" tabindex="0" aria-selected="true">24</button><button class="rs-cal-day rs-cal-day-today" role="gridcell" tabindex="-1" aria-current="date">25</button><button class="rs-cal-day" role="gridcell" tabindex="-1">26</button></div></div></div>
@@ -7397,7 +7397,7 @@ npx shadcn add https://getraster.com/r/calendar.json
 
 ```tsx
 import { useState } from "react";
-import { Calendar } from "@noorddev/raster-react";
+import { Calendar } from "@noorddev/vlak-react";
 
 const [date, setDate] = useState<Date>();
 
@@ -7457,12 +7457,12 @@ CSS: `packages/core/css/components/calendar.css`
 
 # Date picker
 
-1px trigger that opens a calendar overlay.
+Selects a date from a calendar overlay opened by a 1px trigger.
 
 Category: forms  
 Name: `date-picker`  
 Also known as: Date picker, DatePicker, Date input, Date field  
-Page: https://getraster.com/components/date-picker/
+Page: https://vlak.dev/components/date-picker/
 
 ## When to use
 
@@ -7479,27 +7479,27 @@ Page: https://getraster.com/components/date-picker/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { DatePicker } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { DatePicker } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add date-picker
+npx @noorddev/vlak-cli add date-picker
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/date-picker.json
+npx shadcn add https://vlak.dev/r/date-picker.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <button class="rs-dropdown"><span>24 July 2026</span></button>
@@ -7509,7 +7509,7 @@ npx shadcn add https://getraster.com/r/date-picker.json
 
 ```tsx
 import { useState } from "react";
-import { DatePicker } from "@noorddev/raster-react";
+import { DatePicker } from "@noorddev/vlak-react";
 
 const [date, setDate] = useState<Date>();
 
@@ -7568,12 +7568,12 @@ CSS: `packages/core/css/components/date-picker.css`
 
 # Data table
 
-Sortable table. Headers expose aria-sort.
+Sorts and presents structured records. Column headers expose aria-sort.
 
 Category: content  
 Name: `data-table`  
 Also known as: Data table, Sortable table, Grid  
-Page: https://getraster.com/components/data-table/
+Page: https://vlak.dev/components/data-table/
 
 ## When to use
 
@@ -7590,27 +7590,27 @@ Page: https://getraster.com/components/data-table/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { DataTable } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { DataTable } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add data-table
+npx @noorddev/vlak-cli add data-table
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/data-table.json
+npx shadcn add https://vlak.dev/r/data-table.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <table class="rs-table"><thead><tr><th><button class="rs-datatable-sort">Phase</button></th><th>Weeks</th></tr></thead><tbody><tr><td>Identity</td><td>4</td></tr><tr><td>Strategy</td><td>2</td></tr></tbody></table>
@@ -7619,7 +7619,7 @@ npx shadcn add https://getraster.com/r/data-table.json
 ## Example
 
 ```tsx
-import { DataTable } from "@noorddev/raster-react";
+import { DataTable } from "@noorddev/vlak-react";
 
 <DataTable
   columns={[
@@ -7666,12 +7666,12 @@ CSS: `packages/core/css/components/data-table.css`
 
 # Aspect ratio
 
-Box that holds a ratio. Media fills it.
+Keeps media at a defined aspect ratio while it fills the available box.
 
 Category: content  
 Name: `aspect-ratio`  
 Also known as: Aspect ratio, Ratio box, Media frame  
-Page: https://getraster.com/components/aspect-ratio/
+Page: https://vlak.dev/components/aspect-ratio/
 
 ## When to use
 
@@ -7688,27 +7688,27 @@ Page: https://getraster.com/components/aspect-ratio/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { AspectRatio } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { AspectRatio } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add aspect-ratio
+npx @noorddev/vlak-cli add aspect-ratio
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/aspect-ratio.json
+npx shadcn add https://vlak.dev/r/aspect-ratio.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-ratio" style="aspect-ratio:16/9;max-width:280px;background:var(--divider-subtle)"></div>
@@ -7717,7 +7717,7 @@ npx shadcn add https://getraster.com/r/aspect-ratio.json
 ## Example
 
 ```tsx
-import { AspectRatio } from "@noorddev/raster-react";
+import { AspectRatio } from "@noorddev/vlak-react";
 
 <AspectRatio ratio={16 / 9}>
   <img src="/cover.jpg" alt="Press hall" />
@@ -7755,12 +7755,12 @@ CSS: `packages/core/css/components/aspect-ratio.css`
 
 # Form
 
-Stacked fields with one primary action at the end.
+Collects related inputs as stacked fields with one primary action at the end.
 
 Category: forms  
 Name: `form`  
 Also known as: Form, Form layout, Stacked form  
-Page: https://getraster.com/components/form/
+Page: https://vlak.dev/components/form/
 
 ## When to use
 
@@ -7777,27 +7777,27 @@ Page: https://getraster.com/components/form/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Form } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Form } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add form
+npx @noorddev/vlak-cli add form
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/form.json
+npx shadcn add https://vlak.dev/r/form.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <form class="rs-form"><div class="rs-field"><span class="rs-field-label">Name</span><input class="rs-input rs-input-full" /></div><div class="rs-field"><span class="rs-field-label">E-mail</span><input class="rs-input rs-input-full" /></div><button class="rs-btn-primary">Send</button></form>
@@ -7806,7 +7806,7 @@ npx shadcn add https://getraster.com/r/form.json
 ## Example
 
 ```tsx
-import { Button, Field, FieldLabel, Form, Input } from "@noorddev/raster-react";
+import { Button, Field, FieldLabel, Form, Input } from "@noorddev/vlak-react";
 
 <Form onSubmit={(e) => { e.preventDefault(); save(); }}>
   <Field>
@@ -7859,12 +7859,12 @@ CSS: `packages/core/css/components/form.css`
 
 # Workflow card
 
-Dashed 1px pipeline step. Drag handle, dashed chips, ghost add-step.
+Builds an ordered pipeline from draggable steps. 1px dashed frame, chips, and ghost add action.
 
 Category: patterns  
 Name: `workflow`  
 Also known as: Workflow, Pipeline, Flow card, Process steps  
-Page: https://getraster.com/components/workflow/
+Page: https://vlak.dev/components/workflow/
 
 ## When to use
 
@@ -7881,27 +7881,27 @@ Page: https://getraster.com/components/workflow/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Flow, FlowAdd, FlowBody, FlowNum, FlowPlus, FlowStep, FlowSub, FlowSubAdd, FlowSubs, FlowTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Flow, FlowAdd, FlowBody, FlowNum, FlowPlus, FlowStep, FlowSub, FlowSubAdd, FlowSubs, FlowTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add workflow
+npx @noorddev/vlak-cli add workflow
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/workflow.json
+npx shadcn add https://vlak.dev/r/workflow.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-flow" style="grid-template-columns:184px;width:184px"><div class="rs-flow-step"><span class="rs-flow-num">1</span><h4>Proposal</h4><p>Scope, timeline, and fee on one page.</p><div class="rs-flow-subs"><span>Brief</span><span>Fee</span><span class="rs-flow-sub-add">+</span></div></div><button type="button" class="rs-flow-add"><span class="rs-flow-plus">+</span> Add a step</button></div>
@@ -7910,7 +7910,7 @@ npx shadcn add https://getraster.com/r/workflow.json
 ## Example
 
 ```tsx
-import { Flow, FlowAdd, FlowBody, FlowNum, FlowStep, FlowSub, FlowSubAdd, FlowSubs, FlowTitle } from "@noorddev/raster-react";
+import { Flow, FlowAdd, FlowBody, FlowNum, FlowStep, FlowSub, FlowSubAdd, FlowSubs, FlowTitle } from "@noorddev/vlak-react";
 
 <Flow>
   <FlowStep>
@@ -8037,12 +8037,12 @@ CSS: `packages/core/css/components/workflow.css`
 
 # Assistant panel
 
-Chat panel: user block, reply, suggestion card, input row.
+Frames an assistant exchange with a user message, reply, suggestion, and input row.
 
 Category: patterns  
 Name: `assistant`  
 Also known as: Assistant, Chat panel, AI chat, Conversation, Copilot panel  
-Page: https://getraster.com/components/assistant/
+Page: https://vlak.dev/components/assistant/
 
 ## When to use
 
@@ -8059,27 +8059,27 @@ Page: https://getraster.com/components/assistant/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Assistant, AssistantCard, AssistantDone, AssistantHead, AssistantInput, AssistantMsg, AssistantReply, AssistantSend, AssistantStatus, AssistantTag, AssistantText, AssistantTitle, AssistantUserBlock } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Assistant, AssistantCard, AssistantDone, AssistantHead, AssistantInput, AssistantMsg, AssistantReply, AssistantSend, AssistantStatus, AssistantTag, AssistantText, AssistantTitle, AssistantUserBlock } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add assistant
+npx @noorddev/vlak-cli add assistant
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/assistant.json
+npx shadcn add https://vlak.dev/r/assistant.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-ai"><div class="rs-ai-msg rs-ai-user"><div class="rs-ai-user-block">Make the intro tighter.</div></div><p class="rs-ai-reply">Done. Two sentences, same claim.</p></div>
@@ -8088,7 +8088,7 @@ npx shadcn add https://getraster.com/r/assistant.json
 ## Example
 
 ```tsx
-import { Assistant, AssistantHead, AssistantInput, AssistantMsg, AssistantReply, AssistantSend, AssistantStatus, AssistantTitle, AssistantUserBlock } from "@noorddev/raster-react";
+import { Assistant, AssistantHead, AssistantInput, AssistantMsg, AssistantReply, AssistantSend, AssistantStatus, AssistantTitle, AssistantUserBlock } from "@noorddev/vlak-react";
 
 <Assistant>
   <AssistantHead>
@@ -8235,12 +8235,12 @@ CSS: `packages/core/css/components/assistant.css`
 
 # Theme toggle
 
-Icon that swaps moon and sun with the color scheme. Saved in localStorage.
+Switches between light and dark schemes. The icon changes and the choice persists locally.
 
 Category: actions  
 Name: `theme-toggle`  
 Also known as: Theme toggle, Dark mode toggle, Color scheme switch, Mode toggle  
-Page: https://getraster.com/components/theme-toggle/
+Page: https://vlak.dev/components/theme-toggle/
 
 ## When to use
 
@@ -8256,27 +8256,27 @@ Page: https://getraster.com/components/theme-toggle/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { ThemeToggle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { ThemeToggle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add theme-toggle
+npx @noorddev/vlak-cli add theme-toggle
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/theme-toggle.json
+npx shadcn add https://vlak.dev/r/theme-toggle.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <button class="rs-theme-toggle rs-theme-toggle-inline" aria-label="Toggle color scheme"><svg class="rs-theme-moon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5" vector-effect="non-scaling-stroke"/></svg></button>
@@ -8285,9 +8285,9 @@ npx shadcn add https://getraster.com/r/theme-toggle.json
 ## Example
 
 ```tsx
-import { ThemeToggle } from "@noorddev/raster-react";
+import { ThemeToggle } from "@noorddev/vlak-react";
 
-<ThemeToggle storageKey="raster-theme" onThemeChange={(dark) => track(dark)} />
+<ThemeToggle storageKey="vlak-theme" onThemeChange={(dark) => track(dark)} />
 ```
 
 ## Props
@@ -8302,7 +8302,7 @@ Forwards `ref` to the `HTMLButtonElement`.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `storageKey` | `string` | `"raster-theme"` | localStorage key the choice persists under. |
+| `storageKey` | `string` | `"vlak-theme"` | localStorage key the choice persists under. |
 | `onThemeChange` | `(dark: boolean) => void` |  |  |
 
 ## Keyboard
@@ -8332,12 +8332,12 @@ CSS: `packages/core/css/components/theme-toggle.css`
 
 # Callout
 
-Note in running copy. 1px hairline, radius 0. No left bar.
+Adds a contextual note to running copy. 1px frame, square corners, no accent bar.
 
 Category: feedback  
 Name: `callout`  
 Also known as: Callout, Note, Aside, Admonition  
-Page: https://getraster.com/components/callout/
+Page: https://vlak.dev/components/callout/
 
 ## When to use
 
@@ -8354,27 +8354,27 @@ Page: https://getraster.com/components/callout/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Callout } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Callout } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add callout
+npx @noorddev/vlak-cli add callout
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/callout.json
+npx shadcn add https://vlak.dev/r/callout.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-callout"><p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p></div>
@@ -8383,7 +8383,7 @@ npx shadcn add https://getraster.com/r/callout.json
 ## Example
 
 ```tsx
-import { Callout } from "@noorddev/raster-react";
+import { Callout } from "@noorddev/vlak-react";
 
 <Callout>
   <p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p>
@@ -8421,12 +8421,12 @@ CSS: `packages/core/css/components/callout.css`
 
 # References
 
-Inline citations, a numbered 1px list, and a cite box. Numerals hang in the gutter.
+Connects inline citations to a numbered source list and cite box. Numerals hang in the gutter.
 
 Category: content  
 Name: `references`  
 Also known as: References, Citations, Footnotes, Bibliography  
-Page: https://getraster.com/components/references/
+Page: https://vlak.dev/components/references/
 
 ## When to use
 
@@ -8443,27 +8443,27 @@ Page: https://getraster.com/components/references/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi, RefItem, Refs } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi, RefItem, Refs } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add references
+npx @noorddev/vlak-cli add references
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/references.json
+npx shadcn add https://vlak.dev/r/references.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <p>Set in a single ink.<sup class="rs-cite"><a href="#ref-1">1</a></sup></p><ol class="rs-refs"><li id="ref-1"><span class="rs-ref-authors">Müller-Brockmann, J.</span> Grid systems in graphic design. <a class="rs-ref-doi" href="#">niggli.ch/grid</a></li></ol>
@@ -8472,7 +8472,7 @@ npx shadcn add https://getraster.com/r/references.json
 ## Example
 
 ```tsx
-import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi, RefItem, Refs } from "@noorddev/raster-react";
+import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi, RefItem, Refs } from "@noorddev/vlak-react";
 
 <p>Set in a single ink.<Cite><CiteLink href="#ref-1">1</CiteLink></Cite></p>
 
@@ -8484,7 +8484,7 @@ import { Cite, CiteBox, CiteBoxLabel, CiteBoxText, CiteLink, RefAuthors, RefDoi,
 
 <CiteBox>
   <CiteBoxLabel>Cite this</CiteBoxLabel>
-  <CiteBoxText>Valdés-Olmos, R. (2026). Raster. Noord.</CiteBoxText>
+  <CiteBoxText>Valdés-Olmos, R. (2026). Vlak. Noord.</CiteBoxText>
 </CiteBox>
 ```
 

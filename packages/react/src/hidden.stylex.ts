@@ -1,5 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "./tokens.stylex";
+import { vlak } from "./tokens.stylex";
 
 /** Screen-reader only. Matches .rs-sr */
 export const hidden = stylex.create({
@@ -25,7 +25,7 @@ export const hidden = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible + *": raster.ink,
+      ":focus-visible + *": vlak.ink,
     },
     outlineOffset: {
       default: null,

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -16,7 +16,7 @@ const styles = stylex.create({
     display: "inline-flex",
     width: "1rem",
     height: "1rem",
-    color: raster.ink,
+    color: vlak.ink,
     verticalAlign: "middle",
   },
   ring: {

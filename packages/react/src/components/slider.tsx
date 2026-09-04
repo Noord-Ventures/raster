@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { useFieldControl } from "./field";
 
@@ -23,7 +23,7 @@ const styles = stylex.create({
       default: 2,
       [mq.phone]: "0.25rem",
     },
-    backgroundColor: raster.divider,
+    backgroundColor: vlak.divider,
     borderRadius: {
       default: 1,
       [mq.phone]: 0,
@@ -39,7 +39,7 @@ const styles = stylex.create({
     insetInlineStart: 0,
     top: 0,
     bottom: 0,
-    backgroundColor: raster.ink,
+    backgroundColor: vlak.ink,
     borderRadius: {
       default: 1,
       [mq.phone]: 0,
@@ -62,10 +62,10 @@ const styles = stylex.create({
       default: "50%",
       [mq.phone]: 0,
     },
-    backgroundColor: raster.paper,
+    backgroundColor: vlak.paper,
     borderWidth: 1.5,
     borderStyle: "solid",
-    borderColor: raster.ink,
+    borderColor: vlak.ink,
     boxSizing: "border-box",
     pointerEvents: "none",
   },
@@ -73,7 +73,7 @@ const styles = stylex.create({
   thumbFocused: {
     outlineWidth: 2,
     outlineStyle: "solid",
-    outlineColor: raster.ink,
+    outlineColor: vlak.ink,
     outlineOffset: 2,
   },
   range: {

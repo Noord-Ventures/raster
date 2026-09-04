@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {}
@@ -64,7 +64,7 @@ const styles = stylex.create({
     },
     borderBottomWidth: 2,
     borderBottomStyle: "solid",
-    borderBottomColor: raster.divider,
+    borderBottomColor: vlak.divider,
     fontSize: {
       default: "0.8125rem",
       [mq.phone]: "0.9375rem",
@@ -89,12 +89,12 @@ const styles = stylex.create({
       ":last-child": "1.25rem",
       [mq.phone]: "0.75rem",
     },
-    color: raster.gray,
+    color: vlak.gray,
     fontWeight: 500,
     letterSpacing: "-0.01em",
-    borderBottomWidth: raster.hairline,
+    borderBottomWidth: vlak.hairline,
     borderBottomStyle: "solid",
-    borderBottomColor: raster.divider,
+    borderBottomColor: vlak.divider,
     verticalAlign: "top",
     textAlign: {
       default: "start",
@@ -112,10 +112,10 @@ const styles = stylex.create({
     color: "var(--text)",
     borderTopWidth: 2,
     borderTopStyle: "solid",
-    borderTopColor: raster.divider,
+    borderTopColor: vlak.divider,
     borderBottomWidth: 2,
     borderBottomStyle: "solid",
-    borderBottomColor: raster.divider,
+    borderBottomColor: vlak.divider,
     backgroundColor: "transparent",
   },
   totalCell: {

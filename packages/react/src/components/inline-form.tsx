@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { Icon } from "./icon";
 
@@ -31,14 +31,14 @@ const styles = stylex.create({
     },
     gap: "0.5rem",
     width: "100%",
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
     borderColor: {
-      default: raster.divider,
-      ":focus-within": raster.accent,
+      default: vlak.divider,
+      ":focus-within": vlak.accent,
     },
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     backgroundColor: "var(--bg)",
@@ -56,9 +56,9 @@ const styles = stylex.create({
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
-    transition: `border-color ${raster.durationSnap} ${raster.ease}`,
+    transition: `border-color ${vlak.durationSnap} ${vlak.ease}`,
   },
   input: {
     flexGrow: 1,
@@ -86,17 +86,17 @@ const styles = stylex.create({
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     "::placeholder": {
-      color: raster.gray,
+      color: vlak.gray,
     },
   },
   reveal: {
     maxWidth: 0,
     opacity: 0,
     overflow: "hidden",
-    transition: `max-width ${raster.duration} ${raster.ease}, opacity ${raster.duration} ${raster.ease}`,
+    transition: `max-width ${vlak.duration} ${vlak.ease}, opacity ${vlak.duration} ${vlak.ease}`,
   },
   revealIn: {
     maxWidth: "10rem",
@@ -105,11 +105,11 @@ const styles = stylex.create({
   btn: {
     height: {
       default: "1.75rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     paddingInline: {
       default: "1rem",
@@ -117,7 +117,7 @@ const styles = stylex.create({
     },
     fontSize: {
       default: "0.78125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     minWidth: 0,
     borderRadius: {
@@ -132,8 +132,8 @@ const styles = stylex.create({
     alignItems: "center",
     justifyContent: "center",
     cursor: "pointer",
-    backgroundColor: raster.ink,
-    color: raster.paper,
+    backgroundColor: vlak.ink,
+    color: vlak.paper,
     borderWidth: 0,
   },
   subscribed: {
@@ -143,10 +143,10 @@ const styles = stylex.create({
     fontSize: "0.875rem",
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
     animationName: fadeIn,
-    animationDuration: raster.durationConfirm,
-    animationTimingFunction: raster.ease,
+    animationDuration: vlak.durationConfirm,
+    animationTimingFunction: vlak.ease,
   },
 });
 

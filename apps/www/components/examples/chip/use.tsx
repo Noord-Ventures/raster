@@ -1,4 +1,4 @@
-import { Chip } from "@noorddev/raster-react";
+import { Chip } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 export function Use() {
   return (

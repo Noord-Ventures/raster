@@ -5,17 +5,20 @@ import { specimen } from "./specimen.stylex";
 export function SpecimenPrinciples() {
   return (
     <>
-      {PRINCIPLES.map((law) => (
+      {PRINCIPLES.map((principle) => (
         <section
-          key={law.n}
-          {...sx(`specimen-cell specimen-cell-principle specimen-cell-p${law.n}`, specimen.cell)}
-          aria-label={`Law ${law.n}`}
+          key={principle.n}
+          {...sx(
+            `specimen-cell specimen-cell-principle specimen-cell-p${principle.n}`,
+            specimen.cell,
+          )}
+          aria-label={`Principle ${principle.n}`}
         >
           <div className="specimen-index">
             <p className="specimen-n" aria-hidden="true">
-              {law.n}
+              {principle.n}
             </p>
-            <p className="specimen-n-text">{law.text}</p>
+            <p className="specimen-n-text">{principle.text}</p>
           </div>
         </section>
       ))}

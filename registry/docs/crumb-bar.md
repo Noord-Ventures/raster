@@ -1,11 +1,11 @@
 # Crumb bar
 
-Fixed 72px bar. Transparent at rest; scrolled state adds paper, a bottom 1px, and the trail.
+Keeps the current path visible while scrolling. Fixed at 72px with a 1px bottom rule when active.
 
 Category: navigation  
 Name: `crumb-bar`  
 Also known as: Crumb bar, Sticky header, Top bar, App bar  
-Page: https://getraster.com/components/crumb-bar/
+Page: https://vlak.dev/components/crumb-bar/
 
 ## When to use
 
@@ -22,36 +22,36 @@ Page: https://getraster.com/components/crumb-bar/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { CrumbBar } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { CrumbBar } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add crumb-bar
+npx @noorddev/vlak-cli add crumb-bar
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/crumb-bar.json
+npx shadcn add https://vlak.dev/r/crumb-bar.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
-<nav class="rs-crumb-bar rs-crumb-bar-scrolled"><div class="rs-crumb-bar-inner"><a class="rs-crumb-root" href="/"><span class="rs-crumb-root-full">Raster</span><span class="rs-crumb-root-short">rs</span></a><p class="rs-crumbs"><span>Docs</span><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Components</span></p></div></nav>
+<nav class="rs-crumb-bar rs-crumb-bar-scrolled"><div class="rs-crumb-bar-inner"><a class="rs-crumb-root" href="/"><span class="rs-crumb-root-full">Vlak</span><span class="rs-crumb-root-short">rs</span></a><p class="rs-crumbs"><span>Docs</span><span class="rs-crumbs-sep">/</span><span class="rs-crumbs-here">Components</span></p></div></nav>
 ```
 
 ## Example
 
 ```tsx
-import { CrumbBar } from "@noorddev/raster-react";
+import { CrumbBar } from "@noorddev/vlak-react";
 
 <CrumbBar
   root={{ label: "Renato Valdés Olmos", href: "/" }}

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {}
@@ -22,7 +22,7 @@ const styles = stylex.create({
       [mq.phone]: "100%",
     },
     margin: 0,
-    color: raster.ink,
+    color: vlak.ink,
   },
 });
 

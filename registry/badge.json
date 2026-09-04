@@ -3,11 +3,11 @@
   "name": "badge",
   "type": "registry:component",
   "title": "Badge",
-  "description": "11px badge. Outline, solid, and muted fills.",
+  "description": "Labels status or category. 11px text with outline, solid, and muted variants.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -15,23 +15,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/badge.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** Outline for recommendations, solid for done, muted for pending. */\n  variant?: \"outline\" | \"solid\" | \"muted\";\n}\n\nconst variantClass = {\n  outline: \"rs-badge\",\n  solid: \"rs-badge-solid\",\n  muted: \"rs-badge-muted\",\n} as const;\n\nconst styles = stylex.create({\n  base: {\n    fontSize: \"0.6875rem\",\n    fontWeight: 600,\n    letterSpacing: \"0.02em\",\n    lineHeight: 1.4,\n    borderRadius: raster.radiusSm,\n  },\n  outline: {\n    color: raster.accent,\n    borderWidth: raster.hairline,\n    borderStyle: \"solid\",\n    borderColor: raster.accent,\n    paddingBlock: \"0.1875rem\",\n    paddingInline: \"0.625rem\",\n  },\n  solid: {\n    color: raster.paper,\n    backgroundColor: raster.ink,\n    paddingBlock: \"0.25rem\",\n    paddingInline: \"0.6875rem\",\n  },\n  muted: {\n    color: raster.ink,\n    backgroundColor: raster.dividerSubtle,\n    paddingBlock: \"0.25rem\",\n    paddingInline: \"0.6875rem\",\n  },\n});\n\nexport const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(function Badge(\n  { variant = \"outline\", className, style, ...props },\n  ref,\n) {\n  const sx = rs(\n    [variantClass[variant], className],\n    styles.base,\n    variant === \"solid\" ? styles.solid : variant === \"muted\" ? styles.muted : styles.outline,\n  );\n  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
+      "path": "vlak/badge.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** Outline for recommendations, solid for done, muted for pending. */\n  variant?: \"outline\" | \"solid\" | \"muted\";\n}\n\nconst variantClass = {\n  outline: \"rs-badge\",\n  solid: \"rs-badge-solid\",\n  muted: \"rs-badge-muted\",\n} as const;\n\nconst styles = stylex.create({\n  base: {\n    fontSize: \"0.6875rem\",\n    fontWeight: 600,\n    letterSpacing: \"0.02em\",\n    lineHeight: 1.4,\n    borderRadius: vlak.radiusSm,\n  },\n  outline: {\n    color: vlak.accent,\n    borderWidth: vlak.hairline,\n    borderStyle: \"solid\",\n    borderColor: vlak.accent,\n    paddingBlock: \"0.1875rem\",\n    paddingInline: \"0.625rem\",\n  },\n  solid: {\n    color: vlak.paper,\n    backgroundColor: vlak.ink,\n    paddingBlock: \"0.25rem\",\n    paddingInline: \"0.6875rem\",\n  },\n  muted: {\n    color: vlak.ink,\n    backgroundColor: vlak.dividerSubtle,\n    paddingBlock: \"0.25rem\",\n    paddingInline: \"0.6875rem\",\n  },\n});\n\nexport const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(function Badge(\n  { variant = \"outline\", className, style, ...props },\n  ref,\n) {\n  const sx = rs(\n    [variantClass[variant], className],\n    styles.base,\n    variant === \"solid\" ? styles.solid : variant === \"muted\" ? styles.muted : styles.outline,\n  );\n  return <span ref={ref} {...props} className={sx.className} style={{ ...sx.style, ...style }} />;\n});\n",
       "type": "registry:component",
-      "target": "components/raster/badge.tsx"
+      "target": "components/vlak/badge.tsx"
     },
     {
-      "path": "raster/styles/badge.css",
+      "path": "vlak/styles/badge.css",
       "content": "/* ── badge: generated from packages/react/src/components/badge.tsx ── */\n.rs-badge,.rs-badge-solid,.rs-badge-muted{font-size:0.6875rem;font-weight:600;letter-spacing:0.02em;line-height:1.4;border-radius:var(--radius-sm)}\n.rs-badge{color:var(--accent);border-width:1px;border-style:solid;border-color:var(--accent);padding-block:0.1875rem;padding-inline:0.625rem}\n.rs-badge-solid{color:var(--bg);background-color:var(--text);padding-block:0.25rem;padding-inline:0.6875rem}\n.rs-badge-muted{color:var(--text);background-color:var(--divider-subtle);padding-block:0.25rem;padding-inline:0.6875rem}\n",
       "type": "registry:file",
-      "target": "styles/raster/badge.css"
+      "target": "styles/vlak/badge.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "feedback",
       "classes": [
         "rs-badge",
@@ -41,7 +41,7 @@
       "snippet": "<span class=\"rs-badge\">Recommended</span><span class=\"rs-badge-solid\">Delivered</span><span class=\"rs-badge-muted\">In progress</span>",
       "cssOnly": false,
       "registryDependencies": [
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Badge",
@@ -49,7 +49,7 @@
         "Pill",
         "Status"
       ],
-      "example": "import { Badge } from \"@noorddev/raster-react\";\n\n<Badge>Recommended</Badge>\n<Badge variant=\"solid\">Delivered</Badge>\n<Badge variant=\"muted\">In progress</Badge>",
+      "example": "import { Badge } from \"@noorddev/vlak-react\";\n\n<Badge>Recommended</Badge>\n<Badge variant=\"solid\">Delivered</Badge>\n<Badge variant=\"muted\">In progress</Badge>",
       "usage": {
         "use": [
           "A short status or category next to a title.",

@@ -5,27 +5,27 @@ import { DOOR, HOST } from "../../specimen";
 
 export const metadata: Metadata = {
   title: "Agents",
-  description: "Raster for AI agents: llms.txt, markdown docs, the JSON registry, the CLI, the MCP server, and the API conventions.",
+  description: "Vlak for AI agents: llms.txt, markdown docs, the JSON registry, the CLI, the MCP server, and the API conventions.",
   alternates: { canonical: `${DOOR}/docs/agents/` },
 };
 
 const surfaces = [
-  [`${HOST}/llms.txt`, "The index: what Raster is, the install paths, one line per component"],
+  [`${HOST}/llms.txt`, "The index: what Vlak is, the install paths, one line per component"],
   [`${HOST}/llms-full.txt`, "Everything in one file: every component's docs, props, keyboard, markup"],
   [`${HOST}/docs/<name>.md`, "One component as markdown"],
   [`${HOST}/r/<name>.json`, "The shadcn registry item: files, dependencies, classes"],
   [`${HOST}/r/index.json`, "Every registry item"],
-  ["npx @noorddev/raster-cli list --json", "The catalogue as JSON, offline"],
-  ["npx @noorddev/raster-cli docs <name>", "One component's docs in the terminal"],
-  ["npx @noorddev/raster-cli tokens", "The design tokens as JSON"],
-  ["@noorddev/raster/props", "Every export's props as JSON, importable"],
+  ["npx @noorddev/vlak-cli list --json", "The catalogue as JSON, offline"],
+  ["npx @noorddev/vlak-cli docs <name>", "One component's docs in the terminal"],
+  ["npx @noorddev/vlak-cli tokens", "The design tokens as JSON"],
+  ["@noorddev/vlak/props", "Every export's props as JSON, importable"],
 ];
 
 const mcp = `{
   "mcpServers": {
-    "raster": {
+    "vlak": {
       "command": "npx",
-      "args": ["-y", "@noorddev/raster-mcp"]
+      "args": ["-y", "@noorddev/vlak-mcp"]
     }
   }
 }`;
@@ -84,7 +84,7 @@ export default function AgentsPage() {
       <h2 className="section-label">MCP server</h2>
       <CodeBlock code={mcp} />
       <p className="rs-t-body">
-        <code className="rs-code">@noorddev/raster-mcp</code> serves the same registry over the Model
+        <code className="rs-code">@noorddev/vlak-mcp</code> serves the same registry over the Model
         Context Protocol: list components, read one component&apos;s docs and props, fetch the
         tokens, and get the install command for a given path. Works offline; the snapshot ships in
         the package. Add the block above to your client&apos;s MCP configuration.

@@ -1,49 +1,49 @@
-# Raster tokens
+# Vlak tokens
 
-Every custom property `@noorddev/raster/css/tokens.css` defines, generated from `packages/core/src/tokens.ts`. The dark column applies under `data-theme="dark"` on the root element, or under the system dark scheme until the page decides. The StyleX alias is the key on `raster` from `@noorddev/raster-react/tokens.stylex`. The same tokens ship as JSON (`@noorddev/raster/tokens`) and in the W3C Design Tokens format (`@noorddev/raster/tokens.dtcg`) for Style Dictionary, Figma Variables, and Tokens Studio.
+Every custom property `@noorddev/vlak/css/tokens.css` defines, generated from `packages/core/src/tokens.ts`. The dark column applies under `data-theme="dark"` on the root element, or under the system dark scheme until the page decides. The StyleX alias is the key on `vlak` from `@noorddev/vlak-react/tokens.stylex`. The same tokens ship as JSON (`@noorddev/vlak/tokens`) and in the W3C Design Tokens format (`@noorddev/vlak/tokens.dtcg`) for Style Dictionary, Figma Variables, and Tokens Studio.
 
 ## Custom properties
 
 | Property | Light | Dark | StyleX | Note |
 | --- | --- | --- | --- | --- |
-| `--bg` | `#FAF8F2` | `#0E0C0A` | `raster.paper` | paper |
-| `--text` | `#1A1A1A` | `#E8E8E8` | `raster.ink` | ink |
-| `--text-secondary` | `#6B6B6B` | `#949494` | `raster.gray` | gray |
-| `--accent` | `#1A1A1A` | `#E8E8E8` | `raster.accent` | the "accent" is ink; monochrome |
-| `--divider` | `rgba(0,0,0,0.08)` | `rgba(255,255,255,0.10)` | `raster.divider` |  |
-| `--divider-subtle` | `rgba(0,0,0,0.06)` | `rgba(255,255,255,0.07)` | `raster.dividerSubtle` |  |
-| `--table-alt` | `rgba(0,0,0,0.02)` | `rgba(255,255,255,0.03)` | `raster.tableAlt` |  |
-| `--grid-line` | `rgba(0,0,0,0.04)` | `rgba(255,255,255,0.05)` | `raster.gridLine` |  |
-| `--control-border` | `rgba(0,0,0,0.42)` | `rgba(255,255,255,0.38)` | `raster.controlBorder` |  |
-| `--control-fill` | `#E4E2DC` | `#242220` | `raster.controlFill` |  |
-| `--radius-sm` | `4px` |  | `raster.radiusSm` | slight Raster radius; standalone buttons |
-| `--radius` | `var(--radius-sm)` |  | `raster.radius` | alias — buttons, boxes, dialogs share it; cards stay 0 |
-| `--radius-chrome` | `0px` |  | `raster.radiusChrome` |  |
-| `--gutter` | `20px` |  | `raster.gutter` |  |
-| `--pad` | `20px` |  | `raster.pad` |  |
-| `--radius-in` | `max(0px, calc(var(--radius) - var(--pad)))` |  | `raster.radiusIn` |  |
-| `--ease` | `cubic-bezier(0.3, 0, 0.2, 1)` |  | `raster.ease` |  |
-| `--duration-snap` | `0.12s` |  | `raster.durationSnap` |  |
-| `--duration` | `0.2s` |  | `raster.duration` |  |
-| `--duration-confirm` | `0.16s` |  | `raster.durationConfirm` |  |
-| `--transition` | `background-color var(--duration) var(--ease), border-color var(--duration) var(--ease), color var(--duration) var(--ease), opacity var(--duration) var(--ease)` |  | `raster.transition` |  |
-| `--grid-image` | `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px)` |  | `raster.gridImage` |  |
-| `--grid-size` | `204px` |  | `raster.module` |  |
-| `--grid-pos` | `20px 0` |  | `raster.gridPos` |  |
-| `--text-scale` | `1` |  | `raster.textScale` |  |
-| `--z-raised` | `10` |  | `raster.zRaised` |  |
-| `--z-sticky` | `100` |  | `raster.zSticky` |  |
-| `--z-float` | `200` |  | `raster.zFloat` |  |
-| `--z-overlay` | `300` |  | `raster.zOverlay` |  |
-| `--z-toast` | `400` |  | `raster.zToast` |  |
+| `--bg` | `#FAF8F2` | `#0E0C0A` | `vlak.paper` | paper |
+| `--text` | `#1A1A1A` | `#E8E8E8` | `vlak.ink` | ink |
+| `--text-secondary` | `#6B6B6B` | `#949494` | `vlak.gray` | gray |
+| `--accent` | `#1A1A1A` | `#E8E8E8` | `vlak.accent` | the "accent" is ink; monochrome |
+| `--divider` | `rgba(0,0,0,0.08)` | `rgba(255,255,255,0.10)` | `vlak.divider` |  |
+| `--divider-subtle` | `rgba(0,0,0,0.06)` | `rgba(255,255,255,0.07)` | `vlak.dividerSubtle` |  |
+| `--table-alt` | `rgba(0,0,0,0.02)` | `rgba(255,255,255,0.03)` | `vlak.tableAlt` |  |
+| `--grid-line` | `rgba(0,0,0,0.04)` | `rgba(255,255,255,0.05)` | `vlak.gridLine` |  |
+| `--control-border` | `rgba(0,0,0,0.42)` | `rgba(255,255,255,0.38)` | `vlak.controlBorder` |  |
+| `--control-fill` | `#E4E2DC` | `#242220` | `vlak.controlFill` |  |
+| `--radius-sm` | `4px` |  | `vlak.radiusSm` | slight Vlak radius; standalone buttons |
+| `--radius` | `var(--radius-sm)` |  | `vlak.radius` | alias — buttons, boxes, dialogs share it; cards stay 0 |
+| `--radius-chrome` | `0px` |  | `vlak.radiusChrome` |  |
+| `--gutter` | `20px` |  | `vlak.gutter` |  |
+| `--pad` | `20px` |  | `vlak.pad` |  |
+| `--radius-in` | `max(0px, calc(var(--radius) - var(--pad)))` |  | `vlak.radiusIn` |  |
+| `--ease` | `cubic-bezier(0.3, 0, 0.2, 1)` |  | `vlak.ease` |  |
+| `--duration-snap` | `0.12s` |  | `vlak.durationSnap` |  |
+| `--duration` | `0.2s` |  | `vlak.duration` |  |
+| `--duration-confirm` | `0.16s` |  | `vlak.durationConfirm` |  |
+| `--transition` | `background-color var(--duration) var(--ease), border-color var(--duration) var(--ease), color var(--duration) var(--ease), opacity var(--duration) var(--ease)` |  | `vlak.transition` |  |
+| `--grid-image` | `linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 184px,var(--grid-line) 184px,var(--grid-line) 185px,transparent 185px,transparent 204px)` |  | `vlak.gridImage` |  |
+| `--grid-size` | `204px` |  | `vlak.module` |  |
+| `--grid-pos` | `20px 0` |  | `vlak.gridPos` |  |
+| `--text-scale` | `1` |  | `vlak.textScale` |  |
+| `--z-raised` | `10` |  | `vlak.zRaised` |  |
+| `--z-sticky` | `100` |  | `vlak.zSticky` |  |
+| `--z-float` | `200` |  | `vlak.zFloat` |  |
+| `--z-overlay` | `300` |  | `vlak.zOverlay` |  |
+| `--z-toast` | `400` |  | `vlak.zToast` |  |
 | `--rs-out` | `var(--radius)` |  |  |  |
 | `--rs-gap` | `var(--pad)` |  |  |  |
 | `--rs-in` | `var(--radius-in)` |  |  |  |
 | `--rs-chart-spot` | `var(--text)` |  |  |  |
-| `--hit` | `2.5rem` |  | `raster.hit` |  |
-| `--control-h` | `2.5rem` |  | `raster.controlH` |  |
-| `--control-fs` | `0.875rem` |  | `raster.controlFs` |  |
-| `--control-label` | `0.75rem` |  | `raster.controlLabel` |  |
+| `--hit` | `2.5rem` |  | `vlak.hit` |  |
+| `--control-h` | `2.5rem` |  | `vlak.controlH` |  |
+| `--control-fs` | `0.875rem` |  | `vlak.controlFs` |  |
+| `--control-label` | `0.75rem` |  | `vlak.controlLabel` |  |
 
 ## Responsive overrides
 
@@ -67,7 +67,7 @@ Under `@media (max-width:640px)`:
 
 ## Token groups
 
-The raw values from `rasterTokens` (`import { rasterTokens } from "@noorddev/raster"`, or `@noorddev/raster/tokens` as JSON).
+The raw values from `vlakTokens` (`import { vlakTokens } from "@noorddev/vlak"`, or `@noorddev/vlak/tokens` as JSON).
 
 ### color
 

@@ -1,11 +1,11 @@
 # Alert
 
-1px frame with an icon. Solid ink variant for critical.
+Calls attention to contextual information. 1px frame and icon; critical variant fills with ink.
 
 Category: feedback  
 Name: `alert`  
 Also known as: Alert, Banner, Notice, Inline message  
-Page: https://getraster.com/components/alert/
+Page: https://vlak.dev/components/alert/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/alert/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Alert } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Alert } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add alert
+npx @noorddev/vlak-cli add alert
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/alert.json
+npx shadcn add https://vlak.dev/r/alert.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-alert" role="status"><div><span class="rs-alert-title">Heads up</span><p class="rs-alert-body">Your workspace syncs every hour.</p></div></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/alert.json
 ## Example
 
 ```tsx
-import { Alert } from "@noorddev/raster-react";
+import { Alert } from "@noorddev/vlak-react";
 
 <Alert title="Heads up">Your workspace syncs every hour.</Alert>
 <Alert variant="solid" title="Payment failed" live="assertive">Update your card to keep publishing.</Alert>

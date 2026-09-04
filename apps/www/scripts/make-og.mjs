@@ -1,4 +1,4 @@
-// Raster OG poster, 1200×630. Flush paper, one hairline, the word, the law.
+// Vlak OG poster, 1200×630. Flush paper, one hairline, the word, the law.
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
@@ -52,11 +52,11 @@ html,body{margin:0;background:#FAF8F2}
 </head>
 <body>
   <div class="poster">
-    <div class="cell"><p class="word">Raster</p></div>
+    <div class="cell"><p class="word">Vlak</p></div>
     <div class="rule" aria-hidden="true"></div>
     <div class="cell">
       <p class="law">A poster you can install.</p>
-      <p class="door">getraster.com</p>
+      <p class="door">vlak.dev</p>
     </div>
   </div>
 </body>

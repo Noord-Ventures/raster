@@ -49,7 +49,7 @@ html:has(.swag-page) .site-footer {
   justify-content: flex-start;
   gap: 20px;
   min-height: 204px;
-  /* Slot for the real RasterMark at chrome language: top 24 / left 20.
+  /* Slot for the real VlakMark at chrome language: top 24 / left 20.
      Store sits below that 20px mark. */
   padding-top: 64px;
 }

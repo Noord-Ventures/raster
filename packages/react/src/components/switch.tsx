@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface SwitchProps
@@ -22,7 +22,7 @@ const styles = stylex.create({
     },
     height: {
       default: "1.125rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     minWidth: {
       default: null,
@@ -30,7 +30,7 @@ const styles = stylex.create({
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     borderRadius: {
       default: 9,
@@ -39,7 +39,7 @@ const styles = stylex.create({
     borderWidth: 1.5,
     borderStyle: "solid",
     borderColor: {
-      default: raster.controlBorder,
+      default: vlak.controlBorder,
       [mq.forcedColors]: "ButtonText",
     },
     position: "relative",
@@ -48,7 +48,7 @@ const styles = stylex.create({
     backgroundColor: "transparent",
     cursor: "pointer",
     transition: {
-      default: `background-color ${raster.duration} ${raster.ease}, border-color ${raster.duration} ${raster.ease}`,
+      default: `background-color ${vlak.duration} ${vlak.ease}, border-color ${vlak.duration} ${vlak.ease}`,
       [mq.reduce]: "none",
     },
     outlineWidth: {
@@ -61,7 +61,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -79,11 +79,11 @@ const styles = stylex.create({
   },
   on: {
     backgroundColor: {
-      default: raster.ink,
+      default: vlak.ink,
       [mq.forcedColors]: "Highlight",
     },
     borderColor: {
-      default: raster.ink,
+      default: vlak.ink,
       [mq.forcedColors]: "Highlight",
     },
     forcedColorAdjust: "none",
@@ -111,18 +111,18 @@ const styles = stylex.create({
       [mq.phone]: 0,
     },
     backgroundColor: {
-      default: raster.gray,
+      default: vlak.gray,
       [mq.forcedColors]: "ButtonText",
     },
     forcedColorAdjust: "none",
     transition: {
-      default: `transform ${raster.duration} ${raster.ease}`,
+      default: `transform ${vlak.duration} ${vlak.ease}`,
       [mq.reduce]: "none",
     },
   },
   thumbOn: {
     backgroundColor: {
-      default: raster.paper,
+      default: vlak.paper,
       [mq.forcedColors]: "HighlightText",
     },
     transform: {

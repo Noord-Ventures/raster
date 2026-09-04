@@ -1,4 +1,4 @@
-import { ScatterChart } from "@noorddev/raster-react";
+import { ScatterChart } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 const MARKS = [

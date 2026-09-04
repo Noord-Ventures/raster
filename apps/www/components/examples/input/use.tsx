@@ -1,4 +1,4 @@
-import { Input } from "@noorddev/raster-react";
+import { Input } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

@@ -1,11 +1,11 @@
 # Workflow card
 
-Dashed 1px pipeline step. Drag handle, dashed chips, ghost add-step.
+Builds an ordered pipeline from draggable steps. 1px dashed frame, chips, and ghost add action.
 
 Category: patterns  
 Name: `workflow`  
 Also known as: Workflow, Pipeline, Flow card, Process steps  
-Page: https://getraster.com/components/workflow/
+Page: https://vlak.dev/components/workflow/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/workflow/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Flow, FlowAdd, FlowBody, FlowNum, FlowPlus, FlowStep, FlowSub, FlowSubAdd, FlowSubs, FlowTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Flow, FlowAdd, FlowBody, FlowNum, FlowPlus, FlowStep, FlowSub, FlowSubAdd, FlowSubs, FlowTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add workflow
+npx @noorddev/vlak-cli add workflow
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/workflow.json
+npx shadcn add https://vlak.dev/r/workflow.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-flow" style="grid-template-columns:184px;width:184px"><div class="rs-flow-step"><span class="rs-flow-num">1</span><h4>Proposal</h4><p>Scope, timeline, and fee on one page.</p><div class="rs-flow-subs"><span>Brief</span><span>Fee</span><span class="rs-flow-sub-add">+</span></div></div><button type="button" class="rs-flow-add"><span class="rs-flow-plus">+</span> Add a step</button></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/workflow.json
 ## Example
 
 ```tsx
-import { Flow, FlowAdd, FlowBody, FlowNum, FlowStep, FlowSub, FlowSubAdd, FlowSubs, FlowTitle } from "@noorddev/raster-react";
+import { Flow, FlowAdd, FlowBody, FlowNum, FlowStep, FlowSub, FlowSubAdd, FlowSubs, FlowTitle } from "@noorddev/vlak-react";
 
 <Flow>
   <FlowStep>

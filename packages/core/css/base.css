@@ -1,5 +1,5 @@
 /* ── Base ──
-   Raster owns the page: paper on html, ink on body, and quiet
+   Vlak owns the page: paper on html, ink on body, and quiet
    gutter verticals on html::before so overflow-x:clip cannot drop
    them. --grid-pos: 20px 0 puts the first tile line on the left
    20px gutter; that utmost left gutter must paint. Do not clip

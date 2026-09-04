@@ -1,11 +1,11 @@
 # Icons
 
-16 viewBox marks, 1px currentColor, butt/miter. Shipped in the React package.
+Provides interface marks on a 16px viewBox. 1px currentColor strokes with butt caps and miter joins.
 
 Category: icons  
 Name: `icons`  
 Also known as: Icon, Icons, Icon set, Glyphs  
-Page: https://getraster.com/components/icons/
+Page: https://vlak.dev/components/icons/
 
 ## When to use
 
@@ -22,36 +22,36 @@ Page: https://getraster.com/components/icons/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Icon, IconCatalog, iconLabel, Icons, resolveIcon } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Icon, IconCatalog, iconLabel, Icons, resolveIcon } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add icons
+npx @noorddev/vlak-cli add icons
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/icons.json
+npx shadcn add https://vlak.dev/r/icons.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
-<div class="rs-icons"><svg class="rs-icon" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M6.5 2.5 H13.5 V9.5" vector-effect="non-scaling-stroke"/><rect x="2.5" y="6.5" width="7" height="7" vector-effect="non-scaling-stroke"/></svg><svg class="rs-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M6.5 2.5 H13.5 V9.5" vector-effect="non-scaling-stroke"/><rect x="2.5" y="6.5" width="7" height="7" vector-effect="non-scaling-stroke"/></svg></div>
+<div class="rs-icons"><svg class="rs-icon" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3 H13 V10.5" vector-effect="non-scaling-stroke"/><rect x="3" y="5.5" width="7.5" height="7.5" vector-effect="non-scaling-stroke"/></svg><svg class="rs-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M5.5 3 H13 V10.5" vector-effect="non-scaling-stroke"/><rect x="3" y="5.5" width="7.5" height="7.5" vector-effect="non-scaling-stroke"/></svg></div>
 ```
 
 ## Example
 
 ```tsx
-import { Icon, IconCatalog, iconNames } from "@noorddev/raster-react";
+import { Icon, IconCatalog, iconNames } from "@noorddev/vlak-react";
 
 <Icon name="search" size={12} />
 <Icon name="search" size={16} />

@@ -1,11 +1,11 @@
 # Sidebar
 
-204-wide rail with a head, nav, and foot. 1px on all four sides.
+Holds persistent navigation in a 204px rail with a head, body, and foot.
 
 Category: navigation  
 Name: `sidebar`  
 Also known as: Sidebar, Side nav, Rail, Navigation drawer  
-Page: https://getraster.com/components/sidebar/
+Page: https://vlak.dev/components/sidebar/
 
 ## When to use
 
@@ -22,39 +22,39 @@ Page: https://getraster.com/components/sidebar/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add sidebar
+npx @noorddev/vlak-cli add sidebar
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/sidebar.json
+npx shadcn add https://vlak.dev/r/sidebar.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
-<aside class="rs-sidebar"><div class="rs-sidebar-head">Raster</div><nav class="rs-sidebar-nav"><p class="rs-sidebar-label">Go to</p><a class="rs-sidebar-item" aria-current="page">Overview</a><a class="rs-sidebar-item" href="#">Docs</a><a class="rs-sidebar-item" href="#">Components</a></nav><div class="rs-sidebar-foot">0.3</div></aside>
+<aside class="rs-sidebar"><div class="rs-sidebar-head">Vlak</div><nav class="rs-sidebar-nav"><p class="rs-sidebar-label">Go to</p><a class="rs-sidebar-item" aria-current="page">Overview</a><a class="rs-sidebar-item" href="#">Docs</a><a class="rs-sidebar-item" href="#">Components</a></nav><div class="rs-sidebar-foot">0.3</div></aside>
 ```
 
 ## Example
 
 ```tsx
-import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/raster-react";
+import { Sidebar, SidebarFoot, SidebarHead, SidebarItem, SidebarLabel, SidebarNav } from "@noorddev/vlak-react";
 
 <Sidebar>
-  <SidebarHead>Raster</SidebarHead>
+  <SidebarHead>Vlak</SidebarHead>
   <SidebarNav aria-label="Sidebar">
     <SidebarLabel>Go to</SidebarLabel>
     <SidebarItem href="/" current>Overview</SidebarItem>

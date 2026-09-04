@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 import { Dialog } from "./dialog";
@@ -43,9 +43,9 @@ const styles = stylex.create({
     boxSizing: "border-box",
     width: "100%",
     borderWidth: 0,
-    borderBottomWidth: raster.hairline,
+    borderBottomWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     backgroundColor: "transparent",
     fontFamily: "inherit",
     fontSize: {
@@ -53,7 +53,7 @@ const styles = stylex.create({
       [mq.phone]: "1rem",
     },
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
     paddingBlock: "0.875rem",
     paddingInline: "1rem",
     /* The palette clips at its edge, so the ring sits inside the field. */
@@ -67,7 +67,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -75,10 +75,10 @@ const styles = stylex.create({
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     "::placeholder": {
-      color: raster.gray,
+      color: vlak.gray,
     },
   },
   list: {
@@ -93,7 +93,7 @@ const styles = stylex.create({
     },
     fontWeight: 600,
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
     paddingTop: {
       default: "0.5rem",
       [mq.phone]: "0.75rem",
@@ -124,10 +124,10 @@ const styles = stylex.create({
     fontFamily: "inherit",
     fontSize: {
       default: "0.84375rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
     letterSpacing: "-0.01em",
-    color: raster.ink,
+    color: vlak.ink,
     paddingBlock: {
       default: "0.5rem",
       [mq.phone]: "0.75rem",
@@ -137,21 +137,21 @@ const styles = stylex.create({
       [mq.phone]: "0.875rem",
     },
     borderRadius: {
-      default: raster.radiusSm,
+      default: vlak.radiusSm,
       [mq.phone]: 0,
     },
     cursor: "pointer",
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
   },
   itemActive: {
-    backgroundColor: raster.dividerSubtle,
+    backgroundColor: vlak.dividerSubtle,
   },
   hint: {
     fontSize: "0.6875rem",
-    color: raster.gray,
+    color: vlak.gray,
   },
   empty: {
     padding: {
@@ -163,7 +163,7 @@ const styles = stylex.create({
       default: "0.8125rem",
       [mq.phone]: "0.9375rem",
     },
-    color: raster.gray,
+    color: vlak.gray,
   },
 });
 

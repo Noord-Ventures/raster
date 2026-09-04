@@ -1,16 +1,16 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface CalloutProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const styles = stylex.create({
   box: {
-    backgroundColor: raster.paper,
-    borderWidth: raster.hairline,
+    backgroundColor: vlak.paper,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderRadius: 0,
     boxShadow: "none",
     paddingBlock: {

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import { rasterComponents } from "@noorddev/raster";
+import { vlakComponents } from "@noorddev/vlak";
 import { chrome } from "@/app/site.stylex";
 import { interfaceBySlug } from "@/app/interfaces/catalog";
 import { sx } from "@/lib/sx";
@@ -27,7 +27,7 @@ function trailFor(pathname: string): Crumb[] {
   } else if (parts[0] === "components") {
     trail.push({ label: "Components", href: "/components" });
     if (parts[1]) {
-      const component = rasterComponents.find((c) => c.name === parts[1]);
+      const component = vlakComponents.find((c) => c.name === parts[1]);
       trail.push({ label: component?.title ?? parts[1] });
     }
   } else if (parts[0] === "interfaces") {
@@ -101,9 +101,9 @@ export function CrumbBar() {
       aria-label="Breadcrumbs"
     >
       {/* Root sits outside the inner row so the library’s 1024 inset
-          (margin-left: 204px) cannot place “Raster” on the nav column. */}
+          (margin-left: 204px) cannot place “Vlak” on the nav column. */}
       <Link ref={rootRef} className="rs-crumb-root site-crumb-root" href="/">
-        Raster
+        Vlak
       </Link>
       <div className="rs-crumb-bar-inner">
         {trail.length > 0 && (

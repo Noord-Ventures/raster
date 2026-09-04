@@ -16,7 +16,7 @@ export interface RegistryFile {
   target: string;
 }
 
-export interface RasterMeta {
+export interface VlakMeta {
   category?: string;
   classes?: string[];
   snippet?: string;
@@ -38,18 +38,18 @@ export interface RegistryItem {
   registryDependencies?: string[];
   dependencies?: string[];
   files: RegistryFile[];
-  meta?: { raster?: RasterMeta };
+  meta?: { vlak?: VlakMeta };
 }
 
 export interface Bundle {
   name: string;
   version: string;
-  css: { raster: string };
+  css: { vlak: string };
   items: RegistryItem[];
   docs?: { guide: string; index: string; tokens: string; components: Record<string, string> };
 }
 
-export interface RasterProp {
+export interface VlakProp {
   name: string;
   type: string;
   required: boolean;
@@ -57,24 +57,24 @@ export interface RasterProp {
   description?: string;
 }
 
-export interface RasterExport {
+export interface VlakExport {
   name: string;
   kind: "component" | "hook" | "function" | "type";
   description?: string;
   extends?: string;
-  props: RasterProp[];
+  props: VlakProp[];
 }
 
 export interface PropsJson {
   version: string;
-  components: Record<string, { exports: RasterExport[] }>;
+  components: Record<string, { exports: VlakExport[] }>;
 }
 
 const here = dirname(fileURLToPath(import.meta.url));
 
 function locate(candidates: string[], what: string): string {
   const found = candidates.map((c) => join(here, c)).find((p) => existsSync(p));
-  if (!found) throw new Error(`Raster ${what} not found. Rebuild @noorddev/raster-mcp (pnpm build) or run from the repo.`);
+  if (!found) throw new Error(`Vlak ${what} not found. Rebuild @noorddev/vlak-mcp (pnpm build) or run from the repo.`);
   return found;
 }
 
@@ -93,7 +93,7 @@ export function loadProps(): PropsJson {
 
 /** Component items only: the catalogue, hidden entries excluded unless asked. */
 export function components(includeHidden = false): RegistryItem[] {
-  return loadBundle().items.filter((item) => item.type === "registry:component" && (includeHidden || !item.meta?.raster?.hidden));
+  return loadBundle().items.filter((item) => item.type === "registry:component" && (includeHidden || !item.meta?.vlak?.hidden));
 }
 
 export function findComponent(name: string): RegistryItem | undefined {

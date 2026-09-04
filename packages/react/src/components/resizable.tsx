@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { useMergedRefs } from "../merge-refs";
 
@@ -37,7 +37,7 @@ const styles = stylex.create({
     },
     height: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     marginTop: {
       default: 0,
@@ -56,7 +56,7 @@ const styles = stylex.create({
       [mq.phone]: 0,
     },
     position: "relative",
-    zIndex: raster.zRaised,
+    zIndex: vlak.zRaised,
     cursor: {
       default: "col-resize",
       [mq.phone]: "row-resize",
@@ -76,7 +76,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -110,24 +110,24 @@ const styles = stylex.create({
         [mq.phone]: 1,
       },
       backgroundColor: {
-        default: raster.controlBorder,
+        default: vlak.controlBorder,
         [mq.forcedColors]: "CanvasText",
       },
       forcedColorAdjust: "none",
       transition: {
-        default: `background-color ${raster.durationSnap} ${raster.ease}`,
+        default: `background-color ${vlak.durationSnap} ${vlak.ease}`,
         [mq.reduce]: "none",
       },
     },
     ":hover::after": {
       backgroundColor: {
-        default: raster.ink,
+        default: vlak.ink,
         [mq.forcedColors]: "Highlight",
       },
     },
     ":focus-visible::after": {
       backgroundColor: {
-        default: raster.ink,
+        default: vlak.ink,
         [mq.forcedColors]: "Highlight",
       },
     },

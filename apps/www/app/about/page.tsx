@@ -61,7 +61,7 @@ function WorkStill({ src, alt }: { src: string; alt: string }) {
 
 export default function AboutPage() {
   return (
-    <main id="main" {...sx("field-page", about.page)} aria-label="About Raster">
+    <main id="main" {...sx("field-page", about.page)} aria-label="About Vlak">
       <div {...sx("field", about.field)}>
         <section
           {...sx("field-cell field-cell-era", about.cell, about.cellTall, about.cellEnd)}
@@ -144,7 +144,7 @@ export default function AboutPage() {
         >
           <Kicker id="specimen-heading">{specimen.kicker}</Kicker>
           <p {...sx("field-spec-type", about.specType)} aria-hidden="true">
-            Raster
+            Vlak
           </p>
           <Copy wide>
             <CopyP>{specimen.body}</CopyP>
@@ -302,7 +302,7 @@ export default function AboutPage() {
               </a>
               {" · "}
               <a href={person.repo} {...sx("", about.link)}>
-                github.com/Noord-Ventures/raster
+                github.com/Noord-Ventures/vlak
               </a>
             </p>
             <p {...sx("", about.colophonP)}>

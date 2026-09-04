@@ -1,11 +1,11 @@
 # Theme toggle
 
-Icon that swaps moon and sun with the color scheme. Saved in localStorage.
+Switches between light and dark schemes. The icon changes and the choice persists locally.
 
 Category: actions  
 Name: `theme-toggle`  
 Also known as: Theme toggle, Dark mode toggle, Color scheme switch, Mode toggle  
-Page: https://getraster.com/components/theme-toggle/
+Page: https://vlak.dev/components/theme-toggle/
 
 ## When to use
 
@@ -21,27 +21,27 @@ Page: https://getraster.com/components/theme-toggle/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { ThemeToggle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { ThemeToggle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add theme-toggle
+npx @noorddev/vlak-cli add theme-toggle
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/theme-toggle.json
+npx shadcn add https://vlak.dev/r/theme-toggle.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <button class="rs-theme-toggle rs-theme-toggle-inline" aria-label="Toggle color scheme"><svg class="rs-theme-moon" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"><path d="M10.5 3.5 A5.5 5.5 0 1 0 10.5 12.5 A4 4 0 1 1 10.5 3.5" vector-effect="non-scaling-stroke"/></svg></button>
@@ -50,9 +50,9 @@ npx shadcn add https://getraster.com/r/theme-toggle.json
 ## Example
 
 ```tsx
-import { ThemeToggle } from "@noorddev/raster-react";
+import { ThemeToggle } from "@noorddev/vlak-react";
 
-<ThemeToggle storageKey="raster-theme" onThemeChange={(dark) => track(dark)} />
+<ThemeToggle storageKey="vlak-theme" onThemeChange={(dark) => track(dark)} />
 ```
 
 ## Props
@@ -67,7 +67,7 @@ Forwards `ref` to the `HTMLButtonElement`.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `storageKey` | `string` | `"raster-theme"` | localStorage key the choice persists under. |
+| `storageKey` | `string` | `"vlak-theme"` | localStorage key the choice persists under. |
 | `onThemeChange` | `(dark: boolean) => void` |  |  |
 
 ## Keyboard

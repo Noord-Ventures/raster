@@ -1,11 +1,11 @@
 # Spinner
 
-16px 1px ring. Animation stops when prefers-reduced-motion is on.
+Signals indeterminate progress. 16px ring with a 1px stroke; respects reduced motion.
 
 Category: feedback  
 Name: `spinner`  
 Also known as: Spinner, Loader, Loading indicator, Activity indicator  
-Page: https://getraster.com/components/spinner/
+Page: https://vlak.dev/components/spinner/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/spinner/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Spinner } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Spinner } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add spinner
+npx @noorddev/vlak-cli add spinner
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/spinner.json
+npx shadcn add https://vlak.dev/r/spinner.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-spinner" role="status" aria-label="Loading"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="28 13" vector-effect="non-scaling-stroke"/></svg></span>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/spinner.json
 ## Example
 
 ```tsx
-import { Spinner } from "@noorddev/raster-react";
+import { Spinner } from "@noorddev/vlak-react";
 
 <Spinner label="Loading" />
 ```

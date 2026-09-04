@@ -17,7 +17,7 @@ export function PhoneV1Chrome({
     <>
       <div {...sx("if-v1-status", interfaces.v1Status)} aria-hidden="true">
         <span>9:41</span>
-        <span>Raster</span>
+        <span>Vlak</span>
       </div>
       <header {...sx("if-v1-nav", interfaces.v1Nav)}>
         <p {...sx("if-v1-title", interfaces.v1Title)}>{heading}</p>

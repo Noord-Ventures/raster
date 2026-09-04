@@ -1,11 +1,11 @@
 # Label
 
-12px secondary label, set above the control.
+Names a form control. 12px secondary text, set above the control.
 
 Category: forms  
 Name: `label`  
 Also known as: Label, Form label, Field label  
-Page: https://getraster.com/components/label/
+Page: https://vlak.dev/components/label/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/label/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Label } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Label } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add label
+npx @noorddev/vlak-cli add label
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/label.json
+npx shadcn add https://vlak.dev/r/label.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <label class="rs-label" for="name">Name</label>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/label.json
 ## Example
 
 ```tsx
-import { Label } from "@noorddev/raster-react";
+import { Label } from "@noorddev/vlak-react";
 
 <Label htmlFor="name">Name</Label>
 <input id="name" className="rs-input rs-input-full" />

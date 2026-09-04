@@ -1,11 +1,11 @@
 # Stepper
 
-Numbered dots joined by 1px lines. Done fills ink; active is outlined.
+Shows progress through ordered steps. 1px connectors; done fills with ink, active is outlined.
 
 Category: navigation  
 Name: `stepper`  
 Also known as: Stepper, Steps, Progress steps, Wizard  
-Page: https://getraster.com/components/stepper/
+Page: https://vlak.dev/components/stepper/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/stepper/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Stepper } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Stepper } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add stepper
+npx @noorddev/vlak-cli add stepper
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/stepper.json
+npx shadcn add https://vlak.dev/r/stepper.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-steps"><div class="rs-step"><span class="rs-step-dot rs-step-done">1</span><span class="rs-step-line"></span><span class="rs-step-name">Brief</span></div><div class="rs-step"><span class="rs-step-dot rs-step-active">2</span><span class="rs-step-name">Design</span></div></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/stepper.json
 ## Example
 
 ```tsx
-import { Stepper } from "@noorddev/raster-react";
+import { Stepper } from "@noorddev/vlak-react";
 
 <Stepper steps={[{ name: "Brief" }, { name: "Design", sub: "In review" }, { name: "Build" }]} current={1} />
 ```

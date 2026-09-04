@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 
 const styles = stylex.create({
@@ -24,7 +24,7 @@ const styles = stylex.create({
   label: {
     fontSize: "0.75rem",
     fontWeight: 600,
-    color: raster.ink,
+    color: vlak.ink,
     letterSpacing: "-0.01em",
     display: "block",
     marginBottom: "0.375rem",
@@ -32,14 +32,14 @@ const styles = stylex.create({
   title: {
     fontSize: "1.0625rem",
     fontWeight: 600,
-    color: raster.ink,
+    color: vlak.ink,
     letterSpacing: "-0.02em",
     marginTop: 0,
     marginBottom: "0.5rem",
   },
   body: {
     fontSize: "0.875rem",
-    color: raster.gray,
+    color: vlak.gray,
     fontWeight: 500,
     letterSpacing: "-0.01em",
     lineHeight: 1.6,

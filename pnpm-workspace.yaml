@@ -2,5 +2,9 @@ packages:
   - "packages/*"
   - "apps/*"
 
-onlyBuiltDependencies:
-  - esbuild
+# Keep transitive tooling outside the workspace supply-chain quarantine window.
+overrides:
+  baseline-browser-mapping: 2.11.20
+  electron-to-chromium: 1.5.420
+  jose: 6.2.10
+  postcss: 8.5.27

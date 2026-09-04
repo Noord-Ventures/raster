@@ -26,7 +26,7 @@ import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { rasterComponents } from "../src/registry.ts";
+import { vlakComponents } from "../src/registry.ts";
 
 const require = createRequire(import.meta.url);
 const ts = require("typescript");
@@ -42,7 +42,7 @@ const configFile = ts.readConfigFile(configPath, ts.sys.readFile);
 const parsed = ts.parseJsonConfigFileContent(configFile.config, ts.sys, reactDir);
 const rootNames = [
   join(reactSrc, "index.ts"),
-  ...rasterComponents.filter((c) => c.react).map((c) => join(reactSrc, c.react)),
+  ...vlakComponents.filter((c) => c.react).map((c) => join(reactSrc, c.react)),
 ];
 const program = ts.createProgram({ rootNames, options: parsed.options });
 const checker = program.getTypeChecker();
@@ -231,7 +231,7 @@ function exportEntry(symbol) {
 
 /* ── Which entry owns which export of a shared file ── */
 const byFile = new Map();
-for (const c of rasterComponents) {
+for (const c of vlakComponents) {
   if (!c.react) continue;
   if (!byFile.has(c.react)) byFile.set(c.react, []);
   byFile.get(c.react).push(c);
@@ -267,7 +267,7 @@ for (const [file, owners] of byFile) {
 
 /* Registry order, so the file is stable. */
 const ordered = {};
-for (const c of rasterComponents) if (components[c.name]) ordered[c.name] = components[c.name];
+for (const c of vlakComponents) if (components[c.name]) ordered[c.name] = components[c.name];
 
 const outFile = join(coreDir, "props/props.json");
 mkdirSync(dirname(outFile), { recursive: true });

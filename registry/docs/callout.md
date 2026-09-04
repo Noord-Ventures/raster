@@ -1,11 +1,11 @@
 # Callout
 
-Note in running copy. 1px hairline, radius 0. No left bar.
+Adds a contextual note to running copy. 1px frame, square corners, no accent bar.
 
 Category: feedback  
 Name: `callout`  
 Also known as: Callout, Note, Aside, Admonition  
-Page: https://getraster.com/components/callout/
+Page: https://vlak.dev/components/callout/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/callout/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Callout } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Callout } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add callout
+npx @noorddev/vlak-cli add callout
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/callout.json
+npx shadcn add https://vlak.dev/r/callout.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-callout"><p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/callout.json
 ## Example
 
 ```tsx
-import { Callout } from "@noorddev/raster-react";
+import { Callout } from "@noorddev/vlak-react";
 
 <Callout>
   <p><strong>Fixed fee.</strong> The number on the cover is the number on the invoice.</p>

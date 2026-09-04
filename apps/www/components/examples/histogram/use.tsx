@@ -1,4 +1,4 @@
-import { Histogram } from "@noorddev/raster-react";
+import { Histogram } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

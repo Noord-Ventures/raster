@@ -1,11 +1,11 @@
 # Alert dialog
 
-Native dialog that must be answered. Escape and light dismiss are off.
+Requires a decision before work continues. Native dialog with Escape and light dismiss disabled.
 
 Category: surfaces  
 Name: `alert-dialog`  
 Also known as: Alert dialog, Confirm dialog, Confirmation, Destructive confirm  
-Page: https://getraster.com/components/alert-dialog/
+Page: https://vlak.dev/components/alert-dialog/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/alert-dialog/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add alert-dialog
+npx @noorddev/vlak-cli add alert-dialog
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/alert-dialog.json
+npx shadcn add https://vlak.dev/r/alert-dialog.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <dialog class="rs-dialog" role="alertdialog" closedby="none" aria-labelledby="delete-title" aria-describedby="delete-body" open><h2 class="rs-dialog-title" id="delete-title">Delete this workspace?</h2><p class="rs-dialog-body" id="delete-body">All projects go with it.</p><div class="rs-dialog-actions"><button class="rs-btn-ghost rs-btn-sm">Cancel</button><button class="rs-btn-primary rs-btn-sm">Delete</button></div></dialog>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/alert-dialog.json
 
 ```tsx
 import { useState } from "react";
-import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from "@noorddev/raster-react";
+import { AlertDialog, AlertDialogActions, AlertDialogBody, AlertDialogTitle, Button } from "@noorddev/vlak-react";
 
 const [open, setOpen] = useState(false);
 

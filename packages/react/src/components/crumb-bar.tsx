@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { inertAttrs } from "../compat";
 
@@ -27,7 +27,7 @@ const styles = stylex.create({
     top: 0,
     insetInlineStart: 0,
     insetInlineEnd: 0,
-    zIndex: raster.zSticky,
+    zIndex: vlak.zSticky,
     display: "flex",
     alignItems: "center",
     height: {
@@ -42,14 +42,14 @@ const styles = stylex.create({
     letterSpacing: "-0.01em",
     lineHeight: 1.3,
     backgroundColor: "transparent",
-    borderBottomWidth: raster.hairline,
+    borderBottomWidth: vlak.hairline,
     borderBottomStyle: "solid",
     borderBottomColor: "transparent",
-    transition: raster.transition,
+    transition: vlak.transition,
   },
   scrolled: {
-    backgroundColor: raster.paper,
-    borderBottomColor: raster.divider,
+    backgroundColor: vlak.paper,
+    borderBottomColor: vlak.divider,
   },
   inner: {
     display: "flex",
@@ -69,7 +69,7 @@ const styles = stylex.create({
     },
     paddingInlineStart: {
       default: "4.75rem",
-      [mq.rail]: raster.pad,
+      [mq.rail]: vlak.pad,
       [mq.phone]: "3.875rem",
       [mq.mobileGrid]: "4.625rem",
     },
@@ -89,14 +89,14 @@ const styles = stylex.create({
     visibility: "hidden",
     pointerEvents: "none",
     transition: {
-      default: `opacity ${raster.duration} ${raster.ease}, visibility 0s ${raster.ease} ${raster.duration}`,
+      default: `opacity ${vlak.duration} ${vlak.ease}, visibility 0s ${vlak.ease} ${vlak.duration}`,
       [mq.reduce]: "none",
     },
     fontSize: {
       default: "0.8125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
-    color: raster.ink,
+    color: vlak.ink,
     letterSpacing: "-0.01em",
     display: "flex",
     alignItems: {
@@ -117,7 +117,7 @@ const styles = stylex.create({
     visibility: "visible",
     pointerEvents: "auto",
     transition: {
-      default: `opacity ${raster.duration} ${raster.ease}, visibility 0s`,
+      default: `opacity ${vlak.duration} ${vlak.ease}, visibility 0s`,
       [mq.reduce]: "none",
     },
   },
@@ -135,12 +135,12 @@ const styles = stylex.create({
   root: {
     flexShrink: 0,
     color: {
-      default: raster.ink,
-      ":link": raster.ink,
-      ":visited": raster.ink,
+      default: vlak.ink,
+      ":link": vlak.ink,
+      ":visited": vlak.ink,
     },
     textDecoration: "none",
-    transition: `color ${raster.durationSnap} ${raster.ease}`,
+    transition: `color ${vlak.durationSnap} ${vlak.ease}`,
     width: {
       default: null,
       [mq.at900]: 184,
@@ -164,16 +164,16 @@ const styles = stylex.create({
   },
   link: {
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     color: {
-      default: raster.gray,
-      ":link": raster.gray,
-      ":visited": raster.gray,
-      ":hover": raster.ink,
-      ":active": raster.ink,
-      ":focus-visible": raster.ink,
+      default: vlak.gray,
+      ":link": vlak.gray,
+      ":visited": vlak.gray,
+      ":hover": vlak.ink,
+      ":active": vlak.ink,
+      ":focus-visible": vlak.ink,
     },
     fontWeight: 400,
     textDecoration: {
@@ -192,7 +192,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -208,14 +208,14 @@ const styles = stylex.create({
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
   },
   sep: {
-    color: raster.gray,
+    color: vlak.gray,
   },
   here: {
-    color: raster.ink,
+    color: vlak.ink,
     fontWeight: 500,
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -229,7 +229,7 @@ const styles = stylex.create({
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
   },
 });

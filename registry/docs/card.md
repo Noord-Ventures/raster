@@ -1,11 +1,11 @@
 # Card
 
-Typography stack: label, title, and body. No outline.
+Groups related content as a label, title, and body. No outline.
 
 Category: surfaces  
 Name: `card`  
 Also known as: Card, Panel, Tile  
-Page: https://getraster.com/components/card/
+Page: https://vlak.dev/components/card/
 
 ## When to use
 
@@ -14,7 +14,7 @@ Page: https://getraster.com/components/card/
 
 ## When not to
 
-- Framed boxes with shadows; Raster cards have no outline.
+- Framed boxes with shadows; cards have no outline.
 - Interactive tiles; wrap the title in a Link instead of making the card clickable.
 
 ## Install
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/card/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Card, CardBody, CardInner, CardLabel, CardTitle } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Card, CardBody, CardInner, CardLabel, CardTitle } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add card
+npx @noorddev/vlak-cli add card
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/card.json
+npx shadcn add https://vlak.dev/r/card.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-card"><span class="rs-card-label">Case study</span><h3 class="rs-card-title">A quieter interface</h3><p class="rs-card-body">Emphasis from weight and spacing, never from a hue.</p></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/card.json
 ## Example
 
 ```tsx
-import { Card, CardBody, CardLabel, CardTitle } from "@noorddev/raster-react";
+import { Card, CardBody, CardLabel, CardTitle } from "@noorddev/vlak-react";
 
 <Card>
   <CardLabel>Case study</CardLabel>

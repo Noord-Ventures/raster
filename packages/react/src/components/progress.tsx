@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -16,20 +16,20 @@ const styles = stylex.create({
     justifyContent: "space-between",
     fontSize: "0.75rem",
     fontWeight: 500,
-    color: raster.gray,
+    color: vlak.gray,
     letterSpacing: "-0.01em",
     marginBottom: "0.4375rem",
   },
   bar: {
     height: "0.25rem",
-    backgroundColor: raster.dividerSubtle,
+    backgroundColor: vlak.dividerSubtle,
     borderRadius: 2,
     overflow: "hidden",
   },
   fill: {
     display: "block",
     height: "100%",
-    backgroundColor: raster.ink,
+    backgroundColor: vlak.ink,
     borderRadius: 2,
   },
 });

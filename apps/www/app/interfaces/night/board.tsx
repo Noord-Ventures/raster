@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Icon } from "@noorddev/raster-react";
+import { Icon } from "@noorddev/vlak-react";
 import { Brand } from "../mark";
 import dynamic from "next/dynamic";
 import { PhoneV1Chrome } from "../v1-chrome";

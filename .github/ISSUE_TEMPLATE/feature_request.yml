@@ -1,12 +1,12 @@
 name: Feature request
-description: A component, prop, or token Raster should have.
+description: A component, prop, or token Vlak should have.
 labels: [enhancement]
 body:
   - type: textarea
     id: problem
     attributes:
       label: The problem
-      description: What you are trying to build and where Raster stops short.
+      description: What you are trying to build and where Vlak stops short.
     validations:
       required: true
   - type: textarea

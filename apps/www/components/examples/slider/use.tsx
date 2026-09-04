@@ -1,4 +1,4 @@
-import { Slider } from "@noorddev/raster-react";
+import { Slider } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 
 export function Use() {

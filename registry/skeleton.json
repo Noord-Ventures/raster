@@ -3,11 +3,11 @@
   "name": "skeleton",
   "type": "registry:component",
   "title": "Skeleton",
-  "description": "Divider-tone pulse. Animation stops when prefers-reduced-motion is on.",
+  "description": "Reserves space while content loads. Divider-tone pulse that respects reduced motion.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -15,23 +15,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/skeleton.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface SkeletonProps extends React.HTMLAttributes<HTMLSpanElement> {\n  width?: number | string;\n  height?: number | string;\n}\n\nconst rsSkel = stylex.keyframes({\n  \"0%\": { opacity: 1 },\n  \"50%\": { opacity: 0.55 },\n  \"100%\": { opacity: 1 },\n});\n\nconst styles = stylex.create({\n  skeleton: {\n    display: \"block\",\n    backgroundColor: raster.dividerSubtle,\n    borderRadius: raster.radiusSm,\n    animationName: {\n      default: rsSkel,\n      [mq.reduce]: \"none\",\n    },\n    animationDuration: \"1.6s\",\n    animationTimingFunction: \"ease-in-out\",\n    animationIterationCount: \"infinite\",\n  },\n});\n\nexport const Skeleton = React.forwardRef<HTMLSpanElement, SkeletonProps>(function Skeleton(\n  { width, height = 14, style, className, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-skeleton\", className], styles.skeleton);\n  return (\n    <span\n      ref={ref}\n      aria-hidden=\"true\"\n      {...props}\n      className={sx.className}\n      style={{ width, height, ...sx.style, ...style }}\n    />\n  );\n});\n",
+      "path": "vlak/skeleton.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak, mq } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface SkeletonProps extends React.HTMLAttributes<HTMLSpanElement> {\n  width?: number | string;\n  height?: number | string;\n}\n\nconst rsSkel = stylex.keyframes({\n  \"0%\": { opacity: 1 },\n  \"50%\": { opacity: 0.55 },\n  \"100%\": { opacity: 1 },\n});\n\nconst styles = stylex.create({\n  skeleton: {\n    display: \"block\",\n    backgroundColor: vlak.dividerSubtle,\n    borderRadius: vlak.radiusSm,\n    animationName: {\n      default: rsSkel,\n      [mq.reduce]: \"none\",\n    },\n    animationDuration: \"1.6s\",\n    animationTimingFunction: \"ease-in-out\",\n    animationIterationCount: \"infinite\",\n  },\n});\n\nexport const Skeleton = React.forwardRef<HTMLSpanElement, SkeletonProps>(function Skeleton(\n  { width, height = 14, style, className, ...props },\n  ref,\n) {\n  const sx = rs([\"rs-skeleton\", className], styles.skeleton);\n  return (\n    <span\n      ref={ref}\n      aria-hidden=\"true\"\n      {...props}\n      className={sx.className}\n      style={{ width, height, ...sx.style, ...style }}\n    />\n  );\n});\n",
       "type": "registry:component",
-      "target": "components/raster/skeleton.tsx"
+      "target": "components/vlak/skeleton.tsx"
     },
     {
-      "path": "raster/styles/skeleton.css",
+      "path": "vlak/styles/skeleton.css",
       "content": "/* ── skeleton: generated from packages/react/src/components/skeleton.tsx ── */\n@keyframes rs-anim-rs-skel{0%{opacity:1}50%{opacity:0.55}100%{opacity:1}}\n.rs-skeleton{display:block;background-color:var(--divider-subtle);border-radius:var(--radius-sm);animation-name:rs-anim-rs-skel;animation-duration:1.6s;animation-timing-function:ease-in-out;animation-iteration-count:infinite}\n@media (prefers-reduced-motion: reduce){.rs-skeleton{animation-name:none}}\n",
       "type": "registry:file",
-      "target": "styles/raster/skeleton.css"
+      "target": "styles/vlak/skeleton.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "feedback",
       "classes": [
         "rs-skeleton"
@@ -39,7 +39,7 @@
       "snippet": "<span class=\"rs-skeleton\" style=\"width:180px;height:14px\"></span>",
       "cssOnly": false,
       "registryDependencies": [
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Skeleton",
@@ -47,7 +47,7 @@
         "Loading placeholder",
         "Shimmer"
       ],
-      "example": "import { Skeleton } from \"@noorddev/raster-react\";\n\n<Skeleton width=\"60%\" />\n<Skeleton width={240} height={14} />",
+      "example": "import { Skeleton } from \"@noorddev/vlak-react\";\n\n<Skeleton width=\"60%\" />\n<Skeleton width={240} height={14} />",
       "usage": {
         "use": [
           "Holding the shape of content that is about to arrive.",

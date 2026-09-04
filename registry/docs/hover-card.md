@@ -1,11 +1,11 @@
 # Hover card
 
-Preview panel on hover and keyboard focus.
+Previews linked context on hover or keyboard focus.
 
 Category: surfaces  
 Name: `hover-card`  
 Also known as: Hover card, Preview card, Profile card, Rich tooltip  
-Page: https://getraster.com/components/hover-card/
+Page: https://vlak.dev/components/hover-card/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/hover-card/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { HoverCard } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { HoverCard } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add hover-card
+npx @noorddev/vlak-cli add hover-card
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/hover-card.json
+npx shadcn add https://vlak.dev/r/hover-card.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <span class="rs-hover-card"><span tabindex="0" aria-describedby="noord-card">@noord</span><span class="rs-hover-card-panel" role="tooltip" id="noord-card">Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.</span></span>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/hover-card.json
 ## Example
 
 ```tsx
-import { HoverCard, Link } from "@noorddev/raster-react";
+import { HoverCard, Link } from "@noorddev/vlak-react";
 
 <HoverCard trigger={<Link href="/noord">@noord</Link>}>
   Noord, a venture studio in Alkmaar. Ten portfolio companies, one design system.

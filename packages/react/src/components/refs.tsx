@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface CiteProps extends React.HTMLAttributes<HTMLElement> {}
@@ -20,12 +20,12 @@ const styles = stylex.create({
   },
   citeA: {
     color: {
-      default: raster.gray,
-      ":hover": raster.accent,
+      default: vlak.gray,
+      ":hover": vlak.accent,
     },
     textDecoration: "none",
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
   },
@@ -46,12 +46,12 @@ const styles = stylex.create({
     fontSize: "0.8125rem",
     fontWeight: 500,
     lineHeight: 1.65,
-    color: raster.gray,
+    color: vlak.gray,
     letterSpacing: "-0.01em",
-    borderBottomWidth: raster.hairline,
+    borderBottomWidth: vlak.hairline,
     borderBottomStyle: "solid",
     borderBottomColor: {
-      default: raster.divider,
+      default: vlak.divider,
       ":last-child": "transparent",
     },
     scrollMarginTop: 88,
@@ -78,27 +78,27 @@ const styles = stylex.create({
     fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
     fontSize: "0.6875rem",
     color: {
-      default: raster.gray,
+      default: vlak.gray,
       ":hover": "var(--text)",
     },
     textDecoration: "none",
-    borderBottomWidth: raster.hairline,
+    borderBottomWidth: vlak.hairline,
     borderBottomStyle: "solid",
     borderBottomColor: {
-      default: raster.divider,
-      ":hover": raster.accent,
+      default: vlak.divider,
+      ":hover": vlak.accent,
     },
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     wordBreak: "break-all",
   },
   box: {
-    borderWidth: raster.hairline,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
-    borderRadius: raster.radius,
+    borderColor: vlak.divider,
+    borderRadius: vlak.radius,
     padding: {
       default: "1.25rem",
       [mq.phone]: "14px 16px",
@@ -108,14 +108,14 @@ const styles = stylex.create({
   boxLabel: {
     fontSize: "0.75rem",
     fontWeight: 600,
-    color: raster.gray,
+    color: vlak.gray,
     letterSpacing: "-0.01em",
     marginBottom: "0.5rem",
   },
   boxText: {
     fontSize: "0.8125rem",
     fontWeight: 500,
-    color: raster.gray,
+    color: vlak.gray,
     lineHeight: 1.7,
     userSelect: "all",
   },

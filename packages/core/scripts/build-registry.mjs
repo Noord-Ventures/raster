@@ -3,10 +3,10 @@
 //   registry/index.json    shadcn-compatible registry index (no file contents)
 //   registry/<name>.json   shadcn-compatible registry-item, contents inlined
 //   registry/bundle.json   every item with contents plus the generated docs
-//                          markdown, consumed by @noorddev/raster-cli and
-//                          @noorddev/raster-mcp (both work offline)
+//                          markdown, consumed by @noorddev/vlak-cli and
+//                          @noorddev/vlak-mcp (both work offline)
 //
-// Components install two ways: through the raster CLI (bundles this
+// Components install two ways: through the vlak CLI (bundles this
 // output), or through `npx shadcn add <url>/r/<name>.json` from any
 // host serving this directory.
 //
@@ -16,11 +16,11 @@
 import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join, normalize, relative } from "node:path";
 import { fileURLToPath } from "node:url";
-import { rasterTokens } from "../src/tokens.ts";
-import { rasterComponents } from "../src/registry.ts";
+import { vlakTokens } from "../src/tokens.ts";
+import { vlakComponents } from "../src/registry.ts";
 
-const PUBLIC_HOST = rasterTokens.meta.url;
-const REGISTRY_URL = process.env.RASTER_REGISTRY_URL ?? `${PUBLIC_HOST}/r`;
+const PUBLIC_HOST = vlakTokens.meta.url;
+const REGISTRY_URL = process.env.VLAK_REGISTRY_URL ?? `${PUBLIC_HOST}/r`;
 const VERSION = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8")).version;
 
 const corePath = (p) => fileURLToPath(new URL(`../${p}`, import.meta.url));
@@ -36,28 +36,28 @@ const write = (name, data) => {
 };
 
 /* The base style every component needs: tokens, page base, type scale,
-   reduced-motion rules: everything in raster.css except components. */
+   reduced-motion rules: everything in vlak.css except components. */
 const baseCss = ["tokens.css", "base.css", "type.css", "touch.css", "motion.css"]
   .map((f) => readCore(`css/${f}`))
   .join("\n");
 
 const baseItem = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
-  name: "raster-base",
+  name: "vlak-base",
   type: "registry:style",
-  title: "Raster base",
+  title: "Vlak base",
   description:
     "Tokens (light + dark), page base with the visible module grid, type scale, and reduced-motion rules.",
   registryDependencies: [`${REGISTRY_URL}/inter.json`],
   files: [
     {
-      path: "raster/styles/base.css",
+      path: "vlak/styles/base.css",
       content: baseCss,
       type: "registry:file",
-      target: "styles/raster/base.css",
+      target: "styles/vlak/base.css",
     },
   ],
-  meta: { raster: { category: "foundation", cssOnly: true } },
+  meta: { vlak: { category: "foundation", cssOnly: true } },
 };
 
 const interCss = `/* Inter, SIL OFL 1.1. Variable, latin + latin-ext. System sans is fallback only. */
@@ -96,14 +96,14 @@ const interItem = {
   },
   files: [
     {
-      path: "raster/styles/inter.css",
+      path: "vlak/styles/inter.css",
       content: interCss,
       type: "registry:file",
-      target: "styles/raster/inter.css",
+      target: "styles/vlak/inter.css",
     },
   ],
   meta: {
-    raster: {
+    vlak: {
       category: "foundation",
       cssOnly: true,
       license: "SIL Open Font License 1.1",
@@ -116,7 +116,7 @@ const interItem = {
 /* Files every React component imports. They install once, as one
    registry:lib item, and every component depends on it. */
 const LIB_FILES = ["cx.ts", "rs.ts", "tokens.stylex.ts", "hidden.stylex.ts", "merge-refs.ts"];
-const LIB_ITEM = "raster-lib";
+const LIB_ITEM = "vlak-lib";
 
 function posix(p) {
   return p.replaceAll("\\", "/");
@@ -139,16 +139,16 @@ function isLib(rel) {
 /* The component that owns a React entry file. Chart family entries share
    components/chart.tsx; the owner is the first registry entry naming it. */
 const ownerOfEntry = new Map();
-for (const c of rasterComponents) {
+for (const c of vlakComponents) {
   if (c.react && !ownerOfEntry.has(c.react)) ownerOfEntry.set(c.react, c.name);
 }
 
 /* Where a source file lands in the consumer's tree. Entry files take the
-   owning component's name; helpers keep their path under raster/. */
+   owning component's name; helpers keep their path under vlak/. */
 function destFor(srcRel) {
   const owner = ownerOfEntry.get(srcRel);
-  if (owner) return `raster/${owner}${srcRel.endsWith(".tsx") ? ".tsx" : ".ts"}`;
-  return `raster/${srcRel.replace(/^components\//, "")}`;
+  if (owner) return `vlak/${owner}${srcRel.endsWith(".tsx") ? ".tsx" : ".ts"}`;
+  return `vlak/${srcRel.replace(/^components\//, "")}`;
 }
 
 /* Walk a component's imports. Stops at lib files and at other components'
@@ -210,16 +210,16 @@ const libItem = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: LIB_ITEM,
   type: "registry:lib",
-  title: "Raster lib",
-  description: "Shared helpers every Raster React component imports: the rs() class seam, cx, StyleX tokens, and the hidden-element leaf.",
+  title: "Vlak lib",
+  description: "Shared helpers every Vlak React component imports: the rs() class seam, cx, StyleX tokens, and the hidden-element leaf.",
   dependencies: ["@stylexjs/stylex"],
   files: LIB_FILES.map((f) => ({ ...fileEntry(f, readReact(f)), type: "registry:lib" })),
-  meta: { raster: { category: "foundation", cssOnly: false, registryDependencies: [] } },
+  meta: { vlak: { category: "foundation", cssOnly: false, registryDependencies: [] } },
 };
 
 const items = [interItem, baseItem, libItem];
 
-for (const component of rasterComponents) {
+for (const component of vlakComponents) {
   const files = [];
   const deps = new Set(component.registryDependencies ?? []);
 
@@ -232,10 +232,10 @@ for (const component of rasterComponents) {
   for (const cssFile of component.css) {
     const base = cssFile.split("/").pop();
     files.push({
-      path: `raster/styles/${base}`,
+      path: `vlak/styles/${base}`,
       content: readCore(`css/${cssFile}`),
       type: "registry:file",
-      target: `styles/raster/${base}`,
+      target: `styles/vlak/${base}`,
     });
   }
 
@@ -247,7 +247,7 @@ for (const component of rasterComponents) {
     title: component.title,
     description: component.description,
     registryDependencies: [
-      `${REGISTRY_URL}/raster-base.json`,
+      `${REGISTRY_URL}/vlak-base.json`,
       `${REGISTRY_URL}/inter.json`,
       ...registryDependencies.map((d) => `${REGISTRY_URL}/${d}.json`),
     ],
@@ -255,12 +255,12 @@ for (const component of rasterComponents) {
       ? {
           dependencies: ["@stylexjs/stylex"],
           devDependencies: ["@stylexjs/babel-plugin"],
-          docs: "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+          docs: "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
         }
       : {}),
     files,
     meta: {
-      raster: {
+      vlak: {
         category: component.category,
         classes: component.classes,
         snippet: component.snippet,
@@ -294,8 +294,8 @@ for (const item of items) write(`${item.name}.json`, item);
 
 write("index.json", {
   $schema: "https://ui.shadcn.com/schema/registry.json",
-  name: "raster",
-  homepage: rasterTokens.meta.url,
+  name: "vlak",
+  homepage: vlakTokens.meta.url,
   items: items.map(({ files, ...rest }) => ({
     ...rest,
     files: files.map(({ content, ...file }) => file),
@@ -303,10 +303,10 @@ write("index.json", {
 });
 
 write("bundle.json", {
-  name: "raster",
+  name: "vlak",
   version: VERSION,
   css: {
-    raster: readCore("css/raster.css"),
+    vlak: readCore("css/vlak.css"),
   },
   items,
   docs,

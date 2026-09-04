@@ -1,14 +1,14 @@
 {
-  "name": "raster-monorepo",
+  "name": "vlak-monorepo",
   "private": true,
   "version": "0.4.0",
-  "description": "Raster — a monochrome, CSS-first design system. Tokens, components, CLI, registry, and docs.",
+  "description": "Vlak — a monochrome, CSS-first design system. Tokens, components, CLI, registry, and docs.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Noord-Ventures/raster.git"
+    "url": "git+https://github.com/Noord-Ventures/vlak.git"
   },
-  "homepage": "https://getraster.com",
+  "homepage": "https://vlak.dev",
   "type": "module",
   "engines": {
     "node": ">=22.6"
@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "pnpm -r --filter './packages/*' build",
-    "build:registry": "pnpm --filter @noorddev/raster build:registry",
+    "build:registry": "pnpm --filter @noorddev/vlak build:registry",
     "test": "pnpm -r --filter './packages/*' test",
     "typecheck": "pnpm -r --filter './packages/*' typecheck",
     "lint": "biome check .",

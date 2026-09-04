@@ -1,5 +1,5 @@
 /**
- * Raster concentric radius.
+ * Vlak concentric radius.
  *
  * Steve Ruiz’s innerRadius: sample the −padding isosurface of a circular
  * corner SDF, then fit a circle whose center stays at the known concentric

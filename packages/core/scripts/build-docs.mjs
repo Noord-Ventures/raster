@@ -20,21 +20,21 @@
 
 import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { catalogComponents, rasterComponents } from "../src/registry.ts";
-import { rasterCategories } from "../src/schema.ts";
-import { rasterTokens } from "../src/tokens.ts";
+import { catalogComponents, vlakComponents } from "../src/registry.ts";
+import { vlakCategories } from "../src/schema.ts";
+import { vlakTokens } from "../src/tokens.ts";
 
 const corePath = (p) => fileURLToPath(new URL(`../${p}`, import.meta.url));
 const repoPath = (p) => fileURLToPath(new URL(`../../../${p}`, import.meta.url));
 const read = (p) => readFileSync(p, "utf8");
 
-const HOST = rasterTokens.meta.url;
+const HOST = vlakTokens.meta.url;
 const VERSION = JSON.parse(read(corePath("package.json"))).version;
 const props = JSON.parse(read(corePath("props/props.json")));
-const REACT = "@noorddev/raster-react";
-const CORE = "@noorddev/raster";
-const CLI = "@noorddev/raster-cli";
-const MCP = "@noorddev/raster-mcp";
+const REACT = "@noorddev/vlak-react";
+const CORE = "@noorddev/vlak";
+const CLI = "@noorddev/vlak-cli";
+const MCP = "@noorddev/vlak-mcp";
 
 const outDir = repoPath("registry/docs");
 rmSync(outDir, { recursive: true, force: true });
@@ -58,7 +58,7 @@ const docUrl = (name) => `${HOST}/docs/${name}.md`;
 const pageUrl = (name) => `${HOST}/components/${name}/`;
 
 /* ── Per-component page ── */
-const byCategory = new Map(rasterCategories.map((c) => [c, []]));
+const byCategory = new Map(vlakCategories.map((c) => [c, []]));
 for (const c of catalogComponents) byCategory.get(c.category).push(c);
 
 function importLine(c) {
@@ -73,7 +73,7 @@ function installSection(c) {
   parts.push(`**React package.** Precompiled; no compiler to configure.`);
   parts.push(fence("sh", `npm install ${REACT}`));
   parts.push(fence("tsx", [`import "${REACT}/css";`, imp ?? `// ${c.title} is CSS-only: use the markup below.`].join("\n")));
-  parts.push(`**Vendor the source.** The StyleX leaf lands in \`components/raster/\` for your compiler to own.`);
+  parts.push(`**Vendor the source.** The StyleX leaf lands in \`components/vlak/\` for your compiler to own.`);
   parts.push(fence("sh", `npx ${CLI} add ${c.name}`));
   parts.push(`**shadcn registry.** Same files, through the shadcn CLI.`);
   parts.push(fence("sh", `npx shadcn add ${HOST}/r/${c.name}.json`));
@@ -141,7 +141,7 @@ function componentPage(c) {
 
 /* ── Index ── */
 function indexPage() {
-  const parts = [`# Raster components`, `${catalogComponents.length} components in ${rasterCategories.length} categories. Each page lists install paths, a React example, props, keyboard, and accessibility notes. Version ${VERSION}.`];
+  const parts = [`# Vlak components`, `${catalogComponents.length} components in ${vlakCategories.length} categories. Each page lists install paths, a React example, props, keyboard, and accessibility notes. Version ${VERSION}.`];
   for (const [category, items] of byCategory) {
     if (!items.length) continue;
     parts.push(`## ${title(category)}\n\n${list(items.map((c) => `[${c.title}](${c.name}.md): ${c.description}`))}`);
@@ -178,14 +178,14 @@ function tokensPage() {
   const dark = new Map(parseVars(blockAfter(css, '[data-theme="dark"]')).map((v) => [v.name, v.value]));
   const stylex = read(repoPath("packages/react/src/tokens.stylex.ts"));
   const alias = new Map();
-  for (const m of stylex.matchAll(/^\s*(\w+):\s*"var\((--[\w-]+)\)"/gm)) alias.set(m[2], `raster.${m[1]}`);
+  for (const m of stylex.matchAll(/^\s*(\w+):\s*"var\((--[\w-]+)\)"/gm)) alias.set(m[2], `vlak.${m[1]}`);
   const media = [];
   for (const m of css.matchAll(/@media\s*\(([^)]+)\)\s*\{\s*:root\s*\{([\s\S]*?)\}\s*\}/g)) {
     media.push({ query: m[1].replace(/\s+/g, ""), vars: parseVars(m[2]) });
   }
   const parts = [
-    `# Raster tokens`,
-    `Every custom property \`${CORE}/css/tokens.css\` defines, generated from \`packages/core/src/tokens.ts\`. The dark column applies under \`data-theme="dark"\` on the root element, or under the system dark scheme until the page decides. The StyleX alias is the key on \`raster\` from \`${REACT}/tokens.stylex\`. The same tokens ship as JSON (\`${CORE}/tokens\`) and in the W3C Design Tokens format (\`${CORE}/tokens.dtcg\`) for Style Dictionary, Figma Variables, and Tokens Studio.`,
+    `# Vlak tokens`,
+    `Every custom property \`${CORE}/css/tokens.css\` defines, generated from \`packages/core/src/tokens.ts\`. The dark column applies under \`data-theme="dark"\` on the root element, or under the system dark scheme until the page decides. The StyleX alias is the key on \`vlak\` from \`${REACT}/tokens.stylex\`. The same tokens ship as JSON (\`${CORE}/tokens\`) and in the W3C Design Tokens format (\`${CORE}/tokens.dtcg\`) for Style Dictionary, Figma Variables, and Tokens Studio.`,
     `## Custom properties\n\n${table(
       ["Property", "Light", "Dark", "StyleX", "Note"],
       light.map((v) => [code(v.name), code(v.value), dark.has(v.name) ? code(dark.get(v.name)) : "", alias.has(v.name) ? code(alias.get(v.name)) : "", v.note]),
@@ -202,9 +202,9 @@ function tokensPage() {
     Object.entries(obj).flatMap(([k, v]) =>
       v && typeof v === "object" && !Array.isArray(v) ? flat(v, `${prefix}${k}.`) : [[`${prefix}${k}`, Array.isArray(v) ? JSON.stringify(v) : String(v)]],
     );
-  const groups = Object.entries(rasterTokens).filter(([k]) => k !== "meta");
+  const groups = Object.entries(vlakTokens).filter(([k]) => k !== "meta");
   parts.push(
-    `## Token groups\n\nThe raw values from \`rasterTokens\` (\`import { rasterTokens } from "${CORE}"\`, or \`${CORE}/tokens\` as JSON).\n\n${groups
+    `## Token groups\n\nThe raw values from \`vlakTokens\` (\`import { vlakTokens } from "${CORE}"\`, or \`${CORE}/tokens\` as JSON).\n\n${groups
       .map(([name, value]) => `### ${name}\n\n${table(["Key", "Value"], flat(value).map(([k, v]) => [code(k), code(v)]))}`)
       .join("\n\n")}`,
   );
@@ -213,15 +213,15 @@ function tokensPage() {
 
 /* ── Guide ── */
 function guidePage() {
-  const layers = ["raster.tokens", "raster.base", "raster.type", "raster.components", "raster.touch", "raster.motion"];
+  const layers = ["vlak.tokens", "vlak.base", "vlak.type", "vlak.components", "vlak.touch", "vlak.motion"];
   const exported = Object.values(props.components).flatMap((c) => c.exports.filter((e) => e.kind === "component"));
   const withRef = exported.filter((e) => e.ref).length;
   const categories = [...byCategory].filter(([, items]) => items.length).map(([c, items]) => `${c} (${items.length})`);
-  return `# Raster guide
+  return `# Vlak guide
 
-Raster is a monochrome design system: paper, ink, gray, hairlines, and a ${rasterTokens.grid.module}px module. ${catalogComponents.length} components in ${categories.length} categories: ${categories.join(", ")}. Version ${VERSION}. Site: ${HOST}. Source: https://github.com/Noord-Ventures/raster.
+Vlak is a monochrome design system: paper, ink, gray, hairlines, and a ${vlakTokens.grid.module}px module. ${catalogComponents.length} components in ${categories.length} categories: ${categories.join(", ")}. Version ${VERSION}. Site: ${HOST}. Source: https://github.com/Noord-Ventures/vlak.
 
-Three install paths share one source, so nothing drifts: the React package (precompiled StyleX plus one stylesheet), the vendored source (the shadcn model, through the Raster CLI or the shadcn CLI), and CSS only (\`rs-*\` classes on plain markup).
+Three install paths share one source, so nothing drifts: the React package (precompiled StyleX plus one stylesheet), the vendored source (the shadcn model, through the Vlak CLI or the shadcn CLI), and CSS only (\`rs-*\` classes on plain markup).
 
 ## Install
 
@@ -237,23 +237,23 @@ React 18 or 19. Every component is also its own module: \`import { Button } from
 
 ${fence("sh", `npx ${CLI} init\nnpx ${CLI} add button dialog`)}
 
-\`init\` writes \`styles/raster.css\`, the Inter files, a specimen \`index.html\`, and \`raster.json\`. \`add\` copies the component's StyleX leaf and its dependencies into \`components/raster/\`; shared helpers (\`rs.ts\`, \`cx.ts\`, \`tokens.stylex.ts\`) install once. Vendored leaves need a StyleX compiler (see StyleX below).
+\`init\` writes \`styles/vlak.css\`, the Inter files, a specimen \`index.html\`, and \`vlak.json\`. \`add\` copies the component's StyleX leaf and its dependencies into \`components/vlak/\`; shared helpers (\`rs.ts\`, \`cx.ts\`, \`tokens.stylex.ts\`) install once. Vendored leaves need a StyleX compiler (see StyleX below).
 
 ### shadcn registry
 
 ${fence("sh", `npx shadcn add ${HOST}/r/button.json`)}
 
-The registry at \`${HOST}/r/\` follows the shadcn registry-item schema. \`${HOST}/r/index.json\` lists every item; each item's \`meta.raster\` carries the category, classes, snippet, example, usage, keyboard, accessibility notes, and aliases.
+The registry at \`${HOST}/r/\` follows the shadcn registry-item schema. \`${HOST}/r/index.json\` lists every item; each item's \`meta.vlak\` carries the category, classes, snippet, example, usage, keyboard, accessibility notes, and aliases.
 
 ### CSS only
 
-${fence("html", `<link rel="stylesheet" href="node_modules/${CORE}/css/raster.css" />\n<button class="rs-btn-primary">Primary action</button>`)}
+${fence("html", `<link rel="stylesheet" href="node_modules/${CORE}/css/vlak.css" />\n<button class="rs-btn-primary">Primary action</button>`)}
 
-\`${CORE}/css\` paints every component through \`rs-*\` classes and needs no JavaScript. Individual files are exported too: \`${CORE}/css/tokens.css\`, \`${CORE}/css/components/button.css\`. The class names per component are listed on each component page and in \`/r/<name>.json\` under \`meta.raster.classes\`.
+\`${CORE}/css\` paints every component through \`rs-*\` classes and needs no JavaScript. Individual files are exported too: \`${CORE}/css/tokens.css\`, \`${CORE}/css/components/button.css\`. The class names per component are listed on each component page and in \`/r/<name>.json\` under \`meta.vlak.classes\`.
 
 ## Theming
 
-Set \`data-theme="dark"\` on the root element for the dark scheme, \`data-theme="light"\` to pin light. Without either, \`prefers-color-scheme\` applies. \`color-scheme\` is set with the tokens, so native controls follow. \`ThemeToggle\` flips the attribute and stores the choice in \`localStorage\` under \`raster-theme\`.
+Set \`data-theme="dark"\` on the root element for the dark scheme, \`data-theme="light"\` to pin light. Without either, \`prefers-color-scheme\` applies. \`color-scheme\` is set with the tokens, so native controls follow. \`ThemeToggle\` flips the attribute and stores the choice in \`localStorage\` under \`vlak-theme\`.
 
 There is no accent hue. Emphasis comes from weight, size, and spacing. Charts may carry one spot color through the \`spot\` prop, which sets \`--rs-chart-spot\`.
 
@@ -261,19 +261,19 @@ Every token is a custom property on \`:root\`; override them in your own stylesh
 
 ## Cascade layers and overriding
 
-All Raster CSS sits in cascade layers, in this order: ${layers.map(code).join(", ")}. Unlayered author CSS wins over any of it, so overrides never need \`!important\`:
+All Vlak CSS sits in cascade layers, in this order: ${layers.map(code).join(", ")}. Unlayered author CSS wins over any of it, so overrides never need \`!important\`:
 
 ${fence("css", `.rs-btn-primary { border-radius: 8px; }`)}
 
-To override from inside a layer, declare yours after Raster's: \`@layer raster.motion, app;\`.
+To override from inside a layer, declare yours after Vlak's: \`@layer vlak.motion, app;\`.
 
 ## StyleX
 
-The leaves are StyleX. Consumers of \`${REACT}\` need no compiler: the package is precompiled and \`${REACT}/css\` carries the output. To write your own leaves against Raster tokens, or to compile vendored leaves, use the token file:
+The leaves are StyleX. Consumers of \`${REACT}\` need no compiler: the package is precompiled and \`${REACT}/css\` carries the output. To write your own leaves against Vlak tokens, or to compile vendored leaves, use the token file:
 
-${fence("tsx", `import * as stylex from "@stylexjs/stylex";\nimport { raster, mq } from "${REACT}/tokens.stylex";\n\nconst styles = stylex.create({\n  panel: { borderTop: \`1px solid \${raster.divider}\`, padding: raster.pad, [mq.phone]: { padding: 12 } },\n});`)}
+${fence("tsx", `import * as stylex from "@stylexjs/stylex";\nimport { vlak, mq } from "${REACT}/tokens.stylex";\n\nconst styles = stylex.create({\n  panel: { borderTop: \`1px solid \${vlak.divider}\`, padding: vlak.pad, [mq.phone]: { padding: 12 } },\n});`)}
 
-\`raster\` aliases the CSS custom properties (\`raster.ink\` is \`var(--text)\`), so compiled leaves and \`rs-*\` CSS read the same values. A StyleX compiler must include \`${REACT}/tokens.stylex\` in its compile so the variable hashes match: Vite uses \`@stylexjs/unplugin\`; Next.js uses \`@stylexjs/postcss-plugin\` plus a Babel pass with \`@stylexjs/babel-plugin\`. Without a compiler, import the package and its stylesheet and skip StyleX entirely.
+\`vlak\` aliases the CSS custom properties (\`vlak.ink\` is \`var(--text)\`), so compiled leaves and \`rs-*\` CSS read the same values. A StyleX compiler must include \`${REACT}/tokens.stylex\` in its compile so the variable hashes match: Vite uses \`@stylexjs/unplugin\`; Next.js uses \`@stylexjs/postcss-plugin\` plus a Babel pass with \`@stylexjs/babel-plugin\`. Without a compiler, import the package and its stylesheet and skip StyleX entirely.
 
 ## Components
 
@@ -297,20 +297,20 @@ The CLI works offline: the registry snapshot, the CSS, the docs, and Inter ship 
 ## Registry
 
 - \`${HOST}/r/index.json\`: every item without file contents.
-- \`${HOST}/r/<name>.json\`: one item with its files inlined, in the shadcn registry-item schema. \`raster-base\` (tokens, base, type), \`inter\` (the font), and \`raster-lib\` (shared helpers) are the foundation items every component depends on.
+- \`${HOST}/r/<name>.json\`: one item with its files inlined, in the shadcn registry-item schema. \`vlak-base\` (tokens, base, type), \`inter\` (the font), and \`vlak-lib\` (shared helpers) are the foundation items every component depends on.
 - \`${HOST}/docs/props.json\`: every export of every component with its props (name, type, required, default, description) and the DOM attribute type it extends.
 
 ## For agents
 
-Raster is published as data so tools can install and compose it without guessing:
+Vlak is published as data so tools can install and compose it without guessing:
 
 - \`${HOST}/llms.txt\`: the index of everything below, in the llmstxt.org format. \`${HOST}/llms-full.txt\` is the whole documentation in one file.
 - \`${HOST}/docs/index.md\`, \`${HOST}/docs/guide.md\` (this file), \`${HOST}/docs/tokens.md\`, and \`${HOST}/docs/<name>.md\` for each component.
-- \`${HOST}/r/index.json\` and \`${HOST}/r/<name>.json\`: the registry, with \`meta.raster\` holding the example, usage, keyboard table, accessibility notes, classes, and aliases.
+- \`${HOST}/r/index.json\` and \`${HOST}/r/<name>.json\`: the registry, with \`meta.vlak\` holding the example, usage, keyboard table, accessibility notes, classes, and aliases.
 - \`${HOST}/docs/props.json\`: the props contract, also shipped as \`${CORE}/props\`.
 - \`npx ${CLI} list --json\`, \`search <term> --json\`, \`docs <name>\`, \`tokens --json\`: the same data from the terminal, offline.
-- \`${MCP}\`: an MCP server over stdio with \`list_components\`, \`get_component\`, \`search_components\`, \`get_tokens\`, \`get_install\`, and \`get_guide\`, plus \`raster://docs/<name>\` resources. Configure it as \`{"mcpServers": {"raster": {"command": "npx", "args": ["-y", "${MCP}"]}}}\`.
-- In code, \`import { rasterComponents, rasterTokens } from "${CORE}"\` gives the typed registry and tokens.
+- \`${MCP}\`: an MCP server over stdio with \`list_components\`, \`get_component\`, \`search_components\`, \`get_tokens\`, \`get_install\`, and \`get_guide\`, plus \`vlak://docs/<name>\` resources. Configure it as \`{"mcpServers": {"vlak": {"command": "npx", "args": ["-y", "${MCP}"]}}}\`.
+- In code, \`import { vlakComponents, vlakTokens } from "${CORE}"\` gives the typed registry and tokens.
 
 When composing an interface: pick components by name or alias from index.md, read the page for the example and the props table, import from \`${REACT}\`, and keep to the conventions above. Do not invent props; the props tables are generated from the TypeScript sources. Keep the copy in sentence case.
 `;
@@ -319,9 +319,9 @@ When composing an interface: pick components by name or alias from index.md, rea
 /* ── llms.txt ── */
 function llmsIndex() {
   const lines = [
-    `# Raster`,
+    `# Vlak`,
     ``,
-    `> A monochrome design system: paper, ink, gray, hairlines, and a ${rasterTokens.grid.module}px module. ${catalogComponents.length} React components as precompiled StyleX with one stylesheet, the same components as rs-* CSS, and a shadcn-compatible registry. Version ${VERSION}.`,
+    `> A monochrome design system: paper, ink, gray, hairlines, and a ${vlakTokens.grid.module}px module. ${catalogComponents.length} React components as precompiled StyleX with one stylesheet, the same components as rs-* CSS, and a shadcn-compatible registry. Version ${VERSION}.`,
     ``,
     `Install with \`npm install ${REACT}\` and \`import "${REACT}/css"\`, vendor the source with \`npx ${CLI} add <name>\`, or use \`npx shadcn add ${HOST}/r/<name>.json\`. Every component page below has install paths, a React example, a props table generated from the types, keyboard interactions, and accessibility notes.`,
     ``,
@@ -359,7 +359,7 @@ write(
 );
 
 /* Hidden entries are documented too, for the CLI and MCP only. */
-for (const c of rasterComponents) if (c.hidden) write(`${c.name}.md`, componentPage(c));
+for (const c of vlakComponents) if (c.hidden) write(`${c.name}.md`, componentPage(c));
 
 const stale = readdirSync(outDir).filter((f) => !written.includes(f));
 for (const f of stale) rmSync(`${outDir}/${f}`);

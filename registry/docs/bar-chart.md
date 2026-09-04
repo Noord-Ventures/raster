@@ -1,11 +1,11 @@
 # Bar chart
 
-Vertical or horizontal. Thin ink bars, square ends. Stacks when series share a field.
+Compares values with vertical or horizontal bars. Thin ink marks, square ends, optional stacks.
 
 Category: charts  
 Name: `bar-chart`  
 Also known as: Bar chart, Column chart, Stacked bar chart, Horizontal bar chart  
-Page: https://getraster.com/components/bar-chart/
+Page: https://vlak.dev/components/bar-chart/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/bar-chart/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { BarChart } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { BarChart } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add bar-chart
+npx @noorddev/vlak-cli add bar-chart
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/bar-chart.json
+npx shadcn add https://vlak.dev/r/bar-chart.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-chart"><svg viewBox="0 0 240 64" width="240" height="64"><line class="rs-chart-grid" x1="0" x2="240" y1="56" y2="56"/><rect class="rs-chart-bar" x="20" y="18" width="8" height="38"/><rect class="rs-chart-bar" x="48" y="10" width="8" height="46"/><rect class="rs-chart-bar" x="76" y="24" width="8" height="32"/></svg></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/bar-chart.json
 ## Example
 
 ```tsx
-import { BarChart } from "@noorddev/raster-react";
+import { BarChart } from "@noorddev/vlak-react";
 
 <BarChart
   height={204}

@@ -3,11 +3,11 @@
   "name": "scroll-area",
   "type": "registry:component",
   "title": "Scroll area",
-  "description": "Overflow box with the scrollbar hidden and 20px feathers at the ends.",
+  "description": "Contains overflow without visible scrollbars. 20px edge feathers signal more content.",
   "registryDependencies": [
-    "https://getraster.com/r/raster-base.json",
-    "https://getraster.com/r/inter.json",
-    "https://getraster.com/r/raster-lib.json"
+    "https://vlak.dev/r/vlak-base.json",
+    "https://vlak.dev/r/inter.json",
+    "https://vlak.dev/r/vlak-lib.json"
   ],
   "dependencies": [
     "@stylexjs/stylex"
@@ -15,23 +15,23 @@
   "devDependencies": [
     "@stylexjs/babel-plugin"
   ],
-  "docs": "Raster leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/raster-react instead: it ships precompiled with one stylesheet.",
+  "docs": "Vlak leaves are StyleX. Compile them with @stylexjs/babel-plugin (Vite: @stylexjs/unplugin, Next: @stylexjs/nextjs-plugin). If you would rather not run a compiler, import @noorddev/vlak-react instead: it ships precompiled with one stylesheet.",
   "files": [
     {
-      "path": "raster/scroll-area.tsx",
-      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { raster } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {\n  maxHeight?: number | string;\n  /** Name of the scrolling region; it is keyboard-focusable, so it needs one. */\n  \"aria-label\"?: string;\n}\n\nconst styles = stylex.create({\n  scroll: {\n    overflowY: \"auto\",\n    scrollbarWidth: \"none\",\n    maskImage: \"linear-gradient(to bottom, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%)\",\n    paddingBlock: \"0.75rem\",\n    paddingInline: 0,\n    color: raster.ink,\n    \"::-webkit-scrollbar\": {\n      display: \"none\",\n    },\n    outlineWidth: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n    outlineStyle: {\n      default: null,\n      \":focus-visible\": \"solid\",\n    },\n    outlineColor: {\n      default: null,\n      \":focus-visible\": raster.ink,\n    },\n    outlineOffset: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n  },\n});\n\n/** Hidden scrollbar; feathered top and bottom edges. A named, focusable region. */\nexport const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(function ScrollArea({\n  maxHeight = 240,\n  style,\n  className,\n  \"aria-label\": ariaLabel = \"Scrollable content\",\n  ...props\n}, ref) {\n  const sx = rs([\"rs-scroll\", className], styles.scroll);\n  return (\n    <div\n      ref={ref}\n      role=\"region\"\n      aria-label={props[\"aria-labelledby\"] ? undefined : ariaLabel}\n      className={sx.className}\n      style={{ maxHeight, ...sx.style, ...style }}\n      tabIndex={0}\n      {...props}\n    />\n  );\n});\n",
+      "path": "vlak/scroll-area.tsx",
+      "content": "import * as React from \"react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport { vlak } from \"./tokens.stylex\";\nimport { rs } from \"./rs\";\n\nexport interface ScrollAreaProps extends React.HTMLAttributes<HTMLDivElement> {\n  maxHeight?: number | string;\n  /** Name of the scrolling region; it is keyboard-focusable, so it needs one. */\n  \"aria-label\"?: string;\n}\n\nconst styles = stylex.create({\n  scroll: {\n    overflowY: \"auto\",\n    scrollbarWidth: \"none\",\n    maskImage: \"linear-gradient(to bottom, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%)\",\n    paddingBlock: \"0.75rem\",\n    paddingInline: 0,\n    color: vlak.ink,\n    \"::-webkit-scrollbar\": {\n      display: \"none\",\n    },\n    outlineWidth: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n    outlineStyle: {\n      default: null,\n      \":focus-visible\": \"solid\",\n    },\n    outlineColor: {\n      default: null,\n      \":focus-visible\": vlak.ink,\n    },\n    outlineOffset: {\n      default: null,\n      \":focus-visible\": 2,\n    },\n  },\n});\n\n/** Hidden scrollbar; feathered top and bottom edges. A named, focusable region. */\nexport const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(function ScrollArea({\n  maxHeight = 240,\n  style,\n  className,\n  \"aria-label\": ariaLabel = \"Scrollable content\",\n  ...props\n}, ref) {\n  const sx = rs([\"rs-scroll\", className], styles.scroll);\n  return (\n    <div\n      ref={ref}\n      role=\"region\"\n      aria-label={props[\"aria-labelledby\"] ? undefined : ariaLabel}\n      className={sx.className}\n      style={{ maxHeight, ...sx.style, ...style }}\n      tabIndex={0}\n      {...props}\n    />\n  );\n});\n",
       "type": "registry:component",
-      "target": "components/raster/scroll-area.tsx"
+      "target": "components/vlak/scroll-area.tsx"
     },
     {
-      "path": "raster/styles/scroll-area.css",
+      "path": "vlak/styles/scroll-area.css",
       "content": "/* ── scroll-area: generated from packages/react/src/components/scroll-area.tsx ── */\n.rs-scroll{overflow-y:auto;scrollbar-width:none;mask-image:linear-gradient(to bottom, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);padding-block:0.75rem;padding-inline:0;color:var(--text)}\n.rs-scroll::-webkit-scrollbar{display:none}\n.rs-scroll:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}\n",
       "type": "registry:file",
-      "target": "styles/raster/scroll-area.css"
+      "target": "styles/vlak/scroll-area.css"
     }
   ],
   "meta": {
-    "raster": {
+    "vlak": {
       "category": "content",
       "classes": [
         "rs-scroll"
@@ -39,7 +39,7 @@
       "snippet": "<div class=\"rs-scroll\" style=\"max-height:140px\" tabindex=\"0\"><p>Alkmaar</p><p>Amsterdam</p><p>Delft</p><p>Eindhoven</p><p>Groningen</p><p>Haarlem</p><p>Rotterdam</p><p>Utrecht</p></div>",
       "cssOnly": false,
       "registryDependencies": [
-        "raster-lib"
+        "vlak-lib"
       ],
       "aliases": [
         "Scroll area",
@@ -47,7 +47,7 @@
         "Scrollable region",
         "Overflow box"
       ],
-      "example": "import { ScrollArea } from \"@noorddev/raster-react\";\n\n<ScrollArea maxHeight={240} aria-label=\"Cities\">\n  {cities.map((city) => <p key={city}>{city}</p>)}\n</ScrollArea>",
+      "example": "import { ScrollArea } from \"@noorddev/vlak-react\";\n\n<ScrollArea maxHeight={240} aria-label=\"Cities\">\n  {cities.map((city) => <p key={city}>{city}</p>)}\n</ScrollArea>",
       "usage": {
         "use": [
           "A bounded list inside a fixed layout: a sidebar, a panel, a menu of many rows.",

@@ -3,7 +3,7 @@
  * Do not invent a bio, a client list, a headcount, or a product.
  *
  * Register: workhorse, specific, facts before poetry. Lead with what
- * Raster is and who it is for. History (Crouwel, Müller-Brockmann) sits
+ * Vlak is and who it is for. History (Crouwel, Müller-Brockmann) sits
  * after the specimen. Credits stay in the colophon.
  *
  * Sources:
@@ -16,13 +16,13 @@
  */
 
 import { COMMAND, DOOR, LAW, WORD } from "../specimen";
-import { rasterTokens } from "@noorddev/raster";
+import { vlakTokens } from "@noorddev/vlak";
 
 export const word = WORD;
 export const law = LAW;
 
-const foundry = rasterTokens.type.foundry;
-const grid = rasterTokens.grid;
+const foundry = vlakTokens.type.foundry;
+const grid = vlakTokens.grid;
 
 export const era = {
   heading: WORD,
@@ -31,42 +31,42 @@ export const era = {
 
 export const lead = {
   kicker: "What it is",
-  what: "Raster is a workhorse of a design system on a modular grid, used for interfaces. The page is paper. Type is Inter. The module is 204 pixels — 184 for the column, 20 for the gutter. Cells are flush. A line is 1px.",
-  who: "It is meant for product UI: forms, tables, settings, the everyday catalog. You install the CSS. React is there if you want a component. The classes start with rs-.",
+  what: "Vlak is a monochrome design system for product interfaces. Its name is Dutch for plane or surface. A 204px module sets the structure: 184px of content and a 20px gutter. Inter sets the type. Hairlines mark the grid.",
+  who: "Use it for forms, tables, settings, and other everyday product UI. Import the React package, link the CSS, or vendor the source. Every component exposes stable rs-* classes.",
 };
 
 export const usage = {
   kicker: "Usage",
-  intro: "Three ways in. Import @noorddev/raster-react for precompiled components and one stylesheet. Or run the CLI: it writes the stylesheet, Inter, and a specimen page, and copies component source on request. Or link raster.css and use the classes.",
+  intro: "There are three ways in. Import @noorddev/vlak-react for precompiled components and one stylesheet. Run the CLI to write the stylesheet, Inter, a specimen page, and component source. Or link vlak.css and use the classes.",
   commandWhere: "Terminal",
   command: COMMAND,
   htmlWhere: "Head",
-  html: `<link rel="stylesheet" href="styles/raster.css" />`,
+  html: `<link rel="stylesheet" href="styles/vlak.css" />`,
   controlWhere: "Body",
   control: `<button class="rs-btn-primary">Save</button>`,
   landing:
-    "index.html is the one-shot Raster landing, meant to read like getraster.com: poster type, the 204 grid, the laws. It is not a thin shell.",
+    "index.html is a complete Vlak specimen: poster type, the 204px grid, and the system principles.",
   files:
-    "styles/raster.css, Inter, and raster.json land in your project. No CDN, no runtime fetch. Restyle the specimen toward the live home with the files on disk.",
+    "styles/vlak.css, Inter, and vlak.json land in your project. No CDN, no runtime fetch. Restyle the specimen toward the live home with the files on disk.",
   after: "Dark scheme: set data-theme=\"dark\" on the root element.",
 };
 
 export const license = {
-  kicker: "Free & open source",
-  body: "Raster is free and open source. The code is MIT. You can use it in a product, a poster, or an internal tool.",
+  kicker: "Free and open source",
+  body: "Vlak is free and open source. The code is MIT. You can use it in a product, a poster, or an internal tool.",
   type: `${foundry.typeface} is ${foundry.license}, designed by ${foundry.designer}.`,
 };
 
 export const specimen = {
   kicker: "Specimen",
   body: "Body is 15px, weight 500, measure about 66 characters. Headings and labels are 600. Sentence case. The module holds the type: a 204 cell, or two, or a column of them. Edges step from grid line to grid line.",
-  mid: "A button is 40 tall on the desktop and 44 on the phone. The field label sits on a 16px line so the hairline lands on an integer. Radius on a control follows the concentric law. Module cells stay flush to the gridline.",
-  long: "The smaller sizes keep a tall x-height so interface copy stays readable at 12 and 13. The larger sizes tighten tracking and let weight do the emphasis. There is no accent hue. Paper, ink, and the grays between them are the palette. Motion is 0.12 to 0.18 seconds, ease, a state the user caused — color and opacity name the change; layout rarely moves.",
+  mid: "A button is 40px tall on the desktop and 44px on the phone. The field label sits on a 16px line so the hairline lands on an integer. Control radii follow the concentric law. Module cells stay flush to the gridline.",
+  long: "The smaller sizes keep a tall x-height so interface copy stays readable at 12px and 13px. The larger sizes tighten tracking and let weight do the emphasis. There is no accent hue. Paper, ink, and the grays between them are the palette. Motion lasts 0.12 to 0.18 seconds and responds to an action. Color and opacity signal the change; layout rarely moves.",
 };
 
 export const history = {
   kicker: "History",
-  body: "The program comes from International Typographic Style and Dutch modernism. Josef Müller-Brockmann drew it. Wim Crouwel put it on the press at Total Design.",
+  body: "Vlak draws from Swiss International Typographic Style and Dutch modernism: modular grids, asymmetric composition, sans serif type, and functional hierarchy. It translates those principles from print into product interfaces.",
 };
 
 export const featured = [
@@ -319,19 +319,19 @@ export const program = {
 
 export const notes = [
   {
-    q: "How do I install Raster?",
-    a: "npm install @noorddev/raster-react, then import @noorddev/raster-react/css once and the components where you use them. For CSS only, install @noorddev/raster and link raster.css. For vendored source, npx @noorddev/raster-cli add <name>, or npx shadcn add getraster.com/r/<name>.json.",
+    q: "How do I install Vlak?",
+    a: "npm install @noorddev/vlak-react, then import @noorddev/vlak-react/css once and the components where you use them. For CSS only, install @noorddev/vlak and link vlak.css. For vendored source, npx @noorddev/vlak-cli add <name>, or npx shadcn add vlak.dev/r/<name>.json.",
   },
   {
     q: "How do I add a component?",
-    a: "Import it from @noorddev/raster-react, or copy its StyleX source into components/raster/ with npx @noorddev/raster-cli add <name>. The classes are already in raster.css, so CSS-only pages need no file. The registry is at getraster.com/r/<name>.json.",
+    a: "Import it from @noorddev/vlak-react, or copy its StyleX source into components/vlak/ with npx @noorddev/vlak-cli add <name>. The classes are already in vlak.css, so CSS-only pages need no file. The registry is at vlak.dev/r/<name>.json.",
   },
   {
-    q: "How do I use Raster with Next.js or Vercel?",
-    a: "Import @noorddev/raster-react/css in the root layout and use the components; stateful ones already carry \"use client\". Static export works; this site is one. Set data-theme=\"dark\" on the html element for the dark scheme.",
+    q: "How do I use Vlak with Next.js or Vercel?",
+    a: "Import @noorddev/vlak-react/css in the root layout and use the components; stateful ones already carry \"use client\". Static export works; this site is one. Set data-theme=\"dark\" on the html element for the dark scheme.",
   },
   {
-    q: "Does Raster use Radix or Tailwind?",
+    q: "Does Vlak use Radix or Tailwind?",
     a: "No. Components are StyleX leaves on native elements. No Radix, no Tailwind. Every component also carries stable rs- classes.",
   },
   {
@@ -340,7 +340,7 @@ export const notes = [
   },
   {
     q: "Do I need React?",
-    a: "No. raster.css is generated from the same StyleX leaves and paints every component through rs- classes on plain markup. React is one of three ways in.",
+    a: "No. vlak.css is generated from the same StyleX leaves and paints every component through rs- classes on plain markup. React is one of three ways in.",
   },
   {
     q: "How do I switch to the dark scheme?",
@@ -356,19 +356,19 @@ export const notes = [
   },
   {
     q: "What is the International Typographic Style here?",
-    a: "The influence slogan is International Typographic Style. The Dutch and Swiss names on About are the roster, not a second slogan. Paper, ink, a 204 module, hairlines.",
+    a: "Vlak applies modular grids, sans serif type, asymmetric composition, and functional hierarchy to product interfaces. The About page records the Swiss and Dutch work behind that approach.",
   },
   {
     q: "What is Noord?",
-    a: "Noord Frontier Design Lab sits between Alkmaar and Silicon Valley. Raster was designed and built there. Not a fund.",
+    a: "Noord is a frontier design lab in Alkmaar. Vlak was designed and built there.",
   },
   {
     q: "What are the ten principles?",
-    a: "Simple, Beautiful, Opinionated, Elegant, Clear, Legible, Solid, Versatile, Customizable, Minimal. Sentence case. No periods.",
+    a: "Platform first, one source of paint, accessible by default, paper and ink, 204px module, native elements, React or CSS, stable classes, agent-readable, MIT licensed.",
   },
   {
     q: "Where do I report a problem?",
-    a: "github.com/Noord-Ventures/raster. Issues and pull requests. The packages are @noorddev/raster, @noorddev/raster-react, and @noorddev/raster-cli.",
+    a: "github.com/Noord-Ventures/vlak. Issues and pull requests. The packages are @noorddev/vlak, @noorddev/vlak-react, and @noorddev/vlak-cli.",
   },
 ] as const;
 
@@ -383,14 +383,14 @@ export const typeface = {
 };
 
 export const noord = {
-  heading: "Noord",
-  span: "Alkmaar ↔ Silicon Valley",
-  what: "Noord Frontier Design Lab sits between Alkmaar and Silicon Valley.",
-  built: "Raster was designed and built there.",
-  who: "Renato Valdés Olmos led design and development for Raster at Noord.",
+  heading: "Noord Frontier Design Lab",
+  span: "Alkmaar",
+  what: "Vlak was designed and built at Noord Frontier Design Lab in Alkmaar.",
+  built: "Design and development:",
+  who: "Renato Valdés Olmos.",
   door: DOOR,
-  host: rasterTokens.meta.url,
-  packages: ["@noorddev/raster", "@noorddev/raster-react", "@noorddev/raster-cli"] as const,
+  host: vlakTokens.meta.url,
+  packages: ["@noorddev/vlak", "@noorddev/vlak-react", "@noorddev/vlak-cli"] as const,
   command: COMMAND,
 };
 
@@ -398,5 +398,5 @@ export const person = {
   heading: "Renato Valdés Olmos",
   copyright: "MIT © Noord / Renato Valdés-Olmos",
   year: "2026",
-  repo: "https://github.com/Noord-Ventures/raster",
+  repo: "https://github.com/Noord-Ventures/vlak",
 };

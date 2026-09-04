@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { describeTrigger } from "./tooltip";
 
@@ -22,17 +22,17 @@ const styles = stylex.create({
     position: "absolute",
     top: "calc(100% + 8px)",
     insetInlineStart: 0,
-    zIndex: raster.zFloat,
+    zIndex: vlak.zFloat,
     width: {
       default: "16.25rem",
       [mq.phone]: "min(280px, calc(100vw - 32px))",
     },
-    backgroundColor: raster.paper,
-    borderWidth: raster.hairline,
+    backgroundColor: vlak.paper,
+    borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: raster.divider,
+    borderColor: vlak.divider,
     borderRadius: {
-      default: raster.radius,
+      default: vlak.radius,
       [mq.phone]: 0,
     },
     boxShadow: {
@@ -46,7 +46,7 @@ const styles = stylex.create({
     },
     lineHeight: 1.55,
     letterSpacing: "-0.01em",
-    color: raster.gray,
+    color: vlak.gray,
     opacity: {
       default: 0,
       [stylex.when.ancestor(":hover")]: {
@@ -72,7 +72,7 @@ const styles = stylex.create({
       },
     },
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     // Bridges the 8px gap so the pointer can move onto the panel.

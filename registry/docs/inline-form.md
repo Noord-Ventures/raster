@@ -1,11 +1,11 @@
 # Inline form
 
-One field with the submit action inside. The button appears after the input validates.
+Pairs one field with an embedded submit action. The button appears after validation.
 
 Category: patterns  
 Name: `inline-form`  
 Also known as: Inline form, Newsletter form, Subscribe form, Single-field form  
-Page: https://getraster.com/components/inline-form/
+Page: https://vlak.dev/components/inline-form/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/inline-form/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { InlineForm } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { InlineForm } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add inline-form
+npx @noorddev/vlak-cli add inline-form
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/inline-form.json
+npx shadcn add https://vlak.dev/r/inline-form.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-inline-field"><input class="rs-inline-input" placeholder="Your e-mail" /><span class="rs-reveal rs-reveal-in"><button class="rs-btn-primary rs-inline-btn">Subscribe</button></span></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/inline-form.json
 ## Example
 
 ```tsx
-import { InlineForm } from "@noorddev/raster-react";
+import { InlineForm } from "@noorddev/vlak-react";
 
 <InlineForm
   placeholder="Your e-mail"

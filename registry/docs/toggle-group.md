@@ -1,11 +1,11 @@
 # Toggle group
 
-Joined toggles, one pressed, 1px between.
+Selects one option from joined toggles. The active option fills with ink.
 
 Category: actions  
 Name: `toggle-group`  
 Also known as: Toggle group, Segmented control, Exclusive toggles  
-Page: https://getraster.com/components/toggle-group/
+Page: https://vlak.dev/components/toggle-group/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/toggle-group/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { ToggleGroup } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { ToggleGroup } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add toggle-group
+npx @noorddev/vlak-cli add toggle-group
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/toggle-group.json
+npx shadcn add https://vlak.dev/r/toggle-group.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-toggle-group"><button class="rs-toggle" aria-pressed="true">Left</button><button class="rs-toggle" aria-pressed="false">Center</button><button class="rs-toggle" aria-pressed="false">Right</button></div>
@@ -52,7 +52,7 @@ npx shadcn add https://getraster.com/r/toggle-group.json
 
 ```tsx
 import { useState } from "react";
-import { ToggleGroup } from "@noorddev/raster-react";
+import { ToggleGroup } from "@noorddev/vlak-react";
 
 const [align, setAlign] = useState("left");
 

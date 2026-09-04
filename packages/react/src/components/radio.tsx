@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 import { hidden } from "../hidden.stylex";
 
@@ -64,11 +64,11 @@ const styles = stylex.create({
       default: "0.875rem",
       [mq.phone]: "1.0625rem",
     },
-    color: raster.ink,
+    color: vlak.ink,
     letterSpacing: "-0.01em",
     minHeight: {
       default: "1.5rem",
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
   },
   dot: {
@@ -84,7 +84,7 @@ const styles = stylex.create({
     borderWidth: 1.5,
     borderStyle: "solid",
     borderColor: {
-      default: raster.controlBorder,
+      default: vlak.controlBorder,
       [mq.forcedColors]: "CanvasText",
     },
     position: "relative",
@@ -93,7 +93,7 @@ const styles = stylex.create({
   },
   on: {
     borderColor: {
-      default: raster.ink,
+      default: vlak.ink,
       [mq.forcedColors]: "Highlight",
     },
   },
@@ -105,7 +105,7 @@ const styles = stylex.create({
     },
     borderRadius: "50%",
     backgroundColor: {
-      default: raster.ink,
+      default: vlak.ink,
       [mq.forcedColors]: "Highlight",
     },
     forcedColorAdjust: "none",

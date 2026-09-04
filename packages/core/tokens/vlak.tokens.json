@@ -1,8 +1,8 @@
 {
   "meta": {
-    "name": "Raster",
-    "description": "A monochrome, CSS-first design system.",
-    "url": "https://getraster.com"
+    "name": "Vlak",
+    "description": "A monochrome design system for product interfaces, built on a 204px module.",
+    "url": "https://vlak.dev"
   },
   "color": {
     "light": {

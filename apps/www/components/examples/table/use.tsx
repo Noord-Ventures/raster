@@ -1,4 +1,4 @@
-import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/raster-react";
+import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/vlak-react";
 import { UseField } from "../use-frame";
 export function Use() {
   return (

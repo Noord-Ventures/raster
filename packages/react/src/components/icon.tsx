@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster } from "../tokens.stylex";
+import { vlak } from "../tokens.stylex";
 import { rs } from "../rs";
 import {
   filledCutouts,
@@ -22,15 +22,15 @@ export type { IconName, IconRotate };
 export type { DrawnName, IconAlias, IconGroup } from "./icon-marks";
 
 /**
- * Raster chrome marks. Vera 28 Aug 2026; optical recut 1 Sep 2026; R1 pairs 1 Sep 2026.
+ * Vlak chrome marks. Vera 28 Aug 2026; optical recut 1 Sep 2026; R1 pairs 1 Sep 2026.
  *
  * 16×16 module, optical center 8,8. Line: stroke 1, fill none.
  * Filled: same figures, solid closed geometry, currentColor. Select open
  * figures use hand-cut silhouettes to keep the pair optically complete.
  * Cap butt, join miter, no rx. Hairline stays 1 CSS px at 12, 16, and 24.
  * Copied is check. Accordion down is chevron-right rotated 90°.
- * First five marks (copy, copied, chevron-left, chevron-right, close) stay as drawn,
- * except L/R chevrons take a measured +0.25y optical nudge toward 8,8.
+ * The first five marks keep their original construction; copy has a tighter
+ * measured overlap and L/R chevrons take a +0.25y optical nudge toward 8,8.
  */
 export const ICON_STROKE = 1;
 export const ICON_VIEWBOX = 16;
@@ -82,7 +82,7 @@ const styles = stylex.create({
     display: "flex",
     gap: "1.125rem",
     alignItems: "center",
-    color: raster.ink,
+    color: vlak.ink,
   },
   catalog: {
     width: "100%",
@@ -102,7 +102,7 @@ const styles = stylex.create({
     fontSize: "0.75rem",
     fontWeight: 600,
     letterSpacing: 0,
-    color: raster.gray,
+    color: vlak.gray,
     textTransform: "none",
   },
   grid: {
@@ -111,7 +111,7 @@ const styles = stylex.create({
       default: "repeat(auto-fill, 184px)",
       [at480]: "minmax(0, 1fr)",
     },
-    columnGap: raster.gutter,
+    columnGap: vlak.gutter,
     rowGap: "1.25rem",
     justifyContent: "start",
     width: "100%",
@@ -141,7 +141,7 @@ const styles = stylex.create({
   label: {
     fontSize: "0.6875rem",
     lineHeight: 1.3,
-    color: raster.gray,
+    color: vlak.gray,
     textTransform: "none",
   },
 });

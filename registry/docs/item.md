@@ -1,11 +1,11 @@
 # Item
 
-Flush row: title and description on the left, meta on the right.
+Presents one list entry. Title and description sit left; metadata sits right.
 
 Category: content  
 Name: `item`  
 Also known as: Item, List item, Row, Cell  
-Page: https://getraster.com/components/item/
+Page: https://vlak.dev/components/item/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/item/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Item } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Item } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add item
+npx @noorddev/vlak-cli add item
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/item.json
+npx shadcn add https://vlak.dev/r/item.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <div class="rs-item"><div><p class="rs-item-title">Alkmaar</p><p class="rs-item-desc">The studio city.</p></div><span class="rs-item-meta">NL</span></div>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/item.json
 ## Example
 
 ```tsx
-import { Item } from "@noorddev/raster-react";
+import { Item } from "@noorddev/vlak-react";
 
 <Item title="Alkmaar" description="The studio city." meta="NL" />
 ```

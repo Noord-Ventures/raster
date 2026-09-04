@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
-import { raster, mq } from "../tokens.stylex";
+import { vlak, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 export interface Crumb {
@@ -16,9 +16,9 @@ const styles = stylex.create({
   crumbs: {
     fontSize: {
       default: "0.8125rem",
-      [mq.phone]: raster.controlFs,
+      [mq.phone]: vlak.controlFs,
     },
-    color: raster.ink,
+    color: vlak.ink,
     letterSpacing: "-0.01em",
   },
   list: {
@@ -53,16 +53,16 @@ const styles = stylex.create({
   /* Ancestors are secondary gray at full opacity; the page carries weight. */
   link: {
     transition: {
-      default: raster.transition,
+      default: vlak.transition,
       [mq.reduce]: "none",
     },
     color: {
-      default: raster.gray,
-      ":link": raster.gray,
-      ":visited": raster.gray,
-      ":hover": raster.ink,
-      ":active": raster.ink,
-      ":focus-visible": raster.ink,
+      default: vlak.gray,
+      ":link": vlak.gray,
+      ":visited": vlak.gray,
+      ":hover": vlak.ink,
+      ":active": vlak.ink,
+      ":focus-visible": vlak.ink,
     },
     fontWeight: 400,
     textDecoration: {
@@ -81,7 +81,7 @@ const styles = stylex.create({
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
     outlineWidth: {
       default: null,
@@ -93,7 +93,7 @@ const styles = stylex.create({
     },
     outlineColor: {
       default: null,
-      ":focus-visible": raster.ink,
+      ":focus-visible": vlak.ink,
     },
     outlineOffset: {
       default: null,
@@ -101,10 +101,10 @@ const styles = stylex.create({
     },
   },
   sep: {
-    color: raster.gray,
+    color: vlak.gray,
   },
   here: {
-    color: raster.ink,
+    color: vlak.ink,
     fontWeight: 500,
     display: {
       default: null,
@@ -116,7 +116,7 @@ const styles = stylex.create({
     },
     minHeight: {
       default: null,
-      [mq.phone]: raster.hit,
+      [mq.phone]: vlak.hit,
     },
   },
 });

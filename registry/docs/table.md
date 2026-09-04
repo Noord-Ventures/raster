@@ -1,11 +1,11 @@
 # Table
 
-Open grid, 1px row rules, last column right-aligned. Total rows use 2px rules.
+Presents structured values in rows and columns. 1px row rules; total rows use 2px rules.
 
 Category: content  
 Name: `table`  
 Also known as: Table, Static table, Grid  
-Page: https://getraster.com/components/table/
+Page: https://vlak.dev/components/table/
 
 ## When to use
 
@@ -22,27 +22,27 @@ Page: https://getraster.com/components/table/
 **React package.** Precompiled; no compiler to configure.
 
 ```sh
-npm install @noorddev/raster-react
+npm install @noorddev/vlak-react
 ```
 
 ```tsx
-import "@noorddev/raster-react/css";
-import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/raster-react";
+import "@noorddev/vlak-react/css";
+import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/vlak-react";
 ```
 
-**Vendor the source.** The StyleX leaf lands in `components/raster/` for your compiler to own.
+**Vendor the source.** The StyleX leaf lands in `components/vlak/` for your compiler to own.
 
 ```sh
-npx @noorddev/raster-cli add table
+npx @noorddev/vlak-cli add table
 ```
 
 **shadcn registry.** Same files, through the shadcn CLI.
 
 ```sh
-npx shadcn add https://getraster.com/r/table.json
+npx shadcn add https://vlak.dev/r/table.json
 ```
 
-**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/raster/css`.
+**CSS only.** `rs-*` classes on plain markup, styled by `@noorddev/vlak/css`.
 
 ```html
 <table class="rs-table"><thead><tr><th>Phase</th><th>Weeks</th></tr></thead><tbody><tr><td>Strategy</td><td>2</td></tr><tr><td>Identity</td><td>4</td></tr></tbody></table>
@@ -51,7 +51,7 @@ npx shadcn add https://getraster.com/r/table.json
 ## Example
 
 ```tsx
-import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/raster-react";
+import { Table, TableBody, TableHead, TableRow, TableTd, TableTh } from "@noorddev/vlak-react";
 
 <Table>
   <TableHead>
