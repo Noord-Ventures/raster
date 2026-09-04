@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 const surfaces = [
+  [`${HOST}/design.md`, "Composition, component choices, responsive behavior, and a page-building brief"],
   [`${HOST}/llms.txt`, "The index: what Vlak is, the install paths, one line per component"],
   [`${HOST}/llms-full.txt`, "Everything in one file: every component's docs, props, keyboard, markup"],
   [`${HOST}/docs/<name>.md`, "One component as markdown"],

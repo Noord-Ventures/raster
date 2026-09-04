@@ -101,15 +101,15 @@
   min-height: 0;
   overflow: auto;
   column-count: 2;
-  column-gap: 8px;
-  padding: 8px;
+  column-gap: 12px;
+  padding: 12px;
 }
 .sc-wall-stream > article { break-inside: avoid; }
 .sc-wall-card {
   break-inside: avoid;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   border: 1px solid var(--divider);
-  border-radius: var(--radius-sm);
+  border-radius: 0;
   background: var(--bg);
   overflow: hidden;
 }
@@ -127,7 +127,11 @@
   text-align: left;
   cursor: pointer;
   font-family: inherit;
+  overflow-wrap: anywhere;
+  transition: background-color var(--duration-snap) var(--ease);
 }
+.sc-wall-open:hover { background: color-mix(in srgb, var(--text) 3%, transparent); }
+.sc-wall-open:focus-visible { outline: 2px solid var(--text); outline-offset: -2px; }
 .sc-wall-faces { display: none; }
 .sc-wall-v1-line { display: none; }
 .sc-wall-open img {
@@ -148,7 +152,7 @@
   margin: 0;
   padding: 0 12px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1.45;
 }
@@ -156,13 +160,16 @@
 .sc-wall-meta {
   display: flex;
   align-items: center;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 8px 12px;
   padding: 0 12px;
   font-style: normal;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--text-secondary);
 }
+.sc-wall-meta > span { white-space: nowrap; }
+.sc-wall-meta > span:last-child { display: none; }
 .sc-wall-ghost {
   appearance: none;
   display: inline-flex;
@@ -174,7 +181,10 @@
   background: var(--bg);
   color: var(--text);
   border-radius: var(--radius-sm);
-  font: 500 12px/1 inherit;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
   cursor: pointer;
   transition: border-color var(--duration-snap) var(--ease);
 }
@@ -200,7 +210,10 @@
   color: inherit;
   text-align: left;
   cursor: pointer;
-  font: 500 13px/1.45 inherit;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
 }
 
 @container (max-width: 900px) {
@@ -211,7 +224,7 @@
     max-height: 160px;
   }
   .sc-wall-stream { column-count: 1; }
-  .if-inspect.is-open { width: 100%; border-left: 0; border-top: 1px solid var(--divider); }
+  .sc-wall > .if-inspect.is-open { width: 100%; border-left: 0; border-top: 1px solid var(--divider); }
   .sc-wall-inspect { width: 100%; }
 }
 
@@ -229,13 +242,13 @@
   .sc-wall-feed { min-height: 0; overflow: hidden; }
   .sc-wall-stream {
     column-count: 1;
-    padding: 12px 16px 0;
+    padding: 12px;
     overflow: auto;
     min-height: 0;
   }
   .sc-wall-card {
     margin-bottom: 12px;
-    border-radius: var(--radius-sm);
+    border-radius: 0;
     border-width: 1px;
     overflow: hidden;
   }

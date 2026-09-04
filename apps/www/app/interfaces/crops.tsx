@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Icon } from "@noorddev/vlak-react";
 import { sx } from "@/lib/sx";
 import { type InterfaceSlug, interfaceBySlug } from "./catalog";
 import { interfaces } from "./interfaces.stylex";
@@ -18,7 +19,7 @@ function LineCrop() {
   return (
     <div className="if-crop-scene if-crop-lijn">
       <Lockup slug="line" />
-      <p className="if-crop-kicker">Brief</p>
+      <p className="if-crop-kicker">A closer reading</p>
       <p className="if-crop-line">
         Digital Bath:<br />
         beauty beside
@@ -58,7 +59,7 @@ function WallCrop() {
   return (
     <div className="if-crop-scene if-crop-muur">
       <img src="/interfaces/threads/press-sheet-v2.jpg" alt="" />
-      <p className="if-crop-line">A grid is a plan, not a decoration.</p>
+      <p className="if-crop-line">Mara shared a new print study</p>
     </div>
   );
 }
@@ -68,8 +69,8 @@ function NightCrop() {
     <div className="if-crop-scene if-crop-nacht">
       <div className="if-crop-nacht-grid" />
       <Lockup slug="night" />
-      <p className="if-crop-numeral">Van 04</p>
-      <p className="if-crop-kicker">Kennemerstraatweg · en route</p>
+      <svg className="if-crop-route" viewBox="0 0 348 200" aria-hidden="true"><path d="M-20 160 H104 V72 H242 V28 H370"/><circle cx="104" cy="116" r="6"/><circle cx="242" cy="28" r="4"/></svg>
+      <p className="if-crop-fleet-status"><b>Van 04</b><span>Market / 3rd · moving</span></p>
     </div>
   );
 }
@@ -87,21 +88,13 @@ function RoomCrop() {
   return (
     <div className="if-crop-scene if-crop-kamer">
       <Lockup slug="room" />
-      <p className="if-crop-kicker">Press</p>
+      <p className="if-crop-kicker"># Production</p>
       <p className="if-crop-line">
-        Press run 14 is
-        <br />
-        on the sheet.
-        <br />
-        Fee is on page one.
+        The revised proof is ready for review.
       </p>
       <p className="if-crop-reply">
-        Logged. Weeks 4–7.
-        <br />
-        I will keep the timeline
-        <br />
-        under the fee.
-        <em>Sheet · agent</em>
+        I’ll check the colour separations before we send it to print.
+        <em>Inez · 09:18</em>
       </p>
     </div>
   );
@@ -120,7 +113,7 @@ function GraphicsCrop() {
 function RenderCrop() {
   return (
     <div className="if-crop-scene if-crop-render">
-      <div className="if-crop-tools"><i /><i /><i /><i /><i /></div>
+      <div className="if-crop-tools">{(["move", "refresh", "expand", "grid", "camera"] as const).map((name) => <i key={name}><Icon name={name} size={16} /></i>)}</div>
       <img src="/interfaces/concepts/render-car-v1.jpg" alt="" />
       <span>Perspective · body_v18</span>
     </div>
@@ -130,9 +123,10 @@ function RenderCrop() {
 function DriveCrop() {
   return (
     <div className="if-crop-scene if-crop-drive">
-      <header><span>09:41</span><strong>EV controls</strong><span>18°C · LTE</span></header>
-      <span>Driving</span><b>84</b><em>km/h</em>
-      <p><strong>318 km</strong><br />North Sea Radio · playing</p>
+      <header><span>09:41</span><strong>Vehicle systems</strong><span>18°C · LTE</span></header>
+      <div className="if-crop-ev-name">Evoque <span>Electric concept</span></div>
+      <img src="/interfaces/concepts/evoque-line-v4.png" alt="" />
+      <div className="if-crop-ev-status"><div><span>Range</span><strong>386 <small>km</small></strong></div><div><span>Battery</span><strong>84<small>%</small></strong></div><div><span>Cabin</span><strong>20<small>°</small></strong></div></div>
     </div>
   );
 }
@@ -151,7 +145,7 @@ function FrontierCrop() {
   return (
     <div className="if-crop-scene if-crop-frontier">
       <span>Aster Labs</span>
-      <b>Reasoning models<br />for work that<br />has to hold up.</b>
+      <b>Reasoning models for research and engineering.</b>
       <em>Aster 2 →</em>
     </div>
   );

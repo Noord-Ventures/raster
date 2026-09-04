@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Icon } from "@noorddev/vlak-react";
+import { Button, Icon } from "@noorddev/vlak-react";
 import { Brand } from "../mark";
 import dynamic from "next/dynamic";
 import { PhoneV1Chrome } from "../v1-chrome";
@@ -47,6 +47,7 @@ export function Board() {
             onClick={() => {
               setUnit(row.id);
               setPane("none");
+              setPhonePane("map");
             }}
           >
             <b className="if-ico-row">
@@ -74,10 +75,10 @@ export function Board() {
             <Icon name={item.mark} size={12} />
             {item.state}
           </p>
-          <button type="button" className="sc-night-ghost" onClick={() => setPane("trip")}>
+          <Button type="button" variant="ghost" size="sm" className="sc-night-ghost" onClick={() => setPane("trip")}>
             <Icon name="compass" size={12} />
             Open trip
-          </button>
+          </Button>
         </header>
         <div className="sc-night-map">
           <Scene selected={unit} />
@@ -120,7 +121,7 @@ export function Board() {
             </p>
             <p className="if-ico-row">
               <Icon name="globe" size={12} />
-              San Francisco field. Streets, water, traffic, one selected unit.
+              San Francisco delivery route. Select a vehicle to inspect its location and current trip.
             </p>
             <dl>
               <div>
@@ -133,14 +134,14 @@ export function Board() {
               <div>
                 <dt className="if-ico-row">
                   <Icon name={item.mark} size={12} />
-                  State
+                  Status
                 </dt>
                 <dd>{item.state}</dd>
               </div>
               <div>
                 <dt className="if-ico-row">
                   <Icon name="map-pin" size={12} />
-                  Now
+                  Location
                 </dt>
                 <dd>{item.where}</dd>
               </div>

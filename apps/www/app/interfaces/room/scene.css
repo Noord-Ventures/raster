@@ -52,7 +52,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 6px 16px;
+  padding: 10px 16px;
   min-height: 32px;
 }
 .sc-room-person {
@@ -130,15 +130,21 @@
   grid-template-columns: 28px minmax(0, 1fr);
   gap: 10px;
   width: 100%;
-  padding: 8px 16px;
+  padding: 12px 16px;
   border: 0;
   background: transparent;
   color: inherit;
   text-align: left;
   cursor: pointer;
-  font: 500 13px/1.45 inherit;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
   transition: background-color var(--duration-snap) var(--ease);
 }
+.sc-room-msg > span > b { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+.sc-room-msg:hover,
+.sc-room-person:hover { background: color-mix(in srgb, var(--text) 4%, transparent); }
 .sc-room-msg em {
   font-style: normal;
   font-weight: 500;
@@ -150,7 +156,7 @@
   align-items: center;
   gap: 8px;
   min-height: 52px;
-  padding: 8px 16px 12px;
+  padding: 16px;
   border-top: 1px solid var(--divider);
   grid-column: 2;
   grid-row: 2;
@@ -171,14 +177,17 @@
   color: var(--text);
   border-radius: var(--radius-sm);
   padding: 0 12px;
-  font: 500 13px/1 inherit;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
   transition: border-color var(--duration-snap) var(--ease);
 }
 .sc-room-field:focus-within { border-color: var(--text); }
 .sc-room-field-mark {
   display: inline-flex;
   align-items: center;
-  padding-left: 12px;
+  padding-left: 0;
   color: var(--text-secondary);
 }
 .sc-room-field input {
@@ -203,7 +212,10 @@
   background: var(--text);
   color: var(--bg);
   border-radius: var(--radius-sm);
-  font: 600 12px/1 inherit;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
   cursor: pointer;
   transition: opacity var(--duration-snap) var(--ease);
 }
@@ -227,7 +239,10 @@
   color: inherit;
   text-align: left;
   cursor: pointer;
-  font: 500 13px/1.4 inherit;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
 }
 .sc-room-ghost {
   appearance: none;
@@ -240,7 +255,10 @@
   background: var(--bg);
   color: var(--text);
   border-radius: var(--radius-sm);
-  font: 500 12px/1 inherit;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
   cursor: pointer;
   transition: border-color var(--duration-snap) var(--ease);
 }
@@ -263,14 +281,14 @@
     border-bottom: 1px solid var(--divider);
     max-height: 180px;
   }
-  .if-inspect.is-open { width: 100%; border-left: 0; border-top: 1px solid var(--divider); }
+  .sc-room > .if-inspect.is-open { width: 100%; border-left: 0; border-top: 1px solid var(--divider); }
   .sc-room-inspect { width: 100%; }
 }
 
 @container (max-width: 640px) {
   .sc-room {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    grid-template-rows: auto auto minmax(0, 1fr) auto auto;
     overflow: hidden;
     overflow-x: hidden;
     position: relative;
@@ -286,6 +304,16 @@
   }
   .sc-room[data-pane="channels"] > .sc-room-rail { grid-row: 3; }
   .sc-room > .sc-room-dock { grid-row: 4; }
+  .sc-room > .sc-room-chat { grid-row: 3; }
+  .sc-room[data-pane="channels"] > .sc-room-dock { display: none; }
+  .sc-room > .if-thumb {
+    display: flex;
+    grid-row: 5;
+    min-height: 52px;
+    border-top: 1px solid var(--divider);
+    background: var(--bg);
+  }
+  .sc-room > .if-thumb button { flex: 1; }
   .sc-room-brand,
   .sc-room-label,
   .sc-room-voice,
@@ -320,47 +348,47 @@
     justify-content: center;
     gap: 2px;
     min-height: 56px;
-    margin: 0 16px;
-    padding: 10px 12px 8px;
-    border-radius: var(--radius-sm);
+    margin: 0;
+    padding: 14px 20px;
+    border-radius: 0;
   }
-  .sc-room-ch:first-of-type { margin-top: 12px; }
+  .sc-room-ch:first-of-type { margin-top: 0; }
   .sc-room-ch[aria-current="true"],
   .sc-room-person[aria-current="true"] {
     background: color-mix(in srgb, var(--text) 4%, var(--bg));
     font-weight: 500;
   }
-  .sc-room-ch b { font-size: 13px; font-weight: 500; }
+  .sc-room-ch b { font-size: 14px; font-weight: 500; }
   .sc-room-v1-copy {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 400;
     color: var(--text-secondary);
   }
   .sc-room-person {
     grid-template-columns: 1fr;
     min-height: 48px;
-    margin: 0 16px;
-    padding: 10px 12px 8px;
-    border-radius: var(--radius-sm);
+    margin: 0;
+    padding: 14px 20px;
+    border-radius: 0;
   }
-  .sc-room-person b { font-size: 13px; font-weight: 500; }
-  .sc-room-person i { font-size: 11px; font-weight: 400; }
+  .sc-room-person b { font-size: 14px; font-weight: 500; }
+  .sc-room-person i { font-size: 12px; font-weight: 400; }
   .sc-room-chat { min-height: 0; overflow: hidden; }
   .sc-room-msg { min-height: 44px; }
   .sc-room-dock {
     gap: 8px;
     min-height: 56px;
-    padding: 10px 16px 16px;
+    padding: 16px;
   }
   .sc-room-field,
   .sc-room-dock button {
-    height: 36px;
-    min-height: 36px;
-    font-size: 13px;
+    height: 44px;
+    min-height: 44px;
+    font-size: 16px;
   }
-  .sc-room-dock button { min-width: 72px; font-size: 12px; }
+  .sc-room-dock button { min-width: 64px; font-size: 13px; }
   .sc-room-dock button:disabled {
-    opacity: 1;
+    opacity: 0.4;
     background: var(--text);
     color: var(--bg);
     cursor: default;

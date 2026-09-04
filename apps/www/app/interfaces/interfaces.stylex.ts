@@ -69,7 +69,7 @@ export const interfaces = stylex.create({
   list: {
     display: "grid",
     gridTemplateColumns: {
-      default: "repeat(auto-fill, 388px)",
+      default: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
       [phone]: "1fr",
     },
     columnGap: "var(--gutter)",
@@ -134,7 +134,7 @@ export const interfaces = stylex.create({
       default: "0.8125rem",
       [phone]: "0.9375rem",
     },
-    fontWeight: 500,
+    fontWeight: 400,
     letterSpacing: "-0.01em",
     lineHeight: {
       default: 1.4,
@@ -152,11 +152,7 @@ export const interfaces = stylex.create({
   },
   specimen: {
     containerType: "inline-size",
-    marginTop: {
-      default: 120,
-      [at899]: 24,
-      [phone]: 24,
-    },
+    marginTop: 0,
     height: {
       default: 612,
       [phone]: 680,
@@ -170,7 +166,7 @@ export const interfaces = stylex.create({
     borderStyle: "solid",
     borderColor: "var(--divider)",
     borderRadius: 0,
-    boxShadow: "0 1px 0 rgba(0, 0, 0, 0.04), 0 10px 28px rgba(0, 0, 0, 0.05)",
+    boxShadow: "none",
     overflow: "hidden",
   },
   matter: {

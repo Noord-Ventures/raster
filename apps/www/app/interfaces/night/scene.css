@@ -44,7 +44,10 @@
   color: var(--text);
   text-align: left;
   cursor: pointer;
-  font: 500 13px/1.3 inherit;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
   border-radius: 0;
   transition: color var(--duration-snap) var(--ease), background-color var(--duration-snap) var(--ease);
 }
@@ -82,7 +85,9 @@
   border-bottom: 1px solid var(--divider);
   font-size: 13px;
   font-weight: 600;
+  gap: 12px;
 }
+.sc-night-head > p { margin: 0; min-width: 0; }
 .sc-night-map {
   flex: 1;
   min-height: 0;
@@ -99,16 +104,21 @@
   background: var(--bg);
   color: var(--text);
   border-radius: var(--radius-sm);
-  font: 500 12px/1 inherit;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
   cursor: pointer;
   transition: border-color var(--duration-snap) var(--ease);
+  flex-shrink: 0;
+  width: auto;
 }
 .sc-night-ghost:hover { border-color: var(--text); }
 .sc-night-inspect { width: 204px; padding: 16px 20px; display: grid; gap: 12px; }
 .sc-night-trip { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
 .sc-night-inspect p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--text-secondary); }
 .sc-night-inspect dl { display: grid; gap: 0; margin: 0; }
-.sc-night-inspect div {
+.sc-night-inspect dl > div {
   display: flex;
   justify-content: space-between;
   gap: 12px;
@@ -117,29 +127,43 @@
   font-size: 13px;
 }
 .sc-night-inspect dt { color: var(--text-secondary); }
-.sc-night-inspect dd { margin: 0; font-weight: 600; }
+.sc-night-inspect dd { margin: 0; font-weight: 500; text-align: right; overflow-wrap: anywhere; }
 
 @container (max-width: 900px) {
   .sc-night { grid-template-columns: 1fr; overflow: auto; }
   .sc-night-rail { border-right: 0; border-bottom: 1px solid var(--divider); }
   .sc-night-map { min-height: 240px; }
-  .if-inspect.is-open { width: 100%; border-left: 0; border-top: 1px solid var(--divider); }
+  .sc-night > .if-inspect.is-open { width: 100%; border-left: 0; border-top: 1px solid var(--divider); }
   .sc-night-inspect { width: 100%; }
 }
 
 @container (max-width: 640px) {
   .sc-night {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
     overflow: hidden;
     position: relative;
   }
-  .sc-night-field,
   .sc-night-brand,
   .sc-night-label,
   .sc-night-voice,
   .sc-night-desk-state,
   .sc-night-unit .rs-icon { display: none; }
+  .sc-night[data-pane="fleet"] .sc-night-field,
+  .sc-night[data-pane="map"] .sc-night-rail { display: none; }
+  .sc-night .sc-night-field,
+  .sc-night .sc-night-rail { grid-row: 3; }
+  .sc-night[data-pane="map"] .sc-night-field { display: flex; }
+  .sc-night .sc-night-head { min-height: 52px; padding: 8px 16px; }
+  .sc-night .sc-night-ghost { min-height: 36px; }
+  .sc-night > .if-thumb {
+    display: flex;
+    grid-row: 4;
+    min-height: 52px;
+    border-top: 1px solid var(--divider);
+    background: var(--bg);
+  }
+  .sc-night > .if-thumb button { flex: 1; }
   .sc-night-rail {
     max-height: none;
     border-bottom: 0;
@@ -157,17 +181,17 @@
     justify-content: center;
     gap: 2px;
     min-height: 56px;
-    margin: 0 16px;
-    padding: 10px 12px 8px;
-    font-size: 13px;
-    border-radius: var(--radius-sm);
+    margin: 0;
+    padding: 14px 20px;
+    font-size: 14px;
+    border-radius: 0;
   }
-  .sc-night-unit:first-of-type { margin-top: 12px; }
+  .sc-night-unit:first-of-type { margin-top: 0; }
   .sc-night-unit[aria-current="true"] {
     background: color-mix(in srgb, var(--text) 4%, var(--bg));
     font-weight: 500;
   }
-  .sc-night-unit em { font-size: 11px; }
+  .sc-night-unit em { font-size: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

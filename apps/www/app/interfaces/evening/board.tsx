@@ -44,14 +44,14 @@ const STORES: Store[] = [
   { id: "canal", name: "Canal kitchen", area: "Oudegracht", photo: "/interfaces/food/canal-v2.jpg", rating: "4.7", fee: "€2.90", eta: "27 min", method: "delivery", diet: "fish", price: 2, dish: "Saffron fish stew" },
   { id: "lunch", name: "Press lunch", area: "Spoor", photo: "/interfaces/food/lunch.webp", rating: "4.5", fee: "€1.40", eta: "14 min", method: "pickup", diet: "veg", price: 1, dish: "Ricotta toast" },
   { id: "north", name: "North bakery", area: "Kennemerstraatweg", photo: "/interfaces/food/north.webp", rating: "4.9", fee: "€1.20", eta: "16 min", method: "delivery", diet: "veg", price: 1, dish: "Morning loaf" },
-  { id: "folsom", name: "Folsom counter", area: "Mission", photo: "/interfaces/food/bakery.webp", rating: "4.4", fee: "€2.10", eta: "24 min", method: "delivery", diet: "any", price: 1, dish: "Almond pastry" },
+  { id: "folsom", name: "Station bakery", area: "Stationsweg", photo: "/interfaces/food/bakery.webp", rating: "4.4", fee: "€2.10", eta: "24 min", method: "delivery", diet: "any", price: 1, dish: "Almond pastry" },
 ];
 
 const MENUS: Record<string, Item[]> = {
   buren: [
-    { id: "chicken", name: "Roast chicken", note: "Held at the pass", photo: "/interfaces/food/de-buren-v2.jpg", price: 18, cat: "Plates" },
-    { id: "salad", name: "Beet salad", note: "Cold plate", photo: "/interfaces/food/dish-salad.webp", price: 9, cat: "Plates" },
-    { id: "soup", name: "Leek soup", note: "Slow", photo: "/interfaces/food/dish-soup.webp", price: 8, cat: "Soup" },
+    { id: "chicken", name: "Roast chicken", note: "With potatoes and seasonal greens", photo: "/interfaces/food/de-buren-v2.jpg", price: 18, cat: "Plates" },
+    { id: "salad", name: "Beet salad", note: "Roasted beetroot and goat’s cheese", photo: "/interfaces/food/dish-salad.webp", price: 9, cat: "Plates" },
+    { id: "soup", name: "Leek soup", note: "With sourdough bread", photo: "/interfaces/food/dish-soup.webp", price: 8, cat: "Soup" },
   ],
   kaas: [
     { id: "board", name: "Cheese board", note: "Ready", photo: "/interfaces/food/kaasbar.webp", price: 16, cat: "Boards" },
@@ -74,13 +74,6 @@ const MENUS: Record<string, Item[]> = {
     { id: "soup2", name: "Leek soup", note: "Cup", photo: "/interfaces/food/dish-soup.webp", price: 7, cat: "Soup" },
   ],
 };
-
-const V1_KITCHENS = [
-  { id: "buren", place: "Alkmaar" },
-  { id: "canal", place: "Oudegracht" },
-  { id: "north", place: "Kennemer" },
-  { id: "folsom", place: "Mission" },
-] as const;
 
 function money(n: number) {
   return `€${n.toFixed(2)}`;
@@ -191,16 +184,16 @@ export function Board() {
                 aria-label="Price"
                 value={String(band)}
                 options={[
-                  { value: "0", label: <><Icon name="wallet" size={12} />Any</> },
-                  { value: "1", label: <><Icon name="dollar" size={12} />€</> },
-                  { value: "2", label: <><Icon name="dollar" size={12} />€€</> },
+                  { value: "0", label: "Any price" },
+                  { value: "1", label: "€" },
+                  { value: "2", label: "€€" },
                 ]}
                 onValueChange={(value) => setBand(Number(value) as 0 | 1 | 2)}
               />
             </div>
             <div className="sc-evening-stores" role="group" aria-label="Kitchens">
               {rooms.length === 0 ? (
-                <p className="sc-evening-empty">No kitchens on that filter.</p>
+                <p className="sc-evening-empty">No kitchens match. Try another search or change the filters.</p>
               ) : (
                 rooms.map((row) => (
                   <button key={row.id} type="button" className="sc-evening-store" onClick={() => openStore(row.id)}>
@@ -215,32 +208,12 @@ export function Board() {
                       </i>
                       <em className="if-ico-row">
                         <Icon name="map-pin" size={12} />
-                        {row.area} · {row.fee}
+                        {row.area} · {row.method === "pickup" ? "Free pickup" : `${row.fee} delivery`}
                       </em>
                     </span>
                   </button>
                 ))
               )}
-            </div>
-            <div className="sc-evening-v1" role="group" aria-label="Kitchens">
-              {V1_KITCHENS.map((item) => {
-                const row = STORES.find((store) => store.id === item.id);
-                if (!row) return null;
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    className="sc-evening-v1-row"
-                    aria-current={storeId === item.id}
-                    onClick={() => openStore(item.id)}
-                  >
-                    <b>{row.name}</b>
-                    <i>
-                      {row.rating} · {row.eta} · {item.place} · {row.fee}
-                    </i>
-                  </button>
-                );
-              })}
             </div>
           </>
         ) : (

@@ -3,8 +3,13 @@
 import * as React from "react";
 import * as THREE from "three";
 
-export function CarViewport() {
+type ViewportProps = { rotating: boolean; wireframe: boolean; material: "clay" | "graphite"; resetKey: number };
+
+export function CarViewport(props: ViewportProps) {
   const mountRef = React.useRef<HTMLDivElement>(null);
+  const options = React.useRef(props);
+  options.current = props;
+  const [unavailable, setUnavailable] = React.useState(false);
 
   React.useEffect(() => {
     const mount = mountRef.current;
@@ -18,7 +23,13 @@ export function CarViewport() {
     camera.position.set(7.2, 3.8, 7.8);
     camera.lookAt(0, 0.5, 0);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+    } catch {
+      setUnavailable(true);
+      return;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -100,6 +111,8 @@ export function CarViewport() {
     let dragging = false;
     let previousX = 0;
     let targetRotation = -0.45;
+    let previousReset = options.current.resetKey;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const down = (event: PointerEvent) => { dragging = true; previousX = event.clientX; renderer.domElement.setPointerCapture(event.pointerId); };
     const move = (event: PointerEvent) => { if (!dragging) return; targetRotation += (event.clientX - previousX) * 0.008; previousX = event.clientX; };
     const up = () => { dragging = false; };
@@ -107,6 +120,12 @@ export function CarViewport() {
     renderer.domElement.addEventListener("pointermove", move);
     renderer.domElement.addEventListener("pointerup", up);
     renderer.domElement.addEventListener("pointercancel", up);
+    const keydown = (event: KeyboardEvent) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      targetRotation += event.key === "ArrowLeft" ? -0.2 : 0.2;
+    };
+    mount.addEventListener("keydown", keydown);
 
     const resize = () => {
       const { width, height } = mount.getBoundingClientRect();
@@ -121,7 +140,13 @@ export function CarViewport() {
     let frame = 0;
     const animate = () => {
       frame = requestAnimationFrame(animate);
-      if (!dragging) targetRotation += 0.0012;
+      if (previousReset !== options.current.resetKey) {
+        targetRotation = -0.45;
+        previousReset = options.current.resetKey;
+      }
+      if (!dragging && options.current.rotating && !reducedMotion.matches) targetRotation += 0.0012;
+      clay.color.setHex(options.current.material === "clay" ? 0xb7b5ae : 0x484a49);
+      for (const surface of [clay, glass, dark, selected]) surface.wireframe = options.current.wireframe;
       car.rotation.y += (targetRotation - car.rotation.y) * 0.08;
       renderer.render(scene, camera);
     };
@@ -134,9 +159,10 @@ export function CarViewport() {
       renderer.domElement.removeEventListener("pointermove", move);
       renderer.domElement.removeEventListener("pointerup", up);
       renderer.domElement.removeEventListener("pointercancel", up);
+      mount.removeEventListener("keydown", keydown);
       renderer.dispose();
       scene.traverse((object) => {
-        if (object instanceof THREE.Mesh) {
+        if (object instanceof THREE.Mesh || object instanceof THREE.LineSegments) {
           object.geometry.dispose();
           const materials = Array.isArray(object.material) ? object.material : [object.material];
           materials.forEach((material) => material.dispose());
@@ -146,5 +172,5 @@ export function CarViewport() {
     };
   }, []);
 
-  return <div className="cx-live-model" ref={mountRef} aria-label="Interactive high-poly electric vehicle model. Drag to rotate." />;
+  return <div className="cx-live-model" ref={mountRef} tabIndex={0} role="img" aria-label="Interactive electric vehicle model. Drag or use left and right arrow keys to rotate.">{unavailable && <p className="cx-viewport-fallback">The live model needs WebGL. Try this example in a browser with hardware acceleration enabled.</p>}</div>;
 }

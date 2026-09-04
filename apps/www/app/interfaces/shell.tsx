@@ -2,56 +2,54 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { chrome } from "@/app/site.stylex";
 import { sx } from "@/lib/sx";
-import { type InterfaceSlug, interfaceBySlug } from "./catalog";
+import { type InterfaceSlug, interfaceBySlug, interfaces as catalog } from "./catalog";
 import { interfaces } from "./interfaces.stylex";
 import { InterfacesNav } from "./nav";
+import { StartBuilding } from "./start-building";
+
+const sourceRoot = "https://github.com/Noord-Ventures/vlak/tree/main/apps/www/app/interfaces";
+
+function sourceFor(slug: InterfaceSlug) {
+  return `${sourceRoot}/${["graphics", "render", "drive", "orbit", "frontier", "platforms"].includes(slug) ? "concepts" : slug}`;
+}
 
 export function InterfaceShell({ slug, children }: { slug: InterfaceSlug; children: ReactNode }) {
   const proto = interfaceBySlug(slug)!;
+  const ordered = [...catalog.slice(6), ...catalog.slice(0, 6)];
+  const next = ordered[(ordered.findIndex((item) => item.slug === slug) + 1) % ordered.length]!;
+  const source = sourceFor(slug);
   return (
     <div {...sx("if-index", interfaces.index)}>
       <InterfacesNav />
       <main id="main" {...sx("site-content-wide", chrome.contentWide)}>
-        <div {...sx("if-specimen", interfaces.specimen)}>{children}</div>
-        <section {...sx("if-matter", interfaces.matter)} aria-labelledby={`${slug}-name`}>
-          <p {...sx("if-voice", interfaces.voice)}>{proto.voice}</p>
-          <h1 id={`${slug}-name`} className="rs-t-display">
-            {proto.title}
-          </h1>
-          <p {...sx("if-story", interfaces.story)}>{proto.story}</p>
-          <p {...sx("if-story if-story-2", interfaces.story, interfaces.story2)}>{proto.note}</p>
-          <dl {...sx("if-meta", interfaces.meta)}>
+        <section className="if-study" aria-labelledby={`${slug}-name`}>
+          <header className="if-study-bar">
+            <h1 id={`${slug}-name`}>{proto.title}</h1>
+            <a className="rs-btn-primary if-build-link" href="#build-with-vlak">Build with Vlak <span aria-hidden="true">↓</span></a>
+          </header>
+          <div {...sx("if-specimen", interfaces.specimen)}>{children}</div>
+          <div className="if-study-caption"><p>{proto.use}</p><a href={source}>View source <span aria-hidden="true">↗</span></a></div>
+        </section>
+        <div className="if-detail-content">
+          <section className="if-overview" aria-labelledby={`${slug}-overview`}>
             <div>
-              <dt>Type</dt>
-              <dd>{proto.type}</dd>
+              <h2 id={`${slug}-overview`}>Inside the interface</h2>
+              <p className="if-story">{proto.story}</p>
+              <p className="if-demo-note">{proto.note}</p>
             </div>
-            <div>
-              <dt>Components</dt>
-              <dd className="if-component-list">
+            <div className="if-used-components">
+              <h2>Components used</h2>
+              <p>Explore the building blocks and their APIs.</p>
+              <ul className="if-component-list">
                 {proto.components.map((name) => (
-                  <Link key={name} href={`/components/${name.toLowerCase().replaceAll(" ", "-").replace("icon", "icons")}`}>
-                    {name}
-                  </Link>
+                  <li key={name}><Link href={`/components/${name.toLowerCase().replaceAll(" ", "-").replace("icon", "icons")}/`}>
+                    {name}<span aria-hidden="true">↗</span>
+                  </Link></li>
                 ))}
-              </dd>
+              </ul>
             </div>
-            <div>
-              <dt>Structure</dt>
-              <dd>{proto.module}</dd>
-            </div>
-            <div>
-              <dt>Visual system</dt>
-              <dd>{proto.ink}</dd>
-            </div>
-            <div>
-              <dt>Flow</dt>
-              <dd>{proto.use}</dd>
-            </div>
-            <div>
-              <dt>Layout</dt>
-              <dd>{proto.field}</dd>
-            </div>
-          </dl>
+          </section>
+          <StartBuilding title={proto.title} slug={slug} source={source} />
           <section className="if-modifications" aria-labelledby={`${slug}-modifications`}>
             <h2 id={`${slug}-modifications`}>Component modifications</h2>
             <ul>
@@ -60,7 +58,11 @@ export function InterfaceShell({ slug, children }: { slug: InterfaceSlug; childr
               ))}
             </ul>
           </section>
-        </section>
+          <nav className="if-next-study" aria-label="Explore interfaces">
+            <Link href="/interfaces/">All interfaces <span aria-hidden="true">↗</span></Link>
+            <Link href={`/interfaces/${next.slug}/`}><span>Next study</span><strong>{next.title} <span aria-hidden="true">→</span></strong></Link>
+          </nav>
+        </div>
       </main>
     </div>
   );

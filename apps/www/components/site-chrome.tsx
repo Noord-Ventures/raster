@@ -341,7 +341,7 @@ export function SiteChrome() {
         <Link href="/" {...sx("site-logo", chrome.logo)} aria-label="Vlak">
           <VlakMark />
         </Link>
-        <span className="mobile-site-name" data-visible={atTop} aria-hidden="true">
+        <span className="mobile-site-name" data-visible={atTop && pathname === "/"} aria-hidden="true">
           Vlak.dev
         </span>
       </div>

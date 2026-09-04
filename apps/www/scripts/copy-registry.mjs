@@ -20,6 +20,8 @@ console.log("copied registry → public/r");
 const docsSrc = fileURLToPath(new URL("../../../registry/docs", import.meta.url));
 const docsDest = fileURLToPath(new URL("../public/docs", import.meta.url));
 const publicDir = fileURLToPath(new URL("../public", import.meta.url));
+const designSrc = fileURLToPath(new URL("../../../design.md", import.meta.url));
+cpSync(designSrc, `${publicDir}/design.md`);
 if (!existsSync(docsSrc)) {
   console.error("registry/docs not found — run: pnpm --filter @noorddev/vlak build:registry");
   process.exit(1);

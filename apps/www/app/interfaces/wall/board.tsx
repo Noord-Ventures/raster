@@ -29,7 +29,7 @@ const FEED: Post[] = [
     who: "aziez",
     name: "Mara",
     when: "09:14",
-    text: "The west window is the one that holds.",
+    text: "First proofs for the autumn poster series. The heavier paper keeps the black beautifully sharp.",
     photo: "/interfaces/threads/press-sheet-v2.jpg",
     ratio: "4 / 5",
     likes: 12,
@@ -39,7 +39,7 @@ const FEED: Post[] = [
     who: "jenny",
     name: "Inez",
     when: "09:02",
-    text: "Paper first. Then the street. Then the room.",
+    text: "Taking the posters outside this afternoon to check the type at a distance. Studio walls only tell you so much.",
     likes: 8,
   },
   {
@@ -47,7 +47,7 @@ const FEED: Post[] = [
     who: "jenny",
     name: "Inez",
     when: "08:41",
-    text: "I left a note on the third post.",
+    text: "Three directions from yesterday’s print session. I’m leaning toward the second composition.",
     photo: "/interfaces/threads/posters-v2.jpg",
     ratio: "1 / 1",
     likes: 5,
@@ -57,7 +57,7 @@ const FEED: Post[] = [
     who: "koen",
     name: "Elias",
     when: "08:12",
-    text: "Morning stack. Registration holds.",
+    text: "The new batch is ready. Registration looks consistent across all 200 copies.",
     likes: 3,
   },
   {
@@ -65,7 +65,7 @@ const FEED: Post[] = [
     who: "gianpiero",
     name: "Tomas",
     when: "07:55",
-    text: "On the rail before the street.",
+    text: "A few sheets from this morning’s press check. The small details survived the first run.",
     photo: "/interfaces/threads/press-sheet-v2.jpg",
     ratio: "5 / 4",
     likes: 7,
@@ -75,7 +75,7 @@ const FEED: Post[] = [
     who: "koen",
     name: "Elias",
     when: "07:40",
-    text: "A grid is a plan, not a decoration.",
+    text: "Does anyone have a favourite uncoated stock for a folded programme? Looking for something around 120 gsm.",
     likes: 9,
   },
   {
@@ -83,7 +83,7 @@ const FEED: Post[] = [
     who: "gianpiero",
     name: "Tomas",
     when: "07:11",
-    text: "The rail stays 184.",
+    text: "Final selection for the foyer. These go up on Friday, just in time for opening night.",
     photo: "/interfaces/threads/posters-v2.jpg",
     ratio: "3 / 4",
     likes: 4,
@@ -91,27 +91,27 @@ const FEED: Post[] = [
 ];
 
 const PEOPLE: { id: FaceId; name: string; line: string }[] = [
-  { id: "aziez", name: "Mara", line: "Paper first" },
-  { id: "jenny", name: "Inez", line: "Third post" },
-  { id: "koen", name: "Elias", line: "In the gutter" },
-  { id: "gianpiero", name: "Tomas", line: "On the rail" },
+  { id: "aziez", name: "Mara", line: "Graphic designer" },
+  { id: "jenny", name: "Inez", line: "Art director" },
+  { id: "koen", name: "Elias", line: "Print production" },
+  { id: "gianpiero", name: "Tomas", line: "Studio manager" },
 ];
 
 const COMMENTS: Record<string, { who: FaceId; name: string; text: string }[]> = {
   m1: [
-    { who: "jenny", name: "Inez", text: "Which window?" },
-    { who: "aziez", name: "Mara", text: "West. Always west." },
-    { who: "koen", name: "Elias", text: "I can see it from here." },
+    { who: "jenny", name: "Inez", text: "Which weight did you settle on?" },
+    { who: "aziez", name: "Mara", text: "170 gsm. Much less show-through than the first test." },
+    { who: "koen", name: "Elias", text: "We have enough for the full run." },
   ],
   m2: [
-    { who: "gianpiero", name: "Tomas", text: "Keep the hairline on the active tab only." },
-    { who: "koen", name: "Elias", text: "The rail stays 184." },
+    { who: "gianpiero", name: "Tomas", text: "I can help carry them over after lunch." },
+    { who: "koen", name: "Elias", text: "Bring the smaller version too, for comparison." },
   ],
-  m3: [{ who: "aziez", name: "Mara", text: "Cite hangs in the gutter." }],
-  m4: [{ who: "jenny", name: "Inez", text: "Leave the crumb bar off the poster." }],
-  m5: [{ who: "koen", name: "Elias", text: "The number stays first." }],
-  m6: [{ who: "aziez", name: "Mara", text: "Put the color on the field only." }],
-  m7: [{ who: "jenny", name: "Inez", text: "One module. No second rail." }],
+  m3: [{ who: "aziez", name: "Mara", text: "Second one for me too. The title has more room." }],
+  m4: [{ who: "jenny", name: "Inez", text: "Great. I’ll pick them up at 16:00." }],
+  m5: [{ who: "koen", name: "Elias", text: "The fine lines are holding up well." }],
+  m6: [{ who: "aziez", name: "Mara", text: "I have a few samples in the studio. I’ll bring them tomorrow." }],
+  m7: [{ who: "jenny", name: "Inez", text: "Approved. The venue has confirmed the wall space." }],
 };
 
 export function Board() {
@@ -133,7 +133,7 @@ export function Board() {
 
   return (
     <section className="if-board sc-wall" aria-label={WHAT}>
-      <PhoneV1Chrome heading="Social feed" action="Post" onAction={() => openPost("m1")} />
+      <PhoneV1Chrome heading="Social feed" action="Latest post" onAction={() => openPost("m1")} />
       <aside className="sc-wall-rail" aria-label="People">
         <div className="sc-wall-brand">
           <Brand slug="wall" />
@@ -208,7 +208,7 @@ export function Board() {
                   </span>
                   <span className="if-ico-row">
                     <Icon name="message" size={12} />
-                    {(COMMENTS[row.id] ?? []).length} comments
+                    {(COMMENTS[row.id] ?? []).length} {(COMMENTS[row.id] ?? []).length === 1 ? "comment" : "comments"}
                   </span>
                   {row.photo ? (
                     <span className="if-ico-row">
@@ -242,7 +242,7 @@ export function Board() {
               <b>{person.name}</b>
               <i>{person.line}</i>
             </div>
-            <p>Posts on the wall stay in the street. A face is enough to find them again.</p>
+            <p>{person.name} shares work in progress and updates from the studio.</p>
           </div>
         ) : inspect?.kind === "post" ? (
           <div key={item.id} className="sc-wall-inspect sc-fresh">

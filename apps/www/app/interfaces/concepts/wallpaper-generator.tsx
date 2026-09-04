@@ -156,21 +156,21 @@ export function WallpaperGenerator() {
   const [format, setFormat] = React.useState<Format>("widescreen");
   const [variation, setVariation] = React.useState(42);
   const [generation, setGeneration] = React.useState(0);
-  const [status, setStatus] = React.useState("Ready to generate locally.");
-  const results = React.useMemo(
-    () => makeWallpapers(prompt, variation, generation),
-    [generation],
-  );
+  const [status, setStatus] = React.useState("Choose a composition or generate another set.");
+  const [exporting, setExporting] = React.useState(false);
+  const [results, setResults] = React.useState(() => makeWallpapers(prompt, variation, generation));
 
   function generate() {
-    setGeneration((current) => current + 1);
+    const next = generation + 1;
+    setGeneration(next);
+    setResults(makeWallpapers(prompt, variation, next));
     setSelected(0);
     setStatus("Three new wallpapers ready.");
   }
 
   function exportSelected() {
     const wallpaper = results[selected];
-    if (!wallpaper) return;
+    if (!wallpaper || exporting) return;
     const dimensions = formats[format];
     const canvas = document.createElement("canvas");
     canvas.width = dimensions.width;
@@ -181,8 +181,10 @@ export function WallpaperGenerator() {
       return;
     }
     drawWallpaper(context, wallpaper, dimensions.width, dimensions.height);
+    setExporting(true);
     setStatus(`Preparing ${dimensions.width} × ${dimensions.height} PNG…`);
     canvas.toBlob((blob) => {
+      setExporting(false);
       if (!blob) {
         setStatus("The export could not be prepared.");
         return;
@@ -198,16 +200,17 @@ export function WallpaperGenerator() {
   }
 
   return <div className="cx cx-graphics">
-    <header><b>Wallpaper generator</b><span>Local composition tool</span><Button size="sm" onClick={exportSelected}>Export 6K PNG</Button></header>
+    <header><b>Wallpaper generator</b><span>Three compositions, one starting point</span><Button size="sm" disabled={exporting} onClick={exportSelected}>{exporting ? "Exporting…" : "Export 6K"}</Button></header>
     <aside>
       <p className="cx-label">Direction</p>
-      <label>Prompt<textarea value={prompt} onChange={(event) => setPrompt(event.target.value)} /></label>
+      <label>Variation seed<textarea value={prompt} onChange={(event) => setPrompt(event.target.value)} /></label>
       <p className="cx-label">Canvas</p>
       <div className="cx-segments">{(Object.keys(formats) as Format[]).map((value) => <button key={value} className={format === value ? "on" : ""} aria-pressed={format === value} onClick={() => setFormat(value)}>{formats[value].label}</button>)}</div>
+      <small className="cx-output-size">{formats[format].width} × {formats[format].height} · PNG</small>
       <label>Variation<input type="range" min="0" max="100" value={variation} onChange={(event) => setVariation(Number(event.target.value))} /></label>
       <Button onClick={generate}><Icon name="image" size={16}/>Generate</Button>
       <p className="cx-generation-status" aria-live="polite">{status}</p>
     </aside>
-    <main><div className="cx-results">{results.map((wallpaper, index) => <button key={wallpaper.id} className={selected === index ? "on" : ""} onClick={() => setSelected(index)}><WallpaperArt wallpaper={wallpaper} format={format}/><span>{String(index + 1).padStart(2, "0")} · {wallpaper.name}</span></button>)}</div></main>
+    <div className="cx-workspace"><div className="cx-results">{results.map((wallpaper, index) => <button key={wallpaper.id} className={selected === index ? "on" : ""} aria-pressed={selected === index} onClick={() => setSelected(index)}><WallpaperArt wallpaper={wallpaper} format={format}/><span>{String(index + 1).padStart(2, "0")} · {wallpaper.name}</span></button>)}</div></div>
   </div>;
 }

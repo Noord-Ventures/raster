@@ -77,13 +77,13 @@ export function Board() {
   const [pending, setPending] = React.useState(false);
   const [inspect, setInspect] = React.useState<Inspect>(null);
   const [phonePane, setPhonePane] = React.useState<"inbox" | "thread">("inbox");
-  const end = React.useRef<HTMLDivElement>(null);
+  const thread = React.useRef<HTMLDivElement>(null);
   const box = React.useRef<HTMLInputElement>(null);
   const piece = CHATS.find((item) => item.id === chat)?.title ?? "New chat";
   const looked = inspect?.kind === "line" ? messages.find((msg) => msg.id === inspect.id) : null;
 
   React.useEffect(() => {
-    end.current?.scrollIntoView({ block: "end" });
+    if (thread.current) thread.current.scrollTop = thread.current.scrollHeight;
   }, [messages, pending]);
 
   function openChat(id: string) {
@@ -128,7 +128,7 @@ export function Board() {
       <aside className="sc-ai-rail" aria-label="Chats">
         <div className="sc-ai-brand">
           <p className="if-app">AI chat</p>
-          <p className="sc-ai-voice">Writing assistant</p>
+          <p className="sc-ai-voice">Deftones listening notes</p>
         </div>
         <button type="button" className="rs-btn-ghost sc-ai-new" onClick={fresh}>
           New chat
@@ -157,10 +157,10 @@ export function Board() {
             <Icon name="arrow-left" size={16} />
             Chats
           </button>
-          <h1 className="if-ico-row">
+          <h2 className="if-ico-row">
             <Icon name="message" size={16} />
             {piece}
-          </h1>
+          </h2>
           <button
             type="button"
             className="sc-ai-gear"
@@ -171,7 +171,7 @@ export function Board() {
             Settings
           </button>
         </header>
-        <div className="sc-ai-thread">
+        <div className="sc-ai-thread" ref={thread}>
           <div className="sc-ai-measure">
             {messages.length === 0 ? (
               <div className="sc-ai-empty">
@@ -206,7 +206,7 @@ export function Board() {
                       }
                     >
                       <Icon name="expand" size={12} />
-                      Open line
+                      Explore response
                     </button>
                   </article>
                 ),
@@ -218,7 +218,6 @@ export function Board() {
                 Thinking
               </p>
             ) : null}
-            <div ref={end} />
           </div>
         </div>
       </section>
@@ -267,7 +266,7 @@ export function Board() {
           onClick={() => setPhonePane("thread")}
         >
           <Icon name="message" size={16} />
-          Line
+          Conversation
         </button>
       </nav>
 
@@ -282,7 +281,7 @@ export function Board() {
               </h2>
               <p className="if-ico-row">
                 <Icon name="terminal" size={12} />
-                Model · local
+                Topic · Deftones
               </p>
               <p className="if-ico-row">
                 <Icon name="quote" size={12} />
@@ -290,14 +289,14 @@ export function Board() {
               </p>
               <p className="if-ico-row">
                 <Icon name="shield" size={12} />
-                No live model. Replies stay on this sheet.
+                Sample conversation. New messages receive a preset reply.
               </p>
             </div>
           ) : looked ? (
             <div key={looked.id} className="sc-fresh">
               <h2 className="if-ico-row">
                 <Icon name="expand" size={16} />
-                This line
+                Close reading
               </h2>
               <p>{looked.text}</p>
               <button

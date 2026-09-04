@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Icon, ToggleGroup } from "@noorddev/vlak-react";
+import { Card, Icon, ToggleGroup } from "@noorddev/vlak-react";
 import { Brand } from "../mark";
 import { PhoneV1Chrome } from "../v1-chrome";
 import { interfaceBySlug } from "../catalog";
@@ -13,10 +13,10 @@ const WEEK = { sheets: 38, proofs: 12, press: 4, series: [12, 18, 15, 26, 24, 11
 const MONTH = { sheets: 142, proofs: 41, press: 9, series: [28, 34, 31, 42, 38, 22, 19] };
 
 const JOBS = [
-  { id: "14", name: "Press run 14", city: "Alkmaar", weeks: 4, state: "On press", line: "On press · Alkmaar", note: "Plate is up at 06:00. Density watch on unit 09.", sheet: "Fee on page one. Timeline under the fee. Same ink." },
-  { id: "b", name: "Proof set B", city: "Delft", weeks: 4, state: "Proof", line: "Proof · 4 weeks", note: "Second proof due Friday. Same ink.", sheet: "One mark. No second color in the chrome." },
-  { id: "09", name: "Invoice 09", city: "desk", weeks: 2, state: "Invoice", line: "Invoice · desk", note: "Cover number matches the invoice.", sheet: "Date the sheet to the week the press starts." },
-  { id: "lock", name: "Brief lock", city: "interfaces", weeks: 3, state: "Brief", line: "Brief · interfaces", note: "One sheet. Scope, weeks, fee.", sheet: "A grid is a plan, not a decoration." },
+  { id: "14", name: "Autumn posters", city: "Alkmaar", weeks: 4, state: "On press", line: "On press · Alkmaar", note: "Printing 200 copies. The first batch passed quality control at 09:00.", sheet: "A2 posters on 170 gsm uncoated stock. Final quantity: 200. Collection booked for Friday at 16:00." },
+  { id: "b", name: "Exhibition guide", city: "Delft", weeks: 4, state: "Proof", line: "Proof · Delft", note: "Revised proof sent. Client approval is due Thursday at 15:00.", sheet: "A5 folded programme, 16 pages. Check the venue address and opening times before releasing the print run." },
+  { id: "09", name: "September invoice", city: "Haarlem", weeks: 2, state: "Invoice", line: "Invoice · Haarlem", note: "Invoice sent on 1 September. Payment is due within 14 days.", sheet: "Invoice 09 covers design and production for the September programme. Total: €2,400 excluding VAT." },
+  { id: "lock", name: "Winter programme", city: "Utrecht", weeks: 3, state: "Brief", line: "Brief · Utrecht", note: "Scope approved. Waiting for the final event schedule to start layouts.", sheet: "Programme design, poster series, and digital assets. First presentation scheduled for next Wednesday." },
 ];
 
 function Line({ values }: { values: number[] }) {
@@ -40,10 +40,11 @@ export function Board() {
   const [metricFresh, setMetricFresh] = React.useState(false);
   const data = range === "week" ? WEEK : MONTH;
   const selected = JOBS.find((item) => item.id === job) ?? JOBS[0]!;
+  const visibleJobs = page === "invoices" ? JOBS.filter((item) => item.state === "Invoice") : JOBS;
 
   return (
-    <section className="if-board sc-dash" aria-label={WHAT} style={{ ["--if-spot" as string]: "#E30613" }}>
-      <PhoneV1Chrome heading="Dashboard" action="Floor" onAction={() => { setPage("overview"); setSheet(false); }} />
+    <section className="if-board sc-dash" data-page={page} aria-label={WHAT} style={{ ["--if-spot" as string]: "#E30613" }}>
+      <PhoneV1Chrome heading="Dashboard" action="Overview" onAction={() => { setPage("overview"); setSheet(false); }} />
       <aside className="sc-dash-rail" aria-label="Floor">
         <div className="sc-dash-brand">
           <Brand slug="press" />
@@ -56,7 +57,7 @@ export function Board() {
         {[
           { id: "overview", label: "Overview", meta: "Today", icon: "layout" as const },
           { id: "jobs", label: "Jobs", meta: "4", icon: "list" as const },
-          { id: "invoices", label: "Invoices", meta: "2", icon: "receipt" as const },
+          { id: "invoices", label: "Invoices", meta: "1", icon: "receipt" as const },
         ].map((item) => (
           <button
             key={item.id}
@@ -79,10 +80,10 @@ export function Board() {
 
       <section className="sc-dash-main">
         <div className="sc-dash-head">
-          <h1 className="if-ico-row">
+          <h2 className="if-ico-row">
             <Icon name={page === "overview" ? "layout" : page === "jobs" ? "list" : "receipt"} size={16} />
             {page === "overview" ? "Overview" : page === "jobs" ? "Jobs" : "Invoices"}
-          </h1>
+          </h2>
           <ToggleGroup
             className="sc-dash-range"
             aria-label="Range"
@@ -99,31 +100,31 @@ export function Board() {
         </div>
 
         <div className="sc-dash-metrics">
-          <article className="sc-dash-metric">
+          <Card className="sc-dash-metric">
             <p className="if-ico-row"><Icon name="layers" size={12} /> <span className="sc-dash-metric-long">Sheets this {range}</span><span className="sc-dash-metric-short">Sheets</span></p>
             <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.sheets}</strong>
-          </article>
-          <article className="sc-dash-metric">
+          </Card>
+          <Card className="sc-dash-metric">
             <p className="if-ico-row"><Icon name="file-text" size={12} /> Proofs</p>
             <strong key={range} className={metricFresh ? "sc-fresh" : undefined}>{data.proofs}</strong>
-          </article>
-          <article className="sc-dash-metric">
+          </Card>
+          <Card className="sc-dash-metric">
             <p className="if-ico-row"><Icon name="printer" size={12} /> On press</p>
             <strong key={range} className={`sc-dash-spot${metricFresh ? " sc-fresh" : ""}`}>{data.press}</strong>
-          </article>
+          </Card>
         </div>
 
         <div className="sc-dash-split">
-          <article className="sc-dash-card">
+          <Card className="sc-dash-card">
             <h2 className="if-ico-row"><Icon name="trending-up" size={12} /> Throughput</h2>
             <Line values={data.series} />
-          </article>
-          <article className="sc-dash-card sc-dash-jobs">
+          </Card>
+          <Card className="sc-dash-card sc-dash-jobs">
             <h2 className="if-ico-row">
               <Icon name={page === "invoices" ? "receipt" : "list"} size={12} />
               {page === "invoices" ? "Open invoices" : "Jobs"}
             </h2>
-            {JOBS.map((item) => (
+            {visibleJobs.map((item) => (
               <button
                 key={item.id}
                 type="button"
@@ -131,8 +132,7 @@ export function Board() {
                 aria-current={job === item.id}
                 onClick={() => {
                   setJob(item.id);
-                  setPage("jobs");
-                  setSheet(false);
+                  setSheet(true);
                 }}
               >
                 <span className="if-ico-row">
@@ -157,7 +157,7 @@ export function Board() {
                 Open sheet
               </button>
             </div>
-          </article>
+          </Card>
         </div>
       </section>
 

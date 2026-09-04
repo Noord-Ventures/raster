@@ -91,10 +91,10 @@ Reach for Vlak primitives first:
 - `Card` for a discrete object, not as a default section wrapper. Structural cards should be flush and square.
 - `Input`, `Textarea`, `Select`, and `Combobox` for data entry. Keep labels visible.
 - `Tabs` for sibling views of the same object, not for navigation across unrelated pages.
-- `Menu`, `Dialog`, `Drawer`, and `Popover` for temporary choices or detail. Use the smallest surface that fits the task.
-- `Table`, `DataGrid`, `Progress`, and `Meter` for dense operational information.
+- `DropdownMenu`, `Dialog`, `Drawer`, and `Popover` for temporary choices or detail. Use the smallest surface that fits the task.
+- `Table`, `DataTable`, and `Progress` for dense operational information.
 - `CrumbBar`, `Sidebar`, and navigation components for wayfinding.
-- `EmptyState`, `Toast`, `Alert`, and `Skeleton` for system states. Write the cause and next action when there is one.
+- `Empty`, `Toast`, `Alert`, and `Skeleton` for system states. Write the cause and next action when there is one.
 
 Custom styling may adapt a component to its context, but preserve its behavior, focus state, keyboard model, and semantic element. Modify density, orientation, borders, or layout before inventing a new control.
 
@@ -147,4 +147,3 @@ Do not shrink a desktop composition until it fits. Recompose it.
 ## Definition of done
 
 The page has a clear purpose in its first screen. Its main action is evident. Major edges align. Copy is specific. Components come from Vlak where available. Cards are used with restraint. Both schemes work. Mobile is recomposed and touchable. Keyboard and focus behavior work. The result contains at least one visual decision that belongs to this product and could not be exchanged unchanged with another one.
-
