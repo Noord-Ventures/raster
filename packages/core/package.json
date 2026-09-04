@@ -1,6 +1,6 @@
 {
   "name": "@noorddev/raster",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Raster core — design tokens, component registry, and CSS. Monochrome, CSS-first, zero dependencies.",
   "license": "MIT",
   "repository": {
@@ -67,5 +67,15 @@
   },
   "engines": {
     "node": ">=18.18"
-  }
+  },
+  "keywords": [
+    "design-system",
+    "css",
+    "tokens",
+    "monochrome",
+    "stylex",
+    "shadcn",
+    "registry"
+  ],
+  "author": "Renato Valdés Olmos"
 }

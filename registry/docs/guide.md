@@ -1,6 +1,6 @@
 # Raster guide
 
-Raster is a monochrome design system: paper, ink, gray, hairlines, and a 204px module. 74 components in 9 categories: actions (10), forms (16), navigation (7), feedback (9), surfaces (8), content (13), icons (1), charts (7), patterns (3). Version 0.3.0. Site: https://getraster.com. Source: https://github.com/Noord-Ventures/raster.
+Raster is a monochrome design system: paper, ink, gray, hairlines, and a 204px module. 74 components in 9 categories: actions (10), forms (16), navigation (7), feedback (9), surfaces (8), content (13), icons (1), charts (7), patterns (3). Version 0.4.0. Site: https://getraster.com. Source: https://github.com/Noord-Ventures/raster.
 
 Three install paths share one source, so nothing drifts: the React package (precompiled StyleX plus one stylesheet), the vendored source (the shadcn model, through the Raster CLI or the shadcn CLI), and CSS only (`rs-*` classes on plain markup).
 

@@ -76,6 +76,38 @@ if (failed.length) process.exit(1);
   const out = run("node render.mjs");
   process.stdout.write(out);
 
+  /* 3b. React 18: the peer range allows it, so every export must render there too,
+     with no unknown-prop warnings (popoverTarget and inert are spelled per version). */
+  const r18 = join(work, "r18");
+  run(`mkdir -p ${r18}`);
+  writeFileSync(join(r18, "package.json"), JSON.stringify({ name: "consumer-r18", private: true, type: "module" }, null, 2));
+  run(`npm install --no-audit --no-fund --silent react@18 react-dom@18 ${tarballs.core} ${tarballs.react}`, r18);
+  writeFileSync(
+    join(r18, "render.mjs"),
+    `
+import { renderToString } from "react-dom/server";
+import { createElement as h } from "react";
+import * as R from "@noorddev/raster-react";
+const warnings = new Set();
+console.error = (...a) => { let i = 1; warnings.add(String(a[0]).replace(/%s/g, () => String(a[i++])).slice(0, 120)); };
+const html = renderToString(h("div", null,
+  h(R.Popover, { trigger: "More" }, h(R.PopoverBody, null, "Body")),
+  h(R.CrumbBar, { trail: [{ label: "Docs", href: "#" }, { label: "Here" }] }),
+  h(R.Dialog, { open: true, onClose() {} }, h(R.DialogTitle, null, "T"), h(R.DialogBody, null, "B")),
+  h(R.Select, { options: [{ value: "a", label: "A" }], value: "a", "aria-label": "Pick" }),
+  h(R.Tabs, { defaultValue: "a" }, h(R.TabList, null, h(R.Tab, { value: "a" }, "A")), h(R.TabPanel, { value: "a" }, "P")),
+  h(R.Button, null, "Go"),
+));
+const bad = [...warnings].filter((w) => /does not recognize|non-boolean attribute|Invalid DOM property|Each child in a list/.test(w));
+console.log("  " + (bad.length ? "✗" : "✓") + " react 18 renders " + html.length + " chars, " + bad.length + " prop warnings");
+for (const w of bad) console.log("    " + w);
+if (!html.includes("popovertarget=")) { console.log("    ✗ popovertarget attribute missing on React 18"); process.exit(1); }
+if (bad.length) process.exit(1);
+`,
+  );
+  process.stdout.write(run("node render.mjs", r18));
+  log("react 18 render clean");
+
   /* 4. The CLI from its tarball, offline. */
   const app = join(work, "app");
   run(`mkdir -p ${app}`);

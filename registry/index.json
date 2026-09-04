@@ -1443,6 +1443,11 @@
           "target": "components/raster/crumb-bar.tsx"
         },
         {
+          "path": "raster/compat.ts",
+          "type": "registry:file",
+          "target": "components/raster/compat.ts"
+        },
+        {
           "path": "raster/styles/crumb-bar.css",
           "type": "registry:file",
           "target": "styles/raster/crumb-bar.css"
@@ -3424,6 +3429,11 @@
           "path": "raster/popover.tsx",
           "type": "registry:component",
           "target": "components/raster/popover.tsx"
+        },
+        {
+          "path": "raster/compat.ts",
+          "type": "registry:file",
+          "target": "components/raster/compat.ts"
         },
         {
           "path": "raster/styles/popover.css",

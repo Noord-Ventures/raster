@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.0 (unreleased)
+## 0.4.0
 
 Raster becomes a package you can install three ways, with one source of paint behind all of them.
 

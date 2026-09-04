@@ -1,6 +1,6 @@
 {
   "name": "@noorddev/raster-cli",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "The Raster CLI — install the monochrome design system into any project: npx @noorddev/raster-cli init, npx @noorddev/raster-cli add <component>.",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,7 @@
   },
   "type": "module",
   "bin": {
-    "raster": "./dist/index.js"
+    "raster": "dist/index.js"
   },
   "files": [
     "dist"
@@ -30,5 +30,13 @@
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "vitest": "^3.2.7"
-  }
+  },
+  "keywords": [
+    "cli",
+    "design-system",
+    "shadcn",
+    "registry",
+    "components"
+  ],
+  "author": "Renato Valdés Olmos"
 }

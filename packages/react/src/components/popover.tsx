@@ -6,6 +6,7 @@ import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
 
 import { Button } from "./button";
+import { popoverTargetAttrs } from "../compat";
 
 export interface PopoverProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Trigger content, rendered in a ghost button. */
@@ -138,7 +139,7 @@ export function Popover({ trigger, align = "start", className, style, children, 
         type="button"
         variant="ghost"
         size="sm"
-        popoverTarget={id}
+        {...popoverTargetAttrs(id)}
         style={anchored ? ({ anchorName } as React.CSSProperties) : undefined}
       >
         {trigger}

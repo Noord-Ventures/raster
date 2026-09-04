@@ -1,6 +1,6 @@
 {
   "name": "@noorddev/raster-mcp",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "MCP server for the Raster design system: components, props, docs, tokens, and install commands for coding agents. Works offline.",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,7 @@
   },
   "type": "module",
   "bin": {
-    "raster-mcp": "./dist/index.js"
+    "raster-mcp": "dist/index.js"
   },
   "files": [
     "dist"
@@ -36,5 +36,13 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
     "zod": "^4.5.4"
-  }
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "design-system",
+    "agents",
+    "components"
+  ],
+  "author": "Renato Valdés Olmos"
 }

@@ -1,6 +1,6 @@
 # Raster components
 
-74 components in 9 categories. Each page lists install paths, a React example, props, keyboard, and accessibility notes. Version 0.3.0.
+74 components in 9 categories. Each page lists install paths, a React example, props, keyboard, and accessibility notes. Version 0.4.0.
 
 ## Actions
 

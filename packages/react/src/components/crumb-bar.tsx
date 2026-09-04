@@ -4,6 +4,7 @@ import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import { raster, mq } from "../tokens.stylex";
 import { rs } from "../rs";
+import { inertAttrs } from "../compat";
 
 export interface CrumbBarItem {
   label: React.ReactNode;
@@ -289,7 +290,7 @@ export const CrumbBar = React.forwardRef<HTMLElement, CrumbBarProps>(function Cr
               {rootLabel}
             </span>
           ))}
-        <ol className={crumbs.className} style={crumbs.style} inert={!scrolled}>
+        <ol className={crumbs.className} style={crumbs.style} {...inertAttrs(!scrolled)}>
           {trail.map((crumb, index) => {
             const last = index === trail.length - 1;
             return (

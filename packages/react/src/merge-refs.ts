@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 
 /** Writes a node into a ref of either shape; a missing ref is a no-op. */

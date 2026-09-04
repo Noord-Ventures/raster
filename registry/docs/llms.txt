@@ -1,6 +1,6 @@
 # Raster
 
-> A monochrome design system: paper, ink, gray, hairlines, and a 204px module. 74 React components as precompiled StyleX with one stylesheet, the same components as rs-* CSS, and a shadcn-compatible registry. Version 0.3.0.
+> A monochrome design system: paper, ink, gray, hairlines, and a 204px module. 74 React components as precompiled StyleX with one stylesheet, the same components as rs-* CSS, and a shadcn-compatible registry. Version 0.4.0.
 
 Install with `npm install @noorddev/raster-react` and `import "@noorddev/raster-react/css"`, vendor the source with `npx @noorddev/raster-cli add <name>`, or use `npx shadcn add https://getraster.com/r/<name>.json`. Every component page below has install paths, a React example, a props table generated from the types, keyboard interactions, and accessibility notes.
 

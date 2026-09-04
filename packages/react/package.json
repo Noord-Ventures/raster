@@ -1,6 +1,6 @@
 {
   "name": "@noorddev/raster-react",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Raster React components: precompiled StyleX on Raster tokens. Import the package and one stylesheet; no compiler to configure.",
   "license": "MIT",
   "repository": {
@@ -73,5 +73,15 @@
   },
   "engines": {
     "node": ">=18.18"
-  }
+  },
+  "keywords": [
+    "react",
+    "design-system",
+    "components",
+    "stylex",
+    "accessible",
+    "monochrome",
+    "shadcn"
+  ],
+  "author": "Renato Valdés Olmos"
 }

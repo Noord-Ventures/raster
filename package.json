@@ -1,7 +1,7 @@
 {
   "name": "raster-monorepo",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Raster — a monochrome, CSS-first design system. Tokens, components, CLI, registry, and docs.",
   "license": "MIT",
   "repository": {
@@ -17,7 +17,10 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
-    ]
+    ],
+    "overrides": {
+      "postcss": ">=8.5.23"
+    }
   },
   "scripts": {
     "build": "pnpm -r --filter './packages/*' build",
