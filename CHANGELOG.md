@@ -62,6 +62,10 @@ Raster becomes a package you can install three ways, with one source of paint be
 5. If your CSS overrides used `!important` to beat Raster, drop it; unlayered rules win now.
 6. If you linked `raster-compat.css`, finish the `rs-*` rename; `npx @noorddev/raster-cli init` writes the current stylesheet.
 
+### Icons
+
+- Filled marks use theme-independent transparent detail cuts and a 2px silhouette weight, with optical recuts for arrows, people, folders, links, files, @, hash, and dense system marks. Line marks keep the original 1px language.
+
 ## 0.3.0
 
 Cut 1: a stranger can install Raster after merge, npm publish, and DNS.

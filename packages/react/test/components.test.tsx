@@ -25,6 +25,8 @@ import {
   IconCatalog,
   ICON_STROKE,
   ICON_VIEWBOX,
+  filledCutouts,
+  filledMarks,
   iconGroups,
   iconNames,
   NativeSelect,
@@ -380,6 +382,56 @@ describe("Icon", () => {
     expect(lineSizes).toEqual(["12", "16", "24"]);
     expect(filledSizes).toEqual(["12", "16", "24"]);
     expect(filled!.querySelector(".rs-icon-filled")).toBeTruthy();
+  });
+
+  it("uses deliberate silhouettes for open figures in the filled family", () => {
+    expect(Object.keys(filledMarks)).toEqual([
+      "link",
+      "unlink",
+      "search",
+      "zoom-in",
+      "zoom-out",
+      "home",
+      "inbox",
+      "user",
+      "users",
+      "user-plus",
+      "user-minus",
+      "cart",
+      "flag",
+      "map-pin",
+      "cloud",
+      "folder-open",
+      "clipboard",
+      "duplicate",
+      "files",
+      "key",
+      "database",
+      "monitor",
+      "building",
+      "at",
+      "user-check",
+    ]);
+
+    const { container, rerender } = render(<Icon name="home" variant="filled" />);
+    expect(container.querySelector('mask path[d$="H3.5 Z"]')?.getAttribute("fill")).toBe("white");
+
+    rerender(<Icon name="home" />);
+    expect(container.querySelector('path[d="M3.5 8 L8 3.5 L12.5 8"]')).toBeTruthy();
+    expect(container.querySelector('path[d$="H3.5 Z"]')).toBeNull();
+
+    rerender(<Icon name="map-pin" variant="filled" />);
+    expect(container.querySelector("mask circle")?.getAttribute("fill")).toBe("black");
+    expect(container.querySelector('rect[mask^="url(#rs-icon-"]')?.getAttribute("fill")).toBe("currentColor");
+    expect(filledCutouts["map-pin"]).toEqual([1]);
+  });
+
+  it("punches transparent detail through filled icons", () => {
+    const { container } = render(<Icon name="calendar" variant="filled" />);
+    const mask = container.querySelector("mask");
+    expect(mask).toBeTruthy();
+    expect(mask?.querySelectorAll('[stroke="black"]')).toHaveLength(3);
+    expect(container.querySelector('rect[mask^="url(#rs-icon-"]')).toBeTruthy();
   });
 });
 
