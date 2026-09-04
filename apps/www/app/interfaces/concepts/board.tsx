@@ -4,6 +4,7 @@ import * as React from "react";
 import dynamic from "next/dynamic";
 import { Button, Card, CardBody, CardLabel, CardTitle, Icon } from "@noorddev/vlak-react";
 import { WallpaperGenerator } from "./wallpaper-generator";
+import { Drive } from "./drive";
 
 const CarViewport = dynamic(
   () => import("./car-viewport").then((module) => module.CarViewport),
@@ -15,50 +16,36 @@ function Render() {
   const [wireframe, setWireframe] = React.useState(false);
   const [material, setMaterial] = React.useState<"clay" | "graphite">("clay");
   const [view, setView] = React.useState(0);
+  const [status, setStatus] = React.useState<"loading" | "ready" | "error">("loading");
+  const [reducedMotion, setReducedMotion] = React.useState(false);
+  React.useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReducedMotion(preference.matches);
+    sync();
+    preference.addEventListener("change", sync);
+    return () => preference.removeEventListener("change", sync);
+  }, []);
+  const ready = status === "ready";
+  const playing = ready && rotating && !reducedMotion;
   return <div className="cx cx-render">
-    <header><b>3D workspace</b><span>Concept EV / body_v18</span><span className="cx-header-note">Interactive viewport</span></header>
+    <header><b>3D workspace</b><span>Range Rover Evoque</span><span className="cx-header-note">204,461 triangles</span></header>
     <nav aria-label="Viewport tools">
-      <Button variant="ghost" className={rotating ? "on" : ""} aria-label="Auto-rotate model" aria-pressed={rotating} onClick={() => setRotating(!rotating)} title="Auto-rotate"><Icon name="refresh" size={16}/></Button>
-      <Button variant="ghost" className={wireframe ? "on" : ""} aria-label="Show mesh" aria-pressed={wireframe} onClick={() => setWireframe(!wireframe)} title="Show mesh"><Icon name="grid" size={16}/></Button>
-      <Button variant="ghost" aria-label="Reset camera" onClick={() => setView(view + 1)} title="Reset camera"><Icon name="camera" size={16}/></Button>
+      <Button variant="ghost" disabled={!ready || reducedMotion} className={playing ? "on" : ""} aria-label="Auto-rotate model" aria-pressed={playing} onClick={() => setRotating(!rotating)} title="Auto-rotate"><Icon name="refresh" size={16}/></Button>
+      <Button variant="ghost" disabled={!ready} className={wireframe ? "on" : ""} aria-label="Show mesh" aria-pressed={wireframe} onClick={() => setWireframe(!wireframe)} title="Show mesh"><Icon name="grid" size={16}/></Button>
+      <Button variant="ghost" disabled={!ready} aria-label="Reset camera" onClick={() => setView(view + 1)} title="Reset camera"><Icon name="camera" size={16}/></Button>
     </nav>
     <div className="cx-workspace">
       <div className="cx-render-meta"><span>Perspective · drag to orbit</span><span>{wireframe ? "Mesh view" : "Shaded view"}</span></div>
-      <CarViewport rotating={rotating} wireframe={wireframe} material={material} resetKey={view}/>
-      <div className="cx-timeline"><Button variant="ghost" aria-label={rotating ? "Pause turntable" : "Play turntable"} onClick={() => setRotating(!rotating)}><Icon name={rotating ? "pause" : "play"} size={12}/></Button><span>Turntable</span><i/><span>{rotating ? "Playing" : "Paused"}</span></div>
+      <CarViewport rotating={playing} wireframe={wireframe} material={material} resetKey={view} onStatusChange={setStatus}/>
+      <div className="cx-timeline"><Button variant="ghost" disabled={!ready || reducedMotion} aria-label={playing ? "Pause turntable" : "Play turntable"} onClick={() => setRotating(!rotating)}><Icon name={playing ? "pause" : "play"} size={12}/></Button><span>Turntable</span><i/><span>{status === "loading" ? "Loading model" : status === "error" ? "Unavailable" : reducedMotion ? "Reduced motion" : playing ? "Playing" : "Paused"}</span></div>
     </div>
     <aside>
-      <p className="cx-label">Selected object</p><b>Door outer / left</b>
-      <dl><div><dt>Location</dt><dd>0.42 · 1.08 · 0.76</dd></div><div><dt>Rotation</dt><dd>0° · 2° · 0°</dd></div><div><dt>Scale</dt><dd>1.00</dd></div></dl>
+      <p className="cx-label">Model</p><b>2022 Evoque</b>
+      <dl><div><dt>Triangles</dt><dd>204,461</dd></div><div><dt>Vertices</dt><dd>114,716</dd></div><div><dt>Materials</dt><dd>21</dd></div></dl>
       <p className="cx-label">Body material</p>
-      <Button variant="ghost" className="cx-row" onClick={() => setMaterial(material === "clay" ? "graphite" : "clay")}><i className={"cx-swatch " + material}/>{material === "clay" ? "Warm clay" : "Graphite"}<Icon name="refresh" size={12}/></Button>
-      <p className="cx-panel-hint">Switch materials, inspect the mesh, or drag the model to find a new angle.</p>
+      <Button variant="ghost" disabled={!ready} className="cx-row" onClick={() => setMaterial(material === "clay" ? "graphite" : "clay")}><i className={"cx-swatch " + material}/>{material === "clay" ? "Warm clay" : "Graphite"}<Icon name="refresh" size={12}/></Button>
+      <p className="cx-panel-hint">Inspect the full vehicle mesh, change the paint, or drag to orbit. The turntable pauses while you use the viewer.</p>
     </aside>
-  </div>;
-}
-
-const stations = ["North Sea Radio", "Evening frequency", "Instrumental hour"];
-const driveModes = ["Vehicle", "Journey", "Energy"] as const;
-
-function Drive() {
-  const [temp, setTemp] = React.useState(20);
-  const [playing, setPlaying] = React.useState(true);
-  const [station, setStation] = React.useState(0);
-  const [mode, setMode] = React.useState<(typeof driveModes)[number]>("Vehicle");
-  return <div className="cx cx-drive">
-    <header><span>09:41</span><b>Vehicle systems</b><span>18°C · LTE</span></header>
-    <div className="cx-ev-vehicle">
-      <p className="cx-ev-model"><b>Evoque</b><span>Electric concept</span></p>
-      <div className="cx-ev-modes" aria-label="Vehicle view">{driveModes.map(value => <Button variant="ghost" key={value} className={mode === value ? "on" : ""} aria-pressed={mode === value} onClick={() => setMode(value)}>{value}</Button>)}</div>
-      <img src="/interfaces/concepts/evoque-line-v4.png" alt="Evoque electric concept side-profile line illustration" />
-      <div className="cx-ev-route" aria-live="polite"><Icon name={mode === "Energy" ? "activity" : "compass"} size={16}/><span><b>{mode === "Energy" ? "Next charge · Utrecht" : mode === "Journey" ? "A2 · Utrecht Centraal" : "Ready for the road"}</b><small>{mode === "Energy" ? "150 kW · 6 stalls available" : mode === "Journey" ? "24 min · 31 km · arrive 10:05" : "386 km range · all systems ready"}</small></span></div>
-    </div>
-    <section className="cx-ev-panels" aria-label="Vehicle controls">
-      <Card><CardLabel>Range</CardLabel><strong>386</strong><span>kilometres</span></Card>
-      <Card><CardLabel>Battery</CardLabel><strong>84%</strong><progress aria-label="Battery charge" value="84" max="100"/><span>Charge limit 90%</span></Card>
-      <Card><CardLabel>Cabin</CardLabel><div className="cx-temp"><Button variant="ghost" aria-label="Lower temperature" disabled={temp <= 16} onClick={() => setTemp(temp - 1)}><Icon name="minus" size={16}/></Button><strong aria-live="polite">{temp}°</strong><Button variant="ghost" aria-label="Raise temperature" disabled={temp >= 28} onClick={() => setTemp(temp + 1)}><Icon name="plus" size={16}/></Button></div><span>Climate on</span></Card>
-      <Card><CardLabel>Media and phone</CardLabel><b aria-live="polite">{stations[station]}</b><span>Mara’s phone · {playing ? "playing" : "paused"}</span><div className="cx-player"><Button variant="ghost" aria-label="Previous station" onClick={() => setStation((station + stations.length - 1) % stations.length)}><Icon name="skip-back" size={16}/></Button><Button className="primary" aria-label={playing ? "Pause" : "Play"} onClick={() => setPlaying(!playing)}><Icon name={playing ? "pause" : "play"} size={16}/></Button><Button variant="ghost" aria-label="Next station" onClick={() => setStation((station + 1) % stations.length)}><Icon name="skip-forward" size={16}/></Button></div></Card>
-    </section>
   </div>;
 }
 

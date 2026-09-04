@@ -114,8 +114,8 @@ function RenderCrop() {
   return (
     <div className="if-crop-scene if-crop-render">
       <div className="if-crop-tools">{(["move", "refresh", "expand", "grid", "camera"] as const).map((name) => <i key={name}><Icon name={name} size={16} /></i>)}</div>
-      <img src="/interfaces/concepts/render-car-v1.jpg" alt="" />
-      <span>Perspective · body_v18</span>
+      <img src="/interfaces/concepts/evoque-model-preview.jpg" alt="" />
+      <span>Perspective · Evoque</span>
     </div>
   );
 }
@@ -125,7 +125,7 @@ function DriveCrop() {
     <div className="if-crop-scene if-crop-drive">
       <header><span>09:41</span><strong>Vehicle systems</strong><span>18°C · LTE</span></header>
       <div className="if-crop-ev-name">Evoque <span>Electric concept</span></div>
-      <img src="/interfaces/concepts/evoque-line-v4.png" alt="" />
+      <img src="/interfaces/concepts/evoque-line-v5.png" alt="" />
       <div className="if-crop-ev-status"><div><span>Range</span><strong>386 <small>km</small></strong></div><div><span>Battery</span><strong>84<small>%</small></strong></div><div><span>Cabin</span><strong>20<small>°</small></strong></div></div>
     </div>
   );

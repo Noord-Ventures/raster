@@ -27,7 +27,7 @@ export function InterfaceShell({ slug, children }: { slug: InterfaceSlug; childr
             <h1 id={`${slug}-name`}>{proto.title}</h1>
             <a className="rs-btn-primary if-build-link" href="#build-with-vlak">Build with Vlak <span aria-hidden="true">↓</span></a>
           </header>
-          <div {...sx("if-specimen", interfaces.specimen)}>{children}</div>
+          <div {...sx("if-specimen", interfaces.specimen, slug === "drive" && interfaces.vehicleSpecimen)}>{children}</div>
           <div className="if-study-caption"><p>{proto.use}</p><a href={source}>View source <span aria-hidden="true">↗</span></a></div>
         </section>
         <div className="if-detail-content">
@@ -39,11 +39,10 @@ export function InterfaceShell({ slug, children }: { slug: InterfaceSlug; childr
             </div>
             <div className="if-used-components">
               <h2>Components used</h2>
-              <p>Explore the building blocks and their APIs.</p>
               <ul className="if-component-list">
                 {proto.components.map((name) => (
                   <li key={name}><Link href={`/components/${name.toLowerCase().replaceAll(" ", "-").replace("icon", "icons")}/`}>
-                    {name}<span aria-hidden="true">↗</span>
+                    {name}
                   </Link></li>
                 ))}
               </ul>

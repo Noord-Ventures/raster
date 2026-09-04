@@ -26,11 +26,40 @@ try {
           main: document.querySelectorAll("main").length,
           headings: document.querySelectorAll("h1").length,
           build: !!document.getElementById("build-with-vlak"),
+          buildGutters: (() => {
+            const build = document.getElementById("build-with-vlak");
+            if (!build) return null;
+            const box = build.getBoundingClientRect();
+            const content = build.closest(".if-detail-content").getBoundingClientRect();
+            return [content.left - box.left, box.right - content.right];
+          })(),
+          nextDivider: (() => {
+            const nav = document.querySelector(".if-next-study");
+            if (!nav) return null;
+            const style = getComputedStyle(nav, "::before");
+            return [style.left, style.right];
+          })(),
+          clippedBuildActions: Array.from(document.querySelectorAll(".if-build button")).filter(button => {
+            const box = button.getBoundingClientRect();
+            const section = button.closest(".if-build").getBoundingClientRect();
+            return box.left < section.left || box.right > section.right;
+          }).map(button => button.textContent),
           links: Array.from(document.querySelectorAll(".if-component-list a"), el => el.getAttribute("href")),
+          controlRadii: Array.from(document.querySelectorAll(".cx-graphics > header button, .cx-graphics > aside > button, .cx-graphics textarea, .cx-segments"), el => getComputedStyle(el).borderRadius),
+          clippedFormats: Array.from(document.querySelectorAll(".cx-format-label")).filter(label => {
+            const button = label.closest("button").getBoundingClientRect();
+            const text = label.getBoundingClientRect();
+            return text.left < button.left + 6 || text.right > button.right - 6;
+          }).map(label => label.textContent),
         }));
         if (layout.overflow > 1) failures.push(`${scheme} ${width}px ${route}: ${layout.overflow}px page overflow`);
         if (layout.main !== 1 || layout.headings !== 1) failures.push(`${route}: expected one main and h1, got ${layout.main}/${layout.headings}`);
         if (slug && !layout.build) failures.push(`${route}: missing build section`);
+        if (layout.buildGutters?.some(gutter => Math.abs(gutter - 20) > 1)) failures.push(`${width}px ${route}: build box must extend into both gutters`);
+        if (layout.nextDivider?.some(edge => edge !== "-20px")) failures.push(`${width}px ${route}: next-study divider must extend into both gutters`);
+        if (layout.clippedBuildActions.length) failures.push(`${width}px ${route}: clipped build actions: ${layout.clippedBuildActions.join(", ")}`);
+        if (layout.controlRadii.some(radius => radius !== "4px")) failures.push(`${width}px ${route}: generator controls lost their 4px radius`);
+        if (layout.clippedFormats.length) failures.push(`${width}px ${route}: clipped format labels: ${layout.clippedFormats.join(", ")}`);
         layout.links.forEach(href => componentLinks.add(href));
       }
       console.log(`${scheme} ${width}px: checked gallery and twelve studies`);

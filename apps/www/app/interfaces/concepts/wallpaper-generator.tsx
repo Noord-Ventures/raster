@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Button, Icon } from "@noorddev/vlak-react";
+import { Button, Icon, Textarea, ToggleGroup } from "@noorddev/vlak-react";
 
 type Format = "widescreen" | "desktop" | "phone";
 
@@ -200,15 +200,17 @@ export function WallpaperGenerator() {
   }
 
   return <div className="cx cx-graphics">
-    <header><b>Wallpaper generator</b><span>Three compositions, one starting point</span><Button size="sm" disabled={exporting} onClick={exportSelected}>{exporting ? "Exporting…" : "Export 6K"}</Button></header>
+    <header><b>Wallpaper generator</b><span>Three compositions, one starting point</span><Button size="sm" style={{ borderRadius: "var(--radius-sm)" }} disabled={exporting} onClick={exportSelected}>{exporting ? "Exporting…" : "Export 6K"}</Button></header>
     <aside>
       <p className="cx-label">Direction</p>
-      <label>Variation seed<textarea value={prompt} onChange={(event) => setPrompt(event.target.value)} /></label>
-      <p className="cx-label">Canvas</p>
-      <div className="cx-segments">{(Object.keys(formats) as Format[]).map((value) => <button key={value} className={format === value ? "on" : ""} aria-pressed={format === value} onClick={() => setFormat(value)}>{formats[value].label}</button>)}</div>
-      <small className="cx-output-size">{formats[format].width} × {formats[format].height} · PNG</small>
-      <label>Variation<input type="range" min="0" max="100" value={variation} onChange={(event) => setVariation(Number(event.target.value))} /></label>
-      <Button onClick={generate}><Icon name="image" size={16}/>Generate</Button>
+      <div className="cx-direction"><Textarea label="Variation seed" style={{ borderRadius: "var(--radius-sm)", minHeight: 0 }} value={prompt} onChange={(event) => setPrompt(event.target.value)} /></div>
+      <div className="cx-format-field">
+        <p className="cx-label">Canvas</p>
+        <ToggleGroup className="cx-segments" aria-label="Canvas format" style={{ borderRadius: "var(--radius-sm)", height: "auto" }} value={format} onValueChange={(value) => setFormat(value as Format)} options={(Object.keys(formats) as Format[]).map(value => ({ value, label: <span className="cx-format-label">{formats[value].label}</span> }))} />
+        <small className="cx-output-size">{formats[format].width} × {formats[format].height} · PNG</small>
+      </div>
+      <label className="cx-variation">Variation<input type="range" min="0" max="100" value={variation} onChange={(event) => setVariation(Number(event.target.value))} /></label>
+      <Button style={{ borderRadius: "var(--radius-sm)" }} onClick={generate}><Icon name="image" size={16}/>Generate</Button>
       <p className="cx-generation-status" aria-live="polite">{status}</p>
     </aside>
     <div className="cx-workspace"><div className="cx-results">{results.map((wallpaper, index) => <button key={wallpaper.id} className={selected === index ? "on" : ""} aria-pressed={selected === index} onClick={() => setSelected(index)}><WallpaperArt wallpaper={wallpaper} format={format}/><span>{String(index + 1).padStart(2, "0")} · {wallpaper.name}</span></button>)}</div></div>

@@ -169,6 +169,12 @@ export const interfaces = stylex.create({
     boxShadow: "none",
     overflow: "hidden",
   },
+  vehicleSpecimen: {
+    height: {
+      default: 720,
+      [phone]: 680,
+    },
+  },
   matter: {
     maxWidth: 592,
     paddingTop: 32,
