@@ -317,9 +317,22 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
   }
   .nav-panel-link {
     display: flex; align-items: center;
-    min-height: 44px; padding: 12px 20px; font-size: 1.0625rem;
+    min-height: 44px; padding: 12px 20px !important; font-size: 1.0625rem;
   }
-  .nav-panel-appearance { padding: 12px 20px 16px; }
+  .nav-panel-appearance { padding: 20px 20px 24px; }
+  .nav-panel-appearance .settings-label {
+    display: flex;
+    align-items: center;
+    min-height: 20px;
+    margin: 0 0 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 20px;
+  }
+  .nav-panel-appearance .settings-group + .settings-group {
+    margin-top: 16px;
+    padding-top: 16px;
+  }
   /* Controls keep Vlak's small component radius inside the otherwise flush sheet. */
   .nav-panel-appearance .settings-choice,
   .nav-panel-appearance .text-stepper .rs-btn-ghost {
@@ -445,7 +458,11 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
 @media (max-width: 480px) {
   .logo-wrap { left: calc(8px + env(safe-area-inset-left, 0px)); }
   .nav-toggle { right: calc(8px + env(safe-area-inset-right, 0px)); }
-  .nav-panel-link, .nav-panel-appearance { padding-left: 25px; padding-right: 25px; }
+  .nav-panel-link,
+  .nav-panel-appearance {
+    padding-left: calc(25px + env(safe-area-inset-left, 0px)) !important;
+    padding-right: calc(25px + env(safe-area-inset-right, 0px)) !important;
+  }
   .site-crumb-bar .rs-crumb-bar-inner {
     flex-wrap: nowrap;
     padding: 0 calc(60px + env(safe-area-inset-right, 0px)) 0 calc(60px + env(safe-area-inset-left, 0px));
