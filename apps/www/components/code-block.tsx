@@ -54,8 +54,9 @@ export function CopyControl({ text }: { text: string }) {
 }
 
 export function CodeBlock({ code }: { code: string }) {
+  const lines = code.trim().includes("\n") ? "many" : "one";
   return (
-    <div className="code-block">
+    <div className="code-block" data-lines={lines}>
       {/* Scrolls sideways on narrow screens, so it must take keyboard focus. */}
       <pre tabIndex={0}>{code}</pre>
       <CopyControl text={code} />

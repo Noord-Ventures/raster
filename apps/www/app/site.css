@@ -495,9 +495,10 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
     max-width: 100%;
   }
   .preview-cluster { flex-direction: column; align-items: stretch; width: 100%; gap: 12px; }
-  .code-block { padding: 12px 8px 12px 16px; margin: 16px 0 32px; }
+  .code-block { padding: 12px var(--pad); margin: 16px calc(-1 * var(--pad)) 32px; }
   .code-block pre { font-size: 13.5px; padding-right: 56px; }
-  .code-copy { width: 44px; height: 44px; min-width: 44px; min-height: 44px; top: 50%; right: 4px; transform: translateY(-50%); border-radius: 0; box-shadow: none; }
+  .code-copy { width: 44px; height: 44px; min-width: 44px; min-height: 44px; right: 4px; top: 4px; }
+  .code-block[data-lines="one"] .code-copy { top: 50%; transform: translateY(-50%); }
   .class-list { gap: 8px; margin: 16px 0 32px; }
   .class-list a.rs-chip,
   .class-list .rs-chip {
@@ -772,18 +773,21 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .preview-box > * { max-width: 100%; }
 .preview-box:has(.rs-icon-catalog) { align-items: stretch; justify-content: flex-start; padding: 0; border: 0; width: 100%; }
 .preview-cluster { display: flex; gap: 10px; align-items: center; }
+/* The grey block hangs one gutter into each side; the type stays on the
+   column's grid line. The copy control is ink, top-right on a block of
+   many lines, centred on a one-liner. */
 .code-block {
   position: relative;
   background: var(--table-alt);
   border: 1px solid var(--divider-subtle);
   border-radius: 0;
   box-shadow: none;
-  padding: 14px 16px;
-  margin: 12px 0 28px;
+  padding: 14px var(--pad);
+  margin: 12px calc(-1 * var(--pad)) 28px;
 }
 .code-block pre {
   margin: 0;
-  padding-right: 28px;
+  padding-right: 36px;
   overflow-x: auto;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 12.5px;
@@ -792,26 +796,26 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 }
 .code-copy {
   position: absolute;
-  top: 50%;
+  top: 8px;
   right: 8px;
-  transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   padding: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--table-alt);
+  background: var(--text);
   border: none;
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   box-shadow: none;
-  color: var(--text-secondary);
+  color: var(--bg);
   cursor: pointer;
   font: inherit;
-  transition: color var(--duration-snap) var(--ease);
+  transition: opacity var(--duration-snap) var(--ease);
 }
-.code-copy:hover,
-.code-copy[aria-label="Copied"] { color: var(--text); }
+.code-block[data-lines="one"] .code-copy { top: 50%; transform: translateY(-50%); }
+.code-copy:hover { opacity: .8; }
+.code-copy[aria-label="Copied"] { opacity: 1; }
 .code-copy svg { display: block; }
 .code-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
@@ -969,7 +973,7 @@ html[data-grid="off"] .swag-field {
 .docs-sub + .rs-t-body { margin-top: 6px; }
 .site-content .rs-t-body + .rs-t-body { margin-top: 12px; }
 .site-content .code-block + .rs-t-body { margin-top: -12px; }
-.docs-list { margin: 8px 0 0; padding-left: 18px; }
+.docs-list { margin: 8px 0 0; padding-inline-start: 0; list-style-position: outside; }
 .docs-list li {
   font-size: calc(0.875rem * var(--text-scale, 1));
   font-weight: 400;
@@ -979,6 +983,8 @@ html[data-grid="off"] .swag-field {
   padding: 2px 0;
 }
 .docs-list li::marker { color: var(--text-secondary); }
+/* Markers sit in the gutter; the text starts on the column's grid line. */
+.docs-list li { padding-inline-start: 0; }
 .docs-list + .rs-t-body { margin-top: 12px; }
 .docs-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--gutter); }
 @media (max-width: 640px) { .docs-cols { grid-template-columns: 1fr; } }
