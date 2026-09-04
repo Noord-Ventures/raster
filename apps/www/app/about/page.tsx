@@ -288,6 +288,9 @@ export default function AboutPage() {
               {noord.built} {noord.who}
             </p>
             <p {...sx("", about.colophonP)}>
+              Vlak logo designed by <a href="https://www.liannedias.com" {...sx("", about.link)}>Li-Anne Dias</a>.
+            </p>
+            <p {...sx("", about.colophonP)}>
               {typeface.name}, {typeface.license} · {typeface.designer}. {typeface.ofl}.{" "}
               <a href={typeface.url} {...sx("", about.link)}>
                 {typeface.url.replace("https://", "")}

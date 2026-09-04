@@ -119,7 +119,7 @@
 .sc-night-inspect dt { color: var(--text-secondary); }
 .sc-night-inspect dd { margin: 0; font-weight: 600; }
 
-@media (max-width: 900px) {
+@container (max-width: 900px) {
   .sc-night { grid-template-columns: 1fr; overflow: auto; }
   .sc-night-rail { border-right: 0; border-bottom: 1px solid var(--divider); }
   .sc-night-map { min-height: 240px; }
@@ -127,7 +127,7 @@
   .sc-night-inspect { width: 100%; }
 }
 
-@media (max-width: 640px) {
+@container (max-width: 640px) {
   .sc-night {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto minmax(0, 1fr);

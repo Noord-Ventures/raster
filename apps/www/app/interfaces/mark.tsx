@@ -9,6 +9,12 @@ const marks = {
   night: "truck",
   evening: "bag",
   room: "hash",
+  graphics: "image",
+  render: "box",
+  drive: "compass",
+  orbit: "globe",
+  frontier: "code",
+  platforms: "smartphone",
 } as const;
 
 /** Product marks use the current Vlak icon family. */

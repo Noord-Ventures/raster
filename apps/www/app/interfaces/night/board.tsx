@@ -28,11 +28,11 @@ export function Board() {
 
   return (
     <section className="if-board sc-night" data-pane={phonePane} aria-label={WHAT} style={{ ["--if-spot" as string]: "#E30613" }}>
-      <PhoneV1Chrome heading="Night" action="Trip" onAction={() => setPane("trip")} />
+      <PhoneV1Chrome heading="Fleet" action="Trip" onAction={() => setPane("trip")} />
       <aside className="sc-night-rail" aria-label="Fleet">
         <div className="sc-night-brand">
           <Brand slug="night" />
-          <p className="sc-night-voice">On the street</p>
+          <p className="sc-night-voice">Live dispatch</p>
         </div>
         <p className="sc-night-label if-ico-row">
           <Icon name="truck" size={12} />

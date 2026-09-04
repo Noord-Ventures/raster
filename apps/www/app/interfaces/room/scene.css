@@ -249,7 +249,7 @@
 .sc-room-inspect p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--text-secondary); }
 .sc-room-card { display: grid; gap: 8px; justify-items: start; }
 
-@media (max-width: 900px) {
+@container (max-width: 900px) {
   .sc-room { grid-template-columns: 1fr; overflow: auto; }
   .sc-room-rail,
   .sc-room-chat,
@@ -267,7 +267,7 @@
   .sc-room-inspect { width: 100%; }
 }
 
-@media (max-width: 640px) {
+@container (max-width: 640px) {
   .sc-room {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto minmax(0, 1fr) auto;

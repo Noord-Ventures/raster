@@ -11,46 +11,46 @@ import { InspectorClose } from "../inspector-close";
 const WHAT = interfaceBySlug("room")!.what;
 
 const CHANNELS = [
-  { id: "desk", name: "desk", count: 12, preview: "12 in the room · The room holds the line." },
+  { id: "desk", name: "desk", count: 12, preview: "12 members · Client notes are in." },
   { id: "press", name: "press", count: 4, preview: "4 · Plate is up at 06:00" },
   { id: "yard", name: "yard", count: 2, preview: "2 · Density watch on unit 09" },
 ];
 
 const PEOPLE: { id: FaceId; name: string; state: string; mark: "user-check" | "activity" | "moon" | "users"; extra?: boolean }[] = [
-  { id: "aziez", name: "Aziez", state: "On a line", mark: "activity" },
-  { id: "jenny", name: "Jenny", state: "Away", mark: "moon" },
-  { id: "koen", name: "Koen", state: "On a line", mark: "activity", extra: true },
-  { id: "gianpiero", name: "Gianpiero", state: "At the desk", mark: "user-check", extra: true },
+  { id: "aziez", name: "Mara", state: "On a line", mark: "activity" },
+  { id: "jenny", name: "Inez", state: "Away", mark: "moon" },
+  { id: "koen", name: "Elias", state: "On a line", mark: "activity", extra: true },
+  { id: "gianpiero", name: "Tomas", state: "At the desk", mark: "user-check", extra: true },
 ];
 
 type Msg = { id: string; who: FaceId; name: string; text: string; when: string; replies: number };
 
 const LINES: Record<string, Msg[]> = {
   desk: [
-    { id: "d1", who: "gianpiero", name: "Gianpiero", text: "The room holds the line. Keep the thread on this post.", when: "09:14", replies: 2 },
-    { id: "d2", who: "aziez", name: "Aziez", text: "I left the sheet on the west wall.", when: "09:16", replies: 0 },
-    { id: "d3", who: "jenny", name: "Jenny", text: "Read. I will take the next one.", when: "09:18", replies: 1 },
-    { id: "d4", who: "koen", name: "Koen", text: "Logged. Weeks 4–7. I will keep the timeline under the fee.", when: "09:19", replies: 0 },
+    { id: "d1", who: "gianpiero", name: "Tomas", text: "The client notes are in. Keep the discussion attached to this message.", when: "09:14", replies: 2 },
+    { id: "d2", who: "aziez", name: "Mara", text: "I left the latest proof on the west wall.", when: "09:16", replies: 0 },
+    { id: "d3", who: "jenny", name: "Inez", text: "Seen. I’ll review it after lunch.", when: "09:18", replies: 1 },
+    { id: "d4", who: "koen", name: "Elias", text: "Timeline updated for weeks 4–7. The fee stays above it.", when: "09:19", replies: 0 },
   ],
   press: [
-    { id: "p1", who: "gianpiero", name: "Gianpiero", text: "Form 12 is on the stone.", when: "08:41", replies: 1 },
-    { id: "p2", who: "jenny", name: "Jenny", text: "Hold the second pass.", when: "08:50", replies: 0 },
-    { id: "p3", who: "koen", name: "Koen", text: "Density is within the band.", when: "08:52", replies: 0 },
+    { id: "p1", who: "gianpiero", name: "Tomas", text: "Form 12 is on the stone.", when: "08:41", replies: 1 },
+    { id: "p2", who: "jenny", name: "Inez", text: "Hold the second pass.", when: "08:50", replies: 0 },
+    { id: "p3", who: "koen", name: "Elias", text: "Density is within the band.", when: "08:52", replies: 0 },
   ],
   yard: [
-    { id: "y1", who: "aziez", name: "Aziez", text: "Van 04 is back.", when: "07:12", replies: 1 },
-    { id: "y2", who: "koen", name: "Koen", text: "Yard is quiet. Hold the loop.", when: "07:20", replies: 0 },
+    { id: "y1", who: "aziez", name: "Mara", text: "Van 04 is back.", when: "07:12", replies: 1 },
+    { id: "y2", who: "koen", name: "Elias", text: "Yard is quiet. Hold the loop.", when: "07:20", replies: 0 },
   ],
 };
 
 const THREAD: Record<string, { who: FaceId; name: string; text: string }[]> = {
   d1: [
-    { who: "aziez", name: "Aziez", text: "Which post?" },
-    { who: "gianpiero", name: "Gianpiero", text: "West. The one that holds." },
+    { who: "aziez", name: "Mara", text: "Which revision?" },
+    { who: "gianpiero", name: "Tomas", text: "The west-wall proof." },
   ],
-  d3: [{ who: "koen", name: "Koen", text: "I have it." }],
-  p1: [{ who: "jenny", name: "Jenny", text: "Keep the same ink." }],
-  y1: [{ who: "koen", name: "Koen", text: "Logged." }],
+  d3: [{ who: "koen", name: "Elias", text: "I have it." }],
+  p1: [{ who: "jenny", name: "Inez", text: "Keep the same ink." }],
+  y1: [{ who: "koen", name: "Elias", text: "Logged." }],
 };
 
 export function Board() {
@@ -75,7 +75,7 @@ export function Board() {
     const msg: Msg = {
       id: `you-${Date.now()}`,
       who: "jenny",
-      name: "Jenny",
+      name: "Inez",
       text,
       when: "Now",
       replies: 0,
@@ -87,7 +87,7 @@ export function Board() {
   return (
     <section className="if-board sc-room" data-pane={phonePane} aria-label={WHAT}>
       <PhoneV1Chrome
-        heading="Room"
+        heading="Team chat"
         action="New"
         onAction={() => {
           setChannel("desk");
@@ -99,7 +99,7 @@ export function Board() {
       <aside className="sc-room-rail" aria-label="People">
         <div className="sc-room-brand">
           <Brand slug="room" />
-          <p className="sc-room-voice">In the room</p>
+          <p className="sc-room-voice">Studio workspace</p>
         </div>
         <p className="sc-room-label if-ico-row">
           <Icon name="hash" size={12} />

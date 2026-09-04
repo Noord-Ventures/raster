@@ -127,7 +127,7 @@ export function Board() {
   return (
     <section className="if-board sc-evening" data-page={page} aria-label={WHAT}>
       <PhoneV1Chrome
-        heading="Evening"
+        heading="Order out"
         action="Bag"
         onAction={() => setInspect((cur) => (cur?.kind === "bag" ? null : { kind: "bag" }))}
       />

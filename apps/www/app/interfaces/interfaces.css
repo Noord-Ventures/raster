@@ -307,6 +307,49 @@ body:has(.if-index) {
   color: var(--text);
 }
 
+.if-crop-graphics {
+  position: absolute;
+  inset: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.if-crop-graphics img { width: 100%; height: 100%; object-fit: cover; }
+.if-crop-render { position: absolute; inset: 0; background: #171716; color: #eee; }
+.if-crop-render img { width: 100%; height: 100%; object-fit: cover; }
+.if-crop-render span,
+.if-crop-orbit span {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 6px 8px;
+  background: rgba(8, 10, 12, 0.82);
+  color: #eee;
+  font-size: 0.6875rem;
+}
+.if-crop-drive {
+  position: absolute;
+  inset: 0;
+  padding: 24px;
+  background: #07101a;
+  color: #f4f6fa;
+}
+.if-crop-drive span { color: #8fa1b6; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: .08em; }
+.if-crop-drive b { display: block; margin-top: 18px; font-size: 4.5rem; line-height: .9; letter-spacing: -.06em; }
+.if-crop-drive em { color: #8fa1b6; font-style: normal; }
+.if-crop-drive p { position: absolute; left: 24px; bottom: 20px; margin: 0; color: #8dbdff; }
+.if-crop-orbit { position: absolute; inset: 0; background: #071018; }
+.if-crop-orbit img { width: 100%; height: 100%; object-fit: cover; }
+.if-crop-frontier { position: absolute; inset: 0; padding: 20px; background: #f4f1e8; color: #121212; }
+.if-crop-frontier span { font-size: .75rem; }
+.if-crop-frontier b { display: block; margin-top: 36px; font-size: 2rem; line-height: 1.02; letter-spacing: -.045em; }
+.if-crop-frontier em { position: absolute; left: 20px; bottom: 20px; color: #1d34bd; font-style: normal; }
+.if-crop-platforms { position: absolute; inset: 14px; display: flex; justify-content: center; gap: 18px; background: #ebeae6; }
+.if-crop-platforms > div { width: 116px; padding: 12px 10px; background: #fff; color: #111; border: 5px solid #171717; border-radius: 18px; }
+.if-crop-platforms span { display: block; font-size: .5625rem; }
+.if-crop-platforms b { display: block; margin-top: 18px; }
+.if-crop-platforms p { margin-top: 18px; padding: 10px 8px; background: #172e62; color: #fff; border-radius: 6px; font-size: .625rem; line-height: 1.5; }
+
 .if-tile-matter {
   padding: 12px 20px 14px;
   /* StyleX tileMatter owns the --grid-line seam. */
@@ -339,7 +382,8 @@ body:has(.if-index) {
 
 /* Detail: Vlak chrome around a boxed product UI. Not almost-fullscreen. */
 .if-specimen {
-  margin-top: 204px;
+  container-type: inline-size;
+  margin-top: 120px;
   height: 612px;
   background: var(--bg);
   /* StyleX specimen owns the one --divider hairline. Do not also stroke.
@@ -395,6 +439,7 @@ body:has(.if-index) {
 }
 .if-inspect {
   position: relative;
+  background: var(--bg);
   width: 0;
   opacity: 0;
   overflow: hidden;
@@ -472,6 +517,17 @@ body:has(.if-index) {
   letter-spacing: -0.01em;
   line-height: 1.4;
 }
+.if-component-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+.if-component-list a {
+  color: inherit;
+  text-decoration-color: var(--divider);
+  text-underline-offset: 3px;
+}
+.if-component-list a:hover { text-decoration-color: currentColor; }
 
 /* Kept for the phone 44pt lock. Scenes may still render an rs-sidebar. */
 .if-board .rs-sidebar-item {
@@ -614,8 +670,113 @@ body:has(.if-index) {
   }
 }
 
+/* Interface studies also collapse when their specimen is narrow inside a
+   desktop documentation layout. Viewport queries alone cannot see that case. */
+@container (max-width: 640px) {
+  .if-board {
+    position: relative;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    overflow-x: hidden;
+  }
+  .if-board > * {
+    grid-column: 1;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .if-inspect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    height: auto;
+    overflow: auto;
+    z-index: 4;
+  }
+  .if-board:has(.if-thumb) .if-inspect { bottom: 52px; }
+  .if-inspect.is-open {
+    width: 100%;
+    max-height: 72%;
+    background: var(--bg);
+    border-left: 0;
+    border-top: 1px solid var(--divider);
+  }
+  .if-v1-status {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    grid-row: 1;
+    z-index: 2;
+    height: 44px;
+    padding: 0 20px;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    color: var(--text);
+    background: var(--bg);
+  }
+  .if-v1-status span:last-child { color: var(--text-secondary); font-weight: 400; }
+  .if-v1-status span:first-child { font-weight: 500; }
+  .if-v1-nav {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    grid-row: 2;
+    z-index: 2;
+    height: 48px;
+    padding: 0 16px;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--divider);
+    background: var(--bg);
+  }
+  .if-v1-title { margin: 0; font-size: 1rem; font-weight: 600; letter-spacing: -0.02em; }
+  .if-v1-action {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    min-height: 44px;
+    padding: 0;
+    font: 400 13px/1 inherit;
+    cursor: pointer;
+  }
+  .if-board img { max-width: 100%; }
+  .if-board .rs-sidebar-item {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+  .if-board .rs-tab,
+  .if-board button.rs-tab { min-height: 44px; padding: 12px 0; font-size: 1rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .if-tile,
   .if-rail a,
   .if-inspect { transition: none; }
+}
+
+/* Vlak interface surfaces are square, edge-led regions. Rounded geometry is
+   reserved for avatars, circular transport controls, and physical devices. */
+.if-board .sc-wall-card,
+.if-board .sc-evening-store,
+.if-board .sc-dash-sheet,
+.if-board .sc-night-unit,
+.if-board .sc-room-ch,
+.if-board .sc-room-person,
+.if-board .sc-ai-chat {
+  border-radius: 0;
+}
+@container (max-width: 640px) {
+  .if-board .sc-night-unit,
+  .if-board .sc-room-ch,
+  .if-board .sc-room-person,
+  .if-board .sc-ai-chat {
+    width: 100%;
+    margin-inline: 0;
+    padding-inline: 20px;
+  }
 }

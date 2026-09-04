@@ -145,8 +145,9 @@ export const interfaces = stylex.create({
     backgroundColor: "transparent",
   },
   specimen: {
+    containerType: "inline-size",
     marginTop: {
-      default: 204,
+      default: 120,
       [at899]: 24,
       [phone]: 24,
     },

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Icon } from "@noorddev/vlak-react";
+import { Card, Icon } from "@noorddev/vlak-react";
 import { Brand } from "../mark";
 import { Face, type FaceId } from "../people";
 import { PhoneV1Chrome } from "../v1-chrome";
@@ -27,7 +27,7 @@ const FEED: Post[] = [
   {
     id: "m1",
     who: "aziez",
-    name: "Aziez",
+    name: "Mara",
     when: "09:14",
     text: "The west window is the one that holds.",
     photo: "/interfaces/threads/press-sheet-v2.jpg",
@@ -37,7 +37,7 @@ const FEED: Post[] = [
   {
     id: "m2",
     who: "jenny",
-    name: "Jenny",
+    name: "Inez",
     when: "09:02",
     text: "Paper first. Then the street. Then the room.",
     likes: 8,
@@ -45,7 +45,7 @@ const FEED: Post[] = [
   {
     id: "m3",
     who: "jenny",
-    name: "Jenny",
+    name: "Inez",
     when: "08:41",
     text: "I left a note on the third post.",
     photo: "/interfaces/threads/posters-v2.jpg",
@@ -55,7 +55,7 @@ const FEED: Post[] = [
   {
     id: "m4",
     who: "koen",
-    name: "Koen",
+    name: "Elias",
     when: "08:12",
     text: "Morning stack. Registration holds.",
     likes: 3,
@@ -63,7 +63,7 @@ const FEED: Post[] = [
   {
     id: "m5",
     who: "gianpiero",
-    name: "Gianpiero",
+    name: "Tomas",
     when: "07:55",
     text: "On the rail before the street.",
     photo: "/interfaces/threads/press-sheet-v2.jpg",
@@ -73,7 +73,7 @@ const FEED: Post[] = [
   {
     id: "m6",
     who: "koen",
-    name: "Koen",
+    name: "Elias",
     when: "07:40",
     text: "A grid is a plan, not a decoration.",
     likes: 9,
@@ -81,7 +81,7 @@ const FEED: Post[] = [
   {
     id: "m7",
     who: "gianpiero",
-    name: "Gianpiero",
+    name: "Tomas",
     when: "07:11",
     text: "The rail stays 184.",
     photo: "/interfaces/threads/posters-v2.jpg",
@@ -91,27 +91,27 @@ const FEED: Post[] = [
 ];
 
 const PEOPLE: { id: FaceId; name: string; line: string }[] = [
-  { id: "aziez", name: "Aziez", line: "Paper first" },
-  { id: "jenny", name: "Jenny", line: "Third post" },
-  { id: "koen", name: "Koen", line: "In the gutter" },
-  { id: "gianpiero", name: "Gianpiero", line: "On the rail" },
+  { id: "aziez", name: "Mara", line: "Paper first" },
+  { id: "jenny", name: "Inez", line: "Third post" },
+  { id: "koen", name: "Elias", line: "In the gutter" },
+  { id: "gianpiero", name: "Tomas", line: "On the rail" },
 ];
 
 const COMMENTS: Record<string, { who: FaceId; name: string; text: string }[]> = {
   m1: [
-    { who: "jenny", name: "Jenny", text: "Which window?" },
-    { who: "aziez", name: "Aziez", text: "West. Always west." },
-    { who: "koen", name: "Koen", text: "I can see it from here." },
+    { who: "jenny", name: "Inez", text: "Which window?" },
+    { who: "aziez", name: "Mara", text: "West. Always west." },
+    { who: "koen", name: "Elias", text: "I can see it from here." },
   ],
   m2: [
-    { who: "gianpiero", name: "Gianpiero", text: "Keep the hairline on the active tab only." },
-    { who: "koen", name: "Koen", text: "The rail stays 184." },
+    { who: "gianpiero", name: "Tomas", text: "Keep the hairline on the active tab only." },
+    { who: "koen", name: "Elias", text: "The rail stays 184." },
   ],
-  m3: [{ who: "aziez", name: "Aziez", text: "Cite hangs in the gutter." }],
-  m4: [{ who: "jenny", name: "Jenny", text: "Leave the crumb bar off the poster." }],
-  m5: [{ who: "koen", name: "Koen", text: "The number stays first." }],
-  m6: [{ who: "aziez", name: "Aziez", text: "Put the color on the field only." }],
-  m7: [{ who: "jenny", name: "Jenny", text: "One module. No second rail." }],
+  m3: [{ who: "aziez", name: "Mara", text: "Cite hangs in the gutter." }],
+  m4: [{ who: "jenny", name: "Inez", text: "Leave the crumb bar off the poster." }],
+  m5: [{ who: "koen", name: "Elias", text: "The number stays first." }],
+  m6: [{ who: "aziez", name: "Mara", text: "Put the color on the field only." }],
+  m7: [{ who: "jenny", name: "Inez", text: "One module. No second rail." }],
 };
 
 export function Board() {
@@ -133,11 +133,11 @@ export function Board() {
 
   return (
     <section className="if-board sc-wall" aria-label={WHAT}>
-      <PhoneV1Chrome heading="Wall" action="Post" onAction={() => openPost("m1")} />
+      <PhoneV1Chrome heading="Social feed" action="Post" onAction={() => openPost("m1")} />
       <aside className="sc-wall-rail" aria-label="People">
         <div className="sc-wall-brand">
           <Brand slug="wall" />
-          <p className="sc-wall-voice">On the wall</p>
+          <p className="sc-wall-voice">Studio feed</p>
         </div>
         <p className="sc-wall-label if-ico-row">
           <Icon name="users" size={12} />
@@ -185,7 +185,8 @@ export function Board() {
         </header>
         <div className="sc-wall-stream">
           {FEED.map((row) => (
-            <article key={row.id} className={`sc-wall-card${post === row.id ? " is-on" : ""}${["m1", "m3", "m4", "m5"].includes(row.id) ? " sc-wall-v1" : ""}`}>
+            <article key={row.id}>
+              <Card className={`sc-wall-card${post === row.id ? " is-on" : ""}${["m1", "m3", "m4", "m5"].includes(row.id) ? " sc-wall-v1" : ""}`}>
               <button type="button" className="sc-wall-open" onClick={() => openPost(row.id)}>
                 {row.photo ? <img src={row.photo} alt="" loading="lazy" decoding="async" /> : null}
                 <span className="sc-wall-v1-line">
@@ -222,6 +223,7 @@ export function Board() {
                   )}
                 </em>
               </button>
+              </Card>
             </article>
           ))}
         </div>

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { chrome } from "@/app/site.stylex";
 import { sx } from "@/lib/sx";
 import { type InterfaceSlug, interfaceBySlug } from "./catalog";
@@ -21,27 +22,33 @@ export function InterfaceShell({ slug, children }: { slug: InterfaceSlug; childr
           <p {...sx("if-story if-story-2", interfaces.story, interfaces.story2)}>{proto.note}</p>
           <dl {...sx("if-meta", interfaces.meta)}>
             <div>
-              <dt>What</dt>
-              <dd>{proto.what}</dd>
-            </div>
-            <div>
               <dt>Type</dt>
               <dd>{proto.type}</dd>
             </div>
             <div>
-              <dt>Module</dt>
+              <dt>Components</dt>
+              <dd className="if-component-list">
+                {proto.components.map((name) => (
+                  <Link key={name} href={`/components/${name.toLowerCase().replaceAll(" ", "-").replace("icon", "icons")}`}>
+                    {name}
+                  </Link>
+                ))}
+              </dd>
+            </div>
+            <div>
+              <dt>Structure</dt>
               <dd>{proto.module}</dd>
             </div>
             <div>
-              <dt>Ink</dt>
+              <dt>Visual system</dt>
               <dd>{proto.ink}</dd>
             </div>
             <div>
-              <dt>Use</dt>
+              <dt>Flow</dt>
               <dd>{proto.use}</dd>
             </div>
             <div>
-              <dt>Field</dt>
+              <dt>Layout</dt>
               <dd>{proto.field}</dd>
             </div>
           </dl>

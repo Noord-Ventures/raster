@@ -199,7 +199,7 @@
 .sc-dash-inspect h2 { margin: 0 0 10px; font-size: 13px; }
 .sc-dash-inspect p { margin: 0 0 10px; font-size: 13px; line-height: 1.45; color: var(--text-secondary); }
 
-@media (max-width: 900px) {
+@container (max-width: 900px) {
   .sc-dash { grid-template-columns: 1fr; overflow: auto; }
   .sc-dash-rail { border-right: 0; border-bottom: 1px solid var(--divider); }
   .sc-dash-metrics,
@@ -211,7 +211,7 @@
   .sc-dash-inspect { width: 100%; }
 }
 
-@media (max-width: 640px) {
+@container (max-width: 640px) {
   .sc-dash {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto minmax(0, 1fr);

@@ -43,11 +43,11 @@ export function Board() {
 
   return (
     <section className="if-board sc-dash" aria-label={WHAT} style={{ ["--if-spot" as string]: "#E30613" }}>
-      <PhoneV1Chrome heading="Press" action="Floor" onAction={() => { setPage("overview"); setSheet(false); }} />
+      <PhoneV1Chrome heading="Dashboard" action="Floor" onAction={() => { setPage("overview"); setSheet(false); }} />
       <aside className="sc-dash-rail" aria-label="Floor">
         <div className="sc-dash-brand">
           <Brand slug="press" />
-          <p className="sc-dash-voice">On press</p>
+          <p className="sc-dash-voice">Production overview</p>
         </div>
         <p className="sc-dash-label if-ico-row">
           <Icon name="layout" size={12} />

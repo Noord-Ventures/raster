@@ -20,12 +20,12 @@ function LineCrop() {
       <Lockup slug="line" />
       <p className="if-crop-kicker">Brief</p>
       <p className="if-crop-line">
-        Two sentences,
+        A tighter
         <br />
-        same claim.
+        project brief.
       </p>
       <div className="if-crop-dock">
-        <span>The next line</span>
+        <span>Write a message</span>
         <span className="if-crop-send">Send</span>
       </div>
     </div>
@@ -106,6 +106,64 @@ function RoomCrop() {
   );
 }
 
+function GraphicsCrop() {
+  return (
+    <div className="if-crop-scene if-crop-graphics">
+      {[
+        "/interfaces/concepts/poster-blue-v1.jpg",
+        "/interfaces/concepts/poster-grid-v1.jpg",
+        "/interfaces/concepts/poster-orbit-v1.jpg",
+      ].map((src) => <img key={src} src={src} alt="" />)}
+    </div>
+  );
+}
+
+function RenderCrop() {
+  return (
+    <div className="if-crop-scene if-crop-render">
+      <img src="/interfaces/concepts/render-car-v1.jpg" alt="" />
+      <span>Perspective · body_v18</span>
+    </div>
+  );
+}
+
+function DriveCrop() {
+  return (
+    <div className="if-crop-scene if-crop-drive">
+      <span>Driving</span><b>84</b><em>km/h</em>
+      <p>318 km · North Sea Radio</p>
+    </div>
+  );
+}
+
+function OrbitCrop() {
+  return (
+    <div className="if-crop-scene if-crop-orbit">
+      <img src="/interfaces/concepts/europe-observation-v1.jpg" alt="" />
+      <span>52.37° N · 4.90° E</span>
+    </div>
+  );
+}
+
+function FrontierCrop() {
+  return (
+    <div className="if-crop-scene if-crop-frontier">
+      <span>Aster Labs</span>
+      <b>Reasoning models<br />for work that<br />has to hold up.</b>
+      <em>Aster 2 →</em>
+    </div>
+  );
+}
+
+function PlatformsCrop() {
+  return (
+    <div className="if-crop-scene if-crop-platforms">
+      <div><span>9:41</span><b>Rotterdam</b><p>Intercity 1135<br />On time</p></div>
+      <div><span>9:41</span><b>Rotterdam</b><p>Intercity 1135<br />On time</p></div>
+    </div>
+  );
+}
+
 const CROPS: Record<InterfaceSlug, () => ReactNode> = {
   line: LineCrop,
   press: PressCrop,
@@ -113,6 +171,12 @@ const CROPS: Record<InterfaceSlug, () => ReactNode> = {
   night: NightCrop,
   evening: EveningCrop,
   room: RoomCrop,
+  graphics: GraphicsCrop,
+  render: RenderCrop,
+  drive: DriveCrop,
+  orbit: OrbitCrop,
+  frontier: FrontierCrop,
+  platforms: PlatformsCrop,
 };
 
 export function InterfaceCrop({ slug }: { slug: InterfaceSlug }) {

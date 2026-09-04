@@ -104,6 +104,7 @@
   column-gap: 8px;
   padding: 8px;
 }
+.sc-wall-stream > article { break-inside: avoid; }
 .sc-wall-card {
   break-inside: avoid;
   margin-bottom: 8px;
@@ -112,6 +113,7 @@
   background: var(--bg);
   overflow: hidden;
 }
+.sc-wall-card.rs-card { width: 100%; max-width: none; }
 .sc-wall-card.is-on { background: color-mix(in srgb, var(--text) 5%, var(--bg)); }
 .sc-wall-open {
   appearance: none;
@@ -201,7 +203,7 @@
   font: 500 13px/1.45 inherit;
 }
 
-@media (max-width: 900px) {
+@container (max-width: 900px) {
   .sc-wall { grid-template-columns: 1fr; overflow: auto; }
   .sc-wall-rail {
     border-right: 0;
@@ -213,7 +215,7 @@
   .sc-wall-inspect { width: 100%; }
 }
 
-@media (max-width: 640px) {
+@container (max-width: 640px) {
   .sc-wall {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto minmax(0, 1fr);
@@ -223,11 +225,7 @@
   .if-board.sc-wall .sc-wall-rail { display: none; }
   .sc-wall-faces,
   .sc-wall-head,
-  .sc-wall-card:not(.sc-wall-v1),
-  .sc-wall-who,
-  .sc-wall-meta,
-  .sc-wall-open em,
-  .sc-wall-open img { display: none; }
+  .sc-wall-v1-line { display: none; }
   .sc-wall-feed { min-height: 0; overflow: hidden; }
   .sc-wall-stream {
     column-count: 1;
@@ -236,32 +234,27 @@
     min-height: 0;
   }
   .sc-wall-card {
-    margin-bottom: 0;
+    margin-bottom: 12px;
     border-radius: var(--radius-sm);
-    border-width: 0 0 1px;
+    border-width: 1px;
     overflow: hidden;
   }
   .sc-wall-card.is-on {
     background: color-mix(in srgb, var(--text) 4%, var(--bg));
   }
-  .sc-wall-v1-line {
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text);
-  }
   .sc-wall-open {
     min-height: 64px;
-    gap: 2px;
-    padding: 10px 12px 8px;
+    gap: 8px;
+    padding: 0 0 12px;
   }
   .sc-wall-open p {
-    padding: 0;
-    font-size: 11px;
-    font-weight: 400;
-    line-height: 14px;
-    color: var(--text-secondary);
+    padding: 0 12px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--text);
   }
+  .sc-wall-open img { max-height: 280px; object-fit: cover; }
 }
 
 @media (prefers-reduced-motion: reduce) {
