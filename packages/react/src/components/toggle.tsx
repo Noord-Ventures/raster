@@ -112,8 +112,9 @@ const styles = stylex.create({
     },
     borderWidth: raster.hairline,
     borderStyle: "solid",
+    /* The frame is the ink of the pressed toggle: one object, one colour. */
     borderColor: {
-      default: raster.controlBorder,
+      default: raster.ink,
       [mq.forcedColors]: "ButtonText",
     },
     borderRadius: {

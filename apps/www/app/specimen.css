@@ -215,7 +215,8 @@ html:has(.specimen-page) .site-footer {
   /* Optical left, command display (~2–5rem). Own fraction, not the hero -0.08em. */
   margin-left: calc(1px - 0.07em);
   font-family: inherit;
-  font-size: clamp(2rem, 7.5cqw, 5rem);
+  /* Fits "npm install @noorddev/raster-react" on one line from the 1024 rail up. */
+  font-size: clamp(2rem, 5.9cqw, 4.5rem);
   font-weight: 600;
   letter-spacing: -.045em;
   line-height: .92;

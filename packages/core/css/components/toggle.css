@@ -6,7 +6,7 @@
 @media (prefers-reduced-motion: reduce){.rs-toggle{transition:none}}
 .rs-toggle-pressed{background-color:var(--text);border-color:var(--text);color:var(--bg);forced-color-adjust:none}
 @media (forced-colors: active){.rs-toggle-pressed{background-color:Highlight;border-color:Highlight;color:HighlightText}}
-.rs-toggle-group{display:inline-flex;align-items:stretch;box-sizing:border-box;height:2rem;border-width:1px;border-style:solid;border-color:var(--control-border);border-radius:var(--radius-sm);overflow:hidden}
+.rs-toggle-group{display:inline-flex;align-items:stretch;box-sizing:border-box;height:2rem;border-width:1px;border-style:solid;border-color:var(--text);border-radius:var(--radius-sm);overflow:hidden}
 @media (max-width: 640px){.rs-toggle-group{display:flex;height:var(--hit);width:100%;border-radius:0}}
 @media (forced-colors: active){.rs-toggle-group{border-color:ButtonText}}
 .rs-toggle{height:auto;border-width:0;border-radius:0;margin:0;border-inline-start-width:0;border-inline-start-style:none;border-inline-start-color:transparent}

@@ -658,18 +658,14 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 }
 .section-label + .preview-box,
 .section-label + .rs-scene { margin-top: 12px; }
-/* Catalog + homepage kit: the card / field cell is the frame.
-   StyleX atomics otherwise keep the leaf stroke — zero it here.
-   Do not also zero .rs-scene / .rs-use leaves: In Action is open,
-   so the control's own hairline is the specimen. */
+/* Catalog + homepage kit: the card / field cell is the frame, so panel
+   leaves drop their own stroke here. Grouped controls (button group,
+   toggle group, input group, dropdown) keep theirs: the frame is the control. */
 .gallery-demo .rs-callout,
-.gallery-demo .rs-btn-group,
-.gallery-demo .rs-toggle-group,
 .gallery-demo .rs-empty,
 .gallery-demo .rs-table,
 .gallery-demo .rs-ai,
 .gallery-demo .rs-flow,
-.gallery-demo .rs-input-group,
 .gallery-demo .rs-inline-form,
 .gallery-demo .rs-carousel,
 .gallery-demo .rs-sidebar,
@@ -678,19 +674,15 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .gallery-demo .rs-refs,
 .gallery-demo .rs-alert,
 .gallery-demo .rs-menubar,
-.gallery-demo .rs-dropdown,
 .gallery-demo .rs-dialog,
 .gallery-demo .rs-command,
 .gallery-demo .rs-popover,
 .gallery-demo .rs-hover-card-panel,
 .specimen-kit-live .rs-callout,
-.specimen-kit-live .rs-btn-group,
-.specimen-kit-live .rs-toggle-group,
 .specimen-kit-live .rs-empty,
 .specimen-kit-live .rs-table,
 .specimen-kit-live .rs-ai,
 .specimen-kit-live .rs-flow,
-.specimen-kit-live .rs-input-group,
 .specimen-kit-live .rs-inline-form,
 .specimen-kit-live .rs-carousel,
 .specimen-kit-live .rs-sidebar,
@@ -699,7 +691,6 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .specimen-kit-live .rs-refs,
 .specimen-kit-live .rs-alert,
 .specimen-kit-live .rs-menubar,
-.specimen-kit-live .rs-dropdown,
 .specimen-kit-live .rs-dialog,
 .specimen-kit-live .rs-command,
 .specimen-kit-live .rs-popover,
