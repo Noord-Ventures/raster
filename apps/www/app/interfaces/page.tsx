@@ -26,11 +26,14 @@ export default function InterfacesPage() {
           <p className="rs-t-sub">Twelve product patterns, built with the same components, tokens, and grid.</p>
         </header>
         <div {...sx("if-list", ifx.list)}>
-          {interfaces.map((item) => (
+          {interfaces.map((item, index) => (
             <Link key={item.slug} href={`/interfaces/${item.slug}`} {...sx("if-tile", ifx.tile)}>
               <InterfaceCrop slug={item.slug} />
               <div {...sx("if-tile-matter", ifx.tileMatter)}>
-                <h2 {...sx("", ifx.tileTitle)}>{item.title}</h2>
+                <div className="if-tile-head">
+                  <h2 {...sx("", ifx.tileTitle)}>{item.title}</h2>
+                  <span>{String(index + 1).padStart(2, "0")} ↗</span>
+                </div>
                 <p {...sx("", ifx.tileVoice)}>{item.voice}</p>
               </div>
             </Link>

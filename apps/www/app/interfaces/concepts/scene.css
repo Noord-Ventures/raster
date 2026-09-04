@@ -28,7 +28,14 @@
 .cx-quick button,
 .cx-trip-card { border-radius: 0; }
 .cx-generation-status { min-height: 18px; margin: -6px 0 0; color: #aaa; font-size: 11px; line-height: 1.4; }
+.cx-graphics .cx-segments button { min-width: 0; padding-inline: 5px; font-size: 11px; }
+.cx-graphics .cx-segments button:first-child { flex-grow: 1.45; }
 .cx-graphics > main { padding: 16px; }
+.cx-results { grid-template-columns: minmax(0, 2fr) minmax(148px, 1fr); grid-template-rows: 1fr 1fr; gap: 0; }
+.cx-results button { border-color: #3b3b3a; }
+.cx-results button:first-child { grid-row: 1 / -1; }
+.cx-results button.on { position: relative; z-index: 1; border-color: #f3f1eb; }
+.cx-wallpaper-art { display: block; width: 100%; height: 100%; min-height: 0; background: #111; }
 .cx-live-model { position: absolute; inset: 0; cursor: grab; touch-action: none; }
 .cx-live-model:active { cursor: grabbing; }
 .cx-live-model canvas { display: block; width: 100%; height: 100%; }
@@ -45,7 +52,9 @@
   padding: 0;
   line-height: 0;
 }
-.cx-render > nav .rs-icon { display: block; margin: 0; }
+.cx-render > nav .rs-icon { display: block; margin: 0; transform: translateY(.5px); }
+/* The camera roof puts its visible center above the viewBox axis. */
+.cx-render > nav button:last-child .rs-icon { transform: translateY(1.25px); }
 .cx-frontier { --bg: #f4f1e8; --text: #121212; --text-secondary: #555; }
 .cx-frontier > main {
   position: relative;
@@ -90,7 +99,7 @@
 @keyframes cx-pulse { to { box-shadow: 0 0 0 18px transparent; } }
 
 /* A restrained, architectural cockpit: high contrast, hard divisions, one signal. */
-.cx-drive { position: relative; background: #090b0d; color: #f4f2eb; grid-template-columns: 30% 40% 30%; }
+.cx-drive { position: relative; background: #090b0d; color: #f4f2eb; grid-template-columns: 30% 40% 30%; grid-template-rows: 48px minmax(0, 1fr); }
 .cx-drive > header { height: 48px; background: #111417; border-color: #353b40; }
 .cx-drive > header { display: grid; grid-template-columns: 1fr auto 1fr; }
 .cx-drive > header > span {
@@ -135,6 +144,29 @@
 .cx-drive .cx-quick button { height: 72px; border-width: 0 1px 1px 0; border-color: #353b40; background: transparent; }
 .cx-drive .cx-device { border-color: #353b40; }
 .cx-agenda { gap: 8px; }
+
+/* One itinerary, two recognizably native grammars, held together by Vlak. */
+.cx-phone { position: relative; }
+.cx-phone.ios { grid-template-rows: 28px 58px 1fr 54px; border-radius: 30px; }
+.cx-ios-island { position: absolute; z-index: 2; top: 7px; left: 50%; width: 58px; height: 16px; border-radius: 10px; background: #161616; transform: translateX(-50%); }
+.cx-phone.ios > header { align-items: end; padding-bottom: 8px; }
+.cx-phone.ios > header b { font-size: 17px; letter-spacing: -.03em; }
+.cx-phone.ios > header button { width: 28px; height: 28px; border-radius: 50%; background: #f0f0ed; }
+.cx-phone.ios > main { padding: 8px 14px 14px; }
+.cx-phone.ios .cx-trip-card { border-radius: 11px; }
+.cx-phone.ios > nav { padding: 4px 8px 2px; background: #fafaf8e8; }
+.cx-phone > nav button { display: grid; place-items: center; align-content: center; gap: 2px; font-size: 8px; }
+.cx-phone.ios > nav button.on { color: #173a88; }
+.cx-phone.android { border-radius: 18px; grid-template-rows: 24px 58px 1fr 58px 14px; background: #f7f5ef; }
+.cx-phone.android > header { justify-content: initial; gap: 10px; padding: 0 10px; background: #f7f5ef; border-bottom: 1px solid #d2d0c8; }
+.cx-phone.android > header div { flex: 1; }
+.cx-phone.android > header button { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; }
+.cx-phone.android > main { position: relative; padding: 12px 12px 64px; }
+.cx-phone.android .cx-trip-card { border-radius: 0; background: #263d71; }
+.cx-phone.android .cx-agenda { grid-template-columns: 24px 38px 1fr; align-items: center; min-height: 52px; }
+.cx-phone.android > nav { padding: 4px 12px; background: #e7e5de; border-top: 0; }
+.cx-phone.android > nav button.on { color: #173a88; background: #d5dced; }
+.cx-android-action { position: absolute; right: 14px; bottom: 10px; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 14px; background: #173a88; color: #fff; box-shadow: 0 4px 12px #0002; }
 
 @container (max-width: 640px) {
   .cx-graphics { grid-template: 44px auto minmax(0, 1fr) / 1fr; }
@@ -181,4 +213,71 @@
   .cx-pass-track,
   .cx-sweep,
   .cx-target { animation: none; }
+}
+
+/* EV study follows the measured profile-and-data composition used in the
+   Vlak films, translated into an interactive landscape display. */
+.cx-drive {
+  grid-template: 48px minmax(0, 1fr) 154px / 1fr;
+  background: #0d1012;
+}
+.cx-drive > header { grid-column: 1; }
+.cx-ev-vehicle {
+  position: relative;
+  display: block;
+  min-height: 0;
+  padding: 18px 24px 8px !important;
+  border: 0 !important;
+  overflow: hidden;
+}
+.cx-ev-model { position: relative; z-index: 1; display: flex; gap: 10px; margin: 0; }
+.cx-ev-model span { color: #8d969d; }
+.cx-ev-vehicle > img {
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  bottom: 0;
+  width: 94%;
+  height: calc(100% - 34px);
+  object-fit: contain;
+  object-position: center bottom;
+}
+.cx-ev-modes { position: absolute; z-index: 2; top: 14px; right: 18px; display: flex; border: 1px solid #353b40; }
+.cx-ev-modes button { min-height: 30px; padding: 0 10px; border: 0; border-right: 1px solid #353b40; background: transparent; color: #8d969d; }
+.cx-ev-modes button:last-child { border-right: 0; }
+.cx-ev-modes button.on { background: #d8d7d0; color: #111417; }
+.cx-ev-route { position: absolute; z-index: 2; left: 24px; bottom: 14px; display: flex; align-items: center; gap: 8px; margin: 0; padding: 8px 10px; background: #111417e8; border: 1px solid #353b40; }
+.cx-ev-route span { display: grid; }
+.cx-ev-route small { color: #8d969d; }
+.cx-drive > .cx-ev-panels {
+  position: static;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 0;
+  border: 0;
+  border-top: 1px solid #353b40;
+  background: #111417;
+}
+.cx-ev-panels article { min-width: 0; padding: 14px 16px; border-right: 1px solid #353b40; }
+.cx-ev-panels article:last-child { border-right: 0; }
+.cx-ev-panels article > strong { display: block; margin-top: 6px; font-size: 28px; font-weight: 500; letter-spacing: -.04em; }
+.cx-ev-panels article > b { display: block; margin-top: 9px; }
+.cx-ev-panels article > span { display: block; margin-top: 3px; color: #8d969d; }
+.cx-ev-panels progress { width: 100%; height: 2px; margin: 11px 0 2px; accent-color: #d6d16a; }
+.cx-ev-panels .cx-temp { justify-content: initial; gap: 10px; margin: 8px 0 0; }
+.cx-ev-panels .cx-temp button { width: 32px; height: 32px; min-width: 32px; min-height: 32px; }
+.cx-ev-panels .cx-temp strong { min-width: 48px; font-size: 24px; text-align: center; }
+.cx-ev-panels .cx-player { gap: 4px; margin-top: 8px; }
+.cx-ev-panels .cx-player button { width: 28px; height: 28px; min-width: 28px; min-height: 28px; }
+
+@container (max-width: 640px) {
+  .cx-drive { grid-template: 48px minmax(0, 1fr) auto / 1fr; }
+  .cx-drive > header > span:last-child { visibility: visible; }
+  .cx-ev-vehicle { display: block; padding: 16px !important; }
+  .cx-ev-modes { display: none; }
+  .cx-ev-vehicle > img { left: -8%; width: 116%; height: calc(100% - 52px); }
+  .cx-drive > .cx-ev-panels { position: static; grid-template-columns: repeat(2, 1fr); }
+  .cx-ev-panels article { min-height: 104px; padding: 12px 14px; border-bottom: 1px solid #353b40; }
+  .cx-ev-panels article:nth-child(2n) { border-right: 0; }
+  .cx-ev-panels article:nth-child(-n+2) { display: none; }
 }

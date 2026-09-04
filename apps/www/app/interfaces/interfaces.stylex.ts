@@ -193,7 +193,7 @@ export const interfaces = stylex.create({
     marginTop: 16,
     marginBottom: 0,
     fontSize: "1.0625rem",
-    fontWeight: 500,
+    fontWeight: 400,
     letterSpacing: "-0.01em",
     lineHeight: 1.5,
     color: "var(--text)",

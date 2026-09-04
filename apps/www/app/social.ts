@@ -4,7 +4,7 @@ import { DOOR, HOST, LAW, WORD } from "./specimen";
 const title = WORD;
 const description = LAW;
 const image = {
-  url: "/og.png",
+  url: "/opengraph-image",
   width: 1200,
   height: 630,
   alt: `${WORD}. ${LAW}`,

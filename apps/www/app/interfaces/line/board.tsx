@@ -13,61 +13,61 @@ type Msg = { id: string; role: Role; text: string; fresh?: boolean };
 type Inspect = { kind: "line"; id: string } | { kind: "settings" } | null;
 
 const CHATS = [
-  { id: "brief", title: "Project brief", preview: "Shorten the introduction and keep the fee…", when: "Now" },
-  { id: "press", title: "Print schedule", preview: "Alkmaar · plates ready at 06:00", when: "Today" },
-  { id: "invoice", title: "Invoice summary", preview: "Keep weeks 4–7 below the fee", when: "Yesterday" },
-  { id: "desk", title: "Studio update", preview: "Keep feedback attached to the message", when: "Today" },
-  { id: "wall", title: "Morning review", preview: "Review the latest proof before lunch", when: "Today" },
+  { id: "brief", title: "Digital Bath imagery", preview: "Why beauty and menace coexist", when: "Now" },
+  { id: "press", title: "Change and distance", preview: "Transformation without a stable narrator", when: "Today" },
+  { id: "invoice", title: "Be Quiet and Drive", preview: "Escape as place, motion, and pressure", when: "Yesterday" },
+  { id: "desk", title: "White Pony sequence", preview: "How the album keeps changing temperature", when: "Today" },
+  { id: "wall", title: "Rosemary atmosphere", preview: "Scale, suspension, and the long build", when: "Today" },
 ] as const;
 
 const STARTED: Record<string, Msg[]> = {
   brief: [
-    { id: "b1", role: "you", text: "Make the intro tighter. Keep the fee on the first page." },
+    { id: "b1", role: "you", text: "How do you read the contrast in Digital Bath?" },
     {
       id: "b2",
       role: "line",
-      text: "I tightened it to two sentences and kept the fee on the first page. The timeline now follows the total.",
+      text: "The song places luxurious sensory detail beside implied danger. That friction makes the scene feel intimate and threatening at the same time.",
     },
-    { id: "b3", role: "you", text: "Good. Where should the timeline sit?" },
+    { id: "b3", role: "you", text: "Does the arrangement reinforce that reading?" },
     {
       id: "b4",
       role: "line",
-      text: "Place it directly below the fee. Keep it to two lines; if the schedule grows, move the additional dates to a second sheet.",
+      text: "Yes. The verses leave negative space around the voice, then the chorus arrives with physical weight. The music turns the same scene from private to overwhelming.",
     },
   ],
   press: [
-    { id: "p1", role: "you", text: "Press starts week 4. What do I tell the floor?" },
+    { id: "p1", role: "you", text: "Who is changing in Change: the subject, the narrator, or both?" },
     {
       id: "p2",
       role: "line",
-      text: "One note: same ink, no second color on the plate. Proofs stay in the run. If density drops, stop the sheet and ping the thread.",
+      text: "The ambiguity is the point. The narrator watches a transformation but also sounds implicated in it, so distance becomes a form of self-protection rather than certainty.",
     },
   ],
   invoice: [
-    { id: "i1", role: "you", text: "The invoice has to match the cover." },
+    { id: "i1", role: "you", text: "Why does Be Quiet and Drive feel like escape rather than arrival?" },
     {
       id: "i2",
       role: "line",
-      text: "Use the number on page one. Do not add a second total. Date the sheet to the week the press starts.",
+      text: "The song values motion over destination. Place names fall away, and the emotional demand is simply to get elsewhere before the present closes in.",
     },
   ],
   desk: [
-    { id: "d1", role: "you", text: "Keep the feedback attached to this message." },
-    { id: "d2", role: "line", text: "Done. The conversation will stay linked to the original note." },
+    { id: "d1", role: "you", text: "What holds White Pony together when its songs feel so different?" },
+    { id: "d2", role: "line", text: "A shared tension between control and surrender. The production changes shape, but intimacy repeatedly tips into unease." },
   ],
   wall: [
-    { id: "w1", role: "you", text: "Summarize the latest proof review." },
-    { id: "w2", role: "line", text: "The grid is approved. Increase the caption size before the next print." },
+    { id: "w1", role: "you", text: "What makes Rosemary feel so vast?" },
+    { id: "w2", role: "line", text: "Its scale comes from patience: suspended guitar figures, distant imagery, and a gradual increase in mass rather than a sudden reveal." },
   ],
 };
 
-const HINTS = ["Tighten the intro", "Move the timeline", "Write the invoice line"];
+const HINTS = ["Read Digital Bath", "Discuss Change", "Trace the mood of Rosemary"];
 
 const REPLIES = [
-  "I’ve shortened the copy and kept the key detail on the first page.",
-  "Place it below the fee. Move any extra dates to the following sheet.",
-  "Done. The total stays first, followed by one concise note.",
-  "I’ve reduced the interface copy and kept the emphasis on the content.",
+  "That reading fits the band’s recurring tension between closeness and threat. The image feels inviting until the surrounding music changes its emotional temperature.",
+  "The song keeps its subject deliberately unstable. What first sounds observational gradually implicates the person doing the watching.",
+  "Listen to how the arrangement withholds release. The emotional force comes from accumulation, not from a single lyrical explanation.",
+  "Across the album, physical spaces often stand in for psychological distance. Movement becomes a way to describe pressure without naming it directly.",
 ];
 
 export function Board() {
@@ -175,7 +175,7 @@ export function Board() {
           <div className="sc-ai-measure">
             {messages.length === 0 ? (
               <div className="sc-ai-empty">
-                <p className="sc-ai-hello">What would you like to revise?</p>
+                <p className="sc-ai-hello">Which Deftones song would you like to discuss?</p>
                 <div className="sc-ai-hints">
                   {HINTS.map((hint) => (
                     <button key={hint} type="button" className="sc-ai-hint" onClick={() => send(hint)}>
@@ -215,7 +215,7 @@ export function Board() {
             {pending ? (
               <p className="sc-ai-pending if-ico-row" aria-live="polite">
                 <Icon name="activity" size={12} />
-                Writing
+                Thinking
               </p>
             ) : null}
             <div ref={end} />
@@ -236,7 +236,7 @@ export function Board() {
                 ref={box}
                 type="text"
                 value={draft}
-                placeholder="Write a message"
+                placeholder="Ask about a song"
                 aria-label="Message"
                 autoComplete="off"
                 onChange={(event) => setDraft(event.target.value)}
@@ -286,7 +286,7 @@ export function Board() {
               </p>
               <p className="if-ico-row">
                 <Icon name="quote" size={12} />
-                Voice · the next line
+                Method · close reading
               </p>
               <p className="if-ico-row">
                 <Icon name="shield" size={12} />
@@ -303,12 +303,12 @@ export function Board() {
               <button
                 type="button"
                 onClick={() => {
-                  send("Rewrite that line, shorter.");
+                  send("Take that reading further.");
                   setInspect(null);
                 }}
               >
                 <Icon name="edit" size={12} />
-                Rewrite
+                Go deeper
               </button>
             </div>
           ) : null}

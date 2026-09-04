@@ -20,9 +20,10 @@ function LineCrop() {
       <Lockup slug="line" />
       <p className="if-crop-kicker">Brief</p>
       <p className="if-crop-line">
-        A tighter
+        Digital Bath:<br />
+        beauty beside
         <br />
-        project brief.
+        implied danger.
       </p>
       <div className="if-crop-dock">
         <span>Write a message</span>
@@ -109,11 +110,9 @@ function RoomCrop() {
 function GraphicsCrop() {
   return (
     <div className="if-crop-scene if-crop-graphics">
-      {[
-        "/interfaces/concepts/poster-blue-v1.jpg",
-        "/interfaces/concepts/poster-grid-v1.jpg",
-        "/interfaces/concepts/poster-orbit-v1.jpg",
-      ].map((src) => <img key={src} src={src} alt="" />)}
+      <i className="if-wallpaper-a" />
+      <i className="if-wallpaper-b" />
+      <i className="if-wallpaper-c" />
     </div>
   );
 }
@@ -121,6 +120,7 @@ function GraphicsCrop() {
 function RenderCrop() {
   return (
     <div className="if-crop-scene if-crop-render">
+      <div className="if-crop-tools"><i /><i /><i /><i /><i /></div>
       <img src="/interfaces/concepts/render-car-v1.jpg" alt="" />
       <span>Perspective · body_v18</span>
     </div>
@@ -130,8 +130,9 @@ function RenderCrop() {
 function DriveCrop() {
   return (
     <div className="if-crop-scene if-crop-drive">
+      <header><span>09:41</span><strong>EV controls</strong><span>18°C · LTE</span></header>
       <span>Driving</span><b>84</b><em>km/h</em>
-      <p>318 km · North Sea Radio</p>
+      <p><strong>318 km</strong><br />North Sea Radio · playing</p>
     </div>
   );
 }
@@ -140,6 +141,7 @@ function OrbitCrop() {
   return (
     <div className="if-crop-scene if-crop-orbit">
       <img src="/interfaces/concepts/europe-observation-v1.jpg" alt="" />
+      <i className="if-crop-reticle" />
       <span>52.37° N · 4.90° E</span>
     </div>
   );
@@ -158,8 +160,8 @@ function FrontierCrop() {
 function PlatformsCrop() {
   return (
     <div className="if-crop-scene if-crop-platforms">
-      <div><span>9:41</span><b>Rotterdam</b><p>Intercity 1135<br />On time</p></div>
-      <div><span>9:41</span><b>Rotterdam</b><p>Intercity 1135<br />On time</p></div>
+      <div className="ios"><i /><span>9:41</span><b>Rotterdam</b><p>Intercity 1135<br /><em>On time</em></p><nav>Plan&nbsp;&nbsp; Today&nbsp;&nbsp; You</nav></div>
+      <div className="android"><span>5G · 82%</span><header>‹&nbsp;&nbsp; Rotterdam&nbsp;&nbsp; ⋮</header><p>Intercity 1135<br /><em>On time</em></p><nav>Plan&nbsp;&nbsp; Today&nbsp;&nbsp; You</nav></div>
     </div>
   );
 }

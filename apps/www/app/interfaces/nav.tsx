@@ -7,6 +7,8 @@ import { sx } from "@/lib/sx";
 import { interfaces } from "./catalog";
 import { interfaces as ifx } from "./interfaces.stylex";
 
+const navInterfaces = [...interfaces.slice(6), ...interfaces.slice(0, 6)];
+
 function here(pathname: string, href: string) {
   return pathname === href || pathname === `${href}/`;
 }
@@ -28,7 +30,7 @@ export function InterfacesNav({ rail = true }: { rail?: boolean }) {
       >
         Index
       </Link>
-      {interfaces.map((item) => {
+      {navInterfaces.map((item) => {
         const href = `/interfaces/${item.slug}`;
         return (
           <Link
@@ -51,7 +53,7 @@ export function InterfacesNav({ rail = true }: { rail?: boolean }) {
           <Link href="/interfaces" {...sx("", ifx.railLink)} aria-current={here(pathname, "/interfaces") ? "page" : undefined}>
             Index
           </Link>
-          {interfaces.map((item) => {
+          {navInterfaces.map((item) => {
             const href = `/interfaces/${item.slug}`;
             return (
               <Link key={item.slug} href={href} {...sx("", ifx.railLink)} aria-current={here(pathname, href) ? "page" : undefined}>
