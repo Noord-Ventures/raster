@@ -907,7 +907,7 @@ body{
 .rs-datatable-empty{padding-top:24px;padding-bottom:24px;padding-inline:20px;text-align:center;font-size:13px;letter-spacing:-0.01em;color:var(--text-secondary)}
 
 /* ── aspect-ratio: generated from packages/react/src/components/aspect-ratio.tsx ── */
-.rs-ratio{position:relative;width:100%;overflow:hidden;border-radius:var(--radius)}
+.rs-ratio{position:relative;display:grid;width:100%;overflow:hidden;border-radius:var(--radius)}
 
 /* ── form: generated from packages/react/src/components/form.tsx ── */
 .rs-form{display:flex;flex-direction:column;gap:16px;max-width:388px;margin:0;color:var(--text)}

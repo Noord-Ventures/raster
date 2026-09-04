@@ -705,6 +705,40 @@ body:has(.catalog-page) .rs-crumb-bar-scrolled .rs-crumbs {
 .preview-box:has(.rs-pages) {
   border: none;
 }
+/* Panel leaves that paint their own hairline span the column, so their
+   outline sits on the same edges as the In action frame below. Small
+   grouped controls (button group, toggle group, flow) stay centred. */
+.preview-box:has(.rs-ai),
+.preview-box:has(.rs-callout),
+.preview-box:has(.rs-empty),
+.preview-box:has(.rs-table),
+.preview-box:has(.rs-inline-form),
+.preview-box:has(.rs-carousel),
+.preview-box:has(.rs-sidebar),
+.preview-box:has(.rs-acc),
+.preview-box:has(.rs-chart),
+.preview-box:has(.rs-cite-box),
+.preview-box:has(.rs-refs),
+.preview-box:has(.rs-cal),
+.preview-box:has(.rs-tabs) {
+  padding: 0;
+  align-items: stretch;
+}
+.preview-box:has(.rs-ai) > *,
+.preview-box:has(.rs-callout) > *,
+.preview-box:has(.rs-empty) > *,
+.preview-box:has(.rs-table) > *,
+.preview-box:has(.rs-inline-form) > *,
+.preview-box:has(.rs-carousel) > *,
+.preview-box:has(.rs-sidebar) > *,
+.preview-box:has(.rs-acc) > *,
+.preview-box:has(.rs-chart) > *,
+.preview-box:has(.rs-cite-box) > *,
+.preview-box:has(.rs-refs) > *,
+.preview-box:has(.rs-tabs) > * {
+  width: 100%;
+  max-width: 100%;
+}
 /* Catalog + homepage kit: the card / field cell is the frame.
    StyleX atomics otherwise keep the leaf stroke — zero it here.
    Do not also zero .rs-scene / .rs-use leaves: In Action is open,
@@ -943,6 +977,10 @@ html[data-grid="off"] .swag-field {
 /* ── Docs prose: sub-labels, lists, two columns, and tables inside the 592 measure.
    Tables use the Raster table classes and sit in a scroll container so a
    390px phone never scrolls the page sideways. ── */
+/* Docs prose reads at 400: the 500 body weight is for the poster, not for paragraphs. */
+.site-content .rs-t-body,
+.site-content .docs-list li,
+.site-content .docs-table .rs-table-td { font-weight: 400; }
 .docs-sub { font-size: 13px; font-weight: 600; letter-spacing: -.01em; color: var(--text-secondary); margin: 20px 0 0; }
 .section-label + .docs-sub { margin-top: 12px; }
 .docs-sub + .code-block { margin-top: 8px; }
@@ -952,7 +990,7 @@ html[data-grid="off"] .swag-field {
 .docs-list { margin: 8px 0 0; padding-left: 18px; }
 .docs-list li {
   font-size: calc(0.9375rem * var(--text-scale, 1));
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -.01em;
   line-height: 1.6;
   color: var(--text);

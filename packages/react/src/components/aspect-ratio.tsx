@@ -11,6 +11,8 @@ export interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {
 const styles = stylex.create({
   box: {
     position: "relative",
+    /* Grid stretches the one child to the whole box, so media and captions fill and centre. */
+    display: "grid",
     width: "100%",
     overflow: "hidden",
     borderRadius: raster.radius,

@@ -1,2 +1,2 @@
 /* ── aspect-ratio: generated from packages/react/src/components/aspect-ratio.tsx ── */
-.rs-ratio{position:relative;width:100%;overflow:hidden;border-radius:var(--radius)}
+.rs-ratio{position:relative;display:grid;width:100%;overflow:hidden;border-radius:var(--radius)}

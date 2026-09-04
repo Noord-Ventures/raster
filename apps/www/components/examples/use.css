@@ -18,7 +18,7 @@
 .rs-scene {
   isolation: isolate;
   background-color: transparent;
-  border: none;
+  border: 1px solid var(--divider);
   border-radius: var(--radius-sm);
   box-shadow: none;
   margin: 8px 0 32px;
@@ -31,6 +31,22 @@
   margin: 0;
   grid-template-columns: 1fr !important;
   min-height: 204px;
+}
+/* The scene is the frame. Panel leaves that paint their own hairline drop
+   it here, so In action never shows a box inside a box. */
+.rs-scene .rs-ai,
+.rs-scene .rs-callout,
+.rs-scene .rs-empty,
+.rs-scene .rs-table,
+.rs-scene .rs-inline-form,
+.rs-scene .rs-carousel,
+.rs-scene .rs-sidebar,
+.rs-scene .rs-acc,
+.rs-scene .rs-cite-box,
+.rs-scene .rs-refs,
+.rs-scene .rs-alert {
+  border-color: transparent;
+  box-shadow: none;
 }
 .rs-scene .rs-use-type {
   display: none !important;

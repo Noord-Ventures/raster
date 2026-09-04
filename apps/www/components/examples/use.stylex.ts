@@ -36,9 +36,9 @@ export const useStyles = stylex.create({
   scene: {
     isolation: "isolate",
     backgroundColor: "transparent",
-    borderWidth: 0,
-    borderStyle: "none",
-    borderColor: "transparent",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "var(--divider)",
     borderRadius: "var(--radius-sm)",
     boxShadow: "none",
     marginTop: 8,
