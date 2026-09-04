@@ -101,6 +101,7 @@ body {
 .site-logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 /* Exact 20px box: its left edge sits on the first 20px grid line. */
 .site-logo-mark { width: 20px; height: 20px; }
+.mobile-site-name { display: none; }
 
 .corner-nav {
   position: fixed; top: 24px; left: var(--nav-left); right: auto; z-index: 200;
@@ -292,6 +293,23 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
   .site-logo {
     width: 44px; height: 44px; min-width: 44px; min-height: 44px;
   }
+  .mobile-site-name {
+    display: block;
+    flex: none;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: -.01em;
+    line-height: 1;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+    pointer-events: none;
+  }
+  .mobile-site-name[data-visible="true"] {
+    opacity: 1;
+    transform: translateX(0);
+  }
   /* The mark, crumb and menu share one exact vertical centre. */
   .site-logo-mark {
     position: relative;
@@ -337,6 +355,11 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
   .nav-panel-appearance .settings-choice,
   .nav-panel-appearance .text-stepper .rs-btn-ghost {
     border-radius: var(--radius-sm) !important;
+  }
+  .nav-panel-appearance .settings-group:first-child .rs-toggle {
+    line-height: 1;
+    padding-top: 0;
+    padding-bottom: 2px;
   }
   .nav-panel-appearance .text-stepper .rs-btn-ghost {
     flex: 0 0 44px;
@@ -392,6 +415,7 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
     overflow: hidden;
     white-space: nowrap;
   }
+  .site-crumb-bar[data-home="true"] .rs-crumbs { display: none !important; }
   .site-crumb-bar .rs-crumbs-link,
   .site-crumb-bar a {
     display: inline-flex; align-items: center;

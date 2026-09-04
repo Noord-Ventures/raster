@@ -99,6 +99,7 @@ export function CrumbBar() {
         scrolled && chrome.crumbBarScrolled,
       )}
       aria-label="Breadcrumbs"
+      data-home={pathname === "/"}
     >
       {/* Root sits outside the inner row so the library’s 1024 inset
           (margin-left: 204px) cannot place “Vlak” on the nav column. */}

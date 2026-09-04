@@ -261,12 +261,19 @@ export function SiteChrome() {
   const { scheme, selectScheme, grid, selectGrid, textIndex, stepText } = useSettings();
   const [open, setOpen] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [atTop, setAtTop] = React.useState(true);
   const settingsRef = React.useRef<HTMLDivElement>(null);
   const navToggleRef = React.useRef<HTMLButtonElement>(null);
   const navPanelRef = React.useRef<HTMLElement>(null);
 
   React.useEffect(() => setOpen(false), [pathname]);
   React.useEffect(() => setMenuOpen(false), [pathname]);
+  React.useEffect(() => {
+    const onScroll = () => setAtTop(window.scrollY <= 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   /* Phone menu: lock scroll, move focus to the first link, close on
      Escape, and hand focus back to the toggle on close. */
@@ -334,6 +341,9 @@ export function SiteChrome() {
         <Link href="/" {...sx("site-logo", chrome.logo)} aria-label="Vlak">
           <VlakMark />
         </Link>
+        <span className="mobile-site-name" data-visible={atTop} aria-hidden="true">
+          Vlak.dev
+        </span>
       </div>
 
       <nav {...sx("corner-nav", chrome.cornerNav)} aria-label="Site">
@@ -394,7 +404,7 @@ export function SiteChrome() {
         inert={!open}
       >
         <div className="nav-panel-links">
-          {links.map((l) => (
+          {links.filter((l) => l.href !== "/").map((l) => (
             <Link key={l.href} href={l.href} {...sx("nav-panel-link", chrome.navPanelLink)} aria-current={current(l.href)}>
               {l.label}
             </Link>
