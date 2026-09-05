@@ -67,6 +67,19 @@
   ],
   "headers": [
     {
+      "source": "/(.*)(opengraph-image|twitter-image)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/png"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
