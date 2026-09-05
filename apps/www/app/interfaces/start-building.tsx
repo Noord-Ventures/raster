@@ -45,8 +45,8 @@ export function StartBuilding({ title, slug, source }: { title: string; slug: st
     </div>
     <div className="if-install">
       <div className="if-install-top"><span>Install the package</span><CopyAction text={install} label="Copy install" primary /></div>
-      <pre tabIndex={0} aria-label="Install command" style={{ paddingInline: 0 }}><code>{install}</code></pre>
-      <pre tabIndex={0} aria-label="Import the stylesheet" style={{ paddingInline: 0 }}><code>{'import "@noorddev/vlak-react/css";'}</code></pre>
+      <pre tabIndex={0} role="region" aria-label="Install command" style={{ paddingInline: 0 }}><code>{install}</code></pre>
+      <pre tabIndex={0} role="region" aria-label="Import the stylesheet" style={{ paddingInline: 0 }}><code>{'import "@noorddev/vlak-react/css";'}</code></pre>
       <div className="if-build-links"><a href="/docs/">Installation guide <span aria-hidden="true">→</span></a><a href={source}>View study source <span aria-hidden="true">↗</span></a></div>
     </div>
     <div className="if-agent-start">

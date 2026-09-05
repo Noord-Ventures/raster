@@ -2,7 +2,10 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "declaration": false
+    "declaration": false,
+    "paths": {
+      "@noorddev/vlak": ["../core/src/index.ts"]
+    }
   },
   "include": ["src", "test"]
 }
