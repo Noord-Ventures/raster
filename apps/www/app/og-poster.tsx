@@ -18,7 +18,7 @@ function Mark() {
   );
 }
 
-export function createOgPoster({ label, headline, path = "" }: { label: string; headline: string; path?: string }) {
+export function createOgPoster({ label, headline, path = "" }: { label: string; headline: readonly string[]; path?: string }) {
   return new ImageResponse(
     <div style={{ position: "relative", display: "flex", width: "100%", height: "100%", overflow: "hidden", background: "#faf8f2", color: "#171717", fontFamily: "Inter" }}>
       {modules.map((left) => <div key={left} style={{ position: "absolute", left, top: 0, width: 1, height: 630, background: "#e4e1da" }} />)}
@@ -27,8 +27,8 @@ export function createOgPoster({ label, headline, path = "" }: { label: string; 
       <div style={{ position: "absolute", left: 40, top: 38, display: "flex" }}><Mark /></div>
       <div style={{ position: "absolute", left: 224, top: 88, display: "flex", fontSize: 18, fontWeight: 400, color: "#84817b", letterSpacing: "-0.018em" }}>{label}</div>
 
-      <div style={{ position: "absolute", left: 224, top: 278, width: 792, display: "flex" }}>
-        <span style={{ fontSize: 62, fontWeight: 600, letterSpacing: "-0.052em", lineHeight: 1.02 }}>{headline}</span>
+      <div style={{ position: "absolute", left: 224, top: 278, width: 792, display: "flex", flexDirection: "column" }}>
+        {headline.map((line) => <span key={line} style={{ display: "flex", whiteSpace: "nowrap", fontSize: 62, fontWeight: 600, letterSpacing: "-0.052em", lineHeight: 1.02 }}>{line}</span>)}
       </div>
 
       <div style={{ position: "absolute", left: 224, top: 531, display: "flex", fontSize: 18, fontWeight: 600, letterSpacing: "-0.025em" }}>Vlak</div>

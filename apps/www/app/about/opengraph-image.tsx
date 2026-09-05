@@ -6,5 +6,5 @@ export const contentType = ogContentType;
 export const dynamic = "force-static";
 
 export default function OpenGraphImage() {
-  return createOgPoster({ label: "About", headline: "The method, design lineage, and practical constraints behind Vlak.", path: "/about" });
+  return createOgPoster({ label: "About", headline: ["The method, design lineage,", "and practical constraints", "behind Vlak."], path: "/about" });
 }

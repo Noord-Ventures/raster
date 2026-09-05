@@ -6,5 +6,5 @@ export const contentType = ogContentType;
 export const dynamic = "force-static";
 
 export default function OpenGraphImage() {
-  return createOgPoster({ label: "Documentation", headline: "Install the components. Build your interface.", path: "/docs" });
+  return createOgPoster({ label: "Documentation", headline: ["Install the components.", "Build your interface."], path: "/docs" });
 }
