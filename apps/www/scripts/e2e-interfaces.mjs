@@ -103,6 +103,17 @@ try {
     return { borderLeftWidth: style.borderLeftWidth, boxShadow: style.boxShadow, outlineStyle: style.outlineStyle };
   });
   assert.deepEqual(selectedAssetStyle, { borderLeftWidth: "0px", boxShadow: "none", outlineStyle: "none" }, "Orbit selection must use a full-surface fill, never a leading stripe");
+  const assetRows = await page.locator(".cx-orbit-asset").evaluateAll(elements => elements.map(element => {
+    const box = element.getBoundingClientRect();
+    const children = Array.from(element.children, child => child.getBoundingClientRect());
+    return { top: box.top, bottom: box.bottom, contentTop: Math.min(...children.map(child => child.top)), contentBottom: Math.max(...children.map(child => child.bottom)) };
+  }));
+  for (const [index, row] of assetRows.entries()) {
+    assert(row.contentTop >= row.top && row.contentBottom <= row.bottom, `Orbit asset ${index + 1} content must stay inside its row`);
+    if (index > 0) assert(row.top >= assetRows[index - 1].bottom, `Orbit asset ${index + 1} must not overlap the previous row`);
+  }
+  await page.goto(base + "/interfaces/frontier/", { waitUntil: "networkidle" });
+  assert.notEqual(await page.locator(".cx-frontier-ring-a").evaluate(element => getComputedStyle(element).animationName), "none", "Frontier hero graphic should animate when motion is allowed");
   await page.goto(base + "/interfaces/drive/", { waitUntil: "networkidle" });
   const valueTops = await page.locator(".cx-ev-panels .cx-ev-value").evaluateAll(elements => elements.map(element => Math.round(element.getBoundingClientRect().top)));
   assert.equal(new Set(valueTops).size, 1, `EV values should share one baseline, got ${valueTops.join(", ")}`);

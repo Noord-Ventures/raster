@@ -62,6 +62,20 @@ await desk.keyboard.press("Tab");
 if ((await desk.evaluate(() => document.activeElement?.className)) !== "skip-link") fail("skip link is not the first tab stop");
 await desk.keyboard.press("Enter");
 if (!(await desk.evaluate(() => location.hash === "#main"))) fail("skip link does not target #main");
+await desk.goto(`${base}/components/select/`, { waitUntil: "networkidle" });
+const selectBorders = await desk.evaluate(() => {
+  const read = (selector) => {
+    const style = getComputedStyle(document.querySelector(selector));
+    return { width: style.borderTopWidth, style: style.borderTopStyle, color: style.borderTopColor };
+  };
+  return { preview: read(".preview-box"), trigger: read('.preview-box [role="combobox"]') };
+});
+for (const [part, border] of Object.entries({ preview: selectBorders.preview, trigger: selectBorders.trigger })) {
+  const alpha = Number.parseFloat(border.color.match(/rgba?\([^)]*[, /]([\d.]+)\)$/)?.[1] ?? "1");
+  if (border.width !== "1px" || border.style !== "solid" || border.color === "transparent" || alpha < .35) {
+    fail(`select ${part}: expected a 1px solid control-border box, got ${border.width} ${border.style} ${border.color}`);
+  }
+}
 await desk.close();
 
 /* Phone. */

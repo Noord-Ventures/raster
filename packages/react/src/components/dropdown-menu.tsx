@@ -54,7 +54,7 @@ export const menuStyles = stylex.create({
     },
     borderWidth: vlak.hairline,
     borderStyle: "solid",
-    borderColor: vlak.divider,
+    borderColor: vlak.controlBorder,
     borderRadius: {
       default: vlak.radiusSm,
       [mq.phone]: 0,

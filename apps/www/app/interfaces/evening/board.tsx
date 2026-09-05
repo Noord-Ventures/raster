@@ -118,7 +118,7 @@ export function Board() {
   }
 
   return (
-    <section className="if-board sc-evening" data-page={page} aria-label={WHAT}>
+    <section className="if-board sc-evening" data-page={page} aria-label={`${WHAT} application`}>
       <PhoneV1Chrome
         heading="Order out"
         action="Bag"

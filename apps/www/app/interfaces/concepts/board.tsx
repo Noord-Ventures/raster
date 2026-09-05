@@ -99,7 +99,19 @@ function Frontier() {
   }
   return <div className="cx cx-frontier">
     <header><b>Aster Labs</b><nav aria-label="Company sections">{(["Models", "Research", "Company"] as const).map(value => <button type="button" key={value} aria-pressed={section === value} className={section === value ? "on" : ""} onClick={() => reveal(value)}>{value}</button>)}</nav><Button size="sm" onClick={() => reveal("Models")}>Explore models</Button></header>
-    <div className="cx-workspace"><p>Built in Europe. Available everywhere.</p><h2>Reasoning models for research and engineering.</h2><p className="cx-frontier-intro">Work through complex questions with your documents, data, and code in view.</p><div><Button onClick={() => reveal("Models")}>Explore Aster 2</Button><button type="button" className="cx-text-link" onClick={() => reveal("Research")}>Read the system card <span aria-hidden="true">→</span></button></div></div>
+    <div className="cx-workspace">
+      <div className="cx-frontier-graphic" aria-hidden="true">
+        <span className="cx-frontier-glow"/>
+        <span className="cx-frontier-ring cx-frontier-ring-a"/>
+        <span className="cx-frontier-ring cx-frontier-ring-b"/>
+        <span className="cx-frontier-ring cx-frontier-ring-c"/>
+        <span className="cx-frontier-core"><i/><i/><i/><i/><i/><i/></span>
+        <span className="cx-frontier-node cx-frontier-node-a"/>
+        <span className="cx-frontier-node cx-frontier-node-b"/>
+        <span className="cx-frontier-node cx-frontier-node-c"/>
+      </div>
+      <p>Built in Europe. Available everywhere.</p><h2>Reasoning models for research and engineering.</h2><p className="cx-frontier-intro">Work through complex questions with your documents, data, and code in view.</p><div><Button onClick={() => reveal("Models")}>Explore Aster 2</Button><button type="button" className="cx-text-link" onClick={() => reveal("Research")}>Read the system card <span aria-hidden="true">→</span></button></div>
+    </div>
     <section ref={contentRef} aria-label={section}>{frontierContent[section].map(([label, title, body]) => <Card key={label}><CardLabel>{label}</CardLabel><CardTitle>{title}</CardTitle><CardBody>{body}</CardBody></Card>)}</section>
     <footer><span>Aster Labs is a fictional company</span><span>Interface study · Vlak</span></footer>
   </div>;

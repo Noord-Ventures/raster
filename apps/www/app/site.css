@@ -659,7 +659,7 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
    cards (.gallery-item) and homepage kit cells already have a frame
    — never also stroke preview-box there. */
 .preview-box {
-  border: 1px solid var(--divider);
+  border: 1px solid var(--control-border);
   border-radius: var(--radius-sm);
   padding: 56px 32px;
   min-height: 204px;
