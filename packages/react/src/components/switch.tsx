@@ -34,7 +34,7 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: 9,
-      [mq.phone]: 0,
+      [mq.phone]: 9,
     },
     borderWidth: 1.5,
     borderStyle: "solid",
@@ -108,7 +108,7 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: "50%",
-      [mq.phone]: 0,
+      [mq.phone]: "50%",
     },
     backgroundColor: {
       default: vlak.gray,

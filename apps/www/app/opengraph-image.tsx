@@ -25,7 +25,7 @@ export default async function OpenGraphImage() {
       {columns.map((left) => <div key={left} style={{ position: "absolute", left, top: 0, width: 1, height: 630, background: "#d9d6cf" }} />)}
       {rows.map((top) => <div key={top} style={{ position: "absolute", left: 0, top, width: 1200, height: 1, background: "#d9d6cf" }} />)}
 
-      <div style={{ position: "absolute", left: 40, top: 36, display: "flex", alignItems: "center", gap: 18 }}>
+      <div style={{ position: "absolute", left: 40, top: 36, display: "flex", alignItems: "center" }}>
         <svg width="46" height="46" viewBox="0 0 822 822" fill="#1a1a1a" aria-hidden="true">
           <g transform="translate(0 822) scale(1 -1)">
             <path d="m411.128.67 128.714 128.713L334.5 334.726 129.158 540.068.405 411.315 411.128.669Z" />
@@ -33,16 +33,15 @@ export default async function OpenGraphImage() {
             <path d="m500.812 347.858 128.752-128.752 192.21 192.209-128.752 128.753-96.105-96.105-96.105-96.105Z" />
           </g>
         </svg>
-        <span style={{ fontSize: 24, fontWeight: 650, letterSpacing: "-0.04em" }}>Vlak</span>
       </div>
 
       <div style={{ position: "absolute", left: 40, bottom: 34, display: "flex", flexDirection: "column" }}>
-        <span style={{ fontSize: 106, fontWeight: 650, letterSpacing: "-0.065em", lineHeight: 0.86 }}>Vlak</span>
+        <span style={{ fontSize: 106, fontWeight: 580, letterSpacing: "-0.065em", lineHeight: 0.86 }}>Vlak</span>
         <span style={{ marginTop: 26, fontSize: 20, color: "#55524d" }}>vlak.dev</span>
       </div>
 
       <div style={{ position: "absolute", left: 720, right: 44, bottom: 42, display: "flex", flexDirection: "column" }}>
-        <span style={{ fontSize: 46, fontWeight: 610, letterSpacing: "-0.055em", lineHeight: 1.03 }}>
+        <span style={{ fontSize: 46, fontWeight: 580, letterSpacing: "-0.055em", lineHeight: 1.03 }}>
           A minimal design system for product exploration.
         </span>
         <span style={{ marginTop: 28, fontSize: 18, color: "#55524d" }}>React · CSS · tokens · interfaces</span>

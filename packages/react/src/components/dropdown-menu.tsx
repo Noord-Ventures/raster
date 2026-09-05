@@ -31,7 +31,7 @@ export const menuStyles = stylex.create({
     },
     minWidth: {
       default: "11.25rem",
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radiusSm,
     },
     width: {
       default: null,
@@ -57,7 +57,7 @@ export const menuStyles = stylex.create({
     borderColor: vlak.controlBorder,
     borderRadius: {
       default: vlak.radiusSm,
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radiusSm,
     },
     fontSize: {
       default: "0.875rem",

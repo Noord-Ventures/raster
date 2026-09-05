@@ -3,7 +3,7 @@
 .rs-btn-ghost:disabled,.rs-btn-primary:disabled{cursor:not-allowed;opacity:0.4}
 .rs-btn-ghost:hover,.rs-btn-primary:hover{opacity:0.85}
 .rs-btn-ghost:focus-visible,.rs-btn-primary:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
-@media (max-width: 640px){.rs-btn-ghost,.rs-btn-primary{height:var(--control-h);min-height:var(--hit);width:100%;padding-inline:1.25rem;border-radius:0}}
+@media (max-width: 640px){.rs-btn-ghost,.rs-btn-primary{height:var(--control-h);min-height:var(--hit);width:100%;padding-inline:1.25rem;border-radius:var(--radius-sm)}}
 @media (prefers-reduced-motion: reduce){.rs-btn-ghost,.rs-btn-primary{transition:none}}
 @media (forced-colors: active){.rs-btn-ghost,.rs-btn-primary{opacity:1}.rs-btn-ghost:hover,.rs-btn-primary:hover{opacity:1}.rs-btn-ghost:disabled,.rs-btn-primary:disabled{opacity:1}}
 .rs-btn-primary{font-weight:600;background-color:var(--text);color:var(--bg);border-color:transparent}

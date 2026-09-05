@@ -43,7 +43,7 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: vlak.radiusSm,
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radiusSm,
     },
     zIndex: vlak.zFloat,
     opacity: {

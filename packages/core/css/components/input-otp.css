@@ -5,5 +5,5 @@
 .rs-otp-cell:focus{border-color:var(--accent)}
 .rs-otp-cell:focus-visible{outline-width:2px;outline-style:solid}
 .rs-otp-cell:-webkit-autofill{-webkit-text-fill-color:var(--text);caret-color:var(--text);background-color:var(--bg);box-shadow:inset 0 0 0 1000px var(--bg)}
-@media (max-width: 640px){.rs-otp-cell{width:auto;flex-grow:1;min-width:0;height:var(--hit);min-height:var(--hit);border-radius:0}}
+@media (max-width: 640px){.rs-otp-cell{width:auto;flex-grow:1;min-width:var(--radius-sm);height:var(--hit);min-height:var(--hit);border-radius:0}}
 .rs-otp-cell-invalid{border-color:var(--text)}

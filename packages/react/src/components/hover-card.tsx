@@ -33,7 +33,7 @@ const styles = stylex.create({
     borderColor: vlak.divider,
     borderRadius: {
       default: vlak.radius,
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radius,
     },
     boxShadow: {
       default: "0 8px 24px rgba(0,0,0,0.06)",

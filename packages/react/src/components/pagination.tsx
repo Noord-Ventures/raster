@@ -50,7 +50,7 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: vlak.radiusSm,
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radiusSm,
     },
     display: "flex",
     alignItems: "center",

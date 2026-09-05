@@ -6,7 +6,7 @@
 .rs-page:disabled{cursor:not-allowed;opacity:0.4}
 .rs-page:focus-visible{outline-width:2px;outline-style:solid;outline-color:var(--text);outline-offset:2px}
 @media (prefers-reduced-motion: reduce){.rs-page{transition:none}}
-@media (max-width: 640px){.rs-page{width:var(--hit);height:var(--hit);min-width:var(--hit);min-height:var(--hit);border-radius:0;font-size:var(--control-fs)}}
+@media (max-width: 640px){.rs-page{width:var(--hit);height:var(--hit);min-width:var(--hit);min-height:var(--hit);border-radius:var(--radius-sm);font-size:var(--control-fs)}}
 @media (forced-colors: active){.rs-page{color:ButtonText;border-color:ButtonText;background-color:ButtonFace;opacity:1}.rs-page:disabled{color:GrayText;border-color:GrayText;opacity:1}}
 .rs-page-on{background-color:var(--text);color:var(--bg);font-weight:600;border-color:transparent;forced-color-adjust:none}
 @media (forced-colors: active){.rs-page-on{background-color:Highlight;color:HighlightText;border-color:Highlight}}

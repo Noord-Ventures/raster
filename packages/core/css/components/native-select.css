@@ -6,5 +6,5 @@
 .rs-native-select:is([data-theme="dark"] *){background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' width='16' height='16' fill='none' stroke='%23E8E8E8' stroke-width='1' stroke-linecap='butt' stroke-linejoin='miter'><g transform='rotate(90 8 8)'><path d='M5.5 3.5 L10.5 8 L5.5 12.5' vector-effect='non-scaling-stroke'/></g></svg>")}
 .rs-native-select:focus{border-color:var(--accent)}
 .rs-native-select:focus-visible{outline-width:2px;outline-style:solid}
-@media (max-width: 640px){.rs-native-select{min-height:var(--hit);font-size:1rem;border-radius:0;padding-inline-start:0.875rem;padding-inline-end:2.25rem}}
+@media (max-width: 640px){.rs-native-select{min-height:var(--hit);font-size:1rem;border-radius:var(--radius-sm);padding-inline-start:0.875rem;padding-inline-end:2.25rem}}
 .rs-native-select-invalid{border-color:var(--text)}

@@ -45,7 +45,7 @@ const styles = stylex.create({
     borderStyle: "solid",
     borderRadius: {
       default: vlak.radiusSm,
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radiusSm,
     },
     transition: {
       default: vlak.transition,

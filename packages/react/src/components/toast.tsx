@@ -76,7 +76,7 @@ const styles = stylex.create({
     position: "fixed",
     bottom: {
       default: "1.25rem",
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radius,
     },
     insetInlineEnd: {
       default: "1.25rem",

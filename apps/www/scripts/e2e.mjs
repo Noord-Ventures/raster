@@ -31,6 +31,20 @@ const base = `http://localhost:${server.address().port}`;
 
 const failures = [];
 const fail = (msg) => failures.push(msg);
+
+/* Every landing page owns a real, page-specific 1200 × 630 social image. */
+const socialImages = [];
+for (const section of ["components", "interfaces", "docs", "about"]) {
+  const image = readFileSync(join(out, section, "opengraph-image"));
+  const html = readFileSync(join(out, section, "index.html"), "utf8");
+  if (image.toString("ascii", 1, 4) !== "PNG") fail(`${section}: Open Graph image is not a PNG`);
+  if (image.readUInt32BE(16) !== 1200 || image.readUInt32BE(20) !== 630) fail(`${section}: Open Graph image is not 1200 × 630`);
+  if (!html.includes(`/${section}/opengraph-image`)) fail(`${section}: page does not reference its custom Open Graph image`);
+  if (!html.includes(`/${section}/twitter-image`)) fail(`${section}: page does not reference its custom Twitter image`);
+  socialImages.push(image.toString("base64"));
+}
+if (new Set(socialImages).size !== socialImages.length) fail("landing pages reuse the same social image");
+
 const browser = await chromium.launch(
   process.env.PLAYWRIGHT_EXECUTABLE_PATH
     ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH }
@@ -85,6 +99,19 @@ for (const path of ["/", "/docs/", "/components/", "/components/button/", "/comp
   const overflow = await phone.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   if (overflow > 0) fail(`${path}: horizontal overflow of ${overflow}px at 390px`);
 }
+await phone.goto(`${base}/components/select/`, { waitUntil: "networkidle" });
+const mobileSelect = await phone.evaluate(() => {
+  const preview = document.querySelector('.preview-box [role="combobox"]').getBoundingClientRect();
+  const scene = document.querySelector('.rs-scene [role="combobox"]').getBoundingClientRect();
+  return {
+    previewLeft: Math.round(preview.left),
+    sceneLeft: Math.round(scene.left),
+    previewRadius: getComputedStyle(document.querySelector('.preview-box [role="combobox"]')).borderRadius,
+    sceneRadius: getComputedStyle(document.querySelector('.rs-scene [role="combobox"]')).borderRadius,
+  };
+});
+if (mobileSelect.previewLeft !== mobileSelect.sceneLeft) fail(`phone: Select examples do not share the grid (${mobileSelect.previewLeft}px vs ${mobileSelect.sceneLeft}px)`);
+if (mobileSelect.previewRadius !== "4px" || mobileSelect.sceneRadius !== "4px") fail(`phone: Select lost its 4px radius (${mobileSelect.previewRadius}, ${mobileSelect.sceneRadius})`);
 await phone.goto(`${base}/components/button/`, { waitUntil: "networkidle" });
 const small = await phone.evaluate(() =>
   [...document.querySelectorAll(".preview-box button, .preview-box input:not([type=hidden]), .preview-box a[href], .preview-box [role=option]")]

@@ -29,7 +29,7 @@ const styles = stylex.create({
     borderColor: vlak.divider,
     borderRadius: {
       default: vlak.radius,
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radius,
     },
     backgroundColor: vlak.paper,
     color: vlak.ink,

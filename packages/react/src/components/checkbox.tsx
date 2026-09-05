@@ -42,7 +42,7 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: 3,
-      [mq.phone]: 0,
+      [mq.phone]: 3,
     },
     borderWidth: 1.5,
     borderStyle: "solid",

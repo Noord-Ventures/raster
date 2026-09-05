@@ -26,7 +26,7 @@ const styles = stylex.create({
     backgroundColor: vlak.divider,
     borderRadius: {
       default: 1,
-      [mq.phone]: 0,
+      [mq.phone]: 1,
     },
     marginBlock: {
       default: "0.6875rem",
@@ -42,7 +42,7 @@ const styles = stylex.create({
     backgroundColor: vlak.ink,
     borderRadius: {
       default: 1,
-      [mq.phone]: 0,
+      [mq.phone]: 1,
     },
     pointerEvents: "none",
   },
@@ -60,7 +60,7 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: "50%",
-      [mq.phone]: 0,
+      [mq.phone]: "50%",
     },
     backgroundColor: vlak.paper,
     borderWidth: 1.5,

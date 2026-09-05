@@ -461,7 +461,7 @@ body:has(.catalog-page) .site-crumb-bar.rs-crumb-bar-scrolled .rs-crumbs {
   .gallery-meta { padding: 18px 20px 22px; }
   .gallery-meta h3 { font-size: 1rem; margin: 0 0 6px; }
   .gallery-meta p { font-size: 0.875rem; line-height: 1.5; }
-  .preview-box { padding: 32px 16px; margin: 20px 0 20px; flex-direction: column; align-items: stretch; gap: 12px; }
+  .site-content .preview-box { padding: 32px 19px; margin: 20px 0 20px; flex-direction: column; align-items: stretch; gap: 12px; }
   .gallery-demo { flex-direction: column; align-items: stretch; }
   .preview-box > div,
   .preview-box > form,

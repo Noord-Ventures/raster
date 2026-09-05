@@ -56,7 +56,7 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: vlak.radiusSm,
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radiusSm,
     },
     color: {
       default: vlak.gray,
@@ -125,7 +125,7 @@ const styles = stylex.create({
     },
     borderRadius: {
       default: vlak.radiusSm,
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radiusSm,
     },
     overflow: "hidden",
   },

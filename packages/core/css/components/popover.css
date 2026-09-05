@@ -1,6 +1,6 @@
 /* ── popover: generated from packages/react/src/components/popover.tsx ── */
 .rs-popover{box-sizing:border-box;position:fixed;inset:auto;margin:0;border-width:1px;border-style:solid;border-color:var(--divider);border-radius:var(--radius);background-color:var(--bg);color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:0.875rem;width:15rem;font-size:0.8125rem;line-height:1.45;letter-spacing:-0.01em}
-@media (max-width: 640px){.rs-popover{border-radius:0;box-shadow:none;padding:1rem;width:min(320px, calc(100vw - 32px));font-size:1rem}}
+@media (max-width: 640px){.rs-popover{border-radius:var(--radius);box-shadow:none;padding:1rem;width:min(320px, calc(100vw - 32px));font-size:1rem}}
 .rs-popover-title{display:block;font-size:0.8125rem;font-weight:600;letter-spacing:-0.01em;color:var(--text);margin-bottom:0.25rem}
 @media (max-width: 640px){.rs-popover-title{font-size:1rem}}
 .rs-popover-body{color:var(--text-secondary);margin:0}

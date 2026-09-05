@@ -29,7 +29,7 @@ const styles = stylex.create({
     lineHeight: 1,
     borderRadius: {
       default: vlak.radiusSm,
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radiusSm,
     },
     display: {
       default: null,

@@ -34,7 +34,7 @@ const styles = stylex.create({
     },
     minWidth: {
       default: null,
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radiusSm,
     },
     height: {
       default: "3rem",

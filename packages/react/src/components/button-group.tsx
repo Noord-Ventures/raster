@@ -24,7 +24,7 @@ const styles = stylex.create({
     borderColor: vlak.divider,
     borderRadius: {
       default: vlak.radiusSm,
-      [mq.phone]: 0,
+      [mq.phone]: vlak.radiusSm,
     },
     backgroundColor: vlak.divider,
     gap: vlak.hairline,

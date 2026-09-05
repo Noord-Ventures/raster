@@ -4,6 +4,6 @@
 .rs-tip:hover .rs-tip-bubble{opacity:1;visibility:visible;pointer-events:auto}
 .rs-tip:focus-within .rs-tip-bubble{opacity:1;visibility:visible;pointer-events:auto}
 .rs-tip-bubble::before{content:"";position:absolute;top:100%;inset-inline-start:0;inset-inline-end:0;height:0.5rem}
-@media (max-width: 640px){.rs-tip-bubble{font-size:0.8125rem;padding-block:0.5rem;padding-inline:0.75rem;border-radius:0}}
+@media (max-width: 640px){.rs-tip-bubble{font-size:0.8125rem;padding-block:0.5rem;padding-inline:0.75rem;border-radius:var(--radius-sm)}}
 @media (hover: none){.rs-tip:hover .rs-tip-bubble{opacity:0;visibility:hidden}.rs-tip:active .rs-tip-bubble{opacity:1;visibility:visible}}
 @media (prefers-reduced-motion: reduce){.rs-tip-bubble{transition:none}}
