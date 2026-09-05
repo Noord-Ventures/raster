@@ -1,10 +1,11 @@
 import { createOgPoster, ogContentType, ogSize } from "../og-poster";
+import { interfaces } from "./catalog";
 
-export const alt = "Vlak interfaces — See the system at work.";
+export const alt = "Interfaces — Vlak";
 export const size = ogSize;
 export const contentType = ogContentType;
 export const dynamic = "force-static";
 
 export default function OpenGraphImage() {
-  return createOgPoster({ section: "Interfaces", headline: "See the system at work.", description: "Twelve working studies", accent: "#007b70", motif: "interfaces" });
+  return createOgPoster({ label: `Interfaces · ${interfaces.length} studies`, headline: "See what you can build with Vlak.", path: "/interfaces" });
 }
