@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "incremental": false,
+    "paths": {
+      "@/*": ["./*"],
+      "@noorddev/vlak": ["../../packages/core/src/index.ts"],
+      "@noorddev/vlak/props": ["../../packages/core/props/props.json"],
+      "@noorddev/vlak-react": ["../../packages/react/src/index.ts"],
+      "@noorddev/vlak-react/tokens.stylex": ["../../packages/react/src/tokens.stylex.ts"]
+    }
+  }
+}

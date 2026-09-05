@@ -9,11 +9,7 @@
     "moduleResolution": "bundler",
     "plugins": [{ "name": "next" }],
     "paths": {
-      "@/*": ["./*"],
-      "@noorddev/vlak": ["../../packages/core/src/index.ts"],
-      "@noorddev/vlak/props": ["../../packages/core/props/props.json"],
-      "@noorddev/vlak-react": ["../../packages/react/src/index.ts"],
-      "@noorddev/vlak-react/tokens.stylex": ["../../packages/react/src/tokens.stylex.ts"]
+      "@/*": ["./*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
