@@ -209,8 +209,9 @@
 .cx-orbit > header { grid-column: 1 / -1; }
 .cx-orbit > aside { min-height: 0; border-right: 1px solid var(--divider); background: #0c1720; padding-top: 16px; overflow-y: auto; }
 .cx-orbit > aside > .cx-label { padding: 0 14px 12px; }
-.cx-orbit > aside button { width: 100%; padding: 14px; display: grid; gap: 5px; text-align: left; border: 0; border-top: 1px solid var(--divider); color: var(--text); background: transparent; }
-.cx-orbit > aside button.on { background: #1c303c; }
+.cx.cx-orbit > aside .cx-orbit-asset { width: 100%; padding: 14px; display: grid; gap: 5px; text-align: left; border: 0; border-top: 1px solid var(--divider); border-radius: 0; color: var(--text); background: transparent; box-shadow: none; }
+.cx.cx-orbit > aside .cx-orbit-asset.on { background: #1c303c; }
+.cx.cx-orbit > aside .cx-orbit-asset:focus-visible { outline: 0; background: #294957; }
 .cx-orbit > aside button span { display: flex; align-items: center; gap: 7px; font-size: 12px; }
 .cx-orbit > aside small { color: var(--text-secondary); font-size: 10px; }
 .cx-orbit > aside i, .cx-status i { flex-shrink: 0; width: 5px; height: 5px; border-radius: 50%; background: #91a0aa; }
@@ -386,7 +387,7 @@
   .cx-orbit { grid-template: 56px 70px minmax(0,1fr) / 1fr; }
   .cx-orbit > aside { display: flex; padding: 0; border-right: 0; border-bottom: 1px solid var(--divider); overflow: auto; }
   .cx-orbit > aside > .cx-label { display: none; }
-  .cx-orbit > aside button { flex: 0 0 140px; width: 140px; border-top: 0; border-right: 1px solid var(--divider); padding: 12px; gap: 3px; }
+  .cx.cx-orbit > aside .cx-orbit-asset { flex: 0 0 140px; width: 140px; border: 0; border-right: 1px solid var(--divider); padding: 12px; gap: 3px; }
   .cx-layers .rs-toggle { min-height: 40px; padding-inline: 10px; }
   .cx-frontier { grid-template-rows: 56px auto auto auto; }
   .cx-frontier header nav { display: none; }

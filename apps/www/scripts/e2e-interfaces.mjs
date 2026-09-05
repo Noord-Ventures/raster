@@ -95,6 +95,14 @@ try {
     if (!response.ok()) failures.push(`${href}: component link HTTP ${response.status()}`);
   }
   await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto(base + "/interfaces/orbit/", { waitUntil: "networkidle" });
+  const selectedAsset = page.locator(".cx-orbit-asset").first();
+  await selectedAsset.focus();
+  const selectedAssetStyle = await selectedAsset.evaluate(element => {
+    const style = getComputedStyle(element);
+    return { borderLeftWidth: style.borderLeftWidth, boxShadow: style.boxShadow, outlineStyle: style.outlineStyle };
+  });
+  assert.deepEqual(selectedAssetStyle, { borderLeftWidth: "0px", boxShadow: "none", outlineStyle: "none" }, "Orbit selection must use a full-surface fill, never a leading stripe");
   await page.goto(base + "/interfaces/drive/", { waitUntil: "networkidle" });
   const valueTops = await page.locator(".cx-ev-panels .cx-ev-value").evaluateAll(elements => elements.map(element => Math.round(element.getBoundingClientRect().top)));
   assert.equal(new Set(valueTops).size, 1, `EV values should share one baseline, got ${valueTops.join(", ")}`);
